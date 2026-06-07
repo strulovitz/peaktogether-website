@@ -3,24 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ramanujan's Path � Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=2">
+    <title>Ramanujan's Path — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=3">
 </head>
 <body>
 
     <div data-component="header"></div>
 
     <main class="page">
-        <h1>Ramanujan's Path</h1>
-        <p class="subtitle">A path up Everest: The Riemann Hypothesis</p>
+        <h1>🪷 Path 9: Ramanujan's Path — His Work &amp; Ideas Related to RH</h1>
+        <p class="subtitle">The enigmatic genius whose ideas brush against themes relevant to the Riemann Hypothesis.</p>
 
-        <p>This path is under construction. Base camps coming soon!</p>
+        <p>Srinivasa Ramanujan did not directly tackle RH in his published work, yet several of his ideas intersect with themes central to the problem: his early prime number formula, profound insights into zeta and L-values, and modern developments labeled with his name (Ramanujan graphs, the Ramanujan conjecture) that connect indirectly to RH.</p>
 
-        <a href="/mathematics/Riemann_hypothesis/" class="back-link">? Back to Riemann Hypothesis</a>
+        <h2>Base Camp 1: Ramanujan's Prime Counting Formula Attempt</h2>
+        <p>When Ramanujan first wrote to Hardy in 1913, he claimed an explicit formula for π(x). It was flawed — it implicitly assumed ζ(s) had no complex zeros at all. Studying this incident illuminates why the non-trivial zeros must be accounted for.</p>
+        <ul>
+            <li><strong>Ramanujan: Twelve Lectures on His Life and Work</strong> by G.H. Hardy (1940) — Discusses the prime counting formula episode and how Ramanujan's unrigorous reasoning led to a formula resembling Riemann's explicit formula but missing the oscillatory terms from zeros.</li>
+            <li><strong>Ramanujan and the Theory of Prime Numbers</strong> by Bruce C. Berndt (1989) — Details Ramanujan's work on primes, showing which formulas were correct and which were incomplete.</li>
+        </ul>
+
+        <h2>Base Camp 2: Ramanujan's Arithmetical Functions &amp; Identities</h2>
+        <p>Explore Ramanujan's insights into multiplicative functions that later connected to RH. His Ramanujan sum and Tau function are particularly relevant.</p>
+        <ul>
+            <li><strong>Ramanujan Sums</strong> — Ramanujan introduced c_q(n) = Σ e^{2πian/q} over (a,q)=1, a Fourier basis for arithmetic functions used in explicit formula derivations.</li>
+            <li><strong>Ramanujan's Tau Function &amp; Ramanujan Conjecture</strong> — He conjectured |τ(p)| ≤ 2p^{11/2}, an analogue of RH for that L-function. Proved by Deligne in 1974 — an example where an RH-like bound was proven for a nontrivial class of L-functions.</li>
+            <li><strong>Modular Forms and the Ramanujan Conjecture</strong> by Henryk Iwaniec — Shows how this conjecture is a special case of GRH for automorphic L-functions.</li>
+        </ul>
+
+        <h2>Base Camp 3: Modern "Ramanujan" Notions Linking to RH</h2>
+        <p>Concepts named after Ramanujan that relate to RH analogies, particularly Ramanujan graphs and his Master Theorem.</p>
+        <ul>
+            <li><strong>Ramanujan Graphs</strong> — Regular graphs whose adjacency eigenvalues lie in [-2√(d-1), 2√(d-1)], analogous to Weil's bound for curves. The graph zeta satisfies an analogue of RH when the graph is Ramanujan. See "Expander Graphs and Eigenvalues" by Terence Tao and "The Ihara Zeta and Ramanujan Graphs" by Audrey Terras.</li>
+            <li><strong>Ramanujan's Master Theorem &amp; Zeta Regularization</strong> — His technique for summing divergent series (like 1+2+3+... = -1/12) presaged analytic continuation of zeta. Documented in Hardy's "Divergent Series."</li>
+        </ul>
+
+        <h2>Base Camp 4: Ramanujan's Notebooks &amp; Unfinished Hints</h2>
+        <p>Ramanujan's unpublished work may contain clues. He studied zeros of certain modular form L-functions and observed that their zeros seem to lie on Re(s)=1/2 — essentially observing low-level cases of GRH.</p>
+        <ul>
+            <li><strong>The Lost Notebook and the Rogers–Ramanujan Identities</strong> by Berndt and Andrews — While focused on q-series, some entries touch on zeta values and mysterious integrals.</li>
+            <li><strong>Ramanujan's Notebooks Vol. 2</strong> by Bruce Berndt — Contains a secret formula for ζ(1/2) that Ramanujan discovered, later rigorously proven by Kanemitsu et al.</li>
+            <li><strong>On Ramanujan's formula for ζ(1/2) and ζ(2m+1)</strong> by Kanemitsu et al. (2021) — Documents how Ramanujan probed the zeta function in the critical strip, perhaps hinting at underexplored approaches.</li>
+        </ul>
+
+        <a href="/mathematics/Riemann_hypothesis/" class="back-link">← Back to Riemann Hypothesis</a>
     </main>
 
     <div data-component="footer"></div>
-
     <script src="/components.js"></script>
 </body>
 </html>

@@ -3,24 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Strengthening of Partial Results � Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=2">
+    <title>Strengthening Partial Results — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=3">
 </head>
 <body>
 
     <div data-component="header"></div>
 
     <main class="page">
-        <h1>Strengthening of Partial Results</h1>
-        <p class="subtitle">A path up Everest: The Riemann Hypothesis</p>
+        <h1>📊 Path 6: Strengthening of Partial Results</h1>
+        <p class="subtitle">Pushing partial results as far as possible — proving more zeros on the line, constraining those off it ever tighter.</p>
 
-        <p>This path is under construction. Base camps coming soon!</p>
+        <p>This path doesn't attack RH head-on, but aims to strengthen partial results until they meet RH itself. Key landmarks: Hardy's theorem (infinitely many zeros on the line, 1914), Levinson's 1/3 result (1974), Conrey's 2/5 (1989), and now 41.7% by Pratt et al. (2020).</p>
 
-        <a href="/mathematics/Riemann_hypothesis/" class="back-link">? Back to Riemann Hypothesis</a>
+        <h2>Base Camp 1: Zero-Free Regions &amp; Conditional Results</h2>
+        <p>Understand classical results about where zeros cannot lie. The classical zero-free region: no zeros for Re(s) &gt; 1 − c/log|t|.</p>
+        <ul>
+            <li><strong>The Distribution of Zeros of the Zeta Function</strong> in Titchmarsh — Chapter IX proves the classical zero-free region due to de la Vallée-Poussin.</li>
+            <li><strong>Topics in Analytic Number Theory</strong> by Helmut Maier — Modern discussion of zero-free regions, density theorems, and connections to primes in short intervals.</li>
+            <li><strong>Classical and Large Sieve Inequalities</strong> in Montgomery &amp; Vaughan — Shows how sieve methods bound the density of zeros off the line, introducing the Density Hypothesis.</li>
+        </ul>
+
+        <h2>Base Camp 2: Hardy–Littlewood &amp; Selberg's Results</h2>
+        <p>Early breakthroughs on zeros on the line. In 1914, G.H. Hardy proved infinitely many zeros lie on Re(s)=1/2. Later, Selberg showed a positive proportion are on the line.</p>
+        <ul>
+            <li><strong>Hardy's Original Paper</strong> (1914) — Used Euler's product and Jensen's formula to show ζ(1/2+it) has infinitely many sign changes, implying zeros on the line.</li>
+            <li><strong>On the Zeros of the Zeta Function</strong> by Atle Selberg (1942) — Developed mollifiers (short resonant Dirichlet polynomials) to show a positive proportion of zeros are on or near the line.</li>
+            <li><strong>Harmony of the Zeta Zeros</strong> by Conrey &amp; Iwaniec (Notices of the AMS, 2007) — Celebrates advances in proving proportions of zeros on the line.</li>
+        </ul>
+
+        <h2>Base Camp 3: Levinson's Theorem &amp; Successors</h2>
+        <p>Levinson (1974) shocked the community by proving at least one-third of zeros lie on the critical line. Conrey improved this to two-fifths (40%), and recent work pushes beyond 41%.</p>
+        <ul>
+            <li><strong>Levinson's Original Paper</strong> (Adv. Math. 1974) — Uses zeros of ζ'(s) to trap zeros of ζ(s) via mollifiers and the argument principle.</li>
+            <li><strong>Montgomery's Lectures on the Riemann Zeta Function</strong> (Cambridge, 1986) — Explains Levinson's method step by step.</li>
+            <li><strong>More than 41% of Zeros on the Line</strong> by Pratt, Robles, Zaharescu &amp; Zeindler (2020) — The current frontier: five-twelfths of zeros on the line.</li>
+        </ul>
+
+        <h2>Base Camp 4: Zero Density Hypotheses &amp; Consequences</h2>
+        <p>The complementary approach: assume RH is false but zeros are scarce off-line, and prove conditional results. Many theorems assume a Density Hypothesis (far weaker than RH) and achieve nearly-RH level results.</p>
+        <ul>
+            <li><strong>The Number of Zeros of ζ(s) in Regions</strong> by Ingham (1932) — Proved early zero-density estimates showing "almost all nontrivial zeros are arbitrarily close to 1/2."</li>
+            <li><strong>Density Theorems for Zeta and L-functions</strong> by Henryk Iwaniec — Modern account using large sieve and spectral methods for zero-density results.</li>
+            <li><strong>The Generalized Riemann Hypothesis</strong> by Peter Sarnak (Contemporary Mathematics, 2008) — Surveys partial progress and the community consensus that evidence for RH is strong.</li>
+        </ul>
+
+        <a href="/mathematics/Riemann_hypothesis/" class="back-link">← Back to Riemann Hypothesis</a>
     </main>
 
     <div data-component="footer"></div>
-
     <script src="/components.js"></script>
 </body>
 </html>

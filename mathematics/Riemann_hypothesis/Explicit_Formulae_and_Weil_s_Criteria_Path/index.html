@@ -3,24 +3,53 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explicit Formulae & Weil's Criteria � Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=2">
+    <title>Explicit Formulae &amp; Weil's Criteria — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=3">
 </head>
 <body>
 
     <div data-component="header"></div>
 
     <main class="page">
-        <h1>Explicit Formulae & Weil's Criteria</h1>
-        <p class="subtitle">A path up Everest: The Riemann Hypothesis</p>
+        <h1>📐 Path 5: Explicit Formulae &amp; Weil's Criteria</h1>
+        <p class="subtitle">Leveraging equivalences to RH — turning the problem into positivity statements that might be easier to prove.</p>
 
-        <p>This path is under construction. Base camps coming soon!</p>
+        <p>This path focuses on the explicit formula relating primes to zeros, and criteria (like Weil's) that recast RH as statements about certain functions or forms being positive definite. It's about finding an equivalent inequality that might be more approachable than the original conjecture.</p>
 
-        <a href="/mathematics/Riemann_hypothesis/" class="back-link">? Back to Riemann Hypothesis</a>
+        <h2>Base Camp 1: Riemann's Explicit Formula</h2>
+        <p>Derive and understand the explicit formula connecting prime counting and zeros: ψ(x) = x − Σρ x^ρ/ρ − ζ'(0)/ζ(0) − ½x⁻¹. RH is equivalent to those oscillatory terms being as "small" as possible.</p>
+        <ul>
+            <li><strong>Riemann's Zeta Function</strong> by Edwards — Chapter 11 derives the Exact Formula carefully, explaining each term and its significance.</li>
+            <li><strong>A Primer of Analytic Number Theory</strong> by John Stopple — Provides a gentler introduction, re-deriving explicit formulas in simple terms.</li>
+            <li><strong>Introduction to Analytic Number Theory</strong> by T. Apostol — Builds intuition through partial summation formulas showing how primes and zeros interplay.</li>
+        </ul>
+
+        <h2>Base Camp 2: Weil's Positivity Criterion</h2>
+        <p>In 1952, Weil gave an equivalent statement of GRH: RH is true iff a certain Fourier transform of the prime distribution is positive definite. This transforms RH into a problem of finding a positive kernel.</p>
+        <ul>
+            <li><strong>Weil's Explicit Formula and Positivity</strong> (AIM Notes) — Concisely states Weil's criterion: a certain even test function must make a particular combination of primes and zeros non-negative.</li>
+            <li><strong>Li's Criterion for RH</strong> by John Conrey &amp; Xian-Jin Li (1999) — RH is true iff a sequence of coefficients λₙ are all positive. Transforms RH into an infinite list of inequalities.</li>
+            <li><strong>Equivalents of the Riemann Hypothesis: Volume 1, Arithmetic Equivalents</strong> by K. Broughan — Lists dozens of statements equivalent to RH, including bounds on ψ(x), Mertens function criteria, and Robin's inequality.</li>
+        </ul>
+
+        <h2>Base Camp 3: Mastery of Fourier &amp; Distribution Theory</h2>
+        <p>The explicit formula and Weil's criterion require comfort with distributions (generalized functions) and Fourier transforms.</p>
+        <ul>
+            <li><strong>Fourier Analysis</strong> by Terence Tao (AMS Graduate Studies vol. 142) — Strong grounding in Fourier transform methods, positive-definite functions, and Bochner's theorem.</li>
+            <li><strong>Generalized Functions and Partial Differential Equations</strong> by Avner Friedman — Classic source on distribution theory, important for justifying steps in deriving explicit formulas.</li>
+        </ul>
+
+        <h2>Base Camp 4: Modern Refinements &amp; Computational Verifications</h2>
+        <p>See how explicit formulae are used today in large-scale computations verifying RH to high heights.</p>
+        <ul>
+            <li><strong>The Zeros of Riemann's Zeta Function on the Critical Line</strong> by Andrew Odlyzko — Extensive computations verifying billions of zeros lie on the line and obey GUE statistics.</li>
+            <li><strong>Primes and the Zeta Function</strong> by Brian Conrey (Amer. Math. Monthly, 2003) — Survey using explicit formulas to derive consequences of RH and showing how it sharpens prime number estimates.</li>
+        </ul>
+
+        <a href="/mathematics/Riemann_hypothesis/" class="back-link">← Back to Riemann Hypothesis</a>
     </main>
 
     <div data-component="footer"></div>
-
     <script src="/components.js"></script>
 </body>
 </html>
