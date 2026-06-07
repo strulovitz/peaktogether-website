@@ -183,3 +183,61 @@ works without typing the filename.
 **The winning formula is the simplest one:**
 - Desktop: CSS `:hover` + `::after` bridge (zero gap) + `display: block`
 - Mobile: `right` slide + `visibility` toggle + JS click handlers
+
+---
+
+## Math Rendering (MathJax 3)
+
+All mathematical expressions written in LaTeX (`$...$` for inline, `$$...$$` for display)
+are rendered as proper math notation on every page via MathJax 3.
+
+### How it works
+
+`components.js` loads MathJax automatically on every page:
+
+```javascript
+// 1. Set config BEFORE the MathJax script loads (critical!)
+window.MathJax = {
+    tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    },
+    options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    }
+};
+
+// 2. Load MathJax from CDN
+var script = document.createElement('script');
+script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+script.async = true;
+document.head.appendChild(script);
+
+// 3. Re-typeset after header/footer components load dynamically
+MathJax.typesetPromise();
+```
+
+### Critical rules
+
+1. **`window.MathJax` MUST be set BEFORE the MathJax script loads.**  
+   Do NOT inject the config as a separate `<script>` tag — set the global directly.
+
+2. **Call `typesetPromise()` after dynamic content loads.**  
+   Header/footer are loaded via `fetch`, so re-typeset in their callbacks.
+
+3. **Use `tex-chtml.js` component** — includes AMSmath (supports `\tfrac`, `\frac`, etc.).
+
+4. **Math renders as HTML/CSS** (not images) — scales perfectly on mobile.
+
+5. **Cache-busting**: `components.js` is referenced as `components.js?v=3` on all pages.
+   When making changes to `components.js`, bump the version number in every HTML file.
+
+### Lessons learned
+
+| What was tried | Why it failed |
+|---------------|---------------|
+| Config as injected `<script>` text | Escape issues with backslashes; config not guaranteed to load before MathJax |
+| Not re-typesetting after dynamic content | Math in header/footer not rendered |
+| No cache busting | Browser served old `components.js` without MathJax code |
+
+**The winning formula:** Set `window.MathJax` directly as a JS object, then append the CDN script, then re-typeset after dynamic content loads.
