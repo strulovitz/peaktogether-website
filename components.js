@@ -1,8 +1,6 @@
 (function () {
     'use strict';
 
-    var hoverTimer = null;
-
     function loadComponent(selector, url, callback) {
         var el = document.querySelector(selector);
         if (!el) return;
@@ -64,60 +62,8 @@
         }
     }
 
-    function initDesktopHover() {
-        // Only activate hover menus on devices with a fine pointer (mouse/trackpad)
-        // that actually support hover — skip on touch-only devices
-        if (!window.matchMedia('(hover: hover)').matches) return;
-        if (!window.matchMedia('(pointer: fine)').matches) return;
-
-        var menuItems = document.querySelectorAll('.nav-list > li.has-submenu');
-
-        function showSubmenu(li) {
-            clearTimeout(hoverTimer);
-            // Close any other hover submenus
-            var allOpen = document.querySelectorAll('.nav-list > li.has-submenu.hover-open');
-            for (var k = 0; k < allOpen.length; k++) {
-                if (allOpen[k] !== li) allOpen[k].classList.remove('hover-open');
-            }
-            li.classList.add('hover-open');
-        }
-
-        function hideSubmenu(li) {
-            hoverTimer = setTimeout(function () {
-                li.classList.remove('hover-open');
-            }, 300);
-        }
-
-        for (var i = 0; i < menuItems.length; i++) {
-            (function (li) {
-                var submenu = li.querySelector('.submenu');
-
-                li.addEventListener('mouseenter', function () {
-                    showSubmenu(li);
-                });
-
-                li.addEventListener('mouseleave', function () {
-                    hideSubmenu(li);
-                });
-
-                if (submenu) {
-                    submenu.addEventListener('mouseenter', function () {
-                        showSubmenu(li);
-                    });
-
-                    submenu.addEventListener('mouseleave', function () {
-                        hideSubmenu(li);
-                    });
-                }
-            })(menuItems[i]);
-        }
-    }
-
     document.addEventListener('DOMContentLoaded', function () {
-        loadComponent('[data-component="header"]', '/header.html', function () {
-            initMobileMenu();
-            initDesktopHover();
-        });
+        loadComponent('[data-component="header"]', '/header.html', initMobileMenu);
         loadComponent('[data-component="footer"]', '/footer.html');
     });
 })();
