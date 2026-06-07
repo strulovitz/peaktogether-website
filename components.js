@@ -62,8 +62,38 @@
         }
     }
 
+    function typesetMath() {
+        if (window.MathJax && window.MathJax.typesetPromise) {
+            MathJax.typesetPromise();
+        }
+    }
+
+    function loadMathJax() {
+        if (window.MathJax) {
+            typesetMath();
+            return;
+        }
+        var config = document.createElement('script');
+        config.textContent = 'MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}};';
+        document.head.appendChild(config);
+
+        var script = document.createElement('script');
+        script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
+        script.async = true;
+        script.onload = function () {
+            typesetMath();
+        };
+        document.head.appendChild(script);
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-        loadComponent('[data-component="header"]', '/header.html', initMobileMenu);
-        loadComponent('[data-component="footer"]', '/footer.html');
+        loadComponent('[data-component="header"]', '/header.html', function () {
+            initMobileMenu();
+            typesetMath();
+        });
+        loadComponent('[data-component="footer"]', '/footer.html', function () {
+            typesetMath();
+        });
+        loadMathJax();
     });
 })();
