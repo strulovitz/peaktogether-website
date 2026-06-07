@@ -1,6 +1,8 @@
 (function () {
     'use strict';
 
+    var hoverTimer = null;
+
     function loadComponent(selector, url, callback) {
         var el = document.querySelector(selector);
         if (!el) return;
@@ -30,20 +32,17 @@
         hamburger.addEventListener('click', function () {
             var expanded = hamburger.getAttribute('aria-expanded') === 'true';
             if (expanded) {
-                // Closing menu — reset state
                 nav.classList.remove('nav-open');
                 document.body.classList.remove('menu-open');
                 hamburger.setAttribute('aria-expanded', 'false');
                 closeAllSubmenus(nav);
             } else {
-                // Opening menu
                 nav.classList.add('nav-open');
                 document.body.classList.add('menu-open');
                 hamburger.setAttribute('aria-expanded', 'true');
             }
         });
 
-        // Close menu when clicking a link
         var navLinks = nav.querySelectorAll('a');
         for (var i = 0; i < navLinks.length; i++) {
             navLinks[i].addEventListener('click', function () {
@@ -54,7 +53,6 @@
             });
         }
 
-        // Submenu toggles
         var toggles = nav.querySelectorAll('.submenu-toggle');
         for (var j = 0; j < toggles.length; j++) {
             toggles[j].addEventListener('click', function (e) {
@@ -66,8 +64,60 @@
         }
     }
 
+    function initDesktopHover() {
+        // Only activate hover menus on devices with a fine pointer (mouse/trackpad)
+        // that actually support hover — skip on touch-only devices
+        if (!window.matchMedia('(hover: hover)').matches) return;
+        if (!window.matchMedia('(pointer: fine)').matches) return;
+
+        var menuItems = document.querySelectorAll('.nav-list > li.has-submenu');
+
+        function showSubmenu(li) {
+            clearTimeout(hoverTimer);
+            // Close any other hover submenus
+            var allOpen = document.querySelectorAll('.nav-list > li.has-submenu.hover-open');
+            for (var k = 0; k < allOpen.length; k++) {
+                if (allOpen[k] !== li) allOpen[k].classList.remove('hover-open');
+            }
+            li.classList.add('hover-open');
+        }
+
+        function hideSubmenu(li) {
+            hoverTimer = setTimeout(function () {
+                li.classList.remove('hover-open');
+            }, 300);
+        }
+
+        for (var i = 0; i < menuItems.length; i++) {
+            (function (li) {
+                var submenu = li.querySelector('.submenu');
+
+                li.addEventListener('mouseenter', function () {
+                    showSubmenu(li);
+                });
+
+                li.addEventListener('mouseleave', function () {
+                    hideSubmenu(li);
+                });
+
+                if (submenu) {
+                    submenu.addEventListener('mouseenter', function () {
+                        showSubmenu(li);
+                    });
+
+                    submenu.addEventListener('mouseleave', function () {
+                        hideSubmenu(li);
+                    });
+                }
+            })(menuItems[i]);
+        }
+    }
+
     document.addEventListener('DOMContentLoaded', function () {
-        loadComponent('[data-component="header"]', '/header.html', initMobileMenu);
+        loadComponent('[data-component="header"]', '/header.html', function () {
+            initMobileMenu();
+            initDesktopHover();
+        });
         loadComponent('[data-component="footer"]', '/footer.html');
     });
 })();
