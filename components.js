@@ -15,6 +15,13 @@
             });
     }
 
+    function closeAllSubmenus(nav) {
+        var open = nav.querySelectorAll('.submenu-open');
+        for (var i = 0; i < open.length; i++) {
+            open[i].classList.remove('submenu-open');
+        }
+    }
+
     function initMobileMenu() {
         var hamburger = document.querySelector('.hamburger');
         var nav = document.getElementById('mainNav');
@@ -22,23 +29,33 @@
 
         hamburger.addEventListener('click', function () {
             var expanded = hamburger.getAttribute('aria-expanded') === 'true';
-            hamburger.setAttribute('aria-expanded', !expanded);
-            nav.classList.toggle('nav-open');
-            document.body.classList.toggle('menu-open');
+            if (expanded) {
+                // Closing menu — reset state
+                nav.classList.remove('nav-open');
+                document.body.classList.remove('menu-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                closeAllSubmenus(nav);
+            } else {
+                // Opening menu
+                nav.classList.add('nav-open');
+                document.body.classList.add('menu-open');
+                hamburger.setAttribute('aria-expanded', 'true');
+            }
         });
 
-        // Close menu when clicking a link (mobile)
+        // Close menu when clicking a link
         var navLinks = nav.querySelectorAll('a');
         for (var i = 0; i < navLinks.length; i++) {
             navLinks[i].addEventListener('click', function () {
                 nav.classList.remove('nav-open');
                 document.body.classList.remove('menu-open');
                 hamburger.setAttribute('aria-expanded', 'false');
+                closeAllSubmenus(nav);
             });
         }
 
-        // Submenu toggles on mobile
-        var toggles = nav.querySelectorAll('.submenu-toggle, .submenu-toggle-mobile');
+        // Submenu toggles
+        var toggles = nav.querySelectorAll('.submenu-toggle');
         for (var j = 0; j < toggles.length; j++) {
             toggles[j].addEventListener('click', function (e) {
                 e.preventDefault();
