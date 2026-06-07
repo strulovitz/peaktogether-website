@@ -178,6 +178,17 @@ h1, h2, h3, h4, h5, h6 {
 
 /* ── Desktop Dropdown ── */
 
+.nav-list > li.has-submenu::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    height: 12px;
+    background: transparent;
+    z-index: 998;
+}
+
 .submenu {
     display: none;
     position: absolute;
