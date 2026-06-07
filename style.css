@@ -190,11 +190,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .submenu {
-    display: none;
+    visibility: hidden;
+    opacity: 0;
+    pointer-events: none;
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) translateY(-4px);
     background: #fff;
     border-radius: 14px;
     box-shadow: 0 8px 40px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.04);
@@ -202,16 +204,15 @@ h1, h2, h3, h4, h5, h6 {
     padding: 8px 0;
     list-style: none;
     z-index: 999;
-    animation: dropdownIn 0.15s ease;
-}
-
-@keyframes dropdownIn {
-    from { opacity: 0; transform: translateX(-50%) translateY(-4px); }
-    to   { opacity: 1; transform: translateX(-50%) translateY(0); }
+    transition: visibility 0s 0.25s, opacity 0.2s, transform 0.2s;
 }
 
 .has-submenu:hover > .submenu {
-    display: block;
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateX(-50%) translateY(0);
+    transition: visibility 0s 0s, opacity 0.2s, transform 0.2s;
 }
 
 /* ── Dropdown Section ── */
@@ -332,18 +333,24 @@ h1, h2, h3, h4, h5, h6 {
     /* Submenu on mobile — hidden by default, shown when .submenu-open */
     .submenu {
         display: none;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: none;
+        transition: none;
         position: static;
         box-shadow: none;
         border-radius: 0;
         background: #fdfaf5;
         min-width: auto;
         padding: 0;
-        animation: none;
-        transform: none;
     }
 
     .has-submenu.submenu-open > .submenu {
         display: block;
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
     }
 
     .submenu-heading {
