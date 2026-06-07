@@ -20,6 +20,7 @@ html {
     --cream: #FFF7EA;
     --text: #1F2933;
     --pink: #FF9BB3;
+    --header-height: 64px;
 }
 
 body {
@@ -27,47 +28,294 @@ body {
     background: var(--cream);
     color: var(--text);
     min-height: 100vh;
+    padding-top: var(--header-height);
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: 'Nunito', 'Segoe UI', system-ui, sans-serif;
 }
 
-/* ── Navbar ── */
+/* ═══════════════════════════════════════════
+   HEADER
+   ═══════════════════════════════════════════ */
 
-.navbar {
+.site-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-height);
     background: #fff;
     border-bottom: 2px solid #ffe8d6;
-    padding: 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
+    z-index: 1000;
 }
 
-.nav-links {
+.header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    height: 100%;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    list-style: none;
-    gap: 0;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.nav-links a {
+.logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: var(--blue);
+    text-decoration: none;
+    white-space: nowrap;
+    z-index: 1001;
+}
+
+.logo:hover {
+    color: #1a3d5c;
+}
+
+/* ── Hamburger ── */
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1001;
+}
+
+.hamburger .bar {
     display: block;
-    padding: 14px 22px;
+    width: 26px;
+    height: 3px;
+    background: var(--blue);
+    border-radius: 3px;
+    transition: transform 0.3s, opacity 0.3s;
+}
+
+.hamburger[aria-expanded="true"] .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger[aria-expanded="true"] .bar:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger[aria-expanded="true"] .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}
+
+/* ── Desktop Nav ── */
+
+.main-nav {
+    display: flex;
+}
+
+.nav-list {
+    display: flex;
+    align-items: center;
+    list-style: none;
+    gap: 4px;
+}
+
+.nav-list > li {
+    position: relative;
+}
+
+.nav-list a,
+.submenu-toggle {
+    display: block;
+    padding: 10px 16px;
     color: var(--text);
     text-decoration: none;
-    font-size: 1rem;
+    font-size: 0.95rem;
     font-weight: 600;
     font-family: 'Nunito', sans-serif;
-    border-radius: 0;
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
     transition: color 0.2s, background 0.2s;
 }
 
-.nav-links a:hover {
+.nav-list a:hover,
+.submenu-toggle:hover {
     color: var(--orange);
     background: #fff7ef;
 }
+
+.coming-soon span {
+    display: block;
+    padding: 10px 16px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    color: #bbb;
+    cursor: default;
+    white-space: nowrap;
+}
+
+.coming-soon small {
+    font-size: 0.7rem;
+    font-weight: 400;
+    color: #ccc;
+}
+
+/* ── Desktop Dropdowns ── */
+
+.submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+    min-width: 220px;
+    padding: 8px 0;
+    list-style: none;
+    z-index: 999;
+}
+
+.has-submenu:hover > .submenu {
+    display: block;
+}
+
+.submenu li {
+    position: relative;
+}
+
+.submenu a {
+    padding: 10px 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-radius: 0;
+    display: block;
+}
+
+.submenu a:hover {
+    background: #fef9f0;
+}
+
+/* ── Nested (3rd level) Submenu ── */
+
+.submenu-nested {
+    top: -8px;
+    left: 100%;
+    min-width: 340px;
+}
+
+.submenu-toggle-mobile {
+    display: none;
+}
+
+/* ═══════════════════════════════════════════
+   MOBILE MENU
+   ═══════════════════════════════════════════ */
+
+@media (max-width: 900px) {
+    .hamburger {
+        display: flex;
+    }
+
+    .main-nav {
+        position: fixed;
+        top: 0;
+        right: -320px;
+        width: 300px;
+        height: 100vh;
+        background: #fff;
+        box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+        padding: 80px 0 40px;
+        overflow-y: auto;
+        transition: right 0.3s ease;
+        display: block;
+        z-index: 1000;
+    }
+
+    .main-nav.nav-open {
+        right: 0;
+    }
+
+    .nav-list {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+    }
+
+    .nav-list > li {
+        border-bottom: 1px solid #f0e8dc;
+    }
+
+    .nav-list a,
+    .submenu-toggle,
+    .coming-soon span {
+        padding: 14px 24px;
+        font-size: 1rem;
+        border-radius: 0;
+    }
+
+    /* Show submenu-toggle-mobile instead of desktop toggle logic */
+    .submenu-toggle-mobile {
+        display: block;
+        padding: 14px 24px;
+        font-size: 1rem;
+        font-weight: 600;
+        font-family: 'Nunito', sans-serif;
+        cursor: pointer;
+        color: var(--blue);
+        border-top: 1px solid #f0e8dc;
+    }
+
+    .has-submenu > .submenu-toggle {
+        display: none;
+    }
+
+    .submenu {
+        display: none;
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        background: #fdfaf5;
+        min-width: auto;
+        padding: 0;
+    }
+
+    .has-submenu.submenu-open > .submenu {
+        display: block;
+    }
+
+    .submenu a {
+        padding: 12px 24px 12px 40px;
+        font-size: 0.95rem;
+    }
+
+    .submenu-nested {
+        background: #faf6ed;
+        min-width: auto;
+    }
+
+    .submenu-nested a {
+        padding-left: 56px;
+        font-size: 0.9rem;
+    }
+
+    /* Overlay */
+    body.menu-open::after {
+        content: '';
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.3);
+        z-index: 999;
+    }
+}
+
+/* ═══════════════════════════════════════════
+   MAIN CONTENT SECTIONS
+   ═══════════════════════════════════════════ */
 
 /* ── Hero ── */
 
@@ -227,24 +475,202 @@ h1, h2, h3, h4, h5, h6 {
     line-height: 1.5;
 }
 
-/* ── Footer ── */
+/* ═══════════════════════════════════════════
+   PAGE CONTENT (generic inner pages)
+   ═══════════════════════════════════════════ */
 
-.footer {
-    text-align: center;
-    padding: 40px 20px;
-    background: #fff;
-    border-top: 2px solid #ffe8d6;
-    font-size: 0.9rem;
-    color: #999;
+.page {
+    max-width: 880px;
+    margin: 40px auto 60px;
+    padding: 0 20px;
 }
 
-.footer .domain {
+.page h1 {
+    font-size: 2.4rem;
+    color: var(--blue);
+    font-weight: 800;
+    margin-bottom: 0.6rem;
+}
+
+.page .subtitle {
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 30px;
+}
+
+.page h2 {
+    font-size: 1.6rem;
+    color: var(--blue);
+    margin-top: 36px;
+    margin-bottom: 12px;
+    font-weight: 700;
+}
+
+.page p {
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: #444;
+    margin-bottom: 16px;
+}
+
+.page ul {
+    list-style: none;
+    padding: 0;
+}
+
+.page li {
+    margin-bottom: 8px;
+}
+
+.page li a {
+    display: block;
+    padding: 14px 20px;
+    background: #fff;
+    border-radius: 12px;
+    color: var(--blue);
+    text-decoration: none;
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: transform 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.page li a:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    background: #fef9f0;
+}
+
+.path-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.path-card {
+    background: #fff;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s, box-shadow 0.15s;
+    text-decoration: none;
+    display: block;
+    color: var(--text);
+}
+
+.path-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+}
+
+.path-card h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 6px;
+}
+
+.path-card p {
+    font-size: 0.9rem;
+    color: #888;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.back-link {
+    display: inline-block;
+    margin-top: 30px;
+    color: var(--orange);
+    font-weight: 600;
+    font-family: 'Nunito', sans-serif;
+    text-decoration: none;
+}
+
+.back-link:hover {
+    text-decoration: underline;
+}
+
+/* ═══════════════════════════════════════════
+   FOOTER
+   ═══════════════════════════════════════════ */
+
+.site-footer {
+    background: #fff;
+    border-top: 2px solid #ffe8d6;
+    padding: 50px 20px 30px;
+    margin-top: 60px;
+}
+
+.footer-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.footer-brand {
+    margin-bottom: 20px;
+}
+
+.footer-logo {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 6px;
+}
+
+.footer-tagline {
+    color: #aaa;
+    font-size: 0.95rem;
+}
+
+.footer-links {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.footer-links a {
+    color: var(--text);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.footer-links a:hover {
+    color: var(--orange);
+}
+
+.footer-social {
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+}
+
+.social-placeholder {
+    font-size: 1.6rem;
+    opacity: 0.4;
+    cursor: default;
+}
+
+.footer-bottom {
+    color: #bbb;
+    font-size: 0.85rem;
+}
+
+.footer-bottom .domain {
     font-weight: 700;
     color: var(--blue);
     font-family: 'Nunito', sans-serif;
 }
 
-/* ── Mobile ── */
+/* ═══════════════════════════════════════════
+   MOBILE RESPONSIVE
+   ═══════════════════════════════════════════ */
 
 @media (max-width: 768px) {
     .hero h1 {
@@ -266,5 +692,13 @@ h1, h2, h3, h4, h5, h6 {
     .cards {
         grid-template-columns: 1fr;
         max-width: 400px;
+    }
+
+    .page h1 {
+        font-size: 1.8rem;
+    }
+
+    .path-grid {
+        grid-template-columns: 1fr;
     }
 }
