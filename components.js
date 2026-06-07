@@ -69,19 +69,25 @@
     }
 
     function loadMathJax() {
-        if (window.MathJax) {
-            typesetMath();
-            return;
-        }
-        var config = document.createElement('script');
-        config.textContent = 'MathJax={tex:{inlineMath:[["$","$"],["\\\\(","\\\\)"]],displayMath:[["$$","$$"],["\\\\[","\\\\]"]]}};';
-        document.head.appendChild(config);
+        // Set config BEFORE loading MathJax
+        window.MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']],
+                displayMath: [['$$', '$$'], ['\\[', '\\]']]
+            },
+            options: {
+                skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+            }
+        };
 
         var script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js';
         script.async = true;
         script.onload = function () {
             typesetMath();
+        };
+        script.onerror = function () {
+            console.warn('MathJax failed to load');
         };
         document.head.appendChild(script);
     }
