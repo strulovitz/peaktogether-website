@@ -1,54 +1,32 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Explicit Formulae &amp; Weil's Criteria — Peak Together</title>
+    <title></title>
     <link rel="stylesheet" href="/style.css?v=3">
 </head>
 <body>
-
     <div data-component="header"></div>
-
-    <main class="page">
-        <h1>📐 Path 5: Explicit Formulae &amp; Weil's Criteria</h1>
-        <p class="subtitle">Leveraging equivalences to RH — turning the problem into positivity statements that might be easier to prove.</p>
-
-        <p>This path focuses on the explicit formula relating primes to zeros, and criteria (like Weil's) that recast RH as statements about certain functions or forms being positive definite. It's about finding an equivalent inequality that might be more approachable than the original conjecture.</p>
-
-        <h2>Base Camp 1: Riemann's Explicit Formula</h2>
-        <p>Derive and understand the explicit formula connecting prime counting and zeros: ψ(x) = x − Σρ x^ρ/ρ − ζ'(0)/ζ(0) − ½x⁻¹. RH is equivalent to those oscillatory terms being as "small" as possible.</p>
-        <ul>
-            <li><strong>Riemann's Zeta Function</strong> by Edwards — Chapter 11 derives the Exact Formula carefully, explaining each term and its significance.</li>
-            <li><strong>A Primer of Analytic Number Theory</strong> by John Stopple — Provides a gentler introduction, re-deriving explicit formulas in simple terms.</li>
-            <li><strong>Introduction to Analytic Number Theory</strong> by T. Apostol — Builds intuition through partial summation formulas showing how primes and zeros interplay.</li>
-        </ul>
-
-        <h2>Base Camp 2: Weil's Positivity Criterion</h2>
-        <p>In 1952, Weil gave an equivalent statement of GRH: RH is true iff a certain Fourier transform of the prime distribution is positive definite. This transforms RH into a problem of finding a positive kernel.</p>
-        <ul>
-            <li><strong>Weil's Explicit Formula and Positivity</strong> (AIM Notes) — Concisely states Weil's criterion: a certain even test function must make a particular combination of primes and zeros non-negative.</li>
-            <li><strong>Li's Criterion for RH</strong> by John Conrey &amp; Xian-Jin Li (1999) — RH is true iff a sequence of coefficients λₙ are all positive. Transforms RH into an infinite list of inequalities.</li>
-            <li><strong>Equivalents of the Riemann Hypothesis: Volume 1, Arithmetic Equivalents</strong> by K. Broughan — Lists dozens of statements equivalent to RH, including bounds on ψ(x), Mertens function criteria, and Robin's inequality.</li>
-        </ul>
-
-        <h2>Base Camp 3: Mastery of Fourier &amp; Distribution Theory</h2>
-        <p>The explicit formula and Weil's criterion require comfort with distributions (generalized functions) and Fourier transforms.</p>
-        <ul>
-            <li><strong>Fourier Analysis</strong> by Terence Tao (AMS Graduate Studies vol. 142) — Strong grounding in Fourier transform methods, positive-definite functions, and Bochner's theorem.</li>
-            <li><strong>Generalized Functions and Partial Differential Equations</strong> by Avner Friedman — Classic source on distribution theory, important for justifying steps in deriving explicit formulas.</li>
-        </ul>
-
-        <h2>Base Camp 4: Modern Refinements &amp; Computational Verifications</h2>
-        <p>See how explicit formulae are used today in large-scale computations verifying RH to high heights.</p>
-        <ul>
-            <li><strong>The Zeros of Riemann's Zeta Function on the Critical Line</strong> by Andrew Odlyzko — Extensive computations verifying billions of zeros lie on the line and obey GUE statistics.</li>
-            <li><strong>Primes and the Zeta Function</strong> by Brian Conrey (Amer. Math. Monthly, 2003) — Survey using explicit formulas to derive consequences of RH and showing how it sharpens prime number estimates.</li>
-        </ul>
-
-        <a href="/mathematics/Riemann_hypothesis/" class="back-link">← Back to Riemann Hypothesis</a>
+    <main class="page"><h1>5. Explicit Formulae and Weil’s Criteria Path</h1>
+<p>This path focuses on the explicit formula relating primes and zeros, and criteria (like Weil’s) that turn RH into statements about certain functions or forms being positive definite[52]. It’s about leveraging equivalences to RH that might be easier to prove than RH itself.</p>
+<h2>Base Camp 1: Riemann’s Explicit Formula – Derive and understand the explicit formula connecting prime counting and zeros. Riemann’s explicit formula expresses $\pi(x)$ (the prime counting function) or related functions (Chebyshev’s $\psi(x)$) in terms of an infinite sum over the nontrivial zeros $\rho$ of $\zeta(s)$. Mastering this formula is key because many RH criteria stem from it. Books:</h2>
+<p>“Riemann’s Zeta Function” by Edwards – Chapter 11 of Edwards is devoted to the Exact (Explicit) Formula[53]. It carefully derives the formula$$\psi(x) = x - \sum_{\rho} \frac{x^\rho}{\rho} - \frac{\zeta&#39;(0)}{\zeta(0)} - \frac12 x^{-1},$$where the sum is over nontrivial zeros $\rho$[53]. Understanding each term (especially the oscillatory sum over zeros) is crucial – RH is equivalent to those oscillations being as “small” as possible. Edwards’ derivation is insightful and historically grounded.</p>
+<p>“Explicit Formulas” by John Stopple (Chapter 3 of A Primer of Analytic Number Theory) – Stopple’s textbook (2003) provides a gentler introduction, re-deriving explicit formulas in a “simple terms” manner akin to Burnol’s exposition[54][55]. He even covers alternative forms like Haran’s additive convolution form of the explicit formula[56]. This helps learners see the explicit formula not as a magic black box, but as a natural result of contour integration and the functional equation.</p>
+<p>“Introduction to Analytic Number Theory” by T. Apostol – Apostol doesn’t go as far as the full explicit formula, but he does derive partial summation formulas and simpler explicit summation formulas (like Euler’s formula for $\sum_{n\le x}\Lambda(n)$). These build intuition towards the full formula by examining how primes and zeros interplay in partial cases.</p>
+<h2>Base Camp 2: Weil’s Positivity Criterion – Study Weil’s criterion (and variants like Li’s criterion) which recast RH as positivity conditions. In 1952, André Weil gave an equivalent statement of the Generalized RH in terms of a certain Fourier transform of the prime distribution being positive definite[52]. Key references:</h2>
+<p>“Weil’s Explicit Formula and Positivity” (AIM Notes) – The AIM workshop notes[57][49] concisely state Weil’s criterion: roughly, RH for all Dirichlet $L$-functions is equivalent to a certain even test function $h(t)$ always making a particular combination of primes and zeros non-negative. This duality between primes and zeros is shown in the formula given[49]. These notes are helpful as they step through the formula and then say “Using this duality Weil gave a criterion for RH”[58]. In other words, if a certain positive kernel can be found so that an inequality holds, then RH follows. Understanding this link is profound because it connects RH to Fourier analysis and almost positive semi-definite distributions[52].</p>
+<p>“Li’s Criterion for RH” – In 1997, Xian-Jin Li found a beautiful criterion: RH is true iff a sequence of coefficients $\lambda_n$ (derived from the power series of $\xi(s)$) are all positive. These coefficients can be computed and have been checked to be positive for many $n$. A great reference is “The Riemann Hypothesis and Li’s Criterion” by John Conrey & Xian-Jin Li (1999)[59]. This paper (reprinted in Borwein et al.[59]) explains and proves Li’s criterion, connecting it with Weil’s criterion and other positivity statements. Studying Li’s criterion is pedagogically useful: it transforms RH into an infinite list of inequalities that look simpler than locating zeros – a different angle to attack.</p>
+<p>“Equivalents of the Riemann Hypothesis: Volume 1, Arithmetic Equivalents” by K. Broughan – Broughan’s first volume (2017) lists dozens of statements equivalent to RH (and GRH). Many of these are in the spirit of explicit formula analysis: bounds on $\psi(x)$, Mertens function criteria, Robin’s inequality for $\sigma(n)$, etc. For example, one equivalence Broughan highlights is: RH is true iff for all $x \ge 2$,$$|\pi(x) - \text{li}(x)| < \frac{1}{8\pi}\sqrt{x}\,\log x,$$a statement on the error term of the prime counting function[60][61]. Collecting such criteria, Broughan’s book can guide a researcher to focus on a potentially easier inequality. It’s a respected compendium[62] for anyone exploring explicit formulae and consequences.</p>
+<h2>Base Camp 3: Mastery of Fourier and Distribution Theory Techniques – The explicit formula and Weil’s criterion require some real analysis muscle. At this stage, one should ensure they are comfortable with the theory of distributions (generalized functions) and Fourier transforms, since Weil’s criterion is “to the effect that a certain generalized function is positive definite”[52]. Recommended supporting texts:</h2>
+<p>“Fourier Analysis” by Terrence Tao (AMS Graduate Studies vol. 142) – Provides a strong grounding in Fourier transform methods and distribution theory. It covers topics like the Fourier transform of the Gaussian (which appears in explicit formulas as the test function $h(t)$ in Weil’s criterion[63]) and positive-definite functions (Bochner’s theorem), which are exactly the types of analysis needed to parse Weil’s statements.</p>
+<p>“Generalized Functions and Partial Differential Equations” by Avner Friedman – A classic source on distribution theory. It explains how to differentiate under the summation sign, etc., which is important when justifying steps in deriving explicit formulas or manipulating them (like Weil did combining all Dirichlet $L$ functions’ formulas at once[64]). This might be beyond what’s strictly necessary, but it ensures one isn’t fazed by terms like “generalized function”, “positive definite kernel”, etc., that show up in Weil’s papers[52].</p>
+<h2>Base Camp 4: Modern Refinements and Computational verifications – Explore how explicit formulae are used in practice today. This includes large-scale computations verifying RH to high heights and how explicit formula shapes those computations:</h2>
+<p>“The Zeros of Riemann’s Zeta Function on the Critical Line” by Andrew Odlyzko – Odlyzko’s extensive computations of zeta zeros (into the billions) are a direct application of explicit formula ideas (Turing’s method, etc.). His papers (1987, 1989) detail how one uses the explicit formula to locate zeros in practice and check their distribution[65]. Reading Odlyzko’s work gives a sense of confidence in RH: for example, he verified that the first $10^{13}$ zeros lie on the line and obey GUE statistics[39]. This empirical backing, combined with the explicit formula’s rigor, strongly supports the validity of RH[19].</p>
+<p>“Primes and the Zeta Function” by Brian Conrey (Amer. Math. Monthly, 2003) – A survey that uses explicit formulas to derive many consequences of RH in number theory (like the improved prime gap bounds, etc.). Conrey’s exposition (also found in his 2002 Notices article) ties together everything: how assuming RH simplifies the error term in PNT to the “best possible” [66], gives bounds for many arithmetic functions like Möbius and $\sigma(n)$[61][67], and how conditionally we can prove myriad theorems. This underscores the power of explicit formula – it’s the common thread between RH and so many arithmetic statements[67][68].</p>
+<p>Following the Explicit Formula path, one essentially tries to prove RH by proving an equivalent inequality or positivity. It’s a path that doesn’t stray far from classical number theory, but rather uses deep analysis to corner RH. The books and papers here are widely regarded as providing both the necessary technical tools and the insightful interpretations of those tools (Weil and Li’s criteria in particular are celebrated for their elegance).</p>
+    <a href="/mathematics/Riemann_hypothesis/" class="back-link">← Back to Riemann Hypothesis</a>
     </main>
-
     <div data-component="footer"></div>
     <script src="/components.js"></script>
 </body>
