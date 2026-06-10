@@ -486,10 +486,10 @@ class HarmonicSeriesPage(Page):
         H = self.partial[N]
         if N <= 7:
             terms = " + ".join(
-                "1" if n == 1 else r"\tfrac{1}{%d}" % n for n in range(1, N + 1))
+                "1" if n == 1 else r"\frac{1}{%d}" % n for n in range(1, N + 1))
         else:
-            terms = (r"1 + \tfrac{1}{2} + \tfrac{1}{3} + \tfrac{1}{4} + "
-                     r"\cdots + \tfrac{1}{%d}" % N)
+            terms = (r"1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + "
+                     r"\cdots + \frac{1}{%d}" % N)
         return [
             (r"$H_N \,=\, \sum_{n=1}^{N} \frac{1}{n}"
              r" \,=\, 1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\cdots$", 16),
@@ -878,7 +878,18 @@ class App:
 
 
 def main():
-    App().run()
+    try:
+        App().run()
+    except Exception:
+        import traceback
+        import datetime
+        tb = traceback.format_exc()
+        print(tb, file=sys.stderr)
+        with open("math_flyer.log", "a", encoding="utf-8") as f:
+            f.write("\n=== CRASH %s ===\n" % datetime.datetime.now().isoformat())
+            f.write(tb)
+            f.write("=" * 60 + "\n")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
