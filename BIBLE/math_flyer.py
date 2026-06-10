@@ -480,10 +480,10 @@ class HarmonicSeriesPage(Page):
         H = self.partial[N]
         if N <= 7:
             terms = " + ".join(
-                "1" if n == 1 else r"\tfrac{1}{%d}" % n for n in range(1, N + 1))
+                "1" if n == 1 else r"\frac{1}{%d}" % n for n in range(1, N + 1))
         else:
-            terms = (r"1 + \tfrac{1}{2} + \tfrac{1}{3} + \tfrac{1}{4} + "
-                     r"\cdots + \tfrac{1}{%d}" % N)
+            terms = (r"1 + \frac{1}{2} + \frac{1}{3} + \frac{1}{4} + "
+                     r"\cdots + \frac{1}{%d}" % N)
         return [
             (r"$H_N \,=\, \sum_{n=1}^{N} \frac{1}{n}"
              r" \,=\, 1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\cdots$", 16),
@@ -672,8 +672,8 @@ class App:
         y = 48                                            # LaTeX formula panel
         latex_items = [(self.tex.latex(s, fs), s) for s, fs in page.overlay_latex()]
         if latex_items:
-            pw = max(t[0][1] for t, _ in latex_items) * 0.5 + 28
-            ph = sum(t[0][2] * 0.5 + 10 for t, _ in latex_items) + 18
+            pw = max(t[1] for t, _ in latex_items) * 0.5 + 28
+            ph = sum(t[2] * 0.5 + 10 for t, _ in latex_items) + 18
             draw_rect(10, y, pw, ph, (0.05, 0.06, 0.11), 0.78)
             ty = y + 10
             for t, _ in latex_items:
