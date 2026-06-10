@@ -16,9 +16,6 @@
 <p>Calculus is the mathematics of continuous change. In calculus, we learn how to describe how quickly things change (with derivatives) and how to accumulate quantities (with integrals). For example, if distance changes over time, calculus gives us velocity and acceleration – rates of change that are intuitive in everyday life. Just as importantly, calculus introduces the concept of the limit, which lets us talk about what happens as we “zoom in” on a point or as some quantity grows without bound. This idea of tending toward a value is critical for making sense of infinite processes.</p>
 <p>One of the most eye-opening lessons in basic calculus is dealing with infinite series – summing infinitely many terms. At first, it sounds impossible to add up infinitely many numbers and get a finite answer, but calculus (and its rigorous cousin, analysis) provides the tools to determine whether such a sum converges to a limit or diverges (grows without bound). For example, the series $1 + \tfrac{1}{2} + \tfrac{1}{3} + \tfrac{1}{4} + \cdots$, known as the harmonic series, diverges – it keeps growing slowly but inexorably to infinity[1]. This fact is surprising because the terms $\tfrac{1}{n}$ get very small, yet not small enough to prevent the infinite sum from blowing up. Such insights teach us caution and precision when handling infinity. (We’ll later see that this divergent harmonic series is intimately related to the Riemann zeta function at $s=1$ – a preview of things to come.)</p>
 
-<!-- ---------------------------------------------------------------------- -->
-<!--  ?? INTERACTIVE DEMO — Peak Together: Harmonic Series                 -->
-<!--  Descriptions by Claude Fable (verbatim).  Built by DeepSeek V4 Pro.  -->
 <!-- ============================================= -->
 <!--  INTERACTIVE DEMO -- Peak Together: Harmonic Series  -->
 <!--  Descriptions by Claude Fable (verbatim).             -->
@@ -27,11 +24,11 @@
 <div class="demo-callout">
     <h3>Try It Together -- Interactive 3D Demo</h3>
     <p><strong>Two players, one computer, one screen, one 3D math world.</strong></p>
-    <p>Player 2 ("Pilot", keyboard + T.16000M joystick) flies Descent-style with 6 degrees of freedom. Player 1 ("Manipulator", mouse + Xbox controller) drags sliders, like Mathematica's Manipulate[].</p>
+    <p>The design: one shared screen. The boyfriend (Pilot) flies a Descent-style 6-DOF ship with the keyboard; he may borrow the mouse for pitch/yaw by holding the right mouse button (with an invert toggle). The girlfriend (Manipulator) uses the mouse (left button) on sliders to change $N$, spacing, etc.</p>
 
     <div class="demo-page">
         <h4>Page 1 -- Harmonic Series: Definition &amp; Divergence</h4>
-        <p>The series <em>H</em><sub><em>N</em></sub> = 1 + 1/2 + 1/3 + ... + 1/<em>N</em> is rendered as real LaTeX (via matplotlib's mathtext -- no LaTeX installation needed), and in 3D you see the terms 1/<em>n</em> as shrinking bars next to a translucent "partial-sum wall" that grows like ln <em>N</em> + <em>&gamma;</em> -- divergence made visible.</p>
+        <p>The series $H_N = \sum_{n=1}^{N} \frac{1}{n}$ is rendered as real LaTeX (via matplotlib's mathtext -- no LaTeX installation needed), and in 3D you see the terms $1/n$ as shrinking bars next to a translucent "partial-sum wall" that grows like $\ln N + \gamma$ -- divergence made visible.</p>
     </div>
 
     <div class="demo-page">
