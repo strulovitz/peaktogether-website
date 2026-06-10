@@ -511,19 +511,178 @@ class HarmonicSeriesPage(Page):
 
 # =====================================================================
 #  TEMPLATE FOR FUTURE PAGES  (for the coding agent — copy, rename, fill)
+#  Planned future pages (one class each, same pattern):
+#    IntegralTestPage, GrowthRatePage, DivisibilityPage, InterpolationPage,
+#    RamanujanSummationPage, CrossingDesertPage, StackingBlocksPage,
+#    CountingPrimesPage, CouponCollectorPage, AlgorithmAnalysisPage
 # =====================================================================
-# @register_page
-# class ComparisonTestPage(Page):
-#     """PAGE 2 — Oresme's comparison: 1 + 1/2 + (1/4+1/4) + (1/8 x4) + ...
-#     TODO: draw grouped bars in a second color BEHIND the harmonic bars,
-#     each group summing to exactly 1/2; slider 'Groups k'; show LaTeX
-#     $H_{2^k} \\geq 1 + k/2$. Reuse draw_box/Slider exactly as above."""
-#     TITLE = "Comparison Test  (Oresme, 1350)"
-#
-# Planned future pages (one class each, same pattern):
-#   IntegralTestPage, GrowthRatePage, DivisibilityPage, InterpolationPage,
-#   RamanujanSummationPage, CrossingDesertPage, StackingBlocksPage,
-#   CountingPrimesPage, CouponCollectorPage, AlgorithmAnalysisPage
+
+@register_page
+class ComparisonTestPage(Page):
+    """PAGE 2 — Comparison test (Nicole Oresme, ~1350).
+    Faithful 3D version of the Wikipedia figure for 'Harmonic series':
+      * GREY adjacent bars of unit width: bar n spans x in (n-1, n], height 1/n,
+        so the AREA of bar n equals the term 1/n.
+      * BLUE outlined rectangles: rectangle j spans (2^(j-1), 2^j], height 1/2^j
+        -> width * height = 2^(j-1) * 2^(-j) = 1/2. EVERY blue rectangle has
+        area exactly 1/2, and the grey bars always poke above it.
+      * RED curve y = 1/x, dashed gridlines at 1/2, 1/4, 1/8, ...,
+        x-axis ticks at the powers of two.
+    Wikipedia caption: 'There are infinite blue rectangles each with area 1/2,
+    yet their total area is exceeded by that of the grey bars denoting the
+    harmonic series.'
+
+    ENGINE NOTE: geometry is compiled into a GL display list, rebuilt only
+    when a slider changes (this page draws up to 256 bars). Future heavy
+    pages should copy this trick.
+    """
+    TITLE = "Comparison Test (Oresme, ~1350)  —  Blue Rectangles of Area 1/2"
+    K_MAX = 8                                   # up to 2^8 = 256 bars
+
+    def __init__(self):
+        super().__init__()
+        n = np.arange(1, 2 ** self.K_MAX + 1)
+        self.partial = np.concatenate(([0.0], np.cumsum(1.0 / n)))
+        self.s_k    = Slider("Groups  k   (N = 2^k bars)", 1, self.K_MAX, 5, step=1)
+        self.s_sp   = Slider("Horizontal scale", 0.5, 2.5, 1.2)
+        self.s_fill = Slider("Blue fill opacity", 0.0, 1.0, 0.30)
+        self.s_hl   = Slider("Highlight rectangle (0 = all)", 0, self.K_MAX, 0, step=1)
+        self.sliders = [self.s_k, self.s_sp, self.s_fill, self.s_hl]
+        self._cache_key = None
+        self._dlist = None
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        key = (int(self.s_k.value), round(self.s_sp.value, 3),
+               round(self.s_fill.value, 2), int(self.s_hl.value))
+        if key != self._cache_key:              # rebuild only on slider change
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(*key)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+    def _build_scene(self, k, sp, fill_alpha, hl):
+        N = 2 ** k
+        draw_floor_grid(max(60.0, (N + 4) * sp))
+        gap = 0.04 * sp                          # thin gaps, as in the figure
+
+        # --- GREY bars: bar n spans x in (n-1, n], height 1/n -------------
+        glColor4f(0.78, 0.78, 0.81, 1.0)
+        for n in range(1, N + 1):
+            draw_box((n - 1) * sp + gap, 0.0, -0.6,
+                     n * sp - gap, 1.0 / n, 0.6)
+
+        # --- flat 'figure' elements: no lighting, like a drawing ----------
+        glDisable(GL_LIGHTING)
+
+        # axes (white) with ticks at the powers of two: 1, 2, 4, 8, ...
+        glLineWidth(2.0)
+        glColor4f(0.92, 0.92, 0.95, 1.0)
+        glBegin(GL_LINES)
+        glVertex3f(-0.6 * sp, 0.0, 0.65); glVertex3f((N + 1.5) * sp, 0.0, 0.65)
+        glVertex3f(0.0, 0.0, 0.65);       glVertex3f(0.0, 1.65, 0.65)
+        for j in range(0, k + 1):                # ticks at x = 2^j  (and x=1)
+            x = (2 ** j) * sp
+            glVertex3f(x, 0.0, 0.65); glVertex3f(x, -0.14, 0.65)
+        glEnd()
+
+        # dashed grey gridlines at y = 1/2, 1/4, ..., 1/2^k  (and y = 1)
+        glEnable(GL_LINE_STIPPLE)
+        glLineStipple(2, 0x00FF)
+        glLineWidth(1.5)
+        glColor4f(0.55, 0.55, 0.60, 0.9)
+        glBegin(GL_LINES)
+        for j in range(0, k + 1):
+            y = 2.0 ** (-j)
+            glVertex3f(0.0, y, 0.65); glVertex3f(N * sp, y, 0.65)
+        glEnd()
+        glDisable(GL_LINE_STIPPLE)
+
+        # RED curve  y = 1/x  (passes through the top-right corner of each bar)
+        glLineWidth(3.0)
+        glColor4f(0.93, 0.18, 0.12, 1.0)
+        glBegin(GL_LINE_STRIP)
+        for t in np.linspace(0.625, N + 1.0, 260):   # start where y = 1.6
+            glVertex3f(t * sp, 1.0 / t, 0.7)
+        glEnd()
+
+        # --- BLUE rectangles: group j spans (2^(j-1), 2^j], height 1/2^j ---
+        #     width * height = 2^(j-1) * 2^(-j) = 1/2   (EVERY one, area 1/2)
+        def blue_of(j):
+            if hl == 0 or j == hl:
+                return (0.36, 0.36, 0.96)
+            return (0.36 * 0.35, 0.36 * 0.35, 0.96 * 0.45)   # dimmed
+
+        if fill_alpha > 0.01:                    # translucent fill, in front
+            glDepthMask(GL_FALSE)
+            for j in range(1, k + 1):
+                r, g, b = blue_of(j)
+                a = fill_alpha * (1.0 if (hl == 0 or j == hl) else 0.35)
+                glColor4f(r, g, b, a)
+                x0, x1 = (2 ** (j - 1)) * sp, (2 ** j) * sp
+                y1 = 2.0 ** (-j)
+                glBegin(GL_QUADS)
+                glVertex3f(x0, 0.0, 0.72); glVertex3f(x1, 0.0, 0.72)
+                glVertex3f(x1, y1, 0.72);  glVertex3f(x0, y1, 0.72)
+                glEnd()
+            glDepthMask(GL_TRUE)
+
+        glLineWidth(3.5)                         # thick blue outlines
+        for j in range(1, k + 1):
+            glColor4f(*blue_of(j), 1.0)
+            x0, x1 = (2 ** (j - 1)) * sp, (2 ** j) * sp
+            y1 = 2.0 ** (-j)
+            glBegin(GL_LINE_LOOP)
+            glVertex3f(x0, 0.0, 0.74); glVertex3f(x1, 0.0, 0.74)
+            glVertex3f(x1, y1, 0.74);  glVertex3f(x0, y1, 0.74)
+            glEnd()
+
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        k = int(self.s_k.value)
+        N = 2 ** k
+        H = self.partial[N]
+        return [
+            # Wikipedia line 1: replace each denominator by the next power of 2
+            # (bold = the replaced ones; mathtext has no per-symbol color)
+            (r"$1+\frac{1}{2}+\frac{1}{3}+\frac{1}{4}+\frac{1}{5}+\frac{1}{6}"
+             r"+\frac{1}{7}+\frac{1}{8}+\frac{1}{9}+\cdots"
+             r"\;\geq\;1+\frac{1}{2}+\frac{1}{\mathbf{4}}+\frac{1}{4}"
+             r"+\frac{1}{\mathbf{8}}+\frac{1}{\mathbf{8}}+\frac{1}{\mathbf{8}}"
+             r"+\frac{1}{8}+\frac{1}{\mathbf{16}}+\cdots$", 13),
+            # Wikipedia line 2: grouping equal terms
+            (r"$1+\left(\frac{1}{2}\right)+\left(\frac{1}{4}+\frac{1}{4}\right)"
+             r"+\left(\frac{1}{8}+\frac{1}{8}+\frac{1}{8}+\frac{1}{8}\right)"
+             r"+\left(\frac{1}{16}+\cdots+\frac{1}{16}\right)+\cdots"
+             r"\;=\;1+\frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\frac{1}{2}+\cdots$", 12),
+            # Wikipedia line 3 (Oresme's bound), with live numbers
+            (r"$\sum_{n=1}^{2^{%d}}\frac{1}{n} \;=\; H_{%d} \approx %.4f"
+             r"\;\geq\;1+\frac{%d}{2} \;=\; %.1f$"
+             % (k, N, H, k, 1.0 + 0.5 * k), 14),
+        ]
+
+    def overlay_info(self):
+        k = int(self.s_k.value)
+        N = 2 ** k
+        lines = [
+            "There are infinite blue rectangles each with area 1/2, yet their total",
+            "area is exceeded by that of the grey bars denoting the harmonic series.",
+            "Red curve: y = 1/x.   Original proof: Nicole Oresme, around 1350.",
+        ]
+        hl = int(self.s_hl.value)
+        if hl:
+            lines.append(
+                "Blue rectangle %d: width %d  x  height 1/%d  =  area 1/2 exactly.%s"
+                % (hl, 2 ** (hl - 1), 2 ** hl,
+                   "" if hl <= k else "   (raise the k slider to see it!)"))
+        return lines
 
 
 # =====================================================================
