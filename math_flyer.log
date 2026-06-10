@@ -1,0 +1,15 @@
+
+=== CRASH 2026-06-10T16:42:40.544026 ===
+Traceback (most recent call last):
+  File "C:\Users\nir_s\peaktogether-website\math_flyer.py", line 882, in main
+    App().run()
+  File "C:\Users\nir_s\peaktogether-website\math_flyer.py", line 876, in run
+    self.render()
+  File "C:\Users\nir_s\peaktogether-website\math_flyer.py", line 836, in render
+    pw = max(t[0][1] for t, _ in latex_items) * 0.5 + 28
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nir_s\peaktogether-website\math_flyer.py", line 836, in <genexpr>
+    pw = max(t[0][1] for t, _ in latex_items) * 0.5 + 28
+             ~~~~^^^
+IndexError: invalid index to scalar variable.
+============================================================
