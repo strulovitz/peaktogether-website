@@ -208,11 +208,12 @@ class TexCache:
                 glDeleteTextures([tid])
             self.cache.clear()
 
-    def latex(self, s, fontsize=15):
-        key = ("L", s, fontsize)
+    def latex(self, s, fontsize=15, color="#F2F4FA"):
+        key = ("L", s, fontsize, color)
         if key not in self.cache:
             self._prune()
-            self.cache[key] = surface_to_texture(latex_to_surface(s, fontsize))
+            self.cache[key] = surface_to_texture(
+                latex_to_surface(s, fontsize, color))
         return self.cache[key]
 
     def text(self, s, size=20, color=(225, 228, 238), bold=False):
@@ -259,6 +260,28 @@ def draw_texture(tex, x, y, scale=1.0, alpha=1.0):
     glEnd()
     glDisable(GL_TEXTURE_2D)
     return w, h
+
+
+def draw_latex_3d(tex, cx, y_bottom, z, height):
+    """Draw a cached (tid, w, h) texture as a flat quad in the world's
+    x-y plane: horizontally centered at cx, sitting on y_bottom.
+    Used for labels INSIDE the 3D figure (call every frame, NOT inside
+    display lists -- the texture cache may recycle texture ids)."""
+    tid, w, h = tex
+    ww = height * (w / float(h))
+    x0 = cx - ww / 2.0
+    glDisable(GL_LIGHTING)
+    glEnable(GL_TEXTURE_2D)
+    glBindTexture(GL_TEXTURE_2D, tid)
+    glColor4f(1, 1, 1, 1)
+    glBegin(GL_QUADS)
+    glTexCoord2f(0, 0); glVertex3f(x0, y_bottom, z)
+    glTexCoord2f(1, 0); glVertex3f(x0 + ww, y_bottom, z)
+    glTexCoord2f(1, 1); glVertex3f(x0 + ww, y_bottom + height, z)
+    glTexCoord2f(0, 1); glVertex3f(x0, y_bottom + height, z)
+    glEnd()
+    glDisable(GL_TEXTURE_2D)
+    glEnable(GL_LIGHTING)
 
 
 # =====================================================================
@@ -679,6 +702,171 @@ class ComparisonTestPage(Page):
         return lines
 
 
+@register_page
+class IntegralTestPage(Page):
+    """PAGE 3 — Integral test. Faithful 3D version of the Wikipedia figure:
+    'Rectangles with area given by the harmonic series, and the hyperbola
+    y = 1/x through the upper left corners of these rectangles.'
+      * Cream rectangles, 1 unit wide, 1/n high, on white 'paper', with
+        black outlines, black axes, black corner dots -- figure colors.
+      * Crimson curve y = 1/x through the upper-LEFT corners (n, 1/n).
+      * 'Shift rectangles left' slider: drag 0 -> 1 and the rectangles
+        slide one unit left, dropping BELOW the curve. That slide IS the
+        proof of:  integral(1..N+1) < H_N < integral(1..N) + 1.
+    Geometry uses the standard display-list cache (rebuilt on slider change).
+    """
+    TITLE = "Integral Test  --  H_N Trapped Between Two Integrals"
+    N_CAP = 80
+
+    def __init__(self):
+        super().__init__()
+        self.tex = None                          # set by App (Patch C)
+        n = np.arange(1, self.N_CAP + 1)
+        self.partial = np.concatenate(([0.0], np.cumsum(1.0 / n)))
+        self.s_n     = Slider("Rectangles  N", 1, self.N_CAP, 6, step=1)
+        self.s_shift = Slider("Shift rectangles left", 0.0, 1.0, 0.0)
+        self.s_sp    = Slider("Horizontal scale", 0.6, 2.5, 1.4)
+        self.s_fill  = Slider("Rectangle fill opacity", 0.0, 1.0, 0.90)
+        self.sliders = [self.s_n, self.s_shift, self.s_sp, self.s_fill]
+        self._cache_key = None
+        self._dlist = None
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        N, sp = int(self.s_n.value), round(self.s_sp.value, 3)
+        shift, fill = round(self.s_shift.value, 3), round(self.s_fill.value, 2)
+        key = (N, sp, shift, fill)
+        if key != self._cache_key:
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(N, sp, shift, fill)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+        # --- LaTeX labels, every frame (textures cached, quads are cheap) --
+        if self.tex is None:
+            return
+        ink, crimson = "#1A1A1A", "#B5093D"
+        for n in range(1, min(N, 5) + 1):        # term labels, as in figure
+            lab = r"$1$" if n == 1 else r"$\frac{1}{%d}$" % n
+            draw_latex_3d(self.tex.latex(lab, 16, ink),
+                          (n + 0.5 - shift) * sp, 1.0 / n + 0.06, 0.8,
+                          0.17 if n == 1 else 0.27)
+        draw_latex_3d(self.tex.latex(r"$y=\frac{1}{x}$", 16, crimson),
+                      1.7 * sp, 1.85, 0.8, 0.42)
+        for i in range(0, min(N + 1, 8) + 1):    # x-axis numbers 0,1,2,...
+            cx = -0.18 * sp if i == 0 else i * sp
+            draw_latex_3d(self.tex.latex(r"$%d$" % i, 14, ink),
+                          cx, -0.34, 0.8, 0.18)
+        draw_latex_3d(self.tex.latex(r"$1$", 14, ink),    # y-axis tick label
+                      -0.24 * sp, 0.92, 0.8, 0.18)
+        draw_latex_3d(self.tex.latex(r"$x$", 16, ink),
+                      (N + 1.55) * sp, -0.34, 0.8, 0.18)
+        draw_latex_3d(self.tex.latex(r"$y$", 16, ink),
+                      -0.26 * sp, 2.06, 0.8, 0.18)
+
+    def _build_scene(self, N, sp, shift, fill):
+        draw_floor_grid(max(60.0, (N + 4) * sp))
+
+        glDisable(GL_LIGHTING)
+        # white 'paper' behind the whole figure (so black ink works)
+        glColor4f(0.965, 0.950, 0.915, 1.0)
+        glBegin(GL_QUADS)
+        glVertex3f(-1.2 * sp, -0.45, -0.75); glVertex3f((N + 2) * sp, -0.45, -0.75)
+        glVertex3f((N + 2) * sp, 2.30, -0.75); glVertex3f(-1.2 * sp, 2.30, -0.75)
+        glEnd()
+
+        # black axes with ticks at the integers
+        glLineWidth(2.5)
+        glColor4f(0.07, 0.07, 0.08, 1.0)
+        glBegin(GL_LINES)
+        glVertex3f(-0.6 * sp, 0.0, -0.7); glVertex3f((N + 1.7) * sp, 0.0, -0.7)
+        glVertex3f(0.0, -0.3, -0.7);      glVertex3f(0.0, 2.15, -0.7)
+        for i in range(1, N + 2):                 # x ticks
+            glVertex3f(i * sp, 0.0, -0.7); glVertex3f(i * sp, -0.09, -0.7)
+        glVertex3f(0.0, 1.0, -0.7); glVertex3f(-0.09 * sp, 1.0, -0.7)  # y tick
+        glEnd()
+        glEnable(GL_LIGHTING)
+
+        # cream rectangles: rectangle n spans x in [n-shift, n+1-shift]
+        if fill > 0.01:
+            translucent = fill < 0.99
+            if translucent:
+                glDepthMask(GL_FALSE)
+            glColor4f(0.99, 0.93, 0.76, fill)
+            for n in range(1, N + 1):
+                draw_box((n - shift) * sp, 0.0, -0.5,
+                         (n + 1 - shift) * sp, 1.0 / n, 0.5)
+            if translucent:
+                glDepthMask(GL_TRUE)
+
+        glDisable(GL_LIGHTING)
+        # black outlines on the rectangle fronts (always visible)
+        glLineWidth(2.5)
+        glColor4f(0.07, 0.07, 0.08, 1.0)
+        for n in range(1, N + 1):
+            x0, x1 = (n - shift) * sp, (n + 1 - shift) * sp
+            glBegin(GL_LINE_LOOP)
+            glVertex3f(x0, 0.0, 0.55); glVertex3f(x1, 0.0, 0.55)
+            glVertex3f(x1, 1.0 / n, 0.55); glVertex3f(x0, 1.0 / n, 0.55)
+            glEnd()
+
+        # crimson hyperbola y = 1/x
+        glLineWidth(3.5)
+        glColor4f(0.71, 0.04, 0.24, 1.0)
+        glBegin(GL_LINE_STRIP)
+        for t in np.linspace(0.45, N + 1.3, 280):
+            glVertex3f(t * sp, 1.0 / t, 0.6)
+        glEnd()
+
+        # black dots on the curve at (n, 1/n) -- the upper-left corners
+        glColor4f(0.05, 0.05, 0.06, 1.0)
+        for n in range(1, N + 1):
+            glBegin(GL_TRIANGLE_FAN)
+            glVertex3f(n * sp, 1.0 / n, 0.62)
+            for i in range(17):
+                a = 2.0 * math.pi * i / 16
+                glVertex3f(n * sp + 0.05 * math.cos(a),
+                           1.0 / n + 0.05 * math.sin(a), 0.62)
+            glEnd()
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        N = int(self.s_n.value)
+        H = self.partial[N]
+        return [
+            (r"$\int_{1}^{\infty}\frac{1}{x}\,dx \;=\; \infty"
+             r"\qquad\Rightarrow\qquad \sum_{n=1}^{\infty}\frac{1}{n}"
+             r"\;\mathrm{diverges}$", 15),
+            (r"$\int_{1}^{N+1}\frac{1}{x}\,dx \;<\; \sum_{i=1}^{N}\frac{1}{i}"
+             r" \;<\; \int_{1}^{N}\frac{1}{x}\,dx \,+\, 1$", 15),
+            (r"$\ln %d = %.4f \;<\; H_{%d} = %.4f \;<\; 1+\ln %d = %.4f$"
+             % (N + 1, math.log(N + 1), N, H, N, 1.0 + math.log(N)), 13),
+        ]
+
+    def overlay_info(self):
+        s = self.s_shift.value
+        lines = [
+            "Rectangles with area given by the harmonic series, and the hyperbola",
+            "y = 1/x through the upper left corners of these rectangles.  (Wikipedia)",
+        ]
+        if s < 0.05:
+            lines.append("Curve BELOW the rectangle tops -> area under curve < sum."
+                         "  But that integral is INFINITE -> the sum diverges!")
+        elif s > 0.95:
+            lines.append("Shifted left by 1 unit: rectangles now lie BELOW the curve"
+                         " -> sum < integral + 1.  Together: the sandwich above.")
+        else:
+            lines.append("Sliding left... (%.2f of 1 unit)  Watch the rectangles"
+                         " duck under the curve." % s)
+        return lines
+
+
 # =====================================================================
 #  GAMEPAD STUB  (for DeepSeek later — keyboard/mouse must keep working!)
 # =====================================================================
@@ -735,6 +923,8 @@ class App:
         self.gamepads = GamepadManager()
         self.panel = UIPanel()
         self.pages = [cls() for cls in PAGES]
+        for p in self.pages:
+            p.tex = self.tex          # pages may draw cached textures in 3D
         self.page_idx = 0
         self.show_help = True
         self.invert_pitch = False
