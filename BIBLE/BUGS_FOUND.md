@@ -40,6 +40,46 @@ The visual difference is minimal (slightly larger fraction) and the program now 
 
 ---
 
+## Bug #2: Texture index error in render() — `t[0][1]` should be `t[1]`
+
+### Problem
+In `App.render()`, the LaTeX panel layout code iterates over `latex_items` which is a list of `((tid, w, h), latex_string)` tuples. The loop variable `t` is the `(tid, w, h)` texture tuple:
+
+```python
+latex_items = [(self.tex.latex(s, fs), s) for s, fs in page.overlay_latex()]
+if latex_items:
+    pw = max(t[0][1] for t, _ in latex_items) * 0.5 + 28   # BUG
+    ph = sum(t[0][2] * 0.5 + 10 for t, _ in latex_items) + 18  # BUG
+```
+
+### Crash
+```
+IndexError: invalid index to scalar variable
+```
+
+### Why
+`t = (tid, w, h)` — a 3-tuple. `t[0]` is the integer `tid`. Trying `t[0][1]` indexes into an integer, which fails.
+
+Note: The *lower* loop in the same block correctly uses `t[2]` (height):
+```python
+for t, _ in latex_items:
+    draw_texture(t, 24, ty, scale=0.5)
+    ty += t[2] * 0.5 + 10     # correct: t[2] = height
+```
+
+### Solution
+Replace `t[0][1]` with `t[1]` (width) and `t[0][2]` with `t[2]` (height):
+
+```python
+pw = max(t[1] for t, _ in latex_items) * 0.5 + 28
+ph = sum(t[2] * 0.5 + 10 for t, _ in latex_items) + 18
+```
+
+### Note
+This bug was masked by Bug #1 — the `\tfrac` crash happened *before* this code was reached. It surfaced immediately after Bug #1 was fixed.
+
+---
+
 ## Workflow Note (for Claude Fable)
 
 - You (Claude Fable) = architect, providing the "Bible" skeleton

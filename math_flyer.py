@@ -833,8 +833,8 @@ class App:
         y = 48                                            # LaTeX formula panel
         latex_items = [(self.tex.latex(s, fs), s) for s, fs in page.overlay_latex()]
         if latex_items:
-            pw = max(t[0][1] for t, _ in latex_items) * 0.5 + 28
-            ph = sum(t[0][2] * 0.5 + 10 for t, _ in latex_items) + 18
+            pw = max(t[1] for t, _ in latex_items) * 0.5 + 28
+            ph = sum(t[2] * 0.5 + 10 for t, _ in latex_items) + 18
             draw_rect(10, y, pw, ph, (0.05, 0.06, 0.11), 0.78)
             ty = y + 10
             for t, _ in latex_items:
