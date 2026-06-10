@@ -1044,7 +1044,7 @@ def main():
         import datetime
         tb = traceback.format_exc()
         print(tb, file=sys.stderr)
-        with open("math_flyer.log", "a", encoding="utf-8") as f:
+        with open("harmonic_series_mathematics.log", "a", encoding="utf-8") as f:
             f.write("\n=== CRASH %s ===\n" % datetime.datetime.now().isoformat())
             f.write(tb)
             f.write("=" * 60 + "\n")
