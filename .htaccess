@@ -16,6 +16,12 @@ RewriteRule ^(.+)/$ $1/index.html [L]
     Header set Cache-Control "max-age=2592000, public"
 </FilesMatch>
 
+# Force .py files to download (Dreamhost would try to execute them as CGI)
+<FilesMatch "\.py$">
+    SetHandler default-handler
+    Header set Content-Disposition "attachment"
+</FilesMatch>
+
 # Caching for CSS/JS (7 days)
 <FilesMatch "\.(css|js)$">
     Header set Cache-Control "max-age=604800, public"
