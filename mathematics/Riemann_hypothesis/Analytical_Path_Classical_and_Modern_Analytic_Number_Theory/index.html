@@ -83,6 +83,13 @@
         <p>Compare the overlay's two numbers: $D/n$ vs $\ln n + 2\gamma - 1$ — and tell each other that bounding the leftover error is <em>still an open problem</em> (Dirichlet's divisor problem). Someone in this room could solve it. 😉</p>
     </div>
 
+    <div class="demo-page">
+        <h4>Page 10 -- Collecting Coupons: E[T] = n H_n</h4>
+        <p><strong>Exhibit A (left):</strong> Faithful Wikipedia chart — rows $n=1..60$, grey bars of length $\lceil n H_n \rceil$ (every 5th darker), with computed values $12, 30, 50, 72, 96, 120, 146, 172, 198, 225, 253, 281$ matching the figure exactly! Dashed fan lines $E(T)=n..5n$ in the figure's dark-red → green progression. 🎯</p>
+        <p><strong>Exhibit B (right):</strong> A wall of 60 coupon tiles + live simulation with deterministic seeded draws — scrub "Random draws t" backwards <em>and</em> forwards! Tiles light up in vibrant color when first collected. At $k=55/60$ the overlay says the next coupon costs $60/5 = 12$ draws, and the <em>last</em> one costs $60$. The tail is where collectors go broke. 💸</p>
+        <p>Race night! Each pick a seed, scrub to completion, compare your $T$ against $E[T] = 281$ — who beat the expectation? Reseed and rematch! 🎰</p>
+    </div>
+
     <p><strong>Press Tab</strong> to cycle between pages. More pages coming soon!</p>
     <p class="demo-reqs">Requirements: Python 3.9+ &nbsp;|&nbsp; <code>pip install pygame PyOpenGL numpy matplotlib</code></p>
     <a href="harmonic_series_mathematics.py" download class="demo-dl-button">Download harmonic_series_mathematics.py</a>
