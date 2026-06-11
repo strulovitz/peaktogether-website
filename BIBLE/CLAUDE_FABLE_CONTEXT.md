@@ -152,14 +152,16 @@ $...$/$$...$$ for math in prose, code in fenced blocks, collapsible
     then design the new page per the rules above.
 
 ## 10. ADDENDUM (2026-06-11)
-* Pages 4 (PartialSumsPage: Wikipedia table + Euler–Maclaurin curves) and
-  5 (DivisibilityPage: cube-towers nu2 proof, ORIGINAL design — no WP
-  figure) are complete; both clean builds, no bugs.
+* Pages 4 (PartialSumsPage), 5 (DivisibilityPage), 6 (InterpolationPage),
+  7 (JeepProblemPage: crossing a desert, exact Fraction arithmetic),
+  8 (BlockStackingPage: true-3D wooden stack, overhang H_n/2),
+  9 (PrimesDivisorsPage: Euler primes + Dirichlet hyperbola lattice),
+  10 (CouponCollectorPage: Wikipedia chart + live coupon simulation)
+  are ALL complete; clean builds, zero bugs.
 * WORKING COPY vs BIBLE diffs (DeepSeek's domain, do NOT reinvent):
   full GamepadManager; Ship.update() takes a gp parameter;
   App.update() calls self.gamepads.pilot_command(); crash logging via
   try/except + traceback into math_flyer.log. Bible has only a stub.
-* Section split decided: Page 6 = Interpolation (digamma domain-coloring
-  on complex plane, image already provided) MERGED WITH Ramanujan
-  summation (sum^R 1/n = gamma). Then continue roadmap: Crossing a
-  desert -> Stacking blocks -> Counting primes -> Coupons -> Quicksort.
+* All 10 pages built. Bible fully synced. Website demo callouts updated.
+  Next: Quicksort (the last Applications subsection — Wikipedia has a
+  GIF animation).
