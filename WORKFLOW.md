@@ -75,18 +75,29 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 
 ## What We've Built So Far
 
-| Page | Topic | Status |
-|------|-------|--------|
-| Page 1 | Harmonic Series -- Definition & Divergence | ✅ Done |
-| Page 2 | Comparison Test (Oresme, ~1350) | ✅ Done |
-| Page 3 | Integral Test: H_N trapped between two integrals | ✅ Done (June 11) |
-| Page 4 | Partial Sums & Growth Rate: ln n + gamma | ✅ Done (June 11) |
-| Page 5 | Divisibility: cube-towers n^2 proof (ORIGINAL) | ✅ Done (June 11) |
-| Page 6 | Interpolation (digamma) + Ramanujan summation | ✅ Done (June 11) |
-| Page 7 | Crossing a desert (jeep problem) | ⏳ Next |
+### Harmonic Series Roadmap — ALL 11 PAGES COMPLETE 🎉
 
-## Roadmap (from Claude Fable)
-- Crossing a desert → Stacking blocks → Counting primes → Collecting coupons → Quicksort
+| Page | Class | Topic | Status |
+|------|-------|-------|--------|
+| 1 | HarmonicSeriesPage | Definition & Divergence | ✅ |
+| 2 | ComparisonTestPage | Oresme ~1350 | ✅ |
+| 3 | IntegralTestPage | H_N trapped between integrals | ✅ |
+| 4 | PartialSumsPage | Partial Sums & Growth Rate: ln n + γ | ✅ |
+| 5 | DivisibilityPage | cube-towers n² proof (ORIGINAL) | ✅ |
+| 6 | InterpolationPage | Digamma + Ramanujan Summation | ✅ |
+| 7 | JeepProblemPage | Crossing a desert (Fraction arithmetic) | ✅ |
+| 8 | BlockStackingPage | Stacking blocks — Overhang = H_n/2 | ✅ |
+| 9 | PrimesDivisorsPage | Euler primes + Dirichlet hyperbola | ✅ |
+| 10 | CouponCollectorPage | Collecting coupons — E[T] = n H_n | ✅ |
+| 11 | QuicksortPage | ∑ 2H_i = O(n log n) — Lomuto partition | ✅ |
+
+**All 11 pages Bible-synced, zero bugs, committed & pushed.** Clean streak: 11/11 pages with zero runtime bugs.
+
+### Next: Basel Problem (New Wikipedia Section)
+- **Topic:** Basel problem — ∑ 1/n² = π²/6 (Euler, 1734)
+- **Goal:** A new interactive demo page (or pages) for the Basel problem section of the Harmonic Series Wikipedia article
+- **Process:** Nir will get Wikipedia text + Claude Fable's design → paste to me → I build
+- **File:** Same `harmonic_series_mathematics.py` (or a new file if the file gets too large — Claude Fable's Rule #8: past ~2000 lines, propose folder+zip)
 
 ### Features Implemented
 - 6-DOF quaternion camera (no gimbal lock)
@@ -124,6 +135,51 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
   </FilesMatch>
   ```
 - **If it happens again:** Check `.htaccess` is uploaded to Dreamhost. If missing, re-upload it.
+
+### `import random` — CHECK BEFORE BUILDING
+- The QuicksortPage (and potentially future pages) needs `import random` at the top of the file.
+- Working copy and Bible both have it added as of June 11. Verify it's still there if pages stop working.
+
+### HTML Editing: ALWAYS use Python, NEVER PowerShell Set-Content
+- PowerShell corrupts UTF-8 emojis to Windows-1252. Use Python `open(path, 'r', encoding='utf-8')` for all HTML edits.
+
+## 🔴 SESSION LOG — June 11, 2026
+
+### Events
+1. **OpenCode crashed** mid-session. Restored context from WORKFLOW.md and git history.
+2. **Fixed AGENTS.md** — removed stale StrulovitzGhost references. Memory now points to PeakTogether WORKFLOW.md only.
+3. **Fixed WORKFLOW.md** — updated "What We've Built" table to include Pages 3-6 (built before crash).
+4. **Pages 7-11 built** from Claude Fable's designs:
+   - Page 7 (JeepProblemPage): Exact Fraction arithmetic, no rounding
+   - Page 8 (BlockStackingPage): True-3D wooden blocks with COM arrows
+   - Page 9 (PrimesDivisorsPage): Sieve + display list caching (~3600 dots)
+   - Page 10 (CouponCollectorPage): Deterministic seeded random, Wikipedia chart matching
+   - Page 11 (QuicksortPage): Lomuto partition with trace precomputation
+5. **`import random` added** — QuicksortPage needed it; was missing from both files.
+6. **Claude Fable got stuck on Quicksort GIF** — couldn't see the animation. Started a fresh conversation with updated CLAUDE_FABLE_CONTEXT.md. Successfully built without the GIF.
+7. **All 11 pages committed & pushed.** Zero bugs across the entire build.
+8. **BIBLE folder now contains:** math_flyer.py (synced), CLAUDE_FABLE_CONTEXT.md (Fable's memory), CLAUDE_FABLE_PAGE{4-11}_RESPONSE.md (verbatim responses), BUGS_FOUND_math_flyer_py_10Jun2026_16_48.md.
+
+### Files Modified Today
+| File | Change |
+|------|--------|
+| `BIBLE/math_flyer.py` | Pages 7-11 added, `import random` added |
+| `BIBLE/CLAUDE_FABLE_CONTEXT.md` | Addendum updated: all pages complete |
+| `BIBLE/CLAUDE_FABLE_PAGE{7-11}_RESPONSE.md` | Created — verbatim Claude Fable responses |
+| `mathematics/.../harmonic_series_mathematics.py` | Pages 7-11 added, `import random` added |
+| `mathematics/.../index.html` | Demo callouts for Pages 7-11 added |
+| `WORKFLOW.md` | Pages table updated, session log added |
+| `C:\Users\nir_s\.config\opencode\AGENTS.md` | Removed StrulovitzGhost, points to PeakTogether only |
+
+### Current State
+| Item | Status |
+|------|--------|
+| Harmonic Series Roadmap (11 pages) | ✅ Complete |
+| Bible synced | ✅ All 11 pages |
+| Website demo callouts | ✅ All 11 pages |
+| Git (PeakTogether) | Clean, pushed |
+| Known bugs | 0 |
+| Next | Basel Problem — new Wikipedia section |
 
 ## Nir's Preferences
 - Nir LOVES emojis -- use them abundantly in chat
