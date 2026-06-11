@@ -77,9 +77,16 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 
 | Page | Topic | Status |
 |------|-------|--------|
-| Page 1 | Harmonic Series -- Definition & Divergence | Done |
-| Page 2 | Comparison Test (Oresme, ~1350) | Done |
-| Page 3 | Integral Test | Coming next |
+| Page 1 | Harmonic Series -- Definition & Divergence | ✅ Done |
+| Page 2 | Comparison Test (Oresme, ~1350) | ✅ Done |
+| Page 3 | Integral Test: H_N trapped between two integrals | ✅ Done (June 11) |
+| Page 4 | Partial Sums & Growth Rate: ln n + gamma | ✅ Done (June 11) |
+| Page 5 | Divisibility: cube-towers n^2 proof (ORIGINAL) | ✅ Done (June 11) |
+| Page 6 | Interpolation (digamma) + Ramanujan summation | ✅ Done (June 11) |
+| Page 7 | Crossing a desert (jeep problem) | ⏳ Next |
+
+## Roadmap (from Claude Fable)
+- Crossing a desert → Stacking blocks → Counting primes → Collecting coupons → Quicksort
 
 ### Features Implemented
 - 6-DOF quaternion camera (no gimbal lock)
