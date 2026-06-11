@@ -104,6 +104,20 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 7. After every meaningful change, commit and push
 8. Ask Nir before doing ANYTHING you're unsure about
 
+## ⚠️ Known Bugs / Gotchas (June 11, 2026)
+
+### Dreamhost 500 Error on .py Downloads
+- **Symptom:** Clicking the download link for `harmonic_series_mathematics.py` gives 500 Internal Server Error
+- **Cause:** Dreamhost Apache tries to EXECUTE `.py` files as CGI scripts. Our file is a desktop PyOpenGL app — it crashes the server.
+- **Fix (in `.htaccess`):**
+  ```apache
+  <FilesMatch "\.py$">
+      SetHandler default-handler
+      Header set Content-Disposition "attachment"
+  </FilesMatch>
+  ```
+- **If it happens again:** Check `.htaccess` is uploaded to Dreamhost. If missing, re-upload it.
+
 ## Nir's Preferences
 - Nir LOVES emojis -- use them abundantly in chat
 - Nir does NOT know Python -- explain things simply
