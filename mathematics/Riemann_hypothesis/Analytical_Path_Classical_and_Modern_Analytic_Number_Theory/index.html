@@ -90,6 +90,12 @@
         <p>Race night! Each pick a seed, scrub to completion, compare your $T$ against $E[T] = 281$ — who beat the expectation? Reseed and rematch! 🎰</p>
     </div>
 
+    <div class="demo-page">
+        <h4>Page 11 -- Quicksort: The Harmonic Price of Sorting</h4>
+        <p>The grand finale! 🔀 31 shuffled grey bars — she drags "Progress %" and the animation begins. A red bar lights up (the pivot, always the last bar of the shaded zone), a blue line marks its height, and red curved arcs flash as bars leap past each other. He flies low along the wall and watches the shaded zone split, split, split again — until, at 100%, a perfect staircase stands from 1 to 31. 🎯</p>
+        <p>The punchline: about 188 comparisons expected. Why? Two bars that end up neighbors ($k=0$) are compared almost surely: probability $2/(0+2) = 1$. Two bars far apart almost never meet: $2/(k+2)$ shrinks like a harmonic term. Sum all those harmonic crumbs over every pair and out comes $\sum 2 H_i = O(n \log n)$ — the <em>same series</em> that built our towers and crossed our desert now sets the speed limit of sorting! ⚡</p>
+    </div>
+
     <p><strong>Press Tab</strong> to cycle between pages. More pages coming soon!</p>
     <p class="demo-reqs">Requirements: Python 3.9+ &nbsp;|&nbsp; <code>pip install pygame PyOpenGL numpy matplotlib</code></p>
     <a href="harmonic_series_mathematics.py" download class="demo-dl-button">Download harmonic_series_mathematics.py</a>
