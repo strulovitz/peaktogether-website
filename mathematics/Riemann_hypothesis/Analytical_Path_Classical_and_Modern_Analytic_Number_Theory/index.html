@@ -48,6 +48,13 @@
         <p>Highlight rows $1$, $2$, $6$: the <em>only</em> exact decimals ($1$, $1.5$, $2.45$) -- "remember these three, next page explains why there are no others!"</p>
     </div>
 
+    <div class="demo-page">
+        <h4>Page 5 -- Divisibility: No $H_n$ Is an Integer (except $H_1 = 1$)</h4>
+        <p>Our first <em>original</em> visualization (Wikipedia has no figure for this proof)! 🎨 Towers of blue cubes — each cube = one factor of $2$ in the numerator $M/i$.</p>
+        <p>Set $n = 7$: the red cube-less column sits at $i = 4$. Girlfriend nudges $n$ to $8$ — the red column <em>jumps</em> to $8$ and column $4$ grows a cube. Again at $16$. The boyfriend flies down the alley of towers: <em>every</em> column has at least one blue cube except the red one, always exactly one.</p>
+        <p>Read the overlay: numerators (green = even, red = odd) — one red number only. Sum odd, denominator $M$ even: $H_n = \frac{\mathrm{odd}}{\mathrm{even}}$, never an integer. <strong>Subtract slider:</strong> try $H_{12} - H_5$, $H_{20} - H_{19}$… exact fractions, never integers — the stronger theorem!</p>
+    </div>
+
     <p><strong>Press Tab</strong> to cycle between pages. More pages coming soon!</p>
     <p class="demo-reqs">Requirements: Python 3.9+ &nbsp;|&nbsp; <code>pip install pygame PyOpenGL numpy matplotlib</code></p>
     <a href="harmonic_series_mathematics.py" download class="demo-dl-button">Download harmonic_series_mathematics.py</a>

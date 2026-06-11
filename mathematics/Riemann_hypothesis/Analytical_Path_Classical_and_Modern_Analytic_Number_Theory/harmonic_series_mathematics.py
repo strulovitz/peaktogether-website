@@ -1072,6 +1072,154 @@ class PartialSumsPage(Page):
         return lines
 
 
+@register_page
+class DivisibilityPage(Page):
+    """PAGE 5 — Divisibility: no harmonic number except H_1 = 1 is an
+    integer. ORIGINAL visualization (Wikipedia has no figure here):
+    write H_n = sum_i (M/i)/M with M = lcm(1..n). Column i carries one
+    blue cube per factor of 2 in the numerator M/i, i.e. nu2(M/i)
+    = k - nu2(i) cubes, where 2^k is the highest power of two <= n.
+    EXACTLY ONE column is cube-less (i = 2^k): the only ODD numerator
+    (red wireframe). Sum of numerators = evens + one odd = ODD, over the
+    EVEN denominator M -> never an integer. A 'Subtract H_m' slider
+    shows the stronger fact: no two harmonic numbers differ by an
+    integer (exact Fractions). Standard display-list cache.
+    """
+    TITLE = "Divisibility  —  No  H_n  Is an Integer (except H_1 = 1)"
+    N_MAX = 20
+
+    def __init__(self):
+        super().__init__()
+        from fractions import Fraction
+        self.tex = None
+        self.fracs, f = [], Fraction(0)
+        for n in range(1, self.N_MAX + 1):
+            f += Fraction(1, n)
+            self.fracs.append(f)
+        self.M = [1]                              # M[n-1] = lcm(1..n)
+        for n in range(2, self.N_MAX + 1):
+            m = self.M[-1]
+            self.M.append(m * n // math.gcd(m, n))
+        self.S = [sum(self.M[n - 1] // i for i in range(1, n + 1))
+                  for n in range(1, self.N_MAX + 1)]   # numerator sums
+        self.s_n  = Slider("Terms  n", 1, self.N_MAX, 10, step=1)
+        self.s_dx = Slider("Column spacing", 0.8, 2.0, 1.2)
+        self.s_m  = Slider("Subtract H_m (0 = off)", 0, self.N_MAX - 1, 0,
+                           step=1)
+        self.sliders = [self.s_n, self.s_dx, self.s_m]
+        self._cache_key = None
+        self._dlist = None
+
+    @staticmethod
+    def _nu2(x):                                  # factors of 2 in x
+        c = 0
+        while x % 2 == 0:
+            x //= 2
+            c += 1
+        return c
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        n, dx = int(self.s_n.value), round(self.s_dx.value, 3)
+        key = (n, dx)
+        if key != self._cache_key:
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(n, dx)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+        # ---- labels, every frame (light ink: open dark world, no paper) --
+        if self.tex is None:
+            return
+        k = n.bit_length() - 1                   # 2^k = top power of two <= n
+        M = self.M[n - 1]
+        for i in range(1, n + 1):
+            x = i * dx
+            draw_latex_3d(self.tex.text(str(i), 14, "#D8DCE8"),
+                          x, -0.50, 0.3, 0.24)   # index below column
+            num = M // i
+            col = "#FF6B5E" if num % 2 == 1 else "#7FD49A"
+            top = (k - self._nu2(i)) * 0.45      # numerator above, staggered
+            draw_latex_3d(self.tex.text(str(num), 12, col),
+                          x, top + 0.22 + (i % 2) * 0.32, 0.3, 0.22)
+        if n > 1:
+            draw_latex_3d(self.tex.latex(r"$i = 2^{%d} = %d$" % (k, 2 ** k),
+                                         14, "#FF6B5E"),
+                          (2 ** k) * dx, -0.95, 0.3, 0.30)
+
+    def _build_scene(self, n, dx):
+        draw_floor_grid(max(30.0, (n + 2) * dx))
+        k = n.bit_length() - 1
+        glColor4f(0.16, 0.18, 0.26, 1.0)         # base tiles
+        for i in range(1, n + 1):
+            x = i * dx
+            draw_box(x - 0.3, -0.08, -0.3, x + 0.3, 0.0, 0.3)
+        glColor4f(0.42, 0.60, 0.95, 1.0)         # blue cubes = factors of 2
+        for i in range(1, n + 1):
+            x = i * dx
+            for j in range(k - self._nu2(i)):
+                draw_box(x - 0.2, j * 0.45, -0.2,
+                         x + 0.2, j * 0.45 + 0.40, 0.2)
+        # red wireframe on the unique cube-less column  i = 2^k
+        glDisable(GL_LIGHTING)
+        glLineWidth(3.0)
+        glColor4f(1.0, 0.32, 0.25, 1.0)
+        x = (2 ** k) * dx
+        h = max(k * 0.45, 0.5)
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(x - 0.28, 0.0, 0.25); glVertex3f(x + 0.28, 0.0, 0.25)
+        glVertex3f(x + 0.28, h, 0.25);   glVertex3f(x - 0.28, h, 0.25)
+        glEnd()
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        n = int(self.s_n.value)
+        out = [(r"$H_n = \sum_{i=1}^{n}\frac{M/i}{M},"
+                r"\qquad M = \mathrm{lcm}(1,\ldots,n)$", 15)]
+        if n == 1:
+            out.append((r"$H_1 = 1$"
+                        r"\qquad \mathrm{(the\ only\ integer\ }H_n)$", 14))
+        else:
+            out.append((r"$M = %d\ \mathrm{(even)},\qquad"
+                        r"\sum_{i=1}^{%d} M/i = %d\ \mathrm{(odd)}"
+                        r"\qquad\Rightarrow\qquad"
+                        r"H_{%d} = \frac{\mathrm{odd}}{\mathrm{even}}$"
+                        % (self.M[n - 1], n, self.S[n - 1], n), 13))
+        m = int(self.s_m.value)
+        if 0 < m < n:
+            d = self.fracs[n - 1] - self.fracs[m - 1]
+            out.append((r"$H_{%d} - H_{%d} = \frac{%d}{%d}"
+                        r"\;\neq\;\mathrm{integer}$"
+                        % (n, m, d.numerator, d.denominator), 13))
+        return out
+
+    def overlay_info(self):
+        n = int(self.s_n.value)
+        k = n.bit_length() - 1
+        lines = [
+            "Each blue cube = one factor of 2 left in the numerator M/i.",
+            "Exactly ONE column has no cubes: i = 2^%d = %d -> the only ODD"
+            " numerator." % (k, 2 ** k),
+            "Evens + one odd = odd sum, over even denominator M: never an"
+            " integer.",
+            "2nd proof: some prime n/2 < p <= n divides the denominator"
+            " (Bertrand's postulate).",
+            "Only H_1 = 1, H_2 = 1.5, H_6 = 2.45 terminate as decimals"
+            " (remember page 4!).",
+        ]
+        m = int(self.s_m.value)
+        if m >= n and m > 0:
+            lines.append("Subtract slider: choose m < n to compare"
+                         " (currently m = %d >= n = %d)." % (m, n))
+        return lines
+
+
 # =====================================================================
 #  GAMEPAD MANAGER — T.16000M joystick (PILOT) + Xbox 360 pad (MANIPULATOR)
 #  Built from verified axis maps in the Anniversary C++ project (Nir's HW).

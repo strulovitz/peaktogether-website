@@ -149,4 +149,17 @@ $...$/$$...$$ for math in prose, code in fenced blocks, collapsible
    (b) the Wikipedia section text + illustration + caption for the next
    page on the roadmap.
 3. Fix any reported Bible bugs FIRST (list the exact corrected lines),
-   then design the new page per the rules above.
+    then design the new page per the rules above.
+
+## 10. ADDENDUM (2026-06-11)
+* Pages 4 (PartialSumsPage: Wikipedia table + Euler–Maclaurin curves) and
+  5 (DivisibilityPage: cube-towers nu2 proof, ORIGINAL design — no WP
+  figure) are complete; both clean builds, no bugs.
+* WORKING COPY vs BIBLE diffs (DeepSeek's domain, do NOT reinvent):
+  full GamepadManager; Ship.update() takes a gp parameter;
+  App.update() calls self.gamepads.pilot_command(); crash logging via
+  try/except + traceback into math_flyer.log. Bible has only a stub.
+* Section split decided: Page 6 = Interpolation (digamma domain-coloring
+  on complex plane, image already provided) MERGED WITH Ramanujan
+  summation (sum^R 1/n = gamma). Then continue roadmap: Crossing a
+  desert -> Stacking blocks -> Counting primes -> Coupons -> Quicksort.
