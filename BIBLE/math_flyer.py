@@ -867,6 +867,590 @@ class IntegralTestPage(Page):
         return lines
 
 
+@register_page
+class PartialSumsPage(Page):
+    """PAGE 4 — Partial sums (harmonic numbers) + Growth rate.
+    Faithful 3D version of Wikipedia's partial-sums TABLE: rows n = 1..20
+    with H_n as an exact fraction, as a decimal, and as the grey
+    'relative size' bar (length H_n). Exact fractions via fractions.Fraction.
+    Growth rate (Euler-Maclaurin):  H_n = ln n + gamma + 1/(2n) - eps_n,
+    with 0 <= eps_n <= 1/(8 n^2). The 'Approximation' slider overlays
+    curves through the bar tips: 1 = ln n (red, misses all tips by the
+    SAME gap), 2 = ln n + gamma (amber, the gap IS gamma), 3 = + 1/(2n)
+    (cyan, nails them). Standard display-list cache; labels drawn per
+    frame with draw_latex_3d (never inside the list).
+    """
+    TITLE = "Partial Sums  H_n  —  Growth Rate  ln n + gamma"
+    N_MAX = 20
+    RH = 0.55                                   # row height
+
+    def __init__(self):
+        super().__init__()
+        from fractions import Fraction
+        self.tex = None
+        self.fracs, f = [], Fraction(0)
+        for n in range(1, self.N_MAX + 1):
+            f += Fraction(1, n)
+            self.fracs.append(f)
+        self.H = [float(f) for f in self.fracs]
+        self.s_rows  = Slider("Table rows  n", 1, self.N_MAX, self.N_MAX, step=1)
+        self.s_scale = Slider("Bar scale", 1.0, 3.0, 2.0)
+        self.s_fit   = Slider("Approximation  (0=off 1=ln 2=+g 3=+1/2n)",
+                              0, 3, 0, step=1)
+        self.s_hl    = Slider("Highlight row (0 = none)", 0, self.N_MAX, 0, step=1)
+        self.sliders = [self.s_rows, self.s_scale, self.s_fit, self.s_hl]
+        self._cache_key = None
+        self._dlist = None
+
+    def _y(self, n):                            # row 1 on top, like the table
+        return (self.N_MAX - n) * self.RH
+
+    def _dec_str(self, n):                      # Wikipedia-style decimals
+        d = self.fracs[n - 1].denominator
+        while d % 2 == 0: d //= 2
+        while d % 5 == 0: d //= 5
+        if d == 1:                              # terminates: only n = 1, 2, 6
+            return "%g" % self.H[n - 1]
+        return "~%.5f" % self.H[n - 1]
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        N, s = int(self.s_rows.value), round(self.s_scale.value, 3)
+        mode, hl = int(self.s_fit.value), int(self.s_hl.value)
+        key = (N, s, mode, hl)
+        if key != self._cache_key:
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(N, s, mode, hl)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+        # ---- table text, every frame (textures cached) -------------------
+        if self.tex is None:
+            return
+        ink = "#1A1A1A"
+        for label, cx in (("n", -5.0), ("fraction", -3.6),
+                          ("decimal", -1.3), ("relative size", 1.6)):
+            draw_latex_3d(self.tex.text(label, 15, ink, True),
+                          cx, self._y(1) + 0.62, 0.4, 0.24)
+        for n in range(1, N + 1):
+            y = self._y(n)
+            draw_latex_3d(self.tex.text(str(n), 15, ink), -5.0, y, 0.4, 0.26)
+            fr = self.fracs[n - 1]
+            if n == 1:
+                draw_latex_3d(self.tex.latex(r"$1$", 14, ink),
+                              -3.6, y, 0.4, 0.26)
+            else:
+                draw_latex_3d(self.tex.latex(
+                    r"$\frac{%d}{%d}$" % (fr.numerator, fr.denominator),
+                    13, ink), -3.6, y - 0.05, 0.4, 0.40)
+            draw_latex_3d(self.tex.text(self._dec_str(n), 15, ink),
+                          -1.3, y, 0.4, 0.26)
+        if mode >= 2:                           # the gap between red and amber
+            draw_latex_3d(self.tex.latex(r"$\gamma$", 16, "#E8A33D"),
+                          (math.log(N) + GAMMA / 2.0) * s,
+                          self._y(N) - 0.42, 0.4, 0.30)
+
+    def _build_scene(self, N, s, mode, hl):
+        draw_floor_grid(40.0)
+        top = self._y(1) + 1.05
+        xr = max(self.H[self.N_MAX - 1] * s + 0.9, 8.0)
+
+        glDisable(GL_LIGHTING)
+        glColor4f(0.965, 0.950, 0.915, 1.0)     # paper
+        glBegin(GL_QUADS)
+        glVertex3f(-5.8, -0.7, -0.75); glVertex3f(xr, -0.7, -0.75)
+        glVertex3f(xr, top, -0.75);    glVertex3f(-5.8, top, -0.75)
+        glEnd()
+        glLineWidth(1.5)                         # table grid, light grey
+        glColor4f(0.72, 0.72, 0.74, 1.0)
+        glBegin(GL_LINES)
+        for n in range(1, N + 1):                # row separators
+            glVertex3f(-5.6, self._y(n) - 0.12, -0.7)
+            glVertex3f(xr - 0.2, self._y(n) - 0.12, -0.7)
+        glVertex3f(-5.6, self._y(1) + 0.50, -0.7)        # header underline
+        glVertex3f(xr - 0.2, self._y(1) + 0.50, -0.7)
+        for cx in (-4.55, -2.50, -0.35):         # column separators
+            glVertex3f(cx, self._y(N) - 0.12, -0.7)
+            glVertex3f(cx, self._y(1) + 0.50, -0.7)
+        glEnd()
+        glEnable(GL_LIGHTING)
+
+        for n in range(1, N + 1):                # grey 'relative size' bars
+            if hl == 0 or n == hl:
+                glColor4f(0.62, 0.62, 0.66, 1.0)
+            else:
+                glColor4f(0.80, 0.79, 0.77, 1.0)         # dimmed vs paper
+            if n == hl:
+                glColor4f(0.93, 0.62, 0.18, 1.0)         # highlighted: amber
+            y0 = self._y(n)
+            draw_box(0.0, y0, -0.18, self.H[n - 1] * s, y0 + 0.30, 0.18)
+
+        glDisable(GL_LIGHTING)
+        if mode >= 1:                            # approximation curves
+            curves = [((0.85, 0.22, 0.18), lambda t: math.log(t))]
+            if mode >= 2:
+                curves.append(((1.00, 0.70, 0.20),
+                               lambda t: math.log(t) + GAMMA))
+            if mode >= 3:
+                curves.append(((0.15, 0.78, 0.88),
+                               lambda t: math.log(t) + GAMMA + 0.5 / t))
+            glLineWidth(3.0)
+            for col, f in curves:
+                glColor4f(*col, 1.0)
+                glBegin(GL_LINE_STRIP)
+                for t in np.linspace(1.0, N, 240):
+                    glVertex3f(f(t) * s, (self.N_MAX - t) * self.RH + 0.15, 0.3)
+                glEnd()
+            if mode >= 2:                        # gamma gap marker, bottom row
+                yg = self._y(N) - 0.30
+                glLineWidth(2.0)
+                glColor4f(1.0, 0.70, 0.20, 1.0)
+                glBegin(GL_LINES)
+                glVertex3f(math.log(N) * s, yg, 0.3)
+                glVertex3f((math.log(N) + GAMMA) * s, yg, 0.3)
+                glEnd()
+        glColor4f(0.05, 0.05, 0.06, 1.0)         # black dots on the bar tips
+        for n in range(1, N + 1):
+            x, y = self.H[n - 1] * s, self._y(n) + 0.15
+            glBegin(GL_TRIANGLE_FAN)
+            glVertex3f(x, y, 0.32)
+            for i in range(17):
+                a = 2.0 * math.pi * i / 16
+                glVertex3f(x + 0.06 * math.cos(a), y + 0.06 * math.sin(a), 0.32)
+            glEnd()
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        N = int(self.s_rows.value)
+        n = int(self.s_hl.value) or N
+        fr = self.fracs[n - 1]
+        out = [
+            (r"$H_n = \sum_{k=1}^{n}\frac{1}{k}$", 16),
+            (r"$H_n = \ln n + \gamma + \frac{1}{2n} - \varepsilon_n,"
+             r"\qquad 0 \leq \varepsilon_n \leq \frac{1}{8n^2},"
+             r"\qquad \gamma \approx 0.5772$", 14),
+        ]
+        if n == 1:
+            out.append((r"$H_1 = 1$", 14))
+        else:
+            out.append((r"$H_{%d} = \frac{%d}{%d} \approx %.5f$"
+                        % (n, fr.numerator, fr.denominator, self.H[n - 1]), 14))
+        return out
+
+    def overlay_info(self):
+        N, mode = int(self.s_rows.value), int(self.s_fit.value)
+        lines = [
+            "Adding the first n terms produces a partial sum, called a harmonic",
+            "number, H_n.  The grey bars are Wikipedia's 'relative size' column.",
+            "Logarithmic crawl: to push H_n past 10 you need n = 12367 terms!",
+        ]
+        if mode >= 1:
+            approx = [math.log(N), math.log(N) + GAMMA,
+                      math.log(N) + GAMMA + 0.5 / N]
+            txt = "At n=%d:  ln n = %.5f" % (N, approx[0])
+            if mode >= 2: txt += "   +gamma = %.5f" % approx[1]
+            if mode >= 3: txt += "   +1/(2n) = %.5f" % approx[2]
+            lines.append(txt + "   vs  H_%d = %.5f" % (N, self.H[N - 1]))
+        hl = int(self.s_hl.value)
+        if hl:
+            eps = math.log(hl) + GAMMA + 0.5 / hl - self.H[hl - 1]
+            lines.append("Row %d:  eps_%d = %.6f  (bound 1/(8n^2) = %.6f).%s"
+                         % (hl, hl, eps, 1.0 / (8.0 * hl * hl),
+                            "  Terminating decimal!" if hl in (1, 2, 6) else ""))
+        return lines
+
+
+@register_page
+class DivisibilityPage(Page):
+    """PAGE 5 — Divisibility: no harmonic number except H_1 = 1 is an
+    integer. ORIGINAL visualization (Wikipedia has no figure here):
+    write H_n = sum_i (M/i)/M with M = lcm(1..n). Column i carries one
+    blue cube per factor of 2 in the numerator M/i, i.e. nu2(M/i)
+    = k - nu2(i) cubes, where 2^k is the highest power of two <= n.
+    EXACTLY ONE column is cube-less (i = 2^k): the only ODD numerator
+    (red wireframe). Sum of numerators = evens + one odd = ODD, over the
+    EVEN denominator M -> never an integer. A 'Subtract H_m' slider
+    shows the stronger fact: no two harmonic numbers differ by an
+    integer (exact Fractions). Standard display-list cache.
+    """
+    TITLE = "Divisibility  —  No  H_n  Is an Integer (except H_1 = 1)"
+    N_MAX = 20
+
+    def __init__(self):
+        super().__init__()
+        from fractions import Fraction
+        self.tex = None
+        self.fracs, f = [], Fraction(0)
+        for n in range(1, self.N_MAX + 1):
+            f += Fraction(1, n)
+            self.fracs.append(f)
+        self.M = [1]                              # M[n-1] = lcm(1..n)
+        for n in range(2, self.N_MAX + 1):
+            m = self.M[-1]
+            self.M.append(m * n // math.gcd(m, n))
+        self.S = [sum(self.M[n - 1] // i for i in range(1, n + 1))
+                  for n in range(1, self.N_MAX + 1)]   # numerator sums
+        self.s_n  = Slider("Terms  n", 1, self.N_MAX, 10, step=1)
+        self.s_dx = Slider("Column spacing", 0.8, 2.0, 1.2)
+        self.s_m  = Slider("Subtract H_m (0 = off)", 0, self.N_MAX - 1, 0,
+                           step=1)
+        self.sliders = [self.s_n, self.s_dx, self.s_m]
+        self._cache_key = None
+        self._dlist = None
+
+    @staticmethod
+    def _nu2(x):                                  # factors of 2 in x
+        c = 0
+        while x % 2 == 0:
+            x //= 2
+            c += 1
+        return c
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        n, dx = int(self.s_n.value), round(self.s_dx.value, 3)
+        key = (n, dx)
+        if key != self._cache_key:
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(n, dx)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+        # ---- labels, every frame (light ink: open dark world, no paper) --
+        if self.tex is None:
+            return
+        k = n.bit_length() - 1                   # 2^k = top power of two <= n
+        M = self.M[n - 1]
+        for i in range(1, n + 1):
+            x = i * dx
+            draw_latex_3d(self.tex.text(str(i), 14, "#D8DCE8"),
+                          x, -0.50, 0.3, 0.24)   # index below column
+            num = M // i
+            col = "#FF6B5E" if num % 2 == 1 else "#7FD49A"
+            top = (k - self._nu2(i)) * 0.45      # numerator above, staggered
+            draw_latex_3d(self.tex.text(str(num), 12, col),
+                          x, top + 0.22 + (i % 2) * 0.32, 0.3, 0.22)
+        if n > 1:
+            draw_latex_3d(self.tex.latex(r"$i = 2^{%d} = %d$" % (k, 2 ** k),
+                                         14, "#FF6B5E"),
+                          (2 ** k) * dx, -0.95, 0.3, 0.30)
+
+    def _build_scene(self, n, dx):
+        draw_floor_grid(max(30.0, (n + 2) * dx))
+        k = n.bit_length() - 1
+        glColor4f(0.16, 0.18, 0.26, 1.0)         # base tiles
+        for i in range(1, n + 1):
+            x = i * dx
+            draw_box(x - 0.3, -0.08, -0.3, x + 0.3, 0.0, 0.3)
+        glColor4f(0.42, 0.60, 0.95, 1.0)         # blue cubes = factors of 2
+        for i in range(1, n + 1):
+            x = i * dx
+            for j in range(k - self._nu2(i)):
+                draw_box(x - 0.2, j * 0.45, -0.2,
+                         x + 0.2, j * 0.45 + 0.40, 0.2)
+        # red wireframe on the unique cube-less column  i = 2^k
+        glDisable(GL_LIGHTING)
+        glLineWidth(3.0)
+        glColor4f(1.0, 0.32, 0.25, 1.0)
+        x = (2 ** k) * dx
+        h = max(k * 0.45, 0.5)
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(x - 0.28, 0.0, 0.25); glVertex3f(x + 0.28, 0.0, 0.25)
+        glVertex3f(x + 0.28, h, 0.25);   glVertex3f(x - 0.28, h, 0.25)
+        glEnd()
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        n = int(self.s_n.value)
+        out = [(r"$H_n = \sum_{i=1}^{n}\frac{M/i}{M},"
+                r"\qquad M = \mathrm{lcm}(1,\ldots,n)$", 15)]
+        if n == 1:
+            out.append((r"$H_1 = 1$"
+                        r"\qquad \mathrm{(the\ only\ integer\ }H_n)$", 14))
+        else:
+            out.append((r"$M = %d\ \mathrm{(even)},\qquad"
+                        r"\sum_{i=1}^{%d} M/i = %d\ \mathrm{(odd)}"
+                        r"\qquad\Rightarrow\qquad"
+                        r"H_{%d} = \frac{\mathrm{odd}}{\mathrm{even}}$"
+                        % (self.M[n - 1], n, self.S[n - 1], n), 13))
+        m = int(self.s_m.value)
+        if 0 < m < n:
+            d = self.fracs[n - 1] - self.fracs[m - 1]
+            out.append((r"$H_{%d} - H_{%d} = \frac{%d}{%d}"
+                        r"\;\neq\;\mathrm{integer}$"
+                        % (n, m, d.numerator, d.denominator), 13))
+        return out
+
+    def overlay_info(self):
+        n = int(self.s_n.value)
+        k = n.bit_length() - 1
+        lines = [
+            "Each blue cube = one factor of 2 left in the numerator M/i.",
+            "Exactly ONE column has no cubes: i = 2^%d = %d -> the only ODD"
+            " numerator." % (k, 2 ** k),
+            "Evens + one odd = odd sum, over even denominator M: never an"
+            " integer.",
+            "2nd proof: some prime n/2 < p <= n divides the denominator"
+            " (Bertrand's postulate).",
+            "Only H_1 = 1, H_2 = 1.5, H_6 = 2.45 terminate as decimals"
+            " (remember page 4!).",
+        ]
+        m = int(self.s_m.value)
+        if m >= n and m > 0:
+            lines.append("Subtract slider: choose m < n to compare"
+                         " (currently m = %d >= n = %d)." % (m, n))
+        return lines
+
+
+@register_page
+class InterpolationPage(Page):
+    """PAGE 6 — Interpolation (digamma) + Ramanujan summation.
+    Exhibit 1: Wikipedia's digamma 'painting' — domain coloring of
+      psi(z) over Re,Im in [-6,6]. Computed with numpy (recurrence
+      psi(z) = psi(z+1) - 1/z until Re >= 15, then asymptotic series),
+      hue = arg psi(z), uploaded ONCE as a page-owned GL texture
+      (deliberately NOT in TexCache -> can never be recycled).
+    Exhibit 2: white-paper graph of H_x = psi(x+1) + gamma (crimson)
+      threading exactly through black dots (n, H_n); blue bead slider
+      rides the curve (exact H_{1/2} = 2 - 2 ln 2 at x = 1/2).
+      'Show ln x' toggle: the gap curve-minus-ln(x) shrinks toward
+      gamma — the Ramanujan value of the divergent harmonic series.
+    Standard display-list cache for the graph; painting drawn per frame
+    (one textured quad, opacity slider stays live).
+    """
+    TITLE = "Interpolation (Digamma)  +  Ramanujan Summation"
+    PS, PCX, PCY, PZ = 0.85, 3.1, 6.4, -3.0    # painting scale/center/z
+
+    def __init__(self):
+        super().__init__()
+        self.tex = None
+        self._painting = None                   # needs GL -> built lazily
+        n = np.arange(1, 10)
+        self.Hn = np.concatenate(([0.0], np.cumsum(1.0 / n)))   # H_0..H_9
+        self.xs = np.linspace(0.0, 8.3, 320)
+        self.ys = self._digamma(self.xs + 1.0).real + GAMMA
+        self.s_x  = Slider("Marker x  (interpolated H_x)", 0.0, 8.0, 2.5)
+        self.s_ln = Slider("Show ln x + gamma gap (0/1)", 0, 1, 0, step=1)
+        self.s_op = Slider("Color plot opacity", 0.0, 1.0, 1.0)
+        self.sliders = [self.s_x, self.s_ln, self.s_op]
+        self._cache_key = None
+        self._dlist = None
+
+    # ------------------------------------------------- digamma maths ---
+    @staticmethod
+    def _digamma(z):
+        """Vectorized complex digamma: recurrence + asymptotic series."""
+        z = np.array(z, dtype=np.complex128, ndmin=1, copy=True)
+        res = np.zeros_like(z)
+        for _ in range(15):                     # psi(z) = psi(z+1) - 1/z
+            m = z.real < 15.0
+            if not m.any():
+                break
+            res[m] -= 1.0 / z[m]
+            z[m] += 1.0
+        inv = 1.0 / z
+        i2 = inv * inv
+        res += np.log(z) - 0.5 * inv \
+               - i2 * (1.0/12.0 - i2 * (1.0/120.0 - i2 / 252.0))
+        return res
+
+    def _H(self, x):                            # H_x = psi(x+1) + gamma
+        return float(self._digamma(np.array([x + 1.0]))[0].real) + GAMMA
+
+    def _make_painting(self):
+        from matplotlib.colors import hsv_to_rgb
+        res = 512
+        t = (np.arange(res) + 0.5) / res * 12.0 - 6.0    # pixel centers:
+        Z = t[None, :] + 1j * (-t[:, None])              # never hits a pole
+        W = self._digamma(Z)
+        hue = (np.angle(W) / (2.0 * math.pi)) % 1.0
+        one = np.ones_like(hue)
+        rgb = (hsv_to_rgb(np.dstack([hue, one, one])) * 255).astype(np.uint8)
+        surf = pygame.surfarray.make_surface(rgb.transpose(1, 0, 2))
+        return surface_to_texture(surf)
+
+    # ----------------------------------------------------------- 3D ---
+    def draw_world(self):
+        x, ln_on = round(self.s_x.value, 3), int(self.s_ln.value)
+        key = (x, ln_on)
+        if key != self._cache_key:
+            if self._dlist is not None:
+                glDeleteLists(self._dlist, 1)
+            self._dlist = glGenLists(1)
+            glNewList(self._dlist, GL_COMPILE)
+            self._build_scene(x, ln_on)
+            glEndList()
+            self._cache_key = key
+        glCallList(self._dlist)
+
+        # ---- the painting (page-owned texture, opacity slider live) -----
+        if self._painting is None:
+            self._painting = self._make_painting()       # one-time, ~0.5 s
+        op = self.s_op.value
+        hw = 6.0 * self.PS
+        x0, x1 = self.PCX - hw, self.PCX + hw
+        y0, y1 = self.PCY - hw, self.PCY + hw
+        if op > 0.01:
+            glDisable(GL_LIGHTING)
+            glColor4f(0.97, 0.97, 0.97, op)              # white margins
+            glBegin(GL_QUADS)
+            glVertex3f(x0 - 0.9, y0 - 1.0, self.PZ - 0.05)
+            glVertex3f(x1 + 0.5, y0 - 1.0, self.PZ - 0.05)
+            glVertex3f(x1 + 0.5, y1 + 0.6, self.PZ - 0.05)
+            glVertex3f(x0 - 0.9, y1 + 0.6, self.PZ - 0.05)
+            glEnd()
+            glEnable(GL_TEXTURE_2D)
+            glBindTexture(GL_TEXTURE_2D, self._painting[0])
+            glColor4f(1, 1, 1, op)
+            glBegin(GL_QUADS)
+            glTexCoord2f(0, 0); glVertex3f(x0, y0, self.PZ)
+            glTexCoord2f(1, 0); glVertex3f(x1, y0, self.PZ)
+            glTexCoord2f(1, 1); glVertex3f(x1, y1, self.PZ)
+            glTexCoord2f(0, 1); glVertex3f(x0, y1, self.PZ)
+            glEnd()
+            glDisable(GL_TEXTURE_2D)
+            glEnable(GL_LIGHTING)
+
+        # ---- labels, every frame ----------------------------------------
+        if self.tex is None:
+            return
+        ink = "#1A1A1A"
+        if op > 0.3:                                     # painting ticks
+            for v in (-6, -4, -2, 0, 2, 4, 6):
+                draw_latex_3d(self.tex.text(str(v), 13, ink),
+                              self.PCX + v * self.PS, y0 - 0.42,
+                              self.PZ - 0.02, 0.26)
+                draw_latex_3d(self.tex.text(str(v), 13, ink),
+                              x0 - 0.45, self.PCY + v * self.PS - 0.12,
+                              self.PZ - 0.02, 0.26)
+            draw_latex_3d(self.tex.text("Re(z)", 13, ink),
+                          self.PCX, y0 - 0.80, self.PZ - 0.02, 0.26)
+            draw_latex_3d(self.tex.text("Im(z)", 13, ink),
+                          x0 - 0.45, y1 + 0.18, self.PZ - 0.02, 0.26)
+        for i in range(1, 9):                            # graph x ticks
+            draw_latex_3d(self.tex.text(str(i), 13, ink),
+                          float(i), -0.32, -0.5, 0.20)
+        for n in range(1, 5):                            # a few dot labels
+            draw_latex_3d(self.tex.latex(r"$H_%d$" % n, 13, ink),
+                          float(n) - 0.30, self.Hn[n] + 0.10, -0.5, 0.24)
+        if ln_on:
+            draw_latex_3d(self.tex.latex(r"$\to \gamma$", 15, "#E8A33D"),
+                          8.05, 0.5 * (math.log(7.6) + self._H(7.6)) - 0.12,
+                          -0.45, 0.30)
+
+    def _build_scene(self, x, ln_on):
+        draw_floor_grid(40.0)
+        glDisable(GL_LIGHTING)
+        glColor4f(0.965, 0.950, 0.915, 1.0)              # graph paper
+        glBegin(GL_QUADS)
+        glVertex3f(-0.9, -0.7, -0.65); glVertex3f(9.0, -0.7, -0.65)
+        glVertex3f(9.0, 3.4, -0.65);   glVertex3f(-0.9, 3.4, -0.65)
+        glEnd()
+        glLineWidth(2.5)                                 # black axes
+        glColor4f(0.07, 0.07, 0.08, 1.0)
+        glBegin(GL_LINES)
+        glVertex3f(-0.5, 0.0, -0.6); glVertex3f(8.7, 0.0, -0.6)
+        glVertex3f(0.0, -0.4, -0.6); glVertex3f(0.0, 3.2, -0.6)
+        for i in range(1, 9):
+            glVertex3f(float(i), 0.0, -0.6); glVertex3f(float(i), -0.09, -0.6)
+        for j in (1, 2, 3):
+            glVertex3f(0.0, float(j), -0.6); glVertex3f(-0.09, float(j), -0.6)
+        glEnd()
+        if ln_on:                                        # grey dashed ln x
+            glEnable(GL_LINE_STIPPLE)
+            glLineStipple(2, 0x0F0F)
+            glLineWidth(2.5)
+            glColor4f(0.35, 0.40, 0.50, 1.0)
+            glBegin(GL_LINE_STRIP)
+            for t in self.xs[self.xs >= 0.62]:
+                glVertex3f(t, math.log(t), -0.55)
+            glEnd()
+            glDisable(GL_LINE_STIPPLE)
+            glLineWidth(3.0)                             # amber gap at x=7.6
+            glColor4f(1.0, 0.70, 0.20, 1.0)
+            glBegin(GL_LINES)
+            glVertex3f(7.6, math.log(7.6), -0.5)
+            glVertex3f(7.6, self._H(7.6), -0.5)
+            glEnd()
+        glLineWidth(3.5)                                 # crimson H_x curve
+        glColor4f(0.71, 0.04, 0.24, 1.0)
+        glBegin(GL_LINE_STRIP)
+        for t, yv in zip(self.xs, self.ys):
+            glVertex3f(t, yv, -0.55)
+        glEnd()
+        glColor4f(0.05, 0.05, 0.06, 1.0)                 # dots (n, H_n)
+        for n in range(0, 9):
+            self._disk(float(n), self.Hn[n], -0.5, 0.06)
+        bx, by = x, self._H(x)                           # blue bead + drop
+        glColor4f(0.15, 0.35, 0.85, 1.0)
+        self._disk(bx, by, -0.45, 0.10)
+        glEnable(GL_LINE_STIPPLE)
+        glLineStipple(1, 0x00FF)
+        glLineWidth(2.0)
+        glBegin(GL_LINES)
+        glVertex3f(bx, 0.0, -0.5); glVertex3f(bx, by, -0.5)
+        glEnd()
+        glDisable(GL_LINE_STIPPLE)
+        glLineWidth(1.0)
+        glEnable(GL_LIGHTING)
+
+    @staticmethod
+    def _disk(cx, cy, z, r):
+        glBegin(GL_TRIANGLE_FAN)
+        glVertex3f(cx, cy, z)
+        for i in range(17):
+            a = 2.0 * math.pi * i / 16
+            glVertex3f(cx + r * math.cos(a), cy + r * math.sin(a), z)
+        glEnd()
+
+    # ------------------------------------------------------ overlays ---
+    def overlay_latex(self):
+        x = self.s_x.value
+        out = [
+            (r"$\psi(x) = \frac{d}{dx}\ln\Gamma(x)"
+             r" = \frac{\Gamma'(x)}{\Gamma(x)}$", 15),
+            (r"$\psi(n) = H_{n-1} - \gamma \qquad\Rightarrow\qquad"
+             r" H_x = \psi(x+1) + \gamma$", 14),
+            (r"$\sum_{n \geq 1}^{\mathcal{R}} \frac{1}{n}"
+             r" = \gamma \approx 0.57722$", 14),
+        ]
+        if abs(x - 0.5) < 0.03:
+            out.append((r"$H_{1/2} = 2 - 2\ln 2 \approx 0.61371$", 14))
+        elif abs(x - round(x)) < 0.02 and round(x) >= 1:
+            n = int(round(x))
+            out.append((r"$H_{%d} = %.5f$" % (n, self.Hn[n]), 14))
+        else:
+            out.append((r"$H_{%.2f} = \psi(%.2f) + \gamma = %.5f$"
+                        % (x, x + 1.0, self._H(x)), 14))
+        return out
+
+    def overlay_info(self):
+        lines = [
+            '"The color representation of the Digamma function in a',
+            ' rectangular region of the complex plane."  (Wikipedia)',
+            "As Gamma interpolates factorials, digamma interpolates harmonic",
+            "numbers: the crimson curve threads through EVERY dot (n, H_n).",
+            "Painting: rainbow pinwheels = poles at 0, -1, -2, ...; the big",
+            "swirl near 1.46163 is digamma's only positive real zero.",
+        ]
+        if int(self.s_ln.value):
+            lines.append("Gap (curve minus ln x) sinks toward gamma = 0.57722"
+                         " — the Ramanujan value of the divergent series!")
+        return lines
+
+
 # =====================================================================
 #  GAMEPAD STUB  (for DeepSeek later — keyboard/mouse must keep working!)
 # =====================================================================

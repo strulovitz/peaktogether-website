@@ -55,6 +55,13 @@
         <p>Read the overlay: numerators (green = even, red = odd) — one red number only. Sum odd, denominator $M$ even: $H_n = \frac{\mathrm{odd}}{\mathrm{even}}$, never an integer. <strong>Subtract slider:</strong> try $H_{12} - H_5$, $H_{20} - H_{19}$… exact fractions, never integers — the stronger theorem!</p>
     </div>
 
+    <div class="demo-page">
+        <h4>Page 6 -- Interpolation (Digamma) + Ramanujan Summation</h4>
+        <p>Our most ambitious page yet! 🖼️ A giant gallery painting hung in 3D space — live-computed <em>domain coloring</em> of the digamma function $\psi(z)$ over the complex plane, with rainbow pinwheels marching along the negative real axis (the poles at $0, -1, -2, \ldots$) and the great swirl near $1.4616$ — digamma's only positive real zero.</p>
+        <p>In front: a crimson interpolation curve $H_x = \psi(x+1) + \gamma$ threading exactly through every black dot $(n, H_n)$. Girlfriend drags the blue bead — at every integer it kisses a dot; park it at $x = 0.5$ and the overlay snaps to the exact $H_{1/2} = 2 - 2\ln 2$.</p>
+        <p>Toggle "Show $\ln x$": the dashed curve runs below, and the amber gap on the right shrinks toward $\gamma$ — <em>"the Ramanujan value of the divergent harmonic series</em> $\sum_{n \geq 1}^{\mathcal{R}} \frac{1}{n} = \gamma$<em>."</em> 🤯</p>
+    </div>
+
     <p><strong>Press Tab</strong> to cycle between pages. More pages coming soon!</p>
     <p class="demo-reqs">Requirements: Python 3.9+ &nbsp;|&nbsp; <code>pip install pygame PyOpenGL numpy matplotlib</code></p>
     <a href="harmonic_series_mathematics.py" download class="demo-dl-button">Download harmonic_series_mathematics.py</a>
