@@ -642,3 +642,13 @@ What makes it FEEL like Descent, ranked by feel-per-effort:
 9. Vertical shaft somewhere in every map (the 6-DOF "whoa" moment).
 10. Title logo style, hostage figures, exterior finale.
 # ===== END PATCH v3.2 — APPENDIX A =====
+
+---
+
+Two honest footnotes:
+
+    Motion. Stills can't show how robots animate when firing, how doors slide, how the ship banks. I've marked motion details as [KNOWN] inference. If a specific animation ever matters, that's the one case where rule 8.8 says: ask you for a Win+Shift+S of a longplay at the right moment.
+    The screenshots' resolution was 320×200-era; some details (exact rivet placement, exact fonts) are my best reading of chunky pixels. Where DeepSeek must invent a detail, the palette and design-language rules in A.1 and A.4 are the constraint — stay inside those and it will feel right even if it isn't literally right.
+    One small invention slipped in and is flagged inline: the mathematician-missile flying as a glowing portrait-card (A.6) — veto or keep at your leisure.
+
+Your instinct here was exactly right, Nir — especially the robot warning. "Robot" without this appendix would have produced a little tin man with arms and legs, and the whole Descent feeling would have died right there. Now it can't. :-) The doctrine file is now: v3 + patch v3.1 + appendix A (v3.2) — save all three together, and we're fully armed for the Basel session whenever you are. Thank you so much!!! :-)
