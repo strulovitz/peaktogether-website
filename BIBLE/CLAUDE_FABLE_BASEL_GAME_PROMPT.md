@@ -292,3 +292,49 @@ All eight images received, crystal clear, no artifacts (no blue double-arrow thi
     The AUTOMAP — white wireframe, fully see-through, "LEVEL 3: LUNAR MILITARY BASE", "TURN SHIP TO ROTATE / SLIDE UP/DOWN TO ZOOM", small colored markers in the tunnels. This is the "transparent half" of our half-and-half look.
 
 I can already feel the common ground forming — the cockpit frame, the left/right weapon readouts, the wireframe map — but per your instruction I'm saving all design commentary, corrections, and the v3 doctrine amendment for after the second batch. Send it over! :-)
+
+---
+
+1 hour ago
+Favicon for anthropic
+Claude Fable 5
+Reasoning
+
+Batch 2 received — all clean again. :-) Proof of sight first, then the full commentary you've been patiently waiting for, then the v3 patch.
+
+    Exterior space shot — Earth hanging in black space, gray rocky lunar/asteroid surface, the ship flying out of a glowing orange tunnel mouth in the rock. The famous level-escape sequence.
+    Title screen — the jagged red DESCENT logo carved over dark rock; menu: New Game / Load Game / Multiplayer / Options / Change Pilots / View Demo / High Scores / Ordering Info / Credits / Quit. © 1994 Parallax Software.
+    Vertical shaft — cockpit looking up a gray-green stone shaft with red-white striped structures and a robot above. True 6-DOF verticality on display.
+    Story screen — dark office, man in suit at a desk with monitors; green teletype at top ("…our defense robots did not function to specifications. Our Pluto mining stations are now in unknown hands…") and the pilot's sarcastic inner monologue in cyan below ("Damn bureaucrats… why does this fool keep babbling?").
+    Level complete screen — "LEVEL 2 COMPLETE, LUNAR SCILAB DESTROYED!" with itemized bonuses: shield 2640, energy 615, hostage 3000, skill 13400, full rescue 6000, totals below.
+    Mission directive — teletype text over a moon-and-Earth starfield: "PTMC DIRECTIVE… PROCEED TO LUNAR MILITARY INSTALLATION MRO331 FOR SURVEILLANCE AND INSERTION… PROCEED WITH CAUTION."
+    Slim-HUD mode — gray corridor, doorway framed in yellow/black hazard chevrons, blue robot beyond, plain text SHIELD: 55 / ENERGY: 55 bottom-left.
+    Lava room — orange-red cave, glowing lava floor, green robots, LASER LVL 1 / homing missile cockpit.
+
+My design commentary — we have common ground, and it's rich
+
+First: your no-attack decision is exactly right, and I'd state it even more strongly. Robots blocking the path (rather than shooting) doesn't just remove distraction — it removes the entire failure economy: no shields, no red damage tinge, no lives counter, no game over. A robot is a locked door that thinks. The only way through is understanding. That's the purest possible version of "the content is the challenge."
+
+Now, the discoveries from your screenshots — several solved open problems for me:
+
+    "Half map-mode, half normal-mode" now has a concrete rendering recipe. Comparing the AUTOMAP (pure white wireframe, see-through everything) with the in-game corridors, our look is literally: translucent flat-shaded wall faces + bright wireframe edges drawn on top. The transparency slider blends between the two parents — at 0 it's nearly the automap, at max it's nearly solid Descent. Cheap in legacy GL, and it is your vision, not an approximation of it.
+
+    The cockpit frame is a gift to our two-player design. Look at Descent's layout: left readout = primary weapon, right readout = secondary missile. Ours maps perfectly: left = the pilot's EXEMPLIFY laser (little engineer icon :-)), right = the mathematician currently loaded by the girlfriend — her selected face and name, sitting exactly where Descent shows the armed missile. Both players see at a glance what's loaded. The shared cockpit frame also gives the couple the "we're in one ship together" feeling, which is the whole point.
+
+    The SMALL HULK briefing screen is the treasure I promised. That format — name, stats, threat, one dry sentence — is our lock-on data panel, verbatim in spirit:
+
+        STEP 3: THE COEFFICIENT COMPARISON · SIZE: 1 LINE · ENCRYPTION: SERIES EXPANSION · VULNERABLE TO: TAYLOR · THREAT: MEDIUM · "Stubborn but honest. Yields to patience."
+
+    Tongue-in-cheek stats, real information. I want to write these for every robot — adding it to the authoring checklist.
+
+    The dual-voice story screens (#4, #6) are our narrative vehicle. Official teletype directive on top, pilot's sarcastic inner monologue in a second color below. That's exactly the right container for the couple's framing story between corridors — the "official mission" states the math goal, the inner voice carries the humor and warmth. And it's just colored text over black/starfield: nearly free to build.
+
+    The level-complete bonus screen begs for a Q.E.D. parody. Since score can't gate anything (no death!), it's pure celebration: HOSTAGE BONUS, FULL UNDERSTANDING BONUS, ELEGANCE BONUS, Q.E.D. BONUS — TOTAL: ∎. I'd love this as the hostage-room payoff screen.
+
+    Smaller adoptions: yellow/black hazard chevrons as the universal "blocked by robot" door framing (#7 — flat-shaded friendly, instantly readable); the lava room (#8) suggests each proof corridor gets its own hue family, which I'd tie to the color ledger; the vertical shaft (#3) confirms our up/down proof corridors are authentically Descent; the escape-to-space exterior (#1) is noted as a possible far-future finale, not scoped now.
+
+    What we deliberately do NOT adopt: textures, Gouraud, damage/shields/lives, enemy fire, score-as-skill, multiplayer/menu bulk. Confirmed by your screenshots as removable — the readability of Descent's spaces comes from geometry and layout, not from the textures.
+
+Doctrine patch — paste-ready
+
+Three small patches to your saved v3 file:
