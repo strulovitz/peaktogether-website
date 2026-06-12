@@ -380,3 +380,14 @@ Three small patches to your saved v3 file:
    for specific needs not covered there (e.g., a particular animation).
 
 # ===== END PATCH v3.1 =====
+
+---
+
+I folded these into the patch for convenience, but they're my additions today, so flag any you dislike and I'll re-issue the patch:
+
+    Cockpit left/right readout mapping (exemplify left, mathematician right);
+    Q.E.D. bonus parody screen;
+    Dual-voice story screens as the lesson-script carrier;
+    Corridor hue families tied to the color ledger.
+
+Nir, between your doctrine and these sixteen images, Descent QED now has a complete visual identity — and we got it without a single line of code written prematurely. When you're ready (fresh chat, paste v3 + this patch), we open the Basel problem article and start placing robots in corridors. Thank you so much for a genuinely great design day!!! :-)
