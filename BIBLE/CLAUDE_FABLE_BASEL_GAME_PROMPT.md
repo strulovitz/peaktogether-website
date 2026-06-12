@@ -338,3 +338,45 @@ Now, the discoveries from your screenshots — several solved open problems for 
 Doctrine patch — paste-ready
 
 Three small patches to your saved v3 file:
+
+# ===== PATCH v3.1 — LOOK & FEEL (apply to the v3 Descent Doctrine) =====
+
+# --- PATCH A: in §6, append as a new bullet at the end of the section ---
+* **ROBOTS DO NOT ATTACK (locked 2026-06-12):** no enemy fire, no shield/
+  damage/red-tinge, no lives, no game over. A robot is a thinking locked
+  door: it physically blocks the corridor until defeated by understanding.
+  Score exists only as celebration (see Q.E.D. screen, §6B).
+
+# --- PATCH B: insert as a new section between §6 and §7 ---
+## 6B. LOOK & FEEL REFERENCE (16 Descent screenshots reviewed 2026-06-12)
+* WALLS RECIPE: translucent flat-shaded faces + bright wireframe edges on
+  top = "half map-mode / half normal-mode". Transparency slider blends
+  between automap look (low) and solid look (high). Default mid.
+* COCKPIT FRAME (simplified): kept — shared-ship feeling for the couple.
+  LEFT readout = pilot's EXEMPLIFY laser (engineer icon). RIGHT readout =
+  girlfriend's loaded mathematician (face + name), where Descent shows
+  the armed missile. Center = lock-on / corridor name.
+* LOCK-ON DATA PANEL: styled after Descent's robot briefing screen
+  ("SMALL HULK / SIZE / ARMAMENT / THREAT"): step name, ENCRYPTION:
+  <topic>, VULNERABLE TO: <mathematician>, tongue-in-cheek THREAT level,
+  one dry flavor sentence. Authored per robot (added to §9 checklist).
+* STORY SCREENS: dual-voice teletype over black/starfield between
+  corridors — official directive text (mission = the math goal) + the
+  pilots' inner-monologue in a second color (humor/romance). This is the
+  in-game carrier of the couple's lesson script.
+* Q.E.D. SCREEN: parody of Descent's level-complete bonuses — HOSTAGE
+  BONUS, FULL UNDERSTANDING BONUS, ELEGANCE BONUS, Q.E.D. BONUS,
+  TOTAL: the tombstone/QED square. Pure celebration, gates nothing.
+* VISUAL LANGUAGE: yellow/black hazard chevrons frame robot-blocked
+  passages; each proof corridor gets its own hue family tied to the
+  color ledger; vertical shafts are encouraged (authentic 6-DOF).
+* NOT ADOPTED: textures, Gouraud, enemy fire, shields/lives/damage
+  tinge, skill scoring, multiplayer, menu bulk. Title screen: "DESCENT
+  QED" in the jagged-red-logo spirit, minimal menu — designed LATER.
+
+# --- PATCH C: replace hard rule §8.8 entirely with ---
+8. Descent look & feel: I reviewed 16 screenshots on 2026-06-12; the
+   adopted reference points live in §6B. Ask for NEW screenshots only
+   for specific needs not covered there (e.g., a particular animation).
+
+# ===== END PATCH v3.1 =====
