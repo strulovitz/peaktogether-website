@@ -384,6 +384,16 @@ Three small patches to your saved v3 file:
 * WALLS RECIPE: translucent flat-shaded faces + bright wireframe edges on
   top = "half map-mode / half normal-mode". Transparency slider blends
   between automap look (low) and solid look (high). Default mid.
+* GREYSCALE WORLD RULE (Nir, locked 2026-06-13): the WORLD is
+  achromatic — walls in dark greys, edges in white/light grey
+  (automap-style wireframe), background near-black. CHROMATIC color
+  is reserved for MEANING only: ledger backdrops on equations, robot
+  eye bands, holograms, lamps, hostage blue, and the yellow/black
+  chevron hazard frames marking robot stations. Consequence: any
+  colored glow seen through a translucent grey wall is, by
+  construction, CONTENT waiting ahead. Wall translucency is
+  user-adjustable (slider/keys), default ~half-transparent; the
+  automap look (fully wireframe) is one extreme of that same slider.
 * COCKPIT FRAME (simplified): kept — shared-ship feeling for the couple.
   LEFT readout = pilot's EXEMPLIFY laser (engineer icon). RIGHT readout =
   girlfriend's loaded mathematician (face + name), where Descent shows
