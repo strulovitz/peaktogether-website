@@ -85,8 +85,17 @@ def init_gl():
 
 
 def draw_overlay_text(text):
-    """TODO(DeepSeek): paste your working implementation from v1.1 here."""
-    pass
+    """On-screen overlay (bottom-left) showing this text."""
+    font = pygame.font.Font(None, 24)
+    surf = font.render(text, True, (180, 180, 180))
+    data = pygame.image.tostring(surf, "RGBA", True)
+    w, h = surf.get_size()
+    glDisable(GL_FOG)
+    glDisable(GL_DEPTH_TEST)
+    glWindowPos2d(10, 10)
+    glDrawPixels(w, h, GL_RGBA, GL_UNSIGNED_BYTE, data)
+    glEnable(GL_DEPTH_TEST)
+    glEnable(GL_FOG)
 
 
 def main():
@@ -112,7 +121,8 @@ def main():
                 wall_alpha = min(palette.WALL_ALPHA_MAX, wall_alpha + palette.WALL_ALPHA_STEP)
             if ev.type == KEYDOWN and ev.key == K_F3:
                 wireframe = not wireframe
-                # TODO(DeepSeek): paste your working F3 toggle from v1.1.
+                glPolygonMode(GL_FRONT_AND_BACK,
+                              GL_LINE if wireframe else GL_FILL)
 
         cam.update(pygame.key.get_pressed(), dt)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
