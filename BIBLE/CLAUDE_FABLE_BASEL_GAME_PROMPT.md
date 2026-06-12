@@ -404,3 +404,241 @@ What a smart request, Nir — you're absolutely right. Right now I hold these si
 One honesty note before the patch: I'll mark the difference between [SEEN] (directly in your screenshots) and [KNOWN] (general knowledge about Descent that the stills support but don't show, e.g., animations) — so future-me never mistakes inference for observation.
 
 Here it is — append to the end of the v3 doctrine file:
+
+# ===== PATCH v3.2 — APPENDIX A: THE VISUAL BIBLE OF DESCENT QED =====
+# Written 2026-06-12 by Claude Fable IMMEDIATELY after studying 16
+# screenshots of Descent (1994, Parallax Software) provided by Nir from
+# MobyGames. Future-me has NO access to these images. DeepSeek NEVER saw
+# them. This appendix is the only surviving visual memory. Tags:
+# [SEEN] = directly observed in the screenshots.
+# [KNOWN] = general knowledge consistent with them (treat as softer).
+
+## A.1 OVERALL PALETTE, LIGHT, AND MOOD
+[SEEN] The world is DARK. Not horror-dark: mine-dark. Base surfaces are
+desaturated browns, grays, gray-greens. Against this darkness, accents
+are few and intensely saturated: glowing orange fireballs, green laser
+bolts and green HUD digits, blue light strips, yellow/black hazard
+stripes, red warning structures, orange-red lava. The emotional formula:
+DARK NEUTRAL ENVIRONMENT + RARE SATURATED GLOWS. Light appears to come
+from the glowing things themselves, not from a sun. Our remake: keep
+CLEAR_COLOR near-black blue (0.045,0.055,0.10), walls in dark desaturated
+tints, and reserve saturated color EXCLUSIVELY for meaning (ledger
+backdrops, robots, holograms, lasers). If everything glows, nothing does.
+
+## A.2 CORRIDORS, SHAFTS, AND ROOMS
+[SEEN] Corridors are tunnels with polygonal cross-sections — roughly
+square or octagonal (one striking shot: a long octagonal tube whose
+eight faces are alternately plain metal and orange-striped panels, with
+thin BLUE LIGHT STRIPS running lengthwise along the corner edges,
+converging to a vanishing point with a robot silhouetted dead-center.
+That shot is the single most "Descent" image of all 16 — symmetric
+one-point perspective down a glowing throat). Corridors BEND, SLOPE, and
+go FULLY VERTICAL: one screenshot looks straight UP a stone shaft (the
+ship is flying upward; "floor" is meaningless). Rooms are irregular
+blocky caverns — not boxes: ceilings at odd angles, alcoves, ledges,
+multiple exits at different heights. Geometry is built ENTIRELY from
+flat quads at varied angles; the rock look comes from texture, but the
+SHAPES alone read as "mine" — which is why our textureless version works.
+[SEEN] Environmental theming per area: brown rock; gray stone; clean
+gray metal panels; a lava cavern where the floor is glowing orange-red
+liquid casting red light up the walls. -> Our corridor hue families
+(§6B) are authentic: Descent already does "this area is the red area."
+[KNOWN] Corridors connect via short throats and junctions; the automap
+confirms a tangled 3D knot of tubes, not a flat floor plan.
+RECONSTRUCTION: 8-sided tubes for corridors (cheap, instantly iconic),
+irregular faceted polyhedra for rooms, blue edge-glow lines along
+corridor corners (bright wireframe edges, §6B, doubling as the map-mode
+half), occasional full-vertical shaft.
+
+## A.3 DOORS AND HAZARD MARKINGS
+[SEEN] Doorways are framed by thick slanted jambs painted with YELLOW/
+BLACK DIAGONAL CHEVRON STRIPES (universal industrial "caution" visual).
+One shot frames a distant blue robot perfectly inside such a doorway —
+the stripes say "danger/blocked beyond this line" with zero words.
+[KNOWN] Doors slide open as panels when approached/unlocked; some doors
+require colored access keys (blue/yellow/red) found in the level.
+RECONSTRUCTION: every robot-blocked passage gets a chevron-striped
+frame (two flat quads with painted stripes — trivially flat-shadable).
+Colored-key doors are a READY-MADE METAPHOR for prerequisites: a
+corridor whose entrance needs the "Hipparchus key" the couple collected
+in training. Adopt when training corridors arrive (Step 2).
+
+## A.4 THE ROBOTS — CRITICAL SECTION, READ TWICE
+THE SINGLE BIGGEST TRAP: when anyone (human or AI) hears "robot" they
+imagine a HUMANOID — head, arms, legs. DESCENT ROBOTS ARE NOTHING LIKE
+THAT. [SEEN] They are HOVERING MACHINES — no legs, no feet, no ground
+contact, floating at corridor mid-height. Design language, observed:
+* CHUNKY LOW-POLY HULLS: angular faceted bodies — wedges, prisms,
+  truncated pyramids bolted together; silhouettes are asymmetric and
+  industrial, like flying mining equipment, because canonically that is
+  what they are: hijacked PTMC mining machines.
+* A CENTRAL "EYE": typically one glowing sensor strip or lens cluster
+  (the briefing-screen robot has a glowing RED visor-like eye band on a
+  squat head-block sitting directly on the hull — no neck).
+* SIDE-MOUNTED ARMATURES: stubby weapon pods, claw-like manipulators or
+  drill mounts hanging from the hull's flanks — tool-arms, not human arms.
+* BOLD 2-3 COLOR PAINT JOBS: the briefing robot ("SMALL HULK") is GREEN
+  with RED/DARK camo patches; other shots show a bright GREEN drone, and
+  PAIRED BLUE robots; paint reads as team colors against dark walls.
+* SIZE: briefing screen lists SMALL HULK at "5 METERS" — robots are
+  roughly ship-sized or bigger; they FILL a corridor and credibly BLOCK it.
+[KNOWN] They bob/hover in place, rotate to face the player, and have a
+slight idle drift — alive, mechanical, patient.
+RECONSTRUCTION FOR DESCENT QED: each robot = 1-3 stacked faceted prisms
+(flat-shaded, hidden-face removal, ~20-60 triangles), one glowing eye
+band (emissive quad), two stubby side pods, hovering with a slow
+sinusoidal bob and a slow yaw toward the player. Distinct silhouette +
+distinct 2-color paint per robot TYPE. NEVER humanoid. Their menace is
+in their stillness and their size — they wait in the corridor's throat.
+Defeat: [SEEN] explosions are bright orange fireballs — a billboard
+flash + expanding sphere is enough; then the plaque fades in.
+
+## A.5 THE COCKPIT AND HUD — THE FRAME OF THE WHOLE EXPERIENCE
+[SEEN] The cockpit occupies the BOTTOM ~THIRD of the screen plus thin
+side struts; the 3D view shows through the windshield gap. Materials:
+dark gunmetal gray-purple panels with rivets, small indicator lights,
+and beveled edges. Layout, precisely:
+* CENTER-BOTTOM: a small monitor showing a TOP-DOWN ICON OF YOUR OWN
+  SHIP (in original: damage display). Flanking it, big glowing digits:
+  shield number in BLUE/WHITE (e.g., 92) and energy number in
+  YELLOW/ORANGE (e.g., 82), one above the other.
+* LEFT MONITOR: current PRIMARY weapon — an ICON/PICTURE of the weapon
+  + name + number (e.g., "VULCAN 2500", "LASER LVL 3", "SPREAD").
+* RIGHT MONITOR: current SECONDARY — missile picture + name + count
+  (e.g., "HOMING MISSILE 04", "CONCSN MISSILE 003").
+* FAR LEFT EDGE: a small "LOCK" indicator block.
+* TOP-LEFT (outside cockpit): lives as small ship glyphs ("x 2").
+* TOP-RIGHT: "SCORE: 26800" in glowing GREEN digits.
+* CENTER OF VIEW: small GREEN crosshair (cross / twin brackets).
+[SEEN] An alternative SLIM HUD exists: no cockpit frame at all, just
+text overlays — "SHIELD: 55  ENERGY: 55" bottom-left in colored caps,
+weapons in bottom corners, score top-right. (Both modes shipped in the
+original; ours will offer the full cockpit as default — the shared-ship
+feeling — slim mode optional later.)
+DESCENT QED MAPPING (locked in §6B): LEFT monitor = pilot's EXEMPLIFY
+laser (engineer icon + "EXEMPLIFY"); RIGHT monitor = girlfriend's loaded
+MATHEMATICIAN (portrait + name, e.g., "TAYLOR"); CENTER monitor = lock-on
+status / current corridor name / current reading-layer label; shield+
+energy digits replaced by gentle progress numbers (e.g., robots cleared
+/ total). Keep: green crosshair, green top-right status text, gunmetal
+frame with rivets, the LOCK block (lights up on robot lock-on).
+
+## A.6 WEAPON FIRE AND EXPLOSIONS
+[SEEN] Player lasers: TWIN BRIGHT GREEN BOLTS — short glowing segments
+— fired simultaneously from the two lower corners of the windshield,
+converging toward the crosshair. Iconic and trivially cheap: two
+emissive elongated quads + slight convergence. (Higher laser levels
+shift color in the original [KNOWN: blue/purple at higher levels] — we
+can color OUR laser per reading-tier if we ever want.)
+[SEEN] Explosions: saturated ORANGE/YELLOW fireballs, roughly spherical
+billboards with ragged edges, briefly HUGE (filling much of the view).
+[KNOWN] Missiles: small bright projectile + smoke trail + the same
+orange explosion. Ours: the mathematician-missile can fly as a small
+glowing portrait-card [INVENTED, pending Nir] or classic bolt; on
+correct hit -> orange fireball -> plaque; on wrong weapon -> the fizzle
+(small damp spark, no fireball) + explanation panel.
+
+## A.7 HOSTAGES AND PICKUPS
+[SEEN] Hostages: small HUMANOID figures in bright BLUE jumpsuits (the
+only humanoids in the game — instantly readable as "people" against all
+the machine shapes), standing in a reddish chamber behind the robots'
+territory, waiting. Two stood together in a doorway.
+[KNOWN] In the original you fly INTO them to rescue; a counter ticks up;
+the level-complete screen pays a "FULL RESCUE BONUS" for saving all.
+[SEEN] Pickups: small bright floating objects scattered in rooms —
+glowing orbs and capsule/box shapes in blue/yellow/violet, visually
+"collectible" by pure color-pop against dark rock.
+RECONSTRUCTION: hostages = simple blue low-poly figures (capsule body,
+sphere head — the ONE place humanoid shapes are correct), standing in
+the Q.E.D. room; rescued by flying through; they trigger the Q.E.D.
+celebration screen. Ingredient-faces (Hipparchus etc.) float and slowly
+rotate like pickups, with a soft glow halo so they pop like Descent's
+power-ups [face textures on billboards].
+
+## A.8 THE AUTOMAP
+[SEEN] Full-screen mode framed by a riveted dark METAL PLATE border;
+ornate gold/bronze title "AUTOMAP" top-left in a gothic-industrial
+display font; below, "LEVEL 3: LUNAR MILITARY BASE" in smaller gold
+caps. The map itself: PURE WHITE WIREFRAME tunnel outlines on BLACK —
+every explored corridor visible THROUGH every other (no hidden-face
+removal at all), forming a tangled 3D knot of tubes. Small colored
+markers (green, blue) sit inside the wireframe at points of interest.
+Footer instructions in the same gold caps: "TURN SHIP TO ROTATE. SLIDE
+UP/DOWN TO ZOOM." [SEEN] No enemies shown on the original map.
+DESCENT QED: our world IS half this automap at all times (§6B walls
+recipe). We DELIBERATELY DEVIATE from "no enemies shown": alive robots
+appear through walls as colored points (breadcrumbs, §6) — colored by
+their corridor's hue family. A full-screen classic automap mode is a
+cheap bonus later (we already render the wireframe half).
+
+## A.9 META SCREENS — TITLE, BRIEFINGS, STORY, LEVEL COMPLETE, EXTERIOR
+* TITLE [SEEN]: "DESCENT" in a huge JAGGED RED logo — letterforms like
+  shards/cracked metal, sharp diagonal cuts, dark red shading giving a
+  chiseled 3D feel — floating over a dark rock-textured background.
+  Menu below in modest gold/bronze CAPS, one item highlighted. Total
+  layout: logo top ~40%, menu list centered below. OURS: same jagged
+  spirit reading "DESCENT QED" (Nir: BFG-Edition energy), minimal menu
+  (New Game / Continue / Options / Quit).
+* MISSION DIRECTIVE [SEEN]: glowing monospaced teletype CAPS over a
+  starfield with a large moon and the Earth: header block "PTMC
+  DIRECTIVE CMD-RPT13 414 / TO: MD1032, LUNAR ORBIT / FROM: PTMC
+  HEADQUARTERS, EARTH ORBIT" then short imperative mission text
+  ("PROCEED TO... PROCEED WITH CAUTION."). Corporate-military, dry,
+  numbered, slightly absurd. PTMC = Post-Terran Mining Corporation
+  [KNOWN]; the player is mercenary "Material Defender" MD1032 [KNOWN].
+* STORY SCENE [SEEN]: a dark rendered office — man in a suit at a desk,
+  monitors glowing — with TWO text voices: GREEN teletype at top = what
+  the executive is saying ("...our defense robots did not function to
+  specifications..."), CYAN text below = the pilot's sarcastic INNER
+  MONOLOGUE ("Damn bureaucrats... Why does this fool keep babbling?").
+  THE DUAL-VOICE DEVICE IS THE TONE TEMPLATE FOR ALL OUR WRITING (§A.10).
+* LEVEL COMPLETE [SEEN]: the red DESCENT logo on rock, then gold caps,
+  centered, itemized: "LEVEL 2 COMPLETE / LUNAR SCILAB DESTROYED!" then
+  SHIELD BONUS 2640 / ENERGY BONUS 615 / HOSTAGE BONUS 3000 / SKILL
+  BONUS 13400 / FULL RESCUE BONUS 6000 / TOTAL BONUS / TOTAL SCORE.
+  OURS (§6B): same skeleton, parody items, FULL UNDERSTANDING BONUS,
+  Q.E.D. BONUS, TOTAL: ∎.
+* ROBOT BRIEFING/DATABASE [SEEN]: riveted metal frame, BLACK screen,
+  monospaced caps in red/green: "SMALL HULK / MODIFIED PTMC MINING
+  ROBOT / SIZE: 5 METERS / EST. ARMAMENT: 2 HEAVY ARGON LASERS /
+  THREAT: MEDIUM" + one laconic flavor line ("STANDARD BORER ROBOT.
+  TOUGH AND AGILE.") beside a 3D render of the robot. = template for
+  our lock-on data panel (§6B).
+* EXTERIOR FINALE [SEEN]: black starfield, photoreal Earth (blue,
+  clouded) hanging upper-left, gray cratered lunar ground, and the
+  mine's tunnel mouth glowing ORANGE from the explosion within as the
+  tiny ship escapes. Pure cinematic payoff. NOT SCOPED; remember it
+  exists for a possible grand finale someday.
+
+## A.10 TONE OF VOICE — HOW DESCENT TALKS, HOW WE TALK
+Descent's writing is DRY CORPORATE-MILITARY TELETYPE plus ONE sardonic
+human voice undercutting it. Numbers and codenames played straight
+("CMD-RPT13 414", "THREAT: MEDIUM", "5 METERS"); the humor NEVER
+announces itself. Our adaptation, locked:
+* Directives = the math mission in corporate deadpan: "PROCEED TO
+  CORRIDOR EULER-1. INTELLIGENCE REPORTS AN INFINITE SERIES BEHAVING
+  SUSPICIOUSLY WELL. ESTABLISH CONVERGENCE. PROCEED WITH RIGOR."
+* Inner monologue = the couple's warmth and doubts, second color:
+  "An exact value for an infinite sum? Sure. And I suppose pi will just
+  show up out of nowhere." (...later, at the Q.E.D. room: it did.)
+* Robot stats deadpan: "ENCRYPTION: SERIES EXPANSION. VULNERABLE TO:
+  TAYLOR. THREAT: MEDIUM. STUBBORN BUT HONEST. YIELDS TO PATIENCE."
+* THREAT levels are jokes calibrated honestly: a hard step IS "THREAT:
+  HIGH" — the joke is using military language about an equation, never
+  mocking the players' difficulty.
+Corner labels stay as locked: "explain like I'm a mathematician /
+physicist / biologist / engineer (by example, with actual numbers)".
+
+## A.11 RECONSTRUCTION PRIORITY ORDER (if effort must be rationed)
+What makes it FEEL like Descent, ranked by feel-per-effort:
+1. The cockpit frame with left/right weapon monitors + green crosshair.
+2. Octagonal corridors with blue edge-glow lines, one-point perspective.
+3. Hovering non-humanoid faceted robots, bobbing, corridor-filling.
+4. Twin green laser bolts converging from the windshield corners.
+5. Dark world / saturated-glow-only palette discipline (A.1).
+6. Chevron-striped doorframes.
+7. Orange fireball on robot defeat.
+8. Teletype meta-screens (directive, briefing stats, Q.E.D. bonuses).
+9. Vertical shaft somewhere in every map (the 6-DOF "whoa" moment).
+10. Title logo style, hostage figures, exterior finale.
+# ===== END PATCH v3.2 — APPENDIX A =====
