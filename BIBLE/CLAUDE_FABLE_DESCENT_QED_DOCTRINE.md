@@ -149,7 +149,38 @@ Complicated articles may need several games.
   (and for variance: BLACK text on light tints, e.g., pink). Per-game
   COLOR LEDGER: each key sub-expression gets a backdrop color at birth,
   consistently across all robots/corridors; combined expressions get
-  blended colors (red+blue -> purple). ~6 base colors max per game.
+  blended colors (red+blue -> purple).
+
+  KINDERGARTEN MIXING LAW (Nir's rule, locked 2026-06-12, and he
+  caught Claude breaking it once already): color mixing is a SEMANTIC
+  DIMENSION, not decoration. Per corridor: each core INGREDIENT
+  concept of the proof (max ~3) gets a PRIMARY — red / yellow / blue.
+  Secondaries (orange=red+yellow, green=yellow+blue, purple=red+blue)
+  are RESERVED: they may ONLY mark expressions that genuinely combine
+  the two parent ingredients. When a combined expression is
+  algebraically split apart on screen, its segments REVERT to the
+  parent primaries. NEVER use a secondary as an independent base
+  color — it is a false signal ("where are its parents?").
+  Consistency is required WITHIN a corridor; colors may be freely
+  re-assigned BETWEEN corridors (not enough rainbow for global
+  consistency). Authoring order: identify the proof's ingredients
+  FIRST, assign primaries, then derive blends. Glue symbols
+  (=, parentheses, \cdots, lone constants) stay neutral/backdropless.
+  Shades within one family are allowed as emphasis (light blue is
+  still pure blue). The per-game COLOR LEDGER table is duplicated as
+  a comment at the top of the game's content file so DeepSeek sees it.
+
+  Some proofs will have more than 3 ingredients — then the law gets
+  strained (we'd need a 4th primary, and real paint mixing gets muddy
+  past three). When that happens, the right move is per your "within
+  one corridor only" insight: split the proof across corridor segments,
+  or let a blend "graduate" into a new ingredient after a crafting-style
+  moment (orange becomes a sealed brick, then participates as a unit).
+  We'll cross that bridge when an article forces us to — Basel doesn't.
+  The slice corridor needs exactly 3 ingredients, as if Euler designed
+  his proof for us. :-)
+
+  ~6 base colors max per game.
   Backdrop opacity = user SLIDER, from near-transparent ("beautiful")
   to opaque ("readable"), DEFAULT mid-way.
   Authoring constraint: equations are authored as SIDE-BY-SIDE SEGMENTS
@@ -219,7 +250,8 @@ Complicated articles may need several games.
     training corridors, robot count & order per corridor
 [ ] Weapon roster: face per technique, ingredients & crafting recipes,
     asset manifest (file names for Nir)
-[ ] Color ledger: ~6 base colors, birth assignments, blend rules
+[ ] Color ledger: ingredients->primaries, blends derived per the
+    Kindergarten Mixing Law (§6)
 [ ] Per robot: equation as tintable segments; layers L1/L2/L3; exemplify
     slide with concrete numbers + value arcs; hologram assignment;
     fizzle text for each WRONG weapon (why it doesn't apply)
