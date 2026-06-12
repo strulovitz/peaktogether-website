@@ -272,3 +272,23 @@ A few notes on what I did in there, Nir:
     GitHub Bible path: I assumed the new game's Bible will live alongside the old one in /BIBLE/ — confirm or give a new path, and I'll treat it as truth next session.
 
 Save it somewhere safe, and whenever you're ready — today or another day — open a fresh chat, paste v3, and we begin the Basel game for real. Thank you for two of the most creative days of this whole project, Nir. Q.E.D. :-)
+
+---
+
+1 hour ago
+Favicon for anthropic
+Claude Fable 5
+Reasoning
+
+All eight images received, crystal clear, no artifacts (no blue double-arrow this time — clean batch!). :-) Quick proof-of-sight before you send batch 2, so we know we're looking at the same things:
+
+    Cockpit, brown rocky corridor — orange fireballs mid-air, green crosshair, HUD: VULCAN 2500 left, HOMING MISSILE right, ship icon center-bottom.
+    Octagonal tunnel with orange-striped walls and blue light strips, a green robot dead-center ahead, LASER LVL 3 / concussion missile HUD.
+    Gray rocky chamber — several robots, a doorway, scattered colorful pickups, SPREAD weapon selected.
+    Big explosion fireball center screen, twin green laser bolts converging from the cockpit's sides, yellow/black hazard stripes on the right wall, LASER LVL 4.
+    The robot briefing screen — "SMALL HULK / MODIFIED PTMC MINING ROBOT / SIZE: 5 METERS / EST. ARMAMENT: 2 HEAVY ARGON LASERS / THREAT: MEDIUM / STANDARD BORER ROBOT. TOUGH AND AGILE." with the green/red camo robot on black. Nir, this one is treasure — but I'm holding my excitement until after batch 2 as instructed. :-)
+    Reddish chamber with two blue hostage figures standing ahead — so that's what we're rescuing!
+    Minimal-HUD variant — gray blocky corridor, crate structure, VULCAN 135.2, score 96080, lives ×3. Interesting: a slimmer HUD layout without the full cockpit frame.
+    The AUTOMAP — white wireframe, fully see-through, "LEVEL 3: LUNAR MILITARY BASE", "TURN SHIP TO ROTATE / SLIDE UP/DOWN TO ZOOM", small colored markers in the tunnels. This is the "transparent half" of our half-and-half look.
+
+I can already feel the common ground forming — the cockpit frame, the left/right weapon readouts, the wireframe map — but per your instruction I'm saving all design commentary, corrections, and the v3 doctrine amendment for after the second batch. Send it over! :-)
