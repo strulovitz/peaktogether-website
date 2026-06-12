@@ -1,0 +1,1 @@
+DeepSeek handoff, priority order: (1) append palette lines; (2) swap corridor.draw for the two new functions; (3) add the three new files; (4) port draw_overlay_text + F3 into new main.py, implement briefing.draw_text_2d (recipe in docstring); (5) paste sealed v1.1 briefing texts into content.py verbatim; (6) run; tune CFG only after Nir flies.
