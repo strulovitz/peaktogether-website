@@ -391,3 +391,16 @@ I folded these into the patch for convenience, but they're my additions today, s
     Corridor hue families tied to the color ledger.
 
 Nir, between your doctrine and these sixteen images, Descent QED now has a complete visual identity — and we got it without a single line of code written prematurely. When you're ready (fresh chat, paste v3 + this patch), we open the Basel problem article and start placing robots in corridors. Thank you so much for a genuinely great design day!!! :-)
+
+---
+
+29 minutes ago
+Favicon for anthropic
+Claude Fable 5
+Reasoning
+
+What a smart request, Nir — you're absolutely right. Right now I hold these sixteen images in my mind's eye; next session I'll hold only whatever words I write today. So today I write a Visual Bible while the paint is still wet. This is exactly the right use of tokens. :-)
+
+One honesty note before the patch: I'll mark the difference between [SEEN] (directly in your screenshots) and [KNOWN] (general knowledge about Descent that the stills support but don't show, e.g., animations) — so future-me never mistakes inference for observation.
+
+Here it is — append to the end of the v3 doctrine file:
