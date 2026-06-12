@@ -1,6 +1,9 @@
-"""main.py -- Descent QED, Build Step 1 entry point. python main.py"""
+"""main.py -- Descent QED, Build Step 1.2 entry point. python main.py
+NOTE(DeepSeek): port your finished draw_overlay_text() and F3 lines
+into this file -- do not lose them; only the camera changed."""
 
 import math
+import numpy as np
 import pygame
 from pygame.locals import *
 from OpenGL.GL import *
@@ -8,21 +11,23 @@ from OpenGL.GLU import gluPerspective, gluLookAt
 import corridor
 import palette
 
-WIN_SIZE   = (1280, 720)
-MOVE_SPEED = 12.0      # units/s
-TURN_SPEED = 80.0      # deg/s
+WIN_SIZE      = (1280, 720)
+MOVE_SPEED    = 12.0
+TURN_SPEED    = 80.0
+PLAYER_RADIUS = 0.6
 
 
 class DebugCamera:
-    """TEMPORARY free-fly camera; replaced by the Pi-Rho GX in a later step."""
+    """TEMPORARY free-fly camera -- now collides with the mine."""
 
     def __init__(self):
-        self.pos = [0.0, 0.0, -4.0]    # just inside the MOUTH
+        self.pos = np.array([0.0, 0.0, -4.0])
         self.yaw, self.pitch = 0.0, 0.0
 
     def direction(self):
         y, p = math.radians(self.yaw), math.radians(self.pitch)
-        return (-math.sin(y) * math.cos(p), math.sin(p), -math.cos(y) * math.cos(p))
+        return np.array([-math.sin(y) * math.cos(p), math.sin(p),
+                         -math.cos(y) * math.cos(p)])
 
     def update(self, keys, dt):
         if keys[K_LEFT]:  self.yaw += TURN_SPEED * dt
@@ -31,15 +36,29 @@ class DebugCamera:
         if keys[K_DOWN]:  self.pitch = max(-85.0, self.pitch - TURN_SPEED * dt)
         d = self.direction()
         ry = math.radians(self.yaw)
-        right = (math.cos(ry), 0.0, -math.sin(ry))
-        step = MOVE_SPEED * dt
+        right = np.array([math.cos(ry), 0.0, -math.sin(ry)])
+        delta = np.zeros(3)
+        if keys[K_w]: delta += d
+        if keys[K_s]: delta -= d
+        if keys[K_d]: delta += right
+        if keys[K_a]: delta -= right
+        if keys[K_r]: delta += np.array([0.0, 1.0, 0.0])
+        if keys[K_f]: delta -= np.array([0.0, 1.0, 0.0])
+        self._try_move(delta * MOVE_SPEED * dt)
+
+    def _try_move(self, delta):
+        """Full step if legal; otherwise per-axis = sliding along walls."""
+        cand = self.pos + delta
+        if corridor.inside(cand, PLAYER_RADIUS):
+            self.pos = cand
+            return
+        cur = self.pos.copy()
         for axis in range(3):
-            if keys[K_w]: self.pos[axis] += d[axis] * step
-            if keys[K_s]: self.pos[axis] -= d[axis] * step
-            if keys[K_d]: self.pos[axis] += right[axis] * step
-            if keys[K_a]: self.pos[axis] -= right[axis] * step
-        if keys[K_r]: self.pos[1] += step
-        if keys[K_f]: self.pos[1] -= step
+            c = cur.copy()
+            c[axis] += delta[axis]
+            if corridor.inside(c, PLAYER_RADIUS):
+                cur = c
+        self.pos = cur
 
     def apply(self):
         d = self.direction()
@@ -53,8 +72,7 @@ def init_gl():
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
     glDisable(GL_CULL_FACE)
-    # DARKNESS, not fog: there is no weather in a mine. Fog color == BG
-    # exactly, so geometry fades into black depth, never into mist.
+    # DARKNESS, not fog: fog color == BG exactly, geometry fades to black.
     glEnable(GL_FOG)
     glFogi(GL_FOG_MODE, GL_LINEAR)
     glFogfv(GL_FOG_COLOR, (*palette.BG, 1.0))
@@ -67,20 +85,14 @@ def init_gl():
 
 
 def draw_overlay_text(text):
-    """TODO(DeepSeek): on-screen overlay (bottom-left) showing this text.
-    Recipe: render `text` with pygame.font.Font(None, 24) to a surface,
-    pygame.image.tostring(surf, "RGBA", True), then glWindowPos2d(10, 10)
-    + glDrawPixels(w, h, GL_RGBA, GL_UNSIGNED_BYTE, data). Disable
-    GL_FOG and GL_DEPTH_TEST around the call, re-enable after.
-    Acceptance: alpha value visibly updates on screen when [ ] pressed.
-    Until then the console print in main() covers this."""
+    """TODO(DeepSeek): paste your working implementation from v1.1 here."""
     pass
 
 
 def main():
     pygame.init()
     pygame.display.set_mode(WIN_SIZE, DOUBLEBUF | OPENGL)
-    pygame.display.set_caption("Descent QED -- EULER-1734 (Step 1: The Empty Mine)")
+    pygame.display.set_caption("Descent QED -- EULER-1734 (Step 1.2)")
     init_gl()
     cam = DebugCamera()
     clock = pygame.time.Clock()
@@ -100,16 +112,13 @@ def main():
                 wall_alpha = min(palette.WALL_ALPHA_MAX, wall_alpha + palette.WALL_ALPHA_STEP)
             if ev.type == KEYDOWN and ev.key == K_F3:
                 wireframe = not wireframe
-                # TODO(DeepSeek): apply debug wireframe toggle here.
-                # Hint: glPolygonMode(GL_FRONT_AND_BACK,
-                #                     GL_LINE if wireframe else GL_FILL)
-                # Acceptance: F3 flips the whole world to automap mode.
+                # TODO(DeepSeek): paste your working F3 toggle from v1.1.
 
         cam.update(pygame.key.get_pressed(), dt)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         glLoadIdentity()
         cam.apply()
-        corridor.draw(wall_alpha)
+        corridor.draw(wall_alpha, cam.pos)
         draw_overlay_text("wall alpha %.2f   [ ] adjust   F3 wireframe" % wall_alpha)
         pygame.display.flip()
 
