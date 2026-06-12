@@ -32,6 +32,11 @@ game you ASK Nir to paste the relevant Wikipedia article(s), plus the
 linked prerequisite articles, plus illustrations + captions.
 
 ## 2. THE TEAM & WORKFLOW
+  No content is "sealed" unless it exists VERBATIM in the repo
+  (BIBLE/content_v1.md). Chat memory, Claude's recollection, and
+  "we discussed this once" are NOT storage. If grep can't find it,
+  it does not exist. (Adopted after Claude cited a sealed package
+  that was never written to disk. Never again.)
 * **Nir** (human, Windows 11): inventor of this whole concept (faces-as-
   weapons, fog-layer reading, laser-exemplify — his ideas). Coordinates,
   tests, hosts on his website (peaktogether). GitHub:
