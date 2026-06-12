@@ -45,6 +45,14 @@ linked prerequisite articles, plus illustrations + captions.
   speaker tags (HE:/SHE:) are banned from content files forever.
   (Adopted after Claude drafted scripted couple dialogue; Nir
   vetoed: "they will not adhere to any such script.")
+  Every robot IS a mathematical problem, stated formally and
+  completely in the Wikipedia register: "Prove that ...", "Find
+  ...", "Express ... as ...". No riddle-softening, no poetic
+  paraphrase in the problem statement. ALL softening lives in
+  mechanics (zoom, laser, weapons, presentation hints) -- the
+  scaffolding around the problem, never inside its text.
+  (Adopted after Claude drafted riddles; Nir vetoed: "not some
+  softened riddle.")
 * **Nir** (human, Windows 11): inventor of this whole concept (faces-as-
   weapons, fog-layer reading, laser-exemplify — his ideas). Coordinates,
   tests, hosts on his website (peaktogether). GitHub:
