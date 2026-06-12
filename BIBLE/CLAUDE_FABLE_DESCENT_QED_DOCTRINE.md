@@ -35,8 +35,16 @@ linked prerequisite articles, plus illustrations + captions.
   No content is "sealed" unless it exists VERBATIM in the repo
   (BIBLE/content_v1.md). Chat memory, Claude's recollection, and
   "we discussed this once" are NOT storage. If grep can't find it,
-  it does not exist. (Adopted after Claude cited a sealed package
+  it does not exist.   (Adopted after Claude cited a sealed package
   that was never written to disk. Never again.)
+  The boyfriend and girlfriend are REAL FUTURE PLAYERS, not
+  characters. No game text may be attributed to them, quote them,
+  or simulate their dialogue. The game has one voice -- the mine's
+  signage/system voice -- which may state facts, give hints, and
+  ASK the players questions, but never answer for them. All
+  speaker tags (HE:/SHE:) are banned from content files forever.
+  (Adopted after Claude drafted scripted couple dialogue; Nir
+  vetoed: "they will not adhere to any such script.")
 * **Nir** (human, Windows 11): inventor of this whole concept (faces-as-
   weapons, fog-layer reading, laser-exemplify — his ideas). Coordinates,
   tests, hosts on his website (peaktogether). GitHub:
