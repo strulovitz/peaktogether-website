@@ -525,6 +525,17 @@ in their stillness and their size — they wait in the corridor's throat.
 Defeat: [SEEN] explosions are bright orange fireballs — a billboard
 flash + expanding sphere is enough; then the plaque fades in.
 
+  BODY SIMPLICITY RULE (Nir's veto, locked 2026-06-12): robot bodies
+  are GENERIC VESSELS, never sculptures of their math. One robot = one
+  simple compact body: a single faceted hull (one prism/box, optional
+  wedge nose, ~20-60 triangles), one glowing eye band, two stubby side
+  pods, hover-bob + slow yaw. Per-robot variation comes ONLY from:
+  size, hull proportions, 2-color paint job, and eye color (eye = the
+  ledger color of the concept it guards). NO multi-part bodies, NO
+  shape gimmicks, NO geometry that encodes meaning. The meaning lives
+  in the equation segments, reading layers, colors, and briefing text.
+  (Claude proposed a robot shaped like an infinite product once. Once.)
+
 ## A.5 THE COCKPIT AND HUD — THE FRAME OF THE WHOLE EXPERIENCE
 [SEEN] The cockpit occupies the BOTTOM ~THIRD of the screen plus thin
 side struts; the 3D view shows through the windshield gap. Materials:
