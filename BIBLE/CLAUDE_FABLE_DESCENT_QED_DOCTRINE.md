@@ -201,15 +201,16 @@ Complicated articles may need several games.
   begin_2d/end_2d, draw_rect, draw_texture, draw_box, draw_latex_3d,
   Slider/UIPanel, App skeleton (60 FPS, resizable, Esc, H/F1),
   CLEAR_COLOR=(0.045,0.055,0.10), display-list caching discipline.
-* NEW SYSTEMS to spec for DeepSeek (staged, not all at once): corridor/
-  map geometry from a data-driven graph; translucent walls + through-wall
-  robot dots; robot entities + lock-on detection; weapon inventory UI +
-  missile/laser actions; reading mode (layered billboards, alpha by
-  distance from reading depth, wheel input, right-stick pan); TILED sign
-  textures (big explanations exceed one matplotlib texture — compose a
-  grid of texture blocks); hologram billboards; plaque spawning; crafting
-  crossfade; fizzle feedback. Biggest single engine task: tiled signs +
-  segment baseline alignment.
+* CLAUDE WRITES THE HARD CODE. For every build step, Claude authors
+  the core modules in full: architecture, geometry, math, rendering
+  passes, game state — anything requiring judgment. DeepSeek receives
+  the finished files plus a TODO(DeepSeek) list containing ONLY:
+  boilerplate, asset wiring, platform plumbing, long-but-mechanical
+  fills, and value tuning after Nir's test flights. Every DeepSeek
+  task is marked inline `# TODO(DeepSeek)` with an exact recipe and
+  an acceptance check. DeepSeek never designs; Claude never outsources
+  brains. (Adopted after Claude delegated Step 1 wholesale and Nir
+  vetoed. Never again.)
 * PACKAGING: the one-file rule is DEAD. Each game = ZIP -> self-contained
   folder: engine file(s) + per-game content file + assets/ (faces/*.png
   etc.). Claude defines assets by NAMING CONVENTION + manifest in specs
