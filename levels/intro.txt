@@ -1,0 +1,9 @@
+# Level manifest — Option A.
+# title: the level's display name.
+# corridors: indented paths to corridor fixtures, in ORDER.
+# Paths are resolved relative to THIS file's directory (levels/).
+title: Introduction to Placeholders
+corridors:
+  ../corridors/01_dummy.txt
+  ../corridors/02_dummy.txt
+  ../corridors/03_dummy.txt

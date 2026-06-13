@@ -1,0 +1,37 @@
+# ===========================================================
+# DUMMY CORRIDOR THREE — engine test fixture, NO real mathematics.
+# COLOR LEDGER (duplicated here for DeepSeek's eyes):
+#   PRIMARY left  = yellow  (stand-in concept "M")
+#   PRIMARY right = blue    (stand-in concept "N")
+#   BLEND   mix   = left + right   -> green
+# ===========================================================
+CORRIDOR: 3
+TITLE { Placeholder Corridor Three }
+FLAVOR { A third test tube, deliberately unlike the others. }
+LEDGER {
+  PRIMARY left  = yellow
+  PRIMARY right = blue
+  BLEND   mix   = left + right
+}
+BRIEFING_INTRO { Third placeholder briefing. Distinct title, distinct ledger,
+                 distinct robot — proving a level holds different corridors. }
+ENTRY_TEXT { You have entered the third placeholder corridor. }
+EXIT_TEXT { You have cleared the third placeholder corridor. Nicely done. }
+
+ROBOT: 1
+NAME { Dummy Sentinel Delta }
+BRIEFING_HINT { Vulnerable to the placeholder technique SPANNER. }
+PROBLEM { Combine placeholders $M$ and $N$ into the placeholder $K$. }
+EXPLAIN_MATHEMATICIAN { Graduate placeholder describing the combination. }
+EXPLAIN_PHYSICIST { Undergraduate placeholder. }
+EXPLAIN_BIOLOGIST { High-school placeholder. }
+EXPLAIN_ENGINEER { Numerically, [[ $K$ | 9.000 ]] is the blend of the parts. }
+SEGMENTS {
+  $M$       | left
+  $+$       | NEUTRAL
+  $N$       | right
+  $=$       | NEUTRAL
+  $K$       | mix
+}
+EYE { mix }
+FIZZLE SPANNER { Even SPANNER fizzles on this placeholder. }

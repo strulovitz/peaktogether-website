@@ -1,0 +1,36 @@
+# ===========================================================
+# DUMMY CORRIDOR TWO — engine test fixture, NO real mathematics.
+# COLOR LEDGER (duplicated here for DeepSeek's eyes):
+#   PRIMARY one   = red    (stand-in concept "P")
+#   PRIMARY two   = blue   (stand-in concept "Q")
+#   BLEND   three = one + two   -> purple
+# ===========================================================
+CORRIDOR: 2
+TITLE { Placeholder Corridor Two }
+FLAVOR { A second test tube, still meaning nothing. }
+LEDGER {
+  PRIMARY one   = red
+  PRIMARY two   = blue
+  BLEND   three = one + two
+}
+BRIEFING_INTRO { Second placeholder briefing, used only to verify that a
+                 different corridor renders distinctly from the first. }
+ENTRY_TEXT { You have entered the second placeholder corridor. }
+EXIT_TEXT { You have cleared the second placeholder corridor. }
+
+ROBOT: 1
+NAME { Dummy Sentinel Gamma }
+BRIEFING_HINT { Vulnerable to the placeholder technique WIDGET. }
+PROBLEM { Show that the placeholder $P$ relates to the placeholder $Q$
+          under the stated dummy conditions. }
+EXPLAIN_MATHEMATICIAN { Graduate-level placeholder relating $P$ and $Q$. }
+EXPLAIN_PHYSICIST { Undergraduate placeholder. $P$ pushes, $Q$ pulls. }
+EXPLAIN_BIOLOGIST { High-school placeholder. Two stand-ins interact. }
+EXPLAIN_ENGINEER { Plug in: [[ $P$ | 2.000 ]] against [[ $Q$ | 5.000 ]]. }
+SEGMENTS {
+  $P$       | one
+  $\to$     | NEUTRAL
+  $Q$       | two
+}
+EYE { two }
+FIZZLE GADGET { GADGET does not apply: wrong placeholder family. }
