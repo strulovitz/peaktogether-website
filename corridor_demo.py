@@ -1,15 +1,14 @@
 """
 corridor_demo.py — standalone flythrough of ONE bent corridor.
 
-Controls: WASD/RF translate, arrows pitch/yaw, Q/E roll, Shift boost
-(handled inside ship.update via pygame keys). ESC quits.
+Controls (via ship.update + pygame keys): WASD/RF translate, arrows pitch/yaw,
+Q/E roll, Shift boost. ESC quits.
 
-Frame order (CRITICAL — matches engine contract):
+Frame order (CONTRACT — flush walls BEFORE billboards):
   1. clear + apply_view
-  2. opaque: corner glow, chevrons (enqueued as walls here for simplicity),
-     robots (opaque hull)
-  3. render.flush_walls(ship.pos)   <-- translucent walls sorted+drawn ONCE
-  4. billboards: title + defeat plaques
+  2. corridor.draw_world(...)        # walls queued + opaque robots
+  3. render.flush_walls(ship.pos)    # translucent walls sorted + drawn ONCE
+  4. corridor.draw_labels(...)       # title + defeat plaques (billboards)
 """
 
 import sys
@@ -20,7 +19,7 @@ from OpenGL.GL import (
 )
 
 import render
-import palette as palette_mod
+import palette
 from content_parser import parse_corridor
 from corridor_builder import build_corridor
 
@@ -30,20 +29,19 @@ def main(path="corridors/01_dummy.txt"):
     pygame.display.set_mode((1280, 800), DOUBLEBUF | OPENGL)
     pygame.display.set_caption("DESCENT QED — corridor demo")
 
-    render.init_gl(1280, 800) if hasattr(render, "init_gl") else None
-    render.set_fog()  # 40 -> 140 toward CLEAR_COLOR
+    render.init_gl((1280, 800))          # ONE tuple (Bug 6)
+    render.set_fog()                     # 40 -> 140 toward CLEAR_COLOR
 
-    cc = palette_mod.CLEAR_COLOR
+    cc = palette.CLEAR_COLOR
     glClearColor(cc[0], cc[1], cc[2], 1.0)
 
     data = parse_corridor(path)
     corridor = build_corridor(data, origin=(0, 0, 0), direction=(0, 0, -1))
 
     texcache = render.TexCache()
-    ship = render.Ship(home_pos=(0.0, 0.0, 8.0))   # start just outside the mouth
+    ship = render.Ship(home_pos=(0.0, 0.0, 8.0))   # just outside the mouth
 
     clock = pygame.time.Clock()
-    # quick demo: defeat the first robot after 4s to show the museum plaque
     t_accum = 0.0
     defeated_first = False
 
@@ -59,6 +57,7 @@ def main(path="corridors/01_dummy.txt"):
         ship.update(dt, pygame.key.get_pressed())
         corridor.update(dt, tuple(ship.pos.tolist()))
 
+        # demo: defeat first robot after 4s to show the museum plaque
         if not defeated_first and t_accum > 4.0:
             robs = corridor.get_robots()
             if robs:
@@ -72,14 +71,9 @@ def main(path="corridors/01_dummy.txt"):
         cam_right = render.ship_right(ship.q)
         cam_up    = render.ship_up(ship.q)
 
-        # corridor.draw enqueues walls + draws robots (opaque) + queues chevrons/glow
-        corridor.draw(cam_right, cam_up, texcache)
-
-        # CRITICAL: flush translucent walls ONCE, after opaque/robots,
-        # before billboards. (corridor.draw already drew title+plaques AFTER
-        # its robots; for strict ordering we flush here so walls sit behind
-        # the billboards correctly.)
-        render.flush_walls(tuple(ship.pos.tolist()))
+        corridor.draw_world(cam_right, cam_up, texcache)        # 2. queue walls + robots
+        render.flush_walls(tuple(ship.pos.tolist()))            # 3. flush BEFORE billboards
+        corridor.draw_labels(cam_right, cam_up, texcache)       # 4. billboards
 
         pygame.display.flip()
 
