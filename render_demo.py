@@ -112,13 +112,23 @@ def main():
             render.draw_billboard(tex, pos, cam_right, cam_up,
                                   scale=2.5, alpha=1.0)
 
-        # ---- PASS 2: TRANSLUCENT (wall fills LAST), far->near so nearer
-        # translucent fills blend over farther ones correctly ----
-        for quad in reversed(quads):
-            render.draw_wall(quad,
-                             fill_color=palette.WORLD_WALL_FILL,
-                             edge_color=palette.WORLD_EDGE,
-                             fill_alpha=wall_alpha)
+        # ---- PASS 2: ENQUEUE translucent walls (do NOT draw here) ----
+        # Enqueue every corridor wall; also enqueue a couple of EXTRA
+        # overlapping walls at different depths to prove the shared sort.
+        for quad in quads:
+            render.queue_wall(quad,
+                              palette.WORLD_WALL_FILL,
+                              palette.WORLD_EDGE,
+                              wall_alpha)
+        # two overlapping translucent slabs at different depths:
+        render.queue_wall([(-4,-4,-25),(4,-4,-25),(4,4,-25),(-4,4,-25)],
+                          palette.WORLD_WALL_FILL, palette.WORLD_EDGE, 0.5)
+        render.queue_wall([(-4,-4,-40),(4,-4,-40),(4,4,-40),(-4,4,-40)],
+                          palette.WORLD_WALL_FILL, palette.WORLD_EDGE, 0.5)
+
+        # ---- SINGLE FLUSH: once per frame, after opaque+robots, ----
+        # ---- before billboards. Camera position passed in. ----
+        render.flush_walls(ship.pos)
 
         # ---- HUD ----
         render.begin_2d(*WIN_SIZE)
