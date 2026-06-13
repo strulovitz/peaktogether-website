@@ -1,24 +1,11 @@
 # render_demo.py
 # =====================================================================
-#  Descent QED -- RENDER DEMO
-#  Stand-alone scene that exercises every render.py primitive so the
-#  output can be screenshotted. Built "like Fable": same legacy-GL window
-#  setup, quaternion Ship camera, [ ] wall-alpha control, 60 FPS loop.
-#
-#  DRAW ORDER (Fable's correct transparency ordering):
-#    1. OPAQUE pass: edges, breadcrumbs, box wireframe, billboards
-#    2. TRANSLUCENT pass: wall fills LAST, so opaque content shows through.
-#
-#  FOG: render.py owns distance-darkening as a PERMANENT engine feature
-#  (render.DARKNESS_START -> render.DARKNESS_END). The room below is large
-#  enough that the far end visibly darkens -- that is the engine's fog
-#  doing its job, not a demo trick.
-#
-#  PORTABILITY: verified for Windows / Linux. On macOS the window may come
-#  up BLACK -- see the macOS comment next to set_mode below for the fix.
+#  Descent QED -- RENDER DEMO  (corrected scene layout)
+#  render.py is unchanged; this fixes the DEMO scene so wall color is
+#  visible up close and the engine fog darkens the receding tunnel to
+#  near-black at the far end.
 # =====================================================================
 
-import math
 import numpy as np
 import pygame
 from pygame.locals import *
@@ -29,39 +16,40 @@ import render
 
 WIN_SIZE = (1280, 720)
 
-# A large demo room (~120 units deep) so the engine fog
-# (render.DARKNESS_START -> render.DARKNESS_END) visibly darkens the far
-# end. The fog itself is production render behavior; the room is just big
-# enough to show it.
-ROOM_LO = (-10.0, -2.0, -120.0)
-ROOM_HI = ( 10.0,  8.0,    2.0)
+# A long corridor running down -Z. Cross-section is small (you're INSIDE
+# it), so wall fills face the camera and show their color up close, while
+# the far end recedes into the fog band (render.DARKNESS_START..END) and
+# darkens to near-black.
+HALF_W = 6.0      # corridor half-width / half-height
+NEAR_Z = 5.0      # corridor starts just behind the camera
+FAR_Z  = -160.0   # ...and runs well past DARKNESS_END so the far end is black
+SEG    = 8.0      # spacing of ring segments down the corridor
 
 
-def room_walls():
-    """Yield floor, ceiling, side walls + far wall as quads, near->far so
-    the engine fog visibly bites the far ones."""
-    x0, y0, z0 = ROOM_LO
-    x1, y1, z1 = ROOM_HI
-    yield [(x0,y0,z0),(x1,y0,z0),(x1,y0,z1),(x0,y0,z1)]  # floor
-    yield [(x0,y1,z0),(x1,y1,z0),(x1,y1,z1),(x0,y1,z1)]  # ceiling
-    yield [(x0,y0,z0),(x0,y1,z0),(x0,y1,z1),(x0,y0,z1)]  # left
-    yield [(x1,y0,z0),(x1,y1,z0),(x1,y1,z1),(x1,y0,z1)]  # right
-    yield [(x0,y0,z0),(x1,y0,z0),(x1,y1,z0),(x0,y1,z0)]  # far wall (z0)
+def corridor_quads():
+    """Yield wall quads of a square tube down -Z, segment by segment, so
+    each ring is at a different depth and the fog gradient is smooth."""
+    z = NEAR_Z
+    while z > FAR_Z:
+        z0, z1 = z, z - SEG
+        h = HALF_W
+        # floor, ceiling, left, right for this segment
+        yield [(-h,-h,z0),( h,-h,z0),( h,-h,z1),(-h,-h,z1)]   # floor
+        yield [(-h, h,z0),( h, h,z0),( h, h,z1),(-h, h,z1)]   # ceiling
+        yield [(-h,-h,z0),(-h, h,z0),(-h, h,z1),(-h,-h,z1)]   # left
+        yield [( h,-h,z0),( h, h,z0),( h, h,z1),( h,-h,z1)]   # right
+        z -= SEG
 
 
 def main():
     pygame.init()
 
-    # ---- WINDOW / GL CONTEXT (Fable's exact approach) -------------------
-    # macOS NOTE: this plain set_mode gives a legacy GL context on Windows
-    # and Linux (which is what this fixed-function engine needs). On macOS
-    # Apple deprecated legacy GL and this may produce a BLACK WINDOW. To
-    # fix on macOS, add BEFORE this set_mode call:
+    # macOS NOTE: plain set_mode gives a legacy GL context on Windows/Linux.
+    # On macOS this may give a BLACK WINDOW; add BEFORE set_mode:
     #     pygame.display.gl_set_attribute(GL_CONTEXT_PROFILE_MASK,
     #                                     GL_CONTEXT_PROFILE_COMPATIBILITY)
     #     pygame.display.gl_set_attribute(GL_CONTEXT_MAJOR_VERSION, 2)
     #     pygame.display.gl_set_attribute(GL_CONTEXT_MINOR_VERSION, 1)
-    # (Harmless on Windows/Linux, zero performance cost; only macOS needs it.)
     pygame.display.set_mode(WIN_SIZE, DOUBLEBUF | OPENGL)
     pygame.display.set_caption("Descent QED -- render demo")
 
@@ -69,20 +57,22 @@ def main():
     pygame.font.init()
 
     cache = render.TexCache()
-    ship  = render.Ship(home_pos=(0.0, 3.0, 0.0))
+    # Start the camera INSIDE the near end of the corridor, looking down -Z.
+    ship  = render.Ship(home_pos=(0.0, 0.0, 0.0))
     clock = pygame.time.Clock()
 
-    wall_alpha = 0.45
+    wall_alpha = 0.50
     ALPHA_MIN, ALPHA_MAX, ALPHA_STEP = 0.0, 0.9, 0.05
 
-    # billboards at increasing depth: the nearest is bright, the far one is
-    # darkened by the engine's fog -- a direct visual proof fog is live.
+    # billboards spaced down the corridor: near = bright, far = fogged dark.
     eqs = [
-        (r"$\zeta(2)=\frac{\pi^2}{6}$",      np.array([ 0.0, 3.0, -15.0])),
-        (r"$e^{i\pi}+1=0$",                  np.array([-4.0, 3.0, -45.0])),
+        (r"$\zeta(2)=\frac{\pi^2}{6}$",  np.array([0.0, 0.0, -12.0])),
+        (r"$e^{i\pi}+1=0$",              np.array([0.0, 0.0, -55.0])),
         (r"$\int_0^\infty e^{-x^2}dx=\frac{\sqrt{\pi}}{2}$",
-                                             np.array([ 4.0, 3.0, -90.0])),
+                                         np.array([0.0, 0.0, -110.0])),
     ]
+
+    quads = list(corridor_quads())
 
     while True:
         dt = clock.tick(60) / 1000.0
@@ -102,25 +92,26 @@ def main():
         cam_right = render.ship_right(ship.q)
         cam_up    = render.ship_up(ship.q)
 
-        # ---------- PASS 1: OPAQUE (markers, box, billboards) -------------
-        for i, lx in enumerate(np.linspace(-8, 8, 5)):
-            render.draw_breadcrumb((lx, 0.2, -10.0 - 6 * i),
+        # ---- PASS 1: OPAQUE (breadcrumbs, box, billboards) ----
+        for i in range(8):
+            render.draw_breadcrumb((0.0, -HALF_W + 0.3, -6.0 - i * 10.0),
                                    palette.WORLD_EDGE)
-        render.draw_box_edges((-2, 0, -25), (2, 4, -21), palette.WORLD_EDGE)
+        render.draw_box_edges((-2, -2, -35), (2, 2, -30), palette.WORLD_EDGE)
         for latex, pos in eqs:
             tex = cache.get_mathtext(latex, color=(0.95, 0.96, 0.98),
                                      fontsize=16)
             render.draw_billboard(tex, pos, cam_right, cam_up,
-                                  scale=3.0, alpha=1.0)
+                                  scale=2.5, alpha=1.0)
 
-        # ---------- PASS 2: TRANSLUCENT (wall fills LAST) -----------------
-        for quad in room_walls():
+        # ---- PASS 2: TRANSLUCENT (wall fills LAST), far->near so nearer
+        # translucent fills blend over farther ones correctly ----
+        for quad in reversed(quads):
             render.draw_wall(quad,
                              fill_color=palette.WORLD_WALL_FILL,
                              edge_color=palette.WORLD_EDGE,
                              fill_alpha=wall_alpha)
 
-        # ---------- HUD (2D overlay, fog disabled inside begin_2d) --------
+        # ---- HUD ----
         render.begin_2d(*WIN_SIZE)
         render.draw_text_mathtext_2d(
             cache,
