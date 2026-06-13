@@ -106,11 +106,6 @@ def main():
             render.draw_breadcrumb((0.0, -HALF_W + 0.3, -6.0 - i * 10.0),
                                    col, size=0.35)
         render.draw_box_edges((-2, -2, -35), (2, 2, -30), palette.WORLD_EDGE)
-        for j, (latex, pos) in enumerate(eqs):
-            tint = (1.0, 0.55, 0.30) if j == 0 else (0.95, 0.96, 0.98)
-            tex = cache.get_mathtext(latex, color=tint, fontsize=16)
-            render.draw_billboard(tex, pos, cam_right, cam_up,
-                                  scale=2.5, alpha=1.0)
 
         # ---- PASS 2: ENQUEUE translucent walls (do NOT draw here) ----
         # Enqueue every corridor wall; also enqueue a couple of EXTRA
@@ -129,6 +124,13 @@ def main():
         # ---- SINGLE FLUSH: once per frame, after opaque+robots, ----
         # ---- before billboards. Camera position passed in. ----
         render.flush_walls(ship.pos)
+
+        # ---- BILLBOARDS (after flush, per canonical order) ----
+        for j, (latex, pos) in enumerate(eqs):
+            tint = (1.0, 0.55, 0.30) if j == 0 else (0.95, 0.96, 0.98)
+            tex = cache.get_mathtext(latex, color=tint, fontsize=16)
+            render.draw_billboard(tex, pos, cam_right, cam_up,
+                                  scale=2.5, alpha=1.0)
 
         # ---- HUD ----
         render.begin_2d(*WIN_SIZE)
