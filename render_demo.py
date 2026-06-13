@@ -93,13 +93,22 @@ def main():
         cam_up    = render.ship_up(ship.q)
 
         # ---- PASS 1: OPAQUE (breadcrumbs, box, billboards) ----
+        # Greyscale structure proves the world rule; these few SATURATED
+        # breadcrumbs prove chroma CAN shine through grey walls (brief req).
+        CHROMA = [
+            (1.0, 0.25, 0.25),   # red
+            (0.25, 1.0, 0.40),   # green
+            (0.35, 0.55, 1.0),   # blue
+            (1.0, 0.85, 0.20),   # amber
+        ]
         for i in range(8):
+            col = CHROMA[i % len(CHROMA)]
             render.draw_breadcrumb((0.0, -HALF_W + 0.3, -6.0 - i * 10.0),
-                                   palette.WORLD_EDGE)
+                                   col, size=0.35)
         render.draw_box_edges((-2, -2, -35), (2, 2, -30), palette.WORLD_EDGE)
-        for latex, pos in eqs:
-            tex = cache.get_mathtext(latex, color=(0.95, 0.96, 0.98),
-                                     fontsize=16)
+        for j, (latex, pos) in enumerate(eqs):
+            tint = (1.0, 0.55, 0.30) if j == 0 else (0.95, 0.96, 0.98)
+            tex = cache.get_mathtext(latex, color=tint, fontsize=16)
             render.draw_billboard(tex, pos, cam_right, cam_up,
                                   scale=2.5, alpha=1.0)
 
