@@ -21,6 +21,13 @@ and explosion fire are DECORATION (chosen here), never meaning. The camera
 is RECEIVED as parameters (camera_right / camera_up); a robot never owns or
 queries the camera.
 
+DRAW PHASES: the engine-wide canonical frame order is
+    opaque -> render.flush_walls(ship.pos) -> emissive -> billboards/labels
+so draw() is split into draw_opaque() (the opaque hull, BEFORE the flush)
+and draw_emissive() (additive scanner/hologram/explosion, AFTER the flush).
+draw() is a back-to-back wrapper that looks identical when no flush is
+interleaved.
+
 Confirmed dependencies (frozen):
     palette.Palette.eye(key) -> (r,g,b) floats 0..1, emissive, no alpha.
     render.draw_billboard(tex, center, cam_right, cam_up, scale=1, alpha=1)
@@ -86,6 +93,10 @@ HOLO_BOB_SPD        = 1.0
 HOLO_ALPHA          = 0.55  # text-placeholder translucency (fallback only)
 HOLO_PORTRAIT_ALPHA = 0.85  # additive glow strength for the real portrait
 HOLO_SCALE          = 1.4   # billboard scale
+MIN_HOLO_SCALE      = 0.8   # floor: shrinking a robot must not shrink its
+                            # hologram below readable size.
+# TODO(DeepSeek): tune MIN_HOLO_SCALE after flight | ACCEPTANCE:
+#   a size=0.5 robot still shows a readable hologram.
 HOLO_TINT           = (0.62, 0.84, 1.0)  # cool tint for the text fallback
 
 # ---- DEFEAT EXPLOSION (a real machine detonating) --------------------
@@ -271,9 +282,13 @@ class Robot:
     PUBLIC INTERFACE (final):
         Robot(robot_data, palette, station_pose, paint=None, size=1.0)
         update(dt, ship_position)
-        draw(camera_right, camera_up, texcache)
+        draw(camera_right, camera_up, texcache)            # wrapper
+        draw_opaque(camera_right, camera_up, texcache)     # opaque phase
+        draw_emissive(camera_right, camera_up, texcache)   # emissive phase
         play_defeat()
         is_defeated() -> bool
+        position   (property) -> bobbed world-center THIS frame
+        base_pos              -> un-bobbed station anchor (public)
     """
 
     _hull_tris, _face_quad = _build_hull()
@@ -407,10 +422,28 @@ class Robot:
         return self._defeated
 
     # ------------------------------------------------------------------
+    # DRAW -- split into opaque / emissive phases so an app can honor the
+    # engine-wide frame order:
+    #   opaque -> render.flush_walls(ship.pos) -> emissive -> labels
+    # The hull is opaque (normal depth, drawn BEFORE the wall flush). The
+    # scanner + hologram + explosion are additive / depth-write-off and
+    # must draw AFTER the flush, or flushed translucent walls overpaint
+    # the hologram in open air. draw() below is a convenience wrapper that
+    # is pixel-identical to the old behavior when no flush is interleaved.
+    # ------------------------------------------------------------------
     def draw(self, camera_right, camera_up, texcache):
+        """Convenience wrapper: opaque phase then emissive phase, back to
+        back. Identical to the pre-split visuals in a scene that does not
+        interleave a translucent-wall flush between the two phases."""
+        self.draw_opaque(camera_right, camera_up, texcache)
+        self.draw_emissive(camera_right, camera_up, texcache)
+
+    def draw_opaque(self, camera_right, camera_up, texcache):
+        """OPAQUE phase: the faceted metal hull + pods + the near-black
+        visor housing. Normal depth test, depth-write on. Draws BEFORE the
+        wall flush. If defeated, draws nothing (the explosion is entirely
+        additive and lives in the emissive phase -- matching today)."""
         if self._defeated:
-            if self._explo_t is not None:
-                self._draw_explosion(camera_right, camera_up)
             return
 
         cx, cy, cz = self._world_center()
@@ -426,10 +459,33 @@ class Robot:
 
         self._draw_hull()
         self._draw_visor_slot()
+
+        glPopMatrix()
+
+    def draw_emissive(self, camera_right, camera_up, texcache):
+        """EMISSIVE phase: the Larson scanner glow (in the robot's local
+        frame) + the always-on hologram billboard (world space), or the
+        additive explosion if mid-defeat. Additive / depth-write-off,
+        exactly as before. Draws AFTER the wall flush."""
+        if self._defeated:
+            if self._explo_t is not None:
+                self._draw_explosion(camera_right, camera_up)
+            return
+
+        cx, cy, cz = self._world_center()
+
+        # Scanner draws inside the robot's local model transform.
+        glPushMatrix()
+        glTranslatef(cx, cy, cz)
+        glRotatef(math.degrees(self._yaw), 0.0, 1.0, 0.0)
+        glScalef(self.size, self.size, self.size)
+
+        glDisable(GL_LIGHTING)
         self._draw_scanner()
 
         glPopMatrix()
 
+        # Hologram draws in world space, camera-facing.
         self._draw_hologram(cx, cy, cz, camera_right, camera_up, texcache)
 
     # ------------------------------------------------------------------
@@ -523,6 +579,10 @@ class Robot:
         holo_bob = HOLO_BOB_AMP * math.sin(self._t * HOLO_BOB_SPD)
         center = (cx, cy + HOLO_HEIGHT_ABOVE * self.size + holo_bob, cz)
 
+        # Hologram scale has a FLOOR: shrinking the robot must never shrink
+        # its hologram below readable size (corridor_builder bug).
+        holo_scale = max(MIN_HOLO_SCALE, HOLO_SCALE * self.size)
+
         glEnable(GL_BLEND)
         glDepthMask(GL_FALSE)
         glDisable(GL_DEPTH_TEST)
@@ -531,13 +591,13 @@ class Robot:
             glBlendFunc(GL_SRC_ALPHA, GL_ONE)   # black vanishes, figure glows
             render.draw_billboard(self._holo_tex, center,
                                   camera_right, camera_up,
-                                  scale=HOLO_SCALE * self.size,
+                                  scale=holo_scale,
                                   alpha=HOLO_PORTRAIT_ALPHA)
         else:
             glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
             render.draw_billboard(self._holo_tex, center,
                                   camera_right, camera_up,
-                                  scale=HOLO_SCALE * self.size,
+                                  scale=holo_scale,
                                   alpha=HOLO_ALPHA)
 
         glEnable(GL_DEPTH_TEST)
