@@ -358,6 +358,14 @@ class Robot:
     def _world_center(self):
         return self.base_pos + np.array([0.0, self._bob_y, 0.0])
 
+    @property
+    def position(self):
+        """Public, read-only: the robot's CURRENT bobbed world-center this
+        frame -- the same point draw()/update() use internally. Stable
+        contract for lock-on / targeting / demos. (base_pos remains the
+        un-bobbed station anchor.)"""
+        return self._world_center()
+
     def play_defeat(self):
         """Trigger the multi-burst explosion; afterward the body is gone."""
         if self._defeated:
