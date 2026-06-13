@@ -135,6 +135,82 @@ def ship_up(q):
     return quat_rotate(q, np.array([0.0, 1.0, 0.0]))
 
 
+def quat_look_along(direction, up=(0.0, 1.0, 0.0)):
+    """Return a unit quaternion [w,x,y,z] (same convention/handedness as
+    Ship.q and quat_rotate/quat_to_mat4 in this file) orienting the ship
+    so its FORWARD (-Z in render's convention) points along `direction`,
+    with roll minimized using `up`.
+
+    Guarantee: ship_forward(quat_look_along(d)) == normalize(d).
+
+    `direction` parallel (or anti-parallel) to `up` is handled gracefully
+    by picking a fallback up axis, so no NaN is produced."""
+    d = np.asarray(direction, dtype=float)
+    n = np.linalg.norm(d)
+    if n < 1e-12:
+        return np.array([1.0, 0.0, 0.0, 0.0])  # no direction -> identity
+    f = d / n                                   # desired world forward
+
+    u_hint = np.asarray(up, dtype=float)
+    nu = np.linalg.norm(u_hint)
+    if nu < 1e-12:
+        u_hint = np.array([0.0, 1.0, 0.0])
+    else:
+        u_hint = u_hint / nu
+
+    # If forward is (anti)parallel to up_hint, the cross product degenerates.
+    # Pick a different, non-parallel up axis to avoid NaN.
+    if abs(float(np.dot(f, u_hint))) > 0.9999:
+        u_hint = np.array([0.0, 0.0, 1.0])
+        if abs(float(np.dot(f, u_hint))) > 0.9999:
+            u_hint = np.array([1.0, 0.0, 0.0])
+
+    # Build an orthonormal body->world basis in render's convention:
+    #   body forward (-Z) -> f, body right (+X) -> r, body up (+Y) -> u
+    r = np.cross(f, u_hint)
+    r /= np.linalg.norm(r)
+    u = np.cross(r, f)        # already unit (r,f orthonormal)
+
+    # Rotation matrix R whose action on body axes gives the world axes:
+    #   R @ (1,0,0) = r ;  R @ (0,1,0) = u ;  R @ (0,0,-1) = f
+    # => columns: col0 = r, col1 = u, col2 = -f. This matches the
+    # 3x3 block of quat_to_mat4(q) (verified: that block, applied to
+    # (0,0,-1), yields ship_forward(q)).
+    m00, m01, m02 = r[0], u[0], -f[0]
+    m10, m11, m12 = r[1], u[1], -f[1]
+    m20, m21, m22 = r[2], u[2], -f[2]
+
+    # Standard matrix->quaternion (Shepperd's method, numerically stable),
+    # producing [w,x,y,z] in this file's handedness.
+    tr = m00 + m11 + m22
+    if tr > 0.0:
+        s = math.sqrt(tr + 1.0) * 2.0
+        w = 0.25 * s
+        x = (m21 - m12) / s
+        y = (m02 - m20) / s
+        z = (m10 - m01) / s
+    elif m00 > m11 and m00 > m22:
+        s = math.sqrt(1.0 + m00 - m11 - m22) * 2.0
+        w = (m21 - m12) / s
+        x = 0.25 * s
+        y = (m01 + m10) / s
+        z = (m02 + m20) / s
+    elif m11 > m22:
+        s = math.sqrt(1.0 + m11 - m00 - m22) * 2.0
+        w = (m02 - m20) / s
+        x = (m01 + m10) / s
+        y = 0.25 * s
+        z = (m12 + m21) / s
+    else:
+        s = math.sqrt(1.0 + m22 - m00 - m11) * 2.0
+        w = (m10 - m01) / s
+        x = (m02 + m20) / s
+        y = (m12 + m21) / s
+        z = 0.25 * s
+
+    return quat_normalize(np.array([w, x, y, z], dtype=float))
+
+
 class Ship:
     """Descent-style 6-DOF camera: position + orientation quaternion +
     inertia. DEMO-ONLY -- a real game-mode Ship lives in its own module.
