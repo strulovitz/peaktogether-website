@@ -4,9 +4,9 @@
 
 | Role | Who | What |
 |------|-----|------|
-| **Architect** | Claude Fable (OpenRouter) | Provides the perfect "Bible" skeleton code |
+| **Architect** | ~~Claude Fable~~ Claude Opus 4.8 | Claude Fable banned for non-USA (June 2026). Opus 4.8 is the new architect. |
 | **Builder** | DeepSeek V4 Pro (OpenCode, this is YOU) | Copies Bible, fills in details, fixes bugs |
-| **Boss** | Nir (strulovitz) | Decides everything, talks to Claude Fable, manages the website |
+| **Boss** | Nir (strulovitz) | Decides everything, talks to Claude Opus 4.8, manages the website |
 
 ## The BIBLE System
 
@@ -180,6 +180,23 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 | Git (PeakTogether) | Clean, pushed |
 | Known bugs | 0 |
 | Next | Basel Problem — new Wikipedia section |
+
+## 🔴 SESSION LOG — June 13, 2026
+
+### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
+- **Claude Fable** is now banned for non-USA nationals (USA government regulation, June 2026)
+- **Claude Opus 4.8** is the new software architect 🎉
+- New **Parent/Child workflow**: Opus 4.8 writes interface briefs → DeepSeek V4 Pro (OpenCode) implements → Nir reviews
+- New document: `/PARENT_ESTATE/INTERFACES_v0.1.md` — **Descent QED Engine** interface specification
+- This defines 10 modules (content_parser, palette, hub_builder, corridor_builder, robots, reading_system, render, weapons, game_state, app) with strict contracts
+- Engine is "mathematics-blind" — all math/content enters via corridor files only
+- Key rules: mathtext-only, no humanoid robots, greyscale world with chroma for meaning only, legacy GL, one engine concept per build
+
+### Files Created Today
+| File | Description |
+|------|-------------|
+| `PARENT_ESTATE/INTERFACES_v0.1.md` | Descent QED Engine full interface spec (verbatim from Opus 4.8) |
+| `WORKFLOW.md` | Updated Who's Who + session log |
 
 ## Nir's Preferences
 - Nir LOVES emojis -- use them abundantly in chat
