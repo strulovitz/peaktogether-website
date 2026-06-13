@@ -135,7 +135,7 @@ def _strip_dollars(s: str) -> str:
 
 
 def _tokenize(text: str, fname: str) -> list:
-    """Produce an ordered token list.
+    r"""Produce an ordered token list.
 
     Tokens:
       ("kv",    keyword, value, lineno)        # KEYWORD: value
