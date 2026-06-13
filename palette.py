@@ -107,6 +107,22 @@ def _luminance(rgb: tuple[float, float, float]) -> float:
     return 0.2126 * r + 0.7152 * g + 0.0722 * b
 
 
+def _brighten_keep_hue(rgb: tuple[float, float, float],
+                       boost: float) -> tuple[float, float, float]:
+    """Brighten an RGB triple for an emissive glow WITHOUT shifting its hue.
+
+    Naive per-channel (c*boost then clamp) clips the strongest channel and
+    drags the hue toward that channel (e.g. orange -> red). Instead we scale
+    all channels by the LARGEST factor that keeps the brightest channel <= 1,
+    capped by `boost`. Hue ratios between channels are preserved exactly.
+    """
+    peak = max(rgb)
+    if peak <= 0.0:
+        return rgb
+    safe = min(boost, 1.0 / peak)   # never let any channel exceed 1.0
+    return (rgb[0] * safe, rgb[1] * safe, rgb[2] * safe)
+
+
 # ---------------------------------------------------------------------------
 # Palette
 # ---------------------------------------------------------------------------
@@ -189,13 +205,11 @@ class Palette:
 
     def eye(self, key: str) -> tuple[float, float, float]:
         """Bright EMISSIVE glow RGB (no alpha) for a robot eye-band.
-        Same hue logic as tint(), boosted for glow. NEUTRAL -> bright grey."""
+        Same HUE as tint(), brightened without hue shift. NEUTRAL -> bright grey."""
         if key == "NEUTRAL":
             return _NEUTRAL_EYE_GREY
-        r, g, b = self._key_rgb(key)
-        return (_clamp01(r * _EYE_BOOST),
-                _clamp01(g * _EYE_BOOST),
-                _clamp01(b * _EYE_BOOST))
+        rgb = self._key_rgb(key)
+        return _brighten_keep_hue(rgb, _EYE_BOOST)
 
     def blend_rgb(self, keyA: str, keyB: str) -> tuple[float, float, float]:
         """Mix two PRIMARY keys per the law (for combined expressions / door
