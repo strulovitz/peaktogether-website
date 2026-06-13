@@ -36,7 +36,7 @@ CHEVRON_ROWS     = 3
 CAVERN_RADIUS    = 11.0
 CAVERN_SEGMENTS  = 3         # flare over a few segments (smooth, no gap)
 
-ROBOT_SIZE       = 0.6       # smaller so it fits the tube + hologram clears ceiling
+ROBOT_SIZE       = 1.0       # was 0.6 — shrinking it shrank the hologram too
 TITLE_SCALE      = 0.9       # << tube width
 PLAQUE_SCALE     = 0.7       # smaller than the robot
 LABEL_LIFT       = 2.2       # how far above station to float a plaque
@@ -183,24 +183,28 @@ class CorridorGeometry:
         self._station_poses = []
         if n == 0:
             return
-        # use the straight body segments (skip first, and the cavern flare)
         first = 1
         last = len(self._nodes) - 1 - CAVERN_SEGMENTS
         body = list(range(first, max(first + 1, last)))
         for j in range(n):
             t = (j + 1) / (n + 1)
             seg_i = body[int(t * (len(body) - 1) + 0.5)] if body else 1
+            node = self._nodes[seg_i]
             center = self._seg_mid(seg_i)
-            fwd = -self._nodes[seg_i]["forward"]
+            # seat the robot toward the FLOOR so its hologram rises into open
+            # space toward the ceiling instead of clipping it
+            center = center - node["up"] * (node["radius"] * 0.45)
+            fwd = -node["forward"]
             yaw = math.atan2(fwd[0], -fwd[2])
             self._station_poses.append((tuple(center.tolist()), float(yaw)))
 
     def _build_robots(self):
         self._robots = []
         for rdata, pose in zip(self._robots_data, self._station_poses):
-            paint = self._palette.eye(rdata.eye_color_key)
+            # paint=None -> grey-metal hull. Eye color is applied INSIDE robots.py
+            # from rdata.eye_color_key (the scanner glow). Do NOT paint the hull.
             self._robots.append(
-                Robot(rdata, self._palette, station_pose=pose, paint=paint, size=ROBOT_SIZE)
+                Robot(rdata, self._palette, station_pose=pose, paint=None, size=ROBOT_SIZE)
             )
 
     def _build_cavern_anchors(self):
