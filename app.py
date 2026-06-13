@@ -1,0 +1,220 @@
+"""
+app.py — DESCENT QED engine: minimal integration entry point.
+
+Launch:  python app.py   (no args, from repo root)
+
+PURPOSE (integration proof, NOT gameplay):
+    Load a LEVEL from a manifest, build the central atrium hub + its
+    radiating corridors, spawn the ship facing the first doorway, and fly.
+
+PRIME LAW — MATHEMATICS-BLIND:
+    This module arranges nothing mathematical and assigns no color. It never
+    constructs a Palette or a ColorLedger and never passes one anywhere. All
+    color/meaning lives inside hub_builder/palette. app passes through ONLY
+    the camera basis (cr, cu) and a TexCache to the three hub draw calls.
+
+CANONICAL FRAME ORDER (obeyed verbatim; the cardinal trap is the flush):
+     1. clear color + depth
+     2. ship.update(dt, keys)        # movement (controls baked into render.Ship)
+     3. ship.apply_view()            # load camera matrix
+     4. render.set_fog(...)          # production fog values (from hub_demo.py)
+     5. cr = render.ship_right(ship.q);  cu = render.ship_up(ship.q)
+     6. hub.update(dt, ship.pos)
+     7. hub.draw_world(cr, cu, tc)   # QUEUE walls only — NO flush inside
+     8. render.flush_walls(ship.pos) # <-- EXACTLY ONCE, here, or walls never draw
+     9. hub.draw_robots(cr, cu, tc)
+    10. hub.draw_labels(cr, cu, tc)
+    11. pygame.display.flip()
+
+All window/GL/Ship/TexCache/fog scaffolding is copied verbatim from the
+working hub_demo.py, with two deliberate, file-justified changes:
+  * we load a real LEVEL via level_parser.load_level (the brief's path),
+    instead of hub_demo's discover+duplicate shim;
+  * we AIM the ship at door 0 via render.quat_look_along — hub_demo's stale
+    comment "(No quat_look_along exists.)" predates render.py, which DOES
+    define quat_look_along (verified in the pasted render API). The pasted
+    file is law, so we use it. Result: ship spawns facing a doorway.
+"""
+
+import sys
+
+import pygame
+from OpenGL.GL import (
+    glClear, glClearColor, GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT,
+)
+
+import render
+import palette
+from level_parser import load_level
+from content_parser import ParseError
+from hub_builder import build_hub
+
+
+# ---------------------------------------------------------------------------
+# Configuration (single source — no magic numbers buried in the loop)
+# ---------------------------------------------------------------------------
+
+WIN_SIZE = (1280, 800)          # verbatim from hub_demo.py
+LEVEL_MANIFEST = "levels/intro.txt"   # confirmed: loads 3 distinct corridors
+
+# Fog: production values, copied verbatim from hub_demo.py. These equal
+# render.DARKNESS_START / DARKNESS_END, i.e. render's own defaults — not
+# invented numbers.
+FOG_START = 40
+FOG_END = 140
+
+# Optional tiny debug overlay (fps + ship pos). OFF: this is a bare
+# integration proof with zero gameplay. Flip to True only for debugging;
+# it uses render's existing 2D path (begin_2d / draw_text_mathtext_2d /
+# end_2d) and adds no new infrastructure.
+SHOW_HUD = False
+
+
+# ---------------------------------------------------------------------------
+# Level loading (clean failure, never a raw traceback for content problems)
+# ---------------------------------------------------------------------------
+
+def _load_level_or_die(manifest_path):
+    """Load the level manifest. On any structural/content problem, print a
+    single readable line and exit non-zero — a missing/broken manifest is a
+    CONTENT issue, not a crash, and must not look like a GL failure."""
+    try:
+        return load_level(manifest_path)
+    except ParseError as e:
+        print(f"[app] cannot load level {manifest_path!r}: {e}", file=sys.stderr)
+        sys.exit(2)
+    except OSError as e:
+        print(f"[app] cannot read level {manifest_path!r}: {e}", file=sys.stderr)
+        sys.exit(2)
+
+
+# ---------------------------------------------------------------------------
+# Spawn (PATH 1: build-time aim via quat_look_along)
+# ---------------------------------------------------------------------------
+
+def _make_ship(hub):
+    """Seat the ship at the atrium spawn position, facing the FIRST doorway.
+
+    Position comes from hub.spawn_pose() (NOT hardcoded (0,0,0), so it
+    survives any future atrium_center change). Forward direction is door 0's
+    OUTWARD normal from hub.door_poses(). Orientation is set via the verified
+    render.quat_look_along, which guarantees ship_forward(q) == normalize(d).
+
+    Zero-corridor guard: if the level has no doors, door_poses() is empty;
+    we leave the ship at render.Ship's default orientation (looks -Z).
+    """
+    spawn_pos, _yaw_pitch = hub.spawn_pose()
+    ship = render.Ship(spawn_pos)
+
+    poses = hub.door_poses()
+    if poses:
+        _door_center, fwd = poses[0]
+        ship.q = render.quat_look_along(fwd)
+    return ship
+
+
+# ---------------------------------------------------------------------------
+# Optional debug overlay (gameplay-free; behind SHOW_HUD)
+# ---------------------------------------------------------------------------
+
+def _draw_debug_hud(texcache, fps, ship):
+    """Tiny non-gameplay overlay using render's existing 2D path."""
+    w, h = WIN_SIZE
+    px, py, pz = float(ship.pos[0]), float(ship.pos[1]), float(ship.pos[2])
+    line = r"\mathrm{fps}\ %d \quad \mathrm{pos}\ (%.0f,\ %.0f,\ %.0f)" % (
+        int(fps), px, py, pz)
+    render.begin_2d(w, h)
+    render.draw_text_mathtext_2d(texcache, line, 12, 12,
+                                 color=palette.WORLD_EDGE, fontsize=18)
+    render.end_2d()
+
+
+# ---------------------------------------------------------------------------
+# Main
+# ---------------------------------------------------------------------------
+
+def main():
+    # --- window + GL context (verbatim from hub_demo.py) ---
+    pygame.init()
+    # NOTE (macOS): if the window is solid black, it is the legacy GL profile
+    # issue noted in render.py beside set_mode in render_demo.py. The flags
+    # below are exactly what the working hub_demo.py uses.
+    pygame.display.set_mode(WIN_SIZE, pygame.OPENGL | pygame.DOUBLEBUF)
+    pygame.display.set_caption("DESCENT QED")
+
+    render.init_gl(WIN_SIZE)
+    texcache = render.TexCache()
+
+    # --- build the world from the level manifest ---
+    level = _load_level_or_die(LEVEL_MANIFEST)
+    # build_hub iterates its argument (Level is iterable -> CorridorData) and
+    # reads .title off each item; passing the Level directly is supported.
+    hub = build_hub(level, atrium_center=(0, 0, 0))
+
+    # --- spawn facing door 0 (PATH 1) ---
+    ship = _make_ship(hub)
+
+    # Initial fog set (matches hub_demo.py, which sets it once at setup and
+    # again every frame; we mirror that).
+    render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
+
+    clock = pygame.time.Clock()
+    running = True
+    while running:
+        dt = clock.tick(60) / 1000.0
+
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                running = False
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
+                running = False
+
+        keys = pygame.key.get_pressed()
+
+        # ---- CANONICAL FRAME ORDER ----
+        # 1. clear
+        glClearColor(*palette.CLEAR_COLOR, 1.0)
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+
+        # 2. movement (controls are baked into render.Ship.update)
+        ship.update(dt, keys)
+
+        # 3. camera matrix
+        ship.apply_view()
+
+        # 4. fog (production values)
+        render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
+
+        # 5. camera basis for billboards/labels
+        cr = render.ship_right(ship.q)
+        cu = render.ship_up(ship.q)
+
+        # 6. advance world animation / corridor state
+        hub.update(dt, ship.pos)
+
+        # 7. QUEUE all walls (atrium shell + door frames + corridor walls)
+        hub.draw_world(cr, cu, texcache)
+
+        # 8. THE FLUSH — exactly once, after draw_world, before robots/labels.
+        #    Omit/duplicate this and walls silently never draw (the cardinal trap).
+        render.flush_walls(ship.pos)
+
+        # 9. robots (immediate; after the wall flush)
+        hub.draw_robots(cr, cu, texcache)
+
+        # 10. labels / billboards (mathtext; last)
+        hub.draw_labels(cr, cu, texcache)
+
+        # optional debug overlay (off by default)
+        if SHOW_HUD:
+            _draw_debug_hud(texcache, clock.get_fps(), ship)
+
+        # 11. present
+        pygame.display.flip()
+
+    pygame.quit()
+    sys.exit(0)
+
+
+if __name__ == "__main__":
+    main()
