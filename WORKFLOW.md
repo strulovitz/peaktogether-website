@@ -197,6 +197,8 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 |------|-------------|
 | `PARENT_ESTATE/INTERFACES_v0.1.md` | Descent QED Engine full interface spec — Parts 1 & 2 complete (verbatim from Opus 4.8) |
 | `PARENT_ESTATE/INTERFACES_v0.1.md` (Part 2) | Corridor file format v0.2, Fibonacci-sphere hub geometry, rendering specs, dummy fixture |
+| `PARENT_ESTATE/briefs/CHILD_BRIEF_01_content_parser.md` | Child brief #1 — content_parser module (verbatim from Opus 4.8) |
+| `corridors/01_dummy.txt` | Dummy test fixture for content_parser |
 | `WORKFLOW.md` | Updated Who's Who + session log |
 
 ## Nir's Preferences
