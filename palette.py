@@ -48,12 +48,19 @@ BACKDROP_BASE_ALPHA: float = 0.55
 # Luminance threshold (Rec.709) above which text on a tint should be BLACK.
 _TEXT_LUMA_THRESHOLD: float = 0.55
 
-# Strength of the hue-agnostic "gamut deepening" applied during mixing so that
-# kindergarten secondaries read vividly instead of as RGB-average mud.
-_MIX_DEEPEN_K: float = 0.5
-
 # How much brighter the emissive eye-glow is than the flat backdrop tint.
 _EYE_BOOST: float = 1.25
+
+# --- SECONDARY ANCHORS -----------------------------------------------------
+# The law says a secondary is DERIVED from its two parent primaries. We keep
+# that structural truth (the PAIR selects the color) but use hand-picked,
+# crayon-vivid RGB triples instead of a muddy computed average. Keyed by the
+# FROZENSET of the two parent PRIMARY NAMES so order never matters.
+_SECONDARY_RGB: dict[frozenset, tuple[float, float, float]] = {
+    frozenset({"red", "yellow"}): (0.95, 0.45, 0.05),  # ORANGE  - vivid
+    frozenset({"yellow", "blue"}): (0.15, 0.70, 0.25),  # GREEN   - crayon green
+    frozenset({"red", "blue"}):   (0.55, 0.15, 0.70),  # PURPLE  - rich purple
+}
 
 # --- PRIMARY ANCHORS (concrete, documented RGB; tune via DeepSeek TODO) -----
 # Clean & saturated; chosen so component-wise mixing -> correct secondaries.
@@ -82,24 +89,6 @@ _NEUTRAL_EYE_GREY: tuple[float, float, float] = (0.80, 0.82, 0.86)
 # ---------------------------------------------------------------------------
 def _clamp01(x: float) -> float:
     return 0.0 if x < 0.0 else (1.0 if x > 1.0 else x)
-
-
-def _mix_rgb(a: tuple[float, float, float],
-             b: tuple[float, float, float]) -> tuple[float, float, float]:
-    """Mix two RGB colors per the documented law:
-
-        c_i = mean(a_i, b_i) * (1 - k * |a_i - b_i|)
-
-    Channels where the parents AGREE survive; channels where they disagree
-    strongly are pulled toward 0 (mimics subtractive paint mixing). Symmetric
-    in (a, b) and fully deterministic. Hue-AGNOSTIC: no color is special-cased.
-    """
-    out = []
-    for ai, bi in zip(a, b):
-        mean = 0.5 * (ai + bi)
-        deepened = mean * (1.0 - _MIX_DEEPEN_K * abs(ai - bi))
-        out.append(_clamp01(deepened))
-    return (out[0], out[1], out[2])
 
 
 def _luminance(rgb: tuple[float, float, float]) -> float:
@@ -161,8 +150,10 @@ class Palette:
 
     def _parent_rgb(self, a_name: str, b_name: str,
                     context: str | None = None) -> tuple[float, float, float]:
-        """Resolve two PRIMARY *keys* and mix them. Both must be primaries and
-        must differ (a secondary is a mix of TWO distinct primaries)."""
+        """Resolve two PRIMARY *keys* to their canonical secondary color.
+        Both must be primaries and must differ. The PAIR (not a formula)
+        selects the crayon-vivid secondary, keeping the law's structure:
+        a secondary is always derived from its two parent primaries."""
         if a_name == b_name:
             where = f" (blend {context!r})" if context else ""
             raise PaletteError(
@@ -177,7 +168,14 @@ class Palette:
             raise PaletteError(
                 f"illegal blend{where}: parent {bad!r} is not a primary"
             )
-        return _mix_rgb(_PRIMARY_RGB[a_prim], _PRIMARY_RGB[b_prim])
+        pair = frozenset({a_prim, b_prim})
+        try:
+            return _SECONDARY_RGB[pair]
+        except KeyError:
+            raise PaletteError(
+                f"no canonical secondary defined for primaries "
+                f"{a_prim!r}+{b_prim!r}"
+            )
 
     # -- meaning colors (chroma) -------------------------------------------
     def tint(self, key: str) -> tuple[float, float, float, float]:
