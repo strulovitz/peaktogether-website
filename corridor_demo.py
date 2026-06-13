@@ -71,9 +71,10 @@ def main(path="corridors/01_dummy.txt"):
         cam_right = render.ship_right(ship.q)
         cam_up    = render.ship_up(ship.q)
 
-        corridor.draw_world(cam_right, cam_up, texcache)        # 2. queue walls + robots
-        render.flush_walls(tuple(ship.pos.tolist()))            # 3. flush BEFORE billboards
-        corridor.draw_labels(cam_right, cam_up, texcache)       # 4. billboards
+        corridor.draw_world(cam_right, cam_up, texcache)    # 1. queue walls + chevrons
+        render.flush_walls(tuple(ship.pos.tolist()))        # 2. draw walls
+        corridor.draw_robots(cam_right, cam_up, texcache)   # 3. robots AFTER walls (hologram safe)
+        corridor.draw_labels(cam_right, cam_up, texcache)   # 4. title + plaques
 
         pygame.display.flip()
 

@@ -254,12 +254,20 @@ class CorridorGeometry:
             r.update(dt, ship_position)
 
     def draw_world(self, camera_right, camera_up, texcache):
-        self._draw_tube_walls()      # queue translucent walls (shared rings, no gaps)
-        self._draw_chevrons()        # subtle mouth signage (dominant color)
+        """Phase 1: ONLY queue translucent walls + mouth chevrons.
+        Robots are NOT drawn here anymore — see draw_robots()."""
+        self._draw_tube_walls()
+        self._draw_chevrons()
+
+    def draw_robots(self, camera_right, camera_up, texcache):
+        """Phase 2b: draw robots (opaque hull + additive scanner/hologram).
+        MUST be called AFTER render.flush_walls() so the additive hologram
+        is not overpainted by the translucent walls."""
         for r in self._robots:
             r.draw(camera_right, camera_up, texcache)
 
     def draw_labels(self, camera_right, camera_up, texcache):
+        """Phase 3: title + defeat plaques. After robots."""
         self._draw_title(camera_right, camera_up, texcache)
         self._draw_plaques(camera_right, camera_up, texcache)
 
