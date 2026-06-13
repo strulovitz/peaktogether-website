@@ -1,0 +1,62 @@
+# ===========================================================
+# DUMMY CORRIDOR — engine test fixture, NO real mathematics.
+# COLOR LEDGER (duplicated here for DeepSeek's eyes):
+#   PRIMARY alpha = red    (stand-in concept "A")
+#   PRIMARY beta  = yellow  (stand-in concept "B")
+#   PRIMARY gamma = blue    (stand-in concept "C")
+#   BLEND   delta = alpha + beta   -> orange
+# ===========================================================
+CORRIDOR: 1
+TITLE { Placeholder Corridor One }
+FLAVOR { A test tube where nothing means anything yet. }
+LEDGER {
+  PRIMARY alpha = red
+  PRIMARY beta  = yellow
+  PRIMARY gamma = blue
+  BLEND   delta = alpha + beta
+}
+BRIEFING_INTRO { This briefing page is placeholder text used only to
+                 verify that briefing rendering works. }
+ENTRY_TEXT { You have entered the placeholder corridor. }
+EXIT_TEXT { You have cleared the placeholder corridor. Well done, tester. }
+
+ROBOT: 1
+NAME { Dummy Sentinel Alpha }
+BRIEFING_HINT { This robot is vulnerable to the placeholder technique FOO. }
+PROBLEM { Prove that the placeholder quantity $X$ equals the placeholder
+          quantity $Y$ under the stated dummy conditions. }
+EXPLAIN_MATHEMATICIAN { Graduate-level placeholder. We assume the reader
+          knows what $X$ and $Y$ pretend to be. }
+EXPLAIN_PHYSICIST { Undergraduate placeholder. Think of $X$ as a thing and
+          $Y$ as another thing. }
+EXPLAIN_BIOLOGIST { High-school placeholder. Two quantities are secretly
+          the same. }
+EXPLAIN_ENGINEER { Plug in numbers: the quantity [[ $X$ | 3.000 ]] meets the
+          quantity [[ $Y$ | 3.000 ]], so they match. }
+SEGMENTS {
+  $X$       | alpha
+  $=$       | NEUTRAL
+  $Y$       | beta
+}
+EYE { alpha }
+FIZZLE BAR { The technique BAR does not apply here because this is a
+             placeholder and BAR is the wrong placeholder. }
+FIZZLE BAZ { BAZ fizzles: it solves a different dummy problem. }
+
+ROBOT: 2
+NAME { Dummy Sentinel Beta }
+BRIEFING_HINT { Vulnerable to the placeholder technique QUX. }
+PROBLEM { Express the placeholder $Z$ as a combination of $X$ and $Y$. }
+EXPLAIN_MATHEMATICIAN { Graduate placeholder describing the combination. }
+EXPLAIN_PHYSICIST { Undergraduate placeholder. }
+EXPLAIN_BIOLOGIST { High-school placeholder. }
+EXPLAIN_ENGINEER { Numerically, [[ $Z$ | 6.000 ]] is just the parts added. }
+SEGMENTS {
+  $X$       | alpha
+  $+$       | NEUTRAL
+  $Y$       | beta
+  $=$       | NEUTRAL
+  $Z$       | delta
+}
+EYE { delta }
+FIZZLE BAR { BAR still does not apply, even to the second robot. }
