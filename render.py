@@ -213,6 +213,51 @@ def draw_wall(quad, fill_color, edge_color, fill_alpha):
     glEnd()
 
 
+# ---------------------------------------------------------------------
+#  SHARED TRANSLUCENT-WALL QUEUE (parent ruling)
+#  Translucent rock walls must be blended far-to-near or alpha looks
+#  wrong at module seams. render owns ONE shared sort over ALL queued
+#  walls so independent modules combine correctly in a single frame.
+#
+#  render STAYS STATELESS: it stores no camera. camera_pos is PASSED IN
+#  to flush_walls() every frame.
+#
+#  !!! TRAP -- READ THIS !!!
+#  If a frame enqueues walls via queue_wall() but nobody calls
+#  flush_walls(), those walls are SILENTLY NEVER DRAWN. The queue just
+#  keeps growing. The app frame loop MUST call flush_walls(ship.pos)
+#  exactly once per frame.
+# ---------------------------------------------------------------------
+_wall_queue = []  # each item: (quad, fill_color, edge_color, fill_alpha)
+
+
+def queue_wall(quad, fill_color, edge_color, fill_alpha):
+    """Enqueue ONE translucent wall for this frame. Does not draw yet.
+    Call during a module's draw(); the app calls flush_walls() once per
+    frame to draw the whole queue far-to-near. Stores exactly what the
+    existing draw_wall(quad, fill_color, edge_color, fill_alpha) needs."""
+    _wall_queue.append((quad, fill_color, edge_color, fill_alpha))
+
+
+def flush_walls(camera_pos):
+    """Sort ALL queued walls far-to-near by squared distance of each
+    quad's centroid to camera_pos, draw each via the EXISTING draw_wall,
+    then clear the queue. No-op if the queue is empty. render stays
+    stateless -- camera_pos is passed in, never stored."""
+    if not _wall_queue:
+        return
+    cam = np.asarray(camera_pos)
+
+    def _key(item):
+        c = np.mean(np.asarray(item[0]), axis=0)  # centroid of the quad
+        d = c - cam
+        return -float(np.dot(d, d))               # negative => farthest first
+
+    for quad, fill_color, edge_color, fill_alpha in sorted(_wall_queue, key=_key):
+        draw_wall(quad, fill_color, edge_color, fill_alpha)
+    _wall_queue.clear()
+
+
 def draw_breadcrumb(pos, color, size=0.15):
     """A small marker (three crossed segments) at a world position."""
     x, y, z = pos
