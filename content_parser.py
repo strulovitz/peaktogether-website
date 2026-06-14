@@ -539,6 +539,7 @@ def _parse_robot(toks: list, ledger: ColorLedger, fname: str) -> RobotData:
     segments = []
     eye = None
     fizzles = {}
+    required_technique_id = None  # Brief #9
 
     _explain_map = {
         "EXPLAIN_MATHEMATICIAN": "mathematician",
@@ -572,6 +573,13 @@ def _parse_robot(toks: list, ledger: ColorLedger, fname: str) -> RobotData:
             if arg is None:
                 raise ParseError(f"{fname}:{ln}: FIZZLE missing weapon name")
             fizzles[arg] = _clean_body(body)
+        elif keyword == "VULNERABLE_TO":  # Brief #9
+            tok_id = _clean_body(body).strip()
+            if not re.match(r'^[A-Za-z0-9_]+$', tok_id):
+                raise ParseError(
+                    f"{fname}:{ln}: VULNERABLE_TO body must be [A-Za-z0-9_]+, got {tok_id!r}"
+                )
+            required_technique_id = tok_id
         else:
             raise ParseError(f"{fname}:{ln}: unexpected robot block {keyword!r}")
 
@@ -587,6 +595,8 @@ def _parse_robot(toks: list, ledger: ColorLedger, fname: str) -> RobotData:
             raise ParseError(f"{fname}: robot {number} missing EXPLAIN_{required.upper()} block")
     if eye is None:
         raise ParseError(f"{fname}: robot {number} missing EYE block")
+    if required_technique_id is None:  # Brief #9
+        raise ParseError(f"{fname}: robot {number} missing VULNERABLE_TO block")
 
     return RobotData(
         number=number,
@@ -597,6 +607,7 @@ def _parse_robot(toks: list, ledger: ColorLedger, fname: str) -> RobotData:
         segments=segments,
         eye_color_key=eye,
         fizzles=fizzles,
+        required_technique_id=required_technique_id,  # Brief #9
     )
 
 

@@ -34,4 +34,5 @@ SEGMENTS {
   $K$       | mix
 }
 EYE { mix }
+VULNERABLE_TO { dummy_technique }
 FIZZLE SPANNER { Even SPANNER fizzles on this placeholder. }

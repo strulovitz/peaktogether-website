@@ -297,6 +297,7 @@ class Robot:
     def __init__(self, robot_data, palette, station_pose,
                  paint=None, size=1.0):
         # --- data path (the ONLY things robots reads from RobotData) ---
+        self._robot_data = robot_data                    # Brief #9
         self.name = getattr(robot_data, "name", "[ROBOT]")
         self._eye_key = getattr(robot_data, "eye_color_key", "NEUTRAL")
 
@@ -380,6 +381,14 @@ class Robot:
         contract for lock-on / targeting / demos. (base_pos remains the
         un-bobbed station anchor.)"""
         return self._world_center()
+
+    @property
+    def number(self):               # Brief #9
+        return self._robot_data.number
+
+    @property
+    def required_technique_id(self):  # Brief #9
+        return self._robot_data.required_technique_id
 
     def play_defeat(self):
         """Trigger the multi-burst explosion; afterward the body is gone."""
