@@ -45,6 +45,7 @@ from OpenGL.GL import (
 
 import render
 import palette
+import combat                            # Brief #9
 from level_parser import load_level
 from content_parser import ParseError
 from hub_builder import build_hub
@@ -55,7 +56,7 @@ from hub_builder import build_hub
 # ---------------------------------------------------------------------------
 
 WIN_SIZE = (1280, 800)          # verbatim from hub_demo.py
-LEVEL_MANIFEST = "levels/intro.txt"   # confirmed: loads 3 distinct corridors
+LEVEL_MANIFEST = "levels/maxwell.txt"   # Brief #9: Maxwell test corridor
 
 # Fog: production values, copied verbatim from hub_demo.py. These equal
 # render.DARKNESS_START / DARKNESS_END, i.e. render's own defaults — not
@@ -154,12 +155,16 @@ def main():
     # --- spawn facing door 0 (PATH 1) ---
     ship = _make_ship(hub)
 
+    # Brief #9: combat state (owns fire/match/HUD)
+    combat_state = combat.Combat()
+
     # Initial fog set (matches hub_demo.py, which sets it once at setup and
     # again every frame; we mirror that).
     render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
 
     clock = pygame.time.Clock()
     running = True
+    prev_keys = pygame.key.get_pressed()   # Brief #9: rising-edge tracking
     while running:
         dt = clock.tick(60) / 1000.0
 
@@ -170,6 +175,11 @@ def main():
                 running = False
 
         keys = pygame.key.get_pressed()
+
+        # Brief #9: rising-edge detection for combat keys
+        fire_edge  = keys[pygame.K_SPACE]          and not prev_keys[pygame.K_SPACE]
+        prev_edge  = keys[pygame.K_LEFTBRACKET]    and not prev_keys[pygame.K_LEFTBRACKET]
+        next_edge  = keys[pygame.K_RIGHTBRACKET]   and not prev_keys[pygame.K_RIGHTBRACKET]
 
         # ---- CANONICAL FRAME ORDER ----
         # 1. clear
@@ -192,6 +202,10 @@ def main():
         # 6. advance world animation / corridor state
         hub.update(dt, ship.pos)
 
+        # Brief #9: combat (fire, auto-face, fizzle timer)
+        combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub)
+        combat_state.update(dt, ship, hub)
+
         # 7. QUEUE all walls (atrium shell + door frames + corridor walls)
         hub.draw_world(cr, cu, texcache)
 
@@ -205,12 +219,19 @@ def main():
         # 10. labels / billboards (mathtext; last)
         hub.draw_labels(cr, cu, texcache)
 
+        # Brief #9: combat HUD (text only; between labels and flip)
+        render.begin_2d(*WIN_SIZE)
+        combat_state.draw_hud(texcache, WIN_SIZE)
+        render.end_2d()
+
         # optional debug overlay (off by default)
         if SHOW_HUD:
             _draw_debug_hud(texcache, clock.get_fps(), ship)
 
         # 11. present
         pygame.display.flip()
+
+        prev_keys = keys   # Brief #9: snapshot for next frame's rising edges
 
     pygame.quit()
     sys.exit(0)
