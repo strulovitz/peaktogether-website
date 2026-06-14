@@ -653,7 +653,7 @@ def _render_rich_line(raw_line, color, fontsize, dpi):
         for i in range(steps + 1):
             t = i / steps
             px = x0 + t * ew
-            py = arc_top + arc_height * (1.0 - 4.0 * (t - 0.5) ** 2)
+            py = arc_top + arc_height * (4.0 * (t - 0.5) ** 2)
             pts.append((px, py))
 
         line_rgb = (
