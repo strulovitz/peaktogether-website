@@ -646,7 +646,7 @@ def _render_rich_line(raw_line, color, fontsize, dpi):
         ew = x1 - x0
 
         # --- Draw the downward parabola (sad-mouth) in the arc band. ---------
-        arc_top = arc_band * 0.60   # leave room for value text above arc
+        arc_top = arc_band * 0.75   # leave room for value text above arc
         arc_height = arc_band * 0.40
         pts = []
         steps = max(8, int(ew // 4))
