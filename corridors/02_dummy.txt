@@ -33,4 +33,5 @@ SEGMENTS {
   $Q$       | two
 }
 EYE { two }
+VULNERABLE_TO { dummy_technique }
 FIZZLE GADGET { GADGET does not apply: wrong placeholder family. }
