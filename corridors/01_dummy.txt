@@ -39,7 +39,6 @@ SEGMENTS {
   $Y$       | beta
 }
 EYE { alpha }
-VULNERABLE_TO { dummy_technique }
 FIZZLE BAR { The technique BAR does not apply here because this is a
              placeholder and BAR is the wrong placeholder. }
 FIZZLE BAZ { BAZ fizzles: it solves a different dummy problem. }
@@ -60,5 +59,4 @@ SEGMENTS {
   $Z$       | delta
 }
 EYE { delta }
-VULNERABLE_TO { dummy_technique }
 FIZZLE BAR { BAR still does not apply, even to the second robot. }
