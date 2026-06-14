@@ -20,9 +20,8 @@ class GamepadManager:
     AXIS_YAW      = 2   # stick Z twist
     AXIS_THROTTLE = 3   # throttle slider
 
-    # Xbox right-stick axis indices (SDL2 common mapping -- verify with
-    # the runtime axis-picker: wiggle right stick, read live values)
-    XBOX_RSTICK_X = 3
+    # Xbox right-stick axis indices (confirmed from Nir's test: a2=left/right, a4=forward/back)
+    XBOX_RSTICK_X = 2
     XBOX_RSTICK_Y = 4
 
     def __init__(self):

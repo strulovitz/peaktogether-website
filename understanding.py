@@ -78,8 +78,8 @@ class UnderstandingMode:
         # PAN: right stick (additive, simultaneous)
         if gamepads is not None:
             rx, ry = gamepads.manipulator_right_stick()
-            self.pan_x -= rx * STICK_SPEED * dt
-            self.pan_y -= ry * STICK_SPEED * dt
+            self.pan_x += rx * STICK_SPEED * dt
+            self.pan_y += ry * STICK_SPEED * dt
 
         # ESC also exits
         if keys[pygame.K_ESCAPE]:
