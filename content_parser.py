@@ -370,6 +370,19 @@ def _parse_segments(body: str, ledger: ColorLedger, fname: str, lineno: int) -> 
 
 
 # ---------------------------------------------------------------------------
+# VULNERABLE_TO parsing (Brief #9 — TODO(DeepSeek): this needs to be
+# integrated into _parse_robot()'s block-token dispatch, NOT called as a
+# standalone line-by-line parser. The tokenizer already produces block
+# tokens for this directive. Follow the existing EYE { } pattern.)
+_VULNERABLE_RE = re.compile(r'VULNERABLE_TO\s*\{\s*([A-Za-z0-9_]+)\s*\}')
+
+def _parse_vulnerable_to(line, lineno, filename):
+    """Returns the technique id token, or None if this line isn't the directive."""
+    m = _VULNERABLE_RE.search(line)
+    if m:
+        return m.group(1)
+    return None
+
 # Value-arc parsing (public helper)
 # ---------------------------------------------------------------------------
 
