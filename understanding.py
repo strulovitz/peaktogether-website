@@ -56,7 +56,7 @@ class UnderstandingMode:
         # DEPTH: mouse wheel (events)
         for ev in events:
             if ev.type == pygame.MOUSEWHEEL:
-                self.target -= ev.y * DEPTH_SPEED_WHEEL
+                self.target += ev.y * DEPTH_SPEED_WHEEL
         # allow backing out past the front to EXIT
         if self.target < -0.6:
             self.close()
