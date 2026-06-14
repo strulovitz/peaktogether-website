@@ -158,6 +158,15 @@ def main():
     # Brief #9: combat state (owns fire/match/HUD)
     combat_state = combat.Combat()
 
+    # Brief #11: Understanding Mode (4-layer depth panels)
+    from gamepad import GamepadManager
+    from understanding import UnderstandingMode
+    try:
+        gamepads = GamepadManager()
+    except Exception:
+        gamepads = None   # no controller -> mode runs on mouse+keyboard
+    umode = UnderstandingMode()
+
     # Initial fog set (matches hub_demo.py, which sets it once at setup and
     # again every frame; we mirror that).
     render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
@@ -168,60 +177,80 @@ def main():
     while running:
         dt = clock.tick(60) / 1000.0
 
-        for ev in pygame.event.get():
+        events = pygame.event.get()
+        for ev in events:
             if ev.type == pygame.QUIT:
                 running = False
-            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE:
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE and not umode.active:
                 running = False
+            elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_u and not umode.active:
+                robot = combat.blocking_robot(hub)
+                if robot is not None:
+                    umode.open(robot._robot_data)  # Brief #11: pass RobotData, not Robot
 
         keys = pygame.key.get_pressed()
 
-        # Brief #9: rising-edge detection for combat keys
-        fire_edge  = keys[pygame.K_SPACE]          and not prev_keys[pygame.K_SPACE]
-        prev_edge  = keys[pygame.K_LEFTBRACKET]    and not prev_keys[pygame.K_LEFTBRACKET]
-        next_edge  = keys[pygame.K_RIGHTBRACKET]   and not prev_keys[pygame.K_RIGHTBRACKET]
+        # Brief #11: gate world updates when Understanding Mode is active
+        if umode.active:
+            umode.handle_input(events, keys, gamepads, dt)
+        else:
+            # Brief #9: rising-edge detection for combat keys
+            fire_edge  = keys[pygame.K_SPACE]          and not prev_keys[pygame.K_SPACE]
+            prev_edge  = keys[pygame.K_LEFTBRACKET]    and not prev_keys[pygame.K_LEFTBRACKET]
+            next_edge  = keys[pygame.K_RIGHTBRACKET]   and not prev_keys[pygame.K_RIGHTBRACKET]
 
         # ---- CANONICAL FRAME ORDER ----
         # 1. clear
         glClearColor(*palette.CLEAR_COLOR, 1.0)
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
-        # 2. movement (controls are baked into render.Ship.update)
-        ship.update(dt, keys)
+        if not umode.active:
+            # 2. movement (controls are baked into render.Ship.update)
+            ship.update(dt, keys)
 
-        # 3. camera matrix
-        ship.apply_view()
+            # 3. camera matrix
+            ship.apply_view()
 
-        # 4. fog (production values)
-        render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
+            # 4. fog (production values)
+            render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
 
-        # 5. camera basis for billboards/labels
-        cr = render.ship_right(ship.q)
-        cu = render.ship_up(ship.q)
+            # 5. camera basis for billboards/labels
+            cr = render.ship_right(ship.q)
+            cu = render.ship_up(ship.q)
 
-        # 6. advance world animation / corridor state
-        hub.update(dt, ship.pos)
+            # 6. advance world animation / corridor state
+            hub.update(dt, ship.pos)
 
-        # Brief #9: combat (fire, auto-face, fizzle timer)
-        combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub)
-        combat_state.update(dt, ship, hub)
+            # Brief #9: combat (fire, auto-face, fizzle timer)
+            combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub)
+            combat_state.update(dt, ship, hub)
 
-        # 7. QUEUE all walls (atrium shell + door frames + corridor walls)
-        hub.draw_world(cr, cu, texcache)
+        if not umode.active:
+            # 7. QUEUE all walls (atrium shell + door frames + corridor walls)
+            hub.draw_world(cr, cu, texcache)
 
-        # 8. THE FLUSH — exactly once, after draw_world, before robots/labels.
-        #    Omit/duplicate this and walls silently never draw (the cardinal trap).
-        render.flush_walls(ship.pos)
+            # 8. THE FLUSH — exactly once, after draw_world, before robots/labels.
+            #    Omit/duplicate this and walls silently never draw (the cardinal trap).
+            render.flush_walls(ship.pos)
 
-        # 9. robots (immediate; after the wall flush)
-        hub.draw_robots(cr, cu, texcache)
+            # 9. robots (immediate; after the wall flush)
+            hub.draw_robots(cr, cu, texcache)
 
-        # 10. labels / billboards (mathtext; last)
-        hub.draw_labels(cr, cu, texcache)
+            # 10. labels / billboards (mathtext; last)
+            hub.draw_labels(cr, cu, texcache)
 
         # Brief #9: combat HUD (text only; between labels and flip)
         render.begin_2d(*WIN_SIZE)
         combat_state.draw_hud(texcache, WIN_SIZE)
+        umode.draw(texcache, WIN_SIZE)                      # Brief #11
+
+        # Brief #11: temporary right-stick axis picker (verify XBOX_RSTICK_X/Y)
+        if umode.active and gamepads is not None and gamepads.manip_joy is not None:
+            j = gamepads.manip_joy
+            dbg = "axes: " + " ".join("a%d=%+.2f" % (k, j.get_axis(k))
+                                      for k in range(j.get_numaxes()))
+            render.draw_text_mathtext_2d(texcache, dbg, 20, WIN_SIZE[1]-30,
+                                         color=(0.6,0.9,0.6), fontsize=12)
         render.end_2d()
 
         # optional debug overlay (off by default)
