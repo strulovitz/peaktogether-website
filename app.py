@@ -184,7 +184,7 @@ def main():
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_ESCAPE and not umode.active:
                 running = False
             elif ev.type == pygame.KEYDOWN and ev.key == pygame.K_u and not umode.active:
-                robot = combat.blocking_robot(hub)
+                robot = combat.Combat.blocking_robot(hub)
                 if robot is not None:
                     umode.open(robot._robot_data)  # Brief #11: pass RobotData, not Robot
 
