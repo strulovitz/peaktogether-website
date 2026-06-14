@@ -13,6 +13,7 @@
 
 import io
 import math
+import re                         # Brief #10
 import numpy as np
 
 import matplotlib
@@ -467,6 +468,22 @@ class TexCache:
                 latex_to_surface(latex, color, fontsize))
         return self.cache[key]
 
+    def get_rich(self, text, color, fontsize, blur):       # Brief #10
+        """Cache + rasterize a rich (mixed prose+math, multi-line, arc) panel.
+        Keyed on (text, fontsize, color, round(blur, 1)). Mirrors get_mathtext."""
+        key = ("rich", text, fontsize, tuple(color), round(blur, 1))
+        if key in self.cache:
+            return self.cache[key]
+
+        surf = rich_to_surface(text, color=color, fontsize=fontsize)
+        if blur > 0:
+            surf = blur_surface(surf, blur)
+        tex = surface_to_texture(surf)
+
+        self.cache[key] = tex
+        self._prune()
+        return tex
+
 
 # =====================================================================
 #  2D OVERLAY (HUD)  -- mined from Fable's begin_2d / end_2d / draw_texture.
@@ -515,4 +532,184 @@ def draw_text_mathtext_2d(cache, latex, x, y, color=(0.7, 0.7, 0.7),
     """HUD convenience: render `latex` via the cache and blit at (x, y).
     Must be called between begin_2d / end_2d."""
     tex = cache.get_mathtext(latex, color, fontsize)
+    return draw_texture(tex, x, y, scale, alpha)
+
+
+# ============================================================================
+# RICH-TEXT SPINE (Brief #10) — render_rich and friends
+# Mixed prose+math, multi-line, value-arcs, blur, and a raw-bytes uploader.
+# Built on top of latex_to_surface / surface_to_texture / draw_texture.
+# ============================================================================
+
+# Matches a value-arc:  [[ <expr> | <value> ]]
+_ARC_RE = re.compile(r"\[\[\s*(.*?)\s*\|\s*(.*?)\s*\]\]")
+
+
+def rich_to_surface(text, color=(0.95, 0.96, 0.98), fontsize=15, dpi=140):
+    """Rasterize mixed prose+math (with optional value-arcs) to a Surface.
+    - Lines split on '\\n' only. NO word-wrapping (authored layout is sacred).
+    - Prose outside $...$ upright; math inside $...$ inline (fig.text does this).
+    - Value-arc syntax: [[ $expr$ | value ]] -> render $expr$ with a downward
+      parabola above it and `value` written above the arc.
+    Returns a pygame Surface (RGBA, convert_alpha)."""
+
+    lines = text.split("\n")
+
+    # Each entry: dict with the line's rendered Surface, its arc band height,
+    # and a list of arc descriptors (pixel positions resolved during render).
+    rendered_lines = []
+
+    for raw_line in lines:
+        rendered_lines.append(_render_rich_line(raw_line, color, fontsize, dpi))
+
+    # Empty / all-blank fallback: produce a 1x1 transparent surface so callers
+    # always get something blittable.
+    if not rendered_lines:
+        surf = pygame.Surface((1, 1), pygame.SRCALPHA)
+        return surf.convert_alpha()
+
+    total_w = max(ls.get_width() for ls in rendered_lines)
+    total_h = sum(ls.get_height() for ls in rendered_lines)
+    total_w = max(total_w, 1)
+    total_h = max(total_h, 1)
+
+    parent = pygame.Surface((total_w, total_h), pygame.SRCALPHA)
+    parent.fill((0, 0, 0, 0))
+
+    y = 0
+    for ls in rendered_lines:
+        parent.blit(ls, (0, y))
+        y += ls.get_height()
+
+    return parent.convert_alpha()
+
+
+def _render_rich_line(raw_line, color, fontsize, dpi):
+    """Render a single authored line (mixed prose+math, possibly with arcs) to
+    its own Surface. The returned Surface already includes an arc band on top
+    when the line contains value-arcs. Returns a pygame Surface."""
+
+    arc_matches = list(_ARC_RE.finditer(raw_line))
+
+    # ---- Simple case: no arcs. Just render the line as mixed prose+math. ----
+    if not arc_matches:
+        if raw_line.strip() == "":
+            base = latex_to_surface(" ", color=color, fontsize=fontsize, dpi=dpi)
+        else:
+            base = latex_to_surface(raw_line, color=color, fontsize=fontsize, dpi=dpi)
+        return base
+
+    # ---- Arc case --------------------------------------------------------- #
+    arc_band = int(fontsize * 2)
+
+    # Flattened line: replace [[expr|val]] with expr.
+    flat_parts = []
+    cursor = 0
+    arc_spec = []
+    for m in arc_matches:
+        flat_parts.append(raw_line[cursor:m.start()])
+        prefix_len = sum(len(p) for p in flat_parts)
+        expr = m.group(1)
+        value = m.group(2)
+        flat_parts.append(expr)
+        arc_spec.append((prefix_len, prefix_len + len(expr), value, expr))
+        cursor = m.end()
+    flat_parts.append(raw_line[cursor:])
+    flat_line = "".join(flat_parts)
+
+    if flat_line.strip() == "":
+        base = latex_to_surface(" ", color=color, fontsize=fontsize, dpi=dpi)
+    else:
+        base = latex_to_surface(flat_line, color=color, fontsize=fontsize, dpi=dpi)
+
+    bw, bh = base.get_size()
+
+    # Compose final surface = arc band on top + base line below.
+    out_w = bw
+    out_h = bh + arc_band
+    out = pygame.Surface((out_w, out_h), pygame.SRCALPHA)
+    out.fill((0, 0, 0, 0))
+    out.blit(base, (0, arc_band))
+
+    def _measure(prefix):
+        """Pixel width of a leading substring of the flat line."""
+        if prefix == "":
+            return 0
+        s = latex_to_surface(prefix, color=color, fontsize=fontsize, dpi=dpi)
+        return s.get_width()
+
+    for (start_i, end_i, value, expr) in arc_spec:
+        x0 = _measure(flat_line[:start_i])
+        x1 = _measure(flat_line[:end_i])
+        if x1 <= x0:
+            x1 = x0 + max(8, int(fontsize))
+        ew = x1 - x0
+
+        # --- Draw the downward parabola (sad-mouth) in the arc band. ---------
+        arc_top = arc_band * 0.45
+        arc_height = arc_band * 0.40
+        pts = []
+        steps = max(8, int(ew // 4))
+        for i in range(steps + 1):
+            t = i / steps
+            px = x0 + t * ew
+            py = arc_top + arc_height * (1.0 - 4.0 * (t - 0.5) ** 2)
+            pts.append((px, py))
+
+        line_rgb = (
+            int(color[0] * 255),
+            int(color[1] * 255),
+            int(color[2] * 255),
+        )
+        if len(pts) >= 2:
+            pygame.draw.lines(out, (*line_rgb, 255), False, pts, 2)
+
+        # --- Render the value text (wrapped as math) and center it. ---------
+        val_str = value
+        if not (val_str.startswith("$") and val_str.endswith("$")):
+            val_str = "$" + val_str + "$"
+        val_surf = latex_to_surface(val_str, color=color,
+                                    fontsize=max(8, int(fontsize * 0.8)), dpi=dpi)
+        vw, vh = val_surf.get_size()
+        val_x = int(x0 + ew / 2 - vw / 2)
+        val_y = 0
+        out.blit(val_surf, (val_x, val_y))
+
+    return out.convert_alpha()
+
+
+def array_to_texture(rgba_bytes, w, h):
+    """Upload raw RGBA bytes (already Y-flipped for GL) as a GL texture.
+    Returns (tid, w, h). Mirrors surface_to_texture's GL calls exactly."""
+    tid = glGenTextures(1)
+    glBindTexture(GL_TEXTURE_2D, tid)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0,
+                 GL_RGBA, GL_UNSIGNED_BYTE, rgba_bytes)
+    return tid, w, h
+
+
+def blur_surface(surf, radius):
+    """Gaussian-blur a pygame Surface using Pillow. radius=0 returns unchanged.
+    Returns a NEW pygame Surface (RGBA)."""
+    if radius <= 0:
+        return surf.convert_alpha()
+
+    from PIL import Image, ImageFilter
+
+    size = surf.get_size()
+    data = pygame.image.tostring(surf, "RGBA")
+    img = Image.frombytes("RGBA", size, data)
+    img = img.filter(ImageFilter.GaussianBlur(radius))
+    out_data = img.tobytes()
+    return pygame.image.frombuffer(out_data, size, "RGBA").convert_alpha()
+
+
+def render_rich(cache, text, x, y, color=(0.95, 0.96, 0.98),
+                fontsize=15, scale=1.0, alpha=1.0, blur=0.0):
+    """Render mixed prose+math (and value-arcs) and blit at (x, y).
+    blur > 0 applies a Gaussian blur (for out-of-focus panels).
+    Must be called between begin_2d / end_2d. Returns drawn (w, h)."""
+    tex = cache.get_rich(text, color, fontsize, blur)
     return draw_texture(tex, x, y, scale, alpha)
