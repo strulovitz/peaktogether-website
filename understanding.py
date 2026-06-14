@@ -51,9 +51,12 @@ class UnderstandingMode:
         if not self.active:
             return
         # CTRL = engineer unlock (polled — keys + mods for robustness)
+        # Holding CTRL also jumps focus straight to the engineer panel.
         mods = pygame.key.get_mods()
         self.ctrl = (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
                      or bool(mods & pygame.KMOD_CTRL))
+        if self.ctrl:
+            self.target = float(len(LAYER_KEYS) - 1)  # snap to engineer
 
         # DEPTH: mouse wheel (events)
         for ev in events:
