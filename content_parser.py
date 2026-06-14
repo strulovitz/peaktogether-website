@@ -51,6 +51,7 @@ class RobotData:
     segments: list          # list[Segment], in file order
     eye_color_key: str      # a ledger key, or "NEUTRAL"
     fizzles: dict           # weapon_name -> why-not text
+    required_technique_id: str   # <-- ADDED (Brief #9)
 
 
 @dataclass
