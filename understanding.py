@@ -50,8 +50,10 @@ class UnderstandingMode:
     def handle_input(self, events, keys, gamepads, dt):
         if not self.active:
             return
-        # CTRL = engineer unlock (polled)
-        self.ctrl = keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
+        # CTRL = engineer unlock (polled — keys + mods for robustness)
+        mods = pygame.key.get_mods()
+        self.ctrl = (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
+                     or bool(mods & pygame.KMOD_CTRL))
 
         # DEPTH: mouse wheel (events)
         for ev in events:
