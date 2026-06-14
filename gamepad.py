@@ -20,9 +20,9 @@ class GamepadManager:
     AXIS_YAW      = 2   # stick Z twist
     AXIS_THROTTLE = 3   # throttle slider
 
-    # Xbox right-stick axis indices (confirmed from Nir's test: a2=left/right, a4=forward/back)
+    # Xbox right-stick axis indices (confirmed from Nir's test: a2=left/right, a3=forward/back)
     XBOX_RSTICK_X = 2
-    XBOX_RSTICK_Y = 4
+    XBOX_RSTICK_Y = 3
 
     def __init__(self):
         pygame.joystick.init()
