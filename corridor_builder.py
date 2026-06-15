@@ -326,7 +326,10 @@ class CorridorGeometry:
 
     def _draw_title(self, cr, cu, texcache):
         title = self._data.title
-        tex = render.get_plain_text_tex(title, size=16, color=self._dominant_rgb)
+        tex = texcache.get_mathtext(
+            r"\mathrm{%s}" % title.replace(" ", r"\ "),
+            color=self._dominant_rgb, fontsize=16,
+        )
         n0 = self._nodes[0]
         center = n0["center"] + n0["forward"] * 4.0 + n0["up"] * (n0["radius"] * 0.6)
         render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
@@ -341,7 +344,7 @@ class CorridorGeometry:
             text = explain.get("mathematician", "")
             if not text:
                 text = (getattr(rdata, "briefing_hint", "") or "—")
-            tex = render.get_plain_text_tex(text, size=13, color=text_rgb)
+            tex = texcache.get_mathtext(text, color=text_rgb, fontsize=13)
             center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
             render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
                                   scale=PLAQUE_SCALE, alpha=0.9)
