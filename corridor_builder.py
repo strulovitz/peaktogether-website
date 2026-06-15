@@ -46,15 +46,16 @@ LABEL_LIFT       = 2.2       # how far above station to float a plaque
 _RNG_SALT        = 0x5EED
 
 # ---- plaque tunables (Brief #16) ----
-PLAQUE_FONTSIZE     = 14
-PLAQUE_MAX_WIDTH_PX = 560
-PLAQUE_BG_COLOR     = (0.04, 0.05, 0.07)   # == understanding.BG_COLOR
-PLAQUE_BG_ALPHA     = 0.78
-PLAQUE_BODY_COLOR   = (0.95, 0.96, 0.98)   # == U-mode body
-PLAQUE_TITLE_COLOR  = (0.55, 0.70, 0.95)   # == U-mode title
-PLAQUE_TEX_ALPHA    = 0.97
-PLAQUE_CARD_PAD     = 1.12
-PLAQUE_TITLE_LIFT   = 0.55
+PLAQUE_FONTSIZE         = 14
+PLAQUE_MAX_WIDTH_PX     = 560
+PLAQUE_MAX_WORLD_WIDTH  = 4.0        # cap on billboard width in world units
+PLAQUE_BG_COLOR         = (0.04, 0.05, 0.07)   # == understanding.BG_COLOR
+PLAQUE_BG_ALPHA         = 0.78
+PLAQUE_BODY_COLOR       = (0.95, 0.96, 0.98)   # == U-mode body
+PLAQUE_TITLE_COLOR      = (0.55, 0.70, 0.95)   # == U-mode title
+PLAQUE_TEX_ALPHA        = 0.97
+PLAQUE_CARD_PAD         = 1.12
+PLAQUE_TITLE_LIFT       = 0.55
 
 
 # ----------------------------------------------------------------------
@@ -374,16 +375,30 @@ class CorridorGeometry:
 
             center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
 
+            # ---- clamp world-space width to avoid pixel-aspect explosion ----
             _tid, tw, th = body_tex
-            aspect = tw / th if th else 1.0
-            hw = 0.5 * PLAQUE_SCALE * aspect * PLAQUE_CARD_PAD
-            hh = 0.5 * PLAQUE_SCALE * PLAQUE_CARD_PAD
+            pixel_aspect = tw / th if th else 1.0
+            world_width = PLAQUE_SCALE * pixel_aspect
+            if world_width > PLAQUE_MAX_WORLD_WIDTH:
+                corrected_scale = PLAQUE_MAX_WORLD_WIDTH / max(pixel_aspect, 1.0)
+            else:
+                corrected_scale = PLAQUE_SCALE
+
+            hw = 0.5 * corrected_scale * pixel_aspect * PLAQUE_CARD_PAD
+            hh = 0.5 * corrected_scale * PLAQUE_CARD_PAD
             c = center
             p00 = c - rr*hw - uu*hh
             p10 = c + rr*hw - uu*hh
             p11 = c + rr*hw + uu*hh
             p01 = c - rr*hw + uu*hh
 
+            # ---- draw translucent backing card (blended, depth-off) ----
+            from OpenGL.GL import glEnable, glBlendFunc, GL_BLEND, GL_DEPTH_TEST
+            from OpenGL.GL import GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, glDepthMask
+            glEnable(GL_BLEND)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            glDisable(GL_DEPTH_TEST)
+            glDepthMask(GL_FALSE)
             glDisable(GL_TEXTURE_2D)
             glColor4f(PLAQUE_BG_COLOR[0], PLAQUE_BG_COLOR[1],
                       PLAQUE_BG_COLOR[2], PLAQUE_BG_ALPHA)
@@ -391,12 +406,20 @@ class CorridorGeometry:
             glVertex3f(*p00); glVertex3f(*p10); glVertex3f(*p11); glVertex3f(*p01)
             glEnd()
 
-            title_center = center + uu * (hh + PLAQUE_TITLE_LIFT * PLAQUE_SCALE)
+            # ---- title + body billboards on top ----
+            title_center = center + uu * (hh + PLAQUE_TITLE_LIFT * corrected_scale)
             render.draw_billboard(title_tex, tuple(title_center.tolist()), cr, cu,
-                                  scale=PLAQUE_SCALE * 0.8, alpha=PLAQUE_TEX_ALPHA)
+                                  scale=corrected_scale * 0.8, alpha=PLAQUE_TEX_ALPHA)
             render.draw_billboard(body_tex, tuple(center.tolist()), cr, cu,
-                                  scale=PLAQUE_SCALE, alpha=PLAQUE_TEX_ALPHA)
+                                  scale=corrected_scale, alpha=PLAQUE_TEX_ALPHA)
+
+            # ---- restore GL state ----
+            glDepthMask(GL_TRUE)
+            glEnable(GL_DEPTH_TEST)
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
+            glDisable(GL_BLEND)
             glColor4f(1.0, 1.0, 1.0, 1.0)
+            glEnable(GL_TEXTURE_2D)
 
 
 def build_corridor(corridor_data, origin=(0, 0, 0), direction=(0, 0, -1)):
