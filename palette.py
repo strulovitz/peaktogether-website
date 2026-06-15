@@ -77,6 +77,7 @@ WORLD_WALL_FILL: tuple[float, float, float, float] = (0.16, 0.17, 0.20, 0.85)  #
 WORLD_EDGE:      tuple[float, float, float]        = (0.88, 0.90, 0.94)        # light grey/white wireframe
 
 HOSTAGE_BLUE:    tuple[float, float, float]        = (0.30, 0.65, 1.00)        # bright rescue blue
+HOSTAGE_GLOW:    tuple[float, float, float]        = (1.00, 0.78, 0.45)        # warm prize-figure glow (decoration, not meaning)
 HAZARD_YELLOW:   tuple[float, float, float]        = (0.98, 0.80, 0.05)        # chevron stripe A
 HAZARD_BLACK:    tuple[float, float, float]        = (0.05, 0.05, 0.06)        # chevron stripe B
 

@@ -22,6 +22,7 @@ import palette
 from palette import Palette
 import render
 from robots import Robot
+from hostages import build_hostages
 
 
 # ----------------------------------------------------------------------
@@ -114,6 +115,7 @@ class CorridorGeometry:
         self._build_stations()
         self._build_robots()
         self._build_cavern_anchors()
+        self._hostages = build_hostages(self)
 
     # ---- construction -------------------------------------------------
     def _build_rings(self):
@@ -252,6 +254,8 @@ class CorridorGeometry:
         self._ship_pos = np.asarray(ship_position, dtype=float)
         for r in self._robots:
             r.update(dt, ship_position)
+        for h in self._hostages:
+            h.update(dt)
 
     def draw_world(self, camera_right, camera_up, texcache):
         """Phase 1: ONLY queue translucent walls + mouth chevrons.
@@ -265,6 +269,8 @@ class CorridorGeometry:
         is not overpainted by the translucent walls."""
         for r in self._robots:
             r.draw(camera_right, camera_up, texcache)
+        for h in self._hostages:
+            h.draw(camera_right, camera_up, texcache)
 
     def draw_labels(self, camera_right, camera_up, texcache):
         """Phase 3: title + defeat plaques. After robots."""
