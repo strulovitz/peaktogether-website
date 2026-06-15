@@ -484,21 +484,6 @@ class TexCache:
         self._prune()
         return tex
 
-    def get_rich_wrapped(self, text, color, fontsize, max_width_px, blur=0.0):
-        """Cached wrapped-rich panel. Same (tid, w, h) return as get_rich."""
-        key = ("richwrap", text, fontsize, tuple(color),
-               int(max_width_px), round(blur, 1))
-        if key in self.cache:
-            return self.cache[key]
-        surf = rich_to_surface_wrapped(text, color=color, fontsize=fontsize,
-                                       max_width_px=max_width_px)
-        if blur > 0:
-            surf = blur_surface(surf, blur)
-        tex = surface_to_texture(surf)
-        self.cache[key] = tex
-        self._prune()
-        return tex
-
 
 # =====================================================================
 #  2D OVERLAY (HUD)  -- mined from Fable's begin_2d / end_2d / draw_texture.
@@ -801,117 +786,6 @@ def blur_surface(surf, radius):
     img = img.filter(ImageFilter.GaussianBlur(radius))
     out_data = img.tobytes()
     return pygame.image.frombuffer(out_data, size, "RGBA").convert_alpha()
-
-
-# =====================================================================
-#  RICH-TEXT MATH/WORD WRAPPER (Brief #16)
-#  Wraps ANY dense LaTeX/prose onto multiple lines to fit a pixel width.
-#  Breaks ONLY at safe points (between $...$ chunks, after = + - etc.,
-#  between prose words) -- NEVER inside a symbol. Renders the FULL
-#  content; nothing is truncated or simplified.
-# =====================================================================
-
-_MATH_BREAK_OPS = [r"\quad", r"\cdot", r"+", r"-", r"=", r",", r";"]
-
-
-def _split_into_runs(line):
-    runs = []
-    i, n = 0, len(line)
-    while i < n:
-        if line[i] == "$":
-            j = line.find("$", i + 1)
-            if j == -1:
-                runs.append(("prose", line[i:])); break
-            runs.append(("math", line[i + 1:j])); i = j + 1
-        else:
-            j = line.find("$", i)
-            if j == -1:
-                runs.append(("prose", line[i:])); break
-            runs.append(("prose", line[i:j])); i = j
-    return [(k, s) for (k, s) in runs if s != ""]
-
-
-def _atomize_run(kind, s):
-    atoms = []
-    if kind == "prose":
-        for w in re.split(r"(\s+)", s):
-            if w != "":
-                atoms.append(("prose", w))
-        return atoms
-    buf, depth, i = "", 0, 0
-    while i < len(s):
-        matched = None
-        if depth == 0:
-            for op in _MATH_BREAK_OPS:
-                if s.startswith(op, i):
-                    matched = op; break
-        ch = s[i]
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth = max(0, depth - 1)
-        if matched and depth == 0:
-            buf += matched
-            atoms.append(("math", buf)); buf = ""
-            i += len(matched)
-        else:
-            buf += ch; i += 1
-    if buf.strip() != "":
-        atoms.append(("math", buf))
-    return atoms
-
-
-def _atom_to_latex(kind, s):
-    return ("$" + s + "$") if kind == "math" else s
-
-
-def rich_to_surface_wrapped(text, color=(0.95, 0.96, 0.98), fontsize=15,
-                            dpi=140, max_width_px=520, line_gap_px=4):
-    """Like rich_to_surface, but WRAPS each authored line to max_width_px.
-    Breaks only at safe boundaries; never inside a symbol. Renders the FULL
-    text -- no truncation. Returns an RGBA pygame Surface."""
-    authored_lines = text.split("\n")
-    wrapped_surfs = []
-
-    def _line_width(line_atoms):
-        if not line_atoms:
-            return 0
-        latex = "".join(_atom_to_latex(k, s) for (k, s) in line_atoms)
-        if latex.strip() == "":
-            return 0
-        return latex_to_surface(latex, color, fontsize, dpi).get_width()
-
-    for authored in authored_lines:
-        if authored.strip() == "":
-            wrapped_surfs.append(latex_to_surface(" ", color, fontsize, dpi))
-            continue
-        atoms = []
-        for kind, s in _split_into_runs(authored):
-            atoms.extend(_atomize_run(kind, s))
-        cur = []
-        for (k, s) in atoms:
-            if _line_width(cur + [(k, s)]) > max_width_px and cur:
-                latex = "".join(_atom_to_latex(kk, ss) for (kk, ss) in cur)
-                wrapped_surfs.append(latex_to_surface(latex, color, fontsize, dpi))
-                cur = [(k, s)]
-            else:
-                cur = cur + [(k, s)]
-        if cur:
-            latex = "".join(_atom_to_latex(kk, ss) for (kk, ss) in cur)
-            wrapped_surfs.append(latex_to_surface(latex, color, fontsize, dpi))
-
-    if not wrapped_surfs:
-        return pygame.Surface((1, 1), pygame.SRCALPHA).convert_alpha()
-
-    total_w = max(s.get_width() for s in wrapped_surfs)
-    total_h = sum(s.get_height() + line_gap_px for s in wrapped_surfs)
-    parent = pygame.Surface((max(total_w, 1), max(total_h, 1)), pygame.SRCALPHA)
-    parent.fill((0, 0, 0, 0))
-    y = 0
-    for s in wrapped_surfs:
-        parent.blit(s, (0, y))
-        y += s.get_height() + line_gap_px
-    return parent.convert_alpha()
 
 
 def render_rich(cache, text, x, y, color=(0.95, 0.96, 0.98),
