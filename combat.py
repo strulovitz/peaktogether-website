@@ -51,7 +51,7 @@ class Combat:
     """Owns combat + arsenal state for the active corridor."""
 
     # ---- 2D panel layout (cosmetic) ------------------------------------
-    _COLS, _ROWS = 3, 3
+    _COLS, _ROWS = 9, 1
     _CELL = 96
     _PAD = 14
     _MARGIN_X = 24

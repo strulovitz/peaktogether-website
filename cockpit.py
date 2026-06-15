@@ -47,7 +47,7 @@ _SEL_COLOR   = (1.00, 0.85, 0.20)
 # ---------------------------------------------------------------------------
 # CANOPY BEAM FRACTIONS (tune the look here)
 # ---------------------------------------------------------------------------
-_BEAM_TOP_DROP   = 0.04    # how far below the top edge the beams start, frac of H
+_BEAM_TOP_DROP   = 0.00    # beams start flush at the very top of the screen
 _BEAM_TOP_THICK  = 0.07    # beam thickness at the top (lateral end), frac of W
 _BEAM_FOOT_THICK = 0.05    # beam thickness where it meets the bar, frac of W
 
