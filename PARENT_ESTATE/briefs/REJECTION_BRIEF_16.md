@@ -35,45 +35,6 @@ WHAT YOU BROKE (3 fatal bugs, all visible on screen):
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
-WHAT YOU MUST DO DIFFERENTLY THIS TIME:
-
-A) WORLD-SPACE WIDTH CAP.
-   The PIXEL aspect ratio of the rich-text surface is NOT a world-space
-   dimension. Add a PLAQUE_MAX_WORLD_WIDTH constant (suggest 3.5–4.5, tune
-   it as a named constant for DeepSeek). Compute corrected_scale:
-     pixel_aspect = tw / max(th, 1)
-     if PLAQUE_SCALE * pixel_aspect > PLAQUE_MAX_WORLD_WIDTH:
-         corrected_scale = PLAQUE_MAX_WORLD_WIDTH / pixel_aspect
-     else:
-         corrected_scale = PLAQUE_SCALE
-   Use corrected_scale for BOTH the backing card AND draw_billboard calls.
-
-B) BLEND + DEPTH.
-   Before drawing anything in the plaque (backing card + billboards):
-     glEnable(GL_BLEND)
-     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-     glDisable(GL_DEPTH_TEST)
-     glDepthMask(GL_FALSE)
-   After drawing everything in the plaque loop, RESTORE:
-     glDepthMask(GL_TRUE)
-     glEnable(GL_DEPTH_TEST)
-     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-     glDisable(GL_BLEND)
-   Import every GL constant and function you use. NO NameErrors.
-
-C) GL STATE MUST BE CLEAN AFTER THE METHOD.
-   glEnable(GL_TEXTURE_2D) at the end. glColor4f(1,1,1,1) at the end.
-   The code AFTER _draw_plaques must never know it ran.
-
-D) THE DEMO MUST ACTUALLY WORK.
-   Your plaque_demo.py auto-fires by calling handle_input(True, ...) every
-   frame. This fires the FIRST weapon in the arsenal at the FIRST blocking
-   robot. Test this: will it actually match and defeat? If not, make the demo
-   USE the correct weapon. The demo must VISIBLY show a defeated robot + its
-   plaque, without requiring Nir to manually fly and shoot.
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
 THE FILES YOU PRODUCE (same as last time):
 
 - Changes to render.py (rich_to_surface_wrapped + helpers + get_rich_wrapped)
