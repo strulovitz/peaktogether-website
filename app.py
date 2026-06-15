@@ -174,6 +174,8 @@ def main():
     clock = pygame.time.Clock()
     running = True
     prev_keys = pygame.key.get_pressed()   # Brief #9: rising-edge tracking
+    mouse_click_edge = False               # Brief #10: mouse selection
+    mouse_x = mouse_y = 0
     while running:
         dt = clock.tick(60) / 1000.0
 
@@ -187,6 +189,9 @@ def main():
                 robot = combat.Combat.blocking_robot(hub)
                 if robot is not None:
                     umode.open(robot._robot_data)  # Brief #11: pass RobotData, not Robot
+            elif ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
+                mouse_click_edge = True            # Brief #10: face panel selection
+                mouse_x, mouse_y = ev.pos
 
         keys = pygame.key.get_pressed()
 
@@ -221,9 +226,11 @@ def main():
             # 6. advance world animation / corridor state
             hub.update(dt, ship.pos)
 
-            # Brief #9: combat (fire, auto-face, fizzle timer)
-            combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub)
+            # Brief #9+10: combat (fire, auto-face, fizzle timer + face panel selection)
+            combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub,
+                                      mouse_click_edge, mouse_x, mouse_y, gamepads)
             combat_state.update(dt, ship, hub)
+            mouse_click_edge = False             # Brief #10: consume edge
 
         if not umode.active:
             # 7. QUEUE all walls (atrium shell + door frames + corridor walls)
@@ -238,6 +245,9 @@ def main():
 
             # 10. labels / billboards (mathtext; last)
             hub.draw_labels(cr, cu, texcache)
+
+            # Brief #10: 3D projectile (after flush, before 2D overlay)
+            combat_state.draw_projectile_3d(cr, cu, texcache)
 
         # Brief #9: combat HUD (text only; between labels and flip)
         render.begin_2d(*WIN_SIZE)
