@@ -1,8 +1,50 @@
-# 🧠 SESSION CONTEXT — June 15, 2026 (Brief #10 built, 3 bugs found)
+# 🧠 SESSION CONTEXT — June 15, 2026 AFTERNOON (Brief #10 built, 3 bugs found)
 
 > **Project:** DESCENT QED engine
 > **Repo:** `C:\Users\nir_s\peaktogether-website`
 > **GitHub:** `https://github.com/strulovitz/peaktogether-website`
+
+---
+
+## 🚨 START HERE — READ THESE FIRST (4th parent)
+
+**Before reading this file**, the 4th parent MUST read this document which
+contains the FULL game design, architecture, data objects, corridor format,
+canonical frame order, and list of all modules:
+
+👉 **`PARENT_ESTATE/PARENT_HANDOFF_V3.md`** — THE LAW. Game design (section 1),
+tech stack + frame order (section 2), all 11 built modules (section 3),
+corridor file format (section 4), data objects (section 5). Read it first.
+
+**This afternoon file** covers ONLY what happened TODAY: Brief #10 built,
+3 bugs found by Nir, and what the 4th parent still needs to build. It
+assumes you have already absorbed PARENT_HANDOFF_V3.md.
+
+---
+
+## 📦 WHAT WAS ALREADY BUILT BEFORE TODAY (summary)
+
+### World Tier — 8 modules (all complete, tested, flown):
+| # | Module | File | What |
+|---|--------|------|------|
+| 1 | content_parser | `content_parser.py` | Parses corridor `.txt` files → `CorridorData` |
+| 2 | palette | `palette.py` | ColorLedger (opaque keys → colors) |
+| 3 | render | `render.py` | Core GL: Ship, TexCache, quat helpers, wall queue, 2D text, fog |
+| 4 | robots | `robots.py` | Robot class (hull, scanner, hologram, explosion) |
+| 5 | corridor_builder | `corridor_builder.py` | Builds CorridorGeometry from CorridorData |
+| 6 | hub_builder | `hub_builder.py` | Builds HubGeometry: atrium + doorways + corridors |
+| 7 | level_parser | `level_parser.py` | Loads level manifest → Level (list of CorridorData) |
+| 8 | app | `app.py` | Minimal integration, canonical frame loop, WASD/arrows flight |
+
+### Gameplay Tier — built before today:
+| Brief | File | What |
+|-------|------|------|
+| #9 COMBAT | `combat.py` | Fire/match/fizzle, auto-face, text HUD |
+| #11 UNDERSTANDING | `understanding.py`, `gamepad.py` | 4-layer depth panels (U near robot) |
+
+### Corridor fixtures on disk:
+`corridors/01_dummy.txt`, `02_dummy.txt`, `03_dummy.txt`, `maxwell.txt`
+Level manifests: `levels/intro.txt`, `levels/maxwell.txt`
 
 ---
 
@@ -171,21 +213,43 @@ This was already listed as an engine infrastructure gap. Still not built.
 
 ---
 
-## 🔑 KEY FILES FOR THE NEXT PARENT
+## 🔑 ALL PROJECT FILES (for the 4th parent)
 
-| File | Relevance |
-|------|-----------|
-| `PARENT_ESTATE/PARENT_HANDOFF_V3.md` | Full architecture + all built modules + data objects |
-| `PARENT_ESTATE/briefs/CHILD_BRIEF_10_arsenal.md` | The brief that built today's arsenal |
-| `docs/CONTENT_AUTHORING.md` | Reusable content-authoring child brief |
-| `combat.py` | Brief #9 + #10 merged (arsenal, face panel, projectiles) |
-| `app.py` | Frame loop — see lines 225, 242 for Brief #10 wiring |
-| `corridor_builder.py` | `_draw_plaques()` at line 324 — BUG 1 lives here |
-| `gamepad.py` | GamepadManager — `pilot_command()` at line 112 (unwired) |
-| `render.py` | Core GL — `begin_2d`, `draw_texture`, `draw_text_mathtext_2d` |
-| `robots.py` | `load_portrait(name)` at line 173 — loads hologram PNGs |
-| `hub_builder.py` | `HubGeometry.inside(point, margin)` — exists but unwired |
-| `understanding.py` | Understanding Mode (Brief #11 — built, working) |
+```
+peaktogether-website/
+├── app.py                    # main game loop (8 modules wired + Brief #9/#10/#11)
+├── combat.py                 # Brief #9 + #10 merged (arsenal, face panel, projectiles)
+├── render.py                 # core GL engine (Ship, TexCache, wall queue, 2D, fog)
+├── gamepad.py                # GamepadManager (T.16000M pilot + Xbox manipulator)
+├── understanding.py          # Brief #11: 4-layer depth panels (U near robot)
+├── content_parser.py         # corridor .txt parser → CorridorData
+├── palette.py                # ColorLedger
+├── robots.py                 # Robot class + load_portrait(name)
+├── corridor_builder.py       # CorridorGeometry builder (BUG 1: _draw_plaques)
+├── hub_builder.py            # HubGeometry (atrium + doors + hub.inside())
+├── level_parser.py           # level manifest loader
+├── corridors/
+│   ├── 01_dummy.txt          # 2 placeholder robots
+│   ├── 02_dummy.txt          # 1 placeholder robot
+│   ├── 03_dummy.txt          # 1 placeholder robot
+│   └── maxwell.txt           # 5 Maxwell equation robots
+├── levels/
+│   ├── intro.txt             # 3 dummy corridors
+│   └── maxwell.txt           # 1 Maxwell corridor
+├── *.png                     # hologram portraits (blue-tinted)
+├── PARENT_ESTATE/
+│   ├── PARENT_HANDOFF_V3.md  # ⭐ READ FIRST — full architecture + game design
+│   ├── DESCENT_QED_PARENT_HANDOFF.md  # original v1 handoff (background)
+│   ├── INTERFACES_v0.1.md    # original 10-module interface spec
+│   ├── briefs/               # child briefs #1-#11 + patches
+│   ├── reports/              # completion reports
+│   ├── SESSION_2026-06-15_MORNING.md   # morning session (Brief #9/#11 context)
+│   └── SESSION_2026-06-15_AFTERNOON.md # ⭐ THIS FILE
+├── docs/
+│   └── CONTENT_AUTHORING.md  # reusable Wikipedia→corridor child brief
+├── index.html                # Peak Together website homepage
+└── style.css                 # website styles
+```
 
 ---
 
