@@ -16,6 +16,7 @@ import numpy as np
 import render
 from render import draw_texture, draw_text_mathtext_2d, draw_plain_text_2d
 from robots import load_portrait
+from cockpit import CockpitHUD
 from OpenGL.GL import (
     glBegin, glEnd, glVertex2f, glVertex3f, glColor4f, GL_LINES,
 )
@@ -75,6 +76,9 @@ class Combat:
 
         # cosmetic projectile state
         self._proj = None  # {"from":(x,y,z),"to":(x,y,z),"t":float,"dur":float}|None
+
+        # Brief #15: Descent-style cockpit HUD
+        self._cockpit = CockpitHUD()
 
     # ==================================================================
     # ARSENAL SOURCING — multi-corridor
@@ -307,74 +311,33 @@ class Combat:
 
     def _face_hit_test(self, mx, my, hub):
         self._sync_arsenal(hub)
-        for i in range(len(self.arsenal)):
-            x, y, w, h = self._slot_rect(i)
-            if x <= mx <= x + w and y <= my <= y + h:
-                return i
-        return None
+        return self._cockpit.face_at_pixel(mx, my)
 
     def draw_hud(self, cache, win_size):
-        """Text HUD + 3x3 face panel. Called between begin_2d/end_2d."""
+        """Cockpit HUD (struts, dashboard, gauge, left box, 3x3 face grid).
+        Called between begin_2d/end_2d."""
         w, h = win_size
-
-        # ---- Brief #9: existing text HUD ----
-        x = 24
-        y = 28
-        line_h = 26
-        col = (0.85, 0.85, 0.90)
-
         robot = self._hud_robot
-        if robot is None:
-            draw_plain_text_2d("PATH CLEAR", x, y, size=18,
-                               color=(0.6, 0.95, 0.6))
-        else:
-            wdata = self._weapon_by_id(robot.required_technique_id)
-            need_name = wdata["name"] if wdata else "?"
-            draw_plain_text_2d(f"VULNERABLE TO: {need_name}", x, y,
-                               size=18, color=col)
-        y += line_h
 
-        wdata = self._weapon_by_id(self.loaded_id)
-        loaded_name = wdata["name"] if wdata else ("?" if self.arsenal else "NONE")
-        draw_plain_text_2d(f"LOADED: {loaded_name}", x, y,
-                           size=18, color=(0.95, 0.85, 0.55))
-        y += line_h
+        vuln = None
+        if robot is not None:
+            wd = self._weapon_by_id(robot.required_technique_id)
+            vuln = wd["name"] if wd else "?"
 
-        # Brief #9: fizzle panel
-        if self._fizzle_t > 0.0 and self._fizzle_text:
-            fy = int(h * 0.62)
-            draw_plain_text_2d("That technique fizzled harmlessly:",
-                               x, fy, size=16, color=(0.95, 0.7, 0.6))
-            fy += line_h
-            for line in _wrap(self._fizzle_text, _WRAP_CHARS):
-                draw_plain_text_2d(line, x, fy, size=15,
-                                   color=(0.9, 0.85, 0.8))
-                fy += 22
+        wd = self._weapon_by_id(self.loaded_id)
+        loaded_name = wd["name"] if wd else ("?" if self.arsenal else "NONE")
 
-        # ---- Brief #10: 3x3 face panel ----
-        if not self.arsenal:
-            return
-        loaded_slot = self._loaded_slot()
-
-        for i, weap in enumerate(self.arsenal):
-            sx, sy, cw, ch = self._slot_rect(i)
-
-            # face thumbnail
-            tex = load_portrait(weap["name"])
-            if tex is not None:
-                _, tw, th = tex
-                scale = min(cw / max(tw, 1), ch / max(th, 1))
-                ox = sx + (cw - tw * scale) / 2
-                oy = sy + (ch - th * scale) / 2
-                draw_texture(tex, ox, oy, scale=scale)
-
-            # name below face (top-left origin: y + ch)
-            draw_plain_text_2d(weap["name"], sx + cw // 2, sy + ch + 4,
-                               size=11, color=(0.7, 0.7, 0.7), align="center")
-
-            # highlight loaded weapon
-            if i == loaded_slot:
-                self._draw_border(sx, sy, cw, ch, (1.0, 0.85, 0.2, 1.0))
+        state = {
+            "arsenal":      self.arsenal,
+            "loaded_slot":  self._loaded_slot(),
+            "vulnerable":   vuln,
+            "loaded_name":  loaded_name,
+            "path_clear":   robot is None,
+            "gauge_number": None,
+            "fizzle_text":  self._fizzle_text if self._fizzle_t > 0.0 else None,
+            "fizzle_alpha": min(1.0, self._fizzle_t / 1.0),
+        }
+        self._cockpit.draw(w, h, state)
 
     @staticmethod
     def _draw_border(x, y, w, h, color):
