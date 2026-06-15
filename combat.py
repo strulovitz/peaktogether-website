@@ -50,13 +50,6 @@ def build_arsenal(robots):
 class Combat:
     """Owns combat + arsenal state for the active corridor."""
 
-    # ---- 2D panel layout (cosmetic) ------------------------------------
-    _COLS, _ROWS = 9, 1
-    _CELL = 96
-    _PAD = 14
-    _MARGIN_X = 24
-    _MARGIN_Y = 24
-
     def __init__(self):
         # ---- Brief #9 state ----
         self._autoface_t = 0.0
@@ -137,22 +130,20 @@ class Combat:
         if not self.arsenal:
             return
 
-        slot = self._loaded_slot()
         fire_now = bool(fire_edge)  # keyboard SPACE fallback
 
         # ---- controller (safe if absent) ----
         joy = getattr(gamepads, "manip_joy", None) if gamepads else None
         if joy is not None:
-            # grid nav — edge-detected
+            # single-row nav — all four directions just cycle ±1
             if self._btn_edge(joy, 3):   # Y -> UP
-                self._try_move(slot - self._COLS)
+                self._cycle(-1)
             if self._btn_edge(joy, 0):   # A -> DOWN
-                self._try_move(slot + self._COLS)
+                self._cycle(+1)
             if self._btn_edge(joy, 1):   # B -> RIGHT
-                self._try_move(slot + 1, horizontal=True)
+                self._cycle(+1)
             if self._btn_edge(joy, 2):   # X -> LEFT
-                self._try_move(slot - 1, horizontal=True)
-            slot = self._loaded_slot()
+                self._cycle(-1)
             # linear cycle — edge-detected, wrap
             if self._btn_edge(joy, 4):   # LB -> prev
                 self._cycle(-1)
@@ -188,16 +179,6 @@ class Combat:
         edge = now and not self._prev_btn[idx]
         self._prev_btn[idx] = now
         return edge
-
-    def _try_move(self, target, horizontal=False):
-        """Clamp/ignore moves leaving the grid or crossing a row edge."""
-        if target < 0 or target >= len(self.arsenal):
-            return
-        if horizontal:
-            cur = self._loaded_slot()
-            if cur // self._COLS != target // self._COLS:
-                return
-        self.loaded_id = self.arsenal[target]["id"]
 
     def _cycle(self, step):
         if not self.arsenal:
@@ -300,15 +281,6 @@ class Combat:
                 return w
         return None
 
-    def _slot_rect(self, slot):
-        """Pixel rect (x, y, w, h) for a grid slot. Top-left origin."""
-        col = slot % self._COLS
-        row = slot // self._COLS
-        step = self._CELL + self._PAD
-        x = self._MARGIN_X + col * step
-        y = self._MARGIN_Y + row * step
-        return (x, y, self._CELL, self._CELL)
-
     def _face_hit_test(self, mx, my, hub):
         self._sync_arsenal(hub)
         return self._cockpit.face_at_pixel(mx, my)
@@ -338,18 +310,6 @@ class Combat:
             "fizzle_alpha": min(1.0, self._fizzle_t / 1.0),
         }
         self._cockpit.draw(w, h, state)
-
-    @staticmethod
-    def _draw_border(x, y, w, h, color):
-        r, g, b, a = color
-        glColor4f(r, g, b, a)
-        glBegin(GL_LINES)
-        glVertex2f(x, y);         glVertex2f(x + w, y)
-        glVertex2f(x + w, y);     glVertex2f(x + w, y + h)
-        glVertex2f(x + w, y + h); glVertex2f(x, y + h)
-        glVertex2f(x, y + h);     glVertex2f(x, y)
-        glEnd()
-
 
 # -----------------------------------------------------------------------------
 # small free helpers (Brief #9 — UNCHANGED)
