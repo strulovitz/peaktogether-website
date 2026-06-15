@@ -46,6 +46,7 @@ from OpenGL.GL import (
 import render
 import palette
 import combat                            # Brief #9
+from game_state import GameState          # Brief #13
 from level_parser import load_level
 from content_parser import ParseError
 from hub_builder import build_hub
@@ -158,6 +159,9 @@ def main():
     # Brief #9: combat state (owns fire/match/HUD)
     combat_state = combat.Combat()
 
+    # Brief #13: game state (rescue, corridor/level complete, HUD)
+    game_state = GameState(hub)
+
     # Brief #11: Understanding Mode (4-layer depth panels)
     from gamepad import GamepadManager
     from understanding import UnderstandingMode
@@ -226,6 +230,9 @@ def main():
             # 6. advance world animation / corridor state
             hub.update(dt, ship.pos)
 
+            # Brief #13: game state (rescue trigger, progress)
+            game_state.update(hub, ship.pos, dt)
+
             # Brief #9+10: combat (fire, auto-face, fizzle timer + face panel selection)
             combat_state.handle_input(fire_edge, prev_edge, next_edge, ship, hub,
                                       mouse_click_edge, mouse_x, mouse_y, gamepads)
@@ -252,6 +259,7 @@ def main():
         # Brief #9: combat HUD (text only; between labels and flip)
         render.begin_2d(*WIN_SIZE)
         combat_state.draw_hud(texcache, WIN_SIZE)
+        game_state.draw_hud(texcache, WIN_SIZE)    # Brief #13: rescue flash + status + level complete
         umode.draw(texcache, WIN_SIZE)                      # Brief #11
 
         # Brief #11: temporary right-stick axis picker (verify XBOX_RSTICK_X/Y)

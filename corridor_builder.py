@@ -276,8 +276,9 @@ class CorridorGeometry:
         is not overpainted by the translucent walls."""
         for r in self._robots:
             r.draw(camera_right, camera_up, texcache)
-        for h in self._hostages:
-            h.draw(camera_right, camera_up, texcache)
+        if not getattr(self, "hostages_rescued", False):
+            for h in self._hostages:
+                h.draw(camera_right, camera_up, texcache)
 
     def draw_labels(self, camera_right, camera_up, texcache):
         """Phase 3: title + defeat plaques. After robots."""
