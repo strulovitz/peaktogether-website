@@ -6,6 +6,31 @@
 
 ---
 
+## 📜 THE 3rd PARENT'S ONE REAL CONTRIBUTION — Content Authoring Architecture
+
+Before writing Brief #10, Opus 4.8 produced one genuinely good design document:
+**`docs/CONTENT_AUTHORING.md`** — the reusable "content-authoring child" brief.
+
+This is how future Wikipedia pages (Basel Problem, etc.) get turned into game
+corridors. Key ideas:
+- A fresh child Claude interviews Nir page-by-page from Wikipedia, builds a
+  mathematical concept hierarchy, picks ~7 concepts at the RIGHT ALTITUDE (no
+  decomposing to elementary floor), chooses mathematicians + colors + faces
+- The child does ALL the thinking and emits FINISHED corridor `.txt` files
+- NO upfront cast list — each face/concept introduced AT ITS ROBOT, in context
+- Kindergarten mixing law: primaries for ingredients, blends for combinations
+- Corridor is a self-contained universe — same face can mean different things
+  in different corridors
+- Goal: correct large-resolution intuition (teen-driver standard), not mastery
+- The brief template can be pasted into a fresh Claude anytime Nir wants a new
+  Wikipedia subject turned into a game level
+
+This document is durable — it survives parent context loss. The 4th parent
+should read it before designing any future gameplay work, because it defines
+how content gets authored.
+
+---
+
 ## 🎮 WHAT WE BUILT TODAY — Brief #10 (Arsenal/Weapons)
 
 The 3rd parent (Opus 4.8) wrote Brief #10, a child Claude built it, and I (DeepSeek)
