@@ -468,18 +468,6 @@ class TexCache:
                 latex_to_surface(latex, color, fontsize))
         return self.cache[key]
 
-    def get_rich_wrapped(self, text, color, fontsize, max_width_px):
-        """Cached wrapped panel. Same (tid, w, h) return as get_mathtext."""
-        key = ("richwrap", text, fontsize, tuple(color), int(max_width_px))
-        if key in self.cache:
-            return self.cache[key]
-        tex = surface_to_texture(
-            rich_to_surface_wrapped(text, color=color, fontsize=fontsize,
-                                    max_width_px=max_width_px))
-        self.cache[key] = tex
-        self._prune()
-        return tex
-
     def get_rich(self, text, color, fontsize, blur):       # Brief #10
         """Cache + rasterize a rich (mixed prose+math, multi-line, arc) panel.
         Keyed on (text, fontsize, color, round(blur, 1)). Mirrors get_mathtext."""
@@ -807,53 +795,3 @@ def render_rich(cache, text, x, y, color=(0.95, 0.96, 0.98),
     Must be called between begin_2d / end_2d. Returns drawn (w, h)."""
     tex = cache.get_rich(text, color, fontsize, blur)
     return draw_texture(tex, x, y, scale, alpha)
-
-
-def rich_to_surface_wrapped(text, color=(0.95, 0.96, 0.98), fontsize=15,
-                            dpi=140, max_width_px=420, line_gap_px=4):
-    """Like latex_to_surface but WRAPS to max_width_px. Splits authored text
-    into whitespace tokens; a $...$ math span is kept as one unbreakable
-    token. Packs tokens into lines that fit max_width_px, rasterizes each
-    line via latex_to_surface, stacks them. Renders the FULL text (no
-    truncation). Returns an RGBA pygame Surface."""
-    # tokenize: keep $...$ spans whole, split the rest on whitespace
-    tokens, i, n = [], 0, len(text)
-    while i < n:
-        if text[i] == "$":
-            j = text.find("$", i + 1)
-            if j == -1:
-                tokens.append(text[i:]); break
-            tokens.append(text[i:j + 1]); i = j + 1
-        else:
-            j = text.find("$", i)
-            chunk = text[i:(j if j != -1 else n)]
-            tokens.extend(w for w in chunk.split() if w)
-            i = j if j != -1 else n
-
-    def _w(s):
-        if s.strip() == "":
-            return 0
-        return latex_to_surface(s, color, fontsize, dpi).get_width()
-
-    lines, cur = [], ""
-    for tok in tokens:
-        trial = tok if cur == "" else cur + " " + tok
-        if cur and _w(trial) > max_width_px:
-            lines.append(cur); cur = tok
-        else:
-            cur = trial
-    if cur:
-        lines.append(cur)
-    if not lines:
-        return pygame.Surface((1, 1), pygame.SRCALPHA).convert_alpha()
-
-    surfs = [latex_to_surface(ln, color, fontsize, dpi) for ln in lines]
-    total_w = max(s.get_width() for s in surfs)
-    total_h = sum(s.get_height() + line_gap_px for s in surfs)
-    parent = pygame.Surface((max(total_w, 1), max(total_h, 1)), pygame.SRCALPHA)
-    parent.fill((0, 0, 0, 0))
-    y = 0
-    for s in surfs:
-        parent.blit(s, (0, y))
-        y += s.get_height() + line_gap_px
-    return parent.convert_alpha()

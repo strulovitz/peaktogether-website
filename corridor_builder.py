@@ -344,8 +344,7 @@ class CorridorGeometry:
             text = explain.get("mathematician", "")
             if not text:
                 text = (getattr(rdata, "briefing_hint", "") or "—")
-            tex = texcache.get_rich_wrapped(text, color=text_rgb, fontsize=13,
-                                            max_width_px=420)
+            tex = texcache.get_mathtext(text, color=text_rgb, fontsize=13)
             center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
             render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
                                   scale=PLAQUE_SCALE, alpha=0.9)
