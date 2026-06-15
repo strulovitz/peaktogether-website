@@ -14,7 +14,7 @@
 import numpy as np
 
 import render
-from render import draw_texture, draw_text_mathtext_2d
+from render import draw_texture, draw_text_mathtext_2d, draw_plain_text_2d
 from robots import load_portrait
 from OpenGL.GL import (
     glBegin, glEnd, glVertex2f, glVertex3f, glColor4f, GL_LINES,
@@ -332,35 +332,30 @@ class Combat:
 
         robot = self._hud_robot
         if robot is None:
-            draw_text_mathtext_2d(
-                cache, r"\mathrm{PATH\ CLEAR}", x, y, color=(0.6, 0.95, 0.6),
-                fontsize=18)
+            draw_plain_text_2d("PATH CLEAR", x, y, size=18,
+                               color=(0.6, 0.95, 0.6))
         else:
             wdata = self._weapon_by_id(robot.required_technique_id)
             need_name = wdata["name"] if wdata else "?"
-            draw_text_mathtext_2d(
-                cache, _mt(f"VULNERABLE TO: {need_name}"), x, y,
-                color=col, fontsize=18)
+            draw_plain_text_2d(f"VULNERABLE TO: {need_name}", x, y,
+                               size=18, color=col)
         y += line_h
 
         wdata = self._weapon_by_id(self.loaded_id)
         loaded_name = wdata["name"] if wdata else ("?" if self.arsenal else "NONE")
-        draw_text_mathtext_2d(
-            cache, _mt(f"LOADED: {loaded_name}"), x, y,
-            color=(0.95, 0.85, 0.55), fontsize=18)
+        draw_plain_text_2d(f"LOADED: {loaded_name}", x, y,
+                           size=18, color=(0.95, 0.85, 0.55))
         y += line_h
 
         # Brief #9: fizzle panel
         if self._fizzle_t > 0.0 and self._fizzle_text:
             fy = int(h * 0.62)
-            draw_text_mathtext_2d(
-                cache, _mt("That technique fizzled harmlessly:"), x, fy,
-                color=(0.95, 0.7, 0.6), fontsize=16)
+            draw_plain_text_2d("That technique fizzled harmlessly:",
+                               x, fy, size=16, color=(0.95, 0.7, 0.6))
             fy += line_h
             for line in _wrap(self._fizzle_text, _WRAP_CHARS):
-                draw_text_mathtext_2d(
-                    cache, _mt(line), x, fy, color=(0.9, 0.85, 0.8),
-                    fontsize=15)
+                draw_plain_text_2d(line, x, fy, size=15,
+                                   color=(0.9, 0.85, 0.8))
                 fy += 22
 
         # ---- Brief #10: 3x3 face panel ----
@@ -414,22 +409,6 @@ def _nlerp(qa, qb, t):
         b = -b
     out = a * (1.0 - t) + b * t
     return render.quat_normalize(out)
-
-
-def _mt(text):
-    r"""Wrap a plain string as mathtext \mathrm{...} so draw_text_mathtext_2d
-    renders it as upright readable text. Spaces -> \ ; backslash-safe input
-    only (we feed plain ASCII labels and fizzle prose)."""
-    safe = (text.replace("\\", "")
-                .replace("{", "")
-                .replace("}", "")
-                .replace("$", "")
-                .replace("^", " ")
-                .replace("_", " ")
-                .replace("&", "and")
-                .replace("%", " percent"))
-    safe = safe.replace(" ", r"\ ")
-    return r"\mathrm{" + safe + r"}"
 
 
 def _wrap(text, width):

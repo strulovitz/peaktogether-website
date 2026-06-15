@@ -326,10 +326,7 @@ class CorridorGeometry:
 
     def _draw_title(self, cr, cu, texcache):
         title = self._data.title
-        tex = texcache.get_mathtext(
-            r"\mathrm{%s}" % title.replace(" ", r"\ "),
-            color=self._dominant_rgb, fontsize=16,
-        )
+        tex = render.get_plain_text_tex(title, size=16, color=self._dominant_rgb)
         n0 = self._nodes[0]
         center = n0["center"] + n0["forward"] * 4.0 + n0["up"] * (n0["radius"] * 0.6)
         render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
@@ -340,11 +337,11 @@ class CorridorGeometry:
         for r, rdata, (pose, _yaw) in zip(self._robots, self._robots_data, self._station_poses):
             if not r.is_defeated():
                 continue
-            text = (getattr(rdata, "briefing_hint", "") or "—")[:36]
-            tex = texcache.get_mathtext(
-                r"\mathrm{%s}" % text.replace(" ", r"\ "),
-                color=text_rgb, fontsize=13,
-            )
+            explain = getattr(rdata, "explain", {}) or {}
+            text = explain.get("mathematician", "")
+            if not text:
+                text = (getattr(rdata, "briefing_hint", "") or "—")
+            tex = render.get_plain_text_tex(text, size=13, color=text_rgb)
             center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
             render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
                                   scale=PLAQUE_SCALE, alpha=0.9)

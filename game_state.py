@@ -37,7 +37,7 @@ flush_walls. It only reads bits and (in draw_hud) draws HUD text via the
 existing render.draw_text_mathtext_2d path.
 """
 
-from render import draw_text_mathtext_2d
+from render import draw_text_mathtext_2d, draw_plain_text_2d
 from hostages import near_hostages, NEAR_RADIUS
 
 
@@ -58,19 +58,6 @@ _BANNER_COLOR      = (0.70, 0.95, 1.00)
 _STATUS_RIGHT_PAD  = 24
 _STATUS_TOP_PAD    = 28
 _CHAR_PX_AT_18     = 11.0
-
-
-def _mt(text):
-    safe = (text.replace("\\", "")
-                .replace("{", "")
-                .replace("}", "")
-                .replace("$", "")
-                .replace("^", " ")
-                .replace("_", " ")
-                .replace("&", "and")
-                .replace("%", " percent"))
-    safe = safe.replace(" ", r"\ ")
-    return r"\mathrm{" + safe + r"}"
 
 
 class GameState:
@@ -140,21 +127,16 @@ class GameState:
 
         done, total = self.rescued_count()
         status = "RESCUED %d/%d" % (done, total)
-        est_w = len(status) * (_CHAR_PX_AT_18 * (_STATUS_FONTSIZE / 18.0))
-        sx = max(0, int(w - _STATUS_RIGHT_PAD - est_w))
-        draw_text_mathtext_2d(cache, _mt(status), sx, _STATUS_TOP_PAD,
-                              color=_STATUS_COLOR, fontsize=_STATUS_FONTSIZE)
+        draw_plain_text_2d(status, w - _STATUS_RIGHT_PAD, _STATUS_TOP_PAD,
+                           size=_STATUS_FONTSIZE, color=_STATUS_COLOR,
+                           align="right")
 
         if self.show_rescue_flash():
-            self._draw_centered(cache, RESCUE_FLASH_TEXT, w, int(h * 0.40),
-                                 _FLASH_COLOR, _FLASH_FONTSIZE)
+            draw_plain_text_2d(RESCUE_FLASH_TEXT, w // 2, int(h * 0.40),
+                               size=_FLASH_FONTSIZE, color=_FLASH_COLOR,
+                               align="center")
 
         if self.is_level_complete():
-            self._draw_centered(cache, LEVEL_COMPLETE_TEXT, w, int(h * 0.50),
-                                 _BANNER_COLOR, _BANNER_FONTSIZE)
-
-    def _draw_centered(self, cache, text, win_w, y, color, fontsize):
-        latex = _mt(text)
-        _tid, tw, _th = cache.get_mathtext(latex, color, fontsize)
-        x = max(0, (win_w - tw) // 2)
-        draw_text_mathtext_2d(cache, latex, x, y, color=color, fontsize=fontsize)
+            draw_plain_text_2d(LEVEL_COMPLETE_TEXT, w // 2, int(h * 0.50),
+                               size=_BANNER_FONTSIZE, color=_BANNER_COLOR,
+                               align="center")

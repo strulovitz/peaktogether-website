@@ -535,6 +535,88 @@ def draw_text_mathtext_2d(cache, latex, x, y, color=(0.7, 0.7, 0.7),
     return draw_texture(tex, x, y, scale, alpha)
 
 
+# ----------------------------------------------------------------------
+# PLAIN ENGLISH TEXT RENDERER — uses pygame.font, not mathtext.
+# Plain English is NOT math — it needs a real font rasterizer.
+# Fixes the "raw LaTeX code on screen" bug for all HUD/corridor text.
+# ----------------------------------------------------------------------
+PLAIN_TEXT_SIZE = 18
+
+_plain_font_cache = {}   # size -> pygame.font.Font
+_plain_tex_cache = {}     # (text, size, color_rgb_bytes) -> (tid, w, h)
+
+
+def _get_plain_font(size):
+    if size not in _plain_font_cache:
+        candidates = ["Segoe UI", "Arial", "Calibri", "DejaVu Sans"]
+        font = None
+        for name in candidates:
+            try:
+                font = pygame.font.SysFont(name, size)
+                break
+            except Exception:
+                continue
+        if font is None:
+            font = pygame.font.Font(None, size)
+        _plain_font_cache[size] = font
+    return _plain_font_cache[size]
+
+
+def _make_plain_tex(text, size, color):
+    key = (text, size, tuple(int(c * 255) for c in color))
+    if key in _plain_tex_cache:
+        return _plain_tex_cache[key]
+
+    font = _get_plain_font(size)
+    r, g, b = (int(color[0] * 255), int(color[1] * 255), int(color[2] * 255))
+    text_surf = font.render(text, True, (r, g, b))
+    w, h = text_surf.get_width(), text_surf.get_height()
+    if w == 0 or h == 0:
+        w, h = 1, 1
+
+    # Blit to an SRCALPHA surface so we get clean RGBA
+    surf = pygame.Surface((w, h), pygame.SRCALPHA)
+    surf.blit(text_surf, (0, 0))
+    data = pygame.image.tostring(surf, "RGBA", True)  # flip for GL
+
+    tid = glGenTextures(1)
+    glBindTexture(GL_TEXTURE_2D, tid)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA, GL_UNSIGNED_BYTE, data)
+    glBindTexture(GL_TEXTURE_2D, 0)
+
+    tex = (tid, w, h)
+    _plain_tex_cache[key] = tex
+    return tex
+
+
+def draw_plain_text_2d(text, x, y, size=PLAIN_TEXT_SIZE, color=(1, 1, 1),
+                       align="left", alpha=1.0):
+    """Render a plain English string as a 2D overlay. Uses pygame.font for
+    real rasterization — NO mathtext, NO escaping, NO backslashes. Spaces
+    are spaces; punctuation shows literally. Must be called between
+    begin_2d / end_2d.
+
+    align: "left" (default), "center", or "right". For non-left, x is the
+    anchor point (center of the string, or right edge)."""
+    tex = _make_plain_tex(text, size, color)
+    _tid, tw, th = tex
+    if align == "center":
+        x = x - tw // 2
+    elif align == "right":
+        x = x - tw
+    return draw_texture(tex, int(x), int(y), 1.0, alpha)
+
+
+def get_plain_text_tex(text, size=PLAIN_TEXT_SIZE, color=(1, 1, 1)):
+    """Return (tid, w, h) for a plain English string — same tuple format as
+    texcache.get_mathtext(). Use this for billboards / non-HUD textures."""
+    return _make_plain_tex(text, size, color)
+
+
 # ============================================================================
 # RICH-TEXT SPINE (Brief #10) — render_rich and friends
 # Mixed prose+math, multi-line, value-arcs, blur, and a raw-bytes uploader.
