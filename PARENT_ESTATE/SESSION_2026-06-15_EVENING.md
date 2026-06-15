@@ -168,7 +168,7 @@ peaktogether-website/
 | 1 | **Face panel images** — replace blue-tinted `*-hologram.png` with normal photos | 🔴 HIGH | Normal PNGs in Nir's Downloads, not in repo |
 | 2 | **Ship wall containment** — call `hub.inside()` after `ship.update`, clamp if outside | 🟡 MED | `hub.inside()` exists, unwired |
 | 3 | **T.16000M joystick** — wire `gamepads.pilot_command()` into ship controls | 🟡 MED | Code exists in `gamepad.py`, unwired |
-| 4 | **Defeat plaque** — verify EXPLAIN_MATHEMATICIAN text renders correctly (was white rectangle bug) | 🟡 MED | Changed from `briefing_hint[:36]` to full `explain["mathematician"]`, still on mathtext |
+| 4 | **Defeat plaque STILL SHOWS WHITE RECTANGLE** — after robot dies, a billboard should appear at the robot's position showing EXPLAIN_MATHEMATICIAN text as a transparent "road sign" in the corridor (NOT in Understanding Mode — directly in-world, single layer, educational reinforcement on the way back). Currently: white rectangle. Code in `corridor_builder.py:_draw_plaques` (line 327). Was partially changed from `briefing_hint[:36]` to `explain["mathematician"]` but mathtext rendering is still broken. | 🔴 HIGH |
 | 5 | **Spaceship interior reference** — Nir uploaded reference images of cockpit interior that haven't been matched | 🟢 LOW | Current cockpit is functional but might need styling tweaks |
 
 ---
