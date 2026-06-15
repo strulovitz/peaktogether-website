@@ -110,7 +110,7 @@ class GameState:
 
     def rescued_count(self):
         done = sum(1 for r in self._records if r["rescued"])
-        return (done, len(self._records))
+        return (done * 2, len(self._records) * 2)  # 2 people per corridor
 
     def corridors_complete(self):
         done = sum(1 for r in self._records if r["complete"])

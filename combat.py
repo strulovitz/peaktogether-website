@@ -46,13 +46,6 @@ def build_arsenal(robots):
     return arsenal[:9]  # 3x3 grid cap
 
 
-def _latex_safe_name(name):
-    s = name.strip()
-    for ch in ('\\', '&', '%', '$', '#', '_', '{', '}', '^', '~'):
-        s = s.replace(ch, '\\' + ch)
-    return r'\text{' + s + '}'
-
-
 class Combat:
     """Owns combat + arsenal state for the active corridor."""
 
@@ -376,10 +369,8 @@ class Combat:
                 draw_texture(tex, ox, oy, scale=scale)
 
             # name below face (top-left origin: y + ch)
-            draw_text_mathtext_2d(
-                cache, _latex_safe_name(weap["name"]),
-                sx, sy + ch + 4, color=(0.7, 0.7, 0.7), fontsize=13, scale=1.0,
-            )
+            draw_plain_text_2d(weap["name"], sx + cw // 2, sy + ch + 4,
+                               size=11, color=(0.7, 0.7, 0.7), align="center")
 
             # highlight loaded weapon
             if i == loaded_slot:
