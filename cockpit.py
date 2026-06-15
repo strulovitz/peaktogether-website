@@ -32,17 +32,24 @@ from robots import load_portrait
 # ---------------------------------------------------------------------------
 # TOGGLES
 # ---------------------------------------------------------------------------
-STRUTS_ON = True          # set False to remove the corner beams entirely
+STRUTS_ON = True          # set False to remove the canopy beams entirely
 
 # ---------------------------------------------------------------------------
 # COLORS (decoration only -- none carry meaning)
 # ---------------------------------------------------------------------------
-_BAR_FILL    = (0.05, 0.05, 0.06)   # the flat black dashboard bar
-_BAR_BORDER  = (0.30, 0.33, 0.38)   # thin top edge / frame
-_STRUT_FILL  = (0.10, 0.11, 0.13)
-_STRUT_EDGE  = (0.30, 0.33, 0.38)
+_BAR_FILL    = (0.05, 0.05, 0.06)
+_BAR_BORDER  = (0.30, 0.33, 0.38)
+_STRUT_FILL  = (0.42, 0.44, 0.48)   # grey canopy beam
+_STRUT_EDGE  = (0.58, 0.60, 0.65)   # lighter grey highlight edge
 _NAME_COLOR  = (0.78, 0.80, 0.86)
-_SEL_COLOR   = (1.00, 0.85, 0.20)   # selected-face highlight
+_SEL_COLOR   = (1.00, 0.85, 0.20)
+
+# ---------------------------------------------------------------------------
+# CANOPY BEAM FRACTIONS (tune the look here)
+# ---------------------------------------------------------------------------
+_BEAM_TOP_DROP   = 0.04    # how far below the top edge the beams start, frac of H
+_BEAM_TOP_THICK  = 0.07    # beam thickness at the top (lateral end), frac of W
+_BEAM_FOOT_THICK = 0.05    # beam thickness where it meets the bar, frac of W
 
 # ---------------------------------------------------------------------------
 # LAYOUT FRACTIONS (tune the look here)
@@ -51,8 +58,6 @@ _BAR_H_FRAC    = 0.22    # dashboard bar height as fraction of H
 _BAR_PAD_FRAC  = 0.015   # inner padding of the bar, fraction of H
 _NAME_FRAC     = 0.22    # name-strip height as fraction of the face side
 _GAP_FRAC      = 0.5     # horizontal gap between faces, as fraction of a face
-_STRUT_DEPTH   = 0.30    # strut reach down the sides, fraction of H
-_STRUT_WIDTH   = 0.14    # strut width at the top edge, fraction of W
 
 
 # ===========================================================================
@@ -182,10 +187,6 @@ class CockpitHUD:
         L["cells"] = cells
         L["face_side"] = s
 
-        # struts
-        L["strut_w"] = _STRUT_WIDTH * W
-        L["strut_d"] = _STRUT_DEPTH * H
-
         # text anchors (above the bar so they never overlap the faces)
         L["txt_vuln"]   = (pad + 4, 12)
         L["txt_loaded"] = (pad + 4, 12 + _STATUS_LINE_H)
@@ -197,13 +198,31 @@ class CockpitHUD:
     #  DRAW PARTS
     # -----------------------------------------------------------------------
     def _draw_struts(self):
+        """Two grey canopy beams. Tops flush to the screen sides (x=0 and
+        x=W, a little below the top edge); feet land on the bar top at
+        W/4 and 3W/4. Each beam is a thick slanted quad."""
         W = self._W
-        sw = self._L["strut_w"]
-        sd = self._L["strut_d"]
-        left = [(0, 0), (sw, 0), (0, sd)]
+        _bx, bar_top, _bw, _bh = self._L["bar"]
+
+        drop   = _BEAM_TOP_DROP * self._H
+        t_top  = _BEAM_TOP_THICK * W
+        t_foot = _BEAM_FOOT_THICK * W
+
+        # --- LEFT beam: top outer at x=0, foot inner at x=W/4 ---
+        l_top_out  = (0.0,        drop)
+        l_top_in   = (t_top,      drop)
+        l_foot_in  = (W * 0.25,           bar_top)
+        l_foot_out = (W * 0.25 - t_foot,  bar_top)
+        left = [l_top_out, l_top_in, l_foot_in, l_foot_out]
         _filled_poly(left, _STRUT_FILL)
         _poly_outline(left, _STRUT_EDGE)
-        right = [(W, 0), (W - sw, 0), (W, sd)]
+
+        # --- RIGHT beam: mirror (top outer at x=W, foot inner at x=3W/4) ---
+        r_top_out  = (W,          drop)
+        r_top_in   = (W - t_top,  drop)
+        r_foot_in  = (W * 0.75,           bar_top)
+        r_foot_out = (W * 0.75 + t_foot,  bar_top)
+        right = [r_top_out, r_top_in, r_foot_in, r_foot_out]
         _filled_poly(right, _STRUT_FILL)
         _poly_outline(right, _STRUT_EDGE)
 
