@@ -232,6 +232,13 @@ class CorridorGeometry:
     def hostage_positions(self):
         return list(self._hostage_anchors)
 
+    def cavern_floor_normal(self):
+        """World-space 'standing up' axis at the cavern (local up of the
+        final ring). Hostages align their standing axis to this so feet sit
+        on the (possibly tilted) cavern floor."""
+        n = self._nodes[-1]["up"]
+        return tuple((n / np.linalg.norm(n)).tolist())
+
     def inside(self, point, margin=0.0):
         p = np.asarray(point, dtype=float)
         for i in range(len(self._nodes) - 1):

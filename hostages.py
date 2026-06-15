@@ -10,6 +10,12 @@ fake flat lighting, stored pre-shaded geometry, a glPushMatrix transform to
 world position + facing, gentle idle animation, and a draw(cr,cu,texcache)
 method split opaque/emissive exactly like Robot.
 
+FIX #12-FIX-1: corridors BEND in 6-DOF, so the cavern floor has its OWN local
+up vector (_nodes[-1]["up"]), NOT world Y. Hostages now receive that floor
+normal and build a FULL orthonormal basis (right, up, fwd) -> they stand
+perpendicular to the (possibly tilted) cavern floor, feet planted, instead of
+tilting/floating. Bob & sway now displace along the floor normal, not world Y.
+
 THE ENGINE IS MATHEMATICS-BLIND. Hostages carry NO mathematics and NO
 meaning -- pure prize geometry. The warm figure color is DECORATION (chosen
 here, like Robot's HULL_GREY), never a meaning-color. We never call
@@ -28,6 +34,7 @@ Confirmed dependencies (frozen, quoted from the pasted files):
     render.draw_billboard / ship_right / ship_up      (camera basis cr,cu)
     CorridorGeometry.hostage_positions() -> list[(x,y,z)]   (3 floor anchors)
     CorridorGeometry.entrance_pose() -> ((x,y,z),(nx,ny,nz))  (mouth + normal)
+    CorridorGeometry.cavern_floor_normal() -> (ux,uy,uz)  (FIX #12-FIX-1)
     palette opaque constants (HOSTAGE_BLUE etc.); optional palette.HOSTAGE_GLOW
 """
 
@@ -78,7 +85,8 @@ _VARIANTS = [
 # TODO(DeepSeek): TUNE after Nir flies the demo. | ACCEPTANCE: the couple
 #   reads as two distinct PEOPLE standing TOGETHER (not clones, not merged,
 #   not too far apart); the idle bob/sway reads ALIVE (gentle, not seasick);
-#   they GLOW warm and POP against the blue cavern.
+#   they GLOW warm and POP against the blue cavern; in a BENT corridor they
+#   stand PERPENDICULAR to the tilted floor (feet planted, not floating).
 HOSTAGE_SIZE     = 1.6     # overall figure scale (a person ~2.6 units tall)
 COUPLE_SPACING   = 2.2     # world units between the two people (center-to-center)
 BOB_AMPLITUDE    = 0.10    # gentle vertical breathing bob (people, not hover)
@@ -121,8 +129,8 @@ def _shade(tri, base_rgb):
 # ----------------------------------------------------------------------
 # BODY PRIMITIVES  (low-poly, output as triangles (a,b,c) -- same format
 # robots.py's _box/_prism/_wedge_snout emit). Local model space: +Y up,
-# the figure faces +Z (we rotate by yaw about +Y in draw, exactly like
-# the robot hull). Origin at the feet (y=0 = floor).
+# the figure faces +Z (we map this onto the cavern's real basis in draw,
+# replacing the old single Y-yaw). Origin at the feet (y=0 = floor).
 # ----------------------------------------------------------------------
 def _box(cx, cy, cz, hx, hy, hz):
     """Axis-aligned box centered (cx,cy,cz), half-extents (hx,hy,hz).
@@ -188,10 +196,12 @@ def _octa_sphere(cx, cy, cz, r):
 def _build_body(variant):
     """Assemble ONE recognizable standing PERSON from the primitives above,
     pre-shaded per-triangle (skin tone for head/hands, cloth tone for the
-    rest). Returns (verts_flat Nx3, colors list). Mirrors robots.py's
-    _build_hull()+_shade() pattern: geometry built once, colors baked.
+    rest). Returns (verts_flat Nx3, colors list, total_height). Mirrors
+    robots.py's _build_hull()+_shade() pattern: geometry built once, colors
+    baked.
 
-    Proportions (local space, feet at y=0), scaled by variant height:
+    Proportions (local space, FEET AT y=0, standing along +Y, facing +Z),
+    scaled by variant height:
         legs  0.00 -> 1.10
         torso 1.05 -> 1.95   (tapers in at the waist, out at shoulders)
         arms  1.05 -> 1.90   (alongside the torso)
@@ -262,33 +272,58 @@ class Hostage:
     """A single rescued PERSON -- a real 3D humanoid figure.
 
     PUBLIC INTERFACE (final, mirrors Robot's shape):
-        Hostage(world_pos, facing, color_id, variant=0, size=HOSTAGE_SIZE)
+        Hostage(world_pos, facing, up_normal, color_id,
+                variant=0, size=HOSTAGE_SIZE)
         update(dt)                          # gentle idle life; NO tracking
         draw(camera_right, camera_up, texcache)            # wrapper
         draw_opaque(camera_right, camera_up, texcache)     # body, depth on
         draw_emissive(camera_right, camera_up, texcache)   # warm glow, additive
-        position   (property) -> bobbed world-center (feet anchor + bob)
+        position   (property) -> bobbed world-center (feet anchor + bob along up)
         base_pos              -> un-bobbed floor anchor (public)
 
     world_pos : (x,y,z) FLOOR anchor (feet) in world space.
     facing    : (dx,dy,dz) direction the person looks (toward the ship).
+    up_normal : (ux,uy,uz) the cavern floor's local 'up' (standing axis).
+                FIX #12-FIX-1: corridors bend, so this is NOT world Y.
     color_id  : opaque warm GLOW rgb (decoration, never meaning).
     variant   : 0 or 1 -> the two distinct people of the couple.
+
+    The model is built FEET-AT-ORIGIN, standing along model +Y, facing
+    model +Z. draw() maps model +Y -> world up_normal, model +Z -> world
+    fwd (facing, re-orthogonalized), model +X -> world right, via a single
+    column-major glMultMatrixf -- REPLACING the old glRotatef(yaw,0,1,0).
     """
 
-    def __init__(self, world_pos, facing, color_id, variant=0,
+    def __init__(self, world_pos, facing, up_normal, color_id, variant=0,
                  size=HOSTAGE_SIZE):
-        # --- placement (mirrors Robot.base_pos + a yaw) ---
+        # --- placement (mirrors Robot.base_pos) ---
         self.base_pos = np.asarray(world_pos, dtype=float)
         self.size = float(size)
         self.variant = int(variant)
 
-        # yaw from facing, SAME convention as the robots / hub.spawn_pose:
-        #   yaw = atan2(dx, -dz)
-        f = _unit(facing)
-        if abs(f[0]) < 1e-9 and abs(f[2]) < 1e-9:
-            f = np.array([0.0, 0.0, 1.0])
-        self._yaw = math.atan2(f[0], -f[2])
+        # --- FIX #12-FIX-1: build a FULL orthonormal basis from the cavern
+        # floor normal (standing axis) + the facing direction. The figure
+        # feet align to `up`, so it stands perpendicular to the (possibly
+        # tilted) cavern floor instead of assuming world Y is up.
+        up = _unit(up_normal)
+        if np.linalg.norm(up) < 1e-9:
+            up = np.array([0.0, 1.0, 0.0])     # ultimate fallback: world Y
+        fwd0 = _unit(facing)
+
+        # right = up x fwd0. If facing is ~parallel to up, this collapses;
+        # fall back to a stable perpendicular (DEGENERATE CASE per brief).
+        right = np.cross(up, fwd0)
+        if np.linalg.norm(right) < 1e-6:
+            right = np.cross(up, np.array([1.0, 0.0, 0.0]))
+            if np.linalg.norm(right) < 1e-6:
+                right = np.cross(up, np.array([0.0, 0.0, 1.0]))
+        right = _unit(right)
+        # re-orthogonalize forward so fwd _|_ up exactly (model +Z -> fwd)
+        fwd = _unit(np.cross(right, up))
+
+        self._up = up                 # standing axis: bob/sway displace ALONG this
+        self._right = right
+        self._fwd = fwd
 
         # --- warm glow color (DECORATION, never meaning) ---
         self._glow = (np.asarray(color_id, dtype=float)
@@ -308,7 +343,10 @@ class Hostage:
     def update(self, dt):
         """Gentle idle life: a slow breathing bob + a subtle weight-shift
         sway. MIRRORS Robot.update's _t advance + sinusoidal bob. NO player
-        tracking, NO combat, NO timer -- they just wait to be rescued."""
+        tracking, NO combat, NO timer -- they just wait to be rescued.
+        FIX #12-FIX-1: the bob displaces along the FLOOR NORMAL (self._up),
+        not world Y, so a breathing hostage in a bent corridor doesn't drift
+        sideways or sink into a tilted floor."""
         self._t += dt
         ph = self._t + self._phase
         self._bob_y = BOB_AMPLITUDE * math.sin(ph * BOB_SPEED)
@@ -316,7 +354,8 @@ class Hostage:
 
     # ------------------------------------------------------------------
     def _world_center(self):
-        return self.base_pos + np.array([0.0, self._bob_y, 0.0])
+        # FIX #12-FIX-1: bob along the floor normal, not world Y.
+        return self.base_pos + self._up * self._bob_y
 
     @property
     def position(self):
@@ -324,6 +363,29 @@ class Hostage:
         frame (same point draw/update use). base_pos is the un-bobbed
         anchor. Mirrors Robot.position."""
         return self._world_center()
+
+    # ------------------------------------------------------------------
+    def _model_matrix(self, origin):
+        """Column-major 4x4 (OpenGL order) mapping model axes to the cavern
+        basis: model +X -> right, +Y -> up, +Z -> fwd, plus a small sway
+        roll about the standing (up) axis. Built feet-at-origin so the FEET
+        sit on `origin`. Passed flat to glMultMatrixf."""
+        r = self._right
+        u = self._up
+        f = self._fwd
+
+        # subtle weight-shift sway = a small rotation of (right, fwd) about up
+        cs, sn = math.cos(self._sway), math.sin(self._sway)
+        r_s = r * cs + f * sn
+        f_s = -r * sn + f * cs
+
+        # column-major: col0=right, col1=up, col2=fwd, col3=translation
+        return [
+            r_s[0], r_s[1], r_s[2], 0.0,
+            u[0],   u[1],   u[2],   0.0,
+            f_s[0], f_s[1], f_s[2], 0.0,
+            origin[0], origin[1], origin[2], 1.0,
+        ]
 
     # ------------------------------------------------------------------
     # DRAW -- split opaque / emissive exactly like Robot. The corridor's
@@ -339,14 +401,13 @@ class Hostage:
 
     def draw_opaque(self, camera_right, camera_up, texcache):
         """OPAQUE phase: the solid 3D body (head/torso/arms/legs), fake-lit,
-        normal depth test + depth-write on. Same transform recipe as
-        Robot.draw_opaque: translate -> rotate(yaw) -> scale -> emit tris."""
-        cx, cy, cz = self._world_center()
+        normal depth test + depth-write on. FIX #12-FIX-1: the old
+        glRotatef(yaw,0,1,0)/glRotatef(sway) pair is REPLACED by a single
+        glMultMatrixf that aligns the figure to the cavern floor basis."""
+        origin = self._world_center()    # feet sit here; body rises along up
 
         glPushMatrix()
-        glTranslatef(cx, cy, cz)
-        glRotatef(math.degrees(self._yaw), 0.0, 1.0, 0.0)
-        glRotatef(math.degrees(self._sway), 0.0, 0.0, 1.0)   # subtle weight shift
+        glMultMatrixf(self._model_matrix(origin))
         glScalef(self.size, self.size, self.size)
 
         glDisable(GL_LIGHTING)
@@ -360,25 +421,24 @@ class Hostage:
     def draw_emissive(self, camera_right, camera_up, texcache):
         """EMISSIVE phase: a warm additive halo so the couple GLOWS and POPS
         against the blue cavern -- (1) a soft camera-facing ground-glow aura
-        disk under the figure (uses cr,cu like Robot._disk), and (2) a warm
+        disk at the feet (uses cr,cu like Robot._disk), and (2) a warm
         additive re-draw of the body that brightens its silhouette. Additive
         blend, depth-write off; state restored exactly like Robot."""
-        cx, cy, cz = self._world_center()
+        origin = self._world_center()
 
         glEnable(GL_BLEND)
         glBlendFunc(GL_SRC_ALPHA, GL_ONE)   # additive -> glow, dark vanishes
         glDepthMask(GL_FALSE)
 
         # (1) warm ground-glow aura disk at the feet, camera-facing.
-        aura_center = (cx, cy + 0.05 * self.size, cz)
-        self._glow_disk(aura_center, GLOW_AURA_DIAM * self.size,
+        #     FIX #12-FIX-1: lift the aura slightly along the floor normal.
+        aura_center = origin + self._up * (0.05 * self.size)
+        self._glow_disk(tuple(aura_center), GLOW_AURA_DIAM * self.size,
                         camera_right, camera_up, self._glow, GLOW_AURA_ALPHA)
 
         # (2) warm additive body halo -> emissive silhouette that POPS.
         glPushMatrix()
-        glTranslatef(cx, cy, cz)
-        glRotatef(math.degrees(self._yaw), 0.0, 1.0, 0.0)
-        glRotatef(math.degrees(self._sway), 0.0, 0.0, 1.0)
+        glMultMatrixf(self._model_matrix(origin))
         glScalef(self.size, self.size, self.size)
         gr, gg, gb = (float(self._glow[0]), float(self._glow[1]),
                       float(self._glow[2]))
@@ -444,20 +504,24 @@ def build_hostages(corridor_geom, color_id=None,
                    size=HOSTAGE_SIZE, spacing=COUPLE_SPACING):
     """Return EXACTLY TWO Hostage objects for `corridor_geom`, positioned as
     a couple standing TOGETHER on the cavern floor at the corridor's far end,
-    facing back up the corridor toward the arriving ship.
+    facing back up the corridor toward the arriving ship, and STANDING
+    PERPENDICULAR to the (possibly tilted) cavern floor.
 
     Uses ONLY the corridor's PUBLIC interface (no private access):
         corridor_geom.hostage_positions() -> [a_left, a_center, a_right]
             three floor anchors at offsets (-3.5, 0.0, +3.5) along the
-            cavern's local 'right' axis (quoted from corridor_builder
-            _build_cavern_anchors). We IGNORE the count of three and derive
-            our OWN tight couple:
+            cavern's local 'right' axis. We IGNORE the count of three and
+            derive our OWN tight couple:
               midpoint = center anchor (index 1)
               right    = unit(a_right - a_left)   (the cavern lateral axis)
               two people at midpoint +/- right * (spacing/2)
         corridor_geom.entrance_pose() -> ((mouth_xyz),(normal)) -> the couple
             faces from their midpoint toward the mouth (up the corridor).
+        corridor_geom.cavern_floor_normal() -> (ux,uy,uz)  FIX #12-FIX-1:
+            the cavern floor's local 'up' (standing axis). Each Hostage
+            aligns its feet->head to this so it stands on the tilted floor.
 
+    PLACEMENT IS UNCHANGED by FIX #12-FIX-1 -- only ORIENTATION changed.
     EXACTLY TWO. A couple. Not three. Not one. TWO.
     """
     anchors = corridor_geom.hostage_positions()
@@ -471,17 +535,23 @@ def build_hostages(corridor_geom, color_id=None,
     elif len(pts) == 2:
         midpoint = (pts[0] + pts[1]) * 0.5
         right = _unit(pts[1] - pts[0])
-    else:  # single anchor: synthesize a lateral axis from the mouth dir
+    else:  # single anchor: synthesize a lateral axis
         midpoint = pts[0]
         right = np.array([1.0, 0.0, 0.0])
+
+    # FIX #12-FIX-1: the real cavern floor 'up' (NOT world Y).
+    up = _unit(corridor_geom.cavern_floor_normal())
 
     # facing: from the couple toward the corridor mouth (toward the ship).
     mouth_pos, _normal = corridor_geom.entrance_pose()
     facing = _unit(np.asarray(mouth_pos, dtype=float) - midpoint)
-    # keep them upright -- face horizontally up the corridor (no head-tilt).
-    facing = _unit(np.array([facing[0], 0.0, facing[2]])) \
-        if (abs(facing[0]) > 1e-6 or abs(facing[2]) > 1e-6) \
-        else np.array([0.0, 0.0, 1.0])
+    # Keep the look-direction in the floor plane (project out the up
+    # component) so the figure faces along the floor, not up/down into it.
+    facing = facing - up * float(np.dot(facing, up))
+    if np.linalg.norm(facing) < 1e-6:
+        # facing collapsed onto up -> pick the cavern lateral axis instead
+        facing = right.copy()
+    facing = _unit(facing)
 
     glow = _resolve_glow() if color_id is None else np.asarray(color_id, float)
 
@@ -490,8 +560,8 @@ def build_hostages(corridor_geom, color_id=None,
     right_pos = midpoint + right * half
 
     return [
-        Hostage(tuple(left_pos),  facing, glow, variant=0, size=size),
-        Hostage(tuple(right_pos), facing, glow, variant=1, size=size),
+        Hostage(tuple(left_pos),  facing, up, glow, variant=0, size=size),
+        Hostage(tuple(right_pos), facing, up, glow, variant=1, size=size),
     ]
 
 
