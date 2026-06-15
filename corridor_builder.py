@@ -23,6 +23,8 @@ from palette import Palette
 import render
 from robots import Robot
 from hostages import build_hostages
+from OpenGL.GL import (glDisable, glColor4f, glBegin, glEnd,
+                       glVertex3f, GL_TEXTURE_2D, GL_QUADS)
 
 
 # ----------------------------------------------------------------------
@@ -42,6 +44,17 @@ TITLE_SCALE      = 0.9       # << tube width
 PLAQUE_SCALE     = 0.7       # smaller than the robot
 LABEL_LIFT       = 2.2       # how far above station to float a plaque
 _RNG_SALT        = 0x5EED
+
+# ---- plaque tunables (Brief #16) ----
+PLAQUE_FONTSIZE     = 14
+PLAQUE_MAX_WIDTH_PX = 560
+PLAQUE_BG_COLOR     = (0.04, 0.05, 0.07)   # == understanding.BG_COLOR
+PLAQUE_BG_ALPHA     = 0.78
+PLAQUE_BODY_COLOR   = (0.95, 0.96, 0.98)   # == U-mode body
+PLAQUE_TITLE_COLOR  = (0.55, 0.70, 0.95)   # == U-mode title
+PLAQUE_TEX_ALPHA    = 0.97
+PLAQUE_CARD_PAD     = 1.12
+PLAQUE_TITLE_LIFT   = 0.55
 
 
 # ----------------------------------------------------------------------
@@ -336,18 +349,54 @@ class CorridorGeometry:
                               scale=TITLE_SCALE, alpha=0.95)
 
     def _draw_plaques(self, cr, cu, texcache):
-        text_rgb = self._palette.text_color_on(self._dominant_key)
-        for r, rdata, (pose, _yaw) in zip(self._robots, self._robots_data, self._station_poses):
+        import render
+        rr = np.asarray(cr, dtype=float)
+        uu = np.asarray(cu, dtype=float)
+        for idx, (r, rdata, (pose, _yaw)) in enumerate(
+                zip(self._robots, self._robots_data, self._station_poses)):
             if not r.is_defeated():
                 continue
+
+            num = getattr(rdata, "number", None)
+            victory_n = num if num is not None else (idx + 1)
+
             explain = getattr(rdata, "explain", {}) or {}
-            text = explain.get("mathematician", "")
-            if not text:
-                text = (getattr(rdata, "briefing_hint", "") or "—")
-            tex = texcache.get_mathtext(text, color=text_rgb, fontsize=13)
+            body = explain.get("mathematician", "") \
+                or getattr(rdata, "briefing_hint", "") or "\u2014"
+
+            body_tex = texcache.get_rich_wrapped(
+                body, color=PLAQUE_BODY_COLOR, fontsize=PLAQUE_FONTSIZE,
+                max_width_px=PLAQUE_MAX_WIDTH_PX, blur=0.0)
+            title_tex = texcache.get_rich(
+                r"$\mathrm{VICTORY\ \#%s}$" % str(victory_n),
+                color=PLAQUE_TITLE_COLOR,
+                fontsize=max(10, int(PLAQUE_FONTSIZE * 0.8)), blur=0.0)
+
             center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
-            render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
-                                  scale=PLAQUE_SCALE, alpha=0.9)
+
+            _tid, tw, th = body_tex
+            aspect = tw / th if th else 1.0
+            hw = 0.5 * PLAQUE_SCALE * aspect * PLAQUE_CARD_PAD
+            hh = 0.5 * PLAQUE_SCALE * PLAQUE_CARD_PAD
+            c = center
+            p00 = c - rr*hw - uu*hh
+            p10 = c + rr*hw - uu*hh
+            p11 = c + rr*hw + uu*hh
+            p01 = c - rr*hw + uu*hh
+
+            glDisable(GL_TEXTURE_2D)
+            glColor4f(PLAQUE_BG_COLOR[0], PLAQUE_BG_COLOR[1],
+                      PLAQUE_BG_COLOR[2], PLAQUE_BG_ALPHA)
+            glBegin(GL_QUADS)
+            glVertex3f(*p00); glVertex3f(*p10); glVertex3f(*p11); glVertex3f(*p01)
+            glEnd()
+
+            title_center = center + uu * (hh + PLAQUE_TITLE_LIFT * PLAQUE_SCALE)
+            render.draw_billboard(title_tex, tuple(title_center.tolist()), cr, cu,
+                                  scale=PLAQUE_SCALE * 0.8, alpha=PLAQUE_TEX_ALPHA)
+            render.draw_billboard(body_tex, tuple(center.tolist()), cr, cu,
+                                  scale=PLAQUE_SCALE, alpha=PLAQUE_TEX_ALPHA)
+            glColor4f(1.0, 1.0, 1.0, 1.0)
 
 
 def build_corridor(corridor_data, origin=(0, 0, 0), direction=(0, 0, -1)):
