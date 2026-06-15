@@ -1,29 +1,28 @@
 """
-cockpit.py -- DESCENT QED: Descent-style cockpit HUD frame.
+cockpit.py -- DESCENT QED: simple Descent-style cockpit HUD.
 
-Resolution-independent 2D cockpit overlay drawn between render.begin_2d /
-render.end_2d (top-left origin, y-down). Pure legacy immediate-mode polygons
-for all structure; the ONLY textures are the mathematician face portraits.
+Resolution-independent 2D overlay drawn between render.begin_2d /
+render.end_2d (top-left origin, y-down). Pure legacy immediate-mode
+polygons for structure; the ONLY textures are the mathematician faces.
 
-LAYOUT (matches the reference + Nir's overrides):
-  * straight angled struts framing the top corners (no curves)
-  * a dark dashboard band across the bottom, peaked in the middle
-  * LEFT box  : black, empty, bordered -- reserved for future text
-  * CENTER    : glowing gauge housing with a big number (decoration + count)
-  * RIGHT box : black, bordered -- holds the 3x3 face grid (the arsenal)
+LAYOUT (Nir's redesign):
+  * ONE flat black horizontal dashboard bar across the bottom (no peak)
+  * faces in ONE ROW, big, evenly spaced across the bar
+  * plain-text name centered under each face
+  * optional angled struts framing the top corners (STRUTS_ON to toggle)
+  NO side boxes. NO gauge. NO peak.
 
 Everything is a fraction of the passed (W, H); layout() recomputes on any
 size change, so the cockpit re-fits at any resolution with no code edits.
 
-PRIME LAW: no math is interpreted, no color carries meaning. Faces are
+PRIME LAW: no math interpreted, no color carries meaning. Faces are
 presentation only.
 """
 
-import math
 from OpenGL.GL import (
     glBegin, glEnd, glColor4f, glVertex2f,
-    GL_QUADS, GL_LINE_LOOP, GL_TRIANGLE_FAN, GL_LINES,
-    glDisable, glEnable, GL_TEXTURE_2D,
+    GL_QUADS, GL_LINE_LOOP, GL_TRIANGLE_FAN,
+    glDisable, GL_TEXTURE_2D,
 )
 
 from render import draw_texture, draw_plain_text_2d
@@ -31,40 +30,39 @@ from robots import load_portrait
 
 
 # ---------------------------------------------------------------------------
-# COLORS (decoration only -- PRIME LAW: none of these carry meaning)
+# TOGGLES
 # ---------------------------------------------------------------------------
-_DASH_FILL   = (0.10, 0.11, 0.13)   # dark gray dashboard
-_DASH_BEVEL  = (0.30, 0.33, 0.38)   # lighter beveled edge
-_BOX_FILL    = (0.02, 0.02, 0.03)   # near-black box interior
-_BOX_BORDER  = (0.34, 0.37, 0.43)   # box frame
-_STRUT_FILL  = (0.12, 0.13, 0.15)
-_STRUT_EDGE  = (0.32, 0.35, 0.40)
-_GAUGE_RING  = (0.30, 0.85, 1.00)   # the one saturated glow
-_GAUGE_FILL  = (0.04, 0.06, 0.09)
-_GAUGE_NUM   = (0.80, 0.95, 1.00)
-_NAME_COLOR  = (0.72, 0.74, 0.80)
-_SEL_COLOR   = (1.00, 0.85, 0.20)   # selected-cell highlight
+STRUTS_ON = True          # set False to remove the corner beams entirely
 
 # ---------------------------------------------------------------------------
-# LAYOUT FRACTIONS (single source of truth -- tune the look here)
+# COLORS (decoration only -- none carry meaning)
 # ---------------------------------------------------------------------------
-_DASH_H_FRAC   = 0.30    # dashboard height as fraction of H
-_DASH_PEAK     = 0.06    # extra rise in the middle, fraction of H
-_BOX_W_FRAC    = 0.26    # each side box width, fraction of W
-_BOX_INSET     = 0.018   # box inset from screen edges / dashboard, frac of W
-_STRUT_DEPTH   = 0.22    # how far struts reach down the sides, frac of H
-_STRUT_WIDTH   = 0.16    # strut width at the top edge, frac of W
-_GRID_GAP_FRAC = 0.06    # grid gap, fraction of the right box inner width
-_NAME_FRAC     = 0.26    # name-strip height as fraction of the photo side
+_BAR_FILL    = (0.05, 0.05, 0.06)   # the flat black dashboard bar
+_BAR_BORDER  = (0.30, 0.33, 0.38)   # thin top edge / frame
+_STRUT_FILL  = (0.10, 0.11, 0.13)
+_STRUT_EDGE  = (0.30, 0.33, 0.38)
+_NAME_COLOR  = (0.78, 0.80, 0.86)
+_SEL_COLOR   = (1.00, 0.85, 0.20)   # selected-face highlight
+
+# ---------------------------------------------------------------------------
+# LAYOUT FRACTIONS (tune the look here)
+# ---------------------------------------------------------------------------
+_BAR_H_FRAC    = 0.22    # dashboard bar height as fraction of H
+_BAR_PAD_FRAC  = 0.015   # inner padding of the bar, fraction of H
+_NAME_FRAC     = 0.22    # name-strip height as fraction of the face side
+_GAP_FRAC      = 0.5     # horizontal gap between faces, as fraction of a face
+_STRUT_DEPTH   = 0.30    # strut reach down the sides, fraction of H
+_STRUT_WIDTH   = 0.14    # strut width at the top edge, fraction of W
 
 
 # ===========================================================================
-#  POLYGON HELPERS (implemented here, immediate-mode, like render.draw_wall)
+#  POLYGON HELPERS (immediate-mode, like render.draw_wall)
 # ===========================================================================
 
 def _filled_rect(x, y, w, h, color):
     glDisable(GL_TEXTURE_2D)
-    glColor4f(color[0], color[1], color[2], color[3] if len(color) > 3 else 1.0)
+    a = color[3] if len(color) > 3 else 1.0
+    glColor4f(color[0], color[1], color[2], a)
     glBegin(GL_QUADS)
     glVertex2f(x, y)
     glVertex2f(x + w, y)
@@ -79,10 +77,10 @@ def _rect_border(x, y, w, h, color, width=1):
     glColor4f(color[0], color[1], color[2], a)
     for i in range(max(1, int(width))):
         glBegin(GL_LINE_LOOP)
-        glVertex2f(x + i,         y + i)
-        glVertex2f(x + w - i,     y + i)
-        glVertex2f(x + w - i,     y + h - i)
-        glVertex2f(x + i,         y + h - i)
+        glVertex2f(x + i,     y + i)
+        glVertex2f(x + w - i, y + i)
+        glVertex2f(x + w - i, y + h - i)
+        glVertex2f(x + i,     y + h - i)
         glEnd()
 
 
@@ -106,152 +104,92 @@ def _poly_outline(pts, color):
     glEnd()
 
 
-def _ring(cx, cy, r, color, segments=48, width=2):
-    glDisable(GL_TEXTURE_2D)
-    a = color[3] if len(color) > 3 else 1.0
-    for k in range(max(1, int(width))):
-        rr = r - k
-        glColor4f(color[0], color[1], color[2], a)
-        glBegin(GL_LINE_LOOP)
-        for i in range(segments):
-            t = 2.0 * math.pi * i / segments
-            glVertex2f(cx + rr * math.cos(t), cy + rr * math.sin(t))
-        glEnd()
-
-
-def _disc(cx, cy, r, color, segments=48):
-    glDisable(GL_TEXTURE_2D)
-    a = color[3] if len(color) > 3 else 1.0
-    glColor4f(color[0], color[1], color[2], a)
-    glBegin(GL_TRIANGLE_FAN)
-    glVertex2f(cx, cy)
-    for i in range(segments + 1):
-        t = 2.0 * math.pi * i / segments
-        glVertex2f(cx + r * math.cos(t), cy + r * math.sin(t))
-    glEnd()
-
-
 # ===========================================================================
 #  COCKPIT
 # ===========================================================================
 
 class CockpitHUD:
     def __init__(self):
-        self._W = self._H = -1          # last layout size (forces first layout)
-        self._L = {}                    # computed layout dict
-        self._face_cache = {}           # name -> (tid, w, h) | None
+        self._W = self._H = -1
+        self._L = {}
+        self._face_cache = {}
 
-    # -- public: query which face cell (0..8) a pixel is over, else None ----
+    # -- which face cell a pixel is over (0..n-1) or None -------------------
     def face_at_pixel(self, mx, my):
-        for i, (x, y, s, _ns) in enumerate(self._L.get("cells", [])):
+        for i, (x, y, s, _n) in enumerate(self._L.get("cells", [])):
             if x <= mx <= x + s and y <= my <= y + s:
                 return i
         return None
 
     def face_cell_rects(self):
-        """List of (x, y, side) photo squares -- exposed for external use."""
-        return [(x, y, s) for (x, y, s, _ns) in self._L.get("cells", [])]
-
-    def left_box_inner(self):
-        """(x, y, w, h) interior of the empty left box -- for future text."""
-        return self._L.get("left_inner")
+        return [(x, y, s) for (x, y, s, _n) in self._L.get("cells", [])]
 
     # -- main draw ----------------------------------------------------------
     def draw(self, W, H, state):
-        """Draw the cockpit. Call between render.begin_2d / render.end_2d.
-
-        state keys (all optional; missing keys degrade gracefully):
-          arsenal       : list of {"id","name","png"}  (<=9)
-          loaded_slot   : int index into arsenal, or -1
-          vulnerable    : str | None   -> shown above left/over dashboard
-          loaded_name   : str | None
-          path_clear    : bool
-          gauge_number  : str | None   -> big number in center gauge
-          fizzle_text   : str | None
-          fizzle_alpha  : float 0..1
+        """Call between render.begin_2d / render.end_2d.
+        state keys (all optional):
+          arsenal      : list of {"id","name",...}
+          loaded_slot  : int | -1
+          vulnerable   : str | None
+          loaded_name  : str | None
+          path_clear   : bool
+          fizzle_text  : str | None
+          fizzle_alpha : float
         """
-        if W != self._W or H != self._H:
-            self._layout(W, H)
+        arsenal = state.get("arsenal", [])
+        ncount = max(1, len(arsenal))
+        if W != self._W or H != self._H or ncount != self._L.get("n", -1):
+            self._layout(W, H, ncount)
             self._W, self._H = W, H
 
-        self._draw_struts()
-        self._draw_dashboard()
-        self._draw_left_box()
-        self._draw_center_gauge(state.get("gauge_number"))
-        self._draw_right_box(state.get("arsenal", []),
-                             state.get("loaded_slot", -1))
-        self._draw_text_regions(state)
+        if STRUTS_ON:
+            self._draw_struts()
+        self._draw_bar()
+        self._draw_faces(arsenal, state.get("loaded_slot", -1))
+        self._draw_text(state)
 
     # -----------------------------------------------------------------------
-    #  LAYOUT -- every value derived from (W, H); recomputed on size change
+    #  LAYOUT -- single horizontal row of faces inside one flat bar
     # -----------------------------------------------------------------------
-    def _layout(self, W, H):
-        L = {}
-        dash_h = _DASH_H_FRAC * H
-        dash_top = H - dash_h
-        peak = _DASH_PEAK * H
-        L["dash"] = (dash_top, dash_h, peak)
+    def _layout(self, W, H, n):
+        L = {"n": n}
 
-        inset = _BOX_INSET * W
-        box_w = _BOX_W_FRAC * W
-        box_top = dash_top + inset
-        box_h = dash_h - 2 * inset
+        bar_h = _BAR_H_FRAC * H
+        bar_top = H - bar_h
+        L["bar"] = (0.0, bar_top, float(W), bar_h)
 
-        # LEFT box
-        lx = inset
-        L["left"] = (lx, box_top, box_w, box_h)
-        L["left_inner"] = (lx + 6, box_top + 6, box_w - 12, box_h - 12)
+        pad = _BAR_PAD_FRAC * H
+        inner_x = pad
+        inner_y = bar_top + pad
+        inner_w = W - 2 * pad
+        inner_h = bar_h - 2 * pad
 
-        # RIGHT box
-        rx = W - inset - box_w
-        L["right"] = (rx, box_top, box_w, box_h)
-
-        # CENTER gauge (between the two boxes, peaked region)
-        cx = W * 0.5
-        gauge_top = dash_top - peak
-        gauge_r = min(box_h * 0.42, (rx - (lx + box_w)) * 0.18)
-        cy = gauge_top + gauge_r + inset
-        L["gauge"] = (cx, cy, gauge_r)
-
-        # 3x3 GRID inside the RIGHT box ------------------------------------
-        ix = rx + 8
-        iy = box_top + 8
-        iw = box_w - 16
-        ih = box_h - 16
-
-        g_w = _GRID_GAP_FRAC * iw
-        s_from_w = (iw - 4 * g_w) / 3.0
-        s_from_h = (ih - 4 * g_w) / (3.0 * (1.0 + _NAME_FRAC))
+        s_from_w = inner_w / (n + (n + 1) * _GAP_FRAC)
+        s_from_h = inner_h / (1.0 + _NAME_FRAC)
         s = max(8.0, min(s_from_w, s_from_h))
-        n = _NAME_FRAC * s
-        g = g_w
+        n_strip = _NAME_FRAC * s
+        gap = _GAP_FRAC * s
 
-        cell_total_h = s + n
-        grid_w = 3 * s + 4 * g
-        grid_h = 3 * cell_total_h + 4 * g
-        ox = ix + (iw - grid_w) / 2.0 + g
-        oy = iy + (ih - grid_h) / 2.0 + g
+        row_w = n * s + (n + 1) * gap
+        cell_h = s + n_strip
+        ox = inner_x + (inner_w - row_w) / 2.0 + gap
+        oy = inner_y + (inner_h - cell_h) / 2.0
 
         cells = []
-        for i in range(9):
-            col = i % 3
-            row = i // 3
-            x = ox + col * (s + g)
-            y = oy + row * (cell_total_h + g)
-            cells.append((x, y, s, n))
+        for i in range(n):
+            x = ox + i * (s + gap)
+            cells.append((x, oy, s, n_strip))
         L["cells"] = cells
-        L["grid_dims"] = (s, n, g)
+        L["face_side"] = s
 
         # struts
-        sw = _STRUT_WIDTH * W
-        sd = _STRUT_DEPTH * H
-        L["strut_w"] = sw
-        L["strut_d"] = sd
+        L["strut_w"] = _STRUT_WIDTH * W
+        L["strut_d"] = _STRUT_DEPTH * H
 
-        # text anchors (kept clear of boxes/grid)
-        L["txt_vuln"]   = (inset + 4, inset + 2)
-        L["txt_loaded"] = (inset + 4, inset + 2 + _STATUS_LINE_H)
-        L["txt_fizzle"] = (W * 0.5, dash_top - peak - 2 * _STATUS_LINE_H)
+        # text anchors (above the bar so they never overlap the faces)
+        L["txt_vuln"]   = (pad + 4, 12)
+        L["txt_loaded"] = (pad + 4, 12 + _STATUS_LINE_H)
+        L["txt_fizzle"] = (W * 0.5, bar_top - 3 * _STATUS_LINE_H)
 
         self._L = L
 
@@ -259,7 +197,7 @@ class CockpitHUD:
     #  DRAW PARTS
     # -----------------------------------------------------------------------
     def _draw_struts(self):
-        W, H = self._W, self._H
+        W = self._W
         sw = self._L["strut_w"]
         sd = self._L["strut_d"]
         left = [(0, 0), (sw, 0), (0, sd)]
@@ -269,64 +207,30 @@ class CockpitHUD:
         _filled_poly(right, _STRUT_FILL)
         _poly_outline(right, _STRUT_EDGE)
 
-    def _draw_dashboard(self):
-        W, H = self._W, self._H
-        dash_top, dash_h, peak = self._L["dash"]
-        x0, x1 = 0, W
-        mid = W * 0.5
-        hump_half = W * 0.22
-        pts = [
-            (x0, dash_top),
-            (mid - hump_half, dash_top),
-            (mid, dash_top - peak),
-            (mid + hump_half, dash_top),
-            (x1, dash_top),
-            (x1, H),
-            (x0, H),
-        ]
-        _filled_poly(pts, _DASH_FILL)
-        _poly_outline(pts, _DASH_BEVEL)
+    def _draw_bar(self):
+        x, y, w, h = self._L["bar"]
+        _filled_rect(x, y, w, h, _BAR_FILL)
+        _rect_border(x, y, w, h, _BAR_BORDER, width=2)
 
-    def _draw_left_box(self):
-        x, y, w, h = self._L["left"]
-        _filled_rect(x, y, w, h, _BOX_FILL)
-        _rect_border(x, y, w, h, _BOX_BORDER, width=2)
-
-    def _draw_center_gauge(self, number):
-        cx, cy, r = self._L["gauge"]
-        _disc(cx, cy, r * 1.18, _DASH_BEVEL)
-        _disc(cx, cy, r * 1.05, _GAUGE_FILL)
-        _ring(cx, cy, r, _GAUGE_RING, width=3)
-        _ring(cx, cy, r * 0.72, (_GAUGE_RING[0], _GAUGE_RING[1],
-                                 _GAUGE_RING[2], 0.5), width=2)
-        _disc(cx, cy, r * 0.30, (_GAUGE_RING[0], _GAUGE_RING[1],
-                                 _GAUGE_RING[2], 0.25))
-        if number is not None:
-            draw_plain_text_2d(str(number), int(cx), int(cy - r - 30),
-                               size=34, color=_GAUGE_NUM, align="center")
-
-    def _draw_right_box(self, arsenal, loaded_slot):
-        x, y, w, h = self._L["right"]
-        _filled_rect(x, y, w, h, _BOX_FILL)
-        _rect_border(x, y, w, h, _BOX_BORDER, width=2)
-
-        cells = self._L["cells"]
-        for i, (cx0, cy0, s, n) in enumerate(cells):
+    def _draw_faces(self, arsenal, loaded_slot):
+        for i, (cx0, cy0, s, n_strip) in enumerate(self._L["cells"]):
             if i < len(arsenal):
                 name = arsenal[i]["name"]
                 tex = self._get_face(name)
                 if tex is not None:
-                    _tid, tw, th = tex
+                    _tid, tw, _th = tex
                     scale = s / max(tw, 1)
                     draw_texture(tex, int(cx0), int(cy0), scale=scale)
+                else:
+                    _rect_border(cx0, cy0, s, s, _BAR_BORDER, width=1)
                 draw_plain_text_2d(name, int(cx0 + s / 2),
-                                   int(cy0 + s + n * 0.15),
-                                   size=max(9, int(n * 0.45)),
+                                   int(cy0 + s + n_strip * 0.15),
+                                   size=max(10, int(n_strip * 0.5)),
                                    color=_NAME_COLOR, align="center")
             if i == loaded_slot:
                 _rect_border(cx0 - 2, cy0 - 2, s + 4, s + 4, _SEL_COLOR, width=2)
 
-    def _draw_text_regions(self, state):
+    def _draw_text(self, state):
         L = self._L
         if state.get("path_clear"):
             x, y = L["txt_vuln"]
@@ -358,6 +262,9 @@ class CockpitHUD:
                                    align="center", alpha=fa)
                 yy += 22
 
+    # -----------------------------------------------------------------------
+    #  FACE CACHE (load each portrait once)
+    # -----------------------------------------------------------------------
     def _get_face(self, name):
         if name not in self._face_cache:
             try:
