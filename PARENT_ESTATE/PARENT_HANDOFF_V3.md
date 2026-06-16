@@ -55,7 +55,7 @@ Fly up to blocking robot → READ its hologram → IDENTIFY required mathematici
 - No module hardcodes color-to-meaning. Color passes through `palette.py` via opaque keys.
 - If a child interprets math meaning or hardcodes color, they violated the law. Reject their work.
 
-**UNRESOLVED DESIGN QUESTION (ask Nir!):** What happens when the player fires the WRONG mathematician? Currently: harmless fizzle message appears for 6 seconds. Is that final, or should there be a penalty?
+**RESOLVED DESIGN QUESTION (June 16, 2026 — Nir's decision):** What happens when the player fires the WRONG mathematician? **Harmless fizzle message appears for 6 seconds. FINAL. No penalty.** The player is a couple learning together — punishment has no place here. The thinking IS the gameplay.
 
 ---
 

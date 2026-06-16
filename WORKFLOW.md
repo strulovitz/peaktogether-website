@@ -228,6 +228,9 @@ Parent #5 replaced Understanding Mode's live matplotlib rendering with an offlin
 
 DeepSeek attempted to wire the `baked:` manifest system (content_parser.py, level_parser.py, levels/maxwell.txt) and created Basel stubs (corridors/basel_stub_deepseek.txt, levels/basel_deepseek.txt). Robot 1 was invisible. **ALL DeepSeek changes rolled back via git revert.** Repo is now PURE OPUS CODE.
 
+### ✅ DESIGN DECISION LOCKED: Fizzle is FINAL
+Nir confirmed (June 16): wrong-mathematician shot → harmless fizzle for 6 seconds. NO penalty. The couple is learning together.
+
 ### ⚠️ THE GAP: Baked PNGs exist but are NOT wired to the game
 - `understanding.py` expects `robot.understanding_dir` — but no module sets it
 - `levels/maxwell.txt` has NO `baked:` line

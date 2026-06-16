@@ -68,7 +68,7 @@ Fly up to blocking robot → READ its hologram → IDENTIFY required mathematici
 - No module hardcodes color-to-meaning. Color passes through `palette.py` via opaque keys.
 - If a child interprets math meaning or hardcodes color, they violated the law. Reject their work.
 
-**UNRESOLVED DESIGN QUESTION (ask Nir!):** What happens when the player fires the WRONG mathematician? Currently: harmless fizzle message appears for 6 seconds. Is that final, or should there be a penalty?
+**RESOLVED DESIGN QUESTION (Nir's decision, June 16, 2026):** What happens when the player fires the WRONG mathematician? **Harmless fizzle message appears for 6 seconds. FINAL. No penalty.** The couple is learning together. No punishment. The thinking IS the gameplay.
 
 ---
 
@@ -380,7 +380,7 @@ These are known issues that predate Parent #5:
 ### STEP 1 — Confirm with Nir:
 - Ask Nir: "Should I write the wiring brief (#A) and Basel corridor brief (#B) as separate child briefs, or handle the wiring myself as a small parent patch?"
 - Ask Nir: "For the Basel game corridor, should I write it myself or dispatch a child Opus with the corridor writer prompt?"
-- Ask Nir: "What happens on WRONG-mathematician shot? Currently harmless fizzle for 6 seconds. Is that final?"
+- ✅ **ALREADY RESOLVED:** Wrong-mathematician shot → harmless fizzle 6 seconds. FINAL. No penalty.
 
 ### STEP 2 — Write the briefs (one at a time, test each before next):
 
