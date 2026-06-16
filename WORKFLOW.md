@@ -204,6 +204,45 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 
 **Remaining:** Face panel needs normal photos (in Nir's Downloads), ship wall containment, joystick wiring.
 
+## 🔴 SESSION LOG — June 16, 2026 (Parent #5 + DeepSeek Rollback)
+
+### 🔥 MAJOR PIVOT: Live mathtext → Pre-baked LaTeX PNGs (Parent #5 / Opus 4.8)
+
+Parent #5 replaced Understanding Mode's live matplotlib rendering with an offline baker (`deu/bake_corridor.py`). The baker compiles full LaTeX (stains+threads color system) into transparent colored PNGs. The game loads these instead of live-rendering.
+
+**Baker works perfectly:** 0 failures on Maxwell (8/8) and Basel (28/28).
+
+**Opus-authored files (PRESERVED):**
+| File | Author | Description |
+|------|--------|-------------|
+| `deu/bake_corridor.py` | Parent #5 | Baker: corridor.txt → colored transparent PNGs |
+| `understanding.py` | Parent #5 | Fog-and-glass flight, loads baked PNGs with render_rich fallback |
+| `corridors/maxwell.txt` | Parent #5 | Baker-format Maxwell (stains+threads) |
+| `levels/mathematics/basel_problem/basel_euler_proof.txt` | Parent #5 child | Baker-format Basel (6 stains, 7 robots, 28 layers) |
+| `baked/maxwell/*.png` | Baker | 8 baked PNGs |
+| `baked/basel/*.png` | Baker | 28 baked PNGs |
+| `PARENT_ESTATE/UNDERSTANDING_MODE_PREBAKED_LATEX.md` | Parent #5 | Stain+thread design handoff |
+| `PARENT_ESTATE/CORRIDOR_WRITER_PROMPT.md` | Parent #5 | Wikipedia → corridor file prompt |
+
+### 🔴 DEEPSEEK ROLLBACK
+
+DeepSeek attempted to wire the `baked:` manifest system (content_parser.py, level_parser.py, levels/maxwell.txt) and created Basel stubs (corridors/basel_stub_deepseek.txt, levels/basel_deepseek.txt). Robot 1 was invisible. **ALL DeepSeek changes rolled back via git revert.** Repo is now PURE OPUS CODE.
+
+### ⚠️ THE GAP: Baked PNGs exist but are NOT wired to the game
+- `understanding.py` expects `robot.understanding_dir` — but no module sets it
+- `levels/maxwell.txt` has NO `baked:` line
+- No game-format Basel corridor exists
+- Understanding Mode always falls back to `render_rich`
+
+### 📋 Parent #6 Prompt
+Written: `PARENT_ESTATE/PARENT_PROMPT_6_POST_ROLLBACK.md` — full project-wide handoff for the next Opus 4.8 parent. Covers: wiring brief (#A), Basel game corridor brief (#B), engine gaps (#C).
+
+### ⭐ ON RESTART — Read these in order:
+1. **THIS FILE** (WORKFLOW.md)
+2. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
+3. `PARENT_ESTATE/PARENT_PROMPT_6_POST_ROLLBACK.md` — Parent #6 handoff
+4. `PARENT_ESTATE/SESSION_2026-06-15_EVENING.md` — last working session
+
 ## 🔴 SESSION LOG — June 13, 2026
 
 ### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
