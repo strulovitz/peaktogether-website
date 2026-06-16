@@ -117,6 +117,37 @@ class Combat:
                 return r
         return None
 
+    @staticmethod
+    def robot_in_view(hub, ship):
+        """Pick the robot the player is LOOKING AT (for Understanding Mode):
+        the closest robot ahead of the ship inside a ~60° view cone, scoring
+        centered-AND-near highest. Falls back to blocking_robot(hub) if none
+        qualifies. READ-ONLY: does NOT affect combat targeting — blocking_robot
+        remains the sequential gate used by fire/HUD/arsenal."""
+        if not getattr(hub, "corridors", None):
+            return None
+        pos = np.asarray(ship.pos, dtype=float)
+        fwd = np.asarray(render.ship_forward(ship.q), dtype=float)
+        n = np.linalg.norm(fwd)
+        if n < 1e-9:
+            return Combat.blocking_robot(hub)
+        fwd = fwd / n
+
+        best, best_score = None, -1.0
+        for c in hub.corridors:
+            for r in c.get_robots():
+                to = np.asarray(r.position, dtype=float) - pos
+                dist = np.linalg.norm(to)
+                if dist < 1e-6:
+                    continue
+                cos = float(np.dot(to / dist, fwd))
+                if cos < 0.5:                 # ~60° half-cone: must be ahead
+                    continue
+                score = cos / dist            # prefer centered AND near
+                if score > best_score:
+                    best, best_score = r, score
+        return best if best is not None else Combat.blocking_robot(hub)
+
     # ==================================================================
     # INPUT (Brief #9 keyboard + Brief #10 controller/mouse)
     # ==================================================================
