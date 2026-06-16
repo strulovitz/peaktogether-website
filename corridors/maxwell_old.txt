@@ -1,0 +1,155 @@
+# ===========================================================
+# Maxwell Test Corridor — five Maxwell-equation robots.
+# Robot 1 is nearest the doorway. Each is destroyed by exactly
+# ONE technique id. coupling (purple) appears ONLY on robots
+# 3 and 5, only on the expression that genuinely couples E & B.
+# ===========================================================
+CORRIDOR: 1
+TITLE { Maxwell Test Corridor }
+FLAVOR { Four field laws and the synthesis that binds them. }
+LEDGER {
+  PRIMARY field_e = red
+  PRIMARY field_b = blue
+  BLEND   coupling = field_e + field_b
+}
+BRIEFING_INTRO { Five sentinels guard this corridor, one for each of
+          Maxwell's equations. Match each robot's blue hologram face to
+          the right fired technique and the way will open. }
+ENTRY_TEXT { You have entered the Maxwell corridor. }
+EXIT_TEXT { You have cleared the Maxwell corridor. The field is whole. Well done. }
+
+ROBOT: 1
+NAME { Gauss Electric }
+BRIEFING_HINT { Electric charge sources the electric field. This sentinel
+          yields to Gauss's law for electricity. }
+PROBLEM { Show that the electric flux through a closed surface is fixed by
+          the enclosed charge density $\rho$ and the permittivity $\varepsilon_0$. }
+EXPLAIN_MATHEMATICIAN { The divergence of the electric field equals the charge
+          density scaled by $\frac{1}{\varepsilon_0}$; integrate over a region and
+          the divergence theorem returns the enclosed charge. }
+EXPLAIN_PHYSICIST { Field lines begin and end on charges. Counting the lines
+          leaving a closed surface counts the charge inside. }
+EXPLAIN_BIOLOGIST { Imagine each tiny bit of charge breathing field lines
+          outward; the surface around them catches every line. }
+EXPLAIN_ENGINEER { Plug in numbers: a divergence of [[ $\nabla \cdot \mathbf{E}$ | 3.000 ]]
+          meets a source of [[ $\rho / \varepsilon_0$ | 3.000 ]], so they match. }
+SEGMENTS {
+  $\nabla \cdot \mathbf{E}$       | field_e
+  $=$                             | NEUTRAL
+  $\frac{\rho}{\varepsilon_0}$    | field_e
+}
+EYE { field_e }
+VULNERABLE_TO { gauss_e }
+FIZZLE gauss_m { Gauss's law for magnetism describes a field with no sources, but here charge $\rho$ genuinely sources the field. Try the electric Gauss law instead. }
+FIZZLE faraday { Faraday's law is about a changing magnetic field inducing an electric one — no time-change here, just a static source. The electric Gauss law fits. }
+FIZZLE ampere { Ampere's law handles circulation around currents, not flux from charge. This robot wants the electric Gauss law. }
+FIZZLE maxwell { Maxwell's extension adds a displacement current to Ampere — far more than this pure-source problem needs. The electric Gauss law is the match. }
+
+ROBOT: 2
+NAME { Gauss Magnetic }
+BRIEFING_HINT { There are no magnetic charges. This sentinel yields to
+          Gauss's law for magnetism. }
+PROBLEM { Show that the net magnetic flux through any closed surface is zero,
+          because magnetic field lines never begin or end. }
+EXPLAIN_MATHEMATICIAN { The divergence of the magnetic field vanishes
+          everywhere: $\nabla \cdot \mathbf{B} = 0$, so no point acts as a
+          magnetic source or sink. }
+EXPLAIN_PHYSICIST { Cut a magnet in half and you get two magnets, never an
+          isolated pole. Every field line that leaves must return. }
+EXPLAIN_BIOLOGIST { Picture loops of field that always close on themselves,
+          like rivers that flow back into their own source. }
+EXPLAIN_ENGINEER { Plug in numbers: the divergence [[ $\nabla \cdot \mathbf{B}$ | 0.000 ]]
+          meets the value [[ $0$ | 0.000 ]], so they match. }
+SEGMENTS {
+  $\nabla \cdot \mathbf{B}$   | field_b
+  $=$                         | NEUTRAL
+  $0$                         | NEUTRAL
+}
+EYE { field_b }
+VULNERABLE_TO { gauss_m }
+FIZZLE gauss_e { The electric Gauss law expects a charge source, but magnetic charge does not exist — the right side here is zero. Use the magnetic Gauss law. }
+FIZZLE faraday { Faraday couples a changing magnetic field to an electric one; this problem is the pure no-monopole statement. The magnetic Gauss law fits. }
+FIZZLE ampere { Ampere's law is about circulation around currents, not the absence of magnetic sources. Try the magnetic Gauss law. }
+FIZZLE maxwell { Maxwell's full curl equation is overkill for the simple fact that magnetic flux sums to zero. The magnetic Gauss law is the match. }
+
+ROBOT: 3
+NAME { Faraday }
+BRIEFING_HINT { A changing magnetic field induces a circulating electric
+          field. This sentinel yields to Faraday's law. }
+PROBLEM { Show that a magnetic field changing in time, $\frac{\partial \mathbf{B}}{\partial t}$,
+          drives a circulating electric field around it. }
+EXPLAIN_MATHEMATICIAN { The curl of the electric field equals the negative
+          time rate of change of the magnetic field, coupling the two fields
+          through $-\frac{\partial \mathbf{B}}{\partial t}$. }
+EXPLAIN_PHYSICIST { Move a magnet through a loop of wire and a current flows —
+          the changing magnetic field pushes the charges around the loop. }
+EXPLAIN_BIOLOGIST { A shifting magnetic mood stirs the electric field into
+          swirling, the way a moving spoon sets tea spinning. }
+EXPLAIN_ENGINEER { Plug in numbers: the curl [[ $\nabla \times \mathbf{E}$ | -2.000 ]]
+          meets the rate [[ $-\partial \mathbf{B} / \partial t$ | -2.000 ]], so they match. }
+SEGMENTS {
+  $\nabla \times \mathbf{E}$                              | field_e
+  $=$                                                     | NEUTRAL
+  $-\frac{\partial \mathbf{B}}{\partial t}$               | coupling
+}
+EYE { coupling }
+VULNERABLE_TO { faraday }
+FIZZLE gauss_e { The electric Gauss law handles flux from static charge, but this problem couples a CHANGING magnetic field to an electric one. Faraday's law fits. }
+FIZZLE gauss_m { The magnetic Gauss law states magnetic flux is zero; it says nothing about a changing field inducing a curl. Try Faraday's law. }
+FIZZLE ampere { Ampere relates the magnetic curl to current; here it is the ELECTRIC curl driven by a changing B. Faraday's law is the match. }
+FIZZLE maxwell { Maxwell's term adds a changing-E source to the magnetic curl — the mirror image of what is needed. This robot wants Faraday's law. }
+
+ROBOT: 4
+NAME { Ampere }
+BRIEFING_HINT { Steady electric current circulates the magnetic field around
+          it. This sentinel yields to Ampere's law. }
+PROBLEM { Show that a steady current density $\mathbf{J}$ produces a magnetic
+          field circulating around it, scaled by $\mu_0$. }
+EXPLAIN_MATHEMATICIAN { The curl of the magnetic field equals the current
+          density times $\mu_0$, so circulation of $\mathbf{B}$ traces the
+          current it encloses. }
+EXPLAIN_PHYSICIST { Run current down a wire and a magnetic field wraps around
+          it; the more current, the stronger the loop of field. }
+EXPLAIN_BIOLOGIST { A stream of moving charge wears a collar of magnetism, the
+          way a river carves a circling eddy. }
+EXPLAIN_ENGINEER { Plug in numbers: the curl [[ $\nabla \times \mathbf{B}$ | 4.000 ]]
+          meets the source [[ $\mu_0 \mathbf{J}$ | 4.000 ]], so they match. }
+SEGMENTS {
+  $\nabla \times \mathbf{B}$   | field_b
+  $=$                          | NEUTRAL
+  $\mu_0 \mathbf{J}$           | field_b
+}
+EYE { field_b }
+VULNERABLE_TO { ampere }
+FIZZLE gauss_e { The electric Gauss law is about flux from charge, not the magnetic field circling a current. Try Ampere's law. }
+FIZZLE gauss_m { The magnetic Gauss law says magnetic flux sums to zero; it does not relate field circulation to current. Ampere's law fits. }
+FIZZLE faraday { Faraday drives an ELECTRIC curl from a changing magnetic field; here a steady current drives a MAGNETIC curl. Ampere's law is the match. }
+FIZZLE maxwell { Maxwell's full equation adds a displacement-current term, but this is the steady-current case with no changing E. Plain Ampere's law fits. }
+
+ROBOT: 5
+NAME { Maxwell }
+BRIEFING_HINT { Ampere's law completed: a changing electric field also
+          circulates the magnetic field. This sentinel yields to Maxwell. }
+PROBLEM { Show that both a steady current $\mathbf{J}$ AND a changing electric
+          field $\frac{\partial \mathbf{E}}{\partial t}$ circulate the magnetic field. }
+EXPLAIN_MATHEMATICIAN { The curl of the magnetic field equals $\mu_0 \mathbf{J}$
+          plus the displacement term $\mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}$,
+          coupling the electric and magnetic fields. }
+EXPLAIN_PHYSICIST { Even with no wire, a changing electric field between two
+          plates makes a magnetic field circle around — the displacement
+          current that completes the set. }
+EXPLAIN_BIOLOGIST { The electric and magnetic fields finally hold hands: a
+          shifting electric field stirs magnetism just as a current would. }
+EXPLAIN_ENGINEER { Plug in numbers: the curl [[ $\nabla \times \mathbf{B}$ | 7.000 ]]
+          meets the sum [[ $\mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \partial \mathbf{E} / \partial t$ | 7.000 ]], so they match. }
+SEGMENTS {
+  $\nabla \times \mathbf{B}$                                                              | field_b
+  $=$                                                                                     | NEUTRAL
+  $\mu_0 \mathbf{J} + \mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}$          | coupling
+}
+EYE { coupling }
+VULNERABLE_TO { maxwell }
+FIZZLE gauss_e { The electric Gauss law handles static flux from charge, not the changing-E term that completes the magnetic curl. Maxwell's law fits. }
+FIZZLE gauss_m { The magnetic Gauss law states magnetic flux is zero; it does not include the displacement current. Try Maxwell's law. }
+FIZZLE faraday { Faraday gives the ELECTRIC curl from a changing B; this is the MAGNETIC curl with the extra changing-E term. Maxwell's law is the match. }
+FIZZLE ampere { Ampere's law covers the steady current alone, but this problem adds the displacement-current term $\mu_0 \varepsilon_0 \frac{\partial \mathbf{E}}{\partial t}$. The completed law is Maxwell's. }
