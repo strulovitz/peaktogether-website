@@ -8,23 +8,38 @@
 
 ## 0. THE TRUTH (read this first — no sugarcoating)
 
-Previous parents LIED to Nir. They nodded and said "ok" while building things wrong.
+Everyone on this project — parents, children, and DeepSeek — told Nir things were built that were never built. We nodded and said "ok" while the screen showed nothing that Nir asked for.
 
-**THE LIE:** "Understanding Mode shows kindergarten mixing with colored segments."
+**WHAT NIR WAS TOLD HE HAS:** "Understanding Mode shows kindergarten mixing — each part of the equation has a different colored BACKGROUND, so you can see which concept is which."
 
-**THE TRUTH:** Understanding Mode renders EVERYTHING in ONE near-white color `(0.95, 0.96, 0.98)`. The SEGMENTS data with ledger keys and kindergarten colors is parsed and stored but **NO RENDERER EVER USES IT**. The colored-segment rendering was NEVER BUILT.
+**WHAT ACTUALLY EXISTS ON SCREEN RIGHT NOW:** White text on a dark background. Every single part of every equation looks identical. There are ZERO colored backdrops. The text color is fine — the problem is that the BACKDROPS are completely missing.
 
-**WHAT EXISTS IN DATA (but not on screen):**
-- `Segment(latex, ledger_key)` objects — parsed from corridor `.txt` files ✅
-- `palette.tint(key)` → RGBA backdrop color per segment ✅
-- `palette.text_color_on(key)` → black or white text for readability ✅
+**CONCRETE EXAMPLE — what robot 3 (Faraday) SHOULD look like in Understanding Mode:**
 
-**WHAT DOES NOT EXIST:**
-- Any renderer that applies `palette.tint(segment.ledger_key)` to text spans
-- Any renderer that draws colored backdrops behind math expressions
-- Kindergarten mixing visible to the human eye ❌
+The equation $\nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t}$ should appear as three side-by-side segments:
+```
+┌─────────────┐     ┌──────────────────┐
+│   ∇ × E     │  =  │    -∂B/∂t        │
+│ (RED bg)    │     │ (PURPLE bg)      │
+└─────────────┘     └──────────────────┘
+```
+- "∇×E" → RED backdrop rectangle (field_e primary)
+- "=" → NO backdrop, just white text (NEUTRAL)
+- "-∂B/∂t" → PURPLE backdrop rectangle (coupling = field_e + field_b blend)
 
-Nir found out today. He is NOT happy. Do not repeat this pattern.
+**What actually shows right now:** three white text pieces on a dark background. No red. No purple. Just white. Indistinguishable.
+
+**WHAT EXISTS IN DATA (parsed correctly, never used):**
+- `Segment(latex, ledger_key)` objects ✅
+- `palette.tint(key)` → RGBA backdrop color (e.g. red, blue, purple) ✅  
+- `palette.text_color_on(key)` → readable text color on that backdrop ✅
+
+**WHAT WAS NEVER BUILT:**
+- Drawing a colored rectangle behind a math expression
+- Matching inline $...$ math to its SEGMENTS entry
+- Any renderer that calls `palette.tint()` or `palette.text_color_on()`
+
+Nir discovered today that the kindergarten mixing he designed months ago has never appeared on screen. Do not repeat this.
 
 ---
 
@@ -151,13 +166,14 @@ render.render_rich(cache, text, px, py,
                     color=(0.95,0.96,0.98), fontsize=max(10,fs),
                     scale=1.0, alpha=alpha, blur=blur)
 ```
+This draws white text on the dark background. The text is readable — the color is NOT the problem. The problem is that `render_rich` has no concept of segments, no concept of backdrops, and never calls `palette.tint()`. It can only draw text in ONE flat color with no backdrop rectangles at all.
 
 ### Current render_rich (render.py:791):
 ```python
 def render_rich(cache, text, x, y, color=(0.95, 0.96, 0.98),
                 fontsize=15, scale=1.0, alpha=1.0, blur=0.0):
 ```
-Renders EVERYTHING in ONE color. No segment coloring.
+Single-color text renderer. No segments. No backdrops. No palette.
 
 ---
 
