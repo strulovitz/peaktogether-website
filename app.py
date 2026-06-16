@@ -57,7 +57,7 @@ from hub_builder import build_hub
 # ---------------------------------------------------------------------------
 
 WIN_SIZE = (1280, 800)          # verbatim from hub_demo.py
-LEVEL_MANIFEST = "levels/maxwell.txt"   # Brief #9: Maxwell test corridor
+LEVEL_MANIFEST = "levels/basel_deepseek.txt"   # DeepSeek Basel stub (DELETE when Opus builds real one)
 
 # Fog: production values, copied verbatim from hub_demo.py. These equal
 # render.DARKNESS_START / DARKNESS_END, i.e. render's own defaults — not
