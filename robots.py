@@ -394,6 +394,12 @@ class Robot:
     def fizzles(self):  # Brief #9
         return self._robot_data.fizzles
 
+    @property
+    def understanding_dir(self):  # Brief #A
+        """Baked-PNG folder for Understanding Mode (path string; "" if none).
+        Read straight off RobotData; engine stays mathematics-blind."""
+        return getattr(self._robot_data, "understanding_dir", "")
+
     def play_defeat(self):
         """Trigger the multi-burst explosion; afterward the body is gone."""
         if self._defeated:

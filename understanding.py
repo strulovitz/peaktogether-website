@@ -105,9 +105,16 @@ class UnderstandingMode:
         d = getattr(self.robot, "understanding_dir", "") or ""
         num = getattr(self.robot, "number", None)
         if not d or num is None:
+            # Brief #A — loud fallback (a): no baked folder / no robot number.
+            print("UNDERSTANDING: no baked PNG for robot=%r layer=%r "
+                  "(understanding_dir=%r) -> live-text fallback"
+                  % (num, layer, d))
             return None
         path = os.path.join(d, f"robot{num}_{layer}.png")
         if not os.path.isfile(path):
+            # Brief #A — loud fallback (b): expected baked PNG is missing.
+            print("UNDERSTANDING: baked PNG missing: %s -> live-text fallback"
+                  % path)
             return None
         try:
             surf = pygame.image.load(path).convert_alpha()

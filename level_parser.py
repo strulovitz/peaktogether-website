@@ -87,10 +87,12 @@ _LEVEL_FILE_RE = re.compile(r".+\.txt$")
 # in one file, and lets the same corridor fixture belong to multiple levels.
 
 
-def _read_manifest(path: str) -> tuple[str, list[str]]:
-    """Parse a level manifest file into (title, [corridor_path, ...]).
+def _read_manifest(path: str) -> tuple[str, str, list[str]]:
+    """Parse a level manifest file into (title, baked_dir, [corridor_path, ...]).
 
-    Paths are returned already resolved against the manifest's directory.
+    `baked_dir` is the OPTIONAL `baked:` folder (where Understanding Mode's
+    pre-baked LaTeX PNGs live), resolved against the manifest's directory.
+    "" when absent. Paths are returned already resolved.
     Raises ParseError with file:line on any structural violation.
     """
     fname = os.path.basename(path)
@@ -103,6 +105,7 @@ def _read_manifest(path: str) -> tuple[str, list[str]]:
         raise ParseError(f"{fname}: cannot read level manifest: {e}")
 
     title = None
+    baked_dir = None          # Brief #A — optional baked-PNG folder
     corridor_paths: list[str] = []
     in_corridors = False
 
@@ -122,6 +125,18 @@ def _read_manifest(path: str) -> tuple[str, list[str]]:
             title = stripped[len("title:"):].strip()
             if not title:
                 raise ParseError(f"{fname}:{lineno}: 'title:' is empty")
+            in_corridors = False
+            continue
+
+        if low.startswith("baked:"):            # Brief #A
+            if baked_dir is not None:
+                raise ParseError(f"{fname}:{lineno}: duplicate 'baked:' line")
+            rel = stripped[len("baked:"):].strip()
+            if not rel:
+                raise ParseError(f"{fname}:{lineno}: 'baked:' is empty")
+            baked_dir = rel if os.path.isabs(rel) else os.path.normpath(
+                os.path.join(base_dir, rel)
+            )
             in_corridors = False
             continue
 
@@ -155,7 +170,7 @@ def _read_manifest(path: str) -> tuple[str, list[str]]:
     if not corridor_paths:
         raise ParseError(f"{fname}: 'corridors:' lists no corridor files")
 
-    return title, corridor_paths
+    return title, (baked_dir or ""), corridor_paths
 
 
 # ---------------------------------------------------------------------------
@@ -181,7 +196,7 @@ def load_level(path: str) -> Level:
     if not os.path.isfile(path):
         raise ParseError(f"load_level: not a file: {path!r}")
 
-    title, corridor_paths = _read_manifest(path)
+    title, baked_dir, corridor_paths = _read_manifest(path)   # Brief #A
     manifest_name = os.path.basename(path)
 
     # Reject duplicates by resolved absolute path — distinctness is a hard rule.
@@ -202,7 +217,11 @@ def load_level(path: str) -> Level:
                 f"{manifest_name}: listed corridor fixture not found: {p!r}"
             )
         # Delegate ALL single-corridor parsing to the existing layer.
-        corridors.append(parse_corridor(p))
+        cd = parse_corridor(p)
+        cd.understanding_dir = baked_dir            # Brief #A
+        for r in cd.robots:                          # propagate to each RobotData
+            r.understanding_dir = baked_dir
+        corridors.append(cd)
 
     return Level(title=title, corridors=corridors)
 
