@@ -185,15 +185,16 @@ Either:
 - Extend `render_rich` to accept `segments: list[Segment]` and `palette` parameters, OR
 - Write a NEW function (e.g., `render_rich_colored`) that takes segments + palette
 
-The renderer must:
+The renderer must be **completely data-driven** — it works with ANY corridor file, not just Maxwell:
+
 1. Parse the text for `$...$` math spans (same tokenizer as render_rich)
-2. For each math span, look up its LaTeX in the robot's `segments` list
-3. Draw a colored backdrop rectangle behind matched spans using `palette.tint(key)`
-4. Draw the math text on top using `palette.text_color_on(key)`
-5. Prose outside `$...$` gets no backdrop, rendered in white/light grey
+2. For each math span, look up its LaTeX in the robot's `segments` list (generic string matching, no hardcoded keys)
+3. Draw a colored backdrop rectangle behind matched spans using `palette.tint(key)` — whatever key the segment has
+4. Draw the math text on top using `palette.text_color_on(key)` — purely driven by the palette
+5. Prose outside `$...$` gets no backdrop, rendered in light grey
 6. Multi-line wrapping must preserve per-line segment colors
 7. Support alpha, blur, and scale (same as current render_rich)
-8. Cache textures per (text, segments, colors, blur) key
+8. Cache textures per (text, segments, palette, blur) key — the palette can differ per corridor
 
 ### B. Wire it into Understanding Mode
 
@@ -201,11 +202,21 @@ Modify `understanding.py`:
 - Pass `self.robot.segments` and the corridor's `ColorLedger` to the new renderer
 - Each of the 4 layers uses the SAME segments data (coloring comes from the robot's equation, not the layer)
 
-### C. Test fixture
+### C. CRITICAL: General engine, NOT Maxwell-specific
 
-Use the Maxwell corridor (`maxwell.txt`) which has the richest SEGMENTS data:
-- Robot 3 (Faraday): segments with field_e, NEUTRAL, coupling keys
-- Robot 5 (Maxwell): segments with field_b, NEUTRAL, coupling keys
+**The Maxwell corridor is ONLY a test fixture.** The REAL game will have many corridors, each with DIFFERENT mathematical concepts, different ledger keys, different numbers of primaries and blends. For example: a calculus corridor with "rate" and "accumulation" primaries, a number-theory corridor with "prime" and "composite" keys, etc.
+
+**Your code must be COMPLETELY data-driven:**
+- It reads `segments` from whatever `RobotData` it receives — NEVER hardcode field_e, field_b, or coupling
+- It reads the `ColorLedger` from whatever corridor is loaded — NEVER hardcode which keys are primaries vs blends
+- It calls `palette.tint(key)` and `palette.text_color_on(key)` for ALL coloring — NEVER pick colors directly
+- Segment matching is by LaTeX string comparison against the `segments` list — NEVER by key name
+
+**Test fixture for now:** Maxwell corridor (`maxwell.txt`) has the richest SEGMENTS data for testing:
+- Robot 3 (Faraday): 3 segments with field_e, NEUTRAL, coupling keys
+- Robot 5 (Maxwell): 3 segments with field_b, NEUTRAL, coupling keys
+
+But the code must also work on `corridors/01_dummy.txt` (with alpha/beta/gamma keys) and any future corridor that follows the same file format.
 
 ---
 
@@ -251,12 +262,12 @@ Omit/duplicate → BLACK SCREEN.
 
 When done, the child must report:
 1. What functions were added/changed (file + line numbers)
-2. How to test: `python app.py`, fly into Maxwell corridor, press U near robot 3 (Faraday), verify:
-   - "∇×E" has RED backdrop
-   - "=" has NO backdrop (NEUTRAL)
-   - "-∂B/∂t" has PURPLE backdrop
-   - Prose between math is plain white
-   - All 4 layers (mathematician/physicist/biologist/engineer) show the SAME segment colors
+2. How to test: 
+   - `python app.py` with Maxwell level, fly into corridor, press U near robot 3 (Faraday), verify:
+     - "∇×E" has RED backdrop, "=" has NO backdrop, "-∂B/∂t" has PURPLE backdrop
+     - Prose between math is plain light grey text
+     - All 4 layers show the SAME segment colors
+   - Then test with `levels/intro.txt` (dummy corridors with alpha/beta/gamma/delta keys) — verify the renderer works with a completely different ledger
    - Blur, pan, depth, CTRL unlock all still work
 3. Any decisions or tradeoffs made
 
