@@ -52,6 +52,7 @@ class RobotData:
     eye_color_key: str      # a ledger key, or "NEUTRAL"
     fizzles: dict           # weapon_name -> why-not text
     required_technique_id: str   # Brief #9
+    understanding_dir: str = ""  # Brief #11d: path to baked PNGs e.g. "baked/maxwell"
 
 
 @dataclass
@@ -80,6 +81,7 @@ class CorridorData:
     exit_text: str
     robots: list      # list[RobotData], in file order
     ledger: ColorLedger
+    understanding_dir: str = ""  # Brief #11d: path to baked PNGs e.g. "baked/maxwell"
 
 
 # ---------------------------------------------------------------------------
