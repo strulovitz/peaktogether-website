@@ -245,6 +245,30 @@ Written: `PARENT_ESTATE/PARENT_PROMPT_6_POST_ROLLBACK.md` — full project-wide 
 2. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
 3. `PARENT_ESTATE/PARENT_PROMPT_6_POST_ROLLBACK.md` — Parent #6 handoff
 4. `PARENT_ESTATE/SESSION_2026-06-15_EVENING.md` — last working session
+5. `PARENT_ESTATE/SESSION_2026-06-16_NIGHT.md` — today's full session ⭐
+
+## 🔴 SESSION LOG — June 16, 2026 NIGHT (end of day — HUGE PROGRESS 🎉)
+
+### Brief #A — Baked PNG Wiring (+ Loud Fallback) — COMPLETE ✅
+Parent #6 wrote the brief. Child Opus implemented 9 edits across 3 rounds:
+- **Edits 1-6:** understanding_dir field on dataclasses, baked: manifest parsing, injection into data objects, Robot property, loud fallback prints
+- **Edits 7-8:** robot_in_view(hub, ship) selector — U now opens the robot you're FACING, not the combat gate
+- **Edit 9:** frame-1 auto-fire fix — changed abs(lt)→lt in gamepad trigger detection (Xbox triggers rest at -1.0, abs(-1.0)=1.0>0.5 → auto-fire on frame 1)
+
+### 🔴 CRITICAL BUG FOUND & FIXED: Robot 1 invisible in all corridors
+3 runtime probes narrowed it from "rendering mystery" to "input bug": data=5 stations=5 robots=5 (parser healthy) → all 5 positions spread cleanly (not co-located) → draw#1 defeated=True (caught auto-fire on frame 1). General fix — repairs robot 1 in Maxwell AND Basel.
+
+### Design Decision Locked: fizzle is FINAL
+Wrong missile → harmless 6s message, NO penalty. The couple is learning together.
+
+### Brief #B — Basel Game Corridor — READY (not yet dispatched)
+Parent #6 wrote the brief. Child will author corridors/basel.txt + levels/basel.txt (7 robots: Euler, al-Khwarizmi, Weierstrass, Taylor, Viete, Hipparchus, Riemann — 42 fizzles). Pending: Nir resolves NAME vs portrait-filename mismatch.
+
+### Files modified today
+combat.py (robot_in_view + abs fix), app.py (U key), content_parser.py, level_parser.py, robots.py, understanding.py, levels/maxwell.txt
+
+### New files created today
+CHILD_BRIEF_A_BAKED_PNG_WIRING.md, CHILD_BRIEF_B_BASEL_GAME_CORRIDOR.md, 3 Brief #A completion reports, SESSION_2026-06-16_NIGHT.md, PARENT_PROMPT_6_POST_ROLLBACK.md
 
 ## 🔴 SESSION LOG — June 13, 2026
 
