@@ -1,3 +1,3 @@
 title: Maxwell Test Corridor
 corridors:
-  ../corridors/maxwell.txt
+  ../corridors/maxwell_old.txt
