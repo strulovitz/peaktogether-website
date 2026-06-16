@@ -224,31 +224,6 @@ Claude Fable lives on OpenRouter and has NO MEMORY between sessions. Every time 
 | `corridors/01_dummy.txt` | Dummy test fixture for content_parser |
 | `WORKFLOW.md` | Updated Who's Who + session log |
 
-## 🔴 SESSION LOG — June 16, 2026 (EVENING, Parent #5, DeepSeek)
-
-### 🔥 MAJOR PIVOT: Live mathtext → Pre-baked LaTeX PNGs
-
-Parent #5 (Opus 4.8) replaced Understanding Mode's live matplotlib rendering with an offline baker. The baker (`deu/bake_corridor.py`) compiles full LaTeX into transparent colored PNGs with a stain+thread color system. The game loads these PNGs instead of live-rendering.
-
-**Baker works perfectly:** 0 failures on Maxwell (8/8) and Basel (28/28).
-
-**New files:** `deu/bake_corridor.py`, `baked/maxwell/*.png`, `baked/basel/*.png`, new `understanding.py` (fog-and-glass flight), `PARENT_ESTATE/UNDERSTANDING_MODE_PREBAKED_LATEX.md`, `PARENT_ESTATE/CORRIDOR_WRITER_PROMPT.md`
-
-**Wired:** `understanding_dir` flows from level manifest `baked:` line → `CorridorData` → `RobotData` → Understanding Mode loads `baked/<dir>/robot<N>_<layer>.png`
-
-### 🔴 BUG: Robot 1 (Leonhard Euler) invisible in Basel corridor
-Only 6 of 7 robots render in-game. Robot 1 exists in all data structures but not on screen. Verified: 7 RobotData objects, 7 Robot runtime objects, 7 valid positions, all undefeated.
-
-### 🟡 Remaining: defeat plaque white rectangle, ship containment, joystick wiring, face photos
-
-### ⭐ ON RESTART — Read these in order:
-1. **THIS FILE** (WORKFLOW.md)
-2. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
-3. `PARENT_ESTATE/SESSION_2026-06-16_EVENING.md` — full day details
-4. `PARENT_ESTATE/UNDERSTANDING_MODE_PREBAKED_LATEX.md` — stain+thread design
-
-### ⚠️ Current test state: `app.py` LEVEL_MANIFEST = `"levels/basel_deepseek.txt"` (DeepSeek stub). Switch back to `"levels/maxwell.txt"` for Maxwell.
-
 ## Nir's Preferences
 - Nir LOVES emojis -- use them abundantly in chat
 - Nir does NOT know Python -- explain things simply
