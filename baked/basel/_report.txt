@@ -4,114 +4,78 @@ STAINS  : roots, coeff_root, sine_fn, product, series, answer
 DPI     : 600
 
 --- ROBOT 1: Leonhard Euler ---
-  [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.15 ...\zeta(2)=\sum_{n=1}^{\infty}\frac{1}{n^2}}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.15 ...swer}{\color{descentprose}\frac{\pi^2}{6}}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] biologist    
-          ! Missing $ inserted.
-          l.15 ...orbox{answer}{\color{descentprose}\pi^2/6}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.15 ...{\color{descentprose}\sum 1/n^2 = \pi^2/6}
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot1_mathematician.png
+  [ OK  ] physicist     -> robot1_physicist.png
+  [ OK  ] biologist     -> robot1_biologist.png
+  [ OK  ] engineer      -> robot1_engineer.png
 
 --- ROBOT 2: Coefficient Matching ---
   [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.16 ...lor{descentprose}1-\tfrac{x^2}{3!}+\cdots}
+          ! Missing } inserted.
+          l.16 ...ients coincide. The ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.16 ...{\color{descentprose}\sum 1/n^2 = \pi^2/6}
+          ! Missing } inserted.
+          l.16 ...m. Look only at the ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] biologist    
-          ! Missing $ inserted.
-          l.16 ...x{sine_fn}{\color{descentprose}\sin x / x}
+          ! Missing } inserted.
+          l.16 ...d compares just the ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.16 ...oeff_root}{\color{descentprose}\sum 1/n^2}
+          ! Missing } inserted.
+          l.16 .... Here matching the ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
 
 --- ROBOT 3: The Product Over Roots ---
   [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.16 ...box{sine_fn}{\color{descentprose}\sin x/x}
+          ! Missing } inserted.
+          l.16 ..._t1} $\Big(1-\frac{x^2}{n^2\pi^2}\Big)$}$}
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.16 ...box{sine_fn}{\color{descentprose}\sin x/x}
+          ! Missing } inserted.
+          l.16 ...l is the product of ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] biologist    
-          ! Missing $ inserted.
-          l.15 ...orbox{sine_fn}{\color{descentprose}\sin x}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.15 ...box{sine_fn}{\color{descentprose}\sin x/x}
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot3_biologist.png
+  [ OK  ] engineer      -> robot3_engineer.png
 
 --- ROBOT 4: The Series From Derivatives ---
   [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.17 ...orbox{sine_fn}{\color{descentprose}\sin x}
+          ! Missing } inserted.
+          l.17 ...rose}$\sin x$}}$ is ${\color{thread__t2} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.17 ...orbox{sine_fn}{\color{descentprose}\sin x}
+          ! Missing } inserted.
+          l.17 ...es its power series ${\color{thread__t2} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] biologist    
-          ! Missing $ inserted.
-          l.17 ...orbox{sine_fn}{\color{descentprose}\sin x}
+          ! Missing } inserted.
+          l.17 ...in x$}}$ this gives ${\color{thread__t2} $
           !  ==> Fatal error occurred, no output PDF file produced!
   [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.16 ...orbox{sine_fn}{\color{descentprose}\sin x}
+          ! Missing } inserted.
+          l.16 ...e}\text{series'}}}$ ${\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
 
 --- ROBOT 5: François Viète ---
-  [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.15 ...ts}{\color{descentprose}\text{roots } r_i}
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot5_mathematician.png
   [ OK  ] physicist     -> robot5_physicist.png
   [ OK  ] biologist     -> robot5_biologist.png
-  [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.15 ...tprose}x^2\text{ coefficient}=-\sum 1/r^2}
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] engineer      -> robot5_engineer.png
 
 --- ROBOT 6: The Zeros of Sine ---
-  [FAIL ] mathematician
-          ! Missing $ inserted.
-          l.15 ...orbox{sine_fn}{\color{descentprose}\sin x}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.15 ...orbox{sine_fn}{\color{descentprose}\sin x}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] biologist    
-          ! Missing $ inserted.
-          l.15 ...orbox{sine_fn}{\color{descentprose}\sin x}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] engineer     
-          ! Missing $ inserted.
-          l.15 ...orbox{sine_fn}{\color{descentprose}\sin x}
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot6_mathematician.png
+  [ OK  ] physicist     -> robot6_physicist.png
+  [ OK  ] biologist     -> robot6_biologist.png
+  [ OK  ] engineer      -> robot6_engineer.png
 
 --- ROBOT 7: Bernhard Riemann ---
-  [ OK  ] mathematician -> robot7_mathematician.png
-  [FAIL ] physicist    
-          ! Missing $ inserted.
-          l.16 ...ox{answer}{\color{descentprose}\sum 1/n^2}
+  [FAIL ] mathematician
+          ! Missing } inserted.
+          l.16 ...prod_{p\text{ prime}}{\color{thread__t1} $
           !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] physicist     -> robot7_physicist.png
   [ OK  ] biologist     -> robot7_biologist.png
   [ OK  ] engineer      -> robot7_engineer.png
 
-DONE. 23 failure(s).
+DONE. 11 failure(s).
