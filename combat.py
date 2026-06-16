@@ -181,13 +181,20 @@ class Combat:
             if self._btn_edge(joy, 5):   # RB -> next
                 self._cycle(+1)
 
-            # triggers -> FIRE (magnitude + edge, rest-value-agnostic)
+            # triggers -> FIRE.
+            # Xbox/XInput analog triggers REST at -1.0 (released) and read
+            # +1.0 fully pressed; some drivers rest at 0.0 instead. Using
+            # abs() (old bug) treated the -1.0 resting state as "fully
+            # pressed", auto-firing on frame 1 and silently destroying the
+            # first robot in every corridor. Test the SIGNED value crossing
+            # into the clearly-pressed positive region — false for BOTH
+            # resting conventions (-1.0 and 0.0), true only for a real pull.
             FIRE_TH = 0.5
             try:
                 lt = joy.get_axis(4); rt = joy.get_axis(5)
             except Exception:
                 lt = rt = 0.0
-            trigger_now = (abs(lt) > FIRE_TH) or (abs(rt) > FIRE_TH)
+            trigger_now = (lt > FIRE_TH) or (rt > FIRE_TH)   # signed, not abs()
             fire_edge_pad = trigger_now and not self._prev_trigger
             self._prev_trigger = trigger_now
             fire_now = fire_now or fire_edge_pad
