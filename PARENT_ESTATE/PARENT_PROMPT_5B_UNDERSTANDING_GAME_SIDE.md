@@ -1,6 +1,6 @@
-# 🚀 PARENT 6 PROMPT — Understanding Mode: game-side PNG integration
+# 🚀 PARENT 5 PROMPT (part 2) — Understanding Mode: game-side PNG integration
 
-> **TO:** Claude Opus 4.8 — You are PARENT #6.
+> **TO:** Claude Opus 4.8 — You are PARENT #5 (continuation).
 > **FROM:** Nir (strulovitz) + DeepSeek V4 Pro (OpenCode)
 > **PASTE THIS ENTIRE DOCUMENT** into a fresh Claude conversation.
 
