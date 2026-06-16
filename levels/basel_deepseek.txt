@@ -1,5 +1,0 @@
-# Basel level manifest — DeepSeek stub (DELETE when Opus builds real one)
-title: Basel Problem (DeepSeek Stub)
-baked: baked/basel
-corridors:
-  ../corridors/basel_stub_deepseek.txt
