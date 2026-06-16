@@ -44,12 +44,23 @@ def _require(tool: str, hint: str) -> str:
     return p
 
 def check_toolchain() -> dict[str, str]:
-    return {
+    tools = {
         "pdflatex": _require("pdflatex",
-            "Install TeX Live (full): https://www.tug.org/texlive/  (~6.5 GB, one time)."),
-        "dvisvgm": _require("dvisvgm",
-            "dvisvgm ships inside TeX Live. Reinstall TeX Live (full) if missing."),
+            "Install TeX Live (full) or MiKTeX: https://www.tug.org/texlive/"),
     }
+    # Preferred PDF->PNG: pdftocairo (Poppler; ships with MiKTeX & most TeX installs)
+    pc = shutil.which("pdftocairo")
+    if pc:
+        tools["pdftocairo"] = pc
+    # Fallback rasteriser
+    dv = shutil.which("dvisvgm")
+    if dv:
+        tools["dvisvgm"] = dv
+    if "pdftocairo" not in tools and "dvisvgm" not in tools:
+        print("FATAL: need either 'pdftocairo' (Poppler) or 'dvisvgm' on PATH.\n"
+              "       Both ship with full TeX Live / MiKTeX.", file=sys.stderr)
+        sys.exit(2)
+    return tools
 
 
 # ----------------------------------------------------------------------------
@@ -151,11 +162,10 @@ def assign_thread_colors(ids: list[str]) -> dict[str, tuple[float, float, float]
 
 
 # ----------------------------------------------------------------------------
-# 4. Expand markers -> real LaTeX (xcolor + soul). Brace-matched, nesting-safe.
-#    STAIN  -> \sethlcolor{key}\hl{ ... }      (sacred background wash)
-#    THREAD -> {\color{thread__id} ... }       (foreground letters)
-#    soul's \hl needs colour set immediately before; we wrap each stain span in a
-#    group so nested/sequential stains don't leak their highlight colour.
+# 4. Expand markers -> real LaTeX (xcolor). Brace-matched, nesting-safe.
+#    STAIN  -> \colorbox{key}{ ... }          (sacred background wash)
+#    THREAD -> {\color{thread__id} ... }      (foreground letters)
+#    \colorbox handles display math (unlike soul's \hl).
 # ----------------------------------------------------------------------------
 def expand_markers(latex: str,
                    stains: dict[str, tuple[float, float, float]],
@@ -180,7 +190,9 @@ def expand_markers(latex: str,
                 res.append(rf"{{\color{{thread__{key}}} {body}}}")
             else:  # stain (sacred); unknown -> uncoloured + reported
                 if key in stains:
-                    res.append(rf"{{\sethlcolor{{{key}}}\hl{{{body}}}}}")
+                    # \colorbox handles display math (unlike soul's \hl).
+                    # We re-assert the prose colour inside so letters stay light on the stain.
+                    res.append(rf"{{\colorbox{{{key}}}{{\color{{descentprose}}{body}}}}}")
                 else:
                     unknown_stains.append(key)
                     res.append(body)
@@ -209,10 +221,8 @@ def build_document(explanation: str,
 
     return rf"""\documentclass[border=10pt,varwidth=14cm]{{standalone}}
 \usepackage{{amsmath,amssymb}}
-\usepackage{{xcolor}}
-\usepackage{{soul}}            % \hl highlight = the sacred stain wash
+\usepackage{{xcolor}}            % provides \colorbox for the stain wash
 \usepackage[T1]{{fontenc}}
-\sethlcolor{{white}}
 {color_defs}
 \definecolor{{descentprose}}{{rgb}}{{0.93,0.95,0.98}}  % neutral light prose
 \begin{{document}}
@@ -244,6 +254,8 @@ def bake_one(tex: str, out_png: Path, dpi: int, tools: dict[str, str]) -> BakeRe
     with tempfile.TemporaryDirectory() as td:
         tmp = Path(td)
         (tmp / "doc.tex").write_text(tex, encoding="utf-8")
+
+        # 1) pdflatex -> PDF
         p = subprocess.run(
             [tools["pdflatex"], "-interaction=nonstopmode", "-halt-on-error",
              "-output-directory", str(tmp), str(tmp / "doc.tex")],
@@ -253,17 +265,32 @@ def bake_one(tex: str, out_png: Path, dpi: int, tools: dict[str, str]) -> BakeRe
             log = tmp / "doc.log"
             txt = log.read_text(encoding="utf-8", errors="ignore") if log.exists() else (p.stdout + p.stderr)
             return BakeResult(False, None, _extract_latex_error(txt))
-        q = subprocess.run(
-            [tools["dvisvgm"], "--pdf", "--png", "--bbox=papersize",
-             f"--png:dpi={dpi}", "--background=transparent",
-             "-o", str(tmp / "out.png"), str(pdf)],
-            capture_output=True, text=True)
-        produced = tmp / "out.png"
+
+        # 2) PDF -> transparent PNG, preferring pdftocairo (clean, build-independent)
+        out_stub = tmp / "out"   # pdftocairo appends .png
+        if tools.get("pdftocairo"):
+            r = subprocess.run(
+                [tools["pdftocairo"], "-png", "-transp", "-r", str(dpi),
+                 "-singlefile", str(pdf), str(out_stub)],
+                capture_output=True, text=True)
+            produced = tmp / "out.png"
+        else:
+            # Fallback: dvisvgm PDF->SVG, then SVG->PNG (no --png flag used)
+            svg = tmp / "out.svg"
+            subprocess.run([tools["dvisvgm"], "--pdf", "-o", str(svg), str(pdf)],
+                           capture_output=True, text=True)
+            r = subprocess.run([tools["dvisvgm"], f"--png:dpi={dpi}",
+                                "-o", str(tmp / "out.png"), str(svg)],
+                               capture_output=True, text=True)
+            produced = tmp / "out.png"
+
         if not produced.exists():
             cands = sorted(tmp.glob("out*.png"))
             if not cands:
-                return BakeResult(False, None, "dvisvgm failed:\n" + (q.stdout + q.stderr)[-1500:])
+                return BakeResult(False, None,
+                                  "PDF->PNG failed:\n" + (r.stdout + r.stderr)[-1500:])
             produced = cands[0]
+
         Image.open(produced).convert("RGBA").save(out_png)
         return BakeResult(True, out_png)
 

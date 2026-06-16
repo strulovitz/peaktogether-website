@@ -1,0 +1,18 @@
+CORRIDOR: Maxwell's Equations — Faraday & Ampere
+SOURCE  : corridors\maxwell.txt
+STAINS  : electric, magnetic, coupling
+DPI     : 600
+
+--- ROBOT 3: Faraday ---
+  [ OK  ] mathematician -> robot3_mathematician.png
+  [ OK  ] physicist     -> robot3_physicist.png
+  [ OK  ] biologist     -> robot3_biologist.png
+  [ OK  ] engineer      -> robot3_engineer.png
+
+--- ROBOT 4: Ampere ---
+  [ OK  ] mathematician -> robot4_mathematician.png
+  [ OK  ] physicist     -> robot4_physicist.png
+  [ OK  ] biologist     -> robot4_biologist.png
+  [ OK  ] engineer      -> robot4_engineer.png
+
+DONE. 0 failure(s).
