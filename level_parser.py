@@ -87,11 +87,10 @@ _LEVEL_FILE_RE = re.compile(r".+\.txt$")
 # in one file, and lets the same corridor fixture belong to multiple levels.
 
 
-def _read_manifest(path: str) -> tuple[str, list[str], str]:
-    """Parse a level manifest file into (title, [corridor_path, ...], baked_dir).
+def _read_manifest(path: str) -> tuple[str, list[str]]:
+    """Parse a level manifest file into (title, [corridor_path, ...]).
 
     Paths are returned already resolved against the manifest's directory.
-    baked_dir is the 'baked:' value (e.g. "baked/maxwell") or "" if absent.
     Raises ParseError with file:line on any structural violation.
     """
     fname = os.path.basename(path)
@@ -104,7 +103,6 @@ def _read_manifest(path: str) -> tuple[str, list[str], str]:
         raise ParseError(f"{fname}: cannot read level manifest: {e}")
 
     title = None
-    baked_dir = ""
     corridor_paths: list[str] = []
     in_corridors = False
 
@@ -125,10 +123,6 @@ def _read_manifest(path: str) -> tuple[str, list[str], str]:
             if not title:
                 raise ParseError(f"{fname}:{lineno}: 'title:' is empty")
             in_corridors = False
-            continue
-
-        if low.startswith("baked:"):
-            baked_dir = stripped[len("baked:"):].strip()
             continue
 
         if low == "corridors:" or low.startswith("corridors:"):
@@ -161,7 +155,7 @@ def _read_manifest(path: str) -> tuple[str, list[str], str]:
     if not corridor_paths:
         raise ParseError(f"{fname}: 'corridors:' lists no corridor files")
 
-    return title, corridor_paths, baked_dir
+    return title, corridor_paths
 
 
 # ---------------------------------------------------------------------------
@@ -187,7 +181,7 @@ def load_level(path: str) -> Level:
     if not os.path.isfile(path):
         raise ParseError(f"load_level: not a file: {path!r}")
 
-    title, corridor_paths, baked_dir = _read_manifest(path)
+    title, corridor_paths = _read_manifest(path)
     manifest_name = os.path.basename(path)
 
     # Reject duplicates by resolved absolute path — distinctness is a hard rule.
@@ -208,13 +202,7 @@ def load_level(path: str) -> Level:
                 f"{manifest_name}: listed corridor fixture not found: {p!r}"
             )
         # Delegate ALL single-corridor parsing to the existing layer.
-        cd = parse_corridor(p)
-        # Brief #11d: propagate baked_dir to corridor and all its robots
-        if baked_dir:
-            cd.understanding_dir = baked_dir
-            for r in cd.robots:
-                r.understanding_dir = baked_dir
-        corridors.append(cd)
+        corridors.append(parse_corridor(p))
 
     return Level(title=title, corridors=corridors)
 
