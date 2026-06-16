@@ -1,8 +1,9 @@
 # 🚀 PARENT 5 PROMPT (part 2) — Understanding Mode: game-side PNG integration
 
-> **TO:** Claude Opus 4.8 — You are PARENT #5 (continuation).
+> **TO:** Claude Opus 4.8 — You are PARENT #5. This is a CONTINUATION of our session.
+> You already designed the pre-baked system, the baker, the corridor writer, and the fog-and-glass understanding.py.
+> Now: wire it into the real game.
 > **FROM:** Nir (strulovitz) + DeepSeek V4 Pro (OpenCode)
-> **PASTE THIS ENTIRE DOCUMENT** into a fresh Claude conversation.
 
 ---
 
