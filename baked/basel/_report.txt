@@ -10,52 +10,22 @@ DPI     : 600
   [ OK  ] engineer      -> robot1_engineer.png
 
 --- ROBOT 2: Coefficient Matching ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.16 ...ients coincide. The ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.16 ...m. Look only at the ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] biologist    
-          ! Missing } inserted.
-          l.16 ...d compares just the ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] engineer     
-          ! Missing } inserted.
-          l.16 .... Here matching the ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot2_mathematician.png
+  [ OK  ] physicist     -> robot2_physicist.png
+  [ OK  ] biologist     -> robot2_biologist.png
+  [ OK  ] engineer      -> robot2_engineer.png
 
 --- ROBOT 3: The Product Over Roots ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.16 ..._t1} $\Big(1-\frac{x^2}{n^2\pi^2}\Big)$}$}
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.16 ...l is the product of ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot3_mathematician.png
+  [ OK  ] physicist     -> robot3_physicist.png
   [ OK  ] biologist     -> robot3_biologist.png
   [ OK  ] engineer      -> robot3_engineer.png
 
 --- ROBOT 4: The Series From Derivatives ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.17 ...rose}$\sin x$}}$ is ${\color{thread__t2} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.17 ...es its power series ${\color{thread__t2} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] biologist    
-          ! Missing } inserted.
-          l.17 ...in x$}}$ this gives ${\color{thread__t2} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] engineer     
-          ! Missing } inserted.
-          l.16 ...e}\text{series'}}}$ ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot4_mathematician.png
+  [ OK  ] physicist     -> robot4_physicist.png
+  [ OK  ] biologist     -> robot4_biologist.png
+  [ OK  ] engineer      -> robot4_engineer.png
 
 --- ROBOT 5: François Viète ---
   [ OK  ] mathematician -> robot5_mathematician.png
@@ -70,12 +40,9 @@ DPI     : 600
   [ OK  ] engineer      -> robot6_engineer.png
 
 --- ROBOT 7: Bernhard Riemann ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.16 ...prod_{p\text{ prime}}{\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot7_mathematician.png
   [ OK  ] physicist     -> robot7_physicist.png
   [ OK  ] biologist     -> robot7_biologist.png
   [ OK  ] engineer      -> robot7_engineer.png
 
-DONE. 11 failure(s).
+DONE. 0 failure(s).
