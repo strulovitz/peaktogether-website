@@ -19,11 +19,11 @@ PHYSICAL MODEL:
 Input (UNCHANGED): mouse wheel = depth(=zoom), mouse + right stick = pan,
 CTRL = engineer unlock, ESC / back-out (focus < -0.6) = exit.
 
-Brief #J1B: the T.16000M back-center button (pygame button index 3) is ADDITIVE to
-CTRL. CTRL here is a HELD reveal (engineer comes into focus WHILE held, softens on
-release) -- not a toggle -- so the joystick button is OR'd into the same held
-boolean, NOT edge-gated. (#J1B's text said "rising-edge"; the real behavior here is
-hold-to-reveal, so the code is held. Nir's game, my bug to not repeat.)
+Brief #J1B: the T.16000M back-center button is ADDITIVE to CTRL. On Nir's unit it
+reports as pygame button index 1 (CONFIRMED 2026-06-17 by an on-screen probe;
+the brief's "index 3" guess was wrong for this hardware). CTRL here is a HELD reveal
+(engineer comes into focus WHILE held, softens on release) -- not a toggle -- so the
+joystick button is OR'd into the same held boolean, NOT edge-gated.
 
 Fallback: if a baked PNG is missing for a layer, render robot.explain[layer] via
 render.render_rich() (old behavior), so the mode never crashes on an unbaked level.
@@ -39,6 +39,10 @@ import render
 LAYER_KEYS  = ["mathematician", "physicist", "biologist", "engineer"]
 LAYER_TITLE = {"mathematician":"MATHEMATICIAN", "physicist":"PHYSICIST",
                "biologist":"BIOLOGIST", "engineer":"ENGINEER"}
+
+# Brief #J1B: pilot-joystick button index for the engineer reveal (HELD, like
+# CTRL). Confirmed by probe on Nir's T.16000M: the back-center button = index 1.
+PILOT_ENGINEER_BTN = 1
 
 BG_COLOR   = (0.04, 0.05, 0.07)   # near-black world replacement
 PAN_SPEED   = 1.0                  # mouse px -> pan px
@@ -187,30 +191,21 @@ class UnderstandingMode:
         if not self.active:
             return
 
-        # Engineer reveal: keyboard CTRL OR T.16000M back-center button (index 3).
-        # HELD, not edge-gated -- the engineer sign sharpens WHILE held and
-        # softens on release. The joystick button is OR'd in exactly like the
-        # two CTRL keys are OR'd. Crash-safe against no controller / no pilot
-        # device / too-few buttons.
+        # Engineer reveal: keyboard CTRL OR T.16000M back-center button
+        # (PILOT_ENGINEER_BTN = index 1, confirmed by probe). HELD, not
+        # edge-gated -- the engineer sign sharpens WHILE held and softens on
+        # release. The joystick button is OR'd in exactly like the two CTRL
+        # keys are. Crash-safe against no controller / no pilot device /
+        # too-few buttons.
         mods = pygame.key.get_mods()
         joy_engineer = False
         if gamepads is not None:
             pj = getattr(gamepads, "pilot_joy", None)
-            if pj is not None and pj.get_numbuttons() > 3:
+            if pj is not None and pj.get_numbuttons() > PILOT_ENGINEER_BTN:
                 try:
-                    joy_engineer = bool(pj.get_button(3))
+                    joy_engineer = bool(pj.get_button(PILOT_ENGINEER_BTN))
                 except Exception:
                     joy_engineer = False
-        # --- TEMP PROBE (Brief #J1B-2): print every pressed pilot button index.
-        #     Press the back-center button, read the console, tell me the number,
-        #     then I hard-wire it and delete this probe. ---
-        if gamepads is not None:
-            pj_probe = getattr(gamepads, "pilot_joy", None)
-            if pj_probe is not None:
-                pressed = [b for b in range(pj_probe.get_numbuttons()) if pj_probe.get_button(b)]
-                if pressed:
-                    print("PILOT BUTTONS DOWN:", pressed,
-                          "(numbuttons=%d)" % pj_probe.get_numbuttons())
         self.ctrl = (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
                      or bool(mods & pygame.KMOD_CTRL)
                      or joy_engineer)
