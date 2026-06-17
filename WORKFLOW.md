@@ -270,6 +270,54 @@ combat.py (robot_in_view + abs fix), app.py (U key), content_parser.py, level_pa
 ### New files created today
 CHILD_BRIEF_A_BAKED_PNG_WIRING.md, CHILD_BRIEF_B_BASEL_GAME_CORRIDOR.md, 3 Brief #A completion reports, SESSION_2026-06-16_NIGHT.md, PARENT_PROMPT_6_POST_ROLLBACK.md
 
+## 🔴 SESSION LOG — June 17, 2026 (Parent #7 — Engine Gaps & Polish 🛠️)
+
+### Parent #7 dispatched 3 briefs:
+
+| Brief | Topic | Status |
+|-------|-------|--------|
+| **#C1** | Ship collision/containment (walls + robot blocking) | ✅ COMPLETE (8 versions, v8 works) |
+| **#P1** | Defeat plaque — use baked PNG instead of live mathtext | ✅ COMPLETE (fixed cos45 sizing) |
+| **#J1** | T.16000M joystick wiring (true analog, additive) | 📋 Dispatched, pending child |
+
+### Brief #C1 journey (the hard one):
+v1-v3: various wall/robot approaches, all leaked
+v4: "oranges in a box" — robot blocking FIXED, walls still leaked
+v5: iterative constraint solve — still leaked
+v6: inner-tube axis (broken, rolled back by Nir)
+v7: clean nearest-centerline (walls only, child deleted robot code)
+**v8: v4 robots + v7 walls combined — WORKS** ✅
+
+### Files created/modified today:
+| File | Change |
+|------|--------|
+| `containment.py` | New — wall confinement + robot blocking |
+| `app.py` | 2 lines: import containment + resolve() call |
+| `corridor_builder.py` | Replaced _draw_plaques — baked PNG + white frame |
+| `corridors/basel.txt` | Child Brief #B delivered (7 robots, 42 fizzles) |
+| `levels/basel.txt` | Basel level manifest |
+| `PARENT_ESTATE/PARENT_PROMPT_7_ENGINE_GAPS.md` | Parent #7 handoff |
+| `PARENT_ESTATE/briefs/CHILD_BRIEF_C1_*.md` | Ship collision brief |
+| `PARENT_ESTATE/briefs/CHILD_BRIEF_P1_*.md` | Defeat plaque brief |
+| `PARENT_ESTATE/briefs/CHILD_BRIEF_J1_*.md` | Joystick wiring brief |
+| `PARENT_ESTATE/reports/COMPLETION_REPORT_BRIEF_C1_*.md` | C1 completion report |
+
+### 🔴 REMAINING ISSUES (Nir's list, June 17):
+
+| # | Issue | Description |
+|---|-------|-------------|
+| 1 | **Understanding Mode "conveyor belt"** | The road-sign panels flip forward↔backward / drift like a conveyor — wrong feel. Must move/depth correctly. |
+| 2 | **Multiple corridors** | Only ONE corridor exists. Game needs several (e.g. different proofs of the Basel problem, each a corridor). Multi-corridor is untested and may bleed holograms/text between robots. |
+| 3 | **T.16000M joystick** | Brief #J1 dispatched, awaiting child. |
+
+### Current state:
+- Ship containment: walls + robots ✅
+- Defeat plaques: baked PNG with white frame ✅
+- Basel corridor: 7 robots playable ✅
+- Joystick: brief dispatched 🟡
+- Understanding Mode conveyor belt: 🔴
+- Multiple corridors: 🔴
+
 ## 🔴 SESSION LOG — June 13, 2026
 
 ### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
