@@ -1,0 +1,4 @@
+title: The Basel Problem
+baked: ../baked/basel
+corridors:
+  ../corridors/basel.txt

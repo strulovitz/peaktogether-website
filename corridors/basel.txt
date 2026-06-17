@@ -1,0 +1,261 @@
+# ===========================================================
+# The Basel Problem — Euler's Descent. Seven sentinels, one per
+# step of Euler's 1734 solution of sum 1/n^2 = pi^2/6. Robot 1 is
+# nearest the doorway. Each yields to exactly ONE mathematician id.
+# Robot N maps 1:1 to baker step N (baked/basel/robotN_*.png).
+# LEDGER mirrors the baker STAINS: roots=red, coeff_root=yellow,
+# sine_fn=blue; product=red+yellow, series=yellow+blue, answer=red+blue.
+# ===========================================================
+CORRIDOR: 1
+TITLE { The Basel Problem -- Euler's Descent }
+FLAVOR { One sum of squares, two faces of a single sine, and the circle hidden inside. }
+LEDGER {
+  PRIMARY roots      = red
+  PRIMARY coeff_root = yellow
+  PRIMARY sine_fn    = blue
+  BLEND   product    = roots + coeff_root
+  BLEND   series     = coeff_root + sine_fn
+  BLEND   answer     = roots + sine_fn
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in Euler's descent on the Basel sum. Read each robot's blue
+          hologram face, judge whose idea its mathematics belongs to, and fire
+          that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the Basel corridor. Somewhere ahead, a sum of squares is waiting to become a circle. }
+EXIT_TEXT { The last sentinel falls and the sum closes into pi^2/6. The hostages are free -- you have flown the whole length of Euler's proof. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the prize itself: the closed form of the sum
+          of inverse squares. It yields to the man who first named the result. }
+PROBLEM { Identify the value of the Basel sum $\sum_{n=1}^{\infty} \frac{1}{n^2}$ --
+          who first proved it equals $\frac{\pi^2}{6}$? }
+EXPLAIN_MATHEMATICIAN { The Basel problem asks for the closed form of
+          $\zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2}$; in 1734 Euler proved it
+          equals $\frac{\pi^2}{6} \approx 1.644934$ by writing $\sin x$ two ways
+          and forcing their coefficients to agree. }
+EXPLAIN_PHYSICIST { Add $1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots$; it
+          settles near $1.645$. Euler's shock was that the exact value is
+          $\frac{\pi^2}{6}$ -- a circle constant inside a sum with no circles. }
+EXPLAIN_BIOLOGIST { Add the reciprocals of the squares $1, 4, 9, 16, \dots$ forever
+          and the pile settles near $1.645$. The surprise is that this is exactly
+          $\frac{\pi^2}{6}$ -- the circle number $\pi$, hiding in plain fractions. }
+EXPLAIN_ENGINEER { Plug in numbers: the sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]
+          meets the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match -- an
+          endless sum collapses into one exact value you can compute with. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$   | answer
+  $=$                                   | NEUTRAL
+  $\frac{\pi^2}{6}$                     | answer
+}
+EYE { answer }
+VULNERABLE_TO { euler }
+FIZZLE al_khwarizmi { Matching like-power coefficients is a true step further inside this proof, but right here you are only being asked to NAME the famous result -- think about WHO first summed these squares. }
+FIZZLE weierstrass { Justifying the infinite product is a genuine and deep part of the story, but this opening robot just states the headline answer -- name the person who first claimed it. }
+FIZZLE taylor { Expanding a function into a power series is a real ingredient used later, but here no function is being expanded -- you are being asked who owns this famous sum. }
+FIZZLE viete { Relating roots to coefficients is a real tool used downstream, but this robot only poses the result itself -- recall who first announced that the squares sum to pi-squared over six. }
+FIZZLE hipparchus { The zeros of sine matter deeper in the proof, but no sine appears yet -- this sentinel just states the prize, so name its discoverer. }
+FIZZLE riemann { Generalizing to the zeta function comes at the very end of the corridor, but this first robot is the original special case -- name the man who solved it in 1734. }
+
+ROBOT: 2
+NAME { al-Khwarizmi }
+BRIEFING_HINT { Coefficient Matching: two true expansions of one function must
+          agree term by term. This sentinel yields to the father of algebra. }
+PROBLEM { Two expansions describe the same function. Equate their $x^2$
+          coefficients to extract the unknown sum -- which algebraic discipline is this? }
+EXPLAIN_MATHEMATICIAN { If one function equals both the series $1 - \frac{x^2}{3!} +
+          \cdots$ and the product $\prod_n \left( 1 - \frac{x^2}{n^2 \pi^2} \right)$,
+          their like-power coefficients coincide; equating the $x^2$ terms gives
+          $-\frac{1}{6} = -\frac{1}{\pi^2} \sum \frac{1}{n^2}$. }
+EXPLAIN_PHYSICIST { Two correct formulas for one curve must agree term by term.
+          The $x^2$ coefficient is $-\frac{1}{6}$ from the series and
+          $-\frac{1}{\pi^2} \sum \frac{1}{n^2}$ from the product; setting them equal
+          gives $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { It is one song written in two notations: if both are right, the
+          note on each beat must match. Compare just the $x^2$ beat of the two
+          versions and that single equality hands you the whole answer. }
+EXPLAIN_ENGINEER { This is equate-coefficients, the workhorse trick: two valid
+          expansions let you read off an unknown by matching one power. Here the
+          $x^2$ terms let you solve for $\sum \frac{1}{n^2}$ without summing it. }
+SEGMENTS {
+  $-\frac{1}{6}$                         | series
+  $=$                                    | NEUTRAL
+  $-\frac{1}{\pi^2} \sum \frac{1}{n^2}$  | product
+}
+EYE { coeff_root }
+VULNERABLE_TO { al_khwarizmi }
+FIZZLE euler { Naming the final result is what the first sentinel wanted; this robot is about the algebraic MOVE of equating two expansions -- think of the discipline whose very name means restoring and balancing. }
+FIZZLE weierstrass { Certifying the infinite product is the rigour behind one side, but this step is the pure act of balancing two expressions against each other -- recall who founded the art of solving equations. }
+FIZZLE taylor { One of the two expansions is indeed a power series, but here you must MATCH it against the other, not generate it -- which ancient discipline is built on balancing equals against equals? }
+FIZZLE viete { Roots and coefficients meet later; this robot is the broader act of setting two whole expansions equal and reading off a term -- think of the founder of algebra itself. }
+FIZZLE hipparchus { Sine's zeros feed one expansion, but this sentinel is about the algebraic balancing of two formulas -- name the scholar whose book gave algebra its name. }
+FIZZLE riemann { The grand generalization waits at the end; this is the humble, powerful act of equating like powers -- recall who first systematized solving for an unknown. }
+
+ROBOT: 3
+NAME { Karl Weierstrass }
+BRIEFING_HINT { The Product Over Roots: factor sine over its zeros as if it were an
+          infinite polynomial. This sentinel yields to the man who made it rigorous. }
+PROBLEM { Euler writes $\frac{\sin x}{x}$ as an infinite product over its roots.
+          Who supplied the rigorous justification that such a product is valid? }
+EXPLAIN_MATHEMATICIAN { Treating $\frac{\sin x}{x}$ as an infinite polynomial, Euler
+          factors it over its roots $\pm \pi, \pm 2\pi, \dots$ as $\frac{\sin x}{x} =
+          \prod_{n=1}^{\infty} \left( 1 - \frac{x^2}{n^2 \pi^2} \right)$; Weierstrass
+          later justified that this product converges and represents the function. }
+EXPLAIN_PHYSICIST { A polynomial is the product of factors, one per root. Euler dares
+          the same for $\frac{\sin x}{x}$, whose roots are the $n\pi$: $\frac{\sin x}{x}
+          = \prod_n \left( 1 - \frac{x^2}{n^2 \pi^2} \right)$. The $\pi$'s enter here. }
+EXPLAIN_BIOLOGIST { You can rebuild a polynomial from where it crosses zero -- one
+          factor per crossing. Euler treats wavy sine like a polynomial with
+          infinitely many crossings and multiplies a factor for each; later someone
+          had to prove that infinite product was even allowed. }
+EXPLAIN_ENGINEER { Engineers factor transfer functions by their zeros, one factor
+          each. Euler does the same to $\frac{\sin x}{x}$ over its zeros $n\pi$. The
+          risky part -- doing it for infinitely many zeros -- is what had to be certified. }
+SEGMENTS {
+  $\frac{\sin x}{x}$                                          | sine_fn
+  $=$                                                         | NEUTRAL
+  $\prod_{n=1}^{\infty} \left( 1 - \frac{x^2}{n^2 \pi^2} \right)$ | product
+}
+EYE { product }
+VULNERABLE_TO { weierstrass }
+FIZZLE euler { Euler boldly WROTE this product, but the robot before you asks who made the daring step safe -- think of the founder of rigorous analysis, not the one who leapt. }
+FIZZLE al_khwarizmi { Equating coefficients uses this product as one input, but this sentinel is about whether the infinite product is even legitimate -- recall who built the careful foundations of limits. }
+FIZZLE taylor { A power series is the OTHER expansion; here the function is written as a product over roots, and someone had to prove that convergent -- name the master of rigorous analysis. }
+FIZZLE viete { Vieta's root-coefficient link inspires the idea, but the question here is who justified extending products to infinitely many factors -- think of the founder of epsilon-delta rigour. }
+FIZZLE hipparchus { Sine's zeros are the roots feeding this product, yet the robot asks who PROVED the product valid -- recall the analyst who put infinite processes on solid ground. }
+FIZZLE riemann { Riemann generalizes much later; this robot is specifically about certifying Euler's infinite product -- name the mathematician famous for rigorous foundations of analysis. }
+
+ROBOT: 4
+NAME { Brook Taylor }
+BRIEFING_HINT { The Series From Derivatives: build sine from its slopes at zero as a
+          power series. This sentinel yields to the namesake of that expansion. }
+PROBLEM { The other expansion of $\frac{\sin x}{x}$ is a power series from repeated
+          derivatives at $0$. Whose expansion gives $1 - \frac{x^2}{3!} + \cdots$? }
+EXPLAIN_MATHEMATICIAN { The Maclaurin expansion of $\sin x$ is $x - \frac{x^3}{3!} +
+          \frac{x^5}{5!} - \cdots$, so $\frac{\sin x}{x} = 1 - \frac{x^2}{3!} +
+          \frac{x^4}{5!} - \cdots$; hence its $x^2$ coefficient is
+          $-\frac{1}{3!} = -\frac{1}{6}$, the value matched against the product. }
+EXPLAIN_PHYSICIST { Differentiating $\sin x$ repeatedly at $0$ gives the series $x -
+          \frac{x^3}{6} + \cdots$. Divide by $x$: $\frac{\sin x}{x} = 1 - \frac{x^2}{6}
+          + \cdots$. The $x^2$ coefficient is simply $-\frac{1}{6}$, with no $\pi$. }
+EXPLAIN_BIOLOGIST { This kind of series rebuilds a function from its slopes at one
+          point, adding bigger correction terms. For sine it gives $x - \frac{x^3}{6}
+          + \cdots$, and dividing by $x$ leaves $1 - \frac{x^2}{6} + \cdots$. }
+EXPLAIN_ENGINEER { This series is the practical way hardware computes $\sin x$ -- a
+          few terms suffice. Here we need just one number: the $x^2$ coefficient
+          $-\frac{1}{6}$, coming from the factorial $3!$. That value is Euler's anchor. }
+SEGMENTS {
+  $\frac{\sin x}{x}$                                  | sine_fn
+  $=$                                                 | NEUTRAL
+  $1 - \frac{x^2}{3!} + \frac{x^4}{5!} - \cdots$      | series
+}
+EYE { series }
+VULNERABLE_TO { taylor }
+FIZZLE euler { Euler assembles all the pieces, but this robot is the specific power-series expansion of sine -- think of the man whose name that series carries. }
+FIZZLE al_khwarizmi { Equating coefficients USES this series as one side; the robot itself is about GENERATING the series from derivatives -- recall whose expansion turns a function into powers of x. }
+FIZZLE weierstrass { Weierstrass justified the PRODUCT side; here you face the series side built from slopes at zero -- name the mathematician whose expansion this is. }
+FIZZLE viete { Roots and coefficients belong to the product picture; this robot is the derivative-built series $1 - x^2/6 + \cdots$ -- think of the namesake of that power series. }
+FIZZLE hipparchus { Sine's zeros build the product; here sine is built instead from its derivatives at a point -- recall who lends his name to that expansion of a function. }
+FIZZLE riemann { The zeta generalization is far ahead; this robot is the humble Maclaurin/Taylor series of sine -- name the expansion's namesake. }
+
+ROBOT: 5
+NAME { Francois Viete }
+BRIEFING_HINT { Vieta's formulas: a polynomial's coefficients are built from its
+          roots. This sentinel yields to the man who first linked roots and coefficients. }
+PROBLEM { For a polynomial written as $\prod (1 - x/r_i)$, the linear coefficient is
+          $-\sum 1/r_i$. Whose formulas connect roots to coefficients like this? }
+EXPLAIN_MATHEMATICIAN { Vieta's formulas express a polynomial's coefficients as signed
+          symmetric functions of its roots; in the form $\prod (1 - x/r_i)$ the linear
+          coefficient is $-\sum \frac{1}{r_i}$. This is the legitimate finite fact that
+          Euler boldly extends to infinitely many roots. }
+EXPLAIN_PHYSICIST { For a quadratic $a(x - r_1)(x - r_2)$ the sum and product of roots
+          ARE the coefficients: $r_1 + r_2 = -\frac{b}{a}$. Reading the $x^2$
+          coefficient of $\prod (1 - x^2/r^2)$ gives exactly $-\sum \frac{1}{r^2}$. }
+EXPLAIN_BIOLOGIST { Here is a true fact about ordinary polynomials: once you know where
+          one hits zero, you know its coefficients -- they are just sums and products
+          of those roots. Euler's leap is to trust that rule for an infinite polynomial. }
+EXPLAIN_ENGINEER { These formulas let you pass between a polynomial's roots and its
+          coefficients without solving anything -- prized for designing filters from
+          chosen zeros. Euler uses one slice: the $x^2$ coefficient is $-\sum 1/r^2$. }
+SEGMENTS {
+  $\prod \left( 1 - \frac{x}{r_i} \right)$   | product
+  $\Rightarrow$                              | NEUTRAL
+  $-\sum \frac{1}{r_i}$                      | coeff_root
+}
+EYE { coeff_root }
+VULNERABLE_TO { viete }
+FIZZLE euler { Euler exploits this root-coefficient link, but he did not discover it -- this robot honours the man who first wrote those relations down. }
+FIZZLE al_khwarizmi { Algebra balances expansions; this robot is the SPECIFIC law tying a polynomial's roots to its coefficients -- recall whose named formulas state that link. }
+FIZZLE weierstrass { Weierstrass justified the infinite product; this sentinel is the finite, classical roots-to-coefficients rule it rests on -- name the man those formulas are named for. }
+FIZZLE taylor { That is the series side, built from derivatives; here the picture is roots determining coefficients -- think of the namesake of the root-coefficient relations. }
+FIZZLE hipparchus { Sine's zeros are the roots being fed in, but this robot is the general principle that roots fix the coefficients -- recall whose formulas express exactly that. }
+FIZZLE riemann { The grand zeta picture is the finale; this is the elementary symmetric-function law of roots and coefficients -- name the early algebraist it is named after. }
+
+ROBOT: 6
+NAME { Hipparchus }
+BRIEFING_HINT { The Zeros of Sine: sine vanishes exactly at the multiples of pi.
+          This sentinel yields to the founder of trigonometry. }
+PROBLEM { Where does $\sin x = 0$? These crossings at the multiples of $\pi$ are the
+          product's raw material. Which founder of trigonometry first charted sine? }
+EXPLAIN_MATHEMATICIAN { $\sin x = 0$ exactly on the multiples of $\pi$; removing the
+          zero at $0$ via $\frac{\sin x}{x}$ leaves roots $\pm \pi, \pm 2\pi, \dots$,
+          paired as $\pm n\pi$ to give factors $1 - \frac{x^2}{n^2 \pi^2}$. These roots
+          are the sole source of $\pi$ in the answer. }
+EXPLAIN_PHYSICIST { Where does $\sin x$ cross zero? At every multiple of $\pi$:
+          $0, \pm \pi, \pm 2\pi, \dots$. Feed these crossings into the product and the
+          $\pi^2$ in $\frac{\pi^2}{6}$ comes straight from squaring the $n\pi$. }
+EXPLAIN_BIOLOGIST { The wave $\sin x$ touches the axis at evenly spaced spots: $0, \pi,
+          2\pi, 3\pi, \dots$ and their negatives. These crossings are the only place
+          the number $\pi$ enters the whole story. }
+EXPLAIN_ENGINEER { The zeros of a system are where its output vanishes. For $\sin x$
+          they sit at $n\pi$, perfectly periodic. Euler harvests this list of zeros as
+          the product's inputs; the spacing $\pi$ resurfaces as $\pi^2$ in the answer. }
+SEGMENTS {
+  $\sin x = 0$        | sine_fn
+  $\Rightarrow$       | NEUTRAL
+  $x = n\pi$          | roots
+}
+EYE { roots }
+VULNERABLE_TO { hipparchus }
+FIZZLE euler { Euler USES these zeros, but this robot is about the trigonometry of where sine vanishes -- think of the ancient astronomer who first tabulated the sine. }
+FIZZLE al_khwarizmi { Algebra balances the two expansions; this sentinel is pure trigonometry -- where sine crosses zero -- so recall who founded the study of those angles. }
+FIZZLE weierstrass { Weierstrass certified the product these zeros feed, but the robot asks WHERE sine is zero -- name the founder of trigonometry who first charted the sine. }
+FIZZLE taylor { That is the derivative-built series; here you need the geometric zeros of sine at the multiples of pi -- think of the father of trigonometry. }
+FIZZLE viete { Vieta turns roots into coefficients, but first you must know WHERE the roots are -- recall the ancient who first measured sine and its vanishing points. }
+FIZZLE riemann { Riemann's zeta is the finale; this robot is the elementary fact that sine vanishes at every multiple of pi -- name trigonometry's founder. }
+
+ROBOT: 7
+NAME { Bernhard Riemann }
+BRIEFING_HINT { Generalization: the Basel sum is one value of the zeta function, which
+          factors as a product over primes. This sentinel yields to zeta's master. }
+PROBLEM { Basel is the case $s = 2$ of $\zeta(s) = \sum \frac{1}{n^s}$, with a product
+          over primes. Who extended $\zeta$ and tied it to the primes? }
+EXPLAIN_MATHEMATICIAN { Basel is the value $s = 2$ of $\zeta(s) = \sum_{n=1}^{\infty}
+          \frac{1}{n^s} = \prod_p \frac{1}{1 - p^{-s}}$. The same sum-equals-product
+          duality reappears as a product over primes; Riemann's continuation of
+          $\zeta$ to complex $s$ then governs how the primes are distributed. }
+EXPLAIN_PHYSICIST { Euler's $\sum \frac{1}{n^2}$ is one value of a whole family
+          $\zeta(s) = \sum \frac{1}{n^s}$. Euler also wrote it as a product over primes,
+          $\prod \frac{1}{1 - p^{-s}}$ -- again a sum equals a product. Riemann
+          extended $\zeta$ to complex $s$, linking it to where the primes lie. }
+EXPLAIN_BIOLOGIST { The Basel sum is one room in a larger building: the zeta function
+          $\sum \frac{1}{n^s}$ for any power $s$. Euler found it secretly factors over
+          the primes -- a sum turning into a product, just like the sine trick -- and
+          studying it became the deepest open question in mathematics. }
+EXPLAIN_ENGINEER { Generalize the exponent: $\zeta(s) = \sum \frac{1}{n^s}$. Its prime
+          product form $\prod \frac{1}{1 - p^{-s}}$ drives counting primes and
+          estimating coprimality. Basel ($s = 2$) is the first concrete value; the
+          machinery scales to the analytic number theory built on it. }
+SEGMENTS {
+  $\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}$   | answer
+  $=$                                              | NEUTRAL
+  $\prod_p \frac{1}{1 - p^{-s}}$                   | product
+}
+EYE { answer }
+VULNERABLE_TO { riemann }
+FIZZLE euler { Euler indeed found the prime product, but this final robot is about the deep continuation of zeta and its link to the primes -- name the man whose hypothesis governs them. }
+FIZZLE al_khwarizmi { Equating coefficients solved the special case; this sentinel is the grand generalization to all exponents s -- recall who extended zeta into the complex plane. }
+FIZZLE weierstrass { Weierstrass secured one infinite product, but this robot is the whole zeta function and its prime factorization -- name the master of its analytic continuation. }
+FIZZLE taylor { The power series cracked one value; here zeta runs over every exponent and over the primes -- think of the man whose name the famous hypothesis bears. }
+FIZZLE viete { Vieta linked finite roots and coefficients; this robot reaches to the infinitude of primes through zeta -- recall who tied that function to their distribution. }
+FIZZLE hipparchus { Sine's zeros gave the special case; this final sentinel is about the zeros of zeta and the primes -- name the mathematician whose study of them is the deepest open problem. }
