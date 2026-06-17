@@ -19,6 +19,12 @@ PHYSICAL MODEL:
 Input (UNCHANGED): mouse wheel = depth(=zoom), mouse + right stick = pan,
 CTRL = engineer unlock, ESC / back-out (focus < -0.6) = exit.
 
+Brief #J1B: the T.16000M back-center button (pygame button index 3) is ADDITIVE to
+CTRL. CTRL here is a HELD reveal (engineer comes into focus WHILE held, softens on
+release) -- not a toggle -- so the joystick button is OR'd into the same held
+boolean, NOT edge-gated. (#J1B's text said "rising-edge"; the real behavior here is
+hold-to-reveal, so the code is held. Nir's game, my bug to not repeat.)
+
 Fallback: if a baked PNG is missing for a layer, render robot.explain[layer] via
 render.render_rich() (old behavior), so the mode never crashes on an unbaked level.
 
@@ -176,13 +182,28 @@ class UnderstandingMode:
         pygame.mouse.set_visible(True)
         pygame.event.set_grab(False)
 
-    # ---- per-frame input (UNCHANGED behavior) -------------------------------
+    # ---- per-frame input -----------------------------------------------------
     def handle_input(self, events, keys, gamepads, dt):
         if not self.active:
             return
+
+        # Engineer reveal: keyboard CTRL OR T.16000M back-center button (index 3).
+        # HELD, not edge-gated -- the engineer sign sharpens WHILE held and
+        # softens on release. The joystick button is OR'd in exactly like the
+        # two CTRL keys are OR'd. Crash-safe against no controller / no pilot
+        # device / too-few buttons.
         mods = pygame.key.get_mods()
+        joy_engineer = False
+        if gamepads is not None:
+            pj = getattr(gamepads, "pilot_joy", None)
+            if pj is not None and pj.get_numbuttons() > 3:
+                try:
+                    joy_engineer = bool(pj.get_button(3))
+                except Exception:
+                    joy_engineer = False
         self.ctrl = (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
-                     or bool(mods & pygame.KMOD_CTRL))
+                     or bool(mods & pygame.KMOD_CTRL)
+                     or joy_engineer)
         if self.ctrl:
             self.target = float(len(LAYER_KEYS) - 1)   # fly to engineer
 
