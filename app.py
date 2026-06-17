@@ -176,9 +176,26 @@ def main():
     # again every frame; we mirror that).
     render.set_fog(start=FOG_START, end=FOG_END, color=palette.CLEAR_COLOR)
 
+    # -- Brief #J1B: T.16000M pilot button reader (digital buttons) --
+    # Safe against: no controller, no pilot device, or fewer buttons than idx.
+    # Used for the index-finger trigger (button 0 = FIRE). Read with the SAME
+    # helper everywhere so the edge computation and the per-frame snapshot can
+    # never drift apart.
+    def _pilot_btn(idx):
+        if gamepads is None:
+            return False
+        pj = getattr(gamepads, "pilot_joy", None)
+        if pj is None or pj.get_numbuttons() <= idx:
+            return False
+        try:
+            return bool(pj.get_button(idx))
+        except Exception:
+            return False
+
     clock = pygame.time.Clock()
     running = True
     prev_keys = pygame.key.get_pressed()   # Brief #9: rising-edge tracking
+    prev_pilot_fire = _pilot_btn(0)        # Brief #J1B: trigger rising-edge state
     mouse_click_edge = False               # Brief #10: mouse selection
     mouse_x = mouse_y = 0
     while running:
@@ -200,14 +217,20 @@ def main():
 
         keys = pygame.key.get_pressed()
 
+        # Rising-edge detection — computed UNCONDITIONALLY every frame so edge
+        # state never goes stale across Understanding Mode (this is what keeps
+        # the trigger from phantom-firing the instant U-mode exits).
+        #   fire_edge = SPACE (keyboard) OR pilot trigger (T.16000M button 0),
+        #               each rising-edged and ADDITIVE.
+        pilot_fire_now = _pilot_btn(0)
+        fire_edge = bool((keys[pygame.K_SPACE] and not prev_keys[pygame.K_SPACE])
+                         or (pilot_fire_now and not prev_pilot_fire))
+        prev_edge = keys[pygame.K_LEFTBRACKET]  and not prev_keys[pygame.K_LEFTBRACKET]
+        next_edge = keys[pygame.K_RIGHTBRACKET] and not prev_keys[pygame.K_RIGHTBRACKET]
+
         # Brief #11: gate world updates when Understanding Mode is active
         if umode.active:
             umode.handle_input(events, keys, gamepads, dt)
-        else:
-            # Brief #9: rising-edge detection for combat keys
-            fire_edge  = keys[pygame.K_SPACE]          and not prev_keys[pygame.K_SPACE]
-            prev_edge  = keys[pygame.K_LEFTBRACKET]    and not prev_keys[pygame.K_LEFTBRACKET]
-            next_edge  = keys[pygame.K_RIGHTBRACKET]   and not prev_keys[pygame.K_RIGHTBRACKET]
 
         # ---- CANONICAL FRAME ORDER ----
         # 1. clear
@@ -286,7 +309,10 @@ def main():
         # 11. present
         pygame.display.flip()
 
-        prev_keys = keys   # Brief #9: snapshot for next frame's rising edges
+        # Snapshots for next frame's rising edges — BOTH unconditional, every
+        # frame, so neither keyboard nor pilot-trigger edge state goes stale.
+        prev_keys = keys
+        prev_pilot_fire = _pilot_btn(0)
 
     pygame.quit()
     sys.exit(0)
