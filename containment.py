@@ -40,6 +40,7 @@ WHY THESE NUMBERS (geometry-derived; DeepSeek may tune):
 --------------------------------------------------------------------------
 """
 
+import math
 import numpy as np
 
 # --- containment constants (geometry-derived; see module docstring) ---
@@ -55,20 +56,8 @@ NORMAL_EPS  = 0.35       # finite-difference probe step for the wall normal.
                          # Scaled up with SHIP_RADIUS so the +/-EPS samples
                          # straddle the (now thicker) clamp boundary cleanly.
 
-ROBOT_RADIUS_PAD  = 0.6  # extra skin added around a robot's true hull reach
-                         # so the ship cannot graze the snout/pods.
-ROBOT_RADIUS_MIN  = 2.6  # floor on the blocking radius. With SHIP_RADIUS the
-                         # plug is >= ROBOT_RADIUS_MIN + SHIP_RADIUS ~= 4.1
-                         # against a tube of half-width 6 -> the robot truly
-                         # blocks the corridor; no clean lane around it.
-
-PLUG_RIM_GAP = 0.8       # How much smaller than the full tube the plug is,
-                         # so the ship can SLIDE around the plug's rim against
-                         # the wall instead of wedging dead. With TUBE_RADIUS=6
-                         # and SHIP_RADIUS=1.5, plug radius (6-0.8)=5.2 leaves
-                         # only a 0.8 sliver at the wall -- too thin for the
-                         # 1.5-radius ship to squeeze through, so corridor is
-                         # genuinely blocked, but ship can still graze-slide.
+# (ROBOT_RADIUS_PAD, ROBOT_RADIUS_MIN, PLUG_RIM_GAP removed --
+#  no longer used by the oranges-in-a-box block sphere.)
 
 
 # ----------------------------------------------------------------------
@@ -120,15 +109,11 @@ def _wall_normal(hub, point, eps=NORMAL_EPS):
 # WALL CONTAINMENT -- hard stop + slide.
 # ----------------------------------------------------------------------
 def _resolve_walls(ship, hub, prev_pos):
-    print("INSIDE?", hub.inside(ship.pos, margin=SHIP_RADIUS),
-          "pos", np.round(ship.pos, 2))
     if hub.inside(ship.pos, margin=SHIP_RADIUS):
         return  # legal: the whole attempted move stayed in the world
 
     # The move pushed (part of) the ship into rock. Find the slide normal.
     n = _wall_normal(hub, ship.pos)
-    print("WALL NORMAL", None if n is None else np.round(n, 2),
-          "into atrium?", float(np.dot(n, hub.center - ship.pos)) if n is not None else None)
 
     if n is None:
         # Degenerate finite-difference (e.g. a sharp corner). Fall back to
@@ -168,44 +153,30 @@ def _resolve_walls(ship, hub, prev_pos):
 
 
 # ----------------------------------------------------------------------
-# ROBOT BLOCKING -- a PLUG across the corridor tube, not a ball at the hull.
+# ROBOT BLOCKING -- "oranges in a box."
 #
-# WHY A PLUG: the robot is seated LOW in the tube (corridor_builder seats it
-# at center - up*radius*0.45). A sphere centered on the robot's visual hull
-# leaves a clear gap between the top of that sphere and the tube ceiling --
-# the ship simply flies OVER the robot (probe: nearest dist 9.36 >> solid_r
-# 4.43, ship passed freely). The robot's PURPOSE is to block the corridor,
-# so the blocking volume must sit on the TUBE AXIS at the robot's depth and
-# SPAN the tube. We find the nearest point on the corridor centerline (from
-# the corridor's public seg_bounds) to the robot, center the plug there, and
-# size it to (segment tube radius - small gap). That leaves no over/under/
-# around lane while preserving HARD-STOP + SLIDE (you slide on the plug face
-# until you give up and kill the robot).
+# The ship is an invisible sphere; each undefeated robot is an invisible
+# sphere CENTERED ON THE TUBE AXIS (not on the robot's low drawn position,
+# which left a gap to fly over -- that was the earlier bug). The robot
+# sphere is sized so that ship_radius + robot_radius is LARGER than the
+# tube's clear half-width, so the ship cannot fit beside it -- no lane on
+# the floor, in a corner, or overhead. Wall containment keeps the ship in
+# the tube; this keeps it from passing the robot. Hard stop + slide.
 # ----------------------------------------------------------------------
 
+def _robot_block_sphere(corridor, robot):
+    """Return (center_on_axis, robot_radius) for an undefeated robot.
 
-def _hull_min_radius(robot):
-    """Lower bound for the plug: the robot's true geometric reach (so the
-    plug never sits INSIDE the visible hull). See SYMPTOM #2 notes: _HULL_R
-    is a decoration constant; we measure actual hull vertices instead."""
-    size = float(getattr(robot, "size", 1.0))
-    verts = getattr(robot, "_hull_verts", None)
-    if verts is not None and len(verts):
-        reach = float(np.max(np.linalg.norm(np.asarray(verts, dtype=float),
-                                            axis=1)))
-    else:
-        reach = float(getattr(type(robot), "_HULL_R", 1.6))
-    return reach * size + ROBOT_RADIUS_PAD
-
-
-def _nearest_centerline_plug(corridor, robot_pos):
-    """Return (plug_center, plug_radius) on this corridor's centerline,
-    nearest to robot_pos, using the corridor's PUBLIC seg_bounds. The plug
-    is centered on the tube AXIS (not the low-seated hull) and sized to the
-    local tube radius so it spans the corridor. Returns None if the robot is
-    not near this corridor's centerline (defensive)."""
+    center_on_axis: the point on the corridor centerline nearest the robot,
+                    using the corridor's public seg_bounds (so the sphere
+                    sits in the MIDDLE of the tube, not on the floor).
+    robot_radius:   sized from the local tube radius so that
+                    robot_radius + SHIP_RADIUS > tube_radius, i.e. the ship
+                    cannot fit beside it. Returns None if not near this
+                    corridor's centerline.
+    """
+    p = np.asarray(robot.position, dtype=float)
     best = None  # (dist2, center, tube_radius)
-    p = np.asarray(robot_pos, dtype=float)
     for seg in getattr(corridor, "seg_bounds", []):
         a = np.asarray(seg["start"], dtype=float)
         b = np.asarray(seg["end"], dtype=float)
@@ -213,8 +184,7 @@ def _nearest_centerline_plug(corridor, robot_pos):
         L2 = float(np.dot(ab, ab))
         if L2 < 1e-12:
             continue
-        t = float(np.dot(p - a, ab)) / L2
-        t = max(0.0, min(1.0, t))
+        t = max(0.0, min(1.0, float(np.dot(p - a, ab)) / L2))
         c = a + ab * t
         d2 = float(np.dot(p - c, p - c))
         if best is None or d2 < best[0]:
@@ -222,40 +192,47 @@ def _nearest_centerline_plug(corridor, robot_pos):
     if best is None:
         return None
     _d2, center, tube_radius = best
-    return center, tube_radius
+
+    # Size the robot sphere to reach the FARTHEST the ship center can get
+    # from the axis, so there is no corner/diagonal lane to slip through.
+    # Round tube -> max wall distance is tube_radius. Square tube -> it's
+    # tube_radius * sqrt(2) (the corner). We use sqrt(2) unconditionally so a
+    # square cross-section is also fully blocked; for the actual round tube
+    # this is just safely conservative (the wall still keeps the ship inside,
+    # so an oversized robot sphere is harmless). A tiny extra ensures the
+    # ship+robot spheres always overlap rather than exactly touch.
+    DIAGONAL_SAFETY = math.sqrt(2.0)
+    max_wall_dist = tube_radius * DIAGONAL_SAFETY
+    robot_radius = max_wall_dist - SHIP_RADIUS + 0.3
+    return center, robot_radius
 
 
 def _resolve_robots(ship, hub, prev_pos):
     for corridor in hub.corridors:
         for robot in corridor.get_robots():
             if robot.is_defeated():
-                continue   # pass-through once destroyed
+                continue   # destroyed -> sphere gone, ship passes freely
 
-            plug = _nearest_centerline_plug(corridor, robot.position)
-            if plug is None:
+            sphere = _robot_block_sphere(corridor, robot)
+            if sphere is None:
                 continue
-            plug_center, tube_radius = plug
+            center, robot_radius = sphere
 
-            # Plug spans the tube (minus a thin rim) but never smaller than
-            # the visible hull; then add the ship skin.
-            tube_span = max(0.0, tube_radius - PLUG_RIM_GAP)
-            plug_r = max(tube_span, _hull_min_radius(robot)) + SHIP_RADIUS
-            print("PLUG r", round(plug_r, 2), "center", np.round(plug_center, 1),
-                  "dist", round(_norm(ship.pos - plug_center), 2))
-
-            to_ship = ship.pos - plug_center
+            solid_r = robot_radius + SHIP_RADIUS   # ship sphere + robot sphere
+            to_ship = ship.pos - center
             dist = _norm(to_ship)
-            if dist >= plug_r:
-                continue   # not inside this plug
+            print("ORANGE solid_r", round(solid_r, 2), "dist", round(dist, 2))
+            if dist >= solid_r:
+                continue   # not touching this robot
 
             n = _normalize(to_ship)
             if n is None:
-                n = _normalize(prev_pos - plug_center)
+                n = _normalize(prev_pos - center)
                 if n is None:
                     n = np.array([0.0, 1.0, 0.0])
 
-            # Hard stop at the plug surface; slide on its face.
-            ship.pos = plug_center + n * plug_r
+            # Hard stop at the surface; slide along it (tangential motion kept).
+            ship.pos = center + n * solid_r
             vdot = float(np.dot(ship.vel, n))
             if vdot < 0.0:
                 ship.vel = ship.vel - n * vdot
