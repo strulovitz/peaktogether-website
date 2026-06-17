@@ -201,6 +201,16 @@ class UnderstandingMode:
                     joy_engineer = bool(pj.get_button(3))
                 except Exception:
                     joy_engineer = False
+        # --- TEMP PROBE (Brief #J1B-2): print every pressed pilot button index.
+        #     Press the back-center button, read the console, tell me the number,
+        #     then I hard-wire it and delete this probe. ---
+        if gamepads is not None:
+            pj_probe = getattr(gamepads, "pilot_joy", None)
+            if pj_probe is not None:
+                pressed = [b for b in range(pj_probe.get_numbuttons()) if pj_probe.get_button(b)]
+                if pressed:
+                    print("PILOT BUTTONS DOWN:", pressed,
+                          "(numbuttons=%d)" % pj_probe.get_numbuttons())
         self.ctrl = (keys[pygame.K_LCTRL] or keys[pygame.K_RCTRL]
                      or bool(mods & pygame.KMOD_CTRL)
                      or joy_engineer)
