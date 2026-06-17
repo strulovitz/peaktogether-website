@@ -46,6 +46,7 @@ from OpenGL.GL import (
 import render
 import palette
 import combat                            # Brief #9
+import containment                       # Brief #C1: ship collision/containment
 from game_state import GameState          # Brief #13
 from level_parser import load_level
 from content_parser import ParseError
@@ -215,7 +216,11 @@ def main():
 
         if not umode.active:
             # 2. movement (controls are baked into render.Ship.update)
-            ship.update(dt, keys)
+            prev_pos = ship.pos.copy()          # Brief #C1: last legal position
+            ship.update(dt, keys)               # sets a TENTATIVE new ship.pos
+            containment.resolve(ship, hub, prev_pos)  # Brief #C1: hard-stop+slide
+                                                #   (corrects ship.pos/.vel in place,
+                                                #    BEFORE the camera is built)
 
             # 3. camera matrix
             ship.apply_view()
