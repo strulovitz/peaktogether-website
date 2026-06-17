@@ -100,11 +100,15 @@ def _wall_normal(hub, point, eps=NORMAL_EPS):
 # WALL CONTAINMENT -- hard stop + slide.
 # ----------------------------------------------------------------------
 def _resolve_walls(ship, hub, prev_pos):
+    print("INSIDE?", hub.inside(ship.pos, margin=SHIP_RADIUS),
+          "pos", np.round(ship.pos, 2))
     if hub.inside(ship.pos, margin=SHIP_RADIUS):
         return  # legal: the whole attempted move stayed in the world
 
     # The move pushed (part of) the ship into rock. Find the slide normal.
     n = _wall_normal(hub, ship.pos)
+    print("WALL NORMAL", None if n is None else np.round(n, 2),
+          "into atrium?", float(np.dot(n, hub.center - ship.pos)) if n is not None else None)
 
     if n is None:
         # Degenerate finite-difference (e.g. a sharp corner). Fall back to
@@ -173,6 +177,8 @@ def _resolve_robots(ship, hub, prev_pos):
             solid_r = _robot_hull_radius(robot) + SHIP_RADIUS
             to_ship = ship.pos - rc
             dist = _norm(to_ship)
+            print("ROBOT", robot.is_defeated(), "dist", round(dist, 2),
+                  "solid_r", round(solid_r, 2))
             if dist >= solid_r:
                 continue   # not overlapping this robot
 
