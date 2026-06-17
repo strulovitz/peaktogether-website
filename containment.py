@@ -44,11 +44,23 @@ import numpy as np
 
 # --- containment constants (geometry-derived; see module docstring) ---
 
-SHIP_RADIUS = 0.6        # ship "skin": clamp margin for hub.inside()
-NORMAL_EPS  = 0.25       # finite-difference probe step for the wall normal
-                         # (units): small vs TUBE_RADIUS 6, large enough to
-                         # cross the inside/outside boundary reliably given
-                         # ~<=0.9 max per-frame motion.
+SHIP_RADIUS = 1.5        # ship "skin" / eye standoff: how far the camera
+                         # (which sits AT ship.pos) must stay off any solid
+                         # surface. TUBE_RADIUS=6, so flyable half-width is
+                         # 6-1.5 = 4.5 (9-wide tube) -- solid wall, the eye
+                         # never reaches the rock, flight still roomy.
+                         # (Was 0.6: too small -> camera peered through.)
+
+NORMAL_EPS  = 0.35       # finite-difference probe step for the wall normal.
+                         # Scaled up with SHIP_RADIUS so the +/-EPS samples
+                         # straddle the (now thicker) clamp boundary cleanly.
+
+ROBOT_RADIUS_PAD  = 0.6  # extra skin added around a robot's true hull reach
+                         # so the ship cannot graze the snout/pods.
+ROBOT_RADIUS_MIN  = 2.6  # floor on the blocking radius. With SHIP_RADIUS the
+                         # plug is >= ROBOT_RADIUS_MIN + SHIP_RADIUS ~= 4.1
+                         # against a tube of half-width 6 -> the robot truly
+                         # blocks the corridor; no clean lane around it.
 
 
 # ----------------------------------------------------------------------
@@ -160,12 +172,30 @@ def _resolve_walls(ship, hub, prev_pos):
 # here (they are not obstacles).
 # ----------------------------------------------------------------------
 def _robot_hull_radius(robot):
-    # World-space hull radius: robots.py draws the hull with glScalef(size)
-    # and exposes Robot._HULL_R ("approx hull radius"). size * _HULL_R is the
-    # live world radius, honoring any future size change automatically.
-    hull_r = getattr(type(robot), "_HULL_R", 1.6)
+    """World-space blocking radius for a robot.
+
+    NOTE: Robot._HULL_R (=1.6) is documented in robots.py as 'approx hull
+    radius for EXPLOSION PLACEMENT scaling' -- it is a DECORATION constant,
+    NOT a collision bound, and the hull is non-spherical (a long snout to
+    +z and side pods reach well past 1.6). Using it as the collision radius
+    left only a tiny hard 'nucleus' the ship could graze around (Symptom 2).
+
+    Instead we measure the robot's ACTUAL geometric reach from its hull
+    vertices (Robot._hull_verts, model space), scale by size, pad it, and
+    floor it so the sphere genuinely encloses the machine and plugs the tube.
+    """
     size = float(getattr(robot, "size", 1.0))
-    return size * hull_r
+
+    verts = getattr(robot, "_hull_verts", None)
+    if verts is not None and len(verts):
+        # max distance of any hull vertex from the model origin (model space)
+        reach = float(np.max(np.linalg.norm(np.asarray(verts, dtype=float),
+                                            axis=1)))
+    else:
+        # defensive fallback to the documented approx radius
+        reach = float(getattr(type(robot), "_HULL_R", 1.6))
+
+    return max(ROBOT_RADIUS_MIN, reach * size + ROBOT_RADIUS_PAD)
 
 
 def _resolve_robots(ship, hub, prev_pos):
@@ -175,6 +205,7 @@ def _resolve_robots(ship, hub, prev_pos):
                 continue   # pass-through once destroyed
             rc = np.asarray(robot.position, dtype=float)
             solid_r = _robot_hull_radius(robot) + SHIP_RADIUS
+            print("ROBOT solid_r", round(solid_r, 2), "size", getattr(robot, "size", 1.0))
             to_ship = ship.pos - rc
             dist = _norm(to_ship)
             print("ROBOT", robot.is_defeated(), "dist", round(dist, 2),
