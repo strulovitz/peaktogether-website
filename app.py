@@ -215,9 +215,12 @@ def main():
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
 
         if not umode.active:
-            # 2. movement (controls are baked into render.Ship.update)
+            # 2. movement (keyboard + analog joystick, ADDITIVE -- Brief #J1)
             prev_pos = ship.pos.copy()          # Brief #C1: last legal position
-            ship.update(dt, keys)               # sets a TENTATIVE new ship.pos
+            # Brief #J1: read the T.16000M pilot stick (None = no device or the
+            # ~1s startup calibration window; keyboard still flies meanwhile).
+            cmd = gamepads.pilot_command() if gamepads is not None else None
+            ship.update6dof(dt, keys, cmd)      # sets a TENTATIVE new ship.pos
             containment.resolve(ship, hub, prev_pos)  # Brief #C1: hard-stop+slide
                                                 #   (corrects ship.pos/.vel in place,
                                                 #    BEFORE the camera is built)

@@ -257,6 +257,74 @@ class Ship:
         self.vel += (target - self.vel) * min(1.0, self.ACCEL * dt)
         self.pos += self.vel * dt
 
+    def update6dof(self, dt, keys, cmd=None):
+        """6-DOF flight that SUMS keyboard (digital) + joystick (analog),
+        then does ONE velocity-ease + ONE position-integrate per frame.
+
+        - Keyboard path is IDENTICAL in feel to update(): digital +/-1 per axis,
+          thrust normalized to a unit vector, boost on shift.
+        - Joystick path is TRUE ANALOG: pitch/yaw/roll and thrust_xyz are
+          passed through PROPORTIONALLY (half-tilt = half-rate). Deadzones are
+          ALREADY applied upstream by gamepad.pilot_command(); we do NOT
+          re-apply them, and we do NOT route analog through the normalize.
+        - cmd is the dict from gamepad.pilot_command() {pitch,yaw,roll in
+          -1..1, thrust_xyz tuple of -1..1}, or None (no device / calibrating).
+          When cmd is None this behaves exactly like the keyboard-only update().
+
+        ADDITIVE: a player may use keyboard and stick simultaneously.
+        update() is left untouched for any other caller/test."""
+        # ----- rotation rates: keyboard (digital +/-1) + analog (proportional) -----
+        kb_pitch = float(keys[K_UP]   - keys[K_DOWN])
+        kb_yaw   = float(keys[K_LEFT] - keys[K_RIGHT])
+        kb_roll  = float(keys[K_q]    - keys[K_e])
+
+        a_pitch = a_yaw = a_roll = 0.0
+        if cmd is not None:
+            a_pitch = cmd['pitch']
+            a_yaw   = cmd['yaw']
+            a_roll  = cmd['roll']
+
+        # Sum, then clamp each rotation channel to +/-1 so keyboard+stick at full
+        # deflection can't exceed the single-source max rate (no double-speed
+        # spin). Partial stick stays proportional.
+        pitch = max(-1.0, min(1.0, kb_pitch + a_pitch)) * self.PITCH_YAW  * dt
+        yaw   = max(-1.0, min(1.0, kb_yaw   + a_yaw))   * self.PITCH_YAW  * dt
+        roll  = max(-1.0, min(1.0, kb_roll  + a_roll))  * self.ROLL_SPEED * dt
+        self.rotate_local([1, 0, 0], pitch)
+        self.rotate_local([0, 1, 0], yaw)
+        self.rotate_local([0, 0, 1], roll)
+
+        # ----- thrust: keyboard UNIT vector (digital) + analog vector (proportional) -----
+        kb_thrust = np.array([
+            float(keys[K_d] - keys[K_a]),
+            float(keys[K_r] - keys[K_f]),
+            float(keys[K_s] - keys[K_w]),
+        ])
+        n = np.linalg.norm(kb_thrust)
+        if n > 1e-9:
+            kb_thrust /= n          # keyboard stays digital/normalized (as update())
+
+        a_thrust = np.zeros(3)
+        if cmd is not None:
+            tx, ty, tz = cmd['thrust_xyz']
+            a_thrust = np.array([tx, ty, tz], dtype=float)   # NO normalize: analog
+
+        local = kb_thrust + a_thrust
+        # Clamp MAGNITUDE to <=1: full deflection (either/both) = full thrust,
+        # partial stick stays proportional. This preserves analog and prevents
+        # keyboard+stick summing past MAX_SPEED.
+        m = np.linalg.norm(local)
+        if m > 1.0:
+            local /= m
+
+        boost = self.BOOST if (keys[K_LSHIFT] or keys[K_RSHIFT]) else 1.0
+        target = quat_rotate(self.q, local) * self.MAX_SPEED * boost
+
+        # ONE ease, ONE integrate -- identical math to update(), shared by both
+        # inputs so they never "fight".
+        self.vel += (target - self.vel) * min(1.0, self.ACCEL * dt)
+        self.pos += self.vel * dt
+
     def apply_view(self):
         glLoadIdentity()
         glMultMatrixf(np.ascontiguousarray(quat_to_mat4(self.q)))
