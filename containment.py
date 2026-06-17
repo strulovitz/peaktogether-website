@@ -238,6 +238,23 @@ def _resolve_robots(ship, hub, prev_pos):
                 ship.vel = ship.vel - n * vdot
 
 
+def _outside_all_robots(ship, hub):
+    """True if the ship center is outside every undefeated robot's block
+    sphere -- used to detect when the iterative solve has converged."""
+    for corridor in hub.corridors:
+        for robot in corridor.get_robots():
+            if robot.is_defeated():
+                continue
+            sphere = _robot_block_sphere(corridor, robot)
+            if sphere is None:
+                continue
+            center, robot_radius = sphere
+            solid_r = robot_radius + SHIP_RADIUS
+            if _norm(ship.pos - center) < solid_r - 1e-6:
+                return False
+    return True
+
+
 # ----------------------------------------------------------------------
 # PUBLIC ENTRY POINT
 # ----------------------------------------------------------------------
@@ -245,17 +262,30 @@ def resolve(ship, hub, prev_pos):
     """Hard-stop-with-slide containment. Mutates ship.pos / ship.vel in
     place. Call EXACTLY between ship.update(dt, keys) and ship.apply_view().
 
-    prev_pos: a COPY of ship.pos taken BEFORE ship.update() ran (the last
-    known-legal position). Pass np.asarray(prev_pos, float).
-
-    Order: WALLS first, then ROBOTS, then ONE more wall pass -- a robot push
-    in a tight tube could nudge the ship toward a wall; the second wall pass
-    catches that. Correct-and-simple over clever. If constraints truly fight,
-    the wall pass's "still outside -> prev_pos" fallback stops the ship dead
-    rather than leaking it through either surface.
+    Walls and robots are TWO overlapping constraints: a robot sphere is
+    wider than the tube, so sliding on the robot can push the ship toward
+    (or through) the wall, and re-clamping the wall can push it back toward
+    the robot. A single pass cannot satisfy both. We ITERATE the pair until
+    they converge to a position that satisfies BOTH -- the natural 'wedged
+    between robot and wall' rest spot -- with the ship inside the tube and
+    outside the robot. If they still conflict after a few iterations
+    (truly no legal spot), we stop the ship dead at prev_pos, which was
+    legal last frame, rather than leak it into the void.
     """
     prev_pos = np.asarray(prev_pos, dtype=float)
 
-    _resolve_walls(ship, hub, prev_pos)
-    _resolve_robots(ship, hub, prev_pos)
-    _resolve_walls(ship, hub, prev_pos)   # re-settle if a robot push hit rock
+    MAX_ITERS = 6
+    for _ in range(MAX_ITERS):
+        _resolve_robots(ship, hub, prev_pos)
+        _resolve_walls(ship, hub, prev_pos)
+        # Converged? Both constraints satisfied -> done.
+        if hub.inside(ship.pos, margin=SHIP_RADIUS) and _outside_all_robots(ship, hub):
+            return
+
+    # Did not converge (constraints genuinely conflict this frame). Refuse to
+    # leak through the rock: revert to the last legal position and stop.
+    print("CONVERGED?", hub.inside(ship.pos, margin=SHIP_RADIUS),
+          _outside_all_robots(ship, hub), "pos", np.round(ship.pos, 1))
+    if not hub.inside(ship.pos, margin=SHIP_RADIUS):
+        ship.pos = prev_pos.copy()
+        ship.vel = np.zeros(3)
