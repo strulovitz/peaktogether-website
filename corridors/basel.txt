@@ -179,7 +179,7 @@ EXPLAIN_ENGINEER { These formulas let you pass between a polynomial's roots and 
           chosen zeros. Euler uses one slice: the $x^2$ coefficient is $-\sum 1/r^2$. }
 SEGMENTS {
   $\prod \left( 1 - \frac{x}{r_i} \right)$   | product
-  $\Rightarrow$                              | NEUTRAL
+  $=$                                       | NEUTRAL
   $-\sum \frac{1}{r_i}$                      | coeff_root
 }
 EYE { coeff_root }
@@ -212,7 +212,7 @@ EXPLAIN_ENGINEER { The zeros of a system are where its output vanishes. For $\si
           the product's inputs; the spacing $\pi$ resurfaces as $\pi^2$ in the answer. }
 SEGMENTS {
   $\sin x = 0$        | sine_fn
-  $\Rightarrow$       | NEUTRAL
+  $=$                 | NEUTRAL
   $x = n\pi$          | roots
 }
 EYE { roots }
