@@ -16,7 +16,18 @@ Two-phase draw:
 """
 
 import math
+import os
+import sys
 import numpy as np
+
+import pygame
+from OpenGL.GL import (
+    glGenTextures, glBindTexture, glTexParameteri, glTexImage2D,
+    glDisable, glEnable, glColor4f, glLineWidth, glBegin, glEnd,
+    glVertex3f, GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_TEXTURE_MAG_FILTER,
+    GL_TEXTURE_WRAP_S, GL_TEXTURE_WRAP_T, GL_LINEAR, GL_CLAMP_TO_EDGE,
+    GL_RGBA, GL_UNSIGNED_BYTE, GL_LINE_LOOP,
+)
 
 import palette
 from palette import Palette
@@ -41,6 +52,14 @@ ROBOT_SIZE       = 1.0       # was 0.6 — shrinking it shrank the hologram too
 TITLE_SCALE      = 0.9       # << tube width
 PLAQUE_SCALE     = 0.7       # smaller than the robot
 LABEL_LIFT       = 2.2       # how far above station to float a plaque
+
+# --- DEFEAT PLAQUE (Brief #P1) ---------------------------------------
+PLAQUE_FILL       = 0.90    # plaque's LARGER dim spans this fraction of the
+                            # tube cross-section (diameter). Tune freely.
+PLAQUE_FRAME      = 0.04    # white-frame margin as a fraction of plaque size
+PLAQUE_FRAME_PX   = 2.0     # frame line width in pixels (thin)
+PLAQUE_ALPHA      = 0.95    # plaque image opacity
+PLAQUE_MAX_SRC_W  = 4096    # cap source width (GL_MAX_TEXTURE_SIZE safety)
 _RNG_SALT        = 0x5EED
 
 
@@ -336,18 +355,167 @@ class CorridorGeometry:
                               scale=TITLE_SCALE, alpha=0.95)
 
     def _draw_plaques(self, cr, cu, texcache):
-        text_rgb = self._palette.text_color_on(self._dominant_key)
-        for r, rdata, (pose, _yaw) in zip(self._robots, self._robots_data, self._station_poses):
+        """Phase 3: for each DEFEATED robot, billboard its already-baked
+        'mathematician' PNG (Parent #5's pipeline) as an in-world sign,
+        sized to ~PLAQUE_FILL of the tube cross-section, with a thin white
+        frame. NO live text rendering (that was the white-rectangle bug).
+        Draws AFTER render.flush_walls (called from draw_labels)."""
+        for r in self._robots:
             if not r.is_defeated():
                 continue
-            explain = getattr(rdata, "explain", {}) or {}
-            text = explain.get("mathematician", "")
-            if not text:
-                text = (getattr(rdata, "briefing_hint", "") or "—")
-            tex = texcache.get_mathtext(text, color=text_rgb, fontsize=13)
-            center = np.asarray(pose, dtype=float) + np.array([0.0, LABEL_LIFT, 0.0])
-            render.draw_billboard(tex, tuple(center.tolist()), cr, cu,
-                                  scale=PLAQUE_SCALE, alpha=0.9)
+
+            tex = self._plaque_texture(r)   # (tid, w, h) or None (logged once)
+            if tex is None:
+                continue                    # missing bake -> no plaque (honest)
+
+            tid, w, h = tex
+
+            # --- centre on the TUBE AXIS at the robot's segment -----------
+            center, radius = self._plaque_anchor(r)
+
+            # --- scale to ~PLAQUE_FILL of the cross-section, no stretch ---
+            # draw_billboard: full HEIGHT = scale ; full WIDTH = scale*(w/h).
+            # We want the LARGER drawn dimension to span PLAQUE_FILL * (2*radius).
+            aspect = (w / h) if h else 1.0
+            span = PLAQUE_FILL * 2.0 * radius          # target larger-dim size
+            if aspect >= 1.0:
+                scale = span / aspect                  # width is larger -> fit width
+            else:
+                scale = span                           # height is larger -> fit height
+
+            # --- thin white frame (coplanar, same camera plane) ----------
+            # Half-extents of the IMAGE quad (mirrors draw_billboard's math):
+            hh = 0.5 * scale
+            hw = 0.5 * scale * aspect
+            self._draw_plaque_frame(center, cr, cu, hw, hh)
+
+            # --- the image on top ----------------------------------------
+            render.draw_billboard(tex, tuple(np.asarray(center).tolist()),
+                                  cr, cu, scale=scale, alpha=PLAQUE_ALPHA)
+
+
+    def _plaque_anchor(self, robot):
+        """Return (center_on_tube_axis, tube_radius) for this robot.
+        The robot's base_pos was seated LOW in the tube (built as
+        seg_center - up*radius*0.45). We find the robot's segment, then
+        return the segment's true AXIS centre and radius so the plaque is
+        centred in the cross-section (not shoved low)."""
+        base = np.asarray(robot.base_pos, dtype=float)
+
+        # Find the segment whose [start,end] midpoint is nearest base_pos.
+        best_i, best_d2 = 0, float("inf")
+        for i, sb in enumerate(self.seg_bounds):
+            mid = (np.asarray(sb["start"]) + np.asarray(sb["end"])) * 0.5
+            d2 = float(np.dot(mid - base, mid - base))
+            if d2 < best_d2:
+                best_d2, best_i = d2, i
+        sb = self.seg_bounds[best_i]
+        up = np.asarray(sb["up"], dtype=float)
+        radius = float(sb["radius"])
+
+        # base_pos sits at (axis_centre - up*radius*0.45). Lift back to axis.
+        center = base + up * (radius * 0.45)
+        return center, radius
+
+
+    def _plaque_texture(self, robot):
+        """Lazily load + cache the baked 'mathematician' PNG for this robot,
+        keyed by robot.number. Returns (tid, w, h) or None.
+
+        Owns its OWN GL texture ids (does NOT import understanding.py or
+        share its cache). Uploads exactly ONCE per robot (no per-frame leak).
+        On a missing folder / number / file: prints ONE loud stderr line and
+        caches None so we don't retry every frame."""
+        if not hasattr(self, "_plaque_tex_cache"):
+            self._plaque_tex_cache = {}
+
+        num = getattr(robot, "number", None)
+        key = num
+        if key in self._plaque_tex_cache:
+            return self._plaque_tex_cache[key]   # cached tuple OR cached None
+
+        d = getattr(robot, "understanding_dir", "") or ""
+        if not d or num is None:
+            path = os.path.join(d or "<no-dir>", "robot%s_mathematician.png" % num)
+            print("[plaque] no baked PNG for robot %s: %s" % (num, path),
+                  file=sys.stderr)
+            self._plaque_tex_cache[key] = None
+            return None
+
+        path = os.path.join(d, "robot%d_mathematician.png" % num)
+        if not os.path.isfile(path):
+            print("[plaque] no baked PNG for robot %s: %s" % (num, path),
+                  file=sys.stderr)
+            self._plaque_tex_cache[key] = None
+            return None
+
+        try:
+            surf = pygame.image.load(path).convert_alpha()
+        except Exception as e:
+            print("[plaque] failed to load %s: %s" % (path, e), file=sys.stderr)
+            self._plaque_tex_cache[key] = None
+            return None
+
+        # Cap source width (GL_MAX_TEXTURE_SIZE safety), preserving aspect.
+        if surf.get_width() > PLAQUE_MAX_SRC_W:
+            s = PLAQUE_MAX_SRC_W / surf.get_width()
+            surf = pygame.transform.smoothscale(
+                surf, (PLAQUE_MAX_SRC_W, max(1, int(surf.get_height() * s)))
+            ).convert_alpha()
+
+        tex = self._surface_to_plaque_texture(surf)
+        self._plaque_tex_cache[key] = tex
+        # One-time probe line so Nir/DeepSeek can verify the right PNG + size.
+        print("[plaque] robot %d -> %s (%dx%d)" % (num, path, tex[1], tex[2]),
+              file=sys.stderr)
+        return tex
+
+
+    def _surface_to_plaque_texture(self, surf):
+        """Upload a pygame Surface to our OWN GL texture; returns (tid, w, h).
+        Copies understanding._surface_to_texture's EXACT convention:
+        tostring(..., True) flips Y for GL (so the image is right-side up),
+        GL_LINEAR filtering, GL_CLAMP_TO_EDGE wrap (no edge bleed)."""
+        w, h = surf.get_width(), surf.get_height()
+        data = pygame.image.tostring(surf, "RGBA", True)   # flip -> GL row order
+        tid = glGenTextures(1)
+        glBindTexture(GL_TEXTURE_2D, tid)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE)
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE)
+        glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0,
+                     GL_RGBA, GL_UNSIGNED_BYTE, data)
+        glBindTexture(GL_TEXTURE_2D, 0)
+        return (tid, w, h)
+
+
+    def _draw_plaque_frame(self, center, cr, cu, hw, hh):
+        """Thin white GL_LINE_LOOP border around the plaque image, built on the
+        SAME camera-facing plane draw_billboard uses (same center/cr/cu), so it
+        is coplanar and aligned. Frame sits a hair OUTSIDE the image by
+        PLAQUE_FRAME. Pure flat white, no texture. Restores GL state."""
+        c = np.asarray(center, dtype=float)
+        r = np.asarray(cr, dtype=float)
+        u = np.asarray(cu, dtype=float)
+        fw = hw * (1.0 + PLAQUE_FRAME)
+        fh = hh * (1.0 + PLAQUE_FRAME)
+
+        p00 = c - r * fw - u * fh
+        p10 = c + r * fw - u * fh
+        p11 = c + r * fw + u * fh
+        p01 = c - r * fw + u * fh
+
+        glDisable(GL_TEXTURE_2D)      # frame is untextured
+        glLineWidth(PLAQUE_FRAME_PX)
+        glColor4f(1.0, 1.0, 1.0, 1.0)  # flat neutral white (UI border, not meaning)
+        glBegin(GL_LINE_LOOP)
+        glVertex3f(*p00)
+        glVertex3f(*p10)
+        glVertex3f(*p11)
+        glVertex3f(*p01)
+        glEnd()
+        glLineWidth(1.0)              # restore default
 
 
 def build_corridor(corridor_data, origin=(0, 0, 0), direction=(0, 0, -1)):
