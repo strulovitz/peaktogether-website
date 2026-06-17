@@ -280,9 +280,12 @@ class Ship:
 
         a_pitch = a_yaw = a_roll = 0.0
         if cmd is not None:
-            a_pitch = cmd['pitch']
-            a_yaw   = cmd['yaw']
-            a_roll  = cmd['roll']
+            # Brief #J1 sign fix (confirmed by Nir's feel, 2026-06-17):
+            # this T.16000M reports roll/yaw inverted vs the keyboard
+            # convention. Pitch was already correct, so it is NOT flipped.
+            a_pitch =  cmd['pitch']     # correct as-is -- do NOT flip
+            a_yaw   = -cmd['yaw']       # twist right -> yaw right
+            a_roll  = -cmd['roll']      # tilt right  -> roll right
 
         # Sum, then clamp each rotation channel to +/-1 so keyboard+stick at full
         # deflection can't exceed the single-source max rate (no double-speed
@@ -307,7 +310,9 @@ class Ship:
         a_thrust = np.zeros(3)
         if cmd is not None:
             tx, ty, tz = cmd['thrust_xyz']
-            a_thrust = np.array([tx, ty, tz], dtype=float)   # NO normalize: analog
+            # Brief #J1 sign fix: throttle-forward must thrust the ship
+            # FORWARD (like W). This stick reports it inverted; flip Z only.
+            a_thrust = np.array([tx, ty, -tz], dtype=float)  # NO normalize: analog
 
         local = kb_thrust + a_thrust
         # Clamp MAGNITUDE to <=1: full deflection (either/both) = full thrust,
