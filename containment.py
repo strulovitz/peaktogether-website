@@ -50,14 +50,12 @@ SHIP_RADIUS = 1.5        # ship "skin" / eye standoff: how far the camera
                          # surface. TUBE_RADIUS=6, so flyable half-width is
                          # 6-1.5 = 4.5 (9-wide tube) -- solid wall, the eye
                          # never reaches the rock, flight still roomy.
-                         # (Was 0.6: too small -> camera peered through.)
 
-NORMAL_EPS  = 0.35       # finite-difference probe step for the wall normal.
-                         # Scaled up with SHIP_RADIUS so the +/-EPS samples
-                         # straddle the (now thicker) clamp boundary cleanly.
-
-# (ROBOT_RADIUS_PAD, ROBOT_RADIUS_MIN, PLUG_RIM_GAP removed --
-#  no longer used by the oranges-in-a-box block sphere.)
+WALL_INSET = 1.8         # How far inside the rock wall the inner (flyable)
+                         # tube sits. Tube radius ~6; inner radius = 6-1.8 =
+                         # 4.2. Exceeds SHIP_RADIUS so the camera never
+                         # reaches the wall. Correction always pulls TOWARD
+                         # the axis, never outward -- no void-leak possible.
 
 
 # ----------------------------------------------------------------------
@@ -75,81 +73,77 @@ def _normalize(v):
 
 
 # ----------------------------------------------------------------------
-# WALL NORMAL by finite differences of the boolean inside() test.
+# WALL CONTAINMENT -- keep the ship inside a NARROWER inner prism/tube.
 #
-# hub.inside() is boolean-only, so we approximate the OUTWARD-from-rock
-# (i.e. INTO-open-space) normal by sampling inside() around the blocked
-# point. For each axis we test +EPS and -EPS: if stepping +X lands inside
-# the world and -X does not, "more open space lies toward +X," so the
-# normal gains a +X component. Summing over all axes yields a vector that
-# points back toward open space. We normalize it.
+# Each corridor is straight prism sections (seg_bounds gives each section's
+# centerline as start->end base-centers, plus its tube radius). We confine
+# the ship to an INNER tube of radius INNER_RADIUS around the nearest
+# section's axis: project the ship onto the axis; if it is farther than
+# INNER_RADIUS from the axis, pull it straight back to that radius (the
+# correction points TOWARD the axis, never outward, so the ship can never
+# be pushed into the void). The atrium is handled by clamping to its sphere.
 #
-# This is the crux of "slide, not stick." It is robust at the doorway seam
-# because hub.inside() is the UNION (atrium sphere OR any corridor): the
-# union is continuous through the doorway, so the sampled gradient does not
-# flip wildly where the two surfaces overlap.
+# The player still flies freely inside the inner tube -- it just can't reach
+# the rock. Since the walls are untextured, the slightly smaller flyable
+# volume is imperceptible.
 # ----------------------------------------------------------------------
-def _wall_normal(hub, point, eps=NORMAL_EPS):
-    p = np.asarray(point, dtype=float)
-    n = np.zeros(3)
-    for axis in range(3):
-        d = np.zeros(3)
-        d[axis] = eps
-        plus  = hub.inside(p + d, margin=SHIP_RADIUS)
-        minus = hub.inside(p - d, margin=SHIP_RADIUS)
-        if plus and not minus:
-            n[axis] += 1.0
-        elif minus and not plus:
-            n[axis] -= 1.0
-        # both inside or both outside -> this axis gives no clear direction
-    return _normalize(n)   # may be None if degenerate
+
+def _confine_to_axis(ship, center_a, center_b, tube_radius):
+    """Confine the ship to an inner tube around the segment center_a->center_b.
+    Returns True if this segment 'claims' the ship (its projection lands on
+    the segment), so the caller knows the ship was handled."""
+    a = np.asarray(center_a, dtype=float)
+    b = np.asarray(center_b, dtype=float)
+    ab = b - a
+    L2 = float(np.dot(ab, ab))
+    if L2 < 1e-12:
+        return False
+    t = float(np.dot(ship.pos - a, ab)) / L2
+    if t < 0.0 or t > 1.0:
+        return False                      # ship is not alongside this segment
+    axis_point = a + ab * t               # nearest point on the centerline
+    radial = ship.pos - axis_point        # vector from axis out to the ship
+    r = _norm(radial)
+    inner_radius = max(0.0, tube_radius - WALL_INSET)
+    if r > inner_radius:
+        # Pull the ship straight back toward the axis to the inner radius.
+        if r > 1e-9:
+            ship.pos = axis_point + radial * (inner_radius / r)
+            # Kill the outward (toward-wall) velocity component.
+            out = radial / r
+            vdot = float(np.dot(ship.vel, out))
+            if vdot > 0.0:
+                ship.vel = ship.vel - out * vdot
+    print("WALL r", round(r, 2), "inner", round(inner_radius, 2))
+    return True
 
 
-# ----------------------------------------------------------------------
-# WALL CONTAINMENT -- hard stop + slide.
-# ----------------------------------------------------------------------
 def _resolve_walls(ship, hub, prev_pos):
-    if hub.inside(ship.pos, margin=SHIP_RADIUS):
-        return  # legal: the whole attempted move stayed in the world
+    # 1) If the ship is alongside any corridor section, confine it to that
+    #    section's inner tube.
+    handled = False
+    for corridor in hub.corridors:
+        for seg in getattr(corridor, "seg_bounds", []):
+            if _confine_to_axis(ship, seg["start"], seg["end"],
+                                 float(seg["radius"])):
+                handled = True
+                break
+        if handled:
+            break
 
-    # The move pushed (part of) the ship into rock. Find the slide normal.
-    n = _wall_normal(hub, ship.pos)
-
-    if n is None:
-        # Degenerate finite-difference (e.g. a sharp corner). Fall back to
-        # the direction from the blocked point back toward known-open space:
-        # prev_pos was inside the world (it was legal last frame), so the
-        # vector prev_pos - pos points back into open space. If prev_pos is
-        # somehow coincident, use atrium center (always inside).
-        n = _normalize(prev_pos - ship.pos)
-        if n is None:
-            n = _normalize(hub.center - ship.pos)
-        if n is None:
-            ship.pos = prev_pos.copy()
-            ship.vel = np.zeros(3)
-            return
-
-    # Keep only the tangential part of the attempted delta (slide along the
-    # surface); discard the component that drove into the rock.
-    delta = ship.pos - prev_pos
-    delta_slide = delta - n * float(np.dot(delta, n))
-    ship.pos = prev_pos + delta_slide
-
-    # Kill the inward velocity component so the ship does not keep grinding
-    # into the wall next frame (vel is inertial in render.Ship -> it must be
-    # corrected, or the slide will not feel solid).
-    vdot = float(np.dot(ship.vel, n))
-    if vdot < 0.0:
-        ship.vel = ship.vel - n * vdot
-
-    # Corner case: the slid position is STILL outside (e.g. sliding along one
-    # wall pushed us through another). Stop dead rather than leak through.
-    if not hub.inside(ship.pos, margin=SHIP_RADIUS):
-        ship.pos = prev_pos.copy()
-        # kill only the inward component again (prev_pos was legal)
-        vdot = float(np.dot(ship.vel, n))
-        if vdot < 0.0:
-            ship.vel = ship.vel - n * vdot
+    # 2) Otherwise the ship is in the atrium: clamp it inside the atrium
+    #    sphere (radius minus the same inset / ship skin).
+    if not handled:
+        c = np.asarray(hub.center, dtype=float)
+        radial = ship.pos - c
+        r = _norm(radial)
+        atrium_inner = max(0.0, float(hub.radius) - WALL_INSET)
+        if r > atrium_inner and r > 1e-9:
+            out = radial / r
+            ship.pos = c + radial * (atrium_inner / r)
+            vdot = float(np.dot(ship.vel, out))
+            if vdot > 0.0:
+                ship.vel = ship.vel - out * vdot
 
 
 # ----------------------------------------------------------------------
@@ -238,54 +232,21 @@ def _resolve_robots(ship, hub, prev_pos):
                 ship.vel = ship.vel - n * vdot
 
 
-def _outside_all_robots(ship, hub):
-    """True if the ship center is outside every undefeated robot's block
-    sphere -- used to detect when the iterative solve has converged."""
-    for corridor in hub.corridors:
-        for robot in corridor.get_robots():
-            if robot.is_defeated():
-                continue
-            sphere = _robot_block_sphere(corridor, robot)
-            if sphere is None:
-                continue
-            center, robot_radius = sphere
-            solid_r = robot_radius + SHIP_RADIUS
-            if _norm(ship.pos - center) < solid_r - 1e-6:
-                return False
-    return True
-
-
 # ----------------------------------------------------------------------
 # PUBLIC ENTRY POINT
 # ----------------------------------------------------------------------
 def resolve(ship, hub, prev_pos):
-    """Hard-stop-with-slide containment. Mutates ship.pos / ship.vel in
-    place. Call EXACTLY between ship.update(dt, keys) and ship.apply_view().
+    """Hard containment. Mutates ship.pos / ship.vel in place. Call EXACTLY
+    between ship.update(dt, keys) and ship.apply_view().
 
-    Walls and robots are TWO overlapping constraints: a robot sphere is
-    wider than the tube, so sliding on the robot can push the ship toward
-    (or through) the wall, and re-clamping the wall can push it back toward
-    the robot. A single pass cannot satisfy both. We ITERATE the pair until
-    they converge to a position that satisfies BOTH -- the natural 'wedged
-    between robot and wall' rest spot -- with the ship inside the tube and
-    outside the robot. If they still conflict after a few iterations
-    (truly no legal spot), we stop the ship dead at prev_pos, which was
-    legal last frame, rather than leak it into the void.
+    Robots first (block sphere on the tube axis), then walls (confine to the
+    inner tube). The wall step ALWAYS pulls the ship TOWARD the axis, never
+    outward, so it can never push the ship into the void -- which is what
+    broke the earlier slide-based version. If a robot push moved the ship
+    radially, the wall step simply pulls it back onto the inner tube; the
+    two no longer fight, because the wall correction has a fixed inward
+    direction.
     """
     prev_pos = np.asarray(prev_pos, dtype=float)
-
-    MAX_ITERS = 6
-    for _ in range(MAX_ITERS):
-        _resolve_robots(ship, hub, prev_pos)
-        _resolve_walls(ship, hub, prev_pos)
-        # Converged? Both constraints satisfied -> done.
-        if hub.inside(ship.pos, margin=SHIP_RADIUS) and _outside_all_robots(ship, hub):
-            return
-
-    # Did not converge (constraints genuinely conflict this frame). Refuse to
-    # leak through the rock: revert to the last legal position and stop.
-    print("CONVERGED?", hub.inside(ship.pos, margin=SHIP_RADIUS),
-          _outside_all_robots(ship, hub), "pos", np.round(ship.pos, 1))
-    if not hub.inside(ship.pos, margin=SHIP_RADIUS):
-        ship.pos = prev_pos.copy()
-        ship.vel = np.zeros(3)
+    _resolve_robots(ship, hub, prev_pos)
+    _resolve_walls(ship, hub, prev_pos)
