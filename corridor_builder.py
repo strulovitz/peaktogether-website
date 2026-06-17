@@ -395,11 +395,11 @@ class CorridorGeometry:
 
 
     def _plaque_anchor(self, robot):
-        """Return (center_on_tube_axis, tube_radius) for this robot.
-        The robot's base_pos was seated LOW in the tube (built as
-        seg_center - up*radius*0.45). We find the robot's segment, then
-        return the segment's true AXIS centre and radius so the plaque is
-        centred in the cross-section (not shoved low)."""
+        """Return (center_on_tube_axis, wall_half_width) for this robot.
+        NOTE: the corridor is a 4-wall BOX (N_SIDES=4) whose ring 'radius'
+        is the distance to the CORNERS. The flat WALLS sit closer, at
+        radius*cos(45deg) = radius*0.7071. We size the plaque against the
+        flat-wall distance so a camera-facing sign never pokes past the walls."""
         base = np.asarray(robot.base_pos, dtype=float)
 
         # Find the segment whose [start,end] midpoint is nearest base_pos.
@@ -411,11 +411,15 @@ class CorridorGeometry:
                 best_d2, best_i = d2, i
         sb = self.seg_bounds[best_i]
         up = np.asarray(sb["up"], dtype=float)
-        radius = float(sb["radius"])
+        corner_radius = float(sb["radius"])
 
-        # base_pos sits at (axis_centre - up*radius*0.45). Lift back to axis.
-        center = base + up * (radius * 0.45)
-        return center, radius
+        # Lift from the low seat back to the true tube axis (uses corner radius,
+        # which is the real geometric radius along 'up' to the seat offset).
+        center = base + up * (corner_radius * 0.45)
+
+        # Flat-wall half-width: what the plaque must NOT exceed.
+        wall_half = corner_radius * 0.70710678   # cos(45 deg)
+        return center, wall_half
 
 
     def _plaque_texture(self, robot):
