@@ -79,9 +79,15 @@ ENTRY_FOCUS    = -1.0
 # FITS_S: the signed distance at which a sign "fits on screen in all its glory".
 #   Sign-revealing math is anchored here. Keep == 1.0 (one full spacing).
 FITS_S         = 1.0
-# EXIT_THRESHOLD: reverse this far (index units = spacings) PAST sign 0 to exit.
-#   1/3 of a spacing, per Brief #U1 S3.7.
+# EXIT_THRESHOLD: reverse this far (index units = spacings) PAST the entry
+#   position to exit. 1/3 of a spacing, per Brief #U1 S3.7.
 EXIT_THRESHOLD = 1.0 / 3.0
+# EXIT_FOCUS: the actual focus value at which the mode closes. The car ENTERS
+#   at ENTRY_FOCUS (= -1.0, sign 0 at its "fits" framing). Exit = reversing 1/3
+#   of a spacing PAST that entry point. So exit fires below ENTRY_FOCUS, NOT
+#   below zero. (The old bug: exit was f < -1/3, which ENTRY_FOCUS=-1.0 already
+#   satisfies -> the mode closed the instant it opened.)
+EXIT_FOCUS = ENTRY_FOCUS - EXIT_THRESHOLD
 
 # --- Perspective SIZE as a MONOTONIC function of signed distance s (s >= 0) ----
 # Targets (Brief #U1 S5):
@@ -260,15 +266,15 @@ class UnderstandingMode:
             if ev.type == pygame.MOUSEWHEEL:
                 self.target += ev.y * DEPTH_SPEED_WHEEL
 
-        if self.target < -EXIT_THRESHOLD:
+        if self.target < EXIT_FOCUS:
             self.close()
             return
-        self.target = max(-EXIT_THRESHOLD,
+        self.target = max(EXIT_FOCUS,
                           min(float(len(LAYER_KEYS) - 1), self.target))
 
         self.focus += (self.target - self.focus) * min(1.0, dt * 8.0)
 
-        if self.focus < -EXIT_THRESHOLD:
+        if self.focus < EXIT_FOCUS:
             self.close()
             return
 
