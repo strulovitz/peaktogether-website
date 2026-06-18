@@ -1,9 +1,8 @@
-# DESCENT QED — PARENT PROMPT #9: FIX THE CORRIDOR-CREATION PIPELINE (June 18, 2026)
+# DESCENT QED — PARENT #8 FOLLOW-UP: FIX THE CORRIDOR-CREATION PIPELINE (June 18, 2026)
 
-> **TO:** Claude Opus 4.8 — You are PARENT #9 / ARCHITECT.
-> **FROM:** Nir (strulovitz) — the human, the boss. He pastes this to you.
+> **TO:** Claude Opus 4.8 — You are PARENT #8 / ARCHITECT (same session).
+> **FROM:** Nir (strulovitz) — the human, the boss.
 > **BUILDER:** DeepSeek V4 Pro (OpenCode) — commits code, tests, reports.
-> **PASTE THIS ENTIRE DOCUMENT** into a fresh Claude Opus 4.8 conversation.
 > **READ EVERY SECTION BEFORE WRITING ANYTHING.**
 
 ---
@@ -103,12 +102,18 @@ Key features:
 
 ### FILE 3: Level manifest
 
+The manifest is NOT trivial boilerplate — it is the mechanism for **multi-corridor levels**. The Basel Problem will eventually have MANY corridors (Euler's approach, the Even Zeta corridor, and more proofs/approaches in the future), all grouped under ONE level. The manifest is what ties them together:
+
 ```
-title: <Level Title>
-baked: ../baked/<dirname>
+title: The Basel Problem
+baked: ../baked/basel
 corridors:
-  ../corridors/<game_format_filename>.txt
+  ../corridors/basel.txt
+  ../corridors/euler_even_zeta_game.txt
+  ../corridors/future_proof_3.txt
 ```
+
+So the manifest must be produced alongside the corridor files, with the correct paths and baked-PNG directory. For a brand new topic (not adding to an existing level), the child creates a fresh manifest. For adding a corridor to an existing topic (e.g. a new Basel proof), Nir updates the existing manifest to add the new corridor path.
 
 ---
 
