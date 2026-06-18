@@ -346,7 +346,12 @@ Write a new parent prompt asking a fresh Opus to create a PROPER unified
 corridor-authoring prompt with: (1) fresh-chat gate that asks for the topic first,
 (2) produces all 3 files (baker + game + manifest), (3) reference files NOT inline
 (child asks for them), (4) general/forever, not Basel-specific.
-See: PARENT_ESTATE/SESSION_2026-06-18_EVENING.md for full details.
+
+### ON RESTART — Read these in order:
+1. **WORKFLOW.md** (this file)
+2. `PARENT_ESTATE/PARENT_PROMPT_9_EVENING_2026-06-18.md` — Parent #9 handoff (PASTE TO FRESH OPUS)
+3. `PARENT_ESTATE/SESSION_2026-06-18_EVENING.md` — today's full session context
+4. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
 
 ## 🔴 SESSION LOG — June 13, 2026
 
