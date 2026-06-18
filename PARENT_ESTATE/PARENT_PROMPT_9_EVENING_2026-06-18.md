@@ -45,6 +45,91 @@ DESCENT QED is a **6-DOF flying game** themed around MATHEMATICAL PROOF.
 
 ---
 
+## 1b. TECH STACK & ENGINE CANON
+
+- **Python 3.12**, pygame + PyOpenGL. Legacy fixed-function OpenGL (no shaders).
+- **Repo:** `https://github.com/strulovitz/peaktogether-website` (local: `C:\Users\nir_s\peaktogether-website`)
+- **World:** Grey rocky ATRIUM (hollow faceted sphere, radius 34) -> N doorways via FIBONACCI SPHERE distribution -> each doorway leads to a BENT CORRIDOR -> ends in a BLUE CAVERN (hostage room).
+- **Coordinates:** right=+X, up=+Y, forward=-Z. Quaternions [w,x,y,z] numpy.
+- **Ship:** `.pos` (vec3), `.vel` (vec3), `.q` (quaternion). `ship.update6dof(dt, keys, cmd)`.
+- **Mathtext-only rule (game files):** `\frac`, `\sum`, `\pi`, `\prod`, `\sin` ALLOWED. `\tfrac`, `\dfrac`, `\displaystyle`, `\emph`, `\binom` FORBIDDEN. (matplotlib's built-in mathtext, no full LaTeX.)
+- **Full LaTeX rule (baker files):** Baker uses real pdflatex with amsmath/amssymb/xcolor. `\tfrac`, `\displaystyle`, `\emph` all allowed in baker files.
+
+---
+
+## 1c. WHAT IS FULLY BUILT & WORKING (complete inventory)
+
+### WORLD TIER (8 modules — all complete):
+| Module | File | What it does |
+|--------|------|-------------|
+| **content_parser** | `content_parser.py` | Parses corridor `.txt` files -> `CorridorData` + `RobotData` objects. THE AUTHORITATIVE PARSER. |
+| **palette** | `palette.py` | ColorLedger. Maps opaque keys -> RGBA colors. |
+| **render** | `render.py` | Core GL. `Ship` class, quaternion math, fog, wall queue + `flush_walls`, `begin_2d`/`end_2d`, `draw_plain_text_2d`, `render_rich`, billboards, GL display lists. |
+| **robots** | `robots.py` | `Robot` class (faceted hull, Larson scanner eye, hologram portrait, explosion). Portrait filename = `NAME.replace(" ", "_") + "-hologram.png"`. |
+| **corridor_builder** | `corridor_builder.py` | Builds `CorridorGeometry`: bent tube, stations, robot positions, blue cavern, defeat plaques (baked PNGs). |
+| **hub_builder** | `hub_builder.py` | Builds `HubGeometry`: grey atrium sphere + Fibonacci doorways -> corridors. |
+| **level_parser** | `level_parser.py` | Loads level manifest -> `Level`. Parses `baked:` line -> `understanding_dir`. |
+| **app** | `app.py` | Minimal integration. Canonical frame loop. LEVEL_MANIFEST = "levels/basel.txt". |
+
+### GAMEPLAY TIER (all complete):
+| Brief | File | What it does |
+|-------|------|-------------|
+| **#9 COMBAT** | `combat.py` | Fire missiles. ID matching. Fizzle (6s). `robot_in_view()` selector. |
+| **#10 ARSENAL** | `combat.py` + `gamepad.py` | Per-corridor weapons from VULNERABLE_TO. Face-selection panel. |
+| **#11 UNDERSTANDING** | `understanding.py` | Signed-distance road-sign model: fog-and-glass flight through pre-baked PNG panels. Mouse wheel = drive forward/back. CTRL/joystick = engineer unlock. ESC inert. Exit by reversing past sign 0. |
+| **#12 HOSTAGES** | `hostages.py` | TWO 3D humanoid figures on cavern floor. Gentle idle bob+sway. |
+| **#13 GAME STATE** | `game_state.py` | Rescue trigger, "HOSTAGES RESCUED" flash, corridor/level complete, WIN-ONLY. |
+| **#15 COCKPIT** | `cockpit.py` | Descent-style polygon HUD: flat bar, face row, canopy beams. |
+
+### ENGINE INFRASTRUCTURE (all complete):
+| Brief | File | What it does |
+|-------|------|-------------|
+| **#C1 CONTAINMENT** | `containment.py` | Wall confinement + robot blocking. |
+| **#P1 PLAQUES** | `corridor_builder.py` | Defeat plaques show baked PNG with white frame. |
+| **#J1 JOYSTICK** | `render.py` + `app.py` | T.16000M analog flight, proportional, additive to keyboard. |
+| **#J1B BUTTONS** | `app.py` + `understanding.py` | Trigger = fire, back-center = engineer reveal. |
+| **#U1 CONVEYOR FIX** | `understanding.py` | Signed-distance model kills conveyor belt. FIXED TODAY. |
+
+### BAKER PIPELINE:
+| File | What it does |
+|------|-------------|
+| `deu/bake_corridor.py` | Compiles baker-format corridor -> transparent colored PNGs. Uses real pdflatex. |
+| `baked/maxwell/` | 8 PNGs for Maxwell (robots 3-4, 4 layers each) |
+| `baked/basel/` | 28 PNGs for Basel (robots 1-7, 4 layers each) |
+
+### CORRIDORS & LEVELS:
+| File | Type | Description |
+|------|------|-------------|
+| `corridors/maxwell_old.txt` | Game-format | 5 Maxwell robots |
+| `corridors/maxwell.txt` | Baker-format | 5 Maxwell robots |
+| `corridors/basel.txt` | Game-format | 7 Basel/Euler-approach robots, 42 fizzles |
+| `levels/mathematics/basel_problem/basel_euler_proof.txt` | Baker-format | 7 Basel robots |
+| `corridors/euler_even_zeta.txt` | Baker-format | 7 Even Zeta robots (JUST CREATED, no game file yet) |
+| `levels/maxwell.txt` | Manifest | Maxwell level |
+| `levels/basel.txt` | Manifest | Basel level (currently 1 corridor) |
+
+### HARDWARE:
+- T.16000M FCS flight stick: fully wired (6-DOF analog + fire trigger + engineer button)
+- Xbox 360 controller: weapon selection + fire (manipulator role)
+
+---
+
+## 1d. WHAT STILL NEEDS TO BE DONE (beyond the corridor pipeline)
+
+### Priority 1 — The corridor-authoring pipeline (YOUR MISSION — see section 6)
+Create a unified prompt so Nir can produce new corridors without needing a parent.
+
+### Priority 2 — Multiple corridors per level
+Only ONE corridor loads at a time. The hub supports multiple corridors (Fibonacci sphere doorways -> `hub.corridors` list), but multi-corridor has never been tested. Needed: a level manifest with multiple corridor entries, end-to-end testing (enter corridor 1, complete, return to atrium, enter corridor 2), and verifying no cross-corridor bleed (holograms, weapons, hostages, understanding mode).
+
+### Priority 3 — More corridors for the Basel Problem
+The Even Zeta corridor (`corridors/euler_even_zeta.txt`) has only the baker file. Once the unified prompt is working, Nir will use it to produce the game file + manifest update. Then bake, then play. Eventually many more Basel corridors (other proofs, related results).
+
+### Priority 4 — New levels (new mathematical subjects)
+After Basel has multiple corridors working, Nir plans to expand to other subjects (other "hardest problems in mathematics"), each as its own level with its own corridors.
+
+---
+
 ## 2. THE FOUR-LEVEL HIERARCHY
 
 This is critical for your task. Do not confuse these:
