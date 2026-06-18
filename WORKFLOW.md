@@ -352,6 +352,7 @@ corridor-authoring prompt with: (1) fresh-chat gate that asks for the topic firs
 2. `PARENT_ESTATE/PARENT_PROMPT_9_EVENING_2026-06-18.md` — Parent #9 handoff (PASTE TO FRESH OPUS)
 3. `PARENT_ESTATE/SESSION_2026-06-18_EVENING.md` — today's full session context
 4. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
+5. `WEBSITE_REDESIGN_FUSION_2026-06-18.md` — Website redesign plan from Fusion AI (START IMPLEMENTING TOMORROW)
 
 ## 🔴 SESSION LOG — June 13, 2026
 
