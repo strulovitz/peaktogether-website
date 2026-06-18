@@ -74,7 +74,7 @@ Robot 7 generalizes beyond it.
 
 A robot's NAME in the BAKER file may be EITHER:
   (a) a person's name           — e.g. ROBOT 1 "Leonhard Euler",
-                                          ROBOT 5 "Francois Viete",
+                                          ROBOT 5 "François Viète",
                                           ROBOT 7 "Bernhard Riemann"
   (b) the name of the TECHNIQUE — e.g. ROBOT 2 "Coefficient Matching",
                                           ROBOT 3 "The Product Over Roots",
@@ -95,7 +95,7 @@ The rule (from robots.py):
     filename = NAME.strip().replace(" ", "_") + "-hologram.png"
 
 No lowercasing, no accent-stripping. Therefore the game NAME that drives the
-filename must be ASCII: the baker prose may write "Francois Viete", but the game
+filename must be ASCII: the baker prose may write "François Viète", but the game
 NAME is "Francois Viete" -> Francois_Viete-hologram.png. Portraits live at the
 repo root as <Name_With_Underscores>-hologram.png.
 
@@ -319,7 +319,7 @@ ask for it; never fabricate it.
 
 
 ================================================================================
-12. CANONICAL REFERENCE -- THE REAL BASEL FILES (VERBATIM, ON-DISK TRUTH)
+12. CANONICAL REFERENCE — THE REAL BASEL FILES (VERBATIM, ON-DISK TRUTH)
 ================================================================================
 
 Study these as worked examples of every rule above. They are the actual files on
@@ -327,7 +327,7 @@ disk; do not transplant their content into your own corridor.
 
 
 --------------------------------------------------------------------------------
-FILE A -- BAKER FILE
+FILE A — BAKER FILE
 path: levels/mathematics/basel_problem/basel_euler_proof.txt
 --------------------------------------------------------------------------------
 
@@ -393,7 +393,7 @@ ROBOT: 7
 
 
 --------------------------------------------------------------------------------
-FILE B -- GAME FILE
+FILE B — GAME FILE
 path: corridors/basel.txt
 --------------------------------------------------------------------------------
 
@@ -661,7 +661,7 @@ FIZZLE hipparchus { Sine's zeros gave the special case; this final sentinel is a
 
 
 --------------------------------------------------------------------------------
-FILE C -- MANIFEST (THE LEVEL FILE)
+FILE C — MANIFEST (THE LEVEL FILE)
 path: levels/basel.txt
 --------------------------------------------------------------------------------
 
