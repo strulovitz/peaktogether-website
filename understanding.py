@@ -1,29 +1,51 @@
-"""understanding.py -- Brief #11d: Understanding Mode, fog-and-glass flight.
+"""understanding.py -- Brief #U1: Understanding Mode, fog-and-glass flight.
 
-The player is a spaceship flying along a line of GLASS SIGNS (explanation panels:
-mathematician -> physicist -> biologist -> engineer), baked offline as transparent
-LaTeX PNGs (deu/bake_corridor.py). Gaze is fixed FORWARD; you fly forward/reverse
-(=zoom) and pan up/down/left/right.
+ROAD-SIGN PHYSICS (Brief #U1 rewrite):
+  The player is a CAR driving FORWARD down a foggy road past a fixed line of
+  GLASS SIGNS (explanation panels: mathematician -> physicist -> biologist ->
+  engineer), baked offline as transparent PNGs. Gaze is fixed STRICTLY FORWARD.
+  The car never turns around. You drive forward/back (mouse wheel) and pan to
+  read a sign bigger than the screen.
 
-PHYSICAL MODEL:
-  * Each sign is real glass. Its transparency is a FIXED, baked property -- it does
-    NOT change as you approach (no observer effect). Signs are drawn at full alpha;
-    the PNG's own alpha is the only transparency.
+  SIGNED DISTANCE is the heart of the model. Let f = the car's continuous
+  position along the road, and i = a sign's integer index (0 = mathematician /
+  front, increasing into depth). For each sign:
+
+        s_i = i - f
+
+      * s_i > 0  -> sign is AHEAD  -> visible; size/blur/fog depend on s_i.
+      * s_i = 0  -> car is AT the sign (largest; overflows; pan to read).
+      * s_i < 0  -> sign is BEHIND -> CULLED. Drawn not at all, ever. (This one
+                    rule kills the old "conveyor belt": a passed sign vanishes
+                    instead of reversing and drifting away in front of you.)
+
+  ENTRY: f starts at ENTRY_FOCUS = -1.0, so sign 0 has s_0 = 1 and sits at the
+  "fits-on-screen with a tiny margin" framing (FITS_S = 1). The first forward
+  wheel click raises f toward 0, smoothly growing sign 0 past the edges (then
+  you pan). No snap, no jump.
+
+  REVERSE & EXIT: reverse falls out of the signed math for free. Backing up in
+  the middle just reveals the previous (harder) sign ahead -- it never exits.
+  Exit happens ONLY by reversing PAST sign 0 by 1/3 of a spacing: when
+  f < -EXIT_THRESHOLD (= -1/3), call close(). While f is in (-1/3, 0) sign 0 is
+  still drawn (s_0 = -f, a small positive -> visibly shrinking) so the player
+  SEES it shrink before the mode closes.
+
+PHYSICAL MODEL (unchanged in spirit):
+  * Each sign is real glass. Transparency is a FIXED baked property -- it does
+    NOT change with approach. Signs are drawn at full alpha; the PNG's own alpha
+    is the only transparency.
   * What changes with distance is the AIR: FOG (color = FOG_COLOR) sits between
-    signs. Farther signs are seen through MORE fog (washed) and are OUT OF FOCUS
-    (blurrier). Flying closer = less fog between you and that sign = it comes into
-    focus and its true clarity, while its own glassiness never changes.
-  * Size grows with nearness (perspective). No snap-to-fit; park at any distance and
-    pan around a sign bigger than the screen. A corner minimap shows the roam.
+    you and a sign, and a sign is blurrier the farther ahead it is. Darkening of
+    a far sign is done by the FOG QUAD in front of it (draw_texture always draws
+    at glColor 1,1,1 -- the only honest way to darken here is fog), NOT by
+    dimming the texture.
 
-Input (UNCHANGED): mouse wheel = depth(=zoom), mouse + right stick = pan,
-CTRL = engineer unlock, ESC / back-out (focus < -0.6) = exit.
-
-Brief #J1B: the T.16000M back-center button is ADDITIVE to CTRL. On Nir's unit it
-reports as pygame button index 1 (CONFIRMED 2026-06-17 by an on-screen probe;
-the brief's "index 3" guess was wrong for this hardware). CTRL here is a HELD reveal
-(engineer comes into focus WHILE held, softens on release) -- not a toggle -- so the
-joystick button is OR'd into the same held boolean, NOT edge-gated.
+Input: mouse wheel = depth (drive forward/back). mouse + right stick = pan.
+CTRL / T.16000M back-center button (index 1) = engineer reveal (HELD).
+ESC = INERT inside Understanding Mode (Brief #U1). app.py already refuses to
+quit the game while umode.active, so deleting the old ESC->close() here makes
+ESC fully inert in this mode while still quitting the game everywhere else.
 
 Fallback: if a baked PNG is missing for a layer, render robot.explain[layer] via
 render.render_rich() (old behavior), so the mode never crashes on an unbaked level.
@@ -40,41 +62,64 @@ LAYER_KEYS  = ["mathematician", "physicist", "biologist", "engineer"]
 LAYER_TITLE = {"mathematician":"MATHEMATICIAN", "physicist":"PHYSICIST",
                "biologist":"BIOLOGIST", "engineer":"ENGINEER"}
 
-# Brief #J1B: pilot-joystick button index for the engineer reveal (HELD, like
-# CTRL). Confirmed by probe on Nir's T.16000M: the back-center button = index 1.
 PILOT_ENGINEER_BTN = 1
 
-BG_COLOR   = (0.04, 0.05, 0.07)   # near-black world replacement
-PAN_SPEED   = 1.0                  # mouse px -> pan px
-STICK_SPEED = 1200.0               # right-stick units -> pan px/s (big sheets)
-DEPTH_SPEED_WHEEL = 0.18           # focus units per wheel click (small = silky)
+BG_COLOR   = (0.04, 0.05, 0.07)
+PAN_SPEED   = 1.0
+STICK_SPEED = 1200.0
+DEPTH_SPEED_WHEEL = 0.18
 BASE_FONTSIZE = 22
 
-# --- Continuous perspective (size) and focus (blur) from distance d ------------
-# distance d = |focus - layer_index|. Size and blur are smooth functions of d.
-# Opacity is NOT a function of d -- glass keeps its own baked alpha.
-CLOSEUP_FILL = 1.30   # at d=0 the sign fills this fraction of screen WIDTH (>1 = roam)
-FAR_FILL     = 0.42   # shrinks toward this with distance (perspective preview)
-SIZE_FALLOFF = 0.85   # perspective decay rate (Gaussian sigma-ish)
-PEAK_BLUR    = 0.0    # in focus at d=0
-BLUR_PER_D   = 4.0    # px blur added per unit distance (out of focus = far)
+# === Brief #U1: SIGNED-DISTANCE ROAD-SIGN MODEL ===============================
+# f = car position along the road; per sign s_i = i - f (see module docstring).
+#
+# ENTRY_FOCUS: where the car starts. -1.0 puts sign 0 at s=1 (the "fits"
+#   framing) so it appears whole-with-a-tiny-margin on entry, NOT overflowing.
+ENTRY_FOCUS    = -1.0
+# FITS_S: the signed distance at which a sign "fits on screen in all its glory".
+#   Sign-revealing math is anchored here. Keep == 1.0 (one full spacing).
+FITS_S         = 1.0
+# EXIT_THRESHOLD: reverse this far (index units = spacings) PAST sign 0 to exit.
+#   1/3 of a spacing, per Brief #U1 S3.7.
+EXIT_THRESHOLD = 1.0 / 3.0
 
-# --- FOG (this, not opacity changes, is what washes out distance) --------------
-# Glass signs keep their own baked alpha (drawn at full alpha). Distance is conveyed
-# by a fog veil laid in FRONT of farther signs. fog_strength rises with distance.
-# BLACK fog (matches dark bg) -> far signs dissolve into depth.
-# For WHITE fog (dreamy mist) set FOG_COLOR = (0.90, 0.92, 0.95).
+# --- Perspective SIZE as a MONOTONIC function of signed distance s (s >= 0) ----
+# Targets (Brief #U1 S5):
+#   s -> 0   : sign grows past the screen so the player must PAN (liked).
+#   s == 1   : whole sign fits with a tiny L/R margin  -> fill ~= FITS_FILL.
+#   s  > 1   : shrinks with distance toward FAR_FILL (perspective preview).
+# We use a true-ish perspective law fill = NEAR_K / (s + NEAR_K), clamped to a
+# far floor. NEAR_K is chosen so that fill(1) == FITS_FILL exactly:
+#       FITS_FILL = NEAR_K / (1 + NEAR_K)  ->  NEAR_K = FITS_FILL / (1 - FITS_FILL)
+# At s=0 this gives fill=1.0 (full screen width); panning pushes a touch beyond
+# via the +PAN_OVERFILL bump so s near 0 clearly overflows. Monotonic decreasing
+# in s, so a passed-but-not-yet-culled sign only ever shrinks -- never a bell.
+FITS_FILL     = 0.90
+FAR_FILL      = 0.42
+NEAR_K        = FITS_FILL / (1.0 - FITS_FILL)
+PAN_OVERFILL  = 0.55
+
+# --- BLUR as a function of signed distance s (farther ahead = more veiled) -----
+# Uses the EXISTING pre-baked blur rungs (no live blur). Tuned so:
+#   s <= ~0.4 : crisp (rung 0-ish).
+#   s == 1    : readable-as-current, lightly softened.
+#   s == 2    : clearly veiled (next sign behind doesn't compete).
+BLUR_PER_S   = 4.0
+
+# --- FOG: darkens/veils farther signs (the only honest darkening here) ---------
+# Glass keeps its baked alpha (drawn full alpha). A fog quad laid IN FRONT of a
+# farther sign darkens & washes it. fog_strength rises with s.
 FOG_COLOR    = (0.04, 0.05, 0.07)
-FOG_PER_D    = 0.55   # fog opacity added per unit distance
-FOG_MAX      = 0.92   # never fully opaque -> deep structure still ghosts through
+FOG_PER_S    = 0.34
+FOG_MAX      = 0.92
 
 # --- Pre-blur ladder (built once per open; ZERO per-frame blur cost) ----------
-BLUR_RUNGS = 10       # crisp + 9 progressively blurred -> smooth continuous dissolve
-BLUR_STEP  = 1.2      # px Gaussian per rung -> max ~10.8px
+BLUR_RUNGS = 10
+BLUR_STEP  = 1.2
 MAX_DRAW_BLUR = (BLUR_RUNGS - 1) * BLUR_STEP
 
 # --- Source cap: allow bigger-than-screen panels (we roam them; don't compress) -
-PANEL_MAX_W = 4096    # within typical GL_MAX_TEXTURE_SIZE; raise if your GPU allows
+PANEL_MAX_W = 4096
 
 # --- Minimap -------------------------------------------------------------------
 MINIMAP_W      = 200
@@ -87,18 +132,19 @@ class UnderstandingMode:
     def __init__(self):
         self.active = False
         self.robot  = None
-        self.focus  = 0.0          # continuous spaceship position 0..3
-        self.target = 0.0
-        self.pan_x  = 0.0          # pan in screen px applied to the focused sign
+        self.focus  = ENTRY_FOCUS
+        self.target = ENTRY_FOCUS
+        self.pan_x  = 0.0
         self.pan_y  = 0.0
         self.ctrl   = False
-        self._panels = {}          # { key: [ (tid,w,h) rung0_sharp, rung1, ... ] }
+        self._nearest_i = None
+        self._panels = {}
         self._all_tids = []
 
     # ---- texture building (load once per open) ------------------------------
     def _surface_to_texture(self, surf):
         w, h = surf.get_width(), surf.get_height()
-        data = pygame.image.tostring(surf, "RGBA", True)  # flip -> GL row order
+        data = pygame.image.tostring(surf, "RGBA", True)
         tid = glGenTextures(1)
         glBindTexture(GL_TEXTURE_2D, tid)
         glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR)
@@ -115,14 +161,12 @@ class UnderstandingMode:
         d = getattr(self.robot, "understanding_dir", "") or ""
         num = getattr(self.robot, "number", None)
         if not d or num is None:
-            # Brief #A — loud fallback (a): no baked folder / no robot number.
             print("UNDERSTANDING: no baked PNG for robot=%r layer=%r "
                   "(understanding_dir=%r) -> live-text fallback"
                   % (num, layer, d))
             return None
         path = os.path.join(d, f"robot{num}_{layer}.png")
         if not os.path.isfile(path):
-            # Brief #A — loud fallback (b): expected baked PNG is missing.
             print("UNDERSTANDING: baked PNG missing: %s -> live-text fallback"
                   % path)
             return None
@@ -135,26 +179,30 @@ class UnderstandingMode:
             surf = pygame.transform.smoothscale(
                 surf, (PANEL_MAX_W, max(1, int(surf.get_height() * s)))
             ).convert_alpha()
-        rungs = [self._surface_to_texture(surf)]                 # rung 0 = crisp
+        rungs = [self._surface_to_texture(surf)]
         for r in range(1, BLUR_RUNGS):
             rungs.append(self._surface_to_texture(
-                render.blur_surface(surf, r * BLUR_STEP)))         # high-quality PIL
+                render.blur_surface(surf, r * BLUR_STEP)))
         return rungs
 
     def _rung_for_blur(self, blur_px):
         idx = int(round(min(MAX_DRAW_BLUR, max(0.0, blur_px)) / BLUR_STEP))
         return max(0, min(BLUR_RUNGS - 1, idx))
 
-    # ---- continuous appearance (size + focus + fog; NO opacity change) -------
-    def _size_fill(self, d):
-        g = math.exp(-(d * d) / (2.0 * SIZE_FALLOFF * SIZE_FALLOFF))  # 1 at d=0
-        return FAR_FILL + (CLOSEUP_FILL - FAR_FILL) * g
+    # ---- continuous appearance from SIGNED distance s (>= 0 only) ------------
+    def _size_fill(self, s):
+        """Monotonic-decreasing perspective fill. fill(0) ~= 1.0 + PAN_OVERFILL
+        (overflow -> pan), fill(1) == FITS_FILL, decays toward FAR_FILL far away."""
+        s = max(0.0, s)
+        fill = NEAR_K / (s + NEAR_K)
+        fill += PAN_OVERFILL * math.exp(-s * s / 0.5)
+        return max(FAR_FILL, fill)
 
-    def _blur_px(self, d):
-        return PEAK_BLUR + BLUR_PER_D * d
+    def _blur_px(self, s):
+        return BLUR_PER_S * max(0.0, s)
 
-    def _fog_strength(self, d):
-        return max(0.0, min(FOG_MAX, FOG_PER_D * d))
+    def _fog_strength(self, s):
+        return max(0.0, min(FOG_MAX, FOG_PER_S * max(0.0, s)))
 
     # ---- entry / exit --------------------------------------------------------
     def open(self, robot_data):
@@ -162,15 +210,16 @@ class UnderstandingMode:
             return
         self.active = True
         self.robot  = robot_data
-        self.focus = self.target = 0.0
+        self.focus = self.target = ENTRY_FOCUS
         self.pan_x = self.pan_y = 0.0
+        self._nearest_i = None
         self._panels = {}
         self._all_tids = []
         for key in LAYER_KEYS:
             self._panels[key] = self._load_panel_ladder(key)
         pygame.mouse.set_visible(False)
         pygame.event.set_grab(True)
-        pygame.mouse.get_rel()       # discard initial jump
+        pygame.mouse.get_rel()
 
     def close(self):
         self.active = False
@@ -183,6 +232,7 @@ class UnderstandingMode:
                     glDeleteTextures(int(t))
         self._panels = {}
         self._all_tids = []
+        self._nearest_i = None
         pygame.mouse.set_visible(True)
         pygame.event.set_grab(False)
 
@@ -191,12 +241,6 @@ class UnderstandingMode:
         if not self.active:
             return
 
-        # Engineer reveal: keyboard CTRL OR T.16000M back-center button
-        # (PILOT_ENGINEER_BTN = index 1, confirmed by probe). HELD, not
-        # edge-gated -- the engineer sign sharpens WHILE held and softens on
-        # release. The joystick button is OR'd in exactly like the two CTRL
-        # keys are. Crash-safe against no controller / no pilot device /
-        # too-few buttons.
         mods = pygame.key.get_mods()
         joy_engineer = False
         if gamepads is not None:
@@ -210,20 +254,29 @@ class UnderstandingMode:
                      or bool(mods & pygame.KMOD_CTRL)
                      or joy_engineer)
         if self.ctrl:
-            self.target = float(len(LAYER_KEYS) - 1)   # fly to engineer
+            self.target = float(len(LAYER_KEYS) - 1)
 
         for ev in events:
             if ev.type == pygame.MOUSEWHEEL:
                 self.target += ev.y * DEPTH_SPEED_WHEEL
-        if self.target < -0.6:        # back out past the front -> exit
+
+        if self.target < -EXIT_THRESHOLD:
             self.close()
             return
-        self.target = max(0.0, min(float(len(LAYER_KEYS) - 1), self.target))
+        self.target = max(-EXIT_THRESHOLD,
+                          min(float(len(LAYER_KEYS) - 1), self.target))
 
-        # smooth continuous glide of the spaceship toward target depth
         self.focus += (self.target - self.focus) * min(1.0, dt * 8.0)
 
-        # PAN (mouse + right stick), applied to the focused sign
+        if self.focus < -EXIT_THRESHOLD:
+            self.close()
+            return
+
+        nearest = self._nearest_ahead_index()
+        if nearest != self._nearest_i:
+            self.pan_x = self.pan_y = 0.0
+            self._nearest_i = nearest
+
         dx, dy = pygame.mouse.get_rel()
         self.pan_x -= dx * PAN_SPEED
         self.pan_y -= dy * PAN_SPEED
@@ -232,12 +285,19 @@ class UnderstandingMode:
             self.pan_x -= rx * STICK_SPEED * dt
             self.pan_y -= ry * STICK_SPEED * dt
 
-        if keys[pygame.K_ESCAPE]:
-            self.close()
-
     # ---- helpers -------------------------------------------------------------
-    def _focused_layer(self):
-        return int(round(max(0.0, min(float(len(LAYER_KEYS) - 1), self.focus))))
+    def _nearest_ahead_index(self):
+        """Index of the sign the player is currently READING: the smallest s_i
+        with s_i >= 0 (nearest sign still ahead-or-at the car)."""
+        best_i = None
+        best_s = None
+        for i in range(len(LAYER_KEYS)):
+            s = i - self.focus
+            if s >= -1e-6:
+                if best_s is None or s < best_s:
+                    best_s = s
+                    best_i = i
+        return best_i
 
     def _draw_dims(self, rungs, fill, win_w):
         _, sw, sh = rungs[0]
@@ -265,70 +325,68 @@ class UnderstandingMode:
             return
         w, h = win_size
 
-        # opaque background replaces the world
         glDisable(GL_TEXTURE_2D)
         glColor4f(*BG_COLOR, 1.0)
         glBegin(GL_QUADS)
         glVertex2f(0, 0); glVertex2f(w, 0); glVertex2f(w, h); glVertex2f(0, h)
         glEnd()
 
-        focused_i = self._focused_layer()
+        nearest_i = self._nearest_ahead_index()
 
-        # clamp pan to the focused sign's drawn size (bounded roam)
-        foc_rungs = self._panels.get(LAYER_KEYS[focused_i])
         foc_draw_w = foc_draw_h = 0.0
-        if foc_rungs:
-            fill0 = self._size_fill(abs(self.focus - focused_i))
-            foc_draw_w, foc_draw_h = self._draw_dims(foc_rungs, fill0, w)
-            self._clamp_pan(foc_draw_w, foc_draw_h, w, h)
+        foc_rungs = None
+        if nearest_i is not None:
+            foc_rungs = self._panels.get(LAYER_KEYS[nearest_i])
+            if foc_rungs:
+                s_near = max(0.0, nearest_i - self.focus)
+                fill0 = self._size_fill(s_near)
+                foc_draw_w, foc_draw_h = self._draw_dims(foc_rungs, fill0, w)
+                self._clamp_pan(foc_draw_w, foc_draw_h, w, h)
 
-        # FAR -> NEAR. Before each sign, lay the fog that sits in FRONT of its depth,
-        # then draw the GLASS sign at full alpha (its own baked transparency only).
-        order = sorted(range(len(LAYER_KEYS)),
-                       key=lambda i: abs(self.focus - i), reverse=True)
-        for i in order:
-            d = abs(self.focus - i)
+        visible = []
+        for i in range(len(LAYER_KEYS)):
+            s = i - self.focus
+            if s >= -1e-6:
+                visible.append((i, max(0.0, s)))
+
+        visible.sort(key=lambda t: t[1], reverse=True)
+        for i, s in visible:
             key = LAYER_KEYS[i]
             rungs = self._panels.get(key)
 
-            # fog veil for this depth (more fog = farther)
-            self._fog_quad(w, h, self._fog_strength(d))
+            self._fog_quad(w, h, self._fog_strength(s))
 
-            blur = self._blur_px(d)
+            blur = self._blur_px(s)
             if key == "engineer" and not self.ctrl:
-                blur = max(blur, 7.0)               # engineer locked-soft until CTRL
+                blur = max(blur, 7.0)
                 title_suffix = "   [hold CTRL]"
             else:
                 title_suffix = ""
             title = LAYER_TITLE[key] + title_suffix
 
             if rungs:
-                fill = self._size_fill(d)
+                fill = self._size_fill(s)
                 draw_w, draw_h = self._draw_dims(rungs, fill, w)
-                pan_x = self.pan_x if i == focused_i else 0.0
-                pan_y = self.pan_y if i == focused_i else 0.0
+                pan_x = self.pan_x if i == nearest_i else 0.0
+                pan_y = self.pan_y if i == nearest_i else 0.0
                 px = (w - draw_w) * 0.5 + pan_x
                 py = (h - draw_h) * 0.5 + pan_y
                 scale = draw_w / rungs[0][1]
                 tex = rungs[self._rung_for_blur(blur)]
-                # GLASS: full alpha; transparency is the PNG's own baked alpha
                 render.draw_texture(tex, px, py, scale=scale, alpha=1.0)
-                # title floats just above the sign, scaled with it
-                tfs = max(10, int(BASE_FONTSIZE * min(1.0, fill / CLOSEUP_FILL)))
+                tfs = max(10, int(BASE_FONTSIZE * min(1.0, fill / (FITS_FILL + PAN_OVERFILL))))
                 render.render_rich(cache, title, px + 8, py + draw_h + 6,
                                    color=(0.55, 0.70, 0.95), fontsize=tfs)
             else:
-                # FALLBACK: PNG missing -> old live-text behavior (never crashes)
-                fs = max(10, int(BASE_FONTSIZE * min(1.0, self._size_fill(d) / CLOSEUP_FILL)))
+                fs = max(10, int(BASE_FONTSIZE * min(1.0, self._size_fill(s) / (FITS_FILL + PAN_OVERFILL))))
                 text = self.robot.explain.get(key, "")
-                px = w * 0.08 + (self.pan_x if i == focused_i else 0.0)
-                py = h * 0.18 + (self.pan_y if i == focused_i else 0.0)
+                px = w * 0.08 + (self.pan_x if i == nearest_i else 0.0)
+                py = h * 0.18 + (self.pan_y if i == nearest_i else 0.0)
                 render.render_rich(cache, title, px, py - fs * 1.6,
                                    color=(0.55, 0.70, 0.95), fontsize=int(fs * 0.8))
                 render.render_rich(cache, text, px, py,
                                    color=(0.95, 0.96, 0.98), fontsize=fs, blur=blur)
 
-        # ---- minimap: only when the focused sign overflows the screen ---------
         if foc_rungs and (foc_draw_w > w or foc_draw_h > h):
             self._draw_minimap(foc_rungs, foc_draw_w, foc_draw_h, w, h)
 
@@ -340,7 +398,6 @@ class UnderstandingMode:
         mx = w - mm_w - MINIMAP_MARGIN
         my = h - mm_h - MINIMAP_MARGIN
 
-        # backing panel
         glDisable(GL_TEXTURE_2D)
         glColor4f(*MINIMAP_BG)
         glBegin(GL_QUADS)
@@ -348,17 +405,14 @@ class UnderstandingMode:
         glVertex2f(mx + mm_w + 4, my + mm_h + 4); glVertex2f(mx - 4, my + mm_h + 4)
         glEnd()
 
-        # thumbnail = blurriest rung (cheap, already loaded)
         render.draw_texture(rungs[-1], mx, my, scale=mm_w / sw, alpha=0.95)
 
-        # view rectangle: fraction of the full sign currently on screen.
         sign_left = (w - draw_w) * 0.5 + self.pan_x
         sign_top  = (h - draw_h) * 0.5 + self.pan_y
         vx = (-sign_left) / draw_w
         vy = (-sign_top) / draw_h
         vw = w / draw_w
         vh = h / draw_h
-        # clamp the rectangle fully inside [0,1]^2 of the thumbnail
         x0 = max(0.0, min(1.0, vx))
         y0 = max(0.0, min(1.0, vy))
         x1 = max(0.0, min(1.0, vx + vw))
