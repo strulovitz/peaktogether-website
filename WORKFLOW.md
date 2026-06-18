@@ -315,8 +315,38 @@ v7: clean nearest-centerline (walls only, child deleted robot code)
 - Defeat plaques: baked PNG with white frame ✅
 - Basel corridor: 7 robots playable ✅
 - Joystick: brief dispatched 🟡
-- Understanding Mode conveyor belt: 🔴
+- Understanding Mode conveyor belt: ✅ FIXED (Brief #U1, signed-distance model)
 - Multiple corridors: 🔴
+- Unified corridor-creation prompt: 🔴 (first attempt failed, redo tomorrow)
+
+## 🔴 SESSION LOG — June 18, 2026 EVENING
+
+### Brief #U1 — Understanding Mode conveyor belt — FIXED ✅
+Child Opus replaced abs() distance with signed distance in understanding.py.
+Signs behind the car are now CULLED (never drawn). Entry starts at ENTRY_FOCUS=-1.0
+so sign 0 fits on screen. ESC inert in U-mode. Exit by reversing 1/3 past sign 0.
+Bug found: instant-close on entry (ENTRY_FOCUS already past EXIT_THRESHOLD). Fixed
+by measuring exit from ENTRY_FOCUS, not zero: EXIT_FOCUS = -1.333.
+Nir confirmed: "it works perfectly."
+
+### New baker-format corridor — euler_even_zeta.txt
+Corridor-writer child produced baker file for "Euler's Sine Product and the Even
+Zeta Values" (2nd Basel corridor). 7 robots, 6 stains. Saved to
+corridors/euler_even_zeta.txt. BUT: only the baker file was produced. The old
+CORRIDOR_WRITER_PROMPT.md only produces baker files, not game files.
+
+### Unified corridor prompt — ATTEMPTED AND FAILED
+Parent #8 wrote CORRIDOR_CREATOR_PROMPT.md (a "forever" general prompt for all 3
+files). When Nir pasted it to a fresh child, the child did NOT ask what topic to
+work on — it immediately started writing content. Root cause: no fresh-chat gate,
+and ~400 lines of inline Basel reference files confused the child. Prompt deleted.
+
+### Tomorrow's #1 priority:
+Write a new parent prompt asking a fresh Opus to create a PROPER unified
+corridor-authoring prompt with: (1) fresh-chat gate that asks for the topic first,
+(2) produces all 3 files (baker + game + manifest), (3) reference files NOT inline
+(child asks for them), (4) general/forever, not Basel-specific.
+See: PARENT_ESTATE/SESSION_2026-06-18_EVENING.md for full details.
 
 ## 🔴 SESSION LOG — June 13, 2026
 
