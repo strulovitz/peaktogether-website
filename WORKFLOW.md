@@ -380,6 +380,9 @@ Jacob_Bernoulli, Isaac_Newton, Albert_Girard, Pietro_Mengoli (Nir will get them)
 ### Nir's multi-corridor strategy
 Build corridors one at a time. Test each individually. After several real corridors work, THEN add multi-corridor engine support. Test with real Basel corridors, NOT the toy Maxwell placeholder.
 
+### 🔴 REPO REORGANIZATION PLANNED (the big one)
+Nir's vision: Peak Together is a MULTI-GAME platform (Descent, Doom, Pinball, fighting games, RTS, etc.). Right now ALL Descent files are dumped in the repo root mixed with website files. Plan: move ALL Descent files (all .py, corridors/, levels/, baked/, deu/, BIBLE/, PARENT_ESTATE/, portraits, WORKFLOW.md, docs/) into a `descent/` folder. Website files (index.html, style.css, components.js, header.html, footer.html, images/, mathematics/) stay in root. Future games get their own top-level folders (doom/, pinball/, etc.). Parent #10 prompt covers both this AND the per-corridor baked image fix.
+
 ### ON RESTART — Read these in order:
 1. **WORKFLOW.md** (this file)
 2. `PARENT_ESTATE/SESSION_2026-06-20_NIGHT.md` — tonight's full session context ⭐

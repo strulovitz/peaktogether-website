@@ -1,4 +1,4 @@
-# DESCENT QED — PARENT PROMPT #10: GENERIC FOLDER ARCHITECTURE FOR BAKED IMAGES (June 20, 2026)
+# PEAK TOGETHER — PARENT PROMPT #10: REPO REORGANIZATION + GENERIC FOLDER ARCHITECTURE (June 20, 2026)
 
 > **TO:** Claude Opus 4.8 — You are PARENT #10 / ARCHITECT.
 > **FROM:** Nir (strulovitz) — the human, the boss.
@@ -8,15 +8,148 @@
 
 ---
 
-## 0. YOUR ROLE
+## 0. YOUR ROLE — TWO MISSIONS
 
-You are the 10th PARENT / ARCHITECT of DESCENT QED. You write tightly-scoped BRIEFS for child Opus instances and design decisions for the builder (DeepSeek). The game engine is feature-complete for single-corridor play. Your job today is to design the FOLDER and BAKING architecture so that the game scales cleanly to MANY subjects, MANY corridors per subject, without any code or folder structure being tied to "Basel" or any other specific topic.
+You are the 10th PARENT / ARCHITECT. You write tightly-scoped BRIEFS for child Opus instances and design decisions for the builder (DeepSeek). You have TWO missions today, both about making the project scale cleanly to the future:
+
+**MISSION A — REPO REORGANIZATION (the bigger one):** Peak Together is NOT just Descent QED. It is a platform for MANY games — Descent, Doom, Pinball, fighting games, RTS games, and more — each teaching science through a different classic game genre. Right now, ALL of Descent QED's files (Python modules, corridors, levels, baked images, portraits, BIBLE, docs) are dumped directly in the repo root, mixed in with the WEBSITE files (index.html, style.css, etc.). This must be separated: all Descent files move into a `descent/` folder, so that when Nir starts building a Doom clone tomorrow, it gets its own `doom/` folder and nothing gets mixed up.
+
+**MISSION B — PER-CORRIDOR BAKED IMAGE ISOLATION:** Within Descent, the baked-image architecture uses one shared folder per level. Two corridors with the same robot numbers collide. Each corridor needs its own isolated baked-image folder. This is a SUBSET of Mission A — it's the internal folder structure within `descent/`.
 
 ---
 
 ## 1. THE GAME IN ONE PARAGRAPH
 
 DESCENT QED is a 6-DOF flying game where a couple descends through corridors, each corridor being one mathematical proof/approach broken into robots. Each robot is a puzzle ("whose idea is this?"). The player fires mathematician-missiles to destroy robots. Wrong shots produce gentle teaching messages ("fizzles"). Understanding Mode lets the player read colored LaTeX explanations (baked as transparent PNGs). The engine is mathematics-blind — it never interprets math, only matches opaque IDs.
+
+---
+
+## 1b. THE BIGGER PICTURE — PEAK TOGETHER IS A MULTI-GAME PLATFORM
+
+Peak Together's website (peaktogether.me) is the HOME of many games, not just Descent QED. Nir's roadmap includes:
+- **Descent QED** — 6-DOF corridor flight (Descent 1995 tribute) — CURRENTLY BEING BUILT
+- **A Doom/Quake clone** — graph-theory mazes
+- **A fighting game** — trigonometry and integrals as moves/countermoves
+- **A pinball game** — motion curves along function graphs
+- **An RTS game** — biochemistry, building molecules
+- **A roller coaster game** — topology
+- And about 8 more game concepts
+
+Each game is a separate codebase with its own engine, its own data files, its own assets. They all live under the same GitHub repo and the same website. The website's job is to present them all; each game's job is to be self-contained.
+
+**RIGHT NOW, the repo is a mess.** Descent QED's Python files, corridor data, baked images, portrait PNGs, development docs (BIBLE/, PARENT_ESTATE/), and everything else are ALL dumped directly in the repo root alongside the website's HTML, CSS, and JS files. When Nir starts building the Doom clone, there would be nowhere clean to put it — Doom's Python files would mix with Descent's Python files in the same root folder.
+
+**THE FIX:** All of Descent QED's files must move into a single `descent/` folder. The website files stay in the root. Future games get their own top-level folders (`doom/`, `pinball/`, etc.). Each game folder is fully self-contained.
+
+### COMPLETE FILE INVENTORY — WHAT GOES WHERE
+
+**STAYS IN REPO ROOT (website files):**
+
+| File/Folder | What it is |
+|-------------|-----------|
+| `index.html` | Homepage |
+| `style.css` | Global stylesheet |
+| `components.js` | Header/footer loader + mobile menu |
+| `header.html` | Shared header with navigation menu (CAREFUL — this took a long time to build, do not break it) |
+| `footer.html` | Shared footer |
+| `images/` | Website images (hero, doom screenshots, etc.) |
+| `mathematics/` | Website content pages (Riemann Hypothesis paths, etc.) — includes the downloadable harmonic_series_mathematics.py demo |
+| `.htaccess` | Dreamhost Apache config |
+| `.gitignore` | Git ignore rules |
+| `WEBSITE_REDESIGN_FUSION_2026-06-18.md` | Website design document |
+
+**MOVES INTO `descent/` (Descent QED game — ALL of these):**
+
+| File/Folder | What it is |
+|-------------|-----------|
+| `app.py` | Game entry point |
+| `combat.py` | Combat system |
+| `cockpit.py` | Cockpit HUD |
+| `containment.py` | Ship wall/robot collision |
+| `content_parser.py` | Corridor file parser |
+| `corridor_builder.py` | Corridor geometry builder |
+| `game_state.py` | Game state (win condition) |
+| `gamepad.py` | Gamepad/joystick support |
+| `hostages.py` | Hostage figures |
+| `hub_builder.py` | Hub/atrium builder |
+| `level_parser.py` | Level manifest parser |
+| `palette.py` | Color ledger |
+| `render.py` | Core GL rendering |
+| `robots.py` | Robot class |
+| `understanding.py` | Understanding Mode |
+| `show_colors.py` | Color utility |
+| `cockpit_demo.py` | Demo script |
+| `corridor_demo.py` | Demo script |
+| `game_state_demo.py` | Demo script |
+| `hostages_demo.py` | Demo script |
+| `hub_demo.py` | Demo script |
+| `level_demo.py` | Demo script |
+| `render_demo.py` | Demo script |
+| `robots_demo.py` | Demo script |
+| `test_palette.py` | Test script |
+| `test_parser.py` | Test script |
+| `test_quat.py` | Test script |
+| `corridors/` | Corridor data files (baker + game format) |
+| `levels/` | Level manifests and baker files |
+| `baked/` | Baked PNG images for Understanding Mode |
+| `deu/` | Baker tool (bake_corridor.py) |
+| `descent_qed/` | Old early code (keep or clean up) |
+| `BIBLE/` | Bible files (Claude Fable's original code) |
+| `PARENT_ESTATE/` | Development architecture docs, briefs, sessions |
+| `WORKFLOW.md` | Game development workflow/memory |
+| `docs/` | Game documentation (CONTENT_AUTHORING.md, etc.) |
+| `*-hologram.png` | 14 portrait images for robots |
+
+**AFTER THE MOVE, the repo looks like:**
+
+```
+peaktogether-website/               # GitHub repo root = website root
+├── index.html                      # Website
+├── style.css                       # Website
+├── components.js                   # Website
+├── header.html                     # Website (DO NOT BREAK THE MENU)
+├── footer.html                     # Website
+├── images/                         # Website images
+├── mathematics/                    # Website content pages
+├── .htaccess                       # Dreamhost config
+├── .gitignore                      # Git ignore
+├── WEBSITE_REDESIGN_FUSION_2026-06-18.md
+│
+├── descent/                        # GAME 1: Descent QED
+│   ├── app.py                      # Entry point: python descent/app.py
+│   ├── combat.py, cockpit.py, ...  # All engine modules
+│   ├── corridors/                  # Corridor data files
+│   ├── levels/                     # Level manifests + baker files
+│   ├── baked/                      # Per-corridor baked images (see Mission B)
+│   ├── deu/                        # Baker tool
+│   ├── BIBLE/                      # Bible
+│   ├── PARENT_ESTATE/              # Dev docs
+│   ├── WORKFLOW.md                 # Dev workflow
+│   ├── docs/                       # Game docs
+│   └── *-hologram.png              # Portrait images
+│
+├── doom/                           # GAME 2: (future) Doom/Quake clone
+│   └── ...
+│
+├── pinball/                        # GAME 3: (future) Pinball
+│   └── ...
+│
+└── (more games in the future)
+```
+
+### CRITICAL CONCERNS FOR THE MOVE:
+
+1. **All Python imports within Descent are relative to each other** (e.g. `import render`, `from content_parser import ...`). After moving into `descent/`, these imports must still work. The game is run as `python descent/app.py` or from inside the `descent/` folder as `python app.py`. Design the move so imports don't break.
+
+2. **The baker tool (`deu/bake_corridor.py`) references paths** relative to the repo root or to its own location. These paths must be updated or the baker must be told to run from inside `descent/`.
+
+3. **The level manifests reference corridors and baked folders with relative paths** (e.g. `../corridors/basel.txt`, `../baked/basel`). After the move, these paths change because everything is inside `descent/`.
+
+4. **The website's download links** on the mathematics pages point to the Python demo file. These links must still work after the move (or be updated).
+
+5. **`git mv` must be used** for the move so git preserves file history. Do NOT delete-and-recreate.
+
+6. **The header.html menu system took a VERY long time to get working.** Do NOT touch it. The website files are not moving — only the game files move.
 
 ---
 
@@ -113,9 +246,25 @@ corridors:
 
 ---
 
-## 7. YOUR MISSION
+## 7. YOUR MISSION — TWO PARTS
 
-Design the generic folder architecture and produce a BRIEF for the builder (DeepSeek) to implement. Specifically:
+### MISSION A: REPO REORGANIZATION (game/website separation)
+
+Design and produce a BRIEF for the builder to move ALL Descent QED files into a `descent/` folder, leaving only website files in the repo root. The complete file inventory is in section 1b above. Specifically:
+
+1. **Design the exact `git mv` sequence** — list every file and folder that moves, in order, so the builder can execute it without guessing. Use `git mv` to preserve history.
+
+2. **Design the import/path fix strategy** — after moving all .py files into `descent/`, every `import render`, `from content_parser import ...`, etc. must still work. Design how the game is launched (e.g. `cd descent && python app.py` or `python -m descent.app` or another approach). The simplest solution that doesn't require rewriting every import is best.
+
+3. **Design the relative-path updates** — the level manifests reference corridors and baked folders with relative paths. The baker references paths relative to the repo root. All these paths must be updated after the move. List every file that needs path updates.
+
+4. **Handle the website download links** — the `mathematics/` pages have download links to the Python demo. These may need updating if the demo file moves.
+
+5. **Do NOT touch website files** — index.html, style.css, components.js, header.html, footer.html, images/ must NOT be modified. The header menu system took a long time to build; it must not be broken.
+
+### MISSION B: PER-CORRIDOR BAKED IMAGE ISOLATION (within descent/)
+
+Design the per-corridor baked image architecture WITHIN the new `descent/` folder. Specifically:
 
 1. **Design a folder convention** for baked images that is generic, per-corridor, and collision-free. Think about: where do baked images for corridor 1 of the Basel Problem go? Where do baked images for corridor 3 of the Riemann Hypothesis go? Where do baked images for corridor 1 of Protein Folding go? The naming should be obvious, self-documenting, and never collide.
 
@@ -125,27 +274,29 @@ Design the generic folder architecture and produce a BRIEF for the builder (Deep
 
 4. **Design the baker workflow change** — when the builder bakes a new corridor, what `--out` path does it use? How does this connect to the manifest?
 
-5. **Write a brief for the builder** — a tightly-scoped set of edits (numbered, one per edit) that DeepSeek can apply to make this work. Cover: level_parser.py changes, manifest format changes, and the folder convention. Do NOT touch understanding.py or corridor_builder.py or robots.py unless absolutely necessary — they already use `robot.understanding_dir` correctly.
+5. **Write the builder brief** — a tightly-scoped set of edits (numbered, one per edit) covering BOTH missions. The builder will execute these in order. Cover: the git mv sequence, import/path fixes, level_parser.py changes, manifest format changes, and the folder convention. Do NOT touch understanding.py or corridor_builder.py or robots.py unless absolutely necessary — they already use `robot.understanding_dir` correctly.
 
-6. **Update guidance for the CORRIDOR CREATOR PROMPT** — what does the child need to know about the new folder/manifest format? (Nir will update the FOREVER prompt accordingly.)
+6. **Update guidance for the CORRIDOR CREATOR PROMPT** — what does the child need to know about the new folder structure and manifest format? (Nir will update the FOREVER prompt accordingly.)
 
 ---
 
 ## 8. WHAT TO PRODUCE
 
 One document containing:
-1. The folder convention (with examples for Basel, Riemann, and a hypothetical third subject)
-2. The new manifest format (with example)
-3. The numbered edits for the builder (level_parser.py, etc.)
-4. The updated bake command for the builder
-5. A note on what the CORRIDOR CREATOR PROMPT needs to change
+1. The repo reorganization plan: every file/folder that moves, the git mv commands, and the post-move structure
+2. The import/path fix strategy for the Python modules
+3. The per-corridor baked image folder convention (with examples for Basel, Riemann, and a hypothetical third subject)
+4. The new manifest format (with example)
+5. The numbered edits for the builder (git mv sequence + level_parser.py + manifest format + path updates)
+6. The updated bake command for the builder (using new paths inside descent/)
+7. A note on what the CORRIDOR CREATOR PROMPT needs to change
 
 ---
 
 ## 9. HOW TO BEGIN
 
 Your first message to Nir should:
-1. Confirm you understand the problem (per-corridor baked image isolation, generic folder structure).
+1. Confirm you understand BOTH missions (repo reorganization + per-corridor baked image isolation).
 2. Ask Nir to paste `level_parser.py` so you can see exactly how the manifest is parsed today.
 3. Ask any clarifying questions before writing the design.
 

@@ -54,15 +54,19 @@ Already have: Leonhard_Euler, al-Khwarizmi, Karl_Weierstrass (from corridor 1).
 
 ## WHAT TO DO TOMORROW — IN ORDER
 
-1. **Dispatch Parent Prompt #10** to a fresh Opus: `PARENT_ESTATE/PARENT_PROMPT_10_GENERIC_FOLDERS_2026-06-20_NIGHT.md`. The parent will design the generic folder architecture. Apply the builder's brief.
+1. **Dispatch Parent Prompt #10** to a fresh Opus: `PARENT_ESTATE/PARENT_PROMPT_10_GENERIC_FOLDERS_2026-06-20_NIGHT.md`. The parent has TWO missions:
+   - **Mission A (THE BIG ONE):** Move ALL Descent QED files into a `descent/` folder, leaving only website files in the repo root. This is so future games (Doom, Pinball, etc.) each get their own top-level folder and nothing gets mixed up. The parent designs the git mv sequence, import fixes, and path updates.
+   - **Mission B:** Per-corridor baked image isolation within `descent/`. Each corridor gets its own baked-image folder so images never collide.
 
-2. **Bake corridor 2** once the folder architecture is fixed (so images go to the right per-corridor folder, not colliding with corridor 1).
+2. **Apply the parent's brief** — execute the git mv moves, fix imports/paths, update manifest format.
 
-3. **Test corridor 2** individually (point the game at it, play through all 7 robots, verify fizzles, Understanding Mode images).
+3. **Bake corridor 2** once the folder architecture is fixed.
 
-4. **Get portraits** for the 4 new mathematicians.
+4. **Test corridor 2** individually (point the game at it, play through all 7 robots).
 
-5. **Continue making more corridors** for Basel (one at a time, each tested individually).
+5. **Get portraits** for the 4 new mathematicians.
+
+6. **Continue making more corridors** for Basel (one at a time, each tested individually).
 
 ---
 
@@ -74,7 +78,8 @@ Already have: Leonhard_Euler, al-Khwarizmi, Karl_Weierstrass (from corridor 1).
 | CORRIDOR_CREATOR_PROMPT_FOREVER | v2 (274 lines), saved |
 | Basel corridor 1 (Euler's approach) | PLAYABLE, baked, tested |
 | Basel corridor 2 (Even Zeta generalization) | 3 FILES SAVED, NOT YET BAKED (collision issue) |
-| Generic folder architecture | PARENT PROMPT WRITTEN, not yet dispatched |
+| Generic folder architecture | PARENT PROMPT WRITTEN (expanded: repo reorg + per-corridor baked), not yet dispatched |
+| **REPO REORGANIZATION** | **PLANNED: move ALL Descent files into descent/ folder, leave website in root. For future multi-game support (Doom, Pinball, etc.)** |
 | 4 new portraits | Nir will get them tomorrow |
 | Multi-corridor engine support | NOT YET — build corridors first, test individually, then do multi-corridor later |
 | Git | Clean, pushed |
