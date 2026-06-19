@@ -1,0 +1,59 @@
+TITLE { The Basel Problem -- Every Even Zeta by Symmetric Polynomials }
+
+STAINS {
+  roots         = 0.85 0.12 0.12   # red — the zeros n*pi; the sole source of every pi^{2k}; feeds zeta_value AND power_product
+  power_sums    = 0.12 0.30 0.85   # blue — sums of k-th powers p_k (finite H_n^{(2k)} -> zeta(2k)); feeds zeta_value AND elem_sym
+  newton_bridge = 0.90 0.78 0.10   # yellow — Newton's identities, the dictionary between the two symmetric families; shared ingredient of power_product AND elem_sym
+  power_product = 0.90 0.45 0.10   # orange — the convolution fusing the root-product with the zeta-series = red(roots) + yellow(Newton bridge)
+  elem_sym      = 0.15 0.55 0.20   # green — elementary symmetric polynomials e_k = the product's coefficients = yellow(Newton bridge) + blue(power sums)
+  zeta_value    = 0.55 0.10 0.65   # purple — the answer zeta(2k) = rational * pi^{2k}: born where red(roots) meets blue(power sums)
+}
+
+ROBOT: 1
+  NAME { Leonhard Euler }
+  EXPLAIN_MATHEMATICIAN { Euler's sine argument is not limited to $\zeta(2)$. The same machinery yields a closed form for every $\stain{zeta_value}{$\zeta(2n)=\sum_{k=1}^{\infty}\frac{1}{k^{2n}}$}$, and in each case the value is a $\stain{zeta_value}{\emph{rational multiple of} $\pi^{2n}$}$, e.g. $\stain{zeta_value}{$\zeta(4)=\tfrac{\pi^4}{90}$}$ and $\stain{zeta_value}{$\zeta(6)=\tfrac{\pi^6}{945}$}$. }
+  EXPLAIN_PHYSICIST { Having found $\zeta(2)=\pi^2/6$, ask: what about $\sum 1/k^4$ or $\sum 1/k^6$? Euler's method generalizes. Every even case comes out as $\stain{zeta_value}{$\pi^{2n}$ times a clean fraction}$: $\stain{zeta_value}{$\zeta(4)=\tfrac{\pi^4}{90}$}$, $\stain{zeta_value}{$\zeta(6)=\tfrac{\pi^6}{945}$}$, and so on forever. }
+  EXPLAIN_BIOLOGIST { The same trick that summed $1+\tfrac14+\tfrac19+\cdots$ also sums the fourth powers $1+\tfrac1{16}+\tfrac1{81}+\cdots$, the sixth powers, and beyond. Each answer is just $\pi$ raised to an even power, times a tidy fraction: $\stain{zeta_value}{$\pi^4/90$}$, $\stain{zeta_value}{$\pi^6/945$}$. }
+  EXPLAIN_ENGINEER { One method, infinitely many results. Instead of solving each sum $\sum 1/k^{2n}$ from scratch, Euler's generalization hands you all of them as $\stain{zeta_value}{rational $\times\ \pi^{2n}$}$. Because $\pi$ is transcendental, this also proves each $\zeta(2n)$ is irrational. }
+
+ROBOT: 2
+  NAME { Jacob Bernoulli }
+  EXPLAIN_MATHEMATICIAN { The closed form is packaged by the Bernoulli numbers $B_{2n}$: $\displaystyle \stain{zeta_value}{$\zeta(2n)=\frac{(-1)^{n-1}(2\pi)^{2n}}{2\,(2n)!}\,\thread{t1}{B_{2n}}$}$. The single rational sequence $\thread{t1}{B_2=\tfrac16,\ B_4=-\tfrac1{30},\ B_6=\tfrac1{42}}$ supplies the fraction in front of every $\pi^{2n}$. }
+  EXPLAIN_PHYSICIST { What fixes the fraction in $\zeta(2n)=(\text{frac})\cdot\pi^{2n}$? A famous list of rationals, the Bernoulli numbers $\thread{t1}{B_{2n}}$. Plugging $\thread{t1}{B_2=\tfrac16}$ gives $\zeta(2)=\tfrac{\pi^2}{6}$; $\thread{t1}{B_4=-\tfrac1{30}}$ gives $\stain{zeta_value}{$\zeta(4)=\tfrac{\pi^4}{90}$}$. }
+  EXPLAIN_BIOLOGIST { There is a special list of fractions $\thread{t1}{\tfrac16,\ -\tfrac1{30},\ \tfrac1{42},\dots}$ discovered while adding up powers of whole numbers. These Bernoulli numbers are exactly the fractions that sit in front of $\pi$ in each answer, so the list \emph{is} the recipe for all the $\stain{zeta_value}{even zeta values}$. }
+  EXPLAIN_ENGINEER { The Bernoulli numbers $\thread{t1}{B_{2n}}$ are a precomputed table: once you have them, $\stain{zeta_value}{$\zeta(2n)=\frac{(-1)^{n-1}(2\pi)^{2n}}{2(2n)!}B_{2n}$}$ is a plug-in formula. The same table also drives Faulhaber's sum-of-powers formula and the Euler--Maclaurin formula. }
+
+ROBOT: 3
+  NAME { Isaac Newton }
+  EXPLAIN_MATHEMATICIAN { Newton's identities are the dictionary linking the two symmetric families: $\displaystyle \stain{newton_bridge}{$(-1)^k k\,\thread{t1}{e_k}=\sum_{j=1}^{k}(-1)^{k-j-1}\thread{t2}{p_j}\,\thread{t1}{e_{k-j}}$}$. They convert the $\thread{t2}{\text{power sums}}$ of the roots into the $\thread{t1}{\text{elementary symmetric}}$ coefficients, and back. }
+  EXPLAIN_PHYSICIST { Two ways to summarize a set of numbers: add their powers (power sums) or take products of subsets (elementary symmetric). $\stain{newton_bridge}{Newton's identities}$ translate between them, e.g. $2\thread{t1}{e_2}=\thread{t2}{p_1}^2-\thread{t2}{p_2}$. That translation is exactly what turns the sine product into the $\zeta$ sum. }
+  EXPLAIN_BIOLOGIST { Suppose you describe a bag of numbers two ways: by adding up their squares, cubes, etc., or by multiplying them in little groups. $\stain{newton_bridge}{Newton's rule}$ is the exchange rate between those two descriptions, letting you swap one for the other whenever it's convenient. }
+  EXPLAIN_ENGINEER { Newton's identities are a recurrence: feed in $\thread{t2}{\text{power sums }p_j}$ and crank out the $\thread{t1}{\text{coefficients }e_k}$ (or reverse). They compute a matrix's characteristic polynomial from traces of its powers, and here they $\stain{newton_bridge}{bridge}$ the root-product to the zeta-series. }
+
+ROBOT: 4
+  NAME { al-Khwarizmi }
+  EXPLAIN_MATHEMATICIAN { The $\stain{elem_sym}{elementary symmetric polynomials}$ $\stain{elem_sym}{$e_k=\!\!\sum_{i_1<\cdots<i_k}\!\! x_{i_1}\cdots x_{i_k}$}$ are precisely the coefficients of $\prod(x-x_i)$. With $x_i=-\pi^2/i^2$, the coefficient $\thread{t1}{[x^{2k}]}\tfrac{S_n(x)}{x}$ is the $k$-th such $\stain{elem_sym}{$e_k$}$ of the inverse-square roots. }
+  EXPLAIN_PHYSICIST { Multiply out $\prod(1-x^2/(i^2\pi^2))$ and the coefficient of each power is an $\stain{elem_sym}{elementary symmetric polynomial}$: $e_1=\sum x_i$, $e_2=\sum_{i<j}x_ix_j$, and so on. These $\thread{t1}{\text{coefficients}}$ are what the matching procedure reads off the product. }
+  EXPLAIN_BIOLOGIST { When you expand a big product of brackets, the answer's coefficients are sums of products of the bracket-roots, taken one at a time, two at a time, three at a time. Those bundles are the $\stain{elem_sym}{elementary symmetric polynomials}$ — the natural $\thread{t1}{\text{building-block coefficients}}$. }
+  EXPLAIN_ENGINEER { $\stain{elem_sym}{Elementary symmetric polynomials}$ are the coefficients you get when you know a system's roots and want its polynomial: $e_1$ is the trace, $e_n$ the determinant. Here each $\thread{t1}{[x^{2k}]}$ coefficient of the sine product is one such $\stain{elem_sym}{$e_k$}$ in the roots $-\pi^2/i^2$. }
+
+ROBOT: 5
+  NAME { Albert Girard }
+  EXPLAIN_MATHEMATICIAN { The other symmetric family is the $\stain{power_sums}{power sums}$ $\stain{power_sums}{$p_k=\sum_i x_i^{k}$}$. For the roots $i^{-2}$, the finite power sum is $\stain{power_sums}{$H_n^{(2k)}=\sum_{i=1}^n i^{-2k}$}$, and $\thread{t1}{H_n^{(2k)}\to\zeta(2k)}$ as $n\to\infty$. Girard published these power-sum relations in 1629, before Newton. }
+  EXPLAIN_PHYSICIST { The companion to elementary symmetric is the $\stain{power_sums}{power sum}$: just add the $k$-th powers, $\stain{power_sums}{$p_k=\sum x_i^k$}$. Take the roots to be $1/i^2$; then the finite sum $\thread{t1}{H_n^{(2k)}=\sum_{i\le n} 1/i^{2k}}$ grows into exactly $\thread{t1}{\zeta(2k)}$. The zeta values ARE limiting power sums. }
+  EXPLAIN_BIOLOGIST { The simplest way to summarize numbers: raise each to a power and add. That's a $\stain{power_sums}{power sum}$. If the numbers are $1,\tfrac14,\tfrac19,\dots$, the $\stain{power_sums}{power sum}$ of their $k$-th powers, continued forever, is precisely the zeta value $\thread{t1}{\zeta(2k)}$ we are chasing. }
+  EXPLAIN_ENGINEER { $\stain{power_sums}{Power sums}$ $p_k=\sum x_i^k$ are trivial to accumulate — one running total per power. The link is direct: the partial $\stain{power_sums}{$H_n^{(2k)}$}$ is just a truncated zeta, and $\thread{t1}{H_n^{(2k)}\to\zeta(2k)}$. Newton's identities then trade these for the product's coefficients. }
+
+ROBOT: 6
+  NAME { Karl Weierstrass }
+  EXPLAIN_MATHEMATICIAN { The partial product $\displaystyle \stain{power_product}{$\frac{S_n(x)}{x}=\prod_{k=1}^{n}\thread{t1}{\Big(1-\frac{x^2}{k^2\pi^2}\Big)}$}$ has roots $\stain{roots}{$\pm k\pi,\ k\le n$}$. Its $[x^{2k}]$ coefficient, an elementary symmetric function of $\stain{roots}{$-\pi^{-2}k^{-2}$}$, converges to the full $\sin x/x$ factorization Weierstrass made rigorous. }
+  EXPLAIN_PHYSICIST { Build the sine product one factor at a time: $\stain{power_product}{$\frac{S_n(x)}{x}=\prod_{k\le n}\thread{t1}{(1-\frac{x^2}{k^2\pi^2})}$}$. Each factor kills one $\stain{roots}{root $k\pi$}$. As $n\to\infty$ this becomes Euler's full product — the convergence is exactly what Weierstrass certified. }
+  EXPLAIN_BIOLOGIST { Take the sine product but stop after $n$ factors — a finite, honest polynomial $\stain{power_product}{$S_n(x)/x$}$ whose $\thread{t1}{\text{brackets}}$ each correspond to one $\stain{roots}{zero of sine}$. Letting $n$ grow recovers the infinite product, once you've checked it's allowed to. }
+  EXPLAIN_ENGINEER { $\stain{power_product}{$S_n(x)/x$}$ is the truncated transfer function: $n$ factors, $n$ $\stain{roots}{zeros at $k\pi$}$. Reading its $\thread{t1}{[x^{2k}]}$ coefficient and taking $n\to\infty$ is the practical computation; Weierstrass's theorem guarantees the limit is the true infinite product. }
+
+ROBOT: 7
+  NAME { Pietro Mengoli }
+  EXPLAIN_MATHEMATICIAN { Convolving the two pictures gives the closed identity $\displaystyle \stain{power_product}{$\frac{\pi^{2k}}{2}\frac{(2k)(-1)^k}{(2k+1)!}=-[x^{2k}]\frac{\sin\pi x}{\pi x}\times\!\sum_{i\ge1}\zeta(2i)x^i$}$, which rearranges to $\stain{zeta_value}{$\zeta(2k)=[x^{2k}]\thread{t1}{\tfrac12(1-\pi x\cot\pi x)}$}$. Mengoli first posed Basel in 1650. }
+  EXPLAIN_PHYSICIST { Multiplying the root-product against the zeta-series and matching powers yields one tidy generating function: $\stain{zeta_value}{$\zeta(2k)=[x^{2k}]\thread{t1}{\tfrac12\big(1-\pi x\cot\pi x\big)}$}$. Every even zeta value is now just a coefficient of the $\thread{t1}{\text{cotangent}}$ — the sum Mengoli first asked about in 1650. }
+  EXPLAIN_BIOLOGIST { All the even-zeta answers can be read off a single function: write out $\stain{zeta_value}{$\tfrac12(1-\pi x\,\thread{t1}{\cot}\,\pi x)$}$ as a power series, and the number in front of $x^{2k}$ is $\zeta(2k)$. One $\thread{t1}{\text{cotangent}}$ formula holds the whole infinite family Mengoli started hunting in 1650. }
+  EXPLAIN_ENGINEER { The payoff is a generating function: expand $\stain{zeta_value}{$\tfrac12(1-\pi x\cot\pi x)$}$ once and harvest $\zeta(2),\zeta(4),\zeta(6),\dots$ as successive coefficients — no per-case work. The $\thread{t1}{\cot}$ here is the same one whose Taylor series carries the Bernoulli numbers, closing the loop Mengoli opened. }
