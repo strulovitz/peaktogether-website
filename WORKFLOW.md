@@ -347,12 +347,44 @@ corridor-authoring prompt with: (1) fresh-chat gate that asks for the topic firs
 (2) produces all 3 files (baker + game + manifest), (3) reference files NOT inline
 (child asks for them), (4) general/forever, not Basel-specific.
 
+## 🔴 SESSION LOG — June 20, 2026 NIGHT
+
+### Website redesign committed & pushed
+Fusion AI redesign (from June 18) was sitting uncommitted. Committed: new index.html, style.css, 7 new images. Commit aa6a785.
+
+### CORRIDOR_CREATOR_PROMPT_FOREVER — unified corridor prompt
+Parent #9 produced a "forever" prompt for creating ALL 3 corridor files (baker + game + manifest).
+- v1: 54 lines — too compressed, Nir rejected
+- v2: 274 lines — proper detail, accepted
+- Saved as `PARENT_ESTATE/CORRIDOR_CREATOR_PROMPT_FOREVER.md`
+- Old baker-only prompt `CORRIDOR_WRITER_PROMPT.md` UNTOUCHED
+
+### Basel corridor 2 — "Every Even Zeta by Symmetric Polynomials"
+Child Opus (using FOREVER prompt) produced all 3 files:
+- Baker: `levels/mathematics/basel_problem/basel_general.txt` (7 robots)
+- Game: `corridors/basel_general.txt` (42 fizzles)
+- Manifest: `levels/basel.txt` updated with 2nd corridor
+- Commit 4f4a321
+- Old baker-only file renamed to `corridors/OLD_euler_even_zeta.txt`
+
+### 🔴 CRITICAL: Baked image collision
+Both corridors have robots 1-7. Manifest has ONE `baked:` path. Images named by robot number only. Baking corridor 2 would OVERWRITE corridor 1's images. Architecture needs per-corridor baked directories.
+
+### Parent Prompt #10 — Generic Folder Architecture
+Written: `PARENT_ESTATE/PARENT_PROMPT_10_GENERIC_FOLDERS_2026-06-20_NIGHT.md`
+NOT YET DISPATCHED. Mission: design generic per-corridor baked image folders, manifest format change, level_parser.py changes.
+
+### 4 new portraits needed
+Jacob_Bernoulli, Isaac_Newton, Albert_Girard, Pietro_Mengoli (Nir will get them).
+
+### Nir's multi-corridor strategy
+Build corridors one at a time. Test each individually. After several real corridors work, THEN add multi-corridor engine support. Test with real Basel corridors, NOT the toy Maxwell placeholder.
+
 ### ON RESTART — Read these in order:
 1. **WORKFLOW.md** (this file)
-2. `PARENT_ESTATE/PARENT_PROMPT_9_EVENING_2026-06-18.md` — Parent #9 handoff (PASTE TO FRESH OPUS)
-3. `PARENT_ESTATE/SESSION_2026-06-18_EVENING.md` — today's full session context
+2. `PARENT_ESTATE/SESSION_2026-06-20_NIGHT.md` — tonight's full session context ⭐
+3. `PARENT_ESTATE/PARENT_PROMPT_10_GENERIC_FOLDERS_2026-06-20_NIGHT.md` — Parent #10 (PASTE TO FRESH OPUS)
 4. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
-5. `WEBSITE_REDESIGN_FUSION_2026-06-18.md` — Website redesign plan from Fusion AI (START IMPLEMENTING TOMORROW)
 
 ## 🔴 SESSION LOG — June 13, 2026
 
