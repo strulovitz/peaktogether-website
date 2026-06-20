@@ -94,6 +94,14 @@ A THREAD links a compact expression to its expanded form on ONE page (one robot,
 - You do NOT pick thread colors. The baker auto-assigns legible, distinct hues. You only mark which spans belong together with `\thread{id}{ ...content... }`.
 - A span may carry BOTH systems at once: `\stain{roots}{ $\thread{t1}{ x = n\pi }$ }`. The stain says "where you are in the big story"; the thread says "what-opens-into-what right here." Keep them independent. Note: `\thread{}{}` just changes the foreground color — it inherits whatever text/math mode surrounds it. Since this thread is inside a stain (which is text mode via `\colorbox`), the `$...$` is needed for math. If a thread is already inside a `$...$` block (not inside a stain), no extra `$...$` is needed: `$\thread{t1}{x^2}$` works.
 
+CRITICAL LaTeX RULE FOR THREADS — THE DOUBLE-DOLLAR TRAP: Because `\thread{}{}` inherits the surrounding mode, you must use `$...$` in exactly ONE place — either around the thread OR inside it, NEVER BOTH. Using both creates 4 dollar signs, which crashes pdflatex with "Missing } inserted."
+
+CORRECT: `$\thread{t1}{p_2}$` — the `$...$` is AROUND the thread; the thread inherits math mode; `p_2` renders as math. This is the preferred pattern when the thread is in running math.
+CORRECT: `\thread{t1}{$p_2$}` — the `$...$` is INSIDE the thread; use this when the thread is in running text (not already inside `$...$`).
+CORRECT: `\stain{roots}{$\thread{t1}{p_2}$}` — inside a stain, `$...$` goes inside the stain, and the thread inherits that math mode. No inner `$` inside the thread.
+WRONG:   `$\thread{t1}{$p_2$}$` — FOUR dollar signs! The inner `$` exits math mode, `p_2` is typeset as text, then re-enters math mode. pdflatex crashes. NEVER DO THIS.
+WRONG:   `$\stain{roots}{$\thread{t1}{$p_2$}$}$` — same trap, nested deeper. The thread already inherits math mode from the stain's inner `$...$`; adding another `$` inside the thread creates the same 4-dollar crash.
+
 THREADS EXIST ONLY IN THE BAKER FILE. There is no thread equivalent in the game file (threads live only inside the baked images). When you strip the baker explanations into the game file, you simply delete the \thread wrappers and keep their inner content.
 
 ## YOUR WORKING ORDER — FOLLOW THESE TEN STEPS EXACTLY
