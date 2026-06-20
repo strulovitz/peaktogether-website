@@ -19,7 +19,7 @@ THE PLAYER CANNOT LOSE. There is no penalty, no score, no buzzer. A wrong shot p
 
 ## THE THREE FILES YOU PRODUCE (and why there are three)
 
-1) THE BAKER FILE — full LaTeX. Nir's offline builder compiles this file with real pdflatex into colored, transparent images that power the "reading" screen (called Understanding Mode, reached by pressing U near a robot). Because it uses REAL LaTeX with amsmath, amssymb, and xcolor, you may freely use \frac, \displaystyle, \tfrac, \dfrac, \binom, \partial, \nabla, \sum, \int, \mathbf, \emph, and similar. This file is where the rich, layered math explanations live, with the color markup (\stain and \thread) described below.
+1) THE BAKER FILE — full LaTeX. Nir's offline builder compiles this file with real pdflatex into colored, transparent images that power the "reading" screen (called Understanding Mode, reached by pressing U near a robot). Because it uses REAL LaTeX with amsmath, amssymb, and xcolor, you may freely use \frac, \displaystyle, \tfrac, \dfrac, \binom, \partial, \nabla, \sum, \int, \mathbf, \emph, \text{}, and similar. This file is where the rich, layered math explanations live, with the color markup (\stain and \thread) described below.
 
 2) THE GAME FILE — limited mathtext. The game engine loads this at runtime to place the robots, run combat, show each robot's hologram and floating math, and serve the wrong-shot fizzle messages. It is rendered by matplotlib's built-in mathtext, which supports only a SMALL subset of LaTeX. In this file you must NEVER use \tfrac, \dfrac, \displaystyle, \emph, \binom, or any package-level command. You may use \frac, \sum, \prod, \pi, \infty, \cdot, \times, \pm, \zeta, \sin, \cos, \tan, \log, \approx, \leq, \geq, \left( \right), superscripts with ^, subscripts with _, integers, and simple fractions like \frac{1}{n^2}. The deep, complicated math is already handled by the baked images, so the math in THIS file should stay short and simple.
 
@@ -76,14 +76,23 @@ green = 0.15 0.55 0.20
 
 Name each stain KEY by its MEANING, never by its color — for example roots, summation, sine_function, coupling, final_answer. After each key, put a comment naming the color and explaining why that concept earns it. In the explanation text, wrap a colored span as `\stain{key}{ ...the content... }`. Every key you wrap with must be declared in the STAINS block, or the bake fails.
 
+CRITICAL LaTeX RULE FOR STAINS: The baker expands `\stain{key}{content}` into `\colorbox{key}{\color{descentprose}content}`. The `\colorbox` command puts its content in TEXT MODE. This means any math inside a stain (like `\pi`, `\sum`, `\frac{}{}`, `\zeta`, subscripts, superscripts) MUST be wrapped in its own `$...$` INSIDE the stain braces. Without the inner `$...$`, pdflatex will fail with "Missing $ inserted."
+
+CORRECT: `\stain{roots}{$x = n\pi$}` — the `$...$` is INSIDE the stain, providing math mode inside the colorbox.
+CORRECT: `\stain{roots}{\text{the roots}}` — plain text, no math, no `$...$` needed.
+CORRECT: `$\displaystyle \stain{answer}{$\zeta(2)=\sum_{n=1}^{\infty}\frac{1}{n^2}$}$` — outer `$` for inline display, inner `$...$` for math inside the colorbox.
+WRONG:   `$\stain{roots}{\pi^2/k^2}$` — the outer `$` does NOT help because `\colorbox` creates a new text-mode box; the inner content needs its own `$...$`.
+
+Use `\text{}` (from amsmath) to insert prose words inside math-mode stains: `\stain{roots}{$\text{roots } \pm\pi, \pm2\pi, \dots$}`.
+
 ### SYSTEM 2 — THREADS (foreground letters; MICRO; page-local)
 
-A THREAD links a compact expression to its expanded form on ONE page (one robot, one layer). Example: line 1 shows `\thread{t1}{(a+b)^2}` and line 2 shows `\thread{t1}{a^2 + 2ab + b^2}`; because both wear thread t1, the player's eye connects the compact form to its expansion.
+A THREAD links a compact expression to its expanded form on ONE page (one robot, one layer). Example: line 1 shows `$\thread{t1}{(a+b)^2}$` and line 2 shows `$\thread{t1}{a^2 + 2ab + b^2}$`; because both wear thread t1, the player's eye connects the compact form to its expansion.
 
 - Threads are PAGE-LOCAL: they reset for every robot and every layer, and they do NOT travel between robots. A "t1" in robot 2's physicist layer has nothing to do with a "t1" in robot 5.
 - Invent distinct ids freely on each page: t1, t2, t3, or meaningful short names. Nested parentheses must get DIFFERENT thread ids — never wrap everything in one thread. Same id means same color; different ids mean different colors.
 - You do NOT pick thread colors. The baker auto-assigns legible, distinct hues. You only mark which spans belong together with `\thread{id}{ ...content... }`.
-- A span may carry BOTH systems at once: `\stain{roots}{ \thread{t1}{ x = n\pi } }`. The stain says "where you are in the big story"; the thread says "what-opens-into-what right here." Keep them independent.
+- A span may carry BOTH systems at once: `\stain{roots}{ $\thread{t1}{ x = n\pi }$ }`. The stain says "where you are in the big story"; the thread says "what-opens-into-what right here." Keep them independent. Note: `\thread{}{}` just changes the foreground color — it inherits whatever text/math mode surrounds it. Since this thread is inside a stain (which is text mode via `\colorbox`), the `$...$` is needed for math. If a thread is already inside a `$...$` block (not inside a stain), no extra `$...$` is needed: `$\thread{t1}{x^2}$` works.
 
 THREADS EXIST ONLY IN THE BAKER FILE. There is no thread equivalent in the game file (threads live only inside the baked images). When you strip the baker explanations into the game file, you simply delete the \thread wrappers and keep their inner content.
 
@@ -162,6 +171,8 @@ ROBOT: 2
 
 Use full LaTeX freely here. BALANCE EVERY BRACE — one stray { or } breaks that image entirely. Keep each layer short. Do not use packages beyond amsmath, amssymb, xcolor. If you are unsure a command exists, use a simpler one; a failed formula produces no image.
 
+NOTE ON BAKER NAMEs: In the baker file, the robot NAME can be the mathematician's name OR the technique/concept name (e.g. "Coefficient Matching", "The Product Over Roots") — it is only used for the bake report. In the GAME file, the NAME MUST be the person's name in plain ASCII (it resolves to portrait filenames). The two files MAY have different NAMEs for the same robot number.
+
 ### STEP 6 — WRITE THE GAME FILE BY STRIPPING THE BAKER, PLUS THE GAME-ONLY FIELDS
 
 Match the pasted Basel game file's exact structure. First the corridor header:
@@ -172,7 +183,7 @@ FLAVOR { }
 LEDGER {
 PRIMARY roots = red
 PRIMARY series = blue
-PRIMARY = yellow
+PRIMARY some_concept = yellow
 BLEND final_answer = roots + series
 ...
 }
@@ -188,14 +199,14 @@ Then write each ROBOT block. Copy the EXACT field set and brace style from the p
 ROBOT: 1
 NAME { Leonhard Euler } # the person; resolves to the portrait file (see STEP 9)
 BRIEFING_HINT { States the result } # one line; the TECHNIQUE/STEP NAME lives here
-PROBLEM { Find ∑n21​ } # the puzzle this robot poses; simple mathtext only
+PROBLEM { Find $\sum \frac{1}{n^2}$ } # the puzzle this robot poses; simple mathtext only
 EXPLAIN_MATHEMATICIAN { } # see stripping steps below
 EXPLAIN_PHYSICIST { }
 EXPLAIN_BIOLOGIST { }
 EXPLAIN_ENGINEER { }        # stripping step 8: ADD [[ $expr$ | value ]] arcs here
 SEGMENTS { ... } # short colored math fragments; see SEGMENTS below
 EYE { roots } # a LEDGER key, or the word NEUTRAL
-VULNERABLE_TO { euler } # the mathematician id; SINGLE-VALUE line, lowercase ascii
+VULNERABLE_TO { euler } # the mathematician id; block with ONE value, lowercase ascii
 
 
 THE STRIPPING PROCESS — turn each baker EXPLAIN into its game EXPLAIN by applying these transformations in order:
@@ -227,23 +238,23 @@ A BAD fizzle: "Wrong! Try again." (Scolds, teaches nothing.) Also bad: "That's n
 
 ### STEP 8 — WRITE THE MANIFEST
 
-Match the pasted Basel manifest exactly (its key spellings, its order, its relative-path style). It names the SUBJECT, points to the baked-image folder, and lists the corridor file(s). General shape:
+Match the pasted Basel manifest exactly (its key spellings, its order, its relative-path style). It names the SUBJECT and lists the corridor file(s), each with its own baked-image folder. General shape:
 
-title:
-baked: ../baked/
+title: <subject name>
 corridors:
-../corridors/.txt
+  ../corridors/<corridor>.txt    baked=../baked/<subject>/<approach>
 
+
+Each corridor line has a `baked=` annotation pointing to that corridor's own baked-image folder. This ensures corridors never collide — each has isolated baked images.
 
 TWO CASES:
 - NEW TOPIC (this subject has no manifest yet): write a brand-new manifest as above, with your single corridor listed.
 - ADDING TO AN EXISTING TOPIC (another proof/approach for a subject that already has a manifest): first ask Nir to paste that subject's CURRENT manifest. Then hand back the COMPLETE updated manifest — the whole file, not a fragment — with your new corridor added as one more indented line under corridors:
 
 title: The Basel Problem
-baked: ../baked/basel
 corridors:
-../corridors/basel.txt
-../corridors/<your_new_corridor>.txt
+  ../corridors/basel.txt                       baked=../baked/basel/euler_approach
+  ../corridors/<your_new_corridor>.txt         baked=../baked/basel/<your_approach_name>
 
 
 Always return the entire manifest so Nir never has to hand-edit anything.
@@ -252,7 +263,7 @@ Always return the entire manifest so Nir never has to hand-edit anything.
 
 The game loads each robot's portrait by taking the robot's NAME, replacing spaces with underscores, and appending `-hologram.png`. So every NAME must be plain ASCII with NO accents (write "Viete", not "Viète"; "Francois", not "François") and must produce a sensible filename. Emit a clearly titled PORTRAITS NEEDED block listing, for every robot, the exact NAME you used and the exact filename it resolves to:
 
-PORTRAITS NEEDED (place each at the repo root; filename must match EXACTLY, including case):
+PORTRAITS NEEDED (place each in the descent/ folder alongside the other hologram PNGs; filename must match EXACTLY, including case):
 
     Leonhard Euler -> Leonhard_Euler-hologram.png
     al-Khwarizmi -> al-Khwarizmi-hologram.png
@@ -269,17 +280,17 @@ Present, in this order:
 4. The COMPLETE manifest in its own code block.
 5. The PORTRAITS NEEDED block.
 6. A fizzle-coverage confirmation: R × (R − 1) total, with a per-robot line showing each robot's wrong-ids are all covered.
-7. The exact build instruction, stated plainly: "Nir, give these three files to your builder. To bake the reading-screen images, the builder runs, from the repo root: `python deu/bake_corridor.py <path-to-your-baker-file>` — then commits all three files plus the new baked images, points the game's manifest at your corridor, and tests it."
+7. The exact build instruction, stated plainly: "Nir, give these three files to your builder. To bake the reading-screen images, the builder runs from the descent/ folder: `python deu/bake_corridor.py <path-to-your-baker-file> --out <baked-output-folder>` (example: `python deu/bake_corridor.py levels/mathematics/basel_problem/basel_euler_proof.txt --out baked/basel/euler_approach`) — then commits all three files plus the new baked images, points the game's manifest at your corridor, and tests it."
 
 YOUR JOB ENDS WHEN YOU DELIVER THESE TEXT FILES. You never bake, run, or test — Nir and his builder do that.
 
 ## THE SEGMENTS SYSTEM (read before STEP 6)
 
-SEGMENTS is a block of SHORT colored math fragments that float on the robot's body in the 3D world. Each fragment is a short mathtext-legal expression paired with a LEDGER color key, written one per line as `{ $expr$ | colorkey }` (follow the pasted Basel game file for the exact punctuation). Use the word NEUTRAL as the key for connective symbols like `=` that carry no special meaning. Keep every expression short and choose fragments that echo THIS robot's step. Example for a robot about the zeros of sine:
+SEGMENTS is a block of SHORT colored math fragments that float on the robot's body in the 3D world. Each fragment is a short mathtext-legal expression paired with a LEDGER color key, written one per line as `$expr$ | colorkey` (NO extra braces per line — the only braces are the SEGMENTS block's own `{ }`). Use the word NEUTRAL as the key for connective symbols like `=` that carry no special meaning. Keep every expression short and choose fragments that echo THIS robot's step. Example for a robot about the zeros of sine:
 
 SEGMENTS {
-sinx=0 | sine_function
-x=nπ | roots
+  $\sin x = 0$ | sine_function
+  $x = n\pi$   | roots
 }
 
 
