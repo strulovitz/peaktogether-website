@@ -11,45 +11,21 @@ DPI     : 600
 
 --- ROBOT 2: Isaac Newton ---
   [ OK  ] mathematician -> robot2_mathematician.png
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.17 ...\text{power sums}}$ ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] physicist     -> robot2_physicist.png
   [ OK  ] biologist     -> robot2_biologist.png
-  [FAIL ] engineer     
-          ! Missing } inserted.
-          l.17 ...he symmetric pieces ${\color{thread__t2} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] engineer      -> robot2_engineer.png
 
 --- ROBOT 3: Albert Girard ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.17 ...ary symmetric ones, ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.17 ...}$ directly. Expand ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot3_mathematician.png
+  [ OK  ] physicist     -> robot3_physicist.png
   [ OK  ] biologist     -> robot3_biologist.png
-  [FAIL ] engineer     
-          ! Missing } inserted.
-          l.17 ...st power sum is $p_1={\color{thread__t2} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] engineer      -> robot3_engineer.png
 
 --- ROBOT 4: Edward Waring ---
-  [FAIL ] mathematician
-          ! Missing } inserted.
-          l.16 ... the coefficient of ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
-  [FAIL ] physicist    
-          ! Missing } inserted.
-          l.16 ...f term by term: the ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] mathematician -> robot4_mathematician.png
+  [ OK  ] physicist     -> robot4_physicist.png
   [ OK  ] biologist     -> robot4_biologist.png
-  [FAIL ] engineer     
-          ! Missing } inserted.
-          l.16 ...x^2}{3^2})$}}$, the ${\color{thread__t1} $
-          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] engineer      -> robot4_engineer.png
 
 --- ROBOT 5: Jacob Bernoulli ---
   [ OK  ] mathematician -> robot5_mathematician.png
@@ -69,4 +45,4 @@ DPI     : 600
   [ OK  ] biologist     -> robot7_biologist.png
   [ OK  ] engineer      -> robot7_engineer.png
 
-DONE. 8 failure(s).
+DONE. 0 failure(s).
