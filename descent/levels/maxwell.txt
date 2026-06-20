@@ -1,0 +1,3 @@
+title: Maxwell Test Corridor
+corridors:
+  ../corridors/maxwell_old.txt    baked=../baked/maxwell/test

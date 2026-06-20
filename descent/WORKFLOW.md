@@ -18,19 +18,37 @@
 ## Project Structure
 
 ```
-peaktogether-website/          # GitHub repo (also Dreamhost live site)
-├── BIBLE/
-│   ├── math_flyer.py          # BIBLE -- DO NOT TOUCH without Claude Fable's OK
-│   └── BUGS_FOUND_<name>_<timestamp>.md  # Bug reports for Claude Fable
-├── mathematics/
-│   └── Riemann_hypothesis/
-│       └── Analytical_Path_Classical_and_Modern_Analytic_Number_Theory/
-│           ├── index.html            # The webpage (edit THIS for demo callout)
-│           └── harmonic_series_mathematics.py  # The working Python demo
-├── index.html                  # Main homepage
-├── style.css                   # Global styles (demo callout CSS is here)
-├── WORKFLOW.md                 # THIS FILE -- read me first every session!
-└── .gitignore                  # Ignores __pycache__, *.pyc, *.log
+peaktogether-website/                # GitHub repo root = website root
+├── index.html                       # Website homepage
+├── style.css                        # Website global styles
+├── components.js                    # Website header/footer loader
+├── header.html                      # Shared navigation menu (DO NOT BREAK)
+├── footer.html                      # Shared footer
+├── images/                          # Website images
+├── mathematics/                     # Website content pages (Riemann Hypothesis, etc.)
+├── .htaccess                        # Dreamhost Apache config
+├── .gitignore                       # Ignores __pycache__, *.pyc, *.log
+├── WEBSITE_REDESIGN_FUSION_2026-06-18.md
+│
+└── descent/                         # GAME 1: Descent QED (ALL game files here)
+    ├── app.py                       # Game entry point: cd descent && python app.py
+    ├── combat.py, cockpit.py, ...   # All engine modules (16 .py files)
+    ├── *_demo.py                    # Demo scripts (8 files)
+    ├── test_*.py                    # Test scripts (3 files)
+    ├── *-hologram.png               # Portrait images (14 files)
+    ├── corridors/                   # Corridor game files
+    ├── levels/                      # Level manifests + baker source files
+    │   ├── basel.txt                # Manifest with per-corridor baked= paths
+    │   └── mathematics/             # Baker source files by subject
+    ├── baked/                       # Per-corridor baked PNG images
+    │   ├── basel/euler_approach/    # Corridor 1 baked images
+    │   ├── basel/euler_generalizations/  # Corridor 2 baked images (NOT YET BAKED)
+    │   └── maxwell/test/            # Maxwell corridor baked images
+    ├── deu/                         # Baker tool (bake_corridor.py)
+    ├── BIBLE/                       # Bible files (Claude Fable's original code)
+    ├── PARENT_ESTATE/               # Development architecture docs, briefs, sessions
+    ├── WORKFLOW.md                  # THIS FILE — read me first every session!
+    └── docs/                        # Game documentation
 ```
 
 ## How to Prompt Claude Fable (for Nir's reference)
@@ -388,6 +406,80 @@ Nir's vision: Peak Together is a MULTI-GAME platform (Descent, Doom, Pinball, fi
 2. `PARENT_ESTATE/SESSION_2026-06-20_NIGHT.md` — tonight's full session context ⭐
 3. `PARENT_ESTATE/PARENT_PROMPT_10_GENERIC_FOLDERS_2026-06-20_NIGHT.md` — Parent #10 (PASTE TO FRESH OPUS)
 4. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
+
+## 🔴 SESSION LOG — June 21, 2026 MORNING (DeepSeek solo — Missions A + B 🏗️)
+
+### MISSION A COMPLETE — Repo Reorganization ✅
+
+ALL Descent QED files moved into `descent/` folder using `git mv` (preserves history). **ZERO code changes needed** — imports, manifest paths, portrait loading all work unchanged because everything moved together as a unit.
+
+**50 items moved:**
+- 16 Python modules (app.py, combat.py, cockpit.py, etc.)
+- 8 demo scripts (*_demo.py)
+- 3 test scripts (test_*.py)
+- 7 data folders (corridors/, levels/, baked/, deu/, descent_qed/, BIBLE/, docs/)
+- 14 portrait PNGs (*-hologram.png)
+- PARENT_ESTATE/ and WORKFLOW.md
+
+**Website files stayed in root:** index.html, style.css, components.js, header.html, footer.html, images/, mathematics/, .htaccess, .gitignore, WEBSITE_REDESIGN_FUSION_2026-06-18.md
+
+**New game launch command:** `cd descent && python app.py`
+
+### MISSION B COMPLETE — Per-Corridor Baked Image Isolation ✅
+
+Each corridor now has its own isolated baked-image subfolder. Images can NEVER collide.
+
+**New folder convention:**
+```
+descent/baked/<subject>/<corridor_slug>/robotN_layer.png
+```
+
+**Existing images moved:**
+- `baked/basel/*.png` → `baked/basel/euler_approach/`
+- `baked/maxwell/*.png` → `baked/maxwell/test/`
+
+**New manifest format (per-corridor `baked=` annotation):**
+```
+title: The Basel Problem
+corridors:
+  ../corridors/basel.txt            baked=../baked/basel/euler_approach
+  ../corridors/basel_general.txt    baked=../baked/basel/euler_generalizations
+```
+
+**Backward compatible:** old manifests with global `baked:` line still work (intro.txt). Per-corridor `baked=` overrides the global fallback.
+
+**level_parser.py changes:**
+- `_read_manifest` now detects `baked=<path>` on corridor lines
+- Returns per-corridor baked dirs alongside corridor paths
+- `load_level` uses per-corridor baked if available, falls back to global
+
+**Parser tested:** All 3 manifests (Basel, Maxwell, Intro) parse correctly with proper per-corridor baked paths.
+
+### Files modified
+| File | Change |
+|------|--------|
+| `descent/level_parser.py` | Per-corridor `baked=` parsing support |
+| `descent/levels/basel.txt` | Per-corridor baked paths (euler_approach, euler_generalizations) |
+| `descent/levels/maxwell.txt` | Per-corridor baked path (test) |
+| `AGENTS.md` | Updated paths to descent/PARENT_ESTATE/ and descent/WORKFLOW.md |
+| `descent/WORKFLOW.md` | Updated project structure + this session log |
+
+### Current state
+| Item | Status |
+|------|--------|
+| Repo reorganization (descent/ folder) | ✅ Complete |
+| Per-corridor baked image isolation | ✅ Complete |
+| Basel corridor 1 (Euler approach) | ✅ Playable, baked in euler_approach/ |
+| Basel corridor 2 (Euler generalizations) | 🟡 Files saved, NOT YET BAKED |
+| Parser tested | ✅ All 3 manifests load correctly |
+| 4 new portraits needed | ⏳ Nir |
+| Git | Pending commit |
+
+### Baker command for corridor 2 (when ready):
+```
+cd descent
+python deu/bake_corridor.py levels/mathematics/basel_problem/basel_general.txt --out baked/basel/euler_generalizations
+```
 
 ## 🔴 SESSION LOG — June 13, 2026
 

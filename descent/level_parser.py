@@ -87,12 +87,14 @@ _LEVEL_FILE_RE = re.compile(r".+\.txt$")
 # in one file, and lets the same corridor fixture belong to multiple levels.
 
 
-def _read_manifest(path: str) -> tuple[str, str, list[str]]:
-    """Parse a level manifest file into (title, baked_dir, [corridor_path, ...]).
+def _read_manifest(path: str) -> tuple[str, str, list[tuple[str, str]]]:
+    """Parse a level manifest file.
 
-    `baked_dir` is the OPTIONAL `baked:` folder (where Understanding Mode's
-    pre-baked LaTeX PNGs live), resolved against the manifest's directory.
-    "" when absent. Paths are returned already resolved.
+    Returns (title, global_baked_dir, [(corridor_path, per_corridor_baked), ...]).
+    global_baked_dir: the OPTIONAL global `baked:` folder ("" when absent).
+    per_corridor_baked: per-corridor `baked=...` annotation ("" when absent).
+    Per-corridor baked overrides the global fallback in load_level.
+    Paths are returned already resolved against the manifest's directory.
     Raises ParseError with file:line on any structural violation.
     """
     fname = os.path.basename(path)
@@ -106,7 +108,7 @@ def _read_manifest(path: str) -> tuple[str, str, list[str]]:
 
     title = None
     baked_dir = None          # Brief #A — optional baked-PNG folder
-    corridor_paths: list[str] = []
+    corridor_paths: list[tuple[str, str]] = []
     in_corridors = False
 
     for lineno, raw in enumerate(raw_lines, start=1):
@@ -154,12 +156,20 @@ def _read_manifest(path: str) -> tuple[str, str, list[str]]:
 
         # Any other non-blank, non-comment line:
         if in_corridors:
-            # Treat as a corridor path entry.
-            rel = stripped
+            baked_match = re.search(r'\s+baked=(\S+)', stripped)
+            if baked_match:
+                rel = stripped[:baked_match.start()].strip()
+                baked_rel = baked_match.group(1)
+                per_baked = baked_rel if os.path.isabs(baked_rel) else os.path.normpath(
+                    os.path.join(base_dir, baked_rel)
+                )
+            else:
+                rel = stripped
+                per_baked = ""
             resolved = rel if os.path.isabs(rel) else os.path.normpath(
                 os.path.join(base_dir, rel)
             )
-            corridor_paths.append(resolved)
+            corridor_paths.append((resolved, per_baked))
         else:
             raise ParseError(
                 f"{fname}:{lineno}: unexpected line before 'corridors:': {stripped!r}"
@@ -201,7 +211,7 @@ def load_level(path: str) -> Level:
 
     # Reject duplicates by resolved absolute path — distinctness is a hard rule.
     seen: set[str] = set()
-    for p in corridor_paths:
+    for p, _pb in corridor_paths:
         key = os.path.abspath(p)
         if key in seen:
             raise ParseError(
@@ -211,16 +221,16 @@ def load_level(path: str) -> Level:
         seen.add(key)
 
     corridors: list[CorridorData] = []
-    for p in corridor_paths:
+    for p, per_baked in corridor_paths:
         if not os.path.isfile(p):
             raise ParseError(
                 f"{manifest_name}: listed corridor fixture not found: {p!r}"
             )
-        # Delegate ALL single-corridor parsing to the existing layer.
         cd = parse_corridor(p)
-        cd.understanding_dir = baked_dir            # Brief #A
-        for r in cd.robots:                          # propagate to each RobotData
-            r.understanding_dir = baked_dir
+        effective_baked = per_baked if per_baked else baked_dir
+        cd.understanding_dir = effective_baked
+        for r in cd.robots:
+            r.understanding_dir = effective_baked
         corridors.append(cd)
 
     return Level(title=title, corridors=corridors)
