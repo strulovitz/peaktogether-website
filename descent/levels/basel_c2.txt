@@ -1,3 +1,3 @@
-title: Basel -- Euler Generalizations (Test -- OLD child, engineer without value arcs)
+title: Basel -- Symmetric-Polynomial Ascent (Test)
 corridors:
-  ../corridors/OLD_basel_general.txt    baked=../baked/basel/OLD_euler_generalizations
+  ../corridors/basel_symmetric.txt    baked=../baked/basel/symmetric_polys

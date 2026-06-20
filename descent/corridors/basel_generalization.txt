@@ -1,0 +1,270 @@
+# ===========================================================
+# The Basel Problem — Generalizing to All Even Zeta Values.
+# Seven sentinels, one per step in extending Euler's 1734 sine
+# trick to every even zeta value zeta(2n) = rational x pi^{2n}.
+# Robot 1 is nearest the doorway. Each yields to exactly ONE
+# mathematician id. Robot N maps 1:1 to baker step N.
+# LEDGER mirrors the baker STAINS: roots=red, power_sums=yellow,
+# trig_fn=blue; sym_machinery=red+yellow, generating_fn=yellow+blue,
+# even_zeta=red+blue.
+# ===========================================================
+CORRIDOR: 1
+TITLE { The Basel Problem -- Generalizing to All Even Zeta Values }
+FLAVOR { One sine trick, pushed to every even power, hands you zeta of 4, 6, 8 -- and a fraction times pi each time. }
+LEDGER {
+  PRIMARY roots         = red
+  PRIMARY power_sums    = yellow
+  PRIMARY trig_fn       = blue
+  BLEND   sym_machinery = roots + power_sums
+  BLEND   generating_fn = power_sums + trig_fn
+  BLEND   even_zeta      = roots + trig_fn
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in extending Euler's descent to ALL the even zeta values. Read each
+          robot's hologram, judge whose idea its mathematics belongs to, and fire
+          that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the generalization corridor. Ahead, one trick is about to spawn an entire family of constants. }
+EXIT_TEXT { The last sentinel falls and the whole tower zeta(2), zeta(4), zeta(6), ... stands revealed -- each a fraction times a power of pi. The hostages are free. You have flown the length of Euler's generalization. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the prize: Euler's sine trick does not stop at
+          Basel -- it gives every even zeta value. It yields to the man who first saw it. }
+PROBLEM { Reading higher coefficients of $\frac{\sin x}{x}$ gives $\zeta(4) = \frac{\pi^4}{90}$,
+          $\zeta(6) = \frac{\pi^6}{945}$, and so on. Who first extended the method? }
+EXPLAIN_MATHEMATICIAN { Euler's 1734 trick is not a one-off. Reading higher
+          coefficients of $\frac{\sin x}{x}$ yields every even zeta value:
+          $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, and in general
+          $\zeta(2n) = q_n \pi^{2n}$ for a rational $q_n$. }
+EXPLAIN_PHYSICIST { Basel solved $\zeta(2) = \frac{\pi^2}{6} \approx 1.6449$ by matching
+          the $x^2$ coefficient. Go further: the $x^4$ coefficient gives
+          $\zeta(4) = \frac{\pi^4}{90} \approx 1.0823$, the $x^6$ coefficient gives
+          $\zeta(6) = \frac{\pi^6}{945} \approx 1.0173$. Each is a fraction times $\pi^{2n}$. }
+EXPLAIN_BIOLOGIST { Euler found $1 + \frac{1}{4} + \frac{1}{9} + \cdots = \frac{\pi^2}{6}$.
+          The same machine, pushed harder, also sums the fourth powers, the sixth powers,
+          and on -- and every answer is a plain fraction times a power of $\pi$. }
+EXPLAIN_ENGINEER { One method, many constants. Matching coefficient by coefficient gives
+          [[ $\zeta(2)$ | 1.6449 ]] then [[ $\zeta(4)$ | 1.0823 ]] then
+          [[ $\zeta(6)$ | 1.0173 ]] -- endless sums collapsed into closed numbers. }
+SEGMENTS {
+  $\zeta(2n)$        | even_zeta
+  $=$                | NEUTRAL
+  $q_n \pi^{2n}$     | even_zeta
+}
+EYE { even_zeta }
+VULNERABLE_TO { euler }
+FIZZLE newton { Translating power sums into symmetric polynomials is a true gear further inside this proof, but here you are only asked WHO first pushed the sine trick to every even power -- name the man behind the original method. }
+FIZZLE girard { The elementary symmetric polynomials are real machinery used downstream, but this opening robot just states the headline family of results -- recall who first claimed them. }
+FIZZLE taylor { Packing the values into a generating function comes later, but no expansion is being built yet -- this sentinel names the prize, so name the man who first reached it. }
+FIZZLE mittag_leffler { The pole expansion of cotangent is a genuine engine deeper down, but this robot only announces the family of answers -- recall who first generalized the trick. }
+FIZZLE bernoulli { The Bernoulli numbers set the size of each value, but this first sentinel is the overall claim, not the formula -- name the man who first extended Basel to all even powers. }
+FIZZLE lindemann { The transcendence of pi is the closing consequence, but here you are simply asked who produced this whole family of zeta values -- name its discoverer. }
+
+ROBOT: 2
+NAME { Isaac Newton }
+BRIEFING_HINT { Newton's identities: the dictionary turning power sums into elementary
+          symmetric polynomials. This sentinel yields to the man who wrote that dictionary. }
+PROBLEM { To reach higher coefficients you must convert power sums $p_k$ into symmetric
+          polynomials $e_k$, e.g. $2e_2 = p_1^2 - p_2$. Whose identities do this? }
+EXPLAIN_MATHEMATICIAN { To reach the higher coefficients you must convert power sums into
+          elementary symmetric polynomials. Newton's identities do exactly this:
+          $k e_k = \sum_{i=1}^{k} (-1)^{i-1} e_{k-i} p_i$, e.g. $2e_2 = e_1 p_1 - p_2$,
+          $3e_3 = e_2 p_1 - e_1 p_2 + p_3$. }
+EXPLAIN_PHYSICIST { The product's coefficients are the $e_k$ (sums of products of roots);
+          the series knows the $p_k$ (sums of powers of roots = the zeta values). Newton's
+          bridge ties them: $p_1 = e_1$, $p_2 = e_1^2 - 2e_2$, $p_3 = e_1^3 - 3 e_1 e_2 + 3 e_3$.
+          So knowing the $p_k$ pins down the $e_k$ and vice-versa. }
+EXPLAIN_BIOLOGIST { There are two ways to summarize a set of numbers: add up their powers,
+          or add up their products. Newton found the exact dictionary translating one
+          summary into the other -- the gear that lets Euler's trick keep climbing. }
+EXPLAIN_ENGINEER { Newton's dictionary in numbers: with $p_1$ and $p_2$ in hand,
+          $2e_2 = p_1^2 - p_2$. If [[ $p_1$ | 3.000 ]] and [[ $p_2$ | 5.000 ]] then
+          [[ $e_2$ | 2.000 ]] -- power sums in, symmetric products out, no roots ever found. }
+SEGMENTS {
+  $2e_2$             | sym_machinery
+  $=$                | NEUTRAL
+  $p_1^2 - p_2$      | power_sums
+}
+EYE { sym_machinery }
+VULNERABLE_TO { newton }
+FIZZLE euler { Euler assembles the whole proof, but this robot is the specific dictionary between power sums and symmetric polynomials -- think of the man whose identities carry that name. }
+FIZZLE girard { The elementary symmetric polynomials are the OUTPUT of this dictionary; the robot is about the conversion rule itself -- recall whose identities express power sums through them. }
+FIZZLE taylor { A generating function packs the results later; here you face the recursion turning $p_k$ into $e_k$ -- name the man whose identities state it. }
+FIZZLE mittag_leffler { The pole expansion feeds the power sums in, but this sentinel is the algebra converting those sums into symmetric functions -- recall whose named identities do that. }
+FIZZLE bernoulli { Bernoulli numbers appear in the final formula, but this robot is the power-sum-to-symmetric conversion -- think of the man those identities are named for. }
+FIZZLE lindemann { Transcendence is the finale; this is the elementary identity linking $p_k$ and $e_k$ -- name its author. }
+
+ROBOT: 3
+NAME { Albert Girard }
+BRIEFING_HINT { Elementary symmetric polynomials: sums of products of the roots, the
+          coefficients of a polynomial. This sentinel yields to their early discoverer. }
+PROBLEM { The $e_k$ are sums of products of $k$ distinct roots, e.g.
+          $e_2 = \sum_{i<j} X_i X_j$. Who first studied these symmetric building blocks? }
+EXPLAIN_MATHEMATICIAN { The objects Newton manipulates are the elementary symmetric
+          polynomials $e_k = \sum_{i_1 < \cdots < i_k} X_{i_1} \cdots X_{i_k}$, the signed
+          coefficients in $\prod_j (\lambda - X_j) = \lambda^n - e_1 \lambda^{n-1} +
+          e_2 \lambda^{n-2} - \cdots$. Here the $X_j$ are the roots $-\pi^2/k^2$ of $\sin x / x$. }
+EXPLAIN_PHYSICIST { An $e_k$ is just add up every product of $k$ distinct roots:
+          $e_1 = X_1 + X_2 + \cdots$, $e_2 = \sum_{i<j} X_i X_j$,
+          $e_3 = \sum_{i<j<k} X_i X_j X_k$. These are precisely the coefficients you read
+          off the product expansion, with the roots plugged in. }
+EXPLAIN_BIOLOGIST { Take a handful of numbers. Add them all up -- the first symmetric sum.
+          Add every pairwise product -- the second. Every triple product -- the third. These
+          tidy sums of products are the blocks every symmetric quantity is built from. }
+EXPLAIN_ENGINEER { With three numbers [[ $X_1$ | 1.000 ]], [[ $X_2$ | 2.000 ]],
+          [[ $X_3$ | 3.000 ]]: the first symmetric sum is [[ $e_1$ | 6.000 ]], the second
+          [[ $e_2$ | 11.000 ]], the third [[ $e_3$ | 6.000 ]] -- and those are the
+          coefficients of $(\lambda - 1)(\lambda - 2)(\lambda - 3)$. }
+SEGMENTS {
+  $e_2$                  | sym_machinery
+  $=$                    | NEUTRAL
+  $\sum_{i<j} X_i X_j$   | roots
+}
+EYE { sym_machinery }
+VULNERABLE_TO { girard }
+FIZZLE euler { Euler uses these building blocks, but this robot honours the early figure who first studied the symmetric sums of products themselves -- not the one who applied them. }
+FIZZLE newton { Newton's identities CONVERT these objects; this robot is about the objects themselves -- the elementary symmetric polynomials -- recall who first described them. }
+FIZZLE taylor { The generating function comes later; here you meet the sums-of-products that ARE a polynomial's coefficients -- think of their early discoverer. }
+FIZZLE mittag_leffler { The pole expansion is a different engine; this sentinel is the elementary symmetric polynomial as coefficient-of-a-polynomial -- recall who first set these down. }
+FIZZLE bernoulli { Bernoulli numbers belong to the closing formula; this robot is the symmetric building blocks of the roots -- name the early algebraist who studied them. }
+FIZZLE lindemann { Transcendence is the finale; this is the humble sum-of-products coefficient -- name the man who first wrote the relations between roots and coefficients in this form. }
+
+ROBOT: 4
+NAME { Brook Taylor }
+BRIEFING_HINT { The generating function: one expansion whose even coefficients ARE the
+          zeta values. This sentinel yields to the namesake of that expansion. }
+PROBLEM { The even zeta values are the coefficients of $\frac{1}{2}(1 - \pi x \cot \pi x)$.
+          Whose expansion packs the whole sequence into one function? }
+EXPLAIN_MATHEMATICIAN { Packaging all coefficients at once gives a generating function:
+          $\zeta(2k) = [x^{2k}] \frac{1}{2}(1 - \pi x \cot(\pi x))$. The even zeta values
+          are literally the Taylor coefficients of $\frac{1}{2}(1 - \pi x \cot \pi x)$. }
+EXPLAIN_PHYSICIST { Instead of one coefficient at a time, expand a single function whose
+          every even coefficient is a zeta value: $\frac{1}{2}(1 - \pi x \cot \pi x)$, with
+          expansion $\zeta(2) x^2 + \zeta(4) x^4 + \zeta(6) x^6 + \cdots$. Read off the
+          $x^{2k}$ term to get $\zeta(2k)$. }
+EXPLAIN_BIOLOGIST { A generating function is one tidy formula carrying an entire list of
+          numbers as its coefficients. Taylor's expansion of the cotangent shape
+          $1 - \pi x \cot \pi x$ has the whole sequence $\zeta(2), \zeta(4), \zeta(6), \dots$
+          packed inside, one per even power of $x$. }
+EXPLAIN_ENGINEER { Expand once, harvest forever. The series of $\frac{1}{2}(1 - \pi x \cot \pi x)$
+          reads [[ $\zeta(2) x^2$ | 1.6449 ]] then [[ $\zeta(4) x^4$ | 1.0823 ]] then
+          [[ $\zeta(6) x^6$ | 1.0173 ]] -- the coefficient of $x^{2k}$ is exactly $\zeta(2k)$. }
+SEGMENTS {
+  $\zeta(2k)$                              | generating_fn
+  $=$                                      | NEUTRAL
+  $\frac{1}{2}(1 - \pi x \cot \pi x)$      | trig_fn
+}
+EYE { generating_fn }
+VULNERABLE_TO { taylor }
+FIZZLE euler { Euler ties it all together, but this robot is the specific power-series expansion that packs the zeta values -- think of the man whose name that expansion carries. }
+FIZZLE newton { Newton's identities feed the coefficients in; the robot itself is the act of expanding a function into a power series -- recall whose expansion turns a function into powers of x. }
+FIZZLE girard { The symmetric polynomials are upstream machinery; here a single function is expanded so its coefficients are the values -- name the namesake of that series. }
+FIZZLE mittag_leffler { The pole expansion EXPLAINS why cotangent works, but this sentinel is the Taylor expansion of it whose coefficients are zeta values -- recall whose series this is. }
+FIZZLE bernoulli { Bernoulli numbers are the coefficients' values, but this robot is the generating-function expansion itself -- think of the man whose power series this is. }
+FIZZLE lindemann { Transcendence comes at the very end; this robot is the humble power-series expansion of the cotangent function -- name the expansion's namesake. }
+
+ROBOT: 5
+NAME { Gosta Mittag-Leffler }
+BRIEFING_HINT { The pole expansion: cotangent rebuilt as one simple pole per integer,
+          releasing the zeta values. This sentinel yields to the master of such expansions. }
+PROBLEM { Cotangent splits as $\pi \cot \pi x = \frac{1}{x} + 2x \sum_{n} \frac{1}{x^2 - n^2}$,
+          one pole per integer. Whose theorem builds a function from its poles? }
+EXPLAIN_MATHEMATICIAN { Why does cotangent carry the zeta values? Because of its pole
+          (partial-fraction) expansion $\pi \cot \pi x = \frac{1}{x} + 2x \sum_{n=1}^{\infty}
+          \frac{1}{x^2 - n^2}$, a Mittag-Leffler expansion summing one simple pole per
+          integer root $n$. Expanding each term geometrically releases the $\zeta(2k)$. }
+EXPLAIN_PHYSICIST { Cotangent has a pole at every integer. Mittag-Leffler's theorem lets you
+          write it as a sum of those poles: $\pi \cot \pi x = \frac{1}{x} + 2x \sum_{n \geq 1}
+          \frac{1}{x^2 - n^2}$. Now expand $\frac{1}{x^2 - n^2} = -\frac{1}{n^2}(1 + \frac{x^2}{n^2}
+          + \cdots)$; collecting powers of $x$ produces $\sum 1/n^{2k} = \zeta(2k)$. }
+EXPLAIN_BIOLOGIST { Cotangent blows up at every whole number. A theorem says you may rebuild
+          such a function as a tidy sum, one simple piece for each place it blows up. Doing
+          that for cotangent and tidying the pieces makes the zeta values fall right out. }
+EXPLAIN_ENGINEER { One pole per integer, summed. From $\pi \cot \pi x = \frac{1}{x} + 2x
+          \sum_{n \geq 1} \frac{1}{x^2 - n^2}$, expanding gives a coefficient built from
+          [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] -- the pole sum literally manufactures the zeta values. }
+SEGMENTS {
+  $\pi \cot \pi x$                                   | trig_fn
+  $=$                                                | NEUTRAL
+  $\frac{1}{x} + 2x \sum \frac{1}{x^2 - n^2}$        | roots
+}
+EYE { trig_fn }
+VULNERABLE_TO { mittag_leffler }
+FIZZLE euler { Euler exploits the cotangent expansion, but this robot asks who PROVED you may build a function from its poles -- think of the namesake of the pole-expansion theorem. }
+FIZZLE newton { Newton's identities convert the resulting sums, but this sentinel is about decomposing cotangent into one pole per integer -- recall whose theorem licenses that. }
+FIZZLE girard { The symmetric polynomials act later on the harvested sums; here cotangent is split across its poles -- name the man whose theorem constructs functions from prescribed poles. }
+FIZZLE taylor { Taylor expands the FINISHED function; this robot is the prior step that splits cotangent into poles so the zeta sums appear -- recall the master of meromorphic pole expansions. }
+FIZZLE bernoulli { Bernoulli numbers label the final coefficients, but this robot is the partial-fraction expansion of cotangent -- name the mathematician whose theorem guarantees it. }
+FIZZLE lindemann { Transcendence is the closing act; this sentinel is the pole expansion of cotangent -- name the man famous for building meromorphic functions from their poles. }
+
+ROBOT: 6
+NAME { Jacob Bernoulli }
+BRIEFING_HINT { The Bernoulli numbers set the size of every even zeta value through the
+          closed formula. This sentinel yields to the man whose numbers these are. }
+PROBLEM { The closed form $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$ uses a
+          sequence $B_{2n} = \frac{1}{6}, -\frac{1}{30}, \dots$. Whose numbers are these? }
+EXPLAIN_MATHEMATICIAN { Matching cotangent's known Taylor coefficients, which carry the
+          Bernoulli numbers $B_{2n}$ (from $\frac{t}{e^t - 1} = \sum B_m \frac{t^m}{m!}$),
+          gives the closed form $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$. }
+EXPLAIN_PHYSICIST { The cotangent series has known coefficients built from the Bernoulli
+          numbers $B_{2n}$: $B_2 = \frac{1}{6}$, $B_4 = -\frac{1}{30}$, $B_6 = \frac{1}{42}$.
+          Equate them to the zeta coefficients and out drops
+          $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$. Check: $n = 1$ gives
+          $\frac{(2\pi)^2}{2 \cdot 2!} \cdot \frac{1}{6} = \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { Long before Euler, Bernoulli found a sequence of fractions
+          $\frac{1}{6}, -\frac{1}{30}, \frac{1}{42}, \dots$ hiding in formulas for adding up
+          powers. The very same fractions set the size of every even zeta value -- one neat
+          formula delivers all of them. }
+EXPLAIN_ENGINEER { Plug Bernoulli's fraction into the master formula. With
+          [[ $B_2$ | 0.1667 ]] and $n = 1$: $\zeta(2) = \frac{(2\pi)^2}{2 \cdot 2!} \cdot B_2 =$
+          [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. Using $B_4 = -\frac{1}{30}$ gives
+          [[ $\frac{\pi^4}{90}$ | 1.0823 ]]. One Bernoulli number per value. }
+SEGMENTS {
+  $\zeta(2n)$                                          | even_zeta
+  $=$                                                  | NEUTRAL
+  $\frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$       | power_sums
+}
+EYE { power_sums }
+VULNERABLE_TO { bernoulli }
+FIZZLE euler { Euler reads off the answer using these numbers, but this robot honours the man who first found the fraction sequence in sums of powers -- not the one who applied it to zeta. }
+FIZZLE newton { Newton's identities are the earlier conversion gear; here the cotangent coefficients are named numbers from sums of powers -- recall whose numbers those are. }
+FIZZLE girard { The symmetric polynomials are upstream; this robot is the famous fraction sequence in the closed formula -- name the man whose numbers $\frac{1}{6}, -\frac{1}{30}, \dots$ these are. }
+FIZZLE taylor { Taylor's expansion exposes the coefficients, but this sentinel is about the specific numbers filling them -- recall who discovered them in formulas for summing powers. }
+FIZZLE mittag_leffler { The pole expansion gives cotangent its series, but this robot is the named numbers in that series -- name the man whose sequence sets each zeta value. }
+FIZZLE lindemann { Transcendence is the finale; this robot is the rational-number sequence in the closed form -- name the man those numbers are named after. }
+
+ROBOT: 7
+NAME { Ferdinand von Lindemann }
+BRIEFING_HINT { Transcendence: since pi is transcendental, every even zeta value is too --
+          while the odd ones stay open. This sentinel yields to the man who proved pi wild. }
+PROBLEM { Each $\zeta(2n)$ is a rational times $\pi^{2n}$, so its nature follows from pi's.
+          Who proved $\pi$ transcendental, making every $\zeta(2n)$ transcendental? }
+EXPLAIN_MATHEMATICIAN { Since each $\zeta(2n) = q_n \pi^{2n}$ with $q_n$ rational, and
+          Lindemann proved $\pi$ (hence every $\pi^{2n}$) transcendental, each $\zeta(2n)$ is
+          transcendental. By contrast the odd values, including $\zeta(3)$, resist: only its
+          irrationality (Apery, 1978) is known. }
+EXPLAIN_PHYSICIST { A transcendental number is no root of any integer polynomial -- a stronger
+          wildness than mere irrationality. Lindemann (1882) proved $\pi$ transcendental, so
+          $\pi^{2n}$ is too, and a rational multiple of it stays transcendental. Hence every
+          $\zeta(2n)$ is transcendental -- while $\zeta(3) \approx 1.2021$ is only known irrational. }
+EXPLAIN_BIOLOGIST { Some numbers can never be the answer to any whole-number equation -- they
+          are transcendental, the wildest kind. Lindemann proved $\pi$ is one. Since each even
+          zeta value is a fraction times a power of $\pi$, all inherit that wildness. The odd
+          ones, like $\zeta(3)$, stay mysterious to this day. }
+EXPLAIN_ENGINEER { Concretely: [[ $\zeta(2)$ | 1.6449 ]] and [[ $\zeta(4)$ | 1.0823 ]] are
+          transcendental because each equals a fraction times $\pi^{2n}$ and pi itself is
+          transcendental. The odd cousin [[ $\zeta(3)$ | 1.2021 ]] is known irrational but its
+          transcendence is still open. }
+SEGMENTS {
+  $\zeta(2n)$            | even_zeta
+  $=$                    | NEUTRAL
+  $q_n \pi^{2n}$         | roots
+}
+EYE { even_zeta }
+VULNERABLE_TO { lindemann }
+FIZZLE euler { Euler built the family of values, but this final robot is about proving them transcendental through pi -- name the man who proved pi itself transcendental. }
+FIZZLE newton { Newton's identities were the early conversion gear; this sentinel is the closing consequence that each value is transcendental -- recall who proved pi wild. }
+FIZZLE girard { The symmetric polynomials are far upstream; here the question is the transcendence inherited from pi -- name the man who first proved pi transcendental. }
+FIZZLE taylor { The generating function delivered the values; this robot asks why they are transcendental -- recall who proved pi is no root of any integer polynomial. }
+FIZZLE mittag_leffler { The pole expansion was the engine; this final sentinel is the transcendence of every even zeta value via pi -- name the man whose 1882 proof settled pi. }
+FIZZLE bernoulli { Bernoulli's numbers sized each value, but this robot is about their transcendence, flowing from pi -- name the man who proved pi transcendental. }

@@ -1,0 +1,289 @@
+# ===========================================================
+# The Basel Problem -- Euler's Symmetric-Polynomial Ascent. Seven
+# sentinels, one per step of the generalization from zeta(2) up to
+# ALL even zeta(2k) and the transcendence consequence. Robot 1 is
+# nearest the doorway. Each yields to exactly ONE mathematician id.
+# Robot N maps 1:1 to baker step N (baked/basel/symmetric_polys/robotN_*.png).
+# LEDGER mirrors the baker STAINS: pi_powers=red, sym_poly=yellow,
+# bernoulli=blue; sym_to_power=red+yellow, even_zeta=red+blue,
+# transcendence=yellow+blue.
+# ===========================================================
+CORRIDOR: 1
+TITLE { The Basel Problem -- Euler's Symmetric-Polynomial Ascent }
+FLAVOR { One trick climbs from pi^2/6 to every even power of pi, and learns where the pattern breaks. }
+LEDGER {
+  PRIMARY pi_powers     = red
+  PRIMARY sym_poly      = yellow
+  PRIMARY bernoulli     = blue
+  BLEND   sym_to_power  = pi_powers + sym_poly
+  BLEND   even_zeta     = pi_powers + bernoulli
+  BLEND   transcendence = sym_poly + bernoulli
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in Euler's ascent from a single sum to all the even zeta values.
+          Read each robot's blue hologram face, judge whose idea its mathematics
+          belongs to, and fire that mathematician. Match the face to the technique
+          and the corridor opens. }
+ENTRY_TEXT { You have entered the higher Basel corridor. The one-sum trick is about to become a machine that conquers every even power of pi. }
+EXIT_TEXT { The last sentinel falls and the whole tower of even zeta values stands solved -- while the odd ones glint, still unconquered, in the dark. The hostages are free. You have flown the full ascent. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the grand prize: a single closed form for
+          EVERY even zeta value. It yields to the man who first found it. }
+PROBLEM { Identify the closed form of $\zeta(2n) = \sum \frac{1}{n^{2k}}$ for all even
+          powers -- who first wrote $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, and the rest? }
+EXPLAIN_MATHEMATICIAN { The Basel trick generalizes: every even zeta value has a closed
+          form $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$, where $B_{2n}$
+          is a Bernoulli number. Thus $\zeta(2) = \frac{\pi^2}{6}$, $\zeta(4) =
+          \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$, and so on. }
+EXPLAIN_PHYSICIST { Basel solved $\sum 1/n^2$. The same machine keeps going: $\sum
+          1/n^4$, $\sum 1/n^6$, all of them. Each lands on a power of $\pi$ times a clean
+          rational: $\zeta(4) = \frac{\pi^4}{90}$, $\zeta(6) = \frac{\pi^6}{945}$. The
+          general shape is $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2 (2n)!} B_{2n}$. }
+EXPLAIN_BIOLOGIST { Adding one-over-the-squares gave $\frac{\pi^2}{6}$. What if instead
+          you add one-over-the-fourth-powers, or the sixth powers? Astonishingly, every
+          even case is a power of $\pi$ times a tidy fraction: $\frac{\pi^4}{90}$,
+          $\frac{\pi^6}{945}$, and onward forever. }
+EXPLAIN_ENGINEER { Plug in numbers. The fourth-power sum [[ $\zeta(4)$ | 1.0823 ]]
+          equals [[ $\frac{\pi^4}{90}$ | 1.0823 ]]; the sixth-power sum [[ $\zeta(6)$ | 1.0173 ]]
+          equals [[ $\frac{\pi^6}{945}$ | 1.0173 ]]. Each is a power of $\pi$ over a whole
+          number, and one formula computes them all. }
+SEGMENTS {
+  $\zeta(2n)$    | even_zeta
+  $=$            | NEUTRAL
+  $\frac{\pi^{2n}}{q}$ | even_zeta
+}
+EYE { even_zeta }
+VULNERABLE_TO { euler }
+FIZZLE newton { The recurrence linking power sums to symmetric pieces is a true engine deeper in this ascent, but right here you only need to NAME the grand result -- think who first computed every even zeta value. }
+FIZZLE girard { Inverting the identities to get power sums directly is a genuine step further in, but this opening robot just states the headline closed form -- name the person who first announced it. }
+FIZZLE waring { The elementary symmetric building blocks are ingredients used later, but no blocks are being assembled here -- you are asked who owns this whole family of even-power results. }
+FIZZLE bernoulli { The rational numbers in the formula are indeed named after someone, but this robot wants the discoverer of the entire closed form, not the source of its fractions -- recall who solved all the even sums. }
+FIZZLE lindemann { Transcendence comes at the very end of this corridor, but this first robot is the bare statement of the formula -- name the man who first derived it. }
+FIZZLE apery { The odd zeta values are the corridor's final mystery, but this sentinel is about the EVEN values, which are completely solved -- name the man who solved them. }
+
+ROBOT: 2
+NAME { Isaac Newton }
+BRIEFING_HINT { Newton's identities: the recurrence converting symmetric pieces of the
+          roots into power sums. This sentinel yields to their discoverer. }
+PROBLEM { A recurrence turns the symmetric pieces $e_k$ of a polynomial's roots into the
+          power sums $p_k$. Whose identities give $k e_k = \sum (-1)^{i-1} e_{k-i} p_i$? }
+EXPLAIN_MATHEMATICIAN { Newton's identities link the two languages of a polynomial's
+          roots. With $e_k$ the elementary symmetric polynomials and $p_k$ the power sums,
+          $k e_k = \sum_{i=1}^{k} (-1)^{i-1} e_{k-i} p_i$. Recursively this expresses
+          $p_k$ from the $e_j$, the bridge from coefficients to power sums. }
+EXPLAIN_PHYSICIST { A polynomial knows its roots two ways: through symmetric combinations
+          $e_k$ (sums of products) and through power sums $p_k = \sum r_i^k$. Newton's
+          identities convert between them. For instance $2 e_2 = e_1 p_1 - p_2$, so
+          $p_2 = e_1^2 - 2 e_2$. Generally $k e_k = \sum_{i=1}^{k} (-1)^{i-1} e_{k-i} p_i$. }
+EXPLAIN_BIOLOGIST { Suppose you know the roots of an equation, but only through indirect
+          clues. Newton found a recipe turning one kind of clue -- the symmetric
+          combinations of roots -- into another: the sum of the roots' powers. That recipe
+          is the gear driving the whole generalization. }
+EXPLAIN_ENGINEER { Newton's identities are a recurrence: feed in the symmetric pieces
+          [[ $e_1$ | 1.000 ]], [[ $e_2$ | 2.000 ]] and crank out the power sums one at a
+          time. With $e_1 = 1$ and $e_2 = 2$, $p_1 = e_1$ gives [[ $p_1$ | 1.000 ]], then
+          $p_2 = e_1^2 - 2 e_2$ gives [[ $e_1^2 - 2 e_2$ | -3.000 ]]. Each step is pure
+          bookkeeping. }
+SEGMENTS {
+  $k e_k$                          | sym_poly
+  $=$                              | NEUTRAL
+  $\sum (-1)^{i-1} e_{k-i} p_i$    | sym_to_power
+}
+EYE { sym_to_power }
+VULNERABLE_TO { newton }
+FIZZLE euler { Naming the final formula is what the first sentinel wanted; this robot is the RECURRENCE that powers the conversion -- think who first wrote those identities between symmetric pieces and power sums. }
+FIZZLE girard { Girard gave the explicit inverted formulas, but the underlying recursive identities themselves -- crank one out from the last -- bear another name; recall who systematized that recurrence. }
+FIZZLE waring { The elementary symmetric pieces $e_k$ are the INPUTS here, not the rule that consumes them; this robot is the recurrence itself -- name the man whose identities convert them to power sums. }
+FIZZLE bernoulli { The Bernoulli numbers enter much later as the rational coefficients; this sentinel is the pure algebraic recurrence between symmetric pieces and power sums -- recall its discoverer. }
+FIZZLE lindemann { Transcendence is the corridor's finale; this robot is the mechanical identity that turns $e_k$ into $p_k$ -- name the mathematician whose recurrence does that. }
+FIZZLE apery { The odd-value mystery waits at the end; this is the workhorse recurrence linking symmetric polynomials to power sums -- recall whose identities they are. }
+
+ROBOT: 3
+NAME { Albert Girard }
+BRIEFING_HINT { The explicit inversion: each power sum written directly as a polynomial in
+          the symmetric pieces. This sentinel yields to the man who wrote them first, in 1629. }
+PROBLEM { Run the identities the useful way: write $p_2 = e_1^2 - 2 e_2$, $p_3 = e_1^3 - 3
+          e_1 e_2 + 3 e_3$ directly. Who first set down these explicit power-sum formulas? }
+EXPLAIN_MATHEMATICIAN { Girard (1629) gave the explicit inversion: each power sum as a
+          polynomial in the elementary symmetric ones, $p_2 = e_1^2 - 2 e_2$, $p_3 = e_1^3
+          - 3 e_1 e_2 + 3 e_3$. Applied to the roots $-\pi^2/k^2$ of $\sin(\pi x)/(\pi x)$,
+          the power sums become $\sum 1/k^2 = \zeta(2)$, $\sum 1/k^4 = \zeta(4)$, and so on. }
+EXPLAIN_PHYSICIST { Girard's formulas run Newton's machine the useful direction: they give
+          each power sum directly. Expand $p_2 = e_1^2 - 2 e_2$ and $p_3 = e_1^3 - 3 e_1 e_2
+          + 3 e_3$. Take the variables to be sine's roots, $x_k = -\pi^2/k^2$. Then $p_1 =
+          -\pi^2 \sum 1/k^2$, and matching it against the product gives $\zeta(2) =
+          \frac{\pi^2}{6}$ -- and the same play gives $\zeta(4), \zeta(6), \dots$. }
+EXPLAIN_BIOLOGIST { Girard wrote down, term by term, how to get the sum of the roots'
+          powers from the simple symmetric clues. Once you feed in sine's special roots --
+          which carry the number $\pi$ -- these power sums turn into exactly the zeta
+          values $\zeta(2), \zeta(4), \zeta(6)$ you want. }
+EXPLAIN_ENGINEER { Use Girard's explicit formulas with the actual sine roots $x_k =
+          -\pi^2/k^2$. The first power sum is $p_1 = e_1 = -\pi^2 \zeta(2)$, which equals
+          [[ $-\pi^2 \cdot 1.6449$ | -16.235 ]]. The second, via [[ $e_1^2 - 2 e_2$ | -3.000 ]],
+          delivers $\zeta(4)$. Each conversion pins one more zeta value to an arithmetic of
+          $\pi$-powers. }
+SEGMENTS {
+  $p_3$                          | sym_to_power
+  $=$                            | NEUTRAL
+  $e_1^3 - 3 e_1 e_2 + 3 e_3$    | sym_poly
+}
+EYE { sym_to_power }
+VULNERABLE_TO { girard }
+FIZZLE euler { Euler assembles the pieces into zeta values, but this robot is the explicit power-sum formulas themselves -- think who first wrote them down, a generation before Newton. }
+FIZZLE newton { The recurrence bears Newton's name, but the EXPLICIT inverted formulas -- power sum spelled out in symmetric pieces -- were first published by someone earlier; recall who set them down in 1629. }
+FIZZLE waring { The symmetric pieces $e_k$ are the ingredients these formulas consume; this robot is the explicit expressions for the power sums -- name the man who first wrote that inversion. }
+FIZZLE bernoulli { The Bernoulli fractions arrive later as coefficients; this sentinel is the explicit conversion of symmetric pieces into power sums -- recall who first published it. }
+FIZZLE lindemann { Transcendence is far ahead; this robot is the explicit power-sum formulas applied to sine's roots -- name the early algebraist who first wrote them. }
+FIZZLE apery { The odd zetas are the finale; here you have the explicit symmetric-to-power-sum formulas -- recall the man who first set them down in 1629. }
+
+ROBOT: 4
+NAME { Edward Waring }
+BRIEFING_HINT { The elementary symmetric polynomials: the organized sums of products that
+          are a polynomial's coefficients. This sentinel yields to a champion of symmetric functions. }
+PROBLEM { Multiplying out $\prod(1 - x^2/k^2)$, the coefficients are organized sums:
+          $e_1 = \sum x_i$, $e_2 = \sum_{i<j} x_i x_j$. What are these building blocks called? }
+EXPLAIN_MATHEMATICIAN { The elementary symmetric polynomials are the building blocks:
+          $e_1 = \sum x_i$, $e_2 = \sum_{i<j} x_i x_j$, $e_k = \sum_{i_1 < \cdots < i_k}
+          x_{i_1} \cdots x_{i_k}$. For $\sin(\pi x)/(\pi x) = \prod(1 - x^2/k^2)$, the
+          coefficient of $x^{2k}$ is $(-1)^k e_k$ of the $1/k^2$. }
+EXPLAIN_PHYSICIST { Before any conversion you need the raw symmetric pieces. The first is
+          $e_1 = x_1 + x_2 + \cdots$ -- just the sum. The second is $e_2 = x_1 x_2 + x_1 x_3
+          + \cdots$ -- every pairwise product. In a product like $\prod(1 - \frac{x^2}{k^2})$
+          these $e_k$ are exactly the coefficients you read off term by term: the $x^2$
+          coefficient is $-e_1$ of the $1/k^2$. }
+EXPLAIN_BIOLOGIST { When you multiply many simple factors together, the answer's
+          coefficients are organized sums: first all the single pieces added up, then all
+          the pairs multiplied and added, then all the triples, and so on. Those organized
+          sums are the symmetric building blocks Newton's recipe needs as ingredients. }
+EXPLAIN_ENGINEER { Multiply out a few factors and watch the blocks appear. For $(1 -
+          \frac{x^2}{1})(1 - \frac{x^2}{4})(1 - \frac{x^2}{9})$, the $x^2$ coefficient is
+          $-e_1 = -(1 + \frac{1}{4} + \frac{1}{9})$, which equals [[ $1 + \frac{1}{4} + \frac{1}{9}$ | 1.3611 ]].
+          Add more factors and $e_1$ climbs toward [[ $\zeta(2)$ | 1.6449 ]]. The blocks $e_k$
+          are all you ever feed Newton. }
+SEGMENTS {
+  $e_2$                       | sym_poly
+  $=$                         | NEUTRAL
+  $\sum_{i<j} x_i x_j$        | sym_poly
+}
+EYE { sym_poly }
+VULNERABLE_TO { waring }
+FIZZLE euler { Euler uses these blocks to reach zeta values, but this robot is the building blocks THEMSELVES -- the organized sums of products -- so think of a great student of symmetric functions, not the one who applied them. }
+FIZZLE newton { Newton's recurrence consumes these blocks; this robot is the blocks before any recurrence -- the elementary symmetric polynomials -- so recall a mathematician known for that family of functions. }
+FIZZLE girard { Girard's formulas turn these blocks into power sums; this sentinel is the blocks at rest, the raw symmetric pieces -- name a champion of symmetric polynomials themselves. }
+FIZZLE bernoulli { The Bernoulli fractions come later as coefficients of the answer; this robot is the symmetric building blocks of the product -- recall who is associated with symmetric functions. }
+FIZZLE lindemann { Transcendence is the corridor's end; this robot is the elementary symmetric polynomials, the ingredients fed into Newton -- name a scholar of symmetric functions. }
+FIZZLE apery { The odd-value mystery is the finale; this sentinel is the raw symmetric building blocks $e_k$ -- recall a mathematician famed for symmetric polynomials. }
+
+ROBOT: 5
+NAME { Jacob Bernoulli }
+BRIEFING_HINT { The Bernoulli numbers: the famous rational sequence that is the rational
+          part of every even zeta value. This sentinel yields to their discoverer. }
+PROBLEM { The rationals $\frac{1}{6}, -\frac{1}{30}, \frac{1}{42}, \dots$ in the closed
+          form $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2(2n)!} B_{2n}$ have a name. Whose numbers are these? }
+EXPLAIN_MATHEMATICIAN { The rationals appearing are the Bernoulli numbers $B_{2n}$, defined
+          by $\frac{t}{e^t - 1} = \sum_{m \geq 0} B_m \frac{t^m}{m!}$, with $B_2 = \frac{1}{6}$,
+          $B_4 = -\frac{1}{30}$, $B_6 = \frac{1}{42}$. They convert the power sums into the
+          closed form $\zeta(2n) = \frac{(-1)^{n-1}(2\pi)^{2n}}{2(2n)!} B_{2n}$. }
+EXPLAIN_PHYSICIST { The clean rational in every even zeta value has a name: the Bernoulli
+          number. They come from one generating function, $\frac{t}{e^t - 1} = \sum B_m
+          t^m/m!$, and the relevant ones are $B_2 = \frac{1}{6}$, $B_4 = -\frac{1}{30}$,
+          $B_6 = \frac{1}{42}$. Drop $B_2 = \frac{1}{6}$ into the formula and out comes
+          $\zeta(2) = \frac{\pi^2}{6}$; $B_4 = -\frac{1}{30}$ gives $\zeta(4) = \frac{\pi^4}{90}$. }
+EXPLAIN_BIOLOGIST { There is a famous list of fractions -- $\frac{1}{6}, -\frac{1}{30},
+          \frac{1}{42}, \dots$ -- discovered by Jacob Bernoulli while adding up powers of
+          whole numbers. These same Bernoulli fractions turn out to be exactly the rational
+          part sitting beside each power of $\pi$ in the zeta values. }
+EXPLAIN_ENGINEER { The Bernoulli numbers are fixed constants: [[ $B_2$ | 0.1667 ]],
+          [[ $B_4$ | -0.0333 ]], [[ $B_6$ | 0.0238 ]]. Feed $B_4$ into $\frac{(2\pi)^4}{2 \cdot 24}
+          |B_4|$ and you recover [[ $\frac{\pi^4}{90}$ | 1.0823 ]], which is $\zeta(4)$ exactly.
+          The fraction is rational; only the $\pi$ is exotic. }
+SEGMENTS {
+  $B_2 = \frac{1}{6}$     | bernoulli
+  $B_4 = -\frac{1}{30}$   | bernoulli
+  $B_6 = \frac{1}{42}$    | bernoulli
+}
+EYE { bernoulli }
+VULNERABLE_TO { bernoulli }
+FIZZLE euler { Euler plugged these fractions into his formula, but this robot is the fractions THEMSELVES and their origin -- think who first discovered that famous rational sequence while summing powers. }
+FIZZLE newton { Newton's recurrence makes power sums, not these specific rationals; this sentinel is the named sequence of fractions in the answer -- recall who found them adding up integer powers. }
+FIZZLE girard { Girard's formulas convert symmetric pieces to power sums; this robot is the separate rational sequence multiplying the $\pi$-powers -- name the man those numbers honour. }
+FIZZLE waring { The symmetric building blocks are the polynomial's coefficients; this robot is the special rational numbers $\frac{1}{6}, -\frac{1}{30}, \dots$ in the zeta formula -- recall their discoverer. }
+FIZZLE lindemann { Transcendence comes next, acting on the $\pi$-power factor; this robot is the RATIONAL factor and its named sequence -- recall who first tabulated those fractions. }
+FIZZLE apery { Apery worked on the odd values; this sentinel is the rational numbers governing the EVEN values -- name the man who discovered that famous fraction sequence. }
+
+ROBOT: 6
+NAME { Ferdinand von Lindemann }
+BRIEFING_HINT { Transcendence of pi: since each even zeta is a rational times a power of
+          pi, and pi is transcendental, so is every even zeta. This sentinel yields to the prover. }
+PROBLEM { Each $\zeta(2k)$ is a rational multiple of $\pi^{2k}$, and a rational times a
+          transcendental stays transcendental. Who proved $\pi$ itself is transcendental? }
+EXPLAIN_MATHEMATICIAN { Since $\zeta(2k)$ is a rational multiple of $\pi^{2k}$ and Lindemann
+          proved $\pi$ transcendental, every $\zeta(2k)$ is transcendental. The
+          Lindemann-Weierstrass theorem gives $e^{\alpha}$ transcendental for nonzero
+          algebraic $\alpha$; with $e^{i\pi} = -1$ algebraic, $\pi$ cannot be algebraic. }
+EXPLAIN_PHYSICIST { We now know $\zeta(2k) = (\text{rational}) \times \pi^{2k}$. A rational
+          times a transcendental is still transcendental, so the only question is whether
+          $\pi$ itself is transcendental. Lindemann settled it: if $e^{i\pi} = -1$ were
+          built from an algebraic $\pi$, the Lindemann-Weierstrass theorem would force $-1$
+          to be transcendental -- absurd. Hence every $\zeta(2k)$ is transcendental. }
+EXPLAIN_BIOLOGIST { A "transcendental" number is one no ordinary polynomial equation can
+          ever capture. Lindemann proved the circle number $\pi$ is one of them. Because
+          each even zeta value is just a plain fraction times a power of $\pi$, that
+          wildness passes straight through: every even zeta value is transcendental too. }
+EXPLAIN_ENGINEER { Take $\zeta(4) = \frac{\pi^4}{90}$. The [[ $\frac{1}{90}$ | 0.0111 ]] is an
+          ordinary rational; multiplying it by [[ $\pi^4$ | 97.409 ]] gives [[ $\zeta(4)$ | 1.0823 ]].
+          Since $\pi$ is transcendental, so is $\pi^4$, and a rational times it stays
+          transcendental. No polynomial with whole-number coefficients ever has $\zeta(4)$ as a root. }
+SEGMENTS {
+  $\zeta(2k)$              | transcendence
+  $=$                      | NEUTRAL
+  $q \cdot \pi^{2k}$       | even_zeta
+}
+EYE { transcendence }
+VULNERABLE_TO { lindemann }
+FIZZLE euler { Euler built the closed form, but this robot asks WHY each even zeta is transcendental -- the key is that $\pi$ is, so think of the man who first proved $\pi$ transcendental. }
+FIZZLE newton { Newton's recurrence built the algebra of power sums; this sentinel is about the deep fact that $\pi$ escapes all polynomials -- recall who proved $\pi$ transcendental. }
+FIZZLE girard { Girard's formulas produced the zeta values; this robot is about their transcendence, which rests on $\pi$ being transcendental -- name the man who established that. }
+FIZZLE waring { The symmetric building blocks live in the algebra; this robot is the number-theoretic fact that $\pi$ -- and hence every even zeta -- is transcendental, so recall who proved it for $\pi$. }
+FIZZLE bernoulli { The Bernoulli numbers are the RATIONAL factor, which is tame; the wildness comes entirely from the $\pi$-power factor -- name the man who proved $\pi$ transcendental. }
+FIZZLE apery { Apery proved an ODD value irrational; this robot is about the EVEN values being transcendental, which follows from $\pi$ being transcendental -- recall who proved that about $\pi$. }
+
+ROBOT: 7
+NAME { Roger Apery }
+BRIEFING_HINT { The contrast: the odd zeta values escape this machinery entirely. The
+          single hard-won fact is that zeta(3) is irrational. This sentinel yields to its prover. }
+PROBLEM { The odd values $\zeta(3), \zeta(5), \dots$ get no closed form from this method.
+          Who proved, in 1979, that at least $\zeta(3)$ is irrational? }
+EXPLAIN_MATHEMATICIAN { The odd zeta values resist this machinery. There is no sine product
+          giving $\zeta(2k+1)$ as a rational multiple of $\pi^{2k+1}$. Apery (1979) proved
+          only that $\zeta(3)$ is irrational; whether $\zeta(3)$ is transcendental, and even
+          whether $\zeta(5), \zeta(7), \dots$ are irrational, remains open. }
+EXPLAIN_PHYSICIST { Everything above worked because the even powers paired up as $\pm n\pi$
+          inside the product. The odd values $\zeta(3), \zeta(5), \dots$ get no such closed
+          form -- the symmetric-polynomial trick simply does not reach them. The single
+          hard-won fact is Apery's: $\zeta(3) = 1.2020569 \dots$ is irrational. Its
+          transcendence is still unknown. }
+EXPLAIN_BIOLOGIST { The beautiful pattern stops at the even numbers. For the odd sums like
+          one-over-the-cubes, nobody has ever found a clean formula with $\pi$. After
+          centuries, the lone breakthrough was Apery's proof that the cube sum $\zeta(3)$ is
+          irrational -- and even that was a shock. The rest stay mysterious. }
+EXPLAIN_ENGINEER { Compute $\zeta(3) = 1 + \frac{1}{8} + \frac{1}{27} + \cdots$, which equals
+          [[ $\zeta(3)$ | 1.2021 ]]. Unlike [[ $\zeta(2)$ | 1.6449 ]], this number fits no
+          formula of the form rational-times-$\pi^3$ that anyone has found. Apery proved
+          $\zeta(3)$ is irrational -- not even a fraction -- but whether it is transcendental
+          is unknown to this day. }
+SEGMENTS {
+  $\zeta(3)$       | transcendence
+  $\approx$        | NEUTRAL
+  $1.2021$         | transcendence
+}
+EYE { transcendence }
+VULNERABLE_TO { apery }
+FIZZLE euler { Euler conquered every EVEN value, but this final robot is about the stubborn ODD ones -- think of the man who, centuries later, proved $\zeta(3)$ irrational. }
+FIZZLE newton { Newton's recurrence solved the even tower; this sentinel is the odd values it cannot reach, and the lone modern breakthrough on them -- recall who proved $\zeta(3)$ irrational. }
+FIZZLE girard { Girard's formulas gave the even zeta values; this robot is about the odd values that escape the method -- name the man whose 1979 proof handled $\zeta(3)$. }
+FIZZLE waring { The symmetric building blocks built the even formula; this robot is the odd values left untouched -- recall the mathematician who proved $\zeta(3)$ irrational. }
+FIZZLE bernoulli { The Bernoulli numbers govern the even values completely; this final sentinel is about the odd values, which have no such pattern -- name the man who cracked $\zeta(3)$. }
+FIZZLE lindemann { Lindemann's transcendence settled the even values; this robot is the still-open odd values, where only one irrationality result exists -- recall who proved $\zeta(3)$ irrational. }

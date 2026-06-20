@@ -1,0 +1,78 @@
+CORRIDOR: The Basel Problem — Generalizing to All Even Zeta Values
+SOURCE  : levels\mathematics\basel_problem\basel_generalization.txt
+STAINS  : roots, power_sums, trig_fn, sym_machinery, generating_fn, even_zeta
+DPI     : 600
+
+--- ROBOT 1: Leonhard Euler ---
+  [ OK  ] mathematician -> robot1_mathematician.png
+  [FAIL ] physicist    
+          ! Missing $ inserted.
+          l.15 ...ntprose}\text{(a fraction)}\times\pi^{2n}}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot1_biologist.png
+  [ OK  ] engineer      -> robot1_engineer.png
+
+--- ROBOT 2: Isaac Newton ---
+  [ OK  ] mathematician -> robot2_mathematician.png
+  [FAIL ] physicist    
+          ! Missing $ inserted.
+          l.18 ...ox{sym_machinery}{\color{descentprose}e_k}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot2_biologist.png
+  [FAIL ] engineer     
+          ! Missing $ inserted.
+          l.17 ...orbox{power_sums}{\color{descentprose}p_1}
+          !  ==> Fatal error occurred, no output PDF file produced!
+
+--- ROBOT 3: Albert Girard ---
+  [FAIL ] mathematician
+          ! Missing $ inserted.
+          l.16 ...olor{descentprose}\text{roots }-\pi^2/k^2}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [FAIL ] physicist    
+          ! Missing $ inserted.
+          l.18 ...ox{sym_machinery}{\color{descentprose}e_k}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot3_biologist.png
+  [ OK  ] engineer      -> robot3_engineer.png
+
+--- ROBOT 4: Brook Taylor ---
+  [ OK  ] mathematician -> robot4_mathematician.png
+  [ OK  ] physicist     -> robot4_physicist.png
+  [ OK  ] biologist     -> robot4_biologist.png
+  [ OK  ] engineer      -> robot4_engineer.png
+
+--- ROBOT 5: Gosta Mittag-Leffler ---
+  [FAIL ] mathematician
+          ! Missing $ inserted.
+          l.16 ...power_sums}{\color{descentprose}\zeta(2k)}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] physicist     -> robot5_physicist.png
+  [ OK  ] biologist     -> robot5_biologist.png
+  [ OK  ] engineer      -> robot5_engineer.png
+
+--- ROBOT 6: Jacob Bernoulli ---
+  [FAIL ] mathematician
+          ! Missing $ inserted.
+          l.16 ...ox{power_sums}{\color{descentprose}B_{2n}}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [FAIL ] physicist    
+          ! Missing $ inserted.
+          l.16 ...ox{power_sums}{\color{descentprose}B_{2n}}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot6_biologist.png
+  [ OK  ] engineer      -> robot6_engineer.png
+
+--- ROBOT 7: Ferdinand von Lindemann ---
+  [FAIL ] mathematician
+          ! Missing $ inserted.
+          l.15 ...{even_zeta}{\color{descentprose}\zeta(2n)}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [FAIL ] physicist    
+          ! Missing $ inserted.
+          l.15 ...{even_zeta}{\color{descentprose}\zeta(2n)}
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot7_biologist.png
+  [ OK  ] engineer      -> robot7_engineer.png
+
+DONE. 10 failure(s).

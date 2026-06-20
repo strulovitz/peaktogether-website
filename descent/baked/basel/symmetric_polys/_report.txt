@@ -1,0 +1,72 @@
+CORRIDOR: The Basel Problem — Euler's Symmetric-Polynomial Ascent
+SOURCE  : levels\mathematics\basel_problem\basel_symmetric_proof.txt
+STAINS  : pi_powers, sym_poly, bernoulli, even_zeta, sym_to_power, transcendence
+DPI     : 600
+
+--- ROBOT 1: Leonhard Euler ---
+  [ OK  ] mathematician -> robot1_mathematician.png
+  [ OK  ] physicist     -> robot1_physicist.png
+  [ OK  ] biologist     -> robot1_biologist.png
+  [ OK  ] engineer      -> robot1_engineer.png
+
+--- ROBOT 2: Isaac Newton ---
+  [ OK  ] mathematician -> robot2_mathematician.png
+  [FAIL ] physicist    
+          ! Missing } inserted.
+          l.17 ...\text{power sums}}$ ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot2_biologist.png
+  [FAIL ] engineer     
+          ! Missing } inserted.
+          l.17 ...he symmetric pieces ${\color{thread__t2} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+
+--- ROBOT 3: Albert Girard ---
+  [FAIL ] mathematician
+          ! Missing } inserted.
+          l.17 ...ary symmetric ones, ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [FAIL ] physicist    
+          ! Missing } inserted.
+          l.17 ...}$ directly. Expand ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot3_biologist.png
+  [FAIL ] engineer     
+          ! Missing } inserted.
+          l.17 ...st power sum is $p_1={\color{thread__t2} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+
+--- ROBOT 4: Edward Waring ---
+  [FAIL ] mathematician
+          ! Missing } inserted.
+          l.16 ... the coefficient of ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [FAIL ] physicist    
+          ! Missing } inserted.
+          l.16 ...f term by term: the ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+  [ OK  ] biologist     -> robot4_biologist.png
+  [FAIL ] engineer     
+          ! Missing } inserted.
+          l.16 ...x^2}{3^2})$}}$, the ${\color{thread__t1} $
+          !  ==> Fatal error occurred, no output PDF file produced!
+
+--- ROBOT 5: Jacob Bernoulli ---
+  [ OK  ] mathematician -> robot5_mathematician.png
+  [ OK  ] physicist     -> robot5_physicist.png
+  [ OK  ] biologist     -> robot5_biologist.png
+  [ OK  ] engineer      -> robot5_engineer.png
+
+--- ROBOT 6: Ferdinand von Lindemann ---
+  [ OK  ] mathematician -> robot6_mathematician.png
+  [ OK  ] physicist     -> robot6_physicist.png
+  [ OK  ] biologist     -> robot6_biologist.png
+  [ OK  ] engineer      -> robot6_engineer.png
+
+--- ROBOT 7: Roger Apery ---
+  [ OK  ] mathematician -> robot7_mathematician.png
+  [ OK  ] physicist     -> robot7_physicist.png
+  [ OK  ] biologist     -> robot7_biologist.png
+  [ OK  ] engineer      -> robot7_engineer.png
+
+DONE. 8 failure(s).
