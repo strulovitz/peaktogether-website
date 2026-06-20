@@ -481,6 +481,34 @@ cd descent
 python deu/bake_corridor.py levels/mathematics/basel_problem/basel_general.txt --out baked/basel/euler_generalizations
 ```
 
+## 🔴 SESSION LOG — June 21, 2026 EVENING (Corridor 2 built & flying! 🎉)
+
+### FOREVER Prompt — 13+ fixes from comprehensive audit
+Full audit of the corridor-creator prompt against baker/parser code. Fixed: stain `$...$` rule, thread double-dollar trap, `--out` flag, per-corridor `baked=` manifest, bare PRIMARY, SEGMENTS notation, portrait location, bake command, engineer value-arc system, physicist intermediate steps, `\text{}` allowed, baker NAME vs game NAME, PROBLEM example.
+
+### Basel Corridor 2 — "Euler's Symmetric-Polynomial Ascent" ✅
+Two child attempts. First child (OLD) had no value arcs + stain errors. Second child had thread double-dollar errors (8 failures) — fixed mechanically by DeepSeek (regex, 38 patterns). Final: **28/28 baked, 0 failures**. Nir confirmed: "it works great."
+
+- Baker: `levels/mathematics/basel_problem/basel_symmetric_proof.txt`
+- Game: `corridors/basel_symmetric.txt`
+- Baked: `baked/basel/symmetric_polys/` (28 PNGs)
+- 7 robots: Euler, Newton, Girard, Waring, Bernoulli, Lindemann, Apery
+- 7 new portraits added this session
+
+### Current state
+| Item | Status |
+|------|--------|
+| Basel corridor 1 (Euler's 1734 approach) | ✅ Playable |
+| Basel corridor 2 (Symmetric-Polynomial Ascent) | ✅ Playable, Nir confirmed |
+| FOREVER prompt | ✅ All fixes applied |
+| app.py points to | `levels/basel_c2.txt` (corridor 2) |
+| Next | Corridors 3-10 for Basel (~10 total) |
+
+### ON RESTART — Read these in order:
+1. **WORKFLOW.md** (this file)
+2. `PARENT_ESTATE/SESSION_2026-06-21.md` — today's full session ⭐
+3. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
+
 ## 🔴 SESSION LOG — June 13, 2026
 
 ### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
