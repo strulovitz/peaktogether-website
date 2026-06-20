@@ -1,4 +1,3 @@
 title: The Basel Problem
 corridors:
   ../corridors/basel.txt            baked=../baked/basel/euler_approach
-  ../corridors/basel_general.txt    baked=../baked/basel/euler_generalizations
