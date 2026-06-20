@@ -42,7 +42,7 @@ Each robot explains its ONE concept at four depths. Think "explain it to me by a
 - EXPLAIN_MATHEMATICIAN — audience: graduate student or researcher. Full rigor, real notation, the way a textbook or a working mathematician would state it.
 - EXPLAIN_PHYSICIST — audience: a strong undergraduate. Still rigorous, but led by intuition; the "why it works" before the "here is the formal proof."
 - EXPLAIN_BIOLOGIST — audience: a bright non-specialist at high-school level. Plain language, everyday analogy, almost no notation. THIS is the layer where Simple English Wikipedia helps most when you gather material.
-- EXPLAIN_ENGINEER — audience: someone applied who asks "what is this FOR?" Concrete mechanism, a worked use, where this shows up in practice.
+- EXPLAIN_ENGINEER — this is the pilot's hero move ("LASER = EXEMPLIFY" in the original design doctrine). The SAME content as the other three layers, retold a fourth way, but with **variables replaced by concrete numbers wherever possible**, and key expressions wrapped in **value-arc markup** `[[ $expr$ | value ]]` (game file only — see THE VALUE-ARC SYSTEM section below). The audience is someone applied who asks "what is this FOR?" — by example, with actual numbers. The corner label in the game reads: "explain like I'm an engineer — by example, with actual numbers." Design intent: the girlfriend player says "not yet, I'm thinking"; the boyfriend presses CTRL and the engineer slide appears — concrete numbers with arcs showing what each expression evaluates to. The boyfriend saves the day when they're stuck. The social dynamic is the feature. In the BAKER file, write this layer with concrete numbers using full LaTeX (the baked PNG will show the numbers beautifully). In the GAME file, wrap each key expression and its concrete value in `[[ $expr$ | value ]]` markup so the runtime renderer draws a downward-opening arc (sad-smiley mouth / downward parabola) above each expression, with the numerical value floating above the arc. Every EXPLAIN_ENGINEER must contain at least two value arcs.
 
 ## COLOR IS MEANING, NOT DECORATION — TWO INDEPENDENT SYSTEMS (BAKER FILE ONLY)
 
@@ -154,7 +154,7 @@ NAME { }
 EXPLAIN_MATHEMATICIAN { <rich LaTeX with \stain{} and \thread{}> }
 EXPLAIN_PHYSICIST { ... }
 EXPLAIN_BIOLOGIST { ... }
-EXPLAIN_ENGINEER { ... }
+EXPLAIN_ENGINEER { <same content but with variables replaced by concrete numbers; rich LaTeX with \stain{} and \thread{}; NO [[ ]] markup here — that is game-file-only> }
 
 ROBOT: 2
 ...
@@ -192,7 +192,7 @@ PROBLEM { Find ∑n21​ } # the puzzle this robot poses; simple mathtext only
 EXPLAIN_MATHEMATICIAN { } # see stripping steps below
 EXPLAIN_PHYSICIST { }
 EXPLAIN_BIOLOGIST { }
-EXPLAIN_ENGINEER { }
+EXPLAIN_ENGINEER { }        # stripping step 8: ADD [[ $expr$ | value ]] arcs here
 SEGMENTS { ... } # short colored math fragments; see SEGMENTS below
 EYE { roots } # a LEDGER key, or the word NEUTRAL
 VULNERABLE_TO { euler } # the mathematician id; SINGLE-VALUE line, lowercase ascii
@@ -205,7 +205,8 @@ THE STRIPPING PROCESS — turn each baker EXPLAIN into its game EXPLAIN by apply
 4. Replace any other forbidden command (e.g. `\binom{a}{b}`) with a mathtext-legal equivalent or plain words; if there is no simple equivalent, rephrase so the sentence still reads correctly.
 5. Remove every `\stain{key}{ ... }` wrapper but KEEP its inner content (delete only the `\stain{key}{` and its matching `}`).
 6. Remove every `\thread{id}{ ... }` wrapper but KEEP its inner content.
-7. Re-read the result: it must be the SAME explanation in words and steps, now containing only mathtext-legal commands and no color markup. That is your game EXPLAIN.
+7. Re-read the result: it must be the SAME explanation in words and steps, now containing only mathtext-legal commands and no color markup. That is your game EXPLAIN for the MATHEMATICIAN, PHYSICIST, and BIOLOGIST layers.
+8. FOR EXPLAIN_ENGINEER ONLY — ADD VALUE-ARC MARKUP: after stripping (steps 1-7), wrap each key mathematical expression and its concrete numerical value in value-arc markup `[[ $expr$ | value ]]`. Each EXPLAIN_ENGINEER in the game file must have at least two value arcs. The expressions you wrap should be the ones that show the player "here is what this evaluates to" — the concrete payoff of the math. Use well-known values from the Wikipedia source (e.g. 1.6449 for pi^2/6, 0.000 for zero, 3.000 for a computed divergence). Do NOT guess values — if you are unsure of a numerical value, ask Nir. See THE VALUE-ARC SYSTEM section below for the exact syntax, rules, and examples from existing corridors.
 
 MATHTEXT RULE FOR THE ENTIRE GAME FILE (PROBLEM, all EXPLAIN layers, SEGMENTS): use ONLY mathtext-legal commands. Never use \tfrac, \dfrac, \displaystyle, \emph, \binom, or any package-level command. A reliable rule of thumb: only use a math command you can actually SEE in the pasted Basel game file. When in doubt, keep the math very simple — the hard math already lives in the baked images.
 
@@ -283,6 +284,50 @@ x=nπ | roots
 
 
 Every color key used in SEGMENTS (and in EYE) must be defined in your LEDGER, or the parser will reject the file.
+
+## THE VALUE-ARC SYSTEM (EXPLAIN_ENGINEER only — read before STEP 6)
+
+Value arcs are the signature feature of the engineer layer. They are the pilot's hero move — pressing CTRL replaces the current explanation sign with the engineer slide, where abstract math becomes concrete numbers. Above each key expression, a downward-opening arc (like a sad-smiley mouth / downward parabola) spans the expression's width, with the concrete numerical value of that expression written above the arc. This makes abstract math tangible and is the visual payoff of the engineer layer.
+
+The markup syntax (used ONLY in the GAME file's EXPLAIN_ENGINEER, never in the baker file):
+
+```
+[[ $\frac{\pi^2}{6}$ | 1.6449 ]]
+```
+
+This tells the rendering engine: draw the expression `$\frac{\pi^2}{6}$` normally, then draw a downward-opening parabola (sad-smiley arc) spanning the expression's width just above it, with "1.6449" centered above the arc. The arc + value use the segment's color tint if available, otherwise neutral light-grey.
+
+RULES:
+- Value arcs exist ONLY in the GAME file's EXPLAIN_ENGINEER. The baker file's EXPLAIN_ENGINEER uses full LaTeX to show concrete numbers beautifully without needing `[[ ]]` markup.
+- Each EXPLAIN_ENGINEER in the game file must have at least two `[[ $expr$ | value ]]` arcs.
+- The value is a concrete decimal number (e.g. 1.6449, 3.000, 0.000), NOT a variable or symbol.
+- You do NOT compute the values — use values from the Wikipedia source material, or well-known mathematical constants (pi = 3.14159, pi^2/6 = 1.6449, e = 2.71828, etc.). If unsure, ask Nir.
+- Multiple arcs on one line are fine; arcs do NOT nest (no `[[ ... [[ ... ]] ... ]]`).
+- The `$expr$` inside the arc follows the same mathtext rules as the rest of the game file (no \tfrac, \dfrac, \displaystyle, etc.).
+- Keep the surrounding prose short and natural: "Plug in numbers: the sum [[ ... ]] meets the constant [[ ... ]], so they match."
+
+EXAMPLES from existing corridors:
+
+Basel corridor 1, robot 1 (Leonhard Euler — states the result):
+```
+EXPLAIN_ENGINEER { Plug in numbers: the sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]
+          meets the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match -- an
+          endless sum collapses into one exact value you can compute with. }
+```
+
+Maxwell corridor, robot 1 (Gauss Electric):
+```
+EXPLAIN_ENGINEER { Plug in numbers: a divergence of [[ $\nabla \cdot \mathbf{E}$ | 3.000 ]]
+          meets a source of [[ $\rho / \varepsilon_0$ | 3.000 ]], so they match. }
+```
+
+Maxwell corridor, robot 2 (Gauss Magnetic):
+```
+EXPLAIN_ENGINEER { Plug in numbers: the divergence [[ $\nabla \cdot \mathbf{B}$ | 0.000 ]]
+          meets the value [[ $0$ | 0.000 ]], so they match. }
+```
+
+The visual result: the player sees "Plug in numbers:" followed by the math expression with a downward parabola arc above it and the numerical value (e.g. "1.6449") floating above the arc. Two expressions side by side, both with arcs, both evaluating to the same number — the player SEES that they match. This is the "explain like I'm an engineer — by example, with actual numbers" experience.
 
 ## HARD RULES — ALWAYS
 
