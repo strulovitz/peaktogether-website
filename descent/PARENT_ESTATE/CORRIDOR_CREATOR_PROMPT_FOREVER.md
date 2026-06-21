@@ -171,7 +171,7 @@ NAME { }
 EXPLAIN_MATHEMATICIAN { <rich LaTeX with \stain{} and \thread{}> }
 EXPLAIN_PHYSICIST { ... }
 EXPLAIN_BIOLOGIST { ... }
-EXPLAIN_ENGINEER { <based on the PHYSICIST text but with variables replaced by concrete numbers; rich LaTeX with \stain{} and \thread{}; NO [[ ]] markup here — that is game-file-only> }
+EXPLAIN_ENGINEER { <based on the PHYSICIST text but with variables replaced by concrete numbers; rich LaTeX with \stain{} and \thread{}; ALSO add [[ $expr$ | value ]] arcs here — the baker renders them as TikZ arcs above the expression with the value on top; expressions inside [[ ]] may include \stain{} and \thread{} markup; do NOT use bare | (pipe) inside the expression — use \lvert and \rvert for absolute values> }
 
 ROBOT: 2
 ...
@@ -308,7 +308,7 @@ Every color key used in SEGMENTS (and in EYE) must be defined in your LEDGER, or
 
 Value arcs are the signature feature of the engineer layer. They are the pilot's hero move — pressing CTRL replaces the current explanation sign with the engineer slide, where abstract math becomes concrete numbers. Above each key expression, a downward-opening arc (like a sad-smiley mouth / downward parabola) spans the expression's width, with the concrete numerical value of that expression written above the arc. This makes abstract math tangible and is the visual payoff of the engineer layer.
 
-The markup syntax (used ONLY in the GAME file's EXPLAIN_ENGINEER, never in the baker file):
+The markup syntax (used in BOTH the baker file AND the game file's EXPLAIN_ENGINEER):
 
 ```
 [[ $\frac{\pi^2}{6}$ | 1.6449 ]]
@@ -317,8 +317,8 @@ The markup syntax (used ONLY in the GAME file's EXPLAIN_ENGINEER, never in the b
 This tells the rendering engine: draw the expression `$\frac{\pi^2}{6}$` normally, then draw a downward-opening parabola (sad-smiley arc) spanning the expression's width just above it, with "1.6449" centered above the arc. The arc + value use the segment's color tint if available, otherwise neutral light-grey.
 
 RULES:
-- Value arcs exist ONLY in the GAME file's EXPLAIN_ENGINEER. The baker file's EXPLAIN_ENGINEER uses full LaTeX to show concrete numbers beautifully without needing `[[ ]]` markup.
-- Each EXPLAIN_ENGINEER in the game file should have value arcs on EVERY expression that can have a concrete numerical value — not just one or two, but ALL of them. The engineer layer is based on the physicist layer (which has the most math), with variables replaced by numbers and an arc above each expression showing what it evaluates to.
+- Value arcs exist in BOTH the baker file AND the game file's EXPLAIN_ENGINEER. In the baker file, the expressions inside `[[ ]]` may include `\stain{}{}` and `\thread{}{}` markup (which the baker will expand to colored LaTeX); the baker renders arcs as TikZ curves above the expression. In the game file, the expressions use stripped mathtext (no stain/thread). The numerical values should be the same in both files. IMPORTANT: do NOT use bare `|` (pipe character) inside the expression part of `[[ ]]` — the `|` is the separator between expression and value. For absolute values, use `\lvert` and `\rvert` instead.
+- Each EXPLAIN_ENGINEER in both files should have value arcs on EVERY expression that can have a concrete numerical value — not just one or two, but ALL of them. The engineer layer is based on the physicist layer (which has the most math), with variables replaced by numbers and an arc above each expression showing what it evaluates to.
 - The value is a concrete decimal number (e.g. 1.6449, 3.000, 0.000), NOT a variable or symbol.
 - You do NOT compute the values — use values from the Wikipedia source material, or well-known mathematical constants (pi = 3.14159, pi^2/6 = 1.6449, e = 2.71828, etc.). If unsure, ask Nir.
 - Multiple arcs on one line are fine; arcs do NOT nest (no `[[ ... [[ ... ]] ... ]]`).

@@ -143,6 +143,37 @@ def _collect_thread_ids(latex: str) -> list[str]:
     return seen
 
 
+_ARC_RE = re.compile(r"\[\[\s*(.*?)\s*\|\s*(.*?)\s*\]\]")
+
+_VALUEARC_CMD = r"""\newcommand{\valuearc}[2]{%
+  \begin{tikzpicture}[baseline=(X.base)]%
+    \node[inner sep=2pt] (X) {#1};%
+    \draw[color=descentprose, line width=0.8pt]%
+      ([yshift=2pt]X.north west) %
+      .. controls ($(X.north west)!0.5!(X.north east)+(0,10pt)$) .. %
+      ([yshift=2pt]X.north east);%
+    \node[above=8pt, font=\scriptsize, text=descentprose] %
+      at ($(X.north west)!0.5!(X.north east)$) {\textbf{#2}};%
+  \end{tikzpicture}%
+}"""
+
+def expand_arcs(latex: str) -> tuple[str, bool]:
+    """Replace [[ expr | value ]] with \\valuearc{expr}{value}."""
+    matches = list(_ARC_RE.finditer(latex))
+    if not matches:
+        return latex, False
+    result: list[str] = []
+    cursor = 0
+    for m in matches:
+        result.append(latex[cursor:m.start()])
+        expr = m.group(1).strip()
+        value = m.group(2).strip()
+        result.append(rf"\valuearc{{{expr}}}{{{value}}}")
+        cursor = m.end()
+    result.append(latex[cursor:])
+    return "".join(result), True
+
+
 # ----------------------------------------------------------------------------
 # 3. Thread auto-colouring — distinct from siblings, legible on any stain.
 #    Thread colour is NOT sacred (which hue is free); only same-id==same-hue,
@@ -218,13 +249,22 @@ def build_document(explanation: str,
     color_defs = "\n".join(defs)
 
     body = expand_markers(explanation, stains, thread_colors, unknown_stains)
+    body, has_arcs = expand_arcs(body)
+
+    tikz_preamble = ""
+    arc_command = ""
+    if has_arcs:
+        tikz_preamble = "\\usepackage{lmodern}\n\\usepackage{tikz}\n\\usetikzlibrary{calc}"
+        arc_command = _VALUEARC_CMD
 
     return rf"""\documentclass[border=10pt,varwidth=14cm]{{standalone}}
 \usepackage{{amsmath,amssymb}}
 \usepackage{{xcolor}}            % provides \colorbox for the stain wash
 \usepackage[T1]{{fontenc}}
+{tikz_preamble}
 {color_defs}
 \definecolor{{descentprose}}{{rgb}}{{0.93,0.95,0.98}}  % neutral light prose
+{arc_command}
 \begin{{document}}
 \color{{descentprose}}
 \sffamily
