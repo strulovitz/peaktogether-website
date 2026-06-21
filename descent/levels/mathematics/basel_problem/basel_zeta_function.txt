@@ -1,0 +1,58 @@
+TITLE { The Basel Problem — The Riemann Zeta Function }
+
+STAINS {
+  the_sum      = 0.85 0.12 0.12   # red — the infinite series of reciprocal squares; primitive feeding BOTH the value and the convergence proof
+  bounding     = 0.90 0.78 0.10   # yellow — the act of bounding/comparing terms from above; primitive feeding the convergence proof
+  pi_constant  = 0.12 0.30 0.85   # blue — the circle number pi; primitive feeding the closed value
+  basel_value  = 0.55 0.10 0.65   # purple — pi^2/6 = red(the sum) + blue(pi): a sum of fractions that equals a power of pi
+  convergence  = 0.90 0.45 0.10   # orange — the sum is finite = red(the sum) + yellow(bounding): boundedness tames the series
+}
+
+ROBOT: 1
+  NAME { Bernhard Riemann }
+  EXPLAIN_MATHEMATICIAN { The Riemann zeta function is $\displaystyle \zeta(s)=\stain{the_sum}{$\sum_{n=1}^{\infty}\frac{1}{n^s}$}$, convergent for $\mathrm{Re}(s)>1$. The Basel problem is the single value $s=2$: $\displaystyle \stain{basel_value}{$\zeta(2)=\sum_{n=1}^{\infty}\frac{1}{n^2}$}$. The whole corridor lives inside this one function. }
+  EXPLAIN_PHYSICIST { Instead of one fixed sum, allow the exponent to vary: $\zeta(s)=\stain{the_sum}{$\sum 1/n^s$}$. For $s=3$ you add $\thread{t1}{1+\tfrac18+\tfrac1{27}+\cdots}$; for $s=2$ you add $\thread{t1}{1+\tfrac14+\tfrac19+\cdots}$. Basel is precisely the $s=2$ slice, $\stain{basel_value}{$\zeta(2)$}$, and it is finite because $s=2>1$. }
+  EXPLAIN_BIOLOGIST { Riemann's zeta function is a machine with one dial, $s$. Set the dial and it adds up $\stain{the_sum}{$1$ over every whole number raised to that power}$. Turn the dial to $2$ and you get the Basel sum, $\stain{basel_value}{$1+\tfrac14+\tfrac19+\cdots$}$ — the one famous question this whole journey is about. }
+  EXPLAIN_ENGINEER { Pick the exponent and the machine computes. At $s=3$ the sum is about $\thread{t1}{1.202}$; at $s=2$ the sum $\stain{the_sum}{$\sum 1/n^2$}$ meets the readout: $\zeta(2)=$ [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]. Basel is just one setting of the dial. }
+
+ROBOT: 2
+  NAME { Pietro Mengoli }
+  EXPLAIN_MATHEMATICIAN { Setting $s=2$ gives $\displaystyle \stain{basel_value}{$\zeta(2)=\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{1}{1^2}+\frac{1}{2^2}+\frac{1}{3^2}+\cdots$}$. This sum equals $\stain{basel_value}{$\frac{\pi^2}{6}$}\approx 1.644934$ — the Basel problem, first posed by Mengoli in 1650 and unsolved for 84 years. }
+  EXPLAIN_PHYSICIST { Take the squares $\thread{t2}{1,4,9,16,\dots}$ and add their reciprocals: $\stain{the_sum}{$\tfrac{1}{1}+\tfrac{1}{4}+\tfrac{1}{9}+\tfrac{1}{16}+\cdots$}$. The partial sums climb past $1.5$, past $1.6$, and creep toward $\stain{basel_value}{$\frac{\pi^2}{6}\approx 1.6449$}$. The number $\stain{pi_constant}{$\pi$}$ from circles appears with no circle in sight. }
+  EXPLAIN_BIOLOGIST { List the perfect squares $\thread{t2}{1,4,9,16,\dots}$, flip each into a fraction, and add them all forever. The total settles near $\stain{basel_value}{$1.645$}$. The astonishing part is that this is exactly $\stain{basel_value}{$\pi^2/6$}$ — the circle number $\stain{pi_constant}{$\pi$}$ hiding inside a pile of plain fractions. }
+  EXPLAIN_ENGINEER { Add the reciprocal squares and watch the total: it reaches [[ $\frac{1}{1}+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}$ | 1.4236 ]] after four terms and keeps climbing toward [[ $\stain{basel_value}{$\frac{\pi^2}{6}$}$ | 1.6449 ]]. The endless sum $\stain{the_sum}{$\sum 1/n^2$}$ locks onto one exact constant. }
+
+ROBOT: 3
+  NAME { Augustin-Louis Cauchy }
+  EXPLAIN_MATHEMATICIAN { The integral test (Maclaurin–Cauchy): for $f$ positive and decreasing, $\stain{the_sum}{$\sum_{n=1}^{\infty} f(n)$}$ converges iff $\stain{bounding}{$\int_{1}^{\infty} f(x)\,dx$}$ is finite. With $f(x)=\thread{t3}{1/x^2}$, $\displaystyle \stain{convergence}{$\int_{1}^{\infty}\frac{dx}{x^2}=\Big[-\frac1x\Big]_1^{\infty}=1<\infty$}$, so $\sum 1/n^2$ converges. }
+  EXPLAIN_PHYSICIST { Lay the bars $f(n)$ beside the smooth curve $\thread{t3}{f(x)=1/x^2}$. Because the curve decreases, the bars are trapped by the area underneath: $\stain{the_sum}{$\sum f(n)$}$ and $\stain{bounding}{$\int f(x)\,dx$}$ live or die together. Here $\stain{bounding}{$\int_{1}^{\infty}\tfrac{1}{x^2}\,dx = \tfrac{1}{1}=1$}$ is a finite area, so the sum is $\stain{convergence}{\text{finite too}}$. }
+  EXPLAIN_BIOLOGIST { Picture each term as a thin rectangle and the smooth curve $\thread{t3}{1/x^2}$ draped over them. The rectangles can never stick out far above a falling curve, so if the area under the curve is finite, the stack of rectangles is finite too. The area here is finite, so the $\stain{convergence}{\text{sum settles down}}$. }
+  EXPLAIN_ENGINEER { Compare the sum to an area. The curve $\thread{t3}{1/x^2}$ encloses area [[ $\int_{1}^{\infty}\frac{dx}{x^2}$ | 1.000 ]]. A finite area means a $\stain{convergence}{\text{finite sum}}$: [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] cannot blow up because its area cap is just [[ $1$ | 1.000 ]] plus the first term. }
+
+ROBOT: 4
+  NAME { Nicole Oresme }
+  EXPLAIN_MATHEMATICIAN { Direct comparison gives a tighter handle: for $n\ge 2$, $\stain{the_sum}{$\frac{1}{n^2}$}<\stain{bounding}{$\frac{1}{n(n-1)}$}$, since $\thread{t4}{n(n-1)}<\thread{t4}{n^2}$. Hence $\displaystyle \sum_{n=1}^{N}\frac{1}{n^2}<1+\stain{bounding}{$\sum_{n=2}^{N}\frac{1}{n(n-1)}$}$, dominating the tail by a friendlier series. }
+  EXPLAIN_PHYSICIST { We need an upper fence for $\stain{the_sum}{$1/n^2$}$. Compare denominators: $\thread{t4}{n(n-1)}$ is slightly \emph{smaller} than $\thread{t4}{n^2}$, so its reciprocal is slightly \emph{bigger}: $\frac{1}{n^2}<\stain{bounding}{$\frac{1}{n(n-1)}$}$ for every $n\ge 2$. So $\sum 1/n^2$ is bounded above by $1+\stain{bounding}{$\sum_{n=2}^{N}\frac{1}{n(n-1)}$}$, and the bigger series will turn out to be easy. }
+  EXPLAIN_BIOLOGIST { To prove a stack of numbers is not too tall, compare each piece to a slightly taller, friendlier piece. Each $\stain{the_sum}{$1/n^2$}$ is a little smaller than $\stain{bounding}{$\frac{1}{n(n-1)}$}$, because $n\times(n-1)$ is a little smaller than $n\times n$. Swap in the friendlier terms and the total can only go up — so if THAT total is tame, ours is too. }
+  EXPLAIN_ENGINEER { Take $n=2$: $\stain{the_sum}{$\frac{1}{n^2}$}=$ [[ $\frac{1}{2^2}$ | 0.250 ]] while $\stain{bounding}{$\frac{1}{n(n-1)}$}=$ [[ $\frac{1}{2 \cdot 1}$ | 0.500 ]] — bigger, as promised. Take $n=3$: [[ $\frac{1}{3^2}$ | 0.1111 ]] versus [[ $\frac{1}{3 \cdot 2}$ | 0.1667 ]]. Each square term hides under a friendlier roof. }
+
+ROBOT: 5
+  NAME { Evangelista Torricelli }
+  EXPLAIN_MATHEMATICIAN { The comparison series telescopes. Partial fractions give $\stain{bounding}{$\frac{1}{n(n-1)}$}=\thread{t5}{\frac{1}{n-1}}-\thread{t5}{\frac{1}{n}}$, so $\displaystyle \sum_{n=2}^{N}\Big(\thread{t5}{\frac{1}{n-1}}-\thread{t5}{\frac{1}{n}}\Big)=\stain{convergence}{$1-\frac{1}{N}$}$, the method of differences collapsing all interior terms. }
+  EXPLAIN_PHYSICIST { Split each term: $\stain{bounding}{$\frac{1}{n(n-1)}$}=\thread{t5}{\frac{1}{n-1}}-\thread{t5}{\frac{1}{n}}$. Now write the sum out: $\big(\tfrac11-\tfrac12\big)+\big(\tfrac12-\tfrac13\big)+\big(\tfrac13-\tfrac14\big)+\cdots$. Each $-\tfrac1k$ is cancelled by the next $+\tfrac1k$; only the very ends survive, leaving $\stain{convergence}{$1-\frac{1}{N}$}$. }
+  EXPLAIN_BIOLOGIST { Each friendly term secretly equals one fraction \emph{minus} the next: $\thread{t5}{\frac{1}{n-1}}-\thread{t5}{\frac{1}{n}}$. Line them up and they cancel like a collapsing telescope — the inside pieces destroy each other in pairs, and only the first and last survive, leaving $\stain{convergence}{$1-\frac{1}{N}$}$. }
+  EXPLAIN_ENGINEER { Watch it collapse with $N=4$: $\big(1-\tfrac12\big)+\big(\tfrac12-\tfrac13\big)+\big(\tfrac13-\tfrac14\big)$. The middles cancel and you are left with [[ $1-\frac{1}{4}$ | 0.750 ]]. As $N$ grows this becomes [[ $1-\frac{1}{N}$ | 1.000 ]]. }
+
+ROBOT: 6
+  NAME { Karl Weierstrass }
+  EXPLAIN_MATHEMATICIAN { Combining the steps: $\displaystyle \stain{the_sum}{$\sum_{n=1}^{N}\frac{1}{n^2}$}<1+\Big(\stain{convergence}{$1-\frac{1}{N}$}\Big)\xrightarrow{N\to\infty}\thread{t6}{2}$. The partial sums are monotone increasing and bounded above by $\thread{t6}{2}$; a monotone bounded sequence converges, so the limit exists and lies in $\stain{convergence}{$(0,2)$}$. }
+  EXPLAIN_PHYSICIST { Stack the two facts. The sum is below $1+\big(\stain{convergence}{$1-\tfrac1N$}\big)$, which rises to $\thread{t6}{2}$. And every term $1/n^2$ is positive, so the partial sums only \emph{increase}. An increasing quantity that can never pass the ceiling $\thread{t6}{2}$ must approach a definite limit — it is squeezed into the interval $\stain{convergence}{$(0,2)$}$. }
+  EXPLAIN_BIOLOGIST { Two facts together finish the job. First, the running total can never climb above $\stain{convergence}{$2$}$. Second, since every piece you add is positive, the total only ever goes up. Something that always rises but never breaks a ceiling has nowhere to go but toward a single resting value — so the sum truly converges. }
+  EXPLAIN_ENGINEER { The ceiling is $1+\big(\stain{convergence}{$1-\frac{1}{N}$}\big)\to$ [[ $1+1$ | 2.000 ]]. The floor is [[ $0$ | 0.000 ]], since every term is positive. Trapped between [[ $0$ | 0.000 ]] and [[ $2$ | 2.000 ]] and always rising, the sum must land on one value: [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]. }
+
+ROBOT: 7
+  NAME { Jacob Bernoulli }
+  EXPLAIN_MATHEMATICIAN { For every positive even integer, $\displaystyle \stain{basel_value}{$\zeta(2n)=\frac{(2\pi)^{2n}(-1)^{n+1}B_{2n}}{2\,(2n)!}$}$, where $B_{2n}$ is a Bernoulli number. At $n=1$, with $\thread{t7}{B_2=\tfrac16}$, this gives $\displaystyle \zeta(2)=\frac{(2\pi)^2\cdot\tfrac16}{2\cdot 2!}=\stain{basel_value}{$\frac{\pi^2}{6}$}$ — Basel as the first case of a whole family. }
+  EXPLAIN_PHYSICIST { The Bernoulli numbers $\thread{t7}{B_2=\tfrac16},\ B_4=-\tfrac1{30},\dots$ are a fixed sequence of rationals. Plug $n=1$ into $\zeta(2n)=\frac{(2\pi)^{2n}\lvert B_{2n}\rvert}{2(2n)!}$: numerator $\stain{pi_constant}{$(2\pi)^2$}\cdot\tfrac16=\tfrac{4\pi^2}{6}$, denominator $2\cdot 2=4$, giving $\frac{4\pi^2}{24}=\stain{basel_value}{$\frac{\pi^2}{6}$}$. The same formula at $n=2$ delivers $\zeta(4)=\tfrac{\pi^4}{90}$. }
+  EXPLAIN_BIOLOGIST { Bernoulli discovered a magic list of fractions — $\thread{t7}{\tfrac16}$, $-\tfrac1{30}$, $\tfrac1{42}$, and so on — that show up all over mathematics. Drop the first one into a single master formula and out pops $\stain{basel_value}{$\pi^2/6$}$. The very same formula, with the next fraction, hands you the answer for fourth powers, sixth powers, and beyond. }
+  EXPLAIN_ENGINEER { Feed the formula $n=1$ and the first Bernoulli number $\thread{t7}{B_2}=$ [[ $\frac{1}{6}$ | 0.1667 ]]. Numerator: $(2\pi)^2\cdot\tfrac16=$ [[ $\frac{4\pi^2}{6}$ | 6.5797 ]]. Denominator: $2\cdot 2!=$ [[ $2 \cdot 2$ | 4.000 ]]. Divide: $\stain{basel_value}{$\frac{\pi^2}{6}$}=$ [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. }

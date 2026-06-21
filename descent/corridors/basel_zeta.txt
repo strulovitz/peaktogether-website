@@ -1,0 +1,289 @@
+# ===========================================================
+# The Basel Problem — The Riemann Zeta Function. Seven sentinels,
+# tracing the Basel section of the zeta-function article: Basel as
+# the s=2 value of zeta, and the convergence machinery (integral
+# test, comparison, telescoping, bounded-monotone) down to the
+# Bernoulli-number closed form. Robot 1 is nearest the doorway.
+# Robot N maps 1:1 to baker step N (baked/basel/zeta_function/robotN_*.png).
+# LEDGER mirrors the baker STAINS: the_sum=red, bounding=yellow,
+# pi_constant=blue; basel_value=red+blue, convergence=red+yellow.
+# ===========================================================
+CORRIDOR: 1
+TITLE { The Basel Problem -- The Riemann Zeta Function }
+FLAVOR { One value of a function with a dial, tamed by comparison and unlocked by a list of magic fractions. }
+LEDGER {
+  PRIMARY the_sum     = red
+  PRIMARY bounding    = yellow
+  PRIMARY pi_constant = blue
+  BLEND   basel_value = the_sum + pi_constant
+  BLEND   convergence = the_sum + bounding
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each move
+          in placing Basel inside the zeta function and proving the sum behaves.
+          Read each robot's hologram, judge whose idea its mathematics belongs to,
+          and fire that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the zeta corridor. Basel is no longer alone here -- it is one value of a far greater function, and you must prove it even settles down. }
+EXIT_TEXT { The last sentinel falls and zeta yields its value: the sum closes into pi^2/6 through a single magic fraction. The hostages are free -- you have flown the whole length of the zeta approach. Well done. }
+
+ROBOT: 1
+NAME { Bernhard Riemann }
+BRIEFING_HINT { Defining the zeta function: a sum with the exponent left free, of
+          which Basel is one value. It yields to the man who built the function. }
+PROBLEM { The Basel sum is the case $s = 2$ of a function $\zeta(s) = \sum \frac{1}{n^s}$.
+          Who defined this function and tied it to the primes? }
+EXPLAIN_MATHEMATICIAN { The Riemann zeta function is $\zeta(s) = \sum_{n=1}^{\infty}
+          \frac{1}{n^s}$, convergent for $Re(s) > 1$. The Basel problem is the single
+          value $s = 2$: $\zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2}$. The whole
+          corridor lives inside this one function. }
+EXPLAIN_PHYSICIST { Instead of one fixed sum, allow the exponent to vary:
+          $\zeta(s) = \sum 1/n^s$. For $s = 3$ you add $1 + \frac{1}{8} + \frac{1}{27}
+          + \cdots$; for $s = 2$ you add $1 + \frac{1}{4} + \frac{1}{9} + \cdots$.
+          Basel is precisely the $s = 2$ slice, $\zeta(2)$, finite because $s = 2 > 1$. }
+EXPLAIN_BIOLOGIST { Riemann's zeta function is a machine with one dial, $s$. Set the
+          dial and it adds up $1$ over every whole number raised to that power. Turn
+          the dial to $2$ and you get the Basel sum, $1 + \frac{1}{4} + \frac{1}{9} +
+          \cdots$ -- the one famous question this whole journey is about. }
+EXPLAIN_ENGINEER { Pick the exponent and the machine computes. At $s = 3$ the sum is
+          about $1.202$; at $s = 2$ the sum meets the readout
+          $\zeta(2) =$ [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]. Basel is just one
+          setting of the dial. }
+SEGMENTS {
+  $\zeta(s) = \sum_{n=1}^{\infty} \frac{1}{n^s}$ | the_sum
+  $=$                                            | NEUTRAL
+  $\zeta(2)$                                     | basel_value
+}
+EYE { the_sum }
+VULNERABLE_TO { riemann }
+FIZZLE mengoli { Naming the Basel VALUE pi^2/6 comes one step deeper; this robot is the whole function with its exponent left free -- think of the man who first extended that function and linked it to the primes. }
+FIZZLE cauchy { Comparing the sum to an integral proves convergence later; here you are only asked who DEFINED the function with a variable exponent -- name the builder of zeta. }
+FIZZLE oresme { Comparing each term to a friendlier one is a later move; this sentinel is the definition of the whole zeta family -- recall who carried that function into the complex plane. }
+FIZZLE torricelli { Telescoping collapses a sum further down; this robot just defines $\zeta(s) = \sum 1/n^s$ for any exponent -- name the mathematician whose name the function bears. }
+FIZZLE weierstrass { Proving the bounded sum settles comes later; here the question is who DEFINED the function of which Basel is one value -- think of the man tied to its deepest hypothesis. }
+FIZZLE jacob_bernoulli { The closed form via your magic numbers is the finale; this opening robot is the bare definition of the zeta function -- name the man who generalized and studied it. }
+
+ROBOT: 2
+NAME { Pietro Mengoli }
+BRIEFING_HINT { Posing the Basel value: the s=2 sum equals pi^2/6. This sentinel
+          yields to the man who first posed the problem. }
+PROBLEM { Setting $s = 2$ gives the Basel sum $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$.
+          Who first posed this famous problem? }
+EXPLAIN_MATHEMATICIAN { Setting $s = 2$ gives $\zeta(2) = \sum_{n=1}^{\infty}
+          \frac{1}{n^2} = \frac{1}{1^2} + \frac{1}{2^2} + \frac{1}{3^2} + \cdots$.
+          This equals $\frac{\pi^2}{6} \approx 1.644934$ -- the Basel problem, first
+          posed by Mengoli in 1650 and unsolved for 84 years. }
+EXPLAIN_PHYSICIST { Take the squares $1, 4, 9, 16, \dots$ and add their reciprocals:
+          $\frac{1}{1} + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots$. The
+          partial sums climb past $1.5$, past $1.6$, toward $\frac{\pi^2}{6} \approx
+          1.6449$. The number $\pi$ from circles appears with no circle in sight. }
+EXPLAIN_BIOLOGIST { List the perfect squares $1, 4, 9, 16, \dots$, flip each into a
+          fraction, and add them all forever. The total settles near $1.645$. The
+          astonishing part is that this is exactly $\pi^2/6$ -- the circle number
+          $\pi$ hiding inside a pile of plain fractions. }
+EXPLAIN_ENGINEER { Add the reciprocal squares and watch the total: it reaches
+          [[ $\frac{1}{1}+\frac{1}{4}+\frac{1}{9}+\frac{1}{16}$ | 1.4236 ]] after
+          four terms and keeps climbing toward [[ $\frac{\pi^2}{6}$ | 1.6449 ]].
+          The endless sum locks onto one exact constant. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$ | the_sum
+  $=$                                 | NEUTRAL
+  $\frac{\pi^2}{6}$                   | basel_value
+}
+EYE { basel_value }
+VULNERABLE_TO { mengoli }
+FIZZLE riemann { The whole zeta function was the first sentinel's prize; this robot is the SPECIFIC s=2 value pi^2/6 and who first asked for it -- think of the man who posed the puzzle, not the one who generalized it. }
+FIZZLE cauchy { The integral test proves this sum is finite further on; here you are asked who first POSED the value of the s=2 sum -- name the early mathematician who set the challenge. }
+FIZZLE oresme { Comparison bounds the sum later; this sentinel is about who first asked for the value of $\sum 1/n^2$ -- recall the man whose question became the Basel problem. }
+FIZZLE torricelli { Telescoping is a tool used in the convergence proof; this robot just states the famous value and asks who posed it -- name the problem's originator. }
+FIZZLE weierstrass { Boundedness finishes the convergence argument; here the robot is the headline value pi^2/6 itself -- recall who first set this sum as an open challenge. }
+FIZZLE jacob_bernoulli { Your magic-number formula PRODUCES pi^2/6 at the very end; this robot only POSES the question of its value -- name the man who first asked it. }
+
+ROBOT: 3
+NAME { Augustin-Louis Cauchy }
+BRIEFING_HINT { The integral test: a sum of positive decreasing terms converges
+          exactly when the matching integral is finite. It yields to the test's namesake. }
+PROBLEM { A sum of positive decreasing terms converges iff its matching integral is
+          finite. Whose convergence test compares a sum to an integral? }
+EXPLAIN_MATHEMATICIAN { The integral test (Maclaurin-Cauchy): for $f$ positive and
+          decreasing, $\sum_{n=1}^{\infty} f(n)$ converges iff $\int_{1}^{\infty}
+          f(x) \, dx$ is finite. With $f(x) = 1/x^2$, $\int_{1}^{\infty} \frac{dx}{x^2}
+          = -\frac{1}{x} \rvert_1^{\infty} = 1 < \infty$, so $\sum 1/n^2$ converges. }
+EXPLAIN_PHYSICIST { Lay the bars $f(n)$ beside the smooth curve $f(x) = 1/x^2$.
+          Because the curve decreases, the bars are trapped by the area underneath:
+          $\sum f(n)$ and $\int f(x) \, dx$ live or die together. Here
+          $\int_{1}^{\infty} \frac{1}{x^2} \, dx = 1$ is a finite area, so the sum is
+          finite too. }
+EXPLAIN_BIOLOGIST { Picture each term as a thin rectangle and the smooth curve
+          $1/x^2$ draped over them. The rectangles can never stick out far above a
+          falling curve, so if the area under the curve is finite, the stack of
+          rectangles is finite too. The area here is finite, so the sum settles down. }
+EXPLAIN_ENGINEER { Compare the sum to an area. The curve $1/x^2$ encloses area
+          [[ $\int_{1}^{\infty}\frac{dx}{x^2}$ | 1.000 ]]. A finite area means a
+          finite sum: [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] cannot blow up because
+          its area cap is just [[ $1$ | 1.000 ]] plus the first term. }
+SEGMENTS {
+  $\int_{1}^{\infty} \frac{dx}{x^2}$ | bounding
+  $=$                                | NEUTRAL
+  $1$                                | convergence
+}
+EYE { convergence }
+VULNERABLE_TO { cauchy }
+FIZZLE riemann { The whole zeta function was defined two steps back; this robot is the area-versus-sum convergence test -- think of the analyst whose name that integral test carries. }
+FIZZLE mengoli { Mengoli posed the value; this sentinel instead PROVES the sum is finite by comparing it to an integral -- recall whose convergence test that is. }
+FIZZLE oresme { Comparing each term to a friendlier term is the NEXT robot; this one compares the whole sum to an integral under a curve -- name the founder of that test. }
+FIZZLE torricelli { Telescoping collapses the friendly comparison sum later; this robot is the integral test itself -- recall the analyst it is named after. }
+FIZZLE weierstrass { Boundedness finishes the argument afterward; here the specific tool is comparing a sum to the area under a curve -- name the man whose test this is. }
+FIZZLE jacob_bernoulli { Your closed-form formula is the finale; this robot is the integral test for convergence -- think of the rigorous analyst whose name it bears. }
+
+ROBOT: 4
+NAME { Nicole Oresme }
+BRIEFING_HINT { Direct comparison: each square term hides under a slightly larger,
+          friendlier term. This sentinel yields to a master of medieval series. }
+PROBLEM { For each $n \geq 2$, $\frac{1}{n^2} < \frac{1}{n(n-1)}$, a friendlier term.
+          Who pioneered bounding a series by comparing its terms? }
+EXPLAIN_MATHEMATICIAN { Direct comparison gives a tighter handle: for $n \geq 2$,
+          $\frac{1}{n^2} < \frac{1}{n(n-1)}$, since $n(n-1) < n^2$. Hence
+          $\sum_{n=1}^{N} \frac{1}{n^2} < 1 + \sum_{n=2}^{N} \frac{1}{n(n-1)}$,
+          dominating the tail by a friendlier series. }
+EXPLAIN_PHYSICIST { We need an upper fence for $1/n^2$. Compare denominators:
+          $n(n-1)$ is slightly smaller than $n^2$, so its reciprocal is slightly
+          bigger: $\frac{1}{n^2} < \frac{1}{n(n-1)}$ for every $n \geq 2$. So
+          $\sum 1/n^2$ is bounded above by $1 + \sum_{n=2}^{N} \frac{1}{n(n-1)}$,
+          and the bigger series will turn out to be easy. }
+EXPLAIN_BIOLOGIST { To prove a stack of numbers is not too tall, compare each piece
+          to a slightly taller, friendlier piece. Each $1/n^2$ is a little smaller
+          than $\frac{1}{n(n-1)}$, because $n$ times $(n-1)$ is a little smaller than
+          $n$ times $n$. Swap in the friendlier terms and the total can only go up --
+          so if THAT total is tame, ours is too. }
+EXPLAIN_ENGINEER { Take $n = 2$: [[ $\frac{1}{2^2}$ | 0.250 ]] while
+          [[ $\frac{1}{2 \cdot 1}$ | 0.500 ]] -- bigger, as promised. Take $n = 3$:
+          [[ $\frac{1}{3^2}$ | 0.1111 ]] versus [[ $\frac{1}{3 \cdot 2}$ | 0.1667 ]].
+          Each square term hides under a friendlier roof. }
+SEGMENTS {
+  $\frac{1}{n^2}$       | the_sum
+  $<$                   | NEUTRAL
+  $\frac{1}{n(n-1)}$    | bounding
+}
+EYE { bounding }
+VULNERABLE_TO { oresme }
+FIZZLE riemann { The whole zeta function lives upstream; this robot is the act of bounding each square term by a friendlier one -- think of the medieval master of comparing series, not the man who generalized zeta. }
+FIZZLE mengoli { Mengoli posed the value; here you bound each term $1/n^2$ from above by $1/n(n-1)$ -- recall who pioneered comparing the terms of a series. }
+FIZZLE cauchy { The integral test compared the WHOLE sum to an area; this robot compares each TERM to a slightly larger term -- name the scholar known for that term-by-term comparison. }
+FIZZLE torricelli { The friendly comparison series telescopes in the NEXT robot; this one is the comparison step that produces those friendly terms -- recall who first bounded series this way. }
+FIZZLE weierstrass { Boundedness wraps everything up later; here the move is the direct comparison $1/n^2 < 1/n(n-1)$ -- name the medieval thinker famed for such comparisons. }
+FIZZLE jacob_bernoulli { Your magic-number formula is the finale; this robot is the humble term-by-term comparison -- think of the early master who bounded a series by friendlier terms. }
+
+ROBOT: 5
+NAME { Evangelista Torricelli }
+BRIEFING_HINT { Telescoping: each friendly term splits into a difference, and the sum
+          collapses to its endpoints. This sentinel yields to an early master of the method. }
+PROBLEM { Each term $\frac{1}{n(n-1)}$ splits as $\frac{1}{n-1} - \frac{1}{n}$, so the
+          sum collapses to $1 - \frac{1}{N}$. Whose method of differences is this? }
+EXPLAIN_MATHEMATICIAN { The comparison series telescopes. Partial fractions give
+          $\frac{1}{n(n-1)} = \frac{1}{n-1} - \frac{1}{n}$, so $\sum_{n=2}^{N} \left(
+          \frac{1}{n-1} - \frac{1}{n} \right) = 1 - \frac{1}{N}$, the method of
+          differences collapsing all interior terms. }
+EXPLAIN_PHYSICIST { Split each term: $\frac{1}{n(n-1)} = \frac{1}{n-1} - \frac{1}{n}$.
+          Now write the sum out: $\left( \frac{1}{1} - \frac{1}{2} \right) + \left(
+          \frac{1}{2} - \frac{1}{3} \right) + \left( \frac{1}{3} - \frac{1}{4} \right)
+          + \cdots$. Each $-\frac{1}{k}$ is cancelled by the next $+\frac{1}{k}$; only
+          the very ends survive, leaving $1 - \frac{1}{N}$. }
+EXPLAIN_BIOLOGIST { Each friendly term secretly equals one fraction minus the next:
+          $\frac{1}{n-1} - \frac{1}{n}$. Line them up and they cancel like a
+          collapsing telescope -- the inside pieces destroy each other in pairs, and
+          only the first and last survive, leaving $1 - \frac{1}{N}$. }
+EXPLAIN_ENGINEER { Watch it collapse with $N = 4$: $\left( 1 - \frac{1}{2} \right) +
+          \left( \frac{1}{2} - \frac{1}{3} \right) + \left( \frac{1}{3} - \frac{1}{4}
+          \right)$. The middles cancel and you are left with
+          [[ $1-\frac{1}{4}$ | 0.750 ]]. As $N$ grows this becomes
+          [[ $1-\frac{1}{N}$ | 1.000 ]]. }
+SEGMENTS {
+  $\frac{1}{n-1} - \frac{1}{n}$ | bounding
+  $=$                           | NEUTRAL
+  $1 - \frac{1}{N}$             | convergence
+}
+EYE { convergence }
+VULNERABLE_TO { torricelli }
+FIZZLE riemann { The zeta function was defined far upstream; this robot is the telescoping collapse of a sum of differences -- think of the early geometer who stated the formula for such a series. }
+FIZZLE mengoli { Mengoli posed the value; here each friendly term splits and the sum collapses to its ends -- recall the early master who first wrote down a telescoping sum. }
+FIZZLE cauchy { Cauchy's integral test bounded the sum by an area; this robot is the algebraic collapse $\frac{1}{n-1} - \frac{1}{n}$ summing to $1 - 1/N$ -- name the early author of that method of differences. }
+FIZZLE oresme { Oresme's comparison PRODUCED these friendly terms; this robot is what happens when you SUM them -- they telescope -- so recall who first stated the partial-sum formula for such a series. }
+FIZZLE weierstrass { Proving the bounded sum settles comes in the next robot; this one is the telescoping cancellation itself -- name the early geometer credited with the method of differences. }
+FIZZLE jacob_bernoulli { Your closed-form formula is the grand finale; this robot is the humble telescoping of a difference series -- think of the early mathematician who first summed one. }
+
+ROBOT: 6
+NAME { Karl Weierstrass }
+BRIEFING_HINT { Bounded and increasing means convergent: the partial sums rise but
+          never pass 2. This sentinel yields to the founder of rigorous limits. }
+PROBLEM { The partial sums increase yet stay below $2$; an increasing bounded
+          sequence must converge. Who made this monotone-convergence reasoning rigorous? }
+EXPLAIN_MATHEMATICIAN { Combining the steps: $\sum_{n=1}^{N} \frac{1}{n^2} < 1 +
+          \left( 1 - \frac{1}{N} \right) \to 2$ as $N \to \infty$. The partial sums
+          are monotone increasing and bounded above by $2$; a monotone bounded
+          sequence converges, so the limit exists and lies in $(0, 2)$. }
+EXPLAIN_PHYSICIST { Stack the two facts. The sum is below $1 + \left( 1 - \frac{1}{N}
+          \right)$, which rises to $2$. And every term $1/n^2$ is positive, so the
+          partial sums only increase. An increasing quantity that can never pass the
+          ceiling $2$ must approach a definite limit -- it is squeezed into the
+          interval $(0, 2)$. }
+EXPLAIN_BIOLOGIST { Two facts together finish the job. First, the running total can
+          never climb above $2$. Second, since every piece you add is positive, the
+          total only ever goes up. Something that always rises but never breaks a
+          ceiling has nowhere to go but toward a single resting value -- so the sum
+          truly converges. }
+EXPLAIN_ENGINEER { The ceiling is $1 + \left( 1 - \frac{1}{N} \right) \to$
+          [[ $1+1$ | 2.000 ]]. The floor is [[ $0$ | 0.000 ]], since every term is
+          positive. Trapped between [[ $0$ | 0.000 ]] and [[ $2$ | 2.000 ]] and
+          always rising, the sum must land on one value: [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]. }
+SEGMENTS {
+  $\sum \frac{1}{n^2} < 2$ | convergence
+  $=$                      | NEUTRAL
+  $(0, 2)$                 | convergence
+}
+EYE { convergence }
+VULNERABLE_TO { weierstrass }
+FIZZLE riemann { The zeta function was defined long upstream; this robot is the rigorous claim that an increasing bounded sum must converge -- think of the founder of careful limit reasoning, not the one who generalized zeta. }
+FIZZLE mengoli { Mengoli posed the value; this sentinel is the rigorous finish -- bounded-and-increasing forces a limit -- so recall who built the rigorous theory of limits. }
+FIZZLE cauchy { Cauchy's integral test gave one bound, but this robot is the monotone-convergence principle that turns boundedness into a limit -- name the master of epsilon-delta rigour. }
+FIZZLE oresme { Oresme compared the terms; this robot uses the resulting bound to conclude the sum converges -- recall who set the rigorous foundations of such limit arguments. }
+FIZZLE torricelli { Torricelli's telescoping gave the ceiling; this robot is the leap from a ceiling to an actual limit -- name the analyst who made that leap rigorous. }
+FIZZLE jacob_bernoulli { Your closed-form value is the finale; this robot only proves a finite limit EXISTS, by boundedness and monotonicity -- think of the founder of rigorous analysis. }
+
+ROBOT: 7
+NAME { Jacob Bernoulli }
+BRIEFING_HINT { The closed form via Bernoulli numbers: a master formula turns the
+          first magic fraction into pi^2/6. This sentinel yields to their discoverer. }
+PROBLEM { A single formula gives $\zeta(2n)$ from a Bernoulli number; with $B_2 =
+          \frac{1}{6}$ it yields $\frac{\pi^2}{6}$. Whose magic numbers are these? }
+EXPLAIN_MATHEMATICIAN { For every positive even integer, $\zeta(2n) =
+          \frac{(2\pi)^{2n} (-1)^{n+1} B_{2n}}{2 (2n)!}$, where $B_{2n}$ is a Bernoulli
+          number. At $n = 1$, with $B_2 = \frac{1}{6}$, this gives $\zeta(2) =
+          \frac{(2\pi)^2 \cdot \frac{1}{6}}{2 \cdot 2!} = \frac{\pi^2}{6}$ -- Basel as
+          the first case of a whole family. }
+EXPLAIN_PHYSICIST { The Bernoulli numbers $B_2 = \frac{1}{6}, B_4 = -\frac{1}{30},
+          \dots$ are a fixed sequence of rationals. Plug $n = 1$ into $\zeta(2n) =
+          \frac{(2\pi)^{2n} \lvert B_{2n} \rvert}{2 (2n)!}$: numerator $(2\pi)^2 \cdot \frac{1}{6}
+          = \frac{4\pi^2}{6}$, denominator $2 \cdot 2 = 4$, giving $\frac{4\pi^2}{24}
+          = \frac{\pi^2}{6}$. The same formula at $n = 2$ delivers $\zeta(4) =
+          \frac{\pi^4}{90}$. }
+EXPLAIN_BIOLOGIST { Bernoulli discovered a magic list of fractions -- $\frac{1}{6}$,
+          $-\frac{1}{30}$, $\frac{1}{42}$, and so on -- that show up all over
+          mathematics. Drop the first one into a single master formula and out pops
+          $\pi^2/6$. The very same formula, with the next fraction, hands you the
+          answer for fourth powers, sixth powers, and beyond. }
+EXPLAIN_ENGINEER { Feed the formula $n = 1$ and the first Bernoulli number
+          $B_2 =$ [[ $\frac{1}{6}$ | 0.1667 ]]. Numerator: $(2\pi)^2 \cdot \frac{1}{6}
+          =$ [[ $\frac{4\pi^2}{6}$ | 6.5797 ]]. Denominator: $2 \cdot 2! =$
+          [[ $2 \cdot 2$ | 4.000 ]]. Divide: [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. }
+SEGMENTS {
+  $\zeta(2n) = \frac{(2\pi)^{2n} \lvert B_{2n} \rvert}{2 (2n)!}$ | basel_value
+  $=$                                                | NEUTRAL
+  $\frac{\pi^2}{6}$                                  | basel_value
+}
+EYE { basel_value }
+VULNERABLE_TO { jacob_bernoulli }
+FIZZLE riemann { Riemann generalized zeta and tied it to the primes, but this final robot is the closed-form value built from a special list of rationals -- name the man who discovered those numbers. }
+FIZZLE mengoli { Mengoli POSED the value; this robot PRODUCES it from a master formula and a magic fraction -- recall whose numbers fill that formula. }
+FIZZLE cauchy { Cauchy's test proved the sum is finite; this robot computes its exact value from a special sequence of rationals -- name the man those numbers honor. }
+FIZZLE oresme { Oresme bounded the sum; this final sentinel delivers its exact closed form via a famous list of fractions -- recall who discovered that list. }
+FIZZLE torricelli { Torricelli's telescoping helped prove convergence; this robot supplies the exact value through a master formula -- name the discoverer of the numbers it uses. }
+FIZZLE weierstrass { Weierstrass proved a limit exists; this robot names that limit exactly using a special sequence of rationals -- think of the man whose numbers those are. }
