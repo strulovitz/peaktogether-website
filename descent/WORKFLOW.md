@@ -506,7 +506,7 @@ Two child attempts. First child (OLD) had no value arcs + stain errors. Second c
 
 ### ON RESTART — Read these in order:
 1. **WORKFLOW.md** (this file)
-2. `PARENT_ESTATE/SESSION_2026-06-21.md` — previous session context
+2. `PARENT_ESTATE/SESSION_2026-06-22_EVENING.md` — latest session context ⭐
 3. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
 
 ## 🔴 SESSION LOG — June 22, 2026 MORNING (DeepSeek V4 Pro — arc baking + corridor 3 🎉)
@@ -550,6 +550,38 @@ Child Opus produced all 3 files. DeepSeek fixed child's `$[[ ]]$` dollar-sign wr
 | app.py points to | `levels/basel_c3.txt` (corridor 3) |
 | Git | Clean, pushed |
 | Next | Corridors 4-10 for Basel (~10 total) |
+
+## 🔴 SESSION LOG — June 22, 2026 EVENING (DeepSeek V4 Pro — corridors 4, 5, 6 🎉)
+
+### Corridor 4 — "Euler's Formula and L'Hopital's Rule" ✅
+7 robots: Euler, Weierstrass, Cauchy, Cotes, Riccati, l'Hopital, Tannery. 28/28 baked, 0 failures. 4 new portraits (Cotes, Riccati, l'Hopital, Tannery). Fixed child's `$[[ ]]$` wrapping, added missing baker arcs, replaced `\coth` with plain text in game file.
+
+### Corridor 5 — "A Proof Using Fourier Series" ✅
+7 robots: Euler, Parseval, Fourier, Argand, Riemann, Hilbert, Bessel. 28/28 baked, 0 failures. 5 new portraits. Child's output was CUT OFF mid-Robot 7 — Nir got the rest from child. Fixed bare `|` inside `[[ ]]` arcs with `\lVert`/`\rVert`.
+
+### Corridor 6 — "Parseval's Identity & the Recurrence" ✅
+7 robots: Parseval, Pythagoras, Hilbert, Fourier, Taylor, Euler, Riemann. 28/28 baked, 0 failures. 1 new portrait (Pythagoras). Fixed thread double-dollar trap in Robot 2 baker. Child forgot ALL arcs in baker — got fix from child (7 EXPLAIN_ENGINEER lines). Fixed bare `|` in Robot 1 game arcs.
+
+### Recurring child bugs documented:
+1. `$[[ ]]$` wrapping — arcs inside outer `$...$` breaks rendering
+2. Baker arcs forgotten — children include arcs in game but not baker
+3. Bare `|` inside `[[ ]]` — breaks arc regex (use `\lvert`/`\rvert`)
+4. Thread double-dollar trap — `$\thread{}{$...$}$` crashes LaTeX
+
+### Current state
+| Item | Status |
+|------|--------|
+| Basel corridor 1 (Euler's 1734 approach) | ✅ Playable |
+| Basel corridor 2 (Symmetric-Polynomial Ascent) | ✅ Playable, arcs re-baked |
+| Basel corridor 3 (Riemann Zeta Function) | ✅ Playable |
+| Basel corridor 4 (Euler's Formula & L'Hopital) | ✅ Playable |
+| Basel corridor 5 (Fourier Series) | ✅ Playable |
+| Basel corridor 6 (Parseval's Identity) | ✅ Playable |
+| Value-arc baking (TikZ) | ✅ Working |
+| FOREVER prompt | ✅ Updated (arcs in both files + pipe warning) |
+| app.py points to | `levels/basel_c6.txt` (corridor 6) |
+| Git | Clean, pushed |
+| Next | Corridors 7-10 for Basel (~10 total) |
 
 ## 🔴 SESSION LOG — June 13, 2026
 
