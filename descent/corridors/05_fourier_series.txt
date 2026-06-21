@@ -1,0 +1,294 @@
+# ===========================================================
+# The Basel Problem — A Proof Using Fourier Series. Seven sentinels,
+# one per step of the Parseval-on-f(x)=x route to sum 1/n^2 = pi^2/6.
+# Robot 1 is nearest the doorway. Each yields to exactly ONE
+# mathematician id. Robot N maps 1:1 to baker step N.
+# LEDGER mirrors the baker STAINS: coefficients=red, basis=yellow,
+# integral=blue; parseval=red+yellow, fourier_coeff=yellow+blue,
+# answer=red+blue.
+# ===========================================================
+CORRIDOR: 1
+TITLE { The Basel Problem -- A Proof Using Fourier Series }
+FLAVOR { The energy of a simple slanted line, measured two ways, and the circle hidden between them. }
+LEDGER {
+  PRIMARY coefficients  = red
+  PRIMARY basis         = yellow
+  PRIMARY integral      = blue
+  BLEND   parseval      = coefficients + basis
+  BLEND   fourier_coeff = basis + integral
+  BLEND   answer        = coefficients + integral
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in the Fourier descent on the Basel sum. Read each robot's blue
+          hologram face, judge whose idea its mathematics belongs to, and fire
+          that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the Fourier corridor. Somewhere ahead, the energy of a straight line is waiting to become a circle. }
+EXIT_TEXT { The last sentinel falls and the two energies snap together at pi^2/6. The hostages are free -- you have flown the whole length of the Fourier proof. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the prize itself: the closed form of the sum
+          of inverse squares. It yields to the man who first named the result. }
+PROBLEM { Identify the value of the Basel sum $\sum_{n=1}^{\infty} \frac{1}{n^2}$ --
+          who first proved it equals $\frac{\pi^2}{6}$? }
+EXPLAIN_MATHEMATICIAN { The Basel problem asks for the closed form of
+          $\sum_{n=1}^{\infty} \frac{1}{n^2}$. The Fourier route obtains
+          $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6} \approx 1.644934$ by
+          applying Parseval's identity to the simple function $f(x) = x$ on
+          $[-\pi, \pi]$. }
+EXPLAIN_PHYSICIST { Add $1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots$; it
+          settles near $1.645$. The exact value is $\frac{\pi^2}{6}$ -- a circle
+          constant. This proof reaches it not through circles but through the energy
+          of the plain straight line $f(x) = x$. }
+EXPLAIN_BIOLOGIST { Add the reciprocals of the squares $1, 4, 9, 16, \dots$ forever
+          and the pile settles near $1.645$. The shocking fact is that this is exactly
+          $\frac{\pi^2}{6}$ -- the circle number $\pi$, found by studying a slanted line. }
+EXPLAIN_ENGINEER { This sum is the total power you get when you break the slanted
+          signal $f(x) = x$ into pure tones and add the strength of each. The sum
+          [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] equals the constant
+          [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$   | answer
+  $=$                                   | NEUTRAL
+  $\frac{\pi^2}{6}$                     | answer
+}
+EYE { answer }
+VULNERABLE_TO { euler }
+FIZZLE parseval { Equating a signal's energy with its spectrum is the very heart of this proof, but right here you are only being asked to NAME the famous result -- think about WHO first summed these squares. }
+FIZZLE fourier { Computing the coefficient of each tone is a true step further inside this proof, but this opening robot just states the headline answer -- name the person who first claimed it. }
+FIZZLE argand { Taking the squared modulus of a coefficient happens deeper in the chain, but no coefficient appears yet -- this sentinel states the prize, so name its discoverer. }
+FIZZLE riemann { Evaluating the energy integral comes later in the corridor, but here no integral is being computed -- you are being asked who owns this famous sum. }
+FIZZLE hilbert { The geometry of projections underlies the whole method, but this first robot only poses the result itself -- recall who first announced that the squares sum to pi-squared over six. }
+FIZZLE bessel { Folding the two-sided spectrum into one is the closing move, but this opening sentinel simply states the prize -- name the man who first solved it in 1734. }
+
+ROBOT: 2
+NAME { Marc-Antoine Parseval }
+BRIEFING_HINT { The Energy Identity: a signal's energy equals the sum of its squared
+          Fourier coefficients. This sentinel yields to the author of that identity. }
+PROBLEM { One energy, two sides: $\sum \lvert c_n \rvert^2$ on the spectral side and
+          $\frac{1}{2\pi} \int_{-\pi}^{\pi} \lvert f(x) \rvert^2 dx$ on the wave side. Whose
+          identity sets them equal? }
+EXPLAIN_MATHEMATICIAN { Parseval's identity equates the energy of a signal with the
+          energy of its spectrum: $\sum_{n=-\infty}^{\infty} \lvert c_n \rvert^2 = \frac{1}{2\pi}
+          \int_{-\pi}^{\pi} \lvert f(x) \rvert^2 dx$. The left side sums the squared Fourier
+          coefficients; the right side integrates the square of $f$. }
+EXPLAIN_PHYSICIST { One quantity, measured two ways. On the right, $\frac{1}{2\pi}
+          \int_{-\pi}^{\pi} \lvert f(x) \rvert^2 dx$ is the average squared height of the curve --
+          its energy. On the left, $\sum \lvert c_n \rvert^2$ is the same energy rebuilt from each
+          frequency. They must be equal, so $\sum \lvert c_n \rvert^2 = \frac{1}{2\pi}
+          \int_{-\pi}^{\pi} x^2 dx$. }
+EXPLAIN_BIOLOGIST { Think of a chord. You can measure its loudness directly, or add up
+          the loudness of every note inside it -- and get the same total. Parseval's
+          identity says the energy in the whole wave equals the energy spread across
+          all its pure tones. Nothing is lost; the two totals match. }
+EXPLAIN_ENGINEER { Parseval is energy bookkeeping: total signal energy equals total
+          spectral energy. The spectral total [[ $2\sum \frac{1}{n^2}$ | 3.2899 ]]
+          equals the wave total [[ $\frac{1}{2\pi}\int_{-\pi}^{\pi} x^2 dx$ | 3.2899 ]],
+          so they balance. }
+SEGMENTS {
+  $\sum_{n=-\infty}^{\infty} \lvert c_n \rvert^2$       | parseval
+  $=$                                                 | NEUTRAL
+  $\frac{1}{2\pi} \int_{-\pi}^{\pi} \lvert f(x) \rvert^2 dx$ | integral
+}
+EYE { parseval }
+VULNERABLE_TO { parseval }
+FIZZLE euler { Naming the final result is what the first sentinel wanted; this robot is the law that LINKS the two energies -- think of the man whose identity equates a sum of squared coefficients with an integral. }
+FIZZLE fourier { Computing each coefficient comes one step later; this robot is the overarching identity that sets the whole spectral sum equal to the wave's energy -- recall who first proved that balance. }
+FIZZLE argand { Squaring a single coefficient's modulus feeds the left side, but this sentinel is the grand statement that both sides are equal -- name the author of the energy identity. }
+FIZZLE riemann { Evaluating the energy integral fills in the right side, but this robot is the identity that DECLARES the two sides equal -- recall whose name that balance carries. }
+FIZZLE hilbert { The orthonormal geometry explains WHY this identity holds, but the robot asks for the identity itself -- name the mathematician it is named after. }
+FIZZLE bessel { Folding the two-sided sum is a later bookkeeping step; this sentinel is the master identity equating spectrum and wave energy -- recall who first stated it. }
+
+ROBOT: 3
+NAME { Joseph Fourier }
+BRIEFING_HINT { The Coefficient Formula: extract each tone's strength by multiplying
+          the signal by that tone and averaging. This sentinel yields to its inventor. }
+PROBLEM { Each coefficient is $c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} f(x) e^{-inx} dx$
+          -- the strength of tone $n$ inside $f$. Whose formula is this? }
+EXPLAIN_MATHEMATICIAN { The Fourier coefficients of $f$ are $c_n = \frac{1}{2\pi}
+          \int_{-\pi}^{\pi} f(x) e^{-inx} dx$. For $f(x) = x$, integration by parts
+          gives $c_n = \frac{(-1)^n}{n} i$ for $n \neq 0$ and $c_0 = 0$. Each $c_n$ is
+          the amount of the pure tone $e^{inx}$ contained in $f$. }
+EXPLAIN_PHYSICIST { To find how much of frequency $n$ lives in $f$, multiply $f$ by the
+          matching tone $e^{-inx}$ and average: $c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi}
+          x \, e^{-inx} dx$. For $f(x) = x$, integrating by parts yields
+          $c_n = \frac{(-1)^n}{n} i$. The other tones average to zero; only tone $n$
+          survives. }
+EXPLAIN_BIOLOGIST { To pull one instrument out of a recording, you tune in to its
+          pitch and listen for how strongly it rings. The coefficient formula does
+          exactly that: it multiplies the signal by a chosen pure tone and averages,
+          and out drops the strength of that one tone. The others cancel away. }
+EXPLAIN_ENGINEER { This is the analysis step: extract each tone's amplitude. For the
+          line $f(x) = x$, the recipe $c_n = \frac{1}{2\pi} \int_{-\pi}^{\pi} x \,
+          e^{-inx} dx$ gives a clean answer. At $n = 1$ the strength is size
+          [[ $\frac{(-1)^n}{n} i$ | 1.000 ]], and the steady part is [[ $c_0$ | 0.000 ]]. }
+SEGMENTS {
+  $c_n$                                              | coefficients
+  $=$                                                | NEUTRAL
+  $\frac{1}{2\pi} \int_{-\pi}^{\pi} x \, e^{-inx} dx$ | fourier_coeff
+}
+EYE { fourier_coeff }
+VULNERABLE_TO { fourier }
+FIZZLE euler { Euler assembles the final answer, but this robot is the specific recipe that turns a signal into its tone-strengths -- think of the man who first decomposed functions into sines and cosines. }
+FIZZLE parseval { Parseval's identity USES these coefficients on its left side; this robot is the formula that COMPUTES each one -- recall who invented the analysis of a function into pure frequencies. }
+FIZZLE argand { Squaring the modulus comes after you HAVE the coefficient; this sentinel is the integral recipe that produces $c_n$ in the first place -- name the founder of frequency analysis. }
+FIZZLE riemann { The energy integral is a different integral entirely; here you face the projection integral that extracts one tone -- recall whose method this analysis is. }
+FIZZLE hilbert { The abstract inner-product view explains this formula, but the robot asks for the concrete coefficient recipe -- name the man who first wrote a function as a sum of tones. }
+FIZZLE bessel { Folding twin frequencies happens at the end; this robot is the formula for a single coefficient -- think of the founder of the series of sines and cosines. }
+
+ROBOT: 4
+NAME { Jean-Robert Argand }
+BRIEFING_HINT { The Squared Modulus: the size-squared of each complex coefficient is
+          exactly 1/n^2. This sentinel yields to the man of the complex plane. }
+PROBLEM { With $c_n = \frac{(-1)^n}{n} i$, the squared modulus is $\lvert c_n \rvert^2 =
+          \frac{1}{n^2}$. Whose geometric picture of a complex number gives its
+          size-squared? }
+EXPLAIN_MATHEMATICIAN { Since $c_n = \frac{(-1)^n}{n} i$, the squared modulus is
+          $\lvert c_n \rvert^2 = \frac{1}{n^2}$ for $n \neq 0$, and $\lvert c_0 \rvert^2 = 0$. The factor
+          $(-1)^n$ and the $i$ each have modulus $1$, so only $\frac{1}{n^2}$ remains.
+          Each coefficient's energy is exactly $\frac{1}{n^2}$. }
+EXPLAIN_PHYSICIST { A complex number's energy is its squared length $\lvert z \rvert^2$. Here
+          $c_n = \frac{(-1)^n}{n} i$, and both $(-1)^n$ and $i$ have length $1$, so
+          $\lvert c_n \rvert^2 = \frac{1}{n^2} \cdot 1 \cdot 1 = \frac{1}{n^2}$. The sign and the
+          imaginary unit vanish under the modulus, leaving the clean square
+          $\frac{1}{n^2}$ -- the very terms of the Basel sum. }
+EXPLAIN_BIOLOGIST { A complex number is an arrow in the plane, and its size is just the
+          arrow's length. Squaring that length throws away which direction it points.
+          So all the awkward signs and imaginary parts disappear, and what is left is
+          simply $1/n^2$ -- exactly the squares we wanted to add. }
+EXPLAIN_ENGINEER { Take the modulus: directions and signs drop out, only magnitude
+          stays. For $n = 1$: $\lvert c_1 \rvert^2 = $ [[ $\frac{1}{n^2}$ | 1.000 ]]; for $n = 2$:
+          [[ $\frac{1}{n^2}$ | 0.250 ]]; for $n = 3$: [[ $\frac{1}{n^2}$ | 0.111 ]].
+          The squared coefficients ARE the Basel terms. }
+SEGMENTS {
+  $\lvert c_n \rvert^2$  | coefficients
+  $=$                    | NEUTRAL
+  $\frac{1}{n^2}$        | answer
+}
+EYE { coefficients }
+VULNERABLE_TO { argand }
+FIZZLE euler { Euler waits at the very top with the assembled answer; this robot is the act of squaring a complex number's length to get its size -- think of the man who pictured complex numbers as arrows in a plane. }
+FIZZLE parseval { Parseval needs these squared coefficients as ingredients; this sentinel is specifically about turning $c_n$ into $\lvert c_n \rvert^2$ -- recall who gave us the geometric size of a complex number. }
+FIZZLE fourier { Fourier's formula produced the coefficient $c_n$; here you must take its SQUARED MAGNITUDE, a geometric step -- name the man of the complex-number diagram. }
+FIZZLE riemann { The energy integral is the other side of the identity; this robot is the modulus that collapses $c_n$ to $1/n^2$ -- recall who pictured a complex number's length in the plane. }
+FIZZLE hilbert { Hilbert's geometry frames the whole sum, but this single step is the squared modulus of one coefficient -- name the mathematician of the complex plane. }
+FIZZLE bessel { Bessel folds the twin frequencies afterward; first each coefficient must be squared in size -- recall who diagrammed complex numbers as arrows whose length is the modulus. }
+
+ROBOT: 5
+NAME { Bernhard Riemann }
+BRIEFING_HINT { The Energy Integral: integrate x-squared from minus-pi to pi to get
+          the wave's energy. This sentinel yields to the master of the integral. }
+PROBLEM { The wave side needs $\int_{-\pi}^{\pi} x^2 dx = \frac{2\pi^3}{3}$. Whose
+          definition of the definite integral evaluates this area? }
+EXPLAIN_MATHEMATICIAN { The energy side requires the definite integral
+          $\int_{-\pi}^{\pi} x^2 dx = \left[ \frac{x^3}{3} \right]_{-\pi}^{\pi} =
+          \frac{2\pi^3}{3}$. Hence $\frac{1}{2\pi} \int_{-\pi}^{\pi} x^2 dx =
+          \frac{\pi^2}{3}$. This is the only place $\pi$ enters -- through integrating
+          $x^2$ over a symmetric interval of width $2\pi$. }
+EXPLAIN_PHYSICIST { The right-hand side needs the area under $x^2$ from $-\pi$ to
+          $\pi$. The antiderivative of $x^2$ is $\frac{x^3}{3}$, so $\int_{-\pi}^{\pi}
+          x^2 dx = \frac{\pi^3}{3} - \frac{(-\pi)^3}{3} = \frac{2\pi^3}{3}$. Dividing
+          by $2\pi$ gives $\frac{\pi^2}{3}$. The $\pi$ comes in right here, from the
+          endpoints. }
+EXPLAIN_BIOLOGIST { Now we measure the actual energy of the line: the area under the
+          bowl-shaped curve $x^2$ between $-\pi$ and $\pi$. That area works out to
+          $\frac{2\pi^3}{3}$. Because the boundaries are set at $\pm\pi$, the circle
+          number $\pi$ slips into the answer at this very step. }
+EXPLAIN_ENGINEER { Compute the wave's energy as a plain area. The integral
+          [[ $\int_{-\pi}^{\pi} x^2 dx$ | 20.6708 ]] equals $\frac{2\pi^3}{3}$, and
+          dividing by $2\pi$ gives the average energy [[ $\frac{\pi^2}{3}$ | 3.2899 ]].
+          That number is what the spectral side must match. }
+SEGMENTS {
+  $\int_{-\pi}^{\pi} x^2 dx$   | integral
+  $=$                         | NEUTRAL
+  $\frac{2\pi^3}{3}$          | answer
+}
+EYE { integral }
+VULNERABLE_TO { riemann }
+FIZZLE euler { Euler holds the finished answer at the top; this robot is the concrete area under x-squared -- think of the man whose definition of the definite integral measures such an area exactly. }
+FIZZLE parseval { Parseval's identity declares the two energies equal; this sentinel actually EVALUATES the wave-side integral -- recall who founded the rigorous theory of the definite integral. }
+FIZZLE fourier { Fourier's integral extracts one tone; this is the DIFFERENT integral that measures the line's total energy -- name the man whose integral computes such an area. }
+FIZZLE argand { Squaring a coefficient feeds the spectral side; this robot evaluates the wave-side area under x-squared -- recall whose rigorous integral gives that value. }
+FIZZLE hilbert { Hilbert's geometry frames the equality, but the robot asks who EVALUATES the energy integral -- name the master of the definite integral. }
+FIZZLE bessel { Bessel folds the spectrum at the end; this sentinel computes the area under x-squared over the interval -- recall whose integral measures that region. }
+
+ROBOT: 6
+NAME { David Hilbert }
+BRIEFING_HINT { Orthonormal Projection: functions are vectors, tones are perpendicular
+          axes, coefficients are shadows. This sentinel yields to the man of that space. }
+PROBLEM { Parseval is the Pythagorean theorem in a space where the tones $e^{inx}$ are
+          perpendicular axes and each $c_n$ is a projection. Whose space is this? }
+EXPLAIN_MATHEMATICIAN { Parseval is the Pythagorean theorem in the space
+          $L^2[-\pi, \pi]$, whose orthonormal basis is $\{ e^{inx} \}$. Each coefficient
+          is a projection $c_n = \langle f, e_n \rangle$, and $\lVert f \rVert^2 = \sum \lvert c_n \rvert^2$ is
+          exactly length-squared equals the sum of squared components. }
+EXPLAIN_PHYSICIST { Functions live in an infinite-dimensional space where the pure
+          tones $e^{inx}$ are perpendicular axes. A coefficient $c_n$ is just $f$'s
+          shadow along axis $n$ -- a projection. Then $\lVert f \rVert^2 = \sum \lvert c_n \rvert^2$ is the
+          Pythagorean theorem: squared length equals the sum of squared components,
+          axis by axis. }
+EXPLAIN_BIOLOGIST { Picture a vector in 3D: its length squared is the sum over
+          perpendicular directions. Now imagine infinitely many perpendicular
+          directions, one per pure tone. The function is a vector there, each
+          coefficient is its shadow on one direction, and Parseval is Pythagoras with
+          infinitely many terms. }
+EXPLAIN_ENGINEER { Treat $f$ as a vector and the tones as perpendicular axes; each
+          coefficient is one component. Pythagoras: total length-squared
+          [[ $\lVert f \rVert^2$ | 3.2899 ]] equals the sum of squared components
+          [[ $\sum \lvert c_n \rvert^2$ | 3.2899 ]]. The geometry guarantees the two sides agree. }
+SEGMENTS {
+  $c_n = \langle f, e_n \rangle$    | basis
+  $=$                               | NEUTRAL
+  $\lVert f \rVert^2 = \sum \lvert c_n \rvert^2$ | parseval
+}
+EYE { basis }
+VULNERABLE_TO { hilbert }
+FIZZLE euler { Euler owns the headline answer; this robot is the geometry that makes the whole proof work -- functions as vectors, tones as perpendicular axes -- think of the man whose infinite-dimensional space this is. }
+FIZZLE parseval { Parseval's identity is the RESULT of this geometry; this sentinel is the underlying space of perpendicular tones and projections -- recall who gave his name to that abstract space. }
+FIZZLE fourier { Fourier's formula computes one projection; this robot is the whole geometric setting that explains WHY projections sum that way -- name the man of the infinite-dimensional space. }
+FIZZLE argand { Argand pictures one complex number; this sentinel pictures the entire function as a vector among infinitely many perpendicular tone-axes -- recall whose space that is. }
+FIZZLE riemann { Riemann's integral evaluates one side; this robot is the geometry of orthonormal axes behind the identity -- name the mathematician whose space holds these function-vectors. }
+FIZZLE bessel { Bessel's twin-folding is a later step; this sentinel is the orthonormal-projection picture itself -- recall the man whose infinite-dimensional space frames it all. }
+
+ROBOT: 7
+NAME { Friedrich Bessel }
+BRIEFING_HINT { Folding the Twins: each frequency appears as plus-n and minus-n with
+          equal energy, so the two-sided sum is double the one-sided. This sentinel
+          yields to the man of the inequality on squared coefficients. }
+PROBLEM { Since $\lvert c_n \rvert^2 = \lvert c_{-n} \rvert^2$, the full sum is $2 \sum_{n=1}^{\infty}
+          \frac{1}{n^2}$; setting it equal to $\frac{\pi^2}{3}$ closes the proof. Whose
+          inequality on squared coefficients frames this? }
+EXPLAIN_MATHEMATICIAN { The sum runs over all integers, but $\lvert c_n \rvert^2 = \lvert c_{-n} \rvert^2$, so
+          $\sum_{n=-\infty}^{\infty} \lvert c_n \rvert^2 = 2 \sum_{n=1}^{\infty} \frac{1}{n^2}$.
+          Setting this equal to $\frac{\pi^2}{3}$ from Parseval gives
+          $2 \sum \frac{1}{n^2} = \frac{\pi^2}{3}$, hence
+          $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$. }
+EXPLAIN_PHYSICIST { Each frequency appears twice -- once as $+n$, once as $-n$ -- with
+          equal energy. So the two-sided spectral sum is double the one-sided Basel
+          sum: $\sum_{-\infty}^{\infty} \lvert c_n \rvert^2 = 2 \sum_{n=1}^{\infty} \frac{1}{n^2}$.
+          Parseval said this equals $\frac{\pi^2}{3}$, so $2 \sum \frac{1}{n^2} =
+          \frac{\pi^2}{3}$, and dividing by $2$ gives $\sum \frac{1}{n^2} =
+          \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { The tones come in matching pairs -- a left twin and a right twin
+          with the same strength. So the full sum over all of them is simply twice the
+          sum over the positive ones. The energy total was $\frac{\pi^2}{3}$; halving
+          it for one twin of each pair leaves $\frac{\pi^2}{6}$ -- and the Basel
+          problem is solved. }
+EXPLAIN_ENGINEER { Fold the two-sided spectrum into one. Twice the Basel sum
+          [[ $2\sum \frac{1}{n^2}$ | 3.2899 ]] equals the energy
+          [[ $\frac{\pi^2}{3}$ | 3.2899 ]]; divide by two and the Basel sum
+          [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] equals [[ $\frac{\pi^2}{6}$ | 1.6449 ]].
+          The endless sum collapses to one constant. }
+SEGMENTS {
+  $\sum_{n=-\infty}^{\infty} \lvert c_n \rvert^2$      | coefficients
+  $=$                                                  | NEUTRAL
+  $2 \sum_{n=1}^{\infty} \frac{1}{n^2}$                | answer
+}
+EYE { answer }
+VULNERABLE_TO { bessel }
+FIZZLE euler { Euler's name crowns the finished result at the top; this final robot is the bookkeeping that folds the twin frequencies and closes the proof -- think of the man whose inequality bounds a sum of squared coefficients. }
+FIZZLE parseval { Parseval handed you the energy total $\pi^2/3$; this sentinel is the last step that halves it by pairing $+n$ with $-n$ -- recall whose inequality on squared coefficients governs such sums. }
+FIZZLE fourier { Fourier's formula made each coefficient; this closing robot pairs the positive and negative frequencies to finish -- name the man whose inequality on squared coefficients frames the spectral sum. }
+FIZZLE argand { Argand's modulus gave each $\lvert c_n \rvert^2$; this final sentinel adds the twin halves together -- recall who is remembered for the inequality bounding sums of squared coefficients. }
+FIZZLE riemann { Riemann's integral gave the energy; this last robot folds the two-sided spectrum into the one-sided Basel sum -- name the astronomer whose inequality on squared coefficients applies here. }
+FIZZLE hilbert { Hilbert's geometry set the stage; this closing step uses the twin symmetry of the spectrum to finish the count -- recall the man whose inequality first bounded such squared-coefficient sums. }

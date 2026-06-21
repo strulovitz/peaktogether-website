@@ -1,0 +1,3 @@
+title: Basel -- A Proof Using Fourier Series (Test)
+corridors:
+  ../corridors/05_fourier_series.txt    baked=../baked/basel/fourier_series

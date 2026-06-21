@@ -1,0 +1,59 @@
+TITLE { The Basel Problem — A Proof Using Fourier Series }
+
+STAINS {
+  coefficients  = 0.85 0.12 0.12   # red — the Fourier coefficients c_n (the frequency side); primitive feeding both the answer and Parseval
+  basis         = 0.90 0.78 0.10   # yellow — the orthonormal-basis / projection principle; shared ingredient of Parseval and the coefficient formula
+  integral      = 0.12 0.30 0.85   # blue — the energy integral of f(x)=x over [-pi,pi]; primitive feeding both the answer and the coefficient formula
+  parseval      = 0.90 0.45 0.10   # orange — Parseval's identity = red(coefficients)+yellow(basis): the Pythagorean theorem in the orthonormal basis
+  fourier_coeff = 0.15 0.55 0.20   # green — the coefficient FORMULA c_n = integral of f against e^{-inx} = yellow(basis)+blue(integral)
+  answer        = 0.55 0.10 0.65   # purple — the Basel sum pi^2/6 = red(coefficients)+blue(integral): born where the frequency side meets the energy side
+}
+
+ROBOT: 1
+  NAME { Leonhard Euler }
+  EXPLAIN_MATHEMATICIAN { The Basel problem asks for the closed form of $\displaystyle \stain{answer}{$\sum_{n=1}^{\infty}\frac{1}{n^2}$}$. The Fourier route obtains $\stain{answer}{$\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$}\approx 1.644934$ by applying Parseval's identity to the simple function $f(x)=x$ on $[-\pi,\pi]$. }
+  EXPLAIN_PHYSICIST { Add up $1+\tfrac14+\tfrac19+\tfrac1{16}+\cdots$, the reciprocals of the squares. It converges to a number near $1.645$, but to \emph{what}? The answer is $\stain{answer}{$\frac{\pi^2}{6}$}$ — a circle constant. This proof reaches it not through circles but through the \emph{energy} of the plain straight line $f(x)=x$. }
+  EXPLAIN_BIOLOGIST { Take the squares $1,4,9,16,\dots$ and add up their reciprocals forever. The pile settles near $1.645$. The shocking fact is that this is exactly $\stain{answer}{$\pi^2/6$}$ — the circle number $\pi$, found here by studying a simple slanted line. }
+  EXPLAIN_ENGINEER { This sum is a real quantity — it is the total ``power'' you get when you break the slanted signal $f(x)=x$ into pure tones and add up the strength of each tone. The sum is [[ $\sum \frac{1}{n^2}$ | 1.6449 ]], matching [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. }
+
+ROBOT: 2
+  NAME { Marc-Antoine Parseval }
+  EXPLAIN_MATHEMATICIAN { Parseval's identity equates the energy of a signal with the energy of its spectrum: $\displaystyle \stain{parseval}{$\sum_{n=-\infty}^{\infty}\thread{t1}{|c_n|^2}=\frac{1}{2\pi}\int_{-\pi}^{\pi}\thread{t2}{|f(x)|^2}\,dx$}$. The left side sums the squared $\stain{coefficients}{\text{Fourier coefficients}}$; the right side integrates the square of $f$. }
+  EXPLAIN_PHYSICIST { One quantity, measured two ways. On the right, $\stain{integral}{$\frac{1}{2\pi}\int_{-\pi}^{\pi}\thread{t2}{|f(x)|^2}dx$}$ is the average squared height of the curve — its ``energy.'' On the left, $\stain{parseval}{$\sum\thread{t1}{|c_n|^2}$}$ is the same energy rebuilt from each frequency's strength. They MUST be equal, so $\stain{parseval}{$\sum\thread{t1}{|c_n|^2}=\stain{integral}{$\frac{1}{2\pi}\int_{-\pi}^{\pi}\thread{t2}{x^2}dx$}$}$. }
+  EXPLAIN_BIOLOGIST { Think of a chord. You can measure its loudness directly, OR add up the loudness of every single note inside it — and you get the same total. Parseval's identity says the energy in the whole $\stain{integral}{\text{wave}}$ equals the energy spread across all its $\stain{coefficients}{\text{pure tones}}$. Nothing is lost; the two totals match. }
+  EXPLAIN_ENGINEER { Parseval is the engineer's energy-bookkeeping law: total signal energy equals total spectral energy. For $f(x)=x$ the spectral side is $\stain{parseval}{$\sum |c_n|^2$}$ and the wave side is $\stain{integral}{$\frac{1}{2\pi}\int_{-\pi}^{\pi}x^2\,dx$}$. Plug numbers: the spectral total [[ $2\sum \frac{1}{n^2}$ | 3.2899 ]] equals the wave total [[ $\frac{1}{2\pi}\int_{-\pi}^{\pi}x^2\,dx$ | 3.2899 ]], so they balance. }
+
+ROBOT: 3
+  NAME { Joseph Fourier }
+  EXPLAIN_MATHEMATICIAN { The Fourier coefficients of $f$ are $\displaystyle \stain{fourier_coeff}{$c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}f(x)\,\thread{t1}{e^{-inx}}\,dx$}$. For $f(x)=x$, integration by parts gives $c_n=\dfrac{(-1)^n}{n}i$ for $n\neq 0$ and $c_0=0$. Each $c_n$ is the amount of the pure tone $\thread{t1}{e^{inx}}$ contained in $f$. }
+  EXPLAIN_PHYSICIST { To find how much of frequency $n$ lives in $f$, multiply $f$ by the matching tone $\thread{t1}{e^{-inx}}$ and average: $\stain{fourier_coeff}{$c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}x\,\thread{t1}{e^{-inx}}\,dx$}$. For $f(x)=x$, integrating by parts yields $c_n=\tfrac{(-1)^n}{n}i$. The other tones average to zero; only tone $n$ survives. }
+  EXPLAIN_BIOLOGIST { To pull one instrument out of a recording, you ``tune in'' to its pitch and listen for how strongly that pitch rings. The coefficient $\stain{fourier_coeff}{\text{formula}}$ does exactly that: it multiplies the signal by a chosen pure tone and averages, and out drops the strength of that one tone. All the other tones cancel away. }
+  EXPLAIN_ENGINEER { This is the analysis step: extract each tone's amplitude. For the line $f(x)=x$, the recipe $\stain{fourier_coeff}{$c_n=\frac{1}{2\pi}\int_{-\pi}^{\pi}x\,e^{-inx}\,dx$}$ gives a clean answer. Plug in $n=1$: the strength is [[ $\frac{(-1)^n}{n}i$ | 1.000 ]] in size, and the steady part is [[ $c_0$ | 0.000 ]]. }
+
+ROBOT: 4
+  NAME { Jean-Robert Argand }
+  EXPLAIN_MATHEMATICIAN { Since $c_n=\tfrac{(-1)^n}{n}i$, the squared modulus is $\stain{coefficients}{$|c_n|^2=\thread{t1}{\Big|\tfrac{(-1)^n}{n}i\Big|^2}=\frac{1}{n^2}$}$ for $n\neq 0$, and $|c_0|^2=0$. The factor $(-1)^n$ and the $i$ have modulus $1$, so only $\tfrac{1}{n^2}$ remains. This is the bridge: each coefficient's energy is exactly $\tfrac{1}{n^2}$. }
+  EXPLAIN_PHYSICIST { A complex number's ``energy'' is its squared length $|z|^2$. Here $c_n=\tfrac{(-1)^n}{n}i$, and both $(-1)^n$ and $i$ have length $1$, so $\stain{coefficients}{$|c_n|^2=\thread{t1}{\tfrac{1}{n^2}\cdot 1\cdot 1}=\frac{1}{n^2}$}$. The messy sign and the imaginary unit vanish under the modulus, leaving the clean square $\tfrac{1}{n^2}$ — the very terms of the Basel sum. }
+  EXPLAIN_BIOLOGIST { A complex number is an arrow in the plane, and its ``size'' is just the arrow's length. Squaring that length throws away which DIRECTION it points. So all the awkward $\stain{coefficients}{\text{sign and imaginary parts}}$ disappear, and what is left is simply $1/n^2$ — exactly the squares we wanted to add. }
+  EXPLAIN_ENGINEER { Take the modulus: directions and signs drop out, only magnitude stays. For $n=1$: $|c_1|^2=$ [[ $\frac{1}{n^2}$ | 1.000 ]]; for $n=2$: [[ $\frac{1}{n^2}$ | 0.250 ]]; for $n=3$: [[ $\frac{1}{n^2}$ | 0.111 ]]. The squared coefficients ARE the Basel terms, one for each $n$. }
+
+ROBOT: 5
+  NAME { Bernhard Riemann }
+  EXPLAIN_MATHEMATICIAN { The energy side requires the definite integral $\stain{integral}{$\int_{-\pi}^{\pi}\thread{t1}{x^2}\,dx=\Big[\tfrac{x^3}{3}\Big]_{-\pi}^{\pi}=\frac{2\pi^3}{3}$}$. Hence $\frac{1}{2\pi}\int_{-\pi}^{\pi}x^2dx=\frac{\pi^2}{3}$. This is the only place $\pi$ enters — through integrating the parabola $x^2$ over a symmetric interval of width $2\pi$. }
+  EXPLAIN_PHYSICIST { The right-hand side needs the area under $\stain{integral}{$\thread{t1}{x^2}$}$ from $-\pi$ to $\pi$. The antiderivative of $x^2$ is $\tfrac{x^3}{3}$, so $\stain{integral}{$\int_{-\pi}^{\pi}\thread{t1}{x^2}dx=\frac{\pi^3}{3}-\frac{(-\pi)^3}{3}=\frac{2\pi^3}{3}$}$. Dividing by $2\pi$ gives $\frac{\pi^2}{3}$. The $\pi$ comes in right here, from the endpoints. }
+  EXPLAIN_BIOLOGIST { Now we measure the actual energy of the line: the area under the bowl-shaped curve $\stain{integral}{$x^2$}$ between $-\pi$ and $\pi$. That area works out to $\tfrac{2\pi^3}{3}$. Because the boundaries of the interval are set at $\pm\pi$, the circle number $\pi$ slips into the answer at this very step. }
+  EXPLAIN_ENGINEER { Compute the wave's energy as a plain area. The integral [[ $\int_{-\pi}^{\pi}x^2\,dx$ | 20.6708 ]] equals $\frac{2\pi^3}{3}$, and dividing by $2\pi$ gives the average energy [[ $\frac{\pi^2}{3}$ | 3.2899 ]]. That single number is what the spectral side must match. }
+
+ROBOT: 6
+  NAME { David Hilbert }
+  EXPLAIN_MATHEMATICIAN { Parseval is the Pythagorean theorem in the Hilbert space $L^2[-\pi,\pi]$, whose orthonormal $\stain{basis}{\text{basis}}$ is $\{\thread{t1}{e^{inx}}\}$. Each coefficient is a projection $c_n=\langle f,\thread{t1}{e_n}\rangle$, and $\stain{parseval}{$\|f\|^2=\sum\thread{t2}{|c_n|^2}$}$ is exactly $\|f\|^2=\sum|\langle f,e_n\rangle|^2$ — length-squared equals the sum of squared components. }
+  EXPLAIN_PHYSICIST { Functions live in an infinite-dimensional space where the pure tones $\stain{basis}{$\thread{t1}{e^{inx}}$}$ are perpendicular axes. A coefficient $c_n$ is just $f$'s shadow along axis $n$ — a projection. Then $\stain{parseval}{$\|f\|^2=\sum\thread{t2}{|c_n|^2}$}$ is the Pythagorean theorem: the squared length of $f$ equals the sum of its squared components, axis by axis. }
+  EXPLAIN_BIOLOGIST { Picture a vector in 3D: its length squared is $x^2+y^2+z^2$, the sum over perpendicular directions. Now imagine infinitely many perpendicular directions, one per pure tone. The function is a vector there, each $\stain{basis}{\text{coefficient}}$ is its shadow on one direction, and Parseval is just Pythagoras with infinitely many terms. }
+  EXPLAIN_ENGINEER { Treat $f$ as a vector and the tones as perpendicular axes; each coefficient is one component. Pythagoras: total length-squared [[ $\lVert f \rVert^2$ | 3.2899 ]] equals the sum of squared components [[ $\sum \lvert c_n \rvert^2$ | 3.2899 ]]. The geometry guarantees the two sides of Parseval agree. }
+
+ROBOT: 7
+  NAME { Friedrich Bessel }
+  EXPLAIN_MATHEMATICIAN { The sum runs over all integers, but $|c_n|^2=|c_{-n}|^2$, so $\stain{coefficients}{$\sum_{n=-\infty}^{\infty}|c_n|^2=2\sum_{n=1}^{\infty}\thread{t1}{\tfrac{1}{n^2}}$}$. Setting this equal to $\frac{\pi^2}{3}$ from Parseval gives $2\sum\thread{t1}{\tfrac1{n^2}}=\frac{\pi^2}{3}$, hence $\stain{answer}{$\sum_{n=1}^{\infty}\thread{t1}{\frac{1}{n^2}}=\frac{\pi^2}{6}$}$. }
+  EXPLAIN_PHYSICIST { Each frequency appears twice — once as $+n$, once as $-n$ — with equal energy. So the two-sided spectral sum is just \emph{double} the one-sided Basel sum: $\stain{coefficients}{$\sum_{-\infty}^{\infty}|c_n|^2=2\sum_{n=1}^{\infty}\thread{t1}{\tfrac1{n^2}}$}$. Parseval said this equals $\frac{\pi^2}{3}$, so $2\sum\thread{t1}{\tfrac1{n^2}}=\frac{\pi^2}{3}$, and dividing by $2$ gives $\stain{answer}{$\sum\thread{t1}{\tfrac1{n^2}}=\frac{\pi^2}{6}$}$. }
+  EXPLAIN_BIOLOGIST { The tones come in matching pairs — a left twin and a right twin with the same strength. So the full sum over all of them is simply twice the sum over the positive ones. The energy total was $\pi^2/3$; halving it for one twin of each pair leaves $\stain{answer}{$\pi^2/6$}$ — and the Basel problem is solved. }
+  EXPLAIN_ENGINEER { Fold the two-sided spectrum into one. Twice the Basel sum [[ $2\sum \frac{1}{n^2}$ | 3.2899 ]] equals the energy [[ $\frac{\pi^2}{3}$ | 3.2899 ]]; divide by two and the Basel sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] equals [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. The endless sum collapses to one constant. }

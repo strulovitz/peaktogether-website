@@ -4,3 +4,4 @@ corridors:
   ../corridors/basel_symmetric.txt        baked=../baked/basel/symmetric_polys
   ../corridors/basel_zeta.txt             baked=../baked/basel/zeta_function
   ../corridors/04_euler_lhopital.txt      baked=../baked/basel/euler_lhopital
+  ../corridors/05_fourier_series.txt      baked=../baked/basel/fourier_series
