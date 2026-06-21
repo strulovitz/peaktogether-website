@@ -384,7 +384,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .hero {
     text-align: center;
-    padding: 40px 20px 60px;
+    padding: 40px 20px 20px;
 }
 
 .eyebrow {
@@ -459,7 +459,7 @@ h1, h2, h3, h4, h5, h6 {
     width: 100%;
     max-width: 900px;
     height: auto;
-    margin: 0 auto;
+    margin: 0 auto 48px;
     border-radius: 24px;
 }
 
@@ -489,7 +489,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .explainer {
     text-align: center;
-    padding: 70px 20px 50px;
+    padding: 0 20px 50px;
 }
 
 .explainer h2 {
@@ -740,8 +740,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .coming-soon-games {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 16px;
+    grid-template-columns: 1fr;
+    gap: 24px;
     max-width: 900px;
     margin: 0 auto 30px;
 }
