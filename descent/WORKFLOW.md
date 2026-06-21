@@ -506,8 +506,50 @@ Two child attempts. First child (OLD) had no value arcs + stain errors. Second c
 
 ### ON RESTART — Read these in order:
 1. **WORKFLOW.md** (this file)
-2. `PARENT_ESTATE/SESSION_2026-06-21.md` — today's full session ⭐
+2. `PARENT_ESTATE/SESSION_2026-06-21.md` — previous session context
 3. `PARENT_ESTATE/PARENT_HANDOFF_V3.md` — THE LAW
+
+## 🔴 SESSION LOG — June 22, 2026 MORNING (DeepSeek V4 Pro — arc baking + corridor 3 🎉)
+
+### Value-Arc Baking Support — NEW FEATURE ✅
+The engineer layer's `[[ $expr$ | value ]]` arcs were NOT visible in-game because baked PNGs are flat images — the game can't know where expressions are. Fixed by adding TikZ arc rendering directly to the baker:
+- `bake_corridor.py`: `[[ expr | value ]]` → `\valuearc{}{}`  (TikZ parabola + value label)
+- Added `\usepackage{lmodern}` to fix font scaling at 600 DPI
+- Arcs only load TikZ when `[[ ]]` patterns are present (zero overhead otherwise)
+- Corridor 2 re-baked with 21 arcs across all 7 engineer layers — 28/28, 0 failures
+- Nir confirmed: "i like it a lot!"
+
+### FOREVER Prompt Updated ✅
+Changed 3 places: children now include `[[ ]]` arcs in BOTH the baker file AND the game file (previously was "game-file-only"). Added warning: do NOT use bare `|` (pipe) inside `[[ ]]` — use `\lvert`/`\rvert` for absolute values.
+
+### Failed Child Leftovers Cleaned Up ✅
+Removed 54 leftover files from previous failed child attempts:
+- `corridors/basel_generalization.txt` + `baked/basel/generalization/`
+- `corridors/OLD_basel_general.txt` + `baked/basel/OLD_euler_generalizations/`
+- `corridors/OLD_euler_even_zeta.txt`
+- Baker source OLD files
+- Fixed manifest: was showing 3 corridors, now correctly shows 2 (before corridor 3)
+
+### Basel Corridor 3 — "The Riemann Zeta Function" ✅
+Child Opus produced all 3 files. DeepSeek fixed child's `$[[ ]]$` dollar-sign wrapping bug (arcs were inside outer `$...$` in both files — would break TikZ and render_rich). Also replaced bare `|` with `\lvert`/`\rvert`.
+- Baker: `levels/mathematics/basel_problem/basel_zeta_function.txt`
+- Game: `corridors/basel_zeta.txt` (7 robots, 42 fizzles)
+- Baked: `baked/basel/zeta_function/` (28 PNGs, 0 failures)
+- 7 robots: Riemann, Mengoli, Cauchy, Oresme, Torricelli, Weierstrass, J. Bernoulli
+- 3 new portraits added: Augustin-Louis_Cauchy, Nicole_Oresme, Evangelista_Torricelli
+- Nir confirmed: "it works great!"
+
+### Current state
+| Item | Status |
+|------|--------|
+| Basel corridor 1 (Euler's 1734 approach) | ✅ Playable |
+| Basel corridor 2 (Symmetric-Polynomial Ascent) | ✅ Playable, arcs re-baked |
+| Basel corridor 3 (Riemann Zeta Function) | ✅ Playable, Nir confirmed |
+| Value-arc baking (TikZ) | ✅ Working |
+| FOREVER prompt (arc in both files) | ✅ Updated |
+| app.py points to | `levels/basel_c3.txt` (corridor 3) |
+| Git | Clean, pushed |
+| Next | Corridors 4-10 for Basel (~10 total) |
 
 ## 🔴 SESSION LOG — June 13, 2026
 
