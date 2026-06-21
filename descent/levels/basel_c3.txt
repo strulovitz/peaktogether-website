@@ -1,0 +1,3 @@
+title: Basel -- The Riemann Zeta Function (Test)
+corridors:
+  ../corridors/basel_zeta.txt    baked=../baked/basel/zeta_function

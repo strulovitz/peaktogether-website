@@ -58,7 +58,7 @@ from hub_builder import build_hub
 # ---------------------------------------------------------------------------
 
 WIN_SIZE = (1280, 800)          # verbatim from hub_demo.py
-LEVEL_MANIFEST = "levels/basel_c2.txt"
+LEVEL_MANIFEST = "levels/basel_c3.txt"
 
 # Fog: production values, copied verbatim from hub_demo.py. These equal
 # render.DARKNESS_START / DARKNESS_END, i.e. render's own defaults — not
