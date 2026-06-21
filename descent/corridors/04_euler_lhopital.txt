@@ -1,0 +1,291 @@
+# ===========================================================
+# The Basel Problem — Corridor 4: Euler's Formula and L'Hopital's Rule.
+# Seven sentinels, one per step of the sinc-product / coth / triple-L'Hopital
+# proof of sum 1/n^2 = pi^2/6. Robot 1 is nearest the doorway. Each yields to
+# exactly ONE mathematician id. Robot N maps 1:1 to baker step N.
+# LEDGER mirrors the baker STAINS: roots=red, logderiv=yellow, analytic=blue;
+# product=red+yellow, hyperbolic=yellow+blue, answer=red+blue.
+# ===========================================================
+CORRIDOR: 4
+TITLE { The Basel Problem -- Euler's Formula and L'Hopital's Rule }
+FLAVOR { A wave becomes a product, a product becomes a cotangent, a cotangent becomes an exponential, and a careful limit hands back the circle. }
+LEDGER {
+  PRIMARY roots      = red
+  PRIMARY logderiv   = yellow
+  PRIMARY analytic   = blue
+  BLEND   product    = roots + logderiv
+  BLEND   hyperbolic = logderiv + analytic
+  BLEND   answer     = roots + analytic
+}
+BRIEFING_INTRO { Seven sentinels guard the longer, scenic road to the hostages, one
+          for each move in the sinc-product proof of the Basel sum. Read each robot's
+          blue hologram face, judge whose idea its mathematics belongs to, and fire
+          that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the Euler-L'Hopital corridor. Here the circle is reached not by matching coefficients, but by bending sine into an exponential and squeezing a limit to nothing. }
+EXIT_TEXT { The last sentinel falls and the limit collapses to pi^2/6. The hostages are free -- you have flown the whole length of the sinc-product proof, from product to cotangent to exponential to limit. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the prize: the same Basel sum, reached by a longer
+          road. It yields to the man who first proved the value. }
+PROBLEM { Identify the value of the Basel sum $\sum_{n=1}^{\infty} \frac{1}{n^2}$ --
+          who first proved it equals $\frac{\pi^2}{6}$? }
+EXPLAIN_MATHEMATICIAN { This corridor proves $\sum_{n=1}^{\infty} \frac{1}{n^2} =
+          \frac{\pi^2}{6} \approx 1.644934$ along a different road: factor $\sin(\pi x)$,
+          take a logarithmic derivative, pass through the hyperbolic cotangent, and
+          finish with a limit. }
+EXPLAIN_PHYSICIST { We want the exact value of $1 + \frac{1}{4} + \frac{1}{9} + \cdots$,
+          near $1.645$. This route reaches $\frac{\pi^2}{6}$ by a chain: write the sinc
+          function as a product, differentiate its logarithm into a cotangent sum, bend
+          it into coth, then squeeze the variable to zero. }
+EXPLAIN_BIOLOGIST { Add $1, \frac{1}{4}, \frac{1}{9}, \frac{1}{16}, \dots$ forever; it
+          settles near $1.645$. The exact value is $\frac{\pi^2}{6}$. This proof takes the
+          scenic route: turn a wave into a product, slide a calculus trick across it,
+          cross into a cousin of the cotangent, and take a careful limit at the end. }
+EXPLAIN_ENGINEER { Plug in numbers: the sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] meets
+          the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match. This proof spends
+          more steps than the first, but each one -- a product, a log-derivative, an
+          exponential rewrite, three L'Hopital passes -- is a reusable tool. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$   | answer
+  $=$                                   | NEUTRAL
+  $\frac{\pi^2}{6}$                     | answer
+}
+EYE { answer }
+VULNERABLE_TO { euler }
+FIZZLE weierstrass { Certifying the infinite sinc product is a genuine, deep step further inside this proof, but right here the robot only states the headline answer -- name the person who first claimed the squares sum to pi-squared over six. }
+FIZZLE cauchy { Taking the logarithmic derivative is a real move waiting downstream, but no product has been written yet -- this opening robot just poses the prize, so name its discoverer. }
+FIZZLE cotes { Turning the cotangent into an exponential happens deeper in the chain, but here nothing is being converted -- you are asked who owns this famous sum. }
+FIZZLE riccati { The hyperbolic cotangent appears later in the descent, but this sentinel states only the result itself -- recall who first summed the inverse squares in 1734. }
+FIZZLE lhopital { The triple limit is the proof's finale, not its opening -- this robot wants the NAME of the value pi-squared over six, so name the man who first found it. }
+FIZZLE tannery { Swapping the limit and the sum is the very last licence the proof needs, but this first robot simply states the prize -- name the mathematician who solved it long before. }
+
+ROBOT: 2
+NAME { Karl Weierstrass }
+BRIEFING_HINT { The Sinc Factorization: write sine over its roots as an infinite product.
+          This sentinel yields to the man who made such products rigorous. }
+PROBLEM { The normalized sinc is written as an infinite product over its roots
+          $\frac{\sin(\pi x)}{\pi x} = \prod (1 - \frac{x^2}{n^2})$. Who justified that
+          an entire function may be factored over its zeros? }
+EXPLAIN_MATHEMATICIAN { The normalized sinc has a product over its zeros $\pm n\pi$:
+          $\frac{\sin(\pi x)}{\pi x} = \prod_{n=1}^{\infty} \left( 1 - \frac{x^2}{n^2}
+          \right)$. As an entire function of finite order, $\sin(\pi x)$ is determined by
+          its zeros up to a trivial exponential factor. }
+EXPLAIN_PHYSICIST { An ordinary polynomial is the product of one factor per root.
+          Weierstrass proved the same assembly is legal for the entire function
+          $\frac{\sin(\pi x)}{\pi x}$, whose roots are $\pm 1, \pm 2, \dots$ Pairing $+n$
+          with $-n$ gives $\prod_n (1 - \frac{x^2}{n^2})$, exact and convergent. }
+EXPLAIN_BIOLOGIST { You can rebuild a polynomial from where it crosses zero -- one factor
+          per crossing. Weierstrass showed you may do this even for a never-ending wave
+          like sinc, multiplying a factor for each of its infinitely many crossings. That
+          infinite product is what this whole proof stands on. }
+EXPLAIN_ENGINEER { Engineers build a transfer function from its zeros, one factor each.
+          Weierstrass certifies the same move for $\frac{\sin(\pi x)}{\pi x}$ over its
+          zeros at every integer: $\prod (1 - \frac{x^2}{n^2})$. With $x = \frac{1}{2}$ the
+          first factor is $1 - \frac{1}{4} = \frac{3}{4}$, and the product tends to
+          [[ $\frac{2}{\pi}$ | 0.6366 ]]. }
+SEGMENTS {
+  $\frac{\sin(\pi x)}{\pi x}$                          | analytic
+  $=$                                                  | NEUTRAL
+  $\prod_{n=1}^{\infty} \left( 1 - \frac{x^2}{n^2} \right)$ | product
+}
+EYE { product }
+VULNERABLE_TO { weierstrass }
+FIZZLE euler { Euler boldly used such products, but the previous robot already wanted the man who NAMED the result -- here the question is who PROVED the infinite product valid, so think of the founder of rigorous analysis. }
+FIZZLE cauchy { Differentiating the logarithm of this product is the NEXT step; right now the robot asks who certified that the product itself is legitimate -- recall the master who put infinite factors on solid ground. }
+FIZZLE cotes { Euler's formula converts the cotangent later; this sentinel is about justifying the factorization of sine over its zeros -- name the analyst famous for that rigour. }
+FIZZLE riccati { The hyperbolic cotangent comes well downstream; this robot is the legitimacy of the sinc product over its roots -- think of the founder of epsilon-delta analysis. }
+FIZZLE lhopital { The limit rule is the finale, not this factorization step -- here someone had to prove an entire function may be built from its zeros, so name the master of rigorous analysis. }
+FIZZLE tannery { Tannery's theorem licenses a different swap at the very end; this robot is about whether the infinite PRODUCT is even allowed -- recall who founded the careful theory of such products. }
+
+ROBOT: 3
+NAME { Augustin-Louis Cauchy }
+BRIEFING_HINT { The Logarithmic Derivative: take ln of the product, then differentiate
+          term by term. This sentinel yields to the founder of rigorous calculus. }
+PROBLEM { Taking $\ln$ of the product and differentiating turns it into a sum of simple
+          fractions. Whose careful analysis licenses differentiating term by term here? }
+EXPLAIN_MATHEMATICIAN { Take the logarithmic derivative of the product. Since
+          $\frac{d}{dx} \ln \prod f_n = \sum f_n'/f_n$, term-by-term differentiation
+          (justified by uniform convergence) gives $\pi \cot(\pi x) - \frac{1}{x} = -\sum
+          \frac{2x}{n^2 - x^2}$. Dividing by $2x$ and regrouping yields $\frac{1}{2x^2} -
+          \frac{\pi \cot(\pi x)}{2x} = \sum \frac{1}{n^2 - x^2}$. }
+EXPLAIN_PHYSICIST { Logarithms turn products into sums, so $\ln$ of the product becomes
+          $\sum \ln(1 - x^2/n^2)$. Differentiating each side -- the right side termwise --
+          and using $\frac{d}{dx} \ln \sin(\pi x) = \pi \cot(\pi x)$, we get $\pi \cot(\pi x)
+          - \frac{1}{x} = -\sum \frac{2x}{n^2 - x^2}$. Divide by $2x$: $\frac{1}{2x^2} -
+          \frac{\pi \cot(\pi x)}{2x} = \sum \frac{1}{n^2 - x^2}$. }
+EXPLAIN_BIOLOGIST { Here is a slick calculus habit: to differentiate a big product, first
+          take its logarithm, which splits the product into a sum, then differentiate the
+          easy pieces. Cauchy's careful theory says you may even do this term by term for
+          an infinite product, turning our wave-product into a tidy sum of fractions. }
+EXPLAIN_ENGINEER { Log-differentiation is the standard way to differentiate a long product:
+          ln first, sum the pieces, then differentiate. Applied here it gives [[ $\frac{1}{2x^2}
+          - \frac{\pi \cot(\pi x)}{2x}$ | 2.000 ]] equal to [[ $\sum \frac{1}{n^2 - x^2}$ | 2.000 ]]
+          at $x = \frac{1}{2}$, where the first term alone is [[ $\frac{1}{n^2 - x^2}$ | 1.333 ]]. }
+SEGMENTS {
+  $\pi \cot(\pi x) - \frac{1}{x}$        | logderiv
+  $=$                                    | NEUTRAL
+  $-\sum \frac{2x}{n^2 - x^2}$           | logderiv
+}
+EYE { logderiv }
+VULNERABLE_TO { cauchy }
+FIZZLE euler { Euler assembles the whole chain, but this robot is the specific act of differentiating the logarithm of an infinite product term by term -- think of the man who built the rigorous theory that makes that legal. }
+FIZZLE weierstrass { Weierstrass certified the product you start from; this step is the log-derivative that acts ON it -- recall who founded the careful calculus of limits and term-by-term differentiation. }
+FIZZLE cotes { Euler's formula converts the cotangent at the NEXT robot; here you are differentiating the log of the product -- name the founder of rigorous analysis behind that move. }
+FIZZLE riccati { The hyperbolic cotangent is two steps ahead; this sentinel is the logarithmic derivative of the product -- think of the man whose analysis licenses differentiating an infinite series term by term. }
+FIZZLE lhopital { The limit rule finishes the proof much later; this robot is about log-then-differentiate on a product -- recall the founder of careful continuity and convergence. }
+FIZZLE tannery { Tannery's swap of limit and sum waits at the end; this is the term-by-term DIFFERENTIATION of a product's logarithm -- name the master who justified such operations rigorously. }
+
+ROBOT: 4
+NAME { Roger Cotes }
+BRIEFING_HINT { Euler's Formula: substitute an imaginary angle and rewrite the cotangent
+          as an exponential. This sentinel yields to the man who first linked them. }
+PROBLEM { Setting $x = -it$ and using $e^{i\theta} = \cos\theta + i\sin\theta$ turns the
+          cotangent into a ratio of exponentials. Who first related the trig functions to
+          the complex exponential? }
+EXPLAIN_MATHEMATICIAN { Substitute $x = -it$, so $n^2 - x^2 \to n^2 + t^2$, and rewrite
+          $\cot$ via Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$. Then
+          $\frac{\pi \cot(-\pi i t)}{2it} = \frac{\pi}{2it} \frac{i(e^{2\pi t} + 1)}{e^{2\pi t}
+          - 1} = \frac{\pi}{2t} + \frac{\pi}{t(e^{2\pi t} - 1)}$, converting the trigonometric
+          cotangent into a real exponential expression. }
+EXPLAIN_PHYSICIST { Cotes' insight (later Euler's formula) is that $e^{i\theta} = \cos\theta
+          + i\sin\theta$, so cosine and sine are exponentials in disguise: $\cos\theta =
+          \frac{e^{i\theta} + e^{-i\theta}}{2}$, $\sin\theta = \frac{e^{i\theta} -
+          e^{-i\theta}}{2i}$. Setting $x = -it$ and feeding these in, the cotangent of an
+          imaginary angle becomes the real ratio $\frac{e^{2\pi t} + 1}{e^{2\pi t} - 1}$ --
+          pure exponentials, no trigonometry left. }
+EXPLAIN_BIOLOGIST { Cotes (and then Euler) discovered that the spinning of sine and cosine
+          is really the growth of the exponential, viewed sideways through imaginary numbers.
+          So if you let the angle become imaginary, the wiggly cotangent quietly turns into a
+          smooth ratio of exponentials -- easier to handle and ready for the limit ahead. }
+EXPLAIN_ENGINEER { Euler's formula $e^{i\theta} = \cos\theta + i\sin\theta$ is the bridge
+          from trig to exponentials. Replacing $x = -it$ turns cot into [[ $\frac{e^{2\pi t}
+          + 1}{e^{2\pi t} - 1}$ | 1.0037 ]] at $t = 1$; as $t$ grows it tends to
+          [[ $1$ | 1.000 ]]. }
+SEGMENTS {
+  $e^{i\theta} = \cos\theta + i\sin\theta$   | hyperbolic
+  $=$                                        | NEUTRAL
+  $\frac{e^{2\pi t} + 1}{e^{2\pi t} - 1}$    | hyperbolic
+}
+EYE { hyperbolic }
+VULNERABLE_TO { cotes }
+FIZZLE euler { The formula bears Euler's name today, but this corridor reserves Euler for the headline result and credits the EARLIER man who first wrote the log-of-cosine-plus-i-sine relation -- think of who preceded Euler here. }
+FIZZLE weierstrass { Weierstrass justified the product; this robot is the complex-exponential rewrite of the cotangent -- recall the Englishman who first tied trig functions to the logarithm of a complex exponential. }
+FIZZLE cauchy { Cauchy's log-derivative produced the cotangent; here that cotangent is CONVERTED into exponentials by a complex-angle substitution -- name the man who first discovered that bridge. }
+FIZZLE riccati { The hyperbolic cotangent is named at the NEXT robot; this step is the underlying complex-exponential identity that makes the conversion possible -- think of its earliest discoverer. }
+FIZZLE lhopital { The limit rule is the finale; this robot is the e-to-the-i-theta identity turning cotangent into exponentials -- recall the geometer who anticipated Euler's formula. }
+FIZZLE tannery { Tannery's swap waits at the very end; this sentinel is the complex exponential form of cosine and sine -- name the man who first related them through the logarithm. }
+
+ROBOT: 5
+NAME { Vincenzo Riccati }
+BRIEFING_HINT { The Hyperbolic Cotangent: recognize the exponential ratio as coth. This
+          sentinel yields to the man who named the hyperbolic functions. }
+PROBLEM { The exponential ratio $\frac{e^u + e^{-u}}{e^u - e^{-u}}$ is a named function.
+          Who introduced and named the hyperbolic functions, including this one? }
+EXPLAIN_MATHEMATICIAN { The exponential ratio is exactly the hyperbolic cotangent: coth $u
+          = \frac{e^u + e^{-u}}{e^u - e^{-u}}$, and cot$(iu) = i$ coth $u$. Hence
+          $\frac{\pi \cot(-\pi it)}{2it} = \frac{\pi}{2t}$ coth$(\pi t)$, and the sum becomes
+          $\sum \frac{1}{n^2 + t^2} = -\frac{1}{2t^2} + \frac{\pi}{2t}$ coth$(\pi t)$. }
+EXPLAIN_PHYSICIST { Riccati's hyperbolic functions are the exponential twins of sine and
+          cosine: coth $u = \frac{e^u + e^{-u}}{e^u - e^{-u}}$. The messy exponential ratio
+          from the last step is precisely coth$(\pi t)$ once the $i$'s cancel. So the equation
+          tidies to $\sum \frac{1}{n^2 + t^2} = -\frac{1}{2t^2} + \frac{\pi}{2t}$ coth$(\pi t)$
+          -- clean and ready for a limit. }
+EXPLAIN_BIOLOGIST { Riccati named a family of functions, the hyperbolic ones, that behave
+          like sine and cosine but are built from the exponential instead of the circle. The
+          exponential ratio we just made is simply one of them, the hyperbolic cotangent.
+          Naming it that way turns a scary formula into a familiar object we can take a limit of. }
+EXPLAIN_ENGINEER { The hyperbolic cotangent [[ $\frac{e^u + e^{-u}}{e^u - e^{-u}}$ | 1.0037 ]]
+          at $u = \pi$. The equation becomes $\sum \frac{1}{n^2 + t^2} = -\frac{1}{2t^2} +
+          \frac{\pi}{2t}$ coth$(\pi t)$; at $t = 1$
+          the right side is about [[ $0.1737$ | 0.1737 ]]. }
+SEGMENTS {
+  $\frac{e^u + e^{-u}}{e^u - e^{-u}}$    | hyperbolic
+  $=$                                    | NEUTRAL
+  $\frac{e^u + e^{-u}}{e^u - e^{-u}}$    | hyperbolic
+}
+EYE { hyperbolic }
+VULNERABLE_TO { riccati }
+FIZZLE euler { Euler exploits the hyperbolic cotangent, but this robot honours the man who first DEFINED and named the hyperbolic functions -- think of who introduced sinh, cosh, and coth. }
+FIZZLE weierstrass { Weierstrass certified the product far upstream; this sentinel is the naming of the exponential ratio as coth -- recall the mathematician who first christened the hyperbolic functions. }
+FIZZLE cauchy { Cauchy's log-derivative is two steps back; here the exponential ratio is identified as the hyperbolic cotangent -- name the man who introduced that family of functions. }
+FIZZLE cotes { Cotes' complex-exponential identity MADE this ratio at the previous robot, but the question now is who NAMED it coth -- think of the founder of the hyperbolic functions. }
+FIZZLE lhopital { The limit rule is the finale; this robot only recognizes the exponential ratio as a named hyperbolic function -- recall who first defined and named it. }
+FIZZLE tannery { Tannery's swap comes at the end; this step is the identification of the ratio as the hyperbolic cotangent -- name the man who introduced the hyperbolic functions. }
+
+ROBOT: 6
+NAME { Guillaume de l'Hopital }
+BRIEFING_HINT { The Triple Limit: as t goes to zero a 0/0 form appears; differentiate top
+          and bottom three times. This sentinel yields to the namesake of that rule. }
+PROBLEM { Letting $t \to 0$ produces a $\frac{0}{0}$ form, resolved by differentiating
+          numerator and denominator three times. Whose rule is being applied? }
+EXPLAIN_MATHEMATICIAN { Let $t \to 0$ in $\sum \frac{1}{n^2 + t^2}$. The right side
+          $-\frac{1}{2t^2} + \frac{\pi}{2t}$ coth$(\pi t)$ is an indeterminate $\frac{0}{0}$
+          once combined; applying L'Hopital's rule thrice removes the indeterminacy:
+          $\sum_{n=1}^{\infty} \frac{1}{n^2} = \lim_{t \to 0} \frac{\pi^2(2\pi t + 1)}{4\pi^2
+          t^2 + 12\pi t + 6} = \frac{\pi^2}{6}$. }
+EXPLAIN_PHYSICIST { As $t \to 0$ both pieces blow up, but their difference is finite -- a
+          $\frac{0}{0}$ form. L'Hopital's rule says: when a quotient is $\frac{0}{0}$,
+          differentiate top and bottom and try again. Three passes turn the tangle into the
+          harmless ratio $\frac{\pi^2(2\pi t + 1)}{4\pi^2 t^2 + 12\pi t + 6}$. Setting $t = 0$
+          gives $\frac{\pi^2 \cdot 1}{6} = \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { When a fraction tries to become $\frac{0}{0}$ -- zero over zero, which
+          says nothing -- L'Hopital's rule rescues it: replace top and bottom by how fast each
+          is changing, and look again. Do this three times here and the runaway pieces settle
+          into a plain fraction whose value at the end is exactly $\frac{\pi^2}{6}$. }
+EXPLAIN_ENGINEER { L'Hopital handles $\frac{0}{0}$ by differentiating top and bottom. After
+          three passes the limit is [[ $\frac{\pi^2(2\pi t + 1)}{4\pi^2 t^2 + 12\pi t + 6}$ | 1.6449 ]]
+          at $t = 0$, where the numerator is [[ $\pi^2(2\pi t + 1)$ | 9.8696 ]] over a
+          denominator of [[ $4\pi^2 t^2 + 12\pi t + 6$ | 6.000 ]], giving [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. }
+SEGMENTS {
+  $\frac{\pi^2(2\pi t + 1)}{4\pi^2 t^2 + 12\pi t + 6}$   | analytic
+  $=$                                                    | NEUTRAL
+  $\frac{\pi^2}{6}$                                      | answer
+}
+EYE { answer }
+VULNERABLE_TO { lhopital }
+FIZZLE euler { Euler ties the whole proof together, but this robot is the specific rescue of a 0/0 limit by differentiating top and bottom -- think of the man whose rule that is. }
+FIZZLE weierstrass { Weierstrass secured the product at the start; this final computation resolves a 0/0 form by repeated differentiation -- recall the namesake of the rule for indeterminate quotients. }
+FIZZLE cauchy { Cauchy's log-derivative built the cotangent sum; here a 0/0 limit is cracked by differentiating numerator and denominator -- name the rule used for such forms. }
+FIZZLE cotes { Cotes' formula turned cotangent into exponentials; this robot is the 0/0 limit at the very end, resolved by a famous differentiation rule -- think of its namesake. }
+FIZZLE riccati { Riccati's coth set up the expression; now it must be evaluated at t=0 as a 0/0 form -- recall whose rule differentiates top and bottom to resolve it. }
+FIZZLE tannery { Tannery's theorem licenses pulling the limit inside the sum -- a different, final guarantee; this robot is the 0/0 differentiation rule itself, so name the man it is named for. }
+
+ROBOT: 7
+NAME { Jules Tannery }
+BRIEFING_HINT { The Limit-Sum Swap: justify moving the limit inside the infinite sum by a
+          dominating bound. This sentinel yields to the theorem's namesake. }
+PROBLEM { Moving $\lim_{t \to 0}$ inside the infinite sum needs a dominating bound
+          $\lvert a_k \rvert \leq M_k$ with $\sum M_k < \infty$. Whose theorem licenses this interchange? }
+EXPLAIN_MATHEMATICIAN { Passing $\lim_{t \to 0}$ inside the infinite sum requires
+          justification. Tannery's theorem: if $\lvert a_k(t) \rvert \leq M_k$ with $\sum M_k < \infty$, then
+          $\lim \sum a_k = \sum \lim a_k$. Here $\frac{1}{n^2 + t^2} \leq \frac{1}{n^2}$ and
+          $\sum \frac{1}{n^2} < \infty$, so $\lim_{t \to 0} \sum \frac{1}{n^2 + t^2} =
+          \sum \frac{1}{n^2}$. }
+EXPLAIN_PHYSICIST { Why may we move the limit through an infinite sum? Tannery's theorem
+          gives the licence: if each term is bounded by a fixed $M_k$ whose total $\sum M_k$ is
+          finite, the swap is safe. Here each term $\frac{1}{n^2 + t^2}$ is dominated by
+          $\frac{1}{n^2}$, and $\sum \frac{1}{n^2}$ converges, so $\lim$ and $\sum$ trade places
+          to leave exactly $\sum \frac{1}{n^2}$. }
+EXPLAIN_BIOLOGIST { When you have an endless sum that also depends on a sliding number $t$,
+          you cannot always take the limit term by term -- unless something keeps the tail under
+          control. Tannery's theorem is that safety check: if every term stays under a fixed,
+          finite budget, swapping the limit inside is allowed, and the sum becomes the plain
+          Basel sum. }
+EXPLAIN_ENGINEER { Tannery's theorem licenses swapping $\lim$ and $\sum$ when each term is
+          capped by a convergent bound. Here [[ $\frac{1}{n^2 + t^2}$ | 1.000 ]] at $n = 1, t = 0$
+          is below the cap [[ $\frac{1}{n^2}$ | 1.000 ]], and [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]
+          is finite. So the limit slides in and the sum reduces to $\sum \frac{1}{n^2}$. }
+SEGMENTS {
+  $\frac{1}{n^2 + t^2}$        | analytic
+  $\leq$                       | NEUTRAL
+  $\frac{1}{n^2}$              | answer
+}
+EYE { answer }
+VULNERABLE_TO { tannery }
+FIZZLE euler { Euler owns the headline result, but this final robot is the precise theorem that lets the limit pass inside the infinite sum -- think of the man that interchange theorem is named for. }
+FIZZLE weierstrass { Weierstrass justified the product at the start; this last step justifies swapping limit and SUM by a dominating bound -- recall the namesake of that interchange theorem. }
+FIZZLE cauchy { Cauchy's analysis differentiated a sum term by term earlier; here the question is who licenses pulling a LIMIT inside an infinite sum via a convergent bound -- name that specific theorem's author. }
+FIZZLE cotes { Cotes' exponential identity is long behind; this robot is the dominated-bound swap of limit and sum -- think of the mathematician whose theorem permits it. }
+FIZZLE riccati { Riccati's hyperbolic cotangent is already used; this final guarantee is about interchanging limit and infinite sum under a finite bound -- recall the namesake of that theorem. }
+FIZZLE lhopital { L'Hopital's rule resolved the 0/0 limit at the previous robot; this separate, final step justifies moving the limit INSIDE the sum -- name the man whose theorem grants that. }

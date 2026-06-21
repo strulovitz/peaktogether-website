@@ -1,0 +1,48 @@
+CORRIDOR: The Basel Problem — Euler's Formula and L'Hopital's Rule
+SOURCE  : levels\mathematics\basel_problem\basel_euler_lhopital.txt
+STAINS  : roots, logderiv, analytic, product, hyperbolic, answer
+DPI     : 600
+
+--- ROBOT 1: Leonhard Euler ---
+  [ OK  ] mathematician -> robot1_mathematician.png
+  [ OK  ] physicist     -> robot1_physicist.png
+  [ OK  ] biologist     -> robot1_biologist.png
+  [ OK  ] engineer      -> robot1_engineer.png
+
+--- ROBOT 2: Karl Weierstrass ---
+  [ OK  ] mathematician -> robot2_mathematician.png
+  [ OK  ] physicist     -> robot2_physicist.png
+  [ OK  ] biologist     -> robot2_biologist.png
+  [ OK  ] engineer      -> robot2_engineer.png
+
+--- ROBOT 3: Augustin-Louis Cauchy ---
+  [ OK  ] mathematician -> robot3_mathematician.png
+  [ OK  ] physicist     -> robot3_physicist.png
+  [ OK  ] biologist     -> robot3_biologist.png
+  [ OK  ] engineer      -> robot3_engineer.png
+
+--- ROBOT 4: Roger Cotes ---
+  [ OK  ] mathematician -> robot4_mathematician.png
+  [ OK  ] physicist     -> robot4_physicist.png
+  [ OK  ] biologist     -> robot4_biologist.png
+  [ OK  ] engineer      -> robot4_engineer.png
+
+--- ROBOT 5: Vincenzo Riccati ---
+  [ OK  ] mathematician -> robot5_mathematician.png
+  [ OK  ] physicist     -> robot5_physicist.png
+  [ OK  ] biologist     -> robot5_biologist.png
+  [ OK  ] engineer      -> robot5_engineer.png
+
+--- ROBOT 6: Guillaume de l'Hopital ---
+  [ OK  ] mathematician -> robot6_mathematician.png
+  [ OK  ] physicist     -> robot6_physicist.png
+  [ OK  ] biologist     -> robot6_biologist.png
+  [ OK  ] engineer      -> robot6_engineer.png
+
+--- ROBOT 7: Jules Tannery ---
+  [ OK  ] mathematician -> robot7_mathematician.png
+  [ OK  ] physicist     -> robot7_physicist.png
+  [ OK  ] biologist     -> robot7_biologist.png
+  [ OK  ] engineer      -> robot7_engineer.png
+
+DONE. 0 failure(s).
