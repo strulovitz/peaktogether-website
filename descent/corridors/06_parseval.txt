@@ -1,0 +1,296 @@
+# ===========================================================
+# The Basel Problem — Parseval's Identity & the Recurrence.
+# Seven sentinels: Parseval's L^2 proof of sum 1/n^2 = pi^2/6,
+# then the recurrence that generalizes to zeta(2j). Robot 1 is
+# nearest the doorway. Each yields to exactly ONE mathematician id.
+# Robot N maps 1:1 to baker step N (baked/basel/parseval/robotN_*.png).
+# LEDGER mirrors the baker STAINS: norm=red, basis=yellow,
+# frequency=blue; identity=red+yellow, coefficients=yellow+blue,
+# answer=red+blue.
+# ===========================================================
+CORRIDOR: 6
+TITLE { The Basel Problem -- Parseval's Identity }
+FLAVOR { One ramp function, measured two ways -- in length and in tones -- and forced to agree. }
+LEDGER {
+  PRIMARY norm         = red
+  PRIMARY basis        = yellow
+  PRIMARY frequency    = blue
+  BLEND   identity     = norm + basis
+  BLEND   coefficients = basis + frequency
+  BLEND   answer       = norm + frequency
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in the Parseval descent on the Basel sum. Read each robot's blue
+          hologram face, judge whose idea its mathematics belongs to, and fire
+          that mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the Parseval corridor. Ahead, the energy of a simple ramp will be weighed two ways at once -- and forced to balance into a circle. }
+EXIT_TEXT { The last sentinel falls and the two energies balance: pi^2/6 = zeta(2), reached through Parseval's identity. The hostages are free -- you have flown the whole length of the energy-balance proof. Well done. }
+
+ROBOT: 1
+NAME { Marc-Antoine Parseval }
+BRIEFING_HINT { This sentinel states the prize itself: the identity equating a
+          function's total energy with the sum of its squared Fourier amplitudes.
+          It yields to the man whose identity this is. }
+PROBLEM { One equation sets a function's squared norm equal to the sum of its
+          squared Fourier coefficients. Whose identity is this? }
+EXPLAIN_MATHEMATICIAN { Parseval's identity equates two energies:
+          $\lVert f \rVert^2 = \sum_{k=-\infty}^{\infty} \lvert \langle f, e_k \rangle \rvert^2$. The
+          whole-function energy on the left equals the total spectral energy on the
+          right. Choosing $f(\vartheta) = \vartheta$ will deliver $\zeta(2)$. }
+EXPLAIN_PHYSICIST { A signal carries the same total energy whether measured in time
+          or in frequency. Parseval makes this exact: the integral of the square,
+          $\int_0^1 \lvert f \rvert^2$, equals the sum of the squared Fourier amplitudes,
+          $\sum \lvert \langle f, e_k \rangle \rvert^2$. Feed in $f(\vartheta) = \vartheta$ and out
+          falls $\frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { Imagine a sound. You can measure its loudness directly, or break
+          it into pure tones and add up the loudness of each tone -- you get the same
+          total. That is Parseval's rule. Apply it to one simple ramp and the circle
+          number $\frac{\pi^2}{6}$ drops out. }
+EXPLAIN_ENGINEER { Energy in equals energy out: the time-domain power
+          [[ $\int_0^1 \lvert f \rvert^2$ | 0.3333 ]] matches the sum of band powers
+          [[ $\sum \lvert \langle f, e_k \rangle \rvert^2$ | 0.3333 ]], so they balance -- and for
+          the ramp this rebuilds [[ $\frac{\pi^2}{6}$ | 1.6449 ]]. }
+SEGMENTS {
+  $\lVert f \rVert^2$                              | norm
+  $=$                                              | NEUTRAL
+  $\sum \lvert \langle f, e_k \rangle \rvert^2$    | frequency
+}
+EYE { identity }
+VULNERABLE_TO { parseval }
+FIZZLE pythagoras { The right-angle, sum-of-squares geometry IS the soul of this identity, but here you are only asked to NAME the energy equation itself -- think of the man it is named after, not the ancient triangle behind it. }
+FIZZLE hilbert { The inner-product space is the arena this identity lives in, but this opening robot just states the headline equation -- name the person whose identity equates the two energies. }
+FIZZLE fourier { The basis of pure tones is what gets summed on the right, but no basis is being constructed here -- you are asked who owns this energy-balance identity. }
+FIZZLE taylor { Integration by parts computes the coefficients further down, but here nothing is being integrated -- recall whose identity sets total energy equal to summed amplitudes. }
+FIZZLE euler { Assembling the final pi^2/6 comes later; this first robot simply states the general identity that makes it possible -- name the man it is named for. }
+FIZZLE riemann { Generalizing to zeta(2j) is the finale, but this opening sentinel is the plain identity itself -- name the person whose namesake it is. }
+
+ROBOT: 2
+NAME { Pythagoras }
+BRIEFING_HINT { The geometric heart: a squared length equals the sum of its squared
+          perpendicular components. This sentinel yields to the namesake of that theorem. }
+PROBLEM { Parseval is just one theorem stretched to infinitely many right angles:
+          squared length equals the sum of squared components. Whose theorem is that? }
+EXPLAIN_MATHEMATICIAN { Parseval is the Pythagorean theorem in a Hilbert space:
+          $\lVert x \rVert^2 = \sum_k \lvert \langle x, e_k \rangle \rvert^2$. For orthogonal $u \perp v$,
+          $\lVert u+v \rVert^2 = \lVert u \rVert^2 + \lVert v \rVert^2$; extended to a complete orthonormal family,
+          this is the identity itself. }
+EXPLAIN_PHYSICIST { In the plane, $c^2 = a^2 + b^2$: the squared length is the sum of
+          squared components along perpendicular axes. A Hilbert space just has
+          infinitely many perpendicular axes $e_k$, so $\lVert x \rVert^2$ becomes the infinite
+          sum $\sum_k \lvert \langle x, e_k \rangle \rvert^2$ of squared components. }
+EXPLAIN_BIOLOGIST { Right triangle: the long side squared equals the sum of the two
+          short sides squared. Now picture a shape with infinitely many corners, all
+          at right angles. Its length squared is still just the sum of all its squared
+          shadows on those directions. That is all Parseval says. }
+EXPLAIN_ENGINEER { Pythagoras with numbers: legs $a$ and $b$ give hypotenuse
+          $\sqrt{a^2 + b^2}$. With unit-length perpendicular axes, the squared length
+          is the running total of the squared components -- and infinitely many axes is
+          fine, the total still converges. }
+SEGMENTS {
+  $\lVert u+v \rVert^2$              | norm
+  $=$                                | NEUTRAL
+  $\lVert u \rVert^2 + \lVert v \rVert^2$ | frequency
+}
+EYE { norm }
+VULNERABLE_TO { pythagoras }
+FIZZLE parseval { The named identity is the infinite-dimensional FORM of this idea, but this robot is the ancient right-angle theorem underneath -- think of who first proved the sum-of-squares law for triangles. }
+FIZZLE hilbert { The space supplies the infinitely many axes, but this robot is about the squared-length law that holds on them -- recall the ancient geometer whose theorem this is. }
+FIZZLE fourier { Fourier supplies the perpendicular tones, yet the principle here -- length squared equals summed squares -- predates them by millennia -- name its discoverer. }
+FIZZLE taylor { No integral appears here; this is the pure geometry of right angles and squared sides -- recall the namesake of the theorem on a right triangle. }
+FIZZLE euler { Euler assembles the final number; this robot is the bare geometric law that energy decomposes into squared components -- name the ancient behind the right-triangle theorem. }
+FIZZLE riemann { The generalization waits at the end; this is the elementary sum-of-squares theorem on perpendicular directions -- name the founder of that result. }
+
+ROBOT: 3
+NAME { David Hilbert }
+BRIEFING_HINT { The arena: an inner-product space of functions, complete, with a
+          length and an angle. This sentinel yields to the man this space is named for. }
+PROBLEM { The whole proof lives in a complete inner-product space of functions, where
+          $\langle f, g \rangle = \int_0^1 f \overline{g}$ defines length and angle.
+          Whose space is this? }
+EXPLAIN_MATHEMATICIAN { The arena is $L^2_{per}(0,1)$ with inner product
+          $\langle f, g \rangle = \int_0^1 f(x) \overline{g(x)} \, dx$ and norm
+          $\lVert f \rVert = \sqrt{\langle f, f \rangle}$. Completeness guarantees that an
+          orthonormal basis lets every $f$ be written as
+          $\sum_k \langle f, e_k \rangle \, e_k$. }
+EXPLAIN_PHYSICIST { A Hilbert space is ordinary geometry with infinitely many
+          dimensions: it has lengths and angles through an inner product
+          $\langle f, g \rangle = \int_0^1 f \overline{g} \, dx$, and the length is
+          $\lVert f \rVert = \sqrt{\langle f, f \rangle}$. Being complete means there are enough
+          limits for these infinite sums to actually live in the space. }
+EXPLAIN_BIOLOGIST { Think of arrows in space: you can measure how long an arrow is and
+          the angle between two arrows. This kind of space does the same for whole
+          functions -- it gives each function a length and lets two functions be
+          perpendicular. It just allows infinitely many independent directions. }
+EXPLAIN_ENGINEER { Treat a function like a vector with infinitely many coordinates.
+          The dot product becomes an integral,
+          $\langle f, g \rangle = \int_0^1 f \overline{g}$, and the length is
+          $\lVert f \rVert = \sqrt{\langle f, f \rangle}$. Complete is the promise that the
+          infinite coordinate expansion really reconstructs the original signal. }
+SEGMENTS {
+  $\langle f, g \rangle$                  | norm
+  $=$                                     | NEUTRAL
+  $\int_0^1 f \overline{g} \, dx$         | basis
+}
+EYE { norm }
+VULNERABLE_TO { hilbert }
+FIZZLE parseval { The identity holds inside this space, but this robot is the space ITSELF -- the complete inner-product geometry -- so name the mathematician it is named after. }
+FIZZLE pythagoras { The right-angle law lives here, yet the robot asks for the ARENA -- the complete inner-product space of functions -- recall whose name that infinite-dimensional space carries. }
+FIZZLE fourier { Fourier furnishes the basis vectors, but first you need the space they sit in: the complete inner-product space -- name the man it is named for. }
+FIZZLE taylor { Integration by parts is a later tool; here you face the abstract space with its inner product and norm -- recall whose name labels this kind of space. }
+FIZZLE euler { Euler closes the computation; this robot is the geometric stage on which it happens -- the complete inner-product space -- name its namesake. }
+FIZZLE riemann { The zeta generalization is the ending; this sentinel is the underlying function space with length and angle -- name the mathematician this space honours. }
+
+ROBOT: 4
+NAME { Joseph Fourier }
+BRIEFING_HINT { The orthonormal basis: pure waves at every integer frequency, mutually
+          perpendicular. This sentinel yields to the founder of the tone decomposition. }
+PROBLEM { The basis vectors are the pure waves $e_k = e^{2\pi i k\vartheta}$, one per
+          frequency, and a coefficient is the overlap $\langle f, e_k \rangle$. Whose
+          decomposition is this? }
+EXPLAIN_MATHEMATICIAN { The complex exponentials $e_k(\vartheta) = e^{2\pi i k\vartheta}$
+          are orthonormal: $\langle e_k, e_j \rangle = \int_0^1 e^{2\pi i(k-j)\vartheta}
+          \, d\vartheta = \delta_{k,j}$. The coordinates of $f$ in this basis are the
+          coefficients $\langle f, e_k \rangle = \int_0^1 f(\vartheta) e^{-2\pi i k\vartheta}
+          \, d\vartheta$. }
+EXPLAIN_PHYSICIST { The axes are the pure waves $e_k = e^{2\pi i k\vartheta}$, one per
+          integer frequency $k$. They are mutually perpendicular and unit length:
+          $\langle e_k, e_j \rangle = \delta_{k,j}$ (one if $k=j$, zero otherwise). A
+          function's coordinate along wave $k$ is its coefficient $\langle f, e_k \rangle$. }
+EXPLAIN_BIOLOGIST { The big idea: any repeating wiggle is a stack of pure, evenly spaced
+          tones. Those tones are the building-block waves, all at right angles to one
+          another. How much of each tone is present is that tone's coefficient -- found
+          by overlapping the function with that wave. }
+EXPLAIN_ENGINEER { The basis is the bank of pure tones $e^{2\pi i k\vartheta}$ for
+          $k = \dots, -1, 0, 1, \dots$. They are orthonormal:
+          $\langle e_k, e_j \rangle = \delta_{k,j}$. To get the strength of tone $k$ you
+          correlate the signal against it, giving
+          $\langle f, e_k \rangle = \int_0^1 f e^{-2\pi i k\vartheta} \, d\vartheta$. }
+SEGMENTS {
+  $e_k = e^{2\pi i k\vartheta}$           | basis
+  $=$                                     | NEUTRAL
+  $\langle e_k, e_j \rangle = \delta_{k,j}$ | coefficients
+}
+EYE { basis }
+VULNERABLE_TO { fourier }
+FIZZLE parseval { Parseval SUMS the squared coefficients; this robot builds the basis of tones that those coefficients live on -- think of who first decomposed functions into pure waves. }
+FIZZLE pythagoras { The waves are perpendicular like Pythagorean axes, but the robot asks WHO supplied this wave basis -- recall the founder of the tone-by-tone expansion. }
+FIZZLE hilbert { Hilbert gave the space; here you need the specific orthonormal waves filling it -- name the man whose series expands functions into those frequencies. }
+FIZZLE taylor { That is the integration tool used to evaluate a coefficient; this robot is the wave basis itself -- recall whose name the frequency decomposition bears. }
+FIZZLE euler { Euler finishes the sum; this robot is the orthonormal exponential basis feeding it -- name the founder of expanding signals into pure tones. }
+FIZZLE riemann { The zeta family is the ending; this sentinel is the periodic wave basis $e^{2\pi i k\vartheta}$ -- name the mathematician whose series these are. }
+
+ROBOT: 5
+NAME { Brook Taylor }
+BRIEFING_HINT { Integration by parts: trade a hard integral for an easy one to compute
+          the ramp's coefficient. This sentinel yields to the discoverer of that rule. }
+PROBLEM { Computing $\int_0^1 \vartheta e^{-2\pi i k\vartheta} d\vartheta$ uses
+          $\int u\,dv = uv - \int v\,du$ to extract $-\frac{1}{2\pi i k}$. Who discovered
+          this method? }
+EXPLAIN_MATHEMATICIAN { For $f(\vartheta) = \vartheta$, integration by parts gives
+          $\langle f, e_k \rangle = \int_0^1 \vartheta e^{-2\pi i k\vartheta} \, d\vartheta
+          = -\frac{1}{2\pi i k}$ for $k \neq 0$, and $\frac{1}{2}$ for $k = 0$. Thus
+          $\lvert \langle f, e_k \rangle \rvert^2 = \frac{1}{(2\pi k)^2}$. }
+EXPLAIN_PHYSICIST { Integration by parts, $\int u\,dv = uv - \int v\,du$, turns
+          $\int_0^1 \vartheta e^{-2\pi i k\vartheta} d\vartheta$ into a boundary term
+          minus an easy integral. The leftover oscillation integrates to zero over a
+          full period, leaving $\langle f, e_k \rangle = -\frac{1}{2\pi i k}$, so
+          $\lvert \langle f, e_k \rangle \rvert^2 = \frac{1}{4\pi^2 k^2}$. }
+EXPLAIN_BIOLOGIST { To overlap the ramp $\vartheta$ with a wave we use a trick that
+          trades a hard integral for an easy one: differentiate the simple part,
+          integrate the wavy part. The wavy leftover averages to nothing over a whole
+          cycle, leaving one clean coefficient for each frequency. }
+EXPLAIN_ENGINEER { Integration by parts is the lever: $\int u\,dv = uv - \int v\,du$.
+          For $\int_0^1 \vartheta e^{-2\pi i k\vartheta} d\vartheta$ pick $u = \vartheta$
+          and $dv = e^{-2\pi i k\vartheta} d\vartheta$; the periodic remainder vanishes,
+          giving $\langle f, e_k \rangle = -\frac{1}{2\pi i k}$ and squared size
+          $\frac{1}{(2\pi k)^2}$. }
+SEGMENTS {
+  $\int u\,dv$                            | coefficients
+  $=$                                     | NEUTRAL
+  $uv - \int v\,du$                       | norm
+}
+EYE { coefficients }
+VULNERABLE_TO { taylor }
+FIZZLE parseval { Parseval sums these coefficients once they exist; this robot is the integration TECHNIQUE that computes one -- recall who first published integration by parts. }
+FIZZLE pythagoras { The sum-of-squares geometry comes later; here a single integral is being cracked open by parts -- name the mathematician who discovered that integration rule. }
+FIZZLE hilbert { Hilbert's space holds the functions, but this robot is the calculus move that evaluates the coefficient integral -- recall the discoverer of integration by parts. }
+FIZZLE fourier { Fourier defined the coefficient; this robot is the integration-by-parts trick that actually evaluates it -- name the man credited with that method. }
+FIZZLE euler { Euler balances the books afterward; this sentinel is the integration step producing $-1/(2\pi i k)$ -- name who first set down integration by parts. }
+FIZZLE riemann { The recurrence at the end reuses this very trick, but this robot is the basic integration-by-parts rule -- name the mathematician who discovered it. }
+
+ROBOT: 6
+NAME { Leonhard Euler }
+BRIEFING_HINT { The assembly: set the ramp's energy 1/3 equal to the summed squared
+          coefficients and solve. This sentinel yields to the man who first found pi^2/6. }
+PROBLEM { Set $\int_0^1 \vartheta^2 d\vartheta = \frac{1}{3}$ equal to the spectral sum
+          and rearrange to recover $\frac{\pi^2}{6}$. Who first proved this value? }
+EXPLAIN_MATHEMATICIAN { Parseval now reads
+          $\lVert f \rVert^2 = \int_0^1 \vartheta^2 d\vartheta = \frac{1}{3} = \sum_{k \neq 0}
+          \frac{1}{(2\pi k)^2} + \frac{1}{4} = 2\sum_{k \geq 1} \frac{1}{(2\pi k)^2} +
+          \frac{1}{4}$. Solving, $\frac{\pi^2}{6} = \zeta(2)$. }
+EXPLAIN_PHYSICIST { Set the two sides equal. Left: $\int_0^1 \vartheta^2 d\vartheta =
+          \frac{1}{3}$. Right: the $k=0$ term $\frac{1}{4}$ plus twice the tail
+          $2\sum_{k \geq 1} \frac{1}{4\pi^2 k^2}$. So
+          $\frac{1}{3} - \frac{1}{4} = \frac{1}{2\pi^2} \sum_{k \geq 1} \frac{1}{k^2}$,
+          giving $\sum \frac{1}{k^2} = \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { Now just balance the books. The whole-function energy is
+          $\frac{1}{3}$. The tones contribute a flat piece $\frac{1}{4}$ plus a tail
+          made of $1/k^2$ pieces. Forcing the two totals to match rearranges into the
+          famous sum $\frac{\pi^2}{6}$ -- the same Basel answer, a brand-new way. }
+EXPLAIN_ENGINEER { Energy balance with numbers: the time side is
+          [[ $\int_0^1 \vartheta^2 d\vartheta$ | 0.3333 ]]; the spectral side is the DC
+          term [[ $\frac{1}{4}$ | 0.2500 ]] plus the harmonic tail. Subtract, multiply
+          by $2\pi^2$, and the tail sums to [[ $\frac{\pi^2}{6}$ | 1.6449 ]] --
+          Basel solved through pure energy accounting. }
+SEGMENTS {
+  $\frac{1}{3}$                           | norm
+  $=$                                     | NEUTRAL
+  $\frac{\pi^2}{6}$                       | answer
+}
+EYE { answer }
+VULNERABLE_TO { euler }
+FIZZLE parseval { Parseval's identity is the SCAFFOLD here, but this robot is the final act of solving it for the sum -- recall who first proved the squares add to pi-squared over six. }
+FIZZLE pythagoras { The sum-of-squares geometry set this up; this robot is the closing arithmetic that yields pi^2/6 -- name the man who first found that value in 1734. }
+FIZZLE hilbert { Hilbert's space framed the proof; here the two energies are balanced into the final answer -- name the mathematician who first obtained pi^2/6. }
+FIZZLE fourier { Fourier supplied the tones whose powers are summed; this robot solves the balance for the Basel value -- recall who first proved it equals pi^2/6. }
+FIZZLE taylor { Integration by parts produced the coefficients; this robot does the final rearrangement into pi^2/6 -- name the man who first summed these squares exactly. }
+FIZZLE riemann { Generalizing to zeta(2j) is the next robot; this one nails the special case pi^2/6 -- name the mathematician who first solved Basel. }
+
+ROBOT: 7
+NAME { Bernhard Riemann }
+BRIEFING_HINT { Generalization: higher powers theta^j give a recurrence for the
+          coefficients, feeding Parseval to yield zeta(2j). This sentinel yields to
+          zeta's master. }
+PROBLEM { Using $f_j = \vartheta^j$, a recurrence links the coefficient integrals and
+          Parseval then yields every $\zeta(2j)$. Who extended this zeta function and
+          studied it deeply? }
+EXPLAIN_MATHEMATICIAN { Using $f_j(\vartheta) = \vartheta^j$ and
+          $I_{j,k} = \int_0^1 \vartheta^j e^{-2\pi i k\vartheta} d\vartheta$, integration
+          by parts yields the recurrence $I_{j,k} = -\frac{1}{2\pi i k} +
+          \frac{j}{2\pi i k} I_{j-1,k}$. Parseval on $\lVert f_j \rVert^2$ then expresses each
+          $\zeta(2j)$ in closed form. }
+EXPLAIN_PHYSICIST { The trick is not a one-off. Take higher ramps
+          $f_j(\vartheta) = \vartheta^j$; their coefficients $I_{j,k}$ obey a recurrence,
+          each built from the previous via the same integration by parts. Feed them
+          through Parseval and you generate $\zeta(4), \zeta(6), \dots, \zeta(2j)$. }
+EXPLAIN_BIOLOGIST { One ramp gave us $\zeta(2)$. Steeper and steeper ramps, fed through
+          the very same machine, give $\zeta(4)$, $\zeta(6)$, and onward -- each new
+          answer leaning on the one before it like a chain. The single idea scales into
+          a whole family of circle-number sums. }
+EXPLAIN_ENGINEER { Generalize the exponent. Powers $\vartheta^j$ give coefficient
+          integrals $I_{j,k}$ linked by a step-down recurrence in $j$. Each level runs
+          back through Parseval to output the next even-zeta value $\zeta(2j)$ -- the
+          same engine, cranked repeatedly, builds the whole tower. }
+SEGMENTS {
+  $f_j(\vartheta) = \vartheta^j$          | frequency
+  $=$                                     | NEUTRAL
+  $\zeta(2j)$                             | answer
+}
+EYE { answer }
+VULNERABLE_TO { riemann }
+FIZZLE parseval { Parseval's identity is the engine reused at every level, but this robot is the grand generalization to all zeta(2j) -- name the man whose study of zeta runs deepest. }
+FIZZLE pythagoras { The right-angle law underlies each step, yet this sentinel reaches to the whole family of even zeta values -- recall who extended the zeta function and tied it to the primes. }
+FIZZLE hilbert { Hilbert's space hosts every f_j, but this robot is about generalizing to zeta(2j) and beyond -- name the mathematician whose name the famous hypothesis bears. }
+FIZZLE fourier { Fourier's basis serves all the powers, but this final robot is the zeta generalization itself -- recall the master of zeta's analytic continuation. }
+FIZZLE taylor { Integration by parts powers the recurrence, yet the robot asks about the whole zeta family it produces -- name the man whose study of that function is the deepest open problem. }
+FIZZLE euler { Euler cracked the first value pi^2/6; this robot is the generalization to every zeta(2j) and the function's deep theory -- name the mathematician famous for it. }

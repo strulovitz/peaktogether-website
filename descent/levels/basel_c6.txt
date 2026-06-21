@@ -1,0 +1,3 @@
+title: Basel -- Parseval's Identity (Test)
+corridors:
+  ../corridors/06_parseval.txt    baked=../baked/basel/parseval

@@ -1,0 +1,59 @@
+TITLE { The Basel Problem — Parseval's Identity & the Recurrence }
+
+STAINS {
+  norm         = 0.85 0.12 0.12   # red — the squared norm / energy side, integral of |f|^2; primitive feeding the identity and the final answer
+  basis        = 0.90 0.78 0.10   # yellow — the orthonormal basis e_k; shared ingredient of BOTH the identity and the coefficients
+  frequency    = 0.12 0.30 0.85   # blue — the coefficient/frequency side, the sum of |<f,e_k>|^2; primitive feeding coefficients and the answer
+  identity     = 0.90 0.45 0.10   # orange — Parseval's identity ITSELF, equating the two sides = red(norm) + yellow(orthonormal basis)
+  coefficients = 0.15 0.55 0.20   # green — the Fourier coefficients <f,e_k> AS PROJECTIONS onto the basis = yellow(basis) + blue(frequency side)
+  answer       = 0.55 0.10 0.65   # purple — the Basel value pi^2/6 = zeta(2), born where the two sides meet: red(norm side 1/3) + blue(frequency sum)
+}
+
+ROBOT: 1
+  NAME { Marc-Antoine Parseval }
+  EXPLAIN_MATHEMATICIAN { Parseval's identity equates two energies: $\displaystyle \stain{identity}{$\|f\|^2=\sum_{k=-\infty}^{\infty}|\langle f,e_k\rangle|^2$}$. The whole-function $\stain{norm}{\text{energy}}$ on the left equals the total $\stain{frequency}{\text{spectral energy}}$ on the right. Choosing $f(\vartheta)=\vartheta$ will deliver $\stain{answer}{$\zeta(2)$}$. }
+  EXPLAIN_PHYSICIST { A signal carries the same total energy whether you measure it in time or in frequency. Parseval makes this exact: the integral of the square, $\stain{norm}{$\int_0^1 |f|^2$}$, equals the sum of the squared $\stain{frequency}{\text{Fourier amplitudes}}$, $\stain{frequency}{$\sum |\langle f,e_k\rangle|^2$}$. Feed in $f(\vartheta)=\vartheta$ and out falls $\stain{answer}{$\pi^2/6$}$. }
+  EXPLAIN_BIOLOGIST { Imagine a sound. You can measure its loudness directly, or you can break it into pure tones and add up the loudness of each tone — and you get the same total. That is $\stain{identity}{\text{Parseval's rule}}$. Apply it to one simple ramp and the circle number $\stain{answer}{$\pi^2/6$}$ drops out. }
+  EXPLAIN_ENGINEER { Energy in equals energy out: the time-domain $\stain{norm}{\text{power}}$ matches the sum of $\stain{frequency}{\text{band powers}}$. For the ramp $f(\vartheta)=\vartheta$ the left side is $\stain{norm}{$\tfrac13$}$ and the spectral side rebuilds $\stain{answer}{$\pi^2/6$}$ — an exact constant from an endless sum. }
+
+ROBOT: 2
+  NAME { Pythagoras }
+  EXPLAIN_MATHEMATICIAN { Parseval is the Pythagorean theorem in a Hilbert space: $\stain{norm}{$\|x\|^2$}=\sum_k \stain{frequency}{$|\langle x,e_k\rangle|^2$}$. For orthogonal $\thread{t1}{u}\perp \thread{t2}{v}$, $\thread{t3}{\|u+v\|^2}=\thread{t1}{\|u\|^2}+\thread{t2}{\|v\|^2}$; extended to a complete orthonormal family this is the identity itself. }
+  EXPLAIN_PHYSICIST { In the plane, $\thread{t3}{c^2}=\thread{t1}{a^2}+\thread{t2}{b^2}$: the squared length is the sum of squared components along perpendicular axes. A Hilbert space just has infinitely many perpendicular axes $e_k$, so $\stain{norm}{$\|x\|^2$}$ becomes the infinite sum $\sum_k \stain{frequency}{$|\langle x,e_k\rangle|^2$}$ of squared components. }
+  EXPLAIN_BIOLOGIST { Right triangle: the long side squared equals the sum of the two short sides squared. Now picture a shape with infinitely many corners, all at right angles to each other. Its $\stain{norm}{\text{length squared}}$ is still just the sum of all its $\stain{frequency}{\text{squared shadows}}$ on those directions. That is all Parseval says. }
+  EXPLAIN_ENGINEER { Pythagoras with numbers: legs $\thread{t1}{a}$ and $\thread{t2}{b}$ give hypotenuse $\thread{t3}{\sqrt{a^2+b^2}}$. With unit-length perpendicular axes, the $\stain{norm}{\text{squared length}}$ is exactly the running total of the $\stain{frequency}{\text{squared components}}$ — and infinitely many axes is fine, the total still converges. }
+
+ROBOT: 3
+  NAME { David Hilbert }
+  EXPLAIN_MATHEMATICIAN { The arena is $\stain{basis}{$L^2_{\mathrm{per}}(0,1)$}$ with inner product $\stain{norm}{$\langle f,g\rangle=\int_0^1 f(x)\overline{g(x)}\,dx$}$ and norm $\stain{norm}{$\|f\|=\sqrt{\langle f,f\rangle}$}$. Completeness guarantees that an orthonormal $\stain{basis}{\text{basis}}$ lets every $f$ be written as $\sum_k \stain{coefficients}{$\langle f,e_k\rangle$}\, e_k$. }
+  EXPLAIN_PHYSICIST { A Hilbert space is ordinary geometry with infinitely many dimensions: it has lengths and angles through an $\stain{norm}{\text{inner product}}$ $\thread{t1}{\langle f,g\rangle}=\int_0^1 f\overline{g}\,dx$, and the $\stain{norm}{\text{length}}$ is $\thread{t2}{\|f\|}=\sqrt{\thread{t1}{\langle f,f\rangle}}$. Being \emph{complete} means there are enough limits for these infinite sums to actually live in the space. }
+  EXPLAIN_BIOLOGIST { Think of arrows in space: you can measure how long an arrow is and the angle between two arrows. A $\stain{basis}{\text{Hilbert space}}$ does the same for whole functions — it gives each function a $\stain{norm}{\text{length}}$ and lets two functions be "perpendicular." It just allows infinitely many independent directions instead of three. }
+  EXPLAIN_ENGINEER { Treat a function like a vector with infinitely many coordinates. The dot product becomes an integral, $\stain{norm}{$\langle f,g\rangle=\int_0^1 f\overline{g}$}$, and the length is $\stain{norm}{$\|f\|=\sqrt{\langle f,f\rangle}$}$. "Complete" is the practical promise that the infinite coordinate expansion really reconstructs the original signal. }
+
+ROBOT: 4
+  NAME { Joseph Fourier }
+  EXPLAIN_MATHEMATICIAN { The complex exponentials $\stain{basis}{$e_k(\vartheta)=e^{2\pi i k\vartheta}$}$ are orthonormal: $\langle e_k,e_j\rangle=\int_0^1 e^{2\pi i(k-j)\vartheta}\,d\vartheta=\delta_{k,j}$. The coordinates of $f$ in this basis are the Fourier coefficients $\stain{coefficients}{$\langle f,e_k\rangle=\int_0^1 f(\vartheta)\,e^{-2\pi i k\vartheta}\,d\vartheta$}$. }
+  EXPLAIN_PHYSICIST { Fourier's axes are the pure waves $\stain{basis}{$e_k=e^{2\pi i k\vartheta}$}$, one per integer frequency $k$. They are mutually perpendicular and unit length: $\thread{t1}{\langle e_k,e_j\rangle}=\thread{t1}{\delta_{k,j}}$ (one if $k=j$, zero otherwise). A function's coordinate along wave $k$ is its $\stain{coefficients}{\text{Fourier coefficient}}$ $\langle f,e_k\rangle$. }
+  EXPLAIN_BIOLOGIST { Fourier's big idea: any repeating wiggle is a stack of pure, evenly spaced tones. Those tones are the $\stain{basis}{\text{building-block waves}}$, all at right angles to one another. How much of each tone is present is that tone's $\stain{coefficients}{\text{coefficient}}$ — found by overlapping the function with that wave. }
+  EXPLAIN_ENGINEER { The basis is the bank of pure tones $\stain{basis}{$e^{2\pi i k\vartheta}$}$ for $k=\dots,-1,0,1,\dots$. They are orthonormal: $\stain{basis}{$\langle e_k,e_j\rangle=\delta_{k,j}$}$. To get the strength of tone $k$ you correlate the signal against it, giving the coefficient $\stain{coefficients}{$\langle f,e_k\rangle=\int_0^1 f\,e^{-2\pi i k\vartheta}\,d\vartheta$}$. }
+
+ROBOT: 5
+  NAME { Brook Taylor }
+  EXPLAIN_MATHEMATICIAN { For $f(\vartheta)=\vartheta$, integration by parts gives $\displaystyle \stain{coefficients}{$\langle f,e_k\rangle=\int_0^1\vartheta\,e^{-2\pi i k\vartheta}\,d\vartheta=-\frac{1}{2\pi i k}$}$ for $k\neq0$, and $\thread{t1}{\tfrac12}$ for $k=0$. Thus $|\langle f,e_k\rangle|^2=\stain{frequency}{$\dfrac{1}{(2\pi k)^2}$}$. }
+  EXPLAIN_PHYSICIST { Integration by parts, $\int u\,dv=\thread{t1}{uv}-\int v\,du$, turns $\int_0^1\vartheta\,e^{-2\pi i k\vartheta}\,d\vartheta$ into a boundary term minus an easy integral. The leftover oscillation integrates to zero over a full period, leaving $\stain{coefficients}{$\langle f,e_k\rangle=-\dfrac{1}{2\pi i k}$}$, so $|\langle f,e_k\rangle|^2=\stain{frequency}{$\dfrac{1}{4\pi^2k^2}$}$. }
+  EXPLAIN_BIOLOGIST { To overlap the ramp $\vartheta$ with a wave we use a trick that trades a hard integral for an easy one: differentiate the simple part, integrate the wavy part. The wavy leftover averages to nothing over a whole cycle, and we are left with one clean $\stain{coefficients}{\text{coefficient}}$ for each frequency. }
+  EXPLAIN_ENGINEER { Integration by parts is the lever: $\int u\,dv=uv-\int v\,du$. For $\int_0^1\vartheta\,e^{-2\pi i k\vartheta}\,d\vartheta$ pick $u=\vartheta$ and $dv=e^{-2\pi i k\vartheta}\,d\vartheta$; the periodic remainder vanishes, giving $\stain{coefficients}{$\langle f,e_k\rangle=-\tfrac{1}{2\pi i k}$}$ and squared size $\stain{frequency}{$\tfrac{1}{(2\pi k)^2}$}$. }
+
+ROBOT: 6
+  NAME { Leonhard Euler }
+  EXPLAIN_MATHEMATICIAN { Parseval now reads $\stain{norm}{$\|f\|^2=\int_0^1\vartheta^2\,d\vartheta=\tfrac13$}=\sum_{k\neq0}\stain{frequency}{$\dfrac{1}{(2\pi k)^2}$}+\thread{t1}{\tfrac14}=2\sum_{k\geq1}\dfrac{1}{(2\pi k)^2}+\thread{t1}{\tfrac14}$. Solving, $\stain{answer}{$\dfrac{\pi^2}{6}=\zeta(2)$}$. }
+  EXPLAIN_PHYSICIST { Set the two sides equal. Left: $\stain{norm}{$\int_0^1\vartheta^2\,d\vartheta=\tfrac13$}$. Right: the $k=0$ term $\thread{t1}{\tfrac14}$ plus twice the tail $2\sum_{k\geq1}\dfrac{1}{4\pi^2k^2}$. So $\tfrac13-\thread{t1}{\tfrac14}=\dfrac{1}{2\pi^2}\sum_{k\geq1}\dfrac{1}{k^2}$, giving $\stain{answer}{$\sum\dfrac{1}{k^2}=\dfrac{\pi^2}{6}$}$. }
+  EXPLAIN_BIOLOGIST { Now just balance the books. The whole-function energy is $\stain{norm}{$\tfrac13$}$. The tones contribute a flat piece $\tfrac14$ plus a tail made of $1/k^2$ pieces. Forcing the two totals to match rearranges into the famous sum $\stain{answer}{$\pi^2/6$}$ — the same Basel answer, reached a brand-new way. }
+  EXPLAIN_ENGINEER { Energy balance with numbers: the time side is $\stain{norm}{$\tfrac13\approx0.3333$}$; the spectral side is the DC term $\thread{t1}{\tfrac14=0.2500}$ plus the harmonic tail. Subtract, multiply by $2\pi^2$, and the tail sums to $\stain{answer}{$\pi^2/6\approx1.6449$}$ — Basel solved through pure energy accounting. }
+
+ROBOT: 7
+  NAME { Bernhard Riemann }
+  EXPLAIN_MATHEMATICIAN { Using $f_j(\vartheta)=\vartheta^j$ and $I_{j,k}=\int_0^1\vartheta^j e^{-2\pi i k\vartheta}\,d\vartheta$, integration by parts yields the recurrence $\thread{t1}{I_{j,k}=-\frac{1}{2\pi i k}+\frac{j}{2\pi i k}I_{j-1,k}}$. Parseval on $\|f_j\|^2$ then expresses each $\stain{answer}{$\zeta(2j)$}$ in closed form. }
+  EXPLAIN_PHYSICIST { The trick is not a one-off. Take higher ramps $\stain{frequency}{$f_j(\vartheta)=\vartheta^j$}$; their coefficients $I_{j,k}$ obey a $\thread{t1}{\text{recurrence}}$, each one built from the previous via the same integration by parts. Feed them through Parseval and you generate $\stain{answer}{$\zeta(4),\zeta(6),\dots,\zeta(2j)$}$. }
+  EXPLAIN_BIOLOGIST { One ramp gave us $\zeta(2)$. Steeper and steeper ramps, fed through the very same machine, give $\zeta(4)$, $\zeta(6)$, and onward — each new answer leaning on the one before it like a $\thread{t1}{\text{chain}}$. The single idea scales into a whole family of $\stain{answer}{\text{circle-number sums}}$. }
+  EXPLAIN_ENGINEER { Generalize the exponent. Powers $\stain{frequency}{$\vartheta^j$}$ give coefficient integrals $I_{j,k}$ linked by a $\thread{t1}{\text{step-down recurrence}}$ in $j$. Each level runs back through Parseval to output the next even-zeta value $\stain{answer}{$\zeta(2j)$}$ — the same engine, cranked repeatedly, builds the whole tower. }
