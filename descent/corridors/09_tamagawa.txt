@@ -1,0 +1,290 @@
+# ===========================================================
+# The Basel Problem -- Geometry Meets Arithmetic (Tamagawa).
+# Corridor 9: the proof assuming Weil's conjecture on Tamagawa
+# numbers for SL2. Seven sentinels descend from the headline
+# tau=1 down through the adeles, the local p-adic factors, the
+# fundamental-domain volume pi^2/6, the Euler product, to the
+# Basel value zeta(2)=pi^2/6. Robot 1 is nearest the doorway.
+# Robot N maps 1:1 to baker step N (baked/basel/tamagawa/robotN_*.png).
+# LEDGER mirrors the baker STAINS: infinite_place=red,
+# the_constant=yellow, finite_places=blue; tamagawa_measure=
+# red+blue (the product over ALL places), basel_answer=blue+yellow.
+# ===========================================================
+CORRIDOR: 9
+TITLE { The Basel Problem -- Geometry Meets Arithmetic }
+FLAVOR { One strange volume equal to one, split into a curved-space piece and a prime-by-prime piece, and pi^2/6 forced into the open. }
+LEDGER {
+  PRIMARY infinite_place   = red
+  PRIMARY the_constant     = yellow
+  PRIMARY finite_places    = blue
+  BLEND   tamagawa_measure = infinite_place + finite_places
+  BLEND   basel_answer     = finite_places + the_constant
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in the Tamagawa-number descent on the Basel sum. Read each robot's
+          hologram face, judge whose idea its mathematics belongs to, and fire that
+          mathematician. Match the face to the technique and the corridor opens. }
+ENTRY_TEXT { You have entered the Tamagawa corridor. Somewhere ahead, the volume of a strange shape equals one -- and that one is secretly pi^2/6 times a product over every prime. }
+EXIT_TEXT { The last sentinel falls and geometry meets arithmetic: zeta(2) = pi^2/6. The hostages are free -- you have flown the whole length of the Weil-Tamagawa proof. Well done. }
+
+ROBOT: 1
+NAME { Andre Weil }
+BRIEFING_HINT { This sentinel states the prize: the Tamagawa number of SL2 equals one.
+          It yields to the man who conjectured that this measure is one. }
+PROBLEM { A whole proof starts from one claim: the Tamagawa number of $SL_2$ over the
+          rationals equals $1$. Who conjectured that this measure is exactly one? }
+EXPLAIN_MATHEMATICIAN { The conjecture asserts that a simply connected semisimple group
+          has Tamagawa number $1$. For $SL_2$ this reads $\tau(SL_2(\mathbb{Q})
+          \backslash SL_2(\mathbb{A}_{\mathbb{Q}})) = 1$. Unfolding this single equation
+          into its real and $p$-adic factors reproduces the Basel value. }
+EXPLAIN_PHYSICIST { One clean statement starts everything: the volume $\tau$ of a space
+          attached to $SL_2$ over the rationals equals exactly $1$. That space combines
+          one piece from the real numbers with one piece from each prime. Writing the
+          $1$ as the product of all those pieces makes $\frac{\pi^2}{6}$ fall out. }
+EXPLAIN_BIOLOGIST { Picture a strange shape whose total volume is exactly one. It is
+          glued from one ordinary geometry part and a separate number-pattern part for
+          every prime. The proof is: measure each part, multiply, demand the answer be
+          one -- and out pops the circle number. }
+EXPLAIN_ENGINEER { Plug in the claim: the total measure
+          [[ $\tau(SL_2(\mathbb{Q}) \backslash SL_2(\mathbb{A}_{\mathbb{Q}}))$ | 1.000 ]]
+          equals the target [[ $1$ | 1.000 ]]. Everything below splits this single $1$
+          into a real factor times a prime factor -- and forces $\frac{\pi^2}{6}$ out. }
+SEGMENTS {
+  $\tau(SL_2(\mathbb{Q}) \backslash SL_2(\mathbb{A}_{\mathbb{Q}}))$ | tamagawa_measure
+  $=$                                                              | NEUTRAL
+  $1$                                                              | tamagawa_measure
+}
+EYE { tamagawa_measure }
+VULNERABLE_TO { weil }
+FIZZLE tamagawa { Defining the invariant measure is the very next step inside this proof, but right here you are only asked to NAME the bold prediction itself -- think who conjectured this number equals one. }
+FIZZLE chevalley { Building the adeles comes just below, yet this opening robot merely states the headline claim -- name the person who first asserted the measure is one. }
+FIZZLE hensel { The p-adic local factors live deeper down, but no prime is being counted yet -- this sentinel just states the prize, so name who conjectured it. }
+FIZZLE gauss { The fundamental-domain area appears later in the descent, but here no geometry is measured yet -- recall who predicted this whole measure equals one. }
+FIZZLE euler { The prime product is a true ingredient further on, but this first robot only announces the result -- name the man whose conjecture this statement is. }
+FIZZLE riemann { Reading off zeta(2) is the grand finale, but this opening robot is the bold starting claim -- name who conjectured that the Tamagawa number is one. }
+
+ROBOT: 2
+NAME { Tsuneo Tamagawa }
+BRIEFING_HINT { The invariant measure: an honest volume on SL2 that does not depend on
+          any choice of scaling. This sentinel yields to the man it is named after. }
+PROBLEM { To call a volume "one" you must fix a ruler. The invariant volume form
+          $\omega = \frac{1}{x}\,dx\,dy\,dz$ gives a measure independent of scaling.
+          Whose measure is this? }
+EXPLAIN_MATHEMATICIAN { On $SL_2 = \{ xt - yz = 1 \}$ choose the left-invariant form
+          $\omega = \frac{1}{x}\,dx\wedge dy\wedge dz$. Replacing $\omega$ by $c\,\omega$
+          rescales each local measure, but the product formula $\prod_v \lvert c\rvert_v = 1$ makes
+          the quotient measure independent of $c$, so $\tau$ is canonically defined. }
+EXPLAIN_PHYSICIST { To measure the space you need a volume element. On $SL_2$, matrices
+          satisfy $xt - yz = 1$, and the natural invariant element is $\omega =
+          \frac{1}{x}\,dx\,dy\,dz$. It is only defined up to a constant $c$; but rescaling
+          changes the real piece by $\lvert c\rvert_\infty$ and each prime piece by $\lvert c\rvert_p$, whose
+          product is exactly $1$. So the total measure $\tau$ depends on no choice. }
+EXPLAIN_BIOLOGIST { Before a shape can have volume "one," everyone must agree on a ruler.
+          This ruler is the rule "divide by $x$." Even if two people pick rulers differing
+          by a fixed scale, all the prime-by-prime rescalings cancel perfectly, so everyone
+          measures the same total volume. The number is real, not an artifact. }
+EXPLAIN_ENGINEER { The volume form is $\omega = \frac{1}{x}\,dx\,dy\,dz$ on the surface
+          where [[ $xt - yz$ | 1.000 ]] equals $1$. Rescaling by a constant scales the real
+          factor by [[ $\lvert c\rvert_\infty$ | 2.000 ]] while the primes give [[ $\prod_p \lvert c\rvert_p$ | 0.500 ]],
+          and their product [[ $\prod_v \lvert c\rvert_v$ | 1.000 ]] is $1$ -- so the measure is unchanged. }
+SEGMENTS {
+  $\omega = \frac{1}{x}\,dx\,dy\,dz$ | tamagawa_measure
+  $xt - yz = 1$                      | tamagawa_measure
+}
+EYE { tamagawa_measure }
+VULNERABLE_TO { tamagawa }
+FIZZLE weil { Weil predicted the value is one, but this robot is about the invariant RULER that lets you measure at all -- think who first showed this volume is choice-free. }
+FIZZLE chevalley { The adeles assemble all the places, but this step is the single invariant volume form and why it is well-defined -- recall the man this measure is named for. }
+FIZZLE hensel { Counting at a prime comes later; here the question is the choice-free measure on the group itself -- name who observed that rescaling cancels via the product formula. }
+FIZZLE gauss { Gauss's tile is one factor, but this sentinel is the underlying invariant volume that makes every factor honest -- recall whose measure this is. }
+FIZZLE euler { The Euler product multiplies the factors; this robot is the volume form that defines them in the first place -- name the man it is named after. }
+FIZZLE riemann { The zeta finale is far below; this is the foundational invariant measure on SL2 -- recall whose observation makes it independent of scaling. }
+
+ROBOT: 3
+NAME { Claude Chevalley }
+BRIEFING_HINT { The adeles: glue the real numbers and every p-adic field into one ring,
+          so all places live together. This sentinel yields to a founder of the adelic view. }
+PROBLEM { To handle the real place and all primes at once, one bundles them into the
+          adele ring $\mathbb{A}_{\mathbb{Q}} = \mathbb{R} \times \prod_p \mathbb{Q}_p$.
+          Who is a founder of this adelic framework? }
+EXPLAIN_MATHEMATICIAN { The adele ring is the restricted product $\mathbb{A}_{\mathbb{Q}}
+          = \mathbb{R} \times \prod_p \mathbb{Q}_p$, with $\mathbb{Q}$ embedded diagonally
+          as a discrete cocompact subring. Since $SL_2(\mathbb{Q})$ is a lattice in
+          $SL_2(\mathbb{A}_{\mathbb{Q}})$, the quotient is compact and its measure factors
+          as a real place times $\prod_p$ over the finite places. }
+EXPLAIN_PHYSICIST { To work with all primes at once, glue them into one object. An adele
+          is a list -- one real number, plus one $p$-adic number for every prime -- with
+          almost all $p$-adic entries integers: $\mathbb{A}_{\mathbb{Q}} = \mathbb{R}
+          \times \prod_p \mathbb{Q}_p$. The rationals sit inside as a discrete lattice, so
+          the quotient by $SL_2(\mathbb{Q})$ is compact and its volume splits per place. }
+EXPLAIN_BIOLOGIST { There are many ways to measure how big a rational number is: the
+          ordinary size, and for each prime a special "$p$-adic" size. The adeles hold the
+          ordinary size and all the prime sizes in a single object. Once everything lives
+          together, the big volume breaks into one piece for ordinary numbers and one per prime. }
+EXPLAIN_ENGINEER { An adele bundles [[ $1$ | 1.000 ]] real coordinate with one $p$-adic
+          coordinate per prime. The volume factors place-by-place: it equals the
+          [[ $\text{real factor}$ | 1.6449 ]] times the [[ $\text{prime product}$ | 0.6079 ]],
+          and we demand their product be [[ $1$ | 1.000 ]]. The diagonal $\mathbb{Q}$ is a
+          lattice, so the quotient is compact with a finite volume to compute. }
+SEGMENTS {
+  $\mathbb{A}_{\mathbb{Q}} = \mathbb{R} \times \prod_p \mathbb{Q}_p$ | finite_places
+  $=$                                                               | NEUTRAL
+  $SL_2(\mathbb{Q}) \subset SL_2(\mathbb{A}_{\mathbb{Q}})$          | tamagawa_measure
+}
+EYE { finite_places }
+VULNERABLE_TO { chevalley }
+FIZZLE weil { Weil predicted the final value, but this robot is about the STAGE on which everything lives -- the ring gluing all places -- so name a founder of the adelic viewpoint. }
+FIZZLE tamagawa { The invariant ruler comes from the step above; here the question is the arena -- the adele ring of all completions -- recall who helped build that framework. }
+FIZZLE hensel { Hensel gave us each single p-adic field, but this sentinel asks who packaged the real place AND all of them together into one ring -- think of the adelic founder. }
+FIZZLE gauss { Gauss's tile is the real factor inside this arena, but the robot asks who assembled all places at once -- name a founder of the adeles. }
+FIZZLE euler { The Euler product multiplies factors that LIVE in this ring; the robot itself is about the ring -- recall who helped found the adelic framework. }
+FIZZLE riemann { The zeta finale is below; this robot is the adelic stage where real and p-adic worlds meet -- name a founder of that combined structure. }
+
+ROBOT: 4
+NAME { Kurt Hensel }
+BRIEFING_HINT { The p-adic local factor: count determinant-one grids over p symbols to
+          get 1 - 1/p^2. This sentinel yields to the inventor of the p-adic numbers. }
+PROBLEM { Each prime contributes a local factor: $\lvert SL_2(\mathbb{F}_p)\rvert = p(p^2-1)$ times
+          $p^{-3}$ gives $1 - \frac{1}{p^2}$. Who invented the $p$-adic numbers behind these places? }
+EXPLAIN_MATHEMATICIAN { At a finite place, $\omega(SL_2(\mathbb{Z}_p)) =
+          \lvert SL_2(\mathbb{F}_p)\rvert \cdot \omega(SL_2(\mathbb{Z}_p, p))$. A standard count gives
+          $\lvert SL_2(\mathbb{F}_p)\rvert = p(p^2-1)$ and the congruence subgroup has measure
+          $p^{-3}$, so $\omega(SL_2(\mathbb{Z}_p)) = p(p^2-1) \cdot p^{-3} = 1 - \frac{1}{p^2}$. }
+EXPLAIN_PHYSICIST { Each prime contributes one factor. Count the determinant-one matrices
+          over the field of $p$ elements: exactly $\lvert SL_2(\mathbb{F}_p)\rvert = p(p^2-1)$. The
+          tiny congruence piece below has measure $p^{-3}$. Multiply: $p(p^2-1) \cdot p^{-3}$.
+          Since $p(p^2-1) = p^3 - p$, dividing by $p^3$ gives $1 - \frac{1}{p^2}$. }
+EXPLAIN_BIOLOGIST { Each prime gets a turn and contributes one little factor. The recipe:
+          count how many "determinant-one" grids you can make using only the $p$ symbols of
+          that prime, then shrink by a fixed amount. The bookkeeping always simplifies to the
+          same tidy shape: one minus one-over-$p$-squared. }
+EXPLAIN_ENGINEER { Take the prime $p = 2$. The count is
+          [[ $\lvert SL_2(\mathbb{F}_2)\rvert = p(p^2-1)$ | 6.000 ]] grids, the congruence piece is
+          [[ $p^{-3}$ | 0.125 ]], and their product is [[ $p(p^2-1) \cdot p^{-3}$ | 0.750 ]].
+          That equals [[ $1 - \frac{1}{p^2}$ | 0.750 ]] -- the local factor at the prime $2$. }
+SEGMENTS {
+  $\lvert SL_2(\mathbb{F}_p)\rvert = p(p^2-1)$ | finite_places
+  $=$                               | NEUTRAL
+  $1 - \frac{1}{p^2}$               | finite_places
+}
+EYE { finite_places }
+VULNERABLE_TO { hensel }
+FIZZLE weil { Weil's claim is the headline; this robot is the concrete count at a single prime -- think of the man who invented the p-adic numbers that live at each finite place. }
+FIZZLE tamagawa { The invariant ruler frames the whole measure, but here you count grids over one prime field -- recall who created the p-adic numbers underlying these places. }
+FIZZLE chevalley { Chevalley bundled all places into the adeles; this robot is the arithmetic at ONE prime, computing 1 - 1/p^2 -- name the inventor of the p-adics themselves. }
+FIZZLE gauss { Gauss's tile is the real place; this sentinel is a finite place, where you count determinant-one matrices mod p -- recall who built the p-adic numbers. }
+FIZZLE euler { Euler multiplies these factors together later; this robot is the single prime's factor and where it comes from -- name the creator of the p-adic numbers. }
+FIZZLE riemann { Riemann's zeta is the finale; this robot is the local count giving one minus one-over-p-squared -- recall the inventor of the p-adic numbers at each prime. }
+
+ROBOT: 5
+NAME { Carl Friedrich Gauss }
+BRIEFING_HINT { The fundamental domain: a single modular tile in the upper half-plane
+          whose hyperbolic area is pi^2/6. This sentinel yields to the man who drew it. }
+PROBLEM { The real place is a modular tile $\{ |z| > 1,\ |\mathrm{Re}\,z| < \frac{1}{2} \}$
+          whose hyperbolic area is $\frac{\pi^2}{6}$. Who first studied this domain, via
+          reduction of quadratic forms? }
+EXPLAIN_MATHEMATICIAN { At the infinite place one integrates $\omega$ over a fundamental
+          domain for $SL_2(\mathbb{Z})$ on the upper half-plane $\mathbb{H}$, namely
+          $\{ |z| > 1,\ |\mathrm{Re}\,z| < \frac{1}{2} \}$. The hyperbolic-area computation
+          gives $\omega(SL_2(\mathbb{Z}) \backslash SL_2(\mathbb{R})) = \frac{\pi^2}{6}$. }
+EXPLAIN_PHYSICIST { The real place needs a region representing each orbit once: the modular
+          fundamental domain in the upper half-plane, the strip with $|z| > 1$ and
+          $|\mathrm{Re}\,z| < \frac{1}{2}$. Integrating the invariant volume over this one
+          tile gives a finite hyperbolic measure, and it works out to $\frac{\pi^2}{6}$.
+          This is where $\pi$ physically enters -- from geometry, not arithmetic. }
+EXPLAIN_BIOLOGIST { The "ordinary numbers" piece is a shape: a curved tile in the upper
+          half-plane that repeats to fill everything. You measure the area of just one such
+          tile, using the curved (hyperbolic) ruler -- and that one area comes out to
+          $\frac{\pi^2}{6}$. The circle number is born right here, from geometry. }
+EXPLAIN_ENGINEER { Measure the modular tile: the region with [[ $\lvert z\rvert$ | 1.000 ]] just above
+          $1$ and [[ $\lvert \mathrm{Re}\,z\rvert$ | 0.500 ]] below one-half. Its hyperbolic volume is
+          [[ $\omega(SL_2(\mathbb{Z}) \backslash SL_2(\mathbb{R}))$ | 1.6449 ]], that is
+          [[ $\frac{\pi^2}{6}$ | 1.6449 ]] -- the real-place factor in the grand product. }
+SEGMENTS {
+  $|z| > 1,\ |\mathrm{Re}\,z| < \frac{1}{2}$ | infinite_place
+  $=$                                        | NEUTRAL
+  $\frac{\pi^2}{6}$                          | infinite_place
+}
+EYE { infinite_place }
+VULNERABLE_TO { gauss }
+FIZZLE weil { Weil's claim is the headline; this robot is the curved tile whose area is pi^2/6 -- think of the man who first drew this domain while reducing quadratic forms. }
+FIZZLE tamagawa { The invariant ruler measures this tile, but the robot asks who first studied the tile itself -- recall the geometer who handled such domains via quadratic forms. }
+FIZZLE chevalley { Chevalley assembled the places; this sentinel is the single real-place tile and its area -- name the man who first charted the modular fundamental domain. }
+FIZZLE hensel { Hensel's p-adics give the finite places; this robot is the REAL place, a hyperbolic tile of area pi^2/6 -- recall who first drew that domain. }
+FIZZLE euler { Euler multiplies the prime factors; this robot is the geometric real factor pi^2/6 from the tile -- name the geometer who first studied that fundamental domain. }
+FIZZLE riemann { Riemann's zeta is the finale; this robot is the curved tile whose area is pi^2/6 -- recall who first analysed this domain through reduction of quadratic forms. }
+
+ROBOT: 6
+NAME { Leonhard Euler }
+BRIEFING_HINT { The Euler product: the product over primes of (1 - 1/p^2) equals 1/zeta(2).
+          This sentinel yields to the man whose product identity this is. }
+PROBLEM { Multiply all the prime factors: $\prod_p (1 - \frac{1}{p^2})$. This famous product
+          equals $\frac{1}{\zeta(2)}$. Whose identity links a product over primes to a sum
+          over integers? }
+EXPLAIN_MATHEMATICIAN { The product of finite-place factors is the Euler product
+          $\prod_p (1 - \frac{1}{p^2})$. Recognizing $\prod_p (1 - p^{-2})^{-1} = \zeta(2)$
+          shows the finite product equals $\frac{1}{\zeta(2)}$. }
+EXPLAIN_PHYSICIST { Multiply all the prime factors: $\prod_p (1 - \frac{1}{p^2})$. Euler's
+          identity says the reciprocal, $\prod_p \frac{1}{1 - p^{-2}}$, is exactly the sum
+          $\sum_n \frac{1}{n^2} = \zeta(2)$, because expanding each geometric factor and
+          multiplying reconstructs every integer's inverse square once, by unique
+          factorization. So the prime product itself equals $\frac{1}{\zeta(2)}$. }
+EXPLAIN_BIOLOGIST { String together all the little prime factors "one minus one-over-$p$-
+          squared." Euler found a magic bridge: this product over primes is secretly the same
+          as a sum over all whole numbers, flipped upside down. So the entire prime product
+          collapses into one famous quantity -- one divided by the Basel sum. }
+EXPLAIN_ENGINEER { Multiply the first prime factors: [[ $1 - \frac{1}{2^2}$ | 0.750 ]] times
+          [[ $1 - \frac{1}{3^2}$ | 0.889 ]] times [[ $1 - \frac{1}{5^2}$ | 0.960 ]] and onward,
+          converging to [[ $\prod_p (1 - \frac{1}{p^2})$ | 0.6079 ]]. Euler's identity says
+          that limit is [[ $\frac{1}{\zeta(2)}$ | 0.6079 ]] -- the prime product IS $1/\zeta(2)$. }
+SEGMENTS {
+  $\prod_p \left( 1 - \frac{1}{p^2} \right)$ | finite_places
+  $=$                                        | NEUTRAL
+  $\frac{1}{\zeta(2)}$                       | basel_answer
+}
+EYE { basel_answer }
+VULNERABLE_TO { euler }
+FIZZLE weil { Weil's claim opened the corridor; this robot is the bridge turning a product over primes into a sum over integers -- think of the man whose product identity that is. }
+FIZZLE tamagawa { The invariant ruler defined the measure; this sentinel is the prime product collapsing to 1/zeta(2) -- recall who discovered the product-equals-sum identity. }
+FIZZLE chevalley { Chevalley's adeles hold these factors; this robot is the act of MULTIPLYING them into 1/zeta(2) -- name the man whose famous product over primes this is. }
+FIZZLE hensel { Hensel gave each single factor 1 - 1/p^2; here you multiply them ALL and recognize 1/zeta(2) -- recall whose identity ties that product to the integer sum. }
+FIZZLE gauss { Gauss gave the real factor pi^2/6; this robot is the prime product equal to 1/zeta(2) -- name the man who first wrote a sum as a product over primes. }
+FIZZLE riemann { Riemann studied zeta deeply, but this robot is specifically the product-over-primes identity for 1/zeta(2) -- recall who first discovered that product form. }
+
+ROBOT: 7
+NAME { Bernhard Riemann }
+BRIEFING_HINT { The synthesis: one = pi^2/6 times 1/zeta(2), so zeta(2) = pi^2/6. This
+          sentinel yields to the master of the zeta function that bridges geometry and primes. }
+PROBLEM { The master equation reads $1 = \frac{\pi^2}{6} \prod_p (1 - \frac{1}{p^2})$, forcing
+          $\zeta(2) = \frac{\pi^2}{6}$. Who extended the zeta function tying geometry to the primes? }
+EXPLAIN_MATHEMATICIAN { Assembling the places, $\tau = 1$ becomes $1 = \frac{\pi^2}{6}
+          \prod_p (1 - \frac{1}{p^2})$. The product is $\frac{1}{\zeta(2)}$, so $\zeta(2) =
+          \frac{\pi^2}{6}$. Inverting the logic gives the Weil conjecture for $SL_2$ from an
+          independent Basel evaluation: arithmetic $\zeta(2)$ and hyperbolic geometry are two
+          faces of one identity. }
+EXPLAIN_PHYSICIST { Put the pieces together. The total measure is $1$, the real factor is
+          $\frac{\pi^2}{6}$, and the prime factor is $\prod_p (1 - \frac{1}{p^2}) =
+          \frac{1}{\zeta(2)}$. So $1 = \frac{\pi^2}{6} \cdot \frac{1}{\zeta(2)}$, which
+          rearranges to $\zeta(2) = \frac{\pi^2}{6}$ -- Basel, delivered by geometry and
+          arithmetic meeting in one equation. Riemann's $\zeta$ is the bridge. }
+EXPLAIN_BIOLOGIST { Lay the two halves side by side: the geometry half gave $\frac{\pi^2}{6}$,
+          the prime half gave one over the Basel sum, and the master equation says they must
+          multiply to one. The only way that balances is if the Basel sum is $\frac{\pi^2}{6}$.
+          The same zeta function Riemann made famous ties the curved-space picture to the primes. }
+EXPLAIN_ENGINEER { Balance the master equation: [[ $1$ | 1.000 ]] equals [[ $\frac{\pi^2}{6}$ | 1.6449 ]]
+          times [[ $\prod_p (1 - \frac{1}{p^2})$ | 0.6079 ]]. Since $1.6449 \times 0.6079 = 1$,
+          the only consistent value is [[ $\zeta(2) = \frac{\pi^2}{6}$ | 1.6449 ]]. Geometry and
+          the primes meet at $\zeta(2) = \pi^2/6$ -- the Basel answer, the hostage room. }
+SEGMENTS {
+  $1 = \frac{\pi^2}{6} \prod_p \left( 1 - \frac{1}{p^2} \right)$ | tamagawa_measure
+  $=$                                                           | NEUTRAL
+  $\zeta(2) = \frac{\pi^2}{6}$                                  | basel_answer
+}
+EYE { basel_answer }
+VULNERABLE_TO { riemann }
+FIZZLE weil { Weil's claim was the starting point; this final robot reads off zeta(2) and names the bridge to the primes -- think of the man whose zeta function and hypothesis govern them. }
+FIZZLE tamagawa { The invariant measure framed the whole proof; this sentinel is the closing synthesis tying zeta(2) to the primes -- recall the master of the zeta function. }
+FIZZLE chevalley { Chevalley built the adelic stage; this final robot is the meeting of geometry and arithmetic in zeta(2) -- name the man who extended zeta and linked it to the primes. }
+FIZZLE hensel { Hensel's p-adics built the finite places; this robot is the grand synthesis, zeta(2) = pi^2/6 -- recall whose zeta function bridges geometry and the primes. }
+FIZZLE gauss { Gauss gave the geometric tile; this final sentinel ties that pi^2/6 to the prime product through zeta -- name the master of the zeta function and its primes. }
+FIZZLE euler { Euler found the prime product, but this closing robot is the deep zeta function bridging geometry to the primes -- name the man whose hypothesis governs their distribution. }

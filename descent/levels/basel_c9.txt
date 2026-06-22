@@ -1,0 +1,3 @@
+title: Basel -- Geometry Meets Arithmetic / Tamagawa (Test)
+corridors:
+  ../corridors/09_tamagawa.txt    baked=../baked/basel/tamagawa

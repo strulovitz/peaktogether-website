@@ -8,3 +8,4 @@ corridors:
   ../corridors/06_parseval.txt            baked=../baked/basel/parseval
   ../corridors/07_diff_under_integral.txt baked=../baked/basel/diff_under_integral
   ../corridors/08_cauchy.txt              baked=../baked/basel/cauchy
+  ../corridors/09_tamagawa.txt            baked=../baked/basel/tamagawa
