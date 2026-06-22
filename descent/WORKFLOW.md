@@ -598,6 +598,39 @@ the joystick was "dispatched / pending / never completed" — these are WRONG an
 **Engine infrastructure status:** plain-text renderer ✅, ship containment ✅, joystick ✅ — ALL DONE.
 Remaining real work = more Basel corridors (7-10) + multi-corridor play test + next subject.
 
+## 🔴 SESSION LOG — June 23, 2026 (DeepSeek V4 Pro — corridors 7 & 8 + website)
+
+### Basel Corridor 7 — "Differentiation Under the Integral Sign" ✅
+7 robots: Euler, Leibniz, al-Khwarizmi, Gregory, Taylor, Fubini, Mengoli. 28/28 baked, 0 failures.
+3 new portraits (Leibniz, Gregory, Fubini; Mengoli already existed). Wired: `levels/basel_c7.txt` + app.py.
+Fixed child bug: R5 Taylor had bare math after `\text{}` inside a stain (`\stain{...}{\text{...}\sum 1/n^2}`) → re-wrapped math in `$...$`.
+
+### Basel Corridor 8 — "Cauchy's Elementary Descent" ✅
+7 robots: Cauchy, de Moivre, Newton, Viète, Pythagoras, Archimedes, Gauss. 28/28 baked, 0 failures.
+3 new portraits (de Moivre, Archimedes, Carl Friedrich Gauss; Cauchy/Newton/Viète/Pythagoras existed). Wired: `levels/basel_c8.txt` + app.py.
+Fixed child bug: R4 Viète had bare `\stain{roots}{\cot^2 x_r}` (no inner `$`) → `\stain{roots}{$\cot^2 x_r$}`.
+Child also FORGOT all value-arcs → got a fix from the child (7 baker + 6 game `EXPLAIN_ENGINEER` lines with `[[ ]]` arcs), re-baked 28/28.
+Verified `\binom`, `\operatorname{Im}`, `\rightarrow`, `\csc`, `\cot` all render in matplotlib mathtext on this machine.
+
+### NEW recurring child bug (tell every future child)
+5. **Bare math after `\text{}` inside a `\stain{}`** — any math chunk after a `\text{...}` in a stain body must be wrapped in its own `$...$` (e.g. `\stain{roots}{$\cot^2 x_r$}`, NOT `\stain{roots}{\cot^2 x_r}`). Bare math lands in colorbox text-mode → "Missing $ inserted". Hit corridor 7 R5 and corridor 8 R4.
+
+### Website work (peaktogether.me) ✅
+- Added **About page** (`about/index.html`, reuses `.page` style) — a verbatim tribute to Nir's girlfriend; `<3` → ❤️. Added "About" as the last header-menu item.
+- Home page: swapped Last Frontier image to couple+AI version (`images/hall-of-fame-last-frontier2.png`); deleted old `hall-of-fame-last-frontier.png`.
+- **Footer rebuilt**: 11 social icons (Call, Website, Gmail, Email, YouTube, Facebook, X, Instagram, LinkedIn, TikTok, GitHub) with real links, desktop hover tooltips, and `@media (hover:none)` labels for phones. Removed old emoji icons + Home/Riemann footer links. Icons live in `images/social-media/` (full folder copied; 21 icons, 11 used).
+
+### Current state
+Basel corridors 1-8 all playable. `app.py` → `levels/basel_c8.txt`. Git clean, pushed.
+
+### 📋 TO-DO (open items)
+- **Corridor 10 — "Geometric proof":** investigate including the Wikipedia illustration inside Understanding Mode for robot 1. Pre-baked PNGs are LaTeX-text only today; showing a real diagram/image needs new engine support. → **Make an Opus parent and consult on the best technical options** before building corridor 10.
+- T.16000M joystick: ✅ already done (see correction above).
+- Multi-corridor play test (all corridors in one `levels/basel.txt`) still untested.
+
+### Next
+Corridor 9 = **"Proof assuming Weil's conjecture on Tamagawa numbers."**
+
 ## 🔴 SESSION LOG — June 13, 2026
 
 ### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
