@@ -631,6 +631,46 @@ Basel corridors 1-8 all playable. `app.py` → `levels/basel_c8.txt`. Git clean,
 ### Next
 Corridor 9 = **"Proof assuming Weil's conjecture on Tamagawa numbers."**
 
+## 🔴 SESSION LOG — June 23, 2026 (LATER) — Corridor 9 + ALL-NINE COMPLETE GAME 🏆
+
+### Basel Corridor 9 — "Geometry Meets Arithmetic" (Weil/Tamagawa) ✅
+7 robots: Weil, Tamagawa, Chevalley, Hensel, Gauss, Euler, Riemann. 28/28 baked. 4 new portraits
+(Weil, Tamagawa, Chevalley, Hensel). Fixed child bugs: 6 bare-pipe arcs (`|c|`, `|SL_2(F_p)|`,
+`|z|`, `|Re z|` → `\lvert/\rvert`), `CORRIDOR: 1` → `9`, 2 bare-math-in-stain (`\tau`, `\prod`),
+stray `;` artifacts. The yellow stain (`the_constant`) was orphaned → child repainted π²/6 yellow in
+robot 7 (baker + game SEGMENTS) so green = blue + yellow is visible. Nir confirmed.
+
+### THE COMPLETE ALL-NINE GAME (Parent #10) 🏆🎉
+Goal: "make the game complete — auto-load ALL NINE corridors." Diagnosed & fixed with the architect
+over several rounds (DeepSeek pasted real code each round; never guessed an API):
+- **Combat scoping** (`combat.py`): `current_corridor`/`blocking_robot` are now ship-position-based
+  via `c.inside(ship.pos)` (were hard-wired to `corridors[0]`). Threaded `ship.pos` through
+  `_sync_arsenal`, `_fire`, `update`, `handle_input`, both `robot_in_view` fallbacks,
+  `_face_hit_test` (a 2nd `_sync_arsenal` site DeepSeek caught via grep), and `game_state_demo`.
+  Fire/HUD/arsenal now follow the corridor the ship is actually in.
+- **Readable signs** (`hub_builder` + `corridor_builder`): door labels + corridor-mouth titles use
+  `render.get_plain_text_tex` (plain prose) and strip the "The Basel Problem -- " prefix.
+- **Plain-text texture bug** (`render.py`): `pygame.font.render` leaves transparent bg = `(fg,0)`,
+  which the alpha-ignoring 3D billboard rendered as a SOLID COLOUR BAR (no text). FIX (empirically
+  proven headless): zero RGB where `alpha==0` → bg `(0,0,0,0)` like `latex_to_surface`. (The
+  architect's first idea, `surf.fill`, was a proven no-op; DeepSeek's "Candidate B" was the real fix.)
+- **Progress + finale** (`game_state.py`): per-corridor "PROOF COMPLETE N/9" flash + a
+  "QUOD ERAT DEMONSTRANDUM / All nine proofs solved." finale when all 9 are cleared.
+- `app.py` `LEVEL_MANIFEST` → `"levels/basel.txt"` (ALL NINE).
+
+### RESULT 🎉
+Nir flew the **WHOLE all-nine game end-to-end** and reached the **QED finale**. The Basel Problem
+game is **COMPLETE**.
+
+### Current state
+| Item | Status |
+|------|--------|
+| Basel corridors 1-9 | ✅ all playable |
+| All-nine multi-corridor game | ✅ COMPLETE — auto-loads, ship-scoped combat, readable signs, PROOF COMPLETE flash + QED finale |
+| `app.py` points to | `levels/basel.txt` (ALL NINE) |
+| Git | clean, pushed |
+| Next | Nir's call (next subject / new game / the geometric-proof game / polish) |
+
 ## 🔴 SESSION LOG — June 13, 2026
 
 ### MAJOR: Claude Fable Banned — New Architect & Architecture 🏗️
