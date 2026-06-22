@@ -78,20 +78,35 @@ class Combat:
     # ==================================================================
 
     @staticmethod
-    def current_corridor(hub):
-        r = Combat.blocking_robot(hub)
-        if r is not None:
-            for c in hub.corridors:
-                if r in c.get_robots():
-                    return c
-        return hub.corridors[0]  # fallback if nothing engaged
+    def current_corridor(hub, ship_pos):
+        """The corridor the ship is physically inside, by geometry.
 
-    def _sync_arsenal(self, hub):
+        Uses each corridor's own tube-containment test (CorridorGeometry.inside).
+        PRIME LAW: pure geometry — scopes by WHERE the ship is, never by what any
+        mathematics means. Falls back to corridor[0] only when the ship is in the
+        open atrium (inside no tube), so a freshly-spawned ship still has a sane
+        arsenal/HUD target before it enters a doorway.
+        """
+        corridors = getattr(hub, "corridors", None)
+        if not corridors:
+            return None
+        for c in corridors:
+            if c.inside(ship_pos):
+                return c
+        # Generous second pass: ship may sit just outside the tube wall (the mouth
+        # lip, or pushed out by containment). Pick the corridor it's nearest to
+        # entering, using a small margin, before defaulting to corridor[0].
+        for c in corridors:
+            if c.inside(ship_pos, margin=6.0):
+                return c
+        return corridors[0]
+
+    def _sync_arsenal(self, hub, ship_pos):
         """Rebuild arsenal iff the engaged corridor changed. Identity-keyed."""
-        corr = self.current_corridor(hub)
+        corr = self.current_corridor(hub, ship_pos)
         if corr is not self._arsenal_corridor:
             self._arsenal_corridor = corr
-            self.arsenal = build_arsenal(corr.get_robots())
+            self.arsenal = build_arsenal(corr.get_robots()) if corr is not None else []
             ids = {w["id"] for w in self.arsenal}
             if self.loaded_id not in ids:
                 self.loaded_id = self.arsenal[0]["id"] if self.arsenal else None
@@ -107,12 +122,16 @@ class Combat:
     # ==================================================================
 
     @staticmethod
-    def blocking_robot(hub):
-        """First robot in path order that is not yet defeated, else None."""
-        if not getattr(hub, "corridors", None):
+    def blocking_robot(hub, ship_pos):
+        """First not-yet-defeated robot, in path order, IN THE SHIP'S CORRIDOR.
+
+        (Was hard-wired to hub.corridors[0]; now follows the ship's real tube via
+        current_corridor.) Returns None if that corridor is fully cleared.
+        """
+        corr = Combat.current_corridor(hub, ship_pos)
+        if corr is None:
             return None
-        robots = hub.corridors[0].get_robots()
-        for r in robots:
+        for r in corr.get_robots():
             if not r.is_defeated():
                 return r
         return None
@@ -130,7 +149,7 @@ class Combat:
         fwd = np.asarray(render.ship_forward(ship.q), dtype=float)
         n = np.linalg.norm(fwd)
         if n < 1e-9:
-            return Combat.blocking_robot(hub)
+            return Combat.blocking_robot(hub, ship.pos)
         fwd = fwd / n
 
         best, best_score = None, -1.0
@@ -146,7 +165,7 @@ class Combat:
                 score = cos / dist            # prefer centered AND near
                 if score > best_score:
                     best, best_score = r, score
-        return best if best is not None else Combat.blocking_robot(hub)
+        return best if best is not None else Combat.blocking_robot(hub, ship.pos)
 
     # ==================================================================
     # INPUT (Brief #9 keyboard + Brief #10 controller/mouse)
@@ -157,7 +176,7 @@ class Combat:
         """Rising-edge driven. SPACE=fire (keyboard fallback), controller for
         grid nav + cycle + trigger fire, mouse for click-to-select. prev_edge/
         next_edge ('['/']') are RETIRED — accepted but ignored."""
-        self._sync_arsenal(hub)
+        self._sync_arsenal(hub, ship.pos)
         if not self.arsenal:
             return
 
@@ -201,7 +220,7 @@ class Combat:
 
         # ---- mouse (alternate) ----
         if mouse_click_edge:
-            hit = self._face_hit_test(mouse_x, mouse_y, hub)
+            hit = self._face_hit_test(mouse_x, mouse_y, hub, ship.pos)
             if hit is not None:
                 self.loaded_id = self.arsenal[hit]["id"]
 
@@ -229,7 +248,7 @@ class Combat:
     # ==================================================================
 
     def _fire(self, ship, hub):
-        robot = self.blocking_robot(hub)
+        robot = self.blocking_robot(hub, ship.pos)
 
         # Brief #10: spawn projectile (cosmetic)
         if robot is not None:
@@ -265,7 +284,7 @@ class Combat:
     # ==================================================================
 
     def update(self, dt, ship, hub):
-        self._hud_robot = self.blocking_robot(hub)
+        self._hud_robot = self.blocking_robot(hub, ship.pos)
 
         # Brief #10: advance cosmetic projectile
         if self._proj is not None:
@@ -319,8 +338,8 @@ class Combat:
                 return w
         return None
 
-    def _face_hit_test(self, mx, my, hub):
-        self._sync_arsenal(hub)
+    def _face_hit_test(self, mx, my, hub, ship_pos):
+        self._sync_arsenal(hub, ship_pos)
         return self._cockpit.face_at_pixel(mx, my)
 
     def draw_hud(self, cache, win_size):

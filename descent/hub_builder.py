@@ -26,6 +26,20 @@ import palette
 from corridor_builder import build_corridor, TUBE_RADIUS
 
 
+def _door_label_text(title):
+    """Turn a verbose corridor TITLE into a short, readable door sign.
+
+    Strips the shared 'The Basel Problem -- ' prefix (redundant on every door)
+    and normalizes the ASCII double-hyphen to an en-dash. Pure string cleanup;
+    no math meaning is interpreted (PRIME LAW preserved).
+    """
+    s = title.strip()
+    prefix = "The Basel Problem -- "
+    if s.startswith(prefix):
+        s = s[len(prefix):].strip()
+    return s.replace(" -- ", " - ").replace("--", "-")
+
+
 # ============================================================
 # TUNABLES  (DeepSeek tunes via screenshots)
 # ============================================================
@@ -203,7 +217,8 @@ class HubGeometry:
                                           self._door_dirs, self._titles):
             if not title:
                 continue
-            tex = texcache.get_mathtext(title, palette.WORLD_EDGE, 28)
+            label = _door_label_text(title)
+            tex = render.get_plain_text_tex(label, color=palette.WORLD_EDGE)
             # Place the label just outside the door, on the frame rim.
             lbl_pos = center + normal * (DOOR_FRAME_DEPTH + 2.0)
             render.draw_billboard(tex, tuple(lbl_pos), cr, cu, scale=1.0, alpha=1.0)
