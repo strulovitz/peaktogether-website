@@ -1,0 +1,59 @@
+TITLE { The Basel Problem — Differentiation Under the Integral Sign }
+
+STAINS {
+  reciprocal_squares = 0.85 0.12 0.12   # red — the sum Σ1/n²; primitive idea, appears at the top and reborn at the bottom
+  trig_world         = 0.90 0.78 0.10   # yellow — arctan / arccos / completing the square / trig substitution; shared ingredient
+  integral_machinery = 0.12 0.30 0.85   # blue — the parametric integral I(α) and integrating over x; the object being differentiated
+  final_answer       = 0.90 0.45 0.10   # orange — π²/6 = red(the sum) + yellow(the π born from arctan/arccos): the sum wedded to π
+  arctan_derivative  = 0.15 0.55 0.20   # green — dI/dα as an arctan expression = blue(the integral) + yellow(trig world)
+  log_series_sum     = 0.55 0.10 0.65   # purple — ∫ln(1−e^−x)dx = −Σ1/n² = red(the sum) + blue(the integral): the sum born FROM the integral
+}
+
+ROBOT: 1
+  NAME { Leonhard Euler }
+  EXPLAIN_MATHEMATICIAN { The Basel problem asks for the closed form of $\displaystyle \stain{final_answer}{$\sum_{n=1}^{\infty}\frac{1}{n^2}$}$. Euler proved $\stain{final_answer}{$\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$}\approx 1.644934$. This corridor reaches the same value by a different road: build a $\stain{integral_machinery}{$\text{parametric integral}$}$ and differentiate it. }
+  EXPLAIN_PHYSICIST { Add $1+\tfrac14+\tfrac19+\tfrac1{16}+\cdots$, the reciprocals of the squares. It converges near $1.645$ — but to \emph{what}? The answer is $\stain{final_answer}{$\frac{\pi^2}{6}$}$, a circle constant. This proof gets there by hiding the sum inside an $\stain{integral_machinery}{\text{integral}}$ and taking its derivative. }
+  EXPLAIN_BIOLOGIST { Take the squares $1,4,9,16,\dots$ and add their reciprocals forever. The pile settles near $1.645$, which turns out to be exactly $\stain{final_answer}{$\pi^2/6$}$ — the circle number $\pi$, hiding in plain fractions. Here we reach it through a clever $\stain{integral_machinery}{\text{integral}}$. }
+  EXPLAIN_ENGINEER { This sum measures real things: the chance two random integers are coprime is $6/\pi^2$. Knowing [[ $\sum 1/n^2$ | 1.6449 ]] equals [[ $\pi^2/6$ | 1.6449 ]] turns an endless sum into one exact constant. This route reaches $\stain{final_answer}{$\pi^2/6$}$ via an $\stain{integral_machinery}{\text{integral with a tunable knob}}$. }
+
+ROBOT: 2
+  NAME { Gottfried Wilhelm Leibniz }
+  EXPLAIN_MATHEMATICIAN { Introduce the parameter-carrying integral $\displaystyle \stain{integral_machinery}{$I(\alpha)=\int_0^\infty \ln\!\big(1+\alpha e^{-x}+e^{-2x}\big)\,dx$}$. Its antiderivative is not elementary, but differentiating under the integral sign gives $\displaystyle \frac{dI}{d\alpha}=\int_0^\infty \thread{t1}{\frac{e^{-x}}{1+\alpha e^{-x}+e^{-2x}}}\,dx$. }
+  EXPLAIN_PHYSICIST { Put an adjustable knob $\alpha$ inside the integral: $\stain{integral_machinery}{$I(\alpha)=\int_0^\infty \ln(1+\alpha e^{-x}+e^{-2x})\,dx$}$. You cannot integrate it directly, but you \emph{can} ask how $I$ changes as you turn the knob — differentiate under the integral sign to get a $\thread{t1}{\text{far simpler integrand}}$. }
+  EXPLAIN_BIOLOGIST { The trick: instead of attacking one hard integral, build a whole family of them with a dial $\alpha$, written $\stain{integral_machinery}{$I(\alpha)$}$. Then study how the answer \emph{moves} as you turn the dial. That rate of change is a much $\thread{t1}{\text{simpler thing}}$ to compute. }
+  EXPLAIN_ENGINEER { Differentiation-under-the-integral (Feynman's favourite trick): wrap the problem in a parameter $\alpha$, forming [[ $I(\alpha)$ | 0 ]] at $\alpha{=}0$, then differentiate inside. The messy log integrand becomes the $\thread{t1}{\text{clean rational integrand}}$ $\stain{integral_machinery}{$e^{-x}/(1+\alpha e^{-x}+e^{-2x})$}$. }
+
+ROBOT: 3
+  NAME { al-Khwarizmi }
+  EXPLAIN_MATHEMATICIAN { Substitute $u=e^{-x}$ and complete the square in the denominator: $1+\alpha u+u^2=\thread{t1}{(u+\tfrac{\alpha}{2})^2+\big(1-\tfrac{\alpha^2}{4}\big)}$. For $-2<\alpha<2$ the constant is positive, so the integral takes the standard form $\stain{trig_world}{$\int \frac{du}{(\cdots)^2+(\cdots)^2}$}$ that integrates to an arctangent. }
+  EXPLAIN_PHYSICIST { The denominator $1+\alpha u+u^2$ becomes a perfect square plus a positive constant, $\thread{t1}{(u+\tfrac{\alpha}{2})^2+(1-\tfrac{\alpha^2}{4})}$. That shape — \emph{something squared plus a constant squared} — is exactly the $\stain{trig_world}{\text{form whose integral is an arctangent}}$. }
+  EXPLAIN_BIOLOGIST { To tame the bottom of the fraction, rewrite it as a square plus a leftover: $\thread{t1}{(u+\tfrac{\alpha}{2})^2+(\text{positive})}$. This old algebra move, completing the square, reshapes the integral into the one $\stain{trig_world}{\text{standard pattern}}$ everyone knows how to integrate. }
+  EXPLAIN_ENGINEER { Completing the square turns $1+\alpha u+u^2$ into [[ $(u+\alpha/2)^2+(1-\alpha^2/4)$ | 1 ]] (value at $\alpha{=}0,u{=}0$). The "$X^2+a^2$" denominator is the canonical $\stain{trig_world}{\text{arctangent integral}}$ form, valid precisely while $1-\alpha^2/4>0$, i.e. $-2<\alpha<2$. }
+
+ROBOT: 4
+  NAME { James Gregory }
+  EXPLAIN_MATHEMATICIAN { The integral evaluates to $\displaystyle \stain{arctan_derivative}{$\frac{dI}{d\alpha}=\frac{2}{\sqrt{4-\alpha^2}}\!\left[\arctan\!\frac{\alpha+2}{\sqrt{4-\alpha^2}}-\arctan\!\frac{\alpha}{\sqrt{4-\alpha^2}}\right]$}$. The arctangent difference formula $\thread{t1}{\arctan u-\arctan v=\arctan\frac{u-v}{1+uv}}$ collapses the bracket, after which $I(\alpha)$ integrates to $-\tfrac12\arccos(\tfrac{\alpha}{2})^2+c$. }
+  EXPLAIN_PHYSICIST { Carrying out the integral leaves a \emph{difference of two arctangents}, $\stain{arctan_derivative}{$\frac{dI}{d\alpha}=\frac{2}{\sqrt{4-\alpha^2}}[\arctan(\cdots)-\arctan(\cdots)]$}$. The identity $\thread{t1}{\arctan u-\arctan v}$ folds two arctangents into one, simplifying $dI/d\alpha$ so it can be integrated back up. }
+  EXPLAIN_BIOLOGIST { The derivative comes out as one arctangent minus another, $\stain{arctan_derivative}{\text{a difference of arctangents}}$. There is a neat rule for $\thread{t1}{\text{subtracting two arctangents}}$ and getting a single one — using it tidies the expression so we can undo the derivative and recover $I$ itself. }
+  EXPLAIN_ENGINEER { $dI/d\alpha$ is a scaled $\stain{arctan_derivative}{\text{difference of arctangents}}$. Apply $\thread{t1}{\arctan u-\arctan v=\arctan\frac{u-v}{1+uv}}$ to merge them; integrating the result in $\alpha$ yields the closed form [[ $-\tfrac12\arccos(\alpha/2)^2+c$ | 0 ]] structure, with $c$ still unknown. }
+
+ROBOT: 5
+  NAME { Brook Taylor }
+  EXPLAIN_MATHEMATICIAN { Pinning $c$ (next robot) gives $I(-2)=2\int_0^\infty \ln(1-e^{-x})\,dx=-\tfrac{\pi^2}{3}$. Expand the logarithm by its Mercator/Taylor series: $\displaystyle \ln(1-e^{-x})=\thread{t1}{-\sum_{n=1}^{\infty}\frac{e^{-nx}}{n}}$, turning a single log into the $\stain{reciprocal_squares}{\text{sum that will become }$\sum 1/n^2$}$. }
+  EXPLAIN_PHYSICIST { At $\alpha=-2$ the integral involves $\ln(1-e^{-x})$. Replace the logarithm by its power series, $\thread{t1}{\ln(1-t)=-\sum t^n/n}$ with $t=e^{-x}$. The single logarithm splits into an infinite ladder of simple exponentials — and the $1/n$ inside is the seed of $\stain{reciprocal_squares}{$\sum 1/n^2$}$. }
+  EXPLAIN_BIOLOGIST { Near the end we meet $\ln(1-e^{-x})$. A logarithm can be rewritten as an endless sum of simpler pieces, $\thread{t1}{-\sum e^{-nx}/n}$. Each piece carries a $1/n$; once we add them up, those $1/n$'s are what grow into the $\stain{reciprocal_squares}{\text{sum of }$1/n^2$}$ we are chasing. }
+  EXPLAIN_ENGINEER { Series-expand the log: $\ln(1-t)=\thread{t1}{-\sum_{n\ge1} t^n/n}$, valid for $|t|<1$, here with $t=e^{-x}<1$. The coefficient list [[ $1,\tfrac12,\tfrac13,\dots$ | 1 ]] (first term) is the $1/n$ pattern that, after integrating, supplies the $\stain{reciprocal_squares}{$1/n^2$ terms}$. }
+
+ROBOT: 6
+  NAME { Guido Fubini }
+  EXPLAIN_MATHEMATICIAN { Interchanging sum and integral, $\displaystyle \stain{log_series_sum}{$\int_0^\infty\!\ln(1-e^{-x})\,dx=-\sum_{n=1}^{\infty}\int_0^\infty\!\frac{e^{-nx}}{n}\,dx=-\sum_{n=1}^{\infty}\frac{1}{n^2}$}$, since $\thread{t1}{\int_0^\infty e^{-nx}dx=1/n}$. The swap is justified because the terms are nonnegative. }
+  EXPLAIN_PHYSICIST { Now add up the ladder. Each term integrates trivially, $\thread{t1}{\int_0^\infty e^{-nx}dx=1/n}$, and dividing by the $n$ already there makes $1/n^2$. Summing them, the integral \emph{becomes} $\stain{log_series_sum}{$-\sum 1/n^2$}$ — the integral has turned into the Basel sum. }
+  EXPLAIN_BIOLOGIST { We have a sum of integrals; Fubini lets us swap the order and integrate first, then add. Each little integral gives $\thread{t1}{1/n}$, which paired with its $1/n$ becomes $1/n^2$. Adding them all up, the whole integral equals $\stain{log_series_sum}{$-\sum 1/n^2$}$. }
+  EXPLAIN_ENGINEER { Swap $\int$ and $\sum$ (legal here: all terms one sign). Each piece gives [[ $\int_0^\infty e^{-nx}dx$ | 1 ]] $=1/n$ at $n{=}1$, times the $1/n$ out front $=1/n^2$. The integral collapses to $\stain{log_series_sum}{$-\sum 1/n^2$}$, linking the integral world directly to the sum. }
+
+ROBOT: 7
+  NAME { Pietro Mengoli }
+  EXPLAIN_MATHEMATICIAN { The constant $c$ is fixed by the self-similarity $I(2)=4I(0)$ (factor $1+2e^{-x}+e^{-2x}=(1+e^{-x})^2$ and set $u=x/2$), giving $c=\stain{final_answer}{$\frac{\pi^2}{6}$}$. Then $I(-2)=-\tfrac{\pi^2}{3}$ and the previous step's $-\sum 1/n^2$ combine to force $\stain{final_answer}{$\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$}$ — the problem Mengoli first posed. }
+  EXPLAIN_PHYSICIST { One clean relation, $I(2)=4I(0)$, pins the unknown constant to $c=\stain{final_answer}{$\pi^2/6$}$. Feeding that back, $I(-2)=-\pi^2/3$, while the same $I(-2)$ equals $-2\sum 1/n^2$. Equate them and out drops $\stain{final_answer}{$\sum 1/n^2=\pi^2/6$}$ — the very sum Mengoli asked about in 1650. }
+  EXPLAIN_BIOLOGIST { One last anchor — a tidy fact that $I(2)$ is just $4$ times $I(0)$ — fixes the leftover constant to $\stain{final_answer}{$\pi^2/6$}$. Combine that with the integral we just summed, and the two descriptions of the same quantity force the answer: $\stain{final_answer}{$\sum 1/n^2=\pi^2/6$}$. }
+  EXPLAIN_ENGINEER { Calibrate the constant using [[ $I(2)/I(0)$ | 4 ]]: factoring $(1+e^{-x})^2$ and rescaling shows $I(2)=4I(0)$, fixing $c=\pi^2/6$. Then $I(-2)=-\pi^2/3=-2\sum 1/n^2$ closes the loop: $\stain{final_answer}{$\sum 1/n^2=\pi^2/6$}$, answering the question Mengoli first raised. }

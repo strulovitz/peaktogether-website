@@ -1,0 +1,283 @@
+# ===========================================================
+# The Basel Problem — Differentiation Under the Integral Sign.
+# Seven sentinels, one per step of the Freitas/Feynman-trick proof
+# of sum 1/n^2 = pi^2/6. Robot 1 is nearest the doorway. Each yields
+# to exactly ONE mathematician id. Robot N maps 1:1 to baker step N
+# (baked/basel/diff_under_integral/robotN_*.png).
+# LEDGER mirrors the baker STAINS: reciprocal_squares=red,
+# trig_world=yellow, integral_machinery=blue;
+# final_answer=red+yellow, arctan_derivative=yellow+blue,
+# log_series_sum=red+blue.
+# ===========================================================
+CORRIDOR: 7
+TITLE { The Basel Problem -- Differentiation Under the Integral Sign }
+FLAVOR { One stubborn sum of squares, hidden inside an integral with a tunable knob, coaxed out by a derivative. }
+LEDGER {
+  PRIMARY reciprocal_squares = red
+  PRIMARY trig_world         = yellow
+  PRIMARY integral_machinery = blue
+  BLEND   final_answer       = reciprocal_squares + trig_world
+  BLEND   arctan_derivative  = trig_world + integral_machinery
+  BLEND   log_series_sum     = reciprocal_squares + integral_machinery
+}
+BRIEFING_INTRO { Seven sentinels guard the road to the hostages, one for each
+          move in the differentiation-under-the-integral descent on the Basel sum.
+          Read each robot's blue hologram face, judge whose idea its mathematics
+          belongs to, and fire that mathematician. Match the face to the technique
+          and the corridor opens. }
+ENTRY_TEXT { You have entered the integral corridor. Somewhere ahead, a sum of squares is hiding inside an integral, waiting to be differentiated out. }
+EXIT_TEXT { The last sentinel falls and the integral surrenders its secret: the sum closes into pi^2/6. The hostages are free -- you have flown the whole length of the Feynman-trick proof. Well done. }
+
+ROBOT: 1
+NAME { Leonhard Euler }
+BRIEFING_HINT { This sentinel states the prize itself: the closed form of the sum
+          of inverse squares. It yields to the man who first proved the result. }
+PROBLEM { Identify the value of the Basel sum $\sum_{n=1}^{\infty} \frac{1}{n^2}$ --
+          who first proved it equals $\frac{\pi^2}{6}$? }
+EXPLAIN_MATHEMATICIAN { The Basel problem asks for the closed form of
+          $\sum_{n=1}^{\infty} \frac{1}{n^2}$; in 1734 Euler proved it equals
+          $\frac{\pi^2}{6} \approx 1.644934$. This corridor reaches the same value
+          along a different road -- a parametric integral, differentiated. }
+EXPLAIN_PHYSICIST { Add $1 + \frac{1}{4} + \frac{1}{9} + \frac{1}{16} + \cdots$; it
+          settles near $1.645$. The exact value is $\frac{\pi^2}{6}$ -- a circle
+          constant inside a sum with no circles, reached here through an integral. }
+EXPLAIN_BIOLOGIST { Add the reciprocals of the squares $1, 4, 9, 16, \dots$ forever
+          and the pile settles near $1.645$. The surprise is that this is exactly
+          $\frac{\pi^2}{6}$ -- the circle number $\pi$, hiding in plain fractions. }
+EXPLAIN_ENGINEER { Plug in numbers: the sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]]
+          meets the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match -- an
+          endless sum collapses into one exact value you can compute with. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$   | final_answer
+  $=$                                   | NEUTRAL
+  $\frac{\pi^2}{6}$                     | final_answer
+}
+EYE { final_answer }
+VULNERABLE_TO { euler }
+FIZZLE leibniz { Differentiating under the integral sign is the engine of this proof, but right here you are only being asked to NAME the famous result -- think about WHO first summed these squares. }
+FIZZLE al_khwarizmi { Completing the square is a genuine step deeper in this proof, but this opening robot just states the headline answer -- name the person who first proved it. }
+FIZZLE gregory { The arctangent identity is a real tool used downstream, but this robot only poses the result itself -- recall who first announced that the squares sum to pi-squared over six. }
+FIZZLE taylor { Expanding a logarithm into a series is a real ingredient used later, but here nothing is being expanded -- you are being asked who owns this famous sum. }
+FIZZLE fubini { Swapping sum and integral happens near the end, but this first sentinel just states the prize -- name the man who first claimed the value in 1734. }
+FIZZLE mengoli { Mengoli first POSED this problem, but the robot asks who first SOLVED it and named the value -- recall the man who proved it in 1734. }
+
+ROBOT: 2
+NAME { Gottfried Wilhelm Leibniz }
+BRIEFING_HINT { Differentiation under the integral sign: wrap the problem in a
+          parameter and differentiate inside. This sentinel yields to the co-founder
+          of calculus whose rule this is. }
+PROBLEM { A hard integral is given a tunable parameter $\alpha$, then differentiated
+          inside the integral sign. Whose integral rule licenses this move? }
+EXPLAIN_MATHEMATICIAN { Introduce $I(\alpha) = \int_0^\infty \ln(1 + \alpha e^{-x} +
+          e^{-2x})\, dx$. Its antiderivative is not elementary, but differentiating
+          under the integral sign gives $\frac{dI}{d\alpha} = \int_0^\infty
+          \frac{e^{-x}}{1 + \alpha e^{-x} + e^{-2x}}\, dx$ -- a far simpler integrand. }
+EXPLAIN_PHYSICIST { Put an adjustable knob $\alpha$ inside the integral, $I(\alpha) =
+          \int_0^\infty \ln(1 + \alpha e^{-x} + e^{-2x})\, dx$. You cannot integrate it
+          directly, but you can ask how $I$ changes as you turn the knob -- differentiate
+          under the integral sign for a much simpler integrand. }
+EXPLAIN_BIOLOGIST { The trick: instead of attacking one hard integral, build a whole
+          family of them with a dial $\alpha$, called $I(\alpha)$, then study how the
+          answer moves as you turn the dial. That rate of change is far simpler to compute. }
+EXPLAIN_ENGINEER { Differentiation under the integral -- Feynman's favourite trick:
+          wrap the problem in a parameter, form [[ $I(\alpha)$ at $\alpha=0$ | 0 ]], then
+          differentiate inside. The messy log integrand becomes the clean rational
+          $e^{-x}/(1 + \alpha e^{-x} + e^{-2x})$. }
+SEGMENTS {
+  $I(\alpha) = \int_0^\infty \ln(1 + \alpha e^{-x} + e^{-2x})\, dx$ | integral_machinery
+  $\Rightarrow$                                                    | NEUTRAL
+  $\frac{dI}{d\alpha} = \int_0^\infty \frac{e^{-x}}{1 + \alpha e^{-x} + e^{-2x}}\, dx$ | integral_machinery
+}
+EYE { integral_machinery }
+VULNERABLE_TO { leibniz }
+FIZZLE euler { Euler owns the final result, but this robot is the calculus MOVE of differentiating inside an integral -- think of the co-inventor of calculus whose integral rule this is. }
+FIZZLE al_khwarizmi { Completing the square comes one step later, on the simpler integrand; this robot is the act of differentiating under the integral sign itself -- name the calculus pioneer behind that rule. }
+FIZZLE gregory { The arctangent identity is used after this integral is evaluated; here the move is differentiating a parametric integral -- recall whose named integral rule this is. }
+FIZZLE taylor { A series expansion appears much later; this sentinel is purely the differentiation-under-the-integral step -- think of the man whose rule lets you differentiate inside an integral. }
+FIZZLE fubini { Fubini swaps sum and integral at the end; this robot differentiates a parametrised integral -- name the co-founder of calculus whose integral rule licenses it. }
+FIZZLE mengoli { Mengoli posed the original problem; this robot is the engine of THIS proof -- differentiating under the integral sign -- so recall the calculus pioneer it is named for. }
+
+ROBOT: 3
+NAME { al-Khwarizmi }
+BRIEFING_HINT { Completing the square: reshape the denominator into a square plus a
+          constant so it integrates to an arctangent. This sentinel yields to the
+          father of algebra. }
+PROBLEM { After $u = e^{-x}$, the denominator $1 + \alpha u + u^2$ is rewritten as a
+          square plus a positive constant. Which algebraic technique is this? }
+EXPLAIN_MATHEMATICIAN { Substitute $u = e^{-x}$ and complete the square:
+          $1 + \alpha u + u^2 = (u + \frac{\alpha}{2})^2 + (1 - \frac{\alpha^2}{4})$.
+          For $-2 < \alpha < 2$ the constant is positive, so the integral takes the
+          standard form that integrates to an arctangent. }
+EXPLAIN_PHYSICIST { The denominator $1 + \alpha u + u^2$ becomes a perfect square plus
+          a positive constant, $(u + \frac{\alpha}{2})^2 + (1 - \frac{\alpha^2}{4})$.
+          That shape -- something squared plus a constant -- is exactly the form whose
+          integral is an arctangent. }
+EXPLAIN_BIOLOGIST { To tame the bottom of the fraction, rewrite it as a square plus a
+          leftover: $(u + \frac{\alpha}{2})^2 + (\text{positive})$. This old algebra
+          move, completing the square, reshapes the integral into the one standard
+          pattern everyone knows how to integrate. }
+EXPLAIN_ENGINEER { Completing the square turns $1 + \alpha u + u^2$ into
+          [[ $(u + \alpha/2)^2 + (1 - \alpha^2/4)$ at $\alpha=0,u=0$ | 1 ]]. The
+          $X^2 + a^2$ denominator is the canonical arctangent form, valid while
+          $1 - \alpha^2/4 > 0$, that is $-2 < \alpha < 2$. }
+SEGMENTS {
+  $1 + \alpha u + u^2$                                                 | trig_world
+  $=$                                                                  | NEUTRAL
+  $\left( u + \frac{\alpha}{2} \right)^2 + \left( 1 - \frac{\alpha^2}{4} \right)$ | trig_world
+}
+EYE { trig_world }
+VULNERABLE_TO { al_khwarizmi }
+FIZZLE euler { Naming the final result was the first sentinel's task; this robot is the algebraic move of completing the square -- think of the discipline whose name means restoring and balancing. }
+FIZZLE leibniz { Differentiation under the integral produced this integrand; now you must RESHAPE its denominator by completing the square -- recall who founded the art of solving equations. }
+FIZZLE gregory { The arctangent identity is applied after this reshaping; the move here is completing the square -- name the scholar whose book gave algebra its name. }
+FIZZLE taylor { A power series appears later; this robot is the algebraic act of turning a quadratic into a square plus a constant -- think of the founder of algebra. }
+FIZZLE fubini { Swapping sum and integral is the endgame; this sentinel is completing the square so an arctangent can appear -- recall the scholar who named algebra. }
+FIZZLE mengoli { Mengoli posed the problem; this robot is the elementary algebra of completing the square -- name the father of algebra whose treatise this technique comes from. }
+
+ROBOT: 4
+NAME { James Gregory }
+BRIEFING_HINT { The arctangent difference formula: fold two arctangents into one so
+          the derivative can be integrated back. This sentinel yields to the man who
+          owns the arctangent series. }
+PROBLEM { The evaluated integral is a difference of two arctangents, collapsed by the
+          identity for $\arctan u - \arctan v$. Whose arctangent work is this? }
+EXPLAIN_MATHEMATICIAN { The integral evaluates to $\frac{dI}{d\alpha} =
+          \frac{2}{\sqrt{4 - \alpha^2}} [ \arctan \frac{\alpha + 2}{\sqrt{4 - \alpha^2}}
+          - \arctan \frac{\alpha}{\sqrt{4 - \alpha^2}} ]$. The difference formula
+          $\arctan u - \arctan v = \arctan \frac{u - v}{1 + uv}$ collapses the bracket,
+          and then $I(\alpha)$ integrates to $-\frac{1}{2} \arccos(\frac{\alpha}{2})^2 + c$. }
+EXPLAIN_PHYSICIST { Carrying out the integral leaves a difference of two arctangents,
+          $\frac{dI}{d\alpha} = \frac{2}{\sqrt{4 - \alpha^2}} [\arctan(\cdots) -
+          \arctan(\cdots)]$. The identity for $\arctan u - \arctan v$ folds them into
+          one, simplifying $\frac{dI}{d\alpha}$ so it can be integrated back up. }
+EXPLAIN_BIOLOGIST { The derivative comes out as one arctangent minus another. There is
+          a neat rule for subtracting two arctangents and getting a single one -- using
+          it tidies the expression so we can undo the derivative and recover $I$ itself. }
+EXPLAIN_ENGINEER { $\frac{dI}{d\alpha}$ is a scaled difference of arctangents. Apply
+          $\arctan u - \arctan v = \arctan \frac{u - v}{1 + uv}$ to merge them;
+          integrating in $\alpha$ gives the closed form
+          [[ $-\frac{1}{2}\arccos(\alpha/2)^2 + c$ | 0 ]] structure, $c$ still unknown. }
+SEGMENTS {
+  $\frac{dI}{d\alpha} = \frac{2}{\sqrt{4 - \alpha^2}} \left[ \arctan(\cdots) - \arctan(\cdots) \right]$ | arctan_derivative
+  $\to$                                                                                                | NEUTRAL
+  $\arctan u - \arctan v = \arctan \frac{u - v}{1 + uv}$                                                | arctan_derivative
+}
+EYE { arctan_derivative }
+VULNERABLE_TO { gregory }
+FIZZLE euler { Euler assembles the whole proof, but this robot is specifically the arctangent difference identity -- think of the man whose name the arctangent series carries. }
+FIZZLE leibniz { Leibniz's rule produced the integral; here the result is a difference of arctangents being simplified -- recall who pioneered the arctangent series. }
+FIZZLE al_khwarizmi { Completing the square set up the arctangent; this robot is the arctangent SUBTRACTION rule itself -- name the mathematician famous for the arctangent expansion. }
+FIZZLE taylor { This is a trigonometric identity, not the log series step that comes later -- think of the man who owns the arctangent series and its identities. }
+FIZZLE fubini { Fubini's swap is the endgame; this sentinel folds two arctangents into one -- recall the namesake of the arctangent series. }
+FIZZLE mengoli { Mengoli posed the question long before; this robot is the arctangent difference formula -- name the mathematician renowned for the arctangent series. }
+
+ROBOT: 5
+NAME { Brook Taylor }
+BRIEFING_HINT { The series from the logarithm: expand $\ln(1 - e^{-x})$ as a power
+          series so the sum can emerge. This sentinel yields to the namesake of that
+          expansion. }
+PROBLEM { At $\alpha = -2$ the integrand $\ln(1 - e^{-x})$ is expanded as a power
+          series in $e^{-x}$. Whose expansion turns this logarithm into a sum? }
+EXPLAIN_MATHEMATICIAN { Pinning the constant gives $I(-2) = 2 \int_0^\infty
+          \ln(1 - e^{-x})\, dx = -\frac{\pi^2}{3}$. Expand the logarithm by its
+          Mercator/Taylor series: $\ln(1 - e^{-x}) = -\sum_{n=1}^{\infty}
+          \frac{e^{-nx}}{n}$, turning one logarithm into the sum that becomes
+          $\sum \frac{1}{n^2}$. }
+EXPLAIN_PHYSICIST { At $\alpha = -2$ the integral involves $\ln(1 - e^{-x})$. Replace
+          the logarithm by its power series $\ln(1 - t) = -\sum \frac{t^n}{n}$ with
+          $t = e^{-x}$. The single logarithm splits into a ladder of exponentials --
+          and the $1/n$ inside is the seed of $\sum \frac{1}{n^2}$. }
+EXPLAIN_BIOLOGIST { Near the end we meet $\ln(1 - e^{-x})$. A logarithm can be rewritten
+          as an endless sum of simpler pieces, $-\sum e^{-nx}/n$. Each piece carries a
+          $1/n$; once we add them up, those $1/n$'s grow into the sum of $1/n^2$. }
+EXPLAIN_ENGINEER { Series-expand the log: $\ln(1 - t) = -\sum_{n \ge 1} \frac{t^n}{n}$,
+          valid for $|t| < 1$, here $t = e^{-x} < 1$. The coefficient list
+          [[ $1, \frac12, \frac13, \dots$ first term | 1 ]] is the $1/n$ pattern that,
+          after integrating, supplies the $1/n^2$ terms. }
+SEGMENTS {
+  $\ln(1 - e^{-x})$                          | log_series_sum
+  $=$                                        | NEUTRAL
+  $-\sum_{n=1}^{\infty} \frac{e^{-nx}}{n}$   | reciprocal_squares
+}
+EYE { reciprocal_squares }
+VULNERABLE_TO { taylor }
+FIZZLE euler { Euler assembles all the pieces, but this robot is the specific power-series expansion of a logarithm -- think of the man whose name that expansion carries. }
+FIZZLE leibniz { Leibniz's rule launched the proof; here a logarithm is being turned into a power series -- recall whose expansion writes a function as a sum of powers. }
+FIZZLE al_khwarizmi { Completing the square was earlier; this robot expands $\ln(1 - e^{-x})$ into a series -- name the mathematician whose expansion this is. }
+FIZZLE gregory { Gregory's arctangent identity was the previous step; this one expands a logarithm into powers of $e^{-x}$ -- think of the namesake of that power series. }
+FIZZLE fubini { Fubini's swap comes next, AFTER the series exists; this robot is the act of CREATING the series from the logarithm -- recall the expansion's namesake. }
+FIZZLE mengoli { Mengoli posed the problem; this robot is the humble Taylor/Mercator series of a logarithm -- name the expansion's namesake. }
+
+ROBOT: 6
+NAME { Guido Fubini }
+BRIEFING_HINT { Interchanging sum and integral: integrate the series term by term so
+          the integral becomes the Basel sum. This sentinel yields to the man whose
+          theorem licenses the swap. }
+PROBLEM { The integral of an infinite sum is computed by swapping integral and sum,
+          integrating each term. Whose theorem justifies interchanging them here? }
+EXPLAIN_MATHEMATICIAN { Interchanging sum and integral, $\int_0^\infty \ln(1 - e^{-x})
+          \, dx = -\sum_{n=1}^{\infty} \int_0^\infty \frac{e^{-nx}}{n}\, dx =
+          -\sum_{n=1}^{\infty} \frac{1}{n^2}$, since $\int_0^\infty e^{-nx} dx = 1/n$.
+          The swap is justified because the terms are nonnegative. }
+EXPLAIN_PHYSICIST { Now add up the ladder. Each term integrates trivially,
+          $\int_0^\infty e^{-nx} dx = 1/n$, and dividing by the $n$ already there makes
+          $1/n^2$. Summing, the integral becomes $-\sum \frac{1}{n^2}$ -- the integral
+          has turned into the Basel sum. }
+EXPLAIN_BIOLOGIST { We have a sum of integrals; this theorem lets us swap the order --
+          integrate first, then add. Each little integral gives $1/n$, which paired with
+          its $1/n$ becomes $1/n^2$. Adding them all, the whole integral equals
+          $-\sum \frac{1}{n^2}$. }
+EXPLAIN_ENGINEER { Swap $\int$ and $\sum$ (legal here: all terms one sign). Each piece
+          gives [[ $\int_0^\infty e^{-nx} dx$ at $n=1$ | 1 ]] $= 1/n$, times the $1/n$
+          out front $= 1/n^2$. The integral collapses to $-\sum \frac{1}{n^2}$. }
+SEGMENTS {
+  $\int_0^\infty \ln(1 - e^{-x})\, dx$                                      | log_series_sum
+  $=$                                                                      | NEUTRAL
+  $-\sum_{n=1}^{\infty} \int_0^\infty \frac{e^{-nx}}{n}\, dx = -\sum_{n=1}^{\infty} \frac{1}{n^2}$ | log_series_sum
+}
+EYE { log_series_sum }
+VULNERABLE_TO { fubini }
+FIZZLE euler { Euler owns the final value, but this robot is the act of swapping sum and integral -- think of the man whose theorem says when that interchange is allowed. }
+FIZZLE leibniz { Leibniz's rule was the differentiation step; this one interchanges an integral and an infinite sum -- recall whose theorem governs swapping integration and summation. }
+FIZZLE al_khwarizmi { Completing the square was far earlier; this robot integrates a series term by term, swapping sum and integral -- name the mathematician whose theorem licenses it. }
+FIZZLE gregory { Gregory's arctangent identity is long past; this sentinel swaps $\int$ and $\sum$ -- think of the man famous for the theorem on interchanging them. }
+FIZZLE taylor { Taylor's expansion CREATED the series; this robot now integrates it term by term, which needs the interchange theorem -- recall whose theorem that is. }
+FIZZLE mengoli { Mengoli posed the original sum; this robot is the analytic step of swapping integral and sum -- name the man whose theorem justifies the interchange. }
+
+ROBOT: 7
+NAME { Pietro Mengoli }
+BRIEFING_HINT { Closing the loop: a self-similarity fixes the constant, and the two
+          values of the integral force the sum. This sentinel yields to the man who
+          first posed the Basel problem. }
+PROBLEM { The relation $I(2) = 4 I(0)$ fixes the constant and seals
+          $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$. Who first posed this problem? }
+EXPLAIN_MATHEMATICIAN { The constant is fixed by the self-similarity $I(2) = 4 I(0)$
+          (factor $1 + 2e^{-x} + e^{-2x} = (1 + e^{-x})^2$, set $u = x/2$), giving
+          $c = \frac{\pi^2}{6}$. Then $I(-2) = -\frac{\pi^2}{3}$ and the previous step's
+          $-\sum \frac{1}{n^2}$ combine to force $\sum_{n=1}^{\infty} \frac{1}{n^2} =
+          \frac{\pi^2}{6}$ -- the problem Mengoli first posed in 1650. }
+EXPLAIN_PHYSICIST { One clean relation, $I(2) = 4 I(0)$, pins the unknown constant to
+          $c = \frac{\pi^2}{6}$. Feeding back, $I(-2) = -\frac{\pi^2}{3}$, while the same
+          $I(-2)$ equals $-2 \sum \frac{1}{n^2}$. Equate them and out drops
+          $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$ -- the sum Mengoli asked about. }
+EXPLAIN_BIOLOGIST { One last anchor -- the tidy fact that $I(2)$ is just $4$ times
+          $I(0)$ -- fixes the leftover constant to $\frac{\pi^2}{6}$. Combine that with
+          the integral we just summed, and the two views of the same quantity force the
+          answer: $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$. }
+EXPLAIN_ENGINEER { Calibrate using [[ $I(2)/I(0)$ | 4 ]]: factoring $(1 + e^{-x})^2$
+          and rescaling shows $I(2) = 4 I(0)$, fixing $c = \frac{\pi^2}{6}$. Then
+          $I(-2) = -\frac{\pi^2}{3} = -2 \sum \frac{1}{n^2}$ closes the loop:
+          $\sum \frac{1}{n^2} = \frac{\pi^2}{6}$. }
+SEGMENTS {
+  $I(2) = 4 I(0)$                          | final_answer
+  $\Rightarrow$                            | NEUTRAL
+  $\sum_{n=1}^{\infty} \frac{1}{n^2} = \frac{\pi^2}{6}$ | final_answer
+}
+EYE { final_answer }
+VULNERABLE_TO { mengoli }
+FIZZLE euler { Euler SOLVED the problem in 1734, but this final sentinel honours the man who first POSED it -- recall who raised the Basel question in 1650. }
+FIZZLE leibniz { Leibniz's rule drove the proof; this robot closes the loop and points back to the question's origin -- name the man who first asked for this sum. }
+FIZZLE al_khwarizmi { Completing the square was a tool inside; this robot is about who first POSED the Basel problem -- recall the mathematician of Bologna who raised it in 1650. }
+FIZZLE gregory { Gregory's arctangent identity was a step within; this sentinel is the originator of the whole question -- name the man who first posed the sum of inverse squares. }
+FIZZLE taylor { Taylor's series was an ingredient; this final robot honours who first stated the problem -- recall the man who posed it long before Euler solved it. }
+FIZZLE fubini { Fubini's swap was the analytic step just before; this robot points to the problem's origin -- name the mathematician who first posed the Basel question. }
