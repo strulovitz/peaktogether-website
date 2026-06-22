@@ -650,6 +650,13 @@ def _make_plain_tex(text, size, color):
     # Blit to an SRCALPHA surface so we get clean RGBA
     surf = pygame.Surface((w, h), pygame.SRCALPHA)
     surf.blit(text_surf, (0, 0))
+    # Zero the RGB of fully-transparent pixels so the background is (0,0,0,0)
+    # like latex_to_surface, NOT (fg, 0). Makes the texture safe for the 3D
+    # billboard path (alpha ignored, RGB read): glyphs coloured, background black.
+    _rgb = pygame.surfarray.pixels3d(surf)
+    _al = pygame.surfarray.pixels_alpha(surf)
+    _rgb[_al == 0] = 0
+    del _rgb, _al      # release surface locks before tostring
     data = pygame.image.tostring(surf, "RGBA", True)  # flip for GL
 
     tid = glGenTextures(1)
