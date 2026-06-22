@@ -267,7 +267,7 @@ EXPLAIN_PHYSICIST { Put the pieces together. The total measure is $1$, the real 
           \frac{1}{\zeta(2)}$. So $1 = \frac{\pi^2}{6} \cdot \frac{1}{\zeta(2)}$, which
           rearranges to $\zeta(2) = \frac{\pi^2}{6}$ -- Basel, delivered by geometry and
           arithmetic meeting in one equation. Riemann's $\zeta$ is the bridge. }
-EXPLAIN_BIOLOGIST { Lay the two halves side by side: the geometry half gave $\frac{\pi^2}{6}$,
+EXPLAIN_BIOLOGIST { Lay the two halves side by side: the geometry half gave the value $\frac{\pi^2}{6}$,
           the prime half gave one over the Basel sum, and the master equation says they must
           multiply to one. The only way that balances is if the Basel sum is $\frac{\pi^2}{6}$.
           The same zeta function Riemann made famous ties the curved-space picture to the primes. }
@@ -276,8 +276,8 @@ EXPLAIN_ENGINEER { Balance the master equation: [[ $1$ | 1.000 ]] equals [[ $\fr
           the only consistent value is [[ $\zeta(2) = \frac{\pi^2}{6}$ | 1.6449 ]]. Geometry and
           the primes meet at $\zeta(2) = \pi^2/6$ -- the Basel answer, the hostage room. }
 SEGMENTS {
-  $1 = \frac{\pi^2}{6} \prod_p \left( 1 - \frac{1}{p^2} \right)$ | tamagawa_measure
-  $=$                                                           | NEUTRAL
+  $\frac{\pi^2}{6}$                                             | the_constant
+  $\prod_p \left( 1 - \frac{1}{p^2} \right)$                    | finite_places
   $\zeta(2) = \frac{\pi^2}{6}$                                  | basel_answer
 }
 EYE { basel_answer }
