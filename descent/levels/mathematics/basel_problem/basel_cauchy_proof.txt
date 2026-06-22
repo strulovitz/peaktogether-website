@@ -14,46 +14,46 @@ ROBOT: 1
   EXPLAIN_MATHEMATICIAN { This corridor walks Cauchy's elementary route to $\displaystyle \stain{answer}{$\zeta(2)=\sum_{n=1}^{\infty}\frac{1}{n^2}=\frac{\pi^2}{6}$}$ (Cours d'Analyse, 1821). Remarkably it uses no calculus until a single limit at the very end: it traps the partial sums $\sum_{k=1}^{m}1/k^2$ between two totals built from $\stain{de_moivre_id}{\text{a trigonometric identity}}$, both tending to $\frac{\pi^2}{6}$. }
   EXPLAIN_PHYSICIST { Add $1+\tfrac14+\tfrac19+\cdots$; it settles near $1.645$. Cauchy's proof reaches the exact value $\stain{answer}{$\frac{\pi^2}{6}$}$ almost without calculus — it squeezes the running sum between two quantities that both close in on $\frac{\pi^2}{6}$ from above and below. }
   EXPLAIN_BIOLOGIST { The reciprocals of the squares $1,4,9,16,\dots$ pile up near $1.645$. Cauchy proves this is exactly $\stain{answer}{$\pi^2/6$}$ by trapping the growing pile between a slightly-too-small total and a slightly-too-big one, then closing the gap. }
-  EXPLAIN_ENGINEER { Cauchy's method is a model of bounding: cage an unknown sum between two computable totals and shrink the cage. Here both bounds march to $\stain{answer}{$\sum 1/n^2 = \pi^2/6$}$, turning an infinite sum into one exact constant. }
+  EXPLAIN_ENGINEER { Cauchy's method is a model of bounding: cage an unknown sum between two computable totals and shrink the cage. Here both bounds march to $\stain{answer}{$\sum 1/n^2 = \pi^2/6$}$, the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], turning an infinite sum into one exact value. }
 
 ROBOT: 2
   NAME { Abraham de Moivre }
   EXPLAIN_MATHEMATICIAN { De Moivre's formula $(\cos x+i\sin x)^n=\cos nx+i\sin nx$ lets Cauchy write $\displaystyle \frac{\cos nx+i\sin nx}{\sin^n x}=\stain{de_moivre_id}{$(\cot x+i)^n$}$. Choosing $n=2m+1$ odd is what later forces a clean polynomial in $\cot^2 x$. }
   EXPLAIN_PHYSICIST { De Moivre's rule turns a power of $(\cos x+i\sin x)$ into the single angle $nx$. Dividing through by $\sin^n x$ recasts it as $\stain{de_moivre_id}{$(\cot x+i)^n$}$ — the compact object whose imaginary part carries all the information. }
   EXPLAIN_BIOLOGIST { There is a beautiful shortcut: raising $\cos x+i\sin x$ to the $n$th power just multiplies the angle to $nx$. Rewriting that fact gives the tidy expression $\stain{de_moivre_id}{$(\cot x+i)^n$}$, the seed of the whole proof. }
-  EXPLAIN_ENGINEER { De Moivre's formula is the rotation rule for complex numbers: powering rotates the angle $n$-fold. Cauchy repackages it as $\stain{de_moivre_id}{$(\cot x+i)^n$}$, a form ready to be expanded and split into real and imaginary parts. }
+  EXPLAIN_ENGINEER { De Moivre's formula is the rotation rule for complex numbers: powering rotates the angle $n$-fold. Cauchy repackages it as $\stain{de_moivre_id}{$(\cot x+i)^n$}$; at $x=\tfrac{\pi}{4},\,n=2$ this is $(1+i)^2$, whose imaginary part [[ $\operatorname{Im}(1+i)^2$ | 2 ]] is ready to be split off. }
 
 ROBOT: 3
   NAME { Isaac Newton }
   EXPLAIN_MATHEMATICIAN { Binomial-expanding $\stain{de_moivre_id}{$(\cot x+i)^n$}$ and taking imaginary parts gives, with $n=2m+1$, the identity $\displaystyle \frac{\sin(nx)}{\sin^n x}=\thread{t1}{\binom{n}{1}\cot^{n-1}x-\binom{n}{3}\cot^{n-3}x\pm\cdots}$. The bracketed expression is a polynomial in $\cot^2 x$. }
   EXPLAIN_PHYSICIST { Expand $(\cot x+i)^n$ by the binomial theorem; the powers of $i$ sort the terms into a real and an imaginary part. The imaginary part is $\thread{t1}{\binom{n}{1}\cot^{n-1}x-\binom{n}{3}\cot^{n-3}x\pm\cdots}$ — exactly what equals $\sin(nx)/\sin^n x$. }
   EXPLAIN_BIOLOGIST { The binomial theorem multiplies out $(\cot x+i)^n$ into many terms. Because $i^2=-1$, the terms alternate in sign and split into two groups; one group, $\thread{t1}{\binom{n}{1}\cot^{n-1}x-\cdots}$, is the piece Cauchy needs. }
-  EXPLAIN_ENGINEER { The binomial theorem is the expansion engine: it turns $(\cot x+i)^n$ into a sum of $\binom{n}{k}$ terms. Collecting the imaginary ones yields the polynomial $\thread{t1}{\binom{n}{1}\cot^{n-1}x-\binom{n}{3}\cot^{n-3}x\pm\cdots}$ that drives the rest of the proof. }
+  EXPLAIN_ENGINEER { The binomial theorem is the expansion engine: it turns $(\cot x+i)^n$ into a sum of $\binom{n}{k}$ terms. Collecting the imaginary ones yields $\thread{t1}{\binom{n}{1}\cot^{n-1}x-\binom{n}{3}\cot^{n-3}x\pm\cdots}$; for $n=5$ the lead coefficient is [[ $\binom{5}{1}$ | 5 ]] and the next is [[ $\binom{5}{3}$ | 10 ]]. }
 
 ROBOT: 4
   NAME { François Viète }
   EXPLAIN_MATHEMATICIAN { The numbers $\stain{roots}{$t_r=\cot^2 x_r$}$, for $x_r=\tfrac{r\pi}{2m+1}$, are the $m$ roots of $p(t)=\binom{2m+1}{1}t^m-\binom{2m+1}{3}t^{m-1}\pm\cdots$. Vieta's formulas read the root-sum off the top two coefficients: $\displaystyle \stain{cot_sum}{$\sum_{r=1}^{m}\cot^2 x_r=\frac{\binom{2m+1}{3}}{\binom{2m+1}{1}}=\frac{2m(2m-1)}{6}$}$. }
   EXPLAIN_PHYSICIST { Sine vanishes at $nx_r$, so each $\stain{roots}{$t_r=\cot^2 x_r$}$ is a root of a known degree-$m$ polynomial. Vieta says the sum of the roots equals (minus) the ratio of its first two coefficients, giving $\stain{cot_sum}{$\sum\cot^2 x_r=\frac{2m(2m-1)}{6}$}$ — no root ever computed individually. }
   EXPLAIN_BIOLOGIST { Once you know a polynomial, you know the sum of its roots from just two coefficients — that is Vieta's rule. Here the roots are the $\stain{roots}{$\cot^2 x_r$}$ values, and their total comes out to $\stain{cot_sum}{$\frac{2m(2m-1)}{6}$}$. }
-  EXPLAIN_ENGINEER { Vieta lets you extract the sum of all roots without solving the polynomial — you just read two coefficients. Applied here it delivers $\stain{cot_sum}{$\sum\cot^2 x_r=\frac{2m(2m-1)}{6}$}$ directly, the lower-bound total Cauchy needs. }
+  EXPLAIN_ENGINEER { Vieta lets you extract the sum of all roots without solving the polynomial — you just read two coefficients. Applied here it delivers $\stain{cot_sum}{$\sum\cot^2 x_r=\frac{2m(2m-1)}{6}$}$; at $m=2$ that lower-bound total is [[ $\frac{2\cdot2(2\cdot2-1)}{6}$ | 2 ]]. }
 
 ROBOT: 5
   NAME { Pythagoras }
   EXPLAIN_MATHEMATICIAN { The Pythagorean identity in reciprocal form, $\csc^2 x=\cot^2 x+1$, converts the cotangent total into the cosecant total: $\displaystyle \stain{csc_sum}{$\sum_{r=1}^{m}\csc^2 x_r=\frac{2m(2m-1)}{6}+m=\frac{2m(2m+2)}{6}$}$. }
   EXPLAIN_PHYSICIST { Adding $1$ to $\cot^2$ gives $\csc^2$ — that is the Pythagorean identity. Apply it to all $m$ terms of $\stain{cot_sum}{\text{the cotangent sum}}$ and the total rises by $m$ to $\stain{csc_sum}{$\frac{2m(2m+2)}{6}$}$, the upper-bound total. }
   EXPLAIN_BIOLOGIST { There is a simple bridge between two trig quantities: $\csc^2 x=\cot^2 x+1$. Using it on every term turns the first total into a second one, $\stain{csc_sum}{$\frac{2m(2m+2)}{6}$}$ — Cauchy's other bound. }
-  EXPLAIN_ENGINEER { $\csc^2 x=\cot^2 x+1$ is a one-line conversion from the Pythagorean relation. Adding $1$ across $m$ terms shifts the known total by exactly $m$, producing the companion sum $\stain{csc_sum}{$\frac{2m(2m+2)}{6}$}$. }
+  EXPLAIN_ENGINEER { $\csc^2 x=\cot^2 x+1$ is a one-line conversion from the Pythagorean relation. Adding $1$ across $m$ terms shifts the known total by exactly $m$, producing $\stain{csc_sum}{$\frac{2m(2m+2)}{6}$}$; at $m=2$ this upper-bound total is [[ $\frac{2\cdot2(2\cdot2+2)}{6}$ | 4 ]]. }
 
 ROBOT: 6
   NAME { Archimedes }
   EXPLAIN_MATHEMATICIAN { Comparing the areas of triangle $OAC$, sector $OAB$, and triangle $OAB$ gives $\tfrac12 r^2\tan\theta>\tfrac12 r^2\theta>\tfrac12 r^2\sin\theta$ for $\theta\in(0,\pi/2)$. Taking reciprocals and squaring yields $\thread{t1}{\cot^2\theta<\frac{1}{\theta^2}<\csc^2\theta}$ — the per-term inequality. }
   EXPLAIN_PHYSICIST { A wedge of a circle sits between two triangles, so its area lies between theirs: $\sin\theta<\theta<\tan\theta$. Flip and square to get $\thread{t1}{\cot^2\theta<\frac{1}{\theta^2}<\csc^2\theta}$ — the inequality applied to every angle $x_r$. }
   EXPLAIN_BIOLOGIST { Picture a slice of pie squeezed between a small triangle and a big one; its area is caught in between. That geometric fact, rearranged, becomes $\thread{t1}{\cot^2\theta<\frac{1}{\theta^2}<\csc^2\theta}$, the bound used on each term. }
-  EXPLAIN_ENGINEER { Trapping a curved area between two straight-edged ones is the classic area-comparison method. It produces $\thread{t1}{\cot^2\theta<\frac{1}{\theta^2}<\csc^2\theta}$; summing it over all $x_r$ wedges the partial sum $\sum 1/k^2$ between the two known totals. }
+  EXPLAIN_ENGINEER { Trapping a curved area between two straight-edged ones is the classic area-comparison method. It produces $\thread{t1}{\cot^2\theta<\frac{1}{\theta^2}<\csc^2\theta}$; at $\theta=\tfrac{\pi}{4}$ the floor is [[ $\cot^2\tfrac{\pi}{4}$ | 1 ]] and the ceiling is [[ $\csc^2\tfrac{\pi}{4}$ | 2 ]], wedging the middle term between them. }
 
 ROBOT: 7
   NAME { Carl Friedrich Gauss }
   EXPLAIN_MATHEMATICIAN { Summing the inequality and multiplying by $(\tfrac{\pi}{2m+1})^2$ gives $\frac{\pi^2}{6}\frac{2m}{2m+1}\frac{2m-1}{2m+1}<\sum_{k=1}^{m}\frac1{k^2}<\frac{\pi^2}{6}\frac{2m}{2m+1}\frac{2m+2}{2m+1}$. As $m\to\infty$ both bounds $\to\frac{\pi^2}{6}$, so by the squeeze theorem $\stain{answer}{$\sum_{k=1}^{\infty}\frac1{k^2}=\frac{\pi^2}{6}$}$. }
   EXPLAIN_PHYSICIST { Both walls of the cage, $\stain{cot_sum}{\text{the lower total}}$ and $\stain{csc_sum}{\text{the upper total}}$, converge to the same limit. When the floor and ceiling meet, whatever is between them is pinned: $\stain{answer}{$\sum 1/k^2=\frac{\pi^2}{6}$}$. }
   EXPLAIN_BIOLOGIST { If a number is always between two others that close in on the same value, it must equal that value. The two totals both shrink toward $\stain{answer}{$\pi^2/6$}$, so the trapped sum has nowhere else to go. }
-  EXPLAIN_ENGINEER { The squeeze theorem is the closing move: bound below and above by sequences with a common limit, and the middle inherits it. Here both bounds tend to $\stain{answer}{$\pi^2/6$}$, fixing the Basel sum exactly. }
+  EXPLAIN_ENGINEER { The squeeze theorem is the closing move: bound below and above by sequences with a common limit, and the middle inherits it. Here both bounds tend to $\stain{answer}{$\pi^2/6$}$, the value [[ $\frac{\pi^2}{6}$ | 1.6449 ]], fixing the Basel sum exactly. }

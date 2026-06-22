@@ -77,9 +77,7 @@ EXPLAIN_PHYSICIST { De Moivre's rule turns a power of $(\cos x + i\sin x)$ into 
 EXPLAIN_BIOLOGIST { A beautiful shortcut: raising $\cos x + i\sin x$ to the $n$th power
           just multiplies the angle to $nx$. Rewriting that gives the tidy expression
           $(\cot x + i)^n$, the seed of the whole proof. }
-EXPLAIN_ENGINEER { De Moivre's formula is the rotation rule for complex numbers:
-          powering rotates the angle $n$-fold. Cauchy repackages it as $(\cot x + i)^n$,
-          ready to be expanded and split into real and imaginary parts. }
+EXPLAIN_ENGINEER { De Moivre's formula is the rotation rule for complex numbers: powering rotates the angle $n$-fold. Cauchy repackages it as $(\cot x + i)^n$; at $x = \frac{\pi}{4},\, n = 2$ this is $(1+i)^2$, whose imaginary part [[ $\operatorname{Im}(1+i)^2$ | 2 ]] is ready to be split off. }
 SEGMENTS {
   $\frac{\cos nx + i\sin nx}{\sin^n x}$   | de_moivre_id
   $=$                                     | NEUTRAL
@@ -111,9 +109,7 @@ EXPLAIN_PHYSICIST { Expand $(\cot x + i)^n$ by the binomial theorem; powers of $
 EXPLAIN_BIOLOGIST { The binomial theorem multiplies out $(\cot x + i)^n$ into many
           terms. Because $i^2 = -1$, they alternate in sign and split into two groups;
           one group is the cotangent polynomial Cauchy needs. }
-EXPLAIN_ENGINEER { The binomial theorem is the expansion engine: it turns
-          $(\cot x + i)^n$ into a sum of $\binom{n}{k}$ terms. Collecting the imaginary
-          ones yields the polynomial that drives the rest of the proof. }
+EXPLAIN_ENGINEER { The binomial theorem is the expansion engine: it turns $(\cot x + i)^n$ into a sum of $\binom{n}{k}$ terms. Collecting the imaginary ones yields the polynomial that drives the rest; for $n = 5$ the lead coefficient is [[ $\binom{5}{1}$ | 5 ]] and the next is [[ $\binom{5}{3}$ | 10 ]]. }
 SEGMENTS {
   $(\cot x + i)^n$                                          | de_moivre_id
   $\rightarrow$                                             | NEUTRAL
@@ -145,9 +141,7 @@ EXPLAIN_PHYSICIST { Sine vanishes at $n x_r$, so each $\cot^2 x_r$ is a root of 
 EXPLAIN_BIOLOGIST { Once you know a polynomial, you know the sum of its roots from just
           two coefficients -- that is Vieta's rule. Here the roots are the $\cot^2 x_r$
           values, and their total is $\frac{2m(2m-1)}{6}$. }
-EXPLAIN_ENGINEER { Vieta extracts the sum of all roots without solving the polynomial
-          -- just read two coefficients. It delivers $\sum \cot^2 x_r =
-          \frac{2m(2m-1)}{6}$ directly, the lower-bound total. }
+EXPLAIN_ENGINEER { Vieta extracts the sum of all roots without solving the polynomial -- just read two coefficients. It delivers $\sum \cot^2 x_r = \frac{2m(2m-1)}{6}$ directly; at $m = 2$ that lower-bound total is [[ $\frac{2 \cdot 2(2 \cdot 2 - 1)}{6}$ | 2 ]]. }
 SEGMENTS {
   $\sum_{r=1}^{m} \cot^2 x_r$   | cot_sum
   $=$                           | NEUTRAL
@@ -177,9 +171,7 @@ EXPLAIN_PHYSICIST { Adding $1$ to $\cot^2$ gives $\csc^2$ -- the Pythagorean ide
 EXPLAIN_BIOLOGIST { A simple bridge between two trig quantities: $\csc^2 x = \cot^2 x
           + 1$. Using it on every term turns the first total into a second one,
           $\frac{2m(2m+2)}{6}$ -- Cauchy's other bound. }
-EXPLAIN_ENGINEER { $\csc^2 x = \cot^2 x + 1$ is a one-line conversion from the
-          Pythagorean relation. Adding $1$ across $m$ terms shifts the known total by
-          exactly $m$, producing the companion sum $\frac{2m(2m+2)}{6}$. }
+EXPLAIN_ENGINEER { $\csc^2 x = \cot^2 x + 1$ is a one-line conversion from the Pythagorean relation. Adding $1$ across $m$ terms shifts the known total by exactly $m$, producing the companion sum $\frac{2m(2m+2)}{6}$; at $m = 2$ this upper-bound total is [[ $\frac{2 \cdot 2(2 \cdot 2 + 2)}{6}$ | 4 ]]. }
 SEGMENTS {
   $\sum_{r=1}^{m} \csc^2 x_r$   | csc_sum
   $=$                           | NEUTRAL
@@ -213,10 +205,7 @@ EXPLAIN_PHYSICIST { A wedge of a circle sits between two triangles, so its area 
 EXPLAIN_BIOLOGIST { Picture a slice of pie squeezed between a small triangle and a big
           one; its area is caught between them. That fact, rearranged, becomes
           $\cot^2\theta < \frac{1}{\theta^2} < \csc^2\theta$, the bound on each term. }
-EXPLAIN_ENGINEER { Trapping a curved area between two straight-edged ones is the
-          classic area-comparison method. It produces $\cot^2\theta < \frac{1}{\theta^2}
-          < \csc^2\theta$; summing over all $x_r$ wedges $\sum 1/k^2$ between the two
-          known totals. }
+EXPLAIN_ENGINEER { Trapping a curved area between two straight-edged ones is the classic area-comparison method. It produces $\cot^2\theta < \frac{1}{\theta^2} < \csc^2\theta$; at $\theta = \frac{\pi}{4}$ the floor is [[ $\cot^2\frac{\pi}{4}$ | 1 ]] and the ceiling is [[ $\csc^2\frac{\pi}{4}$ | 2 ]], wedging the middle term between them. }
 SEGMENTS {
   $\cot^2\theta$                | cot_sum
   $< \frac{1}{\theta^2} <$      | NEUTRAL
@@ -249,9 +238,7 @@ EXPLAIN_PHYSICIST { Both walls of the cage -- the lower total and the upper tota
 EXPLAIN_BIOLOGIST { If a number is always between two others that close in on the same
           value, it must equal that value. Both totals shrink toward $\frac{\pi^2}{6}$,
           so the trapped sum has nowhere else to go. }
-EXPLAIN_ENGINEER { The squeeze theorem is the closing move: bound below and above by
-          sequences with a common limit, and the middle inherits it. Both bounds tend
-          to $\frac{\pi^2}{6}$, fixing the Basel sum exactly. }
+EXPLAIN_ENGINEER { The squeeze theorem is the closing move: bound below and above by sequences with a common limit, and the middle inherits it. Both bounds tend to $\frac{\pi^2}{6}$, the value [[ $\frac{\pi^2}{6}$ | 1.6449 ]], fixing the Basel sum exactly. }
 SEGMENTS {
   $\sum_{k=1}^{m} \frac{1}{k^2}$   | answer
   $\longrightarrow$                | NEUTRAL
