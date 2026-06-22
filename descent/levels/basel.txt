@@ -7,3 +7,4 @@ corridors:
   ../corridors/05_fourier_series.txt      baked=../baked/basel/fourier_series
   ../corridors/06_parseval.txt            baked=../baked/basel/parseval
   ../corridors/07_diff_under_integral.txt baked=../baked/basel/diff_under_integral
+  ../corridors/08_cauchy.txt              baked=../baked/basel/cauchy

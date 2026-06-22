@@ -1,0 +1,267 @@
+# ===========================================================
+# The Basel Problem — Cauchy's Elementary Descent. Seven sentinels,
+# one per step of Cauchy's proof (Cours d'Analyse, 1821) that
+# sum 1/n^2 = pi^2/6 using almost no calculus. Robot 1 is nearest
+# the doorway. Each yields to exactly ONE mathematician id.
+# Robot N maps 1:1 to baker step N (baked/basel/cauchy/robotN_*.png).
+# LEDGER mirrors the baker STAINS: roots=red, vieta=yellow,
+# de_moivre_id=blue; cot_sum=red+yellow, csc_sum=yellow+blue,
+# answer=red+blue.
+# ===========================================================
+CORRIDOR: 8
+TITLE { The Basel Problem -- Cauchy's Elementary Descent }
+FLAVOR { A complex power, a polynomial of cotangents, and a pie-slice squeezed between two triangles -- pi^2/6 with almost no calculus. }
+LEDGER {
+  PRIMARY roots        = red
+  PRIMARY vieta        = yellow
+  PRIMARY de_moivre_id = blue
+  BLEND   cot_sum      = roots + vieta
+  BLEND   csc_sum      = vieta + de_moivre_id
+  BLEND   answer       = roots + de_moivre_id
+}
+BRIEFING_INTRO { Seven sentinels guard Cauchy's elementary road to the Basel sum.
+          Read each robot's blue hologram face, judge whose idea its mathematics
+          belongs to, and fire that mathematician. Match the face to the technique
+          and the corridor opens. }
+ENTRY_TEXT { You have entered the Cauchy corridor. Ahead, a sum of squares will be caged between two trigonometric totals and squeezed onto a circle constant. }
+EXIT_TEXT { The last sentinel falls and the cage snaps shut on pi^2/6. The hostages are free -- you have flown the whole length of Cauchy's proof. Well done. }
+
+ROBOT: 1
+NAME { Augustin-Louis Cauchy }
+BRIEFING_HINT { This sentinel states the prize and the strategy: trap the partial
+          sums between two totals and squeeze. It yields to the author of this
+          elementary proof. }
+PROBLEM { Identify the value of the Basel sum $\sum_{n=1}^{\infty} \frac{1}{n^2}$ --
+          whose elementary, almost-calculus-free proof traps it at $\frac{\pi^2}{6}$? }
+EXPLAIN_MATHEMATICIAN { This corridor walks Cauchy's elementary route (Cours
+          d'Analyse, 1821) to $\zeta(2) = \sum_{n=1}^{\infty} \frac{1}{n^2} =
+          \frac{\pi^2}{6}$, using no calculus until a single limit at the end: it
+          traps $\sum_{k=1}^{m} 1/k^2$ between two totals both tending to
+          $\frac{\pi^2}{6}$. }
+EXPLAIN_PHYSICIST { Add $1 + \frac{1}{4} + \frac{1}{9} + \cdots$; it settles near
+          $1.645$. Cauchy reaches the exact value $\frac{\pi^2}{6}$ almost without
+          calculus, squeezing the running sum between two quantities that both close
+          in on $\frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { The reciprocals of the squares $1, 4, 9, 16, \dots$ pile up near
+          $1.645$. Cauchy proves this is exactly $\frac{\pi^2}{6}$ by trapping the
+          growing pile between a slightly-too-small total and a slightly-too-big one. }
+EXPLAIN_ENGINEER { Plug in numbers: the sum [[ $\sum \frac{1}{n^2}$ | 1.6449 ]] meets
+          the constant [[ $\frac{\pi^2}{6}$ | 1.6449 ]], so they match. Cauchy cages
+          this unknown between two computable totals and shrinks the cage. }
+SEGMENTS {
+  $\sum_{n=1}^{\infty} \frac{1}{n^2}$   | answer
+  $=$                                   | NEUTRAL
+  $\frac{\pi^2}{6}$                     | answer
+}
+EYE { answer }
+VULNERABLE_TO { cauchy }
+FIZZLE de_moivre { De Moivre's formula opens the machinery one step deeper, but this first robot only asks you to NAME the prize and whose elementary proof reaches it -- think of the author of the Cours d'Analyse. }
+FIZZLE newton { The binomial expansion is a true later ingredient, but here no power is being expanded -- name the man whose elementary proof of this sum the corridor follows. }
+FIZZLE viete { Reading root-sums off coefficients comes downstream; this opening robot just states the headline value -- recall whose almost-calculus-free proof of it this is. }
+FIZZLE pythagoras { The csc-cot identity is used later inside the proof, but this sentinel only poses the famous result -- name the author of this particular elementary descent. }
+FIZZLE archimedes { The pie-slice area inequality appears further along; this robot just states the prize itself -- name the mathematician whose 1821 proof traps it. }
+FIZZLE gauss { The squeeze is the closing move at the very end, but this first robot states the result, not the limit -- name the man whose elementary route to it this corridor walks. }
+
+ROBOT: 2
+NAME { Abraham de Moivre }
+BRIEFING_HINT { De Moivre's formula turns a complex power into a single multiplied
+          angle, giving $(\cot x + i)^n$. This sentinel yields to its namesake. }
+PROBLEM { Powering $\cos x + i\sin x$ to the $n$th multiplies the angle to $nx$,
+          recasting it as $(\cot x + i)^n$. Whose formula is this? }
+EXPLAIN_MATHEMATICIAN { De Moivre's formula $(\cos x + i\sin x)^n = \cos nx + i\sin nx$
+          lets Cauchy write $\frac{\cos nx + i\sin nx}{\sin^n x} = (\cot x + i)^n$;
+          choosing $n = 2m+1$ odd later forces a clean polynomial in $\cot^2 x$. }
+EXPLAIN_PHYSICIST { De Moivre's rule turns a power of $(\cos x + i\sin x)$ into the
+          single angle $nx$. Dividing by $\sin^n x$ recasts it as $(\cot x + i)^n$ --
+          the compact object whose imaginary part carries everything. }
+EXPLAIN_BIOLOGIST { A beautiful shortcut: raising $\cos x + i\sin x$ to the $n$th power
+          just multiplies the angle to $nx$. Rewriting that gives the tidy expression
+          $(\cot x + i)^n$, the seed of the whole proof. }
+EXPLAIN_ENGINEER { De Moivre's formula is the rotation rule for complex numbers:
+          powering rotates the angle $n$-fold. Cauchy repackages it as $(\cot x + i)^n$,
+          ready to be expanded and split into real and imaginary parts. }
+SEGMENTS {
+  $\frac{\cos nx + i\sin nx}{\sin^n x}$   | de_moivre_id
+  $=$                                     | NEUTRAL
+  $(\cot x + i)^n$                        | de_moivre_id
+}
+EYE { de_moivre_id }
+VULNERABLE_TO { de_moivre }
+FIZZLE cauchy { Cauchy assembles the whole proof, but this specific move -- powering a complex number multiplies its angle -- bears one man's name; recall whose formula turns $(\cos x + i\sin x)^n$ into $\cos nx + i\sin nx$. }
+FIZZLE newton { The binomial theorem EXPANDS this power at the next step; here the power is merely FORMED by multiplying the angle -- name the man whose formula does that. }
+FIZZLE viete { Roots and coefficients come later; this robot is the complex-power identity that produces $(\cot x + i)^n$ -- think of its namesake. }
+FIZZLE pythagoras { The csc-cot bridge is used downstream; this sentinel is the rule for raising $\cos x + i\sin x$ to a power -- recall whose formula that is. }
+FIZZLE archimedes { The geometric inequality waits further on; here a complex number is raised to the $n$th power, multiplying its angle -- name the formula's owner. }
+FIZZLE gauss { The squeeze is the finale; this robot is the complex-exponential identity giving $(\cot x + i)^n$ -- name the man whose formula it is. }
+
+ROBOT: 3
+NAME { Isaac Newton }
+BRIEFING_HINT { The binomial theorem expands $(\cot x + i)^n$; its imaginary part is
+          a polynomial in cotangents. This sentinel yields to the master of that expansion. }
+PROBLEM { Expanding $(\cot x + i)^n$ and collecting imaginary parts gives
+          $\binom{n}{1}\cot^{n-1}x - \binom{n}{3}\cot^{n-3}x \pm \cdots$. Whose theorem
+          expands the power? }
+EXPLAIN_MATHEMATICIAN { Binomial-expanding $(\cot x + i)^n$ and taking imaginary parts
+          gives, with $n = 2m+1$, $\frac{\sin(nx)}{\sin^n x} = \binom{n}{1}\cot^{n-1}x
+          - \binom{n}{3}\cot^{n-3}x \pm \cdots$ -- a polynomial in $\cot^2 x$. }
+EXPLAIN_PHYSICIST { Expand $(\cot x + i)^n$ by the binomial theorem; powers of $i$ sort
+          the terms into real and imaginary parts. The imaginary part is
+          $\binom{n}{1}\cot^{n-1}x - \binom{n}{3}\cot^{n-3}x \pm \cdots$, which equals
+          $\sin(nx)/\sin^n x$. }
+EXPLAIN_BIOLOGIST { The binomial theorem multiplies out $(\cot x + i)^n$ into many
+          terms. Because $i^2 = -1$, they alternate in sign and split into two groups;
+          one group is the cotangent polynomial Cauchy needs. }
+EXPLAIN_ENGINEER { The binomial theorem is the expansion engine: it turns
+          $(\cot x + i)^n$ into a sum of $\binom{n}{k}$ terms. Collecting the imaginary
+          ones yields the polynomial that drives the rest of the proof. }
+SEGMENTS {
+  $(\cot x + i)^n$                                          | de_moivre_id
+  $\rightarrow$                                             | NEUTRAL
+  $\binom{n}{1}\cot^{n-1}x - \binom{n}{3}\cot^{n-3}x \pm \cdots$ | de_moivre_id
+}
+EYE { de_moivre_id }
+VULNERABLE_TO { newton }
+FIZZLE cauchy { Cauchy directs the whole proof, but this robot is the act of EXPANDING a binomial power into its terms -- name the man whose theorem performs that expansion. }
+FIZZLE de_moivre { De Moivre FORMED the power $(\cot x + i)^n$ at the previous step; this robot EXPANDS it term by term -- recall whose binomial theorem does the multiplying-out. }
+FIZZLE viete { Vieta reads sums of roots off the resulting polynomial later; first the power must be expanded -- name the master of the binomial theorem. }
+FIZZLE pythagoras { The csc-cot identity comes after the polynomial is built; this step is the binomial expansion itself -- recall whose theorem expands $(\cot x + i)^n$. }
+FIZZLE archimedes { The area inequality is a separate later ingredient; here a power is expanded by the binomial theorem -- name its owner. }
+FIZZLE gauss { The limit closes the proof at the end; this robot is the algebraic expansion of a binomial power -- name the mathematician whose theorem that is. }
+
+ROBOT: 4
+NAME { Francois Viete }
+BRIEFING_HINT { Vieta's formulas read the sum of a polynomial's roots off its top two
+          coefficients. This sentinel yields to the man who linked roots and coefficients. }
+PROBLEM { The numbers $\cot^2 x_r$ are the roots of a known degree-$m$ polynomial;
+          their sum is $\frac{2m(2m-1)}{6}$. Whose formulas give a root-sum from
+          coefficients? }
+EXPLAIN_MATHEMATICIAN { The numbers $t_r = \cot^2 x_r$, for $x_r = \frac{r\pi}{2m+1}$,
+          are the $m$ roots of $p(t) = \binom{2m+1}{1} t^m - \binom{2m+1}{3} t^{m-1}
+          \pm \cdots$. Vieta's formulas read the root-sum off the top two
+          coefficients: $\sum_{r=1}^{m} \cot^2 x_r = \frac{2m(2m-1)}{6}$. }
+EXPLAIN_PHYSICIST { Sine vanishes at $n x_r$, so each $\cot^2 x_r$ is a root of a known
+          degree-$m$ polynomial. Vieta says the sum of roots equals minus the ratio of
+          its first two coefficients, giving $\sum \cot^2 x_r = \frac{2m(2m-1)}{6}$. }
+EXPLAIN_BIOLOGIST { Once you know a polynomial, you know the sum of its roots from just
+          two coefficients -- that is Vieta's rule. Here the roots are the $\cot^2 x_r$
+          values, and their total is $\frac{2m(2m-1)}{6}$. }
+EXPLAIN_ENGINEER { Vieta extracts the sum of all roots without solving the polynomial
+          -- just read two coefficients. It delivers $\sum \cot^2 x_r =
+          \frac{2m(2m-1)}{6}$ directly, the lower-bound total. }
+SEGMENTS {
+  $\sum_{r=1}^{m} \cot^2 x_r$   | cot_sum
+  $=$                           | NEUTRAL
+  $\frac{2m(2m-1)}{6}$          | cot_sum
+}
+EYE { cot_sum }
+VULNERABLE_TO { viete }
+FIZZLE cauchy { Cauchy uses this root-sum, but he did not discover the rule -- this robot honours the man who first tied a polynomial's coefficients to its roots. }
+FIZZLE de_moivre { De Moivre's formula built the identity that yielded this polynomial; this robot is the LAW that sums its roots from coefficients -- recall whose named formulas state that link. }
+FIZZLE newton { Newton's binomial theorem produced the polynomial; now its ROOTS must be summed from its coefficients -- name the man whose formulas do exactly that. }
+FIZZLE pythagoras { The csc-cot identity is the very next step; this robot is the root-coefficient rule applied to the cotangent polynomial -- recall whose formulas those are. }
+FIZZLE archimedes { The geometric inequality is separate; here a sum of roots is read off coefficients -- name the early algebraist behind those relations. }
+FIZZLE gauss { The squeeze ends the proof; this robot is the elementary roots-to-coefficients law -- name the man it is named after. }
+
+ROBOT: 5
+NAME { Pythagoras }
+BRIEFING_HINT { The identity $\csc^2 x = \cot^2 x + 1$ converts the cotangent total
+          into the cosecant total. This sentinel yields to the namesake of that identity. }
+PROBLEM { Adding $1$ to each $\cot^2 x_r$ turns the cotangent sum into the cosecant
+          sum $\frac{2m(2m+2)}{6}$. Whose identity is $\csc^2 x = \cot^2 x + 1$? }
+EXPLAIN_MATHEMATICIAN { The Pythagorean identity in reciprocal form, $\csc^2 x =
+          \cot^2 x + 1$, converts the cotangent total into the cosecant total:
+          $\sum_{r=1}^{m} \csc^2 x_r = \frac{2m(2m-1)}{6} + m = \frac{2m(2m+2)}{6}$. }
+EXPLAIN_PHYSICIST { Adding $1$ to $\cot^2$ gives $\csc^2$ -- the Pythagorean identity.
+          Apply it to all $m$ terms of the cotangent sum and the total rises by $m$ to
+          $\frac{2m(2m+2)}{6}$, the upper-bound total. }
+EXPLAIN_BIOLOGIST { A simple bridge between two trig quantities: $\csc^2 x = \cot^2 x
+          + 1$. Using it on every term turns the first total into a second one,
+          $\frac{2m(2m+2)}{6}$ -- Cauchy's other bound. }
+EXPLAIN_ENGINEER { $\csc^2 x = \cot^2 x + 1$ is a one-line conversion from the
+          Pythagorean relation. Adding $1$ across $m$ terms shifts the known total by
+          exactly $m$, producing the companion sum $\frac{2m(2m+2)}{6}$. }
+SEGMENTS {
+  $\sum_{r=1}^{m} \csc^2 x_r$   | csc_sum
+  $=$                           | NEUTRAL
+  $\frac{2m(2m+2)}{6}$          | csc_sum
+}
+EYE { csc_sum }
+VULNERABLE_TO { pythagoras }
+FIZZLE cauchy { Cauchy invokes this identity, but it is far older than his proof -- this robot is the relation $\csc^2 = \cot^2 + 1$, so name the ancient whose theorem it expresses. }
+FIZZLE de_moivre { De Moivre's formula belongs to the complex-power step; this robot is the trig identity converting cotangent into cosecant -- recall whose theorem underlies it. }
+FIZZLE newton { The binomial theorem built the polynomial; this step merely adds $1$ to each term via $\csc^2 = \cot^2 + 1$ -- name the man whose identity that is. }
+FIZZLE viete { Vieta gave the cotangent sum; this robot CONVERTS it using $\csc^2 = \cot^2 + 1$ -- recall the ancient geometer behind that relation. }
+FIZZLE archimedes { Archimedes supplies the area inequality next; this robot is the Pythagorean trig identity -- name the man whose theorem it comes from. }
+FIZZLE gauss { The squeeze closes the proof; this robot is the elementary identity $\csc^2 = \cot^2 + 1$ -- recall whose right-triangle theorem it expresses. }
+
+ROBOT: 6
+NAME { Archimedes }
+BRIEFING_HINT { A circular sector caged between two triangles gives the inequality
+          $\cot^2\theta < 1/\theta^2 < \csc^2\theta$. This sentinel yields to the
+          master of area-comparison. }
+PROBLEM { Comparing a pie-slice sector to two triangles gives $\cot^2\theta <
+          \frac{1}{\theta^2} < \csc^2\theta$. Who pioneered trapping a curved area
+          between straight-edged ones? }
+EXPLAIN_MATHEMATICIAN { Comparing the areas of triangle $OAC$, sector $OAB$, and
+          triangle $OAB$ gives $\frac{1}{2} r^2 \tan\theta > \frac{1}{2} r^2 \theta >
+          \frac{1}{2} r^2 \sin\theta$ on $(0, \pi/2)$. Reciprocating and squaring yields
+          $\cot^2\theta < \frac{1}{\theta^2} < \csc^2\theta$ -- the per-term inequality. }
+EXPLAIN_PHYSICIST { A wedge of a circle sits between two triangles, so its area lies
+          between theirs: $\sin\theta < \theta < \tan\theta$. Flip and square to get
+          $\cot^2\theta < \frac{1}{\theta^2} < \csc^2\theta$, applied to every angle
+          $x_r$. }
+EXPLAIN_BIOLOGIST { Picture a slice of pie squeezed between a small triangle and a big
+          one; its area is caught between them. That fact, rearranged, becomes
+          $\cot^2\theta < \frac{1}{\theta^2} < \csc^2\theta$, the bound on each term. }
+EXPLAIN_ENGINEER { Trapping a curved area between two straight-edged ones is the
+          classic area-comparison method. It produces $\cot^2\theta < \frac{1}{\theta^2}
+          < \csc^2\theta$; summing over all $x_r$ wedges $\sum 1/k^2$ between the two
+          known totals. }
+SEGMENTS {
+  $\cot^2\theta$                | cot_sum
+  $< \frac{1}{\theta^2} <$      | NEUTRAL
+  $\csc^2\theta$                | csc_sum
+}
+EYE { roots }
+VULNERABLE_TO { archimedes }
+FIZZLE cauchy { Cauchy sums this inequality, but the area-comparison behind it is far older -- this robot is the pie-slice-between-triangles bound; name the ancient who pioneered it. }
+FIZZLE de_moivre { De Moivre's formula belongs to the algebra; this robot is the GEOMETRIC inequality from comparing a sector to two triangles -- recall the master of such area arguments. }
+FIZZLE newton { The binomial theorem built the polynomial; this sentinel is the geometric area bound $\cot^2\theta < 1/\theta^2 < \csc^2\theta$ -- name the pioneer of trapping curved areas. }
+FIZZLE viete { Vieta summed the roots; here a curved sector is caged between two triangles -- recall the ancient who first squeezed areas this way. }
+FIZZLE pythagoras { Pythagoras supplied the csc-cot identity; this robot is the AREA inequality wedging the sector between two triangles -- name the master of the method of exhaustion. }
+FIZZLE gauss { Gauss closes with the limit; this robot is the geometric area-comparison that produces the per-term inequality -- name its ancient pioneer. }
+
+ROBOT: 7
+NAME { Carl Friedrich Gauss }
+BRIEFING_HINT { Both bounds converge to the same limit, so the trapped sum is pinned
+          to pi^2/6. This sentinel yields to the man who set the squeeze on rigorous footing. }
+PROBLEM { As $m \to \infty$ both bounds tend to $\frac{\pi^2}{6}$, pinning the sum
+          there. Who put this squeeze on a rigorous, modern footing? }
+EXPLAIN_MATHEMATICIAN { Summing the inequality and multiplying by
+          $\left(\frac{\pi}{2m+1}\right)^2$ gives $\frac{\pi^2}{6} \frac{2m}{2m+1}
+          \frac{2m-1}{2m+1} < \sum_{k=1}^{m} \frac{1}{k^2} < \frac{\pi^2}{6}
+          \frac{2m}{2m+1} \frac{2m+2}{2m+1}$. As $m \to \infty$ both bounds tend to
+          $\frac{\pi^2}{6}$, so by the squeeze theorem $\sum_{k=1}^{\infty}
+          \frac{1}{k^2} = \frac{\pi^2}{6}$. }
+EXPLAIN_PHYSICIST { Both walls of the cage -- the lower total and the upper total --
+          converge to the same limit. When floor and ceiling meet, whatever lies
+          between is pinned: $\sum 1/k^2 = \frac{\pi^2}{6}$. }
+EXPLAIN_BIOLOGIST { If a number is always between two others that close in on the same
+          value, it must equal that value. Both totals shrink toward $\frac{\pi^2}{6}$,
+          so the trapped sum has nowhere else to go. }
+EXPLAIN_ENGINEER { The squeeze theorem is the closing move: bound below and above by
+          sequences with a common limit, and the middle inherits it. Both bounds tend
+          to $\frac{\pi^2}{6}$, fixing the Basel sum exactly. }
+SEGMENTS {
+  $\sum_{k=1}^{m} \frac{1}{k^2}$   | answer
+  $\longrightarrow$                | NEUTRAL
+  $\frac{\pi^2}{6}$                | answer
+}
+EYE { answer }
+VULNERABLE_TO { gauss }
+FIZZLE cauchy { Cauchy designed the whole cage, but this final robot is the squeeze LIMIT itself, set on modern rigorous footing -- name the man credited with formulating it in modern terms. }
+FIZZLE de_moivre { De Moivre's formula opened the proof; this last robot is the closing squeeze of the two bounds onto one limit -- recall who put that pinching argument on rigorous footing. }
+FIZZLE newton { The binomial theorem was an early ingredient; this final step is the limit where both bounds meet at pi^2/6 -- name the man behind the modern squeeze theorem. }
+FIZZLE viete { Vieta gave one of the totals; this robot is the limiting squeeze that closes both totals onto the answer -- recall who formulated the sandwich argument rigorously. }
+FIZZLE pythagoras { Pythagoras converted one sum to the other; this sentinel is the final limit pinning the trapped sum -- name the man credited with the modern squeeze theorem. }
+FIZZLE archimedes { Archimedes gave the geometric inequality; this robot is the modern LIMIT step that closes the cage onto pi^2/6 -- name who set that squeeze on rigorous footing. }

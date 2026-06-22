@@ -1,0 +1,3 @@
+title: Basel -- Cauchy's Elementary Descent (Test)
+corridors:
+  ../corridors/08_cauchy.txt    baked=../baked/basel/cauchy
