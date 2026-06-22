@@ -1,0 +1,3 @@
+title: Basel -- Differentiation Under the Integral Sign (Test)
+corridors:
+  ../corridors/07_diff_under_integral.txt    baked=../baked/basel/diff_under_integral
