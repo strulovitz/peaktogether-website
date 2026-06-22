@@ -49,6 +49,14 @@ RESCUE_RADIUS = NEAR_RADIUS
 RESCUE_FLASH_TEXT  = "HOSTAGES RESCUED"
 LEVEL_COMPLETE_TEXT = "LEVEL COMPLETE"
 
+PROOF_FLASH_SECONDS = 3.0
+PROOF_COMPLETE_PREFIX = "PROOF COMPLETE"
+QED_LINE_1 = "QUOD ERAT DEMONSTRANDUM"
+QED_LINE_2 = "All nine proofs solved."
+_PROOF_FONTSIZE = 30
+_PROOF_COLOR = (0.85, 0.95, 0.70)
+_QED_COLOR = (1.00, 0.95, 0.75)
+
 _STATUS_FONTSIZE   = 18
 _FLASH_FONTSIZE    = 34
 _BANNER_FONTSIZE   = 40
@@ -80,6 +88,8 @@ class GameState:
         self._records = [{"rescued": False, "complete": False} for _ in range(n)]
         self.level_complete = False
         self._flash_t = 0.0
+        self._proof_flash_t = 0.0
+        self._proof_flash_text = ""
         self._banner_shown = False
 
     def update(self, hub, ship_pos, dt):
@@ -101,12 +111,19 @@ class GameState:
                 robots = corridor.get_robots()
                 if all(r.is_defeated() for r in robots):
                     rec["complete"] = True
+                    done = sum(1 for r in self._records if r["complete"])
+                    total = len(self._records)
+                    self._proof_flash_text = "%s  %d / %d" % (
+                        PROOF_COMPLETE_PREFIX, done, total)
+                    self._proof_flash_t = PROOF_FLASH_SECONDS
 
         if self._records and all(r["complete"] for r in self._records):
             self.level_complete = True
 
         if self._flash_t > 0.0:
             self._flash_t = max(0.0, self._flash_t - dt)
+        if self._proof_flash_t > 0.0:
+            self._proof_flash_t = max(0.0, self._proof_flash_t - dt)
 
     def rescued_count(self):
         done = sum(1 for r in self._records if r["rescued"])
@@ -136,7 +153,15 @@ class GameState:
                                size=_FLASH_FONTSIZE, color=_FLASH_COLOR,
                                align="center")
 
+        if self._proof_flash_t > 0.0:
+            draw_plain_text_2d(self._proof_flash_text, w // 2, int(h * 0.48),
+                               size=_PROOF_FONTSIZE, color=_PROOF_COLOR,
+                               align="center")
+
         if self.is_level_complete():
-            draw_plain_text_2d(LEVEL_COMPLETE_TEXT, w // 2, int(h * 0.50),
-                               size=_BANNER_FONTSIZE, color=_BANNER_COLOR,
+            draw_plain_text_2d(QED_LINE_1, w // 2, int(h * 0.46),
+                               size=_BANNER_FONTSIZE, color=_QED_COLOR,
+                               align="center")
+            draw_plain_text_2d(QED_LINE_2, w // 2, int(h * 0.54),
+                               size=_STATUS_FONTSIZE, color=_BANNER_COLOR,
                                align="center")
