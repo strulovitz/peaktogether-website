@@ -59,6 +59,16 @@ keyboard + mouse, plus a Thrustmaster T.16000M flight stick (pilot) and an Xbox 
   (the hostage room).
 - The hub builder (`hub_builder.py`) creates the atrium and one doorway per corridor in the loaded
   level; `corridor_builder.py` builds each corridor's geometry, robot positions, and cavern.
+- The Fibonacci-sphere placement and the hub contract are **already designed and built — do NOT
+  re-improvise them.** For the record (verify exact names by reading the files): the hub exposes
+  `spawn_pose() -> ((x,y,z),(yaw,pitch))` (radians, forward = −Z; yaw = atan2(dx,−dz), pitch =
+  asin(dy)), `door_poses() -> list[((x,y,z),(nx,ny,nz))]` (door centre + outward Fibonacci normal),
+  `direction(i) -> unit vec3`, a `hub.corridors` list, `inside(point, margin) -> bool`, and
+  `update()/draw_world()/draw_robots()/draw_labels()`. The Fibonacci spacing is guaranteed
+  non-intersecting for N up to ~12 at the hub radius (the hub asserts a minimum pairwise angle), so
+  **nine corridors → nine doorways is well within the safe range.** The precise Fibonacci-sphere
+  maths and design rationale are written up in `INTERFACES_v0.1.md` **Part 2** (see §7, Reference
+  Documents) — and in Claude Fable's original doctrine. Read them; don't reinvent them.
 - Canonical per-frame render order is strict (clear → ship.update → apply_view → fog → queue walls
   → flush_walls EXACTLY once → robots → labels → HUD → flip). Forgetting the single `flush_walls`
   call = silent black screen. (DeepSeek knows this trap.)
@@ -189,7 +199,49 @@ DeepSeek implements, tests on Nir's machine, and reports back.
 
 ---
 
-## 7. ONE-LINE SUMMARY
+## 7. REFERENCE DOCUMENTS & ENGINE SOURCE (read these / ask Nir to paste them)
+
+Everything previous parents — and the project's original designer **"Claude Fable"** — wrote about
+the engine, the world, the **Fibonacci-sphere hub**, and the multi-corridor question already lives
+in the repo. Please READ (or ask Nir to paste) whatever you need **before** proposing a plan. Never
+invent an API — read the real signatures (a hard rule the project learned from past mistakes). The
+most relevant material (paths under `descent/` unless noted):
+
+**Design / architecture (in `PARENT_ESTATE/`):**
+- `INTERFACES_v0.1.md` — the engine interface spec. **Part 2 is "THE HUB & FIBONACCI-SPHERE GEOMETRY
+  (the core engine novelty)"**: exact Fibonacci-sphere placement, the non-intersection / collision
+  canon, and the full `HubGeometry` API. This is THE place for the geometry details.
+- `PARENT_HANDOFF_V3.md` — the current design **LAW** (game rules, module list, data objects, the
+  corridor file format, the canonical frame order + the flush trap).
+- `DESCENT_QED_PARENT_HANDOFF.md` — an earlier full architect handoff (world + Fibonacci + module
+  contracts).
+- `reports/COMPLETION_REPORT_06_hub_builder.md` — the **exact hub API as actually built**
+  (`spawn_pose`/`door_poses` shapes, the Fibonacci yaw/pitch convention, the collision assertion).
+- `reports/COMPLETION_REPORT_07_level_parser.md` — how a level manifest becomes a `Level` of
+  corridors (the parser already asserts unique titles + unique `CORRIDOR` numbers and
+  `len(hub.corridors) == len(level.corridors) == len(door_poses())`).
+
+**The original designer's doctrine (in `BIBLE/`):**
+- `CLAUDE_FABLE_DESCENT_QED_DOCTRINE.md`, `CLAUDE_FABLE_CONTEXT.md`,
+  `CLAUDE_FABLE_CONTEXT_V2_BASEL.md` — "Claude Fable"'s original design doctrine and context (the
+  deeper *why* behind the hub, the colours, the reading system, the two-player roles).
+
+**Prior parents already scoped MULTI-CORRIDOR — worth reading:**
+- `PARENT_PROMPT_9_EVENING_2026-06-18.md` — already spells out the exact multi-corridor test: "enter
+  corridor 1, complete, return to atrium, enter corridor 2; verify no cross-corridor bleed of
+  holograms / weapons / hostages / Understanding Mode."
+- `PARENT_PROMPT_8_EVENING_2026-06-17.md` — earlier notes that the hub already supports
+  `hub.corridors`, but only one corridor had ever been attached.
+
+**Engine source files (in `descent/`):** `app.py`, `level_parser.py`, `content_parser.py`,
+`hub_builder.py`, `corridor_builder.py`, `render.py`, `robots.py`, `combat.py`, `game_state.py`,
+`understanding.py`, `palette.py`, `cockpit.py`, `containment.py`, `gamepad.py`. Manifests:
+`levels/basel.txt` (all nine) and `levels/basel_cN.txt` (single-corridor). Baker:
+`deu/bake_corridor.py`. Project memory: `WORKFLOW.md`.
+
+DeepSeek can paste any of these to you verbatim on request.
+
+## 8. ONE-LINE SUMMARY
 
 DESCENT QED is a 6-DOF couples' game where you fly through mathematical-proof corridors and destroy
 each robot by firing the mathematician whose idea that proof-step belongs to. **Nine Basel-Problem
