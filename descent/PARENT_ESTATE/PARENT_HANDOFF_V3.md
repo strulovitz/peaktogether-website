@@ -102,7 +102,7 @@ Fly up to blocking robot → READ its hologram → IDENTIFY required mathematici
 | **corridor_builder** | `corridor_builder.py` | Builds `CorridorGeometry` from `CorridorData`: bent tube with stations, robot positions, blue cavern at end. `hostage_positions()` returns 3 world-space points (NOT drawn yet). |
 | **hub_builder** | `hub_builder.py` | Builds `HubGeometry`: grey atrium sphere + Fibonacci-sphere doorways → corridors. `spawn_pose()`, `door_poses()`, `inside(point, margin)`, `update()`, `draw_world()`, `draw_robots()`, `draw_labels()`. `hub.corridors` list. |
 | **level_parser** | `level_parser.py` | Loads level manifest → `Level` (iterable of `CorridorData`). `discover_levels()`. |
-| **app** | `app.py` | Minimal integration. Canonical frame loop. Loads `levels/maxwell.txt`. Spawns ship. WASD/arrows flight. ESC to quit. **T.16000M joystick NOT wired for flight (code exists, needs connecting).** |
+| **app** | `app.py` | Minimal integration. Canonical frame loop. Loads `levels/maxwell.txt`. Spawns ship. WASD/arrows flight. ESC to quit. **T.16000M joystick FULLY WIRED for flight ✅ (Briefs #J1 + #J1B, June 17-18 — analog 6-DOF + fire trigger + engineer button).** |
 
 ### GAMEPLAY TIER (Briefs #9, #10, #11 — BUILT):
 
@@ -240,10 +240,8 @@ After this exists, remove `_mt()` from `combat.py` and call the engine function.
 - Add containment call in `app.py` frame loop (after `ship.update`).
 - Desired behavior: gentle teleport back inside (like invisible cushion). No punishment.
 
-#### 3. T.16000M joystick wiring
-`gamepad.py` has `GamepadManager.pilot_command()` → returns `{pitch, yaw, roll, thrust_xyz}`. But `app.py` only feeds keyboard to `ship.update`. Nobody calls `gamepads.pilot_command()`.
-- Wire joystick output into ship controls in the frame loop.
-- Joystick adds to keyboard (simultaneous use, not replacement).
+#### 3. T.16000M joystick wiring — ✅ DONE (June 17-18, Briefs #J1 + #J1B)
+`gamepad.py`'s `GamepadManager.pilot_command()` is now wired into ship controls in the frame loop. Joystick is additive to keyboard (simultaneous use). Analog 6-DOF flight + fire trigger + engineer-reveal button all working. Nir confirmed in-game.
 
 ---
 
@@ -253,7 +251,7 @@ After this exists, remove `_mt()` from `combat.py` and call the engine function.
 |-----|----------|---------|
 | HUD text escapes too aggressively | Low | `_mt()` in combat.py strips apostrophes, hyphens. Known, will be fixed by plain-text renderer (gap #1). |
 | Ship flies through walls | Medium | Containment not enforced (gap #2). |
-| Joystick not wired | Medium | Code exists but not connected (gap #3). |
+| ~~Joystick not wired~~ | ✅ FIXED | Wired June 17-18 (Briefs #J1 + #J1B). Analog flight + trigger + button. |
 | Black screen on macOS | Info | Legacy GL profile issue. Documented in render.py. |
 
 ---
@@ -302,7 +300,7 @@ Controls: WASD/RF move, arrows rotate, Q/E roll, Shift boost, `[`/`]` cycle weap
 
 ## 10. ONE-PARAGRAPH SUMMARY FOR PARENT
 
-You are building a 6-DOF Descent-style game where a couple flies through mathematics corridors to rescue hostages at the end. Robots block the way and must be destroyed by firing the correct mathematician-missile at them. Reading the robot's hologram tells the player which mathematician is required — reading alone does nothing; the player must think and choose. The engine is mathematics-blind (matches opaque IDs only). The world tier (8 modules) is complete and flyable. The gameplay tier started: combat (#9) and Understanding Mode (#11) are built. The original weapons/arsenal (#10) and game state/hostages (#11) briefs were never written by the 2nd parent. Three engine infrastructure gaps exist (plain-text renderer, ship containment, joystick wiring). Write the remaining briefs, one per child, testing each before proceeding. Do not let context loss corrupt the design — re-read section 1 before EVERY brief.
+You are building a 6-DOF Descent-style game where a couple flies through mathematics corridors to rescue hostages at the end. Robots block the way and must be destroyed by firing the correct mathematician-missile at them. Reading the robot's hologram tells the player which mathematician is required — reading alone does nothing; the player must think and choose. The engine is mathematics-blind (matches opaque IDs only). The world tier (8 modules) is complete and flyable. The gameplay tier started: combat (#9) and Understanding Mode (#11) are built. The original weapons/arsenal (#10) and game state/hostages (#11) briefs were never written by the 2nd parent. The three earlier engine infrastructure gaps (plain-text renderer, ship containment, joystick wiring) are now ALL FIXED. Write the remaining briefs, one per child, testing each before proceeding. Do not let context loss corrupt the design — re-read section 1 before EVERY brief.
 
 ---
 **END OF HANDOFF — Nir will now tell you what to build first.**

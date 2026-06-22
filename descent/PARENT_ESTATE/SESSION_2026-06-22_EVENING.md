@@ -94,7 +94,7 @@ Removed 54 leftover files from previous failed child attempts (corridors, baked 
 - Move on to a NEW subject (Riemann Hypothesis? Navier-Stokes? Nir decides)
 
 ### Engine / infrastructure:
-- T.16000M joystick wiring (Brief #J1 dispatched, never completed)
+- ✅ T.16000M joystick wiring — DONE (Briefs #J1 + #J1B, June 17-18: analog 6-DOF flight + fire trigger + engineer button). Nir confirmed it works in-game.
 - Multi-corridor engine support (untested with real corridors)
 
 ---

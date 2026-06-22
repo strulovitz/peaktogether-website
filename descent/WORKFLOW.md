@@ -296,7 +296,7 @@ CHILD_BRIEF_A_BAKED_PNG_WIRING.md, CHILD_BRIEF_B_BASEL_GAME_CORRIDOR.md, 3 Brief
 |-------|-------|--------|
 | **#C1** | Ship collision/containment (walls + robot blocking) | ✅ COMPLETE (8 versions, v8 works) |
 | **#P1** | Defeat plaque — use baked PNG instead of live mathtext | ✅ COMPLETE (fixed cos45 sizing) |
-| **#J1** | T.16000M joystick wiring (true analog, additive) | 📋 Dispatched, pending child |
+| **#J1** | T.16000M joystick wiring (true analog, additive) | ✅ COMPLETE (June 17-18, + #J1B buttons) |
 
 ### Brief #C1 journey (the hard one):
 v1-v3: various wall/robot approaches, all leaked
@@ -326,13 +326,13 @@ v7: clean nearest-centerline (walls only, child deleted robot code)
 |---|-------|-------------|
 | 1 | **Understanding Mode "conveyor belt"** | The road-sign panels flip forward↔backward / drift like a conveyor — wrong feel. Must move/depth correctly. |
 | 2 | **Multiple corridors** | Only ONE corridor exists. Game needs several (e.g. different proofs of the Basel problem, each a corridor). Multi-corridor is untested and may bleed holograms/text between robots. |
-| 3 | **T.16000M joystick** | Brief #J1 dispatched, awaiting child. |
+| 3 | **T.16000M joystick** | ✅ DONE — fully wired June 17-18 (Briefs #J1 + #J1B). |
 
 ### Current state:
 - Ship containment: walls + robots ✅
 - Defeat plaques: baked PNG with white frame ✅
 - Basel corridor: 7 robots playable ✅
-- Joystick: brief dispatched 🟡
+- Joystick: ✅ FULLY WIRED (June 17-18, Briefs #J1 + #J1B)
 - Understanding Mode conveyor belt: ✅ FIXED (Brief #U1, signed-distance model)
 - Multiple corridors: 🔴
 - Unified corridor-creation prompt: 🔴 (first attempt failed, redo tomorrow)
@@ -582,6 +582,21 @@ Child Opus produced all 3 files. DeepSeek fixed child's `$[[ ]]$` dollar-sign wr
 | app.py points to | `levels/basel_c6.txt` (corridor 6) |
 | Git | Clean, pushed |
 | Next | Corridors 7-10 for Basel (~10 total) |
+
+## ✅ CORRECTION (June 23, 2026 — per Nir)
+
+**The T.16000M joystick is FULLY WIRED and works in-game.** Nir confirmed this directly.
+Some stale notes had crept into the latest session file and current-state tables saying
+the joystick was "dispatched / pending / never completed" — these are WRONG and now corrected.
+
+- Joystick was wired June 17-18 via **Brief #J1** (analog 6-DOF flight, additive to keyboard,
+  proportional) + **Brief #J1B** (trigger = fire missile, back-center button = engineer reveal).
+- See `SESSION_2026-06-18_EVENING.md` (`Joystick | FULLY WIRED`) and
+  `PARENT_PROMPT_8/9` which both describe it as complete.
+- Files: `render.py` (`Ship.update6dof`) + `app.py` + `understanding.py` + `gamepad.py`.
+
+**Engine infrastructure status:** plain-text renderer ✅, ship containment ✅, joystick ✅ — ALL DONE.
+Remaining real work = more Basel corridors (7-10) + multi-corridor play test + next subject.
 
 ## 🔴 SESSION LOG — June 13, 2026
 
