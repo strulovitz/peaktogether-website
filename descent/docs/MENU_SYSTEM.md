@@ -241,3 +241,60 @@ MathJax.typesetPromise();
 | No cache busting | Browser served old `components.js` without MathJax code |
 
 **The winning formula:** Set `window.MathJax` directly as a JS object, then append the CDN script, then re-typeset after dynamic content loads.
+
+---
+
+## PLANNED NAVIGATION REDESIGN (decided June 23, 2026 — NOT YET BUILT)
+
+Peak Together is now a multi-game arcade. The navigation is being redesigned to
+match. This section is the agreed design; the implementation will follow later
+(do NOT break the proven mechanics above when building it).
+
+### New top bar (left to right)
+
+```
+Home  ·  The Arcade  ·  The Mountains ▾  ·  How It Works  ·  About      [ ▶ Play Free ]  [ GitHub ]
+```
+
+### What each item is
+
+| Item | Type | Target |
+|------|------|--------|
+| **Home** | leaf link | existing home page (`/`) |
+| **The Arcade** | leaf link | NEW page `/arcade/` (filterable games grid) |
+| **The Mountains** | dropdown ONLY — **not a page** | see nesting below |
+| **How It Works** | leaf link | NEW page `/how-it-works/` |
+| **About** | leaf link | existing `/about/` |
+| **▶ Play Free** | CTA button → leaf link | NEW page (e.g. `/play/`) |
+| **GitHub** | CTA button → external link | `https://github.com/strulovitz/peaktogether-website` |
+
+### The Mountains — THREE menu levels (this is new vs. the 2-level menu today)
+
+- **Level 1 — The Mountains**: dropdown only, NOT a page. Contains sub-menus:
+  - **Level 2 — Mathematics**: sub-dropdown, NOT a page. Contains leaf links:
+    - **Level 3 — Riemann Hypothesis**: LEAF LINK → `https://www.peaktogether.me/mathematics/Riemann_hypothesis/`. **No further sub-menus** — this is the deepest level, and the deepest level is where the real page links live.
+    - (more Mathematics topics added here later)
+  - **Physics** (Level 2 sub-dropdown — leaf links added later)
+  - **Chemistry** (Level 2 sub-dropdown — leaf links added later)
+  - **Biology** (Level 2 sub-dropdown — leaf links added later)
+  - (more subjects added later)
+
+### Key design rules (decided by Nir)
+
+1. **The Mountains is NOT a page.** It only opens a dropdown.
+2. **Mathematics / Physics / Chemistry / Biology are NOT pages.** Each is a sub-dropdown.
+3. **Only the deepest level links to real pages** (e.g. Riemann Hypothesis → its page). The deepest leaf level has NO further sub-menus.
+4. The current "Mathematics → Riemann Hypothesis → 9 paths" menu nesting goes away. Riemann Hypothesis becomes a single leaf link; its 9 paths live ON the Riemann Hypothesis page, not in the menu.
+5. The three grey top-bar items today (Physics/Chemistry/Biology "(soon)") move under The Mountains as Level-2 sub-dropdowns.
+
+### Technical notes for implementation (later)
+
+- This needs a **third nesting level** the current CSS does not have yet (today it is
+  top-level `.has-submenu` → one `.submenu`). Adding Level 3 must reuse — never replace —
+  the proven patterns: `::after` hover bridge on desktop, `right` + `visibility` slide on
+  mobile (NEVER `transform`), `<span class="submenu-toggle">` accordions on mobile, every
+  `<a>` closes the drawer, `data-component` injection, and the `components.js?v=N`
+  cache-buster bump.
+- The two CTA buttons (Play Free, GitHub) are the only genuinely new header elements;
+  their desktop placement (right end of header) and mobile placement (inside the drawer)
+  must not disturb the flex header or the drawer.

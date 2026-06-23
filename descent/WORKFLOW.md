@@ -698,3 +698,18 @@ game is **COMPLETE**.
 - Verbatin Claude Fable descriptions for website callouts
 - Be concise but cheerful
 - Nir is the boss -- always ask before taking initiative
+
+## 🔴 SESSION LOG — June 23, 2026 (LATER) — Website: footer + PLANNED nav redesign
+
+### Footer tagline updated ✅
+`footer.html` tagline → "💯 Always free · 🔓 Always open-source · ✋ No signup, no payment, no ads, no catch. Made with love for two minds at a time." (shared footer = every page). Committed `fa3e4ef`, pushed. (Nir uploads via FileZilla to go live on Dreamhost.)
+
+### PLANNED navigation redesign (TALKED THROUGH, decided, NOT YET BUILT) 📋
+Fusion's "lobby of an arcade" IA. Full spec written to `descent/docs/MENU_SYSTEM.md` → section "PLANNED NAVIGATION REDESIGN". Summary:
+- Top bar: `Home · The Arcade · The Mountains ▾ · How It Works · About  [▶ Play Free] [GitHub]`
+- **The Mountains** = dropdown ONLY (not a page) → sub-dropdowns **Mathematics / Physics / Chemistry / Biology** (more later).
+- **Mathematics** = sub-dropdown (not a page) → leaf link **Riemann Hypothesis** → `https://www.peaktogether.me/mathematics/Riemann_hypothesis/` (NO further submenu; its 9 paths live on that page now).
+- Only the DEEPEST level links to real pages. This is a NEW **3-level** menu (today it's 2-level).
+- New pages: The Arcade (`/arcade/`), How It Works, ▶ Play Free. GitHub button → `https://github.com/strulovitz/peaktogether-website`.
+- IMPLEMENTATION RULE: reuse — never replace — the proven mechanics (::after hover bridge, right+visibility mobile slide NEVER transform, span accordions, every `<a>` closes drawer, data-component injection, `components.js?v=N` bump).
+- STATUS: design only. We are still TALKING / planning. Do NOT build the menu until Nir says go.
