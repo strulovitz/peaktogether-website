@@ -884,3 +884,24 @@ Descent QED now ships as a one-click Windows download on **itch.io** (primary) +
 **GitHub Releases** (mirror), linked from peaktogether.me. Reusable PyInstaller template lives under
 `descent/` for every future game. Remaining nice-to-haves: trailer video, true Python-free PC test
 (in a few days), and the Linux build via GitHub Actions (later).
+
+### 🎬 TRAILER / LOOPING VIDEO — added to the game page (June 23, 2026)
+Opus 4.8's plan saved verbatim to `docs/TRAILER_LOOPING_VIDEO.md`. Implemented per Nir's choices:
+- Nir recorded with Windows Game Bar (1280×800 window, 60fps). Source:
+  `C:\Users\nir_s\Videos\Captures\DESCENT QED 2026-06-23 20-05-54.mp4` (48.47s).
+- DeepSeek used an **already-present** ffmpeg (no download): `C:\Users\nir_s\miniconda3\envs\f5-tts\Library\bin\ffmpeg.exe` (4.3.1).
+- Cut the first 3s, kept the **full rest (45.53s)**, stripped audio, 30fps, 1280×800 (16:10), web-optimized.
+- Nir's decisions: **MP4 only** (the WebM came out BIGGER — 4.13MB vs MP4 3.2MB — so dropped it),
+  keep the video's **native 16:10** (no cropping), clip **at the very top with the hero art below it**.
+- Committed `arcade/descent-qed/descent-qed-clip.mp4` (3.2MB) + `images/descent-qed-clip-poster.jpg`
+  (0.08MB) to the repo; the video is served FREE via **jsDelivr** (NOT Dreamhost):
+  `https://cdn.jsdelivr.net/gh/strulovitz/peaktogether-website@master/arcade/descent-qed/descent-qed-clip.mp4`
+  (note **@master**, not @main — this repo's default branch).
+- Added `<video autoplay loop muted playsinline preload=metadata poster=...>` block at the top of
+  `arcade/descent-qed/index.html` (above the hero art), plus `.pt-clip` / `.pt-clip__video` CSS
+  (`aspect-ratio: 16 / 10`, `object-fit: cover`) in `style.css`. Bumped ONLY the game page to
+  `style.css?v=21` (the CSS change is additive, so other pages keep v=20 — no need to re-upload them).
+- **FileZilla upload (Nir):** `style.css`, `arcade/descent-qed/index.html`, and
+  `images/descent-qed-clip-poster.jpg` (3 files). The MP4 itself is NOT uploaded to Dreamhost — it lives
+  on GitHub/jsDelivr. If the clip doesn't appear right away, give jsDelivr a couple of minutes to cache.
+- Reusable for future games: swap footage + filenames; same ffmpeg recipe + `<video>` block + jsDelivr URL.

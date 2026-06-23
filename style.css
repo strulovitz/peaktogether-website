@@ -1717,3 +1717,21 @@ body.lightbox-locked { overflow: hidden; }
 .lightbox-close:hover {
     background: rgba(255, 255, 255, 0.28);
 }
+
+/* Looping gameplay clip (game page hero) */
+.pt-clip {
+    width: 100%;
+    max-width: 960px;
+    margin: 0 auto 1.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    aspect-ratio: 16 / 10;
+}
+
+.pt-clip__video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
