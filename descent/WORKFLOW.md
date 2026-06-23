@@ -925,3 +925,9 @@ using existing styles (plain `<ul>`/`<code>`, NO new CSS → no extra cache bump
   LB/RB cycle faces; LT/RT=fire). ~1s startup calibration. Controllers are optional + additive.
 **FileZilla (Nir):** upload `arcade/descent-qed/index.html` (now has trailer + controls). The trailer also
 needs `style.css` + `images/descent-qed-clip-poster.jpg` uploaded (from the trailer step) if not done yet.
+
+### 🎨 Added "orange = yellow + red" to the color-mixing law (June 23, 2026)
+Per Nir. Added `.gp-c.orange { background: #e67e22; color: #fff; }` to `style.css` (next to red/yellow/
+blue/green/purple) and a `<span class="gp-c orange">orange = yellow + red</span>` chip in the
+color-mixing sentence on the game page. Since style.css changed, bumped the game page to
+**`style.css?v=22`** (other pages stay v=20 — additive change). FileZilla: `style.css` + `arcade/descent-qed/index.html`.
