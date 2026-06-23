@@ -850,3 +850,10 @@ launches, loads all assets, flies, AND **Understanding Mode works** (the crash i
 build is GOOD. (True Python-free PC test still planned in a few days as final confirmation.)
 **NEXT:** Step 9 itch.io upload, Step 10 GitHub Releases upload, then Step 11 peaktogether.me
 (trailer + buttons + SmartScreen note) — all with DeepSeek's step-by-step help.
+
+### 🎉 STEP 9 DONE — Descent QED is LIVE on itch.io (June 23, 2026)
+Nir uploaded the Windows zip + hero-art cover + 4 screenshots and confirmed "it worked".
+**🔗 itch.io page (the "Play on Windows" target for Step 11): https://strulovitz.itch.io/descent-qed**
+Remaining: Step 10 (GitHub Releases mirror + .sha256.txt), Step 11 (peaktogether.me — point the
+"Play on Windows" button at the itch URL above, add a smaller "Mirror (GitHub)" link, trailer, and the
+friendly SmartScreen "Unknown publisher" note; bump style.css?v=, FileZilla up to Dreamhost).
