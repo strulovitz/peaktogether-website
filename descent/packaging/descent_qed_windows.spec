@@ -1,8 +1,8 @@
 # -*- mode: python ; coding: utf-8 -*-
 from pathlib import Path
 
-ROOT = Path(SPECPATH).resolve().parent
-GAME_DIR = ROOT / "descent"
+# This spec lives in descent/packaging/ ; its parent is the game folder descent/.
+GAME_DIR = Path(SPECPATH).resolve().parent
 if not GAME_DIR.exists():
     raise SystemExit(f"Could not find game directory: {GAME_DIR}")
 

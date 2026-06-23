@@ -2,7 +2,7 @@ $ErrorActionPreference = "Stop"
 $Version = if ($env:PT_VERSION) { $env:PT_VERSION } else { Get-Date -Format "yyyy.MM.dd" }
 $ZipName = "PeakTogether-DescentQED-Windows-$Version.zip"
 
-if (!(Test-Path ".\descent\app.py")) { throw "Run from repo root (\.descent\app.py not found)." }
+if (!(Test-Path ".\app.py")) { throw "Run from the descent\ folder (.\app.py not found)." }
 
 Write-Host "Cleaning..."
 Remove-Item -Recurse -Force ".\build", ".\dist", ".\release" -ErrorAction SilentlyContinue
