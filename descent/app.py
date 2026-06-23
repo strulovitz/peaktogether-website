@@ -36,6 +36,13 @@ working hub_demo.py, with two deliberate, file-justified changes:
     file is law, so we use it. Result: ship spawns facing a doorway.
 """
 
+# --- Peak Together bootstrap (must run before pygame / asset loading) ---
+import os, sys
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from pt_runtime import bootstrap
+bootstrap("DescentQED")
+# --- end bootstrap ---
+
 import sys
 
 import pygame

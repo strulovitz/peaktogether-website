@@ -16,11 +16,22 @@ import math
 import re                         # Brief #10
 import numpy as np
 
-import matplotlib
-matplotlib.use("Agg")  # PORTABLE: pure-software rasterizer, identical on
-                       # Windows / macOS / Linux, needs no display server.
-from matplotlib.figure import Figure
-from matplotlib.backends.backend_agg import FigureCanvasAgg
+# matplotlib is a DEV-ONLY runtime fallback for live mathtext rasterization.
+# Shipped player builds use pre-baked PNGs and EXCLUDE matplotlib from the
+# bundle (see packaging/descent_qed_windows.spec). Guard the import so a
+# missing matplotlib degrades gracefully instead of crashing the game.
+try:
+    import matplotlib
+    matplotlib.use("Agg")  # PORTABLE: pure-software rasterizer, identical on
+                           # Windows / macOS / Linux, needs no display server.
+    from matplotlib.figure import Figure
+    from matplotlib.backends.backend_agg import FigureCanvasAgg
+    HAS_MATPLOTLIB = True
+except Exception:
+    matplotlib = None
+    Figure = None
+    FigureCanvasAgg = None
+    HAS_MATPLOTLIB = False
 
 import pygame
 from pygame.locals import *
@@ -482,6 +493,11 @@ def latex_to_surface(latex, color=(0.95, 0.96, 0.98), fontsize=15, dpi=140):
     """Render a mathtext string to a transparent pygame Surface.
     `color` is an RGB float tuple in 0..1. Uses bbox_inches='tight' so
     matplotlib trims the glyph box for us (Fable's trick)."""
+    if not HAS_MATPLOTLIB:
+        # No matplotlib in the shipped bundle: player builds use pre-baked
+        # PNGs, so this live-rasterization fallback should not run. Degrade
+        # gracefully (tiny transparent surface) instead of crashing.
+        return pygame.Surface((1, 1), pygame.SRCALPHA)
     fig = Figure(figsize=(8, 2))
     fig.patch.set_alpha(0.0)
     FigureCanvasAgg(fig)
