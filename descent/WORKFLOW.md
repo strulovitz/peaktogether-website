@@ -713,3 +713,33 @@ Fusion's "lobby of an arcade" IA. Full spec written to `descent/docs/MENU_SYSTEM
 - New pages: The Arcade (`/arcade/`), How It Works, ▶ Play Free. GitHub button → `https://github.com/strulovitz/peaktogether-website`.
 - IMPLEMENTATION RULE: reuse — never replace — the proven mechanics (::after hover bridge, right+visibility mobile slide NEVER transform, span accordions, every `<a>` closes drawer, data-component injection, `components.js?v=N` bump).
 - STATUS: ✅ BUILT June 23, 2026. `header.html` rewritten (3-level menu + Play Free/GitHub CTA), `style.css` got a "NAV v2" block, new pages `/arcade/ /how-it-works/ /play/` created, `components.js` UNCHANGED (handles nested toggles already), `style.css?v=13→v=14` bumped on all 48 HTML pages. See `descent/docs/MENU_SYSTEM.md` → "NAVIGATION REDESIGN — BUILT". Nir uploads via FileZilla to go live on Dreamhost (remember to upload the 3 new folders too).
+
+## 🔴 SESSION LOG — June 23, 2026 (LATER) — Descent QED game page
+
+### New dedicated game page: `/arcade/descent-qed/` ✅
+Built from Fusion's 9-section "Reusable Game-Page Template", filled with rich detail from Claude Fable's
+`descent/BIBLE/CLAUDE_FABLE_DESCENT_QED_DOCTRINE.md` (729 lines). Sections: title block (▶ Playable badge,
+hook, hero placeholder, Download/GitHub buttons, setup line), nostalgia hook (Then→Now using original Descent
+images + remake placeholder), the twist (robots = proof steps, weapons = mathematicians, gentle fizzle), the
+mountain (Riemann Hypothesis / Basel Problem, $\sum 1/n^2=\pi^2/6$, the NINE corridors/proofs list),
+Understanding Mode (4 glass road-signs graduate/undergrad/high-school/applied + kindergarten color-mixing law),
+how-you-two-play (Pilot / Navigator roles + solo note), gallery (placeholders), download & setup
+(`pip install pygame PyOpenGL numpy matplotlib`; `cd descent && python app.py`), footer strip.
+
+### CTA buttons repointed (text/style UNCHANGED, only href) ✅
+All "Play Descent"-style buttons now point to `/arcade/descent-qed/`:
+- Home: 3 buttons ("Play the First Game Free", "Play Descent QED Free", "Start with Everest — Play Descent QED")
+- Arcade page + Play page: "Enter Descent QED →"
+- NOT touched: the menu "Riemann Hypothesis" leaf link and the in-page science link still point to
+  `/mathematics/Riemann_hypothesis/` (that's the science hub, not the game).
+
+### CSS + cache
+Added a "GAME PAGE" block to `style.css` (`.gp-*`: badge, placeholders, then-now, gallery, signs, color chips,
+roles, footer strip + mobile rules). Bumped `style.css?v=16 → v=17` on all pages.
+
+### NEXT STEP (Nir's plan)
+Ask Fusion (with DeepSeek's help) to refine this page — likely the hero art + Then→Now remake images
+(currently placeholders) and any extra copy. Implement their answer INTO this same page.
+
+### ⬆️ Upload reminder
+FileZilla → Dreamhost: upload `style.css`, all changed HTML, and the new folder `arcade/descent-qed/`.

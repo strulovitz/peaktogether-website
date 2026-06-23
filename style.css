@@ -1349,3 +1349,303 @@ h1, h2, h3, h4, h5, h6 {
     padding: 0.15em 0.5em;
     border-radius: 3px;
 }
+
+/* ═══════════════════════════════════════════
+   GAME PAGE (e.g. /arcade/descent-qed/)
+   ═══════════════════════════════════════════ */
+
+.gp .game-badge {
+    margin-top: 6px;
+}
+
+.gp-hook {
+    font-size: 1.25rem !important;
+    line-height: 1.6 !important;
+    color: #444 !important;
+    margin: 0.4rem 0 1.6rem !important;
+}
+
+.gp code {
+    background: #f1ece2;
+    color: #8a4b1a;
+    padding: 0.12em 0.45em;
+    border-radius: 5px;
+    font-size: 0.95em;
+}
+
+/* Placeholders for art/screenshots not yet made */
+.media-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    text-align: center;
+    background: repeating-linear-gradient(45deg, #fbf6ec, #fbf6ec 12px, #f6efe1 12px, #f6efe1 24px);
+    border: 2px dashed #e3d6bf;
+    border-radius: 18px;
+    color: #b08a52;
+    padding: 40px 20px;
+    min-height: 220px;
+}
+
+.media-placeholder span {
+    font-size: 1.4rem;
+    font-weight: 800;
+    font-family: 'Nunito', sans-serif;
+}
+
+.media-placeholder small {
+    font-size: 0.85rem;
+    color: #c0a878;
+    max-width: 360px;
+}
+
+.media-placeholder.small {
+    min-height: 150px;
+    padding: 24px 16px;
+}
+
+.gp-hero {
+    margin: 0 0 24px;
+}
+
+/* CTA row */
+.gp-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin: 8px 0 6px;
+}
+
+.gp-ghost-btn {
+    display: inline-block;
+    background: #fff;
+    color: var(--blue);
+    border: 2px solid var(--blue);
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    padding: 13px 28px;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.gp-ghost-btn:hover {
+    background: var(--blue);
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+.gp-setup-line {
+    font-size: 0.95rem !important;
+    color: #888 !important;
+    margin: 8px 0 8px !important;
+}
+
+/* Then -> Now */
+.gp-thennow {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 24px 0;
+}
+
+.gp-thennow figure {
+    margin: 0;
+}
+
+.gp-thennow img,
+.gp-thennow .media-placeholder {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 16px;
+    display: block;
+}
+
+.gp-thennow figcaption {
+    text-align: center;
+    font-size: 0.9rem;
+    color: #888;
+    margin-top: 8px;
+    font-weight: 600;
+}
+
+.gp-original-row-label {
+    font-size: 0.95rem !important;
+    color: #888 !important;
+    margin: 24px 0 10px !important;
+    font-weight: 600;
+}
+
+/* Galleries */
+.gp-gallery {
+    display: grid;
+    gap: 12px;
+    margin: 8px 0 8px;
+}
+
+.gp-gallery.four { grid-template-columns: repeat(4, 1fr); }
+.gp-gallery.three { grid-template-columns: repeat(3, 1fr); }
+
+.gp-gallery img {
+    width: 100%;
+    height: 130px;
+    object-fit: cover;
+    border-radius: 12px;
+    display: block;
+}
+
+/* Formula */
+.gp-formula {
+    text-align: center;
+    font-size: 1.1rem !important;
+    margin: 18px 0 !important;
+}
+
+/* Lists */
+.gp-list {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: #444;
+    margin: 8px 0 18px;
+    padding-left: 1.4em;
+}
+
+.gp-list li { margin-bottom: 8px; }
+
+.gp-proofs li { font-weight: 600; color: var(--blue); }
+
+.nowrap { white-space: nowrap; }
+
+/* Understanding-mode signs */
+.gp-signs {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 20px 0 24px;
+}
+
+.gp-sign {
+    background: #fff;
+    border-radius: 16px;
+    padding: 18px 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    border-top: 5px solid #ccc;
+}
+
+.gp-sign.s1 { border-top-color: var(--blue); }
+.gp-sign.s2 { border-top-color: var(--lavender); }
+.gp-sign.s3 { border-top-color: var(--mint); }
+.gp-sign.s4 { border-top-color: var(--orange); }
+
+.gp-sign-tier {
+    display: inline-block;
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--blue);
+    margin-bottom: 8px;
+}
+
+.gp-sign p {
+    font-size: 0.92rem;
+    color: #555;
+    line-height: 1.55;
+    margin: 0;
+}
+
+/* Kindergarten color chips */
+.gp-c {
+    display: inline-block;
+    padding: 1px 8px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 0.95em;
+}
+
+.gp-c.red { background: #e74c3c; color: #fff; }
+.gp-c.yellow { background: #f4d03f; color: #5a4a00; }
+.gp-c.blue { background: #3498db; color: #fff; }
+.gp-c.green { background: #27ae60; color: #fff; }
+.gp-c.purple { background: #9b59b6; color: #fff; }
+
+/* Couple roles */
+.gp-roles {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    margin: 18px 0 18px;
+}
+
+.gp-role {
+    background: #fff;
+    border-radius: 18px;
+    padding: 24px 22px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
+}
+
+.gp-role h3 {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: var(--blue);
+    margin-bottom: 10px;
+}
+
+.gp-role p {
+    font-size: 0.98rem;
+    color: #555;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.gp-solo {
+    display: block;
+    margin-top: 8px;
+    font-style: italic;
+    color: #e6458a;
+    font-weight: 600;
+}
+
+.gp-muted {
+    color: #888 !important;
+    font-size: 1rem !important;
+}
+
+/* Footer strip */
+.gp-footstrip {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    align-items: center;
+    margin: 36px 0 8px;
+    padding: 18px 22px;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.06);
+    font-size: 0.95rem;
+    color: #666;
+    font-weight: 600;
+}
+
+.gp-footstrip a {
+    color: var(--blue);
+    font-weight: 800;
+    text-decoration: none;
+}
+
+.gp-footstrip a:hover { color: var(--orange); }
+
+@media (max-width: 768px) {
+    .gp-hook { font-size: 1.1rem !important; }
+    .gp-thennow,
+    .gp-roles,
+    .gp-signs { grid-template-columns: 1fr; }
+    .gp-gallery.four,
+    .gp-gallery.three { grid-template-columns: repeat(2, 1fr); }
+    .gp-footstrip { flex-direction: column; align-items: flex-start; }
+}
