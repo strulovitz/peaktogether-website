@@ -843,3 +843,10 @@ only extra third-party dep (the other PIL hit is the dev-only baker `deu/bake_co
 Rebuilt OK. **New zip ~108.8 MB. New SHA-256: 7A42613FCD9E831D8A68D52220DFA35EADED4E2C73FAC17A82B61586CCB069C8.**
 Lesson for future games: any lazy/function-level `import` of a third-party lib must be in
 requirements-runtime.txt; the dev machine hides missing deps that the frozen bundle exposes.
+
+### ✅ STEP 8 PASSED — Nir confirmed "now everything works" (June 23, 2026)
+Nir re-extracted the new (Pillow) zip and tested on his laptop: the packaged `Descent QED.exe`
+launches, loads all assets, flies, AND **Understanding Mode works** (the crash is gone). The Windows
+build is GOOD. (True Python-free PC test still planned in a few days as final confirmation.)
+**NEXT:** Step 9 itch.io upload, Step 10 GitHub Releases upload, then Step 11 peaktogether.me
+(trailer + buttons + SmartScreen note) — all with DeepSeek's step-by-step help.
