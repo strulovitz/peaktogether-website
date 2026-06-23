@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Descent QED — Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=18">
+    <link rel="stylesheet" href="/style.css?v=19">
 </head>
 <body>
 
@@ -47,7 +47,7 @@
                     <figcaption>Then — the original <em>Descent</em> (1995)</figcaption>
                 </figure>
                 <figure>
-                    <div class="media-placeholder small"><span>✨ Now</span><small>Pixar-style remake art coming soon</small></div>
+                    <img src="/images/descent-qed-screenshot-1.png" alt="Descent QED in-game screenshot — flying through the equation tunnel">
                     <figcaption>Now — <em>Descent QED</em></figcaption>
                 </figure>
             </div>
@@ -192,11 +192,11 @@
 
             <!-- ⑦ GALLERY -->
             <h2>📸 Gallery</h2>
-            <p class="gp-muted">In-game screenshots and clips of Descent QED are on the way — drop back soon!</p>
+            <p class="gp-muted">Real in-game screenshots — click any photo to view it full-size. (Video clips coming soon!)</p>
             <div class="gp-gallery three">
-                <div class="media-placeholder small"><span>🎞️</span><small>Corridor flight — coming soon</small></div>
-                <div class="media-placeholder small"><span>🤖</span><small>Robot lock-on &amp; hologram — coming soon</small></div>
-                <div class="media-placeholder small"><span>🏆</span><small>Q.E.D. finale — coming soon</small></div>
+                <img src="/images/descent-qed-screenshot-4.png" alt="Descent QED — corridor flight">
+                <img src="/images/descent-qed-screenshot-2.png" alt="Descent QED — robot lock-on and hologram">
+                <img src="/images/descent-qed-screenshot-3.png" alt="Descent QED — the Q.E.D. finale">
             </div>
 
             <!-- ⑧ DOWNLOAD & SETUP -->
@@ -227,5 +227,66 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp img');
+            if (!imgs.length) return;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+
+            var big = document.createElement('img');
+            big.className = 'lightbox-img';
+            big.alt = '';
+
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+
+            overlay.appendChild(big);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+
+            function openBox(src, alt) {
+                big.setAttribute('src', src);
+                big.setAttribute('alt', alt || '');
+                overlay.classList.add('open');
+                document.body.classList.add('lightbox-locked');
+            }
+            function closeBox() {
+                overlay.classList.remove('open');
+                document.body.classList.remove('lightbox-locked');
+                big.setAttribute('src', '');
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () {
+                    openBox(this.getAttribute('src'), this.getAttribute('alt'));
+                });
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target === closeBtn) closeBox();
+            });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    })();
+    </script>
 </body>
 </html>
