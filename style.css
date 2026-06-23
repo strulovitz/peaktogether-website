@@ -1410,6 +1410,16 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0 0 24px;
 }
 
+.gp-hero-img {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: auto;
+    margin: 4px auto 24px;
+    border-radius: 20px;
+    box-shadow: 0 10px 34px rgba(0, 0, 0, 0.18);
+}
+
 /* CTA row */
 .gp-cta {
     display: flex;
