@@ -244,7 +244,7 @@ MathJax.typesetPromise();
 
 ---
 
-## PLANNED NAVIGATION REDESIGN (decided June 23, 2026 — NOT YET BUILT)
+## 🏔️ NAVIGATION REDESIGN — BUILT June 23, 2026 (DeepSeek V4 Pro)
 
 Peak Together is now a multi-game arcade. The navigation is being redesigned to
 match. This section is the agreed design; the implementation will follow later
@@ -298,3 +298,11 @@ Home  ·  The Arcade  ·  The Mountains ▾  ·  How It Works  ·  About      [ 
 - The two CTA buttons (Play Free, GitHub) are the only genuinely new header elements;
   their desktop placement (right end of header) and mobile placement (inside the drawer)
   must not disturb the flex header or the drawer.
+
+### AS BUILT (June 23, 2026)
+
+- `header.html` rewritten: top bar = Home · The Arcade · The Mountains ▾ · How It Works · About · `.nav-cta` (Play Free + GitHub). All three levels reuse the SAME class names (`.has-submenu`, `.submenu-toggle`, `.submenu`) so `components.js` works UNCHANGED — it already selects every `.submenu-toggle` at any depth and toggles its own parent's `.submenu-open` (with `stopPropagation`). No JS edit, no `components.js?v=` bump needed.
+- `style.css` got a new "NAV v2" block (before MAIN CONTENT SECTIONS): level-2 rows + a level-3 flyout (`left: 100%`, with an invisible horizontal `::after` hover bridge), plus a mobile media query turning level 3 into a deeper-indented static accordion and stacking the CTA buttons full-width in the drawer. The old `.submenu-section/.submenu-heading/.submenu-paths` rules are left intact (now unused).
+- New pages created: `/arcade/`, `/how-it-works/`, `/play/`. GitHub button → `https://github.com/strulovitz/peaktogether-website` (external, `target="_blank"`).
+- `style.css?v=13` → `style.css?v=14` bumped on all 48 HTML pages (Python, UTF-8 safe) so the new menu CSS is fetched fresh.
+- The old 2-level "Mathematics → Riemann Hypothesis → 9 paths" menu is gone; Riemann Hypothesis is now a single leaf link to its page (the 9 paths live on that page).

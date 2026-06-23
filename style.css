@@ -377,6 +377,210 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ═══════════════════════════════════════════
+   NAV v2 — 3-LEVEL DROPDOWN + CTA BUTTONS
+   (added June 2026 — reuses the proven hover-bridge / accordion mechanics;
+    see descent/docs/MENU_SYSTEM.md)
+   ═══════════════════════════════════════════ */
+
+/* ── Level-2 rows (subjects) inside the top-level dropdown ── */
+.submenu li.has-submenu {
+    position: relative;            /* anchor for the level-3 flyout */
+}
+
+.submenu .submenu-toggle {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    margin: 0 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--blue);
+    border-radius: 8px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.15s, background 0.15s;
+}
+
+.submenu .submenu-toggle:hover {
+    background: #f0f4ff;
+    color: #1a3d5c;
+}
+
+/* level-2 caret points right on desktop */
+.submenu .submenu-toggle::after {
+    content: '\25B8';              /* triangle right */
+    font-size: 0.7rem;
+    margin-left: auto;
+    opacity: 0.6;
+}
+
+/* ── Level-3 flyout panel (topics) ── */
+.submenu .submenu {
+    top: -8px;
+    left: 100%;
+    transform: none;
+    margin-left: 2px;
+    min-width: 260px;
+}
+
+/* invisible horizontal bridge so the hover never drops (Firefox-safe) */
+.submenu li.has-submenu::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(100% - 4px);
+    width: 12px;
+    height: 100%;
+    z-index: 998;
+}
+
+/* level-3 leaf links */
+.submenu .submenu a {
+    display: block;
+    padding: 9px 20px;
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: #555;
+    text-decoration: none;
+    border-radius: 8px;
+    margin: 0 8px;
+    transition: color 0.15s, background 0.15s, padding 0.15s;
+}
+
+.submenu .submenu a:hover {
+    color: var(--orange);
+    background: #fef9f0;
+    padding-left: 24px;
+}
+
+/* "Coming soon" leaf placeholder */
+.submenu-coming {
+    display: block;
+    padding: 9px 20px;
+    margin: 0 8px;
+    font-size: 0.85rem;
+    font-style: italic;
+    color: #bbb;
+    cursor: default;
+}
+
+/* ── CTA buttons (Play Free + GitHub) ── */
+.nav-cta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-left: 10px;
+}
+
+.nav-cta .btn-play,
+.nav-cta .btn-github {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    padding: 9px 16px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 800;
+    border-radius: 10px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: transform 0.15s, background 0.15s, box-shadow 0.15s;
+}
+
+.nav-cta .btn-play {
+    background: var(--orange);
+    color: #5a3a12;
+    box-shadow: 0 3px 12px rgba(255, 184, 107, 0.5);
+}
+
+.nav-cta .btn-play:hover {
+    background: #ffa94d;
+    transform: translateY(-1px);
+}
+
+.nav-cta .btn-github {
+    background: var(--blue);
+    color: #fff;
+}
+
+.nav-cta .btn-github:hover {
+    background: #1a3d5c;
+    transform: translateY(-1px);
+}
+
+/* ── Mobile: 3-level accordion + stacked CTA ── */
+@media (max-width: 900px) {
+    /* level-2 rows look like indented accordion headers */
+    .submenu .submenu-toggle {
+        margin: 0;
+        border-radius: 0;
+        padding: 13px 8px 13px 24px;
+        font-size: 0.95rem;
+        justify-content: space-between;
+        border-top: 1px solid #f0e8dc;
+    }
+
+    /* caret back to a down-arrow that rotates when open (like level 1) */
+    .submenu .submenu-toggle::after {
+        content: '\25BE';          /* triangle down */
+        margin-left: 0;
+    }
+
+    /* level-3 flyout becomes a static, deeper-indented accordion */
+    .submenu .submenu {
+        position: static;
+        top: auto;
+        left: auto;
+        margin-left: 0;
+        min-width: auto;
+        background: #f7f1e6;
+    }
+
+    .submenu .submenu a {
+        margin: 0;
+        border-radius: 0;
+        padding: 12px 8px 12px 40px;
+        border-bottom: 1px solid #f5efe4;
+    }
+
+    .submenu .submenu a:hover {
+        padding-left: 44px;
+    }
+
+    .submenu-coming {
+        margin: 0;
+        padding: 12px 8px 12px 40px;
+    }
+
+    /* kill the horizontal hover bridge on touch */
+    .submenu li.has-submenu::after {
+        display: none;
+    }
+
+    /* CTA buttons stack full-width at the bottom of the drawer */
+    .nav-cta {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+        margin-left: 0;
+        padding: 16px 8px 4px;
+    }
+
+    .nav-cta .btn-play,
+    .nav-cta .btn-github {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    .nav-list > li.nav-cta {
+        border-bottom: none;
+    }
+}
+
+/* ═══════════════════════════════════════════
    MAIN CONTENT SECTIONS
    ═══════════════════════════════════════════ */
 

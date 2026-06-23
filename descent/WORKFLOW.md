@@ -712,4 +712,4 @@ Fusion's "lobby of an arcade" IA. Full spec written to `descent/docs/MENU_SYSTEM
 - Only the DEEPEST level links to real pages. This is a NEW **3-level** menu (today it's 2-level).
 - New pages: The Arcade (`/arcade/`), How It Works, ▶ Play Free. GitHub button → `https://github.com/strulovitz/peaktogether-website`.
 - IMPLEMENTATION RULE: reuse — never replace — the proven mechanics (::after hover bridge, right+visibility mobile slide NEVER transform, span accordions, every `<a>` closes drawer, data-component injection, `components.js?v=N` bump).
-- STATUS: design only. We are still TALKING / planning. Do NOT build the menu until Nir says go.
+- STATUS: ✅ BUILT June 23, 2026. `header.html` rewritten (3-level menu + Play Free/GitHub CTA), `style.css` got a "NAV v2" block, new pages `/arcade/ /how-it-works/ /play/` created, `components.js` UNCHANGED (handles nested toggles already), `style.css?v=13→v=14` bumped on all 48 HTML pages. See `descent/docs/MENU_SYSTEM.md` → "NAVIGATION REDESIGN — BUILT". Nir uploads via FileZilla to go live on Dreamhost (remember to upload the 3 new folders too).
