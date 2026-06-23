@@ -19,7 +19,11 @@ def bootstrap(game_slug: str = "DescentQED") -> None:
     os.environ.setdefault("PYGAME_HIDE_SUPPORT_PROMPT", "1")
 
     if getattr(sys, "frozen", False):
-        _BASE_DIR = Path(sys.executable).resolve().parent
+        # PyInstaller one-folder: bundled data lives in sys._MEIPASS (the
+        # "_internal" folder), NOT next to the .exe. Point the asset base there
+        # so the game's relative asset loads (levels/, baked/, *-hologram.png)
+        # resolve correctly. Fall back to the exe folder if _MEIPASS is absent.
+        _BASE_DIR = Path(getattr(sys, "_MEIPASS", Path(sys.executable).resolve().parent))
     else:
         _BASE_DIR = Path(__file__).resolve().parent
 

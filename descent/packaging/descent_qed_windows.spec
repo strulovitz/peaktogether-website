@@ -7,7 +7,9 @@ if not GAME_DIR.exists():
     raise SystemExit(f"Could not find game directory: {GAME_DIR}")
 
 excluded_dir_names = {"__pycache__", ".pytest_cache", ".mypy_cache",
-                      ".ruff_cache", "build", "dist", ".venv-build", "build_env"}
+                      ".ruff_cache", "build", "dist", ".venv-build", "build_env",
+                      # dev-only folders that must NOT ship to players:
+                      "BIBLE", "PARENT_ESTATE", "docs", "packaging"}
 excluded_suffixes = {".pyc", ".pyo"}
 
 datas = []

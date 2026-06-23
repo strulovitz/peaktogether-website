@@ -8,7 +8,10 @@ Write-Host "Cleaning..."
 Remove-Item -Recurse -Force ".\build", ".\dist", ".\release" -ErrorAction SilentlyContinue
 
 Write-Host "Creating build venv..."
-if (!(Test-Path ".\.venv-build")) { py -3.12 -m venv .venv-build }
+if (!(Test-Path ".\.venv-build")) {
+    if (Get-Command py -ErrorAction SilentlyContinue) { py -3.12 -m venv .venv-build }
+    else { python -m venv .venv-build }
+}
 $Python = ".\.venv-build\Scripts\python.exe"
 
 & $Python -m pip install --upgrade pip setuptools wheel

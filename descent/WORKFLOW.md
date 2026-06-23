@@ -766,3 +766,68 @@ architecture, pinned requirements.txt, and a step-by-step pipeline for Nir's Dre
 Stack facts captured: Python 3.12.11, pygame 2.6.1 (SDL 2.28.4), PyOpenGL 3.1.10, numpy 2.4.6, matplotlib 3.10.9;
 legacy fixed-function OpenGL; assets = pre-baked PNGs (~20 MB); LaTeX/TikZ baker is dev-only.
 **STATUS:** Nir will restart DeepSeek, paste this prompt to Fusion, then we implement Fusion's answer.
+
+## 🔴 SESSION LOG — June 23, 2026 (LATER) — Packaging & Distribution: Windows .exe BUILT 📦🎉
+
+### Manual fusion received & saved VERBATIM
+Nir gave the packaging question to GPT-5.5 + Gemini 3.1 Pro Preview (separate OpenRouter chats),
+then had Claude Opus 4.8 judge + integrate. Opus's final combined answer saved **word-for-word** to
+`docs/MANUAL_FUSION_PACKAGING_AND_DISTRIBUTION.md` (commit 558b397). Plan = PyInstaller one-folder →
+zip → host on itch.io (primary) + GitHub Releases (mirror) → link from peaktogether.me. Never ship Python.
+
+### Implemented Opus's DeepSeek steps 1-6 (then RELOCATED per Nir)
+Files were first created in repo root (Opus said "repo root"), but **Nir's multi-game architecture rule
+overrides that** — root is the platform/website, each game lives in its own folder. Moved everything into
+`descent/` via `git mv` (commit 85e07be). Final locations:
+- `descent/requirements-runtime.txt` (pygame==2.6.1, PyOpenGL==3.1.10, numpy==2.4.6 — what gets bundled)
+- `descent/requirements-build.txt` (pyinstaller>=6.11,<7)
+- `descent/requirements-dev.txt` (-r runtime + matplotlib==3.10.9 — dev-only baker)
+- `descent/pt_runtime.py` (base-path + per-game AppData + crash-logger w/ MessageBox)
+- `descent/packaging/descent_qed_windows.spec` (sweeps ALL non-.py assets; excludes matplotlib/tkinter)
+- `descent/build_windows_release.ps1` (one-click: venv → pip → PyInstaller → zip → SHA-256)
+- `descent/app.py` — bootstrap block inserted at top (before pygame/asset loading)
+- `descent/render.py` — matplotlib **guarded** (try/except → HAS_MATPLOTLIB; `latex_to_surface`
+  returns a tiny transparent surface if absent). NOT deleted. BIBLE/math_flyer.py left untouched.
+- root `.gitignore` — added `build/ dist/ release/ .venv-build/`
+
+### 🐛 THREE real bugs found in the plan/environment (flagged, not powered-through) + fixed
+1. **`py -3.12` launcher not installed** on Nir's PC (only `python`=3.12.11). Build script's venv step
+   would fail. Fix: try `py -3.12` if present, else fall back to `python`.
+2. **`contents_directory="."` did NOT flatten** in PyInstaller 6.21 — data files landed in `_internal\`,
+   but the bootstrap pointed the frozen base at the .exe folder → game would crash looking for
+   `levels/basel.txt`. **Fix:** `pt_runtime.py` frozen branch now uses `sys._MEIPASS` (= `_internal`)
+   as the asset base. Standard PyInstaller pattern.
+3. **Sweep bundled internal dev folders** (BIBLE, PARENT_ESTATE, docs, packaging) into the player
+   download — bloat + leaks private docs/Fable's code. **Fix:** added those to the spec's
+   `excluded_dir_names`. Verified gone from the bundle.
+
+### BUILD SUCCEEDED ✅ (Nir gave download permission)
+`cd descent; .\build_windows_release.ps1` →
+- venv `.venv-build` (python -m venv), pinned deps + pyinstaller 6.21.0 installed
+- `dist\Descent QED\Descent QED.exe` + `_internal\` (260 baked PNGs, 44 holograms, levels, corridors) ✅
+- `release\PeakTogether-DescentQED-Windows-2026.06.23.zip` (~103 MB) + `.sha256.txt`
+- **SHA-256: 0C35E6D94E3C402DC23151F0A0924682946CC5E473A511C27BFE518E3948C970**
+- Known harmless warnings: `MSVCR90.dll` missing for OpenGL's gle/freeglut .vc9 DLLs (we don't use
+  GLE/GLUT — we use pygame for the window), and benign "conda-meta not found" notes.
+
+### Automated smoke test PASSED
+Launched the .exe headless-ish: ran 30s (game loop alive) with **NO crash-log** written to
+`%LOCALAPPDATA%\PeakTogether\DescentQED\` → assets resolved, no unhandled exception. Visual eyeball
+(images/text/controls) still pending Nir's double-click; true Python-free PC test in a few days.
+
+### Current state / NEXT (steps 7-11 are Nir's, with DeepSeek's step-by-step help)
+| Item | Status |
+|------|--------|
+| Steps 1-6 (code + spec + build script) | ✅ done, committed, pushed |
+| Step 7 build | ✅ done (zip in `descent/release/`) |
+| Step 8 test on Python-free PC | ⏳ Nir, in a few days |
+| Step 9 upload to itch.io (primary) | ⏳ Nir (DeepSeek gave step-by-step) |
+| Step 10 upload to GitHub Releases (mirror) | ⏳ Nir (DeepSeek gave step-by-step) |
+| Step 11 update peaktogether.me (trailer + buttons + SmartScreen note) | 🔜 NEXT, with DeepSeek |
+
+### NOTES for future games (reuse template)
+Each game = its own folder with its own `requirements-*.txt`, `pt_runtime.py` (own slug),
+`packaging/<game>_windows.spec`, `build_windows_release.ps1`. Writes to
+`%LOCALAPPDATA%\PeakTogether\<GameSlug>\`. The spec must use `sys._MEIPASS` via pt_runtime (NOT the
+exe folder) and exclude BIBLE/PARENT_ESTATE/docs/packaging. The `py -3.12`→`python` fallback is baked in.
+The release zip/.sha256.txt are gitignored (uploaded to itch/GitHub Releases, never committed).
