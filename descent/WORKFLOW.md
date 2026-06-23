@@ -866,3 +866,21 @@ Direct zip download:
 https://github.com/strulovitz/peaktogether-website/releases/download/descent-qed-v1.0.0/PeakTogether-DescentQED-Windows-2026.06.23.zip
 **Both hosts now live** → itch.io (primary): https://strulovitz.itch.io/descent-qed · GitHub (mirror): the tag above.
 **ONLY remaining step:** Step 11 — update peaktogether.me (DeepSeek builds it; both real URLs now known).
+
+### 🏁 STEP 11 DONE — peaktogether.me game page wired (June 23, 2026) — DISTRIBUTION COMPLETE 🎉
+Edited ONLY `arcade/descent-qed/index.html` (no CSS change → NO cache bump needed → tiny FileZilla upload):
+- Title-block CTA + the Download section now have **▶ Play on Windows — Free → itch.io** and a ghost
+  **Mirror (GitHub) → the v1.0.0 release page** (reused existing `.big-button` / `.gp-ghost-btn` classes).
+- Easy 4-step install (download → Extract All → open folder → double-click "Descent QED.exe").
+- Friendly **SmartScreen "Unknown publisher"** reassurance note (click "More info" → "Run anyway").
+- Kept `python app.py` as a **"Prefer to run from source? (for developers)"** subsection; added `pillow`
+  to its pip line (game now needs Pillow).
+- Setup line now reads "No Python. No terminal. No installer. Just unzip and double-click."
+**FileZilla upload:** just `arcade/descent-qed/index.html` to Dreamhost (one file). No style.css change.
+**TODO later:** add the looping trailer/video at the top of the page when Nir has one (a clean spot awaits).
+
+### 🏆 PACKAGING & DISTRIBUTION MISSION COMPLETE
+Descent QED now ships as a one-click Windows download on **itch.io** (primary) +
+**GitHub Releases** (mirror), linked from peaktogether.me. Reusable PyInstaller template lives under
+`descent/` for every future game. Remaining nice-to-haves: trailer video, true Python-free PC test
+(in a few days), and the Linux build via GitHub Actions (later).
