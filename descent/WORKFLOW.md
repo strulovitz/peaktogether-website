@@ -905,3 +905,23 @@ Opus 4.8's plan saved verbatim to `docs/TRAILER_LOOPING_VIDEO.md`. Implemented p
   `images/descent-qed-clip-poster.jpg` (3 files). The MP4 itself is NOT uploaded to Dreamhost — it lives
   on GitHub/jsDelivr. If the clip doesn't appear right away, give jsDelivr a couple of minutes to cache.
 - Reusable for future games: swap footage + filenames; same ffmpeg recipe + `<video>` block + jsDelivr URL.
+
+### 🎮 CONTROLS section added to the game page (June 23, 2026)
+Nir noticed the page never explained the keys. Added a "🎮 Controls" section to
+`arcade/descent-qed/index.html` at the END of the "how you two play" section (before the Gallery),
+using existing styles (plain `<ul>`/`<code>`, NO new CSS → no extra cache bump; page already at v=21).
+**All controls were read VERBATIM from the code (not guessed):**
+- Flight (render.py `update`/`update6dof`): `W` fwd / `S` back / `A` left / `D` right / `R` up / `F` down;
+  arrows `↑↓` pitch, `←→` yaw; `Q`/`E` roll; `Shift` boost.
+- Combat (combat.py `handle_input`): **left-click a face = load that mathematician**; `Space` = fire;
+  wrong = harmless 6s fizzle. ⚠️ **`[` / `]` are RETIRED (accepted but IGNORED)** — do NOT tell players
+  to use them (the old PARENT_HANDOFF "HOW TO RUN" was stale on this).
+- Understanding Mode (understanding.py + app.py): `U` enter (facing a robot); mouse wheel = depth layers
+  (graduate→undergrad→high-school→applied); move mouse = pan; hold `Ctrl` = jump to deepest engineer layer;
+  **exit by scrolling the wheel BACKWARD past the first sign** (Esc is inert inside U-mode).
+- Quit: `Esc` (when not in U-mode).
+- Optional (gamepad.py): **T.16000M** = Pilot (stick pitch/roll, twist=yaw, throttle=thrust, hat=strafe,
+  trigger=fire, button 1=engineer layer); **Xbox 360** = Navigator (right stick=pan in U-mode; A/B/X/Y or
+  LB/RB cycle faces; LT/RT=fire). ~1s startup calibration. Controllers are optional + additive.
+**FileZilla (Nir):** upload `arcade/descent-qed/index.html` (now has trailer + controls). The trailer also
+needs `style.css` + `images/descent-qed-clip-poster.jpg` uploaded (from the trailer step) if not done yet.
