@@ -28,7 +28,7 @@ peaktogether-website/                # GitHub repo root = website root
 ├── mathematics/                     # Website content pages (Riemann Hypothesis, etc.)
 ├── .htaccess                        # Dreamhost Apache config
 ├── .gitignore                       # Ignores __pycache__, *.pyc, *.log
-├── WEBSITE_REDESIGN_FUSION_2026-06-18.md
+├── docs/                            # Website/platform planning docs (Fusion prompts, hero-art style prompt, redesign notes)
 │
 └── descent/                         # GAME 1: Descent QED (ALL game files here)
     ├── app.py                       # Game entry point: cd descent && python app.py
@@ -748,7 +748,7 @@ FileZilla → Dreamhost: upload `style.css`, all changed HTML, and the new folde
 
 ### Descent QED game-page images wired ✅
 - Hero art: `images/descent-qed-hero-art.png` (square; GPT 5.4 Image 2; prompt saved verbatim in
-  `GAME_HERO_ART_STYLE_PROMPT.md` at repo root — reusable style template for all future game hero art).
+  `docs/GAME_HERO_ART_STYLE_PROMPT.md` — reusable style template for all future game hero art).
 - 4 screenshots placed: screenshot-1 = "Now" in Then→Now; screenshot-4 = corridor flight;
   screenshot-2 = robot lock-on; screenshot-3 = Q.E.D. finale.
 - "Then" image swapped to `images/descent-2-water-elongated-14-over-9-screenshot.jpg`.
@@ -758,7 +758,7 @@ FileZilla → Dreamhost: upload `style.css`, all changed HTML, and the new folde
 - style.css bumped through v=20 during this work.
 
 ### NEXT BIG TOPIC — packaging & distribution (await Fusion) 📦
-Wrote `FUSION_PROMPT_PACKAGING_AND_DISTRIBUTION.md` (repo root). It asks Fusion how to ship the game so
+Wrote `docs/FUSION_PROMPT_PACKAGING_AND_DISTRIBUTION.md`. It asks Fusion how to ship the game so
 non-technical 15–25-yr-olds can install/play WITHOUT `python app.py`: browser demo feasibility (pygbag vs our
 PyOpenGL+matplotlib stack), one-click `.exe` (PyInstaller/Nuitka/etc.), a real `setup.exe` (Inno/NSIS) + Linux
 (AppImage/Flatpak), FREE hosting (itch.io / GitHub Releases / etc.), no-system-collision strategy, multi-game
