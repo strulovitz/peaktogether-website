@@ -491,14 +491,13 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .nav-cta .btn-play {
-    background: var(--orange);
-    color: #5a3a12;
-    box-shadow: 0 3px 12px rgba(255, 184, 107, 0.5);
+    background: #27ae60;
+    color: #fff;
+    box-shadow: 0 3px 12px rgba(39, 174, 96, 0.5);
 }
 
 .nav-cta .btn-play:hover {
-    background: #ffa94d;
-    color: #5a3a12;
+    background: #1e8449;
     transform: translateY(-1px);
 }
 

@@ -945,3 +945,14 @@ Per Nir, three changes:
    v=20/v=22 mix) via a UTF-8-safe Python script (NEVER PowerShell Set-Content for HTML). ▶ emoji verified intact.
 **FileZilla (Nir):** `style.css`, `header.html`, and the HTML pages (all bumped to v=23 — uploading them all
 ensures returning visitors get the fix; new visitors get it regardless). Current cache version: **v=23**.
+
+### 🟢 FINAL Play Free button design — GREEN, mirroring GitHub (June 23, 2026)
+Nir didn't want "same color on hover"; he wanted the Play button to change text color on hover like the
+GitHub button does. Solution: make Play Free **green** so it behaves identically to GitHub (which is blue):
+- Resting: `background: #27ae60` (site green) + `color: #fff` (white) + green-tinted glow.
+- Hover: `background: #1e8449` (darker green) + 1px lift; **no `color` set** → the global
+  `.nav-list > li > a:hover { color: var(--orange) }` turns the text yellow (reads great on green, just like
+  on GitHub's blue). Removed the earlier dark-brown override.
+- GitHub button still EXACTLY as is (blue). Two matching pills: GitHub blue, Play Free green.
+- Site-wide CSS change → bumped ALL 52 pages to **`style.css?v=24`** (UTF-8-safe Python). Current version: **v=24**.
+**FileZilla (Nir):** `style.css` + all v=24 HTML pages (header.html already has the /arcade/descent-qed/ link).
