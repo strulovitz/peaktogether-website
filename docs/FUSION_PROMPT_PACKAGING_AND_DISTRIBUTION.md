@@ -45,8 +45,8 @@ Please now elaborate on this **A LOT**, as a full discussion in its own right.
 
 ## 1. OUR EXACT TECH STACK & VERSIONS (please tailor all advice to these)
 
-- **OS we build on:** Windows 11 (64-bit). **Primary user OS: Windows.** Linux support is *ideal*; macOS is
-  a nice-to-have.
+- **OS we build on:** Windows 11 (64-bit). **Primary user OS: Windows.** Linux support is *ideal*.
+  **We are NOT targeting macOS — please skip macOS entirely (no `.app`/`.dmg`/notarization/Gatekeeper talk).**
 - **Python:** **3.12.11** (CPython, from a Miniconda base env on the dev machine).
 - **Runtime libraries (currently installed versions):**
   - **pygame 2.6.1** (bundles **SDL 2.28.4**)
@@ -130,8 +130,7 @@ Briefcase/BeeWare** (and anything better). For the winner, cover concretely:
 **Q3 — A real installer (the dream `setup.exe`):** Should we wrap the bundle in **Inno Setup** or **NSIS**
 (free) to produce a true `setup.exe` with a Start-Menu shortcut, desktop icon, and uninstaller? Rank them and
 give the recommended approach. For **Linux**, rank **AppImage vs Flatpak vs .deb vs plain tarball** for a
-double-click experience. For **macOS** (nice-to-have), note the `.app`/`.dmg` + **notarization/Gatekeeper**
-friction honestly.
+double-click experience. **(We are NOT targeting macOS — please skip it entirely.)**
 
 **Q4 — FREE hosting for the downloadable installer/zip (and any browser build):** Give us a few **free**
 options with pros/cons, then **rank them for OUR needs** (educational game, ages 15–25, growing catalog).
