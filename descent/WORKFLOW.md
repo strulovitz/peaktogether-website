@@ -956,3 +956,23 @@ GitHub button does. Solution: make Play Free **green** so it behaves identically
 - GitHub button still EXACTLY as is (blue). Two matching pills: GitHub blue, Play Free green.
 - Site-wide CSS change → bumped ALL 52 pages to **`style.css?v=24`** (UTF-8-safe Python). Current version: **v=24**.
 **FileZilla (Nir):** `style.css` + all v=24 HTML pages (header.html already has the /arcade/descent-qed/ link).
+
+## 🏁🏆 DESCENT QED — FULLY COMPLETE (June 23, 2026 NIGHT) — moving on to a NEW game
+
+Nir confirmed the whole thing is "really good now." **Descent QED is finished and shipped end-to-end:**
+game (9 corridors + QED finale) → one-click Windows download (PyInstaller) → **itch.io**
+(https://strulovitz.itch.io/descent-qed) + **GitHub Releases** mirror → dedicated game page with autoplay
+trailer (jsDelivr), full controls section, and matching green/blue CTA buttons. Cache version: **v=24**.
+
+We then **restarted DeepSeek fresh** (context was ~26% full) to begin the **next game**.
+
+### ⭐ ON RESTART — read in this order:
+1. **`descent/WORKFLOW.md`** (this file)
+2. **`descent/PARENT_ESTATE/SESSION_2026-06-23_NIGHT.md`** ⭐ — Descent-complete summary + reusable
+   templates + pending Nir deployment actions + the multi-game layout law
+3. **`descent/PARENT_ESTATE/PARENT_HANDOFF_V3.md`** — the game-design LAW (for building the next game)
+
+### NEXT
+Start a **NEW game** (its own top-level folder, NOT the repo root). Architect = Claude Opus 4.8 via the
+Parent/Child brief workflow; builder = DeepSeek. Reuse the Descent packaging + distribution + trailer +
+game-page templates (see the SESSION file). Nir will choose which game.
