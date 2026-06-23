@@ -106,12 +106,18 @@ download. And we'd love a repeatable approach we can reuse for every future game
 
 ## 4. OUR QUESTIONS FOR YOU (please decide what is best for us)
 
+For **each** question below, please lay out the realistic **alternatives** you would consider, give the
+**honest pros and cons of each**, then **rank them and recommend the single best one for our specific
+situation** — and explain why. (We don't know the options; telling us the alternatives and their tradeoffs is
+exactly what we're asking you for.)
+
 1. Given everything above, **how should a non-technical user (no Python, no terminal) install and run our
    game as easily as possible?** Please give your recommended approach, step by step.
 2. Is letting users **"try it instantly" in a web browser** realistic for our game **as it is built**? If yes,
    how? If not, why — and what would you do instead?
 3. **Where should we host the downloadable game** (and anything else) **for free**, given our
-   Dreamhost-is-FileZilla-only-static + GitHub situation? What's best for our 15–25 audience, and why?
+   Dreamhost-is-FileZilla-only-static + GitHub situation? Please give us the free options **with the pros and
+   cons of each**, **rank them** for our 15–25 audience, and recommend the best one — and why.
 4. **How do we make sure that installing our games never harms or changes the user's existing system or
    Python**, and never conflicts between our own multiple games as the catalog grows?
 5. We're worried users might see scary "unknown publisher" / security warnings when they download or run
