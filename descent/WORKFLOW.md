@@ -931,3 +931,17 @@ Per Nir. Added `.gp-c.orange { background: #e67e22; color: #fff; }` to `style.cs
 blue/green/purple) and a `<span class="gp-c orange">orange = yellow + red</span>` chip in the
 color-mixing sentence on the game page. Since style.css changed, bumped the game page to
 **`style.css?v=22`** (other pages stay v=20 — additive change). FileZilla: `style.css` + `arcade/descent-qed/index.html`.
+
+### 🧭 Header "Play Free" button hover fix + repoint, and removed wrong control line (June 23, 2026)
+Per Nir, three changes:
+1. **Removed** the (incorrect) "LT or RT trigger = fire." line from the game page's Xbox controls list.
+2. **Header (site-wide) "Play Free" button:** on hover its text became `var(--orange)` (from the global
+   `.nav-list > li > a:hover { color: var(--orange) }` at style.css ~line 152) → yellow-on-yellow =
+   invisible. Fix: added `color: #5a3a12;` to `.nav-cta .btn-play:hover` (specificity (0,3,0) beats the
+   global (0,2,2); no `!important` involved). **GitHub button left EXACTLY as is** (white→orange hover on
+   dark blue looks great — Nir confirmed). Also repointed `btn-play` href `/play/` → `/arcade/descent-qed/`
+   in `header.html` (shared nav, so it changes everywhere once header.html is uploaded).
+3. Because the header CSS is site-wide, **bumped ALL 52 HTML pages to `style.css?v=23`** (normalized the
+   v=20/v=22 mix) via a UTF-8-safe Python script (NEVER PowerShell Set-Content for HTML). ▶ emoji verified intact.
+**FileZilla (Nir):** `style.css`, `header.html`, and the HTML pages (all bumped to v=23 — uploading them all
+ensures returning visitors get the fix; new visitors get it regardless). Current cache version: **v=23**.

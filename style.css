@@ -498,6 +498,7 @@ h1, h2, h3, h4, h5, h6 {
 
 .nav-cta .btn-play:hover {
     background: #ffa94d;
+    color: #5a3a12;
     transform: translateY(-1px);
 }
 
