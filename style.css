@@ -408,31 +408,29 @@ h1, h2, h3, h4, h5, h6 {
     color: #1a3d5c;
 }
 
-/* level-2 caret points left on desktop (flyout opens left) */
+/* level-2 caret points right on desktop */
 .submenu .submenu-toggle::after {
-    content: '\25C2';              /* triangle left */
+    content: '\25B8';              /* triangle right */
     font-size: 0.7rem;
     margin-left: auto;
     opacity: 0.6;
 }
 
-/* ── Level-3 flyout panel (topics) — opens LEFT to stay on-screen ── */
+/* ── Level-3 flyout panel (topics) ── */
 .submenu .submenu {
     top: -8px;
-    right: 100%;
-    left: auto;
+    left: 100%;
     transform: none;
-    margin-right: 2px;
+    margin-left: 2px;
     min-width: 260px;
 }
 
-/* invisible horizontal bridge (left side) so the hover never drops (Firefox-safe) */
+/* invisible horizontal bridge so the hover never drops (Firefox-safe) */
 .submenu li.has-submenu::after {
     content: '';
     position: absolute;
     top: 0;
-    right: calc(100% - 4px);
-    left: auto;
+    left: calc(100% - 4px);
     width: 12px;
     height: 100%;
     z-index: 998;
@@ -536,9 +534,7 @@ h1, h2, h3, h4, h5, h6 {
         position: static;
         top: auto;
         left: auto;
-        right: auto;
         margin-left: 0;
-        margin-right: 0;
         min-width: auto;
         background: #f7f1e6;
     }
