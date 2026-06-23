@@ -6,6 +6,20 @@
 
 ---
 
+## ROLES & HOW TO GIVE YOUR ANSWER (please read this first)
+
+You are working in a **chat on OpenRouter**. The one who will carry out your instructions is **DeepSeek V4
+Pro**, working inside **OpenCode** (which is more or less like Claude Code — an agentic coding assistant
+running on my PC). The **design and the heavy lifting of the hard code should be done by YOU**, and given to
+me as **copy-paste-ready blocks** — **not** by DeepSeek. DeepSeek has a very hard time with the *holistic*
+context: it can cure a headache but damage the liver (or some other organ of the body) in the process. So I
+want **you** to be the good doctor who thinks about everything **holistically**.
+
+Therefore, please give your **entire answer in a format I can copy and paste easily** — plain prose plus
+copy-paste-ready code/command blocks. **Please do NOT use tables.**
+
+---
+
 ## 0. WHO WE ARE / CONTEXT
 
 - **Project:** *Peak Together* (peaktogether.me) — free, open-source **co-op educational games** that turn the
@@ -112,5 +126,7 @@ download. And we'd love a repeatable approach we can reuse for every future game
 ## 5. HOW TO ANSWER
 
 Please be thorough, honest, and practical. **You are the expert; we are not** — where there are tradeoffs,
-**choose for us** and explain why. Please end with a clear, ordered **recommended plan we can act on.**
-Thank you so much!!! :-)
+**choose for us** and explain why. **You do the design and the hard code**, and hand it to me as
+**copy-paste-ready blocks** (commands and files), since DeepSeek (in OpenCode) will paste and run them.
+**No tables, please** — keep the whole answer easy to copy and paste. Please end with a clear, ordered
+**recommended plan we can act on.** Thank you so much!!! :-)
