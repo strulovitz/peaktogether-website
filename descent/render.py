@@ -874,7 +874,13 @@ def blur_surface(surf, radius):
     if radius <= 0:
         return surf.convert_alpha()
 
-    from PIL import Image, ImageFilter
+    try:
+        from PIL import Image, ImageFilter
+    except Exception:
+        # Pillow should be bundled (requirements-runtime.txt). If it is ever
+        # missing, skip the blur and return the surface unchanged rather than
+        # crashing the game (e.g. when entering Understanding Mode).
+        return surf.convert_alpha()
 
     size = surf.get_size()
     data = pygame.image.tostring(surf, "RGBA")

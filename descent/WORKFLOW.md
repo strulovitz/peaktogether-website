@@ -831,3 +831,15 @@ Each game = its own folder with its own `requirements-*.txt`, `pt_runtime.py` (o
 `%LOCALAPPDATA%\PeakTogether\<GameSlug>\`. The spec must use `sys._MEIPASS` via pt_runtime (NOT the
 exe folder) and exclude BIBLE/PARENT_ESTATE/docs/packaging. The `py -3.12`→`python` fallback is baked in.
 The release zip/.sha256.txt are gitignored (uploaded to itch/GitHub Releases, never committed).
+
+### 🐛 BUG #4 found during Nir's Step-8 test — Understanding Mode crash (missing Pillow)
+Entering Understanding Mode on robot 1 crashed the packaged game:
+`render.py:877 blur_surface -> ModuleNotFoundError: No module named 'PIL'`. `blur_surface` (the
+glass-panel Gaussian blur) lazy-imports Pillow, which the dev machine had but the bundle did not.
+**Fix:** added `Pillow==12.2.0` to `descent/requirements-runtime.txt` (now bundled — verified
+`_internal\PIL` present) **and** guarded the import in `blur_surface` (returns the surface unblurred
+if PIL is ever missing, instead of crashing). Proactively scanned ALL runtime imports — PIL was the
+only extra third-party dep (the other PIL hit is the dev-only baker `deu/bake_corridor.py`, not shipped).
+Rebuilt OK. **New zip ~108.8 MB. New SHA-256: 7A42613FCD9E831D8A68D52220DFA35EADED4E2C73FAC17A82B61586CCB069C8.**
+Lesson for future games: any lazy/function-level `import` of a third-party lib must be in
+requirements-runtime.txt; the dev machine hides missing deps that the frozen bundle exposes.
