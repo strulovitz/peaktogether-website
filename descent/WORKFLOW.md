@@ -857,3 +857,12 @@ Nir uploaded the Windows zip + hero-art cover + 4 screenshots and confirmed "it 
 Remaining: Step 10 (GitHub Releases mirror + .sha256.txt), Step 11 (peaktogether.me — point the
 "Play on Windows" button at the itch URL above, add a smaller "Mirror (GitHub)" link, trailer, and the
 friendly SmartScreen "Unknown publisher" note; bump style.css?v=, FileZilla up to Dreamhost).
+
+### 🎉 STEP 10 DONE — GitHub Releases mirror is LIVE (June 23, 2026)
+Nir published the release (zip + .sha256.txt attached) and confirmed "it worked".
+**🔗 Release page (the "Mirror (GitHub)" target for Step 11):**
+https://github.com/strulovitz/peaktogether-website/releases/tag/descent-qed-v1.0.0
+Direct zip download:
+https://github.com/strulovitz/peaktogether-website/releases/download/descent-qed-v1.0.0/PeakTogether-DescentQED-Windows-2026.06.23.zip
+**Both hosts now live** → itch.io (primary): https://strulovitz.itch.io/descent-qed · GitHub (mirror): the tag above.
+**ONLY remaining step:** Step 11 — update peaktogether.me (DeepSeek builds it; both real URLs now known).
