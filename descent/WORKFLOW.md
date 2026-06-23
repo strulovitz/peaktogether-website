@@ -743,3 +743,26 @@ Ask Fusion (with DeepSeek's help) to refine this page — likely the hero art + 
 
 ### ⬆️ Upload reminder
 FileZilla → Dreamhost: upload `style.css`, all changed HTML, and the new folder `arcade/descent-qed/`.
+
+## 🔴 SESSION LOG — June 23, 2026 (LATER) — Game page images + Fusion packaging prompt
+
+### Descent QED game-page images wired ✅
+- Hero art: `images/descent-qed-hero-art.png` (square; GPT 5.4 Image 2; prompt saved verbatim in
+  `GAME_HERO_ART_STYLE_PROMPT.md` at repo root — reusable style template for all future game hero art).
+- 4 screenshots placed: screenshot-1 = "Now" in Then→Now; screenshot-4 = corridor flight;
+  screenshot-2 = robot lock-on; screenshot-3 = Q.E.D. finale.
+- "Then" image swapped to `images/descent-2-water-elongated-14-over-9-screenshot.jpg`.
+- Added a cross-browser **click-to-enlarge lightbox** (inline vanilla JS in the game page only — NO
+  components.js change; targets all `.gp img`; close via backdrop/×/Esc; scroll-locked).
+- Thumbnails: keep `width:100%`, use `height:auto` (dropped `object-fit:cover`) so images show uncropped.
+- style.css bumped through v=20 during this work.
+
+### NEXT BIG TOPIC — packaging & distribution (await Fusion) 📦
+Wrote `FUSION_PROMPT_PACKAGING_AND_DISTRIBUTION.md` (repo root). It asks Fusion how to ship the game so
+non-technical 15–25-yr-olds can install/play WITHOUT `python app.py`: browser demo feasibility (pygbag vs our
+PyOpenGL+matplotlib stack), one-click `.exe` (PyInstaller/Nuitka/etc.), a real `setup.exe` (Inno/NSIS) + Linux
+(AppImage/Flatpak), FREE hosting (itch.io / GitHub Releases / etc.), no-system-collision strategy, multi-game
+architecture, pinned requirements.txt, and a step-by-step pipeline for Nir's Dreamhost+FileZilla+GitHub reality.
+Stack facts captured: Python 3.12.11, pygame 2.6.1 (SDL 2.28.4), PyOpenGL 3.1.10, numpy 2.4.6, matplotlib 3.10.9;
+legacy fixed-function OpenGL; assets = pre-baked PNGs (~20 MB); LaTeX/TikZ baker is dev-only.
+**STATUS:** Nir will restart DeepSeek, paste this prompt to Fusion, then we implement Fusion's answer.
