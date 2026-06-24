@@ -3,20 +3,17 @@ from __future__ import annotations
 from math import sin
 import random
 
-from ursina import Entity, color, destroy
+from ursina import Entity, color, destroy, Vec3 as _UVec3
 
 from principia.schema import DemonSpec, Vec3
 
 
-# ---------------------------------------------------------------------------
-# Pure, headless-testable helpers
-# ---------------------------------------------------------------------------
 class _Health:
     def __init__(self, hp: int) -> None:
         self.hp = hp
         self.dead = False
 
-    def hit(self) -> bool:  # returns True ONLY on the lethal hit
+    def hit(self) -> bool:
         if self.dead:
             return False
         self.hp -= 1
@@ -35,9 +32,6 @@ def hex_to_rgb(hexstr: str) -> tuple[int, int, int]:
     return (int(s[0:2], 16), int(s[2:4], 16), int(s[4:6], 16))
 
 
-# ---------------------------------------------------------------------------
-# Demon
-# ---------------------------------------------------------------------------
 class Demon:
     def __init__(self, spec: DemonSpec, position: Vec3, parent=None) -> None:
         self._health = _Health(spec.hp)
@@ -52,16 +46,18 @@ class Demon:
         self._circles = []
         for circle in spec.circles:
             r, g, b = hex_to_rgb(circle.color)
+            # Project Ursina expects normalized 0-1 floats (see builder._rgb01);
+            # 0-255 ints render as white.
             c = Entity(
                 model="sphere",
                 parent=self.root,
                 position=circle.offset,
                 scale=circle.radius * 2,
-                color=color.rgb(r, g, b),
+                color=color.rgba(r / 255, g / 255, b / 255, 1),
                 collider="sphere",
             )
             c.kind = "demon"
-            c.demon = self  # back-reference for generic shooter handler
+            c.demon = self
             self._circles.append(c)
 
     def update(self, dt: float) -> None:
@@ -73,7 +69,7 @@ class Demon:
     def hit(self, point) -> None:
         if self.is_dead():
             return
-        if self._health.hit():  # lethal
+        if self._health.hit():
             self._die()
 
     def is_dead(self) -> bool:
@@ -84,13 +80,6 @@ class Demon:
 
     def _die(self) -> None:
         for c in self._circles:
-            ang = random.uniform(0, 6.283185)
-            elev = random.uniform(-0.5, 1.0)
-            direction = type(c.world_position)(
-                sin(ang), elev, sin(ang + 1.5708)
-            ) if False else None
-            # build a simple outward direction tuple-compatible offset
-            from ursina import Vec3 as _UVec3
             dvec = _UVec3(
                 random.uniform(-1, 1),
                 random.uniform(-0.3, 1.0),
