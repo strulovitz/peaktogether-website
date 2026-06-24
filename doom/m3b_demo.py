@@ -9,16 +9,22 @@ Controls:
 """
 from __future__ import annotations
 
-from math import sin
-import random
-
 from ursina import (
-    Ursina, Entity, camera, color, mouse, held_keys, raycast,
-    application, time, Text, Vec3, destroy,
+    Ursina,
+    Entity,
+    camera,
+    color,
+    mouse,
+    raycast,
+    application,
+    time,
+    Text,
+    Vec3,
+    Texture,
 )
 from PIL import Image, ImageDraw
 
-from principia import config
+import principia.config as config
 from principia.content.loader import load_level
 from principia.assets.manager import AssetManager
 from principia.world.builder import build_room
@@ -27,91 +33,97 @@ from principia.control.input import InputManager
 from principia.player.shooter import Shooter
 from principia.enemy.demon import Demon
 from principia.ceiling.equations import CeilingManager
+from principia.schema import CeilingBand
 from principia.ui.readmode import ReadMode
 
 
-PACK_DIR = "content_pack"
-ROOM_ID = "lemma1"
-
-
-def make_band_texture():
-    """Inline Pillow placeholder ceiling equation band."""
-    img = Image.new("RGBA", (1024, 128), (10, 10, 16, 255))
+def make_equation_texture(text: str = "q = m v") -> Texture:
+    img = Image.new("RGBA", (256, 64), (0, 0, 0, 0))
     d = ImageDraw.Draw(img)
-    d.text((20, 50), "a^2 + b^2 = c^2   (Q.E.D.)", fill=(220, 220, 255, 255))
-    from ursina import Texture
+    d.text((10, 20), text, fill=(255, 255, 255, 255))
     return Texture(img)
 
 
 def main():
     app = Ursina()
 
-    # --- load + build ----------------------------------------------------
-    level = load_level(PACK_DIR, ROOM_ID)
-    assets = AssetManager(PACK_DIR)
+    # --- Load level + build lemma1 room ---
+    level = load_level("content_packs/principia", "fixture")
+    room = next(r for r in level.floorplan.rooms if r.id == "lemma1")
+    assets = AssetManager("content_packs/principia")
+    cell = build_room(room, level.rooms["lemma1"], assets)
 
-    room = next(r for r in level.floorplan.rooms if r.id == ROOM_ID)
-    content = level.rooms[ROOM_ID]
-
-    cell = build_room(room, content, assets)
-
+    # --- Wall state ---
     wall_state = WallStateManager(assets)
     for block_id, panel in cell.panels.items():
-        wall_state.register(ROOM_ID, block_id, panel, panel.off_tex, panel.on_tex)
-    try:
-        wall_state.load(config.SAVE_FILE)
-    except Exception:
-        pass
+        wall_state.register("lemma1", block_id, panel, panel.off_tex, panel.on_tex)
 
-    # --- demon -----------------------------------------------------------
-    demon = Demon(content.demon, position=Vec3(0, config.EYE_HEIGHT, 6))
+    # --- Demon ---
+    spec = level.rooms["lemma1"].demon
+    demon = Demon(spec, tuple(spec.position))
 
-    # --- ceiling band ----------------------------------------------------
-    ceiling = CeilingManager(assets)
-    band = Entity(
-        model='quad',
-        texture=make_band_texture(),
-        position=(0, config.CEILING_H - 0.05, 6),
-        rotation_x=90,
-        scale=(8, 1),
+    # --- Ceiling band ---
+    equation_tex = make_equation_texture("q = m v")
+    band_entity = Entity(
+        model="quad",
+        texture=equation_tex,
+        position=(6, config.CEILING_H - 0.05, 10),
+        rotation=(90, 0, 0),
         double_sided=True,
+        scale=3,
     )
-    ceiling.register_band(ROOM_ID, band, band)
+    cb = CeilingBand(
+        band_id="cb_l1_1",
+        above_wall="",
+        equation_png="png/eq_l1_1.png",
+        hidden_until_demon_dead=True,
+    )
+    ceiling = CeilingManager(assets)
+    ceiling.register_band("lemma1", cb, band_entity)
 
-    def on_demon_death():
-        ceiling.reveal(ROOM_ID)
-        glyphs = [p.on_tex for p in cell.panels.values()]
-        ceiling.spray_from(demon.position, glyphs)
+    demon.on_death(lambda: (
+        ceiling.reveal("lemma1"),
+        ceiling.spray_from(tuple(spec.position), [equation_tex]),
+    ))
 
-    demon.on_death(on_demon_death)
-
-    # --- camera (manual fps) --------------------------------------------
-    camera.position = (0, config.EYE_HEIGHT, 0)
-    camera.rotation = (0, 0, 0)
-    mouse.locked = True
-
-    # --- input + shooter -------------------------------------------------
+    # --- Input + shooter ---
     inp = InputManager()
-
-    def reveal_panel(entity, point):
-        wall_state.toggle(ROOM_ID, entity.block_id)
-
     shooter = Shooter(camera, inp)
+
+    def reveal(block_id: str):
+        if not wall_state.state(block_id):
+            wall_state.toggle(block_id)
+
     shooter.register_hit_handlers(
-        on_wall=reveal_panel,
-        on_demon=lambda e, p: e.demon.hit(p),
+        on_wall=reveal,
+        on_demon=(lambda e, p: e.demon.hit(p)),
         on_secret=None,
     )
 
+    # --- Read mode ---
     read_mode = ReadMode()
 
-    hud = Text(text="", origin=(-0.5, 0.5), x=-0.86, y=0.46, scale=0.9)
+    # --- Camera / manual mover setup ---
+    mouse.locked = True
+    crosshair = Entity(
+        parent=camera.ui,
+        model="quad",
+        color=color.red,
+        scale=0.008,
+    )
+
+    camera.position = (6, config.EYE_HEIGHT, 2)
+    camera.rotation = (0, 0, 0)
+
+    hud = Text(text="", position=(-0.85, 0.45), scale=1.0)
+
+    LO, HI = 0.6, 11.4
 
     def update():
         inp.poll()
 
+        # --- Read mode: world is frozen for reading ---
         if read_mode.is_open():
-            # world frozen for reading
             if inp.read_mode_pressed() or inp.pause_pressed():
                 read_mode.close()
             return
@@ -120,6 +132,7 @@ def main():
             application.quit()
             return
 
+        # --- Enter read mode: raycast forward, open if looking at a panel ---
         if inp.read_mode_pressed():
             hit = raycast(
                 camera.world_position,
@@ -131,32 +144,35 @@ def main():
                 read_mode.open(hit.entity.block_id, hit.entity.texture)
                 return
 
-        # --- normal play ------------------------------------------------
+        # --- Normal play ---
         shooter.update(time.dt)
         demon.update(time.dt)
 
-        # inline mover (look + walk)
-        dx, dy = inp.aim_delta()
-        camera.rotation_y += dx
-        camera.rotation_x = max(-89, min(89, camera.rotation_x - dy))
+        strafe, forward = inp.move_axis()
 
-        ax, az = inp.move_axis()
         fwd = camera.forward
-        right = camera.right
-        move = (right * ax + fwd * az)
-        move.y = 0
-        if move.length() > 0:
-            move = move.normalized() * config.WALK_SPEED * time.dt
-            camera.position += move
-        camera.y = config.EYE_HEIGHT
+        rgt = camera.right
+        forward_flat = Vec3(fwd[0], 0, fwd[2])
+        right_flat = Vec3(rgt[0], 0, rgt[2])
+        if forward_flat.length() > 0:
+            forward_flat = forward_flat.normalized()
+        if right_flat.length() > 0:
+            right_flat = right_flat.normalized()
 
+        move = (right_flat * strafe + forward_flat * forward) * config.WALK_SPEED * time.dt
+        new_pos = camera.position + move
+
+        nx = max(LO, min(HI, new_pos[0]))
+        nz = max(LO, min(HI, new_pos[2]))
+        camera.position = (nx, config.EYE_HEIGHT, nz)
+
+        pct = wall_state.progress("lemma1") * 100
         hud.text = (
-            f"Read: {wall_state.progress(ROOM_ID) * 100:.0f}%  |  "
-            f"click=reveal  ·  shoot demon=exorcise  ·  "
+            f"Read: {pct:.0f}%  |  click=reveal  ·  shoot demon=exorcise  ·  "
             f"R=read panel  ·  ESC quit"
         )
 
-    app.update = update
+    globals()["update"] = update
     app.run()
 
 
