@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "level_id": "fixture",
+  "ceiling_h": 3.0,
+  "rooms": [
+    { "id": "lemma1", "rect": { "x": 0, "z": 0, "w": 12, "d": 12 },
+      "center": [6, 0, 6], "name_tile": "tiles/lemma1_name.png",
+      "doors": ["door_l1_l2"] },
+    { "id": "lemma2", "rect": { "x": 0, "z": 24, "w": 10, "d": 10 },
+      "center": [5, 0, 29], "name_tile": "tiles/lemma2_name.png",
+      "doors": ["door_l1_l2"] }
+  ],
+  "corridors": [
+    { "id": "corr_l1_l2", "from": "lemma1", "to": "lemma2",
+      "spline": [[6, 0, 12], [6, 0, 18], [5, 0, 24]],
+      "width": 3.0, "guide_color": "#ffcc00" }
+  ],
+  "doors": [
+    { "id": "door_l1_l2", "room": "lemma1", "corridor": "corr_l1_l2",
+      "position": [6, 0, 12], "facing": "N", "width": 3.0 }
+  ]
+}

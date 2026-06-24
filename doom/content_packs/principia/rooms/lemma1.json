@@ -1,0 +1,38 @@
+{
+  "schema_version": "1.0",
+  "room_id": "lemma1",
+  "walls": [
+    {
+      "wall_id": "w_lemma1_N", "facing": "N",
+      "blocks": [
+        { "block_id": "l1_step1", "type": "diagram", "order": 1,
+          "off_png": "png/l1_step1_off.png", "on_png": "png/l1_step1_on.png",
+          "colors": { "abc": "#0072B2", "bd": "#D55E00" },
+          "caption": "Inscribed and circumscribed figures" },
+        { "block_id": "l1_text1", "type": "text", "order": 2,
+          "off_png": "png/l1_text1_off.png", "on_png": "png/l1_text1_on.png",
+          "colors": { "abc": "#0072B2", "bd": "#D55E00" } }
+      ]
+    }
+  ],
+  "ceiling_bands": [
+    { "band_id": "cb_l1_1", "above_wall": "w_lemma1_N",
+      "equation_png": "png/eq_l1_1.png", "hidden_until_demon_dead": true }
+  ],
+  "demon": {
+    "demon_id": "demon_lemma1", "position": [6, 1.2, 6], "hp": 3,
+    "circles": [
+      { "offset": [0, 0, 0], "radius": 0.6, "color": "#FF7AB6", "role": "body" },
+      { "offset": [-0.2, 0.25, 0.55], "radius": 0.1, "color": "#3B6BFF", "role": "eye" },
+      { "offset": [0.2, 0.25, 0.55], "radius": 0.1, "color": "#3B6BFF", "role": "eye" },
+      { "offset": [0, -0.1, 0.6], "radius": 0.06, "color": "#FFFFFF", "role": "tooth" }
+    ],
+    "spray_glyphs": ["png/eq_l1_1.png"]
+  },
+  "secret_door": {
+    "door_id": "qed_lemma1", "wall_id": "w_lemma1_S",
+    "tile_png": "png/qed_halmos.png", "position": [6, 1.5, 0.05],
+    "boss": { "demon_id": "boss_lemma1", "position": [6, 1.2, -3], "hp": 5,
+              "circles": [], "spray_glyphs": [] }
+  }
+}

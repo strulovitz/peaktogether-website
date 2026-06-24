@@ -1,0 +1,4 @@
+{
+  "l1_step1": { "off_png": "png/l1_step1_off.png", "on_png": "png/l1_step1_on.png", "w_px": 1024, "h_px": 1024 },
+  "l1_text1": { "off_png": "png/l1_text1_off.png", "on_png": "png/l1_text1_on.png", "w_px": 1024, "h_px": 1024 }
+}

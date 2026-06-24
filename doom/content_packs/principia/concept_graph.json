@@ -1,0 +1,15 @@
+{
+  "schema_version": "1.0",
+  "level_id": "fixture",
+  "title": "Golden Fixture Level",
+  "nodes": [
+    { "id": "lemma1", "name": "Lemma I", "importance": 5,
+      "summary": "Quantities tending continually to equality become ultimately equal." },
+    { "id": "lemma2", "name": "Lemma II", "importance": 3,
+      "summary": "Sum of inscribed and circumscribed figures approaches the curvilinear area." }
+  ],
+  "edges": [
+    { "source": "lemma1", "target": "lemma2", "weight": 2,
+      "kind": "depends_on", "label": "used by" }
+  ]
+}
