@@ -39,6 +39,18 @@ for e in cell.all_entities:
         if tex is None:
             e.color = _c.magenta   # no texture loaded -> show bright magenta
 
+from ursina import Entity as _E, color as _c2
+# Force every panel double-sided so we see it regardless of facing.
+for e in cell.all_entities:
+    if getattr(getattr(e, "model", None), "name", "") == "quad":
+        e.double_sided = True
+        print("forced double_sided on panel at", e.world_position,
+              "rotation =", e.rotation)
+
+# A known-good GREEN quad facing the camera, placed mid-room as a sanity check.
+_E(model="quad", color=_c2.green, unlit=True,
+   position=(6, 1.6, 6), double_sided=True, scale=1.5)
+
 def input(key):
     if key == "escape": application.quit()
 app.run()
