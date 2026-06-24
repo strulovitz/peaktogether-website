@@ -29,6 +29,16 @@ for i, e in enumerate(cell.all_entities):
           "vis=", e.visible, "enabled=", e.enabled,
           "color=", getattr(e, "color", None))
 
+from ursina import color as _c
+for e in cell.all_entities:
+    if getattr(e, "model", None) and getattr(e.model, "name", "") == "quad":
+        tex = e.texture
+        print("PANEL at", e.world_position,
+              "texture =", getattr(tex, "name", tex),
+              "| path =", getattr(tex, "path", None))
+        if tex is None:
+            e.color = _c.magenta   # no texture loaded -> show bright magenta
+
 def input(key):
     if key == "escape": application.quit()
 app.run()
