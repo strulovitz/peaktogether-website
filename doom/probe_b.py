@@ -51,6 +51,22 @@ for e in cell.all_entities:
 _E(model="quad", color=_c2.green, unlit=True,
    position=(6, 1.6, 6), double_sided=True, scale=1.5)
 
+# Print the N-wall's real bounds so we know its thickness.
+nwall = cell.all_entities[3]
+print("N-WALL scale =", nwall.scale, "world_scale =", nwall.world_scale,
+      "z-extent =", nwall.world_position.z - nwall.world_scale.z/2,
+      "to", nwall.world_position.z + nwall.world_scale.z/2)
+
+# Move both panels well clear of the wall, into open room air, and tint them
+# bright cyan so they're unmistakable even if texture is odd.
+from ursina import color as _c3
+for e in cell.all_entities:
+    if getattr(getattr(e, "model", None), "name", "") == "quad":
+        e.z = 9.0            # pull ~3 units toward the room, away from wall
+        e.double_sided = True
+        e.color = _c3.cyan    # ignore texture for this test
+        print("moved panel to", e.world_position)
+
 def input(key):
     if key == "escape": application.quit()
 app.run()
