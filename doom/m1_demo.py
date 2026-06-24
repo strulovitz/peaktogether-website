@@ -5,7 +5,10 @@ Walk: WASD + mouse. Left-click a wall panel to turn it 'on'. Esc to quit.
 """
 from __future__ import annotations
 
-from ursina import Ursina, Entity, camera, color, raycast, application
+from ursina import (
+    Ursina, Entity, camera, color, raycast, application,
+    Sky, DirectionalLight, AmbientLight,
+)
 from ursina.prefabs.first_person_controller import FirstPersonController
 
 from principia.content.loader import load_level
@@ -14,6 +17,13 @@ from principia.world.builder import build_room
 
 app = Ursina()
 camera.fov = 75
+
+# --- Lighting + sky so the scene isn't a flat white void. -----------------
+Sky()
+AmbientLight(color=color.rgb(180, 180, 190))
+sun = DirectionalLight()
+sun.look_at((1, -1, 1))
+# --------------------------------------------------------------------------
 
 level = load_level("content_packs/principia", "fixture")
 room = next(r for r in level.floorplan.rooms if r.id == "lemma1")
@@ -26,6 +36,11 @@ cell = build_room(room, content, assets)
 player = FirstPersonController(y=1.6, speed=4, position=(6, 1.6, 2))
 player.jump_height = 0
 player.cursor.visible = False
+
+# FirstPersonController resets orientation on creation; force it to look
+# NORTH (+Z, toward the N wall at z=12 where the panels live) and level.
+player.rotation_y = 0      # face +Z
+player.camera_pivot.rotation_x = 0  # level pitch (no looking at floor/ceiling)
 
 Entity(
     parent=camera.ui,
