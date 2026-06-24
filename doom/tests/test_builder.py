@@ -76,5 +76,5 @@ def test_build_room_with_display():
             from ursina import application
 
             application.quit()
-        except Exception:
+        except (Exception, SystemExit):
             pass
