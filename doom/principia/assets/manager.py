@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 import os
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 
 from principia.schema import AssetEntry
 
@@ -50,7 +50,22 @@ class AssetManager:
         draw = ImageDraw.Draw(img)
         # frame so off/on differ structurally as well as in color
         draw.rectangle([2, 2, w - 3, h - 3], outline=fg, width=max(2, w // 256))
-        draw.text((10, 10), f"{label} [{state}]", fill=fg)
+        # Load a TrueType font at a LARGE size so text fills the panel.
+        font = None
+        for name in ("arial.ttf", "DejaVuSans.ttf", "C:/Windows/Fonts/arial.ttf"):
+            try:
+                font = ImageFont.truetype(name, min(w, h) // 12)
+                break
+            except OSError:
+                continue
+        if font is None:
+            font = ImageFont.load_default()
+        label_text = f"{label} [{state}]"
+        bbox = draw.textbbox((0, 0), label_text, font=font)
+        tw, th = bbox[2] - bbox[0], bbox[3] - bbox[1]
+        x = (w - tw) / 2 - bbox[0]
+        y = (h - th) / 2 - bbox[1]
+        draw.text((x, y), label_text, fill=fg, font=font)
         return img
 
     def _resolve_image(self, rel_path: str, label: str, on: bool) -> Image.Image:

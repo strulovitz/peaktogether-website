@@ -3,6 +3,7 @@ from __future__ import annotations
 import pytest
 
 from principia.schema import Rect
+from principia.config import WALL_THICKNESS
 from principia.world.builder import place_panels, PanelPlacement, PANEL_INSET
 
 
@@ -13,7 +14,7 @@ def test_place_panels_north():
         assert isinstance(p, PanelPlacement)
         assert p.rotation_y == 180
         # N wall at max Z, inset toward room interior.
-        assert p.position[2] == pytest.approx(12 - PANEL_INSET)
+        assert p.position[2] == pytest.approx(12 - WALL_THICKNESS / 2 - PANEL_INSET)
         assert p.position[1] == pytest.approx(1.5)
     # X centers at slot*(i+0.5) = 6*0.5, 6*1.5 = 3.0, 9.0
     assert placements[0].position[0] == pytest.approx(3.0)
@@ -28,7 +29,7 @@ def test_place_panels_east():
     for p in placements:
         assert p.rotation_y == 270
         # E wall at max X, inset toward room interior.
-        assert p.position[0] == pytest.approx(12 - PANEL_INSET)
+        assert p.position[0] == pytest.approx(12 - WALL_THICKNESS / 2 - PANEL_INSET)
     # Z centers vary along the wall axis.
     assert placements[0].position[2] == pytest.approx(3.0)
     assert placements[1].position[2] == pytest.approx(9.0)

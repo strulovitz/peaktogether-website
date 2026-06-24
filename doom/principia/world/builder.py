@@ -57,9 +57,9 @@ def place_panels(
         slot = L / n
         width = min(slot * PANEL_SLOT_FRACTION, PANEL_MAX_WIDTH)
         if facing == "N":
-            z = rect.z + rect.d - PANEL_INSET
+            z = rect.z + rect.d - WALL_THICKNESS / 2 - PANEL_INSET
         else:  # S
-            z = rect.z + PANEL_INSET
+            z = rect.z + WALL_THICKNESS / 2 + PANEL_INSET
         for i, block_id in enumerate(block_ids):
             x = rect.x + slot * (i + 0.5)
             placements.append(
@@ -77,9 +77,9 @@ def place_panels(
         slot = L / n
         width = min(slot * PANEL_SLOT_FRACTION, PANEL_MAX_WIDTH)
         if facing == "E":
-            x = rect.x + rect.w - PANEL_INSET
+            x = rect.x + rect.w - WALL_THICKNESS / 2 - PANEL_INSET
         else:  # W
-            x = rect.x + PANEL_INSET
+            x = rect.x + WALL_THICKNESS / 2 + PANEL_INSET
         for i, block_id in enumerate(block_ids):
             z = rect.z + slot * (i + 0.5)
             placements.append(
