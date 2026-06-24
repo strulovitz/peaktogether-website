@@ -116,7 +116,7 @@ principia/
   layout/graph.py   # concept graph -> floorplan + floor-map image (offline-capable)
   world/builder.py  # models -> Ursina entities for ONE cell
   world/rooms.py    # RoomManager: load/unload current cell
-  io/input.py       # InputManager: devices -> semantic actions (ONLY device-touching module)
+  control/input.py  # InputManager: devices -> semantic actions (ONLY device-touching module)
   player/mover.py   # movement (boyfriend)
   player/shooter.py # aim + shoot raycast (girlfriend)
   walls/state.py    # wall block off/on toggle + save/load
@@ -152,7 +152,7 @@ class RoomManager:
     def enter_cell(self, cell_id: str) -> None: ...   # builds it, unloads others
     def current_cell(self) -> str: ...
 
-# io/input.py  (the ONLY device-touching module)
+# control/input.py  (the ONLY device-touching module; renamed from io/ — the name io shadows Python's stdlib io module)
 class InputManager:
     def poll(self) -> None: ...
     def move_axis(self) -> tuple[float,float]: ...    # (strafe, forward) in [-1,1]   MOVER
@@ -203,7 +203,7 @@ class Navigator:
 
 app.py wiring order each frame: input.poll() → mover.update() → shooter.update() → navigator.update() → demon/ceiling updates → hud/map/readmode update.
 
-Recommended build order (each independently testable): schema → assets/manager → content/loader → layout/graph → world/builder → world/rooms → nav/navigator → io/input → player/mover → player/shooter → walls/state → enemy/demon → ceiling/equations → doors/secret → ui/* → app.
+Recommended build order (each independently testable): schema → assets/manager → content/loader → layout/graph → world/builder → world/rooms → nav/navigator → control/input → player/mover → player/shooter → walls/state → enemy/demon → ceiling/equations → doors/secret → ui/* → app.
 7. DATA FORMATS (JSON, validated by pydantic in schema.py)
 
 Two files per level keep authoring clean:
