@@ -124,7 +124,7 @@ def main():
 
         # --- Read mode: world is frozen for reading ---
         if read_mode.is_open():
-            if inp.read_mode_pressed() or inp.pause_pressed():
+            if inp.read_mode_pressed():
                 read_mode.close()
             return
 

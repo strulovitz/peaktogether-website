@@ -53,7 +53,7 @@ class ReadMode:
         )
         hint = Text(
             parent=camera.ui,
-            text="[R] / Esc to close   ·   scroll to zoom",
+            text="[R] to close   ·   scroll to zoom",
             origin=(0, 0),
             y=-0.46,
             scale=0.8,
