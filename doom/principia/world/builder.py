@@ -141,6 +141,9 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
     # headless-friendly until an actual build is requested.
     from ursina import Entity, color
 
+    def _rgb01(r, g, b):
+        return color.rgba(r / 255, g / 255, b / 255, 1)
+
     rect = room.rect
     cx = rect.x + rect.w / 2.0
     cz = rect.z + rect.d / 2.0
@@ -158,7 +161,7 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
         model="plane",
         scale=(rect.w, 1, rect.d),
         position=(cx, 0.0, cz),
-        color=color.rgb(40, 40, 46),
+        color=_rgb01(40, 40, 46),
         collider="box",
         unlit=True,
     )
@@ -171,14 +174,14 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
         scale=(rect.w, 1, rect.d),
         position=(cx, h, cz),
         rotation=(180, 0, 0),
-        color=color.rgb(22, 22, 26),
+        color=_rgb01(22, 22, 26),
         unlit=True,
     )
     all_entities.append(ceiling)
 
     # Four solid boundary walls (thin cubes), height CEILING_H, collidable.
     t = WALL_THICKNESS
-    wall_color = color.rgb(70, 70, 80)
+    wall_color = _rgb01(70, 70, 80)
     # N wall: z = max Z
     walls_spec = [
         ((cx, h / 2.0, rect.z + rect.d), (rect.w, h, t)),  # N
