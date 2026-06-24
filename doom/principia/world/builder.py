@@ -160,6 +160,7 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
         position=(cx, 0.0, cz),
         color=color.rgb(40, 40, 46),
         collider="box",
+        unlit=True,
     )
     all_entities.append(floor)
 
@@ -171,6 +172,7 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
         position=(cx, h, cz),
         rotation=(180, 0, 0),
         color=color.rgb(22, 22, 26),
+        unlit=True,
     )
     all_entities.append(ceiling)
 
@@ -192,6 +194,7 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
             scale=scale,
             color=wall_color,
             collider="box",
+            unlit=True,
         )
         all_entities.append(w)
 
@@ -211,6 +214,7 @@ def build_room(room: RoomCell, content: RoomContent, assets: AssetManager) -> Ce
                 scale=(placement.width, placement.height, 1),
                 double_sided=True,
                 collider="box",
+                unlit=True,
             )
             panel.kind = "panel"
             panel.block_id = placement.block_id

@@ -1,14 +1,8 @@
 """Throwaway end-to-end demo for M1. Not imported by any test/runtime module.
-
-Run:  python m1_demo.py
-Walk: WASD + mouse. Left-click a wall panel to turn it 'on'. Esc to quit.
-"""
+Run:  python m1_demo.py — WASD + mouse, left-click a panel to turn it on, Esc quits."""
 from __future__ import annotations
 
-from ursina import (
-    Ursina, Entity, camera, color, raycast, application,
-    Sky, DirectionalLight, AmbientLight,
-)
+from ursina import Ursina, Entity, camera, color, raycast, application
 from ursina.prefabs.first_person_controller import FirstPersonController
 
 from principia.content.loader import load_level
@@ -18,13 +12,6 @@ from principia.world.builder import build_room
 app = Ursina()
 camera.fov = 75
 
-# --- Lighting + sky so the scene isn't a flat white void. -----------------
-Sky()
-AmbientLight(color=color.rgb(180, 180, 190))
-sun = DirectionalLight()
-sun.look_at((1, -1, 1))
-# --------------------------------------------------------------------------
-
 level = load_level("content_packs/principia", "fixture")
 room = next(r for r in level.floorplan.rooms if r.id == "lemma1")
 content = level.rooms["lemma1"]
@@ -32,17 +19,15 @@ assets = AssetManager("content_packs/principia")
 
 cell = build_room(room, content, assets)
 
-# TEMP: no controller — pin the camera manually looking north at the panels.
-camera.position = (6, 1.6, 2)
-camera.rotation = (0, 0, 0)   # look down +Z toward N wall (z=12)
+player = FirstPersonController(speed=4, position=(6, 1.6, 2))
+player.gravity = 0
+player.jump_height = 0
+player.cursor.visible = False
+player.rotation_y = 0
+player.camera_pivot.rotation_x = 0
 
-Entity(
-    parent=camera.ui,
-    model="quad",
-    scale=0.008,
-    color=color.rgb(255, 60, 60),
-    rotation_z=45,
-)
+Entity(parent=camera.ui, model="quad", scale=0.008,
+       color=color.rgb(255, 60, 60), rotation_z=45)
 
 
 def input(key):
