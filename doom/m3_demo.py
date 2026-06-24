@@ -5,7 +5,7 @@ from __future__ import annotations
 from pathlib import Path
 
 from ursina import (
-    Ursina, Entity, camera, mouse, application, time, Text, Texture, color,
+    Ursina, Entity, camera, mouse, application, time, Text, Texture,
 )
 from PIL import Image, ImageDraw
 
@@ -18,6 +18,7 @@ from principia.control.input import InputManager
 from principia.player.shooter import Shooter
 from principia.enemy.demon import Demon
 from principia.ceiling.equations import CeilingManager
+from principia.schema import CeilingBand
 
 
 def make_equation_texture(text: str = "q = m v") -> Texture:
@@ -41,14 +42,20 @@ def main() -> None:
     # --- walls ---
     wall_state = WallStateManager(assets)
 
+    # FIX (Symptoms 1 & 3): the builder stamps each panel with the real
+    # off_tex / on_tex from assets.wall_textures(...). Pass THOSE to register
+    # so _apply_visual() shows a valid texture (no None -> no invisible panels).
+    for block_id, panel in cell.panels.items():
+        wall_state.register(
+            "lemma1", block_id, panel, panel.off_tex, panel.on_tex
+        )
+
     def reveal_panel(entity, point):
+        # FIX (Symptoms 2 & 4): builder stamps entity.block_id; and
+        # WallStateManager.toggle takes ONLY block_id (one arg).
         block_id = getattr(entity, "block_id", None)
         if block_id is not None:
-            wall_state.toggle("lemma1", block_id)
-
-    for block_id, panel in cell.panels.items():
-        panel.block_id = block_id
-        wall_state.register("lemma1", block_id, panel, None, None)
+            wall_state.toggle(block_id)
 
     # --- demon ---
     spec = content.demon
@@ -56,8 +63,6 @@ def main() -> None:
 
     # --- ceiling band ---
     equation_tex = make_equation_texture("q = m v")
-    band = content  # placeholder; we use the CeilingBand from level content below
-    # build the ceiling band entity
     band_entity = Entity(
         model="quad",
         texture=equation_tex,
@@ -66,9 +71,6 @@ def main() -> None:
         double_sided=True,
         scale=3,
     )
-
-    # fetch the CeilingBand spec for cb_l1_1 if present, else fabricate one
-    from principia.schema import CeilingBand
     cb = CeilingBand(
         band_id="cb_l1_1",
         above_wall="",
@@ -85,7 +87,7 @@ def main() -> None:
         ceiling.spray_from(tuple(spec.position), [equation_tex]),
     ))
 
-    # --- shooter handlers ---
+    # --- shooter handlers (on_demon uses the .demon back-reference) ---
     input_mgr = InputManager()
     shooter = Shooter(camera, input_mgr)
     shooter.register_hit_handlers(
@@ -104,14 +106,12 @@ def main() -> None:
     def update():
         input_mgr.poll()
 
-        # mouse look
         dx, dy = input_mgr.aim_delta()
         rot["yaw"] += dx * 40
         rot["pitch"] = max(-89, min(89, rot["pitch"] - dy * 40))
         camera.rotation_y = rot["yaw"]
         camera.rotation_x = rot["pitch"]
 
-        # movement
         mx, mz = input_mgr.move_axis()
         camera.position += (
             camera.right * mx * config.WALK_SPEED * time.dt
