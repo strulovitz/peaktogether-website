@@ -45,7 +45,13 @@ class Demon:
         self._t = 0.0
         self._base_y = position[1]
 
-        self.root = Entity(position=position, parent=parent or scene)
+        # Face the player: features are authored pointing +Z (north); the
+        # player starts to the south, so rotate the whole demon 180° about Y.
+        self.root = Entity(
+            position=position,
+            parent=parent or scene,
+            rotation=(0, 180, 0),
+        )
 
         self._circles: list[Entity] = []
         # Sort so the big body is drawn first; eyes/teeth (smaller) drawn after
