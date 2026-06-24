@@ -32,15 +32,9 @@ assets = AssetManager("content_packs/principia")
 
 cell = build_room(room, content, assets)
 
-# Start near the south wall (min Z) facing north so the N-wall panels show.
-player = FirstPersonController(y=1.6, speed=4, position=(6, 1.6, 2))
-player.jump_height = 0
-player.cursor.visible = False
-
-# FirstPersonController resets orientation on creation; force it to look
-# NORTH (+Z, toward the N wall at z=12 where the panels live) and level.
-player.rotation_y = 0      # face +Z
-player.camera_pivot.rotation_x = 0  # level pitch (no looking at floor/ceiling)
+# TEMP: no controller — pin the camera manually looking north at the panels.
+camera.position = (6, 1.6, 2)
+camera.rotation = (0, 0, 0)   # look down +Z toward N wall (z=12)
 
 Entity(
     parent=camera.ui,
