@@ -67,6 +67,20 @@ for e in cell.all_entities:
         e.color = _c3.cyan    # ignore texture for this test
         print("moved panel to", e.world_position)
 
+from PIL import Image
+for e in cell.all_entities:
+    if getattr(getattr(e, "model", None), "name", "") == "quad":
+        tex = e.texture
+        # Ursina PIL textures keep the source image; try common attrs.
+        img = getattr(tex, "_cached_image", None) or getattr(tex, "image", None)
+        print("tex obj:", type(tex), "has image:", img is not None,
+              "size:", getattr(tex, "size", "?"))
+        if img is not None:
+            out = f"panel_dump_{int(e.x)}.png"
+            img.save(out)
+            print("SAVED", out, "mode:", img.mode, "size:", img.size,
+                  "extrema:", img.getextrema())
+
 def input(key):
     if key == "escape": application.quit()
 app.run()
