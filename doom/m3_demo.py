@@ -32,7 +32,9 @@ def main() -> None:
     app = Ursina()
     pack_dir = Path("content_packs/principia")
 
-    level = load_level(pack_dir, "lemma1")
+    # FIX (Symptom 1): the level id is "fixture" (per concept_graph.json /
+    # floorplan.json); "lemma1" is the ROOM id, looked up in level.rooms.
+    level = load_level(pack_dir, "fixture")
     assets = AssetManager(pack_dir)
 
     room_cell = next(r for r in level.floorplan.rooms if r.id == "lemma1")
@@ -42,18 +44,14 @@ def main() -> None:
     # --- walls ---
     wall_state = WallStateManager(assets)
 
-    # FIX (Symptoms 1 & 3): the builder stamps each panel with the real
-    # off_tex / on_tex from assets.wall_textures(...). Pass THOSE to register
-    # so _apply_visual() shows a valid texture (no None -> no invisible panels).
     for block_id, panel in cell.panels.items():
         wall_state.register(
             "lemma1", block_id, panel, panel.off_tex, panel.on_tex
         )
 
-    def reveal_panel(entity, point):
-        # FIX (Symptoms 2 & 4): builder stamps entity.block_id; and
-        # WallStateManager.toggle takes ONLY block_id (one arg).
-        block_id = getattr(entity, "block_id", None)
+    # FIX (Symptom 2): the shooter calls on_wall(block_id) with ONE argument —
+    # the block_id string itself, not the entity, and no hit point.
+    def reveal_panel(block_id):
         if block_id is not None:
             wall_state.toggle(block_id)
 
