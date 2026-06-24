@@ -7,7 +7,7 @@ from principia.assets.manager import AssetManager
 from principia.config import CEILING_H, WALL_THICKNESS
 
 # Frozen facing -> rotation_y (degrees about Y). Front of quad faces into room.
-_FACING_ROTATION: dict[str, float] = {"N": 180.0, "S": 0.0, "E": 270.0, "W": 90.0}
+_FACING_ROTATION: dict[str, float] = {"N": 0.0, "S": 180.0, "E": 90.0, "W": 270.0}
 
 # How far in front of the solid boundary wall the panel quad sits.
 PANEL_INSET: float = 0.05

@@ -12,7 +12,7 @@ def test_place_panels_north():
     assert len(placements) == 2
     for p in placements:
         assert isinstance(p, PanelPlacement)
-        assert p.rotation_y == 180
+        assert p.rotation_y == 0
         # N wall at max Z, inset toward room interior.
         assert p.position[2] == pytest.approx(12 - WALL_THICKNESS / 2 - PANEL_INSET)
         assert p.position[1] == pytest.approx(1.5)
@@ -27,7 +27,7 @@ def test_place_panels_east():
     placements = place_panels(Rect(x=0, z=0, w=12, d=12), "E", ["a", "b"], 3.0)
     assert len(placements) == 2
     for p in placements:
-        assert p.rotation_y == 270
+        assert p.rotation_y == 90
         # E wall at max X, inset toward room interior.
         assert p.position[0] == pytest.approx(12 - WALL_THICKNESS / 2 - PANEL_INSET)
     # Z centers vary along the wall axis.
