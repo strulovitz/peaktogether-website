@@ -40,7 +40,7 @@ def test_demon_live_death_callback_once():
 
     pack_dir = Path("content_packs/principia")
     try:
-        level = load_level(pack_dir, "lemma1")
+        level = load_level(pack_dir, "fixture")   # FIX: level id is "fixture"
         spec = level.rooms["lemma1"].demon
     except Exception as e:  # noqa: BLE001
         pytest.skip(f"fixture unavailable: {e}")
