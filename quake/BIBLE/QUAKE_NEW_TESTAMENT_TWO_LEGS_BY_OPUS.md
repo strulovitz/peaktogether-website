@@ -98,6 +98,19 @@ importance drives room size and color. Assign it from two mechanical-ish signals
 
 Map the blended score to 1–5 by quantiles. The lovely consequence: the lemma that everything leans on becomes the biggest, warmest room — the map's shape tells the truth about the book. You sanity-check this in the picture: the giant warm node should be a thing with many arrows into it. If a leaf node is huge, something's wrong — and that's visible, not mathematical.
 
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1) in the "remaining gaps" answer. **Status:** LOCKED — was recorded only in chat; preserved here at its correct section. **What:** the exact importance blend that pins §1.4's "by quantiles."
+
+The "blend by quantiles" above is pinned to a deterministic formula (works for tiny graphs; no quantile degeneracy):
+```
+deg_norm   = indegree / max(1, max_indegree)
+hint_norm  = (importance_hint − 1) / 4
+score      = importance_w_indeg · deg_norm + importance_w_hint · hint_norm
+importance = clamp(round(1 + 4 · score), 1, 5)
+```
+Config (→ BuildConfig): `importance_w_indeg = 0.6`, `importance_w_hint = 0.4`. (Quantile ranking was an optional v1.1 idea; this scalar formula is what's used.)
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
+
 1.5 Layout + 3D crossing-heights (confirming/refining doctrine §8.1)
 
 Tool: networkx for the force-directed placement (spring_layout, Fruchterman–Reingold), deterministic by seed. All crossing/height logic is our own deterministic code over networkx's output.
