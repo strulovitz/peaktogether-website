@@ -62,6 +62,7 @@
 ## §5 — OPEN THREADS / CURRENT FRONTIER (nothing is built yet — design only)
 
 - **No code exists yet.** Everything to date is design/spec. The build (engine M0 → … per the Old Testament §13 roadmap) has not started.
+- ✅ **Parent 2 handoff ready** (`PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`) — forced missions: Leg 1 (MAP) first, then Leg 2 (WALLS). Waiting for Nir to spin up the new Opus parent.
 - **Deferred on purpose (not gaps):** audio / atmosphere (→ ~M8); figure background transparency (a bake-time empirical choice, both paths specified).
 - **Offered by Parent 1, not yet requested:** a consolidated `BuildConfig` + runtime-config canonical file (a single "§4.10"); and a worked degree-5 golden-fixture example for the Room Maker (bearings → walls/door-centers/sub-segments/packed panels).
 - ~~The unformalized amendments need folding in~~ — **DONE (June 25, 2026):** every decided-only-in-chat item is now preserved as a marked inline commentary at its correct section (see §4). Nothing is in a "Miscellaneous" bin.

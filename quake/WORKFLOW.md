@@ -68,7 +68,7 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 - Git is clean and pushed.
 
 ## 9. NEXT STEPS / OPEN THREADS
-- **Fill the Parent 2 mission** (or let Parent 2 propose holistically), then spin it up with Commentaries + OT + NT.
+- ✅ **Parent 2 mission filled** — forced: Leg 1 (MAP) first, then Leg 2 (WALLS). Handoff is ready at `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`. Next: spin up Parent 2 (Opus) with Commentaries + OT + NT.
 - **The build hasn't started** (engine M0 → … per Old Testament §13 / Second Canon §5.4 wiring).
 - Deferred on purpose: **audio** (~M8); figure **background-transparency** (bake-time empirical).
 - Offered by Parent 1, not yet requested: a consolidated `BuildConfig`/runtime-config doc (a "§4.10"); a Room-Maker golden-fixture worked example.
