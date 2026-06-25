@@ -87,5 +87,5 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 - Commit + push after every meaningful change; give Nir **view (blob)** GitHub links to copy from.
 - Default branch is **master** (not main).
 
-## 12. NOTE ON AGENTS.md (intentionally not touched)
-Nir said **do not contaminate the AGENTS file**, so AGENTS.md is unchanged — it still routes startup through the **descent** project. To make this Quake memory findable on wake without touching AGENTS.md, a one-line **redirect note** was added at the top of `descent/WORKFLOW.md` pointing here. On restart: follow that → read this file → read the Commentaries → ask Nir what's next.
+## 12. ON RESTART / AGENTS.md
+AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) now routes startup **directly to Quake**: read this file first, then the Commentaries, then ask Nir. (Nir reversed the earlier "don't touch AGENTS.md" instruction on June 25 so I'd always wake up oriented to Quake until this game ships — like Descent did. The earlier indirect redirect in `descent/WORKFLOW.md` was removed.) Note: AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
