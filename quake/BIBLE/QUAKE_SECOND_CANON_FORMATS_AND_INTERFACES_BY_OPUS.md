@@ -470,6 +470,12 @@ class Recipe(BaseModel):
 
 > You are reading ONE figure from a classical geometry book. I paste the cropped figure image and its caption/surrounding text. Produce a CONSTRUCTION RECIPE as JSON exactly matching the schema I paste below. Rules you must obey: (1) Express the figure as an ORDERED list of construction ops — points, then the lines/circles/conics/arcs built from them — using ONLY the listed op kinds. (2) NEVER rely on absolute coordinates: every later object must be defined constructively (intersection, midpoint, parallel, perpendicular, tangent, foot, through-points). The only coordinates allowed are OPTIONAL rough rough_xy hints on free_points and OPTIONAL near disambiguators on intersect/tangent_from — these are rough relative placements only; global position/scale/rotation will be fixed later by a human tool, so do not try to match the page's exact scale or angle. (3) Name every object (you may use the figure's own letters: A, B, S, c…). (4) Tag every element that should be DRAWN with draw:{group,step,label?}; leave draw:null for helper objects. group is a lowercase semantic name (e.g. "radius","path","construction","tangent","swept_area") — reuse the SAME group name for the same concept so the prose can match its color. (5) Segment the proof into steps and set each drawn element's step to the step where it first appears/matters; fill steps[] with a one-line plain-English gloss per step. (6) Output JSON ONLY. [PASTE THE Recipe SCHEMA HERE.]
 
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1) in the "remaining gaps" answer. **Status:** LOCKED — was recorded only in chat; preserved here at its correct section. **What:** `Draw.marker` is narrowed.
+
+In §3.A.4's `Draw` schema (above), `marker: Literal["none","dot","tick"]` is amended to **`marker: Literal["none","dot"]`** (the `"tick"` option is dropped). Reason: `prooffig.asy`'s `drawAll` only renders `none`/`dot`; `"tick"` was half-wired. Equal-length / tick marks, if ever needed, are expressed as explicit small segments or via the `angle_mark` op, and added properly in a later version.
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
+
 3.A.5 — EMITTER AI output → figure.<figure_id>.asy (the house convention)
 
 The EMITTER turns the recipe into Asymptote against our frozen helper prooffig.asy. Two files are involved: our convention (verbatim, fixed) and the generated figure (a strict template).
@@ -744,6 +750,22 @@ class PageMap(BaseModel):
 
 Validation: page_label unique; leaf_index ≥ 0 and unique. Adapter brief: a 10-line script converting your Archive.org leaf→label file into this; paste one line of yours and I pin it.
 
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1) in the "remaining gaps" answer, after Nir supplied his Archive file's real shape. **Status:** LOCKED — was recorded only in chat; preserved here at its correct section. **What:** the §4.1 validation is finalized, plus the `page_map_adapter.py` child brief.
+
+The §4.1 validation above is AMENDED (the "paste one line and I pin it" is now resolved). Final rule:
+- `PageEntry.leaf_index` (`Field(ge=0)`, `== leafNum − 1`) is the **unique primary key**, present on every entry and **contiguous from 0** — this is what lets `citation_extract` slice the `_djvu.txt` form-feed chunks 1:1 by leaf.
+- `page_label` uniqueness applies **only to non-empty labels**; empty `""` (unnumbered front-matter/plates) is allowed and may repeat freely.
+- `image_path`, if present, must exist on disk.
+- Downstream: `citation_extract.page_seen` uses the leaf's `page_label` if non-empty, else the synthetic string `"[leaf N]"` (N = leaf_index); the "phrase is a substring of the page OCR" guard keys on the leaf chunk, not the label.
+
+New BUILD module — `page_map_adapter.py` (single file, one concern). Frozen contract:
+```python
+def adapt(hocr_pages: dict, pack_id: str, image_dir: str | None) -> PageMap: ...
+```
+Behavior: `hocr_pages` is the parsed archive-hocr-tools format-version "2" JSON (top-level `identifier`, `format-version`, `archive-hocr-tools-version`, `confidence`, `pages[]`; each page has `leafNum` (int, 1-based), `pageNumber` (string, may be ""), other fields ignored). Assert `hocr_pages["format-version"] == "2"` (raise `ValueError` with the found value otherwise). For each entry: `leaf_index = leafNum − 1`; `page_label = pageNumber` (verbatim, including ""); `image_path = f"{image_dir}/leaf_{leafNum:04d}.png"` if `image_dir` else `None`. Sort output pages by `leaf_index` ascending; assert contiguity from 0 (raise naming the missing index). Set `schema_version="1.0"`, `pack_id=pack_id`. Return a validated `PageMap`. Pure function; no IO, no network. Tests: (1) leafNum 1..5 / pageNumber `["","","","41","42"]` → leaf_index 0..4, two empty labels allowed, 41/42 unique, image_path `leaf_0004.png`/`leaf_0005.png`; (2) format-version "1" → raises; (3) gap in leafNum (1,2,4) → raises naming index 2; (4) duplicate non-empty pageNumber → raises; duplicate "" → passes.
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
+
 4.2 concept_graph.json (Layer 1 — feeds level_maker)
 
 ```python
@@ -932,6 +954,35 @@ class RoomRuntime(BaseModel):
 
 Validation: asset_ids exist in manifest; final_pair_id ∈ pairs; hidden_door_wall_slot is the slot of the final pair's drawing OR text; enemy_id == room_id + ".demon"; no two pairs share a wall slot.
 
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1). **Status:** part SUPERSESSION pointer, part LOCKED schema (recorded only in chat; preserved here at its correct section). **What:** the room/door model in §4.5 above is superseded; the still-live panel schemas it keeps are pinned here.
+
+⚠️ **SUPERSESSION:** the `RoomRuntime` door/entrance model in §4.5 above (and the Room-Maker that produced it) is **superseded** by the *Biblical Apocrypha* — `QUAKE_BIBLICAL_APOCRYPHA_ROOM_MAKER_V3_DOOR_BEARINGS_BY_OPUS.md` (Room System v3). For anything about rooms/doors, use the Apocrypha: it replaces the single-entrance model with a list of bearing-accurate `DoorRT` (door **count** = node degree; door **direction** = the corridor's true map bearing). The Apocrypha notes "panels & rest unchanged" — these are those unchanged panel schemas it relies on (they amend the v1 `PanelPairRT` shown above to carry explicit placement):
+```python
+class PanelPlacementRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    wall: Literal["N","E","S","W"]
+    slot_index: int = Field(ge=0)
+    wall_slot: str                 # the "<WALL>-<INDEX>" id (redundant, for debug/door ref)
+    center_xyz: Vec3               # panel center in room-local space
+    width_m: float
+    height_m: float
+    yaw_rad: float                 # facing rotation about Y (panel normal points inward)
+
+class PanelPairRT(BaseModel):      # AMENDED: replaces wall_slot_drawing/wall_slot_text strings
+    model_config = ConfigDict(extra="forbid")
+    pair_id: PairId
+    step_index: int
+    drawing_off_asset: str
+    drawing_on_asset: str
+    text_off_asset: str
+    text_on_asset: str
+    drawing_placement: PanelPlacementRT
+    text_placement: PanelPlacementRT
+```
+Wall-slot grammar: `wall_slot = "<WALL>-<INDEX>"`, WALL ∈ {N,E,S,W}, INDEX 0-based along that wall in reading order; one panel per slot; a step-pair occupies two adjacent slots on the same wall (drawing then text), never split across a corner.
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
+
 4.6 manifest.json (baked assets — feeds assets.load_pack)
 
 ```python
@@ -1025,6 +1076,58 @@ class BuildConfig(BaseModel):               # build_config.json (authored; bake 
     guide_w_dist: float = 0.4
     guide_max_lines: int = 3
 ```
+
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1) in the "remaining gaps" answer. **Status:** LOCKED — recorded only in chat; preserved here at its correct section. **What:** (A) additive `BuildConfig` fields the Room Maker + importance blend use; (B) the new **§4.9 `provenance.json` / `Provenance`** schema.
+
+**(A) Additive `BuildConfig` fields** (amends §4.8; build_config.json):
+```python
+room_px_per_m: float = 360
+panel_min_w_m: float = 0.6 ;  panel_max_w_m: float = 3.2
+panel_min_h_m: float = 0.5 ;  panel_max_h_m: float = 2.4
+panel_gap_m: float = 0.25         # between the two panels of a pair
+pair_gap_m: float = 0.8           # between consecutive pairs
+wall_margin_m: float = 0.6        # from corners
+room_headroom_m: float = 1.2      # ceiling above tallest panel
+room_min_w_m: float = 6.0 ; room_min_d_m: float = 6.0 ; room_min_h_m: float = 3.2
+panel_center_y_pref_m: float = 1.55
+importance_w_indeg: float = 0.6   # used by the importance blend (New Testament §1.4)
+importance_w_hint:  float = 0.4
+# NOTE: the door/room-v3 BuildConfig fields (door_width_m, door_height_m, door_min_separation_m,
+# corner_clearance_m, room_target_aspect, room_pack_slack, room_grow_step_m, room_sizing_max_iters,
+# aisle_depth_m, demon_offset_m) live in the Biblical Apocrypha §3.
+```
+
+**(B) §4.9 — `provenance.json` / `Provenance`** (BUILD-world only; emitted by `merge()`; never shipped):
+```python
+class EdgeProvenance(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    edge_id: str = Field(pattern=r"^edge\.[a-z0-9_]+\.to\.[a-z0-9_]+$")
+    provenance: Literal["cited", "inferred"]
+    snippet: str                       # verbatim citation context; "" only when provenance=="inferred"
+    page_seen: PageLabel | None        # the leaf's label (or "[leaf N]"); None for inferred-only
+    agreement: Literal["both", "citation_only", "inference_only"]
+    reason: str = ""                   # required (non-empty) when provenance=="inferred"
+    vague: bool = False
+
+class Provenance(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    level_id: LevelId
+    edges: list[EdgeProvenance]
+    flags: list[str]                   # plain-English graph-level findings (cycles, missing items, orphans, islands)
+```
+Semantics: `cited` → edge from a resolved printed phrase (snippet verbatim, page_seen set). `inferred` → promoted from the INFERENCE pass with no matching citation (snippet="", reason non-empty). `agreement`: "both" (citation+inference agree — highest confidence) / "citation_only" / "inference_only" (the scrutiny pile — shown dashed in graph_preview.png). `flags` carries the math-free red-flags from `sanity.check`.
+Validation (build fails on any): exactly one `EdgeProvenance` per `concept_graph` edge, matched by `edge_id` (no orphans, no missing); `cited` ⇒ `page_seen` not None and (snippet non-empty or `vague==True`); `inferred` ⇒ `snippet==""`, `page_seen is None`, `reason` non-empty; `agreement=="inference_only"` ⇒ `inferred`, `"citation_only"`/`"both"` ⇒ `cited`; `provenance.json` must NOT appear under `dist/` (a packaging check asserts this).
+Example:
+```json
+{"schema_version":"1.0","level_id":"principia_bk1_sec1",
+ "edges":[
+   {"edge_id":"edge.prop_1.to.law_2","provenance":"cited","snippet":"…which is manifest by the second Law of Motion…","page_seen":"55","agreement":"both","reason":"","vague":false},
+   {"edge_id":"edge.prop_1.to.lemma_1","provenance":"inferred","snippet":"","page_seen":null,"agreement":"inference_only","reason":"The polygon-to-curve limit relies on ultimate-equality of vanishing triangles.","vague":false}],
+ "flags":["ISLANDS: 1 component (ok)"]}
+```
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
 
 §5 — PART C: MODULE INTERFACES (contracts.py made real)
 
@@ -1231,6 +1334,12 @@ def main() -> int: ...
 # tools/overlay_diff.py  (build-time utility)
 def run(back_png: str, front_png: str) -> None: ...
 ```
+
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Decided by** Claude Opus 4.8 (Parent 1) in the "remaining gaps" answer. **Status:** LOCKED — recorded only in chat; preserved here at its correct section. **What:** the Read-Mode target-selection rule (which panel `readmode` opens) + its constants.
+
+`readmode` (above) opens the panel the reticle's ray hits (raycast, hit distance ≤ `READ_MAX_DIST`). If the ray hits nothing, it opens the panel whose center lies within `READ_CONE_HALF_ANGLE` of view-forward and is nearest by distance (≤ `READ_MAX_DIST`); if none qualify, Read is a no-op. Runtime config: **`READ_MAX_DIST = 6.0` m, `READ_CONE_HALF_ANGLE = 35°`**. (The raycast/cone helper is a child detail in `gameplay.py` / `nav_collision.py`.)
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
 
 5.4 Per-frame wiring (authoritative order — restated so children align)
 
