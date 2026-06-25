@@ -12,19 +12,19 @@
 All 9 modules built, integrated, tested. **94/94 green.**
 
 ### Leg 2 (WALLS) — IN PROGRESS 🟡
-**3 of 7 modules built. 110/110 total tests green.**
+**4 of 7 modules built. 114/114 total tests green.**
 
 | # | Module | File | Tests | Status |
 |---|--------|------|-------|--------|
 | C1 | palette_gen | `bake/palette_gen.py` | 4 | ✅ Done |
 | C2 | recipe_validate | `bake/recipe_validate.py` | 6 | ✅ Done |
 | C3 | prooffig_check | `bake/prooffig_check.py` | 6 | ✅ Done |
-| C4 | asy_compile | NOT YET | — | 🔜 NEXT |
-| C5 | _imageops | NOT YET | — | ⏳ |
+| C4 | asy_compile | `bake/asy_compile.py` | 4 | ✅ Done |
+| C5 | _imageops | NOT YET | — | 🔜 NEXT |
 | C6 | baker_figure | NOT YET | — | ⏳ |
 | C7 | baker_text | NOT YET | — | ⏳ |
 
-**The VERY NEXT step is Child 4: `bake/asy_compile.py`** — the subprocess isolate that runs the Asymptote binary with -u params, captures stdout/stderr verbatim, and returns ok=False on error (never raises).
+**The VERY NEXT step is Child 5: `bake/_imageops.py`** — shared pure image helpers (key_out, trim, bbox) that both bakers import. NumPy/Pillow array-based, headless-testable.
 
 ### parent 2 is waiting
 Parent 2 is holding for a build report. He finished both frozen packages. He flagged one §E item (figure_id vs block_id for asset keys) — not blocking, DeedSeek must confirm at integration time.
