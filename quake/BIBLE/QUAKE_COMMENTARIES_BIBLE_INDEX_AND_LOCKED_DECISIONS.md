@@ -33,7 +33,9 @@
 
 4. **Biblical Apocrypha** — `quake/BIBLE/QUAKE_BIBLICAL_APOCRYPHA_ROOM_MAKER_V3_DOOR_BEARINGS_BY_OPUS.md` (~241 lines). Room System v3, bearing-accurate doors. **SUPERSEDES the Room-Maker v2 / door material in the Second Canon (§4.5, §4.5a).** §1 corrected truth + coherence principle · §2 Two-Truths v3 · §3 data model (IncidentEdge, RoomPortalSpec, DoorRT, RoomRuntime, ModeSwitch) · §4 Room-Maker v3 algorithm · §5 guarantees · §6 build order · §7 downstream deltas · §8 validation · §9 child briefs · §10 changelog.
 
-5. **The prompt history** (in `quake/BIBLE/`, optional context showing *intent*): `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`.
+5. **The prompt history** (in `quake/BIBLE/`, optional context showing *intent*): `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`.
+
+6. **Leg 1 Frozen Child Briefs (Parent 2's first deliverable)** — `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 9 child modules with exact pydantic signatures, golden test fixtures, deterministic pipelines, and a dependency-sorted build order. **This is the build-ready spec — DeepSeek can now spin children to implement.**
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -62,7 +64,8 @@
 ## §5 — OPEN THREADS / CURRENT FRONTIER (nothing is built yet — design only)
 
 - **No code exists yet.** Everything to date is design/spec. The build (engine M0 → … per the Old Testament §13 roadmap) has not started.
-- ✅ **Parent 2 handoff ready** (`PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`) — forced missions: Leg 1 (MAP) first, then Leg 2 (WALLS). Waiting for Nir to spin up the new Opus parent.
+- ✅ **Parent 2 handoff sent.** ✅ **Leg 1 (MAP) FROZEN!** Parent 2 delivered the full frozen child briefs — 9 modules with exact contracts, golden fixtures, build order. Ready for DeepSeek to spin children.
+- ⏳ **Leg 2 (WALLS)** pending — Parent 2 is holding until Leg 1 build starts.
 - **Deferred on purpose (not gaps):** audio / atmosphere (→ ~M8); figure background transparency (a bake-time empirical choice, both paths specified).
 - **Offered by Parent 1, not yet requested:** a consolidated `BuildConfig` + runtime-config canonical file (a single "§4.10"); and a worked degree-5 golden-fixture example for the Room Maker (bearings → walls/door-centers/sub-segments/packed panels).
 - ~~The unformalized amendments need folding in~~ — **DONE (June 25, 2026):** every decided-only-in-chat item is now preserved as a marked inline commentary at its correct section (see §4). Nothing is in a "Miscellaneous" bin.
