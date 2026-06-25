@@ -11,6 +11,13 @@ Vec2 = tuple[float, float]
 Vec3 = tuple[float, float, float]
 Hex  = Annotated[str, Field(pattern=r"^#[0-9a-fA-F]{6}$")]
 GroupName = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
+FigureId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.f[0-9]+$")]
+PairId   = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+$")]
+DrawBlockId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+\.fig$")]
+TextBlockId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+\.txt$")]
+EqId     = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.eq[0-9]+$")]
+OpName   = Annotated[str, Field(pattern=r"^[A-Za-z][A-Za-z0-9_']*$")]
+Ref      = OpName
 
 
 # ── SCHEMA 1 ──────────────────────────────────────────────────────────
@@ -188,6 +195,104 @@ class MergeConfig(BaseModel):
     importance_w_indeg: float = 0.6
     importance_w_hint: float = 0.4
 
+
+# ── LEG 2 — RECIPE (coordinate-free construction op-list) ──────────────
+class _Op(BaseModel):
+    """Base for all construction ops."""
+    model_config = ConfigDict(extra="forbid")
+    name: OpName
+    draw: Optional["Draw"] = None  # None = construction helper, computed but not drawn
+
+# ---- attachments ----
+class Label(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    tex: str                            # full LaTeX, e.g. "$A$"
+    placement: Literal["N","S","E","W","NE","NW","SE","SW","center"] = "NE"
+    offset: Optional[Vec2] = None
+
+class Draw(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    group: GroupName                    # palette key → color
+    step: int = Field(ge=1)             # which proof step lights this element
+    label: Optional[Label] = None
+    marker: Literal["none","dot"] = "none"  # LOCKED: "tick" dropped per amendment
+
+# ---- POINTS ----
+class FreePoint(_Op):     op: Literal["free_point"];  rough_xy: Optional[Vec2] = None
+class PointOn(_Op):       op: Literal["point_on"];    path: Ref; t: Optional[float] = None; near: Optional[Vec2] = None
+class Intersect(_Op):     op: Literal["intersect"];   a: Ref; b: Ref; near: Optional[Vec2] = None
+class Midpoint(_Op):      op: Literal["midpoint"];    a: Ref; b: Ref
+class Foot(_Op):          op: Literal["foot"];        point: Ref; line: Ref
+class ReflectPoint(_Op):  op: Literal["reflect_point"]; point: Ref; over: Ref
+
+# ---- LINES / RAYS ----
+class LineOp(_Op):        op: Literal["line"];        a: Ref; b: Ref
+class Segment(_Op):       op: Literal["segment"];     a: Ref; b: Ref
+class RayOp(_Op):         op: Literal["ray"];         a: Ref; b: Ref
+class Parallel(_Op):      op: Literal["parallel"];    through: Ref; to: Ref
+class Perpendicular(_Op): op: Literal["perpendicular"]; through: Ref; to: Ref
+class TangentAt(_Op):     op: Literal["tangent_at"];  curve: Ref; at: Ref
+class TangentFrom(_Op):   op: Literal["tangent_from"]; curve: Ref; frm: Ref; near: Optional[Vec2] = None
+class Bisector(_Op):      op: Literal["bisector"];    a: Ref; vertex: Ref; b: Ref
+
+# ---- CIRCLES / ARCS ----
+class CircleCP(_Op):      op: Literal["circle_cp"];   center: Ref; through: Ref
+class CircleCR(_Op):      op: Literal["circle_cr"];   center: Ref; radius_points: Optional[tuple[Ref, Ref]] = None; radius_value: Optional[float] = None
+class Circle3(_Op):       op: Literal["circle_3"];    a: Ref; b: Ref; c: Ref
+class Arc(_Op):           op: Literal["arc"];         center: Ref; frm: Ref; to: Ref; direction: Literal["ccw","cw"] = "ccw"
+
+# ---- CONICS (Newton) ----
+class EllipseFoci(_Op):   op: Literal["ellipse_foci"];   f1: Ref; f2: Ref; through: Ref
+class EllipseAxes(_Op):   op: Literal["ellipse_axes"];   center: Ref; major_end: Ref; minor_end: Ref
+class ParabolaFD(_Op):    op: Literal["parabola_fd"];    focus: Ref; directrix: Ref
+class HyperbolaFoci(_Op): op: Literal["hyperbola_foci"]; f1: Ref; f2: Ref; through: Ref
+class Conic5(_Op):        op: Literal["conic_5"];        p1: Ref; p2: Ref; p3: Ref; p4: Ref; p5: Ref
+
+# ---- COMPOUND / SEQUENCES ----
+class Polygon(_Op):       op: Literal["polygon"];   points: list[Ref] = Field(min_length=3)
+class Polyline(_Op):      op: Literal["polyline"];  points: list[Ref] = Field(min_length=2)
+class Series(_Op):
+    op: Literal["series"]
+    along: Ref
+    to_curve: Optional[Ref] = None
+    count: int = Field(ge=1, le=64)
+    kind: Literal["inscribed_rects","circumscribed_rects","ordinates","chords","tangent_polygon"]
+
+# ---- MARKS / STANDALONE LABELS ----
+class AngleMark(_Op):     op: Literal["angle_mark"]; a: Ref; vertex: Ref; b: Ref; right: bool = False
+class FloatLabel(_Op):    op: Literal["label"];      at: Ref  # draw must be set; carries the text
+
+RecipeOp = Annotated[
+    "FreePoint | PointOn | Intersect | Midpoint | Foot | ReflectPoint | "
+    "LineOp | Segment | RayOp | Parallel | Perpendicular | TangentAt | TangentFrom | Bisector | "
+    "CircleCP | CircleCR | Circle3 | Arc | "
+    "EllipseFoci | EllipseAxes | ParabolaFD | HyperbolaFoci | Conic5 | "
+    "Polygon | Polyline | Series | AngleMark | FloatLabel",
+    Field(discriminator="op"),
+]
+
+class StepGloss(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    index: int = Field(ge=1)
+    gloss: str
+
+class Recipe(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    figure_id: FigureId
+    node_id: NodeId
+    edition: str
+    caption: str
+    n_steps: int = Field(ge=1)
+    steps: list[StepGloss]
+    ops: list[RecipeOp]
+
+# ── LEG 2 — TEXT BLOCK ─────────────────────────────────────────────────
+class TextBlock(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    block_id: TextBlockId
+    latex: str
+    groups_used: list[GroupName]
 
 # ── LEG 2 — PALETTE ──────────────────────────────────────────────────
 class GroupColor(BaseModel):
