@@ -11,8 +11,8 @@
 ### Leg 1 (MAP) — COMPLETE ✅
 All 9 modules built, integrated, tested. **94/94 green.**
 
-### Leg 2 (WALLS) — IN PROGRESS 🟡
-**6 of 7 modules built. 130/130 total tests green.**
+### Leg 2 (WALLS) — BAKE CHAIN COMPLETE ✅
+**7 of 7 bake modules built. 136/136 total tests green.**
 
 | # | Module | File | Tests | Status |
 |---|--------|------|-------|--------|
@@ -22,9 +22,9 @@ All 9 modules built, integrated, tested. **94/94 green.**
 | C4 | asy_compile | `bake/asy_compile.py` | 4 | ✅ Done |
 | C5 | _imageops | `bake/_imageops.py` | 11 | ✅ Done |
 | C6 | baker_figure | `bake/baker_figure.py` | 5 | ✅ Done |
-| C7 | baker_text | NOT YET | — | 🔜 NEXT |
+| C7 | baker_text | `bake/baker_text.py` | 6 | ✅ Done |
 
-**The VERY NEXT step is Child 7 (FINAL!): `bake/baker_text.py`** — wraps TextBlock LaTeX in standalone template with palette.tex, bakes grey-off + colored-on via Tectonic (injected), keys out/trims, emits text_off/text_on AssetEntries.
+**Leg 2 bake chain is COMPLETE!** 🎉 Remaining: `tools/overlay_diff.py` (standalone Tkinter tool, not in bake chain).
 
 ### parent 2 is waiting
 Parent 2 is holding for a build report. He finished both frozen packages. He flagged one §E item (figure_id vs block_id for asset keys) — not blocking, DeedSeek must confirm at integration time.
