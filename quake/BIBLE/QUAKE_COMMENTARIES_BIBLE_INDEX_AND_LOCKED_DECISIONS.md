@@ -33,11 +33,15 @@
 
 4. **Biblical Apocrypha** — `quake/BIBLE/QUAKE_BIBLICAL_APOCRYPHA_ROOM_MAKER_V3_DOOR_BEARINGS_BY_OPUS.md` (~241 lines). Room System v3, bearing-accurate doors. **SUPERSEDES the Room-Maker v2 / door material in the Second Canon (§4.5, §4.5a).** §1 corrected truth + coherence principle · §2 Two-Truths v3 · §3 data model (IncidentEdge, RoomPortalSpec, DoorRT, RoomRuntime, ModeSwitch) · §4 Room-Maker v3 algorithm · §5 guarantees · §6 build order · §7 downstream deltas · §8 validation · §9 child briefs · §10 changelog.
 
-5. **The prompt history** (in `quake/BIBLE/`, optional context showing *intent*): `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`.
+5. **The prompt history** (in `quake/BIBLE/`, optional context showing *intent*): `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`.
 
 6. **Leg 1 Frozen Child Briefs (Parent 2's first deliverable)** — `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 9 child modules with exact pydantic signatures, golden test fixtures, deterministic pipelines, and a dependency-sorted build order. ✅ BUILT — all 9 modules integrated, 94/94 tests green.
 
-7. **Leg 2 Frozen Child Briefs (Parent 2's second deliverable)** — `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 7 child modules (palette_gen, recipe_validate, prooffig_check, asy_compile, baker_figure, baker_text, overlay_diff) with exact signatures, golden fixtures, injected compilers for headless CI, and a dependency-sorted build order. **Ready for DeepSeek to spin children.**
+7. **Leg 2 Frozen Child Briefs (Parent 2's second deliverable)** — `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 8 child modules (palette_gen, recipe_validate, prooffig_check, asy_compile, _imageops, baker_figure, baker_text, overlay_diff) with exact signatures, golden fixtures, injected compilers for headless CI, and a dependency-sorted build order. ✅ BUILT — all 8 modules integrated, 51/51 tests green, 145/145 total with Leg 1.
+
+8. **Parent 2 → Parent 3 Handoff (full record)** — `quake/BIBLE/QUAKE_PARENT_2_TO_PARENT_3_HANDOFF.md`. Parent 2's full answer: §E flag settled (figure_id-keyed wins), pull list for Parent 3, the mission brief, and closing words to Nir. Includes the verdict on keeping Parent 2 vs. fresh Parent 3.
+
+9. **Prompt to Opus — Parent 3 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`. The self-contained prompt Nir pastes to a fresh Opus chat to launch Parent 3. Mission: freeze and child-brief the Room Maker v3 pipeline. ⬆️ PENDING — Nir decides whether to keep Parent 2 or send this.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
