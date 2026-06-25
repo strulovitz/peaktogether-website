@@ -2,7 +2,7 @@
 
 Captured June 25, 2026, at Nir's request, VERBATIM / word-for-word, AS-IS. This is Parent 1 of Quake — Claude Opus 4.8, run ALONE (not Fusion), at "XHigh" reasoning effort — answering the prompt in `quake/BIBLE/PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`. Nir named this the project's "Second Canon" (after the Old Testament `QUAKE_DOCTRINE_BY_FUSION.md` and the New Testament `QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md`). Nothing below is edited.
 
-⚠️ DEEPSEEK NOTE (not Opus's words): in §3.A.5 the "Op → Asymptote translation table" arrived BLANK in Nir's copy-paste — its cell contents did not survive the transfer. The blank table is preserved below as-received; everything else transmitted intact. → Ask Opus to re-send just that one table when convenient.
+⚠️ DEEPSEEK NOTE (not Opus's words): in §3.A.5 the "Op → Asymptote translation table" originally arrived BLANK in Nir's copy-paste. Opus re-sent it (June 25, 2026) and it is now RESTORED below as a LIST instead of a table (tables don't survive copy-paste) — the content is verbatim from Opus; only the table→list formatting was changed. Everything else in this document transmitted intact.
 
 --- BEGIN VERBATIM ---
 
@@ -558,11 +558,51 @@ drawAll(highlight);
 
 Op → Asymptote translation table (guidance pasted to the EMITTER; names marked ⟨…⟩ are confirmed from the reference doc, never from memory):
 
-[DEEPSEEK NOTE — NOT OPUS'S WORDS: this table arrived BLANK in the copy-paste (all cells empty); its contents did not transfer. Preserved as empty below; to be re-requested from Opus.]
+[DEEPSEEK NOTE — NOT OPUS'S WORDS: this was originally a table that came through blank; Opus re-sent it (June 25, 2026) and it is restored here as a LIST so it survives copy-paste. The content below is Opus's verbatim; only table→list formatting changed. Each entry: **op** — Asymptote construction — *result type* — *reg. (if drawn)* — *notes*. Lead-in from Opus: "Names in ⟨…⟩ are confirmed by the EMITTER against the pinned `asy_geometry_reference.txt` and proven by the compile loop — never asserted from memory. 'Result type' tells the EMITTER what the op produces (for later references); 'Reg.' tells it how the drawn version is registered through `prooffig.asy`."]
 
-|  |  |
-|---|---|
-|  |  |
+- **free_point** — `pair A=(x,y);` (rough_xy only as a starting guess) — *result:* point — *reg:* `lbl(...)`; `dot` if `marker=="dot"` — global placement is irrelevant (overlay tool aligns)
+- **point_on** — `point P=⟨relpoint(path,t)⟩;` or pick nearest of `⟨intersectionpoints⟩` to `near` — *result:* point — *reg:* lbl — use `t` if given, else `near`
+- **intersect** — `pair P=⟨intersectionpoint(a,b)⟩;` or `⟨intersectionpoints(a,b)⟩` then pick nearest to `near` — *result:* point — *reg:* lbl — `near` disambiguates multiple roots
+- **midpoint** — `pair M=⟨midpoint(A--B)⟩;` — *result:* point — *reg:* lbl
+- **foot** — `point F=⟨projection(line)*P⟩` / `⟨foot⟩`-equivalent — *result:* point — *reg:* lbl — perpendicular foot of point on line
+- **reflect_point** — `point R=⟨reflect(line)*P⟩;` — *result:* point — *reg:* lbl — mirror point across `over` (a line)
+- **line** — `line L=⟨line(A,B)⟩;` — *result:* line — *reg:* `elem((path)L,...)` — infinite line; for drawing, clip to the picture box
+- **segment** — `path s=A--B;` — *result:* path — *reg:* `elem((path)s,...)`
+- **ray** — `⟨halfline(A,B)⟩` or line clipped from A through B — *result:* line/path — *reg:* elem — from `a` through `b`
+- **parallel** — `line L=⟨parallel(P,refline)⟩;` — *result:* line — *reg:* elem — through `through`, parallel to `to`
+- **perpendicular** — `line L=⟨perpendicular(P,refline)⟩;` — *result:* line — *reg:* elem — through `through`, perpendicular to `to`
+- **tangent_at** — `line t=⟨tangent of conic/circle at point⟩;` — *result:* line — *reg:* elem — `at` lies on the curve
+- **tangent_from** — `line[] T=⟨tangents(conic/circle, externalpoint)⟩;` pick nearest to `near` — *result:* line — *reg:* elem — two tangents in general → `near` selects
+- **bisector** — `line b=⟨bisector(A,vertex,B)⟩;` — *result:* line — *reg:* elem — interior angle bisector ray/line
+- **circle_cp** — `circle c=⟨circle(center, abs(through-center))⟩;` — *result:* circle — *reg:* `elem((path)c,...)` — radius = |center→through|
+- **circle_cr** — `circle c=⟨circle(center, R)⟩;` where `R=abs(P-Q)` (radius_points) or literal — *result:* circle — *reg:* elem — exactly one of points/value
+- **circle_3** — `circle c=⟨circle(A,B,C)⟩;` — *result:* circle — *reg:* elem — through 3 points
+- **arc** — `path a=⟨arc(center,from,to,dir)⟩;` — *result:* path — *reg:* elem — direction = ccw/cw
+- **ellipse_foci** — `ellipse e=⟨ellipse(F1,F2,through)⟩;` — *result:* conic — *reg:* `elem((path)e,...)` — foci + one point on it
+- **ellipse_axes** — `ellipse e=⟨ellipse(center, a, b, angle)⟩;` with `a=abs(major_end-center)`, `b=abs(minor_end-center)`, `angle=dir(major_end-center)` — *result:* conic — *reg:* elem — center + axis endpoints
+- **parabola_fd** — `parabola p=⟨parabola(focus, directrix_line)⟩;` — *result:* conic — *reg:* elem — focus + directrix line
+- **hyperbola_foci** — `hyperbola h=⟨hyperbola(F1,F2,through)⟩;` — *result:* conic — *reg:* elem — foci + one point
+- **conic_5** — `conic k=⟨conic(p1,p2,p3,p4,p5)⟩;` — *result:* conic — *reg:* elem — general conic through 5 pts
+- **polygon** — `path P=A--B--C--...--cycle;` — *result:* path — *reg:* elem — closed
+- **polyline** — `path P=A--B--C--...;` — *result:* path — *reg:* elem — open
+- **series** — a `for`-loop emitting the N sub-paths; register the whole family with ONE `elem(...)` per sub-path under the same group,step — *result:* path family — *reg:* elem ×N — see pattern below
+- **angle_mark** — compute a small arc between rays vertex→a and vertex→b (or a right-angle square if `right`), as a path; register via elem — *result:* path — *reg:* elem — keeps it highlight-able (do not use a direct-draw `markangle` that bypasses prooffig)
+- **label** — `lbl(tex, at, group, step, placement);` (`at` is a point ref or a literal pair) — *result:* — — *reg:* lbl — standalone floating label; `draw.label` required
+
+series realization pattern (the EMITTER writes this; it's how the ultimate-ratio / inscribed-rectangle figures get drawn while staying highlight-able):
+
+```
+// kind == "inscribed_rects", along == segment AB on the base, to_curve == the curve
+for (int i = 0; i < count; ++i) {
+  real t0 = i/(real)count, t1 = (i+1)/(real)count;
+  pair x0 = ⟨relpoint(along, t0)⟩, x1 = ⟨relpoint(along, t1)⟩;
+  pair y0 = ⟨vertical drop from x0 up to to_curve⟩, y1 = ⟨...from x1...⟩;
+  path rect = x0 -- ⟨inscribed corner⟩ -- ⟨...⟩ -- x1 -- cycle;
+  elem(rect, "swept_area", 3);     // same group+step ⇒ the whole family lights as one step
+}
+```
+
+(circumscribed_rects, ordinates, chords, tangent_polygon are the same loop with the corner rule swapped. The overlay-diff tool verifies the family matches the engraving; the count the book draws is what the READER reports.)
 
 3.A.6 — The EXPLAINING-TEXT block (TEXT AI) — lives inside room_<node_id>.json
 
