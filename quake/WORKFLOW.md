@@ -74,7 +74,7 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 ## 9. NEXT STEPS / OPEN THREADS
 - ✅ **Parent 2 handoff sent** (with handoff + Commentaries + OT + NT).
 - ✅ **Leg 1 (MAP) FROZEN + BUILT by Parent 2!** 9 modules, 94/94 tests green.
-- ✅ **Leg 2 (WALLS) FROZEN by Parent 2 + BAKE CHAIN COMPLETE!** All 7 modules built, 136/136 tests green. Remaining: `tools/overlay_diff.py` (standalone Tkinter tool).
+- ✅ **Leg 2 (WALLS) COMPLETE!** All 8 modules built by Parent 2's children, 145/145 tests green. Both legs done — ready for Parent 2 build report.
 - ⚠️ Parent 2 §E flag: figure asset-id grammar (figure_id vs block_id) — reconcile at integration.
 - **The build hasn't started** (engine M0 → … per Old Testament §13 / Second Canon §5.4 wiring).
 - Deferred on purpose: **audio** (~M8); figure **background-transparency** (bake-time empirical).

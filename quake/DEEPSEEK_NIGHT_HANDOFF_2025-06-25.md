@@ -11,8 +11,8 @@
 ### Leg 1 (MAP) — COMPLETE ✅
 All 9 modules built, integrated, tested. **94/94 green.**
 
-### Leg 2 (WALLS) — BAKE CHAIN COMPLETE ✅
-**7 of 7 bake modules built. 136/136 total tests green.**
+### Leg 2 (WALLS) — COMPLETE ✅🎉
+**ALL 8 modules built. 145/145 total tests green.**
 
 | # | Module | File | Tests | Status |
 |---|--------|------|-------|--------|
@@ -23,8 +23,9 @@ All 9 modules built, integrated, tested. **94/94 green.**
 | C5 | _imageops | `bake/_imageops.py` | 11 | ✅ Done |
 | C6 | baker_figure | `bake/baker_figure.py` | 5 | ✅ Done |
 | C7 | baker_text | `bake/baker_text.py` | 6 | ✅ Done |
+| C8 | overlay_diff | `tools/overlay_diff.py` | 9 | ✅ Done |
 
-**Leg 2 bake chain is COMPLETE!** 🎉 Remaining: `tools/overlay_diff.py` (standalone Tkinter tool, not in bake chain).
+**LEG 2 IS COMPLETE!** 🎉🎉🎉 Both legs done. Parent 2 can receive the build report.
 
 ### parent 2 is waiting
 Parent 2 is holding for a build report. He finished both frozen packages. He flagged one §E item (figure_id vs block_id for asset keys) — not blocking, DeedSeek must confirm at integration time.
