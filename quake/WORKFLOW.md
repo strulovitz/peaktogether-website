@@ -10,7 +10,9 @@
 Peak Together is a multi-game platform (repo root = website; each game in its own top-level folder).
 - **Game 1 — Descent QED** (`descent/`): an educational 6-DOF flyer (Basel Problem). **FINISHED & SHIPPED** (itch.io + GitHub Releases). Done.
 - **Game 2 — Doom / "Principia Descent"** (`doom/`): an educational FPS in Ursina/Panda3D (M0–M3b built, 49 tests). **SHELVED** — superseded by the Quake pivot (a 2D-ish/flat engine couldn't do what we need; see below).
-- **Game 3 — Quake** (`quake/`): **CURRENT PROJECT.** A from-scratch **true-3D** redo. We are in the **DESIGN phase** — nothing is coded yet.
+- **Game 3 — Quake** (`quake/`): **CURRENT PROJECT.** A from-scratch **true-3D** redo. We are in the **BUILD phase** — Leg 1 complete, Leg 2 in progress.
+
+🌙 **ON RESTART:** If you're waking up fresh, read `quake/DEEPSEEK_NIGHT_HANDOFF_2025-06-25.md` FIRST — it has the exact current state, what's done, what's next, and the build process.
 
 ## 1. WHAT QUAKE IS (in one breath)
 A first-person, true-3D desktop game (Python, Windows-first) that turns a **geometry-rich book** into a walkable 3D **concept-graph dungeon**. Each idea = a room; each logical dependency = a corridor; corridors cross at different heights as **bridges/underpasses** (because a force-directed graph layout inevitably crosses — that's WHY it must be true 3D, "Quake," not flat "Doom/Wolfenstein"). Walls carry the **step-by-step geometric proof** (each step = a drawing panel + a full-LaTeX text panel). You "read" a panel by **shooting it** (grey → colored). The final lit proof-wall is a hidden door → shoot it → the room's one demon emerges → kill it → ceiling equations bleed red. Clear every room → level complete. **A fun game, not educational software.** First book: **Newton's _Principia_** (1846 Motte English translation; we have clean OCR text + per-page images + page-numbers JSON).
