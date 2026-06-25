@@ -312,6 +312,26 @@ class Palette(BaseModel):
     map_node_default: Hex
 
 
+# ── LEG 2 — MANIFEST (baked assets) ────────────────────────────────────
+class AssetEntry(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    asset_id: str
+    kind: Literal["figure_off","figure_on","text_off","text_on","ceiling_neutral"]
+    wall_path: str
+    master_path: str
+    px_w: int
+    px_h: int
+    content_bbox: tuple[int,int,int,int]
+    dpi: int
+
+
+class Manifest(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    level_id: LevelId
+    assets: dict[str, AssetEntry]
+
+
 # ── LOADER HELPER ─────────────────────────────────────────────────────
 class SchemaVersionError(ValueError):
     def __init__(self, path: str, found: str, expected: str):
