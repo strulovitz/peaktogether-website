@@ -4,8 +4,19 @@ Opus — a few loose ends and genuine gaps I want to close while the Formats & I
 
 **Reminder of our working model (please honor it everywhere below):** you are the architect — you produce DOCUMENTS: design, decisions, schemas/contracts, and child briefs. Fresh child chats write the actual code; DeepSeek only integrates it. So wherever I ask you to "pin," "define," or "write" something here, I mean the **document / contract / child-brief — never running code.** When code is genuinely needed, it comes from a proper child brief.
 
-## 1. Re-send the "Op → Asymptote translation table" (§3.A.5)
-That table came through BLANK when I copied your reply — its cells did not transfer. Please re-send just that table (the Op → Asymptote-call mapping), verbatim. It's load-bearing: it's where the EMITTER learns how each recipe op maps to an Asymptote `geometry` call — including `series` (the ultimate-ratio figures), the conics (`ellipse_foci`, `parabola_fd`, etc.), `parallel`, `intersect`, `tangent_at`/`tangent_from`, `foot`, `bisector`, and the rest.
+**Formatting note:** for anything I'll copy-paste back here, please prefer **fenced code blocks** over Markdown tables — table cells can get stripped when I copy them (that's exactly what wiped the table in #1).
+
+## 1. Re-send the "Op → Asymptote translation table" (§3.A.5) — but NOT as a table
+That table came through completely BLANK when I copied your reply — its cells didn't survive, almost certainly **because it was formatted as a table** (Markdown tables don't reliably survive copy-paste; the cell contents get stripped). So this time please do **NOT** put it in a table. Instead, give the exact same content as a **plain list inside a fenced code block** (a code block copies verbatim, so nothing is lost) — one mapping per line, in this shape:
+
+```
+free_point        → pair P = (x,y);                      // from rough_xy
+intersect(a,b)    → pair P = intersectionpoint(a,b);     // ⟨confirm fn name⟩
+parallel(thr,to)  → line  L = parallel(thr,to);
+series(...)       → a for-loop emitting N segments/rects/ordinates …
+```
+
+Include **every** recipe op (all the points, lines/rays, circles/arcs, the conics, `series`, and the marks/labels) → its Asymptote `geometry` translation. It's load-bearing: it's how the EMITTER learns each op→Asymptote mapping.
 
 ## 2. Pin the page_map.json adapter — here is my actual file's shape
 My Archive.org page-numbers file is the `archive-hocr-tools` "format-version 2", ~600 entries:
