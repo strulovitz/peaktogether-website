@@ -1,3 +1,5 @@
+> 🔀 **DEEPSEEK REDIRECT (added 2026-06-25):** Descent QED (this game) is FINISHED & shipped. The **current active project is Game 3 — QUAKE** (a from-scratch true-3D redo of the educational-dungeon idea). **On restart, read `quake/WORKFLOW.md` FIRST**, then `quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`, then ask Nir what's next. (AGENTS.md was intentionally left untouched per Nir; this redirect is on the wake path instead.)
+
 # Peak Together -- Workflow for DeepSeek V4 Pro (OpenCode)
 
 ## Who's Who
