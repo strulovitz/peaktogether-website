@@ -1,3 +1,17 @@
+"""
+Figure baker — orchestrates asy_compile + _imageops to produce off/on AssetEntries.
+
+Key design decisions (from the implementing child):
+- compile output stem (e.g. out_dir/prop_1.f1.off) and final save path (...off.png)
+  are distinct: we load from result.outputs[0], then re-save the trimmed array to
+  the canonical .png path, overwriting the raw compile output.
+- content_bbox uses half-open coordinates (x0, y0, x1_excl, y1_excl), so e.g. a
+  black rectangle at cols 12-37, rows 10-29 → bbox (12,10,38,30), width=26, height=20.
+  With trim_padding_px=8 → final dims 42×36.
+- content_bbox is recorded from the keyed array BEFORE padding-trim (per spec);
+  px_w/px_h are derived from the trimmed+padded array AFTER trim.
+"""
+
 from __future__ import annotations
 
 from pathlib import Path

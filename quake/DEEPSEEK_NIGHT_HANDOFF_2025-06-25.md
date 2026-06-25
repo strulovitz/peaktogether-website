@@ -12,7 +12,7 @@
 All 9 modules built, integrated, tested. **94/94 green.**
 
 ### Leg 2 (WALLS) — IN PROGRESS 🟡
-**5 of 7 modules built. 125/125 total tests green.**
+**6 of 7 modules built. 130/130 total tests green.**
 
 | # | Module | File | Tests | Status |
 |---|--------|------|-------|--------|
@@ -21,10 +21,10 @@ All 9 modules built, integrated, tested. **94/94 green.**
 | C3 | prooffig_check | `bake/prooffig_check.py` | 6 | ✅ Done |
 | C4 | asy_compile | `bake/asy_compile.py` | 4 | ✅ Done |
 | C5 | _imageops | `bake/_imageops.py` | 11 | ✅ Done |
-| C6 | baker_figure | NOT YET | — | 🔜 NEXT |
-| C7 | baker_text | NOT YET | — | ⏳ |
+| C6 | baker_figure | `bake/baker_figure.py` | 5 | ✅ Done |
+| C7 | baker_text | NOT YET | — | 🔜 NEXT |
 
-**The VERY NEXT step is Child 6: `bake/baker_figure.py`** — orchestrates asy_compile (injected) + _imageops to render off/on_1..on_N at two DPI tiers, dedup off, emit AssetEntry list.
+**The VERY NEXT step is Child 7 (FINAL!): `bake/baker_text.py`** — wraps TextBlock LaTeX in standalone template with palette.tex, bakes grey-off + colored-on via Tectonic (injected), keys out/trims, emits text_off/text_on AssetEntries.
 
 ### parent 2 is waiting
 Parent 2 is holding for a build report. He finished both frozen packages. He flagged one §E item (figure_id vs block_id for asset keys) — not blocking, DeedSeek must confirm at integration time.
