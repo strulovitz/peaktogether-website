@@ -60,6 +60,8 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 8. Strategy: **lazy-load** heavy docs; baseline OT+NT; rest **on-demand, parent-driven**. Built **the Commentaries** + the **Parent 2 handoff**.
 9. **Preserved chat-only decisions in place:** Opus's "remaining gaps" answer had decisions never written to a file (PageMap rule + adapter brief, `provenance.json` §4.9, `Draw.marker`→[none,dot], Read-Mode rule, importance blend, panel schemas/BuildConfig). I inserted each as a clearly-marked **DeepSeek inline commentary** at its correct section (Second Canon §3.A.4/§4.1/§4.5/§4.9/§5.3; New Testament §1.4; Apocrypha §3 cross-ref) and updated the Commentaries. **Nothing is in a "Miscellaneous" bin.**
 10. Wrote this WORKFLOW (my memory).
+11. **Nir forced the Parent 2 handoff** to start with Leg 1 (MAP) then Leg 2 (WALLS) — no liberal "propose what to do." Handoff sent with Commentaries + OT + NT.
+12. **Parent 2 delivered the FROZEN Leg 1 package** — 9 child modules, exact pydantic contracts, golden test fixtures, deterministic build order, integration acceptance gate mapped to OT M2. Saved verbatim as `QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`.
 
 ## 8. CURRENT SITUATION
 - **Design is broad and deep; NOTHING is built yet** (no `quake/` code — only `quake/BIBLE/` docs).
