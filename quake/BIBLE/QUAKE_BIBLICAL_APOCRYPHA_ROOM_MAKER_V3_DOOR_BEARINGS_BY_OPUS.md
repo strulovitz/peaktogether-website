@@ -73,6 +73,12 @@ class ModeSwitch(_Ev):
     via_edge_id: str | None
 ```
 
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — BEGIN ✚ ━━━━━━━━━━━━━━━
+**Added** 2026-06-25 by DeepSeek. **Status:** navigation cross-reference (no new decision; points to where preserved schemas live). **What:** where the `# panels & rest unchanged` note above resolves to.
+
+The `# panels & rest unchanged` note above refers to schemas defined in the Second Canon and preserved there as DeepSeek inline commentary: **Second Canon §4.5** holds `PanelPlacementRT`, the amended `PanelPairRT` (with `drawing_placement`/`text_placement`), and the `wall_slot` grammar; **Second Canon §4.8** holds the panel/room-sizing `BuildConfig` fields this v3 algorithm uses (`room_px_per_m`, `panel_min/max_w/h_m`, `panel_gap_m`, `pair_gap_m`, `wall_margin_m`, `room_headroom_m`, `room_min_w/d/h_m`, `panel_center_y_pref_m`). Request those sections when building the Room Maker.
+━━━━━━━━━━━━━━━ ✚ DEEPSEEK INLINE COMMENTARY — END ✚ ━━━━━━━━━━━━━━━
+
 New BuildConfig fields (additive; replace v2's door-cluster fields):
 
 ```
