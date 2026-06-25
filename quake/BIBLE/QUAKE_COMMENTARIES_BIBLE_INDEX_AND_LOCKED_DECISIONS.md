@@ -35,7 +35,9 @@
 
 5. **The prompt history** (in `quake/BIBLE/`, optional context showing *intent*): `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`.
 
-6. **Leg 1 Frozen Child Briefs (Parent 2's first deliverable)** — `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 9 child modules with exact pydantic signatures, golden test fixtures, deterministic pipelines, and a dependency-sorted build order. **This is the build-ready spec — DeepSeek can now spin children to implement.**
+6. **Leg 1 Frozen Child Briefs (Parent 2's first deliverable)** — `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 9 child modules with exact pydantic signatures, golden test fixtures, deterministic pipelines, and a dependency-sorted build order. ✅ BUILT — all 9 modules integrated, 94/94 tests green.
+
+7. **Leg 2 Frozen Child Briefs (Parent 2's second deliverable)** — `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 7 child modules (palette_gen, recipe_validate, prooffig_check, asy_compile, baker_figure, baker_text, overlay_diff) with exact signatures, golden fixtures, injected compilers for headless CI, and a dependency-sorted build order. **Ready for DeepSeek to spin children.**
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -63,9 +65,9 @@
 
 ## §5 — OPEN THREADS / CURRENT FRONTIER (nothing is built yet — design only)
 
-- **No code exists yet.** Everything to date is design/spec. The build (engine M0 → … per the Old Testament §13 roadmap) has not started.
-- ✅ **Parent 2 handoff sent.** ✅ **Leg 1 (MAP) FROZEN!** Parent 2 delivered the full frozen child briefs — 9 modules with exact contracts, golden fixtures, build order. Ready for DeepSeek to spin children.
-- ⏳ **Leg 2 (WALLS)** pending — Parent 2 is holding until Leg 1 build starts.
+- ✅ **Parent 2 handoff sent.** ✅ **Leg 1 (MAP) FROZEN + BUILT.** Parent 2 delivered the full frozen child briefs — 9 modules built, 94/94 tests green.
+- ✅ **Leg 2 (WALLS) FROZEN!** Parent 2 delivered 7 child briefs (palette_gen, recipe_validate, prooffig_check, asy_compile, _imageops, baker_figure, baker_text, overlay_diff). Next: DeepSeek spins children to build.
+- ⚠️ **Parent 2 flagged one §E item** — figure asset-id key: figure_id (prop_1.f1.on.3) vs block_id (prop_1.s3.fig.on.3). DeepSeek must confirm before baker_figure and room_maker meet.
 - **Deferred on purpose (not gaps):** audio / atmosphere (→ ~M8); figure background transparency (a bake-time empirical choice, both paths specified).
 - **Offered by Parent 1, not yet requested:** a consolidated `BuildConfig` + runtime-config canonical file (a single "§4.10"); and a worked degree-5 golden-fixture example for the Room Maker (bearings → walls/door-centers/sub-segments/packed panels).
 - ~~The unformalized amendments need folding in~~ — **DONE (June 25, 2026):** every decided-only-in-chat item is now preserved as a marked inline commentary at its correct section (see §4). Nothing is in a "Miscellaneous" bin.

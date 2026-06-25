@@ -71,8 +71,9 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 
 ## 9. NEXT STEPS / OPEN THREADS
 - ✅ **Parent 2 handoff sent** (with handoff + Commentaries + OT + NT).
-- ✅ **Leg 1 (MAP) FROZEN by Parent 2!** 9 child modules, exact contracts, golden fixtures, build order — saved as `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. **Next: DeepSeek spins children to build each module.**
-- ⏳ **Leg 2 (WALLS)** — Parent 2 is holding until Leg 1 build starts.
+- ✅ **Leg 1 (MAP) FROZEN + BUILT by Parent 2!** 9 modules, 94/94 tests green.
+- ✅ **Leg 2 (WALLS) FROZEN by Parent 2!** 7 child briefs saved as `QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Next: DeepSeek spins children to build each module (Child 1: palette_gen.py first).
+- ⚠️ Parent 2 §E flag: figure asset-id grammar (figure_id vs block_id) — reconcile at integration.
 - **The build hasn't started** (engine M0 → … per Old Testament §13 / Second Canon §5.4 wiring).
 - Deferred on purpose: **audio** (~M8); figure **background-transparency** (bake-time empirical).
 - Offered by Parent 1, not yet requested: a consolidated `BuildConfig`/runtime-config doc (a "§4.10"); a Room-Maker golden-fixture worked example.
