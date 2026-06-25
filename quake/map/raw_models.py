@@ -8,7 +8,9 @@ NodeId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
 LevelId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
 PageLabel = str  # printed label; may be ""
 Vec2 = tuple[float, float]
-Hex = Annotated[str, Field(pattern=r"^#[0-9a-fA-F]{6}$")]
+Vec3 = tuple[float, float, float]
+Hex  = Annotated[str, Field(pattern=r"^#[0-9a-fA-F]{6}$")]
+GroupName = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
 
 
 # ── SCHEMA 1 ──────────────────────────────────────────────────────────
@@ -185,6 +187,24 @@ class MergeConfig(BaseModel):
     seed: int = 1729001
     importance_w_indeg: float = 0.6
     importance_w_hint: float = 0.4
+
+
+# ── LEG 2 — PALETTE ──────────────────────────────────────────────────
+class GroupColor(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    hi: Hex       # Stabilo / highlighter color (used under ink, at 40% opacity)
+    ink: Hex      # saturated line color when hot; also the text color for \cg spans
+
+class Palette(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    pack_id: str
+    groups: dict[GroupName, GroupColor]
+    grey_ink: Hex
+    grey_text: Hex
+    bg_key: Hex                    # flat background to render on then key out (magenta)
+    map_importance: dict[str, Hex]  # keys "1".."5" → node ring + guide-line colors
+    map_node_default: Hex
 
 
 # ── LOADER HELPER ─────────────────────────────────────────────────────
