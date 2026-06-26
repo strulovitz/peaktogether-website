@@ -111,11 +111,12 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 - Parent 2: DONE (Leg 1+2 frozen briefs)
 - Parent 3: DONE (Room Maker v3 + Parent 3→4 handoff)
 - Parent 4: DONE (engine frozen briefs, 13 modules built and green)
-- **Parent 5: DONE** — delivered Golden Fixture Pack (38 PNGs + 6 JSONs built under `tests/golden_pack/`), `load_pack` passes
-- **Parent 6: NEXT** — app.py full wiring (§5.4 loop)
+- Parent 5: DONE — delivered Golden Fixture Pack (38 PNGs + 6 JSONs built under `tests/golden_pack/`), `load_pack` passes
+- **Parent 6: DONE** — app.py full wiring written directly by Parent 6, 285/285 tests green, smoke passes, headless CI returns 0
+- **Parent 7: NEXT** — M8 first Principia level
 
 ### What app.py looks like now
-- `app.py` is still the M0 stub (triangle + line test). It has NOT been grown to the full §5.4 wiring.
+- `app.py` is the full §5.4 per-frame loop — wires all 13 engine modules, event-driven save, Read-Mode overlay, mode-switching, guidlines, golden pack smoke test. 285/285 green.
 
 ## 9. NEXT STEPS (the 3-parent roadmap)
 

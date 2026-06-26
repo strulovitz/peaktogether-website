@@ -80,6 +80,12 @@
 - **Op→Asymptote mapping restored.** Second Canon §3.A.5's mapping (originally lost as a blank table) is now present as a **list**.
 - ✅ **DECIDED, and now PRESERVED IN PLACE** (June 25, 2026) as marked *DeepSeek inline commentaries* at their correct sections (these came from Parent-1's "remaining gaps" answer and had lived only in chat; they are LOCKED): (a) **PageMap rule** (`leaf_index` = unique, contiguous-from-0 key; `page_label` uniqueness only for non-empty; `""` allowed/repeats) **+ the `page_map_adapter.py` brief** → Second Canon **§4.1**. (b) **`provenance.json` / `Provenance` schema** → Second Canon **new §4.9** (in the commentary just before §5). (c) **`Draw.marker`** narrowed to `["none","dot"]` → Second Canon **§3.A.4**. (d) **Read-Mode target rule** (raycast-hit, else nearest in cone; `READ_MAX_DIST=6.0`, `READ_CONE_HALF_ANGLE=35°`) → Second Canon **§5.3**. (e) **Importance blend** (`score = 0.6·(indeg/max_indeg) + 0.4·((hint−1)/4)`; `importance = clamp(round(1+4·score),1,5)`) → New Testament **§1.4**. (f) **Panel schemas** (`PanelPlacementRT`, amended `PanelPairRT`, `wall_slot` grammar) + the panel/room-sizing **`BuildConfig`** fields → Second Canon **§4.5 / §4.8** (the Apocrypha's "panels unchanged" depends on these; cross-referenced from the Apocrypha §3).
 
+✅ **AMENDMENT — app.py (M-final wiring), June 26, 2026.** Three ground-truth deltas where the built `gameplay.step` is thinner than the Second Canon design implied:
+- **GuidelinesRecomputed is a signal, not an answer** — emitted with `targets=[]` on room entry; app calls `select_targets(fp, current, cleared, cfg)` itself in response. App DOES call select_targets in the loop when it sees this event.
+- **Read targeting is app-owned** — `gameplay.step` emits only `ReadModeToggled(on=True, asset_id=None)` and never `on=False`. App owns the on/off toggle and the panel pick: `reticle_ray(eye, heading, pitch, aim_x, aim_y)` → `nav.nearest_panel(ray, 6.0)` → `PanelHit.asset_on_id` → `manifest.assets[id].master_path`.
+- **`reticle_ray` is public and reused** — app's Read pick ray is byte-identical to the shoot ray; `eye = pos + 1.6` on Y; cone half-angle (`AIM_CONE_RAD = 0.30`) is internal.
+- Also reaffirmed: **render modules own/cache their own meshes** (app passes none); **`poll(window, None)` → `DEFAULT_BINDINGS`**.
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
