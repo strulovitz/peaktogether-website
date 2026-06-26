@@ -1,8 +1,8 @@
 # QUAKE (Game 3) — Project WORKFLOW & MEMORY for DeepSeek V4 Pro (OpenCode)
 
-> ⭐ **ON RESTART, READ THIS FIRST.** Then read the **Commentaries** (`quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`) — it is the map of the whole project. Then ask Nir what's next. Do NOT try to read the whole BIBLE; it's huge and on-demand.
+> ⭐ **ON RESTART, READ THIS FIRST.** Then read the **Commentaries** (`quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`) — it is the map of the whole project. Then read `quake/DEEPSEEK_MORNING_HANDOFF_2026-06-26.md` for today's exact state. Then ask Nir what's next. Do NOT try to read the whole BIBLE; it's huge and on-demand.
 >
-> This is my (DeepSeek's) own memory for the Quake project, written June 25, 2026. AGENTS.md is intentionally NOT modified (Nir's instruction). A redirect note at the top of `descent/WORKFLOW.md` points here so I find it on wake.
+> This is my (DeepSeek's) own memory for the Quake project. AGENTS.md is intentionally NOT modified (Nir's instruction).
 
 ---
 
@@ -10,9 +10,9 @@
 Peak Together is a multi-game platform (repo root = website; each game in its own top-level folder).
 - **Game 1 — Descent QED** (`descent/`): an educational 6-DOF flyer (Basel Problem). **FINISHED & SHIPPED** (itch.io + GitHub Releases). Done.
 - **Game 2 — Doom / "Principia Descent"** (`doom/`): an educational FPS in Ursina/Panda3D (M0–M3b built, 49 tests). **SHELVED** — superseded by the Quake pivot (a 2D-ish/flat engine couldn't do what we need; see below).
-- **Game 3 — Quake** (`quake/`): **CURRENT PROJECT.** A from-scratch **true-3D** redo. We are in the **BUILD phase** — Leg 1 complete, Leg 2 in progress.
+- **Game 3 — Quake** (`quake/`): **CURRENT PROJECT.** A from-scratch **true-3D** redo. We are in the **BUILD phase** — Legs 1+2+3 complete (186/186 tests green). Leg 4 (engine) design delivered by Parent 4, children not yet spun.
 
-🌙 **ON RESTART:** If you're waking up fresh, read `quake/DEEPSEEK_NIGHT_HANDOFF_2025-06-25.md` FIRST — it has the exact current state, what's done, what's next, and the build process.
+🌙 **ON RESTART:** If you're waking up fresh, read `quake/DEEPSEEK_MORNING_HANDOFF_2026-06-26.md` FIRST — it has the exact current state, what's done today, what's next. Then read the Commentaries. Then ask Nir what's next.
 
 ## 1. WHAT QUAKE IS (in one breath)
 A first-person, true-3D desktop game (Python, Windows-first) that turns a **geometry-rich book** into a walkable 3D **concept-graph dungeon**. Each idea = a room; each logical dependency = a corridor; corridors cross at different heights as **bridges/underpasses** (because a force-directed graph layout inevitably crosses — that's WHY it must be true 3D, "Quake," not flat "Doom/Wolfenstein"). Walls carry the **step-by-step geometric proof** (each step = a drawing panel + a full-LaTeX text panel). You "read" a panel by **shooting it** (grey → colored). The final lit proof-wall is a hidden door → shoot it → the room's one demon emerges → kill it → ceiling equations bleed red. Clear every room → level complete. **A fun game, not educational software.** First book: **Newton's _Principia_** (1846 Motte English translation; we have clean OCR text + per-page images + page-numbers JSON).
@@ -51,31 +51,35 @@ A first-person, true-3D desktop game (Python, Windows-first) that turns a **geom
 ## 6. LOCKED DECISIONS (the frozen spine — full list lives in Commentaries §3)
 Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = bridges/underpasses. Two render modes (wireframe corridor / solid room), switched at the door. Two truths (map vs **TARDIS** room). Two machines (level maker / room maker). Three worlds (content/build/runtime; runtime never sees LaTeX/LLM/book). **Geometry = Asymptote ONLY** (no homemade kernel). **Verification = human overlay-diff** tool. **Highlighting = whole figure + per-step Stabilo**, baked, via `prooffig.asy`. Correctness = **fidelity to the printed page**. Importance 1–5 → room size + map color. **Co-op core** (Mover owns body/heading; Shooter owns reticle; decoupled camera). God-mode; **one hidden enemy per room** (behind the final-proof wall); no level boss. Tech: all-Python, Windows-first, **moderngl + pyglet** + numpy/pillow/pydantic-v2/networkx + (build-only) matplotlib/Asymptote/Tectonic + PyInstaller. **NO** hide-the-pipeline engine. ID spine + `schema_version "1.0"` + `extra="forbid"`. **Room v3 (Apocrypha):** doors = node degree; door direction = corridor's true map bearing; room-local axes parallel to map (global compass); spawn heading = bearing+π; size stays TARDIS. Colors live only in `palette.json` (group names = keys).
 
-## 7. WHAT WE DID TODAY (June 25, 2026)
-1. On startup I discovered the then-current game was **Doom** (M0–M3b, 49 tests). Gave Nir view links to Doom's docs.
-2. **THE PIVOT:** Nir decided to redo from scratch as **Quake (true 3D)**, because force-directed graph layouts cross and need real bridges/underpasses; "Doom/Wolfenstein" had misled Fusion toward flat engines (Panda). New folder `quake/`. Saved Doom's last (bad) parent handoff verbatim.
-3. I wrote the **fresh Fusion request** for the Quake game, iterating per Nir: **geometry-rich ONLY**; **no colorblind** consideration; **no licensing** talk; **no edu-gimmicks** (fun game); **unified hidden enemy**; **Asymptote**; **human overlay-diff verification**; **Stabilo highlighting**; and Nir's **all-AI / no-math-no-code** constraint.
-4. Fusion answered → saved **Old Testament**.
-5. Prompted Opus → **New Testament** (the two legs: the MAP via citation-transcription; the WALLS via Asymptote + overlay-diff).
-6. Prompted Opus → **Second Canon** (the full Formats & Interfaces Standard).
-7. Corrected the Room Maker twice: **variable doors = node degree** (holistic), then **doors at true map bearings** (not portal teleport). Opus delivered **Room System v3** → saved as the **Biblical Apocrypha**.
-8. Strategy: **lazy-load** heavy docs; baseline OT+NT; rest **on-demand, parent-driven**. Built **the Commentaries** + the **Parent 2 handoff**.
-9. **Preserved chat-only decisions in place:** Opus's "remaining gaps" answer had decisions never written to a file (PageMap rule + adapter brief, `provenance.json` §4.9, `Draw.marker`→[none,dot], Read-Mode rule, importance blend, panel schemas/BuildConfig). I inserted each as a clearly-marked **DeepSeek inline commentary** at its correct section (Second Canon §3.A.4/§4.1/§4.5/§4.9/§5.3; New Testament §1.4; Apocrypha §3 cross-ref) and updated the Commentaries. **Nothing is in a "Miscellaneous" bin.**
-10. Wrote this WORKFLOW (my memory).
-11. **Nir forced the Parent 2 handoff** to start with Leg 1 (MAP) then Leg 2 (WALLS) — no liberal "propose what to do." Handoff sent with Commentaries + OT + NT.
-12. **Parent 2 delivered the FROZEN Leg 1 package** — 9 child modules, exact pydantic contracts, golden test fixtures, deterministic build order, integration acceptance gate mapped to OT M2. Saved verbatim as `QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`.
+## 7. WHAT WE DID TODAY (June 26, 2026)
 
-## 8. CURRENT SITUATION
-- **Leg 1 + Leg 2 + Leg 3 all built and green** (186/186 tests). Content pipeline COMPLETE.
-- **Parent 1 dead. Parent 2 done. Parent 3 done** — delivered Room Maker v3 + Parent 3→4 handoff.
-- **Parent 4 next:** the runtime graphics engine (moderngl + pyglet, M0–M7). Handoff ready.
-- Git is clean and pushed.
+1. **Re-oriented:** Read WORKFLOW + Commentaries. Explained §E flag to Nir (already settled: figure_id-keying).
+2. **Launched Parent 3:** Room Maker v3 design frozen. Scripture fetched per Parent 3's pull list.
+3. **Built Leg 3 — 5 children one-by-one:**
+   - C1 portal_spec (4 tests) — bearings from floorplan+graph
+   - C2 room_geometry (17 tests) — bearing rays, perimeter s-map, nudge, subdivide
+   - C3 room_pack (7 tests) — panel sizing, first-fit, grow-and-retry
+   - C4 room_validate (6 tests) — §8 validation rules
+   - C5 room_maker (7 tests) — orchestrator: asset-resolve, doors, panels, demon, ceiling
+   - Extended raw_models.py with BuildConfig, RoomSource, RoomRuntime v3, DoorRT, etc.
+4. **Parent 3 final mission:** Wrote Parent 3→4 handoff (runtime engine M0–M7).
+5. **Launched Parent 4:** Fresh Opus chat with handoff + Commentaries + OT + NT. Fetched §5.1/§5.3/§5.4/§4.4/§4.2/§4.6/§4.7/Apocrypha §7-§8/§4.5 panels/§4.8.
+6. **Parent 4 delivered engine frozen briefs** — answer with Nir, NOT YET PROCESSED by DeepSeek.
+7. Wrote this morning handoff + updated WORKFLOW. Pushed to GitHub.
 
-## 9. NEXT STEPS / OPEN THREADS
-- ✅ Leg 1 (MAP) built. ✅ Leg 2 (WALLS) built. ✅ Leg 3 (ROOMS) built. 186/186 green.
-- ✅ Parent 3→4 handoff written and saved. ⏳ Nir launches Parent 4 with fresh memory.
-- ⏳ **Parent 4's mission:** freeze + child-brief the runtime engine (gfx_context, shaders, render_wire, render_room, camera, input_actions, nav_collision, gameplay, readmode, app).
-- Deferred: audio (~M8), figure background-transparency, §4.10 config doc.
+## 8. CURRENT SITUATION (June 26, 2026 — quarter to noon)
+- **Leg 1 (MAP)** built, 94 tests. **Leg 2 (WALLS)** built, 51 tests. **Leg 3 (ROOMS)** built, 41 tests.
+- **186/186 total tests green.** Content pipeline COMPLETE.
+- **Parent 1 dead. Parent 2 done. Parent 3 done** (Room Maker v3 + Parent 3→4 handoff).
+- **Parent 4 ACTIVE** — delivered engine frozen child briefs. Answer received by Nir but NOT YET PROCESSED by DeepSeek.
+- All code pushed to GitHub (branch: master).
+
+## 9. NEXT STEPS (on wake)
+1. **Read Parent 4's answer** from Nir. Save verbatim as `QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`.
+2. **Update Commentaries** catalog (add item #12).
+3. **Spin engine children** one-by-one (like Leg 3): gfx_context, shaders, render_wire, camera, input_actions, guidelines, assets, render_room, nav_collision, readmode, gameplay, state, app.
+4. **Engine child integration:** some modules need GPU (moderngl/pyglet). Pure math must be separated from GL calls for headless testing. GPU tests skip gracefully.
+5. Deferred: audio (~M8), figure background-transparency, §4.10 config doc.
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically. Surgical "fix exactly this field" prompts are wrong (Nir's "pinky finger, not the whole body" rebuke). Same for context: don't spoon-feed parents pre-filtered lines.
