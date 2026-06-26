@@ -66,20 +66,22 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 5. **Launched Parent 4:** Fresh Opus chat with handoff + Commentaries + OT + NT. Fetched §5.1/§5.3/§5.4/§4.4/§4.2/§4.6/§4.7/Apocrypha §7-§8/§4.5 panels/§4.8.
 6. **Parent 4 delivered engine frozen briefs** — answer with Nir, NOT YET PROCESSED by DeepSeek.
 7. Wrote this morning handoff + updated WORKFLOW. Pushed to GitHub.
+8. **Parent 4's answer SAVED** — verbatim as `QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`. Commentaries updated (item #12). 13 engine children identified, ready to spin.
 
 ## 8. CURRENT SITUATION (June 26, 2026 — quarter to noon)
 - **Leg 1 (MAP)** built, 94 tests. **Leg 2 (WALLS)** built, 51 tests. **Leg 3 (ROOMS)** built, 41 tests.
 - **186/186 total tests green.** Content pipeline COMPLETE.
 - **Parent 1 dead. Parent 2 done. Parent 3 done** (Room Maker v3 + Parent 3→4 handoff).
-- **Parent 4 ACTIVE** — delivered engine frozen child briefs. Answer received by Nir but NOT YET PROCESSED by DeepSeek.
+- **Parent 4 DONE** — delivered engine frozen child briefs. Answer saved as catalog item #12.
 - All code pushed to GitHub (branch: master).
 
 ## 9. NEXT STEPS (on wake)
-1. **Read Parent 4's answer** from Nir. Save verbatim as `QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`.
-2. **Update Commentaries** catalog (add item #12).
-3. **Spin engine children** one-by-one (like Leg 3): gfx_context, shaders, render_wire, camera, input_actions, guidelines, assets, render_room, nav_collision, readmode, gameplay, state, app.
-4. **Engine child integration:** some modules need GPU (moderngl/pyglet). Pure math must be separated from GL calls for headless testing. GPU tests skip gracefully.
-5. Deferred: audio (~M8), figure background-transparency, §4.10 config doc.
+1. ~~**Read Parent 4's answer** from Nir. Save verbatim.~~ ✅ DONE.
+2. ~~**Update Commentaries** catalog (add item #12).~~ ✅ DONE.
+3. **Spin engine children** one-by-one in dependency-sorted order (gfx_context → shaders → app_M0_stub → camera → input_actions → render_wire → guidelines → nav_collision → assets → render_room → readmode → state → gameplay → app_final). Build order: M0 → M1 → M6 → M7.
+4. **Build golden fixture pack** under `tests/golden_pack/` — hand-authored baked JSON+PNG per Part 3 spec.
+5. **Engine child integration:** GPU modules need moderngl/pyglet. Pure/shell split (Rule #4). Pure cores tested headless; GPU tests skip gracefully via `@skip_if_no_gl`.
+6. Deferred: audio (~M8), figure background-transparency, Mode A labels (post-M7).
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically. Surgical "fix exactly this field" prompts are wrong (Nir's "pinky finger, not the whole body" rebuke). Same for context: don't spoon-feed parents pre-filtered lines.

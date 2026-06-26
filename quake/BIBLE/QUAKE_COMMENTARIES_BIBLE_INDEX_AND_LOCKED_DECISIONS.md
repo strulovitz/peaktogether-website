@@ -45,7 +45,9 @@
 
 10. **Leg 3 / Room Maker v3 Frozen Child Briefs (Parent 3's deliverable)** — ✅ BUILT — 5 child modules (portal_spec 4 tests, room_geometry 17, room_pack 7, room_validate 6, room_maker 7). 186/186 total tests green. §E flag settled (figure_id-keying confirmed).
 
-11. **Parent 3 → Parent 4 Handoff** — `quake/BIBLE/QUAKE_PARENT_3_TO_PARENT_4_HANDOFF.md`. Parent 3's final handoff: the runtime engine mission (M0–M7, moderngl + pyglet), locked decisions, verbatim pull list, risk flags. Parent 4 launch pending.
+11. **Parent 3 → Parent 4 Handoff** — `quake/BIBLE/QUAKE_PARENT_3_TO_PARENT_4_HANDOFF.md`. Parent 3's final handoff: the runtime engine mission (M0–M7, moderngl + pyglet), locked decisions, verbatim pull list, risk flags. Parent 4 launched from this.
+
+12. **Leg 4 / Engine Frozen Child Briefs (Parent 4's deliverable)** — `quake/BIBLE/QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`. Parent 4's frozen package: 13 child modules (M0–M7) with exact signatures, pure/shell split, pinned constants, golden fixture pack spec, anti-regression clause, and acceptance gates. Conflicts #1/#3/#4/#6 resolved by Parent 4. Single remaining gap: audio (deferred ~M8). ✅ SAVED — children not yet spun.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -75,11 +77,13 @@
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
 - ✅ **Leg 2 (WALLS) FROZEN + BUILT** — 8 modules, 51/51 green, 145/145 total.
-- ✅ **Parent 3 ACTIVE** — delivered FROZEN Room Maker v3 child-brief package (5 modules: portal_spec, room_geometry, room_pack, room_maker, room_validate + worked degree-5 golden fixture + 5 pinned under-specified spots + BuildConfig additions). Catalog item #10.
-- ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed. No conflict with built bakers.
-- ⏳ **Next:** DeepSeek spins the 5 Room Maker children to build, OR Nir decides what's next (Parent 3's one ask already answered: Leg-1/2 confirm clean for figure_id-keying).
-- **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency.
-- **Offered by Parent 1, not yet requested:** a consolidated §4.10 config doc.
+- ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
+- ✅ **Leg 2 (WALLS) FROZEN + BUILT** — 8 modules, 51/51 green.
+- ✅ **Leg 3 (ROOMS) FROZEN + BUILT** — 5 modules, 41/41 green. 186/186 total.
+- ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed.
+- ✅ **Parent 4 DELIVERED** — FROZEN Engine child briefs (13 modules: M0–M7). Catalog item #12.
+- ⏳ **NEXT:** DeepSeek spins the 13 engine children in dependency-sorted order, starting with gfx_context.py (M0).
+- **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
 
