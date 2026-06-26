@@ -85,7 +85,7 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 14. **Wrote DeepSeek late-afternoon handoff** (this file's companion).
 15. **Updated WORKFLOW.md** (this file).
 
-## 8. CURRENT SITUATION (June 26, 2026 — late afternoon)
+## 8. CURRENT SITUATION (June 26, 2026 — evening)
 
 ### What's built
 - **Leg 1 (MAP):** 9 modules, 94 tests. ✅
@@ -110,8 +110,9 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 - Parent 1: DEAD (context cliff June 25)
 - Parent 2: DONE (Leg 1+2 frozen briefs)
 - Parent 3: DONE (Room Maker v3 + Parent 3→4 handoff)
-- **Parent 4: DONE** (engine frozen briefs, 13 modules built and green)
-- **Parent 5: PENDING** — handoff request sent to Parent 4, awaiting answer
+- Parent 4: DONE (engine frozen briefs, 13 modules built and green)
+- **Parent 5: DONE** — delivered Golden Fixture Pack (38 PNGs + 6 JSONs built under `tests/golden_pack/`), `load_pack` passes
+- **Parent 6: NEXT** — app.py full wiring (§5.4 loop)
 
 ### What app.py looks like now
 - `app.py` is still the M0 stub (triangle + line test). It has NOT been grown to the full §5.4 wiring.
@@ -120,13 +121,13 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 
 Nir has decided the next 3 big things will each be done by a separate parent:
 
-**Parent 5 — Golden Fixture Pack** (NEXT, awaiting Parent 4's handoff)
-- Hand-author baked JSON+PNG files under `tests/golden_pack/`
+**~~Parent 5 — Golden Fixture Pack~~** ✅ DONE
+- Hand-authored baked JSON+PNG files created under `tests/golden_pack/`
 - 3 rooms (r_a, r_b, r_c), 3 corridors with 1 crossing (bridge/underpass)
 - Exercises every engine system: two-step proof room, non-cardinal bearing doors, demon, ceiling, LevelComplete
-- Parent 4→5 handoff prompt sent; answer pending from Nir
+- `load_pack("tests/golden_pack/")` passes; 283/283 tests green
 
-**Parent 6 — app.py Full Wiring** (AFTER Golden Pack)
+**Parent 6 — app.py Full Wiring** (NEXT)
 - Grow M0 stub into the full §5.4 loop
 - Wire all 13 modules together per-frame
 - Mode switching, Read Mode pause, atomic save

@@ -47,7 +47,11 @@
 
 11. **Parent 3 → Parent 4 Handoff** — `quake/BIBLE/QUAKE_PARENT_3_TO_PARENT_4_HANDOFF.md`. Parent 3's final handoff: the runtime engine mission (M0–M7, moderngl + pyglet), locked decisions, verbatim pull list, risk flags. Parent 4 launched from this.
 
-12. **Leg 4 / Engine Frozen Child Briefs (Parent 4's deliverable)** — `quake/BIBLE/QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`. Parent 4's frozen package: 13 child modules (M0–M7) with exact signatures, pure/shell split, pinned constants, golden fixture pack spec, anti-regression clause, and acceptance gates. Conflicts #1/#3/#4/#6 resolved by Parent 4. Single remaining gap: audio (deferred ~M8). ✅ SAVED — children not yet spun.
+12. **Leg 4 / Engine Frozen Child Briefs (Parent 4's deliverable)** — `quake/BIBLE/QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`. Parent 4's frozen package: 13 child modules (M0–M7) with exact signatures, pure/shell split, pinned constants, golden fixture pack spec, anti-regression clause, and acceptance gates. Conflicts #1/#3/#4/#6 resolved by Parent 4. Single remaining gap: audio (deferred ~M8). ✅ BUILT — all 13 modules integrated, 283/283 tests green.
+
+13. **Parent 5 — Golden Fixture Pack** — `quake/BIBLE/QUAKE_PARENT_5_GOLDEN_FIXTURE_PACK.md`. Parent 5's complete deliverable: every JSON + PNG spec, verified against raw_models.py, bearing math confirmed. ✅ BUILT — `tests/golden_pack/` created (6 JSONs + 38 PNGs, `load_pack` passes).
+
+14. **Parent 4 → Parent 5 Handoff** — `quake/BIBLE/QUAKE_PARENT_4_TO_PARENT_5_HANDOFF.md`. Parent 4's handoff: the Golden Fixture Pack mission spec with exact coordinates, bearing math, door placements, and panel layouts.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -81,8 +85,8 @@
 - ✅ **Leg 2 (WALLS) FROZEN + BUILT** — 8 modules, 51/51 green.
 - ✅ **Leg 3 (ROOMS) FROZEN + BUILT** — 5 modules, 41/41 green. 186/186 total.
 - ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed.
-- ✅ **Parent 4 DELIVERED** — FROZEN Engine child briefs (13 modules: M0–M7). Catalog item #12.
-- ⏳ **NEXT:** DeepSeek spins the 13 engine children in dependency-sorted order, starting with gfx_context.py (M0).
+- ✅ **Parent 5 DONE — Golden Fixture Pack BUILT** — `tests/golden_pack/` created (floorplan+palette+manifest + 3 rooms + 38 PNGs). `load_pack` passes. 283/283 green.
+- ⏳ **NEXT:** Parent 6 — app.py full wiring (§5.4 loop).
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
