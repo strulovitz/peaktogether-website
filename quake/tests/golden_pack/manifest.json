@@ -1,0 +1,25 @@
+{
+  "schema_version": "1.0",
+  "level_id": "golden",
+  "assets": {
+    "figure_off_a1": { "asset_id": "figure_off_a1", "kind": "figure_off", "wall_path": "png/wall/figure_off_a1.png", "master_path": "png/master/figure_off_a1.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_on_a1":  { "asset_id": "figure_on_a1",  "kind": "figure_on",  "wall_path": "png/wall/figure_on_a1.png",  "master_path": "png/master/figure_on_a1.png",  "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_off_a1":   { "asset_id": "text_off_a1",   "kind": "text_off",   "wall_path": "png/wall/text_off_a1.png",   "master_path": "png/master/text_off_a1.png",   "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_on_a1":    { "asset_id": "text_on_a1",    "kind": "text_on",    "wall_path": "png/wall/text_on_a1.png",    "master_path": "png/master/text_on_a1.png",    "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_off_a2": { "asset_id": "figure_off_a2", "kind": "figure_off", "wall_path": "png/wall/figure_off_a2.png", "master_path": "png/master/figure_off_a2.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_on_a2":  { "asset_id": "figure_on_a2",  "kind": "figure_on",  "wall_path": "png/wall/figure_on_a2.png",  "master_path": "png/master/figure_on_a2.png",  "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_off_a2":   { "asset_id": "text_off_a2",   "kind": "text_off",   "wall_path": "png/wall/text_off_a2.png",   "master_path": "png/master/text_off_a2.png",   "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_on_a2":    { "asset_id": "text_on_a2",    "kind": "text_on",    "wall_path": "png/wall/text_on_a2.png",    "master_path": "png/master/text_on_a2.png",    "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "ceiling_a":     { "asset_id": "ceiling_a",     "kind": "ceiling_neutral", "wall_path": "png/wall/ceiling_a.png", "master_path": "png/master/ceiling_a.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_off_b1": { "asset_id": "figure_off_b1", "kind": "figure_off", "wall_path": "png/wall/figure_off_b1.png", "master_path": "png/master/figure_off_b1.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_on_b1":  { "asset_id": "figure_on_b1",  "kind": "figure_on",  "wall_path": "png/wall/figure_on_b1.png",  "master_path": "png/master/figure_on_b1.png",  "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_off_b1":   { "asset_id": "text_off_b1",   "kind": "text_off",   "wall_path": "png/wall/text_off_b1.png",   "master_path": "png/master/text_off_b1.png",   "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_on_b1":    { "asset_id": "text_on_b1",    "kind": "text_on",    "wall_path": "png/wall/text_on_b1.png",    "master_path": "png/master/text_on_b1.png",    "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "ceiling_b":     { "asset_id": "ceiling_b",     "kind": "ceiling_neutral", "wall_path": "png/wall/ceiling_b.png", "master_path": "png/master/ceiling_b.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_off_c1": { "asset_id": "figure_off_c1", "kind": "figure_off", "wall_path": "png/wall/figure_off_c1.png", "master_path": "png/master/figure_off_c1.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "figure_on_c1":  { "asset_id": "figure_on_c1",  "kind": "figure_on",  "wall_path": "png/wall/figure_on_c1.png",  "master_path": "png/master/figure_on_c1.png",  "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_off_c1":   { "asset_id": "text_off_c1",   "kind": "text_off",   "wall_path": "png/wall/text_off_c1.png",   "master_path": "png/master/text_off_c1.png",   "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "text_on_c1":    { "asset_id": "text_on_c1",    "kind": "text_on",    "wall_path": "png/wall/text_on_c1.png",    "master_path": "png/master/text_on_c1.png",    "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 },
+    "ceiling_c":     { "asset_id": "ceiling_c",     "kind": "ceiling_neutral", "wall_path": "png/wall/ceiling_c.png", "master_path": "png/master/ceiling_c.png", "px_w": 8, "px_h": 8, "content_bbox": [0, 0, 8, 8], "dpi": 72 }
+  }
+}

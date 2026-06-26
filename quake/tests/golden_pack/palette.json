@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "golden",
+  "groups": {},
+  "grey_ink": "#404040",
+  "grey_text": "#606060",
+  "bg_key": "#ff00ff",
+  "map_importance": {
+    "1": "#4444ff",
+    "2": "#44aa44",
+    "3": "#cccc44",
+    "4": "#ff8844",
+    "5": "#ff4444"
+  },
+  "map_node_default": "#888888"
+}

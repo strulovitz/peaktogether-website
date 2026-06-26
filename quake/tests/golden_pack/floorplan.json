@@ -1,0 +1,70 @@
+{
+  "schema_version": "1.0",
+  "level_id": "golden",
+  "seed": 1729001,
+  "rooms": [
+    {
+      "room_id": "r_a",
+      "map_xz": [0.0, 0.0],
+      "importance": 5,
+      "map_radius_m": 2.0,
+      "map_color": "#ff4444",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "r_b",
+      "map_xz": [12.0, 8.0],
+      "importance": 3,
+      "map_radius_m": 2.0,
+      "map_color": "#cccc44",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "r_c",
+      "map_xz": [6.0, 20.0],
+      "importance": 1,
+      "map_radius_m": 2.0,
+      "map_color": "#4444ff",
+      "socket_y": 0.0
+    }
+  ],
+  "corridors": [
+    {
+      "corridor_id": "edge.a.to.b",
+      "source": "r_a",
+      "target": "r_b",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [[0.0, 0.0], [4.0, 2.6667], [8.0, 5.3333], [12.0, 8.0]],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.b.to.c",
+      "source": "r_b",
+      "target": "r_c",
+      "height_level": 1,
+      "cruise_y": 4.5,
+      "path_xz": [[12.0, 8.0], [6.0, 10.0], [6.0, 20.0]],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.a.to.c",
+      "source": "r_a",
+      "target": "r_c",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [[0.0, 0.0], [6.0, 10.0], [6.0, 20.0]],
+      "width_m": 3.0
+    }
+  ],
+  "crossings": [
+    {
+      "crossing_id": "x_bc_over_ac",
+      "over_corridor": "edge.b.to.c",
+      "under_corridor": "edge.a.to.c",
+      "at_xz": [6.0, 10.0],
+      "over_y": 4.5,
+      "under_y": 0.0
+    }
+  ]
+}
