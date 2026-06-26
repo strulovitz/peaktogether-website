@@ -52,6 +52,8 @@
 13. **Parent 5 — Golden Fixture Pack** — `quake/BIBLE/QUAKE_PARENT_5_GOLDEN_FIXTURE_PACK.md`. Parent 5's complete deliverable: every JSON + PNG spec, verified against raw_models.py, bearing math confirmed. ✅ BUILT — `tests/golden_pack/` created (6 JSONs + 38 PNGs, `load_pack` passes).
 
 14. **Parent 4 → Parent 5 Handoff** — `quake/BIBLE/QUAKE_PARENT_4_TO_PARENT_5_HANDOFF.md`. Parent 4's handoff: the Golden Fixture Pack mission spec with exact coordinates, bearing math, door placements, and panel layouts.
+15. **Parent 5 → Parent 6 Handoff** — `quake/BIBLE/QUAKE_PARENT_5_TO_PARENT_6_HANDOFF.md`. DeepSeek (Runner) on behalf of Parent 5. Mission: design the frozen child brief for the full `app.py` wiring of all 13 engine modules in the §5.4 loop. PENDING — awaiting Parent 6 launch.
+16. **Prompt to Opus — Parent 5→6 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_5_6_HANDOFF.md`. (to be written when Nir launches Parent 6)
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -86,7 +88,7 @@
 - ✅ **Leg 3 (ROOMS) FROZEN + BUILT** — 5 modules, 41/41 green. 186/186 total.
 - ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed.
 - ✅ **Parent 5 DONE — Golden Fixture Pack BUILT** — `tests/golden_pack/` created (floorplan+palette+manifest + 3 rooms + 38 PNGs). `load_pack` passes. 283/283 green.
-- ⏳ **NEXT:** Parent 6 — app.py full wiring (§5.4 loop).
+- ⏳ **NEXT:** Parent 6 — app.py full wiring (§5.4 loop). Handoff written, awaiting Nir's launch.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
