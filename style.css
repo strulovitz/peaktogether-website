@@ -957,7 +957,6 @@ h1, h2, h3, h4, h5, h6 {
     box-shadow: 0 3px 14px rgba(0, 0, 0, 0.05);
     text-align: left;
     transition: transform 0.2s, box-shadow 0.2s;
-    scroll-margin-top: 140px;
 }
 
 .coming-game:hover {
