@@ -43,7 +43,9 @@
 
 9. **Prompt to Opus — Parent 3 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`. The self-contained prompt Nir pastes to a fresh Opus chat to launch Parent 3. Mission: freeze and child-brief the Room Maker v3 pipeline. ✅ SENT — Parent 3 is active.
 
-10. **Leg 3 / Room Maker v3 Frozen Child Briefs (Parent 3's deliverable)** — (new, June 26, 2026 — not yet saved as a separate file; captured in current Parent 3 chat). Parent 3's frozen package: 5 child modules (portal_spec, room_geometry, room_pack, room_maker, room_validate) + worked degree-5 golden fixture + 5 pinned under-specified gaps + BuildConfig additions. §E flag settled (figure_id-keying confirmed).
+10. **Leg 3 / Room Maker v3 Frozen Child Briefs (Parent 3's deliverable)** — ✅ BUILT — 5 child modules (portal_spec 4 tests, room_geometry 17, room_pack 7, room_validate 6, room_maker 7). 186/186 total tests green. §E flag settled (figure_id-keying confirmed).
+
+11. **Parent 3 → Parent 4 Handoff** — `quake/BIBLE/QUAKE_PARENT_3_TO_PARENT_4_HANDOFF.md`. Parent 3's final handoff: the runtime engine mission (M0–M7, moderngl + pyglet), locked decisions, verbatim pull list, risk flags. Parent 4 launch pending.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 

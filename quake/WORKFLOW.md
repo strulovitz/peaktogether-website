@@ -66,17 +66,15 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 12. **Parent 2 delivered the FROZEN Leg 1 package** — 9 child modules, exact pydantic contracts, golden test fixtures, deterministic build order, integration acceptance gate mapped to OT M2. Saved verbatim as `QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`.
 
 ## 8. CURRENT SITUATION
-- **Leg 1 + Leg 2 built and green** (145/145 tests). Leg 3 design now FROZEN by Parent 3.
-- **Parent 1 is dead. Parent 2 done (both legs). Parent 3 ACTIVE — just delivered Room Maker v3 frozen briefs.**
-- All chat-only decisions are safely preserved in the canon (see §7.9).
+- **Leg 1 + Leg 2 + Leg 3 all built and green** (186/186 tests). Content pipeline COMPLETE.
+- **Parent 1 dead. Parent 2 done. Parent 3 done** — delivered Room Maker v3 + Parent 3→4 handoff.
+- **Parent 4 next:** the runtime graphics engine (moderngl + pyglet, M0–M7). Handoff ready.
 - Git is clean and pushed.
 
 ## 9. NEXT STEPS / OPEN THREADS
-- ✅ **Parent 2 handoff sent** + **Leg 1 built** + **Leg 2 built**.
-- ✅ **Parent 3 handoff sent**. ✅ **Parent 3 delivered FROZEN Room Maker v3 package** (5 child modules: portal_spec, room_geometry, room_pack, room_maker, room_validate + worked degree-5 fixture + 5 pinned gaps).
-- ✅ **§E flag SETTLED** — figure_id-keying confirmed by Parent 3 (DrawingBlock.figure_id + highlight_step). No conflict.
-- ⏳ **Parent 3's one ask:** confirm nothing in built Leg-1/Leg-2 assumed block_id-keyed figure assets. DeepSeek answers: confirmed — baker froze to figure_id (prop_1.f1.off/.on.k), consistent. Zero rework. 🟢
-- ⏳ **Next: DeepSeek spins the 5 Room Maker children to build Leg 3**, OR Nir decides what's next.
+- ✅ Leg 1 (MAP) built. ✅ Leg 2 (WALLS) built. ✅ Leg 3 (ROOMS) built. 186/186 green.
+- ✅ Parent 3→4 handoff written and saved. ⏳ Nir launches Parent 4 with fresh memory.
+- ⏳ **Parent 4's mission:** freeze + child-brief the runtime engine (gfx_context, shaders, render_wire, render_room, camera, input_actions, nav_collision, gameplay, readmode, app).
 - Deferred: audio (~M8), figure background-transparency, §4.10 config doc.
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
