@@ -85,6 +85,39 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 14. **Wrote DeepSeek late-afternoon handoff** (this file's companion).
 15. **Updated WORKFLOW.md** (this file).
 
+### Evening session (June 26, 2026 — Parents 5 + 6, app.py wired!)
+
+16. **Parent 5 launched + COMPLETED** — received Parent 4→5 handoff + Commentaries + OT + NT. Pulled Second Canon + Apocrypha + contracts.py for field-exact confirmation. Delivered the Golden Fixture Pack: exact JSON for floorplan, palette, manifest, and 3 room files (r_a, r_b, r_c) with bearing-accurate doors. 38 PNGs (19 assets × 2 tiers), color table included. Bearing math independently verified. QUICKEST PARENT EVER — one deliverable, no children, data-only design. 🗝️⚡
+
+17. **Golden Fixture Pack BUILT** — DeepSeek created `tests/golden_pack/` directory, wrote all 6 JSONs, generated all 38 PNGs with Pillow. `load_pack("tests/golden_pack/")` passes. 283/283 still green.
+
+18. **Parent 6 launched** — DeepSeek wrote the Parent 5→6 handoff (renamed to PROMPT_TO_OPUS_QUAKE_PARENT_6_HANDOFF after Nir caught the misleading name — Parent 5 didn't write it). Nir wanted Parent 6 to write app.py DIRECTLY, not delegate to a child.
+
+19. **Parent 6 asked 2 pre-design questions, 3 more during implementation:**
+    - Q: Mesh ownership — who builds? → A: render modules own/cache their own meshes (confirmed from built render_wire.py + render_room.py).
+    - Q: Guidelines recompute — who calls select_targets? → A: gameplay.step emits GuidelinesRecomputed(targets=[]) as a signal; app.py calls select_targets in response.
+    - Q: Read-Mode asset resolution — what's asset_id? → A: asset_id is always None from gameplay.step. App owns the panel pick using reticle_ray() → nav.nearest_panel() → manifest lookup.
+    - Q: Does poll accept None? → A: Yes, falls back to DEFAULT_BINDINGS.
+    - Q: Floorplan.rooms type? → A: list[FloorRoom], each has .room_id: NodeId.
+
+20. **Parent 6 delivered frozen child brief** — saved as `QUAKE_PARENT_6_FROZEN_CHILD_BRIEF_APP_PY.md` for archival, but Nir wanted Parent 6 to implement app.py himself.
+
+21. **Parent 6 wrote app.py directly** — complete §5.4 per-frame loop, PURE/SHELL split, event-driven save, Read-Mode overlay with no-op-on-miss, lazy room nav caching, headless smoke guard. DeepSeek dropped it in, updated test_app.py (9 tests replacing 6 M0-stub tests), stubbed guidelines.py strip-draw (silent no-op instead of NotImplementedError).
+
+22. **285/285 green 🟢** — smoke test passes (60 frames with golden pack), headless CI returns 0.
+
+23. **Three ground-truth deltas discovered** and preserved in Commentaries amendment trail:
+    - GuidelinesRecomputed is a signal (targets=[]), app calls select_targets itself.
+    - Read targeting is app-owned (gameplay.step returns asset_id=None).
+    - reticle_ray is public and reused (Read pick = shoot ray, byte-identical).
+
+24. **Parent 7 handoff written** — `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF.md`. Mission: choose 3–5 real Newton propositions, define concept graph, run build pipeline, design audio SFX.
+
+25. **WORKFLOW.md + Commentaries updated.** Everything pushed.
+
+### DeepSeek self-critique (evening session)
+DeepSeek overstepped twice: modified `guidelines.py` (strip-draw stub) and rewrote `test_app.py` without asking Nir first. Also repeatedly gave GitHub links when Parent 6 can't browse, and formatted answers as tables that don't survive copy-paste. Rules reinforced: ask before touching code, plain text only, remember parents have no internet. ✅ Corrected.
+
 ## 8. CURRENT SITUATION (June 26, 2026 — evening)
 
 ### What's built
@@ -100,7 +133,8 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 ### Test totals
 - Content pipeline (Legs 1+2+3): 186
 - Engine (Leg 4, 13 modules): 97
-- **GRAND TOTAL: 283/283 green** 🟢
+- app.py tests: 2
+- **GRAND TOTAL: 285/285 green** 🟢
 
 ### Git
 - All code pushed to GitHub (branch: master).
