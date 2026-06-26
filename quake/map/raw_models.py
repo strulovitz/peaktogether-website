@@ -332,6 +332,170 @@ class Manifest(BaseModel):
     assets: dict[str, AssetEntry]
 
 
+# ── LEG 2 — ROOM SOURCE (per-node input to room_maker) ──────────────────
+class FigureDecl(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    figure_id: FigureId
+    asy_path: str
+    recipe_path: str
+    n_steps: int = Field(ge=1)
+    caption: str
+    groups_used: list[GroupName]
+
+class DrawingBlock(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    block_id: DrawBlockId
+    figure_id: FigureId
+    highlight_step: int = Field(ge=1)
+
+class StepPair(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    pair_id: PairId
+    step_index: int = Field(ge=1)
+    drawing: DrawingBlock
+    text: TextBlock
+
+class CeilingEq(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    eq_id: EqId
+    latex: str
+
+class RoomSource(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    node_id: NodeId
+    edition: str
+    figures: list[FigureDecl]
+    blocks: list[StepPair]
+    final_pair_id: PairId
+    ceiling_equations: list[CeilingEq]
+
+
+# ── LEG 3 — BUILDCONFIG (additive; bake & layout & room-v3 constants) ───
+class BuildConfig(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"] = "1.0"
+    # bake
+    bake_dpi_wall: int = 220
+    bake_dpi_master: int = 600
+    bake_trim_alpha: int = 8
+    bake_pad_px: int = 16
+    # layout
+    layout_seed: int = 1729001
+    layout_scale_m: float = 28.0
+    height_delta_m: float = 4.5
+    max_height_levels_warn: int = 7
+    max_height_levels_fail: int = 12
+    guide_w_imp: float = 0.6
+    guide_w_dist: float = 0.4
+    guide_max_lines: int = 3
+    # room / panel sizing (amendment §4(f))
+    room_px_per_m: float = 360
+    panel_min_w_m: float = 0.6
+    panel_max_w_m: float = 3.2
+    panel_min_h_m: float = 0.5
+    panel_max_h_m: float = 2.4
+    panel_gap_m: float = 0.25
+    pair_gap_m: float = 0.8
+    wall_margin_m: float = 0.6
+    room_headroom_m: float = 1.2
+    room_min_w_m: float = 6.0
+    room_min_d_m: float = 6.0
+    room_min_h_m: float = 3.2
+    panel_center_y_pref_m: float = 1.55
+    importance_w_indeg: float = 0.6
+    importance_w_hint: float = 0.4
+    # room v3 door/placement (Apocrypha §3 + Parent 3 additions)
+    door_width_m: float = 2.0
+    door_height_m: float = 2.6
+    door_min_separation_m: float = 2.6
+    corner_clearance_m: float = 0.5
+    room_target_aspect: float = 1.30
+    room_pack_slack: float = 1.20
+    room_grow_step_m: float = 0.5
+    room_sizing_max_iters: int = 240
+    aisle_depth_m: float = 1.6
+    demon_offset_m: float = 1.0
+    door_nudge_tol_rad: float = 0.20
+
+
+# ── LEG 3 — PANEL PLACEMENT (amended PanelPairRT with explicit placement) ─
+class PanelPlacementRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    wall: Literal["N", "E", "S", "W"]
+    slot_index: int = Field(ge=0)
+    wall_slot: str
+    center_xyz: Vec3
+    width_m: float
+    height_m: float
+    yaw_rad: float
+
+class PanelPairRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    pair_id: PairId
+    step_index: int
+    drawing_off_asset: str
+    drawing_on_asset: str
+    text_off_asset: str
+    text_on_asset: str
+    drawing_placement: PanelPlacementRT
+    text_placement: PanelPlacementRT
+
+
+# ── LEG 3 — ENEMY / CEILING RT ──────────────────────────────────────────
+class EnemyRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    enemy_id: str = Field(pattern=r"^[a-z][a-z0-9_]*\.demon$")
+    spawn_xyz: Vec3
+    health: int = 5
+
+class CeilingEqRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    eq_id: EqId
+    asset_id: str
+    pos_xyz: Vec3
+    size_m: Vec2
+
+
+# ── LEG 3 — ROOM RUNTIME v3 (Apocrypha: doors replace entrance) ────────
+class IncidentEdge(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    edge_id: str = Field(pattern=r"^edge\.[a-z0-9_]+\.to\.[a-z0-9_]+$")
+    neighbor_id: NodeId
+    neighbor_importance: int = Field(ge=1, le=5)
+    bearing_rad: float
+
+class RoomPortalSpec(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    node_id: NodeId
+    incident: list[IncidentEdge]
+
+class DoorRT(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    edge_id: str
+    neighbor_id: NodeId
+    bearing_rad: float
+    wall: Literal["N", "E", "S", "W"]
+    center_xyz: Vec3
+    width_m: float
+    height_m: float
+    normal_yaw_rad: float
+    spawn_xyz: Vec3
+    spawn_heading_rad: float
+
+class RoomRuntime(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"]
+    room_id: NodeId
+    dimensions_m: Vec3
+    panel_pairs: list[PanelPairRT]
+    final_pair_id: PairId
+    hidden_door_wall_slot: str
+    doors: list[DoorRT]
+    enemy: EnemyRT
+    ceiling_equations: list[CeilingEqRT]
+
+
 # ── LOADER HELPER ─────────────────────────────────────────────────────
 class SchemaVersionError(ValueError):
     def __init__(self, path: str, found: str, expected: str):
