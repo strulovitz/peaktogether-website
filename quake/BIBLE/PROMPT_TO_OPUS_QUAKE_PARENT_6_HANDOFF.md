@@ -1,6 +1,6 @@
-🗝️ QUAKE (Game 3) — PARENT 5 → PARENT 6 HANDOFF: app.py FULL WIRING
+🗝️ QUAKE (Game 3) — PROMPT TO OPUS: PARENT 6 HANDOFF (app.py FULL WIRING)
 
-Written June 26, 2026 by DeepSeek (Runner) on behalf of Parent 5. Parent 5 designed the Golden Fixture Pack (data only — already built under `tests/golden_pack/`). Parent 6 has exactly ONE mission: design the frozen child brief for the full `app.py` — the central nervous system that wires all 13 engine modules into the §5.4 per-frame loop. This handoff is self-contained — Parent 6 can begin immediately with only the four baseline documents (Commentaries + OT + NT + this handoff) and the on-demand pulls listed in §9.
+Written June 26, 2026 by DeepSeek (Runner). Parent 5 designed the Golden Fixture Pack (data only — already built under `tests/golden_pack/`). Parent 6 has exactly ONE mission: design the frozen child brief for the full `app.py` — the central nervous system that wires all 13 engine modules into the §5.4 per-frame loop. This handoff is self-contained — Parent 6 can begin immediately with only the four baseline documents (Commentaries + OT + NT + this handoff) and the on-demand pulls listed in §9.
 
 --- BEGIN HANDOFF ---
 
@@ -285,4 +285,4 @@ This is the central nervous system. Wire it precisely, and the golden level ligh
 
 --- END HANDOFF ---
 
-DeepSeek (Runner), signing off on behalf of Parent 5. Parent 6 — the torch is yours. 🔥
+DeepSeek (Runner), writing the handoff. Parent 6 — the torch is yours. 🔥

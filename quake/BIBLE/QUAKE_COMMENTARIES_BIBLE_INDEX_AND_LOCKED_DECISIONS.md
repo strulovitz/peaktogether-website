@@ -52,8 +52,7 @@
 13. **Parent 5 — Golden Fixture Pack** — `quake/BIBLE/QUAKE_PARENT_5_GOLDEN_FIXTURE_PACK.md`. Parent 5's complete deliverable: every JSON + PNG spec, verified against raw_models.py, bearing math confirmed. ✅ BUILT — `tests/golden_pack/` created (6 JSONs + 38 PNGs, `load_pack` passes).
 
 14. **Parent 4 → Parent 5 Handoff** — `quake/BIBLE/QUAKE_PARENT_4_TO_PARENT_5_HANDOFF.md`. Parent 4's handoff: the Golden Fixture Pack mission spec with exact coordinates, bearing math, door placements, and panel layouts.
-15. **Parent 5 → Parent 6 Handoff** — `quake/BIBLE/QUAKE_PARENT_5_TO_PARENT_6_HANDOFF.md`. DeepSeek (Runner) on behalf of Parent 5. Mission: design the frozen child brief for the full `app.py` wiring of all 13 engine modules in the §5.4 loop. PENDING — awaiting Parent 6 launch.
-16. **Prompt to Opus — Parent 5→6 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_5_6_HANDOFF.md`. (to be written when Nir launches Parent 6)
+15. **Prompt to Opus — Parent 6 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_6_HANDOFF.md`. DeepSeek-authored handoff (Parent 5 designed data, not code). Mission: design the frozen child brief for the full `app.py` wiring of all 13 engine modules in the §5.4 loop. ⏳ PENDING — awaiting Parent 6 launch.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
