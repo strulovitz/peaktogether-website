@@ -6,26 +6,17 @@ Architect: Claude Opus 4.8 (Parent 4). Status: FROZEN. Scope: the runtime engine
 
 ## RESOLUTIONS (decided by me, Parent 4, in favor of long-term quality)
 
-**Conflict #1 — ModeSwitch.** The Apocrypha §3 is the latest scripture and it already settles this: ModeSwitch carries via_edge_id: str | None. The Apocrypha is dated identically but is the final batch and explicitly amends the Second Canon (§10 changelog: "Events: ModeSwitch.via_edge_id retained"). DECIDED: ModeSwitch(event, to, room_id, via_edge_id). The §5.1 three-field version is superseded. No conflict — I misread evolution as contradiction.
+**Conflict #1 — ModeSwitch.** The Apocrypha §3 is the latest scripture and it already settles this: ModeSwitch carries via_edge_id: str | None. The Apocrypha is dated identically but is the final batch and explicitly amends the Second Canon (§10 changelog: "Events: ModeSwitch.via_edge_id retained"). DECIDED: ModeSwitch(event, to, room_id, via_edge_id). The §5.1 three-field version is superseded.
 
-**Conflict #3 — junction detection / GuidelinesRecomputed.** DECIDED: gameplay.step owns it (it holds nav, pos, dt, and emits all events). It emits GuidelinesRecomputed on (a) RoomCleared, or (b) corridor junction-crossing detected via nav. guidelines.select_targets stays a pure function; app.py calls it when it sees that event. This keeps the §5.4 wiring honest.
+**Conflict #3 — junction detection / GuidelinesRecomputed.** DECIDED: gameplay.step owns it (it holds nav, pos, dt, and emits all events). It emits GuidelinesRecomputed on (a) RoomCleared, or (b) corridor junction-crossing detected via nav. guidelines.select_targets stays a pure function; app.py calls it when it sees that event.
 
-**Pin #1 — type aliases.** No contracts.py alias block was provided, so I define them canonically. These match every usage across all four scriptures:
+**Pin #1 — type aliases.** Now corrected: the canonical aliases live in quake/map/raw_models.py and are re-exported through the new contracts.py (PART 1.5). Children `from contracts import ...` only.
 
-```
-Vec2 = tuple[float, float]
-Vec3 = tuple[float, float, float]
-Hex  = str            # "#rrggbb"
-NodeId = LevelId = PairId = PageLabel = EqId = str
-```
+**Pin #4 — Mode A labels.** DECIDED: Pack does NOT gain ConceptGraph. Mode A v1 draws node rings from Floorplan only. No text labels in M1; labels are post-M7 polish via a future labels.json.
 
-The build legs (94+51+41 tests green) already import these from contracts.py; children must `from contracts import ...`, never redefine. If integration reveals a different alias, that's a one-line child fix, not a redesign.
+**Pin #6 — angular-nudge tolerance.** door_nudge_max_angle_rad = 0.18 (~10.3°) — build-side, in BuildConfig. Engine just reads baked DoorRT.
 
-**Pin #4 — Mode A labels.** DECIDED: Pack does NOT gain ConceptGraph. Mode A v1 draws node rings from Floorplan only (geometry + importance → map_color/map_radius_m). No text labels in M1. Labels are a post-M7 polish item; adding them later means adding a small labels.json to the pack, not touching Pack now. This keeps M1 lean and the render_wire contract minimal.
-
-**Pin #6 — angular-nudge tolerance.** The Apocrypha §8 says "within a configured angular tolerance" but never pins it (Parent 1's final offer was to pin it). I pin it now in BuildConfig: door_nudge_max_angle_rad = 0.18 (~10.3°). Rationale: a door is 2.0 m wide; at the room_min_w/d ≈ 6 m floor the half-perimeter nudge of one door-width subtends ≈ atan(1.0/3.0) ≈ 0.32 rad, and growth shrinks it — 0.18 rad is a comfortable post-growth ceiling that forces another grow-iteration rather than accepting a visibly-wrong door. This is build-side, so it doesn't affect the runtime engine, but I pin it so Leg-3's room_maker validation is deterministic. (Engine just reads the baked DoorRT.)
-
-Everything else is now unambiguous. Proceeding to the freeze.
+The unified-compass call, runtime-only pitch, and ceiling-hidden-until-cleared decisions stand as frozen in the briefs.
 
 ---
 
@@ -34,13 +25,16 @@ Everything else is now unambiguous. Proceeding to the freeze.
 You are implementing exactly ONE single-file module for the QUAKE runtime engine.
 
 ABSOLUTE RULES:
-1. Import every shared type from contracts.py. NEVER redefine Actions, Event,
-   ViewMatrix, NavQuery, PanelHit, Ray, GameState, Pack, Floorplan, RoomRuntime,
-   DoorRT, PanelPairRT, PanelPlacementRT, Manifest, AssetEntry, SaveGame, BuildConfig,
-   Vec2, Vec3, Hex, NodeId, PairId, etc. They exist. Import them.
+1. Import every shared type from contracts.py (it re-exports the canonical models
+   from map/raw_models.py and defines the engine-only types — see PART 1.5).
+   NEVER redefine Actions, Event, ViewMatrix, NavQuery, PanelHit, Ray, GameState,
+   Pack, Floorplan, RoomRuntime, DoorRT, PanelPairRT, PanelPlacementRT, Manifest,
+   AssetEntry, SaveGame, BuildConfig, Vec2, Vec3, Hex, NodeId, PairId, etc. They
+   exist in contracts.py. Import them. NEVER import map.raw_models directly.
 2. Do NOT import any other engine module's internals. Talk only through the frozen
    signatures in this brief.
-3. Every JSON you load: assert obj.schema_version == "1.0".
+3. Every JSON you load: use contracts.load_json(path, Model) (it asserts
+   schema_version == "1.0"), or assert obj.schema_version == "1.0" yourself.
 4. SPLIT YOUR MODULE: a PURE core (plain functions on numbers/arrays/dataclasses,
    zero pyglet, zero moderngl, zero file/window) and a THIN shell (the GL/window/IO).
    The pure core is fully unit-tested. The shell is guarded so it imports and runs
@@ -57,18 +51,9 @@ ABSOLUTE RULES:
    When you hand it to GL, transpose at the boundary if the GL call wants column-major
    (INTEGRATION: confirm). Keep all your math row-major internally.
 8. Provide the exact test names listed. GPU/window tests use the marker
-   @skip_if_no_gl (a fixture provided by conftest.py that skips when no context).
+   @skip_if_no_gl (provided by conftest.py — see PART 1.5; skips when no context).
 
-I introduce two tiny shared helpers every module may use (DeepSeek creates these once, they are infrastructure, not engine logic):
-
-```python
-# conftest.py provides:  skip_if_no_gl  — pytest marker that skips when pyglet
-#   cannot create a hidden GL context (headless CI). Pure-core tests never use it.
-
-# glguard.py provides:   HAVE_GL: bool  — True iff a context can be made.
-#   Shells check `if not HAVE_GL: return` at the top of any draw call so import
-#   and headless smoke-launch never crash.
-```
+The three infrastructure files referenced above (contracts.py, glguard.py, conftest.py) are defined fully in PART 1.5 and MUST exist on disk before any child is spun.
 
 ---
 
@@ -77,6 +62,11 @@ I introduce two tiny shared helpers every module may use (DeepSeek creates these
 Build strictly in this order. Each milestone is independently runnable (OT §13).
 
 ```
+M-1 (INFRASTRUCTURE — before any child; full files in PART 1.5):
+      0. contracts.py        (re-exports map/raw_models + ALL engine-only types)
+         glguard.py          (HAVE_GL probe; never crashes on import)
+         conftest.py         (skip_if_no_gl marker)
+
 M0  (prove the GPU path is ours):
       1. gfx_context.py      (window + GL context + GPU capability check)
       2. shaders.py          (wire/solid/blit programs + ceiling tint uniform)
@@ -85,7 +75,7 @@ M0  (prove the GPU path is ours):
 M1  (walk a wireframe graph, comfortable):
       4. camera.py           (decoupled, damped, pitch-clamped ViewMatrix)
       5. input_actions.py    (semantic two-player actions; edge detection)
-      6. render_wire.py      (Mode A: no-blend depth, distance-dim, line-quads, bloom)
+      6. render_wire.py       (Mode A: no-blend depth, distance-dim, line-quads, bloom)
       7. guidelines.py       (target selection §8.2 + guide-line draw)
       8. nav_collision.py    (corridor nav first; room nav + door_at added at M6)
       [app.py grows: Mode A loop]
@@ -103,7 +93,393 @@ M7  (full loop, persisted, co-op):
       [app.py final: full wiring per §5.4]
 ```
 
-Rationale for the order: gfx_context+shaders prove ownership of the pipeline before any content (M0 front-loaded per §8). camera+input are pure-math and unblock everything. render_wire needs only Floorplan (already built) → M1 is reachable with zero room work. Rooms (assets→render_room→readmode) form M6. state+gameplay close the loop at M7. nav_collision and app.py grow across milestones (noted inline).
+Rationale for the order: the three infrastructure files (step 0) are the import foundation every child depends on — nothing compiles without them. gfx_context+shaders prove ownership of the pipeline before any content (M0 front-loaded per §8). camera+input are pure-math and unblock everything. render_wire needs only Floorplan (already built) → M1 is reachable with zero room work. Rooms (assets→render_room→readmode) form M6. state+gameplay close the loop at M7. nav_collision and app.py grow across milestones (noted inline).
+
+---
+
+## PART 1.5 — INFRASTRUCTURE (contracts.py + glguard.py + conftest.py)
+
+These three files are step 0 of the build order. They do not implement engine behavior — they are the import foundation. DeepSeek creates them verbatim before spinning any child.
+
+### Why contracts.py is a facade, not a rewrite
+
+The canonical aliases and pydantic models already exist in quake/map/raw_models.py (516 lines; the 145+ green build-leg tests import from it). The runtime engine must (a) reuse those exact models — re-defining them would risk silent contract drift, the #1 failure mode (Iron Rule #2) — and (b) add the runtime-only types the 13 briefs need (Actions, the Event union, Ray, PanelHit, NavQuery, GameState, SaveGame, Pack, ViewMatrix, Report). So contracts.py re-exports everything from raw_models and defines the engine-only types in one place. Every child imports only from contracts, so the build/runtime boundary stays clean and there is a single source of truth.
+
+### File: quake/contracts.py
+
+```python
+"""
+contracts.py — THE single import surface for the QUAKE runtime engine.
+
+Re-exports the canonical aliases + pydantic models from map/raw_models.py
+(the build-world source of truth, already covered by 145+ green tests) and
+defines the runtime-only types the engine needs. Engine modules import ONLY
+from here; they never import map.raw_models directly.
+
+Conventions (bedrock): pydantic v2, ConfigDict(extra="forbid"),
+schema_version == "1.0", IDs are Annotated[str, Field(pattern=...)].
+"""
+from __future__ import annotations
+
+from typing import Annotated, Literal, Protocol, Union, runtime_checkable
+from dataclasses import dataclass, field
+
+import numpy as np
+from pydantic import BaseModel, ConfigDict, Field
+
+# =============================================================================
+# 1. RE-EXPORT THE CANONICAL TYPES FROM map/raw_models.py
+# =============================================================================
+# INTEGRATION: these names mirror the verbatim alias block + model list DeepSeek
+# reported from map/raw_models.py. If any spelling differs in raw_models, fix the
+# import list HERE ONLY (the facade absorbs it) — never in a child module.
+from map.raw_models import (  # noqa: F401  (re-exported)
+    # --- type aliases ---
+    NodeId, LevelId, PageLabel, Vec2, Vec3, Hex, GroupName,
+    FigureId, PairId, DrawBlockId, TextBlockId, EqId,
+    # --- Leg 1 (MAP) models ---
+    Floorplan, FloorRoom, Corridor, Crossing,
+    ConceptGraph, Node, Edge,
+    # --- Leg 2 (WALLS) models ---
+    Palette, GroupColor,
+    Manifest, AssetEntry,
+    RoomSource, FigureDecl, StepPair, DrawingBlock, TextBlock, CeilingEq,
+    # --- shared build config + room runtime (Leg 3) ---
+    BuildConfig,
+    RoomRuntime, DoorRT, PanelPairRT, PanelPlacementRT, EnemyRT, CeilingEqRT,
+    # --- helpers ---
+    load_json,
+)
+
+# Defensive star-import so a name we forgot to list above is still reachable
+# from contracts. (Explicit list above is the documented surface; this is a net.)
+from map.raw_models import *  # noqa: F401,F403
+
+# =============================================================================
+# 2. RUNTIME-ONLY TYPES (do NOT exist in raw_models; defined here once)
+# =============================================================================
+
+# --- ViewMatrix: a 4x4 float32 row-major numpy array (alias for documentation) ---
+ViewMatrix = np.ndarray  # shape (4,4), dtype float32, ROW-MAJOR by engine convention
+
+
+# --- A generic build/runtime report (used by gfx_context.check_caps, etc.) ------
+@dataclass(frozen=True)
+class Report:
+    ok: bool
+    errors: list[str] = field(default_factory=list)
+    warnings: list[str] = field(default_factory=list)
+
+
+# --- Co-op semantic actions (one snapshot per frame; produced by input_actions) -
+# Frozen so game logic cannot mutate the input snapshot mid-step.
+class Actions(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+    # MOVER (owns the body) ---------------------------------------------------
+    move_x: float = 0.0          # [-1,1] strafe (right +)
+    move_y: float = 0.0          # [-1,1] forward (+) / back (-)
+    heading_delta: float = 0.0   # radians this frame (yaw). MOVER ONLY.
+    pitch_delta: float = 0.0     # radians this frame, pre-clamp. MOVER ONLY.
+    # SHOOTER (owns the reticle) ---------------------------------------------
+    aim_x: float = 0.0           # [-1,1] reticle x within cone
+    aim_y: float = 0.0           # [-1,1] reticle y within cone
+    fire: bool = False           # edge: true only on the frame fire is pressed
+    fire_held: bool = False
+    # SHARED ------------------------------------------------------------------
+    read_toggle: bool = False    # edge
+    interact: bool = False       # edge
+    pause: bool = False          # edge
+
+
+# --- Geometry / runtime helpers ------------------------------------------------
+@dataclass(frozen=True)
+class Ray:
+    origin: Vec3
+    direction: Vec3              # need not be unit; consumers normalize if required
+
+
+@dataclass(frozen=True)
+class PanelHit:
+    asset_on_id: str
+    asset_off_id: str
+    pair_id: PairId
+    is_drawing: bool
+    distance: float
+
+
+# --- Events emitted by gameplay.step (typed, discriminated on `event`) ----------
+class _Ev(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+
+class PanelLit(_Ev):
+    event: Literal["panel_lit"] = "panel_lit"
+    pair_id: PairId
+    room_id: NodeId
+
+
+class DoorOpened(_Ev):
+    event: Literal["door_opened"] = "door_opened"
+    room_id: NodeId
+
+
+class DemonSpawned(_Ev):
+    event: Literal["demon_spawned"] = "demon_spawned"
+    enemy_id: str
+    room_id: NodeId
+
+
+class DemonHit(_Ev):
+    event: Literal["demon_hit"] = "demon_hit"
+    enemy_id: str
+    hp_remaining: int
+
+
+class DemonKilled(_Ev):
+    event: Literal["demon_killed"] = "demon_killed"
+    enemy_id: str
+    room_id: NodeId
+
+
+class RoomCleared(_Ev):
+    event: Literal["room_cleared"] = "room_cleared"
+    room_id: NodeId
+
+
+class LevelComplete(_Ev):
+    event: Literal["level_complete"] = "level_complete"
+    level_id: LevelId
+
+
+class ModeSwitch(_Ev):
+    # Apocrypha §3 supersedes Second Canon §5.1: via_edge_id is carried.
+    event: Literal["mode_switch"] = "mode_switch"
+    to: Literal["corridor", "room"]
+    room_id: NodeId | None = None
+    via_edge_id: str | None = None
+
+
+class ReadModeToggled(_Ev):
+    event: Literal["read_toggled"] = "read_toggled"
+    on: bool
+    asset_id: str | None = None
+
+
+class GuidelinesRecomputed(_Ev):
+    event: Literal["guides"] = "guides"
+    targets: list[NodeId] = Field(default_factory=list)
+
+
+Event = Annotated[
+    Union[
+        PanelLit, DoorOpened, DemonSpawned, DemonHit, DemonKilled,
+        RoomCleared, LevelComplete, ModeSwitch, ReadModeToggled,
+        GuidelinesRecomputed,
+    ],
+    Field(discriminator="event"),
+]
+
+
+# --- Savegame (disk; written by state.save, atomic; Second Canon §4.7) ----------
+class RoomProgress(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    pairs_on: list[PairId] = Field(default_factory=list)
+    hidden_door_open: bool = False
+    enemy_defeated: bool = False
+    room_cleared: bool = False
+
+
+class LevelProgress(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    rooms: dict[NodeId, RoomProgress] = Field(default_factory=dict)
+    level_complete: bool = False
+
+
+class PlayerSave(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    level_id: LevelId
+    mode: Literal["corridor", "room"]
+    current_room_id: NodeId | None = None
+    position_xyz: Vec3
+    heading_rad: float
+    # NOTE: pitch is runtime-only and intentionally NOT persisted.
+
+
+class SaveGame(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+    schema_version: Literal["1.0"] = "1.0"
+    profile_id: str = "default"
+    levels: dict[LevelId, LevelProgress] = Field(default_factory=dict)
+    player: PlayerSave
+
+
+# --- GameState (in-memory runtime state; NOT a pydantic model — mutable) --------
+@dataclass
+class GameState:
+    save: SaveGame
+    mode: Literal["corridor", "room"]
+    current_room_id: NodeId | None
+    pos: Vec3
+    heading_rad: float
+    pitch_rad: float
+    lit: set[str]                 # block_ids turned on (mirrors save)
+    cleared: set[NodeId]
+
+
+# --- Pack (everything the runtime loads; assembled by assets.load_pack) ---------
+@dataclass
+class Pack:
+    floorplan: Floorplan
+    rooms: dict[NodeId, RoomRuntime]
+    manifest: Manifest
+    palette: Palette
+    asset_dir: str
+
+
+# --- NavQuery protocol (implemented by nav_collision builders) ------------------
+@runtime_checkable
+class NavQuery(Protocol):
+    def resolve_player_motion(self, start: Vec3, delta: Vec3) -> Vec3: ...
+    def nearest_panel(self, ray: Ray, max_dist: float) -> PanelHit | None: ...
+    def door_at(self, point: Vec3) -> str | None: ...   # edge_id or None (room nav)
+
+
+# =============================================================================
+# 3. RUNTIME CONSTANTS that are part of the locked contract (shared by modules)
+# =============================================================================
+# Read-Mode target rule (Second Canon §5.3 commentary, LOCKED):
+READ_MAX_DIST: float = 6.0              # metres
+READ_CONE_HALF_ANGLE_RAD: float = 0.6108652  # 35 degrees in radians
+
+# Shared comfort/camera clamp (camera.py and gameplay.py both reference this):
+PITCH_CLAMP_RAD: float = 1.2217         # +/-70 degrees
+
+
+__all__ = [
+    # re-exported aliases
+    "NodeId", "LevelId", "PageLabel", "Vec2", "Vec3", "Hex", "GroupName",
+    "FigureId", "PairId", "DrawBlockId", "TextBlockId", "EqId",
+    # re-exported models
+    "Floorplan", "FloorRoom", "Corridor", "Crossing",
+    "ConceptGraph", "Node", "Edge",
+    "Palette", "GroupColor", "Manifest", "AssetEntry",
+    "RoomSource", "FigureDecl", "StepPair", "DrawingBlock", "TextBlock", "CeilingEq",
+    "BuildConfig",
+    "RoomRuntime", "DoorRT", "PanelPairRT", "PanelPlacementRT", "EnemyRT", "CeilingEqRT",
+    "load_json",
+    # engine-only types
+    "ViewMatrix", "Report", "Actions", "Ray", "PanelHit",
+    "PanelLit", "DoorOpened", "DemonSpawned", "DemonHit", "DemonKilled",
+    "RoomCleared", "LevelComplete", "ModeSwitch", "ReadModeToggled",
+    "GuidelinesRecomputed", "Event",
+    "RoomProgress", "LevelProgress", "PlayerSave", "SaveGame",
+    "GameState", "Pack", "NavQuery",
+    # locked constants
+    "READ_MAX_DIST", "READ_CONE_HALF_ANGLE_RAD", "PITCH_CLAMP_RAD",
+]
+```
+
+### File: quake/glguard.py
+
+```python
+"""
+glguard.py — headless-safe probe for whether a real GL context can be made.
+
+Engine render/window shells check `if not glguard.HAVE_GL: return` at the top of
+any draw/context call so that:
+  * importing any engine module on a headless CI machine never crashes, and
+  * the smoke launch degrades gracefully instead of throwing.
+
+This module performs the probe ONCE at import, swallowing every failure. It must
+never raise on import.
+"""
+from __future__ import annotations
+
+
+def _probe() -> bool:
+    """Return True iff a moderngl context can be created right now.
+
+    INTEGRATION: confirm the exact pyglet 2.1.x hidden-window + moderngl
+    create_context incantation. The structure (try/except → bool) is fixed;
+    only the two external calls inside may need their exact names confirmed.
+    """
+    try:
+        import moderngl  # noqa: WPS433 (local import is intentional)
+        # Preferred: a standalone context needs no visible window.
+        # INTEGRATION: moderngl.create_context(standalone=True, require=330)
+        ctx = moderngl.create_standalone_context(require=330)
+        ok = ctx is not None
+        try:
+            ctx.release()
+        except Exception:
+            pass
+        return ok
+    except Exception:
+        # Fall back to a hidden pyglet window + attached context.
+        try:
+            import pyglet  # noqa: WPS433
+            import moderngl  # noqa: WPS433
+            # INTEGRATION: confirm pyglet 2.1.x Window(visible=False) and that
+            # moderngl.create_context() binds to the current pyglet GL context.
+            win = pyglet.window.Window(width=8, height=8, visible=False)
+            ctx = moderngl.create_context()
+            ok = ctx is not None
+            try:
+                win.close()
+            except Exception:
+                pass
+            return ok
+        except Exception:
+            return False
+
+
+# Probe exactly once at import; never raise.
+try:
+    HAVE_GL: bool = _probe()
+except Exception:  # pragma: no cover - belt and suspenders
+    HAVE_GL = False
+```
+
+### File: quake/conftest.py
+
+```python
+"""
+conftest.py — pytest configuration shared by the whole QUAKE test suite.
+
+Provides the `skip_if_no_gl` marker used by every GPU/window test. Pure-core
+tests never use it and always run in headless CI.
+
+Usage in a test module:
+    from conftest import skip_if_no_gl   # or rely on pytest collecting it
+
+    @skip_if_no_gl
+    def test_programs_compile(...):
+        ...
+"""
+from __future__ import annotations
+
+import pytest
+
+try:
+    from glguard import HAVE_GL
+except Exception:  # if even importing glguard fails, treat as no-GL
+    HAVE_GL = False
+
+# A ready-to-use decorator: @skip_if_no_gl
+skip_if_no_gl = pytest.mark.skipif(
+    not HAVE_GL,
+    reason="No GL context available (headless); skipping GPU/window test.",
+)
+
+
+def pytest_configure(config: "pytest.Config") -> None:
+    """Register the marker name so `-W error::pytest.PytestUnknownMarkWarning`
+    stays clean and `pytest --markers` documents it."""
+    config.addinivalue_line(
+        "markers",
+        "skip_if_no_gl: skip when no GL context can be created (headless CI).",
+    )
+```
 
 ---
 
@@ -190,7 +566,7 @@ so render_wire/render_room/readmode bind against them):
 ```
 wire_program  — Mode A lines as camera-facing quads.
   uniforms:  u_mvp (mat4), u_dim_near (float), u_dim_far (float),
-             u_color (vec3), u_depth_bias (float)
+             u_color (vec3), u_depth_bias (float), u_viewport (vec2)
   in:        in_pos (vec3, line endpoint in world), in_side (vec2, quad expansion),
              in_color (vec3, per-vertex importance color)
   behavior:  expand line into a screen-facing quad of constant pixel width
@@ -215,9 +591,10 @@ blit_program  — fullscreen textured quad (Read Mode + bloom composite).
   behavior:  uv' = (in_uv - 0.5)/u_zoom + 0.5 + u_pan; sample; pass through.
 
 ceiling_tint_uniform(prog, red):
-   sets prog's u_tint = (red, red*0.0, red*0.0)  -> pure blood-red scaled by `red`
+   sets prog's u_tint = (red, 0.0, 0.0)  -> pure blood-red scaled by `red`
    and u_use_tint = 1 if red>0 else 0.
    (INTEGRATION: prog['u_tint'].value = (...); prog['u_use_tint'].value = ...)
+   Uses tint_rgb() for the rgb triple.
 ```
 
 PURE CORE (testable headless):
@@ -263,12 +640,12 @@ LOCKED COMFORT INVARIANTS (encode them here):
 - The camera FOLLOWS heading with a CRITICALLY-DAMPED spring (no overshoot).
 - Pitch is CLAMPED then smoothed.
 
-PINNED CONSTANTS (module-level, the comfort tuning — I pin these now):
+PINNED CONSTANTS (module-level):
 ```
 CAM_HEADING_OMEGA   = 12.0    # spring natural frequency (rad/s); critically damped
 CAM_PITCH_OMEGA     = 14.0
-PITCH_CLAMP_RAD     = 1.2217  # ±70° in radians
 EYE_HEIGHT_M        = 1.6     # camera Y offset above pos.y (pos is feet/floor)
+# PITCH_CLAMP_RAD is imported from contracts (== 1.2217, +/-70 deg) — single source.
 ```
 
 BEHAVIOR:
@@ -285,27 +662,14 @@ Each update:
   Shortest-arc for yaw: wrap (target_yaw - _yaw) into [-pi, pi] before the spring
   so it never spins the long way around.
   eye = (pos.x, pos.y + EYE_HEIGHT_M, pos.z)
-  forward = (cos(_pitch)*sin(_yaw_world), sin(_pitch), cos(_pitch)*cos(_yaw_world))
-    where yaw 0 looks toward +Z (north) and +yaw turns toward +X (east), matching
-    the global compass (bearing θ measured atan2(dz?...) — see COMPASS NOTE).
+  forward = ( cos(_pitch)*cos(_yaw), sin(_pitch), cos(_pitch)*sin(_yaw) )
+    FROZEN COMPASS: a heading/bearing of θ → world forward (cos θ, 0, sin θ),
+    with +X = east, +Z = north, matching bearing_rad = atan2(dz, dx). This single
+    definition makes Mode A, doors (bearing), spawn (bearing+π), and the camera
+    agree by construction.
   Build a right-handed look-at view matrix (eye, eye+forward, up=+Y).
   Return as np.ndarray (4,4) float32 ROW-MAJOR.
 ```
-
-COMPASS NOTE (consistency law): bearings in the scriptures are
-atan2(dz, dx) with room-local +X=east, +Z=north. To make "walk forward" agree
-with bearings, define heading so that forward direction = (sin? )...
-PIN: heading_rad is measured the SAME as bearing_rad: a heading of θ points the
-body in world direction (cos θ on X? ) -> USE: forward_xz = (cos(yaw), sin(yaw))
-interpreted as (x=cos θ? ) — NO. To match bearing_rad = atan2(dz,dx):
-   world_dir(θ) = (dx, dz) = (cos θ, sin θ)   # x=cosθ, z=sinθ
-Therefore forward (ignoring pitch) = (cos(_yaw), 0, sin(_yaw)).
-Spawn heading bearing+π thus points from the door toward room center — exactly
-the corridor-approach direction. This single definition makes Mode A, doors,
-and the camera agree by construction. FREEZE THIS: forward_xz=(cos θ, sin θ).
-
-Full forward with pitch:
-  forward = ( cos(_pitch)*cos(_yaw), sin(_pitch), cos(_pitch)*sin(_yaw) )
 
 TESTS (all pure, no GL):
 ```
@@ -322,8 +686,6 @@ test_forward_compass       — yaw=0,pitch=0 → forward≈(1,0,0) (east = +X, b
 test_matrix_shape_dtype    — update returns (4,4) float32.
 test_deterministic         — same inputs from fresh Camera → identical matrices.
 ```
-
-A note I owe you on the compass, decided now and frozen: bearing in the scriptures is atan2(dz, dx), so a bearing/heading of θ corresponds to world direction (x=cos θ, z=sin θ). I freeze the camera's forward (yaw component) as (cos yaw, 0, sin yaw) so that heading, door bearings, spawn headings, and Mode-A corridor directions are one coherent system. This is the kind of cross-cutting consistency call that had to be made once, centrally — so I made it.
 
 ---
 
@@ -368,7 +730,7 @@ def build_actions(sample: RawSample, prev: EdgeTracker, dt: float,
     # move_x/move_y = clamp(mover_axis_*, -1, 1)
     # fire = edge(shooter_fire_down); fire_held = shooter_fire_down
     # read_toggle/interact/pause = edge(...)
-    # returns frozen Actions.
+    # returns a frozen Actions (contracts.Actions, frozen pydantic model).
 ```
 
 PINNED CONSTANTS:
@@ -424,9 +786,8 @@ GEOMETRY (PURE CORE — fully testable headless):
 ```
 Build a renderable mesh from Floorplan:
   - For each Corridor: a polyline through path_xz, each vertex at y=cruise_y
-    (ramp knees already in path_xz). Color from the corridor's importance? No —
-    color by the TARGET room's map_color OR a neutral wire color. PIN: corridors
-    use neutral wire color WIRE_BASE=(1,1,1); node rings use their FloorRoom.map_color.
+    (ramp knees already in path_xz). PIN: corridors use neutral wire color
+    WIRE_BASE=(1,1,1); node rings use their FloorRoom.map_color.
   - For each FloorRoom: a ring (circle) of map_radius_m in the XZ plane at
     y=socket_y, color = map_color.
   - Crossings render naturally because corridors carry their cruise_y and ramp
@@ -566,19 +927,17 @@ def build_corridor_nav(fp: Floorplan) -> NavQuery: ...
 def build_room_nav(room: RoomRuntime) -> NavQuery: ...
 ```
 
-NavQuery Protocol (contracts §5.1):
-```python
+NavQuery Protocol (contracts):
+```
 resolve_player_motion(self, start: Vec3, delta: Vec3) -> Vec3
 nearest_panel(self, ray: Ray, max_dist: float) -> PanelHit | None
-```
-
-PLUS (Apocrypha §7 delta — add to the room NavQuery object):
-```python
-def door_at(self, point: Vec3) -> str | None    # returns edge_id or None
+door_at(self, point: Vec3) -> str | None    # returns edge_id or None
 ```
 
 PURPOSE: collision + ray queries. Two builders return objects implementing NavQuery.
-This is PURE geometry — no GL, fully testable. (No window, no textures.)
+This is PURE geometry — no GL, fully testable. (No window, no textures.) The corridor
+NavQuery's door_at always returns None (doors are a room-mode concept); the room
+NavQuery implements the real door_at.
 
 CORRIDOR NAV (build_corridor_nav):
 ```
@@ -590,7 +949,7 @@ the floor: project the attempted delta, clamp to stay within corridor half-width
 the nearest path segment (soft nudge toward centerline — OT §8.3 rail assist), and
 set y to the local floor height (interpolated along the segment / socket).
 nearest_panel: corridors have NO panels → always returns None.
-(Mode A has no shooting targets; this satisfies the protocol.)
+door_at: corridor nav → always None.
 ```
 
 ROOM NAV (build_room_nav):
@@ -599,16 +958,17 @@ Axis-aligned box [-W/2,W/2]×[0,H]×[-D/2,D/2] from room.dimensions_m. Walls sol
 EXCEPT door intervals: for each DoorRT, the opening on its wall (centered at
 door.center_xyz, width door.width_m, up to door.height_m) is PASSABLE. The hidden
 alcove (final pair drawing) is a shallow recess, NOT passable as transit.
-resolve_player_motion: slide along floor (y stays 0 + EYE handled by camera),
-block at solid walls, allow passing through door intervals (so stepping out a door
-triggers a ModeSwitch — gameplay checks door_at).
+resolve_player_motion: slide along floor, block at solid walls, allow passing
+through door intervals (so stepping out a door triggers a ModeSwitch — gameplay
+checks door_at).
 nearest_panel(ray, max_dist): intersect ray with every panel quad (each PanelPairRT
 has drawing_placement + text_placement: a rect at center_xyz, width_m×height_m,
 facing yaw_rad inward). Return the nearest hit ≤ max_dist as PanelHit with:
   asset_on_id/asset_off_id = the on/off asset_ids for THAT panel (drawing or text),
   pair_id, is_drawing (True if the hit panel is the drawing), distance.
 door_at(point): if point lies within a door's opening interval on its wall plane
-  (within a small threshold), return that door.edge_id; else None.
+  (within DOOR_TRIGGER_DEPTH_M of the wall and inside the opening width/height),
+  return that door.edge_id; else None.
 ```
 
 PURE HELPERS (exposed for tests):
@@ -629,6 +989,7 @@ test_corridor_keeps_on_floor   — motion across a ramp segment sets y to the ra
                                  height (interpolated).
 test_corridor_soft_boundary    — attempt to walk past half-width → clamped inside.
 test_corridor_nearest_panel_none — always None.
+test_corridor_door_at_none     — always None.
 test_room_wall_blocks          — motion into a solid wall is blocked (start stays
                                  inside box).
 test_room_door_passable        — motion through a door interval is allowed (final
@@ -639,9 +1000,9 @@ test_ray_misses                — ray pointing away → None.
 test_nearest_of_two            — two panels in line → the closer one returned.
 test_door_at_inside            — point in a door opening → its edge_id.
 test_door_at_solid             — point on a solid wall stretch → None.
-test_door_at_uses_bearing_placed_door — door at a non-cardinal bearing (e.g. NE,
-                                 landing on N or E wall per the ray rule) is found
-                                 at its actual center_xyz, NOT a wall-center.
+test_door_at_uses_bearing_placed_door — door at a non-cardinal bearing (landing on
+                                 N or E wall per the ray rule) is found at its
+                                 actual center_xyz, NOT a wall-center.
 ```
 
 ---
@@ -653,18 +1014,18 @@ FROZEN SIGNATURE (Second Canon §5.3):
 def load_pack(dir: str) -> Pack: ...   # asserts schema_version on every file
 ```
 
-PURPOSE: load all baked content into a Pack (contracts §5.1):
+PURPOSE: load all baked content into a Pack (contracts):
 ```
 Pack(floorplan, rooms: dict[NodeId,RoomRuntime], manifest, palette, asset_dir)
 ```
 
 BEHAVIOR (mostly PURE + file IO; no GL):
 ```
-Read from `dir`:
-  floorplan.json            -> Floorplan        (assert schema_version=="1.0")
-  room_runtime/room_*.json  -> RoomRuntime each (assert; key by room_id)
-  manifest.json             -> Manifest         (assert)
-  palette.json              -> Palette          (assert)
+Read from `dir` using contracts.load_json(path, Model) (asserts schema_version):
+  floorplan.json            -> Floorplan
+  room_runtime/room_*.json  -> RoomRuntime each (key by room_id)
+  manifest.json             -> Manifest
+  palette.json              -> Palette
 asset_dir = the directory containing the PNGs referenced by manifest wall_path/
   master_path (relative to `dir`).
 VALIDATE (fail loudly, ValueError with the offending id):
@@ -675,13 +1036,10 @@ VALIDATE (fail loudly, ValueError with the offending id):
 DO NOT load PNG pixels here (that's render's job at GL-upload time); just verify
 paths exist. (Pillow load happens in the render shells / readmode.)
 
-Palette: load palette.json into the Palette model (name->hex map); assert the
+Palette is the contracts.Palette model (re-exported from raw_models); assert the
 reserved keys exist (grey_ink, grey_text, bg_key, map_importance.1..5) per §2.4.
+(Palette already exists in raw_models — import it from contracts; do NOT redefine.)
 ```
-
-NOTE on Palette type: import Palette from contracts. If contracts lacks it, define
-locally as a thin pydantic model {schema_version, colors: dict[str,Hex]} and flag
-to DeepSeek — but FIRST assume contracts has it (the build legs ship palette.json).
 
 TESTS:
 ```
@@ -735,6 +1093,9 @@ def build_room_mesh(room: RoomRuntime) -> RoomMesh:
 
 Pure: build_room_mesh is deterministic geometry; unit-test corner positions, hole
 presence, panel count.
+
+def panel_is_on(pair_id: PairId, lit: set[str], room: RoomRuntime) -> bool:
+  # a pair is "on" iff any of its block_ids are in lit. (Pure; unit-tested.)
 ```
 
 SHELL (skips headless):
@@ -745,21 +1106,15 @@ draw_room(view, room, pack, state):
   Lazy-load & cache textures from pack.manifest wall_path PNGs (Pillow→GL texture),
   keyed by asset_id (INTEGRATION: moderngl texture from Pillow bytes).
   Bind solid_program; u_mvp=view (transpose at boundary if needed).
-  Draw walls/floor/ceiling/jambs/alcove with a neutral wall texture or flat color
-  (u_use_tint=0). (PIN: walls use a flat material color WALL_RGB=(0.18,0.18,0.20);
-  a wall texture is a later polish item.)
-  For each PanelQuad: choose asset = on_asset_id if its pair_id ∈ state.lit-derived
-  "on" set ELSE off_asset_id. (PIN: a pair is "on" iff any of its block_ids are in
-  state.lit; gameplay flips the whole pair, so checking pair-on is consistent.)
-  Enable BLEND locally for panels (transparent PNGs), draw, then DISABLE blend and
-  RESTORE depth state (Mode B walls are opaque, panels alpha — draw opaque first,
-  panels after, blend only for panels). (INTEGRATION: ctx blend func one-minus-src-
-  alpha.)
-  Ceiling equations: for each CeilingEqRT, draw its quad with the neutral asset.
-  If room.room_id in state.cleared (enemy_defeated/cleared): set tint via
-  ceiling_tint_uniform(solid_program, red=1.0) → blood-red; else u_use_tint=0
-  (hidden look: PIN — when not cleared, ceiling equations are NOT drawn at all
-  (hidden until demon dies, per OT §3.2); when cleared, draw them tinted red).
+  Draw walls/floor/ceiling/jambs/alcove with a flat material color WALL_RGB
+  (u_use_tint=0). (A wall texture is later polish.)
+  For each PanelQuad: choose asset = on_asset_id if panel_is_on(...) ELSE off_asset_id.
+  Draw opaque geometry first; then enable BLEND locally for panels (transparent
+  PNGs), draw panels, then DISABLE blend and RESTORE the depth state. (INTEGRATION:
+  ctx blend func one-minus-src-alpha.)
+  Ceiling equations: ONLY drawn if room.room_id in state.cleared (hidden until the
+  demon dies, OT §3.2). When drawn, set tint via ceiling_tint_uniform(solid_program,
+  red=1.0) → blood-red, then draw each CeilingEqRT quad with its neutral asset.
 ```
 
 PINNED:
@@ -782,9 +1137,8 @@ test_door_hole_at_bearing  — a DoorRT at a non-cardinal bearing placed on (say
 test_panel_count           — N pairs → 2N PanelQuads (drawing+text).
 test_panel_corners         — a panel's 4 corners are width_m×height_m around
                              center_xyz, normal per yaw_rad.
-test_panel_on_off_select   — given state.lit containing a pair's block → that
-                             PanelQuad resolves to on_asset_id (test the pure
-                             selector helper, not the GL draw).
+test_panel_on_off_select   — panel_is_on returns True when a pair's block is in lit,
+                             False otherwise.
 test_alcove_is_recess      — hidden_door_wall_slot yields an alcove recess, not a
                              through-hole.
 @skip_if_no_gl test_draw_smoke — golden room draws without error.
@@ -800,9 +1154,10 @@ def draw_read(asset_master_path: str, zoom: float, pan: Vec2) -> None: ...
 ```
 
 LOCKED RULE (Second Canon §5.3 commentary): the TARGET-selection (which asset to read)
-is owned by gameplay/nav (raycast-hit ≤ READ_MAX_DIST=6.0, else nearest center
-within READ_CONE_HALF_ANGLE=35° ≤ 6.0, else no-op). draw_read only RENDERS the
-chosen master PNG. World is paused by app. Read Mode does NOT flip panel state.
+is owned by gameplay/nav (raycast-hit ≤ READ_MAX_DIST, else nearest center within
+READ_CONE_HALF_ANGLE_RAD ≤ READ_MAX_DIST, else no-op). Both constants are imported
+from contracts (READ_MAX_DIST=6.0, READ_CONE_HALF_ANGLE_RAD=35°). draw_read only
+RENDERS the chosen master PNG. World is paused by app. Read Mode does NOT flip state.
 
 PURPOSE: render a pin-sharp, full-screen, flat 2D, zoomable/pannable image of the
 master-DPI panel PNG. No perspective, no blur (R12 escape hatch).
@@ -847,7 +1202,7 @@ def load(path: str, pack: Pack) -> GameState: ...
 def save(state: GameState, path: str) -> None: ...   # atomic
 ```
 
-PURPOSE: own GameState (runtime, contracts §5.1) and its persistence as SaveGame
+PURPOSE: own GameState (runtime, contracts) and its persistence as SaveGame
 (disk, §4.7). Atomic writes.
 
 ```
@@ -862,30 +1217,29 @@ BEHAVIOR:
 ```
 new_state(pack, profile_id):
   Start in corridor mode at the level's start. PIN: start position = the first
-  FloorRoom's socket (lowest room_id) socket point; heading_rad = 0; pitch=0;
-  lit=∅; cleared=∅. Build a fresh SaveGame with empty LevelProgress for the level.
-  current_room_id = None (in corridor).
+  FloorRoom's socket (lowest room_id) socket point (x, socket_y, z); heading_rad=0;
+  pitch=0; lit=∅; cleared=∅. Build a fresh SaveGame with empty LevelProgress for the
+  level (level_id from floorplan.level_id). current_room_id = None (in corridor).
 save(state, path):
-  Sync state→SaveGame: for the active level, write per-room RoomProgress from
-  state (pairs_on derived from state.lit grouped by pair; enemy_defeated/room_cleared
-  from state.cleared; hidden_door_open tracked in state — PIN: add nothing to
-  GameState; derive hidden_door_open = (room cleared OR final pair lit) per room as
-  gameplay sets it — see gameplay brief which OWNS these transitions and updates
-  state.save directly). Player block from state.pos/heading/mode/current_room_id.
-  ATOMIC: write temp file in same dir → flush+fsync → os.replace(temp, path).
+  Sync state→SaveGame via state_to_save (below). ATOMIC: write temp file in same
+  dir → flush+fsync → os.replace(temp, path).
 load(path, pack):
-  Read+validate SaveGame (assert schema_version=="1.0"). Forward-compat: unknown
-  room/level ids vs pack are DROPPED with a logged warning. Rebuild GameState:
-  pos from player.position_xyz, heading from player.heading_rad, pitch=0,
-  mode/current_room_id from player, lit/cleared rebuilt from LevelProgress.
+  Read+validate SaveGame (contracts.load_json asserts schema_version). Forward-
+  compat: unknown room/level ids vs pack are DROPPED with a logged warning. Rebuild
+  GameState via save_to_state.
 
 IMPORTANT DIVISION OF LABOR: state.py does pure (de)serialization + atomic IO.
-gameplay.py is the ONLY writer of progress semantics; it mutates state and calls
-save. state.py never decides game rules.
+gameplay.py is the ONLY writer of progress semantics (it mutates state.save's
+RoomProgress directly as the player acts). state.py never decides game rules.
 
 Provide pure helpers (testable):
-  def state_to_save(state) -> SaveGame
-  def save_to_state(save, pack) -> GameState
+  def state_to_save(state: GameState) -> SaveGame
+    # player block from state.pos/heading/mode/current_room_id; the levels dict is
+    # taken from state.save (gameplay keeps it current). pitch NOT written.
+  def save_to_state(save: SaveGame, pack: Pack) -> GameState
+    # pos from player.position_xyz, heading from player.heading_rad, pitch=0,
+    # mode/current_room_id from player; lit rebuilt from each RoomProgress.pairs_on
+    # expanded to block_ids; cleared = rooms whose RoomProgress.room_cleared.
 ```
 
 TESTS:
@@ -916,90 +1270,81 @@ the door logic, demon spawn/kill, room clear, ceiling reveal, god-mode, mode swi
 guideline-recompute triggering. (OT §3.2 door logic; Apocrypha §7; co-op rules.)
 
 PER-STEP BEHAVIOR (order matters):
-
 ```
 1. APPLY MOTION (Mover owns it):
      state.heading_rad += actions.heading_delta
-     state.pitch_rad    = clamp(state.pitch_rad + actions.pitch_delta, ±PITCH_CLAMP)
-       (clamp constant shared with camera; import or re-pin PITCH_CLAMP_RAD=1.2217)
-     desired = forward/strafe from heading + (move_y, move_x) * WALK_SPEED * dt
-       forward_xz = (cos(heading), sin(heading)) ; strafe_xz = (sin(heading), -cos(heading))
-       (FREEZE: matches camera compass — heading θ → forward (cosθ,·,sinθ).)
-     delta = (forward_xz*move_y + strafe_xz*move_x) scaled by WALK_SPEED*dt, y=0
+     state.pitch_rad    = clamp(state.pitch_rad + actions.pitch_delta, ±PITCH_CLAMP_RAD)
+       (PITCH_CLAMP_RAD imported from contracts — same value as camera.)
+     forward_xz = (cos(heading), sin(heading))    # FROZEN compass; matches camera
+     strafe_xz  = (sin(heading), -cos(heading))
+     delta = (forward_xz*move_y + strafe_xz*move_x) * WALK_SPEED_M_S * dt, y=0
      state.pos = nav.resolve_player_motion(state.pos, delta)
 
 2. MODE-SWITCH CHECK:
-     if state.mode == "room": eid = nav.door_at(state.pos)
+     if state.mode == "room":
+        eid = nav.door_at(state.pos)
         if eid is not None:  # stepped out a transit door
            emit ModeSwitch(to="corridor", room_id=state.current_room_id, via_edge_id=eid)
+           set state.mode="corridor", current_room_id=None
            (app performs the teleport-snap: unload room, place player in corridor at
-            that edge's mouth, heading = bearing (facing away from room, i.e. outward).
-            gameplay sets state.mode="corridor", current_room_id=None.)
-     if state.mode == "corridor":
-        # entering a room: app/gameplay detects arrival at a node socket whose room
-        # the player walks into via a corridor mouth. PIN: when pos enters a room
-        # node's socket disc AND the player is moving inward, emit
-        # ModeSwitch(to="room", room_id=that node, via_edge_id=the corridor edge).
-        # On this event app loads the room; gameplay sets state.mode="room",
-        # current_room_id=node, and places player at doors[edge].spawn_xyz with
-        # heading = doors[edge].spawn_heading_rad (== bearing+π, zero snap).
-        # ALSO: emit GuidelinesRecomputed when a junction socket is crossed.
+            that edge's mouth, heading = bearing (outward).)
+     elif state.mode == "corridor":
+        # entering a room: when pos enters a node socket disc (radius
+        # SOCKET_ENTER_RADIUS_M) AND moving inward, emit
+        # ModeSwitch(to="room", room_id=that node, via_edge_id=the corridor edge);
+        # set state.mode="room", current_room_id=node; place player at
+        # doors[edge].spawn_xyz with heading = doors[edge].spawn_heading_rad
+        # (== bearing+π, zero snap).
+        # ALSO: emit GuidelinesRecomputed(targets=[]) when a junction socket is crossed
+        # (app fills targets by calling select_targets).
 
-3. SHOOTING (Shooter owns it; only in room mode does it have targets):
+3. SHOOTING (Shooter owns it; only in room mode has targets):
      if actions.fire and state.mode == "room":
-        ray = ray_from_camera_through_reticle(state, actions.aim_x, actions.aim_y)
-          (PIN: reticle ray = camera eye + a direction offset within the aim cone;
-           cone half-angle AIM_CONE_RAD = 0.30. Shooter NEVER rotates camera — the ray
-           is derived from the current view + aim offset only.)
-        hit = nav.nearest_panel(ray, max_dist=SHOOT_MAX_DIST=50.0)
+        ray = reticle_ray(eye, state.heading_rad, state.pitch_rad, actions.aim_x,
+                          actions.aim_y)   # within AIM_CONE_RAD; Shooter NEVER rotates cam
+        hit = nav.nearest_panel(ray, max_dist=SHOOT_MAX_DIST)
         room = pack.rooms[state.current_room_id]
-        Resolve DOOR LOGIC (OT §3.2) using the FINAL pair + hidden door state:
-          - If hit is the final pair's panel AND final pair is OFF:
-                flip it ON (add its block_ids to state.lit); emit PanelLit(...).
-          - elif final pair is ON and hidden door CLOSED and the shot hits the
-            hidden-door alcove panel (final drawing):
-                open hidden door (state: mark hidden_door_open for room);
-                spawn demon; emit DoorOpened(room_id) + DemonSpawned(enemy_id,room_id).
-          - elif demon is alive and the shot hits the demon (ray vs demon billboard
-            at room.enemy.spawn_xyz, radius DEMON_RADIUS=0.6):
-                demon hp -= 1 (god-mode: player can't die; ammo infinite);
-                emit DemonHit(enemy_id, hp); if hp<=0:
-                   emit DemonKilled; mark enemy_defeated; reveal ceiling (no draw here);
-                   if all rooms' clear conditions met → but per-room: mark room cleared,
-                   add room to state.cleared, emit RoomCleared(room_id); if every room
-                   in the level is cleared → emit LevelComplete(level_id).
-          - elif hit is any OTHER pair and that pair is OFF:
-                flip ON; emit PanelLit. (Normal reading by shooting.)
-          - else: no-op (door OPEN + shot into nothing, or already-on panel).
-     Persist: gameplay updates state.save's RoomProgress for the affected room
-     (pairs_on, hidden_door_open, enemy_defeated, room_cleared, level_complete) so a
-     debounced save() by app captures it.
+        events, new_lit, new_hidden, new_hp, cleared = resolve_shot(
+            room, hit, state.lit, hidden_open_for_room, demon_hp_for_room)
+        apply deltas to state + state.save's RoomProgress for this room
+        (pairs_on, hidden_door_open, enemy_defeated, room_cleared); if every room in the
+        level is cleared → mark level_complete and emit LevelComplete.
 
-4. READ TOGGLE: if actions.read_toggle: emit ReadModeToggled(on=not currently,
-     asset_id = the target asset under the §5.3 rule, or None). (app pauses the world
-     and calls readmode; gameplay does not draw.) Read does NOT flip state.
+     DOOR LOGIC inside resolve_shot (OT §3.2), PURE:
+        - hit is final pair's panel AND final pair OFF → flip ON; PanelLit.
+        - final pair ON AND hidden door CLOSED AND hit is the hidden-door alcove panel
+          (final drawing) → open hidden door; spawn demon; DoorOpened + DemonSpawned.
+        - demon alive AND ray hits demon billboard (center room.enemy.spawn_xyz, radius
+          DEMON_RADIUS) → hp-=1 (god-mode; infinite ammo); DemonHit; if hp<=0 →
+          DemonKilled + mark enemy_defeated + RoomCleared (ceiling reveal handled by
+          render via state.cleared).
+        - hit is any OTHER pair AND that pair OFF → flip ON; PanelLit.
+        - else → no-op.
 
-GOD-MODE: there is no player health, no death, no ammo counter. Never emit any
-player-damage event. Exactly one enemy per room (room.enemy). No level boss.
+4. READ TOGGLE: if actions.read_toggle: emit ReadModeToggled(on=<new>,
+     asset_id=<target asset under the §5.3 rule, or None>). Read does NOT flip state.
+
+GOD-MODE: no player health, no death, no ammo. Never emit a player-damage event
+(none exists in the union). Exactly one enemy per room. No level boss.
 ```
 
 PINNED CONSTANTS:
 ```
 WALK_SPEED_M_S = 2.4     # slow default walk (comfort)
-PITCH_CLAMP_RAD = 1.2217
 AIM_CONE_RAD = 0.30
 SHOOT_MAX_DIST = 50.0
 DEMON_RADIUS = 0.6
-SOCKET_ENTER_RADIUS_M = 1.0   # how close to a node socket counts as "entering"
+SOCKET_ENTER_RADIUS_M = 1.0
+# PITCH_CLAMP_RAD imported from contracts.
 ```
 
 PURE HELPERS (exposed for tests):
 ```python
 def reticle_ray(eye, heading, pitch, aim_x, aim_y) -> Ray
-def resolve_shot(room, hit, lit, hidden_open, demon_hp) -> (events, new_lit,
-                 new_hidden_open, new_demon_hp, cleared_bool)
+def resolve_shot(room, hit, lit, hidden_open, demon_hp)
+    -> (events, new_lit, new_hidden_open, new_demon_hp, cleared_bool)
   (PURE: the entire door/demon decision table, no state mutation — returns the
-   deltas. step() applies them. This makes the OT §3.2 table fully unit-testable.)
+   deltas. step() applies them. Makes the OT §3.2 table fully unit-testable.)
 ```
 
 TESTS (pure, headless — the heart of the test suite):
@@ -1009,16 +1354,15 @@ test_door_logic_off_to_on  — final pair OFF + shot hits it → flips ON, Panel
 test_door_logic_open_door  — final pair ON + closed + shot hits alcove → DoorOpened
                              + DemonSpawned.
 test_door_logic_open_noop  — door already open + shot into empty → no door event.
-test_demon_takes_5_hits    — 5 DemonHit then DemonKilled + RoomCleared; hp from 5→0.
-test_god_mode_no_death     — no event in the whole sequence is a player-damage type
-                             (there is none in the union — assert by construction).
-test_normal_panel_flip     — shot hits a non-final OFF pair → PanelLit, that pair on.
+test_demon_takes_5_hits    — 5 DemonHit then DemonKilled + RoomCleared; hp 5→0.
+test_god_mode_no_death     — no event in any sequence is a player-damage type
+                             (none in the union — assert by construction).
+test_normal_panel_flip     — shot hits a non-final OFF pair → PanelLit, pair on.
 test_already_on_noop       — shot hits an ON panel → no PanelLit re-emit.
-test_mover_only_motion     — heading only changes by actions.heading_delta; aim
+test_mover_only_motion     — heading changes only by actions.heading_delta; aim
                              never changes heading/pitch.
-test_walk_uses_nav         — resolve_player_motion is called with the computed delta
-                             (monkeypatch a fake NavQuery; assert delta direction
-                             matches heading & move inputs).
+test_walk_uses_nav         — resolve_player_motion called with the computed delta
+                             (fake NavQuery; delta direction matches inputs).
 test_modeswitch_out_of_room— in room, pos crosses a door → ModeSwitch(to corridor,
                              via_edge_id set).
 test_modeswitch_into_room  — in corridor, entering a node socket → ModeSwitch(to
@@ -1047,35 +1391,31 @@ M0 STUB (deliver first):
 make_window(1280,720,"QUAKE M0"); compile shaders; each frame
 clear, draw ONE shaded triangle (solid_program, flat) + ONE wireframe line
 (wire_program), depth ON, blend OFF; present. Prove the GPU path is ours. Return 0
-on clean exit. This stub is replaced as modules land.
+on clean exit. This stub is replaced as modules land. If not glguard.HAVE_GL, main
+returns 0 immediately (headless smoke-launch path).
 ```
 
 FINAL WIRING (§5.4 — authoritative order):
 ```
 state init: pack = assets.load_pack(dir); state = state.new_state(pack) (or load).
 nav: corridor_nav = nav_collision.build_corridor_nav(pack.floorplan); a room_nav is
-     (re)built on entering each room.
+     (re)built on entering each room. current_nav starts = corridor_nav.
 per frame:
   actions = input_actions.poll(window, bindings)
   events  = gameplay.step(state, actions, pack, current_nav, dt)
   for ev in events: handle:
      ModeSwitch(to="room")    → room_nav = build_room_nav(pack.rooms[room_id]);
-                                current_nav = room_nav; (state already updated by
-                                gameplay) TELEPORT-SNAP (no blend).
+                                current_nav = room_nav; TELEPORT-SNAP (no blend).
      ModeSwitch(to="corridor")→ current_nav = corridor_nav; unload room; snap.
      GuidelinesRecomputed     → targets = guidelines.select_targets(
                                    pack.floorplan, current_node_or_nearest,
                                    state.cleared, cfg)
-     ReadModeToggled(on)      → set read_active, read_asset master path (resolve via
-                                manifest from ev.asset_id), zoom=1,pan=(0,0)
+     ReadModeToggled(on)      → set read_active=on; resolve master path from
+                                ev.asset_id via pack.manifest; zoom=1,pan=(0,0)
      (other events → optional SFX hooks; audio is a GAP, ~M8)
   view = camera.update(state.heading_rad, state.pitch_rad, state.pos, dt)
   if read_active:
-      readmode.draw_read(master_path, zoom, pan)   # world PAUSED (do not step world
-          again; we already stepped — PIN: when read_active, SKIP gameplay world
-          effects next frames by passing a "paused" actions snapshot OR gate step;
-          simplest: app sets dt-effects off and only processes read zoom/pan +
-          read_toggle to exit. KEEP gameplay pure; app gates it.)
+      readmode.draw_read(master_path, zoom, pan)   # world PAUSED
   elif state.mode == "corridor":
       render_wire.draw_graph(view, pack.floorplan, state)
       guidelines.draw_guidelines(view, pack.floorplan, targets)
@@ -1083,28 +1423,30 @@ per frame:
   else:
       render_room.draw_room(view, pack.rooms[state.current_room_id], pack, state)
   present/swap
-  debounced: state.save(state, save_path)  (e.g. at most every 1.0s or on any
+  debounced: state.save(state, save_path)  (at most every ~1.0s or on any
       progress event)
 
-PIN (world pause during Read): app does NOT call gameplay.step while read_active
-except to consume the read_toggle that exits Read. This keeps the OT rule "world
-paused, shooting is the only thing that flips off→on" — and Read never flips.
+PIN (world pause during Read): while read_active, app does NOT call gameplay.step
+except to consume the read_toggle that exits Read (app passes a zeroed/paused
+Actions so the world does not advance). Keeps "world paused; shooting is the only
+thing that flips off→on" — and Read never flips. gameplay stays pure; app gates it.
 
 PIN (current_node_or_nearest for guidelines): app tracks the last node socket the
 Mover passed (from ModeSwitch/junction events) as `current`. At level start it is
-the start room id.
+the start room id (lowest room_id).
 ```
 
 TESTS:
 ```
-@skip_if_no_gl test_m0_smoke    — main() M0 stub opens, renders a few frames headless-
-                                  guarded, exits 0 (or, if no GL, returns cleanly via
-                                  glguard without crashing the import).
-test_event_dispatch_pure        — a pure helper dispatch_events(events, ...) (extract
-                                  the event→side-effect-intent mapping as a pure
-                                  function returning a small command list) is unit-
-                                  tested: ModeSwitch→swap nav command, etc. (Keep the
-                                  GL/window parts in the shell; test the routing.)
+@skip_if_no_gl test_m0_smoke    — main() M0 stub opens, renders a few frames, exits
+                                  0. (Headless: main returns 0 via glguard without
+                                  crashing the import.)
+test_event_dispatch_pure        — a pure helper dispatch_events(events, ctx) (extract
+                                  the event→command mapping as a pure function
+                                  returning a small command list) is unit-tested:
+                                  ModeSwitch→swap-nav command, ReadModeToggled→
+                                  set-read command, GuidelinesRecomputed→recompute
+                                  command, etc. (GL/window parts stay in the shell.)
 ```
 
 ---
@@ -1122,19 +1464,20 @@ CONTENTS (exactly OT §12.5, made concrete):
                      underpass (two corridors at cruise_y 0.0 and 4.5; a Crossing entry
                      with over_y>under_y). importances spread 5/3/1. map_colors from a
                      palette.
-  palette.json     — includes the reserved keys + a few groups; valid hex.
+  palette.json     — includes the reserved keys (grey_ink, grey_text, bg_key,
+                     map_importance.1..5) + a few groups; valid hex.
   manifest.json    — assets for: r_a has 2 step-pairs (a two-step room) → figure_off,
                      figure_on.1, figure_on.2, text off/on ×2; plus a ceiling_neutral.
                      Tiny real PNGs (e.g. 8×8) at wall_path & master_path so file-exists
                      checks pass and textures upload.
   room_runtime/room_r_a.json — dimensions_m, 2 panel_pairs with PanelPlacementRT,
-                     final_pair_id=s2, hidden_door_wall_slot = s2 drawing's wall_slot,
-                     enemy r_a.demon health 5, 1 ceiling eq, doors: DoorRT list matching
-                     r_a's degree (a connects to b and c → 2 doors at their true
-                     bearings; at least one NON-CARDINAL bearing so the bearing-placement
-                     tests bite).
-  room_runtime/room_r_b.json, room_r_c.json — minimal valid rooms (1 pair each, 1 door
-                     or more per degree).
+                     final_pair_id=<r_a's s2>, hidden_door_wall_slot = s2 drawing's
+                     wall_slot, enemy r_a.demon health 5, 1 ceiling eq, doors: DoorRT
+                     list matching r_a's degree (a connects to b and c → 2 doors at
+                     their true bearings; at least one NON-CARDINAL bearing so the
+                     bearing-placement tests bite).
+  room_runtime/room_r_b.json, room_r_c.json — minimal valid rooms (1 pair each, doors
+                     per degree).
 
   This pack EXERCISES: 1 crossing (bridge+underpass), a two-step room, a demon, a ceiling
   equation, bearing-placed non-cardinal doors, the full clear→LevelComplete path.
@@ -1189,6 +1532,19 @@ skip gracefully without a context; the golden pack plays end-to-end in the smoke
 
 ## PART 5 — HANDOFF NOTES & THE ONE REMAINING GAP
 
+INFRASTRUCTURE (PART 1.5) — created FIRST, before any child:
+```
+  - contracts.py: re-exports every alias + model from map/raw_models.py and defines the
+    engine-only types (Actions, Event union, Ray, PanelHit, NavQuery, GameState,
+    SaveGame + progress models, Pack, ViewMatrix, Report) and the locked constants
+    (READ_MAX_DIST, READ_CONE_HALF_ANGLE_RAD, PITCH_CLAMP_RAD). Children import ONLY
+    from contracts; they NEVER touch map.raw_models. INTEGRATION: confirm the re-export
+    name list against the real raw_models.py — any spelling delta is a one-line fix in
+    contracts.py only.
+  - glguard.py: HAVE_GL probe, never crashes on import; shells gate draws on it.
+  - conftest.py: the skip_if_no_gl marker for GPU/window tests.
+```
+
 DECISIONS I MADE AND FROZE (so no one re-litigates):
 ```
   - Compass: heading/bearing θ → world forward (cosθ, 0, sinθ); +X east, +Z north.
@@ -1199,23 +1555,27 @@ DECISIONS I MADE AND FROZE (so no one re-litigates):
   - Pack does NOT include ConceptGraph; Mode A draws rings from Floorplan only; no node
     text labels in v1 (labels are a post-M7 polish via a future labels.json — no Pack
     contract touch now).
-  - pitch is runtime-only, never persisted (save stores position + heading only, per
-    §4.7 PlayerSave which has no pitch field).
+  - pitch is runtime-only, never persisted (PlayerSave has no pitch field).
   - Ceiling equations are NOT drawn until cleared, then drawn blood-red (tint=1.0).
   - Walls are a flat material color in v1 (WALL_RGB); wall textures are later polish.
-  - All comfort/gameplay constants pinned in each brief (CAM_*, PITCH_CLAMP, WALK_SPEED,
-    AIM_CONE, DIM_*, etc.) — children read pinned constants, do not invent.
+  - Actions is a FROZEN pydantic model (validates + satisfies test_actions_frozen).
+  - PanelLit carries pair_id + room_id; DemonHit carries hp_remaining.
+  - Locked constants centralized in contracts (READ_*, PITCH_CLAMP_RAD) — modules import
+    them, never re-pin different values.
+  - All other comfort/gameplay constants pinned per-module (CAM_*, WALK_SPEED, AIM_CONE,
+    DIM_*, etc.) — children read pinned constants, do not invent.
 ```
 
 INTEGRATION-LOOP ITEMS (external API names I REFUSE to assert from memory — DeepSeek's
 compile loop confirms each in ONE isolated wrapper per module, per Iron Rule #3):
 ```
-  - pyglet 2.1.x: Window construction args, keyboard/mouse/controller polling.
-  - moderngl: create_context, program(), texture-from-Pillow, FBO/framebuffer for bloom,
-    blend func, depth_func string, uniform assignment, mat4 row/column-major at the
-    boundary (transpose if needed — each render shell has ONE transpose point).
-  - Whether GameState/Pack should be dataclasses vs the @dataclass shown — follow
-    contracts.py exactly; it already exists.
+  - The contracts.py re-export name list vs the real map/raw_models.py spellings.
+  - pyglet 2.1.x: Window construction args (incl. visible=False), keyboard/mouse/
+    controller polling.
+  - moderngl: create_context / create_standalone_context(require=330), program(),
+    texture-from-Pillow, FBO/framebuffer for bloom, blend func, depth_func string,
+    uniform assignment, mat4 row/column-major at the boundary (transpose if needed —
+    each render shell has ONE transpose point).
 ```
 
 THE ONE GENUINE GAP I CANNOT CLOSE FROM CONTRACTS (flagged, not invented):
