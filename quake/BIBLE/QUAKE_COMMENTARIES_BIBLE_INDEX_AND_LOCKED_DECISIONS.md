@@ -37,7 +37,7 @@
 
 6. **Leg 1 Frozen Child Briefs (Parent 2's first deliverable)** — `quake/BIBLE/QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 9 child modules with exact pydantic signatures, golden test fixtures, deterministic pipelines, and a dependency-sorted build order. ✅ BUILT — all 9 modules integrated, 94/94 tests green.
 
-7. **Leg 2 Frozen Child Briefs (Parent 2's second deliverable)** — `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 8 child modules (palette_gen, recipe_validate, prooffig_check, asy_compile, _imageops, baker_figure, baker_text, overlay_diff) with exact signatures, golden fixtures, injected compilers for headless CI, and a dependency-sorted build order. ✅ BUILT — all 8 modules integrated, 51/51 tests green, 145/145 total with Leg 1.
+7. **Leg 2 Frozen Child Briefs (Parent 2's second deliverable)** — `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_BY_OPUS_PARENT_2.md`. Parent 2's frozen package: 8 child modules (palette_gen, recipe_validate, prooffig_check, asy_compile, _imageops, baker_figure, baker_text, overlay_diff) with exact signatures, golden fixtures, injected compilers for headless CI, and a dependency-sorted build order. ✅ BUILT — all 8 modules integrated, 51/51 tests green, 145/145 total with Leg 1.
 
 8. **Parent 2 → Parent 3 Handoff (full record)** — `quake/BIBLE/QUAKE_PARENT_2_TO_PARENT_3_HANDOFF.md`. Parent 2's full answer: §E flag settled (figure_id-keyed wins), pull list for Parent 3, the mission brief, and closing words to Nir. Includes the verdict on keeping Parent 2 vs. fresh Parent 3.
 

@@ -34,7 +34,7 @@ Parent 2 is holding for a build report. He finished both frozen packages. He fla
 
 ## THE LEG 2 FROZEN BRIEFS (Parent 2's document)
 
-File: `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`
+File: `quake/BIBLE/QUAKE_LEG_2_WALLS_FROZEN_BY_OPUS_PARENT_2.md`
 
 This is the authoritative spec for all 7 Leg 2 children. **DeepSeek's job:** for each child, craft a self-contained prompt (with all needed pydantic models verbatim), send it to a fresh OpenRouter Opus chat (the "child"), receive the code, save it, run tests, fix any issues, commit, push, then move to next child.
 
@@ -109,7 +109,7 @@ quake/
   BIBLE/
     QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md   ← THE MAP
     QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md
-    QUAKE_LEG_2_WALLS_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md  ← AUTHORITY
+    QUAKE_LEG_2_WALLS_FROZEN_BY_OPUS_PARENT_2.md  ← AUTHORITY
     ... (other scriptures)
   WORKFLOW.md                   ← points here on restart
 ```
