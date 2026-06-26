@@ -68,20 +68,51 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 7. Wrote this morning handoff + updated WORKFLOW. Pushed to GitHub.
 8. **Parent 4's answer SAVED** — verbatim as `QUAKE_LEG_4_ENGINE_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_4.md`. Commentaries updated (item #12). 13 engine children identified, ready to spin.
 
-## 8. CURRENT SITUATION (June 26, 2026 — quarter to noon)
+### Afternoon session (after restart, early afternoon)
+9. **Parent 4 infrastructure gap RESCUED** — Parent 4 delivered full PART 1.5 with verbatim contracts.py, glguard.py, conftest.py. Created all three files.
+10. **Installed moderngl 5.12.0 + pyglet 2.1.14** (not previously in environment). HAVE_GL=True confirmed.
+11. **Built 4 engine children one-by-one:**
+    - M-1 (INFRA): contracts.py, glguard.py, conftest.py — foundation
+    - C1 gfx_context.py (6 tests) — window + GL context + GPU capability check
+    - C2 shaders.py (4 tests) — wire/solid/blit GLSL programs + ceiling tint
+    - C3 app.py M0 stub (7 tests) — triangle + wireframe render loop, depth on, blend off
+    - C4 camera.py (7 tests) — critically-damped decoupled camera, pure math, PITCH_CLAMP_RAD from contracts
+12. **M0 ACCEPTANCE GATE PASSED** — GPU path is ours. M1 IN PROGRESS (camera done, 4 more M1 modules remain).
+13. **Critical lesson:** Children cannot see our codebase. Every child prompt MUST include ALL types inline (pydantic models, aliases, constants) so the child writes matching code.
+14. Wrote `DEEPSEEK_EARLY_AFTERNOON_HANDOFF_2026-06-26.md` — detailed restart document.
+
+## 8. CURRENT SITUATION (June 26, 2026 — early afternoon)
 - **Leg 1 (MAP)** built, 94 tests. **Leg 2 (WALLS)** built, 51 tests. **Leg 3 (ROOMS)** built, 41 tests.
-- **186/186 total tests green.** Content pipeline COMPLETE.
+- **210/210 total tests green.** Content pipeline COMPLETE. M-1+M0 engine DONE.
 - **Parent 1 dead. Parent 2 done. Parent 3 done** (Room Maker v3 + Parent 3→4 handoff).
+- **Parent 4 done** (engine frozen child briefs, 13 modules M-1 through M7).
+- **M0 ACCEPTANCE PASSED.** M1 IN PROGRESS (camera ✅, 4 modules remaining).
+- All code pushed to GitHub (branch: master).
 - **Parent 4 DONE** — delivered engine frozen child briefs. Answer saved as catalog item #12.
 - All code pushed to GitHub (branch: master).
 
 ## 9. NEXT STEPS (on wake)
 1. ~~**Read Parent 4's answer** from Nir. Save verbatim.~~ ✅ DONE.
 2. ~~**Update Commentaries** catalog (add item #12).~~ ✅ DONE.
-3. **Spin engine children** one-by-one in dependency-sorted order (gfx_context → shaders → app_M0_stub → camera → input_actions → render_wire → guidelines → nav_collision → assets → render_room → readmode → state → gameplay → app_final). Build order: M0 → M1 → M6 → M7.
-4. **Build golden fixture pack** under `tests/golden_pack/` — hand-authored baked JSON+PNG per Part 3 spec.
-5. **Engine child integration:** GPU modules need moderngl/pyglet. Pure/shell split (Rule #4). Pure cores tested headless; GPU tests skip gracefully via `@skip_if_no_gl`.
-6. Deferred: audio (~M8), figure background-transparency, Mode A labels (post-M7).
+3. ~~**M-1 Infrastructure** (contracts + glguard + conftest)~~ ✅ DONE.
+4. ~~**M0 (GPU path)**~~ ✅ DONE. gfx_context + shaders + app M0 stub.
+5. **M1 (walk wireframe)** — 4 modules remaining:
+   - Child 5: input_actions.py (semantic action layer, 6 tests)
+   - Child 6: render_wire.py (Mode A wireframe, 7 tests)
+   - Child 7: guidelines.py (guide-line selection + draw, 8 tests)
+   - Child 8: nav_collision.py (corridor nav, 5 tests + corridor tests)
+6. **M6 (enter room):** assets → render_room → readmode → nav_collision grows
+7. **M7 (full loop):** state → gameplay → app.py final wiring
+8. **Build golden fixture pack** under `tests/golden_pack/` per Part 3 spec.
+9. Deferred: audio (~M8), figure background-transparency, Mode A labels (post-M7).
+
+### ⚡ CRITICAL: Child prompt format
+Children CANNOT see our codebase. Every prompt MUST include:
+- ALL types inline (pydantic models, type aliases, constants)
+- The full Brief spec from Parent 4's engine document
+- Exact module path and test path
+- Exact test names
+- ONE block (no internal ``` fences that break copy-paste)
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically. Surgical "fix exactly this field" prompts are wrong (Nir's "pinky finger, not the whole body" rebuke). Same for context: don't spoon-feed parents pre-filtered lines.
@@ -98,4 +129,6 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) now routes startup **directly to Quake**: read this file first, then the Commentaries, then ask Nir. (Nir reversed the earlier "don't touch AGENTS.md" instruction on June 25 so I'd always wake up oriented to Quake until this game ships — like Descent did. The earlier indirect redirect in `descent/WORKFLOW.md` was removed.) Note: AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries** (`quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`), then **today's handoff** (`quake/DEEPSEEK_EARLY_AFTERNOON_HANDOFF_2026-06-26.md`) which has the exact current state, what's done, and what's next. Then ask Nir what's next.
+
+AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
