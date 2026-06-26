@@ -41,7 +41,9 @@
 
 8. **Parent 2 → Parent 3 Handoff (full record)** — `quake/BIBLE/QUAKE_PARENT_2_TO_PARENT_3_HANDOFF.md`. Parent 2's full answer: §E flag settled (figure_id-keyed wins), pull list for Parent 3, the mission brief, and closing words to Nir. Includes the verdict on keeping Parent 2 vs. fresh Parent 3.
 
-9. **Prompt to Opus — Parent 3 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`. The self-contained prompt Nir pastes to a fresh Opus chat to launch Parent 3. Mission: freeze and child-brief the Room Maker v3 pipeline. ⬆️ PENDING — Nir decides whether to keep Parent 2 or send this.
+9. **Prompt to Opus — Parent 3 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`. The self-contained prompt Nir pastes to a fresh Opus chat to launch Parent 3. Mission: freeze and child-brief the Room Maker v3 pipeline. ✅ SENT — Parent 3 is active.
+
+10. **Leg 3 / Room Maker v3 Frozen Child Briefs (Parent 3's deliverable)** — (new, June 26, 2026 — not yet saved as a separate file; captured in current Parent 3 chat). Parent 3's frozen package: 5 child modules (portal_spec, room_geometry, room_pack, room_maker, room_validate) + worked degree-5 golden fixture + 5 pinned under-specified gaps + BuildConfig additions. §E flag settled (figure_id-keying confirmed).
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -67,14 +69,15 @@
 - **Op→Asymptote mapping restored.** Second Canon §3.A.5's mapping (originally lost as a blank table) is now present as a **list**.
 - ✅ **DECIDED, and now PRESERVED IN PLACE** (June 25, 2026) as marked *DeepSeek inline commentaries* at their correct sections (these came from Parent-1's "remaining gaps" answer and had lived only in chat; they are LOCKED): (a) **PageMap rule** (`leaf_index` = unique, contiguous-from-0 key; `page_label` uniqueness only for non-empty; `""` allowed/repeats) **+ the `page_map_adapter.py` brief** → Second Canon **§4.1**. (b) **`provenance.json` / `Provenance` schema** → Second Canon **new §4.9** (in the commentary just before §5). (c) **`Draw.marker`** narrowed to `["none","dot"]` → Second Canon **§3.A.4**. (d) **Read-Mode target rule** (raycast-hit, else nearest in cone; `READ_MAX_DIST=6.0`, `READ_CONE_HALF_ANGLE=35°`) → Second Canon **§5.3**. (e) **Importance blend** (`score = 0.6·(indeg/max_indeg) + 0.4·((hint−1)/4)`; `importance = clamp(round(1+4·score),1,5)`) → New Testament **§1.4**. (f) **Panel schemas** (`PanelPlacementRT`, amended `PanelPairRT`, `wall_slot` grammar) + the panel/room-sizing **`BuildConfig`** fields → Second Canon **§4.5 / §4.8** (the Apocrypha's "panels unchanged" depends on these; cross-referenced from the Apocrypha §3).
 
-## §5 — OPEN THREADS / CURRENT FRONTIER (nothing is built yet — design only)
+## §5 — OPEN THREADS / CURRENT FRONTIER
 
-- ✅ **Parent 2 handoff sent.** ✅ **Leg 1 (MAP) FROZEN + BUILT.** Parent 2 delivered the full frozen child briefs — 9 modules built, 94/94 tests green.
-- ✅ **Leg 2 (WALLS) FROZEN!** Parent 2 delivered 7 child briefs (palette_gen, recipe_validate, prooffig_check, asy_compile, _imageops, baker_figure, baker_text, overlay_diff). Next: DeepSeek spins children to build.
-- ⚠️ **Parent 2 flagged one §E item** — figure asset-id key: figure_id (prop_1.f1.on.3) vs block_id (prop_1.s3.fig.on.3). DeepSeek must confirm before baker_figure and room_maker meet.
-- **Deferred on purpose (not gaps):** audio / atmosphere (→ ~M8); figure background transparency (a bake-time empirical choice, both paths specified).
-- **Offered by Parent 1, not yet requested:** a consolidated `BuildConfig` + runtime-config canonical file (a single "§4.10"); and a worked degree-5 golden-fixture example for the Room Maker (bearings → walls/door-centers/sub-segments/packed panels).
-- ~~The unformalized amendments need folding in~~ — **DONE (June 25, 2026):** every decided-only-in-chat item is now preserved as a marked inline commentary at its correct section (see §4). Nothing is in a "Miscellaneous" bin.
+- ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
+- ✅ **Leg 2 (WALLS) FROZEN + BUILT** — 8 modules, 51/51 green, 145/145 total.
+- ✅ **Parent 3 ACTIVE** — delivered FROZEN Room Maker v3 child-brief package (5 modules: portal_spec, room_geometry, room_pack, room_maker, room_validate + worked degree-5 golden fixture + 5 pinned under-specified spots + BuildConfig additions). Catalog item #10.
+- ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed. No conflict with built bakers.
+- ⏳ **Next:** DeepSeek spins the 5 Room Maker children to build, OR Nir decides what's next (Parent 3's one ask already answered: Leg-1/2 confirm clean for figure_id-keying).
+- **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency.
+- **Offered by Parent 1, not yet requested:** a consolidated §4.10 config doc.
 
 ---
 

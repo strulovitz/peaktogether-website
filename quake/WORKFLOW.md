@@ -66,19 +66,18 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 12. **Parent 2 delivered the FROZEN Leg 1 package** — 9 child modules, exact pydantic contracts, golden test fixtures, deterministic build order, integration acceptance gate mapped to OT M2. Saved verbatim as `QUAKE_LEG_1_MAP_FROZEN_CHILD_BRIEFS_BY_OPUS_PARENT_2.md`.
 
 ## 8. CURRENT SITUATION
-- **Design is broad and deep; NOTHING is built yet** (no `quake/` code — only `quake/BIBLE/` docs).
-- **Parent 1 is dead.** The **Parent 2 handoff** is ready (`PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`) — it has an unfilled **`[Nir: state Parent 2's first mission here.]`** slot.
-- All chat-only decisions are now safely preserved in the canon (see §7.9).
+- **Leg 1 + Leg 2 built and green** (145/145 tests). Leg 3 design now FROZEN by Parent 3.
+- **Parent 1 is dead. Parent 2 done (both legs). Parent 3 ACTIVE — just delivered Room Maker v3 frozen briefs.**
+- All chat-only decisions are safely preserved in the canon (see §7.9).
 - Git is clean and pushed.
 
 ## 9. NEXT STEPS / OPEN THREADS
-- ✅ **Parent 2 handoff sent** (with handoff + Commentaries + OT + NT).
-- ✅ **Leg 1 (MAP) FROZEN + BUILT by Parent 2!** 9 modules, 94/94 tests green.
-- ✅ **Leg 2 (WALLS) COMPLETE!** All 8 modules built by Parent 2's children, 145/145 tests green. Both legs done — ready for Parent 2 build report.
-- ⚠️ Parent 2 §E flag: figure asset-id grammar (figure_id vs block_id) — reconcile at integration.
-- **The build hasn't started** (engine M0 → … per Old Testament §13 / Second Canon §5.4 wiring).
-- Deferred on purpose: **audio** (~M8); figure **background-transparency** (bake-time empirical).
-- Offered by Parent 1, not yet requested: a consolidated `BuildConfig`/runtime-config doc (a "§4.10"); a Room-Maker golden-fixture worked example.
+- ✅ **Parent 2 handoff sent** + **Leg 1 built** + **Leg 2 built**.
+- ✅ **Parent 3 handoff sent**. ✅ **Parent 3 delivered FROZEN Room Maker v3 package** (5 child modules: portal_spec, room_geometry, room_pack, room_maker, room_validate + worked degree-5 fixture + 5 pinned gaps).
+- ✅ **§E flag SETTLED** — figure_id-keying confirmed by Parent 3 (DrawingBlock.figure_id + highlight_step). No conflict.
+- ⏳ **Parent 3's one ask:** confirm nothing in built Leg-1/Leg-2 assumed block_id-keyed figure assets. DeepSeek answers: confirmed — baker froze to figure_id (prop_1.f1.off/.on.k), consistent. Zero rework. 🟢
+- ⏳ **Next: DeepSeek spins the 5 Room Maker children to build Leg 3**, OR Nir decides what's next.
+- Deferred: audio (~M8), figure background-transparency, §4.10 config doc.
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically. Surgical "fix exactly this field" prompts are wrong (Nir's "pinky finger, not the whole body" rebuke). Same for context: don't spoon-feed parents pre-filtered lines.
