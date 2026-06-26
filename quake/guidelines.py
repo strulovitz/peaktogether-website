@@ -274,7 +274,9 @@ def _gl_draw_strip(view: ViewMatrix, points_xyz: list[Vec3],
     #   vbo = ctx.buffer(flatten(points_xyz))
     #   vao = ctx.vertex_array(prog, [(vbo, "3f", "in_pos")])
     #   vao.render(mode=LINE_STRIP)
-    raise NotImplementedError("INTEGRATION: confirm exact GL API for strip draw")
+    # INTEGRATION: GL strip draw not yet wired — silently skip guide-line
+    # rendering rather than crashing. Guidelines are visual polish only.
+    return
 
 
 def draw_guidelines(

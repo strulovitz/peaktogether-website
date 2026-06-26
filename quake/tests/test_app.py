@@ -1,4 +1,4 @@
-"""Tests for quake/app.py (M0 thin loop)."""
+"""Tests for quake/app.py (full §5.4 per-frame loop)."""
 
 import app
 from glguard import HAVE_GL
@@ -14,36 +14,40 @@ except ImportError:  # pragma: no cover - conftest provides this fixture/marker
 # PURE CORE tests (always run, fully headless)
 # ---------------------------------------------------------------------------
 
-def test_event_dispatch_returns_empty_list():
-    """M0: nothing to dispatch yet — must return an empty list, never crash."""
-    out = app.event_dispatch([], ctx=None)
-    assert out == []
-    assert isinstance(out, list)
+def test_clamp_pitch_in_range():
+    assert app._clamp_pitch(0.0) == 0.0
+    assert app._clamp_pitch(1.0) == 1.0
+    assert app._clamp_pitch(-0.5) == -0.5
 
 
-def test_event_dispatch_ignores_input():
-    """Placeholder must not consume/produce anything in M0."""
-    assert app.event_dispatch(["fake", "events"], ctx=object()) == []
+def test_clamp_pitch_above():
+    assert app._clamp_pitch(2.0) == app.PITCH_CLAMP_RAD
 
 
-def test_solid_triangle_geometry_shape():
-    tri = app._solid_triangle_vertices()
-    assert tri.shape == (3, 5)          # 3 verts, pos(3)+uv(2)
-    assert str(tri.dtype) == "float32"
+def test_clamp_pitch_below():
+    assert app._clamp_pitch(-2.0) == -app.PITCH_CLAMP_RAD
 
 
-def test_wire_line_geometry_shape():
-    line = app._wire_line_vertices()
-    assert line.shape == (2, 3)         # 2 endpoints, pos(3)
-    assert str(line.dtype) == "float32"
+def test_clamp_pitch_boundary():
+    assert app._clamp_pitch(app.PITCH_CLAMP_RAD) == app.PITCH_CLAMP_RAD
+    assert app._clamp_pitch(-app.PITCH_CLAMP_RAD) == -app.PITCH_CLAMP_RAD
 
 
-def test_identity_view_is_row_major_4x4():
-    import numpy as np
-    view = app._identity_view()
-    assert view.shape == (4, 4)
-    assert str(view.dtype) == "float32"
-    assert np.allclose(view, np.eye(4))
+def test_read_state_defaults():
+    rs = app.ReadState()
+    assert rs.active is False
+    assert rs.zoom == 1.0
+    assert rs.pan == (0.0, 0.0)
+    assert rs.master_path is None
+
+
+def test_frame_outcome_defaults():
+    fo = app.FrameOutcome()
+    assert fo.progress_changed is False
+    assert fo.mode_switched_to is None
+    assert fo.switched_room_id is None
+    assert fo.read_toggle_signaled is False
+    assert fo.recompute_guidelines is False
 
 
 def test_main_headless_returns_zero(monkeypatch):
@@ -52,11 +56,22 @@ def test_main_headless_returns_zero(monkeypatch):
     assert app.main() == 0
 
 
+def test_progress_event_set_contains_expected():
+    assert "panel_lit" in app._PROGRESS_EVENTS
+    assert "door_opened" in app._PROGRESS_EVENTS
+    assert "demon_killed" in app._PROGRESS_EVENTS
+    assert "room_cleared" in app._PROGRESS_EVENTS
+    assert "level_complete" in app._PROGRESS_EVENTS
+    assert "mode_switch" in app._PROGRESS_EVENTS
+    assert "demon_spawned" not in app._PROGRESS_EVENTS
+    assert "demon_hit" not in app._PROGRESS_EVENTS
+
+
 # ---------------------------------------------------------------------------
 # GPU smoke test (skipped when no GL context available)
 # ---------------------------------------------------------------------------
 
 @skip_if_no_gl
-def test_m0_smoke():
-    """main() opens a window, renders a few frames, and exits 0 cleanly."""
+def test_full_loop_smoke():
+    """main() opens a window, loads the golden pack, runs 60 frames, exits 0."""
     assert app.main() == 0

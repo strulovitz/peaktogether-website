@@ -1,3 +1,9 @@
+🗝️ QUAKE — PARENT 6 DELIVERABLE: app.py (FULL §5.4 PER-FRAME WIRING)
+
+Authored by Parent 6 (Claude Opus 4.8), June 26, 2026. This is the complete drop-in app.py — the central nervous system wiring all 13 engine modules. Written directly by the parent (no child), against:
+- The frozen child brief (§0–§14 from earlier)
+- Three ground-truth clarifications from DeepSeek (GuidelinesRecomputed signal, ReadModeToggled asset_id=None, reticle_ray public)
+
 """
 quake/app.py — full per-frame loop (the §5.4 central nervous system).
 
@@ -107,12 +113,28 @@ def _clamp_pitch(pitch: float) -> float:
 
 
 def _start_node(pack: Any) -> Optional[str]:
-    """Deterministic fallback start node id. fp.rooms is list[FloorRoom];
-    FloorRoom.room_id: NodeId. Pure & defensive."""
+    """Deterministic fallback start node id for seeding guidelines when
+    current_room_id is None. Returns the first room id in floorplan order,
+    or None if the floorplan exposes none. Pure & defensive (never raises)."""
     fp = pack.floorplan
     rooms = getattr(fp, "rooms", None)
-    if rooms and len(rooms) > 0:
-        return getattr(rooms[0], "room_id", None)
+    if rooms:
+        try:
+            # rooms may be a list of room objects or a dict keyed by node id.
+            if isinstance(rooms, dict):
+                for k in rooms:
+                    return k
+            else:
+                first = rooms[0]
+                rid = getattr(first, "room_id", None) or getattr(first, "id", None)
+                if rid is not None:
+                    return rid
+        except Exception:
+            return None
+    # Fall back to pack.rooms (the runtime dict) if floorplan offered nothing.
+    if pack.rooms:
+        for k in pack.rooms:
+            return k
     return None
 
 
@@ -273,8 +295,8 @@ def main() -> int:
         read_state = ReadState()
 
         # Seed guidelines for the first frames. current_room_id may be None in
-        # the corridor; fall back to the first room in floorplan order.
-        bindings = None                       # poll handles None -> uses DEFAULT_BINDINGS
+        # the corridor; fall back to a deterministic start node.
+        bindings = None                       # default device bindings (poll handles None)
         current = state.current_room_id or _start_node(pack)
         try:
             targets = select_targets(pack.floorplan, current, state.cleared, cfg) \
@@ -400,3 +422,26 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
+
+Notes from Parent 6:
+
+    Read-Mode "no-op on miss" is now a real behavior. If you press read while
+    looking at nothing readable, _read_toggle_pick returns active=False (it does
+    not flip on with a blank overlay). That matches the locked rule "if none
+    qualify, Read is a no-op."
+
+    Read pick uses the CURRENT-mode nav. Panels live in rooms, so in practice the
+    meaningful pick happens when nav is the room nav. In corridor mode
+    nearest_panel will simply return None (corridor nav has no panels) → Read
+    no-ops. Correct.
+
+    bindings = None: poll(window, None) — if poll requires a real object, tell me
+    the default and I'll swap.
+
+    _start_node is defensive about floorplan shape (handles dict or list, falls
+    back to pack.rooms). If DeepSeek confirms the exact attribute, I can simplify.
+
+    numpy and moderngl imports are kept/lazy exactly as the stub had them,
+    preserving the headless guarantee.
+
+    No meshes built, no MVP written by app — render modules own all of that.
