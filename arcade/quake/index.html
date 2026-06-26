@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quake — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main>
+        <article class="page gp">
+
+            <!-- ① TITLE BLOCK -->
+            <span class="game-badge building">🔨 Building</span>
+            <h1>⛏️ Quake</h1>
+            <p class="gp-hook">
+                Inspired by <strong>Quake</strong> (1996) — where a force-directed 3D graph becomes a walkable dungeon
+                and <strong>every room is one proposition from Newton's Principia</strong>. Walls carry the step-by-step
+                geometric proof; you read a panel by <em>shooting</em> it. The final lit proof-wall is a hidden door —
+                shoot it, and the room's one demon emerges.
+            </p>
+
+            <!-- Sneak-peek screenshot (early Doom engine demo) -->
+            <img class="gp-hero-img" src="/images/doom-mountains.png" alt="Early engine screenshot from the Doom prototype — a glimpse of the tech that will become Quake">
+
+            <div class="gp-cta">
+                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" class="big-button" target="_blank" rel="noopener">👀 Sneak Peek on GitHub</a>
+                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/quake" class="gp-ghost-btn" target="_blank" rel="noopener">Quake Source Code</a>
+            </div>
+            <p class="gp-setup-line">Early demo available — Python source, run it yourself. The real thing is being built right now. 🔨</p>
+
+            <!-- ② THE NOSTALGIA HOOK -->
+            <h2>You remember this.</h2>
+            <p>
+                In 1996, <strong>Quake</strong> did something no shooter had done before: it gave you a <em>true 3D world</em>
+                — not a flat plane faking depth. Corridors crossed over and under each other as bridges. The engine knew
+                exactly where you were in all three dimensions. We kept that feeling — the dark stone walls, the echoing
+                footsteps, the demon waiting in the dark — and poured something completely new inside.
+            </p>
+
+            <div class="gp-thennow">
+                <figure>
+                    <img src="/images/quake-cover.jpg" alt="Quake (1996) — the original box cover">
+                    <figcaption>Then — the original <em>Quake</em> (1996)</figcaption>
+                </figure>
+                <figure>
+                    <img src="/images/doom-map.png" alt="Early Doom prototype — wireframe map of the concept graph">
+                    <figcaption>Now — our engine's wireframe map (sneak peek)</figcaption>
+                </figure>
+            </div>
+
+            <!-- ③ THE TWIST -->
+            <h2>Here's what's different — and amazing.</h2>
+            <p>
+                This isn't a shooter. <strong>Every room is a proposition from Newton's Principia</strong> — the 1687 book
+                that invented physics. Each logical dependency between propositions is a corridor. The result is a
+                <strong>concept-graph dungeon</strong>: you walk from idea to idea, and the geometry of the map <em>is</em>
+                the structure of Newton's argument.
+            </p>
+            <p>
+                Walls carry the <strong>step-by-step geometric proof</strong>. Each step is a drawing panel (a real Asymptote
+                figure) and a full-LaTeX text panel. You "read" a panel by <strong>shooting it</strong> — it glows from grey
+                to colored. The final lit proof-wall is a hidden door. Shoot it, and the room's one demon emerges. Kill it,
+                and the <strong>ceiling equations bleed red</strong> — the room is cleared, and you've earned the insight.
+            </p>
+            <p>
+                Corridors cross at different heights — a force-directed graph layout inevitably has crossings, so we made
+                them a <strong>feature</strong>: bridges and underpasses. True 3D, with two render modes: <strong>wireframe
+                corridor</strong> (transparent, distance-dimmed, with Half-Life guide-lines) for transit, and <strong>solid
+                room</strong> (walls, panels, demon, ceiling equations) for combat and reading.
+            </p>
+
+            <!-- ④ THE MOUNTAIN YOU'RE CLIMBING -->
+            <h2>🏔️ The mountain you're climbing</h2>
+            <p>
+                <strong>The peak:</strong> Newton's <em>Principia Mathematica</em> — the 1687 book that gave us the laws of
+                motion, universal gravitation, and the mathematical framework for classical physics. Every proposition builds
+                on earlier ones in a strict logical chain, which maps <em>perfectly</em> to a graph of rooms and corridors.
+            </p>
+            <p>
+                The 1846 Andrew Motte English translation is our source — we have clean OCR text, per-page images, and a
+                page-numbers index. Each figure from the book is rebuilt in Asymptote (a modern LaTeX geometry tool), with
+                per-step highlighting so you can watch a geometric proof unfold one construction at a time.
+            </p>
+            <p><strong>What you'll actually understand by the end:</strong></p>
+            <ul class="gp-list">
+                <li>How Newton proved that Kepler's equal-area law follows from a central force.</li>
+                <li>Why orbits are conic sections — and what that has to do with your living room.</li>
+                <li>How geometric reasoning (not algebra!) built the foundations of physics.</li>
+                <li>What "fidelity to the printed page" means — we reproduce the <em>real</em> proof, not a simplification.</li>
+            </ul>
+
+            <!-- ⑤ BUILDING IN PUBLIC -->
+            <h2>🔨 Building in public — follow along</h2>
+            <p>
+                We're building this engine from scratch — true 3D, pure Python, with <strong>moderngl + pyglet</strong>
+                for direct GPU control. No Unity. No Unreal. No Godot. Just us and the pipeline. Every commit is on
+                GitHub, and we document the whole journey.
+            </p>
+            <p>
+                Our early prototype was a <strong>Doom/Wolfenstein-style engine</strong> (Ursina/Panda3D), which you can
+                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" target="_blank" rel="noopener">download and run</a>
+                right now — it's a working 3D walkable concept graph! But a flat engine couldn't do true bridge/underpass
+                crossings (the whole point of Quake!), so we pivoted to a from-scratch true-3D rebuild. The sneak-peek
+                screenshots below are from that early prototype.
+            </p>
+
+            <div class="gp-gallery three">
+                <img src="/images/doom-stairs.png" alt="Doom prototype — stairs and corridors in the concept graph">
+                <img src="/images/doom-imp-shotgun2.png" alt="Doom prototype — enemy encounter in a proof room">
+                <img src="/images/doom-map.png" alt="Doom prototype — wireframe map of interconnected rooms">
+            </div>
+
+            <p class="gp-muted">Screenshots from our early Doom/Wolfenstein prototype — the stepping stone that taught us we needed true 3D. 📸</p>
+
+            <!-- ⑥ HOW YOU TWO PLAY -->
+            <h2>❤️ How you two play</h2>
+            <p>
+                Quake is built for <strong>two people on one screen</strong> — with a co-op design that gives each player
+                a real, distinct job.
+            </p>
+            <div class="gp-roles">
+                <div class="gp-role">
+                    <h3>🕹️ Player 1 — The Mover</h3>
+                    <p>
+                        Owns the body and heading. Walks through the 3D dungeon with WASD and mouse-look.
+                        Enters rooms, navigates corridors, and <strong>decides where to go</strong>.
+                        The camera follows the Mover with a critically-damped spring — smooth, comfortable, no motion sickness.
+                    </p>
+                </div>
+                <div class="gp-role">
+                    <h3>🎯 Player 2 — The Shooter</h3>
+                    <p>
+                        Owns the reticle. Aims freely within a cone, completely independent of the camera.
+                        Fires at panels to "read" them (grey → colored), lights up the hidden proof-wall
+                        to reveal the demon, and fights the single enemy in each room.
+                        The Shooter's aim <strong>never</strong> rotates the camera — zero couch co-op conflict.
+                    </p>
+                </div>
+            </div>
+            <p>
+                Neither of you can win alone. One explores and navigates; the other reads and shoots.
+                You have to <strong>talk to each other</strong> — that's the whole point.
+                <span class="gp-solo">Playing solo? You can play both roles yourself; it's just more fun with someone beside you. 💕</span>
+            </p>
+
+            <!-- ⑦ GOD-MODE & COMFORT -->
+            <h2>🛡️ God-mode — you cannot die</h2>
+            <p>
+                There is no health bar. No lives. No game-over screen. The challenge is understanding, not survival.
+                Infinite ammo, one demon per room (hidden behind the final proof-wall), no level boss.
+                You're here to learn Newton's Principia, not to grind.
+            </p>
+
+            <!-- ⑧ TECH BEHIND IT -->
+            <h2>⚙️ The tech</h2>
+            <p>
+                <strong>Language:</strong> Pure Python (Windows-first). <strong>Graphics:</strong> moderngl + pyglet
+                (direct OpenGL pipeline, no engine hiding the work). <strong>Math:</strong> NumPy, NetworkX, Pydantic v2.
+                <strong>Build pipeline:</strong> Asymptote (geometry figures), Matplotlib, Tectonic (LaTeX), PyInstaller (packaging).
+            </p>
+            <p>
+                <strong>Custom 3D engine:</strong> we author our own GLSL shaders. Two render modes — wireframe corridor
+                (depth-tested, distance-dimmed) and solid room (textured panels, walls with holes for doors at their true
+                map bearings, hidden alcove, blood-red ceiling tint). Room-local axes are parallel to map axes (global
+                compass). Every door is placed at the corridor's exact map bearing.
+            </p>
+
+            <!-- ⑨ GALLERY -->
+            <h2>📸 Sneak peek gallery</h2>
+            <p class="gp-muted">From our early Doom prototype — the ancestor of today's Quake engine. Click any photo to view it full-size.</p>
+            <div class="gp-gallery four">
+                <img src="/images/doom-imp-shotgun2.png" alt="Doom prototype — imp with shotgun">
+                <img src="/images/doom-stairs.png" alt="Doom prototype — stairs">
+                <img src="/images/doom-chainsaw.png" alt="Doom prototype — chainsaw">
+                <img src="/images/doom-title-screen.png" alt="Doom prototype — title screen">
+            </div>
+
+            <!-- ⑩ DOWNLOAD & PLAY -->
+            <h2>⬇️ Try the early prototype (sneak peek)</h2>
+            <p>The early Doom/Wolfenstein-style engine — a working 3D concept-graph walker. <strong>Requires Python:</strong></p>
+            <div class="gp-cta">
+                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" class="big-button" target="_blank" rel="noopener">▶ Download from GitHub</a>
+            </div>
+            <ol class="gp-list">
+                <li>Get the code from <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a> (free, open-source).</li>
+                <li>Make sure you have <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a> installed.</li>
+                <li>Install the libraries: <code>pip install ursina</code></li>
+                <li>Run it: <code>cd doom</code> then <code>python main.py</code></li>
+            </ol>
+            <p class="gp-setup-line">The real Quake engine (moderngl + pyglet) is being built right now — follow the <a href="https://github.com/strulovitz/peaktogether-website/tree/master/quake" target="_blank" rel="noopener">quake/</a> folder on GitHub! 🔥</p>
+
+            <!-- ⑪ FOOTER STRIP -->
+            <div class="gp-footstrip">
+                <span>⛏️ Next up → <em>first playable Principia level</em></span>
+                <span>🔓 Free &amp; open-source</span>
+                <span><a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Contribute on GitHub →</a></span>
+            </div>
+
+            <a href="/arcade/" class="back-link">← Back to The Arcade</a>
+        </article>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+
+            var big = document.createElement('img');
+            big.className = 'lightbox-img';
+            big.alt = '';
+
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+
+            overlay.appendChild(big);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+
+            function openBox(src, alt) {
+                big.setAttribute('src', src);
+                big.setAttribute('alt', alt || '');
+                overlay.classList.add('open');
+                document.body.classList.add('lightbox-locked');
+            }
+            function closeBox() {
+                overlay.classList.remove('open');
+                document.body.classList.remove('lightbox-locked');
+                big.setAttribute('src', '');
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () {
+                    openBox(this.getAttribute('src'), this.getAttribute('alt'));
+                });
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target === closeBtn) closeBox();
+            });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    })();
+    </script>
+</body>
+</html>
