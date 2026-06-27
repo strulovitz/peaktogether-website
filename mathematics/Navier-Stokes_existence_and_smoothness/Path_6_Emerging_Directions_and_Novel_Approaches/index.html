@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 6: Emerging Directions and Novel Approaches — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 6: Emerging Directions and Novel Approaches</h1>
+
+        <h2>Base Camp 6.1 – Excluding Simplest Blowup Scenarios</h2>
+        <p>Researchers have made progress by proving that certain &ldquo;simple&rdquo; forms of singularities cannot occur, pushing any potential blowup into narrower corners. A key result by Nečas, Růžička &amp; Šverák (1996) showed that Leray's envisioned backward self-similar blowup cannot happen. In other words, there is no non-zero solution of NS of the form $u(x,t)=\frac{1}{\sqrt{T-t}}F\!\Big(\frac{x-x_0}{\sqrt{T-t}}\Big)$ – any such self-similar profile $F$ must be trivial. This eliminated a large class of potential explicit blowups. Another advance was the Liouville-type theorem by Koch, Nadirashvili, Seregin &amp; Šverák (2009) for ancient/stationary solutions: they proved that any bounded ancient solution (or sufficiently decaying stationary solution) in $\mathbb{R}^3$ must be constant. This means if one magnifies a would-be singularity and obtains a steady or eternal flow, that flow has to be trivial, precluding blowup unless the magnified limit is extremely wild. Such results significantly constrain how singularities, if they exist, can behave. (Advanced level: indirect evidence against blowup.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: No Backward Self-Similar Singularity</strong> – (Nečas–Růžička–Šverák 1996) Any hypothetical finite-time blowup cannot obey exact self-similar scaling. This forces any blowup to be &ldquo;hidden&rdquo; in more subtle, non-self-similar dynamics.</li>
+            <li><strong>Stepping Stone: Liouville Theorems for Ancient Solutions</strong> – (KNSS 2009) Bounded entire solutions (or those with mild symmetry or decay) to stationary or time-extended Navier–Stokes are only trivial. Consequently, the limit profile of a blowup cannot be a nice stationary state – it would have to be unbounded or wildly oscillatory.</li>
+            <li><strong>Stepping Stone: Ongoing Work on Uniqueness of Singular Profiles</strong> – Building on these, researchers like Šverák, Tsai, Jia, and others examine uniqueness and structure of potential non-self-similar blowups. For instance, if one assumes a certain rate of blowup, one can sometimes derive contradictions or reduce it to an excluded scenario. The long-term hope is that accumulating enough &ldquo;no blowup in this form&rdquo; results could corner the problem and perhaps imply no blowup at all.</li>
+        </ul>
+
+        <h2>Base Camp 6.2 – Novel Constructions and Weak Solutions Wildness</h2>
+        <p>This path explores new approaches that have emerged outside classical paradigms, including surprising constructions of non-unique weak solutions and altered equations that do blow up. In a striking development, Buckmaster and Vicol (2019) used convex integration (building on work by De Lellis &amp; Székelyhidi for Euler) to construct weak solutions of 3D Navier–Stokes that dissipate energy and are non-unique. These solutions do not satisfy the strong energy inequality (they are not Leray–Hopf solutions), but they demonstrate that simply having a weak solution is far from unique – highlighting the necessity of either uniqueness or additional conditions for the Clay problem. On another front, Tao (2016) introduced an &ldquo;averaged Navier–Stokes&rdquo; model, a modified equation preserving many difficulties of NS, and proved that this modified system can develop finite-time blowup. While the averaged equation is not the actual NS, this result provides a constructive example of an equation arbitrarily close to NS that fails globally – offering insight into the supercritical nature of the problem. These developments, though not solving the problem, enrich understanding: the former shows wild behavior is mathematically possible in Navier–Stokes (if we relax energy conditions), and the latter sheds light on what a &ldquo;potential blowup mechanism&rdquo; might look like in a controlled setting. (Advanced level: pushing the boundaries of the NS paradigm.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Nonuniqueness of Weak Solutions</strong> – Buckmaster &amp; Vicol's construction of infinitely many global weak solutions with the same initial data (violating uniqueness) means the Navier–Stokes problem is ill-posed in the weakest admissible class. This doesn't contradict the Clay problem (which asks for one smooth solution), but it indicates turbulent behavior in weak solutions and underscores why smoothness/energy conditions are crucial.</li>
+            <li><strong>Stepping Stone: Convex Integration Method</strong> – Technique originally developed for Euler equations that produces wild solutions by piecing together oscillatory flows. Its extension to Navier–Stokes (with viscosity) was non-trivial and required adding tiny high-frequency perturbations that overwhelm uniqueness. This method shows the richness of NS dynamics and provides intuition that lack of regularity could manifest as oscillations at ever-finer scales (a hallmark of turbulence).</li>
+            <li><strong>Stepping Stone: Averaged Navier–Stokes Blowup (Tao 2016)</strong> – A deliberate alteration of the nonlinear term (an averaging in physical space) yields an equation that does blow up in finite time from smooth data. The construction serves as a &ldquo;toy model&rdquo; for the real NS, illustrating how a cascade to small scales can force singularity. Lessons from this model may guide future attempts on the real equations, although so far the true Navier–Stokes has resisted similar analysis.</li>
+        </ul>
+
+        <h2>What to Upload Next</h2>
+        <p>To dive deeper into each Base Camp, the following books and papers are top priorities:</p>
+
+        <h3>Base Camp 6.1 – Excluding Simplest Blowup Scenarios</h3>
+        <ul>
+            <li>Nečas, Růžička, Šverák (1996), &ldquo;On Leray's self-similar solutions of the Navier–Stokes equations,&rdquo; Acta Math. 176:283–294. – A pivotal paper that should be read to understand why a straightforward self-similar blowup approach fails. It's short and conceptually clear: shows any such self-similar profile must vanish.</li>
+            <li>Koch, Nadirashvili, Seregin, Šverák (2009), &ldquo;Liouville theorems for the Navier–Stokes equations and applications,&rdquo; Acta Math. 203:83–105. – Read especially for the application to exclude certain ancient solution blowups. The Liouville theorem proof itself is technical (uses De Giorgi iteration), but the corollaries are well explained in the introduction.</li>
+            <li>Vladimir Šverák (2011), &ldquo;On Landau's solutions of the Navier–Stokes equations,&rdquo; J. Math. Sci. 178:576–586. – While focusing on another aspect (Landau's explicit stationary solutions), this lecture-style paper discusses symmetry and Liouville theorems in NS. It provides context to Koch–Šverák results and is more approachable.</li>
+            <li>Giga, Yoshikazu (2006), &ldquo;On elliptic and parabolic Liouville theorems,&rdquo; Hokkaido Univ. Preprint Series in Math. – A survey on Liouville-type results for various PDE. The parts on Navier–Stokes give a broad perspective on how showing &ldquo;no non-trivial bounded solution&rdquo; can imply regularity. Helps in understanding the strategy behind Koch–Šverák et al.'s approach.</li>
+        </ul>
+
+        <h3>Base Camp 6.2 – Novel Constructions and Weak Solutions Wildness</h3>
+        <ul>
+            <li>Tristan Buckmaster &amp; Vlad Vicol (2019), &ldquo;Nonuniqueness of weak solutions to the Navier–Stokes equation,&rdquo; Annals of Math. 189(1):101–144. – The full published paper of the convex integration construction for NS. It is highly technical, but the introduction and outline sections explain the scheme. Even a partial reading is valuable to grasp how violating the energy inequality leads to wild solutions.</li>
+            <li>C. De Lellis &amp; L. Székelyhidi Jr. (2013), &ldquo;Dissipative Euler flows and Onsager's conjecture,&rdquo; Proc. Natl. Acad. Sci. 110(12):4816–4819. – Although about Euler, this is a gentle introduction to convex integration in fluid equations by two pioneers of the method. Reading it provides intuition for Buckmaster–Vicol's Navier–Stokes construction (which adds viscosity to the picture).</li>
+            <li>Terence Tao (2016), &ldquo;Finite time blowup for an averaged three-dimensional Navier–Stokes equation,&rdquo; J. Amer. Math. Soc. 29:601–674. – Tao's paper proving blowup in the modified equation. It's long, but one can focus on the high-level strategy described in the introduction, which explains how averaging sidesteps certain cancellation that might be preventing blowup in NS. This gives ideas on what a genuine NS blowup might require.</li>
+            <li>Pierre Gilles Lemarié-Rieusset (2017), &ldquo;The %'hopf'% construction, or how to reduce the Navier–Stokes regularity problem to a $2$D turbulence model,&rdquo; arXiv:1708.09783. – An exploratory work connecting convex integration solutions and turbulence models. It tries to interpret the wild weak solutions in physical terms. This is speculative but can be thought-provoking when considering what failing scenarios to watch out for in NS.</li>
+        </ul>
+
+        <a href="/mathematics/Navier-Stokes_existence_and_smoothness/" class="back-link">← Back to Navier–Stokes</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

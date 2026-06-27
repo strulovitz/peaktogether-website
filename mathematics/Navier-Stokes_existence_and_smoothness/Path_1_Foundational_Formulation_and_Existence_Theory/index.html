@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 1: Foundational Formulation and Existence Theory — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 1: Foundational Formulation and Existence Theory</h1>
+
+        <h2>Base Camp 1.1 – Problem Statement &amp; Historical Context</h2>
+        <p>Introduces the Clay Millennium problem on 3D Navier–Stokes and its significance. The official problem description by Fefferman (2006) clearly formulates the global existence and smoothness question. It highlights that in three dimensions one has neither a proof of global smooth solution nor a counterexample. Most experts conjecture a positive answer (no finite-time blowup). Early discussions (e.g. Sinai 1998) emphasized the importance of resolving this for understanding turbulence. (Intuitive level: frames the problem and why it matters.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Clay Problem Statement</strong> – Precise conjecture requiring a smooth, global solution for any smooth initial data.</li>
+            <li><strong>Stepping Stone: Expert Expectation</strong> – General belief in global regularity despite lack of proof, underscoring the problem's subtlety.</li>
+            <li><strong>Stepping Stone: 2D vs 3D Contrast</strong> – In 2D the Navier–Stokes problem is long solved (global smooth solutions exist), but this gives no hint for the genuinely harder 3D case.</li>
+        </ul>
+
+        <h2>Base Camp 1.2 – Weak Solutions &amp; Energy Inequalities</h2>
+        <p>Covers Leray's and Hopf's foundational work constructing global weak solutions that satisfy the energy inequality. Leray's seminal 1934 paper &ldquo;Sur le mouvement d'un liquide visqueux emplissant l'espace&rdquo; proved the existence of global finite-energy weak solutions in $\mathbb{R}^3$. Hopf (1951) extended this to bounded domains, yielding what are now called Leray–Hopf weak solutions. These solutions are known to exist for all time but are not known to be smooth or unique. The approach uses energy estimates (dissipation of kinetic energy) and compactness methods to overcome nonlinearities. (Rigorous level: functional analytic construction of solutions.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Leray–Hopf Weak Solutions</strong> – Existence of at least one global weak solution for any divergence-free smooth initial data (energy inequality ensures bounded $L^2$ energy for all time).</li>
+            <li><strong>Stepping Stone: Energy Inequality</strong> – Key a priori estimate: kinetic energy decays due to viscosity, preventing uncontrolled growth.</li>
+            <li><strong>Stepping Stone: Local Strong Solutions</strong> – Classical short-time solutions exist and are unique for smooth data (via Picard iteration), but may break down at a finite &ldquo;blowup time&rdquo; if singularities form.</li>
+        </ul>
+
+        <h2>What to Upload Next</h2>
+        <p>To dive deeper into each Base Camp, the following books and papers are top priorities:</p>
+
+        <h3>Base Camp 1.1 – Problem Statement &amp; Context</h3>
+        <ul>
+            <li>Charles L. Fefferman (2006), &ldquo;Existence and Smoothness of the Navier–Stokes Equation.&rdquo; – Clay Institute official problem description. Provides a precise statement of the Millennium Problem and background remarks.</li>
+            <li>Ya. G. Sinai (1998), &ldquo;Navier–Stokes equations: global existence and uniqueness,&rdquo; contributed to <em>Open Problems in Math Physics</em>. An accessible one-page summary of the 3D NS problem and its significance.</li>
+            <li>Terence Tao (2017), &ldquo;Why global regularity for Navier–Stokes is hard&rdquo; (blog essay). An intuitive discussion of the obstacles (supercriticality, etc.) in proving regularity. Great for conceptual understanding before delving into technical papers.</li>
+        </ul>
+
+        <h3>Base Camp 1.2 – Weak Solutions &amp; Energy Inequalities</h3>
+        <ul>
+            <li>J. Leray (1934), &ldquo;Sur le mouvement d'un liquide visqueux emplissant l'espace,&rdquo; Acta Math. – The classic paper introducing Leray–Hopf weak solutions. Contains the construction of global weak solutions via energy estimates. (Rigorous, foundational.)</li>
+            <li>E. Hopf (1951), &ldquo;Über die Anfangswertaufgabe für die hydrodynamischen Grundgleichungen,&rdquo; Univ. of Münster Lecture Notes. Extends Leray's existence to bounded domains and discusses weak solution uniqueness issues. (Historical and technical.)</li>
+            <li>Peter Constantin (2001), &ldquo;Some Open Problems and Research Directions in Fluid Dynamics,&rdquo; in <em>Mathematics Unlimited</em>. – Sections describing the NS regularity problem and Leray's contributions. Good survey by a leading expert, at an intuitive to intermediate level.</li>
+            <li>Roger Temam (1977), <em>Navier–Stokes Equations: Theory and Numerical Analysis</em> – Chapters 1–2 cover the energy inequality, weak solutions, and existence proofs in detail. A standard graduate text for the PDE foundations of NS (rigorous, intermediate level).</li>
+        </ul>
+
+        <a href="/mathematics/Navier-Stokes_existence_and_smoothness/" class="back-link">← Back to Navier–Stokes</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

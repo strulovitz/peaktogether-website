@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 5: Special Cases and Simplified Models — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 5: Special Cases and Simplified Models</h1>
+
+        <h2>Base Camp 5.1 – Two-Dimensional Navier–Stokes (Resolved Case)</h2>
+        <p>Reviews the well-understood 2D incompressible Navier–Stokes equations, which serve as an important contrast. In two dimensions, Ladyzhenskaya (1950s–1960s) and others established global existence and smoothness for all finite-energy solutions. Intuitively, the obstruction of vortex stretching is absent in 2D (vorticity magnitude is governed by a maximum principle). Every weak solution in 2D is eventually smooth and obeys energy decay. Textbook treatments (e.g. Ladyzhenskaya's &ldquo;The Mathematical Theory of Viscous Incompressible Flow&rdquo;, 1969) rigorously prove global regularity in 2D and even the existence of global attractors. While 2D results do not solve the 3D problem, they provide insight (e.g. highlighting the role of the stretching term $ (u\cdot\nabla)u$ which in 2D has a special structure that precludes blowup). (Intermediate level: complete theory in a lower dimension.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Global Regularity in 2D</strong> – For any smooth initial vorticity in $\mathbb{R}^2$, the solution exists for all time and remains smooth. Energy and enstrophy estimates in 2D are globally bounded, preventing singularities.</li>
+            <li><strong>Stepping Stone: No Vortex Stretching</strong> – In 2D, the vorticity $\omega$ is a scalar satisfying $\partial_t\omega + (u\cdot\nabla)\omega = \nu\Delta \omega$. The nonlinear term does not amplify $|\omega|$; indeed $|\omega(t)|_{\infty}$ decays for $t&gt;0$ by the maximum principle. This fundamental difference is a key reason 2D is easier (and underscores that any 3D blowup must involve vortex stretching).</li>
+            <li><strong>Stepping Stone: Attractors and Long-Time Behavior</strong> – 2D Navier–Stokes also has a well-developed global dynamics theory: all solutions eventually reach a compact global attractor in phase space (reflecting mixing and dissipation). This contrasts with 3D, where even basic existence is open, let alone the structure of an attractor.</li>
+        </ul>
+
+        <h2>Base Camp 5.2 – Axisymmetric Flows</h2>
+        <p>Considers the important subclass of axisymmetric solutions (solutions invariant under rotations about some axis). If the flow has no swirl (zero angular velocity component), the 3D Navier–Stokes equations reduce to a form much like 2D, and indeed global smoothness has been proved for this case. Ukhovskii and Yudovich (1968) showed that for axisymmetric initial data without swirl, solutions remain global and smooth, essentially because the vortex lines neither stretch nor twist. For axisymmetric flows with swirl, the problem is harder (the swirl component reintroduces a form of vortex stretching). Partial results exist: e.g. if the swirl component is initially small or decays fast, one can sometimes prove global regularity; otherwise, the full axisymmetric case with swirl remains open. However, any potential singularity in an axisymmetric flow must occur on the symmetry axis (by uniqueness of angular momentum sign). This geometry has allowed stronger criteria – for instance, there are regularity criteria involving the boundedness of the velocity on the axis or integral conditions on the swirl. (Intermediate level: symmetry-reduced scenarios.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Axisymmetric No-Swirl Theorem</strong> – If $u_θ\equiv 0$ (no swirl component), then Navier–Stokes in $\mathbb{R}^3$ is globally well-posed. In cylindrical coordinates, the equations simplify and one can obtain uniform bounds on vorticity similar to the 2D case.</li>
+            <li><strong>Stepping Stone: Axisymmetric w/ Swirl – Partial Results</strong> – With swirl, singularity formation is unresolved. Known results: if the swirl component $u_θ$ decays rapidly or the solution is initially close to a no-swirl state, global existence can be shown (see e.g. Chen &amp; Zhang 2001). Also, Ladyzhenskaya's condition can be specialized: e.g. if $u_r, u_z$ (the meridional components) satisfy a Serrin condition or $u_θ$ is sufficiently small in $L^\infty_tL^2_x$, then smoothness follows.</li>
+            <li><strong>Stepping Stone: Numerical and Empirical Evidence</strong> – Axisymmetric flows are often studied numerically as likely candidates for blowup (because they concentrate vorticity along the symmetry axis). Notably, a well-known computational study by Luo &amp; Hou (2014) in the Euler (inviscid) case suggested a possible singularity in an axisymmetric swirling flow. For Navier–Stokes, no numerical evidence of blowup has been widely accepted, but axisymmetric simulations guide intuition on how a singularity, if it exists, might form (e.g. ring singularities or &ldquo;finite-time vortex ring pinch-off&rdquo;).</li>
+        </ul>
+
+        <h2>What to Upload Next</h2>
+        <p>To dive deeper into each Base Camp, the following books and papers are top priorities:</p>
+
+        <h3>Base Camp 5.1 – Two-Dimensional Navier–Stokes</h3>
+        <ul>
+            <li>O. A. Ladyzhenskaya (1969, 2nd ed.), <em>The Mathematical Theory of Viscous Incompressible Flow</em> – Chapters on 2D NS. Rigorous proofs of global existence/uniqueness in 2D and discussions on differences with 3D. A classical text that builds fundamental intuition.</li>
+            <li>Roger Temam (1995), <em>Navier–Stokes Equations and Nonlinear Functional Analysis</em> – Contains a concise treatment of the 2D global existence (as well as 3D local theory). Good for a quick yet solid understanding of 2D via energy methods.</li>
+            <li>A. J. Majda and A. L. Bertozzi (2002), <em>Vorticity and Incompressible Flow</em> – Chapters 2 and 4 cover 2D flows, vorticity conservation, and global regularity. Provides physical interpretation (e.g. why 2D flows can't blow up) alongside math.</li>
+            <li>C. Foias, O. Manley, R. Rosa, R. Temam (2001), <em>Navier–Stokes Equations and Turbulence</em> – While focused on turbulence, it includes an extensive discussion of 2D Navier–Stokes long-time behavior (since 2D has no blowup, one can talk about its turbulence theory rigorously). This contextualizes the importance of 2D results and their limitations when extrapolated to 3D.</li>
+        </ul>
+
+        <h3>Base Camp 5.2 – Axisymmetric Flows</h3>
+        <ul>
+            <li>M. R. Ukhovskii and V. I. Yudovich (1968), &ldquo;Axially symmetric flows of ideal and viscous fluids filling the whole space,&rdquo; J. Appl. Math. Mech. 32:52–61. – Proves global existence for axisymmetric no-swirl Navier–Stokes and discusses the structure of the equations in cylindrical coordinates. Fundamental reading for symmetry reductions.</li>
+            <li>G. 1. Seregin and V. Šverák (2002), &ldquo;On Type I singularities of the local axi-symmetric solutions of Navier–Stokes equations,&rdquo; Comm. PDE 31:1025–1047. – A study of potential singularities in axisymmetric flows with swirl. Introduces certain monotonicity formulas and partial results that any blowup (if it exists) would have to obey. Advanced but insightful.</li>
+            <li>Tai-Peng Tsai (2016), &ldquo;Axisymmetric solutions of the Navier–Stokes equations,&rdquo; Proc. Royal Soc. A 472:20160584. – A modern survey of known results for axisymmetric Navier–Stokes. Summarizes both no-swirl theorems and what is known with swirl, in a clear manner. Good to read for up-to-date status.</li>
+            <li>Dongho Chae (2014), <em>The Navier–Stokes Equations: An Introduction</em> – This book's later chapters include sections on special solutions, including axisymmetric flows. It provides accessible proofs for some axisymmetric regularity criteria and is suitable as an introductory text for this subtopic.</li>
+        </ul>
+
+        <a href="/mathematics/Navier-Stokes_existence_and_smoothness/" class="back-link">← Back to Navier–Stokes</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

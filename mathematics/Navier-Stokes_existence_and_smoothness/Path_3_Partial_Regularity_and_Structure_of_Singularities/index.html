@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 3: Partial Regularity and Structure of Singularities — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 3: Partial Regularity and Structure of Singularities</h1>
+
+        <h2>Base Camp 3.1 – Suitable Weak Solutions &amp; Local Energy Inequality</h2>
+        <p>Focuses on the class of &ldquo;suitable&rdquo; weak solutions introduced by Scheffer and used by Caffarelli–Kohn–Nirenberg. In addition to the standard Leray–Hopf properties, a suitable weak solution satisfies a local energy inequality (essentially, no anomalous energy increase in any subdomain) which is crucial for studying potential singular points. Scheffer (1976) pioneered applying geometric measure theory to Navier–Stokes, proving that one can localize the energy inequality to rule out &ldquo;too large&rdquo; singular sets. This set-up allows one to define the singular set $\mathcal{S}$ (points in space–time where $u$ is not locally bounded) and to derive bounds on its size. (Rigorous level: definitions and framework for partial regularity.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Local Energy Inequality</strong> – For any test function $\phi$, $\partial_t (\tfrac{1}{2}|u|^2) + \nabla\cdot(\tfrac{1}{2}|u|^2u + pu) + \nu|\nabla u|^2 \le 0$ in distribution. This extra condition (beyond weak solutions) defines &ldquo;suitability&rdquo; and is key to localizing energy.</li>
+            <li><strong>Stepping Stone: Suitable Weak Solution</strong> – Leray–Hopf weak solution that satisfies the local energy inequality. Existence of at least one suitable weak solution was shown by Scheffer (1977) and refined by Caffarelli–Kohn–Nirenberg (1982). It provides a platform to study singularities with tools akin to harmonic analysis and measure theory.</li>
+            <li><strong>Stepping Stone: Singular Set $\mathcal{S}$</strong> – The set of points in space–time where $u(x,t)$ is not smooth. Suitable solutions and local energy give control on $\mathcal{S}$'s structure (e.g. concentration of energy near $\mathcal{S}$ must obey certain inequalities).</li>
+        </ul>
+
+        <h2>Base Camp 3.2 – Partial Regularity Theorems (CKN Theory)</h2>
+        <p>Investigates the groundbreaking partial regularity result of Caffarelli, Kohn &amp; Nirenberg (1982). They proved that every suitable weak solution is smooth outside a small singular set: specifically, the one-dimensional parabolic Hausdorff measure of $\mathcal{S}$ is zero. In essence, although singularities might exist, they cannot fill up a region of space–time; they are essentially &ldquo;rare.&rdquo; The CKN theorem built on Scheffer's earlier work (which had shown, for example, that the 2D Hausdorff measure of $\mathcal{S}$ is zero – a weaker conclusion). CKN introduced an intricate blow-up argument and $\varepsilon$-regularity lemmas inspired by harmonic map theory to achieve this sharp result. Later, Fang-Hua Lin (1998) gave a simpler proof of CKN's partial regularity theorem, making the argument more accessible. (Rigorous level: deep PDE analysis.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: CKN 1982 Theorem</strong> – The singular set of any suitable weak solution has parabolic Hausdorff dimension at most 1. Equivalently, for each fixed time $t$, singular points (if any) form a set of Hausdorff dimension $\leq 1$ in space, and there are at most finitely many singular times.</li>
+            <li><strong>Stepping Stone: Scheffer's Measure Results</strong> – Scheffer (1977) had earlier shown partial regularity in a weaker sense (e.g. 1D Hausdorff measure of singular set in time is zero). CKN improved this to the optimal dimensional bound, using a more powerful $\varepsilon$-regularity criterion: any potential singularity has an $\varepsilon$-neighborhood where a scaled energy is small, implying regularity.</li>
+            <li><strong>Stepping Stone: Lin's Simplified Proof</strong> – In 1998, F.-H. Lin provided a streamlined proof of the CKN theorem, avoiding some technical complexities. This proof uses a direct Morrey-space iteration and has become a standard reference for learning partial regularity in Navier–Stokes.</li>
+        </ul>
+
+        <h2>Base Camp 3.3 – Characterization of Potential Singularities</h2>
+        <p>Delves into what is known or conjectured about the nature of singular points, assuming they exist. Through partial regularity, we know singularities (if any) cannot be too &ldquo;large&rdquo;; moreover, any singular point $(x_0,t_0)$ is known to have certain &ldquo;Type I&rdquo; or &ldquo;Type II&rdquo; blow-up profiles. For example, one can show that if a solution blows up, there exist sequences of rescalings of $u$ around $(x_0,t_0)$ that tend to a non-trivial ancient solution of Navier–Stokes or a steady solution (by a compactness argument). Recent works have tried to classify these ancient or backward-in-time self-similar solutions. For instance, it is known that non-trivial backward self-similar singular solutions (of the Leray form) do not exist, ruling out a simple self-similar blowup. Current research examines whether any singularity must be of a more subtle form (e.g. &ldquo;Type II&rdquo; with slower blowup rate). (Research frontier: understanding singularity profiles.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Type I vs Type II Blowup</strong> – A Type I blowup satisfies the same scaling as the equations (roughly $|u|\sim (T-t)^{-1/2}$ as $t\to T^-$). Leray conjectured self-similar Type I blowups; however, none exist except the trivial solution. Thus any blowup (if it occurs) would be Type II (slower rate), complicating analysis.</li>
+            <li><strong>Stepping Stone: Limits to Stationary or Ancient Solutions</strong> – Any sequence of blow-up rescalings (zooming into a singularity) yields a limiting solution that is either a stationary Navier–Stokes solution or an ancient (eternal) solution. Liouville-type theorems (Base Camp 6.1) show that bounded ancient or stationary solutions under mild conditions must be trivial. This suggests singularities, if they exist, demand very pathological and hard-to-construct behavior.</li>
+            <li><strong>Stepping Stone: Uniqueness of Singular Trajectories</strong> – A consequence of partial regularity is that the set of singular times is discrete; between any two singular times, the solution actually recovers regularity. Efforts are ongoing to prove that perhaps no singular time exists at all (which would solve the problem), or to deduce more about the flow near a singularity (e.g. possible swirl or neckpinch structures).</li>
+        </ul>
+
+        <h2>What to Upload Next</h2>
+        <p>To dive deeper into each Base Camp, the following books and papers are top priorities:</p>
+
+        <h3>Base Camp 3.1 – Suitable Weak Solutions &amp; Local Energy</h3>
+        <ul>
+            <li>Vladimir Scheffer (1977), &ldquo;Hausdorff measure and the Navier–Stokes equations,&rdquo; Comm. Math. Phys. 55:97–112. – Scheffer's first partial regularity paper. Defines suitable weak solutions and proves initial measure estimates on the singular set. Difficult but foundational.</li>
+            <li>V. Scheffer (1976), &ldquo;Turbulence and Hausdorff dimension,&rdquo; in <em>Turbulence and Navier–Stokes Equations</em> (Lecture Notes in Math. 565). – Earlier work using geometric measure theory ideas (discusses possible Hausdorff dimension of singularities heuristically). Good for background and motivation.</li>
+            <li>Pierre Gilles Lemarié-Rieusset (2002), <em>Recent Developments in the Navier–Stokes Problem</em> – Chapter 8 introduces suitable weak solutions and local energy inequality in a modern context. Helpful to see a streamlined presentation of these technical definitions (intermediate/advanced).</li>
+            <li>Gregory Seregin (2015), <em>Lecture Notes on Regularity Theory for the Navier–Stokes Equations</em> – An up-to-date monograph covering suitable weak solutions and partial regularity. Begins from basics and builds to current regularity results, making it a great single resource for Path 3.</li>
+        </ul>
+
+        <h3>Base Camp 3.2 – Partial Regularity Theorems (CKN Theory)</h3>
+        <ul>
+            <li>Luis Caffarelli, Robert Kohn, Louis Nirenberg (1982), &ldquo;Partial regularity of suitable weak solutions of the Navier–Stokes equations,&rdquo; Comm. Pure Appl. Math. 35:771–831. – The full CKN paper. Technical but it contains the definitive partial regularity proof. Read for the main ideas and $\varepsilon$-regularity lemma structure.</li>
+            <li>Fang-Hua Lin (1998), &ldquo;A new proof of the Caffarelli–Kohn–Nirenberg theorem,&rdquo; Comm. Pure Appl. Math. 51(3):241–257. – Simplified proof of CKN. Highly recommended to read alongside CKN, as it distills the argument and is more approachable while still containing all key ingredients.</li>
+            <li>Philippe G. Lemarié-Rieusset (2016), <em>The Navier–Stokes Problem in the 21st Century</em> – Contains a chapter reviewing partial regularity results (Scheffer, CKN, Lin) in a unifying framework. Useful to see these theorems in context and with commentary.</li>
+            <li>Susan Friedlander &amp; Daniele Serre (eds.) (2001), <em>Handbook of Mathematical Fluid Dynamics</em>, Vol. II – Survey article by G. Seregin on partial regularity in Navier–Stokes. Summarizes known results up to early 2000s with sketches of proofs. Good as a high-level guide before tackling the original papers.</li>
+        </ul>
+
+        <h3>Base Camp 3.3 – Characterization of Potential Singularities</h3>
+        <ul>
+            <li>Jiří Nečas, Milan Růžička, Vladimír Šverák (1996), &ldquo;On Leray's self-similar solutions of the Navier–Stokes equations,&rdquo; Acta Math. 176:283–294. – Proves non-existence of non-trivial backward self-similar blowup solutions. Essential reading to understand why one &ldquo;natural&rdquo; blowup ansatz fails.</li>
+            <li>G. Koch, N. Nadirashvili, G. Seregin, V. Šverák (2009), &ldquo;Liouville theorems for the Navier–Stokes equations and applications,&rdquo; Acta Math. 203:83–105. – Shows any bounded ancient solution is constant, used to rule out certain blowup limits. This paper is challenging but illuminates how one leverages boundedness/symmetry to constrain singularities.</li>
+            <li>Tai-Peng Tsai (2018), <em>Lectures on Navier–Stokes Equations</em> – Contains chapters on possible singularity formations and ancient solutions. Offers a pedagogical introduction to blowup analysis and self-similar solutions, summarizing many research results in simpler terms.</li>
+            <li>Hou, Thomas Y., and Guo Luo (2014), &ldquo;Potentially singular behavior of the 3D incompressible Euler equations,&rdquo; PNAS 111(36):12968–12973. – Though about Euler, this numerical study of an axisymmetric blowup scenario provides intuition on how a 3D Navier–Stokes singularity might develop (in absence of viscosity). It's useful for inspiration and for formulating rigorous questions, even as one remains cautious translating numerics to proofs.</li>
+        </ul>
+
+        <a href="/mathematics/Navier-Stokes_existence_and_smoothness/" class="back-link">← Back to Navier–Stokes</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

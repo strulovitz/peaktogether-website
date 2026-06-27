@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 2: Regularity Criteria and Blow-up Conditions — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 2: Regularity Criteria and Blow-up Conditions</h1>
+
+        <h2>Base Camp 2.1 – Ladyzhenskaya–Prodi–Serrin Conditions</h2>
+        <p>Studies integrability criteria that guarantee a weak solution is actually smooth (preventing blowup). A classical result by Ladyzhenskaya (1958) and Prodi–Serrin (1962) asserts that if a weak solution $u(x,t)$ lies in certain $L^p_tL^q_x$ spaces (with $2/p + 3/q \le 1$), then no singularities occur. In particular, Serrin's 1962 paper showed that if $u\in L^r(0,T;L^s(\mathbb{R}^3))$ with $2/r+3/s\le 1$ (e.g. $L^\infty_tL^3_x$ or $L^4_tL^{12}_x$), then $u$ is smooth on $(0,T)$. These criteria, proved via interpolation and energy estimates, essentially require that the solution is not too large on average. (Intermediate level: conditional regularity theorems.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: Serrin's Criterion</strong> – If $u$'s time-space integrability satisfies $2/p+3/q&lt;1$ (or equals 1 under mild endpoint conditions), then $u$ remains regular.</li>
+            <li><strong>Stepping Stone: Examples</strong> – Notably, $u\in L^\infty(0,T;L^3_x)$ or $u\in L^5(0,T;L^{10}_x)$ are sufficient to preclude blowup (these meet Serrin's condition).</li>
+            <li><strong>Stepping Stone: Contrast with Weak Solutions</strong> – Leray–Hopf solutions are known to belong to $L^2_tL^6_x$ (for incompressible flow), which falls outside the Serrin range (since $2/2+3/6=3/2&gt;1$), highlighting the gap between known existence and known regularity regimes.</li>
+        </ul>
+
+        <h2>Base Camp 2.2 – Vorticity &amp; Critical Norm Criteria</h2>
+        <p>Explores blow-up criteria in critical spaces, often involving the vorticity $\omega = \nabla \times u$. A celebrated criterion by Beale–Kato–Majda (1984) states that a smooth solution of the 3D Euler equations can blow up only if $\int_0^T |\omega(t)|_{L^\infty}dt = \infty$. For the viscous Navier–Stokes case, this implies that as long as the vorticity remains bounded in sup-norm (no infinite swirl), the solution cannot develop a singularity. Another milestone result (Escauriaza–Seregin–Šverák 2003) proved that if $u$ is bounded in critical Lebesgue space $L^\infty(0,T;L^3_x)$, then $u$ is actually smooth up to time $T$. In other words, the borderline Serrin case $(p,q)=(\infty,3)$ still precludes blowup. Researchers have also found regularity criteria based on one component of velocity or pressure – for example, requiring just one velocity component to satisfy a Serrin-type condition can ensure smoothness. (Advanced level: sharpening conditions for no-blowup.)</p>
+        <h3>Stepping Stones</h3>
+        <ul>
+            <li><strong>Stepping Stone: BKM Criterion</strong> – (Euler analog) Blow-up can occur only if vorticity norms blow up: $\sup_{t&lt;T}|\omega(\cdot,t)|_{\infty} = \infty$ or equivalently $\int_0^T\!|\omega|_{\infty}dt=\infty$. No infinite vorticity accumulation ⇒ extend solution beyond $T$.</li>
+            <li><strong>Stepping Stone: Escauriaza–Seregin–Šverák Theorem</strong> – If $u(t)\in L^\infty(0,T;L^3(\mathbb{R}^3))$, then $u$ does not blow up at $T$ (in fact $u$ is Hőlder-continuous near $T$). This solved the last open endpoint of Serrin's condition.</li>
+            <li><strong>Stepping Stone: Further Regularity Criteria</strong> – E.g., if one component of the velocity $u_3$ remains in $L^2_tL^\infty_x$ (a &ldquo;one-component Serrin condition&rdquo;), then no blowup occurs. Similarly, conditions on the pressure (e.g. $p \in L^{5/4}_{t,x}$) or the direction of vorticity can prevent singularities – though these are more technical refinements.</li>
+        </ul>
+
+        <h2>What to Upload Next</h2>
+        <p>To dive deeper into each Base Camp, the following books and papers are top priorities:</p>
+
+        <h3>Base Camp 2.1 – Ladyzhenskaya–Prodi–Serrin Conditions</h3>
+        <ul>
+            <li>James Serrin (1962), &ldquo;On the interior regularity of weak solutions of the Navier–Stokes equations,&rdquo; Arch. Ration. Mech. Anal. 9:187–195. – Original paper establishing the $L^r_tL^s_x$ regularity criterion. (Classical, rigorous.)</li>
+            <li>O. A. Ladyzhenskaya (1963), <em>The Mathematical Theory of Viscous Incompressible Flow</em> – Contains Ladyzhenskaya's early regularity conditions (e.g. $u\in L^4_{t,x}$) and proofs. Provides a very clear classical PDE approach (intermediate level, monograph).</li>
+            <li>J. G. Heywood (1980), &ldquo;The interior regularity of the weak solutions of the Navier–Stokes equations,&rdquo; Acta Math. 142:159–178. – A detailed exposition of Serrin's condition and related results, with full proofs and slight extensions. (Rigorous.)</li>
+            <li>Giovanni Galdi (2011), <em>An Introduction to the Mathematical Theory of the Navier–Stokes Equations</em>, Vol. I. – Sections on Leray–Hopf solutions and Criteria à la Serrin. A comprehensive modern textbook, providing context and detailed proofs (graduate level).</li>
+        </ul>
+
+        <h3>Base Camp 2.2 – Vorticity &amp; Critical Norm Criteria</h3>
+        <ul>
+            <li>J. T. Beale, T. Kato, A. Majda (1984), &ldquo;Remarks on the breakdown of smooth solutions for the 3-D Euler equations,&rdquo; Comm. Math. Phys. 94:61–66. – The BKM paper. Short and incisive, it proves the vorticity blow-up criterion. A must-read for understanding blowup mechanisms in ideal fluids.</li>
+            <li>Luis Escauriaza, G. Seregin, V. Šverák (2003), &ldquo;$L_{3,\infty}$-solutions of Navier–Stokes and backward uniqueness,&rdquo; Russ. Math. Surveys 58(2):211–250. – Proves the critical $L^\infty_tL^3_x$ regularity criterion. Also introduces techniques of backward uniqueness. (Advanced, but crucial result.)</li>
+            <li>M. R. Ukhovskii, V. I. Yudovich (1968), &ldquo;Axially symmetric flows of ideal and viscous fluids,&rdquo; J. Appl. Math. Mech. 32:52–61. – Not directly a criterion, but provides the context for how special structure (no swirl) prevents blowup. Reading this alongside criteria papers shows how geometry can enforce conditions akin to Serrin's.</li>
+            <li>Alexander Majda &amp; Andrea Bertozzi (2002), <em>Vorticity and Incompressible Flow</em> – Chapter 3 covers blow-up criteria and vorticity estimates in both Euler and Navier–Stokes. Offers intuition linking the BKM criterion with physical vortex stretching, at an accessible level.</li>
+        </ul>
+
+        <a href="/mathematics/Navier-Stokes_existence_and_smoothness/" class="back-link">← Back to Navier–Stokes</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>
