@@ -46,71 +46,30 @@ def tint_rgb(red: float) -> tuple[float, float, float]:
 # All target "#version 330 core".
 # ---------------------------------------------------------------------------
 
-# --- wire: Mode A lines as camera-facing quads -----------------------------
+# --- wire: Mode A lines (simple LINES, depth-tested) ------------------------
 WIRE_VS = """#version 330 core
 
 uniform mat4  u_mvp;
-uniform vec2  u_viewport;     // pixels (width, height)
-uniform float u_depth_bias;   // added to clip-space z (after w-divide handled below)
 
-in vec3 in_pos;     // line endpoint in world space
-in vec2 in_side;    // quad expansion: x = +/-1 across the line, y = +/-1 along
-in vec3 in_color;   // per-vertex importance color
+in vec3 in_pos;
+in vec3 in_color;
 
-out vec3  v_color;
-out float v_view_depth;  // positive view-space distance (clip.w proxy)
+out vec3 v_color;
 
 void main() {
-    vec4 clip = u_mvp * vec4(in_pos, 1.0);
-
-    // View/clip depth used for distance dimming downstream.
-    v_view_depth = clip.w;
-
-    // Expand to a constant *pixel* width quad. We push the endpoint sideways
-    // in NDC by a fixed pixel amount. Half-width in pixels:
-    float half_px = 1.5;
-
-    // NDC offset = (pixels / viewport) * 2.0, scaled by clip.w so the
-    // perspective divide yields the intended pixel size.
-    vec2 px_to_ndc = (2.0 * half_px) / u_viewport;
-    vec2 ndc_off = in_side * px_to_ndc * clip.w;
-
-    clip.xy += ndc_off;
-
-    // Depth bias applied in clip space.
-    clip.z += u_depth_bias * clip.w;
-
+    gl_Position = u_mvp * vec4(in_pos, 1.0);
     v_color = in_color;
-    gl_Position = clip;
 }
 """
 
 WIRE_FS = """#version 330 core
 
-uniform float u_dim_near;   // view depth where dimming starts
-uniform float u_dim_far;    // view depth where dimming is fully applied
-uniform vec3  u_color;      // base/global color (multiplies importance)
-
-in vec3  v_color;
-in float v_view_depth;
+in vec3 v_color;
 
 out vec4 frag_color;
 
 void main() {
-    const vec3 DARK_GREY = vec3(0.18);
-    const vec3 DIM_FLOOR = vec3(0.12);  // NEVER pure black
-
-    // distance_factor: 0 at near, 1 at far.
-    float denom = max(u_dim_far - u_dim_near, 1e-4);
-    float distance_factor = clamp((v_view_depth - u_dim_near) / denom, 0.0, 1.0);
-
-    vec3 base = v_color * u_color;
-    vec3 dimmed = mix(base, DARK_GREY, distance_factor);
-
-    // Clamp the dim floor: never darker than DIM_FLOOR.
-    vec3 rgb = max(dimmed, DIM_FLOOR);
-
-    frag_color = vec4(rgb, 1.0);
+    frag_color = vec4(v_color, 1.0);
 }
 """
 
