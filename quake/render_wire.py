@@ -158,32 +158,32 @@ def expand_segments_to_quad_attribs(
     if n == 0:
         return (np.zeros((0, 3), np.float32),
                 np.zeros((0, 3), np.float32),
-                np.zeros((0,), np.float32),
+                np.zeros((0, 2), np.float32),
                 np.zeros((0, 3), np.float32))
 
     A = segments[:, 0, :]   # (N,3)
     B = segments[:, 1, :]   # (N,3)
 
-    # Per-segment 6-vertex pattern.
     pos      = np.empty((n, 6, 3), np.float32)
     other    = np.empty((n, 6, 3), np.float32)
-    side     = np.empty((n, 6), np.float32)
+    side     = np.empty((n, 6, 2), np.float32)
     colA     = colors  # (N,3)
 
     # Vertex roles: (pos_is_A?, side)
-    #   v0=(A,-1) v1=(B,-1) v2=(B,+1) v3=(A,-1) v4=(B,+1) v5=(A,+1)
-    pos[:, 0] = A; other[:, 0] = B; side[:, 0] = -1.0
-    pos[:, 1] = B; other[:, 1] = A; side[:, 1] = -1.0
-    pos[:, 2] = B; other[:, 2] = A; side[:, 2] = +1.0
-    pos[:, 3] = A; other[:, 3] = B; side[:, 3] = -1.0
-    pos[:, 4] = B; other[:, 4] = A; side[:, 4] = +1.0
-    pos[:, 5] = A; other[:, 5] = B; side[:, 5] = +1.0
+    # side.x = across (-1 left, +1 right)  side.y = along (-1 toward A, +1 toward B)
+    #   v0=(A,-1,-1) v1=(B,-1,+1) v2=(B,+1,+1) v3=(A,-1,-1) v4=(B,+1,+1) v5=(A,+1,-1)
+    pos[:, 0] = A; other[:, 0] = B; side[:, 0] = (-1.0, -1.0)
+    pos[:, 1] = B; other[:, 1] = A; side[:, 1] = (-1.0,  1.0)
+    pos[:, 2] = B; other[:, 2] = A; side[:, 2] = ( 1.0,  1.0)
+    pos[:, 3] = A; other[:, 3] = B; side[:, 3] = (-1.0, -1.0)
+    pos[:, 4] = B; other[:, 4] = A; side[:, 4] = ( 1.0,  1.0)
+    pos[:, 5] = A; other[:, 5] = B; side[:, 5] = ( 1.0, -1.0)
 
     col = np.repeat(colA[:, None, :], 6, axis=1)  # (N,6,3)
 
     return (pos.reshape(-1, 3).astype(np.float32),
             other.reshape(-1, 3).astype(np.float32),
-            side.reshape(-1).astype(np.float32),
+            side.reshape(-1, 2).astype(np.float32),
             col.reshape(-1, 3).astype(np.float32))
 
 
@@ -258,7 +258,7 @@ def _gl_make_vao(ctx, program, pos_vbo, other_vbo, side_vbo, col_vbo):
         [
             (pos_vbo,   "3f", "in_pos"),
             (other_vbo, "3f", "in_other"),
-            (side_vbo,  "1f", "in_side"),
+            (side_vbo,  "2f", "in_side"),
             (col_vbo,   "3f", "in_color"),
         ],
     )
