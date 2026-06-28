@@ -174,7 +174,8 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Parent 4: DONE (engine frozen briefs, 13 modules built and green)
 - Parent 5: DONE — delivered Golden Fixture Pack (38 PNGs + 6 JSONs built under `tests/golden_pack/`), `load_pack` passes
 - **Parent 6: DONE** — app.py full wiring written directly by Parent 6, 285/285 tests green, smoke passes, headless CI returns 0
-- **Parent 7: DONE** — frozen level design delivered (20 rooms, Book 1 Sections I–III, "First & Last Ratios → Inverse-Square Law"). `concept_graph.json` (20 nodes / 28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7 (DeepSeek checked: edge-id rule, DAG, connectivity, no self-loops, importance 1–5, extra=forbid). Saved verbatim to `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Build (Phase A) pending Nir's go-ahead.
+- **Parent 7: DONE** — frozen level design delivered (20 rooms, Book 1 Sections I–III, "First & Last Ratios → Inverse-Square Law"). `concept_graph.json` (20 nodes / 28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7 (DeepSeek checked: edge-id rule, DAG, connectivity, no self-loops, importance 1–5, extra=forbid). Saved verbatim to `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`.
+- **Parent 8: NEXT** — **Opus implements DIRECTLY (NOT a child — Nir's call: must be holistic; touches many modules).** Two-part mission: (a) harden the map-layout engine (`layout_force`/`layout_height`/`level_maker`) to be numerically robust + scale with graph size, with **NO hardcoded room counts** (no 4 / 20 / etc.) + real-scale regression tests; (b) build a **3D wireframe, navigable map-viewer utility** (Doom-TAB-style automap; fly with arrow keys + WASD to inspect bridges/underpasses at their heights) — doubles as the future in-game map mode. Triggered by the first real `level_maker` run (191 crossings + ±22,000 m phantom coords). DeepSeek writes the handoff (offering verbatim per-stage file snippets to prevent context death).
 
 ### What app.py looks like now
 - `app.py` is the full §5.4 per-frame loop — wires all 13 engine modules, event-driven save, Read-Mode overlay, mode-switching, guidlines, golden pack smoke test. 285/285 green.
@@ -199,10 +200,16 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - Full build plan (Phases A–D) + 6 acceptance gates specified
 - Saved verbatim to `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`
 
-**THE BUILD — Phase A onward** ⏳ NEXT (awaiting Nir's go-ahead)
-- Author `concept_graph.json` into the repo → run `level_maker` → floorplan with bridges/underpasses
-- Then Legs 2+3 (figures, text panels, rooms) → assemble pack → smoke test
-- Two known soft-gaps to resolve during build: (1) citation `label` phrases are reconstructions (CITATION-AI + Nir's eyeball confirm), (2) figure plate/fig numbers tentative (overlay-diff confirms)
+**Phase A FIRST RUN — June 28 (DeepSeek):** authored `concept_graph.json` + a runner under `quake/levels/principia_bk1_inverse_square/`, ran `level_maker`. Result: 20 rooms / 28 corridors, valid DAG ✓, connected ✓ — BUT **UNHEALTHY**: **191 crossings** (a clean 20-room map should have ~a couple dozen) and several crossing coords exploding to **±22,000 m** while rooms sit within ±100 m. Empirically confirmed the two degree-miscounts DeepSeek flagged (lemma_7=6, prop_11=4). Root cause (DeepSeek diagnosis): (1) `layout_force.spring_layout` (k=None, scale=40) collapses 20 nodes — only ever tested on a 4-node toy; (2) `layout_height._segments_intersect` compares orientation floats with `!=` (no tolerance) and computes infinite-line intersections without verifying the point lies within both segments → spurious far-away crossings. **BUILD PAUSED. Floorplan NOT committed (local only).**
+
+**Parent 8 — Engine hardening + 3D Map Viewer** ⏳ NEXT (Opus implements himself; DeepSeek writes the handoff)
+- Fix layout + crossing-detection: robust + **scales with graph size, NO hardcoded counts**; add real-scale regression tests so "green" means something.
+- Build a 3D wireframe, fly-through **map-viewer utility** (arrows + WASD; shows bridges/underpasses at their heights) = Nir's eyes on the floorplan + the future in-game map mode.
+- Keep Floorplan/Corridor/Crossing contracts frozen; keep 285 tests green. Prompt must offer verbatim per-stage file snippets (anti-context-death).
+
+**SEQUENCING — Parent 7 vs Parent 8 vs a possible Parent 9 (Nir asked):** Parent 7's output = **DATA** (`concept_graph.json`, valid §4.2). Parent 8 fixes the **MACHINE** (the layout engine). The input contract (§4.2) and output contract (floorplan) are unchanged → **Parent 7's level data SURVIVES; it does NOT need redoing.** After Parent 8: DeepSeek re-runs `level_maker` on the SAME `concept_graph.json` → fresh floorplan → Nir flies the map viewer. Only IF the map then reveals the graph ITSELF is too tangled would a fresh parent ("Parent 9") adjust Parent 7's design — NOT pre-committed; Nir decides after seeing the map. (Analogy: Parent 7 wrote the recipe; Parent 8 fixes the oven; we re-bake the same recipe; only rewrite the recipe if the cake is still bad with a working oven.)
+
+**When the build resumes (after Parent 8 + Nir's visual OK):** author Legs 2+3 (figures, text panels, rooms) → assemble pack → smoke test. Two known soft-gaps: (1) citation `label` phrases are reconstructions (CITATION-AI + Nir's eyeball confirm), (2) figure plate/fig numbers tentative (overlay-diff confirms).
 
 ### Deferred
 - Audio (deferred on purpose, NOT in Parent 7's scope)
