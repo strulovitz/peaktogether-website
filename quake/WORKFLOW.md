@@ -202,6 +202,24 @@ DeepSeek overstepped twice: modified `guidelines.py` (strip-draw stub) and rewro
 ### CRITICAL LESSON: Parents can't read anything
 Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. They only know what Nir pastes into the chat. The DIGEST solves the context-death problem — instead of 548 KB of raw Newton, the parent gets a 340-line digest. When it needs details, it asks Nir to paste a specific section. The protocol: Parent asks Nir → Nir asks DeepSeek → DeepSeek fetches from disk/GitHub → Nir pastes to Parent.
 
+### Afternoon session (June 28, 2026 — Parent 10 DIED; renderer/content split; Parent 11 launched)
+
+43. **Parent 10 launched then DIED.** Nir launched Parent 10 (room content) with the baseline files. Parent 10 paused to talk first (Nir's instruction — he doesn't want parents sprinting on a "GO"). DeepSeek then made a chain of mistakes that killed the parent: (a) shipped a STALE §10 bug report (three of the "5 bugs" were already fixed in map-viewer work), (b) bundled the renderer mission on top of the already-huge content handoff, (c) was about to paste ~2,000 lines of source into one context. Parent 10 burned his context catching DeepSeek's stale report and never produced a deliverable. **Fed the whole world at once → context death.** This is the SECOND parent DeepSeek killed in a row (Parent 9 = lemma_1 poison; Parent 10 = overload).
+
+44. **Two findings salvaged from Parent 10:** (1) `render_room.py` appears to call `moderngl.create_context()` EVERY draw (new GL context per frame) — prime suspect for black rooms; (2) perspective/MVP is partly a CALLER concern (`app.py`), and `map_viewer.py` already has a working perspective (don't undo it).
+
+45. **Nir's fix — SPLIT the mission, one parent per job, protect context:**
+    - **Parent 11 (fresh, ACTIVE):** single mission = fix the two renderers (Mode A wireframe rebuild to OT aesthetic; Mode B solid-room verify/fix). 20-room content explicitly OUT of scope. Handoff at `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_11_HANDOFF.md`. Launch files = Commentaries + OT + handoff (NT left off — content, not rendering).
+    - **Parent 12 (later):** the 20-room Principia content design.
+
+46. **NEW lesson — question-first material protocol (Nir's insight):** Stop telling parents to request WHOLE files (that's the drown-the-parent trap). Parents should ASK DeepSeek precise QUESTIONS (batched, cross-cutting) and get back EXACT VERBATIM excerpts of only what they need. Whole-file paste = fallback only for a small file being rewritten end-to-end. **Burn DeepSeek's effort to protect the parent's scarce context.** Baked into the Parent 11 handoff §5.
+
+47. **NEW lesson — no "GO", talk-first rhythm:** Handoffs no longer end with "GO" (it makes parents sprint before Nir confirms direction). They end by asking the parent to state its plan / first questions and WAIT.
+
+48. **DeepSeek crimes this session (owned, apologized):** stale bug report; bundling two missions onto one parent; proposing a ~2,000-line context dump; arguing with Nir / giving unsolicited recommendations; dropping the emojis when Nir was upset. Corrected.
+
+49. **Saved + pushed:** Parent 11 handoff written to BIBLE; Commentaries §2/§4/§5 updated; this WORKFLOW entry; everything pushed.
+
 ## 8. CURRENT SITUATION (June 28, 2026 — night)
 
 ### What's built
@@ -231,9 +249,10 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - NOT Parent 9 — DeepSeek implements directly with Nir's supervision
 
 ### Current frontier
-- ⏳ **NEXT:** Implement hierarchical layout in `layout_force.py` per `DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`
-- After: re-run on Parent 7's graph → expect natural crossings
-- After: Nir eyeballs the 3D map viewer (Parent 8 Part B — still pending from original plan)
+- ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
+- ⚠️ Parent 10 DIED (context overload) → mission split
+- ⏳ **NEXT — Parent 11 (ACTIVE): fix the renderers** (Mode A wireframe rebuild + Mode B solid-room verify/fix). The make-or-break visual gate.
+- ⏳ THEN — Parent 12: the 20-room Principia content
 - Deferred: Parent 9 CANCELLED (tainted, unnecessary)
 
 ## 9. NEXT STEPS (after hierarchical layout fix)
@@ -285,6 +304,6 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's restart self-prompt** (`quake/DEEPSEEK_RESTART_PARENT_10_GO.md`) which has the exact current state and launch protocol. Then ask Nir what's next.
-🌙 **CURRENT RESTART PROMPT:** `quake/DEEPSEEK_RESTART_PARENT_10_GO.md` — hierarchical layout DONE (5 crossings), map viewer WORKING, Parent 10 handoff written for room content design. Next: either launch Parent 10 or wait for Nir. (Supersedes `DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`.)
+🌙 **CURRENT STATE (June 28, 2026 — afternoon):** Parent 10 DIED (context overload). Mission SPLIT: renderer fix → fresh **Parent 11** (ACTIVE — handoff at `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_11_HANDOFF.md`); 20-room content → Parent 12 (later). Layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green), but the renderers are the open make-or-break gate (Mode A is a stopgap, Mode B unverified/suspected-black). **On restart: ask Nir whether Parent 11 has responded.** New protocols: question-first material (parents ask DeepSeek precise questions → verbatim excerpts; no whole-file dumps) and no-"GO" talk-first handoffs.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

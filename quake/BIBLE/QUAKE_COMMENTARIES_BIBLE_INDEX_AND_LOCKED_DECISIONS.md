@@ -78,7 +78,9 @@
 
 27. **DeepSeek Self-Prompt — Hierarchical Layout Implementation** ✅ DONE — `quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`. Nir's "solar system" design implemented in `layout_force.py`: planets (importance ≥ 4 or degree ≥ 3) placed first and frozen, asteroids added one at a time pulled to planets only. Default config: 5 natural crossings on 20-node graph. 382/382 green.
 
-28. **Prompt to Opus — Parent 10 Handoff (Room Content Design)** ⏳ NEXT — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_10_HANDOFF.md`. Mission: design room source JSONs, Asymptote figures, recipe JSONs, and LaTeX text for all 20 Principia rooms (11 with figures, 9 text-only). Includes §10 rendering bug report (shader function bug, type mismatches, missing projection) so parent can fix render_wire/render_room properly.
+28. **Prompt to Opus — Parent 10 Handoff (Room Content Design)** ⚠️ PARENT 10 DIED — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_10_HANDOFF.md`. This handoff bundled the huge 20-room content mission AND a renderer bug report; DeepSeek then overloaded Parent 10 with a STALE bug list + a plan to dump ~2,000 lines of source. Context death before any deliverable. Two real findings salvaged (see §4 amendment). The mission is now SPLIT: renderer fix → Parent 11; 20-room content → Parent 12.
+
+29. **Prompt to Opus — Parent 11 Handoff (Fix the Renderers)** ⏳ ACTIVE — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_11_HANDOFF.md`. Fresh, single-mission parent: fix Mode A (rebuild proper wireframe — depth-tested camera-facing line-quads, distance-dim white→grey, never-black, bloom) and Mode B (verify/fix the solid room — suspected per-frame `create_context()` causing black rooms). Uses the question-first material protocol (parent asks DeepSeek precise questions → verbatim excerpts/cross-cuts; whole-file only for small files). No GO; talk-first rhythm. 20-room content explicitly OUT of scope (that is Parent 12). Launch files = Commentaries + OT + this handoff (NT left off — content, not rendering).
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -124,6 +126,13 @@
 - **Parent 9 CANCELLED** — the problem was never graph topology. Tainted handoff (DeepSeek's fault: unilateral lemma_1 constraint). Fixed and archived but not used.
 - **Implementation:** DeepSeek (not a parent) — see `quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`.
 
+✅ **AMENDMENT — Parent 10 died; renderer/content split; question-first material protocol, June 28, 2026 (afternoon).**
+- **Parent 10 context-death.** The Parent 10 handoff bundled two big missions (20-room content design + a renderer fix) onto one chat; DeepSeek then shipped a STALE bug report and was about to paste ~2,000 lines of source. The parent burned context correcting DeepSeek and never produced a deliverable. **Root cause = DeepSeek (again) failing to protect a parent's context** — the same disease as the Parent 9 lemma_1 poison, in a different costume.
+- **Two findings salvaged from Parent 10** (worth keeping): (1) `render_room.py` appears to call `moderngl.create_context()` on EVERY draw — a new GL context per frame — the prime suspect for black rooms; (2) the perspective/MVP projection is partly a CALLER concern (`app.py`), and `tools/map_viewer.py` ALREADY has a working perspective (don't undo it). Also: the old "5 render_wire bugs" report is STALE — three were already fixed during map-viewer work.
+- **The split:** renderer fix → fresh **Parent 11** (single mission); 20-room Principia content → **Parent 12** (later, unless a more urgent bump appears).
+- **Question-first material protocol (now the DEFAULT, supersedes whole-file-by-default):** parents have no file access, but DeepSeek can read/search the whole codebase. So parents should **ask DeepSeek precise QUESTIONS** (batched, cross-cutting across files welcome) and receive **exact verbatim excerpts** of only what they need. Whole-file pasting is a FALLBACK only for a small file the parent will rewrite end-to-end. Principle: **burn DeepSeek's effort to protect the parent's scarce context.** (Nir's call.)
+- **Handoff rhythm:** handoffs no longer end with "GO". They end by asking the parent to state its plan / first questions and WAIT for confirmation before building (talk-first). (Nir's call.)
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -142,7 +151,9 @@
 - ✅ **Parent 8 Part A DONE — Engine hardened!** (June 28 evening) — `layout_force.py` (explicit k=k_factor/√N + normalize_spread), `layout_height.py` (robust parametric `_segments_intersect` with t,u∈[0,1] check), `tests/test_layout_scale.py` (50 new scale-free regression tests, generated DAGs, no hardcoded counts). Contracts (`level_maker.py`, `raw_models.py`) UNCHANGED. **358/358 green 🟢**. G5 re-run: **0 crossings** (down from 191!), room bbox ±40m (down from ±22,000m phantom), 1 height layer. Engine is healthy.
 - ✅ **Hierarchical force-directed layout IMPLEMENTED** (June 28 night) — `layout_force.py` now places "planet" nodes first (importance ≥ 4 or degree ≥ 3, they interact via spring_layout and freeze), then adds "asteroid" nodes one at a time (pulled by springs to planets only, don't pull back, don't interact with each other). Two new defaulted config knobs: `planet_importance` (default 4) and `planet_degree` (default 3). Default config produces **5 natural crossings** on Parent 7's 20-node graph — no graph redesign, no invented edges, no k-factor hunting. DeepSeek implemented (not a parent).
 - ✅ **Map viewer working** — perspective projection fixed, shader bugs fixed (wire_program function call, in_side mismatch, in_other missing, KeyStateHandler replaced). 382/382 green.
-- ⏳ **NEXT — Parent 10: design room content** — 20 rooms, 11 with Asymptote figures, 9 text-only. Produce room_source JSONs, figure .asy files, recipe JSONs, LaTeX proof panels. Handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_10_HANDOFF.md` includes full bug report (§10) so parent can review/fix the simplified LINES renderer.
+- ⚠️ **Parent 10 DIED** (June 28) — context overload (bundled content + renderer + a stale bug report + a ~2,000-line source dump). Mission split. Two findings salvaged (see §4 amendment).
+- ⏳ **NEXT — Parent 11 (ACTIVE): FIX THE RENDERERS** (single mission) — rebuild Mode A wireframe to the OT aesthetic (camera-facing line-quads, distance-dim white→grey, never-black, bloom) and verify/fix Mode B solid room (suspected per-frame `create_context()` → black rooms). Handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_11_HANDOFF.md`. Question-first material protocol; no GO. **This is the make-or-break visual gate.**
+- ⏳ **THEN — Parent 12: design the 20-room Principia content** (figures, recipes, LaTeX, ceiling equations) — deferred until the renderers render.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
