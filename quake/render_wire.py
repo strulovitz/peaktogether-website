@@ -110,10 +110,6 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
     try:
         import moderngl
         ctx = moderngl.get_context()
-        from shaders import wire_program as _wire_compile
-        prog = _wire_compile(ctx)
-        if prog is None:
-            return
     except Exception:
         return
 
@@ -121,11 +117,16 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
     res = _GL_CACHE.get(key)
     if res is None:
         try:
+            from shaders import wire_program as _wire_compile
+            prog = _wire_compile(ctx)
+            if prog is None:
+                return
+
             mesh = build_wire_mesh(fp)
             seg_pos, seg_col = _flatten_segments(mesh.line_segments, mesh.seg_colors)
             ring_pos, ring_col = _flatten_segments(mesh.ring_segments, mesh.ring_colors)
 
-            res = {"seg_vao": None, "ring_vao": None}
+            res = {"prog": prog, "seg_vao": None, "ring_vao": None}
             if seg_pos.shape[0] > 0:
                 vbo_p = ctx.buffer(seg_pos.tobytes())
                 vbo_c = ctx.buffer(seg_col.tobytes())
@@ -141,6 +142,10 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
         except Exception:
             return
         _GL_CACHE[key] = res
+
+    prog = res.get("prog")
+    if prog is None:
+        return
 
     try:
         mvp_gl = np.ascontiguousarray(np.asarray(view, dtype=np.float32).T, dtype=np.float32)
