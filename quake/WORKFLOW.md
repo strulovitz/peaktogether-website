@@ -156,6 +156,24 @@ DeepSeek overstepped twice: modified `guidelines.py` (strip-draw stub) and rewro
 
 37. **Parent 9 handoff FIXED** (lemma_1 removed, constraints cleaned) — preserved for historical record but not used.
 
+### Night session (June 28, 2026 — Hierarchical Layout IMPLEMENTED + Map Viewer FIXED + Parent 10 Launched!)
+
+38. **Hierarchical force-directed layout IMPLEMENTED in `layout_force.py`.** Nir's "solar system" design: Phase 1 places "planet" nodes (importance ≥ 4 or degree ≥ 3) — they interact with each other via spring_layout and freeze. Phase 2 adds "asteroid" nodes one at a time, sorted by connectedness to planets. Asteroids pulled by springs to planets but do NOT pull back and do NOT interact with each other. Two new defaulted config knobs: `planet_importance=4`, `planet_degree=3`. Input/output contract unchanged. **Default config produces 5 natural crossings** on Parent 7's 20-node graph — no graph redesign, no invented edges, no k-factor hunting.
+
+39. **Map viewer debug marathon — 5 bugs found and fixed:**
+    - Bug 1: `wire_program` is a FUNCTION(ctx) that returns a compiled program — `draw_graph` never called it, just passed the raw function to vertex_array. Silent fail.
+    - Bug 2: Shader `in_side` declared as `vec2` but VBO provided 1 float. y = 0 default → degenerate triangles.
+    - Bug 3: VAO bound `in_other` attribute but shader never declared it → KeyError → silent fail.
+    - Bug 4: Map viewer had `FOV_Y_DEG = 60` but never built a perspective projection matrix. Shader expected MVP but got view-only.
+    - Bug 5: `pyglet_key.KeyStateHandler()` broken in pyglet 2.1.14 → replaced with manual `_pressed: set[int]` tracking.
+    - **DeepSeek's "fix" was low-quality** — stripped out entire quad-expansion system, replaced WIRE shader with trivial pass-through, renders simple 1-pixel GL_LINES. Loses thick-line width, distance dimming, bloom. Nir correctly judged this inadequate. Bug report given to Parent 10 for proper fix.
+
+40. **Map viewer now WORKS** — Nir can fly the 20-node floorplan with WASD/arrows/Shift. Sees colored room rings + white corridor lines + 5 crossings.
+
+41. **Parent 10 handoff written** — `PROMPT_TO_OPUS_QUAKE_PARENT_10_HANDOFF.md`. Mission: design room content for all 20 Principia rooms (11 figures + 9 text-only). Includes §10 rendering bug report so parent can fix render_wire/render_room properly. Parent writes Asymptote .asy files, recipe JSONs, LaTeX proof panels, room_source JSONs. Children build. DeepSeek integrates.
+
+42. **WORKFLOW.md + Commentaries updated.** Everything pushed. Restart self-prompt written.
+
 ### Evening session (June 28, 2026 — Parent 8 Part A DONE! Engine hardened!)
 
 32. **Parent 8 launched** — Nir pasted the 4 baseline items to a fresh Opus 4.8 chat. Parent 8 confirmed understanding (Part A = engine hardening, Part B = 3D map viewer), asked one clarifying question about test conventions (DeepSeek answered: proceed without requesting existing test files), and delivered Part A in ONE message.
@@ -266,7 +284,7 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's self-prompt** (`quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`) which has the exact step-by-step implementation plan. Then ask Nir what's next.
-🌙 **CURRENT SELF-PROMPT:** `quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md` — implement hierarchical force-directed layout in `layout_force.py`. (Supersedes `DEEPSEEK_WAKEUP_PARENT_8_GO.md`.)
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's restart self-prompt** (`quake/DEEPSEEK_RESTART_PARENT_10_GO.md`) which has the exact current state and launch protocol. Then ask Nir what's next.
+🌙 **CURRENT RESTART PROMPT:** `quake/DEEPSEEK_RESTART_PARENT_10_GO.md` — hierarchical layout DONE (5 crossings), map viewer WORKING, Parent 10 handoff written for room content design. Next: either launch Parent 10 or wait for Nir. (Supersedes `DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`.)
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
