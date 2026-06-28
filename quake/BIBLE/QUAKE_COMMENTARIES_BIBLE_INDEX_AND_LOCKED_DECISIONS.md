@@ -70,11 +70,13 @@
 
 23. **Prompt to Opus — Parent 8 Handoff (engine fix + 3D map viewer)** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_8_HANDOFF.md`. Self-contained mission brief: Parent 8 (Opus implements himself, NOT a child) hardens the layout/crossing engine (robust + scales with graph size, NO hardcoded counts, new real-scale regression tests) AND builds a 3D wireframe navigable map-viewer utility. Inlines the full engine source (`layout_force`/`layout_height`/`level_maker` + models), a precise test-gap audit, the viewer spec, acceptance gates, and the per-stage verbatim-snippet protocol. The ONE file Nir pastes to Parent 8 after Commentaries + OT + NT.
 
-24. **DeepSeek Wake-up Note — Parent 8 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`. The CURRENT wake-up note (supersedes item 21). Full restart protocol: what happened (Phase A bug), Parent 8 launch URLs, the material-fetch map (which file lives where for Parent 8's per-stage requests), what's on disk (local uncommitted `levels/` dir), and DeepSeek's post-delivery steps (drop in, test, re-run on Parent 7's graph, viewer, report).
+24. **DeepSeek Wake-up Note — Parent 8 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`. Full restart protocol (superseded by `DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`).
 
-25. **Parent 8 — Part A Deliverable (engine hardening)** — `quake/BIBLE/QUAKE_PARENT_8_FROZEN_PART_A_DELIVERABLE.md`. Parent 8's verbatim Part A answer: hardened `layout_force.py` (explicit k ∝ 1/√N + normalize_spread), hardened `layout_height.py` (robust parametric `_segments_intersect`), `tests/test_layout_scale.py` (50 new scale-free regression tests), CHANGELOG. ✅ DROPPED IN — 358/358 tests green. `level_maker.py` and `raw_models.py` contracts UNCHANGED.
+25. **Parent 8 — Part A Deliverable (engine hardening)** — `quake/BIBLE/QUAKE_PARENT_8_FROZEN_PART_A_DELIVERABLE.md`. Parent 8's verbatim Part A answer: hardened `layout_force.py`, hardened `layout_height.py`, `tests/test_layout_scale.py` (50 new scale-free regression tests), CHANGELOG. ✅ DROPPED IN — 358/358 tests green.
 
-26. **Parent 8 — Part B (3D map viewer)** ⏳ NEXT — Parent 8 will request render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py to build the standalone fly-through map-viewer utility (Doom-TAB style, arrows+WASD, shows bridges/underpasses at their heights).
+26. **Prompt to Opus — Parent 9 Handoff (Non-Planar Graph) ❌ CANCELLED** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_9_HANDOFF.md`. DeepSeek-authored (FIXED: lemma_1 and other overreaches removed June 28). Parent 9 launched with poisoned version, delivered tainted output, conceded mission impossible (Sections I–III too sparse). The real problem was layout algorithm, not graph topology. Handoff preserved for record but Parent 9 cancelled.
+
+27. **DeepSeek Self-Prompt — Hierarchical Layout Implementation** — `quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`. Step-by-step implementation plan for replacing `spring_layout` with hierarchical force-directed layout in `layout_force.py`. DeepSeek implements directly (no parent).
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -113,6 +115,13 @@
 - **`level_maker.py` and all `raw_models.py` contracts UNCHANGED.**
 - **Note:** Parent 8 flagged the Commentaries §3 says "1846 Andrew Motte edition" while the Parent 8 handoff §1 and catalog say "1729 Motte." The Wikisource text we're actually using is the 1729 Motte translation. DeepSeek will reconcile the record (not Parent 8's concern).
 
+✅ **AMENDMENT — Hierarchical Layout Pivot, June 28, 2026 night.**
+- **Old approach:** `networkx.spring_layout` throws all N nodes in simultaneously → finds flattest arrangement → 0 crossings. Parent 9 launched to redesign graph for non-planarity (failed — Sections I–III too sparse for real citations to form a non-planar subgraph).
+- **New approach (Nir's design):** Hierarchical force-directed layout — place "planet" nodes first (high importance + high degree, they interact), freeze, then add "asteroid" nodes one at a time. Asteroids are pulled by springs to planets but do NOT pull back and do NOT interact with each other. Because planets are frozen and spread out, edges from different asteroids to overlapping planet-subsets naturally criss-cross → guaranteed crossings without graph redesign.
+- **`layout_force.py` change scope:** Internals only. Input = ConceptGraph, output = Dict[NodeId, Vec2] — unchanged. All existing robustness fixes (k_factor, normalize_spread, intersect_eps) preserved. No contract changes to `level_maker.py`, `raw_models.py`, or `layout_height.py`.
+- **Parent 9 CANCELLED** — the problem was never graph topology. Tainted handoff (DeepSeek's fault: unilateral lemma_1 constraint). Fixed and archived but not used.
+- **Implementation:** DeepSeek (not a parent) — see `quake/DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`.
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -129,8 +138,8 @@
 - ✅ **Parent 7 DONE — Frozen Level Design delivered** — 20-room Principia level (Book 1 Sec I–III, inverse-square). `concept_graph.json` (20 nodes/28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7. Saved verbatim at `QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Two cosmetic prose miscounts noted (lemma_7 is degree 6 not 5; prop_11 is degree 4 not 5 — JSON data correct, build unaffected).
 - ⚠️ **Phase A first run (June 28) surfaced engine bug** — `level_maker` on Parent 7's real 20-node graph yielded **191 crossings + ±22,000 m phantom coordinates** (root cause: `_segments_intersect` used `o1 != o2` — value comparison, NOT sign test — producing phantom far-away intersections; `spring_layout(k=None)` collapsed clusters). Engine only tested on 4-node toy. Build PAUSED.
 - ✅ **Parent 8 Part A DONE — Engine hardened!** (June 28 evening) — `layout_force.py` (explicit k=k_factor/√N + normalize_spread), `layout_height.py` (robust parametric `_segments_intersect` with t,u∈[0,1] check), `tests/test_layout_scale.py` (50 new scale-free regression tests, generated DAGs, no hardcoded counts). Contracts (`level_maker.py`, `raw_models.py`) UNCHANGED. **358/358 green 🟢**. G5 re-run: **0 crossings** (down from 191!), room bbox ±40m (down from ±22,000m phantom), 1 height layer. Engine is healthy.
-- ⏳ **NEXT — Parent 8 Part B (3D map viewer):** Opus implements himself. Build a **3D wireframe navigable map-viewer utility** (free-fly with arrows+WASD; Doom-TAB-style but 3D for bridges/underpasses; doubles as future in-game map mode). Parent 8 will request render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py from DeepSeek when he reaches Stage 2.
-- 📐 **Sequencing (Parent 7 vs 8 vs a possible 9):** Parent 7's data SURVIVES. Engine is healthy (0 crossings — layout spreads nodes cleanly). If Nir wants bridges/underpasses (a Quake feature), we can tweak k_factor or add cross-edges (Parent 9 call, NOT pre-committed; Nir decides after seeing the map viewer). Part B (viewer) comes first so Nir can SEE the floorplan.
+- ⏳ **NEXT — Implement hierarchical force-directed layout in `layout_force.py`:** Nir's design — Phase 1: place high-importance+high-degree "planet" nodes (they interact with each other via springs). Phase 2: freeze planets, add "asteroid" nodes one at a time — each pulled by springs to its connected planets only. Asteroids don't pull back, don't affect each other. Natural crossings from fixed-spread anchors. Input/output contract unchanged (graph → positions). DeepSeek implements per `DEEPSEEK_SELF_PROMPT_LAYOUT_HIERARCHICAL.md`. NOT a parent — direct implementation.
+- **Parent 9 CANCELLED** (June 28, 2026 night) — launched with a DeepSeek-poisoned handoff (unilateral "include lemma_1" constraint). Parent conceded Sections I–III alone cannot yield non-planarity from real citations. The real problem was layout algorithm, not graph topology. Handoff fixed and preserved for record but not reused.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
