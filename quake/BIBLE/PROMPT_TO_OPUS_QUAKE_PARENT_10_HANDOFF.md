@@ -283,3 +283,59 @@ shootable 3D rooms. 20 rooms. 11 figures. The inverse-square law is the headline
 prop_11 should be the most beautiful room in the level.
 
 You design. Children build. DeepSeek integrates. Go. 🔥📐
+
+---
+
+## §10 — CRITICAL: KNOWN RENDERING BUGS (read before designing room renderer)
+
+The rendering code (`render_wire.py`) shipped with MULTIPLE silent bugs that
+made it render black since day 1. DeepSeek discovered and attempted to fix them
+but Nir judged the fixes low-quality (took hours, produced a simplified LINES
+hack that discards the thick-line/bloom/quad-expansion aesthetic the OT specified).
+
+**You should review the renderers and fix them properly.**
+
+### The bugs found:
+
+**Bug 1 — shader function never called:**
+`shaders.py` exports `wire_program(ctx)` as a FUNCTION that takes a GL context
+and returns a compiled program. But `draw_graph` imported it and passed the
+RAW FUNCTION to `ctx.vertex_array()`, which silently failed (try/except swallowed
+the error). Verify `solid_program(ctx)` is called correctly in `render_room.py`.
+
+**Bug 2 — shader/VBO type mismatch:**
+Shader declared `in vec2 in_side` but VBO provided only 1 float per vertex.
+The missing y component defaulted to 0, causing quad-expansion triangles to
+collapse to zero area. The "expand to quad" code (`expand_segments_to_quad_attribs`
+in render_wire.py) and the VAO format string must match the shader declarations.
+
+**Bug 3 — VAO attribute not in shader:**
+`_gl_make_vao` bound attribute `in_other` that the shader never declared.
+`ctx.vertex_array()` raised KeyError, caught silently, nothing rendered.
+
+**Bug 4 — No projection matrix:**
+Map viewer passes `u_mvp` = view matrix only. The shader expects a full
+model-view-PROJECTION matrix but no perspective projection was ever built.
+
+**Bug 5 — `KeyStateHandler` broken in pyglet 2.1.14 on Windows:**
+Replaced with manual `_pressed: set[int]` tracking in the viewer.
+
+### What DeepSeek did (the "fix" you should review):
+Stripped out the entire quad-expansion system, replaced WIRE shader with a
+trivial pass-through vertex/fragment shader, and renders corridors as simple
+1-pixel GL_LINES. This works visually but discards: thick-line width, screen-space
+distance dimming, bloom post-pass, and the Mode A aesthetic from the OT.
+
+### Relevant files (ask DeepSeek to fetch):
+- `quake/render_wire.py` — current simplified wireframe renderer
+- `quake/render_room.py` — solid room renderer (UNVERIFIED — likely has same bugs)
+- `quake/shaders.py` — all GLSL + `wire_program(ctx)` etc.
+- `quake/tools/map_viewer.py` — map viewer (key tracking)
+- `quake/camera.py` — `look_at()` view matrix
+- `quake/gfx_context.py` — window + GL context
+
+### Your call:
+Decide whether to restore the proper quad-expansion approach with thick lines and
+bloom, or keep the simplified LINES and add thickness back later. Either way,
+`render_room.py` must be verified — if rooms render black, the entire game is
+pointless no matter how beautiful the figure designs are.
