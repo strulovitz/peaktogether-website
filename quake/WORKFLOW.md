@@ -111,7 +111,7 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
     - Read targeting is app-owned (gameplay.step returns asset_id=None).
     - reticle_ray is public and reused (Read pick = shoot ray, byte-identical).
 
-24. **Parent 7 handoff written** — `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF.md`. Mission: choose 3–5 real Newton propositions, define concept graph, run build pipeline, design audio SFX.
+24. **Parent 7 handoff written** — `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF.md`. Mission: choose 3–5 real Newton propositions, define concept graph, run build pipeline.
 
 25. **WORKFLOW.md + Commentaries updated.** Everything pushed.
 
@@ -197,11 +197,10 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - Choose real Newton propositions from the DIGESTED PRINCIPIA
 - Define concept graph
 - Run full Leg 1+2+3 build pipeline on real Principia data
-- Audio SFX
 - Turn Quake from tech demo into an actual game
 
 ### Deferred
-- Audio (~M8) — will be designed by Parent 7
+- Audio (deferred on purpose, NOT in Parent 7's scope)
 - Figure background-transparency
 - Mode A labels (post-M7 polish)
 

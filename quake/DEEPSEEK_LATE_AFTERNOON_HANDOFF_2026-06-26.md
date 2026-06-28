@@ -93,7 +93,7 @@ quake/
 - `tests/golden_pack/` — golden fixture pack directory (Parent 5's mission)
 - Full `app.py` wiring — still M0 stub (Parent 6's mission)
 - Real Principia content — not built yet (Parent 7's mission)
-- Audio — SFX, music, atmosphere (deferred to ~M8/Parent 7)
+- Audio — SFX, music, atmosphere (deferred on purpose, NOT in Parent 7's scope)
 - Mode A text labels (deferred to post-M7 polish)
 - Figure background transparency (deferred)
 

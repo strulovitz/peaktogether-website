@@ -9,7 +9,7 @@ If you need ANYTHING else (full text of a proposition, a figure image, a format 
 
 --- BEGIN HANDOFF ---
 
-You are Parent 7. You received this alongside the Commentaries, the Old Testament, the New Testament, and the DIGESTED PRINCIPIA (below). Your mission is to design the first real level — choosing Newton propositions, defining the content pipeline run, and specifying the audio atmosphere. Read §0–§3 for context, §4 is your design space, §5–§6 are frozen constraints, and §8 is your deliverable format.
+You are Parent 7. You received this alongside the Commentaries, the Old Testament, the New Testament, and the DIGESTED PRINCIPIA (below). Your mission is to design the first real level — choosing Newton propositions and defining the content pipeline run. Read §0–§3 for context, §4 is your design space, §5–§6 are frozen constraints, and §8 is your deliverable format.
 
 §0 — WHAT EXISTS (so you know what you're building on top of)
 
@@ -43,7 +43,6 @@ The Principia data (NEW — v2):
 
 What does NOT exist yet (your mission):
   - A real level with real Newton propositions (r_a/r_b/r_c are hand-authored dummies)
-  - Audio — no SFX, no music, no atmosphere
   - Figure background transparency (deferred)
   - Mode A text labels in the wireframe (deferred, post-M7 polish)
 
@@ -64,16 +63,10 @@ Design the first real Principia level. This means:
     - recipe + Asymptote figures → baked PNGs + manifest.json (Leg 2)
     - room_source → room_runtime (Leg 3, Room Maker v3)
 
-(d) Design the audio SFX layer — what sounds play when, what format,
-    how they integrate into app.py's event system. God-mode means no
-    player death sounds. Think: footstep loop (corridor), panel-flip click,
-    demon growl/spawn, demon hit, demon death, room-cleared chime,
-    door-open rumble, ceiling blood-red hum.
-
-(e) Define the level's palette (color groups for the figure elements) —
+(d) Define the level's palette (color groups for the figure elements) —
     pick 3–5 group names with hi/ink hex pairs.
 
-(f) The output of your design feeds DeepSeek and the build pipeline —
+(e) The output of your design feeds DeepSeek and the build pipeline —
     NOT a child. The AI pipeline (Legs 1+2+3) is already built; DeepSeek
     runs it with your specs as input.
 
@@ -94,7 +87,7 @@ Your deliverable is a SPECIFICATION. DeepSeek then:
 
 You do NOT design the AI prompts (those are frozen in the Second Canon §3).
 You DO choose: which propositions, which pages, what importance, what
-color groups, what audio cues.
+color groups.
 
 §3 — HOW TO GET MORE INFORMATION (the material-request protocol)
 
@@ -153,12 +146,9 @@ C. What proof steps? Each figure's construction is segmented into steps
 D. Importance 1–5 per node? What's central to the section (importance 5)
    vs. supporting (importance 3) vs. peripheral (importance 1)?
 
-E. Audio design: Footsteps, panel flip, demon spawn/hit/kill, room cleared,
-   door open, level complete. Format? .wav? .ogg? Separate audio.py module?
+E. Palette: Choose 3–5 group names + hi/ink hex pairs.
 
-F. Palette: Choose 3–5 group names + hi/ink hex pairs.
-
-G. Level structure: level_id convention e.g. "principia_bk1_sec1".
+F. Level structure: level_id convention e.g. "principia_bk1_sec1".
 
 §5 — FROZEN FORMATS (the pipeline's inputs/outputs)
 
@@ -191,7 +181,6 @@ OUTPUTS from the pipeline (generated, you verify the plan):
 - Color: all hex in palette.json; group names are the keys.
 - ID spine: node_id flows unchanged through every format.
 - schema_version "1.0", extra="forbid" on all JSON.
-- Audio is ADDITIVE — a new audio.py module plus app.py wiring. Do NOT change engine modules.
 - The level is built by the existing pipeline; you do NOT redesign the pipeline.
 
 §7 — WHAT YOU ALREADY HAVE + WHAT TO PULL FROM THE BIBLE
@@ -222,11 +211,9 @@ Produce a single document containing:
 
 4. Palette: group names + hi/ink hex pairs + map_importance hexes for 1–5.
 
-5. Audio design: every SFX with trigger condition, emotional intent, and technical integration notes (format, looping, how to wire into app.py's event system). Recommend whether audio lives in its own module (audio.py) or inline in app.py.
+5. Build order: the exact sequence of AI passes + scripts DeepSeek runs, with their inputs and expected outputs.
 
-6. Build order: the exact sequence of AI passes + scripts DeepSeek runs, with their inputs and expected outputs.
-
-7. Acceptance gates:
+6. Acceptance gates:
    - Gate 1: Full 285-test suite still green (no regressions)
    - Gate 2: New level's load_pack(dir) returns a valid Pack
    - Gate 3: Floorplan produced by level_maker is a valid DAG with crossings
@@ -234,14 +221,13 @@ Produce a single document containing:
    - Gate 5: app.py runs the new level, 60-frame smoke test exits 0
    - Gate 6: All rooms have doors[].spawn_xyz/spawn_heading_rad matching bearings
 
-8. Format: prose + fenced code blocks, NO Markdown tables (Nir copy-pastes; tables lose cells).
+7. Format: prose + fenced code blocks, NO Markdown tables (Nir copy-pastes; tables lose cells).
 
 §9 — RISK FLAGS
 
 - The AI pipeline (Legs 1+2+3) is built but has NEVER been run on real Principia data. The first run WILL uncover integration issues.
 - Asymptote compilation is the highest-risk step.
 - The overlay-diff tool (human verification) is what judges figure correctness — NOT mathematical truth. Nir eyeballs two images side by side.
-- Audio integration is new territory — no audio module exists. Design the interface cleanly.
 - Figure background transparency: for the first level, bake on bg_key (#FF00FF) and key it out.
 
 §10 — CONVENTIONS (frozen)
