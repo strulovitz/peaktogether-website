@@ -331,8 +331,8 @@ def run(floorplan_path: Path) -> int:
 
     window, _ctx = make_window(WINDOW_W, WINDOW_H, WINDOW_TITLE)
 
-    keys = pyglet_key.KeyStateHandler()
-    window.push_handlers(keys)
+    # Manual key state tracking (pyglet 2.1.14 KeyStateHandler broken on Windows)
+    _pressed: set[int] = set()
 
     # Mouse-look is opt-in (toggle with M) so the cursor isn't captured by
     # surprise. Tracks exclusive mouse + accumulates motion deltas.
@@ -365,6 +365,7 @@ def run(floorplan_path: Path) -> int:
 
     @window.event
     def on_key_press(symbol, modifiers):  # noqa: ANN001
+        _pressed.add(symbol)
         if symbol == pyglet_key.ESCAPE:
             window.close()
         elif symbol == pyglet_key.M:
@@ -379,21 +380,25 @@ def run(floorplan_path: Path) -> int:
             cam.yaw = fresh.yaw
             cam.pitch = fresh.pitch
 
+    @window.event
+    def on_key_release(symbol, modifiers):  # noqa: ANN001
+        _pressed.discard(symbol)
+
     def update(dt: float) -> None:  # noqa: ANN001
         boost = FLY_BOOST_MULT if (
-            keys[pyglet_key.LSHIFT] or keys[pyglet_key.RSHIFT]
+            pyglet_key.LSHIFT in _pressed or pyglet_key.RSHIFT in _pressed
         ) else 1.0
         step = FLY_SPEED_MPS * boost * dt
         look = LOOK_SPEED_RADPS * dt
 
-        fwd = (1.0 if keys[pyglet_key.W] else 0.0) - (1.0 if keys[pyglet_key.S] else 0.0)
-        strafe = (1.0 if keys[pyglet_key.D] else 0.0) - (1.0 if keys[pyglet_key.A] else 0.0)
-        rise = (1.0 if keys[pyglet_key.E] else 0.0) - (1.0 if keys[pyglet_key.Q] else 0.0)
+        fwd = (1.0 if pyglet_key.W in _pressed else 0.0) - (1.0 if pyglet_key.S in _pressed else 0.0)
+        strafe = (1.0 if pyglet_key.D in _pressed else 0.0) - (1.0 if pyglet_key.A in _pressed else 0.0)
+        rise = (1.0 if pyglet_key.E in _pressed else 0.0) - (1.0 if pyglet_key.Q in _pressed else 0.0)
         if fwd or strafe or rise:
             cam.move(fwd * step, strafe * step, rise * step)
 
-        d_yaw = (1.0 if keys[pyglet_key.RIGHT] else 0.0) - (1.0 if keys[pyglet_key.LEFT] else 0.0)
-        d_pitch = (1.0 if keys[pyglet_key.UP] else 0.0) - (1.0 if keys[pyglet_key.DOWN] else 0.0)
+        d_yaw = (1.0 if pyglet_key.RIGHT in _pressed else 0.0) - (1.0 if pyglet_key.LEFT in _pressed else 0.0)
+        d_pitch = (1.0 if pyglet_key.UP in _pressed else 0.0) - (1.0 if pyglet_key.DOWN in _pressed else 0.0)
         if d_yaw or d_pitch:
             cam.add_look(d_yaw * look, d_pitch * look)
 
