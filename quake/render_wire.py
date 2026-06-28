@@ -377,7 +377,10 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
         return
 
     try:
-        from shaders import wire_program
+        from shaders import wire_program as _wire_compile
+        wire_prog = _wire_compile(ctx)
+        if wire_prog is None:
+            return
     except Exception:
         return
 
@@ -390,7 +393,7 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
     res = _GL_CACHE.get(key)
     if res is None:
         try:
-            res = _build_gl_resources(ctx, wire_program, fp)
+            res = _build_gl_resources(ctx, wire_prog, fp)
         except Exception:
             return
         _GL_CACHE[key] = res
@@ -398,14 +401,14 @@ def draw_graph(view: ViewMatrix, fp: Floorplan, state: GameState) -> None:
     w, h = _gl_viewport_size(ctx)
 
     # Uniforms (row-major view -> oriented at the boundary).
-    _gl_set_matrix(wire_program, "u_mvp", np.asarray(view, dtype=np.float32))
-    _gl_set_uniform(wire_program, "u_dim_near", float(DIM_NEAR_M))
-    _gl_set_uniform(wire_program, "u_dim_far", float(DIM_FAR_M))
-    _gl_set_uniform(wire_program, "u_dim_floor", float(DIM_FLOOR_GREY))
-    _gl_set_uniform(wire_program, "u_depth_bias", float(DEPTH_BIAS))
-    _gl_set_uniform(wire_program, "u_px_width", float(WIRE_PX_WIDTH))
-    _gl_set_uniform(wire_program, "u_viewport", (float(w), float(h)))
-    _gl_set_uniform(wire_program, "u_color", tuple(float(c) for c in WIRE_BASE))
+    _gl_set_matrix(wire_prog, "u_mvp", np.asarray(view, dtype=np.float32))
+    _gl_set_uniform(wire_prog, "u_dim_near", float(DIM_NEAR_M))
+    _gl_set_uniform(wire_prog, "u_dim_far", float(DIM_FAR_M))
+    _gl_set_uniform(wire_prog, "u_dim_floor", float(DIM_FLOOR_GREY))
+    _gl_set_uniform(wire_prog, "u_depth_bias", float(DEPTH_BIAS))
+    _gl_set_uniform(wire_prog, "u_px_width", float(WIRE_PX_WIDTH))
+    _gl_set_uniform(wire_prog, "u_viewport", (float(w), float(h)))
+    _gl_set_uniform(wire_prog, "u_color", tuple(float(c) for c in WIRE_BASE))
 
     # Draw corridor segments, then room rings.
     if res.get("seg_vao") is not None:
