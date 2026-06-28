@@ -66,6 +66,8 @@
 
 21. **DeepSeek Wake-up Note — Parent 7 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md`. Step-by-step protocol for DeepSeek on next restart: which GitHub URLs to give Nir for copy-paste.
 
+22. **Parent 7 — Frozen Level Design (VERBATIM)** — `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Parent 7's complete deliverable: the FIRST real Principia level, "First & Last Ratios → Inverse-Square Law" (Book 1 Sections I–III). 20 rooms / 28 edges; full `concept_graph.json` + `palette.json` (both validated GREEN by DeepSeek vs §4.2/§3.A.7); figure plan for 11 figure-rooms; build order (Phases A–D); 6 acceptance gates. ✅ DELIVERED — build not yet started (Parent 7 deferred go/no-go to Nir).
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).
@@ -109,7 +111,8 @@
 - ✅ **Principia Book 1 ACQUIRED** — Complete 1729 Motte text from Wikisource (14 sections, 548 KB) saved under `quake/principia/book_1/`.
 - ✅ **DIGESTED PRINCIPIA CREATED** — `quake/principia/DIGESTED_PRINCIPIA.md` — parent-safe summary of all 148 lemmas/props/scholia with one-sentence descriptions + figure counts.
 - ✅ **Parent 7 handoff v2 WRITTEN** — Updated with DIGEST, material-request protocol. Combined handoff+DIGEST at `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF_COMBINED.md`. Wake-up note at `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.
-- ⏳ **NEXT:** Launch Parent 7 — fresh Opus chat with Commentaries + OT + NT + Combined Handoff (with DIGEST).
+- ✅ **Parent 7 DONE — Frozen Level Design delivered** — 20-room Principia level (Book 1 Sec I–III, inverse-square). `concept_graph.json` (20 nodes/28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7. Saved verbatim at `QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Two cosmetic prose miscounts noted (lemma_7 is degree 6 not 5; prop_11 is degree 4 not 5 — JSON data correct, build unaffected).
+- ⏳ **NEXT:** THE BUILD (Phase A onward) — awaiting Nir's go-ahead. Author concept_graph.json → level_maker → floorplan; then Legs 2+3 → pack → smoke test.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---

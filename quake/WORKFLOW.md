@@ -174,7 +174,7 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Parent 4: DONE (engine frozen briefs, 13 modules built and green)
 - Parent 5: DONE — delivered Golden Fixture Pack (38 PNGs + 6 JSONs built under `tests/golden_pack/`), `load_pack` passes
 - **Parent 6: DONE** — app.py full wiring written directly by Parent 6, 285/285 tests green, smoke passes, headless CI returns 0
-- **Parent 7: NEXT** — M8 first Principia level
+- **Parent 7: DONE** — frozen level design delivered (20 rooms, Book 1 Sections I–III, "First & Last Ratios → Inverse-Square Law"). `concept_graph.json` (20 nodes / 28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7 (DeepSeek checked: edge-id rule, DAG, connectivity, no self-loops, importance 1–5, extra=forbid). Saved verbatim to `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Build (Phase A) pending Nir's go-ahead.
 
 ### What app.py looks like now
 - `app.py` is the full §5.4 per-frame loop — wires all 13 engine modules, event-driven save, Read-Mode overlay, mode-switching, guidlines, golden pack smoke test. 285/285 green.
@@ -193,11 +193,16 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - app.py full §5.4 per-frame loop written directly by Parent 6
 - Event-driven save, Read-Mode overlay, mode switching, 285/285 green
 
-**Parent 7 — M8 First Principia Level** ⏳ NEXT (handoff written, launch pending)
-- Choose real Newton propositions from the DIGESTED PRINCIPIA
-- Define concept graph
-- Run full Leg 1+2+3 build pipeline on real Principia data
-- Turn Quake from tech demo into an actual game
+**~~Parent 7 — M8 First Principia Level~~ (design)** ✅ DELIVERED
+- Chose 20 real Newton nodes (9 Section-I lemmas + 2 Laws + 5 Sec-II props + Lemma XII + 3 Sec-III props)
+- Concept graph defined: 20 nodes / 28 edges, valid DAG, heavy back-citation → guaranteed crossings
+- Full build plan (Phases A–D) + 6 acceptance gates specified
+- Saved verbatim to `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`
+
+**THE BUILD — Phase A onward** ⏳ NEXT (awaiting Nir's go-ahead)
+- Author `concept_graph.json` into the repo → run `level_maker` → floorplan with bridges/underpasses
+- Then Legs 2+3 (figures, text panels, rooms) → assemble pack → smoke test
+- Two known soft-gaps to resolve during build: (1) citation `label` phrases are reconstructions (CITATION-AI + Nir's eyeball confirm), (2) figure plate/fig numbers tentative (overlay-diff confirms)
 
 ### Deferred
 - Audio (deferred on purpose, NOT in Parent 7's scope)
