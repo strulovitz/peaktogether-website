@@ -68,6 +68,10 @@
 
 22. **Parent 7 — Frozen Level Design (VERBATIM)** — `quake/BIBLE/QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Parent 7's complete deliverable: the FIRST real Principia level, "First & Last Ratios → Inverse-Square Law" (Book 1 Sections I–III). 20 rooms / 28 edges; full `concept_graph.json` + `palette.json` (both validated GREEN by DeepSeek vs §4.2/§3.A.7); figure plan for 11 figure-rooms; build order (Phases A–D); 6 acceptance gates. ✅ DELIVERED — build not yet started (Parent 7 deferred go/no-go to Nir).
 
+23. **Prompt to Opus — Parent 8 Handoff (engine fix + 3D map viewer)** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_8_HANDOFF.md`. Self-contained mission brief: Parent 8 (Opus implements himself, NOT a child) hardens the layout/crossing engine (robust + scales with graph size, NO hardcoded counts, new real-scale regression tests) AND builds a 3D wireframe navigable map-viewer utility. Inlines the full engine source (`layout_force`/`layout_height`/`level_maker` + models), a precise test-gap audit, the viewer spec, acceptance gates, and the per-stage verbatim-snippet protocol. The ONE file Nir pastes to Parent 8 after Commentaries + OT + NT.
+
+24. **DeepSeek Wake-up Note — Parent 8 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`. The CURRENT wake-up note (supersedes item 21). Full restart protocol: what happened (Phase A bug), Parent 8 launch URLs, the material-fetch map (which file lives where for Parent 8's per-stage requests), what's on disk (local uncommitted `levels/` dir), and DeepSeek's post-delivery steps (drop in, test, re-run on Parent 7's graph, viewer, report).
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).

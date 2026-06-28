@@ -237,7 +237,7 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's wake-up note** (`quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md`) which has the exact launch protocol. Then ask Nir what's next.
-🌙 **CURRENT WAKE-UP NOTE:** `quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md` — Parent 7 launch protocol with all GitHub URLs ready.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's wake-up note** (`quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`) which has the exact launch protocol. Then ask Nir what's next.
+🌙 **CURRENT WAKE-UP NOTE:** `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md` — Parent 8 launch protocol (engine fix + 3D map viewer) with all GitHub URLs + the material-fetch map ready. (Supersedes `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.)
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
