@@ -12,6 +12,11 @@ COORDINATES ARE LAW:
   N wall z=+D/2 (inward -Z), S z=-D/2 (inward +Z),
   E x=+W/2 (inward -X), W x=-W/2 (inward +X), floor y=0, ceiling y=H.
   Room-local axes parallel to map axes (NO rotation).
+
+NOTE (Parent 11 integration): the PURE CORE below is unchanged. The THIN GL
+SHELL at the bottom was rebuilt (moderngl.get_context, per-context program
+cache, per-room VAO cache, synthesized flat normals, real uniforms, correct
+manifest texture resolve, explicit per-frame GL-state assert).
 """
 
 from __future__ import annotations
@@ -34,8 +39,7 @@ from contracts import (
     PairId,
 )
 
-# ---- PINNED CONSTANTS ----
-WALL_RGB = (0.18, 0.18, 0.20)
+# ---- PINNED CONSTANTS (pure builders) ----
 DOOR_JAMB_DEPTH_M = 0.3
 ALCOVE_DEPTH_M = 0.4
 PANEL_INSET_M = 0.02  # panel sits just off the wall to avoid z-fight
@@ -522,226 +526,177 @@ def panel_is_on(pair_id: PairId, lit: set[str], room: RoomRuntime) -> bool:
 
 
 # ======================================================================
-# HEADLESS GUARD
+# THIN GL SHELL (Parent 11 rebuild — lit, fixed, cached)
 # ======================================================================
 try:
     from glguard import HAVE_GL
 except Exception:
     HAVE_GL = False
 
+WALL_RGB   = (0.62, 0.60, 0.66)
+JAMB_RGB   = (0.40, 0.38, 0.44)
+ALCOVE_RGB = (0.30, 0.28, 0.34)
+LIGHT_DIR  = (0.40, 0.85, 0.35)   # normalized below
+AMBIENT    = 0.38
 
-# ======================================================================
-# THIN SHELL — GL DRAW (guarded, never crashes on import)
-# ======================================================================
-# Per-room mesh + GL buffer cache, keyed by room_id.
-_mesh_cache: dict[str, RoomMesh] = {}
-_gpu_cache: dict[str, dict] = {}
-_texture_cache: dict[str, object] = {}
-
+_prog_cache: dict = {}            # ctx-id -> solid program
+_mesh_cache: dict = {}            # room_id -> RoomMesh
+_vao_cache:  dict = {}            # room_id -> dict of VAOs
+_texture_cache: dict = {}         # asset_id -> texture|None
 
 def _get_ctx():
-    """INTEGRATION: confirm exact API — obtain the active moderngl context."""
     import moderngl
-    return moderngl.create_context()
+    return moderngl.get_context()          # FIX: reuse the real context
 
+def _program(ctx):
+    key=id(ctx)
+    p=_prog_cache.get(key)
+    if p is None:
+        from shaders import solid_program
+        p=solid_program(ctx)
+        _prog_cache[key]=p
+    return p
 
-def _make_vao(ctx, program, positions, uvs):
-    """INTEGRATION: confirm exact API — build a VAO from buffers."""
-    pos_buf = ctx.buffer(np.ascontiguousarray(positions, np.float32).tobytes())
-    uv_buf = ctx.buffer(np.ascontiguousarray(uvs, np.float32).tobytes())
-    return ctx.vertex_array(
-        program,
-        [
-            (pos_buf, "3f", "in_pos"),
-            (uv_buf, "2f", "in_uv"),
-        ],
-    )
+def _norm(v):
+    v=np.asarray(v,np.float32); n=np.linalg.norm(v)
+    return (v/n).astype(np.float32) if n>1e-9 else v
 
+def _tri_normals(tris):
+    """tris: (N,3,3) -> per-vertex flat normals (N*3,3)."""
+    if tris.shape[0]==0: return np.zeros((0,3),np.float32)
+    p0=tris[:,0,:]; p1=tris[:,1,:]; p2=tris[:,2,:]
+    n=np.cross(p1-p0,p2-p0)
+    ln=np.linalg.norm(n,axis=1,keepdims=True); ln[ln<1e-9]=1.0
+    n=(n/ln).astype(np.float32)
+    return np.repeat(n,3,axis=0)
 
-def _set_mvp(program, view: ViewMatrix):
-    """INTEGRATION: confirm exact API — set u_mvp uniform (transpose row->col)."""
-    try:
-        program["u_mvp"].write(
-            np.ascontiguousarray(view.T, np.float32).tobytes()
-        )
-    except Exception:
-        pass
+def _set_mvp(prog, view, proj=None):
+    # caller passes proj@view already (in `view` param), matching app.py
+    try: prog["u_mvp"].write(np.ascontiguousarray(np.asarray(view,np.float32).T,np.float32).tobytes())
+    except Exception: pass
 
+def _set(prog,name,value):
+    try: prog[name].value=value
+    except Exception: pass
 
-def _set_flag(program, name: str, value):
-    """INTEGRATION: confirm exact API — set a scalar uniform if present."""
-    try:
-        program[name].value = value
-    except Exception:
-        pass
+def _resolve_asset_path(asset_id, pack):
+    manifest=getattr(pack,"manifest",None)
+    if manifest is None: return None
+    entry=manifest.assets.get(asset_id)          # FIX: real access
+    if entry is None: return None
+    return getattr(entry,"wall_path",None)       # wall mip (not the read-mode master)
 
-
-def _upload_texture(ctx, asset_id: str, pack: Pack):
-    """INTEGRATION: confirm exact API — load PNG via Pillow -> GL texture."""
-    if asset_id in _texture_cache:
-        return _texture_cache[asset_id]
-    tex = None
+def _upload_texture(ctx, asset_id, pack):
+    if asset_id in _texture_cache: return _texture_cache[asset_id]
+    tex=None
     try:
         from PIL import Image
-        path = _resolve_asset_path(asset_id, pack)
+        path=_resolve_asset_path(asset_id,pack)
         if path is not None:
-            img = Image.open(path).convert("RGBA")
-            tex = ctx.texture(img.size, 4, img.tobytes())
-            try:
-                tex.build_mipmaps()
-            except Exception:
-                pass
+            img=Image.open(path).convert("RGBA")
+            tex=ctx.texture(img.size,4,img.tobytes())
+            try: tex.build_mipmaps()
+            except Exception: pass
     except Exception:
-        tex = None
-    _texture_cache[asset_id] = tex
+        tex=None
+    _texture_cache[asset_id]=tex
     return tex
 
+def _tris_vao(ctx, prog, tris, uvs):
+    pos=tris.reshape(-1,3).astype(np.float32)
+    uv =uvs.reshape(-1,2).astype(np.float32)
+    nor=_tri_normals(tris)
+    vp=ctx.buffer(np.ascontiguousarray(pos).tobytes())
+    vu=ctx.buffer(np.ascontiguousarray(uv).tobytes())
+    vn=ctx.buffer(np.ascontiguousarray(nor).tobytes())
+    return ctx.vertex_array(prog,[(vp,'3f','in_pos'),(vu,'2f','in_uv'),(vn,'3f','in_normal')])
 
-def _resolve_asset_path(asset_id: str, pack: Pack):
-    """Best-effort resolve an asset_id to a file path via the manifest."""
-    manifest = getattr(pack, "manifest", None)
-    if not manifest:
-        return None
-    try:
-        entry = manifest.get(asset_id) if hasattr(manifest, "get") else None
-        if entry is None:
-            return None
-        for key in ("wall_path", "master_path", "path"):
-            p = entry.get(key) if hasattr(entry, "get") else getattr(entry, key, None)
-            if p:
-                return p
-    except Exception:
-        return None
-    return None
+def _quad_arrays(quad):
+    c=quad.corners; uv=quad.uv
+    pos=np.array([c[0],c[1],c[2], c[0],c[2],c[3]],dtype=np.float32).reshape(-1,3,3)
+    uvs=np.array([uv[0],uv[1],uv[2], uv[0],uv[2],uv[3]],dtype=np.float32).reshape(-1,3,2)
+    return pos,uvs
 
-
-def _enable_blend(ctx):
-    """INTEGRATION: confirm exact API — enable alpha blending for panels."""
-    try:
-        import moderngl
-        ctx.enable(moderngl.BLEND)
-        ctx.blend_func = (moderngl.SRC_ALPHA, moderngl.ONE_MINUS_SRC_ALPHA)
-    except Exception:
-        pass
-
-
-def _disable_blend(ctx):
-    """INTEGRATION: confirm exact API — disable blend, restore opaque state."""
-    try:
-        import moderngl
-        ctx.disable(moderngl.BLEND)
-    except Exception:
-        pass
-
-
-def _render_tris(ctx, program, tris: np.ndarray, uvs: np.ndarray):
-    """Draw a triangle soup with the given (matching) UVs."""
-    if tris.shape[0] == 0:
-        return
-    positions = tris.reshape(-1, 3)
-    uv = uvs.reshape(-1, 2)
-    vao = _make_vao(ctx, program, positions, uv)
-    try:
-        vao.render()
-    finally:
-        try:
-            vao.release()
-        except Exception:
-            pass
-
-
-def _render_quad(ctx, program, quad: PanelQuad, tex):
-    """Draw a single textured panel quad (2 triangles)."""
-    c = quad.corners
-    uv = quad.uv
-    positions = np.array(
-        [c[0], c[1], c[2], c[0], c[2], c[3]], dtype=np.float32
-    )
-    uvs = np.array(
-        [uv[0], uv[1], uv[2], uv[0], uv[2], uv[3]], dtype=np.float32
-    )
-    if tex is not None:
-        try:
-            tex.use(0)
-            _set_flag(program, "u_texture", 0)
-        except Exception:
-            pass
-    _render_tris(ctx, program, positions.reshape(-1, 3, 3),
-                 uvs.reshape(-1, 3, 2))
-
-
-def ceiling_tint_uniform(program, red: float = 1.0) -> None:
-    """Wrapper around the shaders.ceiling_tint_uniform helper."""
-    try:
-        from shaders import ceiling_tint_uniform as _ctu
-        _ctu(program, red=red)
-    except Exception:
-        try:
-            program["u_tint"].value = (red, 0.0, 0.0)
-        except Exception:
-            pass
-
-
-def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack,
-              state: GameState) -> None:
-    """Mode B solid first-person room renderer (THIN GL shell)."""
-    if not HAVE_GL:
-        return
-
-    try:
-        from shaders import solid_program
-    except Exception:
-        return
-
-    try:
-        ctx = _get_ctx()
-    except Exception:
-        return
-
-    rid = room.room_id
+def _get_room_vaos(ctx, prog, room):
+    rid=room.room_id
+    cached=_vao_cache.get(rid)
+    if cached is not None: return cached
     if rid not in _mesh_cache:
-        _mesh_cache[rid] = build_room_mesh(room)
-    mesh = _mesh_cache[rid]
-
-    program = solid_program(ctx)
-
-    _set_mvp(program, view)
-
-    # 1. Walls / floor / ceiling (flat WALL_RGB, no tint)
-    _set_flag(program, "u_use_tint", 0)
-    _set_flag(program, "u_color", WALL_RGB)
-    _render_tris(ctx, program, mesh.wall_tris, mesh.wall_uvs)
-
-    # 3. Door jambs
+        _mesh_cache[rid]=build_room_mesh(room)   # pure builder (same module)
+    mesh=_mesh_cache[rid]
+    d={}
+    d["mesh"]=mesh
+    d["wall"]=_tris_vao(ctx,prog,mesh.wall_tris,mesh.wall_uvs) if mesh.wall_tris.shape[0] else None
     if mesh.door_frame_tris.shape[0]:
-        jamb_uvs = np.zeros((mesh.door_frame_tris.shape[0], 3, 2), np.float32)
-        _render_tris(ctx, program, mesh.door_frame_tris, jamb_uvs)
-
-    # 4. Alcove
+        ju=np.zeros((mesh.door_frame_tris.shape[0],3,2),np.float32)
+        d["jamb"]=_tris_vao(ctx,prog,mesh.door_frame_tris,ju)
+    else: d["jamb"]=None
     if mesh.alcove_tris.shape[0]:
-        alc_uvs = np.zeros((mesh.alcove_tris.shape[0], 3, 2), np.float32)
-        _render_tris(ctx, program, mesh.alcove_tris, alc_uvs)
+        au=np.zeros((mesh.alcove_tris.shape[0],3,2),np.float32)
+        d["alcove"]=_tris_vao(ctx,prog,mesh.alcove_tris,au)
+    else: d["alcove"]=None
+    # panel + ceiling quad VAOs (textured)
+    d["panels"]=[]
+    for q in mesh.panel_quads:
+        pos,uvs=_quad_arrays(q)
+        d["panels"].append((q,_tris_vao(ctx,prog,pos,uvs)))
+    d["ceiling"]=[]
+    for q in mesh.ceiling_quads:
+        pos,uvs=_quad_arrays(q)
+        d["ceiling"].append((q,_tris_vao(ctx,prog,pos,uvs)))
+    _vao_cache[rid]=d
+    return d
 
-    # 2 + 5. Panels (textured, with blend for transparent PNGs)
-    _enable_blend(ctx)
-    _set_flag(program, "u_use_tint", 0)
-    for quad in mesh.panel_quads:
-        if panel_is_on(quad.pair_id, state.lit, room):
-            asset = quad.on_asset_id
-        else:
-            asset = quad.off_asset_id
-        tex = _upload_texture(ctx, asset, pack)
-        _render_quad(ctx, program, quad, tex)
-    _disable_blend(ctx)
+def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState) -> None:
+    """Mode B solid lit room. `view` carries proj@view (set by app.py)."""
+    if not HAVE_GL: return
+    try:
+        import moderngl
+        ctx=_get_ctx()
+    except Exception:
+        return
+    prog=_program(ctx)
+    if prog is None: return
+    # ---- assert OUR full GL state every frame ----
+    ctx.enable(moderngl.DEPTH_TEST); ctx.depth_func="<="; ctx.depth_mask=True
+    ctx.disable(moderngl.BLEND)
 
-    # 6. Ceiling equations — only when room cleared
-    if room.room_id in state.cleared:
-        ceiling_tint_uniform(program, red=1.0)
-        _set_flag(program, "u_use_tint", 1)
-        _enable_blend(ctx)
-        for quad in mesh.ceiling_quads:
-            tex = _upload_texture(ctx, quad.off_asset_id, pack)
-            _render_quad(ctx, program, quad, tex)
-        _disable_blend(ctx)
-        ceiling_tint_uniform(program, red=0.0)
-        _set_flag(program, "u_use_tint", 0)
+    _set_mvp(prog,view)
+    _set(prog,"u_light_dir",tuple(_norm(LIGHT_DIR)))
+    _set(prog,"u_ambient",float(AMBIENT))
+
+    vaos=_get_room_vaos(ctx,prog,room)
+
+    # 1) walls / floor / ceiling structure (untextured lit solid: u_use_tint==2)
+    _set(prog,"u_use_tint",2)
+    _set(prog,"u_tint",WALL_RGB)
+    if vaos["wall"] is not None: vaos["wall"].render()
+    # 3) door jambs
+    if vaos["jamb"] is not None:
+        _set(prog,"u_tint",JAMB_RGB); vaos["jamb"].render()
+    # 4) alcove
+    if vaos["alcove"] is not None:
+        _set(prog,"u_tint",ALCOVE_RGB); vaos["alcove"].render()
+
+    # 2+5) panels (textured, blend ON for transparent PNGs)
+    ctx.enable(moderngl.BLEND)
+    ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
+    _set(prog,"u_use_tint",0)
+    for q,vao in vaos["panels"]:
+        on = panel_is_on(q.pair_id, state.lit, room)   # pure helper (same module)
+        asset = q.on_asset_id if on else q.off_asset_id
+        tex=_upload_texture(ctx,asset,pack)
+        if tex is not None: tex.use(0); _set(prog,"u_tex",0)
+        vao.render()
+    ctx.disable(moderngl.BLEND)
+
+    # 6) ceiling equations — blood-red tint only when cleared
+    if room.room_id in state.cleared and vaos["ceiling"]:
+        ctx.enable(moderngl.BLEND); ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
+        _set(prog,"u_use_tint",1); _set(prog,"u_tint",(1.0,0.0,0.0))
+        for q,vao in vaos["ceiling"]:
+            tex=_upload_texture(ctx,q.off_asset_id,pack)
+            if tex is not None: tex.use(0); _set(prog,"u_tex",0)
+            vao.render()
+        ctx.disable(moderngl.BLEND)
+        _set(prog,"u_use_tint",0)

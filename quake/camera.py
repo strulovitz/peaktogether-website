@@ -131,6 +131,29 @@ def look_at(eye: np.ndarray, target: np.ndarray, up: np.ndarray) -> np.ndarray:
 
 
 # =============================================================================
+# SHARED PROJECTION (Parent 11) — the ONE place perspective is defined.
+# Used by both the game (app.py) and the build-time map viewer.
+# =============================================================================
+FOV_Y_DEG = 60.0
+NEAR_M = 0.1
+FAR_M = 5000.0
+
+
+def perspective(fov_y_deg: float, aspect: float, near: float, far: float) -> np.ndarray:
+    """Standard right-handed perspective, column-vector (M @ p). Row-major float32.
+    w_clip = -z_view (m[3,2] = -1), so clip.w IS the linear view distance."""
+    import math
+    f = 1.0 / math.tan(fov_y_deg * math.pi / 360.0)
+    m = np.zeros((4, 4), dtype=np.float64)
+    m[0, 0] = f / aspect
+    m[1, 1] = f
+    m[2, 2] = (far + near) / (near - far)
+    m[2, 3] = (2.0 * far * near) / (near - far)
+    m[3, 2] = -1.0
+    return np.ascontiguousarray(m, dtype=np.float32)
+
+
+# =============================================================================
 # THIN STATEFUL SHELL — holds smoothed yaw/pitch state, calls the pure core.
 # =============================================================================
 

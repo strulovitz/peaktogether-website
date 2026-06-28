@@ -38,11 +38,11 @@ from shaders import wire_program, solid_program, blit_program
 from assets import load_pack
 from state import new_state, load as state_load, save as state_save
 from input_actions import poll
-from camera import Camera
+from camera import Camera, perspective, FOV_Y_DEG, NEAR_M, FAR_M
 from nav_collision import build_corridor_nav, build_room_nav
 from gameplay import step, reticle_ray
 from guidelines import select_targets, draw_guidelines
-from render_wire import draw_graph
+from render_wire import draw_graph, render_mode_a
 from render_room import draw_room
 from readmode import draw_read
 
@@ -360,21 +360,31 @@ def main() -> int:
                 except Exception as e:
                     print(f"[QUAKE] save failed: {e}", file=sys.stderr)
 
-            # (8) camera (pitch clamped defensively before handing to camera)
+            # (8) camera -> pure view matrix
             view = camera.update(state.heading_rad, _clamp_pitch(state.pitch_rad),
                                  state.pos, dt)
 
-            # (9) clear
-            _gl_clear(ctx, 0.05, 0.06, 0.08, 1.0)
+            # (8b) projection (shared source of truth; live window size, resizable-safe)
+            w = int(getattr(window, "width", WINDOW_W))
+            h = int(getattr(window, "height", WINDOW_H))
+            proj = perspective(FOV_Y_DEG, w / max(h, 1), NEAR_M, FAR_M)
+            mvp = np.ascontiguousarray(proj @ view, dtype=np.float32)   # world->clip for Mode B
 
             # (10) render by mode
             if state.mode == "corridor":
-                draw_graph(view, pack.floorplan, state)
-                draw_guidelines(view, pack.floorplan, targets)
+                # guidelines drawn INTO the same offscreen scene so they glow + share depth
+                def _gl(v, p, aspect):
+                    vp = np.ascontiguousarray(p @ v, dtype=np.float32)
+                    draw_guidelines(vp, pack.floorplan, targets)
+                render_mode_a(ctx, window, view, proj, pack.floorplan, state,
+                              guidelines_fn=_gl, targets=targets)
             else:
+                # DeepSeek integration note: Parent 11's snippet omitted the per-frame
+                # screen clear (render_mode_a clears its own targets, but draw_room does
+                # not). Keep an explicit clear for Mode B so the room can't smear.
+                _gl_clear(ctx, 0.05, 0.06, 0.08, 1.0)
                 room = pack.rooms[state.current_room_id]
-                # draw_room reads state.cleared internally for the blood-red ceiling tint.
-                draw_room(view, room, pack, state)
+                draw_room(mvp, room, pack, state)   # pass proj@view; draw_room transposes on upload
 
             # (11) read overlay (drawn over the world)
             if read_state.active and read_state.master_path is not None:

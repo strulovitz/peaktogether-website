@@ -166,4 +166,6 @@ def test_draw_smoke():
     )
 
     # Must run without raising — the shell guards every GL call.
-    draw_graph(view, fp, state)
+    # Parent 11 changed the signature to draw_graph(view, proj, aspect, fp, state).
+    proj = np.eye(4, dtype=np.float32)
+    draw_graph(view, proj, 1.0, fp, state)
