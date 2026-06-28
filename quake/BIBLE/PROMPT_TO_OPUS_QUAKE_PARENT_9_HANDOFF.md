@@ -34,18 +34,16 @@ Parent 7 selected 20 nodes from Sections I–III. The graph has 28 edges. Averag
 
 ### What DeepSeek found in the actual Principia text
 
-DeepSeek searched the full Principia text for real citations between the 20 nodes. Result: **24 real, verifiable citations** exist in the text. But several key edges Parent 7 included are NOT real citations, and several real citations were excluded. Furthermore, **lemma_1** — the most-cited lemma in Section I (cited by lemma_2, lemma_11, and others) — was not even included as a node by Parent 7.
+DeepSeek searched the full Principia text for real citations between the Parent 7 nodes. Result: several edges Parent 7 included are NOT explicit text citations, and several real citations were excluded.
 
-The 24 real citation edges found in the text are:
+The real citation edges verified in the text:
 
 ```
-(lemma_2  → lemma_1)    ← lemma_1 NOT in graph!
 (lemma_4  → lemma_3)
 (lemma_6  → lemma_5)
 (lemma_7  → lemma_6)
 (lemma_9  → lemma_5)
 (lemma_10 → lemma_9)
-(lemma_11 → lemma_1)    ← lemma_1 NOT in graph!
 (prop_1   → law_1)
 (prop_1   → lemma_5)    ← Parent 7 missed this
 (prop_2   → law_1)
@@ -81,8 +79,6 @@ Parent 7 edges NOT supported by explicit text citations (may be logical/implicit
 - `edge.prop_15.to.prop_4` (no text citation found)
 
 Real citations Parent 7 MISSED:
-- `lemma_2 → lemma_1` (lemma_1 not in graph)
-- `lemma_11 → lemma_1` (lemma_1 not in graph)
 - `prop_1 → lemma_5`
 - `prop_2 → law_2`
 - `prop_4 → prop_2`
@@ -100,24 +96,22 @@ Redesign the Principia Book 1 Sections I–III concept graph so it is **non-plan
 
 1. **Every edge = a real citation from the text.** No invented edges, no "logical" edges, no "probably depends on." If Newton cites it, include it. If he doesn't, don't. This is a GAME about Newton's actual reasoning, not a math textbook reconstruction.
 
-2. **Include lemma_1.** Lemma I is the most-cited lemma in Section I. Lemma II cites it. Lemma XI cites it twice. Excluding it was a mistake.
-
-3. **The graph must be non-planar.** A non-planar graph is one that CANNOT be drawn on a 2D plane without edge crossings. The two minimal non-planar subgraphs are:
+2. **The graph must be non-planar.** A non-planar graph is one that CANNOT be drawn on a 2D plane without edge crossings. The two minimal non-planar subgraphs are:
    - **K5** — 5 nodes, all connected to each other (10 edges)
    - **K3,3** — two groups of 3 nodes, every node in group A connected to every node in group B (9 edges)
    If your graph contains either as a subgraph, it is non-planar and WILL have unavoidable crossings. Target one of these patterns using real citations.
 
-4. **NO hardcoded node/edge/crossing counts.** The graph size is whatever the real citations demand. If the genuine dense subgraph needs 15 nodes, use 15. If it needs 25, use 25. Don't target "about 20" — target non-planarity.
+3. **NO hardcoded node/edge/crossing counts.** The graph size is whatever the real citations demand. If the genuine dense subgraph needs 15 nodes, use 15. If it needs 25, use 25. Don't target "about 20" — target non-planarity.
 
-5. **All nodes must be from Book 1 Sections I, II, or III** of Newton's Principia (1729 Motte translation). These sections cover: the method of first and last ratios (Lemmas I–XI), centripetal forces (Props I–X including Lemma XII), and eccentric conic sections / inverse-square law (Props XI–XVII including Lemmas XIII–XIV).
+4. **All nodes must be from Book 1 Sections I, II, or III** of Newton's Principia (1729 Motte translation). These sections cover: the method of first and last ratios (Lemmas I–XI), centripetal forces (Props I–X including Lemma XII), and eccentric conic sections / inverse-square law (Props XI–XVII including Lemmas XIII–XIV).
 
-6. **Use the EXACT node IDs** from Parent 7 where they exist (lemma_2, law_1, prop_1, etc.), and follow the same pattern for new ones (lemma_1, prop_3, etc.).
+5. **Use the EXACT node IDs** from Parent 7 where they exist (lemma_2, law_1, prop_1, etc.), and follow the same pattern for new ones (e.g., prop_3, lemma_12).
 
-7. **Emil a valid DAG** — no cycles. Newton's citations are always forward (a lemma cites earlier lemmas, a proposition cites lemmas and earlier propositions).
+6. **Emit a valid DAG** — no cycles. Newton's citations are always forward (a lemma cites earlier lemmas, a proposition cites lemmas and earlier propositions).
 
-8. **Keep the importance hints (1–5)** meaningful. The inverse-square law (prop_11) should be importance 5. The basic lemmas maybe 2–3. This affects room size and map color.
+7. **Keep the importance hints (1–5)** meaningful. The inverse-square law (prop_11) should be importance 5. The basic lemmas maybe 2–3. This affects room size and map color.
 
-9. **Output format = valid `concept_graph.json`** conforming to the Second Canon §4.2. The schema is:
+8. **Output format = valid `concept_graph.json`** conforming to the Second Canon §4.2. The schema is:
    - Node: id (pattern ^[a-z][a-z0-9_]*$), name, kind (lemma/law/proposition/corollary), importance (1–5), pages, summary, tags
    - Edge: id (pattern ^edge\.[a-z0-9_]+\.to\.[a-z0-9_]+$), source, target (both NodeId), kind ("depends_on"), weight (1.0), label (the citation phrase from the text)
    - `schema_version: "1.0"`, `extra: "forbid"`
@@ -158,14 +152,14 @@ For the exact data format contract: request the Second Canon §4.2 (ConceptGraph
 ### Suggested workflow
 
 1. Read the DIGEST to understand all available nodes in Sections I–III (~30 total lemmas + propositions + laws)
-2. Ask for the full text of sections 01, 02, and 03 (ONE at a time to protect your context)
-3. Extract EVERY citation from the text — build a complete dependency map
+2. Use DeepSeek's citation list above as your verified edge truth. DeepSeek has already read every word of all three sections and extracted every citation phrase.
+3. If you need to verify a specific citation ("does Prop X cite Lemma Y?"), ask DeepSeek through Nir — he'll grep the text and return the verbatim phrase.
 4. Identify the densest subgraph that contains a K5 or K3,3 pattern
 5. Output the final `concept_graph.json`
 
 ### One gotcha to know
 
-The text uses older citation language: "by Lem. I", "by Lemma 2.", "by the preceding lemma", "by prop. 2.", "by cor. 4. prop. 1." — you'll find these scattered through the proof paragraphs. "The preceding lemma" refers to the immediately prior lemma in the text order, NOT in our graph order. Be careful to resolve these to explicit IDs.
+The text uses older citation language: "by Lemma 2.", "by the preceding lemma", "by prop. 2.", "by cor. 4. prop. 1." — you'll find these scattered through the proof paragraphs. "The preceding lemma" refers to the immediately prior lemma in the text order, NOT in our graph order. Be careful to resolve these to explicit IDs.
 
 ---
 
@@ -194,10 +188,10 @@ Parent 7 gave us a good first draft — 20 real Newton propositions, valid DAG, 
 Your job is to fix that. Use Newton's own words. Make the graph dense enough that the topology itself demands bridges. No seed-hunting. No invented edges. Just real mathematical dependencies, faithfully represented, unavoidably tangled — because Newton's reasoning IS tangled, and a graph that captures it honestly will force crossings naturally.
 
 The densest natural subgraph will likely center on:
-- **Lemma I** (cited by lemma_2, lemma_11, and others)
-- **Lemma VII** (cited by lemma_9? check the text; cited by prop_4, prop_11, prop_13)
+- **Lemma VII** (cited by prop_4, prop_11, prop_13)
 - **Prop VI** (cited by prop_7, prop_11, prop_13 — it's the key formula for computing force laws)
 - **Prop I** (cited by prop_4, prop_6 — the geometric proof of Kepler's Second Law)
+- **Prop VII** (cited by prop_11 — force to any point in a circle)
 
 These are the natural hubs. When you add ALL their real citations (incoming AND outgoing), you'll likely find a K3,3 or K5 lurking in the genuine dependency structure.
 
