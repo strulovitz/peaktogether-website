@@ -1,10 +1,15 @@
-🗝️ QUAKE (Game 3) — PROMPT TO OPUS: PARENT 7 HANDOFF (M8 FIRST PRINCIPIA LEVEL)
+🗝️ QUAKE (Game 3) — PROMPT TO OPUS: PARENT 7 HANDOFF v2 (M8 FIRST PRINCIPIA LEVEL)
 
-Written June 26, 2026 by DeepSeek (Runner). Parents 1–6 are DONE. The full engine (13 modules, 285 tests) is built and wired; the Golden Fixture Pack (3 hand-authored rooms) proves the entire runtime stack works end-to-end. Parent 7 has exactly ONE mission: design the FIRST REAL Principia level — transforming Quake from a tech demo with dummy rooms into an actual game powered by Newton's text. This handoff is self-contained — Parent 7 can begin immediately with the four baseline documents (Commentaries + OT + NT + this handoff) and the on-demand pulls listed in §7.
+Written June 26, 2026 by DeepSeek (Runner). Updated June 28, 2026 (v2 — added DIGESTED PRINCIPIA + material-request protocol). Parents 1–6 are DONE. The full engine (13 modules, 285 tests) is built and wired; the Golden Fixture Pack (3 hand-authored rooms) proves the entire runtime stack works end-to-end. Parent 7 has exactly ONE mission: design the FIRST REAL Principia level — transforming Quake from a tech demo with dummy rooms into an actual game powered by Newton's text.
+
+⚠️ CRITICAL — HOW YOU GET INFORMATION ⚠️
+You are an Opus chat inside OpenRouter. You have NO internet access, NO GitHub access, NO file system access. You CANNOT browse, download, or read anything on your own. The only text you have is what is pasted into this chat — this handoff + the Commentaries + the OT + the NT + the DIGESTED PRINCIPIA below.
+If you need ANYTHING else (full text of a proposition, a figure image, a format specification, a scripture section), you must ASK NIR to copy-paste it for you. Nir is your hands and eyes — he can fetch things from GitHub, Wikisource, or the local filesystem.
+→ HOW TO ASK: Say "Nir, please paste [exactly what file/section/URL] so I can [what you need it for]." Be specific with filenames.
 
 --- BEGIN HANDOFF ---
 
-You are Parent 7. You received this alongside the Commentaries, the Old Testament, and the New Testament. Your mission is to design the first real level — choosing Newton propositions, defining the content pipeline run, and specifying the audio atmosphere. Read §0–§3 for context, §4 is your design space, §5–§6 are frozen constraints, and §8 is your deliverable format.
+You are Parent 7. You received this alongside the Commentaries, the Old Testament, the New Testament, and the DIGESTED PRINCIPIA (below). Your mission is to design the first real level — choosing Newton propositions, defining the content pipeline run, and specifying the audio atmosphere. Read §0–§3 for context, §4 is your design space, §5–§6 are frozen constraints, and §8 is your deliverable format.
 
 §0 — WHAT EXISTS (so you know what you're building on top of)
 
@@ -28,11 +33,13 @@ App.py:
   Full §5.4 per-frame loop wired — event-driven save, Read-Mode overlay,
   mode switching corridor↔room, smoke test runs 60 frames with golden pack.
 
-The Principia source data:
-  We have a clean OCR text file of the 1846 Andrew Motte English translation
-  (_djvu.txt), per-page scans (leaf_*.png), and a page-numbers JSON mapping
-  leaf_index → printed page label. Nir has these files — ask him where they
-  live and he or DeepSeek will give you the exact paths and formats.
+The Principia data (NEW — v2):
+  We now have the COMPLETE 1729 Motte translation of Book 1 from Wikisource —
+  14 sections, 148 items (29 lemmas, 98 propositions, 21 scholia), ~548 KB of clean text.
+  The full text is stored on GitHub at: quake/principia/book_1/section_01.txt through section_14.txt
+  The DIGESTED PRINCIPIA (below) summarizes every single item in one sentence with figure counts.
+  YOU have the DIGEST. Use it to choose propositions. Ask Nir to paste the full text
+  of any section when you need the details.
 
 What does NOT exist yet (your mission):
   - A real level with real Newton propositions (r_a/r_b/r_c are hand-authored dummies)
@@ -63,7 +70,7 @@ Design the first real Principia level. This means:
     demon growl/spawn, demon hit, demon death, room-cleared chime,
     door-open rumble, ceiling blood-red hum.
 
-(e) Define the level's palatte (color groups for the figure elements) —
+(e) Define the level's palette (color groups for the figure elements) —
     pick 3–5 group names with hi/ink hex pairs.
 
 (f) The output of your design feeds DeepSeek and the build pipeline —
@@ -79,8 +86,8 @@ Your deliverable is a SPECIFICATION. DeepSeek then:
   3. Runs INFERENCE AI → inference_raw.json
   4. Runs merge.py → concept_graph.json + provenance.json
   5. Runs level_maker → floorplan.json
-  6. For each node: READER AI → recipe.<figure_id>.json
-  7. For each node: EMITTER AI → figure.<figure_id>.asy
+  6. For each node: READER AI → recipe.figure_id.json
+  7. For each node: EMITTER AI → figure.figure_id.asy
   8. Runs asy_compile + baker_figure + baker_text → PNGs + manifest.json
   9. Runs portal_spec + room_maker → room_runtime/*.json
   10. DeepSeek places all outputs under a level directory and tests
@@ -89,66 +96,69 @@ You do NOT design the AI prompts (those are frozen in the Second Canon §3).
 You DO choose: which propositions, which pages, what importance, what
 color groups, what audio cues.
 
-§3 — THE PRINCIPIA DATA (what Nir has)
+§3 — HOW TO GET MORE INFORMATION (the material-request protocol)
 
-Nir has:
-  - A _djvu.txt file — clean OCR of the full Motte 1846 translation,
-    split by page (form-feed characters separate pages)
-  - Leaf PNGs — one scanned page image per leaf (leaf_0001.png, etc.)
-  - A page-numbers JSON — maps leaf_index (0-based) to printed page label
-    (e.g. leaf 74 → "55") in the format:
-    {"pages": [{"leafNum": 1, "pageNumber": ""}, ...]}
-    (This is the Archive.org hocr-pages format v2, fed to page_map_adapter.py)
+You have the DIGESTED PRINCIPIA (below) which summarizes every lemma,
+proposition, and scholium in one sentence with figure counts. Use it FIRST
+to decide what you need.
 
-Nir also knows the Principia structure: which lemmas/propositions appear
-on which pages. Ask him for: (a) the file paths, (b) what book/section to
-start with, and (c) any specific propositions he wants featured.
+If you need the FULL TEXT of a section, ask Nir to paste it:
+  → "Nir, please paste section_02.txt from GitHub so I can read Props I-VIII in full."
+  The files live at: https://github.com/strulovitz/peaktogether-website/blob/master/quake/principia/book_1/section_NN.txt
+  (NN = 01 through 14)
 
-FOR NOW: assume Book I, Section I (the method of first and last ratios,
-Lemmas I–XI) or Section II (centripetal forces, Prop. I–IV). These are
-the most famous and figure-rich sections.
+If you need FIGURE IMAGES from the original Principia plates, ask Nir:
+  → "Nir, please fetch the scan for Plate 2 Figure 5 from Wikisource."
+  The scans are at: https://en.wikisource.org/wiki/The_Mathematical_Principles_of_Natural_Philosophy_(1729)
+
+If you need more scripture sections beyond what you have (Commentaries + OT + NT), ask Nir:
+  → "Nir, please paste §3.A.5 from the Second Canon (the Op→Asymptote mapping)."
+  or: "Nir, please paste the Apocrypha §3 (RoomRuntime v3, DoorRT)."
+  Nir will ask DeepSeek (the Runner) to fetch the exact section from the BIBLE files on disk.
+
+If you need the EXACT PYDANTIC SCHEMAS (contracts), ask:
+  → "Nir, please paste the relevant models from contracts.py."
+  Nir will ask DeepSeek to extract them.
+
+If you need the GOLDEN FIXTURE PACK for reference (the 3 hand-authored rooms):
+  → "Nir, please paste floorplan.json and one room_runtime file from the golden pack."
+  The golden pack is at: quake/tests/golden_pack/
+
+RULES:
+  1. Always use the DIGEST first to decide WHAT to ask for.
+  2. Be specific — give the exact filename or scripture section.
+  3. Don't ask for everything at once — one or two sections at a time.
+  4. The full text sections are large (20-70 KB each). Only request what you truly need to design the level.
+  5. Remember: Nir knows no math and no code. Describe what you need in plain language.
 
 §4 — YOUR DESIGN SPACE (open questions to resolve)
 
 A. Which propositions? Choose 3–5 that form a dependency chain where
    A depends on nothing (axiom/law), B depends on A, C depends on B, etc.
    The golden pack proved 3 rooms work end-to-end; start similar.
+   SUGGESTED STARTING POINTS from the DIGEST:
+   - Section I (Lemmas I-XI): The mathematical toolbox. Lemma II (limits) → Lemma X (s∝t²)
+   - Section II (Props I-VIII): Centripetal forces, Kepler's 2nd law, v²/r
+   - Section III (Props XI-XVII): Inverse-square law for conic sections (the famous result)
+   - The Laws of Motion (Axioms) are also available as nodes
 
-B. Which figures? Each proposition may have one or more figures in the
-   printed text. Pick the single most iconic figure per proposition as
-   the room's figure. Newton's own engravings are the source of truth.
-   The READER AI will produce the Asymptote construction recipe from
-   the figure scan; the overlay-diff tool verifies fidelity.
+B. Which figures? Each proposition may have one or more figures. The DIGEST
+   tells you how many drawings each item has. Pick items WITH DRAWINGS —
+   the figure is the visual centerpiece of each room.
 
 C. What proof steps? Each figure's construction is segmented into steps
    (the "Stabilo" highlighting layers). For each proposition, define
-   how many steps the proof has and a one-line gloss per step. The
-   TEXT AI produces the LaTeX explaining-text block per step.
+   how many steps the proof has and a one-line gloss per step.
 
 D. Importance 1–5 per node? What's central to the section (importance 5)
-   vs. supporting (importance 3) vs. peripheral (importance 1)? This
-   drives room size on the map and map color.
+   vs. supporting (importance 3) vs. peripheral (importance 1)?
 
-E. Audio design:
-   - Footsteps: looped corridor SFX (how many variants? stereo panning?)
-   - Panel flip: click/snap when a panel is lit
-   - Demon spawn: growl/roar from behind the hidden wall
-   - Demon hit: grunt/pain (1–3 variants)
-   - Demon kill: death cry
-   - Room cleared: chime / tone that transitions to blood-red ceiling hum
-   - Door open: rumble / stone grind
-   - Level complete: fanfare
-   - Music: ambient drone for corridors? or silent?
-   What format? .wav? .ogg? How integrated — pyglet's media player?
-   A separate audio.py module?
+E. Audio design: Footsteps, panel flip, demon spawn/hit/kill, room cleared,
+   door open, level complete. Format? .wav? .ogg? Separate audio.py module?
 
-F. Palette: Choose 3–5 group names for the figure elements (e.g. "path",
-   "radius", "construction", "orbit", "force") and assign hi/ink hex pairs.
-   These group names couple figure color to prose color via \cg{group}{text}.
+F. Palette: Choose 3–5 group names + hi/ink hex pairs.
 
-G. Level structure: Should the first level be a self-contained "chapter"
-   or a slice of a larger book? The level_id convention is e.g.
-   "principia_bk1_sec1". Decide the scope.
+G. Level structure: level_id convention e.g. "principia_bk1_sec1".
 
 §5 — FROZEN FORMATS (the pipeline's inputs/outputs)
 
@@ -166,10 +176,10 @@ OUTPUTS from the pipeline (generated, you verify the plan):
   - inference_raw.json (§3.A.3) — AI's understanding-based edge guesses
   - concept_graph.json (§4.2) — merged DAG, nodes + edges
   - floorplan.json (§4.4) — force-directed layout, rooms + corridors + crossings
-  - recipe.<figure_id>.json (§3.A.4) — coordinate-free Asymptote construction ops
-  - figure.<figure_id>.asy (§3.A.5) — 4-zone Asymptote file
+  - recipe.figure_id.json (§3.A.4) — coordinate-free Asymptote construction ops
+  - figure.figure_id.asy (§3.A.5) — 4-zone Asymptote file
   - manifest.json (§4.6) — baked asset index
-  - room_runtime/room_<node_id>.json (Apocrypha §3 + Second Canon §4.5) — v3 doors
+  - room_runtime/room_node_id.json (Apocrypha §3 + Second Canon §4.5) — v3 doors
   - palette.json (§3.A.7) — all hex, group colors, map_importance 1–5
 
 §6 — FROZEN CONSTRAINTS (do not violate)
@@ -184,16 +194,21 @@ OUTPUTS from the pipeline (generated, you verify the plan):
 - Audio is ADDITIVE — a new audio.py module plus app.py wiring. Do NOT change engine modules.
 - The level is built by the existing pipeline; you do NOT redesign the pipeline.
 
-§7 — WHAT TO PULL FROM THE BIBLE (request via Nir → DeepSeek)
+§7 — WHAT YOU ALREADY HAVE + WHAT TO PULL FROM THE BIBLE
 
-You have the Commentaries + OT + NT. Before designing, pull and design against:
-- Second Canon §3.A.1–§3.A.7 (AI-emitted formats — the schema of every pipeline output)
-- Second Canon §4.2–§4.8 (generated data formats — concept_graph, floorplan, room_runtime)
-- Second Canon §5.2 (build module signatures — to understand what each pipeline step does)
-- The Apocrypha §3 (RoomRuntime v3, DoorRT — to verify your room design is coherent)
-- The PROMPT_TO_OPUS_QUAKE_PARENT_6_HANDOFF.md (§5.3 — the app.py event system audio will hook into)
+You have:
+  ✓ The Commentaries (BIBLE INDEX + locked decisions)
+  ✓ The Old Testament (Fusion's master doctrine)
+  ✓ The New Testament (The Two Legs — MAP + WALLS)
+  ✓ THIS handoff (mission brief)
+  ✓ The DIGESTED PRINCIPIA (below — summaries of all 14 sections + 148 items)
 
-You also need from Nir: the Principia file paths, the book/section to start with, and any proposition preferences.
+Before finalizing your design, you SHOULD also pull and design against (ask Nir):
+  - Second Canon §3.A.1–§3.A.7 (AI-emitted formats — the schema of every pipeline output)
+  - Second Canon §4.2–§4.8 (generated data formats — concept_graph, floorplan, room_runtime)
+  - Second Canon §5.2 (build module signatures — to understand what each pipeline step does)
+  - The Apocrypha §3 (RoomRuntime v3, DoorRT — to verify your room design is coherent)
+  - The app.py event system (ask for contracts.py Events class or Parent 6 handoff §5.3)
 
 §8 — YOUR DELIVERABLE FORMAT
 
@@ -223,15 +238,15 @@ Produce a single document containing:
 
 §9 — RISK FLAGS
 
-- The AI pipeline (Legs 1+2+3) is built but has NEVER been run on real Principia data. The first run WILL uncover integration issues. Expect them. Design your spec to be exact enough that failures are clearly diagnosed.
-- Asymptote compilation is the highest-risk step — the Op→Asymptote translation table (§3.A.5) marks Asymptote function names as ⟨confirm-from-docs⟩. The compile loop is how we confirm them.
-- The overlay-diff tool (human verification) is what judges figure correctness — not mathematical truth, not AI confidence. Nir eyeballs two images side by side. If the figure looks wrong, the recipe needs adjustment.
-- Audio integration is new territory — no audio module exists. Design the interface cleanly so it doesn't couple to engine internals.
-- Figure background transparency is still an open choice (Second Canon closing notes). For the first level, bake on bg_key (#FF00FF) and key it out — the simpler path.
+- The AI pipeline (Legs 1+2+3) is built but has NEVER been run on real Principia data. The first run WILL uncover integration issues.
+- Asymptote compilation is the highest-risk step.
+- The overlay-diff tool (human verification) is what judges figure correctness — NOT mathematical truth. Nir eyeballs two images side by side.
+- Audio integration is new territory — no audio module exists. Design the interface cleanly.
+- Figure background transparency: for the first level, bake on bg_key (#FF00FF) and key it out.
 
 §10 — CONVENTIONS (frozen)
 
-- All IDs lowercase ASCII: node_id ^[a-z][a-z0-9_]*$, pair_id ^[a-z][a-z0-9_]*\.s[0-9]+$, etc.
+- All IDs lowercase ASCII: node_id ^[a-z][a-z0-9_]*$, pair_id .s[0-9]+, etc.
 - Wall literals: "N","E","S","W" uppercase only.
 - Hex: ^#[0-9a-fA-F]{6}$.
 - Coordinates: XZ map plane, Y up.
@@ -239,12 +254,11 @@ Produce a single document containing:
 - extra="forbid" on every pydantic model.
 - All types imported from contracts (never directly from map/raw_models).
 
-§11 — THE NEXT THING AFTER YOU
+§11 — AFTER YOU
 
-After your spec is frozen, DeepSeek runs the pipeline. If any AI pass fails, DeepSeek reports the failure and Nir re-runs the AI with adjusted prompts. The output feeds DeepSeek's integration loop — build, test, fix wiring, push. You do NOT need to design for integration failures — that's DeepSeek's job.
+DeepSeek runs the pipeline. If any AI pass fails, DeepSeek reports the failure. Your spec feeds the integration loop. You do NOT need to design for integration failures — that's DeepSeek's job.
 
-This is the milestone that turns Quake from a wireframe shell into a real game with Newton's own words and drawings on the walls. Design it boldly. The pipeline is waiting. 🗝️📚✨
+This is the milestone that turns Quake from a wireframe shell into a real game with Newton's own words and drawings on the walls. The DIGESTED PRINCIPIA is your map. Design boldly. 🔥📖
 
 --- END HANDOFF ---
-
-DeepSeek (Runner). Parent 7 — the Principia awaits. 🔥📖
+--- BEGIN DIGESTED PRINCIPIA ---

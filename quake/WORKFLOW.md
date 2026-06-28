@@ -118,6 +118,33 @@ Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = brid
 ### DeepSeek self-critique (evening session)
 DeepSeek overstepped twice: modified `guidelines.py` (strip-draw stub) and rewrote `test_app.py` without asking Nir first. Also repeatedly gave GitHub links when Parent 6 can't browse, and formatted answers as tables that don't survive copy-paste. Rules reinforced: ask before touching code, plain text only, remember parents have no internet. ✅ Corrected.
 
+### Day session (June 28, 2026 — Principia data prep + Parent 7 v2 handoff)
+
+26. **Principia Book 1 acquired** — Nir provided the Wikisource URL (1729 Motte translation). The original archive.org OCR was gibberish; the Wikisource human-transcribed version is clean.
+
+27. **`quake/principia/` folder created** with full Book 1:
+    - `definitions/definitions_and_scholium.txt` — Definitions I-VIII + Scholium
+    - `axioms/axioms_and_laws.txt` — Laws I-III + Corollaries I-VI + experiments Scholium
+    - `book_1/section_01.txt` through `section_14.txt` — All 14 sections (~548 KB total)
+    - `book_1_table_of_contents.md` — Wikisource TOC with URLs
+
+28. **DIGESTED PRINCIPIA created** — `quake/principia/DIGESTED_PRINCIPIA.md` — Parent-safe summary:
+    - Every lemma, proposition, scholium gets ONE sentence + figure count
+    - 148 items across 14 sections summarized
+    - Includes dependency chains, summary stats (29 lemmas, 98 props, 21 scholia, 119 figures)
+
+29. **Parent 7 handoff updated to v2** — `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF.md` rewritten:
+    - Added "⚠️ CRITICAL — HOW YOU GET INFORMATION" section — explains the parent has no internet/file access
+    - Added §3 "HOW TO GET MORE INFORMATION" — material-request protocol: parent asks Nir, Nir asks DeepSeek, DeepSeek fetches
+    - Combined handoff + DIGEST into one file: `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF_COMBINED.md` (~558 lines, self-contained)
+
+30. **Wake-up note written** — `quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md` — Step-by-step for DeepSeek on next restart: which GitHub URLs to give Nir for copy-paste to Opus.
+
+31. **WORKFLOW.md updated** — this entry. Everything pushed to GitHub.
+
+### CRITICAL LESSON: Parents can't read anything
+Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. They only know what Nir pastes into the chat. The DIGEST solves the context-death problem — instead of 548 KB of raw Newton, the parent gets a 340-line digest. When it needs details, it asks Nir to paste a specific section. The protocol: Parent asks Nir → Nir asks DeepSeek → DeepSeek fetches from disk/GitHub → Nir pastes to Parent.
+
 ## 8. CURRENT SITUATION (June 26, 2026 — evening)
 
 ### What's built
@@ -162,14 +189,12 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - Exercises every engine system: two-step proof room, non-cardinal bearing doors, demon, ceiling, LevelComplete
 - `load_pack("tests/golden_pack/")` passes; 283/283 tests green
 
-**Parent 6 — app.py Full Wiring** (NEXT)
-- Grow M0 stub into the full §5.4 loop
-- Wire all 13 modules together per-frame
-- Mode switching, Read Mode pause, atomic save
-- CI smoke launch: main() opens, runs N frames against golden pack, exits 0
+**~~Parent 6 — app.py Full Wiring~~** ✅ DONE
+- app.py full §5.4 per-frame loop written directly by Parent 6
+- Event-driven save, Read-Mode overlay, mode switching, 285/285 green
 
-**Parent 7 — M8 First Principia Level** (AFTER app.py)
-- Choose real Newton propositions
+**Parent 7 — M8 First Principia Level** ⏳ NEXT (handoff written, launch pending)
+- Choose real Newton propositions from the DIGESTED PRINCIPIA
 - Define concept graph
 - Run full Leg 1+2+3 build pipeline on real Principia data
 - Audio SFX
@@ -200,6 +225,7 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's handoff** (`quake/DEEPSEEK_LATE_AFTERNOON_HANDOFF_2026-06-26.md`) which has the exact current state. Then ask Nir what's next.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's wake-up note** (`quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md`) which has the exact launch protocol. Then ask Nir what's next.
+🌙 **CURRENT WAKE-UP NOTE:** `quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md` — Parent 7 launch protocol with all GitHub URLs ready.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

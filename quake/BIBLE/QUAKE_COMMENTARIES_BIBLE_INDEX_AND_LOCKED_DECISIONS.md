@@ -54,7 +54,17 @@
 14. **Parent 4 → Parent 5 Handoff** — `quake/BIBLE/QUAKE_PARENT_4_TO_PARENT_5_HANDOFF.md`. Parent 4's handoff: the Golden Fixture Pack mission spec with exact coordinates, bearing math, door placements, and panel layouts.
 15. **Prompt to Opus — Parent 6 Handoff** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_6_HANDOFF.md`. DeepSeek-authored handoff (Parent 5 designed data, not code). Mission: design the frozen child brief for the full `app.py` wiring of all 13 engine modules in the §5.4 loop. ✅ DONE — Parent 6 delivered the frozen child brief below.
 
-16. **Parent 6 — Frozen Child Brief: app.py** — `quake/BIBLE/QUAKE_PARENT_6_FROZEN_CHILD_BRIEF_APP_PY.md`. Parent 6's frozen brief for the full `app.py` per-frame wiring (complete with PURE/SHELL split, event application table, all resolved design decisions, and golden pack integration). ⏳ PENDING — Nir wants Parent 6 to implement it himself, not a child.
+16. **Parent 6 — Frozen Child Brief: app.py** — `quake/BIBLE/QUAKE_PARENT_6_FROZEN_CHILD_BRIEF_APP_PY.md`. Parent 6's frozen brief for the full `app.py` per-frame wiring. ✅ DONE — Parent 6 implemented it himself.
+
+17. **Parent 7 — Combined Handoff v2 (with DIGESTED PRINCIPIA embedded)** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF_COMBINED.md`. Self-contained: mission brief + material-request protocol + full DIGESTED PRINCIPIA. The ONE file Nir pastes to Parent 7 after Commentaries + OT + NT.
+
+18. **DIGESTED PRINCIPIA (standalone)** — `quake/principia/DIGESTED_PRINCIPIA.md`. Parent-safe summary: all 148 lemmas/props/scholia across 14 sections in one sentence each, with figure counts and dependency chains.
+
+19. **Principia Book 1 — Full Text** — `quake/principia/book_1/section_01.txt` through `section_14.txt`. Complete 1729 Motte translation from Wikisource (~548 KB total). Parent 7 requests individual sections by asking Nir.
+
+20. **Principia Introductory Material** — `quake/principia/definitions/` + `quake/principia/axioms/`. Definitions I-VIII, Scholium, Laws I-III, Corollaries I-VI.
+
+21. **DeepSeek Wake-up Note — Parent 7 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_7_GO.md`. Step-by-step protocol for DeepSeek on next restart: which GitHub URLs to give Nir for copy-paste.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -95,7 +105,11 @@
 - ✅ **Leg 3 (ROOMS) FROZEN + BUILT** — 5 modules, 41/41 green. 186/186 total.
 - ✅ **§E flag SETTLED** — figure_id-keying (DrawingBlock.figure_id + highlight_step) confirmed.
 - ✅ **Parent 5 DONE — Golden Fixture Pack BUILT** — `tests/golden_pack/` created (floorplan+palette+manifest + 3 rooms + 38 PNGs). `load_pack` passes. 283/283 green.
-- ⏳ **NEXT:** Parent 6 — app.py full wiring (§5.4 loop). Handoff written, awaiting Nir's launch.
+- ✅ **Parent 6 DONE — app.py wired** — Full §5.4 loop, 285/285 green, smoke passes.
+- ✅ **Principia Book 1 ACQUIRED** — Complete 1729 Motte text from Wikisource (14 sections, 548 KB) saved under `quake/principia/book_1/`.
+- ✅ **DIGESTED PRINCIPIA CREATED** — `quake/principia/DIGESTED_PRINCIPIA.md` — parent-safe summary of all 148 lemmas/props/scholia with one-sentence descriptions + figure counts.
+- ✅ **Parent 7 handoff v2 WRITTEN** — Updated with DIGEST, material-request protocol. Combined handoff+DIGEST at `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF_COMBINED.md`. Wake-up note at `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.
+- ⏳ **NEXT:** Launch Parent 7 — fresh Opus chat with Commentaries + OT + NT + Combined Handoff (with DIGEST).
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
