@@ -95,7 +95,18 @@ You have the DIGESTED PRINCIPIA (below) which summarizes every lemma,
 proposition, and scholium in one sentence with figure counts. Use it FIRST
 to decide what you need.
 
-If you need the FULL TEXT of a section, ask Nir to paste it:
+⚠️ PREFERRED METHOD: Cross-Section Searches via DeepSeek ⚠️
+
+DeepSeek (the Runner) has access to the FULL text of ALL 14 sections on GitHub. Instead of asking Nir to paste an entire 70 KB section (which fills your context window fast and can cause you to "die"), ask DeepSeek to SEARCH across the whole Book 1 for specific topics. DeepSeek will search all 548 KB and return concise verbatim excerpts with exact section and proposition references. Examples:
+
+  → "DeepSeek, please search all sections for every mention of 'inverse square' or 'reciprocally as the square' — give me verbatim excerpts with section and proposition references."
+  → "DeepSeek, where does Newton talk about pendulums or isochronous motion? Give me the relevant passages with their section/proposition labels."
+  → "DeepSeek, find all places where Lemma II is cited or depended upon by later propositions."
+  → "DeepSeek, search for 'Kepler' or 'equal areas' across all sections — I need to trace the equal-area proof chain."
+
+This is the PREFERRED way to get information — it keeps YOUR context window lean and only fills it with what matters. Reserve whole-section pastes for when you truly need to read an entire section's flow from start to finish.
+
+If you DO need the FULL TEXT of a specific section, ask Nir to paste it:
   → "Nir, please paste section_02.txt from GitHub so I can read Props I-VIII in full."
   The files live at: https://github.com/strulovitz/peaktogether-website/blob/master/quake/principia/book_1/section_NN.txt
   (NN = 01 through 14)
@@ -119,10 +130,11 @@ If you need the GOLDEN FIXTURE PACK for reference (the 3 hand-authored rooms):
 
 RULES:
   1. Always use the DIGEST first to decide WHAT to ask for.
-  2. Be specific — give the exact filename or scripture section.
-  3. Don't ask for everything at once — one or two sections at a time.
-  4. The full text sections are large (20-70 KB each). Only request what you truly need to design the level.
-  5. Remember: Nir knows no math and no code. Describe what you need in plain language.
+  2. PREFER cross-section searches via DeepSeek over whole-section pastes. Keep your context lean.
+  3. When asking for whole sections, be specific — give the exact filename or scripture section.
+  4. Don't ask for everything at once — one or two items at a time.
+  5. The full text sections are large (20-70 KB each). Only request whole sections when you truly need the full flow.
+  6. Remember: Nir knows no math and no code. Describe what you need in plain language.
 
 §4 — YOUR DESIGN SPACE (open questions to resolve)
 
