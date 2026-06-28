@@ -37,7 +37,7 @@ from __future__ import annotations
 
 import sys
 from dataclasses import dataclass, field
-from math import cos, pi, sin
+from math import cos, pi, sin, tan
 from pathlib import Path
 
 import numpy as np
@@ -65,6 +65,21 @@ PITCH_LIMIT_RAD = (pi / 2.0) - 0.01   # avoid gimbal flip at straight up/down
 FOV_Y_DEG = 60.0
 NEAR_M = 0.1
 FAR_M = 5000.0                # generous: the tool must see any-scale layouts
+
+
+def _perspective_matrix(fov_y_deg: float, aspect: float, near: float, far: float) -> np.ndarray:
+    """Right-handed perspective projection matrix (column-vector convention).
+
+    Returns (4,4) float32 row-major.  fov_y in degrees.  aspect = width/height.
+    """
+    f = 1.0 / tan(fov_y_deg * pi / 360.0)
+    m = np.zeros((4, 4), dtype=np.float64)
+    m[0, 0] = f / aspect
+    m[1, 1] = f
+    m[2, 2] = (far + near) / (near - far)
+    m[2, 3] = (2.0 * far * near) / (near - far)
+    m[3, 2] = -1.0
+    return np.ascontiguousarray(m, dtype=np.float32)
 
 
 # --------------------------------------------------------------------------- #
@@ -386,9 +401,12 @@ def run(floorplan_path: Path) -> int:
     def on_draw():  # noqa: ANN001
         window.clear()
         view = cam.view_matrix()
+        proj = _perspective_matrix(FOV_Y_DEG, WINDOW_W / WINDOW_H, NEAR_M, FAR_M)
+        # view * proj: column-vector convention → world-to-clip
+        vp = np.ascontiguousarray(proj @ view, dtype=np.float32)
         # Reuse the verified Mode-A wire path. draw_graph honors per-corridor
         # cruise_y, so bridges/underpasses appear at their true heights.
-        draw_graph(view, fp, state)
+        draw_graph(vp, fp, state)
 
         hud.text = (
             f"{floorplan_path.name}\n"
