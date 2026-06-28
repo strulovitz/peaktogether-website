@@ -1,0 +1,2140 @@
+←Section IIThe Mathematical Principles of Natural Philosophyby Isaac Newton, translated by Andrew MotteBook I, Section III: Of the motion of bodies in eccentric Conic sections.Section IV→
+
+Proposition XI
+Proposition XII
+Lemma XIII
+Lemma XIV
+Proposition XIII
+Proposition XIV
+Proposition XV
+Proposition XVI
+Proposition XVII
+Scholium
+
+Section III.
+
+Of the motion of bodies in eccentric conic sections.
+
+Proposition XI. Problem VI.
+
+If a body revolves in a ellipsis: it is required to find the law of centripetal force tending to the focus of the ellipsis. Pl. 4. Fig. 2.
+
+Plate 4, Figure 2
+Let S be the focus of the ellipsis. Draw SP
+cutting the diameter DK of the ellipsis in E, and the ordinate Qv in x; and compleat the parallelogram QxPR. It is evident than EP, is equal to the greater semi-axis
+AC: for drawing HI from the other focus H
+of the ellipsis parallel to EC, because CS, CH are equal ES, EI will be also equal, so that EP is the
+half sum of PS, PI that is, (because of the parallels HI, PR, and the equal angles IPR, HPZ) of PS, PH, which taken together are equal to the whole axis 2AC. Draw QT perpendicular to SP,
+and putting L for the principal latus rectum of the ellipsis (or for 
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                  C
+                  
+                  
+                
+              
+              
+                A
+                C
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {2BC^{2}}{AC}}}
+  
+) we shall have L × QR to L x Pv as QR to Pv, that is, as PE or AC to PC;
+and L x Pv to GvP as L to Gv; and GvP to
+
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ as 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to 
+  
+    
+      
+        
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CD^{2}}
+  
+ '; and (by corol. 2. lem. 7.)
+the points Q and P coinciding, 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ is to 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+  in the
+ratio of equality; and 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+ or 
+  
+    
+      
+        
+          Q
+          
+            c
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qc^{2}}
+  
+ is to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as
+
+  
+    
+      
+        
+          E
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle EP^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+, that is, as 
+  
+    
+      
+        
+          C
+          
+            A
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CA^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+ or (by lem. 12)
+as 
+  
+    
+      
+        
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CD^{2}}
+  
+ to 
+  
+    
+      
+        
+          C
+          
+            B
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CB^{2}}
+  
+. And compounding all those ratio's together,
+we shall have L x QR to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as 
+  
+    
+      
+        
+          A
+          C
+          ×
+          L
+          ×
+          P
+          
+            C
+            
+            
+          
+          ×
+          C
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle AC\times L\times PC^{2}\times CCD^{2}}
+  
+ or 
+  
+    
+      
+        
+          C
+          
+            B
+            
+            
+          
+          ×
+          P
+          
+            C
+            
+            
+          
+          ×
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2CB^{2}\times PC^{2}\times CD^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          C
+          ×
+          G
+          v
+          ×
+          C
+          
+            D
+            
+            
+          
+          ×
+          C
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC\times Gv\times CD^{2}\times CV^{2}}
+  
+,
+or as 2PC to Gv. But the points
+Q and P coinciding, 2PC to Gv are equal. And
+therefore to these, will be also equal. Let those equals be
+drawn in 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                
+                  R
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}}{QR^{2}}}}
+  
+ and 
+  
+    
+      
+        
+          L
+          ×
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle L\times SP^{2}}
+  
+ will become equal to
+
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+. And
+therefore by corol. 1. and 5. prop. 6.) the centripetal force is reciprocally as 
+  
+    
+      
+        
+          L
+          ×
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle L\times SP^{2}}
+  
+,
+that is, reciprocally in the duplicate ratio of the
+distance SP. Q. E. I.
+
+The same otherwise
+
+Seeing the force tending to the centre of the ellipsis,
+by which the body P may revolve in that ellipsis.
+is (by corol. 1. prop. 10.) as the distance CP of
+the body from the centre C of the ellipsis; let CE
+be drawn parallel to the tangent PR of the ellipsis;
+and the force, by which the same body P may revolve
+about any other point S of the ellipsis. if CE and
+PS intersect in E, win be as, 
+  
+    
+      
+        
+          
+            
+              
+                P
+                
+                  R
+                  
+                  
+                
+              
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {PR^{2}}{SP^{2}}}}
+  
+ (by cor. 3. prop,
+7.) that is, if the point S is the focus of the ellipsis,
+and therefore PE be given, as 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}}
+  
+ reciprocally. Q. E. I. 
+With the same brevity with which we reduced
+the fifth problem to the parabola and hyperbola, we
+might do the like here: But because of the dignity of
+the problem and its use: in what follows. I shall confirm
+the other cases by particular demonstrations.
+
+Proposition XII. Problem VII.
+
+Suppose a body to move in an hyperbola: it is required to find the law of centripetal force tending to the focus of that figure.  Pl. 5. Fig. 1.
+
+Plate 5, Figure 1
+Let CA, CB be the semi-axes of the hyperbola;
+PG, KD other conjugate diameters; PF a perpendicula
+to the diameter KD; and Qv an ordinate to
+the diameter GP. Draw SP cutting the diameter
+DK in E, and the ordinate Qv in x, and compleat
+the parallelogram QRPx. It is evident that EP is
+equal to the semi-transverse axe AC; for, drawing
+HI, from the other focus H of the hyperbola, parallel
+to EC, because CS, CH are equal, ES, EI will
+be also equal; so that EP is the half difference of
+PS, PI; that is, (because of the parallels IH, PR,
+and the equal angles IPR. HPZ) if PS, PH, the
+difference of which is equal to the whole axis 2AC.
+Draw QT perpendicular to SP. And putting L for the
+principal latus rectum of the hyperbola, (that is, for
+
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                  C
+                  
+                  
+                
+              
+              
+                A
+                
+                  C
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {2BC^{2}}{AC^{2}}}}
+  
+) we shall have LX QR to L x  Iv as QR to Pv,
+or Px to Pv, that is, (because of the similar triangles
+Pxv, PEC) as PE to PC, or AC to PC. And L x Pv will be to Gv x Pv as L to Gv; and (by
+the properties of the conic sections) the rectangle GvP
+is to 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ as 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to 
+  
+    
+      
+        
+          C
+          
+            d
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Cd^{2}}
+  
+; and (by cor. 2. lem. 7.)
+
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ to 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+, the points Q and P coinciding, becomes
+a ratio of equality; and 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+Qx or 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ is to
+
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as 
+  
+    
+      
+        
+          E
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle EP^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+, that is, as 
+  
+    
+      
+        
+          C
+          
+            A
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CA^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+,
+or (by lem. 12.) as 
+  
+    
+      
+        
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CD^{2}}
+  
+ to 
+  
+    
+      
+        
+          C
+          
+            B
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CB^{2}}
+  
+: and, compounding
+all those ratio's together, we shall have L x QR to
+
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as 
+  
+    
+      
+        
+          A
+          C
+          ×
+          L
+          ×
+          P
+          
+            C
+            
+            
+          
+          ×
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle AC\times L\times PC^{2}\times CD^{2}}
+  
+ or 
+  
+    
+      
+        
+          C
+          
+            B
+            
+            
+          
+          ×
+          P
+          
+            C
+            
+            
+          
+          ×
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2CB^{2}\times PC^{2}\times CD^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          C
+           
+          t
+          i
+          m
+          e
+          s
+          G
+          v
+          ×
+          C
+          
+            D
+            
+            
+          
+          ×
+          C
+          
+            B
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC\ timesGv\times CD^{2}\times CB^{2}}
+  
+, or as 2PC to Gv.
+But the points P and Q coinciding, 2PC and Gv
+are equal. And therefore the quantities L x QR
+and 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+, proportional to them, will be also equal. Q. E. I.
+Let those equalsbe drawn into
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                
+                  R
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}}{QR^{2}}}}
+  
+, and we shall
+have 
+  
+    
+      
+        
+          L
+          ×
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle L\times SP^{2}}
+  
+ to 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+. And therefore (by cor. 1 & 5. prop. 6.) the centripetal force is reciprocally
+as 
+  
+    
+      
+        
+          L
+          ×
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle L\times SP^{2}}
+  
+, that is, reciprocally in the
+duplicate ratio of the distance SP. Q. E. I.
+
+The same otherwise.
+
+Find out the force tending from the centre C of the
+hyperbola. This will be proportional to the distance
+CP. But from thence (by cor. 3. prop. 7.) the
+force tending to the focus S will be as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                
+                  E
+                  
+                  
+                
+              
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {PE^{2}}{SP^{2}}}}
+  
+, that is,
+because PE is given, reciprocally as
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}}
+  
+. Q. E. I.
+And the same way it may be demonsŧrated, that the
+body having its centripetal changed into a centrifugal
+force, will move in the conjugate hyperbola. 
+
+Lemma XIII.
+
+The latus rectum of a parabola belonging to any vertex is quadruple to the distance of that vertex from the focus of the figure.
+This is demonstrated by the writers on the conic
+sections.
+
+Lemma XIV.
+
+The perpendicular let fall from the focus of a parabola on its tangent, if a mean proportional between the dislances of the focus from the point of contact, and from the principal vertex of the figure. Pl. 5. Fig. 2.
+
+Plate 5, Figure 2
+For, let AP be the parabola, S its focus, A its principal
+vertex, P the point of contact, PO an ordinate
+to the principal diameter, PM the tangent meeting
+the principal diameter in M and SN the perpendicular
+from the focus on the tangent. join AM and
+because of the equal lines MS and SP, MN and
+NP, MA and AO; the right lines AN, OP, will
+be parallel; and thence the triangle SAN will be
+right angled at A, and similar to the equal triangles
+SNM, SNP: therefore PS is to SN as SN to
+SA. Q. E. D.
+Cor 1. 
+  
+    
+      
+        
+          P
+          
+            S
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PS^{2}}
+  
+ is to 
+  
+    
+      
+        
+          S
+          
+            N
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SN^{2}}
+  
+ as PS to SA. 
+Cor. 2. And because SA is given, 
+  
+    
+      
+        
+          S
+          
+            N
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SN^{2}}
+  
+ will
+be as PS.
+Cor. 3. And the concourse of any tangent PM
+with the right line SN, drawn from the focus perpendicular
+on the tangent, falls in the right line AN,
+that touches the parabola in the principal vertex.
+
+Proposition XIII. Problem VIII.
+
+If a body moves in the perimeter of a parabola: it it required to find the law of the centripetal force tending to the focus of that figure. Pl. 5. Fig. 3.
+
+Plate 5, Figure 3
+Retaining the construction of the preceding lemma,
+let P be the body in the perimeter of the parabola;
+and from the place Q into which it is next to succeed
+draw QR parallel and QT perpendicular to
+SP, as also Qv parallel to the tangent, and meeting
+the diameter PG in v, and the distance SP in x. Now,
+because of the similar triangles Pxv, SPM, and of
+the equal sides SP, SM of the one, the sides Px or
+QR and Pv of the other will be also equal. But
+(by the conic sections) the square of the ordinate Qv
+is equal to the rectangle under the latus rectum and
+the segment Pv of the diameter, that is, (by lem. 13.)
+to the rectangle 4PS x Pv, or 4PS x QR; and the
+points P and Q coinciding, the ratio of Qv to Qx
+(by cor. 2 lem. 7.) becomes a ratio of equality. And
+therefore 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+, in this case. becomes equal to the
+rectangle 4PS x QR. But (because of the similar
+triangles QxT, SPN) 
+  
+    
+      
+        
+          Q
+          
+            x
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qx^{2}}
+  
+ is to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as 
+  
+    
+      
+        
+          P
+          
+            S
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PS^{2}}
+  
+ to
+
+  
+    
+      
+        
+          S
+          
+            N
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SN^{2}}
+  
+, that is (by cor. 1. lem. 14.) as PS to SA;
+that is, as 4PS x QT to 4SA x QR, and therefore (by prop. 9. lib. 5. elem.) 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ and 4SA x QR
+are equal. Multiply these equals by 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                
+                  R
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}}{QR^{2}}}}
+  
+, and
+
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+ will become equal to 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          ×
+          S
+          A
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}\times 4SA}
+  
+: and
+therefore (by cor. 1. and 5. prop. 6.) the centripetal
+force is reciprocally as 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          ×
+          S
+          A
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}\times 4SA}
+  
+; that is, because
+4SA is given, reciprocally in the duplicate ratio of
+the distance SP. Q. E. I.
+Cor. 1. From the three last propositions it follows,
+that if any body P goes from the place P with
+any velocity in the direction of any right line PR,
+and at the same time is urged by the action of a centripetal
+force, that is reciprocally proportional to the
+square of the distance of the places from the centre;
+the body will move in one of the conic sections,
+having its focus in the centre of force; and the contrary.
+For the focus, the point of contact, and the
+position of the tangent being given, a conic section
+may be described, which at that point shall have a
+given curvature. But the curvature is given from
+the centripetal force and the bodies velocity given:
+and two orbits mutually touching one the other, cannot
+be described by the same centripetal force and the
+same velocity.
+Cor. 2. If the velocity, with which the body
+goes from its place P, is such, that in any infinitely
+small moment of time the lineola PR may be
+thereby described; and the centripetal force such as in
+the same time to move that body through the space
+QR; the body will move in one of the conic sections,
+whose principal latus rectum is the quantity 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}}
+  
+
+in its ultimate state, when the lineolæ PR, QR are diminished in infinitum. In these corollaries, I consider
+the circle as an ellipsis; and I except the case,
+where the body descends to the centre in a right line.
+
+Proposition XIV. Theorem VI.
+
+If several bodies revolve about one common centre, and the centripetal force is reciprocally in the duplicate ratio of the distance of places from the centre; I say, that the principal latera recta of their orbits are in the duplicate ratio of the area's, which the bodies by radii drawn to the centre describe in the same time. Pl. 6. Fig. 1.
+
+Plate 6, Figure 1
+For (by cor. 2. prop. 13.) the latus rectum L is
+equal to the quantity 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}}
+  
+ in its ultimate state when
+the points P and Q coincide. But the lineola QR
+in a given time is as the generating centripetal force;
+that is (by supposition) reciprocally as 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}}
+  
+. And
+therefore 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}}
+  
+ is as 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+          ×
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}\times SP^{2}}
+  
+ that is, the latus
+rectum L is in the duplicate ratio of the area QT x ST.
+Q. E. D.
+Cor. Hence the whole area of the ellipsis, and
+the rectangle under the axes, which is proportional to
+it, is in the ratio compounded of the subduplicate ratio
+of the latus rectum, and the ratio of the periodic
+time. For the whole area is as the area QT x SP
+described in a given time, multiplied by the periodic
+time. 
+
+Proposition XV. Theorem VII.
+
+The same things being supposed, I say that the periodic times in ellipses are in the sessquiplicate ratio of their greater axes.
+For the lesser axe is a mean proportional between
+the greater axe and the latus rectum; and therefore the
+rectangle under the axes is in the ratio compounded
+of the subduplicate ratio of the latus rectum and the
+sesquiplicate ratio of the greater axe. But this rectangle
+(by cor. prop. 14) is in a ratio compounded of
+the subduplicate ratio of the latus rectum and the ratio
+of the periodic time. Subduct from both sides
+the subduplicate ratio of the latus rectum, and there
+will remain the sesquiplicate ratio of the greater axe,
+equal to the ratio of the periodic time. Q.  E. D.
+Cor. Therefore the periodic times in ellipses are
+the same as in circles whose diameters are equal to the
+greater axes of the ellipses.
+
+Proposition XVI. Theorem VIII.
+
+The same things being supposed, and right lines being drawn to the bodies that shall touch the orbits, and perpendiculars being let fall on the tangents from the common focus: I say that the velocities of the bodies are in a ratio compounded of the ratio of the perpendiculars inversely, and the subduplicate ratio of the principal latera recta directly. Pl. 6. Fig; 2.
+
+Plate 6, Figure 2
+From the focus S, draw SY perpendicular to the
+tangent PR, and the velocity of the body P will be
+reciprocally in the subduplicate ratio of the quantity
+
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  Y
+                  
+                  
+                
+              
+              L
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SY^{2}}{L}}}
+  
+. For that velocity is as the infinitely small arc
+PQ described in a given moment of time, that is. (by
+lem. 7.) as the tangent PR; that is, (because of the
+proportionals PR to QT and SP to SY) as 
+  
+    
+      
+        
+          
+            
+              
+                S
+                P
+                ×
+                Q
+                T
+              
+              
+                S
+                Y
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP\times QT}{SY}}}
+  
+,
+or as SY reciprocally and 
+  
+    
+      
+        
+          S
+          P
+          ×
+          Q
+          T
+        
+      
+    
+    {\displaystyle \scriptstyle SP\times QT}
+  
+ directly; but
+SP x QT is as the area described in the given time,
+that is (by prop. 14.) in the subduplicate ratio of the
+latus rectum, Q. E. D.
+Cor. 1. The princ[i]pal latera recta are in a ratio
+compounded of the duplicate ratio of the perpendiculars
+and the duplicate ratio of the velocities.
+Cor. 2. The velocities of bodies, in their greatest
+and least distances from the common focus, are in the ratio
+compounded of the ratio of the distance inversely,
+and the subduplicate ratio of the principal latera recta
+directly. For those perpendiculars are now the distances.
+Cor. 3. And therefore the velocity in a conic
+section, at its greatest or least distance from the focus.
+is to the velocity in a circle at the same distance
+from the centre, in the subduplicate ratio of the principal
+latus rectum to the double of that distance.
+Cor. 4. The velocities of the bodies revolving in
+ellipses, at their mean distances from the common focus,
+are the same as those of bodies revolving in circles,
+at the same distances; that is (by cor. 6. prop, 4-)
+reciprocally in the subduplicate ratio of the distaces. For the perpendiculars are now the lesser semi-axes,
+and these are as mean proportionals between the distances
+and the latera recta. Let this ratio inversely
+be compounded with the subduplicate ratio of the latera
+recta directly, and we shall have the subduplicate
+ratio of the distances inversely.
+Cor. 5. In the same figure, or even in different
+figures, whose principal latera recta are equal,
+the velocity of a body is reciprocally as the perpendicular
+let fall from the focus on the tangent.
+Cor. 6. In a parabola, the velocity is reciprocally
+in the subduplicate ratio of the distance of the body
+from the focus of the figure; it is more variable in
+the ellipsis, and less in the hyperbola, than according
+to this ratio. For (by cor. 2. lem. 14.) the perpendicular
+let fall from the focus on the tangent of a parabola
+is in the subduplicate ratio of the distance. In
+the hyperbola the perpendicular is less variable, in the
+ellipsis more.
+Cor. 7. In a parabola, the velocity of a body
+at any distance from the focus, is to the velocity
+of a body revolving in a circle at the same distance
+from the centre, in the subduplicate ratio of
+the number 2 to 1; in the ellipsis it is less, and in the
+hyperbola greater, than according to this ratio. For
+(by cor. 2. of this prop.) the velocity at the vertex of
+a parabola is in this ratio, and (by cor. 6. of this prop.
+and prop. 4.) the same proportion holds in all distances.
+And hence also in a parabola, the velocity is every
+where equal to the velocity of a body revolving in
+a circle at half the distance; in the ellipsis it is less,
+and in the hyperbola greater. 
+Cor. 8. The velocity of a body revolving in any
+conic section is to the velocity of a body revolving
+in a circle at the distance of half the principal latus
+rectum of the section, as that distance to the perpendicular
+let fall from the focus on the tangent of the
+section. This appears from cor. 5.
+Cr. 9. Wherefore since (by cor. 6. prop. 4.) the
+velocity of a body revolving in this circle is to the
+velocity of another body revolving in any other
+circle, reciprocally in the subduplicate ratio of the distances;
+therefore ex æquo the velocity of a body revolving
+in a conic section will be to the velocity of
+a body revolving in a circle at the lime distance, as a
+mean proportional between that common distance and
+half the principal latus rectum of the section, to the
+perpendicular let fall from the common focus upon the
+tangent of the section.
+
+Proposition XVII. Problem IX.
+
+Supposing the centripetal force to be reciprocally proportional to the squares of the distances of places from the centre, and that the absolute quantity of that force is known; it is required to determine the line, which a body will describe that is let go from a given place with a given velocity in the direction of a given right line.
+
+Plate 6, Figure 3
+Let the centripetal force tending to the point S
+(Pl. 6. Fig. 3 .) be such, as will make the body p revolve
+in any given orbit pq; and suppose the velocity of this
+body in the place p is known. Then from the place
+P, suppose the body P to be let go with a given velocity in the direction of the line PR; but by virtue
+of a centripetal force to be immediately turned aside
+from that right line into the conic section PQ. This
+the right line PR will therefore touch in P. Suppose
+likewise that the right line pr touches the orbit
+pq in p; and if from S you suppose
+let fall on those tangents, the principal latus rectum
+of the conic section (by cor. 1. prop. 16.) will be
+to the principal latus rectum of that orbit, in a ratio
+compounded of the duplicate ratio of the perpendiculars
+and the duplicate ratio of the velocities; and is
+therefore given. Let this latus rectum be L. The focus
+S of the conic section is also given. Let the angle RPH
+be the complement of the angle RPS to two right;
+and the line PH, in which the other focus H is
+placed, is given by position. Let fill SK perpendicular
+on PH, and erect the conjugate semi-axe BC; this
+done, we shall have 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          −
+          K
+          P
+          H
+          +
+          P
+          
+            H
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}-2KPH+PH^{2}}
+  
+ = 
+  
+    
+      
+        
+          C
+          
+            H
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 4CH^{2}}
+  
+ = 
+  
+    
+      
+        
+          B
+          
+            H
+            
+            
+          
+          −
+          B
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 4BH^{2}-4BC^{2}}
+  
+ = 
+  
+    
+      
+        
+          
+            
+              
+                S
+                P
+                +
+                P
+                
+                  H
+                  
+                  
+                
+              
+              ¯
+            
+          
+          −
+          L
+          ×
+          
+            
+              
+                S
+                P
+                +
+                P
+                H
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {SP+PH^{2}}}-L\times {\overline {SP+PH}}}
+  
+ = 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          +
+          S
+          P
+          H
+          +
+          P
+          
+            H
+            
+            
+          
+          −
+          L
+          ×
+          
+            
+              
+                S
+                P
+                +
+                P
+                H
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}+2SPH+PH^{2}-L\times {\overline {SP+PH}}}
+  
+. Add on both sides 
+  
+    
+      
+        
+          K
+          P
+          H
+          −
+          S
+          
+            P
+            
+            
+          
+          −
+          P
+          
+            H
+            
+            
+          
+          +
+          L
+          ×
+          
+            
+              
+                S
+                P
+                +
+                P
+                H
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2KPH-SP^{2}-PH^{2}+L\times {\overline {SP+PH}}}
+  
+, and we shall have 
+  
+    
+      
+        
+          L
+          ×
+          
+            
+              
+                S
+                P
+                +
+                P
+                H
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle L\times {\overline {SP+PH}}}
+  
+ = 
+  
+    
+      
+        
+          S
+          P
+          H
+          +
+          K
+          P
+          H
+        
+      
+    
+    {\displaystyle \scriptstyle 2SPH+2KPH}
+  
+, or 
+  
+    
+      
+        
+          S
+          P
+          +
+          P
+          H
+        
+      
+    
+    {\displaystyle \scriptstyle SP+PH}
+  
+ to PH as 2SP + 2KP to L. Whence PH is given both in length and velocity. That is, if the velocity
+of the body in P is such that the latus rectum L is less
+than 2SP + 2KP, PH will lie on the same side of
+the tangent PR with the line SP; and therefore the
+figure will be an ellipsis, which from the given foci
+S, H and the principal axe SP + PH, is given also.
+But if the velocity of the body is so great, that the
+latus rectum L becomes equal to 2PS + 2 KP, the
+length PH will be infinite; and therefore the figure
+will be a parabola, which has its axe SH parallel to the line PK, and is thence given. But if the body
+goes from its place P with a yet greater velocity, the
+length PH is to be taken on the other side the tangent;
+and so the tangent passing between the foci, the
+figure will be an hyperbola having its principal axe
+equal to the difference of the lines SP and PH, and
+thence is given. For if the body, in these cases, revolves
+in a conic section so found, it is demonstrated
+in prop. 11, 12, and 13, that the centripetal force
+will be reciprocally as the square of the distance of the
+body from the centre of force S; and therefore we
+have rightly determined the line PQ, which a body
+let go from a given place P with a given velocity,
+and in the direction of the right line PR given by
+position, would describe with such a force. Q. E. F.
+Cor. 1. Hence in every conic section, from the
+principal vertex D, the latus rectum L, and the focus
+S given, the other focus H is given. by taking DH
+to DS as the latus rectum to the difference between the
+latus rectum and 4DS. For the proportion, SP + PH
+to PH as 2PS + 2KP to L, becomes, in
+the case of this corollary, DS + DH to DH as 4DS
+to L, and by division DS to DH as 4DS - L
+to L.
+Cor. 2. Whence if the velocity of a body in the
+principal vertex D is given, the orbit may be readily
+found; to wit, by taking its latus rectum to twice
+the distance DS, in the duplicate ratio of this given
+velocity to the velocity of a body revolving in a
+circle at the distance DS (by cor. 3. prop. 16.) and
+then taking DH to DS as the latus rectum to the difference
+between the latus rectum and 4DS.
+Cor. 3. Hence also if a body move in
+any conic section, and is forced out of its orbit
+by an impulse; you may discover the orbit in which it will afterwards pursue its course. For by
+compounding the proper motion of the body with
+that motion, which the impulse alone would
+rate, you'll have the motion with which the body
+will go off from a given place of impulse, in the direction
+of a right line given in position.
+Cor. 4. And if that body is continually disturbed
+by the action of same foreign force, we may
+nearly know its course, by collecting the changes
+which that force introduces in some points, and elminating
+the continual changes it will undergo in the
+intermediate places, from the analogy that appears in
+the progress of the series.
+
+Scholium.
+
+Plate 6, Figure 4
+If a body P (Pl. 6. Fig. 4.) by means of a centripetal
+force tending to any given point R move in the
+perimeter of any given conic section, whose centre is
+C; and the law of the centripetal force is required:
+Draw C G parallel to the radius RP, and meeting the
+tangent PG of the orbit in G; and the force required
+(by cor. 1. & schol. prop, 10. & cor. 3. prop. 7.)
+will be as 
+  
+    
+      
+        
+          
+            
+              
+                C
+                
+                  G
+                  
+                  
+                
+              
+              
+                R
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {CG^{2}}{RP^{2}}}}
+  
+. 

@@ -1,0 +1,2438 @@
+←Section IThe Mathematical Principles of Natural Philosophyby Isaac Newton, translated by Andrew MotteBook I, Section II: Of the invention of centripetal forces.Section III→
+
+Proposition I
+Proposition II
+Scholium
+Proposition III
+Scholium
+Proposition IV
+Scholium
+Proposition V
+Proposition VI
+Proposition VII
+Proposition VIII
+Proposition IX
+Lemma XII
+Proposition X
+Scholium
+
+Section II.
+
+Of the invention of centripetal forces.
+
+Proposition I. Theorem I.
+
+The areas, which revolving bodies describe by radii drawn to an immoveable centre of force, do lie in the same immovable planes, and are proportional to the times in which they are described. Pl. 2. Fig. 5.
+
+Plate 2, Figure 5
+OR suppose the time to be divided into
+equal parts, and in the firstt part of that
+time, let the body by its innate force describe
+the right line AB. In the second
+part of that time, the same would, (by law 1.) if not hinder'd, proceed directly to c, along the line Bc equal to AB; so that by the radii AS, BS, cS drawn to the centre, the equal areas ASB, BSc, would be described. But when the body is arrived at B,
+suppose that a centripetal force act at once with a great impulse, and turning aside the body from the right line Bc, compells it afterwards to continue its
+motion along the right line BC. Draw cC parallel to BS meeting BC in C; and at the end of the second part of the time, the body (by Cor. 1. of the laws) will be found in C, in the same plane with the triangle ASB. Joyn SC, and, because SB and Cc are parallel, the triangle SBC will be equal to the triangle
+SBc, and therefore also to the triangle SAB. By
+the like argument, if the centripetal force acts successively
+in C, D, E, &c. and makes the body in
+each single particle of time, to describe the right lines CD,
+DE, EF, &c. they will all lye in the same plane;
+and the triangle SCD will be equal to the triangle
+SBC, and SDE to SCD, and SEP to SDE. And
+therefore in equal times, equal areas are describ'd in
+one immovable plane: and, by composition, any
+sums SADS, SAFS, of those areas, are one to the
+other, as the times in which they are describ'd. Now
+let the number of those triangles be augmented, and
+their breadth dimnished in infinitum; and (by cor. 4.
+lem. 5.) their ultimate perimeter ADF will be a curve
+line: and therefore the centripetal force, by which the
+body is perpetually drawn back from the tangent of
+this curve, will act continually; and any describ'd
+areas SADS, SAFS, which are always proportional
+to the times of description, will, in this case also, be
+proportional to those times. Q. E. D.
+Cor. 1. The velocity of a body attracted towards
+an immovable centre, in spaces void of resistance,
+is reciprocally as the perpendicular let fall from
+that centre on the right line that touches the orbit.
+For the velocities in those places A, B, C, D, E are as
+the bases AB, BC, CD, DE, EF, of equal triangles; and
+these bases are reciprocally as the perpendiculars let fall
+upon them.
+Cor. 2. If the chords AB, BC of two arcs, successively
+described in equal times, by the same body,
+in spaces void of resistance, are compleated into a parallelogram
+ABCB and the diagonal BV of this parallelogram,
+in the position which it ultimately acquires
+when those arcs are diminished in infinitum, is produced both ways, it will pass through the centre of
+force.
+Cor. 3. If the chords AB, BC, and DE, EF, of
+arcs describ'd in equal times, in spaces void of resistance,
+are compleated into the parallelograms ABCD, DEFZ;
+the forces in B and E are one to the other in the ultimate
+ratio of the diagonals BV, EZ, when those arcs
+are diminished in infinitum. For the motions B; and
+EF of the body (by cor. 1. of the laws) are compounded
+of the motions Bc, BV and Ef, EZ:
+but BV and EZ, which are equal to Cc and Ff
+in the demonstration of this proposition, were generated
+by the impulses of the centripetal force in B and
+E, and are therefore proportional to those impulses.
+Cor. 4. The forces by which bodies, in spaces void
+of resistance, are drawn back from rectilinear motions,
+and turned into curvilinear orbits, are one to another
+as the vers'd sines of arcs described in equal times;
+which versed sines tend to the centre of force, and
+bisect the chords when those arcs are diminished to
+infinity. For such vers'd sines are the halfs of the
+diagonals mentioned in cor. 3.
+Cor. 5. And therefore those forces are to the
+force of gravity, as the said vers'd sines to the vers'd
+sines perpendicular to the horizon of those parabolic arcs
+which projectiles describe in the same time.
+Cor. 6. And the same things do all hold good
+(by cor. 5. of the laws) when the planes in which
+the bodies are mov'd, together with the centres of
+force which are placed in those planes, are not at
+rest but move uniformly forward in right lines. 
+
+Proposition II. Theorem II.
+
+Every body, that moves in any curve line described in a plane, and by a radius, drawn to a point either immoveable, or moving forward with an uniform rectilinear motion, describes about that point areas proportional to the times, is urged by a centripetal force directed to that point.
+Case 1. For every body that moves in a curve
+line, is (by law 1.) turned aside from its rectilinear
+course by the action of some force that impels it.
+And that force by which the body is turned off
+from its rectilinear course, and is made to describe, in
+equal times, the equal least triangles SAB, SBG, SCD, &c.
+about the immovable point S, (by prop. 40. book 1.
+elem. and law 2.) acts in the place B, according to
+the direction of a line parallel to cC, that is, in the
+direction of the line BS; and in the place C, according
+to the direction of a line parallel to dD, that is,
+in the direction of the line CS, &c. And therefore acts
+always in the direction of lines tending to the immovable
+point S. Q. E. D.
+Case 2. And (by cor. 5. of the laws) it is indifferent
+whether the superficies in which a body describes
+a curvilinear figure be quiescent, or moves together
+with the body, the figure describ'd, and its
+point S, uniformly forwards in right lines. 
+Cor. 1. In non-resisting spaces or mediums, if
+the areas are not proportional to the times, the forces
+are not directed to the point in which the radii meet;
+but deviate therefrom in consequantia, or towards the
+parts to which the motion is directed. if the description
+of the areas is accelerated; but in antecedentia, if
+retarded.
+Cor. 2. And even in resisting mediums, if the
+description of the areas is accelerated, the directions of
+the forces deviate from the point in which the radii
+meet, towards the parts to which the motion tends.
+
+Scholium
+
+A body may be urged by a centripetal force
+compounded or several forces. In which case the
+meaning of the proposition is, that the force which
+results out of all, tends to the point S. But if any
+force, acts perpetually in the direction of lines perpendicular
+to the describ'd surface; this force will
+make the body to deviate from the plane of its motion:
+but will neither augment nor diminish the
+quantity of the described surface, and is therefore to
+be neglected in the composition of forces. 
+
+Proposition III. Theorem III.
+
+Every body, that, by a radius drawn to the centre of another body howsover moved, described areas about that centre proportional to the times, is urged by a force compounded out of the centripetal force tending to that other body, and of all the accelerative force by which that other body is impelled.
+Let L represent the one, and T the other body;
+and (by Cor. 6 of the laws) if both bodies are urged
+in the direction of parallel lines, by a new force
+equal and contrary to that by which the second body T
+is urged, the firstt body L will go on to describe
+about the other body T, the same areas as before: but
+the force, by which that other body T was urged,
+will be now destroyed by an equal and contrary force;
+and therefore (by Law 1.) that other body T, now left
+to it self, will either rest, or move uniformly forward
+in a right line: and the firstt body L impell'd by
+the difference of the forces, that is, by the force remaining,
+will go on to describe about the other body
+T; areas proportional to the times. And therefore (by
+Theor. 2.) the difference of the forces is directed to
+the other body T as its centre. Q. E. D.
+Cor. 1. Hence if the one body L, by a radius
+drawn to the other body T, describes areas proportional
+to the times; and from the whole force, by which
+the firstt body L is urged (whether that force is simple, or, according to cor. 2. of the laws, compounded
+out of several forces) we subduct (by the same
+cor.) that whole accelerative force, by which the
+other body is urged; the whole remaining force by
+which the firstt body is urged, will tend to the other
+body T, as its centre.
+Cor. 2. And, if these areas are proportional to the
+times nearly, the remaining force will tend to the other body
+T nearly.
+Cor. 3. And vice versa, if the remaining force
+tends nearly to the other body T, those areas will
+be nearly proportional to the times.
+Cor. 4. If the body L, by a radius drawn to
+the other body T, describes areas, which compared
+with the times, are very unequal; and that other
+body T be either at rest or moves uniformly forward
+in a right line: the action of the centripetal force
+tending to that other body T, is either none at all, or
+it is mix'd and compounded with very powerful actions
+of other forces: and the whole force compounded
+of them all, if they are many, is directed to another
+(immovable or moveable) centre. The same thing
+obtains, when the other body is moved by any motion
+whatsoever; provided that centripetal force is
+taken, which remains after subducting that whole force
+acting upon that other body T.
+
+Scholium
+
+ 
+Because the equable description of areas indicates
+that a centre respected by that force with which the
+body is most affected, and by which it is drawn back
+from its rectilinear motion, and retained in its orbit; why may we not be allowed in the following discourse,
+to use the equable description of areas as an indication
+of a centre, about which all circular motion
+is performed in free spaces?
+
+Proposition IV. Theorem IV.
+
+The centripetal forces of bodies, which by equoble motions describe different circles, tend to the centres of the same  circles; and are one to the other, as the squares of the arcs described in equal times applied to the radii applied the circles.
+These forces tend to the centres of the circles (by
+prop. 2. and cor. 2. prop. 1) and are one to another as
+the versed sines of the least arcs described in equal
+times (by cor. 4. prop. 1.) that is, as the squares
+of the same arcs applied to the diameters of the circles,
+(by lem. 7.) and therefore since those arcs are as arcs
+described in any equal times, and the diameters are as
+the radii; the forces will be as the squares of an arcs
+described in the same time applied to the radii of
+the circles. Q. E. D.
+Cor. 1. Therefore, since those arcs are as the velocities
+of the bodies, the centripetal forces are in a ratio
+compounded of the duplicate ratio of the velocities
+directly, and of the simple ratio of the radii inversely. 
+Cor. 2. And, since the periodic times are in a
+ratio compounded of the ratio of the radii directly;
+and the ratio of the velocities inversely; the centripetal
+forces are in a ratio compounded of the ratio of
+the radii directly, and the duplicate ratio of the periodic
+times inversely.
+Cor. 3. Whence if the periodic times are equal,
+and the velocities therefore as the radii; the centripetal
+forces will be also as the radii; and the contrary.
+Cor. 4. If the periodic times and the velocities
+are both in the subduplicate ratio of the radii; the
+centripetal forces will be equal among themselves: and
+the contrary.
+Cor. 5. If the periodic times are as the radii,
+and therefore the velocities equal; the centripetal forces
+will be reciprocally as the radii: and the contrary.
+Cor. 6. If the periodic times are in the sesquiplicate
+ratio of the radii, and therefore the velocities reciprocally
+in the subduplicate ratio of the radii; the
+centripetal forces will be in the duplicate ratio of the
+radii inversely: and the contrary.
+Cor. 7. And universally, if the periodic time is
+as any power 
+  
+    
+      
+        
+          
+            R
+            
+              n
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle R^{n}}
+  
+ of the radius R, and therefore the
+velocity reciprocally as the power 
+  
+    
+      
+        
+          
+            R
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle R^{n-1}}
+  
+ of the radius;
+the centripetal force will be reciprocally as the
+power 
+  
+    
+      
+        
+          
+            R
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle R^{2n-1}}
+  
+ of the radius: and the contrary.
+Cor. 8. The same things all hold concerning the
+times, the velocities, and forces by which bodies describe
+the similar parts of any similar figures, that
+have their centres in a similar position within those
+figures; as appears by applying the demonstration of
+the preceding cases to those. And the application
+is easy by only substituting the equable description of
+areas in the place of equable motion and using the
+distances of the bodies from the centres instead of the
+radii. 
+Cor. 9. From the same demonstration it likewise
+follows, that the arc which a body, uniformly revolving
+in a circle by means of a given
+force, describe sin any time, is a mean proportioanl between
+the diameter of the circle, and the space which
+the same body falling by the same given space would
+descend thro' in the same given time.
+
+Scholium.
+
+The case of the 6th corollary obtains in the celestial bodies,
+(as Sir Christopher Wren, Dr. Hooke, Dr. Halley have severally observed) and therefore in
+what follows, I intend to treat more at large of those
+things which relate to centripetal force decreasing in
+a duplicate ratio of the distances from the centres.
+Moreover, by means of the preceding proposition
+and its corollaries, we may discover the proportion
+of a centripetal force to any other known force, such
+as that of gravity. For if a body by means of its
+gravity revolves in a circle concentric to the Earth,
+this gravity is the centripetal force of that body. But
+from the descent of heavy bodies, the time of one entire
+revolution, as well as the arc described in any given
+time, is given, (by cor. 9. of this prop.) And by
+such propositions, Mr. Huygens, in his excellent book
+De Horlogie Oscillatorio, has compared the force of
+gravity with the centripetal forces of revolving bodies.
+The preceding proposition may be likewise demonstrated
+after this manner. In any circle suppose a polygon
+to be inscribed of any number of sides. And
+if a body, moved with a given velocity along the
+sides of the polygon, is reflectedfrom the circle at
+the several angular points; the force, with which at every direction it strikes the circle, will be as its
+velocity: and therefore the sum of the forces, in a
+given time, will be as that velocity and the number
+of reflexions conjunctly; that is, (if the species of the
+polygon be given) as the length described in that given
+time, and increased or diminished in the ratio of the same
+length to the radius of the circle; that is, as the
+square of that length applied to the ratios: and therefore if
+the polygon, by having its sides diminished
+is incresead, coincides with the circle, as the square
+of the arc described in a given time applied to the radius.
+This is the centrifugal force, with which the
+body impells the circle; and to which the contrary
+force, wherewith the circle continually repells the body
+towards the centre, is equal.
+
+Proposition V. Problem I.
+
+There being given in any places, the velocity with which a body desribes a given figure, by means of forces directed to some common centre; to find that centre. Pl. 3. Fig. 1.
+
+Plate 3, Figure 1
+Let the three right lines PT, TQV, VR touch the
+figure described in as many points P, Q, R, and meet
+in T and V. On the tangents erects the perpendiculars
+PA, QB, RC, reciprocally proportional to the
+velocities of the body in the points P, Q, R, from
+which the perpendiculars were raised, that is, so that
+PA may be to QB as the velocity in  Q to the
+velocity in P, and QB to RC as the velocity in R to
+the velocity in Q; Thro' the ends A, B, C, of the
+perpendiculars draw AD, DBE, EC, at right angles, meeting in D and E: And the right lines TD, VE
+produced, will meet in S the centre required.
+For the perpendiculars let fall from the centre S on
+the tangents PT, QT, are reciprocally as the velocities
+of the bodies in the points P and Q (by cor. 1.
+prop. 1.) and therefore, by consruction, as the perpendiculars
+AP, BQ directly; that is, as the perpendiculars
+let fall from the point D on the tangents.
+Whence it is easy to infer, that the points S, D, T, are
+in one right line. And by the like argument the points
+S, E, V are also in one right line; and therefore the
+centre S is in the point where the right lines TD,
+VE meet. Q. E. D.
+
+Proposition VI. Theorem V.
+
+In a space void of resisŧance, if a body revolves in any orbit about an immoveable centre, and in the least time describes any arc just then nascent; and the versed sine of that arc is suppofed to be drawn, bisecting the chord, and produced passing through the centre of force: the centripetal force in the middle of the arc, will be as the versed sine directly and the square of the time inversely.
+For the versed sine in a given time is as the force (by
+cor. 4. prop. 1.) and augmenting the time in any ratio,
+because the arc will be augmented in the same ratio, the
+versed sine will be augmented in the duplicate of that
+ratio, (by cor. 2 and 3. lem. 2.) and therefore is as
+the force and the square of the time. Subduct on both
+sides the duplicate ratio of the time, and the force will be as the versed line directly and the square of
+the time inversely. Q. E. D.
+And the same thing may also be easily demonstrated
+by corol. 4. lem. 10.
+
+Plate 3, Figure 2
+Cor. 1. If a body P revolving about the centre
+S, (Pl. 3. Fig. 2.) describes a curve line APQ which
+a right line ZPR touches in any point P; and from
+any other point Q of the curve. QR is drawn parallel
+to the distance SP, meeting the tangent in R;
+and QT is drawn perpendicular to the distance SP:
+the centripetal force will be reciprocally as the solid
+
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+, if the solid be taken of that magnitude
+which it ultimately acquires when the points P and
+Q coincide. For QR is equal to the versed sine of
+double the arc QP, whose middle is P: and double
+the triangle SQP, or SP x QT is proportional to
+the time, in which that double arc is described; and
+therefore may be used for the exponent of the time.
+Cor. 2. By a like reasoning, the centripetal force
+is reciprocally as the solid 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  T
+                  
+                  
+                
+                ×
+                Q
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {ST^{2}\times QP^{2}}{QR}}}
+  
+ if ST is a
+perpendicular from the centre of force on PR the tangent
+of the orbit. For the rectangles ST x QP and
+SP x QT are equal.
+Cor. 3. If the orbit is either a circle, or touches
+or cuts a circle concentrically, that is contains with
+a circle the least angle of contact or section, having
+the same curvature and the same radius of curvature at
+the point P; and if P, V be a chord of this circle,
+drawn from the body through the centre of force; the
+centripetal force will be reciprocally as the solid
+
+  
+    
+      
+        
+          S
+          
+            T
+            
+            
+          
+          ×
+          P
+          V
+        
+      
+    
+    {\displaystyle \scriptstyle ST^{2}\times PV}
+  
+. For PV is 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QP^{2}}{QR}}}
+  
+Cor. 4. The same things being supposed the
+centripetal force is as the square of the velocity directly.
+and that chord inversely. For the velocity is
+reciprocally as the perpendicular ST; by cor. 1. prop. 1.
+Cor. 5. Hence if any curvilinear figure APQ
+is given; and therein a point S is also given to
+which a centripetal force is perpetually directed; that
+law of centripetal force may be found, by which the
+body P will be continually drawn back from a rectlinear
+course, and being detained in the perimeter of
+that figure. will describe the same by a perpetual revolution.
+That is, we are to find by computation, either
+the solid 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+. of the solid 
+  
+    
+      
+        
+          S
+          
+            T
+            
+            
+          
+          ×
+          P
+          V
+        
+      
+    
+    {\displaystyle \scriptstyle ST^{2}\times PV}
+  
+,
+reciprocally proportional to this force. Examples of
+this we shall give in the following problems.
+
+Proposition VII. Problem II.
+
+If a body revolves in the circumference of a circle; it is proposed to find the law of centripetal force directed to any given point. Pl. 3. Fig. 3.
+
+Plate 3, Figure 3
+Let VQPA be the circumference of the circle; S
+the given point to which as to a centre the force tends;
+P the body moving in the circumference; Q the
+next place into which it is to move; and PRZ the
+tangent of the circle at the preceding place. Through
+the point S draw the chord PV, and the diameter
+VA of the circle, join AP, and draw, QT perpendicular
+to SP, which produced, may meet the tangent tangent PR in Z; and lastly, thro' the point Q draw LR parallel to SP, meeting the circle in L, and the tangent PZ in R. And, because of the 
+  
+, that is, QRL, to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+, as 
+  
+    
+      
+        
+          A
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle AV^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PV^{2}}
+  
+. And therefore 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                R
+                L
+                ×
+                P
+                
+                  V
+                  
+                  
+                
+              
+              
+                A
+                
+                  V
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QRL\times PV^{2}}{AV^{2}}}}
+  
+ is equal to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+. Multiply those equals by 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}}{QR}}}
+  
+ and the points P and Q coinciding, for RL write PV; then we shall have
+
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                P
+                
+                  V
+                  
+                  
+                
+              
+              
+                A
+                
+                  V
+                  
+                  
+                
+              
+            
+          
+          =
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times PV^{2}}{AV^{2}}}={\frac {SP^{2}\times QT^{2}}{QR}}}
+  
+. And therefore (by cor. 1. and 5. prop. 6.) the centripetal force is reciprocally as 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                P
+                
+                  V
+                  
+                  
+                
+              
+              
+                A
+                
+                  V
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times PV^{2}}{AV^{2}}}}
+  
+, that is (because 
+  
+    
+      
+        
+          A
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle AV^{2}}
+  
+ is given) reciprocally as the square of the distance of altitude SP, and the cube of the chord PV conjunctly. Q. E. I.
+
+The same otherwise
+
+On the tangent PR produced, let fall the perpendicular ST: and (because of the similar triangles STP, VPA) we shall have AV to PV as SP to ST, and therefore 
+  
+    
+      
+        
+          
+            
+              
+                S
+                P
+                ×
+                P
+                V
+              
+              
+                A
+                V
+              
+            
+          
+          =
+          S
+          T
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP\times PV}{AV}}=ST}
+  
+, and 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                P
+                
+                  V
+                  
+                  
+                
+              
+              
+                A
+                
+                  V
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{2}\times PV^{2}}{AV^{2}}}}
+  
+, that is, (because AV is given) reciprocally as 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          ×
+          P
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}\times PV^{2}}
+  
+. Q. E. I. 
+Cor. 1. Hence if the given point S, to which
+the centripetal force always tends, is placed in the
+circumference of the circle, as at V; the
+force will be reciprocally as the quadrato-cube (or
+fifth power) of the altitude SP.
+
+Plate 3, Figure 4
+Cor. 2. The force by which the body P in the
+circle APTV (Pl. 3. Fig. 4.) revolves about the centre
+of force S is to the force by which the same body P
+may revolve in the same circle and in the same periodic
+time about any other centre of force R, as 
+  
+    
+      
+        
+          R
+          
+            P
+            
+            
+          
+          ×
+          S
+          P
+        
+      
+    
+    {\displaystyle \scriptstyle RP^{2}\times SP}
+  
+
+to the cube of the right line SG, which from
+the firstt centre of force S, is drawn parallel to the
+distance PR of the body from the second centre of
+force R, meeting the tangent PG of the orbit in G.
+For by the construction of this proposition, the former
+force is to the latter as 
+  
+    
+      
+        
+          R
+          
+            P
+            
+            
+          
+          ×
+          P
+          
+            T
+            
+            
+          
+          S
+          P
+        
+      
+    
+    {\displaystyle \scriptstyle RP^{2}\times PT^{3}SP}
+  
+ to 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+          ×
+          P
+          
+            V
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{2}\times PV^{3}}
+  
+;
+that is, as 
+  
+    
+      
+        
+          S
+          P
+          ×
+          R
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP\times RP^{2}}
+  
+ to 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+                ×
+                P
+                
+                  V
+                  
+                  
+                
+              
+              
+                P
+                
+                  T
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {SP^{3}\times PV^{3}}{PT^{3}}}}
+  
+ or, (because
+of the similar triangles PSG, TPV) to 
+  
+    
+      
+        
+          S
+          
+            G
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SG^{3}}
+  
+.
+Cor. 3. The force by which the body P in any
+orbit revolves about the centre of force S, is to the
+force by which the same body may revolve in the
+same orbit, and in the same periodic time about any
+other centre of force R, as the solid 
+  
+    
+      
+        
+          S
+          P
+          ×
+          R
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP\times RP^{2}}
+  
+,
+contained under the distance of the body from the
+firstt centre of force S, and the square of its distance
+from the second centre of force R, to the cube of the
+right line SG, drawn from the firstt centre of force S,
+parallel to the distance RP of the body from the
+second centre of force R, meeting the tangent PG of
+the orbit in G. For the force in this orbit at any
+point P is the same; as in a circle of the same curvature 
+
+Proposition VIII. Problem III.
+
+If a body moves in the semi-circumference PQA; it is proposed to find the law of the centripetal force tending to a point S, so remote, that all the lines PS, RS drawn thereto, may be taken for parallels.  Pl. 3. Fig. 5.
+
+Plate 3, Figure 5
+From C the centre of the semi-circle, let the semidiameter
+CA be drawn, cutting the parallels at right
+angles in M and M and join CP. Because of the
+similar triangles CPM, PZT and RZQ we shall
+have 
+  
+    
+      
+        
+          C
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CP^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            M
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PM^{2}}
+  
+ as 
+  
+    
+      
+        
+          P
+          
+            R
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PR^{2}}
+  
+ to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+; and from the
+nature of the circle, 
+  
+    
+      
+        
+          P
+          
+            R
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PR^{2}}
+  
+ is equal
+to the rectangle 
+  
+    
+      
+        
+          Q
+          R
+          ×
+          
+            
+              
+                R
+                N
+                +
+                Q
+                N
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QR\times {\overline {RN+QN}}}
+  
+, or the points P, Q coinciding,
+to the rectangle 
+  
+    
+      
+        
+          Q
+          R
+          ×
+          P
+          M
+          C
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QR\times 2PMCP^{2}}
+  
+. Therefore 
+  
+    
+      
+        
+          C
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CP^{2}}
+  
+ is to
+
+  
+    
+      
+        
+          P
+          
+            M
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PM^{2}}
+  
+ as 
+  
+    
+      
+        
+          Q
+          R
+          ×
+          P
+          M
+          P
+          
+            R
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QR\times 2PMPR^{2}}
+  
+ to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+; and
+
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+          =
+          
+            
+              
+                P
+                
+                  M
+                  
+                  
+                
+              
+              
+                C
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}={\frac {2PM^{2}}{CP^{2}}}}
+  
+ and
+
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+                ×
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+          =
+          
+            
+              
+                P
+                
+                  M
+                  
+                  
+                
+                ×
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                C
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {QT^{2}\times SP^{2}}{QR}}={\frac {2PM^{2}\times SP^{2}}{CP^{2}}}}
+  
+
+that is, (neglecting the given ration 
+  
+    
+      
+        
+          
+            
+              
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                C
+                
+                  P
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {2SP^{2}}{CP^{2}}}}
+  
+ reciprocally
+as 
+  
+    
+      
+        
+          P
+          
+            M
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PM^{2}}
+  
+. Q. E. I.
+And the same thing is likewise easly inferred from
+the preceding Proposition. 
+
+Scholium.
+
+And by a like reasoning, a body will be moved in
+an ellipsis, or even in an hyperbole, or parabola, by
+a centriperal force which is reciprocally as the cube of
+the ordinate directed to an infinitely remote centre of
+force.
+
+Proposition IX. Problem IV.
+
+If a body revolves in a final PS, cutting all the radii SP, SQ, &c. in a given angle: it is proposed to fund the law of the centripetal force tending to the centre of that sspiral. Pl. 3. Fig. 6.
+
+Plate 3, Figure 6
+Suppose the indefinitely small angle PSQ to
+be given; because then all the angles are given,
+the figure SPRQT will be given in specie.
+Therefore the ratio 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                T
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT}{QR}}}
+  
+ is also given, and 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}}
+  
+ is as
+QT that is (because the figure is given in specie) as
+SP. But if the angle PSQ is any way changed,
+the right line QR, subtending the angle of contact
+QPR, (by lem. 11.) will be changed in the duplicate
+ratio of PR or QT. Therefore the ratio 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{QR}}}
+  
+ 
+remains the same as before, that is a SP. And
+
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+                ×
+                S
+                
+                  P
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}\times SP^{2}}{QR}}}
+  
+ is as 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{3}}
+  
+, and therefore (by corol. 1.
+and 5. prop. 6.) the centripetal force is reciprocally as
+the cube distance SP. Q. E. I. 
+
+The same otherwise
+
+The perpendicular ST let fall upon the tangent and the chord PV of the circle concentrically cutting the spiral are in given ratio's to the height SP; and therefore 
+  
+    
+      
+        
+          S
+          
+            P
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle SP^{3}}
+  
+ is as 
+  
+    
+      
+        
+          S
+          
+            T
+            
+            
+          
+          ×
+          P
+          V
+        
+      
+    
+    {\displaystyle \scriptstyle ST^{2}\times PV}
+  
+, that is (by corol. 3. and 5. prop. 6.) reciprocally as the centripetal force.
+
+Lemma 12.
+
+All parallelograms circmscribed about any conjugate diameters of a given ellipsis or hyperbola are equal among themselves.
+This is demonstrated by the writers on the conic
+sections.
+
+Proposition X. Problem V.
+
+If a body revolve: in an ellipsis: it is proposed to find the law of the centripetal force tending to the centre of the ellipsus. Pl. 4. Fig. 1.
+
+Plate 4, Figure 1
+Suppose CA, CB to be semi-axes of the ellippse;
+GP, DK conjugate diameters; PF, Qf perpendiculars
+to those diameters; Qv an ordinate to the diameter
+GP; and if the parallelogram QvPR be compleated;
+then (by the properties of the conic sections)
+the rectangle PvG will be to 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ as 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to
+
+  
+    
+      
+        
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CD^{2}}
+  
+, and (because of the similar triangles QvT,
+PCF) 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}}
+  
+ to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ as  
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+; and by composition,
+the ration of PvG to 
+  
+    
+      
+        
+          Q
+          
+            T
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle QT^{2}}
+  
+ is compounded of the ratio of 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to 
+  
+    
+      
+        
+          C
+          
+            D
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CD^{2}}
+  
+ and of the ratio of 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+
+to 
+  
+    
+      
+        
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PF^{2}}
+  
+, that is, vG to 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+              
+              
+                P
+                v
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}}{Pv}}}
+  
+ as 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ to 
+  
+    
+      
+        
+          
+            
+              
+                C
+                
+                  D
+                  
+                  
+                
+                ×
+                P
+                
+                  F
+                  
+                  
+                
+              
+              
+                P
+                
+                  C
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {CD^{2}\times PF^{1}}{PC^{2}}}}
+  
+.
+Put QR for Pv, and (by lem. 11.) BC x CA for
+CD x PF PM-C, also (the points P and Q coinciding,) 2PC
+for vG; and multiplying the extremes and means
+together, we shall have 
+  
+    
+      
+        
+          
+            
+              
+                Q
+                
+                  T
+                  
+                  
+                
+                ×
+                P
+                
+                  C
+                  
+                  
+                
+              
+              
+                Q
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {QT^{2}\times PC^{2}}{QR}}}
+  
+ equal to
+
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                  C
+                  
+                  
+                
+                ×
+                C
+                
+                  A
+                  
+                  
+                
+              
+              
+                P
+                C
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {2BC^{2}\times CA^{2}}{PC}}}
+  
+. Therefore (by cor. 5. prop. 6.)
+the centripetal force us reciprocally as 
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                  C
+                  
+                  
+                
+                ×
+                C
+                
+                  A
+                  
+                  
+                
+              
+              
+                P
+                C
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {2BC^{2}\times CA^{2}}{PC}}}
+  
+;
+that is (because 
+  
+    
+      
+        
+          B
+          
+            C
+            
+            
+          
+          ×
+          C
+          
+            A
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2BC^{2}\times CA^{2}}
+  
+ is given) reciprocally
+as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                C
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {1}{PC}}}
+  
+; that is, directly as the distance PC. Q.  E. I.
+
+The same otherwise.
+
+In the right line PG on the other side of the
+point T; take the point u so that Tu may be eqal
+to Tv; then take uV, such as shall be to vG as
+
+  
+    
+      
+        
+          D
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle DC^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+. And because 
+  
+    
+      
+        
+          Q
+          
+            c
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Qc^{2}}
+  
+ is to PvG as
+
+  
+    
+      
+        
+          D
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle DC^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+ (by the conic sections) we shall
+have 
+  
+    
+      
+        
+          Q
+          
+            v
+            
+            
+          
+          =
+          P
+          v
+          ×
+          u
+          V
+        
+      
+    
+    {\displaystyle \scriptstyle Qv^{2}=Pv\times uV}
+  
+. Add the rectangle uPv
+to both sides, and the square of the chord of the arc
+PQ will be equal to the rectangle VPv; and therefore
+a circle, which touches the conic section in P,
+and passes thro' the point Q will pals also thro' the
+point V. Now let the points P and Q meet, and the
+ratio of uV to vG, which is the same with the ratio of
+
+  
+    
+      
+        
+          D
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle DC^{2}}
+  
+ to 
+  
+    
+      
+        
+          P
+          
+            C
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PC^{2}}
+  
+, will become the ratio of PV to PG or PV
+to 2PC; and therefore PV will be equal to 
+  
+    
+      
+        
+          
+            
+              
+                D
+                
+                  C
+                  
+                  
+                
+              
+              
+                P
+                C
+              
+            
+          
+        
+      
+    
+    {\displaystyle \textstyle {\frac {2DC^{2}}{PC}}}
+  
+.
+And therefore the force, by which the body P
+revolves in the ellipses, will be reciprocally as 
+  
+    
+      
+        
+          
+            
+              
+                D
+                
+                  C
+                  
+                  
+                
+              
+              
+                P
+                X
+              
+            
+          
+          ×
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {2DC^{2}}{PX}}\times PF^{2}}
+  
+ (by cor. 3. prop. 6.) that is, (because
+
+  
+    
+      
+        
+          D
+          
+            C
+            
+            
+          
+          ×
+          P
+          
+            F
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2DC^{2}\times PF^{2}}
+  
+ is given) directly as PC. Q.  E. I.
+Cor. 1. And therefore the force is as the distance
+of the body from the centre of the ellipsis; and
+vice versa if the force is as the distance, the body will
+move in an ellipsis whose centre coincides with the
+centre of force, or perhaps in a circle into which the
+ellipsis may degenerate.
+Cor. 2. And the periodic times of the revolutions
+made in all ellipses whatsoever about the same
+centre will be equal. For those times in similar ellipses
+will be equal (by corol. 3 and 8. prop. 4.) but in
+ellipses that have their greater axe common, they
+are one to another as the whole areas of the ellipses
+directly, and the parts of the areas described in the
+same time inversly; that is, as the lesser axes directly.
+and the velocities of the bodies in their principal
+vertices inversely; that is. as those lesser axes directly,
+and the ordinates to the same point of the common axis
+inversely; and therefore (because of the equality of
+the direct and inverse ratio's) in the ratio of equality.
+
+Scholium.
+
+If the ellipsis by having its centre removed to an
+infinite distance degenerates into a parabola, the body
+will move in this parabola; and the force, now tending
+to a centre infinitely remote, will become equable.
+which is Ga1ileo's theorem. And if the parabolic
+section of the cone (by changing the inclination of
+the cutting plane to the cone) degenerates into an
+hyperbola, the body will move in the perimeter of
+this hyperbola, having its centripetal force changed
+into a centrifugal force. And in like manner as in the circle, or in the ellipsis, if the forces are directed to the
+centre of the figure placed in the abscissa, those forces by
+increasing or diminishing the ordinates in any given ratio,
+or even by changing the angle of the inclination of
+the ordinates to the abscissa, are always augmented or diminished
+in the ratio of the distances from the centre;
+provided the periodic times remain equal; so also in
+all figures whatsoever, if the ordinates are augmented
+or diminished in any given ratio, or their inclination
+is any way changed, the periodic time remaining the
+same); the forces directed to any centre placed in
+the abscissa, are in the several ordinates augmented or
+diminished in the ratio of the distances from the centre.

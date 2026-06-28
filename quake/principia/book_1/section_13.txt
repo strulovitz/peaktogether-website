@@ -1,0 +1,1753 @@
+←Section XIIThe Mathematical Principles of Natural Philosophyby Isaac Newton, translated by Andrew MotteBook I, Section XIII: Of the attractive forces of bodies which are not of a sphaerical figure.Section XIV→
+
+Proposition LXXXV
+Proposition LXXXVI
+Proposition LXXXVII
+Proposition LXXXVIII
+Proposition LXXXIX
+Proposition XC
+Proposition XCI
+Proposition XCII
+Proposition XCIII
+Scholium
+
+Section XIII.
+
+Of the attractive forces of bodes which are not of a sphærical figure.
+
+Proposition LXXXV. Theorem XLII.
+
+If a body be attracted by another, and its attraction be vastly stronger when it if contiguous to the attracting body, than when they are separated from one another by a very small interval; the forces of the particles of the attracting body decrease, in the recess of the body attracted, in more than a duplicate ratio of the distance of the particles.
+For if the forces decrease ine a duplicate ratio of the distances from the particles, the attraction towards a sphærical body, being (by prop. 74.)  recioprocally as the square of the distance of the attracted
+body from the centre of the sphere, will
+not be sensibly increased by the contact, and it
+will be still less increased by it, if the attraction,
+in the recess of the body attracted, decreases in a
+still less proportion. The proposition therefore is
+evident concerning attractive spheres. And the case
+is the same of concave sphærical orbs attracting
+external bodies. And much more does it appear
+in orbs that attract bodies placed within them, because
+there the attractions diffused through the
+cavities of those orbs are (by prop. 70.) destroyed
+by contrary attractions, and therefore have
+no effects even in the place of contact. Now if
+from these spheres and sphærical orbs we take of
+way any parts remote from the place of contact,
+and add new parts any where at pleasure; we may
+change the figures of the attractive bodies at
+pleasure, but the parts added or taken away, being
+remote from the place of contact, will cause
+no remarkable excess of the attraction arising from
+the contact: of the two bodies. Therefore the
+proposition holds good in bodies of all figures.
+Q. E. D.
+
+Proposition LXXXVI. Theorem XLUUU.
+
+If the forces of the particles of which an attractive body is composed, decrease, in the recess of the attracted body, in a triplicate or more than triplicate ratio of the distance from the particles; the attraction will be vastly stronger in the point of contact than when the attracting and attracted bodies are separated from each other though by never so small on interval.
+For that the attraction is infinitely increased
+when the attracted corpuscle comes to touch an
+attracting sphere of this kind appears by the solution
+of problem 41. exhibited in the second and
+third examples. The same will also appear (by
+comparing those examples and therorem 41. together)
+of attractions of bodies concavo-convex
+orbs, whether the attracted bodies be
+placed without the orbs, or in the cavities whithin
+them. And by adding to or taking from those
+spheres and orbs, any attractive matter any where
+without the place of contact, so that the attractive
+bodies may receive any assigned figure, the
+proposition will hold good of all bodies universsally. Q. E. D.
+
+Proposition LXXXVII. Theorem XLIV.
+
+if two bodies similar to each other, and consisting of matter equally attractive, attract separately two corpuscles proportional to those bodies, and in a like situation to them; the accelerative attractions of the corpuscle towards the entire bodies will be as the accelerative attractions of the corpuscule towards particles of the bodies proportional to the wholes, and alike situated in them.
+For if the bodies are divided into particles proportional
+to the wholes and alike situated in them,
+it will be, as the attraction towards any particle
+of one of the bodies to the attraction towards the
+correspondent particle in the other body, so are the
+attractions towards the several particles of the firstt
+body to the attractions towards the several correspondent
+particles of the other body; and by composition,
+so is the attraction towards the firstt whole
+body to the attraction towards the second whole
+body.  Q. E. D.
+Cor. 1. Therefore, if as the distances of the corpuscles
+attracted increase, the attractive forces of the
+particles decrease in the ratio of any power of the
+distances; the accelerative attractions towards the
+whole bodies will be as the bodies directly and
+those powers of the distances inversely. As if the
+forces of the particles decrease in a duplicate ratio
+of the distances from the corpuscles attracted, and
+the bodies are as 
+  
+    
+      
+        
+          
+            A
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle A^{3}}
+  
+ and 
+  
+    
+      
+        
+          
+            B
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle B^{3}}
+  
+, and therefore both
+the cubic sides of the bodies, and the distance
+of the attracted corpuscles from the bodies are as A
+and B; the accelerative attractions towards the
+bodies will be as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                
+                
+              
+              
+                A
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {A^{3}}{A^{2}}}}
+  
+ and 
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                
+              
+              
+                B
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {B^{3}}{B^{2}}}}
+  
+, that is, as A and B
+the cubic sides of those bodies. If the forces of
+the particles decrease in a triplicate ratio of the
+distances from the attracted corpuscles; the accelerative attractions towards the whole bodies will be
+as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                
+                
+              
+              
+                A
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {A^{3}}{A^{3}}}}
+  
+ and 
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                
+              
+              
+                B
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {B^{3}}{B^{3}}}}
+  
+, that is, equal. If the forces decrease
+in a quadruplicate ratio; the attractions towards
+the bodies will be as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                
+                
+              
+              
+                A
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {A^{3}}{A^{4}}}}
+  
+ and 
+  
+    
+      
+        
+          
+            
+              
+                B
+                
+                
+              
+              
+                B
+                
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {B^{3}}{B^{4}}}}
+  
+; that is,
+reciprocally as the cubic sides A and B. And
+so in other cases.
+Cor. 2. Hence on the other hand, from the
+forces with which like bodies attract corpuscles
+similarly situated, may be collected the ratio of
+the decrease of the attractive forces of the particles
+as the attracted corpuscle recedes from them;
+if so be that decrease is directly or inversely in
+any ratio of the distances.
+
+Proposition LXXXVIII. Theorem XLV.
+
+If the attractive forces of the equal particles of any body be at the distance of the places from the particles, the force of the whole body will tend to its centre of gravity; and will be the same with the force of a globe, consisting of similar and equal matter; and having its centre in the centre of gravity.
+
+Plate 23, Figure 7
+Let the particles A, B, (Pl. 23. Fig. 7.) of
+the body RSTV attract any corpuscle Z with
+forces which, supposing the particles to be equal between themselves, are as the distances AZ, BZ;
+but if they are supposed unequal, are as those particles
+and their distances AZ, BZ conjunctly, or
+(if I may so speak) as those particles drawn into
+their distances AZ, BZ respectively. And
+let those forces be expressed by the contents under
+A x AR, and B x BZ. Join AB, and let it
+be cut in G, so that AG may be to BG as the
+particle B to the particle A; and G will be the
+common centre of gravity of the particles A and
+B. The force A x AZ will (by cor. 2. of the
+laws) be resolved into the forces A x GZ and
+A x AG; and the force B x BZ into the forces
+B x GZ and B x BG. Now the forces A x AG
+and B x BG, because A is proportional to B, and
+BG to AG, are equal; and therefore having contrary
+directions destroy one other. There remain
+then the forces A x GZ and B x GZ. These tend
+from Z towards the centre G, and compose the
+force 
+  
+    
+      
+        
+          
+            
+              
+                A
+                +
+                B
+              
+              ¯
+            
+          
+          ×
+          G
+          Z
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {A+B}}\times GZ}
+  
+; that is the same force as if
+the attractive particles A and B were placed in
+their common centre of gravity G, composing
+there a little globe.
+By the same reasoning if there be added a third
+particle C, and the force of it be compounded
+with the force 
+  
+    
+      
+        
+          
+            
+              
+                A
+                +
+                B
+              
+              ¯
+            
+          
+          ×
+          G
+          Z
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {A+B}}\times GZ}
+  
+ tending to the centre
+G; the force thence arising will tend to the common
+centre of gravity of that globe in G and of
+the particle C; that is, to the common centre of
+gravity of the three particles A, B, C; and will
+be the same as if that globe and the particle C
+were placed in that common centre composing a
+greater globe there. And so we may go on in
+infinitum. Therefore the whole force of all the particles of any body whatever RSTV, is the same
+as if the body, without removing its centre of
+gravity, were to put on the form of a globe.
+Q. E. D.
+Cor. Hence the motion of the attracted body
+Z will be the same, as if the attracting body
+RSTV were sphærical; and therefore if that attracting
+body be either at rest, or proceed uniformly
+in a right line; the body attracted will
+move in an ellipsis having its centre in the centre
+of gravity of the attracting body.
+
+Proposition LXXXIX. Theorem XLVI.
+
+If there be several bodies consisting of equal particles whose forces are as the distance of the places from each; the force compounded of all the forces by which any corpuscle is attracted, will tend to the common centre of gravity of the attracting bodies; and will be the same as if those attracting bodies, preserving their common centre of gravity, should unite there, and be formed into a globe.
+This is demonstrated after the same manner as
+the foregoing proposition.
+Cor. Therefore the motion of the attracted body
+will be the same as if the attracting bodies,
+preferring their common centre of gravity, should unite there, and be formed into a globe. And
+therefore if the common centre of gravity of the
+attracting bodies be either at rest, or proceeds uniformly
+in a right line; the attracted body will
+move in an ellipsis having its centre in the
+common centre of gravity of the attracting
+bodies.
+
+Proposition XC. Problem XLIV.
+
+If to the several points of any circle there tend equal centripetal forces, increasing or decreasing in any ratio of the distances; it is required to find the force with which a corpuscle it attracted, that is situate any where in a right line which stands at right angles to the plane of the circle at its centre.
+
+Plate 24, Figure 1
+Suppose a circle to be described about the centre
+A (Pl. 24. Fig. 1.) with any interval AD
+in a plane to which the right line AP is perpendicular;
+and let it be required to find the force
+with which a corpuscle P is attracted towards the
+same. From any point E of the circle, to the attracted
+corpuscle P, let there be drawn the right
+line PE. In the right line PA take PF equal to
+PE, and make a perpendicular FK, erected at F,
+to be as the force with which the point E attracts
+the corpuscle P. And let the curve line IKL be the locus of the point K. Let that curve meet
+the plane of the circle in L. In PA take PH
+equal to PD, and erect the perpendicular HI
+meeting that curve in I; and the attraction of the
+corpuscle P towards the circle will be as the area
+AHIL drawn into the altitude AP. Q. E. I.
+For let there be taken in AE a very small line
+Ee. Join Pe, and in PE, PA taka PC equal
+to Pe. And because the force with which any
+point E of the annulus described about the centre
+A with the interval AE in the aforesaid plane, attracts
+to it self the body P, is supposed to be as
+FK; and therefore the force with which that point
+attracts the body P towards A is as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                P
+                ×
+                F
+                K
+              
+              
+                P
+                E
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AP\times FK}{PE}}}
+  
+ and
+the force with which the whole annulus attracts
+the body P towards A, is as the annulus and
+
+  
+    
+      
+        
+          
+            
+              
+                A
+                P
+                ×
+                F
+                K
+              
+              
+                P
+                E
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AP\times FK}{PE}}}
+  
+ conjunctly; and that annulus also is as
+the rectangle under the radius AE and the breadth
+Ee, and this rectangle (because PE and AE, Ee
+and CE are proportional) is equal to the rectangle
+PE x CE or PE x Ff; the force with which that
+annulus attracts the body P towards A, will be as
+Pe x Ff and 
+  
+    
+      
+        
+          
+            
+              
+                A
+                P
+                ×
+                F
+                K
+              
+              
+                P
+                E
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AP\times FK}{PE}}}
+  
+ conjunctly; that is as the
+content under Ff x FK x AP, or as the area FKkf
+drawn into AP. And therefore the sum of the
+forces with which all the annuli, in the circle described
+about the centre A with the interval AD,
+attract the body P towards A, is as the whole area
+AHIKL drawn into AP. Q. E. D. 
+Cor. 1. Hence if the forces of the points decrease
+in the duplicate ratio of the distances, that is,
+if FK be as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                
+                  F
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {1}{PF^{2}}}}
+  
+, and therefore the area AHIKL as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                A
+              
+            
+          
+          −
+          
+            
+              
+                P
+                H
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {1}{PA}}-{\frac {1}{PH}}}
+  
+; the attraction of the corpuscle P
+towards the circle will be as 
+  
+    
+      
+        
+          −
+          
+            
+              
+                P
+                A
+              
+              
+                P
+                H
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 1-{\frac {PA}{PH}}}
+  
+; that is, as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                H
+              
+              
+                P
+                H
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AH}{PH}}}
+  
+.
+Cor. 2. And universally if the forces of the
+points at the distances D be reciprocally as any
+power 
+  
+    
+      
+        
+          
+            D
+            
+              n
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle D^{n}}
+  
+, of the distances; that is, if FK be as
+
+  
+    
+      
+        
+          
+            
+              
+                D
+                
+                  n
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {1}{D^{n}}}}
+  
+, and therefore the area AHIKL as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                
+                  A
+                  
+                    n
+                    −
+                  
+                
+              
+            
+          
+          −
+          
+            
+              
+                P
+                
+                  H
+                  
+                    n
+                    −
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {1}{PA^{n-2}}}-{\frac {1}{PH^{n-2}}}}
+  
+; the attraction of the corpuscle P
+towards the circle will be as 
+  
+    
+      
+        
+          
+            
+              
+                P
+                
+                  A
+                  
+                    n
+                    −
+                  
+                
+              
+            
+          
+          −
+          
+            
+              
+                P
+                A
+              
+              
+                P
+                
+                  H
+                  
+                    n
+                    −
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {1}{PA^{n-2}}}-{\frac {PA}{PH^{n-2}}}}
+  
+.
+cor. 3. And if the diameter of the circle
+be increased in infinitum, and the number n be
+greater than unity; the attraction of the corpuscle
+P towards the whole infinite plane will be reciprocally
+as 
+  
+    
+      
+        
+          P
+          
+            A
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle PA^{n-2}}
+  
+ because the other term
+
+  
+    
+      
+        
+          
+            
+              
+                P
+                A
+              
+              
+                P
+                
+                  H
+                  
+                    n
+                    −
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {PA}{PH^{n-2}}}}
+  
+ vanishes. 
+
+Proposition XCI. Problem XLV.
+
+To find the attraction of a corpuscle situate in the axis of a round solid, to whose several points there tend equal centripetal forces decreasing in any ratio of the distances whatsover.
+
+Plate 24, Figure 2
+Let the corpuscle P (Pl. 24. Fig. 2.) situate
+in the axis AB of the solid DECG, be attracted
+towards that solid. Let the solid be cut by any
+circle as RFS, perpendicular to the axis; and in its
+semi-diameter FS, in any plane PALKB passing
+through the axis. Let there be taken (by prop. 90.)
+the length FK proportional to the force with
+which the corpuscle P is attracted towards that
+circle. Let the locus of the point K be the
+curve line LKI, meeting the planes of the outermost
+circles AL and BI in L and I; and the
+attraction of the corpuscle P towards the solid will
+be as the area LABI. Q. E. I.
+
+Plate 24, Figure 3
+Cor. 1 Hence if the solid be a cylinder described
+by the parallelogram ADEB (Pl. 24. Fig. 3.)
+revolved about the axis AB, and the centripetal
+forces tending to the several points be reciprocally
+as the squares of the distances from the
+points; the attraction of the corpuscle P towards
+this cylinder will be as AB - PE + PD. For the
+ordinate FK (by cor. 1. prop. 90.) will be as 
+  
+    
+      
+        
+          I
+          −
+          
+            
+              
+                P
+                F
+              
+              
+                P
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle I-{\frac {PF}{PR}}}
+  
+.
+The part I of this quantity, drawn into
+the length AB, describes the area I x AB; and
+the other part 
+  
+    
+      
+        
+          
+            
+              
+                P
+                F
+              
+              
+                P
+                R
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {PF}{PR}}}
+  
+
+drawn into the length PB, describes
+the area I into 
+  
+    
+      
+        
+          
+            
+              
+                P
+                E
+                −
+                A
+                D
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {PE-AD}}}
+  
+ (as may be easily
+shewn from the quadrature of the curve LKI);
+and in like manner, the same part drawn into the
+length PA describes the area I into 
+  
+    
+      
+        
+          
+            
+              
+                P
+                D
+                −
+                A
+                D
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {PD-AD}}}
+  
+,
+and drawn into AB, the difference of PB and
+PA describes I into 
+  
+    
+      
+        
+          
+            
+              
+                P
+                E
+                −
+                P
+                D
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {PE-PD}}}
+  
+, the difference of the
+areas. From the firstt content I x AB take away
+the last content I into 
+  
+    
+      
+        
+          
+            
+              
+                P
+                E
+                −
+                P
+                D
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {PE-PD}}}
+  
+, and there will remain
+the area LABI equal to I into 
+  
+    
+      
+        
+          
+            
+              
+                A
+                B
+                −
+                P
+                E
+                +
+                P
+                D
+              
+              ¯
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {AB-PE+PD}}}
+  
+.
+Therefore the force being proportional to this
+area, is as 
+  
+    
+      
+        
+          
+            A
+            B
+            −
+            P
+            B
+            +
+            P
+            D
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {AB-PB+PD}}
+  
+.
+
+Plate 24, Figure 4
+Cor. 2. Hence also is known the force by
+which a spheroid AGBC (Pl. 24. Fig. 4.) attracts
+any body P situate externally in its axis
+AB. Let NKPM be a conic section whose ordinate
+ER perpendicular to PE, may be always
+equal to the length of the line PD, continually
+drawn to the point D in which that ordinate cuts
+the spheroid. From the vertices A, B, of the
+spheroid, let there be erected to its axis AB the
+perpendiculars AK, BM, respectively equal to AP,
+BP, and therefore meeting the conic section in K
+and M; and join KM cutting off from it the
+segment KMRK Let S be the centre of the
+spheroid, and SC its greatest semi-diameter; and
+the force with which the spheroid attracts the
+body P, will be to the force with which a sphere
+described with the diameter AB attracts the same body, as 
+  
+    
+      
+        
+          
+            
+              
+                A
+                S
+                 
+                t
+                i
+                m
+                e
+                s
+                C
+                
+                  S
+                  
+                  
+                
+                −
+                P
+                S
+                ×
+                K
+                M
+                R
+                K
+              
+              
+                P
+                
+                  s
+                  
+                  
+                
+                +
+                C
+                
+                  S
+                  
+                  
+                
+                −
+                A
+                
+                  S
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AS\ timesCS^{2}-PS\times KMRK}{Ps^{2}+CS^{2}-AS^{2}}}}
+  
+ is to
+
+  
+    
+      
+        
+          
+            
+              
+                A
+                
+                  S
+                  
+                  
+                
+              
+              
+                P
+                
+                  S
+                  
+                  
+                
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {AS^{3}}{3PS^{2}}}}
+  
+. And
+by a calculation founded on the same principles
+may be found the forces of the segments of the
+spheroid.
+
+Plate 24, Figure 5
+Cor. 3. If the corpuscle be placed within the
+spheroid and in its axis, the attraction will be as
+its distance from the centre. This may be easily
+collected from the following reasoning, whether
+the particle be in the axis or in any other given
+diameter. Let AGOF (Pl. 2.4. FQ. 5.) be an
+attracting spheroid, S its centre, and P the body
+attracted. Through the body P let there be drawn
+the semi-diameter SPA, and two right lines DE,
+FG meeting the spheroid in D and E, F and G;
+and let PCM, HLN be the superficies of two
+interior spheroids similar and concentrical to the
+exterior, the firstt of which passes through the
+body P, and cuts the right lines DE, FG in B
+and C; and the latter cuts the same right lines in
+H and I, K and L. Let the spheroids have all
+one common axis, and the parts of the right lines
+intercepted on both sides DP and BE, FP and
+CG, DH and IE, FK and LG will be mutually equal;
+because the right lines DE, PB, and
+HI are bissected in the same points as are also the
+right lines FG, PC and KL. Conceive now
+DPF, EPG to represent opposite cones described
+with the infinitely small vertical angles DPF, EPG,
+and the lines DH, EI to be infinitely small also.
+Then the particles of the cones DHKF, GLIE,
+cut off by the spheroidical superficies, by reason of
+the equality of the lines DH and EI, will be
+to one another as the squares of the distances from the body P, and will therefore attract that
+corpuscle equally. And by a like reasoning if the
+spaces DPF, EGCB be divided into particles by
+the superficies of innumerable similar spheroids concentric
+to the former and having one common
+axis, all these particles will equally attract on both
+sides the body P towards contrary parts. Therefore
+the forces of the cone DPF, and of the conic
+segment EGCB are equal and by their contrariety
+destroy each other. And the case is the
+same of the forces of all the matter that lies without
+the interior spheroid PCBM. Therefore the
+body P is attracted by the interior spheroid PCBM
+alone, and therefore (by cor. 3. prop. 71.) its attraction
+is to the force with which the body A
+is attracted by the whole spheroid AGOD, as the
+distance PS to the distance AS. Q. E. D.
+
+Proposition XCII. Theorem XLVI.
+
+An attracting body being given, it is required to find the ratio of the decrease of the centripetal forces tending to its several points.
+The body given must be formed into a sphere,
+a cylinder, or some regular figure whose, law of
+attraction answering to any ratio of decrease may
+be found by prop. 80. 81 and 91. Then, by experiments,
+the force of the attractions must be
+found at several distances, and the law of attraction
+towards the whole, made known by that means,
+will give the ratio of the decrease of the forces of
+the several parts; which was to be found. 
+
+Proposition XCIII. Theorem XLVIII.
+
+If a solid be plane one one side, and infinitely extended on all other sides, and consist of equal particles equally attractive, whose forces decrease, in the recess from the solid, in the ratio of any power greater than the square of the distances; and a corpuscle placed towards either part of the plane is attracted by the force of the whole solid; I say that the attractive force of the whole solid, in the attractive force of the whole solid, in the recess from its plane superficies, will decrease in the ratio of a power whose side is the distance of the corpuscle from the plane, and its index less by 3 than the index of the power of the distance.
+
+Plate 24, Figure 6
+Case. 1. Let LGI (Pl. 24. Fig. 6.) be the
+plane by which the solid is terminated. Let the
+solid lie on that hand of the plane that is towards
+I, and let it be resolved into innumerable planes
+mHM, nIN, oKO, &c. parallel to GL. And
+firstt let the attracted body C be placed without
+the solid. Let there be drawn CGHI perpendicular
+to those innumerable planes, and let the attractive
+forces of the points of the solid decrease
+in the ratio of a power of the distances whose index
+is the number as not less than 3. Therefore (by cor. 3. prop. 90.) the force with which any
+plane mHM attracts the point C, is reciprocally
+as 
+  
+    
+      
+        
+          C
+          
+            H
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CH^{n-2}}
+  
+. In the plane mHM take the length
+HM reciprocally proportional to 
+  
+    
+      
+        
+          C
+          
+            H
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CH^{n-2}}
+  
+, and
+that force will be as HM. In like manner in the
+several planes IGL, nIN, oKO, &c. take the lengthis
+GL, IN, KO, &c. reciprocally proportional to
+
+  
+    
+      
+        
+          C
+          
+            G
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CG^{n-2}}
+  
+, 
+  
+    
+      
+        
+          C
+          
+            I
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CI^{n-2}}
+  
+, 
+  
+    
+      
+        
+          C
+          
+            K
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CK^{n-2}}
+  
+, &c. and the forces
+of those planes will be as the lengthis so taken,
+and therefore the sum of the forces as the sum of
+the lengthis, that is, the force of the whole solid
+as the area GLOK produced infinitely towards OK.
+But that area (by the known methods of quadratures)
+is reciprocally as 
+  
+    
+      
+        
+          C
+          
+            g
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle Cg^{n-3}}
+  
+, and therefore the
+force of the whole solid is reciprocally as 
+  
+    
+      
+        
+          C
+          
+            G
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CG^{n-3}}
+  
+. Q. E. D.
+
+Plate 24, Figure 7
+Case 2. Let the corpuscle (Fig. 7.) be now placed
+on that hand of the plane IGL that is within the solid,
+and take the distance CK equal to the distance
+CG. And the part of the solid LGI x KO terminated
+by the parallel planes IGL, oKO, will attract
+the corpuscle, situate in the middle, neither
+one way nor another, the contrary actions of the
+opposite points destroying one another by reason
+of their equality. Therefore the corpuscle C is attracted
+by the force only of the solid situate beyond
+the plane OK. But this force (by case 1.) is reciprocally
+as 
+  
+    
+      
+        
+          C
+          
+            H
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CH^{n-3}}
+  
+, that is (because CG, CK are
+equal) reciprocally as 
+  
+    
+      
+        
+          C
+          
+            G
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CG^{n-3}}
+  
+. Q. E. D.
+Cor. 1. Hence if the solid LGIN be terminated
+on each side by two infinite parallel planes LG,
+IN; its attractive force is known, subducting from
+the attractive force of the whole infinite solid LGKO,
+the attractive force of the more distant part NIKO
+infinitely produced towards KO. 
+Cor. 2. If the more distrant part of this solid
+be rejected, because its attraction compared with the
+attraction of the nearer part is inconsiderable; the
+attraction of that nearer part will, as the distance
+increases, decrease nearly in the ratio of the power
+
+  
+    
+      
+        
+          C
+          
+            G
+            
+              n
+              −
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle CG^{n-3}}
+  
+
+Cor. 3. And hence if an finite body, plane on
+one side, attract a corpuscle situate over-against the
+middle of that plane, and the distance between the corpuscle and the plane compared with the dimensions
+of the attracting body be extremely small;
+and the attracting body consist of homogeneous
+particles, whose attractive forces decrease in the ratio
+of any power of the distances greater than the
+quadruplicate; the attractive force of the whole
+body will decrease very nearly in the ratio of a
+power whose side is that very small distance,
+and the index less by 3 than the index of the
+former power. This assertion does not hold good
+however of a body consisting of particles whose attractive
+forces decrease in the ratio of the triplicate
+power of the distances; because in that cases
+the attraction of the remoter part of the infinite
+body in the second corollary is always infinitely
+greater than the attraction of the nearer part.
+
+Scholium
+
+If a body is attracted perpendicularly towards a
+given plane, and from the law of attraction given
+the motion of the body be required; the problem
+will be solved by seeking (by prop. 39.) the motion
+of the body descending in a right line towards
+that plane, and (by cor. 2. of the laws) compounding
+that motion with an uniform motion, performed in the direction of lines parallel to that plane. And on
+the contrary if there be required the law of the attraction
+tending towards the plane in perpendicular
+directions, by which the body may be caused to
+move in any given curve line, the problem will
+be solved by working after the manner of the third
+problem.
+But the operations may be contracted by resolving
+the ordinates into converging series. As if to a
+base A the length B be ordinately applied in any
+given angle, that length be as any power of
+the base 
+  
+    
+      
+        
+          
+            A
+            
+              
+                m
+                n
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle A^{\frac {m}{n}}}
+  
+; and there be sought the force with
+which a body, either attracted towards the base or
+driven from it in the direction of that ordinate,
+may be caused to move in the curve line which
+that ordinate always describes with its superior
+extremity; I suppose the base to be increased by a
+very small part O, and I resolve the ordinate
+
+  
+    
+      
+        
+          
+            
+              
+                A
+                +
+                O
+              
+              ¯
+            
+          
+          
+            |
+            
+              
+                m
+                n
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\overline {A+O}}\vert ^{\frac {m}{n}}}
+  
+
+into an infinite series 
+  
+    
+      
+        
+          
+            A
+            
+              
+                m
+                n
+              
+            
+          
+          +
+          
+            
+              m
+              n
+            
+          
+          O
+          
+            A
+            
+              
+                
+                  m
+                  −
+                  n
+                
+                m
+              
+            
+          
+          +
+          
+            
+              
+                m
+                m
+                −
+                m
+                n
+              
+              
+                n
+                n
+              
+            
+          
+          O
+          O
+          
+            A
+            
+              
+                
+                  m
+                  −
+                  n
+                
+                n
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle A^{\frac {m}{n}}+{\frac {m}{n}}OA^{\frac {m-n}{m}}+{\frac {mm-mn}{2nn}}OOA^{\frac {m-2n}{n}}}
+  
+ &c. and I suppose the
+force proportional to the term of this series in which
+O is of two dimensions, that is to the term
+
+  
+    
+      
+        
+          
+            
+              
+                m
+                m
+                −
+                m
+                n
+              
+              
+                n
+                n
+              
+            
+          
+          O
+          O
+          A
+          
+            
+              
+                m
+                −
+                n
+              
+              n
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {mm-mn}{2nn}}OOA{\frac {m-2n}{n}}}
+  
+. Therefore the force sought is as
+
+  
+    
+      
+        
+          
+            
+              
+                m
+                m
+                −
+                m
+                n
+              
+              
+                n
+                n
+              
+            
+          
+          A
+          
+            
+              
+                m
+                −
+                n
+              
+              n
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {mm-mn}{2nn}}A{\frac {m-2n}{n}}}
+  
+, or,
+which is the same thing, as 
+  
+    
+      
+        
+          
+            
+              
+                m
+                m
+                −
+                m
+                n
+              
+              
+                n
+                n
+              
+            
+          
+          B
+          
+            
+              
+                m
+                −
+                n
+              
+              n
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {\frac {mm-mn}{2nn}}B{\frac {m-2n}{n}}}
+  
+. As if the ordinate describe a
+parabola, m begin = 2, and n = 1, the force will
+be as the given quantity 
+  
+    
+      
+        
+          
+            B
+            
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle 2B^{0}}
+  
+, and therefore is . given. Therefore with a given force the body will move in a a parabola, as Galileo has demonstrated. If the ordinate describe an hyperbola, m being=0—1, and n=1; the force will be as 
+  
+    
+      
+        
+          
+            
+              A
+              
+                −
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {2A^{-3}}}
+  
+ or 
+  
+    
+      
+        
+          
+            
+              B
+              
+              
+            
+          
+        
+      
+    
+    {\displaystyle \scriptstyle {2B^{3}}}
+  
+; and therefore a force which is as the cube of the ordinate will cause the body to move in an hyperbola. But leaving this kind of propositions, I
+shall go on to some others relating to motion which I have not yet touched upon.
