@@ -216,6 +216,7 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 - **One parent per mission.** Don't give a parent multiple large missions.
 - Nir hates short prompts when he asked for "very detailed." Be thorough.
 - Nir loves emojis; be warm, concise, ask before initiative, surface typos.
+- **Never call him "boss"** — just **Nir**. (His explicit request, June 28, 2026.)
 
 ## 11. CONVENTIONS
 - Each game lives in its own top-level folder; never put game files in repo root.
