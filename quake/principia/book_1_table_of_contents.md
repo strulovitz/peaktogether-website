@@ -5,6 +5,20 @@
 
 ---
 
+## ❖ Introductory Material — Definitions & Axioms (before the Sections)
+
+The book opens with foundational definitions and the Laws of Motion, before the mathematical lemmas begin.
+
+- **Definitions I–VIII:** Quantity of matter, quantity of motion, vis insita, impressed force, centripetal force (absolute / accelerative / motive)
+- **Scholium:** Absolute vs. relative time, space, place, and motion (the "bucket experiment")
+- **Axioms / Laws of Motion I–III:** Inertia, F=ma, action-reaction
+- **Corollaries I–VI:** Parallelogram of forces, conservation of momentum, centre of gravity, Galilean relativity
+- **Scholium:** Experimental confirmation (pendulums, Wren/Wallis/Huygens, loadstone, mutual gravitation)
+
+**Folder:** `definitions_and_axioms/`
+
+---
+
 ## Section 1 — Mathematical Lemmas: "The Method of First and Last Ratios"
 
 The book opens with a collection of mathematical lemmas on the method of first and last ratios — a geometrical form of infinitesimal calculus.
