@@ -103,7 +103,7 @@ void main() {
     if (u_use_tint == 2) {
         // untextured lit surface: u_tint is the base color
         vec3 N = normalize(v_normal);
-        float ndl = max(dot(N, u_light_dir), 0.0);
+        float ndl = abs(dot(N, u_light_dir));   // two-sided: interior faces light consistently
         float lit = u_ambient + (1.0 - u_ambient) * ndl;
         frag_color = vec4(u_tint * lit, 1.0);
     } else {

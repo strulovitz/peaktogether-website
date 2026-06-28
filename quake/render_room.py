@@ -22,6 +22,7 @@ manifest texture resolve, explicit per-frame GL-state assert).
 from __future__ import annotations
 
 import math
+import os
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -537,7 +538,7 @@ WALL_RGB   = (0.62, 0.60, 0.66)
 JAMB_RGB   = (0.40, 0.38, 0.44)
 ALCOVE_RGB = (0.30, 0.28, 0.34)
 LIGHT_DIR  = (0.40, 0.85, 0.35)   # normalized below
-AMBIENT    = 0.38
+AMBIENT    = 0.5
 
 _prog_cache: dict = {}            # ctx-id -> solid program
 _mesh_cache: dict = {}            # room_id -> RoomMesh
@@ -584,7 +585,10 @@ def _resolve_asset_path(asset_id, pack):
     if manifest is None: return None
     entry=manifest.assets.get(asset_id)          # FIX: real access
     if entry is None: return None
-    return getattr(entry,"wall_path",None)       # wall mip (not the read-mode master)
+    rel=getattr(entry,"wall_path",None)          # wall mip (not the read-mode master)
+    if not rel: return None
+    base=getattr(pack,"asset_dir","") or ""      # FIX: wall_path is relative to the pack dir
+    return os.path.join(base, rel) if base else rel
 
 def _upload_texture(ctx, asset_id, pack):
     if asset_id in _texture_cache: return _texture_cache[asset_id]
@@ -660,6 +664,7 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # ---- assert OUR full GL state every frame ----
     ctx.enable(moderngl.DEPTH_TEST); ctx.depth_func="<="; ctx.depth_mask=True
     ctx.disable(moderngl.BLEND)
+    ctx.disable(moderngl.CULL_FACE)   # FIX: interior room — show all faces (winding is inconsistent; pyglet enables culling by default)
 
     _set_mvp(prog,view)
     _set(prog,"u_light_dir",tuple(_norm(LIGHT_DIR)))
@@ -681,13 +686,17 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # 2+5) panels (textured, blend ON for transparent PNGs)
     ctx.enable(moderngl.BLEND)
     ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
-    _set(prog,"u_use_tint",0)
     for q,vao in vaos["panels"]:
         on = panel_is_on(q.pair_id, state.lit, room)   # pure helper (same module)
         asset = q.on_asset_id if on else q.off_asset_id
         tex=_upload_texture(ctx,asset,pack)
-        if tex is not None: tex.use(0); _set(prog,"u_tex",0)
+        if tex is not None:
+            tex.use(0); _set(prog,"u_tex",0); _set(prog,"u_use_tint",0)
+        else:
+            # FIX: missing texture -> lit grey placeholder, never an unbound-sampler white
+            _set(prog,"u_use_tint",2); _set(prog,"u_tint",(0.78,0.78,0.82))
         vao.render()
+    _set(prog,"u_use_tint",0)
     ctx.disable(moderngl.BLEND)
 
     # 6) ceiling equations — blood-red tint only when cleared

@@ -155,6 +155,7 @@ def _draw_wire(ctx, fp, view, proj, aspect):
     import moderngl
     ctx.enable(moderngl.DEPTH_TEST); ctx.depth_func="<="; ctx.depth_mask=True
     ctx.disable(moderngl.BLEND)
+    ctx.disable(moderngl.CULL_FACE)   # FIX: camera-facing quads — never cull (pyglet enables culling by default)
     res=_get_wire_resources(ctx,fp); prog=res.get("prog")
     if prog is None: return
     try: prog['u_mvp'].write(_mvp_bytes(view,proj))
