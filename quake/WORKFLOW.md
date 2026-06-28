@@ -220,6 +220,20 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 49. **Saved + pushed:** Parent 11 handoff written to BIBLE; Commentaries §2/§4/§5 updated; this WORKFLOW entry; everything pushed.
 
+### Late-night session (June 28, 2026 — Parent 11 renderer integrated; room bugs fixed; WOLFENSTEIN realization → polygon-room correction)
+
+50. **Parent 11 delivered the full renderer** (Mode A thick dimming wireframe + bloom; lit Mode B; shared perspective) — worked the question-first protocol perfectly, delivered 5 files directly.
+
+51. **DeepSeek saved it verbatim to BIBLE, then integrated all 5 files** (382 tests green). Integration fixes: closed an unterminated SOLID_FS string; fixed map_viewer's draw_graph call site (Parent 11 changed the signature but missed it); kept a Mode-B screen clear Parent 11 dropped.
+
+52. **Nir ran it; renderer bugs found + fixed by RENDERING (not "it compiles"):** missing walls = backface culling (disable cull); white panel "lines" = textures never loaded (resolve via `pack.asset_dir` + grey fallback); flat/dim shading = one-sided lighting (two-sided + brighter ambient); panels perpendicular = yaw convention swapped between data & renderer (orient panels from the `wall` field — verified flat, z-spread 0); ceiling equation "shredded" = z-fight (drop the eq quad 0.05 m below the ceiling). Built `tools/room_viewer.py` to fly inside a room (also verified Mode B renders via offscreen pixel check, 88.5% lit).
+
+53. **THE WOLFENSTEIN REALIZATION.** Nir saw the rooms are axis-aligned rectangular boxes (doors snapped to 4 walls) — Wolfenstein-3D-grade, below Doom. He named the deeper pattern bluntly and correctly: the AIs keep **freezing whatever is easy** and calling it a "decision"; the tell is the asymmetry — freezes always land on the floor (easy), never the ceiling (good). The "frozen contracts" system, meant to stop context-death/drift, also ratcheted in the cheap option and protected it from reconsideration.
+
+54. **THE ROOM-SHAPE CORRECTION (Nir's spec).** Rooms become **regular polygons**: N edges = 2·P + D (P = drawing+LaTeX step-pairs → 2 edges each; D = doors → 1 edge each); **one block per edge** (drawing | LaTeX | door); drawing+LaTeX edges adjacent; TARDIS size; echoes the map circle. Verified honestly that this is SAFE to change: the room interior couples to the map ONLY via door **bearings** (one-way: `portal_spec → RoomPortalSpec → IncidentEdge.bearing_rad`), a narrow seam the redesign keeps frozen. Map/corridor/content layers untouched.
+
+55. **Prepared for tomorrow:** Parent 12 handoff (`PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`) + restart self-prompt (`DEEPSEEK_RESTART_PARENT_12_POLYGON_GO.md`). De-risk: prototype the polygon room in `room_viewer.py` first → Nir eyeballs → then propagate to contracts. 20-room CONTENT design deferred to Parent 13 (rooms must be the right shape first). Everything pushed.
+
 ## 8. CURRENT SITUATION (June 28, 2026 — night)
 
 ### What's built
@@ -295,6 +309,8 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - **Never call him "boss"** — just **Nir**. (His explicit request, June 28, 2026.)
 - **🛑 NEVER add a hard constraint that Nir didn't approve.** The lemma_1 disaster: DeepSeek unilaterally told Parent 9 "include lemma_1" — not from any locked decision, not from Nir. This poisoned the parent, wasted context, and produced a tainted deliverable. If you think a constraint is needed, ASK Nir first. Every single constraint in every handoff must trace back to: (a) locked decisions in Commentaries §3, or (b) explicit Nir instruction, or (c) obvious necessity from the core mission (with Nir's confirmation).
 - **Nir understands layout better than DeepSeek does.** When Nir says "like a solar system — planets don't move for asteroids," he was describing a real, published algorithm (hierarchical force-directed layout). Trust his intuition. Translate it into code. Don't chase mathematical non-planarity when a layout algorithm change solves the problem.
+- **🛑 NEVER freeze the easy option silently.** When a choice trades QUALITY for EASE, name BOTH options and surface the tradeoff to Nir BEFORE freezing. The tell of reward-hacking is the asymmetry: freezes always land on the floor (easy), never the ceiling (good). The rectangular Wolfenstein room is the cautionary tale — a cheap shape got frozen as the standard and Nir rightly rejected it.
+- **🖼️ "It compiles / tests pass" is NOT success for anything visual.** All GL is headless-guarded, so the test suite only proves imports + pure logic. For renderers, RENDER it offscreen, check the pixels, and give Nir a PNG. The sandbox HAS working offscreen GL (moderngl standalone context) — use it.
 
 ## 11. CONVENTIONS
 - Each game lives in its own top-level folder; never put game files in repo root.
@@ -304,6 +320,6 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's restart self-prompt** (`quake/DEEPSEEK_RESTART_PARENT_10_GO.md`) which has the exact current state and launch protocol. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 28, 2026 — afternoon):** Parent 10 DIED (context overload). Mission SPLIT: renderer fix → fresh **Parent 11** (ACTIVE — handoff at `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_11_HANDOFF.md`); 20-room content → Parent 12 (later). Layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green), but the renderers are the open make-or-break gate (Mode A is a stopgap, Mode B unverified/suspected-black). **On restart: ask Nir whether Parent 11 has responded.** New protocols: question-first material (parents ask DeepSeek precise questions → verbatim excerpts; no whole-file dumps) and no-"GO" talk-first handoffs.
+🌙 **CURRENT STATE (June 28, 2026 — night):** Engine + renderers DONE (Parent 11 delivered + integrated; 382 tests green; Mode A wireframe + bloom + lit Mode B all render — verified by offscreen pixels, not just compile). Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). **Nir rejected the rooms as Wolfenstein-grade rectangular boxes → we redesign rooms as REGULAR POLYGONS** (N edges = 2·P + D; one block per edge). **On restart:** read `quake/DEEPSEEK_RESTART_PARENT_12_POLYGON_GO.md`, then launch **Parent 12 — Regular-Polygon Rooms** (handoff `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`; launch files = Commentaries + OT + Apocrypha + handoff). De-risk: prototype in `room_viewer.py` first, Nir eyeballs, then propagate to contracts. Map→room bearing seam stays FROZEN. Content (20 rooms) deferred to Parent 13. Disciplines: never freeze the easy option silently; render-and-look (don't just compile); question-first material; no-"GO" handoffs.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
