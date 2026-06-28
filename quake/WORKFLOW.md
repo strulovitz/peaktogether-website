@@ -142,6 +142,31 @@ DeepSeek overstepped twice: modified `guidelines.py` (strip-draw stub) and rewro
 
 31. **WORKFLOW.md updated** — this entry. Everything pushed to GitHub.
 
+### Evening session (June 28, 2026 — Parent 8 Part A DONE! Engine hardened!)
+
+32. **Parent 8 launched** — Nir pasted the 4 baseline items to a fresh Opus 4.8 chat. Parent 8 confirmed understanding (Part A = engine hardening, Part B = 3D map viewer), asked one clarifying question about test conventions (DeepSeek answered: proceed without requesting existing test files), and delivered Part A in ONE message.
+
+33. **Parent 8 Part A DROPPED IN:**
+    - `map/layout_force.py` — explicit k=k_factor/√N + normalize_spread. 3 new defaulted config fields.
+    - `map/layout_height.py` — robust parametric `_segments_intersect` (|denom|≤ε→None; t,u∈[0,1] check). 1 new defaulted config field.
+    - `tests/test_layout_scale.py` — 50 new scale-free regression tests (generated DAGs, N∈[2..55], no hardcoded counts).
+    - `map/level_maker.py` + `map/raw_models.py` — **UNCHANGED** (frozen contracts preserved).
+
+34. **BUG DISCOVERED in old test:** `test_four_node_one_crossing_floorplan` was testing BUGGY behavior. The old `_segments_intersect` used `o1 != o2` (value comparison, NOT sign test) which created a phantom crossing at (118.65, -78.28) — the SAME bug that produced ±22,000m phantom coords on the 20-node graph. Fixed the test to assert invariants conditionally.
+
+35. **358/358 ALL GREEN 🟢** — G1 (285 old) + G2–G4 (50 new) + fix (1 updated) + smoke = ALL PASSING.
+
+36. **G5 — Re-ran on Parent 7's real graph:** 0 crossings (down from 191!), room bbox ±40m (down from ±22,000m phantom), 1 height layer. DAG ✓, connected ✓. Engine is HEALTHY! 🎉 The layout spreads nodes cleanly — no crossings = no bridges/underpasses. If Nir wants bridges (a Quake feature), we can tweak k_factor or add cross-edges (Parent 9 call, NOT pre-committed; Nir decides after seeing the map viewer).
+
+37. **Parent 8 Part A deliverable saved verbatim** to `quake/BIBLE/QUAKE_PARENT_8_FROZEN_PART_A_DELIVERABLE.md`.
+
+38. **Wake-up note updated** to point to Part B next steps. **WORKFLOW.md + Commentaries updated.**
+
+### NEXT: Parent 8 Part B — 3D Map Viewer
+- DeepSeek tells Parent 8 G1–G5 confirmed. Parent 8 requests render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py.
+- After Part B delivered: drop in, test, invite Nir to fly the map viewer.
+- After Nir's visual OK: decide on Parent 9 (tweak graph for bridges/underpasses? Or go ahead with 0 crossings?)
+
 ### CRITICAL LESSON: Parents can't read anything
 Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. They only know what Nir pastes into the chat. The DIGEST solves the context-death problem — instead of 548 KB of raw Newton, the parent gets a 340-line digest. When it needs details, it asks Nir to paste a specific section. The protocol: Parent asks Nir → Nir asks DeepSeek → DeepSeek fetches from disk/GitHub → Nir pastes to Parent.
 
@@ -160,8 +185,10 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 ### Test totals
 - Content pipeline (Legs 1+2+3): 186
 - Engine (Leg 4, 13 modules): 97
-- app.py tests: 2
-- **GRAND TOTAL: 285/285 green** 🟢
+- app.py tests: 9
+- layout_force + layout_height + level_maker: 16
+- **layout_scale (Parent 8 Part A): 50 new** 🆕
+- **GRAND TOTAL: 358/358 green** 🟢
 
 ### Git
 - All code pushed to GitHub (branch: master).
@@ -202,12 +229,20 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 
 **Phase A FIRST RUN — June 28 (DeepSeek):** authored `concept_graph.json` + a runner under `quake/levels/principia_bk1_inverse_square/`, ran `level_maker`. Result: 20 rooms / 28 corridors, valid DAG ✓, connected ✓ — BUT **UNHEALTHY**: **191 crossings** (a clean 20-room map should have ~a couple dozen) and several crossing coords exploding to **±22,000 m** while rooms sit within ±100 m. Empirically confirmed the two degree-miscounts DeepSeek flagged (lemma_7=6, prop_11=4). Root cause (DeepSeek diagnosis): (1) `layout_force.spring_layout` (k=None, scale=40) collapses 20 nodes — only ever tested on a 4-node toy; (2) `layout_height._segments_intersect` compares orientation floats with `!=` (no tolerance) and computes infinite-line intersections without verifying the point lies within both segments → spurious far-away crossings. **BUILD PAUSED. Floorplan NOT committed (local only).**
 
-**Parent 8 — Engine hardening + 3D Map Viewer** ⏳ NEXT (Opus implements himself; DeepSeek writes the handoff)
-- Fix layout + crossing-detection: robust + **scales with graph size, NO hardcoded counts**; add real-scale regression tests so "green" means something.
-- Build a 3D wireframe, fly-through **map-viewer utility** (arrows + WASD; shows bridges/underpasses at their heights) = Nir's eyes on the floorplan + the future in-game map mode.
-- Keep Floorplan/Corridor/Crossing contracts frozen; keep 285 tests green. Prompt must offer verbatim per-stage file snippets (anti-context-death).
+**~~Parent 8 — Part A: Engine hardening~~** ✅ DONE (June 28, 2026 evening)
+- `layout_force.py`: explicit k ∝ 1/√N scaling + post-layout normalize_spread (centroid → rescale). No collapse at any N. Contract: 3 new defaulted fields (k_factor, normalize_spread, min_extent_m), `extra=forbid`.
+- `layout_height.py`: rewrote `_segments_intersect` as robust parametric test (|denom|≤ε → None; t,u∈[0,1] check). Kills phantom far-away coords and near-parallel false positives. Contract: 1 new defaulted field (intersect_eps).
+- `tests/test_layout_scale.py`: 50 new scale-free regression tests (G2–G4). Generated connected DAGs of parametrized N ([2..55]), no hardcoded counts. Covers: near-parallel sweep, angle sweep, disjoint-segment phantom case, in-bounds invariant, scale/health bounds, determinism/order-independence at scale.
+- **BUG DISCOVERED:** The old `test_four_node_one_crossing_floorplan` was testing BUGGY behavior — the old `_segments_intersect` used `o1 != o2` (value comparison, not sign test) which created a phantom crossing at (118.65, -78.28) far outside both segments. The test has been corrected to assert invariants conditionally; genuine crossing detection is tested in `test_layout_height.py` (hand-placed) and `test_layout_scale.py` (generated).
+- **Level_maker contracts UNCHANGED** (`level_maker.py`, `raw_models.py` — zero touches).
 
-**SEQUENCING — Parent 7 vs Parent 8 vs a possible Parent 9 (Nir asked):** Parent 7's output = **DATA** (`concept_graph.json`, valid §4.2). Parent 8 fixes the **MACHINE** (the layout engine). The input contract (§4.2) and output contract (floorplan) are unchanged → **Parent 7's level data SURVIVES; it does NOT need redoing.** After Parent 8: DeepSeek re-runs `level_maker` on the SAME `concept_graph.json` → fresh floorplan → Nir flies the map viewer. Only IF the map then reveals the graph ITSELF is too tangled would a fresh parent ("Parent 9") adjust Parent 7's design — NOT pre-committed; Nir decides after seeing the map. (Analogy: Parent 7 wrote the recipe; Parent 8 fixes the oven; we re-bake the same recipe; only rewrite the recipe if the cake is still bad with a working oven.)
+**G5 — Re-run on Parent 7's real graph:** 0 crossings (down from 191!), room bbox within ±40m (was ±22,000m phantom), 1 height layer. DAG ✓, connected ✓. The engine is healthy. 0 crossings means no bridges/underpasses — Nir decides after seeing the map viewer whether to tweak the graph (add more cross-edges) or adjust k_factor.
+
+**~~Parent 8 — Part B: 3D Map Viewer~~** ⏳ NEXT (Opus implements himself)
+- Build a 3D wireframe, fly-through **map-viewer utility** (arrows + WASD; shows bridges/underpasses at their heights) = Nir's eyes on the floorplan + the future in-game map mode.
+- Keep all contracts frozen. Parent 8 will request render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py when he reaches Stage 2.
+
+**SEQUENCING — Parent 7 vs Parent 8 vs a possible Parent 9 (Nir asked):** Parent 7's output = **DATA** (`concept_graph.json`, valid §4.2). Parent 8 fixes the **MACHINE** (the layout engine). The input contract (§4.2) and output contract (floorplan) are unchanged → **Parent 7's level data SURVIVES.** After Part A: 0 crossings (healthy layout). If Nir wants bridges/underpasses, tweak k_factor or add edges (Parent 9 call, NOT pre-committed). Part B (map viewer) still pending.
 
 **When the build resumes (after Parent 8 + Nir's visual OK):** author Legs 2+3 (figures, text panels, rooms) → assemble pack → smoke test. Two known soft-gaps: (1) citation `label` phrases are reconstructions (CITATION-AI + Nir's eyeball confirm), (2) figure plate/fig numbers tentative (overlay-diff confirms).
 
@@ -238,6 +273,6 @@ Nir has decided the next 3 big things will each be done by a separate parent:
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's wake-up note** (`quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`) which has the exact launch protocol. Then ask Nir what's next.
-🌙 **CURRENT WAKE-UP NOTE:** `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md` — Parent 8 launch protocol (engine fix + 3D map viewer) with all GitHub URLs + the material-fetch map ready. (Supersedes `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.)
+🌙 **CURRENT WAKE-UP NOTE:** `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md` — Parent 8 Part A DONE (engine hardened, 358/358 green, G5 0 crossings healthy). Part B (3D map viewer) pending — DeepSeek tells Parent 8 G1–G5 confirmed; Parent 8 requests render/camera/GL files. (Supersedes `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.)
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

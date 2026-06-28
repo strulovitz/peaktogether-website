@@ -2,6 +2,19 @@
 
 Pure, deterministic functions for detecting which corridors (edges) cross in
 2D and assigning height levels so crossing corridors get different heights.
+
+Hardened (Parent 8):
+  - _segments_intersect rewritten as a ROBUST parametric segment test:
+      * |denom| <= eps  -> parallel/collinear -> NOT a proper crossing -> None
+      * compute parameters t, u; require t,u in [0,1] (with eps slack) before
+        returning a point. This makes it IMPOSSIBLE to return a point that lies
+        outside either segment (kills the phantom far-away intersections), and
+        treats near-parallel pairs as non-crossing (kills the float-noise false
+        positives the old `o1 != o2` sign test produced).
+  - The returned point is, by construction, inside both segments' bounding
+    boxes (it is an affine blend with t in [0,1]).
+
+No IO, no network. Same inputs -> same outputs.
 """
 from __future__ import annotations
 
@@ -21,41 +34,80 @@ class HeightConfig(BaseModel):
     layer_fail: int = 12                # raise if max_layer exceeds this
     base_y: float = 0.0                 # base height in meters
     delta_y: float = 3.0                # height per layer in meters
+    # --- new, additive, defaulted (Parent 8) ---
+    # Numerical tolerance for the robust intersection test. Segments whose
+    # direction-cross-product (denom) has magnitude <= eps are treated as
+    # parallel/collinear (no proper crossing). The parameter membership test
+    # uses the same eps as slack so endpoints-just-touching is consistent.
+    intersect_eps: float = 1e-9
 
 
 def _orientation(p, q, r):
-    """Cross product of (q-p) and (r-q). >0 CCW, <0 CW, ==0 collinear."""
+    """Cross product of (q-p) and (r-q). >0 CCW, <0 CW, ==0 collinear.
+
+    Retained for the collinear/on-segment helper and any callers; the proper
+    crossing test below no longer relies on its sign.
+    """
     return (q[0] - p[0]) * (r[1] - q[1]) - (q[1] - p[1]) * (r[0] - q[0])
 
 
 def _on_segment(p, q, r):
-    """True if point q lies on segment pr (collinear check)."""
+    """True if point q lies within the bounding box of segment pr."""
     return (min(p[0], r[0]) <= q[0] <= max(p[0], r[0]) and
             min(p[1], r[1]) <= q[1] <= max(p[1], r[1]))
 
 
-def _segments_intersect(p1, p2, p3, p4):
-    """Return intersection point Vec2 or None."""
-    o1 = _orientation(p1, p2, p3)
-    o2 = _orientation(p1, p2, p4)
-    o3 = _orientation(p3, p4, p1)
-    o4 = _orientation(p3, p4, p2)
+def _segments_intersect(p1, p2, p3, p4, eps: float = 1e-9):
+    """Robust proper-intersection test for segments p1->p2 and p3->p4.
 
-    if o1 != o2 and o3 != o4:  # general case: they cross
-        x1, y1 = p1
-        x2, y2 = p2
-        x3, y3 = p3
-        x4, y4 = p4
-        denom = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4)
-        if denom == 0:
-            return None
-        t = ((x1 - x3) * (y3 - y4) - (y1 - y3) * (x3 - x4)) / denom
-        ix = x1 + t * (x2 - x1)
-        iy = y1 + t * (y2 - y1)
-        return (ix, iy)
+    Returns the intersection point Vec2 ONLY when the two segments properly
+    cross at a single interior/boundary point; otherwise None.
 
-    # Collinear / touching cases: not a crossing
-    return None
+    Method (parametric):
+        P(t) = p1 + t*(p2 - p1),   t in [0,1]
+        Q(u) = p3 + u*(p4 - p3),   u in [0,1]
+      Solve P(t) = Q(u). The denominator is the cross product of the two
+      direction vectors; if its magnitude <= eps the segments are parallel or
+      collinear -> we report NO proper crossing (consistent with the prior
+      "collinear is not a crossing" contract). Otherwise we compute t and u and
+      require both to lie in [0,1] (with eps slack). The returned point is an
+      affine blend with t in [0,1], so it is GUARANTEED to lie within both
+      segments (and thus within both bounding boxes) -- no phantom points.
+    """
+    x1, y1 = p1
+    x2, y2 = p2
+    x3, y3 = p3
+    x4, y4 = p4
+
+    dx1 = x2 - x1
+    dy1 = y2 - y1
+    dx2 = x4 - x3
+    dy2 = y4 - y3
+
+    # denom = cross(dir1, dir2). Zero (within eps) => parallel/collinear.
+    denom = dx1 * dy2 - dy1 * dx2
+    if abs(denom) <= eps:
+        return None
+
+    # Solve for t and u.
+    # t numerator: cross( (p3 - p1), dir2 )
+    # u numerator: cross( (p3 - p1), dir1 )
+    px = x3 - x1
+    py = y3 - y1
+    t = (px * dy2 - py * dx2) / denom
+    u = (px * dy1 - py * dx1) / denom
+
+    # Require both parameters within [0,1] (with eps slack) for a real crossing
+    # that lies on BOTH segments. This single check eliminates the old
+    # infinite-line intersection blow-up.
+    lo = -eps
+    hi = 1.0 + eps
+    if not (lo <= t <= hi and lo <= u <= hi):
+        return None
+
+    ix = x1 + t * dx1
+    iy = y1 + t * dy1
+    return (ix, iy)
 
 
 def detect_crossings(
@@ -66,12 +118,17 @@ def detect_crossings(
     """
     Returns list of (corridor_id_A, corridor_id_B, intersection_point).
     corridor ids are edge ids from the graph.
+
+    Guarantee (Parent 8): every returned intersection_point lies within both
+    crossing segments (and hence within the bounding box of all node positions),
+    because _segments_intersect only returns affine blends with t,u in [0,1].
     """
     edges = sorted(graph.edges, key=lambda e: e.id)
     crossings: list[tuple[str, str, Vec2]] = []
 
     for ea, eb in combinations(edges, 2):
-        # Skip if they share an endpoint
+        # Skip if they share an endpoint (adjacent corridors meet at a node,
+        # which is a socket, not a crossing).
         if ea.source == eb.source or ea.target == eb.target:
             continue
         if ea.source == eb.target or ea.target == eb.source:
@@ -82,11 +139,12 @@ def detect_crossings(
         b1 = positions[eb.source]
         b2 = positions[eb.target]
 
-        ipt = _segments_intersect(a1, a2, b1, b2)
+        ipt = _segments_intersect(a1, a2, b1, b2, eps=cfg.intersect_eps)
         if ipt is None:
             continue
 
-        # Skip intersections within socket_clearance_m of any node position.
+        # Skip intersections within socket_clearance_m of any node position
+        # (a crossing that hugs a room socket reads as a junction, not a bridge).
         too_close = any(
             math.dist(ipt, pos) < cfg.socket_clearance_m
             for pos in positions.values()

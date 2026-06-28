@@ -72,6 +72,10 @@
 
 24. **DeepSeek Wake-up Note — Parent 8 Launch** — `quake/DEEPSEEK_WAKEUP_PARENT_8_GO.md`. The CURRENT wake-up note (supersedes item 21). Full restart protocol: what happened (Phase A bug), Parent 8 launch URLs, the material-fetch map (which file lives where for Parent 8's per-stage requests), what's on disk (local uncommitted `levels/` dir), and DeepSeek's post-delivery steps (drop in, test, re-run on Parent 7's graph, viewer, report).
 
+25. **Parent 8 — Part A Deliverable (engine hardening)** — `quake/BIBLE/QUAKE_PARENT_8_FROZEN_PART_A_DELIVERABLE.md`. Parent 8's verbatim Part A answer: hardened `layout_force.py` (explicit k ∝ 1/√N + normalize_spread), hardened `layout_height.py` (robust parametric `_segments_intersect`), `tests/test_layout_scale.py` (50 new scale-free regression tests), CHANGELOG. ✅ DROPPED IN — 358/358 tests green. `level_maker.py` and `raw_models.py` contracts UNCHANGED.
+
+26. **Parent 8 — Part B (3D map viewer)** ⏳ NEXT — Parent 8 will request render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py to build the standalone fly-through map-viewer utility (Doom-TAB style, arrows+WASD, shows bridges/underpasses at their heights).
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).
@@ -102,6 +106,13 @@
 - **`reticle_ray` is public and reused** — app's Read pick ray is byte-identical to the shoot ray; `eye = pos + 1.6` on Y; cone half-angle (`AIM_CONE_RAD = 0.30`) is internal.
 - Also reaffirmed: **render modules own/cache their own meshes** (app passes none); **`poll(window, None)` → `DEFAULT_BINDINGS`**.
 
+✅ **AMENDMENT — Parent 8 Part A (engine hardening), June 28, 2026.**
+- **Old `_segments_intersect` was buggy:** used `o1 != o2` (float value comparison) instead of a proper sign test or parametric t,u∈[0,1] check. This produced phantom crossings (e.g., (118.65, -78.28) for a simple 4-node graph where the edges clearly don't cross). The old `test_four_node_one_crossing_floorplan` was silently testing this buggy behavior — it asserted a crossing that was a phantom. The test has been corrected; genuine crossing detection is covered by `test_layout_height.py` (hand-placed) and the new `test_layout_scale.py` (generated DAGs).
+- **`layout_force.py`:** added 3 new defaulted config fields (k_factor, normalize_spread, min_extent_m). Defaults reproduce old behavior exactly (k=1/√N same as networkx k=None; normalize_spread with centroid-at-origin → same scaling as old direct `* scale_m`).
+- **`layout_height.py`:** added 1 new defaulted config field (intersect_eps=1e-9). `_segments_intersect` gained optional `eps` kwarg (defaulted) — still callable with 4 positional args as before.
+- **`level_maker.py` and all `raw_models.py` contracts UNCHANGED.**
+- **Note:** Parent 8 flagged the Commentaries §3 says "1846 Andrew Motte edition" while the Parent 8 handoff §1 and catalog say "1729 Motte." The Wikisource text we're actually using is the 1729 Motte translation. DeepSeek will reconcile the record (not Parent 8's concern).
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -116,10 +127,10 @@
 - ✅ **DIGESTED PRINCIPIA CREATED** — `quake/principia/DIGESTED_PRINCIPIA.md` — parent-safe summary of all 148 lemmas/props/scholia with one-sentence descriptions + figure counts.
 - ✅ **Parent 7 handoff v2 WRITTEN** — Updated with DIGEST, material-request protocol. Combined handoff+DIGEST at `PROMPT_TO_OPUS_QUAKE_PARENT_7_HANDOFF_COMBINED.md`. Wake-up note at `DEEPSEEK_WAKEUP_PARENT_7_GO.md`.
 - ✅ **Parent 7 DONE — Frozen Level Design delivered** — 20-room Principia level (Book 1 Sec I–III, inverse-square). `concept_graph.json` (20 nodes/28 edges) + `palette.json` validate GREEN vs §4.2/§3.A.7. Saved verbatim at `QUAKE_PARENT_7_FROZEN_LEVEL_DESIGN.md`. Two cosmetic prose miscounts noted (lemma_7 is degree 6 not 5; prop_11 is degree 4 not 5 — JSON data correct, build unaffected).
-- ⏳ **NEXT:** THE BUILD (Phase A onward) — awaiting Nir's go-ahead. Author concept_graph.json → level_maker → floorplan; then Legs 2+3 → pack → smoke test.
-- ⚠️ **Phase A first run (June 28) surfaced an engine bug** — `level_maker` on Parent 7's real 20-node graph yielded **191 crossings + ±22,000 m phantom coordinates** (root cause: force layout collapses at scale; `_segments_intersect` numerically non-robust). The engine had only ever been tested on a 4-node toy. **Build PAUSED; floorplan not committed.**
-- ⏳ **NEXT — Parent 8 (Opus implements himself, NOT a child):** (a) harden the layout/crossing engine — robust + scales with graph size, **NO hardcoded room counts** + real-scale regression tests; (b) build a **3D wireframe navigable map-viewer utility** (fly with arrows+WASD; doubles as the future in-game map mode) so Nir can SEE the floorplan. Keep Floorplan/Corridor/Crossing contracts frozen + 285 tests green. DeepSeek writes the handoff, offering verbatim per-stage file snippets to prevent context death.
-- 📐 **Sequencing (Parent 7 vs 8 vs a possible 9):** Parent 7's `concept_graph.json` is DATA and SURVIVES the Parent 8 engine fix — just re-run on the same data afterward. A "Parent 9" (redo of Parent 7) is only needed IF the fixed engine + map viewer reveal the graph itself is too tangled — NOT pre-committed; Nir decides after seeing the map.
+- ⚠️ **Phase A first run (June 28) surfaced engine bug** — `level_maker` on Parent 7's real 20-node graph yielded **191 crossings + ±22,000 m phantom coordinates** (root cause: `_segments_intersect` used `o1 != o2` — value comparison, NOT sign test — producing phantom far-away intersections; `spring_layout(k=None)` collapsed clusters). Engine only tested on 4-node toy. Build PAUSED.
+- ✅ **Parent 8 Part A DONE — Engine hardened!** (June 28 evening) — `layout_force.py` (explicit k=k_factor/√N + normalize_spread), `layout_height.py` (robust parametric `_segments_intersect` with t,u∈[0,1] check), `tests/test_layout_scale.py` (50 new scale-free regression tests, generated DAGs, no hardcoded counts). Contracts (`level_maker.py`, `raw_models.py`) UNCHANGED. **358/358 green 🟢**. G5 re-run: **0 crossings** (down from 191!), room bbox ±40m (down from ±22,000m phantom), 1 height layer. Engine is healthy.
+- ⏳ **NEXT — Parent 8 Part B (3D map viewer):** Opus implements himself. Build a **3D wireframe navigable map-viewer utility** (free-fly with arrows+WASD; Doom-TAB-style but 3D for bridges/underpasses; doubles as future in-game map mode). Parent 8 will request render_wire.py, camera.py, gfx_context.py, shaders.py, input_actions.py from DeepSeek when he reaches Stage 2.
+- 📐 **Sequencing (Parent 7 vs 8 vs a possible 9):** Parent 7's data SURVIVES. Engine is healthy (0 crossings — layout spreads nodes cleanly). If Nir wants bridges/underpasses (a Quake feature), we can tweak k_factor or add cross-edges (Parent 9 call, NOT pre-committed; Nir decides after seeing the map viewer). Part B (viewer) comes first so Nir can SEE the floorplan.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
