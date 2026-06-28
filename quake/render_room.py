@@ -44,6 +44,7 @@ from contracts import (
 DOOR_JAMB_DEPTH_M = 0.3
 ALCOVE_DEPTH_M = 0.4
 PANEL_INSET_M = 0.02  # panel sits just off the wall to avoid z-fight
+CEILING_DROP_M = 0.05  # ceiling-equation quad hangs just below the ceiling (no z-fight)
 
 
 # ======================================================================
@@ -349,6 +350,26 @@ def _placement_corners(center: Vec3, width: float, height: float,
     return np.array([bl, br, tr, tl], dtype=np.float32)
 
 
+def _panel_corners_on_wall(wall, center, width, height, inset):
+    """Flat panel corners lying ON the given wall, facing INTO the room.
+
+    Robust orientation: derived from the `wall` field (unambiguous) rather than
+    `yaw_rad` — the room data's yaw convention (normal=(cos,sin)) differs from the
+    old renderer's (normal=(sin,cos)), which made panels render perpendicular to
+    the wall. Using the wall basis makes panels always parallel to their wall.
+    Returns (4,3) float32 corners in order BL, BR, TR, TL.
+    """
+    along, inward = _wall_basis(wall)
+    up = np.array([0.0, 1.0, 0.0], dtype=np.float32)
+    c = np.asarray(center, dtype=np.float32) + inward * inset
+    hw, hh = width / 2.0, height / 2.0
+    bl = c - along * hw - up * hh
+    br = c + along * hw - up * hh
+    tr = c + along * hw + up * hh
+    tl = c - along * hw + up * hh
+    return np.array([bl, br, tr, tl], dtype=np.float32)
+
+
 def _build_panel_quads(room: RoomRuntime):
     quads: list[PanelQuad] = []
     uv = np.array(
@@ -357,8 +378,8 @@ def _build_panel_quads(room: RoomRuntime):
     for pair in room.panel_pairs:
         dp = pair.drawing_placement
         tp = pair.text_placement
-        d_corners = _placement_corners(
-            dp.center_xyz, dp.width_m, dp.height_m, dp.yaw_rad, PANEL_INSET_M
+        d_corners = _panel_corners_on_wall(
+            dp.wall, dp.center_xyz, dp.width_m, dp.height_m, PANEL_INSET_M
         )
         quads.append(PanelQuad(
             pair_id=pair.pair_id,
@@ -368,8 +389,8 @@ def _build_panel_quads(room: RoomRuntime):
             corners=d_corners,
             uv=uv.copy(),
         ))
-        t_corners = _placement_corners(
-            tp.center_xyz, tp.width_m, tp.height_m, tp.yaw_rad, PANEL_INSET_M
+        t_corners = _panel_corners_on_wall(
+            tp.wall, tp.center_xyz, tp.width_m, tp.height_m, PANEL_INSET_M
         )
         quads.append(PanelQuad(
             pair_id=pair.pair_id,
@@ -389,6 +410,7 @@ def _build_ceiling_quads(room: RoomRuntime):
     )
     for eq in room.ceiling_equations:
         cx, cy, cz = eq.pos_xyz
+        cy = cy - CEILING_DROP_M   # hang just below the ceiling so it doesn't z-fight the ceiling
         w, d = eq.size_m  # width (X), depth (Z)
         hw = w / 2.0
         hd = d / 2.0
