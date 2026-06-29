@@ -322,14 +322,24 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 58. **Parent 13's design decisions:** Light bg/black ink; 4 rects each (inscribed+circumscribed); curve concave-down rising; rich colors (5 distinct local colors); Stabilo yellow/green/orange per step; `\textcolor{name}{text}` spans with matching LaTeX.
 59. **Nir's directive worked:** "BUILD NOW, no propose phase" → Parent 13 delivered all 3 files in one go. Talk-first rhythm respected (questions → build).
 
+### Day session (June 29, 2026 continued — Asymptote 3.12 installed + pipeline WORKS!)
+
+60. **Asymptote 3.12 installed** (standalone, `C:\Program Files\Asymptote\asy.exe`) — MiKTeX bundled 2.88 was broken.
+61. **Ghostscript 10.05 extracted** to `C:\Users\nir_s\gs\bin\gswin64c.exe` — MiKTeX GS 9.25 was too old for Asy 3.12.
+62. **Two .asy fixes for Asy 3.12 compat:** (a) `0xHH` hex literals → decimal integers (Asy doesn't support C hex); (b) `usersetting()` call added so `-u highlight=k` command-line flag actually updates the variable.
+63. **ALL 4 HIGHLIGHTS COMPILE + ARE DIFFERENT!** 🎉 OFF (all black, 2352B) < ON1 (curve+base+side colored, 3987B) < ON2 (inscribed rects, 4300B) < ON3 (circumscribed rects, 4472B). The highlight mechanism WORKS.
+64. **asy_compile.py updated** — `AsyConfig.gs_path` field + env var injection.
+65. **test_asy_compile.py fixed** — mock `fake_run` now accepts `**kwargs` (for `env`).
+66. **382/382 GREEN** 🟢 + pushed.
+
 ### Current frontier (June 29, 2026)
 - ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
 - ✅ Parent 11 DONE (renderers) · ✅ Parent 8 Part A DONE (engine hardened)
 - ✅ Parent 7 DONE (20-room Principia graph + palette frozen)
-- ✅ **Parent 13 DONE — lemma_2 pipeline proof-of-concept DELIVERED**
+- ✅ **Parent 13 DONE — lemma_2 pipeline proof-of-concept DELIVERED + COMPILED**
+- ✅ **Asymptote 3.12 + GS 10.05 installed** — 4 highlight PNGs compile successfully, all different
 - ⚠️ Parent 10 DIED (context overload) · ❌ Parent 12 (polygon rooms) FAILED
-- ⚠️ **Asymptote compile BLOCKED** — MiKTeX Asymptote 2.88 broken (parses own library wrong). Needs fix.
-- ⏳ **NEXT — Fix Asymptote** (install standalone or update MiKTeX) → render PNG → Nir eyeballs
+- ⏳ **NEXT — Show Nir the 4 PNGs** (OFF, ON1, ON2, ON3) for visual approval
 - ⏳ THEN — Parent 14: Design room-content format + builder tool (Descent pattern)
 
 ## 9. NEXT STEPS (June 29, 2026)

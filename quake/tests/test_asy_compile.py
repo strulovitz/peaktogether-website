@@ -10,7 +10,7 @@ def _fake_run_factory(recorded, returncode, expected_file, create_output,
     """Build a fake subprocess.run that records args and optionally writes
     the expected output file."""
 
-    def fake_run(args, capture_output, text, timeout):
+    def fake_run(args, capture_output, text, timeout, **kwargs):
         recorded["args"] = args
         recorded["capture_output"] = capture_output
         recorded["text"] = text
