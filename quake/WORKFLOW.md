@@ -332,15 +332,27 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 65. **test_asy_compile.py fixed** — mock `fake_run` now accepts `**kwargs` (for `env`).
 66. **382/382 GREEN** 🟢 + pushed.
 
-### Current frontier (June 29, 2026)
-- ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
+### Current frontier (June 29, 2026 continued — evening session: room viewer bugs + pipeline fix)
+- ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (385/385 green)
 - ✅ Parent 11 DONE (renderers) · ✅ Parent 8 Part A DONE (engine hardened)
 - ✅ Parent 7 DONE (20-room Principia graph + palette frozen)
 - ✅ **Parent 13 DONE — lemma_2 pipeline proof-of-concept DELIVERED + COMPILED**
 - ✅ **Asymptote 3.12 + GS 10.05 installed** — 4 highlight PNGs compile successfully, all different
+- ✅ **Room viewer working** — lemma_2 room renders with panels on N, E, S walls
+- ✅ **Wall flip FIXED** — `_wall_basis` now has opposite `along` for opposite walls (N:+X↔S:-X, E:-Z↔W:+Z), making all 4 walls geometrically identical from viewer. FLIP_LEFT_RIGHT fixes all uniformly.
+- ✅ **Text pipeline FIXED** — switched from Tectonic+Ghostscript+keyout to **pdflatex+pdftocairo -transp** (Descent pattern!). Native transparency, smooth AA, no magenta edges, no keyout. Text is pure black, readable.
+- ✅ **`key_out_white` helper** added to `_imageops.py` for future use.
 - ⚠️ Parent 10 DIED (context overload) · ❌ Parent 12 (polygon rooms) FAILED
-- ⏳ **NEXT — Show Nir the 4 PNGs** (OFF, ON1, ON2, ON3) for visual approval
-- ⏳ THEN — Parent 14: Design room-content format + builder tool (Descent pattern)
+- 📝 **BUILD SCRIPT** at `C:\Users\nir_s\AppData\Local\Temp\opencode\build_full.py` — uses pdflatex+pdftocairo now. NOT in repo (temp file).
+- ⏳ **NEXT** — Parent 14: Design room-content format + builder tool (Descent pattern)
+
+### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
+- Ghostscript anti-aliases through alpha-only (semi-transparent black → invisible against grey wall)
+- Magenta keyout creates magenta-tinted anti-alias edges (visible but wrong color)
+- White keyout destroys anti-alias edges (right color but invisible)
+- **pdftocairo -transp** (Descent's approach): native transparency, full-color+alpha AA → perfect
+- Never use keyout for text. Always use native transparency.
+- pdftocairo needs `-r 220` (with space), NOT `-r220`
 
 ## 9. NEXT STEPS (June 29, 2026)
 

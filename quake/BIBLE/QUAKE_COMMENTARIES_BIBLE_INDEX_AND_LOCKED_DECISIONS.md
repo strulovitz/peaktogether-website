@@ -187,6 +187,13 @@
 - ⏳ **NEXT — Parent 14: Room-content format + builder tool** — Design text format (Descent pattern) + `build/room_from_spec.py`. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Color system mandatory in format + tool.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
+✅ **AMENDMENT — Text baking pipeline (pdflatex+pdftocairo), June 29, 2026 evening.**
+- **Old pipeline:** Tectonic → PDF → Ghostscript (`pngalpha`, `-dTextAlphaBits=4`, `-dGraphicsAlphaBits=4`) → key out white/magenta background.
+- **Problem:** Ghostscript anti-aliases through alpha-only (RGB stays black, only alpha varies). Semi-transparent black edges blend to invisible against grey wall. Magenta keyout makes edges magenta (visible but wrong color). White keyout destroys edges (right color but invisible).
+- **New pipeline (Descent pattern):** `pdflatex` → `pdftocairo -png -transp -r <dpi>` — **native transparency**, no keyout. Full RGB+alpha anti-aliasing. Black text with smooth edges, perfect readability.
+- **Code changes:** `baker_text.py` — removed `\pagecolor`, removed all keyout logic, uses simple `_trim_save` (trim transparent borders only). `build_full.py` — replaced `tectonic_fn` with `pdflatex_fn`.
+- **Tests:** 385/385 green. `key_out_white` helper preserved in `_imageops.py` for future use.
+
 ---
 
 *DeepSeek maintains this Commentaries and updates §4–§5 as decisions change. Ask for any scripture, whole or in part, at any time.*
