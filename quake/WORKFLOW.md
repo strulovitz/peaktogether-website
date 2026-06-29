@@ -262,37 +262,53 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Input/output contract unchanged (graph → positions)
 - NOT Parent 9 — DeepSeek implements directly with Nir's supervision
 
-### Current frontier
+### Day session (June 29, 2026 — Polygon room failure, pipeline pivot, Parent 13+14 handoffs)
+
+43. **Polygon room prototype attempted and FAILED.** Parent 12's regular-octagon design was built by DeepSeek in `tools/proto_polygon_render.py`, rendered offscreen → 3 PNGs. DeepSeek cannot see images. After multiple render attempts, Nir judged the output "horrific" and "a jumble of triangles." Box rooms (Wolfenstein-grade) remain the standard. Polygon work archived. **New discipline: DeepSeek never does visual refinement. All visual work requires Nir as sole visual judge with rapid PNG turnaround.**
+
+44. **Pipeline strategy pivot (Nir's direction).** Instead of one parent designing all 42 content files (context death), split into:
+    - **Parent 13:** Build ONE room (lemma_2) as pipeline proof-of-concept. Proves LaTeX + Asymptote Stabilo + `\cg` color matching work before scaling.
+    - **Parent 14:** Design text format + Python tool (`build/room_from_spec.py`) — Descent pattern: one tool, 20 parallel children.
+    - Nir explicitly invoked the Descent QED pattern: one format, one tool, many children.
+
+45. **Color system explicitly documented.** Nir corrected DeepSeek for only mentioning Stabilo (step highlighting) but not the full `\cg` color-matching system. Both Parent 13 and Parent 14 handoffs now include a complete §3/§0.5 section on the 4-layer color system: (1) Stabilo cumulative step highlights, (2) permanent `\cg` color-matching between figure elements and LaTeX text, (3) multiple independent colors per text panel, (4) OFF/ON bake via `\cg` macro redefinition. Both handoffs make colors + Stabilo MANDATORY, not optional.
+
+46. **Parent 13 handoff written** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_13_HANDOFF.md` (297 lines). Mission: build lemma_2 end-to-end (recipe + .asy + room_source). Launch files = Commentaries + OT + Apocrypha + handoff.
+
+47. **Parent 14 handoff written** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md` (316 lines). Mission: design room-content text format + `build/room_from_spec.py` tool. Format constraints mandate group+step per element, `\cg` spans in all LaTeX text, `groups_used` lists. Tool validation rejects specs missing color/step annotations.
+
+48. **Restart self-prompt written** — `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`. Full launch protocol, GitHub URLs for copy-paste, all standing rules.
+
+49. **WORKFLOW.md + Commentaries updated.** Everything pushed.
+
+### Current frontier (June 29, 2026)
 - ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
-- ⚠️ Parent 10 DIED (context overload) → mission split
-- ⏳ **NEXT — Parent 11 (ACTIVE): fix the renderers** (Mode A wireframe rebuild + Mode B solid-room verify/fix). The make-or-break visual gate.
-- ⏳ THEN — Parent 12: the 20-room Principia content
-- Deferred: Parent 9 CANCELLED (tainted, unnecessary)
+- ✅ Parent 11 DONE (renderers) · ✅ Parent 8 Part A DONE (engine hardened)
+- ✅ Parent 7 DONE (20-room Principia graph + palette frozen)
+- ⚠️ Parent 10 DIED (context overload) · ❌ Parent 12 (polygon rooms) FAILED
+- ⏳ **NEXT — Parent 13: Build ONE room as pipeline proof-of-concept** (lemma_2, 3 steps)
+- ⏳ THEN — Parent 14: Design room-content format + builder tool (Descent pattern)
+- **Handoffs ready:** Parent 13 (297 lines), Parent 14 (316 lines), restart self-prompt
 
-## 9. NEXT STEPS (after hierarchical layout fix)
+## 9. NEXT STEPS (June 29, 2026)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED (polygon rooms — visual iteration impossible)
 
-### IMMEDIATE — Hierarchical Layout (DeepSeek, no parent)
-1. Implement hierarchical force-directed layout in `layout_force.py`
-   - Phase 1: place "planet" nodes (importance ≥ 4 or degree ≥ 3) — they interact
-   - Phase 2: freeze planets, add "asteroid" nodes one at a time — pulled by springs to planets only
-   - Asteroids don't pull back, don't affect each other
-   - I/O contract unchanged (ConceptGraph → [NodeId, Vec2])
-2. Run all 358 tests — zero regressions required
-3. Re-run on Parent 7's 20-node graph → expect natural crossings (target: 5–15)
-4. If crossing count too low: increase importance threshold (more planets) or decrease k_factor (tighter clusters)
-5. If crossing count too high: decrease importance threshold (fewer planets) or increase k_factor
-6. **Nir decides when the crossing count looks right** (visual quality, not math threshold)
+### IMMEDIATE — Pipeline Proof-of-Concept (Parent 13, ONE room)
+1. Launch Parent 13 — build lemma_2 end-to-end (recipe + .asy + room_source)
+2. DeepSeek runs full pipeline (validate → asy_compile → overlay_diff → bake → room_maker → render)
+3. **Nir SEES the result** — one room with figure, highlighted steps, LaTeX panels, colored \cg spans
+4. Only AFTER Nir confirms the pipeline works → Parent 14 (format+tool for scaling)
 
-### THEN — Map Viewer (Parent 8 Part B, deferred)
-- Parent 8 builds 3D wireframe fly-through map viewer
-- Nir eyeballs the floorplan with real crossings
+### THEN — Format + Tool (Parent 14, modular scaling)
+1. Parent 14 designs text format for room specs + `build/room_from_spec.py` tool
+2. 20 children (one per room) fill in the format → DeepSeek runs tool 20 times
+3. Descent pattern: one format, one tool, many parallel children
 
-### THEN — Resume Build
-- Build Legs 2+3 for Parent 7's level (figures, panels, rooms)
-- Assemble pack, smoke test
-- Nir plays the first level!
+### LESSON — The polygon disaster
+- DeepSeek cannot iterate on visual quality (can't see images)
+- Nir diagnosed this correctly: return to box rooms, move forward
+- Future visual work needs: (a) image-capable AI, or (b) Nir as sole visual judge with rapid PNG turnaround
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -319,7 +335,7 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then **today's restart self-prompt** (`quake/DEEPSEEK_RESTART_PARENT_10_GO.md`) which has the exact current state and launch protocol. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 28, 2026 — night):** Engine + renderers DONE (Parent 11 delivered + integrated; 382 tests green; Mode A wireframe + bloom + lit Mode B all render — verified by offscreen pixels, not just compile). Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). **Nir rejected the rooms as Wolfenstein-grade rectangular boxes → we redesign rooms as REGULAR POLYGONS** (N edges = 2·P + D; one block per edge). **On restart:** read `quake/DEEPSEEK_RESTART_PARENT_12_POLYGON_GO.md`, then launch **Parent 12 — Regular-Polygon Rooms** (handoff `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`; launch files = Commentaries + OT + Apocrypha + handoff). De-risk: prototype in `room_viewer.py` first, Nir eyeballs, then propagate to contracts. Map→room bearing seam stays FROZEN. Content (20 rooms) deferred to Parent 13. Disciplines: never freeze the easy option silently; render-and-look (don't just compile); question-first material; no-"GO" handoffs.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then `quake/DEEPSEEK_RESTART_PARENT_13_GO.md` (detailed restart protocol with GitHub URLs). Then ask Nir what's next.
+🌙 **CURRENT STATE (June 29, 2026):** Engine + renderers DONE (382/382 green). Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). Concept graph + palette FROZEN for 20-room Principia level. **On restart:** launch **Parent 13 — Build ONE room (lemma_2)**. Handoffs: Parent 13 (297 lines) + Parent 14 (316 lines) + restart self-prompt — all in BIBLE/. Disciplines: never freeze the easy option; render-and-look; question-first; no-GO; DeepSeek cannot do visual refinement.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

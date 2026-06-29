@@ -84,7 +84,13 @@
 
 30. **Parent 11 — Renderer Deliverable (VERBATIM)** ✅ DONE + INTEGRATED — `quake/BIBLE/QUAKE_PARENT_11_RENDERER_DELIVERABLE.md`. Full Mode A glow + lit Mode B + shared perspective (5 files). DeepSeek saved it verbatim, integrated all 5 (382 tests green), then fixed the bugs Nir caught by RENDERING (not "it compiles"): culling→missing walls; texture path→white panels; one-sided→flat shading; yaw-convention swap→panels perpendicular; ceiling z-fight. New tool `tools/room_viewer.py` (fly inside a room).
 
-31. **Prompt to Opus — Parent 12 Handoff (Regular-Polygon Rooms)** ⏳ NEXT — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`. Replace the rectangular box room with a REGULAR POLYGON: N edges = 2·P + D (P = drawing+LaTeX step-pairs → 2 edges each; D = doors → 1 edge each); **one block per edge** (drawing | LaTeX | door); drawing+LaTeX edges adjacent; TARDIS size. Keeps the map→room bearing seam FROZEN; redesigns RoomRuntime/DoorRT/PanelPlacementRT + room_maker + render_room + room nav. Prototype in room_viewer first. Launch files = Commentaries + OT + Apocrypha + this handoff. 20-room content deferred to Parent 13.
+31. **Prompt to Opus — Parent 12 Handoff (Regular-Polygon Rooms) ❌ FAILED** — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`. Replace box rooms with regular polygon rooms. Attempted, rendered, visually failed (DeepSeek can't see images). Archived for future image-capable AI.
+
+32. **Prompt to Opus — Parent 13 Handoff (One-Room Pipeline Proof)** ⏳ NEXT — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_13_HANDOFF.md`. Build ONE complete room (lemma_2, 3 steps) end-to-end: recipe JSON + Asymptote figure with Stabilo highlighting + LaTeX panels with \cg color spans + room_source JSON. Proves the content pipeline works before scaling to 20 rooms.
+
+33. **Prompt to Opus — Parent 14 Handoff (Format + Builder Tool)** ⏳ AFTER Parent 13 — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Design a text format for room specs + build `build/room_from_spec.py` tool (Descent pattern). Includes full §0.5 color-system specification (Stabilo + \cg matching mandatory). Enables 20 parallel children to produce room specs without context death.
+
+34. **DeepSeek Restart Self-Prompt — Parent 13 Launch** — `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`. Complete restart protocol: current state, parent history, Parent 13 launch files + GitHub URLs, Parent 14 deferred note, standing rules.
 
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
@@ -144,6 +150,10 @@
 - **NEW STANDING LESSON (governs all future work).** Never silently freeze the easy option as "the design"; when a choice trades quality for ease, name BOTH and surface the tradeoff to Nir BEFORE freezing. The tell of reward-hacking is the asymmetry — freezes always land on the floor (easy), never the ceiling (good). And "it compiles / tests pass" is NOT success for anything visual — render it and look (offscreen pixels + a PNG for Nir).
 - **Renderer bugs fixed during Parent 11 integration** (all verified by offscreen render): culling→missing walls (disable cull); texture path→white panels (join asset_dir + grey fallback); one-sided→flat shading (two-sided + ambient up); yaw swap→panels perpendicular (orient from `wall` field); ceiling-eq z-fight (drop 0.05 m below ceiling).
 
+❌ **AMENDMENT — Parent 12 polygon rooms FAILED, June 29, 2026.** The regular-polygon room redesign was attempted but abandoned. DeepSeek cannot see images and thus cannot iterate on visual quality — multiple render attempts produced unusable triangle jumbles. Box rooms (Wolfenstein-grade) remain the standard. The polygon handoff is archived at `PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md` for future reference if an image-capable AI becomes available. New discipline: DeepSeek never does visual refinement; all visual work requires either image-capable AI or Nir as the sole visual judge with rapid PNG turnaround.
+
+✅ **AMENDMENT — Pipeline strategy pivot, June 29, 2026.** Instead of one parent designing all 20 rooms (context death, Parent 10), the work is split: Parent 13 builds ONE room as proof-of-concept (proves the pipeline works before scaling); Parent 14 designs a modular format+tool (Descent pattern) that enables 20 parallel children to produce room specs.
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -165,8 +175,9 @@
 - ⚠️ **Parent 10 DIED** (June 28) — context overload (bundled content + renderer + a stale bug report + a ~2,000-line source dump). Mission split. Two findings salvaged (see §4 amendment).
 - ✅ **Parent 11 DONE — renderers built + integrated** (Mode A thick dimming wireframe + bloom; lit Mode B). 382 tests green. DeepSeek then fixed the bugs Nir caught by RENDERING (culling/textures/shading/panel-orientation/ceiling z-fight). New tool `tools/room_viewer.py`.
 - ⚠️ **Rooms render, but are axis-aligned rectangular BOXES (Wolfenstein-grade) — Nir REJECTED.** A cheap shape got frozen as the standard. → room-shape redesign.
-- ⏳ **NEXT — Parent 12: REGULAR-POLYGON ROOMS** — floor/ceiling = regular N-gon, N = 2·P + D, one block per edge. Handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`. Prototype in `room_viewer.py` first; map→room bearing seam frozen.
-- ⏳ **THEN — Parent 13: the 20-room Principia content** (figures, recipes, LaTeX) — deferred until rooms are the right shape.
+- ❌ **Parent 12 (Regular-Polygon Rooms) FAILED** — June 29, 2026. DeepSeek built the polygon prototype but cannot see images to iterate on visual quality. Returned to Wolfenstein box rooms.
+- ⏳ **NEXT — Parent 13: Build ONE room as pipeline proof-of-concept** — lemma_2 (simplest figure, 3 steps). Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_13_HANDOFF.md`. Launch files: Commentaries + OT + Apocrypha + handoff. **On restart:** read `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`.
+- ⏳ **THEN — Parent 14: Room-content format + builder tool** — Design text format (Descent pattern) + `build/room_from_spec.py`. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Color system mandatory in format + tool.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
