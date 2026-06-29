@@ -114,10 +114,10 @@ def _wall_basis(wall: str):
     """
     if wall == "N":   # z = +D/2, inward -Z, along +X
         return np.array([1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, -1.0], np.float32)
-    if wall == "S":   # z = -D/2, inward +Z, along +X
-        return np.array([1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, 1.0], np.float32)
-    if wall == "E":   # x = +W/2, inward -X, along +Z
-        return np.array([0.0, 0.0, 1.0], np.float32), np.array([-1.0, 0.0, 0.0], np.float32)
+    if wall == "S":   # z = -D/2, inward +Z, along -X (opposite of N — viewer faces opposite direction)
+        return np.array([-1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, 1.0], np.float32)
+    if wall == "E":   # x = +W/2, inward -X, along -Z
+        return np.array([0.0, 0.0, -1.0], np.float32), np.array([-1.0, 0.0, 0.0], np.float32)
     if wall == "W":   # x = -W/2, inward +X, along +Z
         return np.array([0.0, 0.0, 1.0], np.float32), np.array([1.0, 0.0, 0.0], np.float32)
     raise ValueError(f"unknown wall {wall!r}")
@@ -368,6 +368,12 @@ def _panel_corners_on_wall(wall, center, width, height, inset):
     tr = c + along * hw + up * hh
     tl = c - along * hw + up * hh
     return np.array([bl, br, tr, tl], dtype=np.float32)
+
+
+def _flip_u(uv: np.ndarray) -> np.ndarray:
+    out = uv.copy()
+    out[:, 0] = 1.0 - out[:, 0]
+    return out
 
 
 def _build_panel_quads(room: RoomRuntime):
@@ -622,8 +628,6 @@ def _upload_texture(ctx, asset_id, pack):
             img=Image.open(path).convert("RGBA")
             img=img.transpose(Image.FLIP_TOP_BOTTOM).transpose(Image.FLIP_LEFT_RIGHT)
             tex=ctx.texture(img.size,4,img.tobytes())
-            try: tex.build_mipmaps()
-            except Exception: pass
     except Exception:
         tex=None
     _texture_cache[asset_id]=tex

@@ -45,7 +45,7 @@ def make_palette() -> Palette:
 
 
 def _make_bordered_png(path: Path, w: int = 40, h: int = 24) -> None:
-    """Canned PNG: magenta (bg_key) border with an opaque interior block."""
+    """Canned PNG: magenta border with an opaque interior block."""
     arr = np.zeros((h, w, 4), dtype=np.uint8)
     arr[:, :, 0] = 0xFF
     arr[:, :, 1] = 0x00

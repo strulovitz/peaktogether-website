@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import numpy as np
 
-from bake._imageops import key_out, content_bbox, trim
+from bake._imageops import key_out, key_out_white, content_bbox, trim
 
 
 MAGENTA = (255, 0, 255)
@@ -133,3 +133,44 @@ def test_trim_does_not_mutate_input():
     out[0, 0, 0] = 200  # mutate the crop
 
     assert np.array_equal(rgba, snapshot)
+
+
+# ---- key_out_white tests ----
+
+def test_key_out_white_keys_white_keeps_black():
+    img = np.zeros((3, 3, 3), dtype=np.uint8)
+    img[0, 0] = (255, 255, 255)   # pure white → keyed
+    img[0, 1] = (230, 230, 230)   # near-white → keyed (all > 210)
+    img[0, 2] = (0, 0, 0)         # black text → kept
+    img[1, 0] = (100, 100, 100)   # grey anti-alias → kept (all < 210)
+    img[1, 1] = (221, 50, 200)    # some bright, but not all > 210 → kept
+    img[1, 2] = (255, 0, 255)     # magenta → kept (G=0 < 210)
+
+    out = key_out_white(img, threshold=210)
+    assert out.shape == (3, 3, 4)
+    assert out[0, 0, 3] == 0   # white keyed
+    assert out[0, 1, 3] == 0   # near-white keyed
+    assert out[0, 2, 3] == 255 # black kept
+    assert out[1, 0, 3] == 255 # grey kept
+    assert out[1, 1, 3] == 255 # mixed kept (G not > threshold)
+    assert out[1, 2, 3] == 255 # magenta kept (G < threshold)
+
+
+def test_key_out_white_rgba_input_preserves_alpha():
+    img = np.zeros((2, 2, 4), dtype=np.uint8)
+    img[..., 3] = 200
+    img[0, 0, :3] = (255, 255, 255)  # white → alpha=0
+    img[0, 1, :3] = (50, 50, 50)     # dark → keep alpha
+
+    out = key_out_white(img, threshold=210)
+    assert out[0, 0, 3] == 0     # white overwritten
+    assert out[0, 1, 3] == 200   # original alpha preserved
+
+
+def test_key_out_white_does_not_mutate_input():
+    img = np.zeros((1, 1, 4), dtype=np.uint8)
+    img[..., 3] = 255
+    img[0, 0, :3] = (255, 255, 255)
+    snapshot = img.copy()
+    key_out_white(img, threshold=210)
+    assert np.array_equal(img, snapshot)

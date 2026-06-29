@@ -35,6 +35,8 @@ class BakerTextConfig(BaseModel):
     alpha_threshold: int = 16
     trim_padding_px: int = 8
     preamble: str = ""
+    text_bg_hex: str = "#ffffff"
+    white_threshold: int = 210
 
 
 def _hex_to_rgb(hex_str: str) -> tuple[int, int, int]:
@@ -89,19 +91,18 @@ def _wrap_tex(
     *,
     for_off: bool,
     cfg_preamble: str,
-    bg_hex: str,
 ) -> str:
     """Build the full standalone .tex source for OFF (all black) or ON (colored)."""
     parts: list[str] = []
-    parts.append(r"\documentclass[border=8pt]{standalone}")
+    parts.append(r"\documentclass[border=4pt]{standalone}")
     parts.append(r"\usepackage{amsmath,amssymb,mathtools,xcolor,varwidth}")
-    parts.append(rf"\pagecolor[HTML]{{{bg_hex.lstrip('#')}}}")  # render on key-out color
     if not for_off:
         parts.append(_colors_tex(text_block))
     if cfg_preamble:
         parts.append(cfg_preamble)
     parts.append(r"\begin{document}")
     parts.append(r"\begin{varwidth}{28em}")
+    parts.append(r"\large\bfseries")
     if for_off:
         parts.append(_strip_textcolor(text_block.latex))
     else:
@@ -130,18 +131,16 @@ def _validate(text_block: TextBlock) -> None:
             )
 
 
-def _key_trim_save(
+def _trim_save(
     src_png: Path,
     out_png: Path,
-    bg_rgb: tuple[int, int, int],
     cfg: BakerTextConfig,
     *,
     want_bbox: bool,
 ):
     arr = np.array(Image.open(src_png).convert("RGBA"))
-    keyed = _imageops.key_out(arr, bg_rgb, cfg.alpha_threshold)
-    bbox = _imageops.content_bbox(keyed) if want_bbox else None
-    trimmed = _imageops.trim(keyed, cfg.trim_padding_px)
+    bbox = _imageops.content_bbox(arr) if want_bbox else None
+    trimmed = _imageops.trim(arr, cfg.trim_padding_px)
     Image.fromarray(trimmed).save(out_png)
     h, w = trimmed.shape[0], trimmed.shape[1]
     return bbox, w, h
@@ -149,7 +148,7 @@ def _key_trim_save(
 
 def bake(
     text_block: TextBlock,
-    palette: Palette,             # still needed for bg_key (keyout color)
+    palette: Palette,
     out_dir: Path,
     cfg: BakerTextConfig,
     *,
@@ -159,21 +158,18 @@ def bake(
 
     out_dir.mkdir(parents=True, exist_ok=True)
     block_id = text_block.block_id
-    bg_rgb = _hex_to_rgb(palette.bg_key)
 
-    # --- Write tex sources ---
     off_tex = out_dir / f"{block_id}.off.tex"
     on_tex = out_dir / f"{block_id}.on.tex"
     off_tex.write_text(
-        _wrap_tex(text_block, for_off=True, cfg_preamble=cfg.preamble, bg_hex=palette.bg_key),
+        _wrap_tex(text_block, for_off=True, cfg_preamble=cfg.preamble),
         encoding="utf-8",
     )
     on_tex.write_text(
-        _wrap_tex(text_block, for_off=False, cfg_preamble=cfg.preamble, bg_hex=palette.bg_key),
+        _wrap_tex(text_block, for_off=False, cfg_preamble=cfg.preamble),
         encoding="utf-8",
     )
 
-    # --- Compile OFF (wall + master) ---
     off_wall_stem = out_dir / f"{block_id}.off"
     off_master_stem = Path(str(off_wall_stem) + "@master")
     result = compile_fn(off_tex, off_wall_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
@@ -183,7 +179,6 @@ def bake(
     if not result.ok:
         raise RuntimeError(result.stderr)
 
-    # --- Compile ON (wall + master) ---
     on_wall_stem = out_dir / f"{block_id}.on"
     on_master_stem = Path(str(on_wall_stem) + "@master")
     result = compile_fn(on_tex, on_wall_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
@@ -200,31 +195,31 @@ def bake(
     off_png = Path(str(off_wall_stem) + ".png")
     off_master_png = Path(str(off_master_stem) + ".png")
     if off_png.exists():
-        off_bbox, off_w, off_h = _key_trim_save(
+        off_bbox, off_w, off_h = _trim_save(
             off_png,
             out_dir / f"{block_id}.off.png",
-            bg_rgb, cfg, want_bbox=True,
+            cfg, want_bbox=True,
         )
         if off_master_png.exists():
-            _key_trim_save(
+            _trim_save(
                 off_master_png,
                 out_dir / f"{block_id}.off@master.png",
-                bg_rgb, cfg, want_bbox=False,
+                cfg, want_bbox=False,
             )
 
     on_png = Path(str(on_wall_stem) + ".png")
     on_master_png = Path(str(on_master_stem) + ".png")
     if on_png.exists():
-        _, on_w, on_h = _key_trim_save(
+        _, on_w, on_h = _trim_save(
             on_png,
             out_dir / f"{block_id}.on.png",
-            bg_rgb, cfg, want_bbox=True,
+            cfg, want_bbox=True,
         )
         if on_master_png.exists():
-            _key_trim_save(
+            _trim_save(
                 on_master_png,
                 out_dir / f"{block_id}.on@master.png",
-                bg_rgb, cfg, want_bbox=False,
+                cfg, want_bbox=False,
             )
 
     off_entry = AssetEntry(
