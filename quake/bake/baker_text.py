@@ -71,7 +71,7 @@ def _wrap_tex(
         for lc in text_block.colors_used:
             parts.append(rf"\definecolor{{{lc.name}}}{{HTML}}{{000000}}")
     parts.append(r"\begin{document}")
-    parts.append(r"\begin{varwidth}{\maxdimen}")
+    parts.append(r"\begin{varwidth}{28em}")
     parts.append(text_block.latex)
     parts.append(r"\end{varwidth}")
     parts.append(r"\end{document}")
