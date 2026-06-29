@@ -620,6 +620,7 @@ def _upload_texture(ctx, asset_id, pack):
         path=_resolve_asset_path(asset_id,pack)
         if path is not None:
             img=Image.open(path).convert("RGBA")
+            img=img.transpose(Image.FLIP_TOP_BOTTOM).transpose(Image.FLIP_LEFT_RIGHT)  # Pillow→OpenGL: flip both axes
             tex=ctx.texture(img.size,4,img.tobytes())
             try: tex.build_mipmaps()
             except Exception: pass
