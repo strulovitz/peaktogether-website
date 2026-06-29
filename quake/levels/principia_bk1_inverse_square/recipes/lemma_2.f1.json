@@ -1,0 +1,61 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_2.f1",
+  "node_id": "lemma_2",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II; Plate 1, Fig. 6.",
+  "caption": "Inscribed and circumscribed parallelograms on equal bases under the curve aE; as the bases shrink, the inscribed figure AKbLcMdD, the circumscribed figure AalbmcndoE, and the curvilinear figure AabcdE become ultimately equal.",
+  "n_steps": 3,
+  "steps": [
+    { "index": 1, "gloss": "The curvilinear figure AacE: the curve aE, the baseline AE on equal bases, and the side Aa." },
+    { "index": 2, "gloss": "The inscribed parallelograms Ab, Bc, Cd, standing under the curve on the equal bases." },
+    { "index": 3, "gloss": "The circumscribed parallelograms completed above the curve; their excess over the inscribed figure is the single rectangle ABla, which vanishes as AB shrinks." }
+  ],
+  "ops": [
+    { "name": "A", "op": "free_point", "rough_xy": [0.0, 0.0],
+      "draw": { "step": 1, "marker": "dot", "label": { "tex": "$A$", "placement": "SW" } } },
+    { "name": "E", "op": "free_point", "rough_xy": [8.0, 0.0],
+      "draw": { "step": 1, "marker": "dot", "label": { "tex": "$E$", "placement": "SE" } } },
+    { "name": "B", "op": "free_point", "rough_xy": [2.0, 0.0],
+      "draw": { "step": 1, "marker": "dot", "label": { "tex": "$B$", "placement": "S" } } },
+    { "name": "C", "op": "free_point", "rough_xy": [4.0, 0.0],
+      "draw": { "step": 1, "marker": "dot", "label": { "tex": "$C$", "placement": "S" } } },
+    { "name": "D", "op": "free_point", "rough_xy": [6.0, 0.0],
+      "draw": { "step": 1, "marker": "dot", "label": { "tex": "$D$", "placement": "S" } } },
+
+    { "name": "ptA", "op": "free_point", "rough_xy": [0.0, 1.4],
+      "draw": { "step": 1, "marker": "none", "label": { "tex": "$a$", "placement": "NW" },
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+    { "name": "ptb", "op": "free_point", "rough_xy": [2.0, 2.6],
+      "draw": { "step": 1, "marker": "none", "label": { "tex": "$b$", "placement": "N" },
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+    { "name": "ptc", "op": "free_point", "rough_xy": [4.0, 3.4],
+      "draw": { "step": 1, "marker": "none", "label": { "tex": "$c$", "placement": "N" },
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+    { "name": "ptd", "op": "free_point", "rough_xy": [6.0, 3.9],
+      "draw": { "step": 1, "marker": "none", "label": { "tex": "$d$", "placement": "N" },
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+    { "name": "ptE", "op": "free_point", "rough_xy": [8.0, 4.2],
+      "draw": { "step": 1, "marker": "none", "label": null,
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+
+    { "name": "curve", "op": "polyline", "points": ["ptA", "ptb", "ptc", "ptd", "ptE"],
+      "draw": { "step": 1, "marker": "none", "is_heart": true,
+                "local_color": { "name": "curveblue", "hex": "#1E6FE0" } } },
+    { "name": "baseAE", "op": "segment", "a": "A", "b": "E",
+      "draw": { "step": 1, "marker": "none",
+                "local_color": { "name": "basegreen", "hex": "#00A35A" } } },
+    { "name": "sideAa", "op": "segment", "a": "A", "b": "ptA",
+      "draw": { "step": 1, "marker": "none",
+                "local_color": { "name": "sideorange", "hex": "#E8770A" } } },
+
+    { "name": "inscribed", "op": "series", "along": "baseAE", "to_curve": "curve",
+      "count": 4, "kind": "inscribed_rects",
+      "draw": { "step": 2, "marker": "none", "is_heart": true,
+                "local_color": { "name": "inscpurple", "hex": "#8E24AA" } } },
+
+    { "name": "circumscribed", "op": "series", "along": "baseAE", "to_curve": "curve",
+      "count": 4, "kind": "circumscribed_rects",
+      "draw": { "step": 3, "marker": "none", "is_heart": true,
+                "local_color": { "name": "circred", "hex": "#D81B60" } } }
+  ]
+}
