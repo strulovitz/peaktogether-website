@@ -309,34 +309,43 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 49. **WORKFLOW.md + Commentaries updated.** Everything pushed.
 
+### Day session (June 29, 2026 — Parent 13 DELIVERED! One-room pipeline proof built)
+
+53. **Parent 13 DELIVERED** — All 3 files built + validated + pushed:
+    - `recipe.lemma_2.f1.json` — 5 local colors, 3 steps with hearts, coordinate-free construction ops
+    - `figure.lemma_2.f1.asy` — Self-contained Asymptote (no prooffig.asy yet), Stabilo underlay + matched-color ink
+    - `room_source.lemma_2.json` — 3 step-pairs with \textcolor LaTeX panels, 2 ceiling equations
+54. **Both JSONs validate GREEN** against `raw_models.py` (Recipe + RoomSource, extra-forbid).
+55. **382/382 tests GREEN** 🟢 — no regressions.
+56. **⚠️ Asymptote compile BLOCKED** — MiKTeX bundled Asymptote 2.88 has a bug: `plain_constants.asy:73.1: no type of name 'using'` — the binary can't parse its own standard library. This is a MiKTeX installation issue, NOT a Parent 13 deliverable bug. Parent 13's .asy code itself is syntactically sound. Needs a standalone Asymptote install.
+57. **Push + commit DONE** — all 4 files on GitHub.
+58. **Parent 13's design decisions:** Light bg/black ink; 4 rects each (inscribed+circumscribed); curve concave-down rising; rich colors (5 distinct local colors); Stabilo yellow/green/orange per step; `\textcolor{name}{text}` spans with matching LaTeX.
+59. **Nir's directive worked:** "BUILD NOW, no propose phase" → Parent 13 delivered all 3 files in one go. Talk-first rhythm respected (questions → build).
+
 ### Current frontier (June 29, 2026)
 - ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
 - ✅ Parent 11 DONE (renderers) · ✅ Parent 8 Part A DONE (engine hardened)
 - ✅ Parent 7 DONE (20-room Principia graph + palette frozen)
+- ✅ **Parent 13 DONE — lemma_2 pipeline proof-of-concept DELIVERED**
 - ⚠️ Parent 10 DIED (context overload) · ❌ Parent 12 (polygon rooms) FAILED
-- ⏳ **NEXT — Parent 13: Build ONE room as pipeline proof-of-concept** (lemma_2, 3 steps)
+- ⚠️ **Asymptote compile BLOCKED** — MiKTeX Asymptote 2.88 broken (parses own library wrong). Needs fix.
+- ⏳ **NEXT — Fix Asymptote** (install standalone or update MiKTeX) → render PNG → Nir eyeballs
 - ⏳ THEN — Parent 14: Design room-content format + builder tool (Descent pattern)
-- **Handoffs ready:** Parent 13 (297 lines), Parent 14 (316 lines), restart self-prompt
 
 ## 9. NEXT STEPS (June 29, 2026)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED (polygon rooms — visual iteration impossible)
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED (polygon rooms — visual iteration impossible) | ~~Parent 13~~ ✅
 
-### IMMEDIATE — Pipeline Proof-of-Concept (Parent 13, ONE room)
-1. Launch Parent 13 — build lemma_2 end-to-end (recipe + .asy + room_source)
-2. DeepSeek runs full pipeline (validate → asy_compile → overlay_diff → bake → room_maker → render)
-3. **Nir SEES the result** — one room with figure, highlighted steps, LaTeX panels, colored \cg spans
-4. Only AFTER Nir confirms the pipeline works → Parent 14 (format+tool for scaling)
+### DONE — Pipeline Proof-of-Concept (Parent 13, ONE room)
+1. ✅ Launched Parent 13 — built lemma_2 end-to-end (recipe + .asy + room_source)
+2. ✅ JSONs validated against raw_models.py — both GREEN
+3. ⚠️ Asymptote compile BLOCKED — MiKTeX's asy 2.88 broken (see §8 line 56)
+4. ⏳ Fix Asymptote → compile → bake → room_maker → **render PNG for Nir**
 
 ### THEN — Format + Tool (Parent 14, modular scaling)
 1. Parent 14 designs text format for room specs + `build/room_from_spec.py` tool
 2. 20 children (one per room) fill in the format → DeepSeek runs tool 20 times
 3. Descent pattern: one format, one tool, many parallel children
-
-### LESSON — The polygon disaster
-- DeepSeek cannot iterate on visual quality (can't see images)
-- Nir diagnosed this correctly: return to box rooms, move forward
-- Future visual work needs: (a) image-capable AI, or (b) Nir as sole visual judge with rapid PNG turnaround
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.

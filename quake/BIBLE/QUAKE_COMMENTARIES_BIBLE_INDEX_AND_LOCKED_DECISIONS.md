@@ -92,6 +92,8 @@
 
 34. **DeepSeek Restart Self-Prompt — Parent 13 Launch** — `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`. Complete restart protocol: current state, parent history, Parent 13 launch files + GitHub URLs, Parent 14 deferred note, standing rules.
 
+35. **Parent 13 — Frozen Deliverable (VERBATIM)** ✅ — `quake/BIBLE/QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`. Lemma II end-to-end (recipe + figure.asy + room_source). 3 steps, 5 local colors, Stabilo hearts. Both JSONs validate GREEN.
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).
@@ -156,6 +158,8 @@
 
 ✅ **AMENDMENT — Color system CORRECTION (Nir's true intent), June 29, 2026.** The ENTIRE color model carried in the scriptures (OT/NT/Second Canon/Apocrypha) — global fixed 5-group palette, "same group same color everywhere," cumulative `on_k` stabilo, "grey" uncolored ink — was a **misunderstanding.** Nir described the same thing from the beginning; the AIs misread it and froze the misread (same disease as the Wolfenstein box-room). **The corrected model (Nir's, overrides ALL scriptures):** **(1) Matching colors:** per station (=one step-pair), important elements get distinct local colors; the matching words in the text share them; colors are LOCAL per station (same concept may be different color or no color elsewhere); unimportant ink = **black** (light bg) or **white** (dark bg) — **never grey.** **(2) Stabilo bright highlighter:** ONLY the **current step's heart(s)** get a bright marker (bright yellow/green/orange/pink/cyan), never cumulative. The corrected model is now authoritative in the Parent 13 + Parent 14 handoffs and in the Commentaries §3 locked decision above. All Bible scriptures retain the OLD model unchanged (do not edit them — editing large verbatim files causes collateral damage; they remain as fossils). The DATA FORMATS (`raw_models.py`, `GroupName`, `Palette`, `grey_ink`, `groups_used`) also currently encode the old mistake and are being corrected (DeepSeek is updating code + tests to local-per-station colors + hearts).
 
+✅ **AMENDMENT — Parent 13 delivered, June 29, 2026.** Lemma II pipeline proof-of-concept successfully designed: recipe JSON (3 steps, 5 local colors, hearts per step), self-contained figure.asy (own tiny prooffig convention, Stabilo underlay + matched-color ink with highlight=-1/1/2/3), room_source JSON (3 step-pairs with \textcolor LaTeX panels, 2 ceiling equations). Both JSONs validated GREEN against raw_models.py. Verbatim saved at `QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`. Files at `levels/principia_bk1_inverse_square/recipes/lemma_2.f1.json`, `.../figures/lemma_2.f1.asy`, `.../room_sources/lemma_2.json`. **Asymptote compile blocked** by MiKTeX bug (not Parent 13's fault).
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -178,8 +182,9 @@
 - ✅ **Parent 11 DONE — renderers built + integrated** (Mode A thick dimming wireframe + bloom; lit Mode B). 382 tests green. DeepSeek then fixed the bugs Nir caught by RENDERING (culling/textures/shading/panel-orientation/ceiling z-fight). New tool `tools/room_viewer.py`.
 - ⚠️ **Rooms render, but are axis-aligned rectangular BOXES (Wolfenstein-grade) — Nir REJECTED.** A cheap shape got frozen as the standard. → room-shape redesign.
 - ❌ **Parent 12 (Regular-Polygon Rooms) FAILED** — June 29, 2026. DeepSeek built the polygon prototype but cannot see images to iterate on visual quality. Returned to Wolfenstein box rooms.
-- ⏳ **NEXT — Parent 13: Build ONE room as pipeline proof-of-concept** — lemma_2 (simplest figure, 3 steps). Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_13_HANDOFF.md`. Launch files: Commentaries + OT + Apocrypha + handoff. **On restart:** read `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`.
-- ⏳ **THEN — Parent 14: Room-content format + builder tool** — Design text format (Descent pattern) + `build/room_from_spec.py`. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Color system mandatory in format + tool.
+- ✅ **Parent 13 DONE — One-room pipeline proof-of-concept DELIVERED** — June 29, 2026. recipe.lemma_2.f1.json + figure.lemma_2.f1.asy + room_source.lemma_2.json. Both JSONs validate GREEN. 382/382 tests green. ⚠️ Asymptote compile BLOCKED — MiKTeX Asymptote 2.88 has a library-parsing bug (plain_constants.asy), NOT a Parent 13 bug. Needs standalone Asymptote install. Verbatim deliverable saved at `QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`.
+- ⏳ **THEN — Fix Asymptote → compile → bake → room_maker → render PNG for Nir's eyes**
+- ⏳ **NEXT — Parent 14: Room-content format + builder tool** — Design text format (Descent pattern) + `build/room_from_spec.py`. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Color system mandatory in format + tool.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ---
