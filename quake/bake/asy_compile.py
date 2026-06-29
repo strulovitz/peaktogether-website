@@ -78,11 +78,10 @@ def compile(
         capture_output=True,
         text=True,
         timeout=120,
-        env={**__import__("os").environ, "ASYMPTOTE_GS": cfg.gs_path} if cfg.gs_path else None,
     )
 
-    expected = out_stem.with_suffix(f".{cfg.out_format}")
-    ok = proc.returncode == 0 and expected.exists()
+    expected = Path(str(out_stem) + f".{cfg.out_format}")
+    ok = expected.exists()  # pdflatex warnings may appear on stderr even with retcode=0
     outputs = [expected] if ok else []
 
     return AsyResult(

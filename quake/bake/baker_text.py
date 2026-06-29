@@ -156,9 +156,10 @@ def bake(
     if not result.ok:
         raise RuntimeError(result.stderr)
 
-    if off_stem.with_suffix(".png").exists():
+    off_png = Path(str(off_stem) + ".png")
+    if off_png.exists():
         _key_trim_save(
-            off_stem.with_suffix(".png"),
+            off_png,
             out_dir / f"{block_id}.off.png",
             bg_rgb, cfg, want_bbox=True,
         )
@@ -168,9 +169,10 @@ def bake(
             bg_rgb, cfg, want_bbox=False,
         )
 
-    if on_stem.with_suffix(".png").exists():
+    on_png = Path(str(on_stem) + ".png")
+    if on_png.exists():
         _key_trim_save(
-            on_stem.with_suffix(".png"),
+            on_png,
             out_dir / f"{block_id}.on.png",
             bg_rgb, cfg, want_bbox=True,
         )
