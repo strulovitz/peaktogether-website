@@ -10,6 +10,7 @@ from map.raw_models import (
     DrawingBlock,
     FigureDecl,
     IncidentEdge,
+    LocalColor,
     Manifest,
     RoomPortalSpec,
     RoomRuntime,
@@ -39,7 +40,7 @@ def make_fixture():
         recipe_path="figures/recipe.a.f1.json",
         n_steps=3,
         caption="Test figure",
-        groups_used=["path"],
+        colors_used=[LocalColor(name="path", hex="#E8A200")],
     )
     drawing = DrawingBlock(
         block_id="a.s1.fig",
@@ -49,7 +50,7 @@ def make_fixture():
     text = TextBlock(
         block_id="a.s1.txt",
         latex="Test $x$",
-        groups_used=["path"],
+        colors_used=[LocalColor(name="path", hex="#E8A200")],
     )
     pair = StepPair(
         pair_id="a.s1",

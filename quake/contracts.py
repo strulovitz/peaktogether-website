@@ -25,7 +25,7 @@ from pydantic import BaseModel, ConfigDict, Field
 # import list HERE ONLY (the facade absorbs it) — never in a child module.
 from map.raw_models import (  # noqa: F401  (re-exported)
     # --- type aliases ---
-    NodeId, LevelId, PageLabel, Vec2, Vec3, Hex, GroupName,
+    NodeId, LevelId, PageLabel, Vec2, Vec3, Hex, GroupName, LocalColor,
     FigureId, PairId, DrawBlockId, TextBlockId, EqId,
     # --- Leg 1 (MAP) models ---
     Floorplan, FloorRoom, Corridor, Crossing,
@@ -247,7 +247,7 @@ PITCH_CLAMP_RAD: float = 1.2217         # +/-70 degrees
 
 __all__ = [
     # re-exported aliases
-    "NodeId", "LevelId", "PageLabel", "Vec2", "Vec3", "Hex", "GroupName",
+    "NodeId", "LevelId", "PageLabel", "Vec2", "Vec3", "Hex", "GroupName", "LocalColor",
     "FigureId", "PairId", "DrawBlockId", "TextBlockId", "EqId",
     # re-exported models
     "Floorplan", "FloorRoom", "Corridor", "Crossing",

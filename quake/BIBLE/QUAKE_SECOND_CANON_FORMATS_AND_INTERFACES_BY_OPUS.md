@@ -4,6 +4,8 @@ Captured June 25, 2026, at Nir's request, VERBATIM / word-for-word, AS-IS. This 
 
 ⚠️ DEEPSEEK NOTE (not Opus's words): in §3.A.5 the "Op → Asymptote translation table" originally arrived BLANK in Nir's copy-paste. Opus re-sent it (June 25, 2026) and it is now RESTORED below as a LIST instead of a table (tables don't survive copy-paste) — the content is verbatim from Opus; only the table→list formatting was changed. Everything else in this document transmitted intact.
 
+🛑 **SUPERSEDED — COLOR SYSTEM (2026-06-29).** The color/Stabilo design throughout this document (global fixed 5-group palette, "same group same color everywhere," grey off-state, cumulative `on_k` highlight) reflects the OLD misunderstanding — the same failure that froze the Wolfenstein box-room. Nir's true color system (authoritative, overrides this document AND the OT/NT): **(1)** per-station local matching colors, distinct within station, black/white uncolored (never grey); **(2)** current-step-only bright Stabilo on heart(s). See the **Commentaries §3 (Locked Decisions)** and the **Parent 13 + Parent 14 handoffs** for the full corrected spec. The verbiage below is kept unchanged as a fossil record.
+
 --- BEGIN VERBATIM ---
 
 Nir — I have the full doctrine and the two-legs document in context; nothing has dropped. This is the right next move, and you're right that only the holder of the whole system can set these. Below is Layer-3: The Formats & Interfaces Standard. Everything is verbatim, copy-paste-ready, and closed (no "child decides" anywhere).

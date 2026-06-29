@@ -4,6 +4,48 @@
 
 ---
 
+## ⚠️ CORRECTION FROM NIR — READ THIS FIRST (it overrides everything) ⚠️
+
+**This block comes directly from Nir, the author and owner of this project. It OVERRIDES any description of color or highlighting anywhere else in this prompt (especially §0.5, §2, §3, §5, §6) AND anywhere in the Bible (Old Testament, New Testament, Second Canon, Apocrypha, Commentaries). Wherever they conflict, THIS wins. Your format and tool must embody THIS, not the old model.**
+
+### Why this overrides the Bible (please internalize it; do not argue it back)
+
+- The "frozen" / "Bible" system exists for ONE reason: to stop the AI assembly-line (many fresh chats) from drifting and silently contradicting each other. It was **never** meant to bind Nir. Nir is the author. To him nothing is set in stone — the project is still "water and void," and he shapes the world as he sees fit. When Nir's stated intent and a frozen text conflict, **Nir wins, every time.**
+- This is **not Nir changing his mind.** Nir described this exact color behavior from the very beginning; earlier AIs misunderstood it and froze the misread — the same failure that froze the rejected Wolfenstein box-room. So the Bible's color model is a **recorded mistake**, not Nir's intent. We are correcting a misunderstanding, not amending a decision.
+- **Why we are NOT editing the Bible to fix it:** purely mechanical safety — editing those large verbatim scripture files has repeatedly caused collateral damage (adjacent paragraphs altered or deleted). So we leave the scriptures untouched as a historical record and carry the LIVE truth here in the handoff. The handoff is the authority; the old scripture is the fossil.
+- Your job is to **serve Nir's goal.** Be the angel that builds what the author wants — not the one who quotes scripture back at him.
+
+### The color system Nir actually wants (your format + tool MUST capture exactly this)
+
+A **"station"** = one step-pair = a geometry **drawing panel** + its paired **text-explanation panel**. EVERY station obeys the SAME two rules:
+
+**Rule 1 — Matching colors (the words ↔ the picture). LOCAL to each station.**
+- Whatever the explanation text calls out as important is given a color in the drawing, and the SAME words in the text get that SAME color. Text says "angle ABC" in blue → angle ABC is drawn blue.
+- Within ONE station, each important element gets its OWN DISTINCT color (angle ABC = blue, so triangle DEF = red, line XY = green, …). No two important elements in the same station share a color.
+- Colors are chosen FRESH per station — they are LOCAL, never global. The same angle ABC may be blue in one station, red in another, and have NO color in a third (if it isn't important there). All fine.
+- Anything NOT important in a station is NOT colored. It is drawn in plain **BLACK** (on a light background) or plain **WHITE** (on a dark background). **NEVER grey. There are no shades of grey.**
+
+**Rule 2 — The Stabilo bright highlighter. CURRENT STEP ONLY.**
+- On TOP of the matched colors, ONLY the current step gets a bright highlighter swipe over its "heart" — the single most important piece of that step.
+- If the current step has several hearts, each heart gets its OWN bright marker color: bright yellow, bright green, bright orange, bright pink, bright cyan.
+- These bright marker colors are also LOCAL — picked fresh, not fixed. The same piece highlighted elsewhere can get a different bright color next time.
+- This is NOT cumulative. We do NOT light steps 1..k. We light ONLY the current step's heart(s).
+
+### What this explicitly KILLS from the old (mistaken) model
+
+1. ❌ **No single global fixed palette** ("path is always orange everywhere"). Colors are local, per station, distinct-within-station, and only on important elements.
+2. ❌ **No cumulative reveal** (steps 1..k). The Stabilo lights ONLY the current step's heart(s).
+3. ❌ **No grey.** Uncolored = pure black (light background) or pure white (dark background).
+
+### What this means for YOUR format + tool
+
+- The child's spec must let them, **per station**, mark which elements are important and assign each a **distinct local color**, and write the matching text so the same words carry the same color. (No global 5-group enum; the child picks colors locally. A small set of named, easily-distinguished colors is fine, but the assignment is per station, not a fixed global meaning.)
+- The child's spec must let them mark, **per step**, the **heart(s)** of that step and a **bright marker color** for each — used by the Stabilo, current-step-only.
+- The tool must emit drawings where uncolored ink is black (light bg) / white (dark bg), important elements carry their local color, and only the current step's heart(s) carry the bright Stabilo.
+- The schemas quoted later (the 5 fixed groups, the global `palette.json`, "grey", `highlight >= step`) reflect the OLD mistake. Reconciling them to THIS model is part of your first task; DeepSeek will then update `raw_models.py` and the bake tools. Surface your proposed data shape to Nir.
+
+---
+
 ## §0 — THE PATTERN (why you're doing this)
 
 We have 20 Principia rooms (11 with figures, 9 text-only). Parent 13 is building ONE room as a pipeline proof-of-concept. After that succeeds, we need to build the other 19 — and then more levels after that.
@@ -23,7 +65,9 @@ No parent designs 42 files. No context death. One format, one tool, many childre
 
 ## §0.5 — THE COLOR SYSTEM (the heart of Quake — your format + tool MUST embody this)
 
-This is NOT optional. Every child spec, every tool output, every generated file for ALL future rooms (whether 20 or 20 million) must carry this system. Design your format and tool AROUND it.
+> 🛑 **SUPERSEDED — DISREGARD THE REST OF THIS SECTION.** Everything below in §0.5 (the "Layer 1/2/3/4" model, cumulative `on_k`, the 5 fixed groups, the global palette, `\cg{group}{}`, "grey") describes the OLD misunderstanding. The **authoritative, correct color system is the "⚠️ CORRECTION FROM NIR" block at the top of this prompt** — read it and design your format + tool to it. In one breath: **(1) Matching colors** are local per station, distinct within a station, only on important elements; uncolored ink is **black/white, never grey**; the same words in the text share the color of their shape in the picture. **(2) Stabilo** is a bright marker (yellow/green/orange/pink/cyan) on ONLY the current step's heart(s), never cumulative, also local. The stale text that follows is kept only so you can see what was wrong.
+
+This is NOT optional. Every child spec, every tool output, every generated file for ALL future rooms must carry the (corrected) color system. Design your format and tool AROUND it.
 
 ### Layer 1: Stabilo — cumulative step highlighting on figures
 
@@ -98,6 +142,8 @@ The tool does NOT run Asymptote or bake PNGs — that's a separate pipeline step
 ---
 
 ## §2 — THE FROZEN OUTPUT FORMATS (your tool writes THESE)
+
+> 🛑 **CORRECTION (read before trusting the schemas below).** These formats currently encode the OLD color mistake — a fixed `GroupName` enum of 5 globally-fixed groups, one shared `palette.json`, "grey" for the off-state, `groups_used`, and a per-step "group" tag built for cumulative reveal. Under Nir's corrected model (top of this prompt) colors are **local per station, distinct within a station, only on important elements**, uncolored ink is **black/white (never grey)**, and the Stabilo lights **only the current step's heart(s)** in bright marker colors. So `GroupName`, the global `palette.json`, `Draw.group`, and `groups_used` will need to CHANGE. Treat the schemas below as the *current* shape, not as law — proposing the corrected shape that expresses Nir's model is part of your first task, and DeepSeek will update `raw_models.py` + the bake tools to match. Surface your proposed shape to Nir.
 
 ### Recipe (Section 3.A.4)
 
@@ -251,13 +297,15 @@ Children have NO internet, NO file access. They only know what Nir copy-pastes. 
 4. **Figure + text-only support.** Different keyword blocks for each.
 5. **LaTeX-safe.** Panels contain `$...$` math. Format must not corrupt it.
 6. **Step-structured.** Content organized by step (1..n_steps).
-7. **Color-group-aware.** Every geometric element MUST have a `group` field (one of the 5 palette keys). Every LaTeX text span referencing a figure element MUST use `\cg{group}{text}`. The `groups_used` list per text block is MANDATORY. The format must ENFORCE this — a child cannot submit a spec without color annotations. This is NOT optional.
-8. **Stabilo-step-aware.** Every geometric element MUST have a `step` field (1..n_steps) that controls when it gets highlighted in the cumulative reveal. Elements without a step assignment are REJECTED.
+7. **Local-color-aware (matching colors, per station).** Per station, the child marks which elements are *important* and gives each its own **distinct local color**; the matching words in the paired text carry that SAME color. Unimportant elements get NO color (drawn black on light bg / white on dark bg). The format must ENFORCE that every important element has a local color and that the colored words in the text match their shapes — a child cannot submit a spec without these color annotations. This is NOT optional. (No global 5-group enum; colors are chosen locally per station and may differ between stations.)
+8. **Stabilo-aware (current step ONLY).** Per step, the child marks the **heart(s)** of that step and a **bright marker color** for each (bright yellow/green/orange/pink/cyan). The Stabilo lights ONLY the current step's heart(s) — never cumulatively. A step with no heart marked is REJECTED.
 9. **Geometry-expressible.** Child specifies geometric elements with construction relationships; tool maps to RecipeOps + Asymptote. Tool generates proper `Draw` objects with both `group` AND `step` populated from the spec.
 
 ---
 
 ## §6 — THE TOOL SPEC
+
+> 🛑 **CORRECTION (overrides the generation/validation rules in this section).** The specifics below (`highlight >= step` cumulative conditionals, per-group color variables, "`\cg` group exists in palette", `groups_used`) reflect the OLD color mistake. Keep the tool's *shape* (parse → validate → emit the 3 source files), but change WHAT it validates and emits to Nir's model: local per-station colors where the text's colored words match their shapes, uncolored ink **black/white (never grey)**, and a Stabilo that lights **only the current step's heart(s)** in bright marker colors. The validation rules must enforce *that* model (every important element has a local color; matching text words carry it; each step has at least one heart + bright color), not the old global-palette/cumulative one.
 
 Single Python file: `build/room_from_spec.py`
 

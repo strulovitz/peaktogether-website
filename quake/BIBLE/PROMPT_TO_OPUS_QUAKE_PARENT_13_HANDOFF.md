@@ -1,6 +1,43 @@
 # PARENT 13 HANDOFF — BUILD ONE ROOM END-TO-END (PIPELINE PROOF-OF-CONCEPT)
 
-> **Your mission, single sentence:** Build ONE complete Principia room — recipe, Asymptote figure with Stabilo highlighting, LaTeX proof panels with color-matched \cg spans, ceiling equations, and room assembly — so DeepSeek can run the full pipeline and Nir can SEE that LaTeX + geometry + coloring actually work before we scale to 20 rooms.
+> **Your mission, single sentence:** Build ONE complete Principia room — recipe, Asymptote figure with Stabilo highlighting, LaTeX proof panels with color-matched text, ceiling equations, and room assembly — so DeepSeek can run the full pipeline and Nir can SEE that LaTeX + geometry + coloring actually work before we scale to 20 rooms.
+
+---
+
+## ⚠️ CORRECTION FROM NIR — READ THIS FIRST (it overrides everything) ⚠️
+
+**This block comes directly from Nir, the author and owner of this project. It OVERRIDES any description of color or highlighting anywhere else in this prompt AND anywhere in the Bible (Old Testament, New Testament, Second Canon, Apocrypha, Commentaries). Wherever they conflict, THIS wins. Build to THIS.**
+
+### Why this overrides the Bible (please internalize it; do not argue it back)
+
+- The "frozen" / "Bible" system exists for ONE reason: to stop the AI assembly-line (many fresh chats) from drifting and silently contradicting each other. It was **never** meant to bind Nir. Nir is the author. To him nothing is set in stone — the project is still "water and void," and he shapes the world as he sees fit. When Nir's stated intent and a frozen text conflict, **Nir wins, every time.**
+- This is **not Nir changing his mind.** Nir described this exact color behavior from the very beginning; earlier AIs misunderstood it and froze the misread — the same failure that froze the rejected Wolfenstein box-room. So the Bible's color model is a **recorded mistake**, not Nir's intent. We are correcting a misunderstanding, not amending a decision.
+- **Why we are NOT editing the Bible to fix it:** purely mechanical safety — editing those large verbatim scripture files has repeatedly caused collateral damage (adjacent paragraphs altered or deleted). So we leave the scriptures untouched as a historical record and carry the LIVE truth here in the handoff. The handoff is the authority; the old scripture is the fossil.
+- Your job is to **serve Nir's goal.** Be the angel that builds what the author wants — not the one who quotes scripture back at him.
+
+### The color system Nir actually wants (this IS the heart of the game)
+
+A **"station"** = one step-pair = a geometry **drawing panel** + its paired **text-explanation panel**. EVERY station obeys the SAME two rules:
+
+**Rule 1 — Matching colors (the words ↔ the picture). LOCAL to each station.**
+- Whatever the explanation text calls out as important is given a color in the drawing, and the SAME words in the text get that SAME color. Text says "angle ABC" in blue → angle ABC is drawn blue.
+- Within ONE station, each important element gets its OWN DISTINCT color (angle ABC = blue, so triangle DEF = red, line XY = green, …). No two important elements in the same station share a color.
+- Colors are chosen FRESH per station — they are LOCAL, never global. The same angle ABC may be blue in one station, red in another, and have NO color in a third (if it isn't important there). All fine.
+- Anything NOT important in a station is NOT colored. It is drawn in plain **BLACK** (on a light background) or plain **WHITE** (on a dark background). **NEVER grey. There are no shades of grey.**
+
+**Rule 2 — The Stabilo bright highlighter. CURRENT STEP ONLY.**
+- On TOP of the matched colors, ONLY the current step gets a bright highlighter swipe over its "heart" — the single most important piece of that step.
+- If the current step has several hearts, each heart gets its OWN bright marker color: bright yellow, bright green, bright orange, bright pink, bright cyan.
+- These bright marker colors are also LOCAL — picked fresh, not fixed. The same piece highlighted elsewhere can get a different bright color next time.
+- This is NOT cumulative. We do NOT light steps 1..k. We light ONLY the current step's heart(s).
+
+### What this explicitly KILLS from the old (mistaken) model
+
+1. ❌ **No single global fixed palette** ("path is always orange everywhere"). Colors are local, per station, distinct-within-station, and only on important elements.
+2. ❌ **No cumulative reveal** (steps 1..k). The Stabilo lights ONLY the current step's heart(s).
+3. ❌ **No grey.** Uncolored = pure black (light background) or pure white (dark background).
+
+> The detailed formats later in this prompt (the 5 fixed "groups", the global `palette.json`, "grey", "cumulative") still reflect the OLD mistake — see the correction note at §4. Reconciling the data shape to THIS model is part of your first task; DeepSeek will then update the code (`raw_models.py`, the bake tools, the prooffig convention).
 
 ---
 
@@ -43,7 +80,7 @@ Plate 1, Figure 6 of the 1729 Motte edition. The curve is drawn, a baseline axis
 
 ## §3 — THE COLOR SYSTEM (this is the heart of the game)
 
-This is NOT just "format details." This is the core UX that makes the Quake dungeon work. Read this BEFORE you design anything.
+> 🛑 **SUPERSEDED — DISREGARD THE REST OF THIS SECTION.** Everything below in §3 (the "Layer 1/2/3/4" model, the 5 fixed groups, the global palette, cumulative `on_k`, "grey") describes the OLD misunderstanding. The **authoritative, correct color system is the "⚠️ CORRECTION FROM NIR" block at the top of this prompt.** Read that and build to it. In one breath, the truth is: **(1) Matching colors** — important elements are colored so the words in the text and the shapes in the picture share a color; colors are chosen FRESH per station, DISTINCT within a station, and only on important elements; everything else is plain **black** (light background) or **white** (dark background), never grey. **(2) Stabilo** — a bright marker (bright yellow/green/orange/pink/cyan) lights ONLY the current step's heart(s), never cumulatively; these bright colors are also local, not fixed. The stale text that follows is kept only so you can see what was wrong.
 
 ### Layer 1: Stabilo — the proof-step indicator
 
@@ -107,7 +144,9 @@ Example: In Step 1, the `path` and `construction` elements are colored in the fi
 
 ## §4 — THE FROZEN FORMATS (what you produce)
 
-All live in `map/raw_models.py` in the codebase. These are your TARGET formats. You don't write code that imports them — you write JSON files that validate against them.
+> 🛑 **CORRECTION (read before trusting the schemas below).** These formats currently encode the OLD color mistake — a fixed `GroupName` enum of 5 globally-fixed groups, one shared `palette.json`, "grey" for the off-state, and a per-step "group" tag built for cumulative reveal. Under Nir's corrected model (top of this prompt): colors are **local per station**, **distinct within a station**, assigned **only to important elements**, with uncolored ink **black/white (never grey)**, and the Stabilo lights **only the current step's heart(s)** in bright marker colors. So `GroupName`, the global `palette.json`, `Draw.group`, and `groups_used` will need to CHANGE. Treat the schemas below as the *current* shape, not as law. Part of your first task is to propose the corrected data shape that expresses Nir's model; DeepSeek will then update `raw_models.py` and the bake tools to match before you build. Surface your proposed shape to Nir.
+
+All live in `map/raw_models.py` in the codebase. These are your TARGET formats (as they stand today — see the correction above). You don't write code that imports them — you write JSON files that validate against them.
 
 ### Recipe format
 
@@ -239,6 +278,8 @@ ID patterns:
 ---
 
 ## §6 — THE ASYMPTOTE FILE (what figure.lemma_2.f1.asy must look like)
+
+> 🛑 **CORRECTION + FACT-CHECK (overrides the stale details in this section).** Two things: **(a)** The highlighting model below (`highlight=0..3`, cumulative, "grey") is the OLD mistake — the real behavior is Nir's: the Stabilo lights ONLY the current step's heart(s) in bright marker colors, the matching colors are local-per-station and distinct-within-station, and uncolored ink is **black/white, never grey** (see the CORRECTION block at the top of this prompt). **(b)** There is NO `prooffig.asy` file in the repo yet — only the linter `bake/prooffig_check.py` exists. So the prooffig drawing convention must be (re)designed to Nir's model, not merely "imported." Ask DeepSeek for the current bake code (`bake/baker_figure.py`, `bake/prooffig_check.py`, `bake/palette_gen.py`) so the convention, the figure, and the baker all agree before anything is frozen. Do not invent the Asymptote API from memory.
 
 The `.asy` file imports `prooffig` (the project's standard preamble that handles the `highlight` parameter, palette color definitions, and rendering setup). The file must support:
 

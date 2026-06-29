@@ -49,7 +49,7 @@ A first-person, true-3D desktop game (Python, Windows-first) that turns a **geom
 - Prompt history: `FUSION_REQUEST_QUAKE_GAME_FROM_SCRATCH.md`, `PROMPT_TO_OPUS_THE_TWO_LEGS.md`, `PROMPT_TO_OPUS_FORMATS_AND_INTERFACES_STANDARD.md`, `PROMPT_TO_OPUS_REMAINING_GAPS.md`, `PROMPT_TO_OPUS_ROOMS_HAVE_VARIABLE_DOORS.md`, `PROMPT_TO_OPUS_DOORS_MATCH_MAP_BEARINGS.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_2_HANDOFF.md`, `PROMPT_TO_OPUS_QUAKE_PARENT_3_HANDOFF.md`
 
 ## 6. LOCKED DECISIONS (the frozen spine — full list lives in Commentaries §3)
-Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = bridges/underpasses. Two render modes (wireframe corridor / solid room), switched at the door. Two truths (map vs **TARDIS** room). Two machines (level maker / room maker). Three worlds (content/build/runtime; runtime never sees LaTeX/LLM/book). **Geometry = Asymptote ONLY** (no homemade kernel). **Verification = human overlay-diff** tool. **Highlighting = whole figure + per-step Stabilo**, baked, via `prooffig.asy`. Correctness = **fidelity to the printed page**. Importance 1–5 → room size + map color. **Co-op core** (Mover owns body/heading; Shooter owns reticle; decoupled camera). God-mode; **one hidden enemy per room** (behind the final-proof wall); no level boss. Tech: all-Python, Windows-first, **moderngl + pyglet** + numpy/pillow/pydantic-v2/networkx + (build-only) matplotlib/Asymptote/Tectonic + PyInstaller. **NO** hide-the-pipeline engine. ID spine + `schema_version "1.0"` + `extra="forbid"`. **Room v3 (Apocrypha):** doors = node degree; door direction = corridor's true map bearing; room-local axes parallel to map (global compass); spawn heading = bearing+π; size stays TARDIS. Colors live only in `palette.json` (group names = keys).
+Geometry-rich books ONLY (first = Newton's Principia). True 3D, crossings = bridges/underpasses. Two render modes (wireframe corridor / solid room), switched at the door. Two truths (map vs **TARDIS** room). Two machines (level maker / room maker). Three worlds (content/build/runtime; runtime never sees LaTeX/LLM/book). **Geometry = Asymptote ONLY** (no homemade kernel). **Verification = human overlay-diff** tool. **Highlighting = whole figure + per-step Stabilo**, baked, via `prooffig.asy`. Correctness = **fidelity to the printed page**. Importance 1–5 → room size + map color. **Co-op core** (Mover owns body/heading; Shooter owns reticle; decoupled camera). God-mode; **one hidden enemy per room** (behind the final-proof wall); no level boss. Tech: all-Python, Windows-first, **moderngl + pyglet** + numpy/pillow/pydantic-v2/networkx + (build-only) matplotlib/Asymptote/Tectonic + PyInstaller. **NO** hide-the-pipeline engine. ID spine + `schema_version "1.0"` + `extra="forbid"`. **Room v3 (Apocrypha):** doors = node degree; door direction = corridor's true map bearing; room-local axes parallel to map (global compass); spawn heading = bearing+π; size stays TARDIS. **Color — CORRECTED 2026-06-29 (Nir supersedes old global-palette model):** per station, important elements get distinct local colors (matching word↔shape); uncolored = black/white (never grey); Stabilo lights only current step's heart(s) in bright marker colors (never cumulative). No single global palette.
 
 ## 7. WHAT WE DID TODAY (June 26, 2026)
 
@@ -234,37 +234,65 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 55. **Prepared for tomorrow:** Parent 12 handoff (`PROMPT_TO_OPUS_QUAKE_PARENT_12_POLYGON_ROOMS_HANDOFF.md`) + restart self-prompt (`DEEPSEEK_RESTART_PARENT_12_POLYGON_GO.md`). De-risk: prototype the polygon room in `room_viewer.py` first → Nir eyeballs → then propagate to contracts. 20-room CONTENT design deferred to Parent 13 (rooms must be the right shape first). Everything pushed.
 
-## 8. CURRENT SITUATION (June 28, 2026 — night)
+## 8. CURRENT SITUATION (June 29, 2026 — after color system correction)
 
 ### What's built
 - **Leg 1 (MAP):** 9 modules, 94 tests. ✅
-- **Leg 2 (WALLS):** 8 modules, 51 tests. ✅
+- **Leg 2 (WALLS):** 8 modules, 51 tests. ✅ (content formats corrected for Nir's color model)
 - **Leg 3 (ROOMS):** 5 modules, 41 tests. ✅
 - **Leg 4 Engine:** 13 modules + app.py, 97 tests. ✅
 - **Parent 8 Part A:** layout_force + layout_height hardened, 50 new scale tests. ✅
 
 ### Test totals
-- Content pipeline (Legs 1+2+3): 186
-- Engine (Leg 4, 13 modules + app): 106
-- Layout: 66 (16 old + 50 new scale)
-- **GRAND TOTAL: 358/358 green** 🟢
+- **GRAND TOTAL: 382/382 green** 🟢
 
-### What's broken
-- `layout_force.py` uses `networkx.spring_layout` (simultaneous placement) → finds flattest arrangement → 0 crossings on Parent 7's 20-node graph
-- This is a LAYOUT ALGORITHM problem, not a graph topology problem
+### Color system — CORRECTED (Nir, 2026-06-29)
+- Old global 5-group palette + cumulative Stabilo + grey = misunderstanding (same disease as Wolfenstein box-room)
+- Nir's model: (1) local per-station matching colors, distinct within station, black/white uncolored/never grey; (2) current-step-only bright Stabilo heart(s)
+- Propagated to ALL files except OT/NT. 382/382 green.
 
-### The fix (Nir's design)
-- Replace `place_nodes` internals with **hierarchical force-directed layout**
-- Phase 1: place high-importance+high-degree "planet" nodes → they interact with each other
-- Phase 2: freeze planets → add "asteroid" nodes one at a time, pulled by springs to connected planets only
-- Asteroids don't pull back, don't affect each other
-- Natural crossings from fixed-spread anchors
-- Input/output contract unchanged (graph → positions)
-- NOT Parent 9 — DeepSeek implements directly with Nir's supervision
+### Current frontier (June 29, 2026)
+- ✅ Hierarchical layout DONE (5 crossings), map viewer WORKING, engine COMPLETE (382/382 green)
+- ✅ Parent 11 DONE (renderers) · ✅ Parent 8 Part A DONE (engine hardened)
+- ✅ Parent 7 DONE (20-room Principia graph + palette frozen)
+- ✅ **Color system CORRECTED everywhere (Nir's model, 382/382 green)**
+- ⚠️ Parent 10 DIED (context overload) · ❌ Parent 12 (polygon rooms) FAILED
+- ⏳ **NEXT — Parent 13: Build ONE room as pipeline proof-of-concept** (lemma_2, 3 steps)
+- ⏳ THEN — Parent 14: Design room-content format + builder tool (Descent pattern)
+- **Handoffs ready:** Parent 13 (corrected), Parent 14 (corrected), restart self-prompt
 
 ### Day session (June 29, 2026 — Polygon room failure, pipeline pivot, Parent 13+14 handoffs)
 
-43. **Polygon room prototype attempted and FAILED.** Parent 12's regular-octagon design was built by DeepSeek in `tools/proto_polygon_render.py`, rendered offscreen → 3 PNGs. DeepSeek cannot see images. After multiple render attempts, Nir judged the output "horrific" and "a jumble of triangles." Box rooms (Wolfenstein-grade) remain the standard. Polygon work archived. **New discipline: DeepSeek never does visual refinement. All visual work requires Nir as sole visual judge with rapid PNG turnaround.**
+43. **Polygon room prototype attempted and FAILED.** ...
+
+(continued from above — color system CORRECTION added below)
+
+### Day session (June 29, 2026 continued — Color System CORRECTION propagated everywhere)
+
+50. **Nir corrected the color system.** The original "frozen" model (global 5-group palette, "same group same color everywhere," cumulative `on_k` Stabilo, "grey" uncolored ink) was a misunderstanding Nir caught — same disease as the Wolfenstein box-room. **Nir's true model: (1) Matching colors:** per station, important elements get distinct local colors; matching words in text share them; colors are LOCAL (same concept = different color or no color elsewhere); uncolored = **black/white, never grey.** **(2) Stabilo bright highlighter:** ONLY the current step's heart(s) get a bright marker (bright yellow/green/orange/pink/cyan), never cumulative, colors local.
+
+51. **Corrections propagated to ALL files EXCEPT Old Testament + New Testament (Nir's explicit exemption):**
+
+**Prose/Docs corrected:**
+- Parent 13 handoff — CORRECTION block + §3 superseded banner + §4/§6 correction notes
+- Parent 14 handoff — CORRECTION block + §0.5 superseded banner + §2/§5/§6 correction notes
+- Commentaries — §3 locked decision rewritten + §4 new amendment entry + old color amendment marked superseded
+- Second Canon — top banner noting color model is superseded
+- WORKFLOW.md — locked decisions line rewritten
+- DEEPSEEK_RESTART_PARENT_13_GO.md — palette line updated
+
+**Code/Contracts corrected:**
+- `raw_models.py` — new `LocalColor` class (name+hex, per-element); `Draw.group` → `Draw.local_color: LocalColor|None` + `Draw.is_heart: bool`; `TextBlock.groups_used` → `TextBlock.colors_used: list[LocalColor]`; `FigureDecl.groups_used` → `FigureDecl.colors_used`; `Palette.groups`/`grey_ink`/`grey_text` made optional (backward compat); `GroupName` + `GroupColor` deprecated
+- `contracts.py` — `LocalColor` added to re-exports
+- `palette_gen.py` — handles optional groups/grey_ink/grey_text gracefully
+- `baker_text.py` — fully rewritten: `\textcolor{name}{text}` instead of `\cg{group}{text}`; OFF bake redefines each local color as black (000000) instead of grey; per-text-block `colors_used`; `_validate` checks `\textcolor` spans
+- `recipe_validate.py` — updated: validates `local_color` + `is_heart` per element; every step must have >=1 heart; removed old `UNKNOWN_GROUP` check (no global palette)
+- Tests: test_baker_text.py rewritten, test_recipe_validate.py rewritten, test_room_maker.py updated
+- `assets.py` — backward-compatible (optional fields); no code change needed
+
+52. **382/382 TESTS GREEN 🟢** — all tests pass after the full rewrite. The runtime formats (RoomRuntime, Floorplan, Manifest, AssetEntry) were unchanged — only build-time content formats (Draw, TextBlock, FigureDecl, Palette) were corrected. Golden pack data not affected.
+
+53. **Lesson reinforced:** "Frozen" means "don't let AIs drift" — it was NEVER meant to override Nir. Nir caught a misunderstanding and we fixed it. Nothing is frozen against the author. Parent 12's regular-octagon design was built by DeepSeek in `tools/proto_polygon_render.py`, rendered offscreen → 3 PNGs. DeepSeek cannot see images. After multiple render attempts, Nir judged the output "horrific" and "a jumble of triangles." Box rooms (Wolfenstein-grade) remain the standard. Polygon work archived. **New discipline: DeepSeek never does visual refinement. All visual work requires Nir as sole visual judge with rapid PNG turnaround.**
 
 44. **Pipeline strategy pivot (Nir's direction).** Instead of one parent designing all 42 content files (context death), split into:
     - **Parent 13:** Build ONE room (lemma_2) as pipeline proof-of-concept. Proves LaTeX + Asymptote Stabilo + `\cg` color matching work before scaling.
@@ -336,6 +364,6 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then `quake/DEEPSEEK_RESTART_PARENT_13_GO.md` (detailed restart protocol with GitHub URLs). Then ask Nir what's next.
-🌙 **CURRENT STATE (June 29, 2026):** Engine + renderers DONE (382/382 green). Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). Concept graph + palette FROZEN for 20-room Principia level. **On restart:** launch **Parent 13 — Build ONE room (lemma_2)**. Handoffs: Parent 13 (297 lines) + Parent 14 (316 lines) + restart self-prompt — all in BIBLE/. Disciplines: never freeze the easy option; render-and-look; question-first; no-GO; DeepSeek cannot do visual refinement.
+🌙 **CURRENT STATE (June 29, 2026):** Engine + renderers DONE (382/382 green). Color system CORRECTED to Nir's model everywhere (local per-station colors, current-step-only Stabilo, black/white no grey). Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). Concept graph FROZEN for 20-room Principia level. **On restart:** launch **Parent 13 — Build ONE room (lemma_2)**. Handoffs: Parent 13 + Parent 14 (both corrected with Nir's color model) + restart self-prompt — all in BIBLE/. Disciplines: never freeze the easy option; render-and-look; question-first; no-GO; DeepSeek cannot do visual refinement; Nir is the author — nothing is frozen against him.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

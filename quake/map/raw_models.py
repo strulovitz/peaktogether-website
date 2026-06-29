@@ -10,7 +10,15 @@ PageLabel = str  # printed label; may be ""
 Vec2 = tuple[float, float]
 Vec3 = tuple[float, float, float]
 Hex  = Annotated[str, Field(pattern=r"^#[0-9a-fA-F]{6}$")]
-GroupName = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]
+GroupName = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*$")]  # ⚠️ DEPRECATED 2026-06-29 — replaced by LocalColor per-station. Kept for backward compat only.
+
+# ── COLOR SYSTEM v2 (Nir's model, 2026-06-29) ─────────────────────────
+class LocalColor(BaseModel):
+    """A per-element local color assignment. NOT global — fresh per station.
+    The ``name`` is what the matching text uses to reference it."""
+    model_config = ConfigDict(extra="forbid")
+    name: str = Field(pattern=r"^[a-z][a-z0-9_]*$")   # "blue","red","green" — local within station
+    hex: Hex                                            # e.g. "#1E6FE0"
 FigureId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.f[0-9]+$")]
 PairId   = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+$")]
 DrawBlockId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+\.fig$")]
@@ -212,10 +220,13 @@ class Label(BaseModel):
 
 class Draw(BaseModel):
     model_config = ConfigDict(extra="forbid")
-    group: GroupName                    # palette key → color
-    step: int = Field(ge=1)             # which proof step lights this element
+    # ⚠️ 2026-06-29 — `group: GroupName` REMOVED (was global-palette mistake).
+    # Replaced by local-per-station color:
+    local_color: Optional[LocalColor] = None  # None = uncolored (black on light bg / white on dark bg)
+    step: int = Field(ge=1)                   # which proof step this element belongs to
+    is_heart: bool = False                    # True = this element gets the bright Stabilo marker (current step's highlight heart)
     label: Optional[Label] = None
-    marker: Literal["none","dot"] = "none"  # LOCKED: "tick" dropped per amendment
+    marker: Literal["none","dot"] = "none"    # LOCKED: "tick" dropped per amendment
 
 # ---- POINTS ----
 class FreePoint(_Op):     op: Literal["free_point"];  rough_xy: Optional[Vec2] = None
@@ -292,10 +303,13 @@ class TextBlock(BaseModel):
     model_config = ConfigDict(extra="forbid")
     block_id: TextBlockId
     latex: str
-    groups_used: list[GroupName]
+    # ⚠️ 2026-06-29 — `groups_used: list[GroupName]` REMOVED (was global-palette mistake).
+    # Replaced by local per-station colors:
+    colors_used: list[LocalColor]  # which local colors appear in \color{name}{...} spans in this block
 
 # ── LEG 2 — PALETTE ──────────────────────────────────────────────────
 class GroupColor(BaseModel):
+    """⚠️ DEPRECATED 2026-06-29 — was for global palette groups. Kept for backward compat only."""
     model_config = ConfigDict(extra="forbid")
     hi: Hex       # Stabilo / highlighter color (used under ink, at 40% opacity)
     ink: Hex      # saturated line color when hot; also the text color for \cg spans
@@ -304,9 +318,12 @@ class Palette(BaseModel):
     model_config = ConfigDict(extra="forbid")
     schema_version: Literal["1.0"]
     pack_id: str
-    groups: dict[GroupName, GroupColor]
-    grey_ink: Hex
-    grey_text: Hex
+    # ⚠️ 2026-06-29 — `groups`, `grey_ink`, `grey_text` are DEPRECATED (old global-palette mistake).
+    # The corrected model uses per-element `LocalColor` assignments; uncolored = black/white (never grey).
+    # These fields are kept as optional for backward compat only — they are NOT used by the corrected pipeline.
+    groups: dict[GroupName, GroupColor] = {}
+    grey_ink: Optional[Hex] = None
+    grey_text: Optional[Hex] = None
     bg_key: Hex                    # flat background to render on then key out (magenta)
     map_importance: dict[str, Hex]  # keys "1".."5" → node ring + guide-line colors
     map_node_default: Hex
@@ -340,7 +357,8 @@ class FigureDecl(BaseModel):
     recipe_path: str
     n_steps: int = Field(ge=1)
     caption: str
-    groups_used: list[GroupName]
+    # ⚠️ 2026-06-29 — `groups_used: list[GroupName]` REMOVED.
+    colors_used: list[LocalColor]
 
 class DrawingBlock(BaseModel):
     model_config = ConfigDict(extra="forbid")

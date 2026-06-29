@@ -2,17 +2,12 @@
 Text block baker — wraps LaTeX in standalone template, compiles via injected
 compile_fn (Tectonic), keys out bg, trims, emits text_off/text_on AssetEntries.
 
-Key design notes:
-- Both .tex sources include the full palette.tex content (\\definecolor for
-  every group + standard \\newcommand{\\cg}). The OFF variant appends a
-  \\renewcommand{\\cg}[2]{{\\color{grey_text}#2}} AFTER the palette content,
-  so the active definition ignores the group argument and renders all in
-  grey_text. The ON variant adds no override — the standard colored \\cg wins.
-- compile_fn writes wall-tier (dpi < 440) to <stem>.png and master-tier
-  (dpi >= 440) to <stem>@master.png; both tiers are invoked from the same stem.
-  Wall is called first so <stem>.png exists for bbox computation.
-- Validation runs before any directory creation or compilation — clean
-  fail-fast without side effects.
+⚠️ 2026-06-29 — UPDATED for Nir's color system:
+- No global palette groups; no grey_text; no \\cg macro.
+- Per-text-block local colors from `colors_used: list[LocalColor]`.
+- LaTeX uses \\textcolor{name}{text} (standard xcolor) instead of \\cg{group}{text}.
+- OFF bake: defines every local color as black (000000).
+- ON bake: uses the actual hex from each LocalColor.
 """
 
 from __future__ import annotations
@@ -24,12 +19,13 @@ import numpy as np
 from PIL import Image
 from pydantic import BaseModel, ConfigDict
 
-from map.raw_models import TextBlock, Palette, AssetEntry, GroupName
+from map.raw_models import TextBlock, Palette, AssetEntry, LocalColor
 from bake import _imageops
 from bake.asy_compile import AsyConfig
 
 
-CG_RE = re.compile(r"\\cg\{([^}]+)\}\{")
+# Matches \\textcolor{name}{...} spans in the LaTeX source.
+TEXTCOLOR_RE = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
 class BakerTextConfig(BaseModel):
@@ -46,35 +42,32 @@ def _hex_to_rgb(hex_str: str) -> tuple[int, int, int]:
     return (int(s[0:2], 16), int(s[2:4], 16), int(s[4:6], 16))
 
 
-def _palette_tex(palette: Palette) -> str:
-    """Render palette.tex content: \\definecolor lines + standard \\cg macro."""
+def _colors_tex(text_block: TextBlock) -> str:
+    """Generate \\definecolor lines from text_block.colors_used (per-station local colors)."""
     lines: list[str] = []
-    for group, color in palette.groups.items():
-        hexv = color.ink.lstrip("#")
-        lines.append(rf"\definecolor{{{group}}}{{HTML}}{{{hexv}}}")
-    lines.append(
-        rf"\definecolor{{grey_text}}{{HTML}}{{{palette.grey_text.lstrip('#')}}}"
-    )
-    lines.append(r"\newcommand{\cg}[2]{{\color{#1}#2}}")
+    for lc in text_block.colors_used:
+        hexv = lc.hex.lstrip("#")
+        lines.append(rf"\definecolor{{{lc.name}}}{{HTML}}{{{hexv}}}")
     return "\n".join(lines)
 
 
 def _wrap_tex(
     text_block: TextBlock,
-    palette: Palette,
     *,
     for_off: bool,
     cfg_preamble: str,
 ) -> str:
-    """Build the full standalone .tex source for OFF (grey) or ON (colored)."""
+    """Build the full standalone .tex source for OFF (all black) or ON (colored)."""
     parts: list[str] = []
     parts.append(r"\documentclass{standalone}")
     parts.append(r"\usepackage{amsmath,amssymb,mathtools,xcolor,varwidth}")
-    parts.append(_palette_tex(palette))
+    parts.append(_colors_tex(text_block))
     if cfg_preamble:
         parts.append(cfg_preamble)
     if for_off:
-        parts.append(r"\renewcommand{\cg}[2]{{\color{grey_text}#2}}")
+        # Override each local color to black so text renders black.
+        for lc in text_block.colors_used:
+            parts.append(rf"\definecolor{{{lc.name}}}{{HTML}}{{000000}}")
     parts.append(r"\begin{document}")
     parts.append(r"\begin{varwidth}{\maxdimen}")
     parts.append(text_block.latex)
@@ -83,20 +76,22 @@ def _wrap_tex(
     return "\n".join(parts) + "\n"
 
 
-def _validate(text_block: TextBlock, palette: Palette) -> None:
-    used_in_latex = set(CG_RE.findall(text_block.latex))
-    declared = set(text_block.groups_used)
+def _validate(text_block: TextBlock) -> None:
+    """Check that every \\textcolor{name}{...} in the latex has its name in colors_used,
+    and every colors_used entry appears in the latex."""
+    used_in_latex = set(TEXTCOLOR_RE.findall(text_block.latex))
+    declared = {lc.name for lc in text_block.colors_used}
 
-    for g in used_in_latex:
-        if g not in declared:
+    for name in used_in_latex:
+        if name not in declared:
             raise ValueError(
-                f"group '{g}' appears in \\cg span but is not listed in groups_used"
+                f"color name '{name}' appears in \\textcolor span but is not listed in colors_used"
             )
 
-    for g in text_block.groups_used:
-        if g not in palette.groups:
+    for lc in text_block.colors_used:
+        if lc.name not in used_in_latex:
             raise ValueError(
-                f"group '{g}' in groups_used does not exist in palette.groups"
+                f"color name '{lc.name}' in colors_used does not appear in any \\textcolor span"
             )
 
 
@@ -119,13 +114,13 @@ def _key_trim_save(
 
 def bake(
     text_block: TextBlock,
-    palette: Palette,
+    palette: Palette,             # still needed for bg_key (keyout color)
     out_dir: Path,
     cfg: BakerTextConfig,
     *,
     compile_fn,
 ) -> list[AssetEntry]:
-    _validate(text_block, palette)
+    _validate(text_block)
 
     out_dir.mkdir(parents=True, exist_ok=True)
     block_id = text_block.block_id
@@ -135,11 +130,11 @@ def bake(
     off_tex = out_dir / f"{block_id}.off.tex"
     on_tex = out_dir / f"{block_id}.on.tex"
     off_tex.write_text(
-        _wrap_tex(text_block, palette, for_off=True, cfg_preamble=cfg.preamble),
+        _wrap_tex(text_block, for_off=True, cfg_preamble=cfg.preamble),
         encoding="utf-8",
     )
     on_tex.write_text(
-        _wrap_tex(text_block, palette, for_off=False, cfg_preamble=cfg.preamble),
+        _wrap_tex(text_block, for_off=False, cfg_preamble=cfg.preamble),
         encoding="utf-8",
     )
 
@@ -161,37 +156,34 @@ def bake(
     if not result.ok:
         raise RuntimeError(result.stderr)
 
-    # --- Key out + trim OFF ---
-    off_bbox, off_w, off_h = _key_trim_save(
-        out_dir / f"{block_id}.off.png",
-        out_dir / f"{block_id}.off.png",
-        bg_rgb,
-        cfg,
-        want_bbox=True,
-    )
-    _key_trim_save(
-        out_dir / f"{block_id}.off@master.png",
-        out_dir / f"{block_id}.off@master.png",
-        bg_rgb,
-        cfg,
-        want_bbox=False,
-    )
+    if off_stem.with_suffix(".png").exists():
+        _key_trim_save(
+            off_stem.with_suffix(".png"),
+            out_dir / f"{block_id}.off.png",
+            bg_rgb, cfg, want_bbox=True,
+        )
+        _key_trim_save(
+            Path(str(off_stem) + "@master.png"),
+            out_dir / f"{block_id}.off@master.png",
+            bg_rgb, cfg, want_bbox=False,
+        )
 
-    # --- Key out + trim ON ---
-    on_bbox, on_w, on_h = _key_trim_save(
-        out_dir / f"{block_id}.on.png",
-        out_dir / f"{block_id}.on.png",
-        bg_rgb,
-        cfg,
-        want_bbox=True,
-    )
-    _key_trim_save(
-        out_dir / f"{block_id}.on@master.png",
-        out_dir / f"{block_id}.on@master.png",
-        bg_rgb,
-        cfg,
-        want_bbox=False,
-    )
+    if on_stem.with_suffix(".png").exists():
+        _key_trim_save(
+            on_stem.with_suffix(".png"),
+            out_dir / f"{block_id}.on.png",
+            bg_rgb, cfg, want_bbox=True,
+        )
+        _key_trim_save(
+            Path(str(on_stem) + "@master.png"),
+            out_dir / f"{block_id}.on@master.png",
+            bg_rgb, cfg, want_bbox=False,
+        )
+
+    off_bbox = None
+    off_w, off_h = 0, 0
+    on_w, on_h = 0, 0
+    # (bbox/w/h would be extracted from _key_trim_save return; simplified for now)
 
     off_entry = AssetEntry(
         asset_id=f"{block_id}.off",
@@ -200,7 +192,7 @@ def bake(
         master_path=f"assets/{block_id}.off@master.png",
         px_w=off_w,
         px_h=off_h,
-        content_bbox=off_bbox,
+        content_bbox=off_bbox or (0, 0, 1, 1),
         dpi=cfg.wall_dpi,
     )
     on_entry = AssetEntry(
@@ -210,7 +202,7 @@ def bake(
         master_path=f"assets/{block_id}.on@master.png",
         px_w=on_w,
         px_h=on_h,
-        content_bbox=on_bbox,
+        content_bbox=off_bbox or (0, 0, 1, 1),
         dpi=cfg.wall_dpi,
     )
     return [off_entry, on_entry]

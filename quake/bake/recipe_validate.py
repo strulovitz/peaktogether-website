@@ -2,17 +2,20 @@
 
 Pure, deterministic, no IO. Returns plain-English violation strings
 (empty list = valid).
+⚠️ 2026-06-29 — updated for Nir's color model: no global palette groups;
+validates local_color + is_heart per element.
 """
 
 from __future__ import annotations
 
+import re
 from typing import get_args, get_origin, get_type_hints, Union
 
 from map.raw_models import (
     Recipe,
     Palette,
     StepGloss,
-    GroupName,
+    LocalColor,
     FreePoint,
     PointOn,
     Intersect,
@@ -244,15 +247,36 @@ def validate_recipe(recipe: Recipe, palette: Palette) -> list[str]:
                         f"'{ref}' ({ref_op.op}) but needs a {expected_category}"
                     )
 
-    # ---- 7. DRAWN OP STEP IN RANGE -----------------------------------
+    # ---- 7. DRAWN OP STEP IN RANGE + LOCAL COLOR VALID + HEART --------
     for op in recipe.ops:
         draw = getattr(op, "draw", None)
-        if draw is not None:
-            if not (1 <= draw.step <= n_steps):
+        if draw is None:
+            continue
+        if not (1 <= draw.step <= n_steps):
+            violations.append(
+                f"STEP_OUT_OF_RANGE: '{op.name}' draw.step={draw.step} "
+                f"not in 1..{n_steps}"
+            )
+        # Local color validation (per-element, per-station — no global palette)
+        if draw.local_color is not None:
+            lc = draw.local_color
+            if not re.match(r"^[a-z][a-z0-9_]*$", lc.name):
                 violations.append(
-                    f"STEP_OUT_OF_RANGE: '{op.name}' draw.step={draw.step} "
-                    f"not in 1..{n_steps}"
+                    f"BAD_COLOR_NAME: '{op.name}' local_color.name='{lc.name}' "
+                    f"is not a valid name (must match [a-z][a-z0-9_]*)"
                 )
+            if not re.match(r"^#[0-9a-fA-F]{6}$", lc.hex):
+                violations.append(
+                    f"BAD_COLOR_HEX: '{op.name}' local_color.hex='{lc.hex}' "
+                    f"is not a valid hex color"
+                )
+        # Marker check
+        marker = getattr(draw, "marker", None)
+        if marker is not None and marker not in ("none", "dot"):
+            violations.append(
+                f"BAD_MARKER: '{op.name}' marker='{marker}' "
+                f"must be none or dot"
+            )
 
     # ---- 8. EVERY STEP HAS >=1 DRAWN OP ------------------------------
     drawn_steps: set[int] = set()
@@ -263,11 +287,23 @@ def validate_recipe(recipe: Recipe, palette: Palette) -> list[str]:
     for k in range(1, n_steps + 1):
         if k not in drawn_steps:
             violations.append(
-                f"EMPTY_STEP: step {k} has no drawn element "
-                f"(on_{k} would equal off)"
+                f"EMPTY_STEP: step {k} has no drawn element"
             )
 
-    # ---- 9. CIRCLE_CR EXCLUSIVITY ------------------------------------
+    # ---- 9. EVERY STEP HAS >=1 HEART (Stabilo current-step highlight) ---
+    heart_steps: set[int] = set()
+    for op in recipe.ops:
+        draw = getattr(op, "draw", None)
+        if draw is not None and draw.is_heart:
+            heart_steps.add(draw.step)
+    for k in range(1, n_steps + 1):
+        if k not in heart_steps:
+            violations.append(
+                f"MISSING_HEART: step {k} has no Stabilo heart "
+                f"(no drawn element with is_heart=True)"
+            )
+
+    # ---- 10. CIRCLE_CR EXCLUSIVITY ------------------------------------
     for op in recipe.ops:
         if op.op == "circle_cr":
             has_points = getattr(op, "radius_points", None) is not None
@@ -278,34 +314,13 @@ def validate_recipe(recipe: Recipe, palette: Palette) -> list[str]:
                     f"radius_points/radius_value"
                 )
 
-    # ---- 10. FLOATLABEL HAS LABEL ------------------------------------
+    # ---- 11. FLOATLABEL HAS LABEL ------------------------------------
     for op in recipe.ops:
         if op.op == "float_label":
             draw = getattr(op, "draw", None)
             if draw is None or getattr(draw, "label", None) is None:
                 violations.append(
                     f"FLOATLABEL_NO_LABEL: '{op.name}' has no label"
-                )
-
-    # ---- 11. EVERY DRAW.GROUP IN PALETTE -----------------------------
-    for op in recipe.ops:
-        draw = getattr(op, "draw", None)
-        if draw is not None:
-            if draw.group not in palette.groups:
-                violations.append(
-                    f"UNKNOWN_GROUP: '{op.name}' group='{draw.group}' "
-                    f"not in palette"
-                )
-
-    # ---- 12. MARKER CHECK --------------------------------------------
-    for op in recipe.ops:
-        draw = getattr(op, "draw", None)
-        if draw is not None:
-            marker = getattr(draw, "marker", None)
-            if marker is not None and marker not in ("none", "dot"):
-                violations.append(
-                    f"BAD_MARKER: '{op.name}' marker='{marker}' "
-                    f"must be none or dot"
                 )
 
     return violations
