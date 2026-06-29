@@ -63,6 +63,9 @@ def compile(
     # Output format.
     args += ["-f", cfg.out_format]
 
+    # Batch mode: no viewer window.
+    args += ["-noV"]
+
     # Resolution: Asymptote renders at render_factor × 72dpi.
     args += ["-render", str(render_factor)]
 
