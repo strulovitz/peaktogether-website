@@ -287,9 +287,10 @@ def test_alcove_is_recess():
     assert mesh.alcove_tris.shape[0] > 0, "alcove should exist"
 
     xs = mesh.alcove_tris[:, :, 0].reshape(-1)
-    assert xs.max() > -W / 2 + 1e-4, "alcove must be pushed inward"
-    assert abs(xs.min() - (-W / 2)) < 1e-3, "front rim on wall plane"
-    assert xs.max() <= -W / 2 + ALCOVE_DEPTH_M + 1e-4
+    # Alcove pushes INTO the wall (X < -W/2 for W wall), not into the room
+    assert abs(xs.max() - (-W / 2)) < 1e-3, "front rim on wall plane"
+    assert xs.min() >= -W / 2 - ALCOVE_DEPTH_M - 1e-4, "alcove pushed into wall"
+    assert xs.min() < -W / 2 - 0.01, "alcove must be recessed into wall"
 
     # W wall must remain SOLID at the alcove location (no through-hole)
     covered = _tri_covers_point_xy_on_plane(

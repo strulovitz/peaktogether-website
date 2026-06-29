@@ -119,12 +119,11 @@ def test_off_tex_colors_black(tmp_path):
          compile_fn=make_fake_compile(record))
 
     off_tex = (tmp_path / "prop_1.s3.txt.off.tex").read_text(encoding="utf-8")
-    # OFF variant redefines each local color as black
-    assert r"\definecolor{radius}{HTML}{000000}" in off_tex
-    assert r"\definecolor{path}{HTML}{000000}" in off_tex
-    # The original color definitions should also be present (before override)
-    assert r"\definecolor{radius}{HTML}{CC3333}" in off_tex
-    assert r"\definecolor{path}{HTML}{3366CC}" in off_tex
+    # OFF variant strips all \textcolor commands — renders pure black
+    assert r"\textcolor" not in off_tex
+    # Content without color wrappers should still be present
+    assert "$CP$" in off_tex
+    assert "$AP$" in off_tex
 
 
 # --------------------------------------------------------------------------
@@ -136,11 +135,10 @@ def test_on_tex_uses_colors(tmp_path):
          compile_fn=make_fake_compile())
 
     on_tex = (tmp_path / "prop_1.s3.txt.on.tex").read_text(encoding="utf-8")
+    # ON keeps \textcolor and color definitions
+    assert r"\textcolor" in on_tex
     assert r"\definecolor{radius}{HTML}{CC3333}" in on_tex
     assert r"\definecolor{path}{HTML}{3366CC}" in on_tex
-    # No black override in ON
-    assert r"\definecolor{radius}{HTML}{000000}" not in on_tex
-    assert r"\definecolor{path}{HTML}{000000}" not in on_tex
 
 
 # --------------------------------------------------------------------------

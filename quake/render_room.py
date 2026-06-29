@@ -472,8 +472,8 @@ def _build_alcove(room: RoomRuntime):
     f_tr = center + right * hw + up * hh
     f_tl = center - right * hw + up * hh
 
-    # Back corners (pushed inward)
-    push = inward * depth
+    # Back corners (pushed into the wall = opposite of inward normal)
+    push = -inward * depth
     b_bl = f_bl + push
     b_br = f_br + push
     b_tr = f_tr + push

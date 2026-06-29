@@ -51,6 +51,39 @@ def _colors_tex(text_block: TextBlock) -> str:
     return "\n".join(lines)
 
 
+def _strip_textcolor(latex: str) -> str:
+    """Remove \\textcolor{name}{...} wrappers, leaving just the content.
+    Handles nested braces in the content by counting."""
+    result = []
+    i = 0
+    while i < len(latex):
+        # Match \textcolor{name}{
+        if latex[i:].startswith("\\textcolor{"):
+            # Find the closing } of the name
+            name_end = latex.index("}", i + 12)
+            # Find the { starting the content (immediately after name's })
+            content_brace = latex.index("{", name_end)
+            content_start = content_brace + 1
+            # Find matching } for content (handle nested braces)
+            depth = 0
+            j = content_start
+            while j < len(latex):
+                if latex[j] == "{":
+                    depth += 1
+                elif latex[j] == "}":
+                    if depth == 0:
+                        break
+                    depth -= 1
+                j += 1
+            # Append just the content (skip \textcolor{name}{ and the closing })
+            result.append(latex[content_start:j])
+            i = j + 1
+        else:
+            result.append(latex[i])
+            i += 1
+    return "".join(result)
+
+
 def _wrap_tex(
     text_block: TextBlock,
     *,
@@ -63,16 +96,16 @@ def _wrap_tex(
     parts.append(r"\documentclass[border=8pt]{standalone}")
     parts.append(r"\usepackage{amsmath,amssymb,mathtools,xcolor,varwidth}")
     parts.append(rf"\pagecolor[HTML]{{{bg_hex.lstrip('#')}}}")  # render on key-out color
-    parts.append(_colors_tex(text_block))
+    if not for_off:
+        parts.append(_colors_tex(text_block))
     if cfg_preamble:
         parts.append(cfg_preamble)
-    if for_off:
-        # Override each local color to black so text renders black.
-        for lc in text_block.colors_used:
-            parts.append(rf"\definecolor{{{lc.name}}}{{HTML}}{{000000}}")
     parts.append(r"\begin{document}")
     parts.append(r"\begin{varwidth}{28em}")
-    parts.append(text_block.latex)
+    if for_off:
+        parts.append(_strip_textcolor(text_block.latex))
+    else:
+        parts.append(text_block.latex)
     parts.append(r"\end{varwidth}")
     parts.append(r"\end{document}")
     return "\n".join(parts) + "\n"
