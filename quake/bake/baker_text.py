@@ -56,11 +56,13 @@ def _wrap_tex(
     *,
     for_off: bool,
     cfg_preamble: str,
+    bg_hex: str,
 ) -> str:
     """Build the full standalone .tex source for OFF (all black) or ON (colored)."""
     parts: list[str] = []
-    parts.append(r"\documentclass{standalone}")
+    parts.append(r"\documentclass[border=8pt]{standalone}")
     parts.append(r"\usepackage{amsmath,amssymb,mathtools,xcolor,varwidth}")
+    parts.append(rf"\pagecolor[HTML]{{{bg_hex.lstrip('#')}}}")  # render on key-out color
     parts.append(_colors_tex(text_block))
     if cfg_preamble:
         parts.append(cfg_preamble)
@@ -130,62 +132,67 @@ def bake(
     off_tex = out_dir / f"{block_id}.off.tex"
     on_tex = out_dir / f"{block_id}.on.tex"
     off_tex.write_text(
-        _wrap_tex(text_block, for_off=True, cfg_preamble=cfg.preamble),
+        _wrap_tex(text_block, for_off=True, cfg_preamble=cfg.preamble, bg_hex=palette.bg_key),
         encoding="utf-8",
     )
     on_tex.write_text(
-        _wrap_tex(text_block, for_off=False, cfg_preamble=cfg.preamble),
+        _wrap_tex(text_block, for_off=False, cfg_preamble=cfg.preamble, bg_hex=palette.bg_key),
         encoding="utf-8",
     )
 
     # --- Compile OFF (wall + master) ---
-    off_stem = out_dir / f"{block_id}.off"
-    result = compile_fn(off_tex, off_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
+    off_wall_stem = out_dir / f"{block_id}.off"
+    off_master_stem = Path(str(off_wall_stem) + "@master")
+    result = compile_fn(off_tex, off_wall_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
     if not result.ok:
         raise RuntimeError(result.stderr)
-    result = compile_fn(off_tex, off_stem, {}, AsyConfig(dpi=cfg.master_dpi))
+    result = compile_fn(off_tex, off_master_stem, {}, AsyConfig(dpi=cfg.master_dpi))
     if not result.ok:
         raise RuntimeError(result.stderr)
 
     # --- Compile ON (wall + master) ---
-    on_stem = out_dir / f"{block_id}.on"
-    result = compile_fn(on_tex, on_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
+    on_wall_stem = out_dir / f"{block_id}.on"
+    on_master_stem = Path(str(on_wall_stem) + "@master")
+    result = compile_fn(on_tex, on_wall_stem, {}, AsyConfig(dpi=cfg.wall_dpi))
     if not result.ok:
         raise RuntimeError(result.stderr)
-    result = compile_fn(on_tex, on_stem, {}, AsyConfig(dpi=cfg.master_dpi))
+    result = compile_fn(on_tex, on_master_stem, {}, AsyConfig(dpi=cfg.master_dpi))
     if not result.ok:
         raise RuntimeError(result.stderr)
-
-    off_png = Path(str(off_stem) + ".png")
-    if off_png.exists():
-        _key_trim_save(
-            off_png,
-            out_dir / f"{block_id}.off.png",
-            bg_rgb, cfg, want_bbox=True,
-        )
-        _key_trim_save(
-            Path(str(off_stem) + "@master.png"),
-            out_dir / f"{block_id}.off@master.png",
-            bg_rgb, cfg, want_bbox=False,
-        )
-
-    on_png = Path(str(on_stem) + ".png")
-    if on_png.exists():
-        _key_trim_save(
-            on_png,
-            out_dir / f"{block_id}.on.png",
-            bg_rgb, cfg, want_bbox=True,
-        )
-        _key_trim_save(
-            Path(str(on_stem) + "@master.png"),
-            out_dir / f"{block_id}.on@master.png",
-            bg_rgb, cfg, want_bbox=False,
-        )
 
     off_bbox = None
     off_w, off_h = 0, 0
     on_w, on_h = 0, 0
-    # (bbox/w/h would be extracted from _key_trim_save return; simplified for now)
+
+    off_png = Path(str(off_wall_stem) + ".png")
+    off_master_png = Path(str(off_master_stem) + ".png")
+    if off_png.exists():
+        off_bbox, off_w, off_h = _key_trim_save(
+            off_png,
+            out_dir / f"{block_id}.off.png",
+            bg_rgb, cfg, want_bbox=True,
+        )
+        if off_master_png.exists():
+            _key_trim_save(
+                off_master_png,
+                out_dir / f"{block_id}.off@master.png",
+                bg_rgb, cfg, want_bbox=False,
+            )
+
+    on_png = Path(str(on_wall_stem) + ".png")
+    on_master_png = Path(str(on_master_stem) + ".png")
+    if on_png.exists():
+        _, on_w, on_h = _key_trim_save(
+            on_png,
+            out_dir / f"{block_id}.on.png",
+            bg_rgb, cfg, want_bbox=True,
+        )
+        if on_master_png.exists():
+            _key_trim_save(
+                on_master_png,
+                out_dir / f"{block_id}.on@master.png",
+                bg_rgb, cfg, want_bbox=False,
+            )
 
     off_entry = AssetEntry(
         asset_id=f"{block_id}.off",
@@ -194,7 +201,7 @@ def bake(
         master_path=f"assets/{block_id}.off@master.png",
         px_w=off_w,
         px_h=off_h,
-        content_bbox=off_bbox or (0, 0, 1, 1),
+        content_bbox=off_bbox if off_bbox else (0, 0, off_w, off_h),
         dpi=cfg.wall_dpi,
     )
     on_entry = AssetEntry(
@@ -204,7 +211,7 @@ def bake(
         master_path=f"assets/{block_id}.on@master.png",
         px_w=on_w,
         px_h=on_h,
-        content_bbox=off_bbox or (0, 0, 1, 1),
+        content_bbox=off_bbox if off_bbox else (0, 0, on_w, on_h),
         dpi=cfg.wall_dpi,
     )
     return [off_entry, on_entry]

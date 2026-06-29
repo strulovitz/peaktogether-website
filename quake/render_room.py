@@ -114,12 +114,12 @@ def _wall_basis(wall: str):
     """
     if wall == "N":   # z = +D/2, inward -Z, along +X
         return np.array([1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, -1.0], np.float32)
-    if wall == "S":   # z = -D/2, inward +Z, along +X
-        return np.array([1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, 1.0], np.float32)
+    if wall == "S":   # z = -D/2, inward +Z, along -X (viewer's left=+X=-along, right=-X=+along)
+        return np.array([-1.0, 0.0, 0.0], np.float32), np.array([0.0, 0.0, 1.0], np.float32)
     if wall == "E":   # x = +W/2, inward -X, along +Z
         return np.array([0.0, 0.0, 1.0], np.float32), np.array([-1.0, 0.0, 0.0], np.float32)
-    if wall == "W":   # x = -W/2, inward +X, along +Z
-        return np.array([0.0, 0.0, 1.0], np.float32), np.array([1.0, 0.0, 0.0], np.float32)
+    if wall == "W":   # x = -W/2, inward +X, along -Z (viewer's left=+Z=-along, right=-Z=+along)
+        return np.array([0.0, 0.0, -1.0], np.float32), np.array([1.0, 0.0, 0.0], np.float32)
     raise ValueError(f"unknown wall {wall!r}")
 
 
@@ -620,7 +620,7 @@ def _upload_texture(ctx, asset_id, pack):
         path=_resolve_asset_path(asset_id,pack)
         if path is not None:
             img=Image.open(path).convert("RGBA")
-            img=img.transpose(Image.FLIP_TOP_BOTTOM).transpose(Image.FLIP_LEFT_RIGHT)  # Pillow→OpenGL: flip both axes
+            img=img.transpose(Image.FLIP_TOP_BOTTOM)  # Pillow origin is top-left; OpenGL expects bottom-left
             tex=ctx.texture(img.size,4,img.tobytes())
             try: tex.build_mipmaps()
             except Exception: pass
