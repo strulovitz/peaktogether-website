@@ -42,6 +42,7 @@ class AsyConfig(BaseModel):
     out_format: str = "png"
     dpi: int = 220
     extra_flags: list[str] = []
+    gs_path: str = ""  # Ghostscript path for Asymptote; set via ASYMPTOTE_GS env var if non-empty
 
 
 def compile(
@@ -77,6 +78,7 @@ def compile(
         capture_output=True,
         text=True,
         timeout=120,
+        env={**__import__("os").environ, "ASYMPTOTE_GS": cfg.gs_path} if cfg.gs_path else None,
     )
 
     expected = out_stem.with_suffix(f".{cfg.out_format}")

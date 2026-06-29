@@ -4,23 +4,24 @@
 
 import graph;
 settings.outformat = "png";
-settings.render = 8;
 unitsize(1cm);
 
-int highlight = -1;   // overridden on command line via -u "highlight=k"
+int highlight = -1;
+// Process command-line user settings: asy -u "highlight=1"
+usersetting();
 
 // ---- palette (LOCAL to this station-set; pure black when uncolored) ----
 pen BLACK = rgb(0,0,0) + linewidth(1.0pt);
-pen curveblue   = rgb(0x1E/255, 0x6F/255, 0xE0/255) + linewidth(1.6pt);
-pen basegreen   = rgb(0x00/255, 0xA3/255, 0x5A/255) + linewidth(1.6pt);
-pen sideorange  = rgb(0xE8/255, 0x77/255, 0x0A/255) + linewidth(1.6pt);
-pen inscpurple  = rgb(0x8E/255, 0x24/255, 0xAA/255) + linewidth(1.4pt);
-pen circred     = rgb(0xD8/255, 0x1B/255, 0x60/255) + linewidth(1.4pt);
+pen curveblue   = rgb(30/255, 111/255, 224/255) + linewidth(1.6pt);
+pen basegreen   = rgb(0/255, 163/255, 90/255) + linewidth(1.6pt);
+pen sideorange  = rgb(232/255, 119/255, 10/255) + linewidth(1.6pt);
+pen inscpurple  = rgb(142/255, 36/255, 170/255) + linewidth(1.4pt);
+pen circred     = rgb(216/255, 27/255, 96/255) + linewidth(1.4pt);
 
 // bright Stabilo markers (local, per heart) — laid UNDER the ink, translucent
-pen STABILO_CURVE = rgb(0xFF/255, 0xE0/255, 0x00/255) + opacity(0.45) + linewidth(9pt) + squarecap; // yellow
-pen STABILO_INSC  = rgb(0x00/255, 0xE6/255, 0x76/255) + opacity(0.35) + linewidth(9pt) + squarecap; // green
-pen STABILO_CIRC  = rgb(0xFF/255, 0x6F/255, 0x00/255) + opacity(0.35) + linewidth(9pt) + squarecap; // orange
+pen STABILO_CURVE = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap; // yellow
+pen STABILO_INSC  = rgb(0/255, 230/255, 118/255) + opacity(0.35) + linewidth(9pt) + squarecap; // green
+pen STABILO_CIRC  = rgb(255/255, 111/255, 0/255) + opacity(0.35) + linewidth(9pt) + squarecap; // orange
 
 // ---- ZONE 2: construction (coordinates from the recipe's rough_xy) ----
 pair A=(0,0), B=(2,0), C=(4,0), D=(6,0), E=(8,0);
@@ -68,7 +69,7 @@ void drawAll(int highlight) {
 
   // STEP 2 ink: inscribed rects (matched purple when their step is active, else black)
   for (path r : inscribed)
-    filldraw(r, rgb(0x8E/255,0x24/255,0xAA/255)+opacity(0.12), on2 ? inscpurple : BLACK);
+    filldraw(r, rgb(142/255,36/255,170/255)+opacity(0.12), on2 ? inscpurple : BLACK);
 
   // STEP 3 ink: circumscribed rects
   for (path r : circumscribed)
