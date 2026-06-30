@@ -59,6 +59,11 @@ def run(room_id=None, pack_dir="tests/golden_pack/") -> int:
         return 2
     room = pack.rooms[room_id]
     Wm, Hm, Dm = room.dimensions_m
+    MARGIN = 0.3  # keep camera this far from walls/floor/ceiling
+    # Room bounds (axis-aligned box centered at origin on XZ, floor at Y=0)
+    BX = (-Wm / 2 + MARGIN, Wm / 2 - MARGIN)
+    BY = (MARGIN, Hm - MARGIN)
+    BZ = (-Dm / 2 + MARGIN, Dm / 2 - MARGIN)
     state = _ViewState()
 
     window, _ctx = make_window(WINDOW_W, WINDOW_H, WINDOW_TITLE)
@@ -138,6 +143,10 @@ def run(room_id=None, pack_dir="tests/golden_pack/") -> int:
         rise = (1.0 if pyglet_key.E in _pressed else 0.0) - (1.0 if pyglet_key.Q in _pressed else 0.0)
         if fwd or strafe or rise:
             cam.move(fwd * step, strafe * step, rise * step)
+            # Clamp to room bounds (no flying through walls!)
+            cam.pos[0] = max(BX[0], min(BX[1], cam.pos[0]))
+            cam.pos[1] = max(BY[0], min(BY[1], cam.pos[1]))
+            cam.pos[2] = max(BZ[0], min(BZ[1], cam.pos[2]))
         d_yaw = (1.0 if pyglet_key.RIGHT in _pressed else 0.0) - (1.0 if pyglet_key.LEFT in _pressed else 0.0)
         d_pitch = (1.0 if pyglet_key.UP in _pressed else 0.0) - (1.0 if pyglet_key.DOWN in _pressed else 0.0)
         if d_yaw or d_pitch:

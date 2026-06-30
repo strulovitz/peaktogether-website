@@ -411,20 +411,35 @@ def _build_panel_quads(room: RoomRuntime):
 
 def _build_ceiling_quads(room: RoomRuntime):
     quads: list[PanelQuad] = []
-    uv = np.array(
-        [[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], dtype=np.float32
+    # Base UV: V flipped (compensates _upload_texture FLIP_TOP_BOTTOM for N/S walls)
+    uv_ns = np.array(
+        [[0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]], dtype=np.float32
     )
+    # Rotated 90° clockwise for E/W walls (text reads along Z, not X)
+    uv_ew = np.array(
+        [[1.0, 1.0], [1.0, 0.0], [0.0, 0.0], [0.0, 1.0]], dtype=np.float32
+    )
+    hw = room.dimensions_m[0] / 2.0
+    hd = room.dimensions_m[2] / 2.0
     for eq in room.ceiling_equations:
         cx, cy, cz = eq.pos_xyz
         cy = cy - CEILING_DROP_M   # hang just below the ceiling so it doesn't z-fight the ceiling
-        w, d = eq.size_m  # width (X), depth (Z)
-        hw = w / 2.0
-        hd = d / 2.0
+        w, d = eq.size_m  # width (X), depth (Z) — for N/S: text along X=w; for E/W: text along Z=d
+        # Choose UV: N/S walls (text along X) vs E/W walls (text along Z, rotated 90°)
+        is_ew = abs(cx) > abs(cz)  # equation is closer to E/W wall than N/S wall
+        eq_uv = uv_ew.copy() if is_ew else uv_ns.copy()
+        if is_ew:
+            # Swap: text reads along Z (the larger dimension), narrow along X
+            hw_e = d / 2.0   # X extent = original depth
+            hd_e = w / 2.0   # Z extent = original width
+        else:
+            hw_e = w / 2.0   # X extent = original width
+            hd_e = d / 2.0   # Z extent = original depth
         # Facing downward (-Y). Corners in XZ plane at y = cy.
-        bl = (cx - hw, cy, cz - hd)
-        br = (cx + hw, cy, cz - hd)
-        tr = (cx + hw, cy, cz + hd)
-        tl = (cx - hw, cy, cz + hd)
+        bl = (cx - hw_e, cy, cz - hd_e)
+        br = (cx + hw_e, cy, cz - hd_e)
+        tr = (cx + hw_e, cy, cz + hd_e)
+        tl = (cx - hw_e, cy, cz + hd_e)
         corners = np.array([bl, br, tr, tl], dtype=np.float32)
         quads.append(PanelQuad(
             pair_id=eq.asset_id,  # not a true pair_id; ceilings don't toggle
@@ -432,7 +447,7 @@ def _build_ceiling_quads(room: RoomRuntime):
             off_asset_id=eq.asset_id,
             on_asset_id=eq.asset_id,
             corners=corners,
-            uv=uv.copy(),
+            uv=eq_uv,
         ))
     return quads
 
