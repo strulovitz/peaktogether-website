@@ -88,7 +88,7 @@
 
 32. **Prompt to Opus — Parent 13 Handoff (One-Room Pipeline Proof)** ⏳ NEXT — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_13_HANDOFF.md`. Build ONE complete room (lemma_2, 3 steps) end-to-end: recipe JSON + Asymptote figure with Stabilo highlighting + LaTeX panels with \cg color spans + room_source JSON. Proves the content pipeline works before scaling to 20 rooms.
 
-33. **Prompt to Opus — Parent 14 Handoff (Format + Builder Tool)** ⏳ AFTER Parent 13 — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Design a text format for room specs + build `build/room_from_spec.py` tool (Descent pattern). Includes full §0.5 color-system specification (Stabilo + \cg matching mandatory). Enables 20 parallel children to produce room specs without context death.
+33. **Prompt to Opus — Parent 14 Handoff v2 (CLEAN REWRITE)** ✅ READY — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. **COMPLETELY REWRITTEN June 30, 2026.** The old handoff was STALE — it described `\cg{group}{}`, `GroupName`, a global 5-group palette, and cumulative Stabilo — all of which were already replaced by the June 29 color correction (`\textcolor{name}{}`, `LocalColor`, `is_heart`, black/white no-grey, current-step-only hearts). The new handoff is verified against the actual current `raw_models.py` + `baker_text.py` + lemma_2 recipe/room_source. Single clean truth, no contradictions, one mission (format + tool).
 
 34. **DeepSeek Restart Self-Prompt — Parent 13 Launch** — `quake/DEEPSEEK_RESTART_PARENT_13_GO.md`. Complete restart protocol: current state, parent history, Parent 13 launch files + GitHub URLs, Parent 14 deferred note, standing rules.
 
