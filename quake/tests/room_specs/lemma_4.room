@@ -1,0 +1,67 @@
+room      lemma_4
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IV; Plate 1, Fig. 7.
+caption   If corresponding parallelograms in two figures share one ultimate ratio each-to-each, then the whole figures are in that same ratio.
+final     3
+ceiling   eq0 :: \frac{p_i}{q_i} \;\longrightarrow\; k \quad (\text{each to each, ultimately})
+ceiling   eq1 :: \frac{\sum p_i}{\sum q_i} = k \;\longrightarrow\; \frac{AacE}{PprT} = k \quad (\text{by Lem. 3})
+
+station 1
+  gloss   The first figure AacE with its rank of inscribed parallelograms on equal bases.
+  color   figaviolet #8E24AA
+  color   curveblue  #1E6FE0
+  color   basegreen  #00A35A
+  panel
+    point   A @(0,5)   marker=dot label=$A$ at=SW
+    point   E @(6,5)   marker=dot label=$E$ at=SE
+    point   B @(2,5)   marker=dot label=$B$ at=S
+    point   C @(4,5)   marker=dot label=$C$ at=S
+    point   ptA @(0,6.0) color=curveblue label=$a$ at=NW
+    point   ptb @(2,7.0) color=curveblue label=$b$ at=N
+    point   ptc @(4,7.7) color=curveblue label=$c$ at=N
+    point   ptE @(6,8.1) color=curveblue label=$E$ at=NE
+    polyline curveA ptA ptb ptc ptE   color=curveblue
+    segment baseAE A E   color=basegreen
+    series rankA along baseAE to curveA count 3 kind inscribed_rects \
+           color=figaviolet heart
+  text
+    Here is the \{figaviolet|first figure $AacE$ with its inscribed rank of parallelograms}, erected on three equal bases $AB$, $BC$, $CE$ along \{basegreen|the baseline $AE$}. \{curveblue|The curve $aE$} rises gently above the base, and each strip reaches up to meet it just as in Lemma II. We give this figure exactly three parallelograms because Lemma IV requires that the two figures carry an \emph{equal number} of strips in each rank. Call these three parallelograms $p_1$, $p_2$, $p_3$, taken in order from $A$ toward $E$; they are the building blocks whose ratios we will compare.
+
+station 2
+  gloss   The second figure PprT with its own rank of equal-count parallelograms, a differently shaped curve.
+  color   figbteal   #00897B
+  color   curvered   #D81B60
+  color   basegreen  #00A35A
+  panel
+    point   P @(0,0)   marker=dot label=$P$ at=SW
+    point   T @(6,0)   marker=dot label=$T$ at=SE
+    point   Q @(2,0)   marker=dot label=$Q$ at=S
+    point   R @(4,0)   marker=dot label=$R$ at=S
+    point   ptP @(0,2.6) color=curvered label=$p$ at=NW
+    point   ptr @(2,2.0) color=curvered label=$r$ at=N
+    point   pts @(4,1.3) color=curvered label=$s$ at=N
+    point   ptT @(6,0.6) color=curvered label=$T$ at=NE
+    polyline curveB ptP ptr pts ptT   color=curvered
+    segment basePT P T   color=basegreen
+    series rankB along basePT to curveB count 3 kind inscribed_rects \
+           color=figbteal heart
+  text
+    Below sits the \{figbteal|second figure $PprT$ with its own rank of three parallelograms} on the equal bases $PQ$, $QR$, $RT$ of \{basegreen|the baseline $PT$}. Notice that \{curvered|the curve $prT$} leans the other way --- it descends from $p$ toward $T$ --- so this figure is shaped quite differently from the first. Yet it carries the \emph{same count} of strips, which we name $q_1$, $q_2$, $q_3$ in order from $P$ toward $T$. The whole point of Lemma IV is that the figures may differ wildly in form, provided their corresponding strips agree in ultimate ratio.
+
+station 3
+  gloss   Correspondence lines pairing rank-to-rank; the shared ultimate ratio k carries to the whole figures by Lem. III.
+  color   corrorange #E8770A
+  color   figaviolet #8E24AA
+  color   figbteal   #00897B
+  panel
+    point   m1 @(1,5.5) color=figaviolet label=$p_1$ at=N
+    point   m2 @(3,6.0) color=figaviolet label=$p_2$ at=N
+    point   m3 @(5,6.3) color=figaviolet label=$p_3$ at=N
+    point   n1 @(1,1.3) color=figbteal label=$q_1$ at=S
+    point   n2 @(3,1.0) color=figbteal label=$q_2$ at=S
+    point   n3 @(5,0.6) color=figbteal label=$q_3$ at=S
+    segment link1 m1 n1   color=corrorange heart
+    segment link2 m2 n2   color=corrorange heart
+    segment link3 m3 n3   color=corrorange heart
+  text
+    The \{corrorange|correspondence lines} pair each strip of the upper figure with its mate below: $p_1$ with $q_1$, $p_2$ with $q_2$, $p_3$ with $q_3$. By hypothesis every such pair shares one ultimate ratio $k$, so that $p_i / q_i \to k$ each to each respectively. Then, by composition, the sum of \{figaviolet|all the upper parallelograms} is to the sum of \{figbteal|all the lower parallelograms} in that same ratio $k$, since adding terms of equal ratio preserves the ratio. Finally, by Lemma III each rank of parallelograms is ultimately equal to its own curvilinear figure --- so the sums may be replaced by the whole figures, giving $AacE : PprT = k$. Thus two figures whose corresponding strips share an ultimate ratio are themselves in that very ratio. \textit{Q.E.D.}
