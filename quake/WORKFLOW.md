@@ -386,7 +386,15 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 **Current situation:** Engine 385/385 green. Doctrine settled. **Parent 15 COMPLETE.** 20-room station map frozen. Corrected palette + concept_graph frozen.
 
-**NEXT: Parent 16** — room-content format + `build/room_from_spec.py` tool (Descent pattern). Draft handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`; Nir may refine before launch.
+**NEXT: Parent 16** — room-content format + `build/room_from_spec.py` tool (Descent pattern). Handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md` (reviewed + updated: Parent 15's Decision A.1 baked in — equation/text panels = label-only .asy).
+
+**🌙 ON RESTART → LAUNCH PARENT 16.** Give Nir these four **blob (view) URLs** for copy-paste to a FRESH Opus 4.8 chat:
+1. Commentaries — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`
+2. Old Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_DOCTRINE_BY_FUSION.md`
+3. New Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md`
+4. Parent 16 handoff — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`
+
+Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 15 station map — DeepSeek fetches from `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` + `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`, plus `raw_models.py` + lemma_2 gold files.
 
 **Nir's 3 decisions this session:** (1) lemma_12 = Option A (drawn figure + Apollonius cite), (2) multiple foundational illustrations → each its own station (Option A general rule), (3) NO self-drawn illustrations where Newton gave none → colored-TEXT stations only.
 

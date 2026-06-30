@@ -38,7 +38,7 @@ Quake includes **the math** (geometry + equations/relationships) **and the key n
 
 So **every room has something colored to look at and shoot** — a figure, an equation, or a foundational illustration — beside a matching-colored explanation. There are no inert prose rooms, and nothing is dropped for lacking equations.
 
-**An equation or foundation panel is almost certainly a colored LaTeX image** (much like the explanation panels and the ceiling equations already bake), **not** an Asymptote construction — so such a station likely needs **no recipe/.asy**, just its colored image + colored explanation. Confirm the exact representation (does it use the same "drawing" slot? a small schema addition? — DeepSeek will tell you what the current contract allows and will make any change you specify). Don't guess silently; ask (§4).
+**[FROZEN by Parent 15 — Decision A.1]** Equation and foundation panels are **FigureDecls via a label-only .asy** — the pipeline stays unified. A pure-text/equation station uses an .asy that places separately-colored LaTeX labels (one `label` op per colored term, each with `local_color`, `step`, `is_heart`), with the same `highlight=k → Stabilo-underlay + matched-ink` convention as the gold `lemma_2.f1.asy`. This keeps `StepPair.drawing` (mandatory) naturally populated through the one existing code path (baker / room_maker / the Stabilo convention) — **zero contract change.** The only build-order note (Gate 0): confirm a label-only .asy, being a strict subset of what `lemma_2.f1.asy` already does, bakes and passes `prooffig_check` unchanged. DeepSeek can confirm this for you on request.
 
 ---
 
@@ -60,9 +60,11 @@ Request `raw_models.py` (full file) and the **validated gold geometry reference*
 
 ---
 
-## §5 — THE ROOMS YOU ARE DESIGNING FOR
+## §5 — THE ROOMS YOU ARE DESIGNING FOR (Parent 15's frozen station map)
 
-The first level is `principia_bk1_inverse_square` (Newton, Book I, Sections I–III), ~20 rooms whose stations are a mix of **geometry**, **equations**, and **foundational illustrations** per §2 (no node is dropped; e.g. inertia stays as a foundation room — only meaningless history/trivia is skipped). The exact per-room classification and step counts come from the finalized level design; **DeepSeek will give you that list before you build.** Design the format and tool to handle all kinds uniformly, and to scale to 20+ children writing one room each. Your format must be simple enough that a child AI, given only your format spec + its room's source text, can fill it in correctly.
+The first level is `principia_bk1_inverse_square` (Newton, Book I, Sections I–III), **20 rooms / 56 stations** whose stations are a mix of **DIAGRAM** (16 rooms), **EQUATION** (2: prop_4, prop_15), **TEXT** (1: law_1), and **EQUATION/TEXT** (1: law_2). No dead text-only rooms. The frozen station map — per room: kind, step count, per-step gloss + local colors + hearts, colors_used, ceiling equations, final_pair_id — is in `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` and `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`. **DeepSeek will give you the full station map on request** — you don't need to store it in your context; ask for specific rooms as you need them.
+
+Design the format and tool to handle all three kinds uniformly (DIAGRAM/EQUATION/TEXT — all are FigureDecls via .asy, per the frozen Decision A.1), and to scale to 20+ children writing one room each. Your format must be simple enough that a child AI, given only your format spec + its room's station map + the source text, can fill it in correctly.
 
 ---
 
