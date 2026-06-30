@@ -1,0 +1,30 @@
+room      lemma_12
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I (Lemma XII cited later in Prop. XI); Plate 4, Fig. 1.
+caption   All parallelograms described about conjugate diameters of a given ellipse or hyperbola are equal to one another.
+final     1
+ceiling   eq0 :: \text{parallelogram about conjugate diameters} = \text{const} = 4ab
+
+station 1
+  gloss   An ellipse with one pair of skewed conjugate diameters and the parallelogram circumscribed about it, touching the curve at the four diameter endpoints.
+  color   ellblue    #1E6FE0
+  color   conjorange #E8770A
+  color   pargreen   #00A35A
+  panel
+    point       O @(0,0)         marker=dot label=$O$ at=center
+    point       maj @(4,0)       marker=dot
+    point       min @(0,2.4)     marker=dot
+    ellipse_axes ell center O major maj minor min  color=ellblue heart
+    point       P @(3.4,1.27)    color=conjorange marker=dot label=$P$ at=NE
+    point       Q @(-3.4,-1.27)  color=conjorange marker=dot label=$Q$ at=SW
+    point       R @(-1.5,2.22)   color=conjorange marker=dot label=$R$ at=NW
+    point       S @(1.5,-2.22)   color=conjorange marker=dot label=$S$ at=SE
+    segment     diamPQ P Q       color=conjorange
+    segment     diamRS R S       color=conjorange
+    point       V1 @(5.5,3.4)    marker=dot label=$$ at=NE
+    point       V2 @(2.5,-1.8)   marker=dot label=$$ at=SE
+    point       V3 @(-5.5,-3.4)  marker=dot label=$$ at=SW
+    point       V4 @(-2.5,1.8)   marker=dot label=$$ at=NW
+    polygon     box V1 V2 V3 V4  color=pargreen heart
+  text
+    Here is a single {ellblue|ellipse} with centre $O$, drawn wider than tall. Through the centre run two {conjorange|conjugate diameters} $PQ$ and $RS$ --- note that they are \emph{skewed}, not perpendicular, for that is the whole point of the lemma. About the ellipse is described the {pargreen|parallelogram} whose four sides are tangent to the curve exactly at the four diameter endpoints $P$, $Q$, $R$, $S$. Apollonius proved that no matter which pair of conjugate diameters one chooses, the circumscribed parallelogram always has the very same area, namely $4ab$, where $a$ and $b$ are the semi-axes of the ellipse. Newton invokes this fact without proof, remarking only: \textit{This is demonstrated by the writers on the conic sections.}

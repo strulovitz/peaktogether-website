@@ -102,7 +102,7 @@ import re
 _TC = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
-@pytest.mark.parametrize("name", ["lemma_2", "lemma_5", "lemma_6", "prop_4", "law_1", "law_2"])
+@pytest.mark.parametrize("name", ["lemma_2", "lemma_5", "lemma_6", "lemma_12", "prop_4", "law_1", "law_2"])
 def test_textcolor_scan_consistency(name):
     room = emit_room_source(parse(_spec(name)))
     for b in room.blocks:
@@ -173,6 +173,29 @@ def test_lemma_6_geometry():
     assert "pen chordgreen = rgb(" in asy
     assert "pen tanorange = rgb(" in asy
     assert "pen anglered = rgb(" in asy
+    assert "usersetting();" in asy
+
+
+# ---- lemma_12 geometry room ----
+
+def test_lemma_12_geometry():
+    spec = parse(_spec("lemma_12"))
+    validate(spec)
+    assert spec.kind == "geometry"
+    assert len(spec.stations) == 1
+    assert spec.final_step == 1
+    recipe = emit_recipe(spec)
+    assert recipe is not None
+    assert recipe.n_steps == 1
+    room = emit_room_source(spec)
+    assert len(room.blocks) == 1
+    assert room.final_pair_id == "lemma_12.s1"
+    used = {(c.name, c.hex) for c in room.figures[0].colors_used}
+    assert {"ellblue", "conjorange", "pargreen"} <= {n for n, _ in used}
+    asy = emit_asy(spec)
+    assert "pen ellblue = rgb(" in asy
+    assert "pen conjorange = rgb(" in asy
+    assert "pen pargreen = rgb(" in asy
     assert "usersetting();" in asy
 
 
