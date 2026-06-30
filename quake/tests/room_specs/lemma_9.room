@@ -1,0 +1,89 @@
+room      lemma_9
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IX; Plate 2.
+caption   The areas of triangles formed by ordinates under a curve are ultimately one to the other in the duplicate ratio of the sides.
+final     3
+ceiling   lem9 :: \triangle ABD : \triangle ACE \to AD^2 : AE^2
+
+station 1
+  gloss   A curve crosses a baseline at A; ordinates drop from two curve points to form two shrinking triangles whose area ratio we seek.
+  color   lineblue   #1E6FE0
+  color   curvegreen #00A35A
+  color   ordorange  #E8770A
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    D   @(1.4,0)  marker=dot label=$D$ at=S
+    point    E   @(3.0,0)  marker=dot label=$E$ at=S
+    point    B   @(1.4,1.0) marker=dot label=$B$ at=NW
+    point    C   @(3.0,2.2) marker=dot label=$C$ at=N
+    segment  AE  A E       color=lineblue label=$AE$ at=S
+    polyline curve A B C   color=curvegreen label=$ABC$ at=NW
+    segment  BD  B D       color=ordorange heart label=$BD$ at=E
+    segment  CE  C E       color=ordorange heart label=$CE$ at=E
+    polygon  triABD A B D
+    polygon  triACE A C E
+  text
+    A right line {lineblue|$AE$} and a {curvegreen|curve $ABC$} cut each other at the \
+    given point $A$. From the curve points $B$ and $C$ we let fall the {ordorange|ordinates \
+    $BD$ and $CE$}, drawn at a fixed angle to the base, so that two triangles $\triangle ABD$ \
+    and $\triangle ACE$ are formed beneath the curve. As $B$ and $C$ slide down toward $A$ \
+    both triangles dwindle to nothing, yet we may still ask the limiting value of their ratio. \
+    Newton's claim is that this ultimate ratio is the {ordorange|duplicate ratio of the sides}, \
+    namely $AD^2 : AE^2$.
+
+station 2
+  gloss   The blow-up: AD and AE produced to fixed distant points d and e, ordinates db, ec drawn parallel, a similar curve Abc, and the tangent Ag cutting all four ordinates.
+  color   auxpurple #8E24AA
+  color   lineblue   #1E6FE0
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    D   @(1.4,0)  marker=dot label=$D$ at=S
+    point    E   @(3.0,0)  marker=dot label=$E$ at=S
+    point    d   @(5.5,0)  marker=dot label=$d$ at=S
+    point    e   @(8.0,0)  marker=dot label=$e$ at=S
+    point    f   @(5.5,2.4) marker=dot label=$f$ at=N
+    point    g   @(8.0,3.5) marker=dot label=$g$ at=N
+    point    b   @(5.5,2.0) marker=dot label=$b$ at=NW
+    point    c   @(8.0,3.1) marker=dot label=$c$ at=N
+    segment  base A e      color=lineblue
+    ray      Ad  A d       color=auxpurple
+    ray      Ae  A e       color=auxpurple
+    polyline auxcurve A b c color=auxpurple heart label=$Abc$ at=NW
+    segment  db  d f       color=auxpurple label=$db$ at=E
+    segment  ec  e g       color=auxpurple label=$ec$ at=E
+    tangent_at tag auxcurve at A  color=auxpurple label=$Ag$ at=N
+  text
+    Here is the same device used in Lemma VII. We {auxpurple|produce $AD$ to the remote point \
+    $d$ and $AE$ to $e$}, keeping $Ad : Ae = AD : AE$, and draw the ordinates $db$ and $ec$ \
+    parallel to the original $BD$ and $CE$. A {auxpurple|similar curve $Abc$} is drawn out at \
+    this fixed distance, and the {auxpurple|tangent $Ag$} touches both curves at $A$, cutting \
+    the four ordinates in $F, G, f, g$. The genius of the trick is scale invariance: while the \
+    original figure near $A$ vanishes, this enlarged copy at $d, e$ stays a fixed finite size, \
+    so we may take limits there in plain view. Because every length is proportional, the areas \
+    $\triangle ABD$, $\triangle ACE$ stay in constant ratio to the blown-up areas $Abd$, $Ace$.
+
+station 3
+  gloss   As B,C meet A the angle cAg vanishes, the curvilinear areas collapse onto the triangles Afd and Age, and Lemma V gives the duplicate ratio.
+  color   arearred #D81B60
+  color   lineblue   #1E6FE0
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    d   @(5.5,0)  marker=dot label=$d$ at=S
+    point    e   @(8.0,0)  marker=dot label=$e$ at=S
+    point    f   @(5.5,2.4) marker=dot label=$f$ at=NE
+    point    g   @(8.0,3.5) marker=dot label=$g$ at=NE
+    segment  base A e      color=lineblue
+    segment  df  d f       color=arearred
+    segment  eg  e g       color=arearred
+    polygon  Afd A f d     color=arearred heart label=$Afd$ at=NW
+    polygon  Age A g e     color=arearred heart label=$Age$ at=N
+  text
+    Now hold $Ae$ fixed and let $B$ and $C$ meet $A$; the angle $cAg$ between curve \
+    and tangent vanishes, exactly as in Lemma VII, so the curvilinear areas $Abd$ and $Ace$ \
+    coincide with the {arearred|rectilinear triangles $Afd$ and $Age$}. But these two triangles \
+    share the same vertex angle at $A$ along the tangent $Ag$, so by {arearred|Lemma V (similar \
+    rectilinear figures)} their areas are as the squares of the homologous sides, that is \
+    $Afd : Age = Ad^2 : Ae^2$. Since $Ad : Ae = AD : AE$ and the original triangles $\triangle \
+    ABD$, $\triangle ACE$ stay always proportional to these blown-up areas, the same duplicate \
+    ratio descends to them. Therefore the areas $\triangle ABD$ and $\triangle ACE$ are \
+    ultimately one to the other as $AD^2 : AE^2$. \textit{Q.E.D.}
