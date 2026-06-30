@@ -365,27 +365,32 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - ♻️ **Parent renumber (Nir).** Parent 14 (format+tool) **DELETED before launch** (handoff + restart note removed); its content **discarded** (wrong assumptions) — **NOT** folded into any new parent (Nir's instruction). The level-correction parent (drafted as "7b") is now **Parent 15**, scoped to **complete/fix ONLY** Parent 7's bad/missing/wrong work — NOT redo his correct work (concept-graph topology + 20-room set stay). The format+tool mission becomes a future **Parent 16**, written FRESH with all correct decisions. Order: Parent 15 → Parent 16.
 - 📦 **Self-criticism (owned to Nir):** I kept repeating "9 text-only rooms" without ever checking what's in them, surfaced the contract problem at the last second, over-used the question pop-ups, and dialed emojis down when Nir was upset. Corrected: be honest + thorough up front, normal prose not quizzes, keep the emojis, never take decisions off Nir's plate.
 
-### 🌙 SESSION WRAP — RESTART HERE (June 30, 2026 evening — doctrine settled, Parent 15 ready, all pushed)
+### 🌙 EVENING SESSION (June 30, 2026 — Parent 15 LAUNCHED + DELIVERED! 🎉)
 
-**What we did this session (chronological):**
-1. Reoriented; found Parent 7 had marked 9 of 20 rooms "figure-less" — a workload shortcut.
-2. Nir's **equation-as-figure** decision (geometry-less math → the equation IS the colored figure-panel).
-3. Then Nir's **refinement (the SETTLED rule):** the game includes **the math AND the key non-math foundations the math rests on** — the physical/chemical/biological intuition that gives the math meaning (e.g. inertia's spinning top, planets, projectile). Both are **colored identically** (matching local colors + Stabilo heart = "statement-as-figure"). **Skip ONLY** meaningless history/trivia. **NEVER implant** modern math the book didn't contain (would feel fabricated). → `law_1` (inertia) + `law_2` are real colored rooms, **NOT dropped.** (A brief "math-only / skip all verbal" detour was tried and **reversed** — do not reintroduce it.)
-4. **Parent renumber:** Parent 14 (format+tool) DELETED before launch (wrong assumptions; nothing carried over). Now **Parent 15** = correct/complete Parent 7's level design; **Parent 16** = the format + `build/room_from_spec.py` tool (fresh, launched AFTER Parent 15).
-5. Propagated the doctrine everywhere: Commentaries §3 (locked) + §4 (amendment trail), this WORKFLOW, the Parent 15 + Parent 16 handoffs, and an **add-only** marked `LATER ADDITION BY DEEPSEEK` paragraph in each of the 4 verbatim scriptures (OT/NT/Second Canon/Apocrypha — originals untouched, Nir authorized).
-6. **Everything committed + pushed** (commit `bd90c66`).
+**What we did:**
+1. Reoriented; launched Parent 15 with the 4 baseline files (Commentaries + OT + NT + handoff).
+2. Parent 15 asked Wave-1 questions → DeepSeek built `QUAKE_PARENT_15_WAVE_1_MATERIAL_FROM_DEEPSEEK.md` (gold lemma_2 trio + station contract + Parent 7's figure plan/palette + 8 Newton items verbatim + Q4=Option A).
+3. **Nir settled lemma_12 = Option A** (drawn-fresh ellipse+conjugate-diameter figure, reused from Pl.4 Fig.1; cites Apollonius in one sentence). DeepSeek baked into the material file.
+4. Parent 15 locked 3 decisions: non-geometry panels = FigureDecls (zero contract change); lemma_12 = Option A; foundation illustrations → colored-TEXT only (no drawn scenes per Nir).
+5. **Nir ruled: NO drawn-fresh illustrations where Newton printed none.** Word-only examples become colored-TEXT stations (word↔word colors + Stabilo). Applied to `law_1`'s top/planets/projectile stations.
+6. DeepSeek fetched Wave 2 Newton text for all 11 remaining nodes, delivered inline.
+7. **Parent 15 delivered the complete station map across 2 waves:**
+   - **Wave 1:** corrected `palette.json` (map-side only, groups/grey dead) + corrected `concept_graph.json` (verified citation labels, 28 edges) + station map rooms 1–10 (lemma_2/3/4/5/6/7/9/10 + law_1/2).
+   - **Wave 2:** station map rooms 11–20 (lemma_11/12 + prop_1/2/4/6/7/11/13/15).
+   - **20 rooms, 56 stations total** — every room has a colored thing to shoot (16 DIAGRAM, 2 EQUATION, 1 TEXT, 1 EQUATION/TEXT). No dead text-only rooms.
+   - **Degree fixes:** lemma_7 = 6 doors, prop_11 = 4 doors.
+   - **Contract: ZERO change.** Equation/text panels are FigureDecls via colored-label .asy (Gate 0 = confirm label-only .asy bakes).
+8. Both waves saved verbatim to BIBLE: `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` + `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`.
+9. Two flagged items for downstream (non-blocking): prop_7's self-referential citation + external_citation handling for prop_14/lem_13.
+10. **Everything committed + pushed** (commits `4a4d888`, `17fc98a`, `8491036`, `e34d50f`).
 
-**Current situation:** Engine 385/385 green. Doctrine settled. Parent 15 handoff written + on GitHub. Nothing pending except launching Parent 15.
+**Current situation:** Engine 385/385 green. Doctrine settled. **Parent 15 COMPLETE.** 20-room station map frozen. Corrected palette + concept_graph frozen.
 
-**WHAT WE'RE ABOUT TO DO (next action on wake-up): LAUNCH PARENT 15.** Nir will ask for the document links; give him these four **blob (view) URLs** to paste into a FRESH Opus 4.8 chat, in order:
-1. Commentaries — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`
-2. Old Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_DOCTRINE_BY_FUSION.md`
-3. New Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md`
-4. Parent 15 handoff — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_15_HANDOFF.md`
+**NEXT: Parent 16** — room-content format + `build/room_from_spec.py` tool (Descent pattern). Draft handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`; Nir may refine before launch.
 
-(Full launch protocol also in `quake/DEEPSEEK_RESTART_PARENT_15_GO.md`.) Then **talk-first:** let Parent 15 state its plan + questions; DeepSeek fetches the real Newton text it needs (Principia sections + Laws are on disk under `quake/principia/`).
+**Nir's 3 decisions this session:** (1) lemma_12 = Option A (drawn figure + Apollonius cite), (2) multiple foundational illustrations → each its own station (Option A general rule), (3) NO self-drawn illustrations where Newton gave none → colored-TEXT stations only.
 
-**Standing reminders (Nir was rightly frustrated this session):** normal prose, NO multiple-choice pop-ups; keep the emojis even when he's upset; never take decisions off Nir's plate / never shortcut / never surface a problem one second before he'd see it; check for residue by **MEANING, not by label**.
+**Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
 ### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
 - Ghostscript anti-aliases through alpha-only (semi-transparent black → invisible against grey wall)
@@ -395,20 +400,23 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Never use keyout for text. Always use native transparency.
 - pdftocairo needs `-r 220` (with space), NOT `-r220`
 
-## 9. NEXT STEPS (June 29, 2026)
+## 9. NEXT STEPS (June 30, 2026 evening — Parent 15 DONE)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED (polygon rooms — visual iteration impossible) | ~~Parent 13~~ ✅
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** (20-room station map frozen; both waves saved)
 
-### DONE — Pipeline Proof-of-Concept (Parent 13, ONE room)
-1. ✅ Launched Parent 13 — built lemma_2 end-to-end (recipe + .asy + room_source)
-2. ✅ JSONs validated against raw_models.py — both GREEN
-3. ⚠️ Asymptote compile BLOCKED — MiKTeX's asy 2.88 broken (see §8 line 56)
-4. ⏳ Fix Asymptote → compile → bake → room_maker → **render PNG for Nir**
+### DONE — Parent 15: Level Design Correction
+1. ✅ Corrected palette.json (map-side only, groups/grey dead)
+2. ✅ Corrected concept_graph.json (verified citation labels, degree fixes)
+3. ✅ Station map: 20 rooms, 56 stations (16 DIAGRAM, 2 EQUATION, 1 TEXT, 1 EQUATION/TEXT)
+4. ✅ No dead text-only rooms — Parent 7's "9 figure-less" shortcut overturned
+5. ✅ Zero contract change (equation/text panels = FigureDecls via colored-label .asy)
+6. ✅ Deliverable saved: `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` + `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`
 
-### THEN — Format + Tool (Parent 14, modular scaling)
-1. Parent 14 designs text format for room specs + `build/room_from_spec.py` tool
-2. 20 children (one per room) fill in the format → DeepSeek runs tool 20 times
-3. Descent pattern: one format, one tool, many parallel children
+### NEXT — Parent 16: Format + Tool
+1. `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md` exists as DRAFT; Nir may refine before launch
+2. Mission: room-content format (keyword-block) + `build/room_from_spec.py` tool
+3. Emits recipe.asy + room_source.json for both DIAGRAM and EQUATION/TEXT rooms
+4. Descent pattern: one format, one tool, many parallel children
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -436,6 +444,6 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 30, 2026):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED (2026-06-30): the game includes the math AND its key non-math foundations (intuition like inertia's spinning top/planets/projectile), colored exactly like the math (statement-as-figure); skip only meaningless history/trivia; never implant modern math. `law_1` + `law_2` kept as real rooms.** Parent 14 DELETED; renumbered to **Parent 15** (correct/complete Parent 7's level design) then **Parent 16** (format + tool, fresh). **Everything pushed (commit `bd90c66`).** **On restart → LAUNCH PARENT 15** with: Commentaries + OT + NT + `PROMPT_TO_OPUS_QUAKE_PARENT_15_HANDOFF.md`. Give Nir the four GitHub blob URLs (in the SESSION WRAP above + `DEEPSEEK_RESTART_PARENT_15_GO.md`) for copy-paste to a fresh Opus 4.8 chat.
+🌙 **CURRENT STATE (June 30, 2026 evening):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED:** math + its non-math foundations, both colored; no implanted modern math; word-only examples = colored-TEXT stations (Nir, no drawn scenes). **✨ Parent 15 DONE — 20-room station map FROZEN (20 rooms / 56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT; corrected palette + concept_graph). Both waves saved verbatim. ✨** Parent 14 DELETED. Next: **Parent 16** (format + `build/room_from_spec.py` tool; draft at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`). **Everything pushed (commit `e34d50f`).**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
