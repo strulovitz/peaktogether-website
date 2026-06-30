@@ -346,6 +346,13 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - 📝 **BUILD SCRIPT** at `C:\Users\nir_s\AppData\Local\Temp\opencode\build_full.py` — uses pdflatex+pdftocairo now. NOT in repo (temp file).
 - ⏳ **NEXT** — Parent 14: Design room-content format + builder tool (Descent pattern)
 
+### Day session (June 30, 2026 — room viewer polish + ceiling equation fixes)
+- ✅ **Wall collision bounds** added to `tools/room_viewer.py` — camera clamped to room with 30cm margin
+- ✅ **Ceiling equation V-flip** fixed — `_build_ceiling_quads` UV compensates for `_upload_texture` FLIP_TOP_BOTTOM
+- ✅ **E/W ceiling 90° rotation** — equations near E/W walls get rotated UV + swapped width/depth (text reads along Z)
+- ✅ **Real ceiling text sizing** — `build_full.py` now uses actual rendered PNG dimensions for `size_m` instead of hardcoded `(1.5, 0.4)`
+- ✅ 385/385 tests green throughout. All 3 engine fixes committed + pushed to `render_room.py` + `room_viewer.py`
+
 ### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
 - Ghostscript anti-aliases through alpha-only (semi-transparent black → invisible against grey wall)
 - Magenta keyout creates magenta-tinted anti-alias edges (visible but wrong color)
