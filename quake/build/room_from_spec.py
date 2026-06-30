@@ -1050,9 +1050,12 @@ def _curveY_helper(pts: list, suffix: str) -> list:
 
 def _emit_label_layout(spec: Spec) -> list:
     out: list = []
-    row_gap = 2.2
+    row_gap = 3.5
     for st in spec.stations:
         y = -(st.n - 1) * row_gap
+        if st.layout:
+            out.append(f"pair _layoutpos_{st.n} = (0, {y:.2f});")
+            continue
         if st.term_ops:
             n = len(st.term_ops)
             for ti in range(1, n + 1):
@@ -1070,6 +1073,13 @@ def _emit_stabilo_underlay(spec: Spec, stab: dict) -> list:
     out: list = ["  // STABILO underlay (current step's heart only)"]
     by = stab["by_elem"]
     for st in spec.stations:
+        if st.layout:
+            has_heart = any(t.heart for t in st.term_ops)
+            if has_heart:
+                pen_name = f"STABILO_{st.n}_1"
+                out.append(f"  if (on{st.n}) fill(box(_layoutpos_{st.n} + (-4, -0.5), "
+                           f"_layoutpos_{st.n} + (4, 0.5)), {pen_name});")
+            continue
         for g in st.geo_ops:
             if g.attr.heart:
                 pen = by[(st.n, "geo", g.name)]
@@ -1108,6 +1118,11 @@ def _emit_ink_pass(spec: Spec, is_geometry: bool) -> list:
     else:
         for st in spec.stations:
             on = f"on{st.n}"
+            if st.layout:
+                heart_color = next((t.color for t in st.term_ops if t.heart), "BLACK")
+                out.append(f"  label({_tex_str(_layout_to_plain(st.layout))}, "
+                           f"_layoutpos_{st.n}, {on} ? {heart_color} : BLACK);")
+                continue
             for ti, t in enumerate(st.term_ops, start=1):
                 pen = t.color if t.color else "BLACK"
                 out.append(f"  label({_tex_str(t.latex)}, _termpos_{st.n}_{ti}, "
@@ -1153,6 +1168,11 @@ def _tex_str(latex: str, raw: bool = False) -> str:
         s = f"${s}$"
     s = s.replace("\\", "\\\\").replace('"', '\\"')
     return f'"{s}"'
+
+
+def _layout_to_plain(layout: str) -> str:
+    """Strip {name|text} spans to just text for Asymptote rendering."""
+    return _SPAN_RE.sub(lambda m: m.group(2), layout)
 
 
 def _align(at: str) -> str:

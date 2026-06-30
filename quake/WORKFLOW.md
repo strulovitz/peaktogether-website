@@ -404,12 +404,34 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 2. Parent 16 asked Wave-1 questions → DeepSeek fetched all 5 requested files (raw_models.py, gold lemma_2 trio, baker_text.py, prooffig_check.py, Parent 15 prop_4 + law_1 station map) and answered all 5 technical questions.
 3. **Nir ruled Q2: raw hex (NOT a swatch set).** Variation between rooms = good. Most beautiful / professional / educational wins. Parent told to BUILD NOW, STOP TALKING.
 4. **Parent 16 delivered the COMPLETE format + tool in ONE shot:**
-   - **Part I — ROOMSPEC.md:** keyword-block .room format. Three kinds (geometry/equation/text), one skeleton. `color name #hex` per station. `{name|words}` spans in text. `heart` + `stabilo=#hex` per step. Child never touches JSON/Asymptote/`\textcolor`. Structurally prevents the dead global-palette model (no grammar for room-level colors).
-   - **Part II — `build/room_from_spec.py`:** `parse → validate → emit_recipe → emit_asy → emit_room_source`. Self-contained gold .asy convention (NOT prooffig — explicitly noted). Pydantic-validated output. 11 golden tests specified (lemma_2 roundtrip anchor, prop_4 equation, law_1 text, 7 rejection tests, textcolor scan consistency, ceiling ids).
-   - **One honest gap:** Asymptote op→snippet library (compile-confirm discipline, lazy growth — free points/segments/polylines/series proven; conics/tangents grow one compile at a time).
-5. Everything saved + committed + pushed. **WORKFLOW.md + Commentaries updated.**
+   - **Part I — ROOMSPEC.md:** keyword-block .room format. Three kinds (geometry/equation/text), one skeleton.
+   - **Part II — `build/room_from_spec.py`:** `parse → validate → emit_recipe → emit_asy → emit_room_source`. Self-contained gold .asy convention (NOT prooffig). Pydantic-validated output. 11 golden tests specified.
+   - **One honest gap:** Asymptote op→snippet library (compile-confirm discipline).
 
-**NEXT: Child implements `build/room_from_spec.py`** against the 11 golden tests. DeepSeek integrates.
+### 🌙 LATE EVENING SESSION (June 30, 2026 — Gap closed; code dropped; child pipeline PROVEN!)
+
+5. **Nir rejected the gap** — if DeepSeek codes it, why pay Opus? DeepSeek fetched complete Asymptote docs from internet, pasted to parent.
+6. **Parent 16 delivered v2 — COMPLETE RUNNABLE CODE.** All 28 RecipeOps mapped to exact Asymptote snippets (from geometry module docs). 0 gaps, 0 TODOs. Saved verbatim to `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md` (v2 supersedes v1).
+7. **DeepSeek dropped code into repo:**
+   - `build/room_from_spec.py` — 1,280 lines
+   - `tests/test_room_from_spec.py` — 17 tests
+   - `tests/room_specs/lemma_2.room`, `prop_4.room`, `law_1.room` — gold fixtures
+   - 402/402 tests green (385 old + 17 new)
+8. **Two integration bugs found + fixed:**
+   - `#` comment stripping ate hex colors (`#1E6FE0` → comment) — fixed with hex-aware detection
+   - Cross-station geometry references rejected in validator — fixed to accumulate across stations
+9. **layout rendering fix** — `emit_asy` now uses child's `layout` keyword to render properly-formatted equations (single label, not scattered terms). Stabilo as translucent `box()` rectangle behind text.
+10. **First child test: law_2 END-TO-END.**
+    - Child wrote law_2.room (2-step equation room)
+    - Parsed, validated, emitted all 3 output files ✅
+    - Build pipeline: switched figure baking from Asymptote to pdflatex+pdftocairo for equation rooms (same crisp pipeline as text panels — no Asymptote for text rendering)
+    - Transparent background (no white box) ✅
+    - Room plays in room_viewer ✅
+    - Build script: `%TEMP%\opencode\build_law2.py`
+11. **Self-handoff written** — `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
+12. Everything saved + committed + pushed.
+
+**NEXT on restart: continue children one-by-one (16 remaining). DeepSeek writes child prompts, children return .room files. Build all 20 at once after all done. Order: foundations first (lemma_5 → lemma_6 → lemma_12 → ... up to prop_15).**
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -423,7 +445,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 9. NEXT STEPS (June 30, 2026 evening — Parent 16 DONE)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE** (.room format + tool design frozen; 11 golden tests)
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)**
 
 ### DONE — Parent 15: Level Design Correction
 1. ✅ Corrected palette.json (map-side only, groups/grey dead)
@@ -440,12 +462,12 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 4. ✅ One honest gap: Asymptote snippet library (compile-confirm, lazy growth)
 5. ✅ Deliverable saved: `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`
 
-### NEXT — Child builds `build/room_from_spec.py`
-1. DeepSeek creates child brief from Parent 16's Part II frozen brief
-2. Child implements parse/validate/emit_recipe/emit_asy/emit_room_source
-3. Child writes the 11 golden tests (headless, pure text/JSON)
-4. DeepSeek integrates + validates + runs tests
-5. Proof-of-concept: run `build_room()` on lemma_2.room → DEEP-EQUAL gold triplet
+### NEXT — 16 more children (one .room per room, dependency order)
+1. DeepSeek writes child prompt → child returns .room → DeepSeek drops in tests/room_specs/ → validates
+2. Order: foundations first: lemma_5 → lemma_6 → lemma_12 → lemma_3 → lemma_4 → lemma_7 → lemma_9 → lemma_10 → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
+3. Already done: lemma_2, prop_4, law_1, law_2 ✅
+4. Build full level pack AFTER all 20 .room files are done
+5. Restart handoff: `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -472,7 +494,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 30, 2026 evening):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED:** math + its non-math foundations, both colored; no implanted modern math; word-only examples = colored-TEXT stations (Nir, no drawn scenes). **✨ Parent 15 DONE — 20-room station map FROZEN (20 rooms / 56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT; corrected palette + concept_graph). Both waves saved verbatim. ✨** **✨ Parent 16 DONE — .room format + build/room_from_spec.py tool design FROZEN (11 golden tests; self-contained gold .asy convention; honest Asymptote snippet gap). Deliverable saved verbatim. ✨** Parent 14 DELETED. Next: **Child builds `build/room_from_spec.py`** against the 11 golden tests. DeepSeek integrates. **Everything pushed (commit pending).**
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
+🌙 **CURRENT STATE (July 1, 2026 early morning):** Engine + renderers DONE (402/402 green). Color system CORRECTED. Parent 15 DONE (20-room station map). **Parent 16 DONE (v2: COMPLETE RUNNABLE CODE)** — `build/room_from_spec.py` working, all 28 RecipeOps mapped. **Child pipeline PROVEN** — law_2 room built end-to-end (child → .room → recipe/asy/room_source → pdflatex+pdftocairo bake → room_viewer). **16 more children needed** in dependency order. DO NOT test every child with full bake — collect all .room files, build level pack at the end. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
