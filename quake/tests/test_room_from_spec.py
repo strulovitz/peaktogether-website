@@ -102,7 +102,7 @@ import re
 _TC = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
-@pytest.mark.parametrize("name", ["lemma_2", "prop_4", "law_1"])
+@pytest.mark.parametrize("name", ["lemma_2", "prop_4", "law_1", "law_2"])
 def test_textcolor_scan_consistency(name):
     room = emit_room_source(parse(_spec(name)))
     for b in room.blocks:
@@ -110,6 +110,21 @@ def test_textcolor_scan_consistency(name):
         declared = {c.name for c in b.text.colors_used}
         assert in_latex == declared, f"{name} {b.block_id}: {in_latex} != {declared}"
 
+
+# ---- law_2 equation room ----
+
+def test_law_2_equation():
+    spec = parse(_spec("law_2"))
+    validate(spec)
+    recipe = emit_recipe(spec)
+    assert recipe is not None
+    assert recipe.n_steps == 2
+    room = emit_room_source(spec)
+    assert len(room.blocks) == 2
+    assert room.final_pair_id == "law_2.s2"
+    names = {c.name for c in room.figures[0].colors_used}
+    assert {"motionblue", "forceorange", "dirgreen"} <= names
+    assert len(room.ceiling_equations) == 2
 
 # ---- rejection tests ----
 
