@@ -1,0 +1,42 @@
+room      lemma_5
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma V; Plate 2, Fig. 1.
+caption   In similar figures all homologous sides are proportional, and the areas are in the duplicate ratio of the homologous sides.
+final     2
+ceiling   eq0 :: \frac{AB}{DE} \;=\; \frac{BC}{EF} \;=\; \frac{CA}{FD} \;=\; k
+ceiling   eq1 :: \frac{\text{area}_1}{\text{area}_2} \;=\; k^2
+
+station 1
+  gloss   Two similar triangles displayed side by side: a larger figure ABC and a smaller figure DEF of the very same shape.
+  color   simblue   #1E6FE0
+  color   simgreen  #00A35A
+  panel
+    point   A @(0,0)    color=simblue marker=dot label=$A$ at=SW
+    point   B @(4,0)    color=simblue marker=dot label=$B$ at=SE
+    point   C @(1.2,3)  color=simblue marker=dot label=$C$ at=N
+    polygon fig1 A B C  color=simblue heart
+    point   D @(6,0)    color=simgreen marker=dot label=$D$ at=SW
+    point   E @(8,0)    color=simgreen marker=dot label=$E$ at=SE
+    point   F @(6.6,1.5) color=simgreen marker=dot label=$F$ at=N
+    polygon fig2 D E F  color=simgreen heart
+  text
+    Here stand two \emph{similar} figures: \{simblue|the first figure $ABC$} and \{simgreen|the second figure $DEF$}. To say that two figures are \emph{similar} means that they have exactly the same shape, though not necessarily the same size --- one may be a scaled copy of the other. All their corresponding angles are equal ($\angle A = \angle D$, $\angle B = \angle E$, $\angle C = \angle F$), and their corresponding sides run in the same proportion throughout. The matching outline shared by \{simblue|the larger figure} and \{simgreen|the smaller figure} --- their common shape --- is the heart of this lemma. Whatever we now prove about one such pair holds for \emph{all} similar figures, whether bounded by straight lines or by curves.
+
+station 2
+  gloss   One pair of homologous sides AB and DE is highlighted; all homologous sides share one ratio k, and the areas stand in the duplicate ratio k squared.
+  color   sideorange #E8770A
+  color   simblue    #1E6FE0
+  color   simgreen   #00A35A
+  panel
+    point   A @(0,0)    color=simblue marker=dot label=$A$ at=SW
+    point   B @(4,0)    color=simblue marker=dot label=$B$ at=SE
+    point   C @(1.2,3)  color=simblue label=$C$ at=N
+    polygon fig1 A B C  color=simblue
+    point   D @(6,0)    color=simgreen marker=dot label=$D$ at=SW
+    point   E @(8,0)    color=simgreen marker=dot label=$E$ at=SE
+    point   F @(6.6,1.5) color=simgreen label=$F$ at=N
+    polygon fig2 D E F  color=simgreen
+    segment sideAB A B  color=sideorange heart
+    segment sideDE D E  color=sideorange heart
+  text
+    Pick any one pair of \{sideorange|homologous sides}: $\{sideorange|AB}$ in \{simblue|the first figure} answers to $\{sideorange|DE}$ in \{simgreen|the second}. Newton's claim is that \emph{every} homologous pair stands in one and the same ratio --- so $AB/DE = BC/EF = CA/FD = k$, a single number $k$ that measures how much larger the one figure is than the other. But the \emph{areas} do not grow in this same ratio: they grow in its \emph{duplicate ratio}, that is, in the ratio $k^2$. Thus if \{simblue|the larger figure}'s sides are twice those of \{simgreen|the smaller} ($k = 2$), its area is not twice but \emph{four} times as great ($k^2 = 4$); triple the side, and the area is ninefold. This is why doubling a map's scale quadruples the ink, and why the homologous sides --- highlighted here --- govern both lengths and areas at once. \textit{Q.E.D.}

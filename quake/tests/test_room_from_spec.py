@@ -102,7 +102,7 @@ import re
 _TC = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
-@pytest.mark.parametrize("name", ["lemma_2", "prop_4", "law_1", "law_2"])
+@pytest.mark.parametrize("name", ["lemma_2", "lemma_5", "prop_4", "law_1", "law_2"])
 def test_textcolor_scan_consistency(name):
     room = emit_room_source(parse(_spec(name)))
     for b in room.blocks:
@@ -125,6 +125,32 @@ def test_law_2_equation():
     names = {c.name for c in room.figures[0].colors_used}
     assert {"motionblue", "forceorange", "dirgreen"} <= names
     assert len(room.ceiling_equations) == 2
+
+# ---- lemma_5 geometry room ----
+
+def test_lemma_5_geometry():
+    spec = parse(_spec("lemma_5"))
+    validate(spec)
+    assert spec.kind == "geometry"
+    assert len(spec.stations) == 2
+    assert spec.final_step == 2
+    recipe = emit_recipe(spec)
+    assert recipe is not None
+    assert recipe.n_steps == 2
+    room = emit_room_source(spec)
+    assert len(room.blocks) == 2
+    assert room.final_pair_id == "lemma_5.s2"
+    used = {(c.name, c.hex) for c in room.figures[0].colors_used}
+    assert {"simblue", "simgreen", "sideorange"} <= {n for n, _ in used}
+    asy = emit_asy(spec)
+    assert "import geometry;" in asy
+    assert "pen simblue = rgb(" in asy
+    assert "pen simgreen = rgb(" in asy
+    assert "pen sideorange = rgb(" in asy
+    assert "STABILO" in asy
+    assert "usersetting();" in asy
+    assert asy.strip().endswith("drawAll(highlight);")
+
 
 # ---- rejection tests ----
 
