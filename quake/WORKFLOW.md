@@ -350,8 +350,14 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - ✅ **Wall collision bounds** added to `tools/room_viewer.py` — camera clamped to room with 30cm margin
 - ✅ **Ceiling equation V-flip** fixed — `_build_ceiling_quads` UV compensates for `_upload_texture` FLIP_TOP_BOTTOM
 - ✅ **E/W ceiling 90° rotation** — equations near E/W walls get rotated UV + swapped width/depth (text reads along Z)
-- ✅ **Real ceiling text sizing** — `build_full.py` now uses actual rendered PNG dimensions for `size_m` instead of hardcoded `(1.5, 0.4)`
-- ✅ 385/385 tests green throughout. All 3 engine fixes committed + pushed to `render_room.py` + `room_viewer.py`
+- ✅ **S wall ceiling 180° rotation** — per-wall UV detection (N=V-flip, S=180°, E=90°cw, W=90°ccw) committed
+- ✅ **Real ceiling text sizing** — `build_full.py` now uses actual rendered PNG dimensions for `size_m`
+- ✅ 385/385 tests green throughout. Engine fixes committed: `render_room.py` + `room_viewer.py`
+
+### Afternoon session (June 30, 2026 — Parent 14 handoff PREP)
+- ✅ **Parent 14 handoff v2 — COMPLETE REWRITE.** Old handoff was STALE: described `\cg{group}{}`, `GroupName`, global 5-group palette, cumulative Stabilo — all already replaced by June 29 color correction (`\textcolor{name}{}`, `LocalColor`, `is_heart`, black/white no-grey, current-step-only hearts). Verified against actual `raw_models.py`, `baker_text.py`, and lemma_2 recipe/room_source. New handoff is clean, single truth, zero contradictions.
+- ✅ **Descent pattern verified** — `CORRIDOR:`/`ROBOT:`/`SEGMENTS:` referenced ONLY as format-style inspiration, NOT as Quake content. Quake concepts (rooms, stations, panels, ceiling equations) are the actual content.
+- ✅ Ready to launch Parent 14 on restart.
 
 ### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
 - Ghostscript anti-aliases through alpha-only (semi-transparent black → invisible against grey wall)
@@ -401,7 +407,7 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then `quake/DEEPSEEK_RESTART_PARENT_13_GO.md` (detailed restart protocol with GitHub URLs). Then ask Nir what's next.
-🌙 **CURRENT STATE (June 29, 2026):** Engine + renderers DONE (382/382 green). Color system CORRECTED to Nir's model everywhere (local per-station colors, current-step-only Stabilo, black/white no grey). Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B). Concept graph FROZEN for 20-room Principia level. **On restart:** launch **Parent 13 — Build ONE room (lemma_2)**. Handoffs: Parent 13 + Parent 14 (both corrected with Nir's color model) + restart self-prompt — all in BIBLE/. Disciplines: never freeze the easy option; render-and-look; question-first; no-GO; DeepSeek cannot do visual refinement; Nir is the author — nothing is frozen against him.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**. Then ask Nir what's next.
+🌙 **CURRENT STATE (June 30, 2026):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). Parent 14 handoff v2 READY — clean rewrite matching actual code. **On restart:** launch **Parent 14** with: Commentaries + OT + NT + Parent 14 handoff v2. Give Nir GitHub URLs for copy-paste to a fresh Opus 4.8 chat.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

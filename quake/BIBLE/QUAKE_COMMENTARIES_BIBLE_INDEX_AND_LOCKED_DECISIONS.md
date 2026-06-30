@@ -184,7 +184,7 @@
 - ❌ **Parent 12 (Regular-Polygon Rooms) FAILED** — June 29, 2026. DeepSeek built the polygon prototype but cannot see images to iterate on visual quality. Returned to Wolfenstein box rooms.
 - ✅ **Parent 13 DONE — One-room pipeline proof-of-concept DELIVERED** — June 29, 2026. recipe.lemma_2.f1.json + figure.lemma_2.f1.asy + room_source.lemma_2.json. Both JSONs validate GREEN. 382/382 tests green. ⚠️ Asymptote compile BLOCKED — MiKTeX Asymptote 2.88 has a library-parsing bug (plain_constants.asy), NOT a Parent 13 bug. Needs standalone Asymptote install. Verbatim deliverable saved at `QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`.
 - ⏳ **THEN — Fix Asymptote → compile → bake → room_maker → render PNG for Nir's eyes**
-- ⏳ **NEXT — Parent 14: Room-content format + builder tool** — Design text format (Descent pattern) + `build/room_from_spec.py`. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_14_HANDOFF.md`. Color system mandatory in format + tool.
+- ⏳ **NEXT — Parent 14: Room-content format + builder tool** — Handoff v2 rewritten June 30, 2026 (clean, single truth). Format + `build/room_from_spec.py`. Descent pattern: keyword blocks, one tool, 20 parallel children.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ✅ **AMENDMENT — Text baking pipeline (pdflatex+pdftocairo), June 29, 2026 evening.**
