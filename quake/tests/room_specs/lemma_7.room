@@ -1,0 +1,89 @@
+room      lemma_7
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VII; Plate 2, Fig. 1.
+caption   The ultimate ratio of the arc, the chord, and the tangent, any one to any other, is the ratio of equality.
+final     3
+ceiling   eq0 :: \text{arc}:\text{chord}:\text{tangent}\to 1:1:1
+
+station 1
+  gloss   The original arc ACB rising from A, with its chord AB and tangent AD, exactly the figure of the preceding lemma.
+  color   arcblue  #1E6FE0
+  panel
+    point   A   @(0,0)     marker=dot label=$A$ at=SW
+    point   ptC @(1.1,1.0) color=arcblue label=$C$ at=NW
+    point   B   @(2.2,1.5) marker=dot label=$B$ at=N
+    point   D   @(2.7,0.7) marker=dot label=$D$ at=E
+    polyline arc A ptC B   color=arcblue heart
+    segment chordAB A B    color=arcblue
+    segment tanAD A D      color=arcblue
+  text
+    We resume the very figure of the last lemma. From the point $A$ springs \{arcblue|the arc $ACB$}, \
+    fixed in position, with smooth continuous curvature; across it runs the chord $AB$, and grazing \
+    the curve at $A$ stretches the tangent $AD$. As the point $B$ slides toward $A$, all three of \
+    these --- \{arcblue|arc, chord, and tangent} --- shrink together toward nothing, and the question is: \
+    in what \emph{proportion} do they vanish? Newton's claim is bold and exact: their ultimate ratio, \
+    any one to any other, is the {arcblue|ratio of equality} --- $1:1:1$. The trouble is that three \
+    quantities all collapsing to zero cannot be compared directly, so we need a clever device to hold \
+    their proportions still while we examine them.
+
+station 2
+  gloss   The auxiliary blow-up: AB and AD produced to distant b and d, the parallel bd, and a similar arc Acb that stays finite.
+  color   auxpurple #8E24AA
+  color   arcblue   #1E6FE0
+  panel
+    point   A   @(0,0)     marker=dot label=$A$ at=SW
+    point   ptC @(1.1,1.0) color=arcblue label=$C$ at=NW
+    point   B   @(2.2,1.5) marker=dot label=$B$ at=N
+    point   D   @(2.7,0.7) marker=dot label=$D$ at=SE
+    polyline arc A ptC B   color=arcblue
+    segment chordAB A B    color=arcblue
+    segment tanAD A D      color=arcblue
+    point   b   @(5.5,3.75)  color=auxpurple marker=dot label=$b$ at=N
+    point   d   @(6.75,1.75) color=auxpurple marker=dot label=$d$ at=E
+    point   c   @(2.75,2.5)  color=auxpurple label=$c$ at=NW
+    ray     Ab A b         color=auxpurple
+    ray     Ad A d         color=auxpurple
+    segment secBD B D      color=arcblue
+    segment bd b d         color=auxpurple
+    polyline auxarc A c b  color=auxpurple heart
+  text
+    Here is the device. While $B$ approaches $A$, we always \emph{produce} $AB$ and $AD$ onward to \
+    fixed remote points $b$ and $d$, and parallel to the secant $BD$ we draw \{auxpurple|the line $bd$}. \
+    Upon the distant ends we erect \{auxpurple|the auxiliary arc $Acb$}, always kept \emph{similar} to \
+    the shrinking arc $ACB$. This is the trick: the original figure dwindles toward $A$, but the \
+    enlarged copy out at $b,d$ stays a fixed, finite size --- a faithful magnification in which every \
+    proportion of the little figure is preserved exactly. So whatever ratio arc, chord, and tangent \
+    bear to one another below, the same ratio is held, full-sized and visible, in \{auxpurple|the \
+    finite triangle $Abd$ and arc $Acb$} above.
+
+station 3
+  gloss   By Lemma VI the angle dAb vanishes, so Ab, Ad, and arc Acb coincide and become equal; hence AB, AD, ACB acquire the ratio of equality.
+  color   equalteal #00897B
+  color   auxpurple #8E24AA
+  color   arcblue   #1E6FE0
+  panel
+    point   A   @(0,0)     marker=dot label=$A$ at=SW
+    point   ptC @(1.1,1.0) color=arcblue label=$C$ at=NW
+    point   B   @(2.2,1.5) marker=dot label=$B$ at=N
+    point   D   @(2.7,0.7) marker=dot label=$D$ at=SE
+    polyline arc A ptC B   color=arcblue
+    segment chordAB A B    color=equalteal
+    segment tanAD A D      color=equalteal
+    point   b   @(5.5,3.75)  color=auxpurple marker=dot label=$b$ at=N
+    point   d   @(6.75,1.75) color=auxpurple marker=dot label=$d$ at=E
+    point   c   @(2.75,2.5)  color=auxpurple label=$c$ at=NW
+    ray     Ab A b         color=auxpurple
+    ray     Ad A d         color=auxpurple
+    segment bd b d         color=auxpurple
+    polyline auxarc A c b  color=auxpurple
+    angle   dAb d A b      color=equalteal heart label=$\angle dAb$ at=E
+  text
+    Now suppose $A$ and $B$ to coincide. By the preceding lemma the angle \{equalteal|$\angle dAb$} \
+    vanishes --- the chord and tangent directions merge. Therefore the right lines $Ab$, $Ad$ (which \
+    are always finite) and the intermediate \{auxpurple|arc $Acb$} squeeze together and \
+    \{equalteal|coincide, becoming equal among themselves}. But the original \{equalteal|chord $AB$, \
+    tangent $AD$, and arc $ACB$} are always proportional to these finite three; hence they too must \
+    ultimately stand in the \{equalteal|ratio of equality}, $\text{arc}:\text{chord}:\text{tangent}\to 1:1:1$. \
+    This is the crown of the section: as $B\to A$, arc, chord, and tangent become interchangeable, \
+    and every later argument about velocities, forces, and curvature rests upon this single equality. \
+    \textit{Q.E.D.}
