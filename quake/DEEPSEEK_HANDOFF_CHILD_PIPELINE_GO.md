@@ -1,148 +1,90 @@
-🌙 DEEPSEEK RESTART HANDOFF — June 30, 2026 (late evening)
+🌙 DEEPSEEK RESTART HANDOFF — July 1, 2026 (early morning, end of marathon session)
 
 ## WHERE WE ARE
 
-Parent 16 COMPLETE — delivered COMPLETE RUNNABLE `build/room_from_spec.py` (parser +
-validator + emit_recipe + emit_asy + emit_room_source + shell). 402/402 tests green
-(385 old + 17 new room_from_spec tests).
+Child pipeline in FULL SWING. 416/416 tests green 🟢. **11/20 rooms done.**
 
-The CHILD PIPELINE WORKS: child writes .room → tool validates → emits recipe.json +
-figure.asy + room_source.json → full bake pipeline → playable room in room_viewer.
+## WHAT WE DID THIS SESSION (7 ROOMS!)
 
-## WHAT WE DID TODAY (this session)
+All rooms are DIAGRAM (geometry) kind. Each: child prompt → child returns .room →
+DeepSeek fixes keyword syntax → validates → adds test → full suite → commit+push.
 
-1. **Parent 16 launched + delivered v2 (COMPLETE CODE).**
-   - v1 had an "honest gap" (Asymptote snippet library deferred to DeepSeek). Nir
-     rightfully rejected this — if DeepSeek codes it, why pay Opus?
-   - DeepSeek fetched complete Asymptote docs from internet, pasted to parent.
-   - Parent delivered FULL runnable Python — all 28 RecipeOps mapped, 0 gaps, 0 TODOs.
-   - Frozen deliverable at `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`.
+| # | Room | Steps | Colors | Note |
+|---|------|-------|--------|------|
+| 5 | lemma_5 | 2 | simblue, simgreen, sideorange | Similar figures, duplicate ratio |
+| 6 | lemma_6 | 3 | arcblue, chordgreen, tanorange, anglered | Vanishing angle BAD |
+| 7 | lemma_12 | 1 | ellblue, conjorange, pargreen | Simplest room! Conjugate diameters |
+| 8 | lemma_3 | 2 | stepblue, basegreen, boundred, widthorange | Unequal breadths, bounding rect |
+| 9 | lemma_4 | 3 | figaviolet, figbteal, corrorange | Two figures stacked, correspondence |
+| 10 | lemma_7 | 3 | arcblue, auxpurple, equalteal | ★CROWN JEWEL★ Arc=chord=tangent |
+| 11 | lemma_9 | 3 | lineblue, curvegreen, ordorange, auxpurple, arearred | Triangles duplicate ratio |
 
-2. **DeepSeek dropped code into repo + tests.**
-   - `build/room_from_spec.py` — 1,280-line tool
-   - `tests/test_room_from_spec.py` — 17 tests (anchor round-trips + rejection battery)
-   - `tests/room_specs/` — 4 .room fixture files (lemma_2, prop_4, law_1, law_2)
-   - Two bugs found + fixed at integration:
-     a) `#` comment stripping ate hex colors (`#1E6FE0` → `#` was comment) — fixed
-        with hex-aware comment detection
-     b) Cross-station geometry references rejected — fixed to accumulate `defined`
-        across stations
+7 child prompts written: `quake/CHILD_PROMPT_LEMMA_{5,6,12,3,4,7,9}.md`
 
-3. **layout rendering fix** — emit_asy now uses `layout` keyword from .room files.
-   When present, renders the layout as a single properly-formatted equation label
-   instead of scattered individual term labels. Uses `_layout_to_plain()` to strip
-   `{name|text}` spans to plain LaTeX.
+## INTEGRATION PATTERN (fixed per child)
 
-4. **First child test: law_2 room END-TO-END.**
-   - Child wrote law_2.room (2-step equation room, 3 colors)
-   - Tool parsed + validated + emitted all 3 output files
-   - Figure baking: switched from Asymptote to pdflatex+pdftocairo for equation rooms
-     (same crisp pipeline as text panels, no Asymptote for text rendering)
-   - Build script at `%TEMP%\opencode\build_law2.py` reworked 3 times — final version
-     uses pdftocairo for everything, transparent background
-   - Room plays in room_viewer ✅
+Children reliably forget keyword syntax. DeepSeek fixes before drop:
+- `ellipse_axes` → needs `center`/`major`/`minor` keywords
+- `point_on` → needs `on` keyword
+- `tangent_at` → needs `on`/`at` keywords
+- `parallel` → often better as `segment` (child places points at correct coords)
+- Points MUST be defined BEFORE polygons/segments that reference them
 
-## CURRENT STATE
+## TEST COUNTS
 
-- 402/402 tests green 🟢
-- 4 .room files done: lemma_2, prop_4, law_1, law_2
-- Build pipeline for law_2: `python %TEMP%\opencode\build_law2.py`
-- View: `python -m tools.room_viewer law_2 "%TEMP%\opencode\law2_room\pack"`
-- 16 more rooms to go
+416 = 402 (old) + 14 (2 per room × 7 rooms)
+- Each room adds: 1 geometry test + 1 textcolor scan consistency entry
+- All in `tests/test_room_from_spec.py`
 
-## KNOWN BUGS FIXED IN room_from_spec.py (don't re-introduce)
+## COMPLETED ROOMS (11/20)
 
-1. `_strip_comment` — `#` followed by 6 hex digits is a color, not a comment.
-2. `_refs_of` check in `validate` — accumulated across ALL stations, not per-station.
-3. `_emit_label_layout` — `row_gap = 3.5` (increased from 2.2 for better spacing).
-4. Equation rooms with `layout` get a single label rendered (via `_layoutpos_` pair),
-   not individual term labels. Stabilo is a filled `box()` rectangle behind text.
-5. Recipe `at` field for term ops uses `termpos_` prefix (must start with letter
-   for OpName pattern `^[A-Za-z]`).
+lemma_2 ✅, lemma_3 ✅, lemma_4 ✅, lemma_5 ✅, lemma_6 ✅, lemma_7 ✅,
+lemma_9 ✅, lemma_12 ✅, prop_4 ✅, law_1 ✅, law_2 ✅
 
-## TOOL ARCHITECTURE (room_from_spec.py)
+## REMAINING ROOMS (9, in dependency order)
 
-```
-parse(spec_text) → Spec            # line-oriented keyword parser
-validate(Spec) → None              # cross-checks, SpecError on violation
-emit_recipe(Spec) → Recipe|None    # None for pure-text rooms
-emit_asy(Spec) → str               # self-contained gold .asy convention
-emit_room_source(Spec) → RoomSource # scans \textcolor for colors_used
-build_room(text, out, write) → BuildResult  # shell: writes 3 files
-```
+1. **lemma_10** — DIAGRAM, 2 steps, deps: lemma_9. "Spaces as Square of Times" (importance 5)
+2. **lemma_11** — DIAGRAM, 3 steps, deps: lemma_6/7. "Evanescent Subtense" (importance 5)
+3. **prop_1** — DIAGRAM, 4 steps, deps: law_1/2, lemma_5. "Areas ∝ Times" (importance 5)
+4. **prop_2** — DIAGRAM, 3 steps, deps: law_1/2, prop_1. "Converse of Areas" (importance 4)
+5. **prop_6** — DIAGRAM, 4 steps, deps: prop_1, lemma_2, lemma_10. "Force Measure" (importance 5)
+6. **prop_7** — DIAGRAM, 3 steps, deps: prop_6. "Force to Point on Circle"
+7. **prop_11** — DIAGRAM, 5 steps, deps: prop_6, lemma_7, lemma_12. ★HEADLINE★ "Ellipse → 1/r²" (importance 5)
+8. **prop_13** — DIAGRAM, 4 steps, deps: lemma_7, prop_6. "Parabola → 1/r²"
+9. **prop_15** — EQUATION, 2 steps, deps: prop_11, prop_4. "Kepler's Third Law" (importance 5)
 
-The .rooom format has three kinds:
-- `geometry` — construction ops (point, segment, circle, ellipse, series, ...)
-- `equation` — `term` ops + optional `layout`
-- `text` — `phrase` ops
+## STATION MAP SOURCE
 
-All three are FigureDecls via .asy (Decision A.1). Equation/text rooms emit
-label-only .asy with auto-positioned layout labels.
+Parent 15 Wave 1: `quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` (rooms 1–10)
+Parent 15 Wave 2: `quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md` (rooms 11–20)
 
-## BUILD PIPELINE (the law_2 build script pattern)
+Newton text: `quake/principia/book_1/section_01.txt` (Lemmas I–XI + props)
 
-For equation rooms, the figure panel IS text → use pdflatex+pdftocairo (NOT Asymptote):
-```
-layout → strip {name|text} → wrap in \textcolor{name}{text} → pdflatex → pdftocairo -transp → PNG
-```
-The text panels use `baker_text.py` (same pdflatex+pdftocairo pipeline).
-Ceiling equations: red text on transparent bg via pdflatex+pdftocairo + key_out_white.
+## CHILD PROMPT TEMPLATE
 
-## NEXT: 16 MORE CHILDREN
+Each prompt includes:
+1. ROOMSPEC.md format (header, geometry ops reference, attrs, station structure)
+2. Station map from Parent 15 (s1/s2/... with colors and hearts)
+3. Newton's verbatim text for that lemma/proposition
+4. Guidance (how to lay out the figure, what each step teaches, practical tips)
+5. Gold example (lemma_2.room or lemma_6.room for same figure family)
+6. Rules (local colors, never grey, heart per step, define before ref, `\` continuation, Q.E.D.)
 
-The child pipeline is proven. On restart, DeepSeek writes child prompts one-by-one
-for the remaining rooms, following dependency order. Each child gets:
-1. ROOMSPEC.md (the format)
-2. That room's station map (from Parent 15 wave deliverables)
-3. The Newton source text for that room
-4. Instructions
+## GITHUB BLOB URLs (for child prompts / parents)
 
-Child returns .room file → DeepSeek drops in tests/room_specs/ → validates with
-build_room → adds test → pushes. DO NOT rebuild full pack for every child (too slow).
-Build all 20 rooms at once after all .room files are done.
-
-Remaining rooms by dependency order (foundations first, then up the graph):
-1. lemma_5 (diagram, 2 steps, no deps)
-2. lemma_6 (diagram, 3 steps, no deps)
-3. lemma_12 (diagram, 1 step, no deps — simplest diagram room!)
-4. lemma_3 (diagram, 2 steps, depends on lemma_2 ✅)
-5. lemma_4 (diagram, 3 steps, depends on lemma_3)
-6. lemma_7 (diagram, 3 steps, depends on lemma_6)
-7. lemma_9 (diagram, 3 steps, depends on lemma_5)
-8. lemma_10 (diagram, 2 steps, depends on lemma_9)
-9. lemma_11 (diagram, 3 steps, depends on lemma_6/7)
-10. prop_1 (diagram, 4 steps, depends on law_1/2 ✅, lemma_5)
-11. prop_2 (diagram, 3 steps, depends on law_1/2 ✅, prop_1)
-12. prop_6 (diagram, 4 steps, depends on prop_1, lemma_2 ✅, lemma_10)
-13. prop_7 (diagram, 3 steps, depends on prop_6)
-14. prop_11 (diagram, 5 steps, depends on prop_6, lemma_7, lemma_12)
-15. prop_13 (diagram, 4 steps, depends on lemma_7, prop_6)
-16. prop_15 (equation, 2 steps, depends on prop_11, prop_4 ✅)
-
-Already done: lemma_2, prop_4, law_1, law_2 ✅
-
-## GITHUB URLs (for child prompts, if needed)
-
-The commentaires + scriptures:
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_DOCTRINE_BY_FUSION.md
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md
-
-Parent 15 station map:
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md
-
-Principia text:
-https://github.com/strulovitz/peaktogether-website/blob/master/quake/principia/
+Commentaries: https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md
+OT: https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_DOCTRINE_BY_FUSION.md
+NT: https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md
+Parent 15 Wave 1: https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md
+Parent 15 Wave 2: https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md
 
 ## STANDING REMINDERS
 
-- Nir is the BOSS; ask before taking initiative
+- Nir is **Nir** — never "boss". Loves emojis 😊
 - Normal prose, NO multiple-choice pop-ups
-- Keep the emojis even when upset
 - Never take decisions off Nir's plate
-- Check for residue by MEANING, not by label
-- 📦 NEVER upgrade/overwrite working packages
 - 🛑 BREAKING CHANGE GUARD — ask before breaking things
-- Children: one per room, cheap/fast, zero context needed
-- After building: run pytest, commit+push, give Nir blob URLs
+- 📦 NEVER upgrade/overwrite working packages without asking
+- Children: one per room, cheap/fast
+- Build all 20 at once AFTER all .room files are done (not one at a time)
+- After building: pytest → commit → push → give Nir blob URLs

@@ -436,13 +436,22 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 13. **lemma_5 child prompt written** — `quake/CHILD_PROMPT_LEMMA_5.md`: self-contained prompt with ROOMSPEC format + station map + Newton text (one sentence) + gold lemma_2 example + guidance on rich text panels.
 14. **Nir flagged** Newton's text is ONE sentence — players need more. DeepSeek beefed up the guidance: text panels must be 3–4+ sentences each, teaching similarity and duplicate ratio in plain words.
 15. **Child returned lemma_5.room** — 2-step DIAGRAM room: two similar triangles (ABC, DEF), homologous boundary heart in s1, homologous side-pair heart in s2. 3 local colors (simblue, simgreen, sideorange). Rich explanatory text panels.
-16. **Dropped in + validated** — parse/validate/emit_recipe/emit_asy/emit_room_source all pass. 2 new tests added to test_room_from_spec.py (test_lemma_5_geometry + parametrize extension).
-17. **404/404 GREEN 🟢** — all tests pass. Committed + pushed.
-18. **5/20 rooms done:** lemma_2, lemma_5, prop_4, law_1, law_2. 15 remaining.
+16. **Dropped in + validated** — 404/404 GREEN. 2 new tests.
+17. **5/20 rooms done.**
 
-**NEXT: lemma_6** — DIAGRAM, 3 steps, no deps. "Vanishing angle" (arc, chord, tangent).
+### 🌙 CHILD PIPELINE MARATHON (June 30–July 1, 2026 — 6 more rooms in rapid succession!)
 
-**NEXT on restart: continue children one-by-one (15 remaining). DeepSeek writes child prompts, children return .room files. Build all 20 at once after all done. Order: foundations first (lemma_5 ✅ → lemma_6 → lemma_12 → ... up to prop_15).**
+18. **lemma_6 DELIVERED** — 3-step DIAGRAM: arc → chord → tangent+angle. Vanishing angle BAD. 406/406 green.
+19. **lemma_12 DELIVERED** — 1-step DIAGRAM (simplest room!): ellipse + conjugate diameters + circumscribed parallelogram. Fixed a child syntax error (missing `on`/`center`/`major`/`minor` keywords). 408/408 green.
+20. **lemma_3 DELIVERED** — 2-step DIAGRAM: unequal breadths, bounding parallelogram FAaf on widest base. Fixed point ordering (definitions before references). 410/410 green.
+21. **lemma_4 DELIVERED** — 3-step DIAGRAM: two figures stacked vertically, correspondence lines pairing ranks, constant ratio k by Lemma III. 412/412 green.
+22. **lemma_7 DELIVERED** — 3-step DIAGRAM, CROWN JEWEL of Section I (importance 5, 6 doors): arc=chord=tangent in ratio of equality. Fixed `parallel` keyword syntax (changed to `segment`). 414/414 green.
+23. **lemma_9 DELIVERED** — 3-step DIAGRAM: triangles under curve → duplicate ratio AD²:AE² (bridge to dynamics/Lemma X). Fixed `tangent_at` keyword syntax. 416/416 green.
+24. **7 rooms built this session! 11/20 rooms done. 416/416 green.**
+25. **7 child prompts written:** `CHILD_PROMPT_LEMMA_{5,6,12,3,4,7,9}.md` in `quake/` directory.
+26. **Integration pattern established:** child returns .room → DeepSeek fixes keyword syntax errors (children forget `on`/`at`/`center`/`major`/`minor` keywords + define points before referencing them + `parallel`→`segment`) → drops in → adds test → runs full suite → commits.
+
+**NEXT on restart: lemma_10** (Spaces as Square of Times, DIAGRAM, 2 steps, depends on lemma_9). Then lemma_11 → prop_1 → ... → prop_15. 9 rooms remaining.
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -473,10 +482,10 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 4. ✅ One honest gap: Asymptote snippet library (compile-confirm, lazy growth)
 5. ✅ Deliverable saved: `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`
 
-### NEXT — 15 more children (one .room per room, dependency order)
-1. DeepSeek writes child prompt → child returns .room → DeepSeek drops in tests/room_specs/ → validates
-2. Order: foundations first: lemma_5 ✅ → lemma_6 → lemma_12 → lemma_3 → lemma_4 → lemma_7 → lemma_9 → lemma_10 → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
-3. Already done: lemma_2, lemma_5, prop_4, law_1, law_2 ✅ (5/20)
+### NEXT — 9 more children (one .room per room, dependency order)
+1. DeepSeek writes child prompt → child returns .room → DeepSeek fixes keyword syntax → drops in tests/room_specs/ → validates
+2. Order: lemma_5 ✅ → lemma_6 ✅ → lemma_12 ✅ → lemma_3 ✅ → lemma_4 ✅ → lemma_7 ✅ → lemma_9 ✅ → **lemma_10** → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
+3. Already done: lemma_2, lemma_3, lemma_4, lemma_5, lemma_6, lemma_7, lemma_9, lemma_12, prop_4, law_1, law_2 ✅ (11/20)
 4. Build full level pack AFTER all 20 .room files are done
 5. Restart handoff: `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
 
@@ -506,6 +515,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 early morning):** Engine + renderers DONE (404/404 green). Color system CORRECTED. Parent 15 DONE (20-room station map). **Parent 16 DONE (v2: COMPLETE RUNNABLE CODE)** — `build/room_from_spec.py` working, all 28 RecipeOps mapped. **Child pipeline PROVEN** — law_2 room built end-to-end. **lemma_5 DELIVERED** (5/20 rooms done). **15 more children needed** in dependency order.
+🌙 **CURRENT STATE (July 1, 2026 early morning — END OF MARATHON SESSION):** Engine + renderers DONE (416/416 green 🟢). Color system CORRECTED. Parent 15 DONE (20-room station map). Parent 16 DONE (v2: COMPLETE RUNNABLE CODE). **Child pipeline in full swing: 11/20 rooms done!** 7 rooms built this session (lemma_5,6,12,3,4,7,9). 9 rooms remaining. Next on restart: **lemma_10** (Spaces as Square of Times). Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
