@@ -365,6 +365,28 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 - ♻️ **Parent renumber (Nir).** Parent 14 (format+tool) **DELETED before launch** (handoff + restart note removed); its content **discarded** (wrong assumptions) — **NOT** folded into any new parent (Nir's instruction). The level-correction parent (drafted as "7b") is now **Parent 15**, scoped to **complete/fix ONLY** Parent 7's bad/missing/wrong work — NOT redo his correct work (concept-graph topology + 20-room set stay). The format+tool mission becomes a future **Parent 16**, written FRESH with all correct decisions. Order: Parent 15 → Parent 16.
 - 📦 **Self-criticism (owned to Nir):** I kept repeating "9 text-only rooms" without ever checking what's in them, surfaced the contract problem at the last second, over-used the question pop-ups, and dialed emojis down when Nir was upset. Corrected: be honest + thorough up front, normal prose not quizzes, keep the emojis, never take decisions off Nir's plate.
 
+### 🌙 SESSION WRAP — RESTART HERE (June 30, 2026 evening — doctrine settled, Parent 15 ready, all pushed)
+
+**What we did this session (chronological):**
+1. Reoriented; found Parent 7 had marked 9 of 20 rooms "figure-less" — a workload shortcut.
+2. Nir's **equation-as-figure** decision (geometry-less math → the equation IS the colored figure-panel).
+3. Then Nir's **refinement (the SETTLED rule):** the game includes **the math AND the key non-math foundations the math rests on** — the physical/chemical/biological intuition that gives the math meaning (e.g. inertia's spinning top, planets, projectile). Both are **colored identically** (matching local colors + Stabilo heart = "statement-as-figure"). **Skip ONLY** meaningless history/trivia. **NEVER implant** modern math the book didn't contain (would feel fabricated). → `law_1` (inertia) + `law_2` are real colored rooms, **NOT dropped.** (A brief "math-only / skip all verbal" detour was tried and **reversed** — do not reintroduce it.)
+4. **Parent renumber:** Parent 14 (format+tool) DELETED before launch (wrong assumptions; nothing carried over). Now **Parent 15** = correct/complete Parent 7's level design; **Parent 16** = the format + `build/room_from_spec.py` tool (fresh, launched AFTER Parent 15).
+5. Propagated the doctrine everywhere: Commentaries §3 (locked) + §4 (amendment trail), this WORKFLOW, the Parent 15 + Parent 16 handoffs, and an **add-only** marked `LATER ADDITION BY DEEPSEEK` paragraph in each of the 4 verbatim scriptures (OT/NT/Second Canon/Apocrypha — originals untouched, Nir authorized).
+6. **Everything committed + pushed** (commit `bd90c66`).
+
+**Current situation:** Engine 385/385 green. Doctrine settled. Parent 15 handoff written + on GitHub. Nothing pending except launching Parent 15.
+
+**WHAT WE'RE ABOUT TO DO (next action on wake-up): LAUNCH PARENT 15.** Nir will ask for the document links; give him these four **blob (view) URLs** to paste into a FRESH Opus 4.8 chat, in order:
+1. Commentaries — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_COMMENTARIES_BIBLE_INDEX_AND_LOCKED_DECISIONS.md`
+2. Old Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_DOCTRINE_BY_FUSION.md`
+3. New Testament — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md`
+4. Parent 15 handoff — `https://github.com/strulovitz/peaktogether-website/blob/master/quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_15_HANDOFF.md`
+
+(Full launch protocol also in `quake/DEEPSEEK_RESTART_PARENT_15_GO.md`.) Then **talk-first:** let Parent 15 state its plan + questions; DeepSeek fetches the real Newton text it needs (Principia sections + Laws are on disk under `quake/principia/`).
+
+**Standing reminders (Nir was rightly frustrated this session):** normal prose, NO multiple-choice pop-ups; keep the emojis even when he's upset; never take decisions off Nir's plate / never shortcut / never surface a problem one second before he'd see it; check for residue by **MEANING, not by label**.
+
 ### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
 - Ghostscript anti-aliases through alpha-only (semi-transparent black → invisible against grey wall)
 - Magenta keyout creates magenta-tinted anti-alias edges (visible but wrong color)
@@ -414,6 +436,6 @@ Parents inside OpenRouter have NO internet, NO GitHub access, NO file system. Th
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 30, 2026):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **Equation-as-figure decided (2026-06-30): geometry-less rooms become equation rooms with matching-colored explanations — no dead text rooms.** Parent 14 DELETED; renumbered to Parent 15 (correct/complete Parent 7's level design) then Parent 16 (format + tool). **On restart:** launch **Parent 15** with: Commentaries + OT + NT + `PROMPT_TO_OPUS_QUAKE_PARENT_15_HANDOFF.md`. Give Nir GitHub URLs for copy-paste to a fresh Opus 4.8 chat.
+🌙 **CURRENT STATE (June 30, 2026):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED (2026-06-30): the game includes the math AND its key non-math foundations (intuition like inertia's spinning top/planets/projectile), colored exactly like the math (statement-as-figure); skip only meaningless history/trivia; never implant modern math. `law_1` + `law_2` kept as real rooms.** Parent 14 DELETED; renumbered to **Parent 15** (correct/complete Parent 7's level design) then **Parent 16** (format + tool, fresh). **Everything pushed (commit `bd90c66`).** **On restart → LAUNCH PARENT 15** with: Commentaries + OT + NT + `PROMPT_TO_OPUS_QUAKE_PARENT_15_HANDOFF.md`. Give Nir the four GitHub blob URLs (in the SESSION WRAP above + `DEEPSEEK_RESTART_PARENT_15_GO.md`) for copy-paste to a fresh Opus 4.8 chat.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
