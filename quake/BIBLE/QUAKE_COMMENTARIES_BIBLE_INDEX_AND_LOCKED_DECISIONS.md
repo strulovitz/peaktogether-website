@@ -98,6 +98,8 @@
 
 35. **Parent 13 — Frozen Deliverable (VERBATIM)** ✅ — `quake/BIBLE/QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`. Lemma II end-to-end (recipe + figure.asy + room_source). 3 steps, 5 local colors, Stabilo hearts. Both JSONs validate GREEN.
 
+36. **Parent 16 — Frozen Deliverable (VERBATIM)** ✅ — `quake/BIBLE/QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`. Room-content format (.room spec) + `build/room_from_spec.py` tool design + child brief. Keyword-block format for children; structurally enforces the corrected local-color model. Anchored to gold lemma_2 triplet. 11 golden tests. One honest gap: Asymptote snippet library (compile-confirm, lazy growth).
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).
@@ -178,6 +180,8 @@
 
 ✅ **AMENDMENT — Parent renumbering, June 30, 2026 (Nir).** **Parent 14 (room-content format + builder tool) is DELETED before launch** (handoff + restart note removed). Its mission is re-assigned to a **future Parent 16**, to be launched fresh with all correct decisions baked in from the start (corrected local-color model + equation-as-figure). The level-design correction parent (briefly drafted as "Parent 7b") is now **Parent 15**, scoped to **complete / fix ONLY** what Parent 7 did badly, missed, neglected, or got wrong — NOT to redo Parent 7's correct work (the concept-graph topology and the 20-room set stay; he adds and, where needed, fixes). Launch order: **Parent 15 first** (finish + correct Parent 7's level design, including converting geometry-less rooms into equation rooms), **then Parent 16** (the format + `build/room_from_spec.py` tool).
 
+✅ **AMENDMENT — Parent 16 DELIVERED, June 30, 2026.** Room-content format (.room spec) + `build/room_from_spec.py` tool design delivered in one shot. Format: keyword-block plain-text (.room files), three kinds (geometry/equation/text) sharing one skeleton, colors local-per-station declared with `color name #hex`, `{name|words}` spans in explanation text, `heart` + `stabilo=#hex` per step. Child never writes JSON/Asymptote/`\textcolor`. Tool: `parse → validate → emit_recipe → emit_asy → emit_room_source`, pydantic-validated output, self-contained gold .asy convention (NOT prooffig). Structurally prevents the dead global-palette model (no grammar for room-level colors). 11 golden tests specified. One honest gap: Asymptote op→snippet library (compile-confirm discipline, lazy growth — free points/segments/polylines/series already proven; conics/tangents etc. confirmed one compile at a time). Deliverable saved verbatim at `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`.
+
 ## §5 — OPEN THREADS / CURRENT FRONTIER
 
 - ✅ **Leg 1 (MAP) FROZEN + BUILT** — 9 modules, 94/94 green.
@@ -203,7 +207,8 @@
 - ✅ **Parent 13 DONE — One-room pipeline proof-of-concept DELIVERED** — June 29, 2026. recipe.lemma_2.f1.json + figure.lemma_2.f1.asy + room_source.lemma_2.json. Both JSONs validate GREEN. 382/382 tests green. ⚠️ Asymptote compile BLOCKED — MiKTeX Asymptote 2.88 has a library-parsing bug (plain_constants.asy), NOT a Parent 13 bug. Needs standalone Asymptote install. Verbatim deliverable saved at `QUAKE_PARENT_13_FROZEN_DELIVERABLE.md`.
 - ⏳ **THEN — Fix Asymptote → compile → bake → room_maker → render PNG for Nir's eyes**
 - ✅ **Parent 15 DONE — Level design corrected!** — 20-room station map frozen (56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT). Corrected palette (map-side only) + concept_graph (verified labels, fixed degrees). No dead text-only rooms. Zero contract change. Deliverable saved verbatim in two waves.
-- ⏳ **NEXT — Parent 16: room-content format + `build/room_from_spec.py` tool** (the re-assigned, deleted Parent 14 mission) — keyword-block format + tool emitting recipe/asy/room_source for **DIAGRAM, EQUATION, and TEXT rooms**, in the corrected color model. Draft at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`; Nir may refine before launch.
+- ✅ **Parent 16 DONE — Room-content format + builder tool delivered!** — .room keyword-block format + `build/room_from_spec.py` tool design. 11 golden tests. One honest Asymptote gap (compile-confirm). Frozen verbatim at `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`.
+- ⏳ **NEXT — Child implements `build/room_from_spec.py`** against the 11 golden tests. DeepSeek integrates.
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ✅ **AMENDMENT — Text baking pipeline (pdflatex+pdftocairo), June 29, 2026 evening.**

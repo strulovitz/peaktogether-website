@@ -398,6 +398,19 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 **Nir's 3 decisions this session:** (1) lemma_12 = Option A (drawn figure + Apollonius cite), (2) multiple foundational illustrations → each its own station (Option A general rule), (3) NO self-drawn illustrations where Newton gave none → colored-TEXT stations only.
 
+### 🌙 EVENING SESSION (June 30, 2026 — Parent 16 LAUNCHED + DELIVERED! 🎉)
+
+1. Launched Parent 16 with 4 baseline files (Commentaries + OT + NT + handoff).
+2. Parent 16 asked Wave-1 questions → DeepSeek fetched all 5 requested files (raw_models.py, gold lemma_2 trio, baker_text.py, prooffig_check.py, Parent 15 prop_4 + law_1 station map) and answered all 5 technical questions.
+3. **Nir ruled Q2: raw hex (NOT a swatch set).** Variation between rooms = good. Most beautiful / professional / educational wins. Parent told to BUILD NOW, STOP TALKING.
+4. **Parent 16 delivered the COMPLETE format + tool in ONE shot:**
+   - **Part I — ROOMSPEC.md:** keyword-block .room format. Three kinds (geometry/equation/text), one skeleton. `color name #hex` per station. `{name|words}` spans in text. `heart` + `stabilo=#hex` per step. Child never touches JSON/Asymptote/`\textcolor`. Structurally prevents the dead global-palette model (no grammar for room-level colors).
+   - **Part II — `build/room_from_spec.py`:** `parse → validate → emit_recipe → emit_asy → emit_room_source`. Self-contained gold .asy convention (NOT prooffig — explicitly noted). Pydantic-validated output. 11 golden tests specified (lemma_2 roundtrip anchor, prop_4 equation, law_1 text, 7 rejection tests, textcolor scan consistency, ceiling ids).
+   - **One honest gap:** Asymptote op→snippet library (compile-confirm discipline, lazy growth — free points/segments/polylines/series proven; conics/tangents grow one compile at a time).
+5. Everything saved + committed + pushed. **WORKFLOW.md + Commentaries updated.**
+
+**NEXT: Child implements `build/room_from_spec.py`** against the 11 golden tests. DeepSeek integrates.
+
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
 ### LESSON — text pipeline (June 29 evening, ~2 hours of pain)
@@ -408,9 +421,9 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - Never use keyout for text. Always use native transparency.
 - pdftocairo needs `-r 220` (with space), NOT `-r220`
 
-## 9. NEXT STEPS (June 30, 2026 evening — Parent 15 DONE)
+## 9. NEXT STEPS (June 30, 2026 evening — Parent 16 DONE)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** (20-room station map frozen; both waves saved)
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE** (.room format + tool design frozen; 11 golden tests)
 
 ### DONE — Parent 15: Level Design Correction
 1. ✅ Corrected palette.json (map-side only, groups/grey dead)
@@ -420,11 +433,19 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 5. ✅ Zero contract change (equation/text panels = FigureDecls via colored-label .asy)
 6. ✅ Deliverable saved: `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` + `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`
 
-### NEXT — Parent 16: Format + Tool
-1. `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md` exists as DRAFT; Nir may refine before launch
-2. Mission: room-content format (keyword-block) + `build/room_from_spec.py` tool
-3. Emits recipe.asy + room_source.json for both DIAGRAM and EQUATION/TEXT rooms
-4. Descent pattern: one format, one tool, many parallel children
+### DONE — Parent 16: Room-Content Format + Builder Tool
+1. ✅ ROOMSPEC.md format spec (keyword-block, three kinds, local colors, child-friendly)
+2. ✅ `build/room_from_spec.py` tool design (parse → validate → emit, 11 golden tests)
+3. ✅ Self-contained gold .asy convention (NOT prooffig)
+4. ✅ One honest gap: Asymptote snippet library (compile-confirm, lazy growth)
+5. ✅ Deliverable saved: `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`
+
+### NEXT — Child builds `build/room_from_spec.py`
+1. DeepSeek creates child brief from Parent 16's Part II frozen brief
+2. Child implements parse/validate/emit_recipe/emit_asy/emit_room_source
+3. Child writes the 11 golden tests (headless, pure text/JSON)
+4. DeepSeek integrates + validates + runs tests
+5. Proof-of-concept: run `build_room()` on lemma_2.room → DEEP-EQUAL gold triplet
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -452,6 +473,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**. Then ask Nir what's next.
-🌙 **CURRENT STATE (June 30, 2026 evening):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED:** math + its non-math foundations, both colored; no implanted modern math; word-only examples = colored-TEXT stations (Nir, no drawn scenes). **✨ Parent 15 DONE — 20-room station map FROZEN (20 rooms / 56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT; corrected palette + concept_graph). Both waves saved verbatim. ✨** Parent 14 DELETED. Next: **Parent 16** (format + `build/room_from_spec.py` tool; draft at `PROMPT_TO_OPUS_QUAKE_PARENT_16_HANDOFF.md`). **Everything pushed (commit `e34d50f`).**
+🌙 **CURRENT STATE (June 30, 2026 evening):** Engine + renderers DONE (385/385 green). Color system CORRECTED to Nir's model everywhere. Box rooms intact. Tools: `tools/map_viewer.py` (Mode A), `tools/room_viewer.py` (Mode B with wall collision). Concept graph FROZEN for 20-room Principia level. Parent 13 DONE (lemma_2 pipeline proof). **DOCTRINE SETTLED:** math + its non-math foundations, both colored; no implanted modern math; word-only examples = colored-TEXT stations (Nir, no drawn scenes). **✨ Parent 15 DONE — 20-room station map FROZEN (20 rooms / 56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT; corrected palette + concept_graph). Both waves saved verbatim. ✨** **✨ Parent 16 DONE — .room format + build/room_from_spec.py tool design FROZEN (11 golden tests; self-contained gold .asy convention; honest Asymptote snippet gap). Deliverable saved verbatim. ✨** Parent 14 DELETED. Next: **Child builds `build/room_from_spec.py`** against the 11 golden tests. DeepSeek integrates. **Everything pushed (commit pending).**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
