@@ -178,6 +178,14 @@ LEG 2 — THE WALLS
 
 What it is: scan PNG → Asymptote source (AI-written) → render → you verify with the overlay tool → AI fixes → iterate → bake the off/on, per-step highlighted PNGs the room walls show, plus the paired full-LaTeX explanation panels.
 
+**LATER ADDITION BY DEEPSEEK BEGIN** *(2026-06-30, added by Nir's instruction — this paragraph is ADDED only; nothing above or below it was changed.)*
+
+The wall panels above are described as geometry: a **drawing / figure panel** beside its explaining-text panel. There is now also a second, equally valid kind: a **math / equation panel**, for rooms (or pages or sections) that have **no diagram but do contain math**. In that case the **equation itself is treated exactly like a figure** — the individual important **terms / symbols** of the equation are colored, each its own distinct local color, and the matching descriptive **words** in the paired explanation panel are colored the **same** color (word ↔ symbol, exactly like word ↔ shape). The explanation is taken from the source text where it exists; **if the text gives no explanation, it is written fresh in simple words with minimal math — to EXPLAIN what the equation means, never to merely repeat the symbols.** The Stabilo bright highlighter works identically: only the current step's key term lights up, never cumulative. *Example — Prop. IV, F ∝ v²/r:* color `v²` blue, `r` green, `F` orange on the equation panel; in the explanation, "the square of the speed" is blue (↔ v²), "the distance from the centre" green (↔ r), "the pull toward the centre" orange (↔ F) — the words explain the meaning, they do not read the symbols aloud. Result: **no inert text-only rooms** — every room has a colored thing to look at and shoot, a diagram or a colored equation. (Colors follow the corrected local-per-station model recorded in the Commentaries §3, regardless of any older global-palette wording nearby.)
+
+Refinement (2026-06-30, Nir): the game also includes the **key non-math foundations the math rests on** — the physical / chemical / biological facts and ideas that give the math intuition and meaning (e.g. for inertia: the spinning top, the planets, the projectile). These are treated as panels and **colored exactly like a figure or equation** (key concepts colored, the matching words in the explanation colored the same, per-step heart). Only meaningless history / trivia is skipped; no modern math is implanted that the book did not contain.
+
+**LATER ADDITION BY DEEPSEEK END**
+
 I'll answer your open question first, because it shapes everything.
 
 2.1 THE OPEN QUESTION, DECIDED: who does the highlighting?
