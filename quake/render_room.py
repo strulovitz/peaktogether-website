@@ -411,30 +411,37 @@ def _build_panel_quads(room: RoomRuntime):
 
 def _build_ceiling_quads(room: RoomRuntime):
     quads: list[PanelQuad] = []
-    # Base UV: V flipped (compensates _upload_texture FLIP_TOP_BOTTOM for N/S walls)
-    uv_ns = np.array(
-        [[0.0, 1.0], [1.0, 1.0], [1.0, 0.0], [0.0, 0.0]], dtype=np.float32
-    )
-    # Rotated 90° clockwise for E/W walls (text reads along Z, not X)
-    uv_ew = np.array(
-        [[1.0, 1.0], [1.0, 0.0], [0.0, 0.0], [0.0, 1.0]], dtype=np.float32
-    )
-    hw = room.dimensions_m[0] / 2.0
-    hd = room.dimensions_m[2] / 2.0
+    # UV maps per wall — each viewer looks AT the wall then UP, so text must read left-to-right
+    uv_n = np.array([[0.0,1.0],[1.0,1.0],[1.0,0.0],[0.0,0.0]], dtype=np.float32)  # V-flipped
+    uv_s = np.array([[1.0,0.0],[0.0,0.0],[0.0,1.0],[1.0,1.0]], dtype=np.float32)  # 180° from N
+    uv_e = np.array([[1.0,1.0],[1.0,0.0],[0.0,0.0],[0.0,1.0]], dtype=np.float32)  # 90° cw
+    uv_w = np.array([[0.0,0.0],[0.0,1.0],[1.0,1.0],[1.0,0.0]], dtype=np.float32)  # 90° ccw
     for eq in room.ceiling_equations:
         cx, cy, cz = eq.pos_xyz
-        cy = cy - CEILING_DROP_M   # hang just below the ceiling so it doesn't z-fight the ceiling
-        w, d = eq.size_m  # width (X), depth (Z) — for N/S: text along X=w; for E/W: text along Z=d
-        # Choose UV: N/S walls (text along X) vs E/W walls (text along Z, rotated 90°)
-        is_ew = abs(cx) > abs(cz)  # equation is closer to E/W wall than N/S wall
-        eq_uv = uv_ew.copy() if is_ew else uv_ns.copy()
-        if is_ew:
-            # Swap: text reads along Z (the larger dimension), narrow along X
-            hw_e = d / 2.0   # X extent = original depth
-            hd_e = w / 2.0   # Z extent = original width
+        cy = cy - CEILING_DROP_M
+        w, d = eq.size_m
+        # Determine which wall the equation is near
+        dominant_z = abs(cz) >= abs(cx)
+        if dominant_z:
+            if cz > 0:   # N wall: text along X, V-flipped
+                eq_uv = uv_n.copy()
+                is_ns = True
+            else:         # S wall: text along X, 180° rotated
+                eq_uv = uv_s.copy()
+                is_ns = True
         else:
-            hw_e = w / 2.0   # X extent = original width
-            hd_e = d / 2.0   # Z extent = original depth
+            if cx > 0:   # E wall: text along Z, 90° cw
+                eq_uv = uv_e.copy()
+                is_ns = False
+            else:         # W wall: text along Z, 90° ccw
+                eq_uv = uv_w.copy()
+                is_ns = False
+        if not is_ns:
+            hw_e = d / 2.0
+            hd_e = w / 2.0
+        else:
+            hw_e = w / 2.0
+            hd_e = d / 2.0
         # Facing downward (-Y). Corners in XZ plane at y = cy.
         bl = (cx - hw_e, cy, cz - hd_e)
         br = (cx + hw_e, cy, cz - hd_e)
