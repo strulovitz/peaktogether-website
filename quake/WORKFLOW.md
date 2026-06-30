@@ -431,7 +431,18 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 11. **Self-handoff written** — `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
 12. Everything saved + committed + pushed.
 
-**NEXT on restart: continue children one-by-one (16 remaining). DeepSeek writes child prompts, children return .room files. Build all 20 at once after all done. Order: foundations first (lemma_5 → lemma_6 → lemma_12 → ... up to prop_15).**
+### Evening session (June 30, 2026 — Child pipeline: lemma_5 DELIVERED!)
+
+13. **lemma_5 child prompt written** — `quake/CHILD_PROMPT_LEMMA_5.md`: self-contained prompt with ROOMSPEC format + station map + Newton text (one sentence) + gold lemma_2 example + guidance on rich text panels.
+14. **Nir flagged** Newton's text is ONE sentence — players need more. DeepSeek beefed up the guidance: text panels must be 3–4+ sentences each, teaching similarity and duplicate ratio in plain words.
+15. **Child returned lemma_5.room** — 2-step DIAGRAM room: two similar triangles (ABC, DEF), homologous boundary heart in s1, homologous side-pair heart in s2. 3 local colors (simblue, simgreen, sideorange). Rich explanatory text panels.
+16. **Dropped in + validated** — parse/validate/emit_recipe/emit_asy/emit_room_source all pass. 2 new tests added to test_room_from_spec.py (test_lemma_5_geometry + parametrize extension).
+17. **404/404 GREEN 🟢** — all tests pass. Committed + pushed.
+18. **5/20 rooms done:** lemma_2, lemma_5, prop_4, law_1, law_2. 15 remaining.
+
+**NEXT: lemma_6** — DIAGRAM, 3 steps, no deps. "Vanishing angle" (arc, chord, tangent).
+
+**NEXT on restart: continue children one-by-one (15 remaining). DeepSeek writes child prompts, children return .room files. Build all 20 at once after all done. Order: foundations first (lemma_5 ✅ → lemma_6 → lemma_12 → ... up to prop_15).**
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -462,10 +473,10 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 4. ✅ One honest gap: Asymptote snippet library (compile-confirm, lazy growth)
 5. ✅ Deliverable saved: `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`
 
-### NEXT — 16 more children (one .room per room, dependency order)
+### NEXT — 15 more children (one .room per room, dependency order)
 1. DeepSeek writes child prompt → child returns .room → DeepSeek drops in tests/room_specs/ → validates
-2. Order: foundations first: lemma_5 → lemma_6 → lemma_12 → lemma_3 → lemma_4 → lemma_7 → lemma_9 → lemma_10 → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
-3. Already done: lemma_2, prop_4, law_1, law_2 ✅
+2. Order: foundations first: lemma_5 ✅ → lemma_6 → lemma_12 → lemma_3 → lemma_4 → lemma_7 → lemma_9 → lemma_10 → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
+3. Already done: lemma_2, lemma_5, prop_4, law_1, law_2 ✅ (5/20)
 4. Build full level pack AFTER all 20 .room files are done
 5. Restart handoff: `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
 
@@ -495,6 +506,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 early morning):** Engine + renderers DONE (402/402 green). Color system CORRECTED. Parent 15 DONE (20-room station map). **Parent 16 DONE (v2: COMPLETE RUNNABLE CODE)** — `build/room_from_spec.py` working, all 28 RecipeOps mapped. **Child pipeline PROVEN** — law_2 room built end-to-end (child → .room → recipe/asy/room_source → pdflatex+pdftocairo bake → room_viewer). **16 more children needed** in dependency order. DO NOT test every child with full bake — collect all .room files, build level pack at the end. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
+🌙 **CURRENT STATE (July 1, 2026 early morning):** Engine + renderers DONE (404/404 green). Color system CORRECTED. Parent 15 DONE (20-room station map). **Parent 16 DONE (v2: COMPLETE RUNNABLE CODE)** — `build/room_from_spec.py` working, all 28 RecipeOps mapped. **Child pipeline PROVEN** — law_2 room built end-to-end. **lemma_5 DELIVERED** (5/20 rooms done). **15 more children needed** in dependency order.
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
