@@ -6,166 +6,159 @@
 > 2. Old Testament (`QUAKE_DOCTRINE_BY_FUSION.md`)
 > 3. New Testament (`QUAKE_NEW_TESTAMENT_TWO_LEGS_BY_OPUS.md`)
 > 4. **This handoff (the mission brief)**
->
-> **Additional files you may request (whole or section, via Nir→DeepSeek):**
-> - `quake/map/raw_models.py` — Floorplan, FloorRoom, Corridor data structures
-> - `quake/render_wire.py` — CURRENT flat-plane wireframe renderer (what we're replacing)
-> - `quake/render_room.py` — solid room renderer (for reference on how geometry is structured)
-> - `quake/shaders.py` — wire program, solid program, blit program
-> - `quake/app.py` §render section — how rendering is dispatched
-> - `quake/nav_collision.py` — corridor nav (how floorplan is consumed)
-> - `quake/levels/principia_bk1_inverse_square/pack/floorplan.json` — real floorplan data
-> - Any room_runtime JSON to see what room dimensions look like
-> - Any scripture from the catalog (Commentaries §2)
 
 ---
 
-## §0 — YOUR ONE JOB
+## §0 — WHAT CURRENTLY EXISTS (the problem)
 
-Design and specify a **3D wireframe automap** that looks like the automap in the 1995 game **Descent** — NOT like the current flat-plane colored-lines-and-circles map.
+The game currently has no real automap. There is a 2D top-down map (`render_wire.py`) that draws flat colored circles and lines on the XZ plane — what Nir calls "the ugly map." This is the exact opposite of what the Old Testament specifies.
 
----
-
-## §1 — WHAT DESCENT'S AUTOMAP LOOKS LIKE (reference)
-
-Descent (Parallax Software, 1995) was the first fully-3D first-person shooter. Its automap is:
-
-- A **3D wireframe** rendering of the entire mine, viewed from the player's position/perspective
-- Each **room** appears as a **3D wireframe cube** (edges only, no faces)
-- Each **corridor/tunnel** appears as a **3D wireframe box/tube** connecting rooms
-- Lines are variably colored: white for normal areas, different colors for doors, energy stations, reactor areas
-- Only areas the player has **visited or seen** are shown (fog-of-war)
-- The automap is rendered in a small window OR as a fullscreen overlay
-- It is **NOT** a 2D top-down map with circles and lines on a flat plane
-- Everything is rendered in correct 3D perspective from the player's current viewpoint
-
-You can see reference images by searching: "Descent automap" or "Descent 1995 automap wireframe"
+The Old Testament §3.1 defines the wireframe world. It applies to BOTH the corridor mode and the automap. The corridor mode and the automap are the SAME visual language — 3D wireframe geometry — used in two contexts: walking inside a tunnel vs. flying above the graph.
 
 ---
 
-## §2 — WHAT QUAKE CURRENTLY HAS (the problem)
+## §1 — THE SPEC (verbatim from the Old Testament §3.1)
 
-The current "map" in `render_wire.py` is this:
+> *"Wireframe only. Lines and node rings; no shaded polygons. 'Transparent' here means empty faces with visible edges, not alpha translucency."*
 
-```
-Floor (XZ plane):
-  ┌─ Colored circles (room rings) at room map_xz positions
-  ├─ White lines between them (corridor paths)
-  └─ Distance-dimming (white→grey) + bloom glow
-```
+> *"Depth-tested, NO alpha blending. Depth test on, depth write on, blend off, depthFunc = LEQUAL. Near geometry occludes far."*
 
-It is rendered as camera-facing thick line-quads at each room's `map_xz` position on a flat Y-plane. This is:
-- **2D flat** — everything sits on the XZ plane
-- **No depth** — rooms are circles, not cubes
-- **No 3D structure** — corridors are lines, not tubes
-- **Ugly** — Nir hates it
+> *"Distance-dimming in the line shader: the current section renders near pure white, fading with view-space distance toward dark grey — never pure black (so far structure stays a faint felt presence; vanishing into black is what disorients)."*
+
+> *"Crossings visible as true 3D over/under passes."*
+
+**TRANSLATION FOR THE AUTOMAP:**
+- Every room is a 3D wireframe box (12 edges — 4 bottom, 4 top, 4 vertical)
+- Every corridor is a 3D wireframe tube/box (edges connecting room door positions)
+- Edges are lines ONLY — no filled faces, no shaded surfaces
+- Edges are white up close, dimming to dark grey far away (NEVER black)
+- Depth-tested: near edges of one box occlude far edges of a box behind it
+- Crossings show as true 3D: a high-layer corridor passes visibly OVER a low-layer one
+- No alpha blending — occlusion comes from depth test
+- Room box edges are colored by the room's importance (its `map_color`)
+
+**What the automap does NOT have that corridor mode has:**
+- No floor plane (the player is flying, not walking)
+- No floor guide-lines or arrowheads (no felt floor — you're in free-flight)
+- No rail assist / collision (free movement)
+
+---
+
+## §2 — WHAT DESCENT'S AUTOMAP LOOKS LIKE (the reference)
+
+Descent (Parallax Software, 1995) was the first fully-3D FPS. Its automap:
+- Renders the ENTIRE mine as a 3D wireframe from the player's perspective
+- Each room = 3D wireframe cube (edges only, no faces)
+- Each tunnel = 3D wireframe box connecting rooms
+- Lines colored by room type / function
+- Rendered in free-flight mode (player can fly through the wireframe)
+- Correct 3D perspective — rotate and see rooms from any angle
 
 ---
 
 ## §3 — WHAT NIR WANTS
 
-A **Descent-style 3D wireframe automap** where:
-
-1. **Rooms are 3D wireframe boxes** (rectangular cuboids drawn with edge lines only — 12 edges per box). Room size comes from `RoomRuntime.dimensions_m` (W, H, D). Positioned at the room's map location with the correct 3D height.
-
-2. **Corridors are 3D wireframe connections** (rectangular tubes or simple edge-lines between door positions). Not flat lines on the ground — actual 3D structures.
-
-3. **Everything is rendered in true 3D perspective** from the player's camera position. Rotating the view shows rooms from different angles. Rooms have real depth.
-
-4. **Rooms are colored by importance** — like the current system, but applied to 3D wireframe edges, not flat colored circles.
-
-5. **The rendering replaces** the current `render_mode_a()` / `render_wire.py` approach. Or, it's a NEW function that coexists (the old one can die).
-
-6. **This is purely visual** — navigation is NOT part of this mission. The map is a view-only overlay.
+A Descent-style 3D wireframe automap, toggled with a key (e.g. Tab), where:
+1. Rooms are 3D wireframe boxes positioned at their floorplan locations
+2. Corridors are 3D wireframe tubes/edges between room door positions
+3. Everything rendered in true 3D perspective, free-fly camera
+4. Room edges colored by importance (matching `map_color`)
+5. Distance-dimming: near = bright, far = darker grey, never black
+6. Depth-tested: near geometry occludes far
+7. No floor guide-lines, no arrowheads, no felt floor
+8. Pure wireframe edges — no filled surfaces, no alpha
 
 ---
 
-## §4 — THE ASK (what you must deliver)
-
-A frozen design document containing:
+## §4 — THE DESIGN YOU MUST DELIVER
 
 ### A. Geometry generation (pure, headless-testable)
 
 **Function: `build_automap_mesh(fp: Floorplan, rooms: dict[NodeId, RoomRuntime]) -> AutomapMesh`**
 
 For each room in the floorplan:
-- Create a 3D wireframe box (12 edge lines) at the room's `map_xz` position, with dimensions from `RoomRuntime.dimensions_m`
-- Position: `(map_xz[0], socket_y, map_xz[1])` as the floor-level center
-- Color edges by the room's `importance` rank or `map_color`
+- Build a 3D wireframe box: 12 edge lines (4 bottom, 4 top, 4 vertical)
+- Position: `(map_xz[0], socket_y, map_xz[1])` as floor-level center
+- Dimensions from `RoomRuntime.dimensions_m` which is `(W, H, D)` — or use `map_radius_m` scaled up if RoomRuntime not available
+- Edge color = room's `map_color` (hex → RGB)
 
 For each corridor in the floorplan:
-- Create a 3D wireframe connection between the source and target room door positions
-- OR: simply connect the two room boxes with edge lines at the corridor's `cruise_y`
-- Minimum: 4 corner-edge lines forming a rectangular tube between the two door centers
+- Build a 3D wireframe connection between the source and target room boxes
+- Uses `Corridor.path_xz`, `Corridor.width_m`, and `Corridor.cruise_y`
+- Minimum: 4 edge lines forming a rectangular tube from source door to target door at the corridor's true `cruise_y` height
+- Edge color = white (corridors are transit, importance color belongs to rooms)
 
-**Output: `AutomapMesh` containing:**
-- `edges: np.ndarray` — N×2×3 array of edge vertex pairs (start, end) in world coordinates
-- `edge_colors: np.ndarray` — N×3 array of RGB colors per edge
-- (Optional) `room_labels: list[(Vec3, str)]` — room name labels at each room center
+**Output: `AutomapMesh`:**
+- `edges: np.ndarray` — N×2×3 edge vertex pairs in world coordinates
+- `edge_colors: np.ndarray` — N×3 RGB colors per edge
 
-### B. Rendering (thin shell, requires GL context)
+### B. Rendering (thin GL shell)
 
-**Function: `render_automap(ctx, window, view_matrix, projection_matrix, mesh: AutomapMesh)`**
+**Function: `render_automap(ctx, window, view, proj, mesh)`**
 
-- Takes the AutomapMesh + camera matrices
-- Renders all edges as camera-facing thick line-quads OR thin GL lines
-- Handles depth testing (edges behind walls are occluded)
-- Applies distance-based dimming (close = bright, far = dimmer, never pure black)
-- Optional: bloom/glow overlay for bright areas
-- Must work within the existing moderngl + pyglet pipeline
+- Renders all edges using the EXISTING `wire_quad_program` (thick camera-facing line-quads) or the simpler `wire_program` (both from `shaders.py`)
+- Depth test ON, no blend — exactly like the current `_draw_wire()`
+- Distance-dimming: all edges dim from white→grey with view-space distance (reuse the existing shader's `u_dim_near`/`u_dim_far`/`u_grey_floor` uniforms)
+- For colored room edges, multiply the dimmed white by the room's color
+- Camera: free-fly — WASD movement + mouse look, detached from the player's body
+- Bloom post-pass optional (reuse the existing bloom from `render_mode_a`)
 
-### C. Integration with app.py
+### C. Integration
 
-- Replace or supplement the current corridor-mode rendering with `render_automap()`
-- When `state.mode == "corridor"` → render the automap instead of the old wireframe
-- The automap should be toggleable (e.g., Tab key to show/hide)
-- Camera for the automap: share the player's view matrix, or use an independent overview camera
+- Toggle with Tab key (or assignable key)
+- When active: draw the automap to screen (replaces or overlays the current view)
+- When inactive: normal game rendering
+- Shares the existing moderngl context and FBO pipeline
+- Does NOT modify room rendering, room navigation, or the TARDIS architecture
 
 ### D. Data questions to answer
 
-- Where do room dimensions come from? (RoomRuntime.dimensions_m — but are these available when rendering the map? Currently `render_mode_a` gets `pack.floorplan` only, not `pack.rooms`)
-- How to pass room dimension data alongside the floorplan?
-- Corridor tube geometry: what data is available? (Corridor.path_xz, corridor.width_m, DoorRT.center_xyz)
-- What about the TARDIS problem? Rooms are bigger on the map than their map_radius_m suggests. Should the wireframe boxes use actual room dimensions or scaled-down versions?
+- Where do room dimensions come from? `pack.rooms[room_id].dimensions_m` gives (W, H, D). This data IS available at runtime (it's in the loaded Pack).
+- TARDIS: room interiors are bigger than their map footprint. For the automap, use the ACTUAL room dimensions (they represent real physical space) or a scaled-down version? Surface this question to Nir.
+- Corridor tube endpoints: `DoorRT.center_xyz` gives the door's position inside the room. But rooms don't share a coordinate system. For the automap, corridor endpoints are the room's `map_xz` position (the corridor edge starts at the room box edge, not inside it). Surface how to handle this.
 
 ### E. Acceptance criteria
+- Map renders as true 3D wireframe (boxes for rooms, tubes for corridors)
+- Rooms have visible depth (not flat circles)
+- View rotates in 3D (free-fly camera)
+- Room edges colored by importance
+- Distance-dimming: near bright, far grey, never black
+- Depth-tested: near boxes occlude far boxes
+- No floor guide-lines, no arrowheads
+- Toggleable
 
-- The map renders as a true 3D wireframe (boxes, not circles)
-- Rooms have visible depth/thickness (not flat 2D)
-- The view rotates correctly with the player's camera
-- At least 2 distinct colors appear (e.g., high-importance rooms different from low-importance)
-- The old flat-plane wireframe is gone or disabled by default
-
-### F. Honest gaps / risks
-
-List anything you're unsure about, anything that depends on files you haven't seen, or anything that might break existing systems.
+### F. Honest gaps
+List anything you're unsure about.
 
 ---
 
 ## §5 — WHAT NOT TO DO
 
-- Do NOT keep the flat-plane circles-and-lines approach. This must be true 3D wireframe.
-- Do NOT write navigation code. This is visual-only.
-- Do NOT modify the room system or TARDIS architecture.
-- Do NOT propose a full rendering pipeline rewrite.
-- **Do NOT write code.** This is a design document. DeepSeek implements.
+- Do NOT make a 2D flat top-down map (circles and lines on XZ plane). This is 3D boxes.
+- Do NOT fill boxes with solid shaded surfaces. Wireframe edges only.
+- Do NOT use alpha blending. Depth test is the occlusion mechanism.
+- Do NOT add floor guide-lines, arrowheads, or a felt floor. The automap has none of these.
+- Do NOT make edges fade to pure black. Dark grey floor only.
+- Do NOT reinterpret the mission into something easier. Read the spec, build what it says.
+- Do NOT offer Nir menus of options when the spec already answers the question.
+- Do NOT tell Nir you lost his text and demand re-pastes.
+- Do NOT write code. Design document only. DeepSeek implements.
+- **"Tests pass" is NOT visual success.** Render and show a PNG.
 
 ---
 
-## §6 — HOW TO GET INFORMATION (question-first protocol)
+## §6 — HOW TO GET MORE INFORMATION
 
-You cannot browse the internet or the file system. To request files or sections:
-1. Ask Nir a **precise question** (batched, cross-cutting questions welcome)
-2. Nir asks DeepSeek
-3. DeepSeek fetches the exact verbatim text you need
-4. Nir pastes it to you
-
-Request **exact sections** of files, not whole files (unless the file is small and you're rewriting it).
+Ask DeepSeek (via Nir) for exact verbatim sections. Useful files:
+- `quake/render_wire.py` — existing wireframe renderer (thick quads, dimming, bloom)
+- `quake/shaders.py` — wire_quad_program, wire_program, uniforms
+- `quake/map/raw_models.py` — Floorplan, FloorRoom, Corridor, Crossing
+- `quake/render_room.py` — how solid room boxes are built (reference)
+- `quake/app.py` — render dispatch
+- `quake/levels/principia_bk1_inverse_square/pack/floorplan.json` — real data
 
 ---
 
 ## §7 — TALK FIRST
 
-Start by stating your understanding of Descent's automap, your proposed approach at a high level, and your first questions. **Do not sprint into design without confirmation.**
-
-Nir will read your response and tell you to proceed, adjust, or stop.
+State your understanding of the automap, your proposed approach, and your first questions. **Wait for Nir's confirmation before designing.**
