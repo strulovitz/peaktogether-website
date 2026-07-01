@@ -1,8 +1,8 @@
-🌙 DEEPSEEK RESTART HANDOFF — July 1, 2026 (morning, after lemma_10)
+🌙 DEEPSEEK RESTART HANDOFF — July 1, 2026 (morning, after lemma_11)
 
 ## WHERE WE ARE
 
-Child pipeline in FULL SWING. 419/420 tests green 🟢. **12/20 rooms done.**
+Child pipeline in FULL SWING. 421/422 tests green 🟢. **13/20 rooms done.**
 
 ## WHAT WE DID THIS SESSION (7 ROOMS!)
 
@@ -36,21 +36,20 @@ Children reliably forget keyword syntax. DeepSeek fixes before drop:
 - Each room adds: 1 geometry test + 1 textcolor scan consistency entry
 - All in `tests/test_room_from_spec.py`
 
-## COMPLETED ROOMS (12/20)
+## COMPLETED ROOMS (13/20)
 
 lemma_2 ✅, lemma_3 ✅, lemma_4 ✅, lemma_5 ✅, lemma_6 ✅, lemma_7 ✅,
-lemma_9 ✅, lemma_10 ✅, lemma_12 ✅, prop_4 ✅, law_1 ✅, law_2 ✅
+lemma_9 ✅, lemma_10 ✅, lemma_11 ✅, lemma_12 ✅, prop_4 ✅, law_1 ✅, law_2 ✅
 
-## REMAINING ROOMS (8, in dependency order)
+## REMAINING ROOMS (7, in dependency order)
 
-1. **lemma_11** — DIAGRAM, 3 steps, deps: lemma_6/7. "Evanescent Subtense" (importance 5)
-2. **prop_1** — DIAGRAM, 4 steps, deps: law_1/2, lemma_5. "Areas ∝ Times" (importance 5)
-3. **prop_2** — DIAGRAM, 3 steps, deps: law_1/2, prop_1. "Converse of Areas" (importance 4)
-4. **prop_6** — DIAGRAM, 4 steps, deps: prop_1, lemma_2, lemma_10. "Force Measure" (importance 5)
-5. **prop_7** — DIAGRAM, 3 steps, deps: prop_6. "Force to Point on Circle"
-6. **prop_11** — DIAGRAM, 5 steps, deps: prop_6, lemma_7, lemma_12. ★HEADLINE★ "Ellipse → 1/r²" (importance 5)
-7. **prop_13** — DIAGRAM, 4 steps, deps: lemma_7, prop_6. "Parabola → 1/r²"
-8. **prop_15** — EQUATION, 2 steps, deps: prop_11, prop_4. "Kepler's Third Law" (importance 5)
+1. **prop_1** — DIAGRAM, 4 steps, deps: law_1/2, lemma_5. "Areas ∝ Times" (importance 5)
+2. **prop_2** — DIAGRAM, 3 steps, deps: law_1/2, prop_1. "Converse of Areas" (importance 4)
+3. **prop_6** — DIAGRAM, 4 steps, deps: prop_1, lemma_2, lemma_10. "Force Measure" (importance 5)
+4. **prop_7** — DIAGRAM, 3 steps, deps: prop_6. "Force to Point on Circle"
+5. **prop_11** — DIAGRAM, 5 steps, deps: prop_6, lemma_7, lemma_12. ★HEADLINE★ "Ellipse → 1/r²" (importance 5)
+6. **prop_13** — DIAGRAM, 4 steps, deps: lemma_7, prop_6. "Parabola → 1/r²"
+7. **prop_15** — EQUATION, 2 steps, deps: prop_11, prop_4. "Kepler's Third Law" (importance 5)
 
 ## STATION MAP SOURCE
 
