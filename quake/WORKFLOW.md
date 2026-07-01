@@ -510,45 +510,52 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 9. NEXT STEPS (July 1, 2026 — BUILD PIPELINE session)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)** | **Parent 17** ⏳ ACTIVE
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)** | ~~Parent 17~~ ✅
 
-### DONE — Parent 15: Level Design Correction
-1. ✅ Corrected palette.json
-2. ✅ Corrected concept_graph.json
-3. ✅ Station map: 20 rooms, 56 stations
-4. ✅ No dead text-only rooms
-5. ✅ Zero contract change
+### DONE — Parent 17: Fix the Wall Packer
+1. ✅ Best-fit-decreasing wall packer delivered by Opus
+2. ✅ Integrated — `room_pack.py` + `room_geometry.py` fixed
+3. ✅ RoomTooDense resolved — all 20 rooms now build runtimes
+4. ✅ nudge_doors bearing reorder + room_validate tolerance fix
 
-### DONE — Parent 16: Room-Content Format + Builder Tool
-1. ✅ `.room` format + `build/room_from_spec.py` tool
-2. ✅ Complete runnable code, no gaps
-
-### DONE — Build Pipeline (first run)
+### DONE — Build Pipeline (fully working)
 1. ✅ `build/build_all.py` — master 6-stage build script
 2. ✅ Stage 1: all 20 rooms emit correctly
-3. ✅ Stage 2: 16/20 figures compile
+3. ✅ Stage 2: 16/20 figures compile (4 Asymptote bugs remain, low priority)
 4. ✅ Stage 3: ALL text panels baked (pdflatex fix)
 5. ✅ Stage 4: ALL ceiling equations baked
 6. ✅ Stage 5: Manifest assembled (219 entries, 438 PNGs)
-7. 🔴 Stage 6: Only 4/20 room runtimes (RoomTooDense)
-8. ✅ `app.py` PACK_DIR fixed (smoke test green from any CWD)
-9. ✅ Asymptote translator bugs fixed (ray→path, circle→path, angle labels, foot, arc, safe names, line labels)
-10. ✅ Pdflatex `-halt-on-error` removed (text baking now works)
-11. ✅ OpName pattern relaxed for multi-point refs
+7. ✅ Stage 6: ALL 20 room runtimes build (was 4/20 before Parent 17)
+8. ✅ 446/446 GREEN
 
-### ⏳ ACTIVE — Parent 17: Fix the Wall Packer
-- Mission: fix `build/room_pack.py` / `build/room_geometry.py` RoomTooDense
-- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_17_HANDOFF.md`
-- 2 files, 349 lines total
-- Launch: Commentaries + OT + NT + handoff
+### DONE — Gameplay changes (July 1, 2026)
+1. ✅ `state.py` — start directly in room mode (no ugly map)
+2. ✅ `gameplay.py` — door exit → corridor mode with direction fix
+3. ✅ `app.py` — single-corridor floorplan, savegame fix
+4. ✅ Savegame auto-upgrade: old corridor saves restart in first room
 
-### ⏳ THEN — After Parent 17 delivers
-1. Drop in fix, run build_all.py → all 20 room runtimes
-2. Fix remaining Asymptote bugs (4 rooms: tangent/foot)
-3. Fix door bearing mismatches (3 rooms)
-4. Room viewer verification
-5. Smoke test with app.py
-6. Ship the finished pack 🚀
+### ⏳ ACTIVE — Parent 18: Real 3D Corridors Between Rooms
+- Mission: design real 3D walkable tunnels connecting room doors
+- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_18_CORRIDORS.md`
+- Written July 1, 2026 — NOT YET LAUNCHED
+- The current "corridor" is just the wireframe map with 2 nodes (NOT a real corridor)
+- Nir wants solid 3D tunnels, not wireframe, not teleport
+
+### ⏳ ACTIVE — Parent 19: Descent-Style 3D Wireframe Automap
+- Mission: replace the flat-circle-line map with proper 3D wireframe boxes+tubes
+- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_19_AUTOMAP.md`
+- Written July 1, 2026 — NOT YET LAUNCHED
+- Descent's automap = 3D wireframe rooms+cubes, colored, perspective-correct
+- Current map = flat XZ plane with circles and lines (Nir hates it)
+
+### ⏳ THEN — After Parents 18 + 19 deliver
+1. Drop in corridor geometry + renderer + nav
+2. Drop in 3D automap renderer
+3. Wire both into app.py
+4. Fix remaining Asymptote bugs (4 rooms: tangent/foot)
+5. Fix door bearing mismatches (3 rooms)
+6. Full smoke test with all 20 rooms + corridors
+7. Ship the finished pack 🚀
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -567,6 +574,9 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - **Nir understands layout better than DeepSeek does.** When Nir says "like a solar system — planets don't move for asteroids," he was describing a real, published algorithm (hierarchical force-directed layout). Trust his intuition. Translate it into code. Don't chase mathematical non-planarity when a layout algorithm change solves the problem.
 - **🛑 NEVER freeze the easy option silently.** When a choice trades QUALITY for EASE, name BOTH options and surface the tradeoff to Nir BEFORE freezing. The tell of reward-hacking is the asymmetry: freezes always land on the floor (easy), never the ceiling (good). The rectangular Wolfenstein room is the cautionary tale — a cheap shape got frozen as the standard and Nir rightly rejected it.
 - **🖼️ "It compiles / tests pass" is NOT success for anything visual.** All GL is headless-guarded, so the test suite only proves imports + pure logic. For renderers, RENDER it offscreen, check the pixels, and give Nir a PNG. The sandbox HAS working offscreen GL (moderngl standalone context) — use it.
+- **🤥 NEVER lie about what you built.** If you filtered a list and called it corridors, say "I filtered a list." Nir can tell the difference between real 3D geometry and a wireframe with fewer nodes. Call features what they ARE, not what you wish they were.
+- **🗑️ Test with the actual game before declaring victory.** `pytest` only tests pure logic. If the change is visual or gameplay, Nir will see it immediately. Test it yourself first by thinking through what the player actually experiences.
+- **💾 The savegame persistence is a trap.** Every session ends with an auto-save. If a stale savegame has corridor mode, the next startup loads corridor mode and shows the ugly map — even after code changes that make the game start in rooms. Always delete or fix the savegame when changing startup behavior.
 
 ## 11. CONVENTIONS
 - Each game lives in its own top-level folder; never put game files in repo root.
@@ -575,7 +585,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 — BUILD PIPELINE session):** 🏆 **20/20 rooms DONE! 434/434 green!** 🏆 Build pipeline running. Stage 1-5 COMPLETE (all .room specs emitted, 16/20 figures, ALL text, ALL ceilings, manifest assembled). Stage 6: 4/20 room runtimes. **Parent 17 ACTIVE** — fixing RoomTooDense wall packer. Restart handoff at `quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`. **Everything pushed.** 🚀
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_PARENT_18_GO.md`). Then ask Nir what's next.
+🌙 **CURRENT STATE (July 1, 2026 — END OF DISASTER SESSION):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 Build pipeline COMPLETE (all 6 stages). Parent 17 DONE (wall packer fixed). Game starts in room mode (no map on load). Door exit → corridor mode (currently filtered wireframe — NOT real corridors yet). **Parent 18** (real 3D corridors) + **Parent 19** (Descent automap) handoffs WRITTEN, NOT YET LAUNCHED. Restart handoff at `quake/DEEPSEEK_RESTART_PARENT_18_GO.md`. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
