@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "room_id": "prop_1",
   "dimensions_m": [
-    20.089875,
+    137.089875,
     5.687500000000001,
-    15.45375
+    105.45375
   ],
   "panel_pairs": [
     {
@@ -15,30 +15,30 @@
       "text_off_asset": "prop_1.s1.txt.off",
       "text_on_asset": "prop_1.s1.txt.on",
       "drawing_placement": {
-        "wall": "N",
+        "wall": "W",
         "slot_index": 0,
-        "wall_slot": "N-0",
+        "wall_slot": "W-0",
         "center_xyz": [
-          2.9113990670983423,
+          -68.5449375,
           1.55,
-          7.726875
+          -51.57187500000003
         ],
         "width_m": 1.31,
         "height_m": 2.15,
-        "yaw_rad": 3.141592653589793
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "N",
+        "wall": "W",
         "slot_index": 1,
-        "wall_slot": "N-1",
+        "wall_slot": "W-1",
         "center_xyz": [
-          6.488274067098342,
+          -68.5449375,
           2.171875,
-          7.726875
+          -47.995
         ],
         "width_m": 5.44375,
         "height_m": 4.04375,
-        "yaw_rad": 3.141592653589793
+        "yaw_rad": 1.5707963267948966
       }
     },
     {
@@ -49,30 +49,30 @@
       "text_off_asset": "prop_1.s2.txt.off",
       "text_on_asset": "prop_1.s2.txt.on",
       "drawing_placement": {
-        "wall": "S",
-        "slot_index": 0,
-        "wall_slot": "S-0",
+        "wall": "W",
+        "slot_index": 2,
+        "wall_slot": "W-2",
         "center_xyz": [
-          -0.34086480394090657,
+          -68.5449375,
           1.55,
-          -7.726875
+          -44.218125000000036
         ],
         "width_m": 1.31,
         "height_m": 2.1616666666666666,
-        "yaw_rad": 0.0
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "S",
-        "slot_index": 1,
-        "wall_slot": "S-1",
+        "wall": "W",
+        "slot_index": 3,
+        "wall_slot": "W-3",
         "center_xyz": [
-          -3.9114898039409134,
+          -68.5449375,
           2.3937500000000003,
-          -7.726875
+          -40.64750000000003
         ],
         "width_m": 5.43125,
         "height_m": 4.487500000000001,
-        "yaw_rad": 0.0
+        "yaw_rad": 1.5707963267948966
       }
     },
     {
@@ -83,30 +83,30 @@
       "text_off_asset": "prop_1.s3.txt.off",
       "text_on_asset": "prop_1.s3.txt.on",
       "drawing_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 0,
-        "wall_slot": "W-0",
+        "wall_slot": "E-0",
         "center_xyz": [
-          -10.0449375,
+          68.5449375,
           1.55,
-          -6.571874999999999
+          -25.27753800619795
         ],
         "width_m": 1.31,
         "height_m": 2.1733333333333333,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       },
       "text_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 1,
-        "wall_slot": "W-1",
+        "wall_slot": "E-1",
         "center_xyz": [
-          -10.0449375,
+          68.5449375,
           2.30625,
-          -3.004374999999996
+          -28.845038006197946
         ],
         "width_m": 5.425,
         "height_m": 4.3125,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       }
     },
     {
@@ -117,143 +117,143 @@
       "text_off_asset": "prop_1.s4.txt.off",
       "text_on_asset": "prop_1.s4.txt.on",
       "drawing_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 2,
-        "wall_slot": "W-2",
+        "wall_slot": "E-2",
         "center_xyz": [
-          -10.0449375,
+          68.5449375,
           1.55,
-          0.7631249999999952
+          -32.61253800619796
         ],
         "width_m": 1.31,
         "height_m": 2.1766666666666667,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       },
       "text_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 3,
-        "wall_slot": "W-3",
+        "wall_slot": "E-3",
         "center_xyz": [
-          -10.0449375,
+          68.5449375,
           2.15,
-          4.3118749999999935
+          -36.16128800619794
         ],
         "width_m": 5.3875,
         "height_m": 4.0,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       }
     }
   ],
   "final_pair_id": "prop_1.s4",
-  "hidden_door_wall_slot": "W-2",
+  "hidden_door_wall_slot": "E-2",
   "doors": [
     {
       "edge_id": "edge.prop_1.to.law_2",
       "neighbor_id": "law_2",
-      "bearing_rad": 1.4732152588113823,
-      "wall": "N",
+      "bearing_rad": 2.4999475060799146,
+      "wall": "W",
       "center_xyz": [
-        0.7563990670983429,
+        -68.5449375,
         1.3,
-        7.726875
+        51.21020303130309
       ],
       "width_m": 2.0,
       "height_m": 2.6,
-      "normal_yaw_rad": 3.141592653589793,
+      "normal_yaw_rad": 1.5707963267948966,
       "spawn_xyz": [
-        0.6005170199175967,
+        -67.26315798272925,
         0.0,
-        6.134486609133393
+        50.25258031378582
       ],
-      "spawn_heading_rad": -1.6683773947784104
+      "spawn_heading_rad": -0.6416451475098786
     },
     {
       "edge_id": "edge.prop_6.to.prop_1",
       "neighbor_id": "prop_6",
-      "bearing_rad": 2.3625360880962725,
+      "bearing_rad": 1.623790466791737,
       "wall": "N",
       "center_xyz": [
-        -7.825503251464233,
+        -2.7968340755789853,
         1.3,
-        7.726875
+        52.726875
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": 3.141592653589793,
       "spawn_xyz": [
-        -6.686980500096695,
+        -2.712083133377745,
         0.0,
-        6.602701550474309
+        51.129121177348964
       ],
-      "spawn_heading_rad": -0.7790565654935211
+      "spawn_heading_rad": -1.5178021867980558
     },
     {
       "edge_id": "edge.prop_1.to.law_1",
       "neighbor_id": "law_1",
-      "bearing_rad": -0.5652244045031343,
-      "wall": "S",
+      "bearing_rad": -2.6998402883187347,
+      "wall": "W",
       "center_xyz": [
-        8.5449375,
+        -68.5449375,
         1.3,
-        -7.726875
+        -27.831813790025016
       ],
       "width_m": 2.0,
       "height_m": 2.6,
-      "normal_yaw_rad": 0.0,
+      "normal_yaw_rad": 1.5707963267948966,
       "spawn_xyz": [
-        7.193788012898296,
+        -67.09853130331571,
         0.0,
-        -6.869906468777993
+        -27.147774964962235
       ],
-      "spawn_heading_rad": 2.5763682490866593
+      "spawn_heading_rad": 0.44175236527105843
     },
     {
       "edge_id": "edge.prop_2.to.prop_1",
       "neighbor_id": "prop_2",
-      "bearing_rad": -0.03381311673413053,
+      "bearing_rad": -2.6996574958633013,
+      "wall": "W",
+      "center_xyz": [
+        -68.5449375,
+        1.3,
+        -32.43181379002504
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 1.5707963267948966,
+      "spawn_xyz": [
+        -67.0986563646159,
+        0.0,
+        -31.74751058425141
+      ],
+      "spawn_heading_rad": 0.44193515772649183
+    },
+    {
+      "edge_id": "edge.prop_1.to.lemma_3",
+      "neighbor_id": "lemma_3",
+      "bearing_rad": -0.3253468234134432,
       "wall": "E",
       "center_xyz": [
-        10.0449375,
+        68.5449375,
         1.3,
-        -0.33978014740253926
+        -23.12253800619795
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": -1.5707963267948966,
       "spawn_xyz": [
-        8.44585207434752,
+        67.02887361894528,
         0.0,
-        -0.2856894692238591
+        -22.611118111628613
       ],
-      "spawn_heading_rad": 3.107779536855663
-    },
-    {
-      "edge_id": "edge.prop_1.to.lemma_3",
-      "neighbor_id": "lemma_3",
-      "bearing_rad": -1.3401904731457264,
-      "wall": "S",
-      "center_xyz": [
-        1.8141351960590946,
-        1.3,
-        -7.726875
-      ],
-      "width_m": 2.0,
-      "height_m": 2.6,
-      "normal_yaw_rad": 0.0,
-      "spawn_xyz": [
-        1.448427386463847,
-        0.0,
-        -6.169230047515305
-      ],
-      "spawn_heading_rad": 1.8014021804440663
+      "spawn_heading_rad": 2.8162458301763493
     }
   ],
   "enemy": {
     "enemy_id": "prop_1.demon",
     "spawn_xyz": [
-      -7.4449375,
+      65.94493750000001,
       0.1,
-      0.7631249999999952
+      -32.61253800619796
     ],
     "health": 5
   },

@@ -83,63 +83,63 @@
       "text_off_asset": "prop_7.s3.txt.off",
       "text_on_asset": "prop_7.s3.txt.on",
       "drawing_placement": {
-        "wall": "N",
+        "wall": "S",
         "slot_index": 0,
-        "wall_slot": "N-0",
+        "wall_slot": "S-0",
         "center_xyz": [
-          -3.89625,
+          3.8962499999999993,
           1.55,
-          3.6125
+          -3.6125
         ],
         "width_m": 0.6,
         "height_m": 0.44999999999999996,
-        "yaw_rad": 3.141592653589793
+        "yaw_rad": 0.0
       },
       "text_placement": {
-        "wall": "N",
+        "wall": "S",
         "slot_index": 1,
-        "wall_slot": "N-1",
+        "wall_slot": "S-1",
         "center_xyz": [
-          -0.6868749999999997,
+          0.6868749999999979,
           1.8625,
-          3.6125
+          -3.6125
         ],
         "width_m": 5.41875,
         "height_m": 3.4250000000000003,
-        "yaw_rad": 3.141592653589793
+        "yaw_rad": 0.0
       }
     }
   ],
   "final_pair_id": "prop_7.s3",
-  "hidden_door_wall_slot": "N-0",
+  "hidden_door_wall_slot": "S-0",
   "doors": [
     {
       "edge_id": "edge.prop_7.to.prop_6",
       "neighbor_id": "prop_6",
-      "bearing_rad": -1.5025445084408324,
-      "wall": "S",
+      "bearing_rad": 1.3878602906284765,
+      "wall": "N",
       "center_xyz": [
-        0.24694325908039705,
+        0.6683284530653824,
         1.3,
-        -3.6125
+        3.6125
       ],
       "width_m": 2.0,
       "height_m": 2.6,
-      "normal_yaw_rad": 0.0,
+      "normal_yaw_rad": 3.141592653589793,
       "spawn_xyz": [
-        0.13782511348237314,
+        0.37726061579283754,
         0.0,
-        -2.0162252021342786
+        2.039197894838539
       ],
-      "spawn_heading_rad": 1.6390481451489602
+      "spawn_heading_rad": -1.7537323629613164
     }
   ],
   "enemy": {
     "enemy_id": "prop_7.demon",
     "spawn_xyz": [
-      -3.89625,
+      3.8962499999999993,
       0.1,
-      1.0124999999999997
+      -1.0124999999999997
     ],
     "health": 5
   },

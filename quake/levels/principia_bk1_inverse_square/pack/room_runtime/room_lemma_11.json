@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "room_id": "lemma_11",
   "dimensions_m": [
-    18.157208333333333,
+    16.207208333333334,
     4.7125,
-    13.967083333333333
+    12.467083333333333
   ],
   "panel_pairs": [
     {
@@ -15,30 +15,30 @@
       "text_off_asset": "lemma_11.s1.txt.off",
       "text_on_asset": "lemma_11.s1.txt.on",
       "drawing_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 0,
-        "wall_slot": "W-0",
+        "wall_slot": "E-0",
         "center_xyz": [
-          -9.078604166666667,
+          8.103604166666667,
           1.55,
-          -5.821874999999998
+          5.071875000000001
         ],
         "width_m": 1.3233333333333333,
         "height_m": 0.9416666666666665,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       },
       "text_placement": {
-        "wall": "W",
+        "wall": "E",
         "slot_index": 1,
-        "wall_slot": "W-1",
+        "wall_slot": "E-1",
         "center_xyz": [
-          -9.078604166666667,
+          8.103604166666667,
           1.6124999999999998,
-          -2.238333333333336
+          1.4883333333333324
         ],
         "width_m": 5.44375,
         "height_m": 2.925,
-        "yaw_rad": 1.5707963267948966
+        "yaw_rad": -1.5707963267948966
       }
     },
     {
@@ -49,30 +49,30 @@
       "text_off_asset": "lemma_11.s2.txt.off",
       "text_on_asset": "lemma_11.s2.txt.on",
       "drawing_placement": {
-        "wall": "E",
+        "wall": "N",
         "slot_index": 0,
-        "wall_slot": "E-0",
+        "wall_slot": "N-0",
         "center_xyz": [
-          9.078604166666667,
+          0.7700683535067814,
           1.55,
-          5.821041666666665
+          6.2335416666666665
         ],
         "width_m": 1.325,
         "height_m": 0.9416666666666665,
-        "yaw_rad": -1.5707963267948966
+        "yaw_rad": 3.141592653589793
       },
       "text_placement": {
-        "wall": "E",
+        "wall": "N",
         "slot_index": 1,
-        "wall_slot": "E-1",
+        "wall_slot": "N-1",
         "center_xyz": [
-          9.078604166666667,
+          4.34194335350678,
           1.90625,
-          2.2491666666666665
+          6.2335416666666665
         ],
         "width_m": 5.41875,
         "height_m": 3.5125,
-        "yaw_rad": -1.5707963267948966
+        "yaw_rad": 3.141592653589793
       }
     },
     {
@@ -83,123 +83,123 @@
       "text_off_asset": "lemma_11.s3.txt.off",
       "text_on_asset": "lemma_11.s3.txt.on",
       "drawing_placement": {
-        "wall": "S",
+        "wall": "W",
         "slot_index": 0,
-        "wall_slot": "S-0",
+        "wall_slot": "W-0",
         "center_xyz": [
-          5.310248496205327,
+          -8.103604166666667,
           1.55,
-          -6.9835416666666665
+          -5.071041666666665
         ],
         "width_m": 1.325,
         "height_m": 0.9416666666666665,
-        "yaw_rad": 0.0
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "S",
+        "wall": "W",
         "slot_index": 1,
-        "wall_slot": "S-1",
+        "wall_slot": "W-1",
         "center_xyz": [
-          1.7383734962053214,
+          -8.103604166666667,
           1.55,
-          -6.9835416666666665
+          -1.4991666666666594
         ],
         "width_m": 5.41875,
         "height_m": 2.70625,
-        "yaw_rad": 0.0
+        "yaw_rad": 1.5707963267948966
       }
     }
   ],
   "final_pair_id": "lemma_11.s3",
-  "hidden_door_wall_slot": "S-0",
+  "hidden_door_wall_slot": "W-0",
   "doors": [
     {
       "edge_id": "edge.lemma_11.to.lemma_7",
       "neighbor_id": "lemma_7",
-      "bearing_rad": 1.1093693199121042,
-      "wall": "N",
+      "bearing_rad": -0.35110832058369507,
+      "wall": "E",
       "center_xyz": [
-        3.4724077161255824,
+        8.103604166666667,
         1.3,
-        6.9835416666666665
+        -2.9682286792339108
       ],
       "width_m": 2.0,
       "height_m": 2.6,
-      "normal_yaw_rad": 3.141592653589793,
+      "normal_yaw_rad": -1.5707963267948966,
       "spawn_xyz": [
-        2.760045591971381,
+        6.60121681422445,
         0.0,
-        5.55087275722858
+        -2.4179267228302783
       ],
-      "spawn_heading_rad": -2.032223333677689
+      "spawn_heading_rad": 2.7904843330060984
     },
     {
       "edge_id": "edge.prop_4.to.lemma_11",
       "neighbor_id": "prop_4",
-      "bearing_rad": 2.8587597083775242,
-      "wall": "W",
-      "center_xyz": [
-        -9.078604166666667,
-        1.3,
-        2.6384605202034175
-      ],
-      "width_m": 2.0,
-      "height_m": 2.6,
-      "normal_yaw_rad": 1.5707963267948966,
-      "spawn_xyz": [
-        -7.542174274768901,
-        0.0,
-        2.191937074813346
-      ],
-      "spawn_heading_rad": -0.2828329452122684
-    },
-    {
-      "edge_id": "edge.prop_6.to.lemma_11",
-      "neighbor_id": "prop_6",
-      "bearing_rad": -0.7515706592456403,
+      "bearing_rad": -1.1528626218158358,
       "wall": "S",
       "center_xyz": [
-        7.4727484962053285,
+        2.76829377156049,
         1.3,
-        -6.9835416666666665
+        -6.2335416666666665
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": 0.0,
       "spawn_xyz": [
-        6.303760744899452,
+        2.118897175097335,
         0.0,
-        -5.891082222432314
+        -4.77125439649638
       ],
-      "spawn_heading_rad": 2.3900219943441527
+      "spawn_heading_rad": 1.9887300317739571
+    },
+    {
+      "edge_id": "edge.prop_6.to.lemma_11",
+      "neighbor_id": "prop_6",
+      "bearing_rad": -1.8620814889307156,
+      "wall": "S",
+      "center_xyz": [
+        -1.8688963937135163,
+        1.3,
+        -6.2335416666666665
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 0.0,
+      "spawn_xyz": [
+        -1.4094028139275219,
+        0.0,
+        -4.700940723780537
+      ],
+      "spawn_heading_rad": 1.2795111646590778
     },
     {
       "edge_id": "edge.lemma_11.to.lemma_6",
       "neighbor_id": "lemma_6",
-      "bearing_rad": 1.8284803647182437,
+      "bearing_rad": 1.7905657149895797,
       "wall": "N",
       "center_xyz": [
-        -1.8404649695296422,
+        -1.3924316464932183,
         1.3,
-        6.9835416666666665
+        6.2335416666666665
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": 3.141592653589793,
       "spawn_xyz": [
-        -1.432718182483791,
+        -1.0436243444014632,
         0.0,
-        5.436369227132603
+        4.672025267134638
       ],
-      "spawn_heading_rad": -1.3131122888715492
+      "spawn_heading_rad": -1.3510269386002136
     }
   ],
   "enemy": {
     "enemy_id": "lemma_11.demon",
     "spawn_xyz": [
-      5.310248496205327,
+      -5.503604166666667,
       0.1,
-      -4.383541666666666
+      -5.071041666666665
     ],
     "health": 5
   },

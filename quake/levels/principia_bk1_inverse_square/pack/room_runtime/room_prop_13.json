@@ -15,11 +15,45 @@
       "text_off_asset": "prop_13.s1.txt.off",
       "text_on_asset": "prop_13.s1.txt.on",
       "drawing_placement": {
+        "wall": "N",
+        "slot_index": 0,
+        "wall_slot": "N-0",
+        "center_xyz": [
+          -5.858437499999999,
+          1.55,
+          5.121874999999999
+        ],
+        "width_m": 0.6,
+        "height_m": 0.44999999999999996,
+        "yaw_rad": 3.141592653589793
+      },
+      "text_placement": {
+        "wall": "N",
+        "slot_index": 1,
+        "wall_slot": "N-1",
+        "center_xyz": [
+          -2.6365624999999993,
+          1.55,
+          5.121874999999999
+        ],
+        "width_m": 5.44375,
+        "height_m": 2.6687499999999997,
+        "yaw_rad": 3.141592653589793
+      }
+    },
+    {
+      "pair_id": "prop_13.s2",
+      "step_index": 2,
+      "drawing_off_asset": "prop_13.f1.off",
+      "drawing_on_asset": "prop_13.f1.on.2",
+      "text_off_asset": "prop_13.s2.txt.off",
+      "text_on_asset": "prop_13.s2.txt.on",
+      "drawing_placement": {
         "wall": "S",
         "slot_index": 0,
         "wall_slot": "S-0",
         "center_xyz": [
-          -0.019274260926652964,
+          5.858437499999998,
           1.55,
           -5.121874999999999
         ],
@@ -32,22 +66,22 @@
         "slot_index": 1,
         "wall_slot": "S-1",
         "center_xyz": [
-          -3.2411492609266537,
+          2.6459374999999996,
           1.55,
           -5.121874999999999
         ],
-        "width_m": 5.44375,
-        "height_m": 2.6687499999999997,
+        "width_m": 5.425,
+        "height_m": 2.44375,
         "yaw_rad": 0.0
       }
     },
     {
-      "pair_id": "prop_13.s2",
-      "step_index": 2,
+      "pair_id": "prop_13.s3",
+      "step_index": 3,
       "drawing_off_asset": "prop_13.f1.off",
-      "drawing_on_asset": "prop_13.f1.on.2",
-      "text_off_asset": "prop_13.s2.txt.off",
-      "text_on_asset": "prop_13.s2.txt.on",
+      "drawing_on_asset": "prop_13.f1.on.3",
+      "text_off_asset": "prop_13.s3.txt.off",
+      "text_on_asset": "prop_13.s3.txt.on",
       "drawing_placement": {
         "wall": "W",
         "slot_index": 0,
@@ -68,20 +102,20 @@
         "center_xyz": [
           -6.658437499999999,
           1.55,
-          -1.1093749999999964
+          -1.1124999999999936
         ],
-        "width_m": 5.425,
-        "height_m": 2.44375,
+        "width_m": 5.41875,
+        "height_m": 2.4375,
         "yaw_rad": 1.5707963267948966
       }
     },
     {
-      "pair_id": "prop_13.s3",
-      "step_index": 3,
+      "pair_id": "prop_13.s4",
+      "step_index": 4,
       "drawing_off_asset": "prop_13.f1.off",
-      "drawing_on_asset": "prop_13.f1.on.3",
-      "text_off_asset": "prop_13.s3.txt.off",
-      "text_on_asset": "prop_13.s3.txt.on",
+      "drawing_on_asset": "prop_13.f1.on.4",
+      "text_off_asset": "prop_13.s4.txt.off",
+      "text_on_asset": "prop_13.s4.txt.on",
       "drawing_placement": {
         "wall": "E",
         "slot_index": 0,
@@ -102,58 +136,24 @@
         "center_xyz": [
           6.658437499999999,
           1.55,
-          1.112499999999999
-        ],
-        "width_m": 5.41875,
-        "height_m": 2.4375,
-        "yaw_rad": -1.5707963267948966
-      }
-    },
-    {
-      "pair_id": "prop_13.s4",
-      "step_index": 4,
-      "drawing_off_asset": "prop_13.f1.off",
-      "drawing_on_asset": "prop_13.f1.on.4",
-      "text_off_asset": "prop_13.s4.txt.off",
-      "text_on_asset": "prop_13.s4.txt.on",
-      "drawing_placement": {
-        "wall": "N",
-        "slot_index": 0,
-        "wall_slot": "N-0",
-        "center_xyz": [
-          -3.358437499999999,
-          1.55,
-          5.121874999999999
-        ],
-        "width_m": 0.6,
-        "height_m": 0.44999999999999996,
-        "yaw_rad": 3.141592653589793
-      },
-      "text_placement": {
-        "wall": "N",
-        "slot_index": 1,
-        "wall_slot": "N-1",
-        "center_xyz": [
-          -0.16468749999999854,
-          1.55,
-          5.121874999999999
+          1.128124999999999
         ],
         "width_m": 5.3875,
         "height_m": 1.9062500000000002,
-        "yaw_rad": 3.141592653589793
+        "yaw_rad": -1.5707963267948966
       }
     }
   ],
   "final_pair_id": "prop_13.s4",
-  "hidden_door_wall_slot": "N-0",
+  "hidden_door_wall_slot": "E-0",
   "doors": [
     {
       "edge_id": "edge.prop_13.to.lemma_7",
       "neighbor_id": "lemma_7",
-      "bearing_rad": 2.364342108531069,
+      "bearing_rad": 1.2487482962975684,
       "wall": "N",
       "center_xyz": [
-        -5.158437499999999,
+        1.708984762827602,
         1.3,
         5.121874999999999
       ],
@@ -161,19 +161,19 @@
       "height_m": 2.6,
       "normal_yaw_rad": 3.141592653589793,
       "spawn_xyz": [
-        -4.017886326278967,
+        1.2025688226209665,
         0.0,
-        3.999759578074261
+        3.604132302602107
       ],
-      "spawn_heading_rad": -0.7772505450587239
+      "spawn_heading_rad": -1.8928443572922244
     },
     {
       "edge_id": "edge.prop_13.to.prop_6",
       "neighbor_id": "prop_6",
-      "bearing_rad": -1.2361981350624809,
+      "bearing_rad": -1.8938872963912432,
       "wall": "S",
       "center_xyz": [
-        1.7807257390733477,
+        -1.7149233467784155,
         1.3,
         -5.121874999999999
       ],
@@ -181,19 +181,19 @@
       "height_m": 2.6,
       "normal_yaw_rad": 0.0,
       "spawn_xyz": [
-        1.255302264715204,
+        -1.206924769077221,
         0.0,
-        -3.610607263100473
+        -3.6046612889317253
       ],
-      "spawn_heading_rad": 1.905394518527312
+      "spawn_heading_rad": 1.2477053571985497
     }
   ],
   "enemy": {
     "enemy_id": "prop_13.demon",
     "spawn_xyz": [
-      -3.358437499999999,
+      4.058437499999998,
       0.1,
-      2.521874999999999
+      4.321874999999999
     ],
     "health": 5
   },
