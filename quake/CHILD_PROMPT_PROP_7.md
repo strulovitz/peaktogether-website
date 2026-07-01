@@ -1,32 +1,143 @@
 # QUAKE CHILD PROMPT — prop_7.room
 
-You are a Quake content child. Write ONE `.room` file for prop_7. Return ONLY the `.room` file text (in a fenced code block).
+You are a Quake content child. Write ONE `.room` file for prop_7. Return ONLY the `.room` file text in a fenced code block.
 
-## THE .room FORMAT (v1.0)
+## ⚠️ CRITICAL — YOU MUST FOLLOW THIS FORMAT EXACTLY ⚠️
+
+The .room format is RIGID. Every station has this fixed structure:
+```
+station N
+  gloss <one sentence>
+  color <name> <#hex>
+  panel
+    <ops...>
+  text
+    <prose with {colorname|words} and $math$>
+```
+
+Every station re-defines all its own points. No "shared" geometry across stations.
+
+## COMPLETE WORKING EXAMPLE (prop_6.room — THIS COMPILES!)
+
+Study this EXACTLY. Your file must look like this:
 
 ```
-HEADER:
-  room <node_id>
-  kind geometry
-  import <citation>
-  caption <line>
-  final <step#>
-  ceiling <eq_id> :: <verbatim LaTeX>
+room      prop_6
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VI; Plate 3, Figure 2.
+caption   In a space void of resistance, the centripetal force in the middle of a nascent arc is as the versed sine directly and the square of the time inversely.
+final     4
+ceiling   prop6 :: F \propto \dfrac{\text{versed sine}}{t^2} \qquad F \propto \dfrac{1}{SP^2\cdot QT^2/QR}
 
-GEOMETRY ops: point point_on intersect midpoint foot from to reflect
-  segment line ray parallel through to perp through to tangent_at on at
-  circle_cp circle_cr circle_3 arc ellipse_foci ellipse_axes
-  polygon polyline series angle
+station 1
+  gloss The centre S, the body at P, and the tiny nascent arc PQ pose the measurement problem.
+  color centerorange #E8770A
+  color arcblue #1E6FE0
+  panel
+    point S @(-2.6,-2.2) color=centerorange label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=NE marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    arc P Q S color=arcblue heart
+    segment SP S P
+  text
+    Place the {centerorange|centre of force $S$} and let the body ride the curve at $P$. In the very next \
+    instant it sweeps the {arcblue|nascent arc $PQ$ — the body's path in the least time}, and this arc is the \
+    heart of everything that follows. Prop. I already told us that a central force makes the areas swept \
+    proportional to the times — but it never told us HOW STRONG the force is.
 
-  Attrs: color=NAME heart label=$..$ at=DIR marker=dot @(x,y)
-  DIR = N|S|E|W|NE|NW|SE|SW|center
+station 2
+  gloss The tangent ZPR is the forceless path; the versed sine measures how far the body falls from it.
+  color tangreen #00A35A
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    point R @(1.35,0.75) label=$R$ at=S
+    arc P Q S
+    line ZPR Z R color=tangreen heart label=$\text{tangent }ZPR$ at=E
+    segment SP S P
+    segment QR Q R
+  text
+    Draw the {tangreen|tangent $ZPR$ at $P$} — the straight path the body WOULD take if the force suddenly \
+    vanished. The versed sine $QR$ measures how far the curve pulls away from that tangent.
+
+station 3
+  gloss QR is drawn parallel to SP and QT perpendicular to SP.
+  color parblue #1E6FE0
+  color perpred #D81B60
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    point R @(1.9,1.05) label=$R$ at=SE
+    foot T from Q to S P label=$T$ at=SW
+    arc P Q S
+    line ZPR Z R
+    segment SP S P
+    parallel QR through Q to S P color=parblue heart label=$QR\parallel SP$ at=NE
+    perp QT through Q to S P color=perpred heart label=$QT\perp SP$ at=W
+    angle QTP Q T P
+  text
+    Here is Newton's decisive stroke: draw {parblue|$QR$ PARALLEL to the radius $SP$}. Then drop \
+    {perpred|$QT$ PERPENDICULAR to $SP$}, giving a right angle at $T$. The triangle $SQP$ has \
+    area $\tfrac{1}{2}\,SP\cdot QT$ — proportional to the time by Prop. I.
+
+station 4
+  gloss The force-measure solid is the master formula.
+  color measpurple #8E24AA
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point R @(1.9,1.05) label=$R$ at=SE
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    foot T from Q to S P label=$T$ at=SW
+    arc P Q S
+    line ZPR Z R
+    segment SP S P
+    parallel QR through Q to S P
+    perp QT through Q to S P
+    polygon quad S Q P color=measpurple heart label=$SP^2\!\cdot\!QT^2/QR$ at=center
+  text
+    Assemble the master key. The versed sine gives $F \propto QR/t^2$, while swept area sets \
+    $t \propto SP\cdot QT$; substitute and $F \propto 1/(SP^2\cdot QT^2/QR)$. This single formula \
+    unlocks EVERY later proposition. \textit{Q.E.D.}
 ```
+
+## GEOMETRY OP KEYWORD SYNTAX (MEMORIZE THIS)
+
+Every op has a NAME as the first token after the op keyword:
+
+| Op | Syntax |
+|-----|--------|
+| `point` | `point <name> @(x,y) label=$L$ at=DIR marker=dot` |
+| `segment` | `segment <name> <pt1> <pt2>` |
+| `line` | `line <name> <pt1> <pt2>` |
+| `ray` | `ray <name> <pt1> <pt2>` |
+| `arc` | `arc <pt1> <pt2> <centre>` |
+| `circle_cr` | `circle_cr <name> <centre> <radius>` |
+| `circle_cp` | `circle_cp <name> <centre> <pt_on_circ>` |
+| `circle_3` | `circle_3 <name> <pt1> <pt2> <pt3>` |
+| `polygon` | `polygon <name> <pt1> <pt2> ...` |
+| `polyline` | `polyline <name> <pt1> <pt2> ...` |
+| `parallel` | `parallel <name> through <pt> to <ref_pt1> <ref_pt2>` |
+| `perp` | `perp <name> through <pt> to <ref_pt1> <ref_pt2>` |
+| `foot` | `foot <name> from <pt> to <line_pt1> <line_pt2>` |
+| `tangent_at` | `tangent_at <name> on <curve_name> at <pt>` |
+| `angle` | `angle <name> <a_pt> <vertex_pt> <b_pt>` |
+| `intersect` | `intersect <name> of <obj1> and <obj2>` |
+| `midpoint` | `midpoint <name> of <pt1> <pt2>` |
+| `point_on` | `point_on <name> on <curve> at <DIR>` |
+
+Attributes: `color=NAME heart label=$...$ at=DIR marker=dot`
 
 ## YOUR ROOM — prop_7
 
 **prop_7 · DIAGRAM · 3 step-pairs · Pl.3 Fig.3 · importance 3**
 
-Prop. VI gave us the force-measure formula F ∝ 1/(SP²·QT²/QR). Prop. VII is the FIRST application: find the centripetal force for a body moving in a CIRCLE, with the force directed to ANY point S (not necessarily the centre). Construction: through S draw chord PV and diameter VA, draw QT ⟂ SP, and LR ∥ SP. The circle geometry collapses the ratio QT²/QR into a simple expression involving PV and AV.
+Apply Prop. VI's QR/SP/QT construction to a CIRCLE with force toward ANY point S (not centre).
 
 ```
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VII; Plate 3, Figure 3.
@@ -35,56 +146,43 @@ final     3
 ceiling   prop7 :: F \propto \dfrac{1}{SP^2}\cdot\dfrac{1}{PV^3}
 
 s1 — Circle VQPA → circblue(#1E6FE0); body P; force-point S → centerorange(#E8770A); SP → radgreen(#00A35A) ♥.
-s2 — Tangent PRZ → tanteal(#00897B) ♥; chord PV + diameter VA → diampurple(#8E24AA).
-s3 — Construction QT ⟂ SP, LR ∥ SP → constred(#D81B60) ♥; proportion QT²/QR ∝ 1/PV³ ⇒ the force law.
+s2 — Tangent PRZ → tanteal(#00897B) ♥; chord PV + diameter VA + join AP → diampurple(#8E24AA).
+s3 — QT ⟂ SP, LR ∥ SP → constred(#D81B60) ♥; circle geometry → QT²/QR ∝ PV³ → F ∝ 1/(SP²·PV³).
 
 colors_used: circblue, centerorange, radgreen, tanteal, diampurple, constred
 ```
 
-### Newton's text (verbatim, 1729 Motte, Book I, Section II, Proposition VII):
+### Newton's text (verbatim):
 
 > If a body revolves in the circumference of a circle; it is proposed to find the law of centripetal force directed to any given point. Pl. 3. Fig. 3.
 >
-> Let VQPA be the circumference of the circle; S the given point to which as to a centre the force tends; P the body moving in the circumference; Q the next place into which it is to move; and PRZ the tangent of the circle at the preceding place. Through the point S draw the chord PV, and the diameter VA of the circle, join AP, and draw QT perpendicular to SP, which produced, may meet the tangent PRZ in Z; and lastly, through the point Q draw LR parallel to SP, meeting the circle in L, and the tangent PZ in R. And, because of the similar triangles ZQR, ZTP, ZPA we shall have RP² (that is, QRL) to QT² as AV² to PV². And therefore QRL × PV² / AV² is equal to QT². Multiply those equals by SP²/QR, and the points P and Q coinciding, PV²/AV² becomes unity. Write PV for the chord; and the force (by cor. 1 and 5 prop. 6) will become reciprocally as SP² × PV³, that is (because SP² × PV³ was given), reciprocally as the square of the distance or altitude SP, and the cube of the chord PV conjunctly.
+> Let VQPA be the circumference of the circle; S the given point to which as to a centre the force tends; P the body moving in the circumference; Q the next place into which it is to move; and PRZ the tangent of the circle at the preceding place. Through the point S draw the chord PV, and the diameter VA of the circle, join AP, and draw QT perpendicular to SP, which produced, may meet the tangent PRZ in Z; and lastly, through the point Q draw LR parallel to SP, meeting the circle in L, and the tangent PZ in R. And, because of the similar triangles ZQR, ZTP, ZPA we shall have RP² (that is, QRL) to QT² as AV² to PV². And therefore QRL × PV² / AV² is equal to QT². Multiply those equals by SP²/QR, and the points P and Q coinciding, PV²/AV² becomes unity. Write PV for the chord; and the force (by cor. 1 and 5 prop. 6) will become reciprocally as SP² × PV³.
+
+### Figure layout (Pl.3 Fig.3):
+- A circle with centre O, radius ~5. Point S is inside (not centre), e.g. (1.0, -0.5)
+- P on the right side of circumference (body's position)
+- Q on the upper-left of circumference (next position, nearby)
+- Tangent PRZ at P extending rightward
+- Chord PV through S to far side V
+- Diameter VA through V (through centre O)
+- Join AP
+- QT ⟂ SP (foot T on SP)
+- LR ∥ SP through Q, meeting tangent at R
 
 ### GUIDANCE
 
-Prop. VII is the first concrete application of the Prop. VI force-measure construction to a specific curve — the circle. The key insight: applying the QR/SP/QT construction from Prop. VI to a circle, with S NOT necessarily at the centre, yields a force that varies as 1/(SP²·PV³) where PV is the chord through S.
+**Station 1 — Circle and Force Centre:** Draw the circle (center O, radius ~5). Place S inside. P and Q on circumference. Draw circle, S, and SP. Heart: radgreen SP. Text: introduce the circle as simplest orbit, S not at centre — the challenge.
 
-**Step 1 — Circle and Force Centre:** Draw the circle VQPA. Place S somewhere INSIDE the circle (not at centre). P is the body's current position on the circle. Draw the radius SP (from force centre to body). The {circblue|circle VQPA} is the orbit, the {centerorange|force centre S} is inside it, and the {radgreen|radius SP} is the heart — this line connects the body to the attracting point. In the text: "the circle is the simplest curvilinear orbit. But the force need not come from the circle's centre — S can be anywhere inside. The challenge: apply Prop. VI's QR/SP/QT construction to extract the force law."
+**Station 2 — Tangent, Chord, Diameter:** Add tangent PRZ at P, chord PV through S, diameter VA through V (through O), join AP. Heart: tanteal tangent. Text: tangent = forceless path, chord+diameter unlock circle geometry, VA is diameter so ∠VPA is right angle.
 
-**Step 2 — Tangent, Chord, and Diameter:** Draw the tangent PRZ at P (touching the circle). Through S draw chord PV (cutting the circle at V on the far side). Draw the diameter VA through V. The {tanteal|tangent PRZ} is the heart — the forceless path. The {diampurple|chord PV through S and diameter VA} link S to the circle's geometry. In the text: "the chord PV is the line through S that connects to the far side of the circle. The diameter VA through V gives us the circle's radius — and with it, the similar triangles that will unlock the ratio we need."
+**Station 3 — Construction and Force Law:** Add QT ⟂ SP (foot T), LR ∥ SP through Q, point R on tangent. Heart: constred QT and LR. Text: similar triangles ZQR,ZTP,ZPA → QT²/QR ∝ PV³ → F ∝ 1/(SP²·PV³). When S=centre, PV=diameter → 1/SP². Q.E.D.
 
-**Step 3 — The Construction and Force Law:** Draw QT perpendicular to SP, and LR through Q parallel to SP (Prop. VI's standard construction, adapted for the circle). The {constred|construction QT ⟂ SP and LR ∥ SP} is the heart. The circle's geometry gives the proportion QT²/QR ∝ 1/PV³ through similar triangles ZQR, ZTP, ZPA. Plug into Prop. VI's formula: F ∝ 1/(SP²·PV³). In the text: "the circle collapses the messy QT²/QR ratio into the clean chord-cube law. In the special case where S is at the centre, PV becomes the diameter and the force simplifies to 1/SP² — the inverse-square law emerges naturally from the circle. This is the first glimpse of the 1/r² force that governs the solar system." End with Q.E.D.
-
-**Figure layout (Pl.3 Fig.3):**
-- A large circle VQPA
-- Point S somewhere inside (not centre), e.g., below and right of centre
-- Point P on the circumference, body's current position
-- Nearby point Q on the circle (to the left of P)
-- Tangent PRZ at P (horizontal-ish line)
-- Chord PV through S, cutting circle at V (far side)
-- Diameter VA through V (through circle centre)
-- QT perpendicular from Q to line SP
-- LR through Q parallel to SP, meeting tangent at R
-
-### GOLD EXAMPLE — prop_6.room (same construction pattern!)
-
-Prop. VII uses the identical QR/SP/QT construction as Prop. VI, but applies it to a specific curve (circle). Study prop_6 for the construction pattern. Key differences: s1 adds the circle, s2 adds chord+diameter specific to the circle, s3 derives the circle-specific force law.
-
-## RULES
-
-1. Colors LOCAL per station. Uncolored = BLACK (omit `color=black`).
-2. At least one `heart` per station.
-3. Every declared color used; every used color declared.
-4. Define points BEFORE referencing them.
-5. `segment <name> <pt1> <pt2>`, `line <name> <pt1> <pt2>` — always include a name!
-6. `angle <name> <a> <vertex> <b>` — 4 positional tokens.
-7. `parallel <name> through <pt> to <pt1> <pt2>` — use `through`+`to` keywords.
-8. `perp <name> through <pt> to <pt1> <pt2>` — use `through`+`to` keywords.
-9. `foot <name> from <pt> to <pt1> <pt2>` — use `from`+`to` keywords.
-10. `tangent_at <name> on <curve> at <pt>` — use `on`+`at` keywords.
-11. Text: `{colorname|words}` + `$math$`. 4–5 sentences, EDUCATIONAL.
-12. End final station with `\textit{Q.E.D.}`. `\` for line continuation.
+## ⛔ DO NOT
+- Use `#` comments
+- Invent your own format (no `s1`/`s2` section labels)
+- Define points outside `station` blocks
+- Skip `station N` / `gloss` / `color` / `panel` / `text` markers
+- Forget the NAME on geometry ops
+- Use `color=black` (black is default, omit)
 
 Return ONLY the `.room` file text.
