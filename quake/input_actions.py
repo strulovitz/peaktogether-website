@@ -162,6 +162,7 @@ DEFAULT_BINDINGS = {
         "read": "r",
         "interact": "e",
         "pause": "escape",
+        "ceiling": "c",
     },
 }
 

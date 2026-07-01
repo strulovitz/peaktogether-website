@@ -46,6 +46,15 @@ ALCOVE_DEPTH_M = 0.4
 PANEL_INSET_M = 0.02  # panel sits just off the wall to avoid z-fight
 CEILING_DROP_M = 0.05  # ceiling-equation quad hangs just below the ceiling (no z-fight)
 
+# Ceiling equation manual toggle (C key)
+_show_ceilings: bool = False
+
+
+def toggle_ceilings() -> bool:
+    global _show_ceilings
+    _show_ceilings = not _show_ceilings
+    return _show_ceilings
+
 
 # ======================================================================
 # PURE CORE DATA STRUCTURES
@@ -748,8 +757,8 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     _set(prog,"u_use_tint",0)
     ctx.disable(moderngl.BLEND)
 
-    # 6) ceiling equations — blood-red tint only when cleared
-    if room.room_id in state.cleared and vaos["ceiling"]:
+    # 6) ceiling equations — blood-red tint when cleared, or toggled with C key
+    if (room.room_id in state.cleared or _show_ceilings) and vaos["ceiling"]:
         ctx.enable(moderngl.BLEND); ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
         _set(prog,"u_use_tint",1); _set(prog,"u_tint",(1.0,0.0,0.0))
         for q,vao in vaos["ceiling"]:
