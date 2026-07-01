@@ -1,0 +1,58 @@
+room      lemma_10
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma X; Plate 2.
+caption   The spaces which a body describes from rest under any finite force are, from the very beginning of the motion, in the duplicate ratio of the times.
+final     2
+ceiling   lem10 :: s \propto t^2 \qquad F \propto \frac{s}{t^2}\;(\text{Cor. }4)
+
+station 1
+  gloss   The same figure as Lemma IX, now read as physics: the baseline is TIME, the ordinates are VELOCITY, and the curve is the growth of speed under a force.
+  color   timeblue #1E6FE0
+  color   velgreen #00A35A
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    D   @(1.4,0)  marker=dot label=$D$ at=S
+    point    E   @(3.0,0)  marker=dot label=$E$ at=S
+    point    B   @(1.4,1.0) marker=dot label=$B$ at=NW
+    point    C   @(3.0,2.2) marker=dot label=$C$ at=N
+    segment  AE  A E       color=timeblue label=$AE$ at=S
+    segment  AD  A D       color=timeblue label=$AD$ at=S
+    polyline curve A B C   label=$ABC$ at=NW
+    segment  DB  D B       color=velgreen heart label=$DB$ at=E
+    segment  EC  E C       color=velgreen heart label=$EC$ at=E
+  text
+    Take the very figure of Lemma IX and give it a body and a clock. Along the base we lay off \
+    {timeblue|the times $AD$ and $AE$} — time runs horizontally, so a longer segment means a \
+    longer interval since the motion began at $A$. The curve $ABC$ is now the growth of speed: \
+    a finite force (steady, or increasing, or slackening) urges the body, so at each instant it \
+    is moving faster than the last, exactly as Galileo saw in a falling stone. The upright \
+    {velgreen|ordinates $DB$ and $EC$} are the VELOCITIES reached at times $AD$ and $AE$, drawn \
+    at a fixed angle to the base. Thus the flat geometric picture becomes a record of accelerated \
+    motion, with time below and speed above.
+
+station 2
+  gloss   By Lemma IX the two triangular areas are the spaces described, and since they stand in the duplicate ratio of the times we obtain s proportional to t squared, whence Cor. 4 gives force proportional to space over time squared.
+  color   spacered #D81B60
+  color   timeblue #1E6FE0
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    D   @(1.4,0)  marker=dot label=$D$ at=S
+    point    E   @(3.0,0)  marker=dot label=$E$ at=S
+    point    B   @(1.4,1.0) marker=dot label=$B$ at=NW
+    point    C   @(3.0,2.2) marker=dot label=$C$ at=N
+    segment  AE  A E       color=timeblue label=$AE$ at=S
+    polyline curve A B C   label=$ABC$ at=NW
+    segment  DB  D B
+    segment  EC  E C
+    polygon  triABD A B D  color=spacered heart label=$ABD$ at=E
+    polygon  triACE A C E  color=spacered heart label=$ACE$ at=NE
+  text
+    A distance travelled is velocity accumulated over time, and that accumulation is precisely \
+    the AREA swept beneath the velocity curve. So the {spacered|areas $\triangle ABD$ and \
+    $\triangle ACE$ — the spaces described} in the two intervals are what we must compare. But \
+    this is the identical figure of Lemma IX, and by Lemma IX these areas are ultimately in the \
+    duplicate ratio of the base sides, namely $AD^2 : AE^2$. Since {timeblue|$AD$ and $AE$ are \
+    the times}, the spaces stand as the squares of the times — the celebrated law $s \propto t^2$ \
+    that governs everything falling from rest. Cor.\ 4 then closes the ring: rearranging \
+    $s \propto F\,t^2$ we read off $F \propto \dfrac{s}{t^2}$, so the forces are as the spaces \
+    directly and the squares of the times inversely. \textit{Q.E.D.}
