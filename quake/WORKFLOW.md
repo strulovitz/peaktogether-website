@@ -510,7 +510,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 9. NEXT STEPS (July 1, 2026 — BUILD PIPELINE session)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)** | ~~Parent 17~~ ✅
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)** | ~~Parent 17~~ ✅ | ~~Parent 18~~ ❌ FIRED | ~~Parent 20~~ ❌ FIRED | **~~Parent 21~~ ✅ DONE (real 3D corridors!)**
 
 ### DONE — Parent 17: Fix the Wall Packer
 1. ✅ Best-fit-decreasing wall packer delivered by Opus
@@ -534,28 +534,37 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 3. ✅ `app.py` — single-corridor floorplan, savegame fix
 4. ✅ Savegame auto-upgrade: old corridor saves restart in first room
 
-### ⏳ ACTIVE — Parent 18: Real 3D Corridors Between Rooms
-- Mission: design real 3D walkable tunnels connecting room doors
-- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_18_CORRIDORS.md`
-- Written July 1, 2026 — NOT YET LAUNCHED
-- The current "corridor" is just the wireframe map with 2 nodes (NOT a real corridor)
-- Nir wants solid 3D tunnels, not wireframe, not teleport
-
 ### ⏳ ACTIVE — Parent 19: Descent-Style 3D Wireframe Automap
 - Mission: replace the flat-circle-line map with proper 3D wireframe boxes+tubes
 - Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_19_AUTOMAP.md`
-- Written July 1, 2026 — NOT YET LAUNCHED
+- Written July 1, 2026 (rewritten, 509 lines, code-first) — NOT YET LAUNCHED
 - Descent's automap = 3D wireframe rooms+cubes, colored, perspective-correct
 - Current map = flat XZ plane with circles and lines (Nir hates it)
 
-### ⏳ THEN — After Parents 18 + 19 deliver
-1. Drop in corridor geometry + renderer + nav
-2. Drop in 3D automap renderer
-3. Wire both into app.py
-4. Fix remaining Asymptote bugs (4 rooms: tangent/foot)
-5. Fix door bearing mismatches (3 rooms)
-6. Full smoke test with all 20 rooms + corridors
-7. Ship the finished pack 🚀
+### DONE — Parent 21: Real 3D Wireframe Corridors (Descent QED Box Pattern)
+1. ✅ Parent 21 delivered all 4 files (render_wire, nav_collision, guidelines, app.py)
+2. ✅ Integrated — 446/446 GREEN
+3. ✅ Box-chain tunnels (one box per path_xz segment, 12 wireframe edges each, ramp-interpolated heights)
+4. ✅ Per-segment box collision (lateral clamp, Y floor-to-ceiling, Z free)
+5. ✅ Guide-lines ride the ramping tunnel floor (LINE_STRIP via wire_program)
+6. ✅ Full floorplan renders in corridor mode — depth-test resolves bridges/underpasses
+7. ✅ Integration fix: arc-length ramp computation (not vertex interpolation) for 2-point corridors
+8. ⚠️ Nav uses socket_y=0 at all ends (rooms' socket_y not consulted). Room socket ramp to corridor cruise_y still works via the trapezoid ramp function.
+9. ✅ Verbatim deliverable saved at `QUAKE_PARENT_21_FROZEN_DELIVERABLE.md`
+
+### ⏳ NEXT — Parent 19: Descent-Style 3D Wireframe Automap
+- Mission: replace the flat-circle-line map with proper 3D wireframe boxes+tubes
+- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_19_AUTOMAP.md`
+- Written July 1, 2026 (rewritten, 509 lines, code-first) — LAUNCH THIS NEXT
+- Descent's automap = 3D wireframe rooms+cubes, colored, perspective-correct
+- Same 3D box geometry as corridors (Parent 21 already built this)
+
+### ⏳ AFTER PARENT 19
+1. Drop in automap renderer + wire into app.py (Tab toggle)
+2. Fix remaining Asymptote bugs (4 rooms: tangent/foot)
+3. Fix door bearing mismatches (3 rooms)
+4. Full smoke test with all 20 rooms + corridors + automap
+5. Ship the finished pack 🚀
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -609,7 +618,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_PARENT_21_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 — END OF CORRECTION SESSION):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 Build pipeline COMPLETE (all 6 stages). Parent 17 DONE (wall packer fixed). Game starts in room mode. Door exit → corridor mode (ugly flat map — NOT real corridors). **Parent 21** (real 3D corridors, code-writer) + **Parent 19** (Descent automap, code-writer) handoffs WRITTEN and CLEAN. Restart handoff at `quake/DEEPSEEK_RESTART_PARENT_21_GO.md`. **Everything pushed.** 🚀
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`). Then ask Nir what's next.
+🌙 **CURRENT STATE (July 1, 2026 — PARENT 21 INTEGRATED!):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 Build pipeline COMPLETE (all 6 stages). **Parent 21 DONE — Real 3D wireframe corridor box-tunnels integrated.** Descent QED pattern: box-chain tunnels (one box per path_xz segment, 12 edges each, ramp-interpolated heights, full collision, guide-lines on tunnel floor, depth-test bridges/underpasses). Full floorplan renders. **Parent 19** (Descent-style 3D wireframe automap, code-writer) handoff CLEAN and READY. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
