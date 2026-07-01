@@ -633,7 +633,26 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 Parent 19 (3D automap) and Parent 21 (3D corridors) are now MOOT — superseded by the flat pivot. No parents were used.
 
-**⏳ NEXT:** Nir play-tests the live game (`python app.py`) — walk into doors (teleport), watch the minimap marker + moods + X. Then polish per Nir's eyeball (marker size/position, colors, orientation).
+**✅ Nir play-tested — LOVES IT!** Teleport + minimap both work. Feedback applied same session:
+- ✅ **Marker was upside-down → FIXED** (V-flip the emoji quad UVs in `minimap.py`).
+- ✅ **Swapped to Nir's 5 custom emoji PNGs** (`quake/hud/emoji/`, from his Downloads) with his refined **5-mood state machine** (replaces the old 4-mood):
+  1. **arrived** = `Flushed-Face-Emoji.png` — game start / right after each teleport, until the player moves 1 metre.
+  2. **moving** = `Thinking-Face-Emoji.png` — after moving ≥1 m, until something else happens.
+  3. **panels** = `Face-with-Monocle-Emoji.png` — after shooting panels (they're colorful).
+  4. **demon** = `Fearful-Face-Emoji.png` — after releasing the hidden demon.
+  5. **cleared** = `Grinning-Face-with-Smiling-Eyes-Emoji.png` — after killing the demon.
+  - `marker_mood(state, level_id, room_id, moved)` is pure+tested; `app.py` tracks the "moved 1 m" arrival distance and passes `mood` into `draw_minimap`.
+- Added `quake/.gitignore` (savegame.json / __pycache__ / *.pyc). **455 green.** Pushed.
+
+**🎮 CONTROLS clarification (Nir hit this):** panels are colored by **LEFT-CLICK (fire)** on a panel, NOT the `L` key. `R` = Read Mode. `L` is unbound. → make controls clearer / show a controls hint (polish list).
+
+**⏳ TOMORROW — POLISH (Nir's plan):**
+1. Nir eyeballs the fixed upright emoji orientation in-game (should be correct now).
+2. **Polish the game graphics + the text/figures on the walls** (the room panels) — the big visual pass Nir wants.
+3. Make controls obvious (fire=color panels, R=read, doors=teleport) — maybe an on-screen hint.
+4. Optional minimap tweaks after eyeballing: marker size/position, map orientation, dot sizes.
+5. Known-minor: a few rooms have 2 doors at near-identical map bearings (two neighbors share a direction) — cosmetic.
+- Preview PNGs (DeepSeek can't see images): `%TEMP%\opencode\minimap_preview.png` + `minimap_preview2.png`.
 
 ---
 
@@ -645,6 +664,6 @@ Parent 19 (3D automap) and Parent 21 (3D corridors) are now MOOT — superseded 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 — THE FLAT PIVOT!):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 **BIG DECISION: abandoned 3D walkable corridors → going FLAT** (2D graph + teleport doors + corner minimap HUD with a mood-emoji player marker + X on cleared rooms; rooms stay first-person 3D). **PREP DONE:** reverted `layout_force.py` to `844dedd`, regenerated a truly FLAT floorplan (0 crossings), rebuilt all 20 room runtimes with compass-accurate doors, pushed. **NEXT: two code-writer parents (no children) — (1) teleport navigation, (2) corner minimap HUD.** Parents 19 & 21 are now moot. See "THE BIG PIVOT" section above for full detail. **Everything pushed.** 🚀
+🌙 **CURRENT STATE (July 1, 2026 — FLAT PIVOT SHIPPED!):** 🏆 **20/20 rooms DONE. 455 GREEN.** 🏆 **Abandoned 3D corridors → FLAT** (2D graph + teleport doors + corner minimap HUD; rooms stay first-person 3D). **DONE by DeepSeek (Nir said do it myself, no parents):** (1) flat 0-crossing floorplan regenerated + rooms rebuilt with compass doors; (2) **teleport navigation** (`gameplay.py` `_teleport_through_door`); (3) **corner minimap HUD** (`minimap.py`) — importance dots + links + red X on cleared + **Nir's 5 custom emoji PNGs** as the mood marker (arrived/moving/panels/demon/cleared). Nir play-tested & loves it; upside-down marker FIXED. **NEXT (tomorrow): POLISH** — game graphics + wall panel text/figures, clearer controls (fire=color panels), optional minimap tweaks. Parents 19 & 21 moot. See "THE BIG PIVOT" section above. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
