@@ -284,6 +284,14 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
         camera = Camera()
         _log("main: entering frame loop")
         room_navs: dict = {}                  # lazily filled on ModeSwitch -> room
+
+        # Start in a room directly — build its nav now.
+        if state.mode == "room" and state.current_room_id is not None:
+            room_data = pack.rooms.get(state.current_room_id)
+            if room_data is not None:
+                room_navs[state.current_room_id] = build_room_nav(room_data)
+                _log(f"main: room nav built for {state.current_room_id}")
+
         read_state = ReadState()
 
         # Seed guidelines for the first frames. current_room_id may be None in

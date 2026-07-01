@@ -29,16 +29,16 @@ def _stub_pack():
     return Pack(floorplan=fp, rooms={}, manifest=None, palette=None, asset_dir=".")
 
 
-def test_new_state_corridor():
+def test_new_state_starts_in_room():
     pack = _stub_pack()
     state = new_state(pack)
 
-    assert state.mode == "corridor"
-    assert state.current_room_id is None
+    assert state.mode == "room"
+    assert state.current_room_id == "alpha"   # lexicographically first room
     assert state.lit == set()
     assert state.cleared == set()
-    # Lowest room_id is "alpha": (map_xz[0], socket_y, map_xz[1])
-    assert state.pos == (10.0, 0.5, 20.0)
+    # pack.rooms is empty in stub, so pos defaults to origin
+    assert state.pos == (0.0, 0.0, 0.0)
     assert state.heading_rad == 0.0
     assert state.pitch_rad == 0.0
     assert state.save.profile_id == "default"

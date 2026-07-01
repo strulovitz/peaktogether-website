@@ -27,10 +27,18 @@ from contracts import (
 
 
 def new_state(pack: Pack, profile_id: str = "default") -> GameState:
-    """Create a fresh GameState for a new game."""
-    # Find the FloorRoom with the lowest room_id (string sort).
+    """Create a fresh GameState for a new game. Starts inside the first room."""
     start_room: FloorRoom = min(pack.floorplan.rooms, key=lambda r: r.room_id)
-    pos: Vec3 = (start_room.map_xz[0], start_room.socket_y, start_room.map_xz[1])
+    room_id: NodeId = start_room.room_id
+    room_rt = pack.rooms.get(room_id)
+
+    # Default spawn: first door, or room center at floor level.
+    pos: Vec3 = (0.0, 0.0, 0.0)
+    heading: float = 0.0
+    if room_rt is not None and room_rt.doors:
+        first_door = room_rt.doors[0]
+        pos = first_door.spawn_xyz
+        heading = first_door.spawn_heading_rad
 
     level_id: LevelId = pack.floorplan.level_id
 
@@ -40,19 +48,19 @@ def new_state(pack: Pack, profile_id: str = "default") -> GameState:
         levels={level_id: LevelProgress()},
         player=PlayerSave(
             level_id=level_id,
-            mode="corridor",
-            current_room_id=None,
+            mode="room",
+            current_room_id=room_id,
             position_xyz=pos,
-            heading_rad=0.0,
+            heading_rad=heading,
         ),
     )
 
     return GameState(
         save=save_game,
-        mode="corridor",
-        current_room_id=None,
+        mode="room",
+        current_room_id=room_id,
         pos=pos,
-        heading_rad=0.0,
+        heading_rad=heading,
         pitch_rad=0.0,
         lit=set(),
         cleared=set(),

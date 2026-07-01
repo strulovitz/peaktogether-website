@@ -255,19 +255,30 @@ def test_walk_uses_nav():
 
 
 def test_modeswitch_out_of_room():
+    # Player walks through a door: teleports directly to the neighbor room.
+    room_alpha = _room("r.s1", [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)], room_id="alpha")
+    # Neighbor room (beta) has a door leading back to alpha
+    door_back = DoorRT(
+        edge_id="edge.beta.to.alpha", neighbor_id="alpha",
+        bearing_rad=3.14, wall="W", center_xyz=(-5.0, 1.5, 0.0),
+        width_m=1.2, height_m=2.4, normal_yaw_rad=3.14,
+        spawn_xyz=(-3.0, 0.0, 0.0), spawn_heading_rad=0.0,
+    )
+    room_beta = _room("r.s2", [_pair("r.s1", 0, "S", (0, 1.5, 5), 0.0)], room_id="beta")
+    room_beta.doors = [door_back]
     state = _stub_state(mode="room", room_id="alpha", pos=(3.0, 0.0, 0.0))
-    room = _room("r.s1", [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)], room_id="alpha")
-    frooms = [_floorroom("alpha", 100.0, 100.0)]
-    pack = _stub_pack(room, extra_floor_rooms=frooms)
-    nav = _stub_nav_with_door("edge1")
+    frooms = [_floorroom("alpha", 100.0, 100.0), _floorroom("beta", 200.0, 200.0)]
+    pack = _stub_pack(room_alpha, extra_floor_rooms=frooms, extra_rooms={"beta": room_beta})
+    nav = _stub_nav_with_door("edge.alpha.to.beta")
     evs = step(state, Actions(), pack, nav, 0.016)
     sw = [e for e in evs if e.event == "mode_switch"]
     assert len(sw) == 1
-    assert sw[0].to == "corridor"
-    assert sw[0].room_id == "alpha"
-    assert sw[0].via_edge_id == "edge1"
-    assert state.mode == "corridor"
-    assert state.current_room_id is None
+    assert sw[0].to == "room"            # stays in room mode
+    assert sw[0].room_id == "beta"       # teleports to beta
+    assert state.mode == "room"
+    assert state.current_room_id == "beta"
+    assert state.pos == (-3.0, 0.0, 0.0)  # beta's door spawn
+    assert state.heading_rad == 0.0
 
 
 def test_modeswitch_into_room():
