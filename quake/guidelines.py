@@ -14,6 +14,7 @@ GL context; the draw is skipped when HAVE_GL is False.
 
 from __future__ import annotations
 
+import math
 from collections import deque
 
 from contracts import (Floorplan, FloorRoom, Corridor, NodeId, Vec2, Vec3,
@@ -26,6 +27,48 @@ try:
     from glguard import HAVE_GL
 except Exception:
     HAVE_GL = False
+
+_CORRIDOR_HEIGHT_M = 3.0
+_RAMP_FRACTION = 0.30
+
+
+def _compute_floor_y_at_xz(fp: Floorplan, x: float, z: float) -> float:
+    """Corridor floor Y at (x,z) using the same trapezoid ramp as the tunnel boxes."""
+    for cor in fp.corridors:
+        pts = cor.path_xz
+        if len(pts) < 2:
+            continue
+        seg_lens = []
+        for n in range(len(pts) - 1):
+            dx = pts[n + 1][0] - pts[n][0]
+            dz = pts[n + 1][1] - pts[n][1]
+            seg_lens.append(math.hypot(dx, dz))
+        total = sum(seg_lens)
+        if total < 1e-9:
+            continue
+        cum = [0.0]
+        for sl in seg_lens:
+            cum.append(cum[-1] + sl)
+        for n in range(len(pts) - 1):
+            ax, az = pts[n][0], pts[n][1]
+            bx, bz = pts[n + 1][0], pts[n + 1][1]
+            dx, dz = bx - ax, bz - az
+            seg_len2 = dx * dx + dz * dz
+            if seg_len2 < 1e-9:
+                continue
+            t = ((x - ax) * dx + (z - az) * dz) / seg_len2
+            if t < -0.1 or t > 1.1:
+                continue
+            t = max(0.0, min(1.0, t))
+            arc = cum[n] + t * seg_lens[n]
+            u = arc / total
+            if u < 0.0:
+                u = 0.0
+            if u > 1.0:
+                u = 1.0
+            ramp = max(0.0, min(u / _RAMP_FRACTION, (1.0 - u) / _RAMP_FRACTION, 1.0))
+            return cor.cruise_y * ramp
+    return 0.0
 
 
 # ==========================================================================
@@ -259,24 +302,58 @@ def _gl_floor_y(room: FloorRoom) -> float:
 
 def _gl_draw_strip(view: ViewMatrix, points_xyz: list[Vec3],
                    color_rgb: Vec3, alpha: float) -> None:
-    """Draw a polyline/ribbon strip on the floor.
+    """Draw a floor guide-line polyline via the simple wire_program (LINE_STRIP)."""
+    if not HAVE_GL or len(points_xyz) < 2:
+        return
+    try:
+        import moderngl
+        ctx = moderngl.get_context()
+    except Exception:
+        return
+    try:
+        from shaders import wire_program
+    except Exception:
+        return
+    prog = wire_program(ctx)
+    if prog is None:
+        return
 
-    INTEGRATION: confirm exact API. Simplest path: feed `points_xyz` to
-    shaders.wire_program as a line strip (or thin ribbon of line-quads).
-    This wrapper is the single place that touches moderngl/pyglet; it is
-    never reached headless (HAVE_GL gate in draw_guidelines).
-    """
-    # INTEGRATION: confirm exact API — pseudocode below.
-    #   from shaders import wire_program
-    #   prog = wire_program()
-    #   prog["u_view"] = view  # row-major; confirm transpose convention
-    #   prog["u_color"] = (*color_rgb, alpha)
-    #   vbo = ctx.buffer(flatten(points_xyz))
-    #   vao = ctx.vertex_array(prog, [(vbo, "3f", "in_pos")])
-    #   vao.render(mode=LINE_STRIP)
-    # INTEGRATION: GL strip draw not yet wired — silently skip guide-line
-    # rendering rather than crashing. Guidelines are visual polish only.
-    return
+    import numpy as np
+    pts = np.asarray(points_xyz, dtype=np.float32)
+    cols = np.tile(np.asarray(color_rgb, dtype=np.float32), (pts.shape[0], 1))
+
+    vbo_p = None
+    vbo_c = None
+    vao = None
+    try:
+        vbo_p = ctx.buffer(pts.tobytes())
+        vbo_c = ctx.buffer(cols.tobytes())
+        vao = ctx.vertex_array(
+            prog,
+            [(vbo_p, '3f', 'in_pos'), (vbo_c, '3f', 'in_color')],
+        )
+
+        vp = np.ascontiguousarray(np.asarray(view, dtype=np.float32).T)
+        try:
+            prog['u_mvp'].write(vp.tobytes())
+        except Exception:
+            pass
+
+        ctx.enable(moderngl.DEPTH_TEST)
+        ctx.depth_func = "<="
+        ctx.depth_mask = True
+        ctx.disable(moderngl.BLEND)
+
+        vao.render(mode=moderngl.LINE_STRIP)
+    except Exception:
+        pass
+    finally:
+        for obj in (vao, vbo_p, vbo_c):
+            try:
+                if obj is not None:
+                    obj.release()
+            except Exception:
+                pass
 
 
 def draw_guidelines(
@@ -315,16 +392,15 @@ def draw_guidelines(
         if len(route2d) < 2:
             continue
 
-        target_room = rooms[tid]
-        y = _gl_floor_y(target_room)
-        color = _hex_to_rgb01(target_room.map_color)
+        color = _hex_to_rgb01(rooms[tid].map_color)
 
-        # XZ -> XYZ (Y is up).
-        route3d: list[Vec3] = [(x, y, z) for (x, z) in route2d]
+        route3d: list[Vec3] = [
+            (x, _compute_floor_y_at_xz(fp, x, z) + 0.02, z) for (x, z) in route2d
+        ]
         _gl_draw_strip(view, route3d, color, alpha=0.65)
 
-        # Arrowhead at the tip.
         barbs = _arrowhead_xz(route2d[-2], route2d[-1], size=0.4)
-        barb3d: list[Vec3] = [(x, y, z) for (x, z) in barbs]
-        # two segments: left->tip, tip->right
+        barb3d: list[Vec3] = [
+            (x, _compute_floor_y_at_xz(fp, x, z) + 0.02, z) for (x, z) in barbs
+        ]
         _gl_draw_strip(view, barb3d, color, alpha=0.65)

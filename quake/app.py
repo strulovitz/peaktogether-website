@@ -437,7 +437,12 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
 
             # 6b) recompute guidelines when signaled (gameplay sends targets=[])
             if outcome.recompute_guidelines:
-                gcur = state.current_room_id or _start_node(pack)
+                if state.mode == "corridor" and outcome.travel_edge_id is not None:
+                    parts = outcome.travel_edge_id.split(".to.")
+                    src_cand = parts[0].replace("edge.", "") if len(parts) == 2 else None
+                    gcur = src_cand if src_cand else (state.current_room_id or _start_node(pack))
+                else:
+                    gcur = state.current_room_id or _start_node(pack)
                 try:
                     targets = select_targets(pack.floorplan, gcur, state.cleared, cfg) \
                         if gcur is not None else []
@@ -468,7 +473,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (10) render by mode
             try:
                 if state.mode == "corridor":
-                    render_fp = _active_corridor[0] if _active_corridor[0] is not None else pack.floorplan
+                    render_fp = pack.floorplan
                     def _gl(v, p, aspect):
                         vp = np.ascontiguousarray(p @ v, dtype=np.float32)
                         draw_guidelines(vp, render_fp, targets)

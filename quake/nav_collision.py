@@ -26,6 +26,9 @@ CORRIDOR_SLIDE_SOFTNESS = 0.5  # rail-assist nudge factor (0=hard boundary, 1=fu
 
 _EPS = 1e-9
 
+_CORRIDOR_HEIGHT_M = 3.0
+_RAMP_FRACTION = 0.30
+
 
 # ----------------------------------------------------------------------------
 # Small vector helpers (local, pure)
@@ -157,120 +160,116 @@ def _closest_on_segment_xz(
     return ((cx, cz), t)
 
 
+def _corridor_vertex_heights_nav(cor: Corridor) -> list:
+    """Y at each path_xz vertex — identical formula to render_wire._corridor_vertex_heights."""
+    pts = cor.path_xz
+    seg_lens = []
+    for n in range(len(pts) - 1):
+        dx = pts[n + 1][0] - pts[n][0]
+        dz = pts[n + 1][1] - pts[n][1]
+        seg_lens.append(math.hypot(dx, dz))
+    total = sum(seg_lens)
+    cum = [0.0]
+    for sl in seg_lens:
+        cum.append(cum[-1] + sl)
+    ys = []
+    cy = cor.cruise_y
+    for i in range(len(pts)):
+        u = (cum[i] / total) if total > _EPS else 0.0
+        if u < 0.0:
+            u = 0.0
+        if u > 1.0:
+            u = 1.0
+        ramp = max(0.0, min(u / _RAMP_FRACTION, (1.0 - u) / _RAMP_FRACTION, 1.0))
+        ys.append(cy * ramp)
+    return ys
+
+
 class _CorridorNav:
     def __init__(self, fp: Floorplan):
         self._corridors = list(fp.corridors)
         self._rooms = list(fp.rooms)
-
-    # --- corridor segment selection -------------------------------------
-    def _nearest_segment(self, p_xz: Vec2):
-        """Find nearest (corridor, segment_index, closest_xz, t, dist) over all
-        corridor path segments."""
-        best = None
+        self._segments = []
         for cor in self._corridors:
-            path = cor.path_xz
-            if len(path) < 2:
+            pts = cor.path_xz
+            if len(pts) < 2:
                 continue
-            for i in range(len(path) - 1):
-                a = path[i]
-                b = path[i + 1]
-                cpt, t = _closest_on_segment_xz(p_xz, a, b)
-                dx = p_xz[0] - cpt[0]
-                dz = p_xz[1] - cpt[1]
-                dist = math.hypot(dx, dz)
-                if best is None or dist < best[4]:
-                    best = (cor, i, cpt, t, dist)
-        return best
+            seg_lens = []
+            for n in range(len(pts) - 1):
+                dx = pts[n + 1][0] - pts[n][0]
+                dz = pts[n + 1][1] - pts[n][1]
+                seg_lens.append(math.hypot(dx, dz))
+            total = sum(seg_lens)
+            cum = [0.0]
+            for sl in seg_lens:
+                cum.append(cum[-1] + sl)
+            half_w = cor.width_m / 2.0
+            for n in range(len(pts) - 1):
+                ax, az = pts[n][0], pts[n][1]
+                bx, bz = pts[n + 1][0], pts[n + 1][1]
+                dx, dz = bx - ax, bz - az
+                seg_len = math.hypot(dx, dz)
+                if seg_len < _EPS:
+                    continue
+                fwd = (dx / seg_len, dz / seg_len)
+                right = (-fwd[1], fwd[0])
+                self._segments.append((
+                    (ax, az), (bx, bz),
+                    cor, cum[n], cum[n + 1], total,
+                    right, half_w,
+                ))
 
     def resolve_player_motion(self, start: Vec3, delta: Vec3) -> Vec3:
-        # Proposed XZ target
         tx = start[0] + delta[0]
+        ty = start[1] + delta[1]
         tz = start[2] + delta[2]
-        target_xz = (tx, tz)
 
-        best = self._nearest_segment(target_xz)
-        if best is None:
-            # No corridors: fall back to passing motion through unchanged.
-            return (tx, start[1] + delta[1], tz)
+        if not self._segments:
+            return (tx, ty, tz)
 
-        cor, seg_i, cpt, t, dist = best
-        half_w = cor.width_m / 2.0
+        best = None
+        best_dist = float("inf")
+        for seg in self._segments:
+            s_xz, e_xz, cor, arc_s, arc_e, total, right, half_w = seg
+            cpt, t = _closest_on_segment_xz((tx, tz), s_xz, e_xz)
+            dist = math.hypot(tx - cpt[0], tz - cpt[1])
+            if dist < best_dist:
+                best_dist = dist
+                best = (seg, cpt, t)
 
-        # Clamp XZ to within half-width of centerline, with soft slide.
-        if dist > half_w:
-            # vector from centerline point to target
-            ox = tx - cpt[0]
-            oz = tz - cpt[1]
-            n = math.hypot(ox, oz)
-            if n > _EPS:
-                ux, uz = ox / n, oz / n
-            else:
-                ux, uz = 0.0, 0.0
-            # Hard clamp position is at half_w from centerline.
-            clamp_x = cpt[0] + ux * half_w
-            clamp_z = cpt[1] + uz * half_w
-            # Soft nudge: blend between clamp position and centerline by
-            # CORRIDOR_SLIDE_SOFTNESS. 0 => hard at boundary, 1 => full pull to centerline.
-            rx = clamp_x + (cpt[0] - clamp_x) * CORRIDOR_SLIDE_SOFTNESS
-            rz = clamp_z + (cpt[1] - clamp_z) * CORRIDOR_SLIDE_SOFTNESS
-            fx, fz = rx, rz
-            # recompute t along segment for the clamped position
-            path = cor.path_xz
-            _, t = _closest_on_segment_xz((fx, fz), path[seg_i], path[seg_i + 1])
-        else:
-            fx, fz = tx, tz
+        seg, cpt, t = best
+        s_xz, e_xz, cor, arc_s, arc_e, total, right, half_w = seg
 
-        # Floor height: interpolate cruise_y along the segment. path_xz is 2D
-        # so the corridor has a single cruise_y; ramps are modeled where the
-        # corridor's cruise_y differs from a node socket. We interpolate
-        # between the endpoint heights. The endpoint heights default to
-        # cruise_y, but if a corridor encodes ramps via per-vertex y we use
-        # the helper below.
-        y = self._floor_height(cor, seg_i, t)
+        arc = arc_s + (arc_e - arc_s) * t
+        u = (arc / total) if total > _EPS else 0.0
+        if u < 0.0:
+            u = 0.0
+        if u > 1.0:
+            u = 1.0
+        ramp = max(0.0, min(u / _RAMP_FRACTION, (1.0 - u) / _RAMP_FRACTION, 1.0))
+        floor_y = float(cor.cruise_y) * ramp
 
-        return (fx, y, fz)
+        lateral = (tx - cpt[0]) * right[0] + (tz - cpt[1]) * right[1]
+        if lateral > half_w:
+            lateral = half_w
+        elif lateral < -half_w:
+            lateral = -half_w
+        fx = cpt[0] + lateral * right[0]
+        fz = cpt[1] + lateral * right[1]
 
-    def _floor_height(self, cor: Corridor, seg_i: int, t: float) -> float:
-        """Interpolate floor height along the segment.
+        cy = ty
+        if cy < floor_y:
+            cy = floor_y
+        elif cy > floor_y + _CORRIDOR_HEIGHT_M:
+            cy = floor_y + _CORRIDOR_HEIGHT_M
 
-        path_xz entries are 2D. Ramp support: endpoint heights are derived
-        from the connected node sockets when available; otherwise cruise_y.
-        We interpolate linearly with t.
-        """
-        path = cor.path_xz
-        y_start = self._height_at_vertex(cor, seg_i)
-        y_end = self._height_at_vertex(cor, seg_i + 1)
-        return y_start + (y_end - y_start) * t
-
-    def _height_at_vertex(self, cor: Corridor, idx: int) -> float:
-        """Height at a corridor vertex.
-
-        The first vertex connects to `source` socket; the last to `target`.
-        If a matching room socket exists, use its socket_y to create ramps.
-        Otherwise use cruise_y.
-        """
-        path = cor.path_xz
-        if idx == 0:
-            sy = self._socket_y(cor.source)
-            if sy is not None:
-                return sy
-        if idx == len(path) - 1:
-            sy = self._socket_y(cor.target)
-            if sy is not None:
-                return sy
-        return cor.cruise_y
-
-    def _socket_y(self, node_id: NodeId):
-        for r in self._rooms:
-            if r.room_id == node_id:
-                return r.socket_y
-        return None
+        return (fx, cy, fz)
 
     def nearest_panel(self, ray: Ray, max_dist: float) -> PanelHit | None:
-        return None  # corridors have no panels
+        return None
 
     def door_at(self, point: Vec3) -> str | None:
-        return None  # corridor nav: no doors
+        return None
 
 
 def build_corridor_nav(fp: Floorplan) -> NavQuery:

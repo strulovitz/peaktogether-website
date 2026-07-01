@@ -6,11 +6,121 @@ Thick camera-facing line-quads (GS, CPU-billboard fallback), distance-dim white-
 """
 from __future__ import annotations
 from dataclasses import dataclass
+import math
 import numpy as np
 from contracts import Floorplan, Hex, GameState, ViewMatrix
 
 WIRE_BASE = (1.0, 1.0, 1.0)
 RING_SEGMENTS = 48
+
+_CORRIDOR_HEIGHT_M = 3.0
+_RAMP_FRACTION = 0.30
+
+
+def _ramp_y(u: float) -> float:
+    """Symmetric trapezoid: 0 at ends, 1 across the middle. u = arc-length fraction."""
+    if u < 0.0:
+        u = 0.0
+    if u > 1.0:
+        u = 1.0
+    return max(0.0, min(u / _RAMP_FRACTION, (1.0 - u) / _RAMP_FRACTION, 1.0))
+
+
+def _corridor_vertex_heights(cor) -> list:
+    """Y at each path_xz vertex: socket_y(0) at ends, ramping to cruise_y in middle."""
+    pts = cor.path_xz
+    seg_lens = []
+    for n in range(len(pts) - 1):
+        dx = float(pts[n + 1][0]) - float(pts[n][0])
+        dz = float(pts[n + 1][1]) - float(pts[n][1])
+        seg_lens.append(math.hypot(dx, dz))
+    total = sum(seg_lens)
+    cum = [0.0]
+    for sl in seg_lens:
+        cum.append(cum[-1] + sl)
+    ys = []
+    cy = float(cor.cruise_y)
+    for i in range(len(pts)):
+        u = (cum[i] / total) if total > 1e-9 else 0.0
+        ys.append(cy * _ramp_y(u))
+    return ys
+
+
+def _box_segment_edges(start, end, right, up, width, height) -> list:
+    """12 wireframe edges ((2,3) float32) for one gravity-aligned box prism."""
+    hw, hh = width / 2.0, height / 2.0
+    cs = [start + right * hw * sx + up * hh * sy
+          for sx, sy in ((1, 1), (1, -1), (-1, -1), (-1, 1))]
+    ce = [end + right * hw * sx + up * hh * sy
+          for sx, sy in ((1, 1), (1, -1), (-1, -1), (-1, 1))]
+    edges = []
+    for i in range(4):
+        edges.append(np.array([cs[i], cs[(i + 1) % 4]], dtype=np.float32))
+    for i in range(4):
+        edges.append(np.array([ce[i], ce[(i + 1) % 4]], dtype=np.float32))
+    for i in range(4):
+        edges.append(np.array([cs[i], ce[i]], dtype=np.float32))
+    return edges
+
+
+def _build_tunnel_mesh(fp: Floorplan) -> WireMesh:
+    """Corridor mode mesh: 3D box-chain tunnels (one box per path segment) + room rings."""
+    seg_list = []
+    seg_col_list = []
+    base = WIRE_BASE
+    up = np.array([0.0, 1.0, 0.0], dtype=np.float32)
+
+    for cor in fp.corridors:
+        pts = cor.path_xz
+        if len(pts) < 2:
+            continue
+        y_vals = _corridor_vertex_heights(cor)
+        width = float(cor.width_m)
+        for n in range(len(pts) - 1):
+            ax, az = float(pts[n][0]), float(pts[n][1])
+            bx, bz = float(pts[n + 1][0]), float(pts[n + 1][1])
+            direction = np.array([bx - ax, 0.0, bz - az], dtype=np.float32)
+            length = float(np.linalg.norm(direction))
+            if length < 1e-6:
+                continue
+            direction = direction / length
+            right = np.cross(up, direction)
+            rn = float(np.linalg.norm(right))
+            if rn < 1e-6:
+                continue
+            right = right / rn
+            start = np.array([ax, y_vals[n], az], dtype=np.float32)
+            end = np.array([bx, y_vals[n + 1], bz], dtype=np.float32)
+            edges = _box_segment_edges(start, end, right, up, width, _CORRIDOR_HEIGHT_M)
+            seg_list.extend(edges)
+            seg_col_list.extend([base] * len(edges))
+
+    line_segments = (np.stack(seg_list, 0).astype(np.float32)
+                     if seg_list else np.zeros((0, 2, 3), np.float32))
+    seg_colors = (np.array(seg_col_list, np.float32)
+                  if seg_col_list else np.zeros((0, 3), np.float32))
+
+    ring_list = []
+    ring_col_list = []
+    angles = (2.0 * np.pi) * (np.arange(RING_SEGMENTS, dtype=np.float64) / float(RING_SEGMENTS))
+    next_angles = (2.0 * np.pi) * ((np.arange(RING_SEGMENTS, dtype=np.float64) + 1.0) / float(RING_SEGMENTS))
+    for room in fp.rooms:
+        cx, cz = float(room.map_xz[0]), float(room.map_xz[1])
+        r = float(room.map_radius_m)
+        y = float(room.socket_y)
+        rgb = hex_to_rgb(room.map_color)
+        for k in range(RING_SEGMENTS):
+            t0, t1 = angles[k], next_angles[k]
+            ring_list.append(np.array(
+                [[cx + r * np.cos(t0), y, cz + r * np.sin(t0)],
+                 [cx + r * np.cos(t1), y, cz + r * np.sin(t1)]], dtype=np.float32))
+            ring_col_list.append(rgb)
+    ring_segments = (np.stack(ring_list, 0).astype(np.float32)
+                     if ring_list else np.zeros((0, 2, 3), np.float32))
+    ring_colors = (np.array(ring_col_list, np.float32)
+                   if ring_col_list else np.zeros((0, 3), np.float32))
+
+    return WireMesh(line_segments, seg_colors, ring_segments, ring_colors)
 
 # ---- tuning (NDC half-thickness; dimming distances in world metres) ----
 LINE_HALF_PX = 0.0025      # half-thickness in NDC-Y (holds up at distance)
@@ -133,7 +243,7 @@ def _get_wire_resources(ctx, fp):
     if prog is None:
         prog=wire_quad_cpu_program(ctx)          # CPU-billboard fallback
         _USE_GS=False
-    mesh=build_wire_mesh(fp)
+    mesh=_build_tunnel_mesh(fp)
     seg_pos,seg_col=_flatten_segments(mesh.line_segments,mesh.seg_colors)
     ring_pos,ring_col=_flatten_segments(mesh.ring_segments,mesh.ring_colors)
     pos=np.concatenate([seg_pos,ring_pos],0) if (seg_pos.shape[0]+ring_pos.shape[0]) else np.zeros((0,3),np.float32)
