@@ -607,7 +607,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 7. **Restart handoff written** — `DEEPSEEK_RESTART_PARENT_21_GO.md`. Launch protocol: Commentaries + OT + NT + Parent 21 handoff. Talk-first. Then launch Parent 19 after Parent 21 integrates.
 
-**Current situation:** 446/446 green. 20/20 rooms built. Parent 18 reverted. Parents 20, 18 both fired. Parent 21 handoff ready. Parent 19 handoff rewritten. No parents active.
+**Current situation:** 446/446 green. 20/20 rooms built. Parent 21 integrated (real 3D corridor box-tunnels). Corridors render but have unresolved bugs: no wall collision (player floats freely), guidelines route from wrong room (always law_1 — FIXED with gcur param), no distance dimming (DIM constants tuned for 220m world, actual world is ~30m), corridors too short (rooms overlap on map, center-to-center gaps only 6-14m with 6m radii). The entire corridor system needs a fresh approach — too many interdependent moving parts for incremental fixes. Parent 19 (automap) not launched. No parents active.
 
 ---
 
