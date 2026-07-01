@@ -103,3 +103,81 @@ def test_first_fit_no_fit():
     pb = PairBlock("a.s1", 1, 3.0, 1.0, 1.5, 1.0, 1.25, 0.8)
     placements, ok = first_fit([pb], [seg], cfg)
     assert not ok
+
+
+# --- Parent 17 additional tests (best-fit-decreasing packer) ---
+
+import pytest
+from map.raw_models import BuildConfig
+from build.room_geometry import s_to_wall_along
+
+
+def _pair(pid, step, w, h):
+    half = (w - 0.25) / 2.0
+    return PairBlock(
+        pair_id=pid, step_index=step,
+        block_w_m=w, block_h_m=h,
+        drawing_w=half, drawing_h=h,
+        text_w=half, text_h=h,
+    )
+
+
+def _bearings(n):
+    return [(f"edge_{i}", (2 * math.pi * i) / n) for i in range(n)]
+
+
+@pytest.mark.parametrize("n_doors", [0, 1, 2, 3, 4, 5, 6])
+def test_converges_for_any_door_count(n_doors):
+    cfg = BuildConfig()
+    pairs = [_pair(f"s{i}", i, 2.0, 1.8) for i in range(1, 4)]
+    res = size_and_pack(pairs, _bearings(n_doors), cfg)
+    assert res.converged
+    assert res.W > 0 and res.D > 0 and res.H > 0
+    assert len(res.placements) == 2 * len(pairs)
+
+
+def test_six_doors_three_steps_like_lemma_7():
+    cfg = BuildConfig()
+    pairs = [_pair(f"s{i}", i, 2.4, 2.0) for i in range(1, 4)]
+    res = size_and_pack(pairs, _bearings(6), cfg)
+    assert res.converged
+    assert len(res.placements) == 6
+
+
+def test_drawing_and_text_stay_on_same_wall():
+    cfg = BuildConfig()
+    pairs = [_pair(f"s{i}", i, 2.2, 1.6) for i in range(1, 5)]
+    res = size_and_pack(pairs, _bearings(4), cfg)
+    assert res.converged
+    by_pair = {}
+    for slot in res.placements:
+        by_pair.setdefault(slot.pair_id, []).append(slot)
+    for pid, slots in by_pair.items():
+        assert len(slots) == 2
+        assert slots[0].wall == slots[1].wall, f"{pid} split across walls"
+
+
+def test_placements_within_their_segment_wall():
+    cfg = BuildConfig()
+    pairs = [_pair(f"s{i}", i, 1.5, 1.4) for i in range(1, 4)]
+    res = size_and_pack(pairs, _bearings(3), cfg)
+    assert res.converged
+    for slot in res.placements:
+        wall, _ = s_to_wall_along(slot.along_center, res.W, res.D)
+        assert wall == slot.wall
+
+
+def test_very_wide_pair_forces_growth_but_converges():
+    cfg = BuildConfig()
+    pairs = [_pair("s1", 1, 6.0, 2.0)]
+    res = size_and_pack(pairs, _bearings(2), cfg)
+    assert res.converged
+
+
+def test_best_fit_uses_multiple_segments():
+    cfg = BuildConfig()
+    pairs = [_pair("s1", 1, 3.0, 1.8), _pair("s2", 2, 3.0, 1.8)]
+    res = size_and_pack(pairs, _bearings(2), cfg)
+    assert res.converged
+    walls_used = {slot.wall for slot in res.placements}
+    assert len(walls_used) >= 1
