@@ -248,23 +248,7 @@ def _single_corridor_floorplan(fp, edge_id):
     )
 
 # Module-level active-corridor state (non-persisted, reset on room entry)
-_active_corridor = [None, None]  # [floorplan, nav]
-
-def _corridor_current_node(state, outcome, pack):
-    """The node the guide-lines should originate from while in corridor mode.
-    Prefer the room just left (carried on the ModeSwitch as room_id); fall back
-    to nearest room ring to the player."""
-    rid = getattr(outcome, "switched_room_id", None)
-    if rid:
-        return rid
-    best = None
-    px, pz = state.pos[0], state.pos[2]
-    for fr in pack.floorplan.rooms:
-        dx = px - fr.map_xz[0]; dz = pz - fr.map_xz[1]
-        d2 = dx * dx + dz * dz
-        if best is None or d2 < best[1]:
-            best = (fr.room_id, d2)
-    return best[0] if best else None
+_active_corridor = [None, None]  # [floorplan, nav] — list to avoid global keyword
 
 def _gl_clear(ctx: Any, r: float, g: float, b: float, a: float) -> None:
     ctx.clear(r, g, b, a)
@@ -441,13 +425,15 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                 if outcome.switched_room_id not in room_navs:
                     room_navs[outcome.switched_room_id] = \
                         build_room_nav(pack.rooms[outcome.switched_room_id])
-                # (corridor nav persists; nothing to tear down)
+                _active_corridor[0] = None
+                _active_corridor[1] = None
 
-            # 6d) entering corridor -> build full-graph corridor nav once
-            if outcome.mode_switched_to == "corridor":
-                if _active_corridor[1] is None:
-                    _active_corridor[0] = pack.floorplan
-                    _active_corridor[1] = build_corridor_nav(pack.floorplan)
+            # 6d) entering corridor via a specific door -> build single-corridor fp
+            if outcome.mode_switched_to == "corridor" and outcome.travel_edge_id is not None:
+                _active_corridor[0] = _single_corridor_floorplan(
+                    pack.floorplan, outcome.travel_edge_id)
+                _active_corridor[1] = build_corridor_nav(_active_corridor[0])
+                _log(f"frame {frame}: single-corridor mode for edge {outcome.travel_edge_id}")
 
             # 6b) recompute guidelines when signaled (gameplay sends targets=[])
             if outcome.recompute_guidelines:
@@ -482,11 +468,10 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (10) render by mode
             try:
                 if state.mode == "corridor":
-                    render_fp = pack.floorplan
-                    guide_cur = _corridor_current_node(state, outcome, pack)
+                    render_fp = _active_corridor[0] if _active_corridor[0] is not None else pack.floorplan
                     def _gl(v, p, aspect):
                         vp = np.ascontiguousarray(p @ v, dtype=np.float32)
-                        draw_guidelines(vp, render_fp, targets, current=guide_cur)
+                        draw_guidelines(vp, render_fp, targets)
                     render_mode_a(ctx, window, view, proj, render_fp, state,
                                   guidelines_fn=_gl, targets=targets)
                 else:

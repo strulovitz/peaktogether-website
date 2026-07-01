@@ -156,14 +156,13 @@ def select_targets(
 # ==========================================================================
 
 def _route_xz(fp: Floorplan, current: NodeId, target: NodeId) -> list[Vec2]:
-    return [(p[0], p[2]) for p in _route_xyz(fp, current, target)]
+    """Trace the BFS shortest-path corridor route (XZ polyline) current->target.
 
-
-def _route_xyz(fp: Floorplan, current: NodeId, target: NodeId) -> list[Vec3]:
-    """Route from `current` to `target` as 3D points that ride the walkable
-    corridor floor (up ramps, across bridges), sitting +0.02 m above it."""
-    from corridor_height import floor_height, height_at_vertex
-
+    Walks corridor path_xz polylines along the BFS parent chain. Returns the
+    concatenated XZ polyline. Pure helper (no GL); safe headless. Returns []
+    if target is unreachable.
+    """
+    # BFS keeping parent + the corridor used for that hop.
     adj_corr: dict[NodeId, list[Corridor]] = {}
     for c in fp.corridors:
         adj_corr.setdefault(c.source, []).append(c)
@@ -186,6 +185,7 @@ def _route_xyz(fp: Floorplan, current: NodeId, target: NodeId) -> list[Vec3]:
     if target not in parent and target != current:
         return []
 
+    # Reconstruct hop chain from target back to current.
     chain: list[tuple[NodeId, NodeId, Corridor]] = []
     node = target
     while node != current and node in parent:
@@ -195,33 +195,25 @@ def _route_xyz(fp: Floorplan, current: NodeId, target: NodeId) -> list[Vec3]:
     chain.reverse()
 
     rooms = _rooms_by_id(fp)
-    rooms_list = list(fp.rooms)
-    lift = 0.02
-    pts: list[Vec3] = []
-
-    def _push(x: float, z: float, y: float) -> None:
-        p = (x, y + lift, z)
-        if not pts or (pts[-1][0] != p[0] or pts[-1][2] != p[2]):
-            pts.append(p)
-
+    pts: list[Vec2] = []
     if current in rooms:
-        r0 = rooms[current]
-        _push(r0.map_xz[0], r0.map_xz[1], r0.socket_y)
+        pts.append(rooms[current].map_xz)
 
     for prev, nxt, corr in chain:
+        # Orient corridor path so it runs prev -> nxt.
         path = list(corr.path_xz)
-        forward = not (corr.source == nxt and corr.target == prev)
-        n = len(path)
-        for j in range(n):
-            idx = j if forward else (n - 1 - j)
-            x, z = float(path[idx][0]), float(path[idx][1])
-            y = height_at_vertex(corr, idx, rooms_list)
-            _push(x, z, y)
+        if corr.source == nxt and corr.target == prev:
+            path = list(reversed(path))
+        pts.extend(path)
         if nxt in rooms:
-            rn = rooms[nxt]
-            _push(rn.map_xz[0], rn.map_xz[1], rn.socket_y)
+            pts.append(rooms[nxt].map_xz)
 
-    return pts
+    # De-duplicate consecutive identical points.
+    deduped: list[Vec2] = []
+    for p in pts:
+        if not deduped or deduped[-1] != p:
+            deduped.append(p)
+    return deduped
 
 
 def _hex_to_rgb01(hex_color: str) -> Vec3:
@@ -260,93 +252,79 @@ def _arrowhead_xz(p_prev: Vec2, p_tip: Vec2, size: float) -> list[Vec2]:
 
 # --- INTEGRATION wrappers (isolate uncertain external GL APIs) -------------
 
-_GUIDE_PROG = [None]  # cached simple wire program
+def _gl_floor_y(room: FloorRoom) -> float:
+    """Felt-floor draw height for a guide-line: socket_y + small epsilon."""
+    return room.socket_y + 0.02
 
 
-def _gl_draw_strip(vp_bytes: bytes, points_xyz: list[Vec3],
-                   color_rgb: Vec3, mode) -> None:
-    """Draw a bright polyline (LINE_STRIP) or barb set (LINES) into the
-    currently-bound framebuffer. Bright, no distance-dim, depth-tested against
-    the wire (inherits the scene's GL_LESS depth state)."""
-    if not HAVE_GL or len(points_xyz) < 2:
-        return
-    try:
-        import moderngl
-        ctx = moderngl.get_context()
-    except Exception:
-        return
-    try:
-        from shaders import wire_program
-    except Exception:
-        return
+def _gl_draw_strip(view: ViewMatrix, points_xyz: list[Vec3],
+                   color_rgb: Vec3, alpha: float) -> None:
+    """Draw a polyline/ribbon strip on the floor.
 
-    if _GUIDE_PROG[0] is None:
-        try:
-            _GUIDE_PROG[0] = wire_program(ctx)
-        except Exception:
-            return
-    prog = _GUIDE_PROG[0]
-
-    import numpy as np
-    pos = np.asarray(points_xyz, dtype=np.float32).reshape(-1, 3)
-    col = np.tile(np.asarray(color_rgb, dtype=np.float32), (pos.shape[0], 1))
-
-    try:
-        prog['u_mvp'].write(vp_bytes)
-    except Exception:
-        pass
-
-    vbo_p = ctx.buffer(pos.tobytes())
-    vbo_c = ctx.buffer(col.tobytes())
-    vao = ctx.vertex_array(
-        prog,
-        [(vbo_p, '3f', 'in_pos'), (vbo_c, '3f', 'in_color')],
-        mode=mode,
-    )
-    vao.render()
-    try:
-        vao.release(); vbo_p.release(); vbo_c.release()
-    except Exception:
-        pass
+    INTEGRATION: confirm exact API. Simplest path: feed `points_xyz` to
+    shaders.wire_program as a line strip (or thin ribbon of line-quads).
+    This wrapper is the single place that touches moderngl/pyglet; it is
+    never reached headless (HAVE_GL gate in draw_guidelines).
+    """
+    # INTEGRATION: confirm exact API — pseudocode below.
+    #   from shaders import wire_program
+    #   prog = wire_program()
+    #   prog["u_view"] = view  # row-major; confirm transpose convention
+    #   prog["u_color"] = (*color_rgb, alpha)
+    #   vbo = ctx.buffer(flatten(points_xyz))
+    #   vao = ctx.vertex_array(prog, [(vbo, "3f", "in_pos")])
+    #   vao.render(mode=LINE_STRIP)
+    # INTEGRATION: GL strip draw not yet wired — silently skip guide-line
+    # rendering rather than crashing. Guidelines are visual polish only.
+    return
 
 
 def draw_guidelines(
-    view: ViewMatrix,          # NOTE: app passes vp = proj @ view here
+    view: ViewMatrix,
     fp: Floorplan,
     targets: list[NodeId],
-    current: NodeId | None = None,
 ) -> None:
-    """Draw Half-Life-style floor guide-lines. Headless-safe."""
+    """Draw Half-Life-style floor guide-lines. Headless-safe.
+
+    The current room is inferred as the first corridor-graph node the routes
+    emanate from is supplied via the floorplan + the caller's targets. Since
+    the frozen signature does not pass `current`, we trace routes from each
+    room reachable; in practice the caller passes targets from select_targets
+    invoked with a known `current`. We resolve `current` from the floorplan's
+    first room if needed; the route helper tolerates that.
+
+    NOTE: per the brief, if targets is empty or GL is unavailable, draw nothing.
+    """
     if not HAVE_GL or not targets:
         return
+
+    rooms = _rooms_by_id(fp)
     if not fp.rooms:
         return
 
-    import numpy as np
-    import moderngl
-
-    # app hands us the combined view-projection; upload transposed (row-major GL)
-    vp = np.asarray(view, dtype=np.float32)
-    vp_bytes = np.ascontiguousarray(vp.T, dtype=np.float32).tobytes()
-
-    rooms = _rooms_by_id(fp)
-    cur = current if (current is not None and current in rooms) else fp.rooms[0].room_id
+    # Without an explicit `current` in the signature, the convention is that
+    # routes start from the player's current room. The gameplay layer that
+    # owns GameState supplies targets; here we derive `current` as the common
+    # source. Fall back to the first room.
+    current = fp.rooms[0].room_id
 
     for tid in targets:
         if tid not in rooms:
             continue
-        route3d = _route_xyz(fp, cur, tid)
-        if len(route3d) < 2:
+        route2d = _route_xz(fp, current, tid)
+        if len(route2d) < 2:
             continue
 
-        color = _hex_to_rgb01(rooms[tid].map_color)
+        target_room = rooms[tid]
+        y = _gl_floor_y(target_room)
+        color = _hex_to_rgb01(target_room.map_color)
 
-        _gl_draw_strip(vp_bytes, route3d, color, mode=moderngl.LINE_STRIP)
+        # XZ -> XYZ (Y is up).
+        route3d: list[Vec3] = [(x, y, z) for (x, z) in route2d]
+        _gl_draw_strip(view, route3d, color, alpha=0.65)
 
-        # Arrowhead at the tip, on the floor plane at the tip's Y.
-        tip = route3d[-1]
-        prev = route3d[-2]
-        barbs2d = _arrowhead_xz((prev[0], prev[2]), (tip[0], tip[2]), size=0.4)
-        y = tip[1]
-        barb3d: list[Vec3] = [(x, y, z) for (x, z) in barbs2d]
-        _gl_draw_strip(vp_bytes, barb3d, color, mode=moderngl.LINES)
+        # Arrowhead at the tip.
+        barbs = _arrowhead_xz(route2d[-2], route2d[-1], size=0.4)
+        barb3d: list[Vec3] = [(x, y, z) for (x, z) in barbs]
+        # two segments: left->tip, tip->right
+        _gl_draw_strip(view, barb3d, color, alpha=0.65)

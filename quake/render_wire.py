@@ -36,17 +36,13 @@ def hex_to_rgb(h: Hex):
     return (int(s[0:2],16)/255.0, int(s[2:4],16)/255.0, int(s[4:6],16)/255.0)
 
 def build_wire_mesh(fp: Floorplan) -> WireMesh:
-    from corridor_height import height_at_vertex
     seg_list=[]; seg_col_list=[]; base=(1.0,1.0,1.0)
-    rooms_list=list(fp.rooms)
     for cor in fp.corridors:
-        pts=cor.path_xz
+        y=float(cor.cruise_y); pts=cor.path_xz
         for n in range(len(pts)-1):
-            ay=height_at_vertex(cor, n, rooms_list)
-            by=height_at_vertex(cor, n+1, rooms_list)
             ax,az=float(pts[n][0]),float(pts[n][1])
             bx,bz=float(pts[n+1][0]),float(pts[n+1][1])
-            seg_list.append(np.array([[ax,ay,az],[bx,by,bz]],dtype=np.float32)); seg_col_list.append(base)
+            seg_list.append(np.array([[ax,y,az],[bx,y,bz]],dtype=np.float32)); seg_col_list.append(base)
     line_segments=(np.stack(seg_list,0).astype(np.float32) if seg_list else np.zeros((0,2,3),np.float32))
     seg_colors=np.array(seg_col_list,np.float32) if seg_col_list else np.zeros((0,3),np.float32)
     ring_list=[]; ring_col_list=[]
