@@ -12,10 +12,10 @@
     "mode": "corridor",
     "current_room_id": null,
     "position_xyz": [
-      5.669,
+      -10.470454679564963,
       0.0,
-      3.78
+      6.640901139089111
     ],
-    "heading_rad": 3.7296
+    "heading_rad": -0.5652244045031338
   }
 }
