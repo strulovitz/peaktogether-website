@@ -1,0 +1,115 @@
+room      prop_1
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition I; Plate 2, Fig. 5.
+caption   The areas which revolving bodies describe by radii drawn to an immoveable centre of force are proportional to the times in which they are described.
+final     4
+ceiling   prop1 :: \dfrac{dA}{dt} = \text{const}\;( \text{areas} \propto \text{times})
+
+station 1
+  gloss   The centre of force S is fixed; the body flies in straight polygonal jumps ABCDEF, one per equal time-slice.
+  color   centerorange #E8770A
+  color   pathblue     #1E6FE0
+  panel
+    point    S  @(0.5,4.8)  marker=dot label=$S$ at=NW color=centerorange
+    point    A  @(1.0,0.4)  marker=dot label=$A$ at=SW
+    point    B  @(3.2,0.9)  marker=dot label=$B$ at=S
+    point    C  @(5.0,2.2)  marker=dot label=$C$ at=SE
+    point    D  @(5.8,4.0)  marker=dot label=$D$ at=E
+    point    E  @(5.4,5.8)  marker=dot label=$E$ at=NE
+    point    F  @(4.2,7.0)  marker=dot label=$F$ at=N
+    polyline path A B C D E F color=pathblue heart label=$ABCDEF$ at=SE
+  text
+    Fix the {centerorange|centre of force $S$} — an immoveable point that pulls on the body. \
+    Now chop the flow of time into equal tiny slices $\Delta t$, and watch the body hop along the \
+    {pathblue|polygonal path $ABCDEF$}: in each slice it flies dead-straight by pure inertia (\textbf{Law I}), \
+    then receives one sudden centripetal thump toward $S$ at each vertex. This is Newton's \textit{impulse \
+    approximation} — the method of first and last ratios (\textbf{Lemma V, Cor.~4}) applied not to figures but to \
+    \emph{motion}. If we can show every little triangle $S$ sweeps out has the same area, we will have proved \
+    that area swept is proportional to elapsed time — Kepler's Second Law, freed from ellipses and made true for \
+    \emph{any} central force whatsoever.
+
+station 2
+  gloss   The radii SA,SB,SC,SD,SE,SF are the sweeping lines that trace out the swept triangles.
+  color   pathblue  #1E6FE0
+  color   radigreen #00A35A
+  color   centerorange #E8770A
+  panel
+    point    S  @(0.5,4.8)  marker=dot label=$S$ at=NW color=centerorange
+    point    A  @(1.0,0.4)  marker=dot label=$A$ at=SW
+    point    B  @(3.2,0.9)  marker=dot label=$B$ at=S
+    point    C  @(5.0,2.2)  marker=dot label=$C$ at=SE
+    point    D  @(5.8,4.0)  marker=dot label=$D$ at=E
+    point    E  @(5.4,5.8)  marker=dot label=$E$ at=NE
+    point    F  @(4.2,7.0)  marker=dot label=$F$ at=N
+    polyline path A B C D E F color=pathblue label=$ABCDEF$ at=SE
+    segment  SA  S A color=radigreen heart label=$SA$ at=W
+    segment  SB  S B color=radigreen heart label=$SB$ at=S
+    segment  SC  S C color=radigreen heart label=$SC$ at=E
+    segment  SD  S D color=radigreen heart label=$SD$ at=E
+    segment  SE  S E color=radigreen heart label=$SE$ at=E
+    segment  SF  S F color=radigreen heart label=$SF$ at=E
+  text
+    Draw the {radigreen|radii $SA,\,SB,\,SC,\,SD,\,SE,\,SF$} from the centre to every vertex of the path. \
+    As the body advances one step, its radius sweeps across a thin triangle: the area cut out between \
+    successive radii is precisely the area described "by a radius drawn to the centre." Kepler saw this pattern \
+    in the wanderings of Mars — the planet moves fast near the Sun and slow when far, yet always paints equal \
+    areas in equal times. Newton's aim is to \emph{explain} it: he will prove that triangle $SAB$, then $SBC$, \
+    then $SCD$, and so on are all exactly equal, so that the running total of {radigreen|swept area} climbs in \
+    perfect lockstep with the clock. In modern language this equal-area law is nothing but the conservation of \
+    angular momentum, hiding in plain geometric sight.
+
+station 3
+  gloss   The three key triangles SAB, SBc, SBC are equal — the heart of the impulse argument.
+  color   radigreen    #00A35A
+  color   arearpurple  #8E24AA
+  color   centerorange #E8770A
+  panel
+    point    S  @(0.5,4.8)  marker=dot label=$S$ at=NW color=centerorange
+    point    A  @(1.0,0.4)  marker=dot label=$A$ at=SW
+    point    B  @(3.2,0.9)  marker=dot label=$B$ at=S
+    point    C  @(5.0,2.2)  marker=dot label=$C$ at=SE
+    point    c  @(5.4,1.4)  marker=dot label=$c$ at=SE
+    segment  Bc  B c color=arearpurple label=$Bc$ at=S
+    segment  cC  c C color=arearpurple label=$Cc$ at=E
+    segment  SB  S B color=radigreen label=$SB$ at=W
+    polygon  SAB S A B color=arearpurple heart label=$SAB$ at=W
+    polygon  SBc S B c color=arearpurple heart label=$SBc$ at=SE
+    polygon  SBC S B C color=arearpurple heart label=$SBC$ at=E
+  text
+    Here is the whole proof in miniature. Had no force acted at $B$, inertia (\textbf{Law I}) would carry the \
+    body straight on to $c$, with {arearpurple|$Bc = AB$}; then triangles $SAB$ and $SBc$ share the base \
+    {radigreen|$SB$} and have equal heights, so \emph{$SAB = SBc$}. But at $B$ a single centripetal impulse toward \
+    $S$ deflects the body, and by the parallelogram of motions (\textbf{Law II, Cor.~1}) it lands at $C$ where \
+    {arearpurple|$Cc \parallel SB$}. Because $Cc$ is parallel to $SB$, triangles $SBc$ and $SBC$ stand on the same \
+    base $SB$ between the same parallels — so \emph{$SBc = SBC$}, and therefore \emph{$SBC = SAB$}. This is \
+    Newton's genius: an impulse pointed straight at $S$ bends the body's \emph{direction} but leaves the swept \
+    {arearpurple|triangular area} untouched.
+
+station 4
+  gloss   The impulse Cc is always parallel to the radius; in the limit the polygon becomes a smooth curve and areas ∝ times.
+  color   pathblue     #1E6FE0
+  color   radigreen    #00A35A
+  color   impulsered   #D81B60
+  color   centerorange #E8770A
+  panel
+    point    S  @(0.5,4.8)  marker=dot label=$S$ at=NW color=centerorange
+    point    A  @(1.0,0.4)  marker=dot label=$A$ at=SW
+    point    B  @(3.2,0.9)  marker=dot label=$B$ at=S
+    point    C  @(5.0,2.2)  marker=dot label=$C$ at=SE
+    point    D  @(5.8,4.0)  marker=dot label=$D$ at=E
+    point    E  @(5.4,5.8)  marker=dot label=$E$ at=NE
+    point    F  @(4.2,7.0)  marker=dot label=$F$ at=N
+    point    c  @(5.4,1.4)  marker=dot label=$c$ at=SE
+    polyline path A B C D E F color=pathblue heart label=$ABCDEF$ at=NW
+    segment  Bc  B c color=pathblue label=$Bc$ at=S
+    segment  SB  S B color=radigreen label=$SB$ at=W
+    ray      imp c C color=impulsered heart label=$Cc \parallel SB$ at=SE
+  text
+    Repeat the same argument at $C$, $D$, $E$, and on: each {impulsered|centripetal impulse $Cc$, always parallel \
+    to the radius $SB$}, preserves the swept area, so $SCD = SBC$, $SDE = SCD$, and every triangle equals every \
+    other. By composition the whole {pathblue|swept region $SADFS$} grows exactly as the time elapses. Now let the \
+    number of triangles increase without bound and their breadth shrink to nothing: by \textbf{Lemma V, Cor.~4} the \
+    ultimate perimeter $ADF$ becomes a smooth {pathblue|curve}, the pulsing thumps merge into a force acting \
+    \emph{continually}, and the equal-area rule passes unbroken to the limit — $\dfrac{dA}{dt} = \text{const}$. \
+    This holds for \emph{any} central force, however it varies with distance: the force sculpts the \emph{shape} of \
+    the orbit, but never touches the sacred equal-area law. \textit{Q.E.D.}
