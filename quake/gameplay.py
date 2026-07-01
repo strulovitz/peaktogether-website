@@ -95,6 +95,58 @@ def resolve_shot(room: RoomRuntime, hit: PanelHit | None, demon_hit: bool,
     return (events, new_lit, new_hidden, new_hp, cleared)
 
 
+def _teleport_through_door(state: GameState, pack: Pack, eid: str,
+                           events: list) -> None:
+    """FLAT design: a door teleports the player straight into the connected
+    room, arriving at that room's matching door (as if stepping out the far
+    side). No corridors, no walking between rooms. Mutates state; appends events.
+    """
+    from logutil import log as _log
+
+    src_room = pack.rooms.get(state.current_room_id)
+    if src_room is None:
+        return
+
+    # Which room does this door lead to?
+    dest_room_id = None
+    for d in src_room.doors:
+        if d.edge_id == eid:
+            dest_room_id = d.neighbor_id
+            break
+    if dest_room_id is None:
+        return
+
+    dest_room = pack.rooms.get(dest_room_id)
+    if dest_room is None:
+        return
+
+    # Arrive at the destination room's door that shares this edge.
+    spawn_pos = None
+    spawn_heading = 0.0
+    for d in dest_room.doors:
+        if d.edge_id == eid:
+            spawn_pos = d.spawn_xyz
+            spawn_heading = d.spawn_heading_rad
+            break
+    if spawn_pos is None and dest_room.doors:
+        spawn_pos = dest_room.doors[0].spawn_xyz
+        spawn_heading = dest_room.doors[0].spawn_heading_rad
+    if spawn_pos is None:
+        return
+
+    _log(f"gameplay: teleport {state.current_room_id} -> {dest_room_id} via {eid}")
+    state.current_room_id = dest_room_id
+    state.pos = spawn_pos
+    state.heading_rad = spawn_heading
+    # Keep the persisted mirror correct so a save resumes in the right room.
+    state.save.player.current_room_id = dest_room_id
+    state.save.player.mode = "room"
+    events.append(ModeSwitch(to="room", room_id=dest_room_id, via_edge_id=None))
+    events.append(GuidelinesRecomputed(targets=[]))
+    if dest_room_id not in _demon_hp:
+        _demon_hp[dest_room_id] = dest_room.enemy.health
+
+
 def step(state: GameState, actions: Actions, pack: Pack,
          nav: NavQuery, dt: float) -> list[Event]:
     """Per-frame game logic. Mutates state in place. Returns emitted Events.
@@ -130,64 +182,11 @@ def step(state: GameState, actions: Actions, pack: Pack,
     # ==== MODE-SWITCH ====
     level_id = pack.floorplan.level_id
 
+    # FLAT design: doors teleport between rooms; there is no corridor mode.
     if state.mode == "room":
         eid = nav.door_at(state.pos)
         if eid is not None:
-            from logutil import log as _log
-            _log(f"gameplay: exiting room {state.current_room_id} via door {eid}")
-            sx, sz = 0.0, 0.0
-            for fr in pack.floorplan.rooms:
-                if fr.room_id == state.current_room_id:
-                    sx, sz = fr.map_xz[0], fr.map_xz[1]
-                    break
-            # Find corridor and go toward the FAR end from current room
-            for cor in pack.floorplan.corridors:
-                if cor.corridor_id == eid or (
-                    cor.source == state.current_room_id and cor.target == eid.split(".to.")[-1].split(".f")[0]
-                ):
-                    # Determine which end is the far end (where we're heading)
-                    if cor.source == state.current_room_id:
-                        tx, tz = cor.path_xz[-1][0], cor.path_xz[-1][1]
-                    else:
-                        tx, tz = cor.path_xz[0][0], cor.path_xz[0][1]
-                    dx, dz = tx - sx, tz - sz
-                    dist = sqrt(dx * dx + dz * dz)
-                    if dist > 0:
-                        dx /= dist; dz /= dist
-                    state.pos = (sx + dx * 2.0, 0.0, sz + dz * 2.0)
-                    state.heading_rad = atan2(dz, dx)
-                    break
-            else:
-                state.pos = (sx, 0.0, sz)
-            events.append(ModeSwitch(to="corridor", room_id=state.current_room_id,
-                                     via_edge_id=eid))
-            state.mode = "corridor"
-            state.current_room_id = None
-    elif state.mode == "corridor":
-        for room in pack.floorplan.rooms:
-            dx_sock = state.pos[0] - room.map_xz[0]
-            dz_sock = state.pos[2] - room.map_xz[1]
-            dist_sock = sqrt(dx_sock * dx_sock + dz_sock * dz_sock)
-            if dist_sock <= SOCKET_ENTER_RADIUS_M:
-                room_data = pack.rooms.get(room.room_id)
-                if room_data is None:
-                    continue
-                spawn_pos = room_data.enemy.spawn_xyz  # fallback
-                spawn_heading = 0.0
-                if room_data.doors:
-                    spawn_pos = room_data.doors[0].spawn_xyz
-                    spawn_heading = room_data.doors[0].spawn_heading_rad
-                from logutil import log as _log
-                _log(f"gameplay: entering room {room.room_id}")
-                events.append(ModeSwitch(to="room", room_id=room.room_id, via_edge_id=None))
-                state.mode = "room"
-                state.current_room_id = room.room_id
-                state.pos = spawn_pos
-                state.heading_rad = spawn_heading
-                events.append(GuidelinesRecomputed(targets=[]))
-                if room.room_id not in _demon_hp:
-                    _demon_hp[room.room_id] = room_data.enemy.health
-                break
+            _teleport_through_door(state, pack, eid, events)
 
     # ==== SHOOTING (only in room mode) ====
     if actions.fire and state.mode == "room" and state.current_room_id is not None:

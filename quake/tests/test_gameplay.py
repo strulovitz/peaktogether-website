@@ -254,36 +254,65 @@ def test_walk_uses_nav():
     assert math.isclose(nav.recorded_delta[2], exp_dz, abs_tol=1e-9)
 
 
-def test_modeswitch_out_of_room():
+def _door(edge_id, neighbor_id, wall, center, spawn, heading):
+    return DoorRT(
+        edge_id=edge_id, neighbor_id=neighbor_id, bearing_rad=0.0, wall=wall,
+        center_xyz=center, width_m=1.2, height_m=2.4, normal_yaw_rad=0.0,
+        spawn_xyz=spawn, spawn_heading_rad=heading,
+    )
+
+
+def _room_with_doors(room_id, doors, pairs=None, final="r.s0"):
+    if pairs is None:
+        pairs = [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)]
+    return RoomRuntime(
+        schema_version="1.0", room_id=room_id, dimensions_m=(10.0, 3.0, 10.0),
+        panel_pairs=pairs, final_pair_id=final, hidden_door_wall_slot="N.0",
+        doors=doors, enemy=EnemyRT(enemy_id="boss.demon", spawn_xyz=(0.0, 0.0, 5.0), health=5),
+        ceiling_equations=[],
+    )
+
+
+def test_teleport_between_rooms():
+    """FLAT: stepping into a door teleports you into the connected room at its
+    matching door — no corridor mode."""
+    gp._demon_hp.clear()
+    room_a = _room_with_doors(
+        "alpha", [_door("edge.alpha.to.beta", "beta", "E", (5.0, 1.5, 0.0),
+                        (3.0, 0.0, 0.0), math.pi)])
+    room_b = _room_with_doors(
+        "beta", [_door("edge.alpha.to.beta", "alpha", "W", (-5.0, 1.5, 0.0),
+                       (-3.0, 0.0, 0.0), 0.5)])
+    frooms = [_floorroom("alpha", 0.0, 0.0), _floorroom("beta", 20.0, 0.0)]
+    pack = _stub_pack(room_a, extra_floor_rooms=frooms, extra_rooms={"beta": room_b})
     state = _stub_state(mode="room", room_id="alpha", pos=(3.0, 0.0, 0.0))
-    room = _room("r.s1", [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)], room_id="alpha")
-    frooms = [_floorroom("alpha", 100.0, 100.0)]
-    pack = _stub_pack(room, extra_floor_rooms=frooms)
-    nav = _stub_nav_with_door("edge1")
+    nav = _stub_nav_with_door("edge.alpha.to.beta")
     evs = step(state, Actions(), pack, nav, 0.016)
-    sw = [e for e in evs if e.event == "mode_switch"]
-    assert len(sw) == 1
-    assert sw[0].to == "corridor"
-    assert sw[0].room_id == "alpha"
-    assert sw[0].via_edge_id == "edge1"
-    assert state.mode == "corridor"
-    assert state.current_room_id is None
 
-
-def test_modeswitch_into_room():
-    room = _room("r.s1", [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)], room_id="a")
-    frooms = [_floorroom("a", 0.0, 0.0)]
-    pack = _stub_pack(room, extra_floor_rooms=frooms)
-    state = _stub_state(mode="corridor", pos=(0.0, 0.0, 0.0))
-    nav = _stub_nav()
-    evs = step(state, Actions(), pack, nav, 0.016)
     sw = [e for e in evs if e.event == "mode_switch"]
     assert len(sw) == 1
     assert sw[0].to == "room"
+    assert sw[0].room_id == "beta"
+    assert state.mode == "room"                       # never leaves room mode
+    assert state.current_room_id == "beta"
+    assert state.pos == room_b.doors[0].spawn_xyz     # arrive at beta's door
+    assert state.heading_rad == room_b.doors[0].spawn_heading_rad
+    # guidelines recompute + persisted mirror updated
+    assert any(e.event == "guides" for e in evs)
+    assert state.save.player.current_room_id == "beta"
+    gp._demon_hp.clear()
+
+
+def test_no_teleport_without_door():
+    room = _room("r.s1", [_pair("r.s0", 0, "N", (0, 1.5, 5), 0.0)], room_id="alpha")
+    frooms = [_floorroom("alpha", 0.0, 0.0)]
+    pack = _stub_pack(room, extra_floor_rooms=frooms)
+    state = _stub_state(mode="room", room_id="alpha", pos=(0.0, 0.0, 0.0))
+    nav = _stub_nav()  # door_at -> None
+    evs = step(state, Actions(), pack, nav, 0.016)
+    assert not [e for e in evs if e.event == "mode_switch"]
     assert state.mode == "room"
-    door = room.doors[0]
-    assert state.pos == door.spawn_xyz
-    assert state.heading_rad == door.spawn_heading_rad
+    assert state.current_room_id == "alpha"
 
 
 def test_read_toggle_no_flip():

@@ -46,6 +46,7 @@ from guidelines import select_targets, draw_guidelines
 from render_wire import draw_graph, render_mode_a
 from render_room import draw_room
 from readmode import draw_read
+from minimap import draw_minimap
 from logutil import log as _log
 
 
@@ -491,6 +492,13 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (11) read overlay (drawn over the world)
             if read_state.active and read_state.master_path is not None:
                 draw_read(read_state.master_path, read_state.zoom, read_state.pan)
+
+            # (11b) corner minimap HUD (flat pivot) — over the room, not in Read Mode
+            if state.mode == "room" and not read_state.active:
+                try:
+                    draw_minimap(pack.floorplan, state, pack.floorplan.level_id, w, h)
+                except Exception as e:
+                    _log(f"frame {frame}: minimap crashed: {e}")
 
             # (12) bloom: corridor-only post-pass — deferred this milestone (no hook).
 
