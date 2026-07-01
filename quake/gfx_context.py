@@ -81,7 +81,9 @@ def check_caps(
 def _create_pyglet_window(width: int, height: int, title: str):
     """INTEGRATION: confirm exact API — pyglet 2.1.x Window constructor args."""
     import pyglet  # local import: never required just to import this module
+    from logutil import log as _log
 
+    _log(f"gfx: creating pyglet window {width}x{height}")
     win = pyglet.window.Window(
         width=width,
         height=height,
@@ -89,6 +91,7 @@ def _create_pyglet_window(width: int, height: int, title: str):
         resizable=True,
         vsync=True,
     )
+    _log("gfx: pyglet window created, attaching input handlers")
 
     # Manual key + mouse state (pyglet 2.1.14 KeyStateHandler broken on Windows)
     _pressed: set[int] = set()
@@ -134,6 +137,7 @@ def _create_pyglet_window(width: int, height: int, title: str):
     win._quake_mouseleft = lambda: _mouse_left
 
     win.set_exclusive_mouse(True)
+    _log("gfx: input handlers attached, exclusive mouse set")
 
     return win
 
@@ -141,8 +145,12 @@ def _create_pyglet_window(width: int, height: int, title: str):
 def _create_gl_context():
     """INTEGRATION: confirm exact API — moderngl.create_context()."""
     import moderngl
+    from logutil import log as _log
 
-    return moderngl.create_context()
+    _log("gfx: creating moderngl context")
+    ctx = moderngl.create_context()
+    _log(f"gfx: moderngl context created OK, GL version={ctx.info.get('GL_VERSION','?')}")
+    return ctx
 
 
 def _query_caps(ctx) -> tuple[tuple[int, int], int, bool]:

@@ -133,6 +133,8 @@ def step(state: GameState, actions: Actions, pack: Pack,
     if state.mode == "room":
         eid = nav.door_at(state.pos)
         if eid is not None:
+            from logutil import log as _log
+            _log(f"gameplay: exiting room {state.current_room_id} via door {eid}")
             events.append(ModeSwitch(to="corridor", room_id=state.current_room_id,
                                      via_edge_id=eid))
             state.mode = "corridor"
@@ -151,6 +153,8 @@ def step(state: GameState, actions: Actions, pack: Pack,
                 if room_data.doors:
                     spawn_pos = room_data.doors[0].spawn_xyz
                     spawn_heading = room_data.doors[0].spawn_heading_rad
+                from logutil import log as _log
+                _log(f"gameplay: entering room {room.room_id}")
                 events.append(ModeSwitch(to="room", room_id=room.room_id, via_edge_id=None))
                 state.mode = "room"
                 state.current_room_id = room.room_id

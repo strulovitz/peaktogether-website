@@ -46,6 +46,7 @@ from guidelines import select_targets, draw_guidelines
 from render_wire import draw_graph, render_mode_a
 from render_room import draw_room
 from readmode import draw_read
+from logutil import log as _log
 
 
 # ---------------------------------------------------------------------------
@@ -246,30 +247,42 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     Headless (no GL): returns 0 immediately — the smoke-launch path.
     """
     if not HAVE_GL:
+        _log("main: HAVE_GL=False, exiting (headless)")
         return 0
 
+    _log("main: HAVE_GL=True, starting window+GL setup")
     import moderngl  # noqa: F401  (lazy: import must never need a GL context)
 
     # ---- STARTUP (any failure here -> stderr + return 1) ------------------
     try:
+        _log("main: creating window")
         window, ctx = _unpack_window(make_window(WINDOW_W, WINDOW_H, WINDOW_TITLE))
+        _log("main: window created OK")
 
         # Compile all three programs now (blit is used by the read overlay).
+        _log("main: compiling shaders")
         wire_program(ctx)
         solid_program(ctx)
         blit_program(ctx)
+        _log("main: shaders compiled OK")
 
+        _log(f"main: loading pack from {PACK_DIR}")
         pack = load_pack(PACK_DIR)
+        _log(f"main: pack loaded, {len(pack.floorplan.rooms)} rooms")
         corridor_nav = build_corridor_nav(pack.floorplan)
+        _log("main: corridor nav built")
         cfg = BuildConfig()
 
         # Best-effort resume; a bad/absent save is never fatal.
         try:
             state = state_load(SAVE_PATH, pack)
+            _log("main: save loaded")
         except Exception:
             state = new_state(pack)
+            _log("main: fresh state created")
 
         camera = Camera()
+        _log("main: entering frame loop")
         room_navs: dict = {}                  # lazily filled on ModeSwitch -> room
         read_state = ReadState()
 
@@ -284,8 +297,8 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             targets = []
     except Exception as e:
         import traceback
+        _log(f"main: STARTUP CRASHED: {e}")
         traceback.print_exc(file=sys.stderr)
-        print(f"[QUAKE] startup failed: {e}", file=sys.stderr)
         return 1
 
     # ---- FRAME LOOP -------------------------------------------------------
@@ -313,10 +326,15 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                     dt = MAX_DT
 
             # (1) input
-            actions = poll(window, bindings)
+            try:
+                actions = poll(window, bindings)
+            except Exception as e:
+                _log(f"frame {frame}: poll() crashed: {e}")
+                raise
 
             # (2) graceful-exit request (non-smoke): semantic pause -> quit
             if not smoke and getattr(actions, "pause", False):
+                _log(f"frame {frame}: pause/ESC — quitting")
                 break
 
             # (3) choose nav from the PRE-step mode
@@ -331,10 +349,16 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                     room_navs[state.current_room_id] = nav
 
             # (4) advance game logic (mutates pos/heading/pitch/mode/room; -> events)
-            events = step(state, actions, pack, nav, dt)
+            try:
+                events = step(state, actions, pack, nav, dt)
+            except Exception as e:
+                _log(f"frame {frame}: step() crashed: {e}")
+                raise
 
             # (5) apply events to mirror state + summarize follow-ups (pure)
             outcome = apply_events(state, events)
+            if outcome.mode_switched_to:
+                _log(f"frame {frame}: mode switch -> {outcome.mode_switched_to} room={outcome.switched_room_id}")
 
             # (6) follow-ups
             # 6a) build/cache room nav on a switch into a room
@@ -374,20 +398,20 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             mvp = np.ascontiguousarray(proj @ view, dtype=np.float32)   # world->clip for Mode B
 
             # (10) render by mode
-            if state.mode == "corridor":
-                # guidelines drawn INTO the same offscreen scene so they glow + share depth
-                def _gl(v, p, aspect):
-                    vp = np.ascontiguousarray(p @ v, dtype=np.float32)
-                    draw_guidelines(vp, pack.floorplan, targets)
-                render_mode_a(ctx, window, view, proj, pack.floorplan, state,
-                              guidelines_fn=_gl, targets=targets)
-            else:
-                # DeepSeek integration note: Parent 11's snippet omitted the per-frame
-                # screen clear (render_mode_a clears its own targets, but draw_room does
-                # not). Keep an explicit clear for Mode B so the room can't smear.
-                _gl_clear(ctx, 0.05, 0.06, 0.08, 1.0)
-                room = pack.rooms[state.current_room_id]
-                draw_room(mvp, room, pack, state)   # pass proj@view; draw_room transposes on upload
+            try:
+                if state.mode == "corridor":
+                    def _gl(v, p, aspect):
+                        vp = np.ascontiguousarray(p @ v, dtype=np.float32)
+                        draw_guidelines(vp, pack.floorplan, targets)
+                    render_mode_a(ctx, window, view, proj, pack.floorplan, state,
+                                  guidelines_fn=_gl, targets=targets)
+                else:
+                    _gl_clear(ctx, 0.05, 0.06, 0.08, 1.0)
+                    room = pack.rooms[state.current_room_id]
+                    draw_room(mvp, room, pack, state)
+            except Exception as e:
+                _log(f"frame {frame}: render crashed: {e}")
+                raise
 
             # (11) read overlay (drawn over the world)
             if read_state.active and read_state.master_path is not None:
@@ -401,12 +425,15 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (14) bookkeeping
             frame += 1
     finally:
+        _log("main: frame loop exited")
         # Auto-save on exit; never let shutdown raise out of main().
         try:
             state_save(state, SAVE_PATH)
+            _log("main: auto-save OK")
         except Exception as e:
-            print(f"[QUAKE] save-on-exit failed: {e}", file=sys.stderr)
+            _log(f"main: save-on-exit failed: {e}")
         _close_window(window)
+        _log("main: window closed, returning")
 
     return 0
 
