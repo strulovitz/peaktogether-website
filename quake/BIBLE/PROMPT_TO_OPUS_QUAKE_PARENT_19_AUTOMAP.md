@@ -88,6 +88,21 @@ For each corridor in the floorplan:
 - Minimum: 4 edge lines forming a rectangular tube from source door to target door at the corridor's true `cruise_y` height
 - Edge color = white (corridors are transit, importance color belongs to rooms)
 
+**Crossings / Bridges / Underpasses (critical):**
+
+The whole point of the automap is showing the 3D structure. The floorplan already has crossing data from `level_maker.py`:
+
+- Every pair of corridors whose paths cross in XZ was detected. One is assigned a higher `height_level` (bridge), one stays lower (underpass).
+- `cruise_y = base_y + height_level * delta_y` — different corridors have different cruising heights.
+- `Floorplan.crossings` records: `over_corridor` (bridge), `under_corridor`, `at_xz` (XZ crossing point), `over_y` (bridge height in meters), `under_y` (underpass height).
+- **Concrete example from the real Principia floorplan:** `crossing_0`: `edge.prop_4.to.lemma_7` passes OVER `edge.lemma_11.to.lemma_6` at `over_y=3.00m` vs `under_y=0.00m`.
+
+**What this means for the automap:** Each corridor's wireframe tube is drawn at its `cruise_y` height. Where two corridors cross, the bridge corridor's tube passes visibly 3m ABOVE the underpass corridor's tube. This is the 3D over/under that makes the automap look like Descent — not a flat 2D map where everything sits on one plane. The player flying through the automap sees true 3D depth: tubes at different heights, one passing over another, occluded by depth test.
+
+Ramps: a corridor edges ramp from `socket_y` (0.0) at room ends up to `cruise_y` in the cruising middle. The automap should show these ramps — edges sloping upward from room level to bridge level.
+
+The Floorplan data fields you need: `Corridor.cruise_y`, `Corridor.height_level`, `Corridor.path_xz`, `Corridor.source`, `Corridor.target`, `FloorRoom.socket_y`, `Crossing.over_y`, `Crossing.under_y`, `Crossing.over_corridor`, `Crossing.under_corridor`, `Crossing.at_xz`.
+
 **Output: `AutomapMesh`:**
 - `edges: np.ndarray` — N×2×3 edge vertex pairs in world coordinates
 - `edge_colors: np.ndarray` — N×3 RGB colors per edge

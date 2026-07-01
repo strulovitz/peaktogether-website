@@ -137,8 +137,29 @@ The ≤3 colored guide-lines on the corridor floor. They follow BFS routes from 
 ### E. Navigation
 Box collision: walls, floor, ceiling constrain the player. At the far end, `door_at(point)` returns the destination door's `edge_id`, and the existing gameplay.py door-entry code handles the rest. Player walks inside the box toward the far end. Gentle rail assist toward the centerline.
 
-### F. Crossings (bridges/underpasses)
-The floorplan already has `crossings` with `over_y`/`under_y`. The wireframe edges of a corridor that is a "bridge" are drawn at their true `over_y` height. Edges of the "under" corridor pass below at `under_y`. Both are visible through the transparent tunnel the player is inside. This is the whole point of 3D wireframe.
+### F. Crossings (bridges/underpasses) — THIS IS WHY THE GAME IS TRUE 3D
+
+The floorplan already has full crossing data. Every corridor crossing has been detected and resolved at build time by `level_maker.py`. Here is the exact mechanism:
+
+**How bridges and underpasses work:**
+
+1. The force-directed graph layout produces corridors that cross each other in 2D (XZ plane).
+2. `detect_crossings()` finds every pair of corridors whose paths intersect in XZ.
+3. `assign_heights()` gives each corridor a `height_level` (0, 1, 2, ...). Crossing corridors get DIFFERENT levels. The higher one is the bridge; the lower one is the underpass.
+4. `cruise_y = base_y + height_level * delta_y` — each corridor has its own cruising height in world Y.
+5. The `crossings` list in Floorplan records: `over_corridor` (bridge), `under_corridor`, `at_xz` (where they cross in XZ), `over_y` (bridge height), `under_y` (underpass height). Assertion: `over_y > under_y`.
+6. At a crossing, the bridge corridor edges are drawn at `over_y` (higher). The underpass edges are drawn at `under_y` (lower). The player sees in 3D: one tunnel passing physically OVER the other — the whole point of true-3D Quake, not flat Doom.
+
+**Ramps:** A corridor starts at its room's floor level (`socket_y = 0.0`), ramps UP to its `cruise_y`, cruises, then ramps back DOWN to the destination room's floor. The edges of the corridor tunnel follow these ramp heights. The player walks the ramp — collision/floor tracks the rising height.
+
+**What this means for your corridor design:** The 3D box tunnel edges must be drawn at the corridor's TRUE height (its `cruise_y` for the cruising section, linearly interpolated down to `socket_y` at the room ends). A bridge corridor's edges are several meters higher than the underpass corridor's edges. The player in the current tunnel sees the bridge's edges above them, the underpass's edges below — through the transparent wireframe box they stand inside.
+
+**Concrete example from the real Principia floorplan:**
+- `crossing_0`: `edge.prop_4.to.lemma_7` (bridge, `over_y=3.00m`) passes OVER `edge.lemma_11.to.lemma_6` (underpass, `under_y=0.00m`)
+- The player walking `edge.prop_4.to.lemma_7` ramps up from 0m to 3m, cruises across the bridge at 3m, then ramps back down. Through the wireframe floor they see the underpass corridor 3m below.
+- The player walking the underpass stays at ~0m and sees the bridge corridor 3m above them.
+
+The Floorplan data you need: `Floorplan.corridors[i].cruise_y`, `Floorplan.crossings[i].over_y`, `Floorplan.crossings[i].under_y`, `FloorRoom.socket_y` (always 0.0).
 
 ### G. Acceptance criteria
 - Exit door → player stands inside a 3D wireframe box tunnel (edges drawn, walls visible as lines)
