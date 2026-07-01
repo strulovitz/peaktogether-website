@@ -1,0 +1,620 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_11.f1",
+  "node_id": "lemma_11",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma XI; Plate 2, Fig. 4.",
+  "caption": "The evanescent subtense of the angle of contact, in all curves of finite curvature, is ultimately in the duplicate ratio of the subtense of the conterminate arc.",
+  "n_steps": 3,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The smooth curve through A with its tangent AD; a point B slides along the arc toward A."
+    },
+    {
+      "index": 2,
+      "gloss": "BD is the subtense of the angle of contact; the auxiliary BG, AG build a right triangle inscribed in a circle."
+    },
+    {
+      "index": 3,
+      "gloss": "As B→A, GJ vanishes and AG/Ag→1, so AB² : Ab² becomes the duplicate ratio of BD : bd."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.8,
+        1.4
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        2.3
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.4,
+        0.0
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "tanAD",
+      "draw": {
+        "local_color": {
+          "name": "tanblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$AD$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "D"
+    },
+    {
+      "name": "chordAB",
+      "draw": {
+        "local_color": {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$AB$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.8,
+        1.4
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        2.3
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.4,
+        0.0
+      ]
+    },
+    {
+      "name": "Dfoot",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        0.0
+      ]
+    },
+    {
+      "name": "G",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$G$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.55,
+        4.05
+      ]
+    },
+    {
+      "name": "J",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$J$",
+          "placement": "W"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.5,
+        3.7
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "tanAD",
+      "draw": {
+        "local_color": {
+          "name": "tanblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "D"
+    },
+    {
+      "name": "chordAB",
+      "draw": {
+        "local_color": {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "subBD",
+      "draw": {
+        "local_color": {
+          "name": "subred",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$BD$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "B",
+      "b": "Dfoot"
+    },
+    {
+      "name": "auxBG",
+      "draw": {
+        "local_color": {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$BG$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "B",
+      "b": "G"
+    },
+    {
+      "name": "auxAG",
+      "draw": {
+        "local_color": {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$AG$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "G"
+    },
+    {
+      "name": "aux",
+      "draw": {
+        "local_color": {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "circle_3",
+      "a": "A",
+      "b": "B",
+      "c": "G"
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        2.3
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.4,
+        0.0
+      ]
+    },
+    {
+      "name": "Dfoot",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        0.0
+      ]
+    },
+    {
+      "name": "G",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$G$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.55,
+        4.05
+      ]
+    },
+    {
+      "name": "J",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$J$",
+          "placement": "W"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.5,
+        3.7
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.8,
+        1.4
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "tanAD",
+      "draw": {
+        "local_color": {
+          "name": "tanblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "D"
+    },
+    {
+      "name": "chordAB",
+      "draw": {
+        "local_color": {
+          "name": "relorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "subBD",
+      "draw": {
+        "local_color": {
+          "name": "relorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "B",
+      "b": "Dfoot"
+    },
+    {
+      "name": "auxAG",
+      "draw": {
+        "local_color": {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$AG$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "G"
+    },
+    {
+      "name": "auxGJ",
+      "draw": {
+        "local_color": {
+          "name": "relorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$GJ$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "G",
+      "b": "J"
+    },
+    {
+      "name": "aux",
+      "draw": {
+        "local_color": {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "circle_3",
+      "a": "A",
+      "b": "B",
+      "c": "G"
+    }
+  ]
+}

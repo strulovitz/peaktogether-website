@@ -1,0 +1,161 @@
+{
+  "schema_version": "1.0",
+  "node_id": "law_1",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law I.",
+  "figures": [
+    {
+      "figure_id": "law_1.f1",
+      "asy_path": "figures/law_1.f1.asy",
+      "recipe_path": "figures/law_1.f1.asy",
+      "n_steps": 4,
+      "caption": "Law I -- Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed.",
+      "colors_used": [
+        {
+          "name": "restblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "motiongreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "topblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "dragred",
+          "hex": "#D81B60"
+        },
+        {
+          "name": "planetpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "freeteal",
+          "hex": "#00897B"
+        },
+        {
+          "name": "projblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "gravorange",
+          "hex": "#E8770A"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "law_1.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "law_1.s1.fig",
+        "figure_id": "law_1.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "law_1.s1.txt",
+        "latex": "Every body perseveres in its \\textcolor{restblue}{state of rest}, or of \\textcolor{motiongreen}{uniform motion in a right line}, unless compelled to change that state by \\textcolor{forceorange}{forces impress'd}.",
+        "colors_used": [
+          {
+            "name": "restblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "motiongreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "forceorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "law_1.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "law_1.s2.fig",
+        "figure_id": "law_1.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "law_1.s2.txt",
+        "latex": "\\textcolor{topblue}{A top} does not cease its rotation, otherwise than as it is \\textcolor{dragred}{retarded by the air}.",
+        "colors_used": [
+          {
+            "name": "topblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "dragred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "law_1.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "law_1.s3.fig",
+        "figure_id": "law_1.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "law_1.s3.txt",
+        "latex": "The greater bodies of \\textcolor{planetpurple}{the planets and comets}, meeting less resistance in \\textcolor{freeteal}{more free spaces}, preserve their motions for a much longer time.",
+        "colors_used": [
+          {
+            "name": "planetpurple",
+            "hex": "#8E24AA"
+          },
+          {
+            "name": "freeteal",
+            "hex": "#00897B"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "law_1.s4",
+      "step_index": 4,
+      "drawing": {
+        "block_id": "law_1.s4.fig",
+        "figure_id": "law_1.f1",
+        "highlight_step": 4
+      },
+      "text": {
+        "block_id": "law_1.s4.txt",
+        "latex": "\\textcolor{projblue}{Projectiles} persevere, so far as not \\textcolor{dragred}{retarded by the resistance of the air}, or impell'd downwards by \\textcolor{gravorange}{gravity}.",
+        "colors_used": [
+          {
+            "name": "projblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "dragred",
+            "hex": "#D81B60"
+          },
+          {
+            "name": "gravorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "law_1.s4",
+  "ceiling_equations": [
+    {
+      "eq_id": "law_1.eq0",
+      "latex": "\\text{no force} \\Rightarrow \\text{no change of motion}"
+    }
+  ]
+}

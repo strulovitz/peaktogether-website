@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "prop_4.f1",
+  "node_id": "prop_4",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.",
+  "caption": "The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The centripetal pull grows with the square of the speed and is inversely as the distance from the centre."
+    },
+    {
+      "index": 2,
+      "gloss": "A small circular arc swept in equal time; the versed sine gives the force."
+    }
+  ],
+  "ops": [
+    {
+      "name": "term_1_1",
+      "draw": {
+        "local_color": {
+          "name": "velblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$v^2$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_1"
+    },
+    {
+      "name": "term_1_2",
+      "draw": {
+        "local_color": {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$F$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_2"
+    },
+    {
+      "name": "term_1_3",
+      "draw": {
+        "local_color": {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$r$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_3"
+    },
+    {
+      "name": "term_2_1",
+      "draw": {
+        "local_color": {
+          "name": "velblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$v^2$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_1"
+    },
+    {
+      "name": "term_2_2",
+      "draw": {
+        "local_color": {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$r$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_2"
+    }
+  ]
+}

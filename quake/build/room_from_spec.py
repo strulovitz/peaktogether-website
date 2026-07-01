@@ -464,7 +464,12 @@ def _parse_geo_op(op: str, toks: list, ln: int) -> GeoOp:
         args["a"], args["b"] = pos[j + 1], pos[j + 2]
     elif op == "foot":
         jf, jt = kw_index("from"), kw_index("to")
-        args["point"], args["line"] = pos[jf + 1], pos[jt + 1]
+        args["point"] = pos[jf + 1]
+        # Check if "to" is followed by 2 tokens → line-through-2-points shorthand
+        if jt + 2 < len(pos) and not pos[jt + 2].startswith(("color", "heart", "stabilo", "label", "at", "=")):
+            args["line"] = [pos[jt + 1], pos[jt + 2]]
+        else:
+            args["line"] = pos[jt + 1]
     elif op == "reflect":
         jo = kw_index("over")
         if pos[0] == "of":
@@ -508,7 +513,18 @@ def _parse_geo_op(op: str, toks: list, ln: int) -> GeoOp:
         args["a"], args["b"], args["c"] = pos[0], pos[1], pos[2]
     elif op == "arc":
         jc, jf, jt = kw_index("center"), kw_index("from"), kw_index("to")
-        args["center"], args["frm"], args["to"] = pos[jc + 1], pos[jf + 1], pos[jt + 1]
+        if jc >= 0 and jf >= 0 and jt >= 0:
+            args["center"], args["frm"], args["to"] = pos[jc + 1], pos[jf + 1], pos[jt + 1]
+        else:
+            # Shorthand: arc NAME FROM TO CENTER (no keywords)
+            # NAME re-used as FROM is common (arc named after starting point)
+            n_pos = len(pos)
+            if n_pos == 2:
+                args["frm"], args["to"], args["center"] = name, pos[0], pos[1]
+            elif n_pos == 3:
+                args["frm"], args["to"], args["center"] = pos[0], pos[1], pos[2]
+            else:
+                raise SpecError(ln, "`arc` needs `center= <C> from= <A> to= <B>` (or shorthand: `arc <name> <from> <to> <center>`)")
         args["direction"] = "cw" if "cw" in pos else "ccw"
     elif op == "ellipse_foci":
         jf, jt = kw_index("foci"), kw_index("through")
@@ -657,7 +673,11 @@ def _refs_of(g: GeoOp) -> list:
               "p1", "p2", "p3", "p4", "p5"):
         v = a.get(k)
         if isinstance(v, str):
-            out.append(v)
+            # 'line' ref may be space-separated shorthand for 2 points
+            if k == "line" and " " in v:
+                out.extend(v.split())
+            else:
+                out.append(v)
     if "radius_points" in a:
         out.extend(a["radius_points"])
     if "points" in a:
@@ -727,7 +747,8 @@ def _geo_op_to_recipe(g: GeoOp, step: int, decl: dict):
     if op == "midpoint":
         return Midpoint(name=name, op="midpoint", a=a["a"], b=a["b"], draw=draw)
     if op == "foot":
-        return Foot(name=name, op="foot", point=a["point"], line=a["line"], draw=draw)
+        line_val = " ".join(a["line"]) if isinstance(a["line"], list) else a["line"]
+        return Foot(name=name, op="foot", point=a["point"], line=line_val, draw=draw)
     if op == "reflect":
         return ReflectPoint(name=name, op="reflect_point", point=a["point"],
                             over=a["over"], draw=draw)
@@ -904,10 +925,23 @@ def _emit_construction(spec: Spec) -> list:
     return out
 
 
+_ASY_RESERVED = {
+    "path", "line", "circle", "ray", "ellipse", "parabola", "hyperbola",
+    "point", "pair", "real", "int", "string", "bool", "void", "transform",
+    "guide", "frame", "picture", "pen", "triple", "N", "S", "E", "W",
+    "NE", "NW", "SE", "SW", "NNE", "NNW", "SSE", "SSW", "ENE", "WNW", "ESE", "WSW",
+    "Up", "Down", "Left", "Right", "Center", "None", "CCW", "CW",
+}
+
+def _safe_name(name: str) -> str:
+    """Prefix names that collide with Asymptote reserved words."""
+    return f"_u_{name}" if name in _ASY_RESERVED else name
+
+
 def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
     a = g.args
     op = g.op
-    nm = g.name
+    nm = _safe_name(g.name)
     if op == "point":
         x, y = (g.rough_xy or (0.0, 0.0))
         return [f"pair {nm} = ({x},{y});"]
@@ -919,7 +953,19 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
     if op == "midpoint":
         return [f"point {nm} = midpoint(segment({a['a']}, {a['b']}));"]
     if op == "foot":
-        return [f"point {nm} = foot({a['point']}, line({_line_pts(a['line'])}));"]
+        line_arg = a["line"]
+        if isinstance(line_arg, list):
+            parts = line_arg
+        elif isinstance(line_arg, str) and " " in line_arg:
+            parts = line_arg.split()
+        else:
+            parts = [str(line_arg)]
+        if len(parts) == 2:
+            return [f"point _ft_{nm} = foot(point({a['point']}), line(point({parts[0]}), point({parts[1]})));",
+                    f"pair {nm} = _ft_{nm};"]
+        # Fallback: single point, use direction from origin
+        return [f"point _ft_{nm} = foot(point({a['point']}), line(point((0,0)), point({parts[0]})));",
+                f"pair {nm} = _ft_{nm};"]
     if op == "reflect":
         return [f"transform _r_{nm} = reflect(line({_line_pts(a['over'])}));",
                 f"pair {nm} = _r_{nm} * {a['point']};"]
@@ -928,7 +974,7 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
     if op == "segment":
         return [f"path {nm} = {a['a']}--{a['b']};"]
     if op == "ray":
-        return [f"ray {nm} = ray({a['a']}, {a['b']});"]
+        return [f"path {nm} = {a['a']}--(shift(10*unit({a['b']}-{a['a']}))*{a['a']});"]
     if op == "parallel":
         return [f"line {nm} = parallel({a['through']}, {a['to']});"]
     if op == "perp":
@@ -941,21 +987,21 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
     if op == "bisector":
         return [f"line {nm} = bisector({a['a']}, {a['vertex']}, {a['b']});"]
     if op == "circle_cp":
-        return [f"circle {nm} = circle({a['center']}, {a['through']});"]
+        return [f"path {nm} = circle({a['center']}, {a['through']});"]
     if op == "circle_cr":
         if a.get("radius_points"):
             p, q = a["radius_points"]
-            return [f"circle {nm} = circle({a['center']}, abs({q}-{p}));"]
-        return [f"circle {nm} = circle({a['center']}, {a['radius_value']});"]
+            return [f"path {nm} = circle({a['center']}, abs({q}-{p}));"]
+        return [f"path {nm} = circle({a['center']}, {a['radius_value']});"]
     if op == "circle_3":
-        return [f"circle {nm} = circle({a['a']}, {a['b']}, {a['c']});"]
+        return [f"path {nm} = circle({a['a']}, {a['b']}, {a['c']});"]
     if op == "arc":
         d = a["direction"]
         return [
             f"real _r_{nm} = abs({a['frm']}-{a['center']});",
             f"path {nm} = arc({a['center']}, _r_{nm}, "
             f"degrees({a['frm']}-{a['center']}), degrees({a['to']}-{a['center']}), "
-            f"{'CCW' if d == 'ccw' else 'CW'});",
+            f'{"CCW" if d == "ccw" else "CW"});',
         ]
     if op == "ellipse_foci":
         return [f"ellipse {nm} = ellipse({a['f1']}, {a['f2']}, {a['through']});"]
@@ -980,11 +1026,15 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
         series_curves.add((g.name, a["along"], a["to_curve"], a["count"], a["kind"]))
         return [f"// series {nm}: built in series-support block below"]
     if op == "angle":
-        return [f"// angle {nm}: drawn via markangle in ZONE 4"]
+        a_pts = g.args
+        return [f"pair {nm} = {a_pts['vertex']} + 0.7*unit((unit({a_pts['a']}-{a_pts['vertex']})+unit({a_pts['b']}-{a_pts['vertex']}))/2);"]
     return [f"// (no construction snippet for {op})"]
 
 
 def _line_pts(ref: str) -> str:
+    parts = ref.split()
+    if len(parts) == 2:
+        return f"{parts[0]}, {parts[1]}"
     return ref
 
 
@@ -1113,8 +1163,23 @@ def _emit_ink_pass(spec: Spec, is_geometry: bool) -> list:
         for st in spec.stations:
             for g in st.geo_ops:
                 if g.attr.label:
-                    out.append(f"  label({_tex_str(g.attr.label)}, {g.name}, "
-                               f"{_align(g.attr.at)});")
+                    nm = _safe_name(g.name)
+                    # For non-point types, extract a midpoint for label placement
+                    if g.op in ("segment", "ray", "arc", "circle_cp", "circle_cr",
+                                "circle_3", "ellipse_foci", "ellipse_axes",
+                                "parabola_fd", "hyperbola_foci", "conic_5",
+                                "polyline", "polygon", "line", "parallel", "perp",
+                                "tangent_at", "tangent_from", "bisector"):
+                        out.append(f"  pair _lbl_{nm} = point({nm}, 0.5);")
+                        out.append(f"  label({_tex_str(g.attr.label)}, _lbl_{nm}, "
+                                   f"{_align(g.attr.at)});")
+                    elif g.op == "line":
+                        out.append(f"  pair _lbl_{nm} = point({nm}, 0);")
+                        out.append(f"  label({_tex_str(g.attr.label)}, _lbl_{nm}, "
+                                   f"{_align(g.attr.at)});")
+                    else:
+                        out.append(f"  label({_tex_str(g.attr.label)}, {nm}, "
+                                   f"{_align(g.attr.at)});")
     else:
         for st in spec.stations:
             on = f"on{st.n}"
@@ -1135,7 +1200,7 @@ def _emit_ink_pass(spec: Spec, is_geometry: bool) -> list:
 
 
 def _draw_geom(g: GeoOp, on: str, pen: str, stabilo: bool) -> list:
-    nm = g.name
+    nm = _safe_name(g.name)
     op = g.op
     if op == "point":
         if stabilo:

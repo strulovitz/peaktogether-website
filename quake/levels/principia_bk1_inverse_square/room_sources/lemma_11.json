@@ -1,0 +1,130 @@
+{
+  "schema_version": "1.0",
+  "node_id": "lemma_11",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma XI; Plate 2, Fig. 4.",
+  "figures": [
+    {
+      "figure_id": "lemma_11.f1",
+      "asy_path": "figures/lemma_11.f1.asy",
+      "recipe_path": "recipes/lemma_11.f1.json",
+      "n_steps": 3,
+      "caption": "The evanescent subtense of the angle of contact, in all curves of finite curvature, is ultimately in the duplicate ratio of the subtense of the conterminate arc.",
+      "colors_used": [
+        {
+          "name": "tanblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "arcgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "subred",
+          "hex": "#D81B60"
+        },
+        {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "relorange",
+          "hex": "#E8770A"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "lemma_11.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "lemma_11.s1.fig",
+        "figure_id": "lemma_11.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "lemma_11.s1.txt",
+        "latex": "Lemmas VI and VII told us that as $B$ slides toward $A$ the \\textcolor{arcgreen}{arc $AB$}      and its chord merge with \\textcolor{tanblue}{the tangent $AD$}, and the angle between them      vanishes. But that only says the gap closes — it does not say \\textit{how fast}.      The deep question of curvature is: as the small distance $AB$ shrinks, by what      power does the curve peel away from its \\textcolor{tanblue}{flat tangent}? Everything about      force and orbit in the later Propositions rests on the answer, so we measure the      departure of the \\textcolor{arcgreen}{curve} from the line it kisses at $A$.",
+        "colors_used": [
+          {
+            "name": "arcgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "tanblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_11.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "lemma_11.s2.fig",
+        "figure_id": "lemma_11.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "lemma_11.s2.txt",
+        "latex": "Drop \\textcolor{subred}{$BD$ perpendicular to the tangent} — this is the \"subtense of the      angle of contact,\" the precise measure of how far the \\textcolor{arcgreen}{curve} has risen      above \\textcolor{tanblue}{$AD$}. Now the clever auxiliary: draw $BG\\perp AB$ and $AG\\perp AD$,      meeting at $G$. Because both $\\angle ABG$ and $\\angle AGD$ are right, the points      $A,B,G$ lie on \\textcolor{auxpurple}{a circle with $AG$ as its diameter}. A chord dropped      from that circle gives the exact relation $AB^{2}=AG\\times BD$ — trapping the tiny      \\textcolor{subred}{departure $BD$} inside a clean, computable ratio.",
+        "colors_used": [
+          {
+            "name": "subred",
+            "hex": "#D81B60"
+          },
+          {
+            "name": "arcgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "tanblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "auxpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_11.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "lemma_11.s3.fig",
+        "figure_id": "lemma_11.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "lemma_11.s3.txt",
+        "latex": "Now shrink everything: let $B,D,G$ approach $A$. The intersection $J$ of $BG$ and      $AG$ races toward $A$ so that \\textcolor{relorange}{$GJ$ becomes less than any assignable      length}, whence $AG:Ag$ differs from equality by nothing in the limit. With      \\textcolor{relorange}{$AB^{2}=AG\\times BD$} and $Ab^{2}=Ag\\times bd$, the ratio $AB^{2}:Ab^{2}$      is compounded of $AG:Ag$ and $BD:bd$; since the first factor becomes unity, by      Lemma I the ultimate ratio $AB^{2}:Ab^{2}$ equals $BD:bd$. Thus the \\textcolor{subred}{subtense}      goes as the \\textit{square} of the \\textcolor{arcgreen}{arc} — every smooth bend, circle or      parabola alike, peels from its \\textcolor{tanblue}{tangent} quadratically, the universal      signature of finite curvature. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "relorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "subred",
+            "hex": "#D81B60"
+          },
+          {
+            "name": "arcgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "tanblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "lemma_11.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_11.eq0",
+      "latex": "BD \\propto AB^{2} \\;(\\text{ultimately})"
+    }
+  ]
+}

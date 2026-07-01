@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_1",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition I; Plate 2, Fig. 5.",
+  "figures": [
+    {
+      "figure_id": "prop_1.f1",
+      "asy_path": "figures/prop_1.f1.asy",
+      "recipe_path": "recipes/prop_1.f1.json",
+      "n_steps": 4,
+      "caption": "The areas which revolving bodies describe by radii drawn to an immoveable centre of force are proportional to the times in which they are described.",
+      "colors_used": [
+        {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "pathblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "radigreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "arearpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "impulsered",
+          "hex": "#D81B60"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_1.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_1.s1.fig",
+        "figure_id": "prop_1.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_1.s1.txt",
+        "latex": "Fix the \\textcolor{centerorange}{centre of force $S$} — an immoveable point that pulls on the body.      Now chop the flow of time into equal tiny slices $\\Delta t$, and watch the body hop along the      \\textcolor{pathblue}{polygonal path $ABCDEF$}: in each slice it flies dead-straight by pure inertia (\\textbf{Law I}),      then receives one sudden centripetal thump toward $S$ at each vertex. This is Newton's \\textit{impulse      approximation} — the method of first and last ratios (\\textbf{Lemma V, Cor.~4}) applied not to figures but to      \\emph{motion}. If we can show every little triangle $S$ sweeps out has the same area, we will have proved      that area swept is proportional to elapsed time — Kepler's Second Law, freed from ellipses and made true for      \\emph{any} central force whatsoever.",
+        "colors_used": [
+          {
+            "name": "centerorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "pathblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_1.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_1.s2.fig",
+        "figure_id": "prop_1.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_1.s2.txt",
+        "latex": "Draw the \\textcolor{radigreen}{radii $SA,\\,SB,\\,SC,\\,SD,\\,SE,\\,SF$} from the centre to every vertex of the path.      As the body advances one step, its radius sweeps across a thin triangle: the area cut out between      successive radii is precisely the area described \"by a radius drawn to the centre.\" Kepler saw this pattern      in the wanderings of Mars — the planet moves fast near the Sun and slow when far, yet always paints equal      areas in equal times. Newton's aim is to \\emph{explain} it: he will prove that triangle $SAB$, then $SBC$,      then $SCD$, and so on are all exactly equal, so that the running total of \\textcolor{radigreen}{swept area} climbs in      perfect lockstep with the clock. In modern language this equal-area law is nothing but the conservation of      angular momentum, hiding in plain geometric sight.",
+        "colors_used": [
+          {
+            "name": "radigreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_1.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_1.s3.fig",
+        "figure_id": "prop_1.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_1.s3.txt",
+        "latex": "Here is the whole proof in miniature. Had no force acted at $B$, inertia (\\textbf{Law I}) would carry the      body straight on to $c$, with \\textcolor{arearpurple}{$Bc = AB$}; then triangles $SAB$ and $SBc$ share the base      \\textcolor{radigreen}{$SB$} and have equal heights, so \\emph{$SAB = SBc$}. But at $B$ a single centripetal impulse toward      $S$ deflects the body, and by the parallelogram of motions (\\textbf{Law II, Cor.~1}) it lands at $C$ where      \\textcolor{arearpurple}{$Cc \\parallel SB$}. Because $Cc$ is parallel to $SB$, triangles $SBc$ and $SBC$ stand on the same      base $SB$ between the same parallels — so \\emph{$SBc = SBC$}, and therefore \\emph{$SBC = SAB$}. This is      Newton's genius: an impulse pointed straight at $S$ bends the body's \\emph{direction} but leaves the swept      \\textcolor{arearpurple}{triangular area} untouched.",
+        "colors_used": [
+          {
+            "name": "arearpurple",
+            "hex": "#8E24AA"
+          },
+          {
+            "name": "radigreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_1.s4",
+      "step_index": 4,
+      "drawing": {
+        "block_id": "prop_1.s4.fig",
+        "figure_id": "prop_1.f1",
+        "highlight_step": 4
+      },
+      "text": {
+        "block_id": "prop_1.s4.txt",
+        "latex": "Repeat the same argument at $C$, $D$, $E$, and on: each \\textcolor{impulsered}{centripetal impulse $Cc$, always parallel      to the radius $SB$}, preserves the swept area, so $SCD = SBC$, $SDE = SCD$, and every triangle equals every      other. By composition the whole \\textcolor{pathblue}{swept region $SADFS$} grows exactly as the time elapses. Now let the      number of triangles increase without bound and their breadth shrink to nothing: by \\textbf{Lemma V, Cor.~4} the      ultimate perimeter $ADF$ becomes a smooth \\textcolor{pathblue}{curve}, the pulsing thumps merge into a force acting      \\emph{continually}, and the equal-area rule passes unbroken to the limit — $\\dfrac{dA}{dt} = \\text{const}$.      This holds for \\emph{any} central force, however it varies with distance: the force sculpts the \\emph{shape} of      the orbit, but never touches the sacred equal-area law. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "impulsered",
+            "hex": "#D81B60"
+          },
+          {
+            "name": "pathblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_1.s4",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_1.eq0",
+      "latex": "\\dfrac{dA}{dt} = \\text{const}\\;( \\text{areas} \\propto \\text{times})"
+    }
+  ]
+}

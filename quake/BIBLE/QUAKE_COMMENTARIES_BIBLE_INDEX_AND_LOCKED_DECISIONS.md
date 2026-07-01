@@ -100,6 +100,8 @@
 
 36. **Parent 16 — Frozen Deliverable (VERBATIM)** ✅ — `quake/BIBLE/QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`. Room-content format (.room spec) + `build/room_from_spec.py` tool design + child brief. Keyword-block format for children; structurally enforces the corrected local-color model. Anchored to gold lemma_2 triplet. 11 golden tests. One honest gap: Asymptote snippet library (compile-confirm, lazy growth).
 
+37. **Prompt to Opus — Parent 17 Handoff (Fix the Wall Packer)** ⏳ ACTIVE — `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_17_HANDOFF.md`. Single mission: fix `size_and_pack()` in `build/room_pack.py` (161 lines) + `build/room_geometry.py` (188 lines) — the wall packing algorithm hits `RoomTooDense` on any room with 2+ doors. 14/20 Principia rooms fail at Stage 6. Doctor-style handoff: symptoms only, no hinted solution. Launch: Commentaries + OT + NT + handoff. Talk-first. No children.
+
 ## §3 — LOCKED DECISIONS (the frozen spine — do not re-decide)
 
 - **Scope:** geometry-rich books ONLY (proofs carried by figures). First content pack = **Newton's _Principia_** (1846 Andrew Motte English translation; we have a clean `_djvu.txt` + per-page images + a leaf→printed-page JSON).
@@ -208,7 +210,13 @@
 - ⏳ **THEN — Fix Asymptote → compile → bake → room_maker → render PNG for Nir's eyes**
 - ✅ **Parent 15 DONE — Level design corrected!** — 20-room station map frozen (56 stations, 16 DIAGRAM + 2 EQUATION + 1 TEXT + 1 EQUATION/TEXT). Corrected palette (map-side only) + concept_graph (verified labels, fixed degrees). No dead text-only rooms. Zero contract change. Deliverable saved verbatim in two waves.
 - ✅ **Parent 16 v2 DONE — Room-content format + COMPLETE CODE delivered!** — All 28 RecipeOps mapped, no gaps, no TODOs. `.room` format + runnable `build/room_from_spec.py` + 11-test suite. Frozen verbatim.
-- ⏳ **NEXT — DeepSeek drops `build/room_from_spec.py` + tests into repo, writes .room fixtures, runs tests**
+- ✅ **Child pipeline COMPLETE — 20/20 .room specs built + validated** (July 1, 2026). All 20 Principia rooms have .room files in `tests/room_specs/`.
+- ✅ **Build pipeline RUNNING — `build/build_all.py` written** (6-stage master script). Stages 1-5 green: all 20 rooms emit, 16/20 figures compile, ALL text + ceilings baked, manifest assembled (219 assets, 438 PNGs).
+- 🔴 **Stage 6 blocked: RoomTooDense on 14/20 rooms.** Wall packer (`room_pack.py` + `room_geometry.py`) can't fit panels+doors when rooms have 2+ doors.
+- ⏳ **Parent 17 ACTIVE — Fix the wall packer.** Handoff at `PROMPT_TO_OPUS_QUAKE_PARENT_17_HANDOFF.md`. Launch: Commentaries + OT + NT + handoff to fresh Opus 4.8.
+- 🟡 **Minor: 4 rooms have Asymptote figure bugs** (tangent/path, foot/pair type mismatches). Fall through to placeholder PNGs. Low priority.
+- 🟡 **Minor: 3 rooms have door bearing mismatches** (~0.05-0.20 rad). Related to wall geometry. Low priority.
+- **Tests: 434/434 green 🟢**
 - **Deferred on purpose:** audio / atmosphere (→ ~M8); figure background transparency; Mode A labels (post-M7).
 
 ✅ **AMENDMENT — Text baking pipeline (pdflatex+pdftocairo), June 29, 2026 evening.**

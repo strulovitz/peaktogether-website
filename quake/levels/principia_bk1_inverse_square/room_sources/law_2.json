@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "node_id": "law_2",
+  "edition": "Newton, Principia, Axioms or Laws of Motion, Law II, p.19 (Motte trans., 1729)",
+  "figures": [
+    {
+      "figure_id": "law_2.f1",
+      "asy_path": "figures/law_2.f1.asy",
+      "recipe_path": "recipes/law_2.f1.json",
+      "n_steps": 2,
+      "caption": "The alteration of motion is proportional to, and directed along, the impressed force.",
+      "colors_used": [
+        {
+          "name": "motionblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "dirgreen",
+          "hex": "#00A35A"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "law_2.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "law_2.s1.fig",
+        "figure_id": "law_2.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "law_2.s1.txt",
+        "latex": "The Law sets \\textcolor{motionblue}{the alteration of motion} in strict proportion to \\textcolor{forceorange}{the motive force impressed}. As Newton explains, if any force generates a motion, then \\textcolor{forceorange}{a double force} will generate \\textcolor{motionblue}{double the motion}, a triple force triple the motion — whether \\textcolor{forceorange}{that force} be impressed altogether and at once, or gradually and successively. The \\textcolor{motionblue}{change $\\Delta(\\text{motion})$} scales exactly with the impressed \\textcolor{forceorange}{$\\mathbf{F}$}.",
+        "colors_used": [
+          {
+            "name": "motionblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "forceorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "law_2.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "law_2.s2.fig",
+        "figure_id": "law_2.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "law_2.s2.txt",
+        "latex": "The \\textcolor{motionblue}{change of motion} is made \\textcolor{dirgreen}{in the direction of the right line} in which \\textcolor{forceorange}{the force} is impressed. This motion, being always directed the same way with \\textcolor{forceorange}{the generating force}, if the body moved before, is \\textcolor{dirgreen}{added to or subducted from} the former motion — according as they directly conspire with or are directly contrary to each other; or \\textcolor{dirgreen}{obliquely joined}, when they are oblique, so as to produce a new motion compounded from the determination of both. Thus \\textcolor{motionblue}{$\\Delta(\\text{motion})$} runs \\textcolor{dirgreen}{parallel} to \\textcolor{forceorange}{$\\mathbf{F}$}.",
+        "colors_used": [
+          {
+            "name": "motionblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "dirgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "forceorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "law_2.s2",
+  "ceiling_equations": [
+    {
+      "eq_id": "law_2.eq0",
+      "latex": "\\Delta(\\text{motion}) \\propto \\mathbf{F}"
+    },
+    {
+      "eq_id": "law_2.eq1",
+      "latex": "\\Delta(\\text{motion}) \\parallel \\mathbf{F}"
+    }
+  ]
+}

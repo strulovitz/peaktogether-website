@@ -1,0 +1,91 @@
+{
+  "schema_version": "1.0",
+  "node_id": "lemma_5",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma V; Plate 2, Fig. 1.",
+  "figures": [
+    {
+      "figure_id": "lemma_5.f1",
+      "asy_path": "figures/lemma_5.f1.asy",
+      "recipe_path": "recipes/lemma_5.f1.json",
+      "n_steps": 2,
+      "caption": "In similar figures all homologous sides are proportional, and the areas are in the duplicate ratio of the homologous sides.",
+      "colors_used": [
+        {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "sideorange",
+          "hex": "#E8770A"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "lemma_5.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "lemma_5.s1.fig",
+        "figure_id": "lemma_5.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "lemma_5.s1.txt",
+        "latex": "Here stand two \\emph{similar} figures: \\\\textcolor{simblue}{the first figure $ABC$} and \\\\textcolor{simgreen}{the second figure $DEF$}. To say that two figures are \\emph{similar} means that they have exactly the same shape, though not necessarily the same size --- one may be a scaled copy of the other. All their corresponding angles are equal ($\\angle A = \\angle D$, $\\angle B = \\angle E$, $\\angle C = \\angle F$), and their corresponding sides run in the same proportion throughout. The matching outline shared by \\\\textcolor{simblue}{the larger figure} and \\\\textcolor{simgreen}{the smaller figure} --- their common shape --- is the heart of this lemma. Whatever we now prove about one such pair holds for \\emph{all} similar figures, whether bounded by straight lines or by curves.",
+        "colors_used": [
+          {
+            "name": "simblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "simgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_5.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "lemma_5.s2.fig",
+        "figure_id": "lemma_5.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "lemma_5.s2.txt",
+        "latex": "Pick any one pair of \\\\textcolor{sideorange}{homologous sides}: $\\\\textcolor{sideorange}{AB}$ in \\\\textcolor{simblue}{the first figure} answers to $\\\\textcolor{sideorange}{DE}$ in \\\\textcolor{simgreen}{the second}. Newton's claim is that \\emph{every} homologous pair stands in one and the same ratio --- so $AB/DE = BC/EF = CA/FD = k$, a single number $k$ that measures how much larger the one figure is than the other. But the \\emph{areas} do not grow in this same ratio: they grow in its \\emph{duplicate ratio}, that is, in the ratio $k^2$. Thus if \\\\textcolor{simblue}{the larger figure}'s sides are twice those of \\\\textcolor{simgreen}{the smaller} ($k = 2$), its area is not twice but \\emph{four} times as great ($k^2 = 4$); triple the side, and the area is ninefold. This is why doubling a map's scale quadruples the ink, and why the homologous sides --- highlighted here --- govern both lengths and areas at once. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "sideorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "simblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "simgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "lemma_5.s2",
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_5.eq0",
+      "latex": "\\frac{AB}{DE} \\;=\\; \\frac{BC}{EF} \\;=\\; \\frac{CA}{FD} \\;=\\; k"
+    },
+    {
+      "eq_id": "lemma_5.eq1",
+      "latex": "\\frac{\\text{area}_1}{\\text{area}_2} \\;=\\; k^2"
+    }
+  ]
+}

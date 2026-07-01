@@ -1,0 +1,180 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_11",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XI; Plate 4, Figure 2.",
+  "figures": [
+    {
+      "figure_id": "prop_11.f1",
+      "asy_path": "figures/prop_11.f1.asy",
+      "recipe_path": "recipes/prop_11.f1.json",
+      "n_steps": 5,
+      "caption": "If a body revolves in an ellipse, find the law of the centripetal force tending to the focus of the ellipse.",
+      "colors_used": [
+        {
+          "name": "ellblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "fociorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "equalpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "parteal",
+          "hex": "#00897B"
+        },
+        {
+          "name": "latusred",
+          "hex": "#D81B60"
+        },
+        {
+          "name": "resultblue",
+          "hex": "#1E6FE0"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_11.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_11.s1.fig",
+        "figure_id": "prop_11.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_11.s1.txt",
+        "latex": "Kepler discovered that the planets sweep out \\textcolor{ellblue}{ellipses}, not circles,      with the Sun sitting at one focus rather than at the centre. Newton now poses      the crowning question of Book I: what force law actually PRODUCES such an orbit?      The two \\textcolor{fociorange}{foci $S$ and $H$} lie on the major axis, and $S$ is the force      centre while $H$ is the empty focus. Drawing the \\textcolor{radgreen}{radius $SP$} from the      force to the body $P$, we measure force by the Prop. VI apparatus and will find      it varies as $1/SP^2$.",
+        "colors_used": [
+          {
+            "name": "ellblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "fociorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_11.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_11.s2.fig",
+        "figure_id": "prop_11.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_11.s2.txt",
+        "latex": "Draw $HI$ parallel to the tangent at $P$, meeting the diameter $EC$ produced.      The great focal property of the \\textcolor{ellblue}{ellipse} is that $PS+PH=2AC$: the sum      of the two \\textcolor{radgreen}{focal radii} is constant and equals the major axis. From      this Newton deduces the pivotal equality \\textcolor{equalpurple}{$EP = AC$}, the semi-major      axis itself. This single relation binds the ellipse's focal geometry to the      measurable lengths the force calculation will demand.",
+        "colors_used": [
+          {
+            "name": "ellblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "equalpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_11.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_11.s3.fig",
+        "figure_id": "prop_11.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_11.s3.txt",
+        "latex": "Draw the tangent at $P$ and the \\textcolor{parteal}{conjugate diameters $DK$ and $PG$}: a      pair through the centre $C$ where each runs parallel to the tangent at the end      of the other. Let $Q$ be a body-point near $P$, with the ordinate $Qv$ dropped      to the diameter $PG$, and complete the \\textcolor{parteal}{parallelogram $QxPR$}. This is      the ellipse's version of the $QR$ construction of Prop. VI, whose nascent limit      measures the deflection. By Lemma VII the \\textcolor{radgreen}{chord $SP$} and its tangent      coincide in the ultimate ratio, licensing this passage to the limit.",
+        "colors_used": [
+          {
+            "name": "parteal",
+            "hex": "#00897B"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_11.s4",
+      "step_index": 4,
+      "drawing": {
+        "block_id": "prop_11.s4.fig",
+        "figure_id": "prop_11.f1",
+        "highlight_step": 4
+      },
+      "text": {
+        "block_id": "prop_11.s4.txt",
+        "latex": "Lemma XII states that all parallelograms circumscribed about \\textcolor{parteal}{conjugate      diameters} of an ellipse are equal, giving the constant-area bridge $CD^2 : CB^2$.      Through this the \\textcolor{parteal}{semi-diameters} that fill the messy ratio chain collapse      onto the fixed axis constants. The decisive quantity is the \\textcolor{latusred}{latus rectum      $L = 2\\,BC^2/AC$}, the chord through the focus $S$ perpendicular to the major axis.      Newton assembles $L\\cdot QR : QT^2$, and Lemma XII lets every ellipse-shape factor      cancel against another, leaving only $SP^2$.",
+        "colors_used": [
+          {
+            "name": "parteal",
+            "hex": "#00897B"
+          },
+          {
+            "name": "latusred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_11.s5",
+      "step_index": 5,
+      "drawing": {
+        "block_id": "prop_11.s5.fig",
+        "figure_id": "prop_11.f1",
+        "highlight_step": 5
+      },
+      "text": {
+        "block_id": "prop_11.s5.txt",
+        "latex": "Compounding the pieces, the rectangle $PvG : Qv^2 = PC^2 : CD^2$, and by the      similar triangles $QxT,\\,PEF$ we get $QT^2 : EP^2 = PF^2 : CA^2$; joining these      with Lemma XII forces \\textcolor{resultblue}{$L\\cdot QR / QT^2 = SP^2$}. Substituting into      the Prop. VI measure $F \\propto 1/(SP^2 \\cdot QT^2/QR)$ makes it become      $1/(SP^2\\cdot SP^2)$ divided cleanly, so the \\textcolor{resultblue}{force varies as      $1/SP^2$}. Thus the \\textcolor{radgreen}{distance $SP$} to the focus alone governs the pull:      the same \\textcolor{resultblue}{inverse-square law} that Newton would recognise as universal      gravitation holds every planet in its \\textcolor{ellblue}{Keplerian ellipse}. \\textit{Q.E.I.}",
+        "colors_used": [
+          {
+            "name": "resultblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "ellblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_11.s5",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_11.eq0",
+      "latex": "F \\propto \\dfrac{1}{SP^2}"
+    }
+  ]
+}

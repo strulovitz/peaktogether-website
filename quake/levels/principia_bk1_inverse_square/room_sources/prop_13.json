@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_13",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XIII; Plate 5, Figure 3.",
+  "figures": [
+    {
+      "figure_id": "prop_13.f1",
+      "asy_path": "figures/prop_13.f1.asy",
+      "recipe_path": "recipes/prop_13.f1.json",
+      "n_steps": 4,
+      "caption": "If a body moves in the perimeter of a parabola, find the law of the centripetal force tending to the focus.",
+      "colors_used": [
+        {
+          "name": "parabblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "fociorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "constpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "relgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "resultred",
+          "hex": "#D81B60"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_13.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_13.s1.fig",
+        "figure_id": "prop_13.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_13.s1.txt",
+        "latex": "Newton has proven the inverse-square law for the \\textcolor{parabblue}{ellipse}. Now he treats      the \\textcolor{parabblue}{parabola} — the limiting orbit that opens to infinity. A body at $P$      feels a force drawn to the \\textcolor{fociorange}{focus $S$}, and \\textcolor{radgreen}{$SP$} is the radius      joining them. The question: does this open orbit still yield $F \\propto 1/SP^2$?      Newton answers yes, by the same Prop. VI machinery.",
+        "colors_used": [
+          {
+            "name": "parabblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "fociorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_13.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_13.s2.fig",
+        "figure_id": "prop_13.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_13.s2.txt",
+        "latex": "Retaining the preceding lemma's construction, let $Q$ be the place into which the body      next succeeds. The \\textcolor{constpurple}{standard Prop. VI apparatus} appears: draw $QR$ parallel      to $SP$ and $QT$ perpendicular to $SP$. Then add the parabola-specific ordinate —      \\textcolor{constpurple}{$Qv$ parallel to the tangent}, meeting the diameter $PG$ at $v$ and the      distance $SP$ at $x$. These lines let us measure the deflection $QR$ against the geometry      of the curve.",
+        "colors_used": [
+          {
+            "name": "constpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_13.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_13.s3.fig",
+        "figure_id": "prop_13.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_13.s3.txt",
+        "latex": "Because triangles $Pxv$ and $SPM$ are similar, and the parabola's focal property makes      the sides $SP$ and $SM$ equal, the corresponding sides $Px$ (that is $QR$) and $Pv$ are      also equal — \\textcolor{relgreen}{$QR = Pv$}. Now invoke the conic sections: the square of the      ordinate equals the rectangle of the latus rectum and $Pv$. By Lemma XIII the parabola's      latus rectum is $4PS$, so \\textcolor{relgreen}{$Qv^2 = 4PS \\cdot Pv = 4PS \\cdot QR$}. The curve's      geometry has collapsed cleanly into the focal distance.",
+        "colors_used": [
+          {
+            "name": "relgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_13.s4",
+      "step_index": 4,
+      "drawing": {
+        "block_id": "prop_13.s4.fig",
+        "figure_id": "prop_13.f1",
+        "highlight_step": 4
+      },
+      "text": {
+        "block_id": "prop_13.s4.txt",
+        "latex": "As $P$ and $Q$ coincide, the ratio of $Qv$ to $Qx$ becomes a ratio of equality by      Cor. 2 of Lemma VII, so $Qx^2 \\to 4PS \\cdot QR$. From the similar triangles $QxT$ and      $SPN$, $Qx^2 : QT^2 = PS^2 : SN^2 = PS : SA$, whence \\textcolor{resultred}{$QT^2 \\propto SP \\cdot QR$}.      By Cor. 1 of Prop. VI the force is measured as $1/(SP^2 \\cdot QT^2/QR)$, and substituting      gives the \\textcolor{resultred}{inverse-square law $F \\propto 1/SP^2$}. The parabola obeys the same      law as the ellipse. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "resultred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_13.s4",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_13.eq0",
+      "latex": "Qv^2 = 4PS\\cdot Pv \\qquad F \\propto \\dfrac{1}{SP^2}"
+    }
+  ]
+}

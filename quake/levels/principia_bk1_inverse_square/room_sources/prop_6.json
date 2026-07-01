@@ -1,0 +1,133 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_6",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VI; Plate 3, Figure 2.",
+  "figures": [
+    {
+      "figure_id": "prop_6.f1",
+      "asy_path": "figures/prop_6.f1.asy",
+      "recipe_path": "recipes/prop_6.f1.json",
+      "n_steps": 4,
+      "caption": "In a space void of resistance, the centripetal force in the middle of a nascent arc is as the versed sine directly and the square of the time inversely.",
+      "colors_used": [
+        {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "tangreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "parblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "perpred",
+          "hex": "#D81B60"
+        },
+        {
+          "name": "measpurple",
+          "hex": "#8E24AA"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_6.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_6.s1.fig",
+        "figure_id": "prop_6.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_6.s1.txt",
+        "latex": "Place the \\textcolor{centerorange}{centre of force $S$} and let the body ride the curve at $P$. In the very next      instant it sweeps the \\textcolor{arcblue}{nascent arc $PQ$ — the body's path in the least time}, and this arc is the      heart of everything that follows. Prop. I already told us that a central force makes the areas swept      proportional to the times — but it never told us HOW STRONG the force is. The whole of celestial      mechanics now waits on one question: can we read the magnitude of the force off the shape of the orbit alone?",
+        "colors_used": [
+          {
+            "name": "centerorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "arcblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_6.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_6.s2.fig",
+        "figure_id": "prop_6.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_6.s2.txt",
+        "latex": "Draw the \\textcolor{tangreen}{tangent $ZPR$ at $P$ — the straight path the body WOULD take if the force suddenly      vanished}; this line is the heart of the argument. The distance by which the curve pulls away from that      tangent is the versed sine $QR$, drawn from the nearby point $Q$ back toward the tangent. By Cor. 4 of      Prop. I this fall in a given time is directly as the force. And by Cor. 2 and 3 of Lem. II, lengthening the      time in any ratio augments the arc in that ratio and the versed sine in the DUPLICATE ratio — so the versed      sine is as the force times the square of the time.",
+        "colors_used": [
+          {
+            "name": "tangreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_6.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_6.s3.fig",
+        "figure_id": "prop_6.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_6.s3.txt",
+        "latex": "Here is Newton's decisive stroke: draw \\textcolor{parblue}{$QR$ PARALLEL to the radius $SP$} rather than straight to      the tangent, and this parallel is one heart of the construction. Then drop \\textcolor{perpred}{$QT$ PERPENDICULAR to      $SP$}, the second heart, giving a right angle at $T$. Because $QR\\parallel SP$, the versed sine now speaks      directly in the language of the force's own direction. And because $QT\\perp SP$, the triangle $SQP$ has      area $\\tfrac{1}{2}\\,SP\\cdot QT$ — which, by Prop. I, is proportional to the time in which the arc is swept.",
+        "colors_used": [
+          {
+            "name": "parblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "perpred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_6.s4",
+      "step_index": 4,
+      "drawing": {
+        "block_id": "prop_6.s4.fig",
+        "figure_id": "prop_6.f1",
+        "highlight_step": 4
+      },
+      "text": {
+        "block_id": "prop_6.s4.txt",
+        "latex": "Now assemble the master key. The versed sine gives $F \\propto QR/t^2$, while the swept area sets      $t \\propto SP\\cdot QT$; substitute and the force becomes reciprocally as the \\textcolor{measpurple}{force-measure      solid $SP^2\\cdot QT^2/QR$}, taken in the limit as $Q\\to P$ (Cor. 4 of Lem. X), and this solid is the heart      of the whole method. For ANY curve, pick $P$ and a nearby $Q$, draw $QR\\parallel SP$ and $QT\\perp SP$, and      compute this limit — it is the single most used formula in all of Book I. Props. 7, 11, and 13 will feed      the circle, the ellipse, and the parabola into exactly this construction. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "measpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_6.s4",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_6.eq0",
+      "latex": "F \\propto \\dfrac{\\text{versed sine}}{t^2} \\qquad F \\propto \\dfrac{1}{SP^2\\cdot QT^2/QR}"
+    }
+  ]
+}

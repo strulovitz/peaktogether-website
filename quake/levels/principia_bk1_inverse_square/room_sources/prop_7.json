@@ -1,0 +1,118 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_7",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VII; Plate 3, Figure 3.",
+  "figures": [
+    {
+      "figure_id": "prop_7.f1",
+      "asy_path": "figures/prop_7.f1.asy",
+      "recipe_path": "recipes/prop_7.f1.json",
+      "n_steps": 3,
+      "caption": "If a body revolves in the circumference of a circle, find the law of centripetal force directed to any given point.",
+      "colors_used": [
+        {
+          "name": "circblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "tanteal",
+          "hex": "#00897B"
+        },
+        {
+          "name": "diampurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "constred",
+          "hex": "#D81B60"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_7.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_7.s1.fig",
+        "figure_id": "prop_7.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_7.s1.txt",
+        "latex": "Proposition VII is the first concrete application of the force-measure proved in \\textcolor{radgreen}{Proposition VI},      now applied to the simplest curvilinear orbit: the \\textcolor{circblue}{circle $VQPA$}.      A body $P$ revolves in the circumference and $Q$ is the next place into which it moves.      The remarkable freedom here is that the \\textcolor{centerorange}{force centre $S$} need not sit at the centre $O$ —      it may lie anywhere inside the circle, and we still seek the law along the \\textcolor{radgreen}{radius $SP$},      which is the distance whose powers Prop. VI taught us to track.",
+        "colors_used": [
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "circblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "centerorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_7.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_7.s2.fig",
+        "figure_id": "prop_7.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_7.s2.txt",
+        "latex": "At the body's place we draw the \\textcolor{tanteal}{tangent $PRZ$}, the forceless straight path the body would keep      without any centripetal pull — this is the heart of the deviation argument.      Through the force centre we draw the \\textcolor{diampurple}{chord $PV$}, and through $V$ the \\textcolor{diampurple}{diameter $VA$}, joining $AP$.      Because $VA$ is a diameter, the angle $VPA$ inscribed in the semicircle is a right angle,      and this single fact seeds the chain of similar triangles that will follow.      The \\textcolor{diampurple}{chord $PV$ through $S$} is the intrinsic length that will ultimately govern the whole force law.",
+        "colors_used": [
+          {
+            "name": "tanteal",
+            "hex": "#00897B"
+          },
+          {
+            "name": "diampurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_7.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_7.s3.fig",
+        "figure_id": "prop_7.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_7.s3.txt",
+        "latex": "Now we lay down Prop. VI's apparatus: \\textcolor{constred}{$QT$ perpendicular to $SP$} and \\textcolor{constred}{$LR$ parallel to $SP$},      meeting the tangent at $R$ and $Z$ and the circle at $L$.      The similar triangles $ZQR$, $ZTP$, $ZPA$ give $RP^2$ (that is $QR\\cdot L$) to $QT^2$ as $AV^2$ to $PV^2$,      so multiplying by $SP^2/QR$ and letting $Q$ coincide with $P$ collapses the \\textcolor{constred}{construction} into the clean chord-cube.      Substituting into Prop. VI yields $F \\propto \\dfrac{1}{SP^2\\cdot PV^3}$; and in the special case where $S$ sits at $O$,      the chord $PV$ becomes the diameter and the law reduces to the pure inverse-square $1/SP^2$. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "constred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_7.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_7.eq0",
+      "latex": "F \\propto \\dfrac{1}{SP^2}\\cdot\\dfrac{1}{PV^3}"
+    }
+  ]
+}

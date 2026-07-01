@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "node_id": "lemma_9",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IX; Plate 2.",
+  "figures": [
+    {
+      "figure_id": "lemma_9.f1",
+      "asy_path": "figures/lemma_9.f1.asy",
+      "recipe_path": "recipes/lemma_9.f1.json",
+      "n_steps": 3,
+      "caption": "The areas of triangles formed by ordinates under a curve are ultimately one to the other in the duplicate ratio of the sides.",
+      "colors_used": [
+        {
+          "name": "lineblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "curvegreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "ordorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "arearred",
+          "hex": "#D81B60"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "lemma_9.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "lemma_9.s1.fig",
+        "figure_id": "lemma_9.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "lemma_9.s1.txt",
+        "latex": "A right line \\textcolor{lineblue}{$AE$} and a \\textcolor{curvegreen}{curve $ABC$} cut each other at the      given point $A$. From the curve points $B$ and $C$ we let fall the \\textcolor{ordorange}{ordinates      $BD$ and $CE$}, drawn at a fixed angle to the base, so that two triangles $\\triangle ABD$      and $\\triangle ACE$ are formed beneath the curve. As $B$ and $C$ slide down toward $A$      both triangles dwindle to nothing, yet we may still ask the limiting value of their ratio.      Newton's claim is that this ultimate ratio is the \\textcolor{ordorange}{duplicate ratio of the sides},      namely $AD^2 : AE^2$.",
+        "colors_used": [
+          {
+            "name": "lineblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "curvegreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "ordorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_9.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "lemma_9.s2.fig",
+        "figure_id": "lemma_9.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "lemma_9.s2.txt",
+        "latex": "Here is the same device used in Lemma VII. We \\textcolor{auxpurple}{produce $AD$ to the remote point      $d$ and $AE$ to $e$}, keeping $Ad : Ae = AD : AE$, and draw the ordinates $db$ and $ec$      parallel to the original $BD$ and $CE$. A \\textcolor{auxpurple}{similar curve $Abc$} is drawn out at      this fixed distance, and the \\textcolor{auxpurple}{tangent $Ag$} touches both curves at $A$, cutting      the four ordinates in $F, G, f, g$. The genius of the trick is scale invariance: while the      original figure near $A$ vanishes, this enlarged copy at $d, e$ stays a fixed finite size,      so we may take limits there in plain view. Because every length is proportional, the areas      $\\triangle ABD$, $\\triangle ACE$ stay in constant ratio to the blown-up areas $Abd$, $Ace$.",
+        "colors_used": [
+          {
+            "name": "auxpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_9.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "lemma_9.s3.fig",
+        "figure_id": "lemma_9.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "lemma_9.s3.txt",
+        "latex": "Now hold $Ae$ fixed and let $B$ and $C$ meet $A$; the angle $cAg$ between curve      and tangent vanishes, exactly as in Lemma VII, so the curvilinear areas $Abd$ and $Ace$      coincide with the \\textcolor{arearred}{rectilinear triangles $Afd$ and $Age$}. But these two triangles      share the same vertex angle at $A$ along the tangent $Ag$, so by \\textcolor{arearred}{Lemma V (similar      rectilinear figures)} their areas are as the squares of the homologous sides, that is      $Afd : Age = Ad^2 : Ae^2$. Since $Ad : Ae = AD : AE$ and the original triangles $\\triangle      ABD$, $\\triangle ACE$ stay always proportional to these blown-up areas, the same duplicate      ratio descends to them. Therefore the areas $\\triangle ABD$ and $\\triangle ACE$ are      ultimately one to the other as $AD^2 : AE^2$. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "arearred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "lemma_9.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_9.eq0",
+      "latex": "\\triangle ABD : \\triangle ACE \\to AD^2 : AE^2"
+    }
+  ]
+}

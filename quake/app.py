@@ -24,6 +24,7 @@ from __future__ import annotations
 import sys
 import time
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any, List, Optional
 
 import numpy as np  # noqa: F401  (kept for parity / view-matrix typing at the boundary)
@@ -51,7 +52,7 @@ from readmode import draw_read
 # MODULE CONSTANTS
 # ---------------------------------------------------------------------------
 
-PACK_DIR = "tests/golden_pack/"
+PACK_DIR = str(Path(__file__).parent / "tests" / "golden_pack")
 SAVE_PATH = "savegame.json"
 
 PITCH_CLAMP_RAD = 1.2217          # ±70°

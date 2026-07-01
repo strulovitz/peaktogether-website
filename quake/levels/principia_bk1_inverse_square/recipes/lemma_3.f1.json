@@ -1,0 +1,525 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_3.f1",
+  "node_id": "lemma_3",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma III; Plate 1, Fig. 6.",
+  "caption": "The same ultimate equality of inscribed and circumscribed figures holds even when the breadths of the parallelograms are unequal.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The curve aE over the baseline AE, with stepped rectangles of unequal breadths AB, BC, CD standing under the curve."
+    },
+    {
+      "index": 2,
+      "gloss": "The bounding parallelogram FAaf on the greatest breadth AF contains the entire error between inscribed and circumscribed figures; as AF shrinks the parallelogram, and hence the error, becomes less than any given rectangle."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        0.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.6,
+        0.0
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.6,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptA",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$a$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        1.4
+      ]
+    },
+    {
+      "name": "ptb",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$b$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        2.9
+      ]
+    },
+    {
+      "name": "ptc",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$c$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.6,
+        3.4
+      ]
+    },
+    {
+      "name": "ptd",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$d$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.6,
+        3.9
+      ]
+    },
+    {
+      "name": "ptE",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        8.0,
+        4.2
+      ]
+    },
+    {
+      "name": "A1",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        1.4
+      ]
+    },
+    {
+      "name": "B1",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        1.4
+      ]
+    },
+    {
+      "name": "C1",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.6,
+        2.9
+      ]
+    },
+    {
+      "name": "D1",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.6,
+        3.4
+      ]
+    },
+    {
+      "name": "curve",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "ptA",
+        "ptb",
+        "ptc",
+        "ptd",
+        "ptE"
+      ]
+    },
+    {
+      "name": "baseAE",
+      "draw": {
+        "local_color": {
+          "name": "basegreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "rect1",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "B1",
+        "A1"
+      ]
+    },
+    {
+      "name": "rect2",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "B",
+        "C",
+        "C1",
+        "B1"
+      ]
+    },
+    {
+      "name": "rect3",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "C",
+        "D",
+        "D1",
+        "C1"
+      ]
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "F",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$F$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptA",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$a$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        1.4
+      ]
+    },
+    {
+      "name": "fpt",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$f$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        1.4
+      ]
+    },
+    {
+      "name": "curve2",
+      "draw": {
+        "local_color": {
+          "name": "stepblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "ptA",
+        "fpt"
+      ]
+    },
+    {
+      "name": "baseAE",
+      "draw": {
+        "local_color": {
+          "name": "basegreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "AF",
+      "draw": {
+        "local_color": {
+          "name": "widthorange",
+          "hex": "#E8770A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "F"
+    },
+    {
+      "name": "FAaf",
+      "draw": {
+        "local_color": {
+          "name": "boundred",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "F",
+        "fpt",
+        "ptA"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,537 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "prop_7.f1",
+  "node_id": "prop_7",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VII; Plate 3, Figure 3.",
+  "caption": "If a body revolves in the circumference of a circle, find the law of centripetal force directed to any given point.",
+  "n_steps": 3,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The circle is the orbit and S is a force centre placed anywhere inside it, not just the centre."
+    },
+    {
+      "index": 2,
+      "gloss": "The tangent, the chord PV through S, and the diameter VA seed the right angle at P."
+    },
+    {
+      "index": 3,
+      "gloss": "The QT and LR construction collapses QT squared over QR into PV cubed, giving the force law."
+    }
+  ],
+  "ops": [
+    {
+      "name": "O",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "circ",
+      "draw": {
+        "local_color": {
+          "name": "circblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$VQPA$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "circle_cr",
+      "center": "O",
+      "radius_value": 3.2
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.8,
+        -1.5
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.3,
+        2.9
+      ]
+    },
+    {
+      "name": "S",
+      "draw": {
+        "local_color": {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.7,
+        -0.8
+      ]
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "local_color": {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$SP$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "O",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "circ",
+      "draw": {
+        "local_color": {
+          "name": "circblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "circle_cr",
+      "center": "O",
+      "radius_value": 3.2
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.8,
+        -1.5
+      ]
+    },
+    {
+      "name": "V",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$V$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -1.65,
+        0.3
+      ]
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.65,
+        -0.3
+      ]
+    },
+    {
+      "name": "S",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.7,
+        -0.8
+      ]
+    },
+    {
+      "name": "tanpz",
+      "draw": {
+        "local_color": {
+          "name": "tanteal",
+          "hex": "#00897B"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$PRZ$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "tangent_at",
+      "curve": "circ",
+      "at": "P"
+    },
+    {
+      "name": "PV",
+      "draw": {
+        "local_color": {
+          "name": "diampurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$PV$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "P",
+      "b": "V"
+    },
+    {
+      "name": "VA",
+      "draw": {
+        "local_color": {
+          "name": "diampurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$VA$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "V",
+      "b": "A"
+    },
+    {
+      "name": "AP",
+      "draw": {
+        "local_color": {
+          "name": "diampurple",
+          "hex": "#8E24AA"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$AP$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "P"
+    },
+    {
+      "name": "VPA",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "angle_mark",
+      "a": "V",
+      "vertex": "P",
+      "b": "A",
+      "right": false
+    },
+    {
+      "name": "O",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "circ",
+      "draw": {
+        "local_color": {
+          "name": "circblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "circle_cr",
+      "center": "O",
+      "radius_value": 3.2
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.8,
+        -1.5
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.3,
+        2.9
+      ]
+    },
+    {
+      "name": "S",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.7,
+        -0.8
+      ]
+    },
+    {
+      "name": "V",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$V$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -1.65,
+        0.3
+      ]
+    },
+    {
+      "name": "tanpz",
+      "draw": {
+        "local_color": {
+          "name": "tanteal",
+          "hex": "#00897B"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "tangent_at",
+      "curve": "circ",
+      "at": "P"
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "T",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "foot",
+      "point": "Q",
+      "line": "S P"
+    },
+    {
+      "name": "QT",
+      "draw": {
+        "local_color": {
+          "name": "constred",
+          "hex": "#D81B60"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$QT$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "perpendicular",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "LR",
+      "draw": {
+        "local_color": {
+          "name": "constred",
+          "hex": "#D81B60"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$LR$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "parallel",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "R",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.35,
+        2.15
+      ]
+    },
+    {
+      "name": "L",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$L$",
+          "placement": "W"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.9,
+        1.35
+      ]
+    },
+    {
+      "name": "Z",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$Z$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.5,
+        -1.0
+      ]
+    }
+  ]
+}

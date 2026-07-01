@@ -1,20 +1,35 @@
 {
   "schema_version": "1.0",
   "node_id": "lemma_2",
-  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II.",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II; Plate 1, Fig. 6.",
   "figures": [
     {
       "figure_id": "lemma_2.f1",
       "asy_path": "figures/lemma_2.f1.asy",
       "recipe_path": "recipes/lemma_2.f1.json",
       "n_steps": 3,
-      "caption": "Inscribed and circumscribed parallelograms under the curve aE on equal bases.",
+      "caption": "Inscribed and circumscribed parallelograms on equal bases under the curve aE; as the bases shrink, the inscribed and circumscribed figures and the curvilinear figure become ultimately equal.",
       "colors_used": [
-        { "name": "curveblue",  "hex": "#1E6FE0" },
-        { "name": "basegreen",  "hex": "#00A35A" },
-        { "name": "sideorange", "hex": "#E8770A" },
-        { "name": "inscpurple", "hex": "#8E24AA" },
-        { "name": "circred",    "hex": "#D81B60" }
+        {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "basegreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "sideorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "inscpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "circred",
+          "hex": "#D81B60"
+        }
       ]
     }
   ],
@@ -22,50 +37,98 @@
     {
       "pair_id": "lemma_2.s1",
       "step_index": 1,
-      "drawing": { "block_id": "lemma_2.s1.fig", "figure_id": "lemma_2.f1", "highlight_step": 1 },
+      "drawing": {
+        "block_id": "lemma_2.s1.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 1
+      },
       "text": {
         "block_id": "lemma_2.s1.txt",
-        "latex": "In the figure $AacE$, bounded by the right lines $\\textcolor{sideorange}{Aa}$ and $\\textcolor{basegreen}{AE}$ and by \\textcolor{curveblue}{the curve $acE$}, take any number of \\emph{equal} bases $AB$, $BC$, $CD$, $\\&c.$ along \\textcolor{basegreen}{the base $AE$}. This is the curvilinear figure whose area we mean to measure.",
+        "latex": "In the figure $AacE$, bounded by the right lines $\\\\textcolor{sideorange}{Aa}$ and $\\\\textcolor{basegreen}{AE}$ and by \\\\textcolor{curveblue}{the curve $acE$}, take any number of \\emph{equal} bases $AB$, $BC$, $CD$, $\\&c.$ along \\\\textcolor{basegreen}{the base $AE$}. This is the curvilinear figure whose area we mean to measure.",
         "colors_used": [
-          { "name": "curveblue",  "hex": "#1E6FE0" },
-          { "name": "basegreen",  "hex": "#00A35A" },
-          { "name": "sideorange", "hex": "#E8770A" }
+          {
+            "name": "sideorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "basegreen",
+            "hex": "#00A35A"
+          },
+          {
+            "name": "curveblue",
+            "hex": "#1E6FE0"
+          }
         ]
       }
     },
     {
       "pair_id": "lemma_2.s2",
       "step_index": 2,
-      "drawing": { "block_id": "lemma_2.s2.fig", "figure_id": "lemma_2.f1", "highlight_step": 2 },
+      "drawing": {
+        "block_id": "lemma_2.s2.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 2
+      },
       "text": {
         "block_id": "lemma_2.s2.txt",
-        "latex": "On these equal bases erect \\textcolor{inscpurple}{the inscribed parallelograms $Ab$, $Bc$, $Cd$, $\\&c.$}, with sides $Bb$, $Cc$, $Dd$ parallel to $\\textcolor{sideorange}{Aa}$. \\textcolor{inscpurple}{The inscribed figure $AKbLcMdD$} lies wholly \\emph{under} \\textcolor{curveblue}{the curve}.",
+        "latex": "On these equal bases erect \\\\textcolor{inscpurple}{the inscribed parallelograms $Ab$, $Bc$, $Cd$, $\\&c.$}, with sides $Bb$, $Cc$, $Dd$ parallel to $\\\\textcolor{sideorange}{Aa}$. \\\\textcolor{inscpurple}{The inscribed figure $AKbLcMdD$} lies wholly \\emph{under} \\\\textcolor{curveblue}{the curve}.",
         "colors_used": [
-          { "name": "inscpurple", "hex": "#8E24AA" },
-          { "name": "sideorange", "hex": "#E8770A" },
-          { "name": "curveblue",  "hex": "#1E6FE0" }
+          {
+            "name": "inscpurple",
+            "hex": "#8E24AA"
+          },
+          {
+            "name": "sideorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "curveblue",
+            "hex": "#1E6FE0"
+          }
         ]
       }
     },
     {
       "pair_id": "lemma_2.s3",
       "step_index": 3,
-      "drawing": { "block_id": "lemma_2.s3.fig", "figure_id": "lemma_2.f1", "highlight_step": 3 },
+      "drawing": {
+        "block_id": "lemma_2.s3.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 3
+      },
       "text": {
         "block_id": "lemma_2.s3.txt",
-        "latex": "Complete \\textcolor{circred}{the circumscribed parallelograms $aKbl$, $bLcm$, $cMdn$, $\\&c.$}, rising \\emph{above} \\textcolor{curveblue}{the curve}. Their excess over \\textcolor{inscpurple}{the inscribed figure} is the sum $Kl + Lm + Mn + Do$, equal to the single rectangle $ABla$ on the base $\\textcolor{basegreen}{AB}$. As $\\textcolor{basegreen}{AB}$ is diminished \\emph{in infinitum} this rectangle becomes less than any given space; hence (by Lem.~I) \\textcolor{inscpurple}{the inscribed} and \\textcolor{circred}{the circumscribed} figures, and therefore the intermediate curvilinear figure, become ultimately equal. \\textit{Q.E.D.}",
+        "latex": "Complete \\\\textcolor{circred}{the circumscribed parallelograms $aKbl$, $bLcm$, $cMdn$, $\\&c.$}, rising \\emph{above} \\\\textcolor{curveblue}{the curve}. Their excess over \\\\textcolor{inscpurple}{the inscribed figure} is the sum $Kl + Lm + Mn + Do$, equal to the single rectangle $ABla$ on the base $\\\\textcolor{basegreen}{AB}$. As $\\\\textcolor{basegreen}{AB}$ is diminished \\emph{in infinitum} this rectangle becomes less than any given space; hence (by Lem.~I) \\\\textcolor{inscpurple}{the inscribed} and \\\\textcolor{circred}{the circumscribed} figures, and therefore the intermediate curvilinear figure, become ultimately equal. \\textit{Q.E.D.}",
         "colors_used": [
-          { "name": "circred",    "hex": "#D81B60" },
-          { "name": "curveblue",  "hex": "#1E6FE0" },
-          { "name": "inscpurple", "hex": "#8E24AA" },
-          { "name": "basegreen",  "hex": "#00A35A" }
+          {
+            "name": "circred",
+            "hex": "#D81B60"
+          },
+          {
+            "name": "curveblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "inscpurple",
+            "hex": "#8E24AA"
+          },
+          {
+            "name": "basegreen",
+            "hex": "#00A35A"
+          }
         ]
       }
     }
   ],
   "final_pair_id": "lemma_2.s3",
   "ceiling_equations": [
-    { "eq_id": "lemma_2.eq0", "latex": "\\lim_{AB \\to 0}\\; \\bigl(\\text{circumscribed} - \\text{inscribed}\\bigr) = ABla \\;\\longrightarrow\\; 0" },
-    { "eq_id": "lemma_2.eq1", "latex": "\\text{inscribed} \\;=\\; \\text{circumscribed} \\;=\\; \\text{curvilinear area} \\quad (\\text{ultimately})" }
+    {
+      "eq_id": "lemma_2.eq0",
+      "latex": "\\lim_{AB \\to 0}\\; \\bigl(\\text{circumscribed} - \\text{inscribed}\\bigr) = ABla \\;\\longrightarrow\\; 0"
+    },
+    {
+      "eq_id": "lemma_2.eq1",
+      "latex": "\\text{inscribed} \\;=\\; \\text{circumscribed} \\;=\\; \\text{curvilinear area} \\quad (\\text{ultimately})"
+    }
   ]
 }

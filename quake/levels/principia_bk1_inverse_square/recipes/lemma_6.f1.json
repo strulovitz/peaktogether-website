@@ -1,0 +1,326 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_6.f1",
+  "node_id": "lemma_6",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VI; Plate 2, Fig. 1.",
+  "caption": "As a point B on a curve approaches the point of contact A, the angle between the chord AB and the tangent AD is diminished without limit and ultimately vanishes.",
+  "n_steps": 3,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The arc ACB rising from A, given in position, with smooth continuous curvature."
+    },
+    {
+      "index": 2,
+      "gloss": "The chord AB cutting straight across the arc; as B slides toward A it grows ever shorter."
+    },
+    {
+      "index": 3,
+      "gloss": "The tangent AD grazes the curve at A; the angle BAD between chord and tangent shrinks to zero as B approaches A."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        2.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.0,
+        3.0
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        2.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.0,
+        3.0
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "chordAB",
+      "draw": {
+        "local_color": {
+          "name": "chordgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptC",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        2.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.0,
+        3.0
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.6,
+        1.4
+      ]
+    },
+    {
+      "name": "arc",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "ptC",
+        "B"
+      ]
+    },
+    {
+      "name": "chordAB",
+      "draw": {
+        "local_color": {
+          "name": "chordgreen",
+          "hex": "#00A35A"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "tanAD",
+      "draw": {
+        "local_color": {
+          "name": "tanorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "D"
+    },
+    {
+      "name": "BAD",
+      "draw": {
+        "local_color": {
+          "name": "anglered",
+          "hex": "#D81B60"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$\\angle BAD$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "angle_mark",
+      "a": "B",
+      "vertex": "A",
+      "b": "D",
+      "right": false
+    }
+  ]
+}

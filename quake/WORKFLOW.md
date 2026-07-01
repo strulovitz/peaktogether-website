@@ -12,7 +12,7 @@ Peak Together is a multi-game platform (repo root = website; each game in its ow
 - **Game 2 — Doom / "Principia Descent"** (`doom/`): an educational FPS in Ursina/Panda3D (M0–M3b built, 49 tests). **SHELVED** — superseded by the Quake pivot (a 2D-ish/flat engine couldn't do what we need; see below).
 - **Game 3 — Quake** (`quake/`): **CURRENT PROJECT.** A from-scratch **true-3D** redo. We are in the **BUILD phase** — Legs 1+2+3 complete (186/186 tests green). Leg 4 (engine) **ALL 13 MODULES BUILT + GREEN (283/283 tests).** Engine is COMPLETE. Parent 4→5 handoff for Golden Fixture Pack requested; awaiting Parent 4's answer.
 
-🌙 **ON RESTART:** Read `quake/DEEPSEEK_LATE_AFTERNOON_HANDOFF_2026-06-26.md` FIRST — it has the exact current state, what's done today, what's next. Then read the Commentaries. Then ask Nir what's next.
+🌙 **ON RESTART:** Read `quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md` FIRST — it has the exact current state, what's done today, what's next. Then read the Commentaries. Then ask Nir what's next.
 
 ## 1. WHAT QUAKE IS (in one breath)
 A first-person, true-3D desktop game (Python, Windows-first) that turns a **geometry-rich book** into a walkable 3D **concept-graph dungeon**. Each idea = a room; each logical dependency = a corridor; corridors cross at different heights as **bridges/underpasses** (because a force-directed graph layout inevitably crosses — that's WHY it must be true 3D, "Quake," not flat "Doom/Wolfenstein"). Walls carry the **step-by-step geometric proof** (each step = a drawing panel + a full-LaTeX text panel). You "read" a panel by **shooting it** (grey → colored). The final lit proof-wall is a hidden door → shoot it → the room's one demon emerges → kill it → ceiling equations bleed red. Clear every room → level complete. **A fun game, not educational software.** First book: **Newton's _Principia_** (1846 Motte English translation; we have clean OCR text + per-page images + page-numbers JSON).
@@ -457,21 +457,43 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - lemma_10, lemma_11, prop_1, prop_2, prop_6, prop_7, prop_11, prop_13, prop_15
 - **20/20 Principia rooms BUILT. 435/436 green.** 🎉
 
-### 🏗️ NEXT PHASE: BUILD THE LEVEL PACK 🏗️
+### 🏗️ BUILD PIPELINE SESSION (July 1, 2026 — build_all.py written + run!)
 
-All .room files are done. Now run the full build pipeline to produce baked game data.
+36. **`build/build_all.py` WRITTEN** — master 6-stage build script for all 20 rooms.
+37. **BUILD PIPELINE RAN 4 TIMES** — iterative fixes:
+    - **FIXED: `app.py` PACK_DIR** — bare relative path → `__file__`-relative (smoke test now green from any CWD)
+    - **FIXED: Asymptote translator bugs** in `room_from_spec.py`:
+      - `ray` → `path` type (Asymptote geometry module has no `ray()`)
+      - `circle` → `path` type (`circle()` returns `path`)
+      - `angle` label positioning → creates `pair` at vertex+bisector
+      - `arc` shorthand → accepts `arc NAME FROM TO CENTER` without keywords
+      - `foot` multi-point → accepts `foot T from Q to S P` (line-through-2-points)
+      - `_safe_name()` → prefixes names that collide with Asymptote reserved words
+      - Label emission → non-point types extract midpoint via `point(nm, 0.5)`
+    - **FIXED: Pdflatex** — removed `-halt-on-error` flag (was killing text bakes on MiKTeX warnings)
+    - **FIXED: `raw_models.py` OpName pattern** — allows spaces for multi-point foot refs
+38. **BUILD RESULTS (after fixes):**
 
-**Self-handoff:** `quake/DEEPSEEK_BUILD_PIPELINE_GO.md` — complete build plan.
-**On restart:** Read DEEPSEEK_BUILD_PIPELINE_GO.md FIRST, then WORKFLOW, then Commentaries.
+| Stage | Status |
+|-------|--------|
+| Stage 1 — Emit recipe/asy/room_source (20/20) | ✅ ALL |
+| Stage 2 — Figure compile | ✅ 16/20 |
+| Stage 3 — Text baking (pdflatex) | ✅ ALL 20 |
+| Stage 4 — Ceiling equations | ✅ ALL |
+| Stage 5 — Manifest (219 assets, 438 PNGs) | ✅ |
+| Stage 6 — Room runtimes | 🔴 4/20 |
 
-37. ⏳ **BUILD PIPELINE** — run `build_all.py` for all 20 rooms:
-    - Stage 1: Emit recipe/asy/room_source from .room files
-    - Stage 2: Compile figures (Asymptote for geometry, pdflatex for equation)
-    - Stage 3: Bake text panels (pdflatex+pdftocairo)
-    - Stage 4: Ceiling equations (pdflatex)
-    - Stage 5: Assemble manifest + palette
-    - Stage 6: build_room_runtime for each room
-38. ⏳ Verify PNGs + room viewer + smoke test
+39. **REMAINING ISSUES:**
+    - 🔴 **RoomTooDense (14 rooms)** — `size_and_pack()` wall packer can't fit panels+doors when rooms have 2+ doors. Tried bigger rooms, more iterations, bigger grow steps — nothing helped. **Parent 17 launched to fix.**
+    - 🟡 **Asymptote bugs (4 rooms)** — `tangent(path, pair)` + `foot(pair, line)`. Fall through to placeholders.
+    - 🟡 **Door bearing mismatches (3 rooms)** — ~0.05-0.20 rad off.
+
+40. **Parent 17 LAUNCHED** — wall packer doctor. Handoff: `PROMPT_TO_OPUS_QUAKE_PARENT_17_HANDOFF.md`. 2 files, 349 lines total. Launch: Commentaries + OT + NT + handoff.
+
+41. **Tests: 434/434 green 🟢** (pre-existing smoke test path fixed).
+
+**Self-handoff:** `quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`
+**On restart:** Read DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md FIRST, then WORKFLOW, then Commentaries.
 39. ⏳ Ship the finished pack
 
 **NEXT on restart: LAUNCH THE BUILD PIPELINE.** 🌙
@@ -486,31 +508,47 @@ All .room files are done. Now run the full build pipeline to produce baked game 
 - Never use keyout for text. Always use native transparency.
 - pdftocairo needs `-r 220` (with space), NOT `-r220`
 
-## 9. NEXT STEPS (June 30, 2026 evening — Parent 16 DONE)
+## 9. NEXT STEPS (July 1, 2026 — BUILD PIPELINE session)
 
-~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)**
+~~Parent 5~~ ✅ | ~~Parent 6~~ ✅ | ~~Parent 7~~ ✅ | ~~Parent 8 Part A~~ ✅ | ~~Parent 9~~ ❌ CANCELLED | ~~Parent 10~~ ❌ DIED | ~~Parent 11~~ ✅ | ~~Parent 12~~ ❌ FAILED | ~~Parent 13~~ ✅ | **~~Parent 14~~ DELETED** | **~~Parent 15~~ ✅ DONE** | **~~Parent 16~~ ✅ DONE (v2: complete code)** | **Parent 17** ⏳ ACTIVE
 
 ### DONE — Parent 15: Level Design Correction
-1. ✅ Corrected palette.json (map-side only, groups/grey dead)
-2. ✅ Corrected concept_graph.json (verified citation labels, degree fixes)
-3. ✅ Station map: 20 rooms, 56 stations (16 DIAGRAM, 2 EQUATION, 1 TEXT, 1 EQUATION/TEXT)
-4. ✅ No dead text-only rooms — Parent 7's "9 figure-less" shortcut overturned
-5. ✅ Zero contract change (equation/text panels = FigureDecls via colored-label .asy)
-6. ✅ Deliverable saved: `QUAKE_PARENT_15_FROZEN_WAVE_1_DELIVERABLE.md` + `QUAKE_PARENT_15_FROZEN_WAVE_2_DELIVERABLE.md`
+1. ✅ Corrected palette.json
+2. ✅ Corrected concept_graph.json
+3. ✅ Station map: 20 rooms, 56 stations
+4. ✅ No dead text-only rooms
+5. ✅ Zero contract change
 
 ### DONE — Parent 16: Room-Content Format + Builder Tool
-1. ✅ ROOMSPEC.md format spec (keyword-block, three kinds, local colors, child-friendly)
-2. ✅ `build/room_from_spec.py` tool design (parse → validate → emit, 11 golden tests)
-3. ✅ Self-contained gold .asy convention (NOT prooffig)
-4. ✅ One honest gap: Asymptote snippet library (compile-confirm, lazy growth)
-5. ✅ Deliverable saved: `QUAKE_PARENT_16_FROZEN_DELIVERABLE.md`
+1. ✅ `.room` format + `build/room_from_spec.py` tool
+2. ✅ Complete runnable code, no gaps
 
-### NEXT — 9 more children (one .room per room, dependency order)
-1. DeepSeek writes child prompt → child returns .room → DeepSeek fixes keyword syntax → drops in tests/room_specs/ → validates
-2. Order: lemma_5 ✅ → lemma_6 ✅ → lemma_12 ✅ → lemma_3 ✅ → lemma_4 ✅ → lemma_7 ✅ → lemma_9 ✅ → **lemma_10** → lemma_11 → prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15
-3. Already done: lemma_2, lemma_3, lemma_4, lemma_5, lemma_6, lemma_7, lemma_9, lemma_12, prop_4, law_1, law_2 ✅ (11/20)
-4. Build full level pack AFTER all 20 .room files are done
-5. Restart handoff: `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`
+### DONE — Build Pipeline (first run)
+1. ✅ `build/build_all.py` — master 6-stage build script
+2. ✅ Stage 1: all 20 rooms emit correctly
+3. ✅ Stage 2: 16/20 figures compile
+4. ✅ Stage 3: ALL text panels baked (pdflatex fix)
+5. ✅ Stage 4: ALL ceiling equations baked
+6. ✅ Stage 5: Manifest assembled (219 entries, 438 PNGs)
+7. 🔴 Stage 6: Only 4/20 room runtimes (RoomTooDense)
+8. ✅ `app.py` PACK_DIR fixed (smoke test green from any CWD)
+9. ✅ Asymptote translator bugs fixed (ray→path, circle→path, angle labels, foot, arc, safe names, line labels)
+10. ✅ Pdflatex `-halt-on-error` removed (text baking now works)
+11. ✅ OpName pattern relaxed for multi-point refs
+
+### ⏳ ACTIVE — Parent 17: Fix the Wall Packer
+- Mission: fix `build/room_pack.py` / `build/room_geometry.py` RoomTooDense
+- Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_17_HANDOFF.md`
+- 2 files, 349 lines total
+- Launch: Commentaries + OT + NT + handoff
+
+### ⏳ THEN — After Parent 17 delivers
+1. Drop in fix, run build_all.py → all 20 room runtimes
+2. Fix remaining Asymptote bugs (4 rooms: tangent/foot)
+3. Fix door bearing mismatches (3 rooms)
+4. Room viewer verification
+5. Smoke test with app.py
+6. Ship the finished pack 🚀
 
 ## 10. LESSONS LEARNED / GOTCHAS (don't repeat these)
 - **Don't micromanage the architect.** Give Opus the *truth* + the *whole problem* and let it think holistically.
@@ -537,7 +575,7 @@ All .room files are done. Now run the full build pipeline to produce baked game 
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 — END OF MARATHON):** 🏆 **20/20 rooms DONE! 435/436 green!** 🏆 Engine + renderers complete. All parents 1–16 finished. Child pipeline COMPLETE. **NEXT PHASE: BUILD PIPELINE** — run build_all.py to compile all 20 rooms into baked game data. Restart handoff at `quake/DEEPSEEK_BUILD_PIPELINE_GO.md`. **Everything pushed.** 🚀
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`). Then ask Nir what's next.
+🌙 **CURRENT STATE (July 1, 2026 — BUILD PIPELINE session):** 🏆 **20/20 rooms DONE! 434/434 green!** 🏆 Build pipeline running. Stage 1-5 COMPLETE (all .room specs emitted, 16/20 figures, ALL text, ALL ceilings, manifest assembled). Stage 6: 4/20 room runtimes. **Parent 17 ACTIVE** — fixing RoomTooDense wall packer. Restart handoff at `quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.

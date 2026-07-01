@@ -1,0 +1,387 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_10.f1",
+  "node_id": "lemma_10",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma X; Plate 2.",
+  "caption": "The spaces which a body describes from rest under any finite force are, from the very beginning of the motion, in the duplicate ratio of the times.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The same figure as Lemma IX, now read as physics: the baseline is TIME, the ordinates are VELOCITY, and the curve is the growth of speed under a force."
+    },
+    {
+      "index": 2,
+      "gloss": "By Lemma IX the two triangular areas are the spaces described, and since they stand in the duplicate ratio of the times we obtain s proportional to t squared, whence Cor. 4 gives force proportional to space over time squared."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.4,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.4,
+        1.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        2.2
+      ]
+    },
+    {
+      "name": "AE",
+      "draw": {
+        "local_color": {
+          "name": "timeblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$AE$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "AD",
+      "draw": {
+        "local_color": {
+          "name": "timeblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$AD$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "D"
+    },
+    {
+      "name": "curve",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$ABC$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "name": "DB",
+      "draw": {
+        "local_color": {
+          "name": "velgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$DB$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "D",
+      "b": "B"
+    },
+    {
+      "name": "EC",
+      "draw": {
+        "local_color": {
+          "name": "velgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$EC$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "E",
+      "b": "C"
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.4,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "NW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.4,
+        1.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        2.2
+      ]
+    },
+    {
+      "name": "AE",
+      "draw": {
+        "local_color": {
+          "name": "timeblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$AE$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "curve",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$ABC$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "name": "DB",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "D",
+      "b": "B"
+    },
+    {
+      "name": "EC",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "E",
+      "b": "C"
+    },
+    {
+      "name": "triABD",
+      "draw": {
+        "local_color": {
+          "name": "spacered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$ABD$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "D"
+      ]
+    },
+    {
+      "name": "triACE",
+      "draw": {
+        "local_color": {
+          "name": "spacered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$ACE$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "C",
+        "E"
+      ]
+    }
+  ]
+}

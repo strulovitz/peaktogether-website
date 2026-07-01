@@ -1,0 +1,601 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_4.f1",
+  "node_id": "lemma_4",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IV; Plate 1, Fig. 7.",
+  "caption": "If corresponding parallelograms in two figures share one ultimate ratio each-to-each, then the whole figures are in that same ratio.",
+  "n_steps": 3,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The first figure AacE with its rank of inscribed parallelograms on equal bases."
+    },
+    {
+      "index": 2,
+      "gloss": "The second figure PprT with its own rank of equal-count parallelograms, a differently shaped curve."
+    },
+    {
+      "index": 3,
+      "gloss": "Correspondence lines pairing rank-to-rank; the shared ultimate ratio k carries to the whole figures by Lem. III."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        5.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        5.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.0,
+        5.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        5.0
+      ]
+    },
+    {
+      "name": "ptA",
+      "draw": {
+        "local_color": {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$a$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        6.0
+      ]
+    },
+    {
+      "name": "ptb",
+      "draw": {
+        "local_color": {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$b$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.0,
+        7.0
+      ]
+    },
+    {
+      "name": "ptc",
+      "draw": {
+        "local_color": {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$c$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        7.7
+      ]
+    },
+    {
+      "name": "ptE",
+      "draw": {
+        "local_color": {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        8.1
+      ]
+    },
+    {
+      "name": "curveA",
+      "draw": {
+        "local_color": {
+          "name": "curveblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "ptA",
+        "ptb",
+        "ptc",
+        "ptE"
+      ]
+    },
+    {
+      "name": "baseAE",
+      "draw": {
+        "local_color": {
+          "name": "basegreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "rankA",
+      "draw": {
+        "local_color": {
+          "name": "figaviolet",
+          "hex": "#8E24AA"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "series",
+      "along": "baseAE",
+      "to_curve": "curveA",
+      "count": 3,
+      "kind": "inscribed_rects"
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "T",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$T$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        0.0
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.0,
+        0.0
+      ]
+    },
+    {
+      "name": "R",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "S"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "name": "ptP",
+      "draw": {
+        "local_color": {
+          "name": "curvered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$p$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        2.6
+      ]
+    },
+    {
+      "name": "ptr",
+      "draw": {
+        "local_color": {
+          "name": "curvered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$r$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.0,
+        2.0
+      ]
+    },
+    {
+      "name": "pts",
+      "draw": {
+        "local_color": {
+          "name": "curvered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$s$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        1.3
+      ]
+    },
+    {
+      "name": "ptT",
+      "draw": {
+        "local_color": {
+          "name": "curvered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$T$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        0.6
+      ]
+    },
+    {
+      "name": "curveB",
+      "draw": {
+        "local_color": {
+          "name": "curvered",
+          "hex": "#D81B60"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "ptP",
+        "ptr",
+        "pts",
+        "ptT"
+      ]
+    },
+    {
+      "name": "basePT",
+      "draw": {
+        "local_color": {
+          "name": "basegreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "P",
+      "b": "T"
+    },
+    {
+      "name": "rankB",
+      "draw": {
+        "local_color": {
+          "name": "figbteal",
+          "hex": "#00897B"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "series",
+      "along": "basePT",
+      "to_curve": "curveB",
+      "count": 3,
+      "kind": "inscribed_rects"
+    },
+    {
+      "name": "m1",
+      "draw": {
+        "local_color": {
+          "name": "figaviolet",
+          "hex": "#8E24AA"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$p_1$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.0,
+        5.5
+      ]
+    },
+    {
+      "name": "m2",
+      "draw": {
+        "local_color": {
+          "name": "figaviolet",
+          "hex": "#8E24AA"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$p_2$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        6.0
+      ]
+    },
+    {
+      "name": "m3",
+      "draw": {
+        "local_color": {
+          "name": "figaviolet",
+          "hex": "#8E24AA"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$p_3$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.0,
+        6.3
+      ]
+    },
+    {
+      "name": "n1",
+      "draw": {
+        "local_color": {
+          "name": "figbteal",
+          "hex": "#00897B"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$q_1$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.0,
+        1.3
+      ]
+    },
+    {
+      "name": "n2",
+      "draw": {
+        "local_color": {
+          "name": "figbteal",
+          "hex": "#00897B"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$q_2$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        1.0
+      ]
+    },
+    {
+      "name": "n3",
+      "draw": {
+        "local_color": {
+          "name": "figbteal",
+          "hex": "#00897B"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$q_3$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.0,
+        0.6
+      ]
+    },
+    {
+      "name": "link1",
+      "draw": {
+        "local_color": {
+          "name": "corrorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "m1",
+      "b": "n1"
+    },
+    {
+      "name": "link2",
+      "draw": {
+        "local_color": {
+          "name": "corrorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "m2",
+      "b": "n2"
+    },
+    {
+      "name": "link3",
+      "draw": {
+        "local_color": {
+          "name": "corrorange",
+          "hex": "#E8770A"
+        },
+        "step": 3,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "m3",
+      "b": "n3"
+    }
+  ]
+}

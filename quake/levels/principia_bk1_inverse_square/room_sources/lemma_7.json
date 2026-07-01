@@ -1,0 +1,98 @@
+{
+  "schema_version": "1.0",
+  "node_id": "lemma_7",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VII; Plate 2, Fig. 1.",
+  "figures": [
+    {
+      "figure_id": "lemma_7.f1",
+      "asy_path": "figures/lemma_7.f1.asy",
+      "recipe_path": "recipes/lemma_7.f1.json",
+      "n_steps": 3,
+      "caption": "The ultimate ratio of the arc, the chord, and the tangent, any one to any other, is the ratio of equality.",
+      "colors_used": [
+        {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "auxpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "equalteal",
+          "hex": "#00897B"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "lemma_7.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "lemma_7.s1.fig",
+        "figure_id": "lemma_7.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "lemma_7.s1.txt",
+        "latex": "We resume the very figure of the last lemma. From the point $A$ springs \\\\textcolor{arcblue}{the arc $ACB$},      fixed in position, with smooth continuous curvature; across it runs the chord $AB$, and grazing      the curve at $A$ stretches the tangent $AD$. As the point $B$ slides toward $A$, all three of      these --- \\\\textcolor{arcblue}{arc, chord, and tangent} --- shrink together toward nothing, and the question is:      in what \\emph{proportion} do they vanish? Newton's claim is bold and exact: their ultimate ratio,      any one to any other, is the \\textcolor{arcblue}{ratio of equality} --- $1:1:1$. The trouble is that three      quantities all collapsing to zero cannot be compared directly, so we need a clever device to hold      their proportions still while we examine them.",
+        "colors_used": [
+          {
+            "name": "arcblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_7.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "lemma_7.s2.fig",
+        "figure_id": "lemma_7.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "lemma_7.s2.txt",
+        "latex": "Here is the device. While $B$ approaches $A$, we always \\emph{produce} $AB$ and $AD$ onward to      fixed remote points $b$ and $d$, and parallel to the secant $BD$ we draw \\\\textcolor{auxpurple}{the line $bd$}.      Upon the distant ends we erect \\\\textcolor{auxpurple}{the auxiliary arc $Acb$}, always kept \\emph{similar} to      the shrinking arc $ACB$. This is the trick: the original figure dwindles toward $A$, but the      enlarged copy out at $b,d$ stays a fixed, finite size --- a faithful magnification in which every      proportion of the little figure is preserved exactly. So whatever ratio arc, chord, and tangent      bear to one another below, the same ratio is held, full-sized and visible, in \\\\textcolor{auxpurple}{the      finite triangle $Abd$ and arc $Acb$} above.",
+        "colors_used": [
+          {
+            "name": "auxpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_7.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "lemma_7.s3.fig",
+        "figure_id": "lemma_7.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "lemma_7.s3.txt",
+        "latex": "Now suppose $A$ and $B$ to coincide. By the preceding lemma the angle \\\\textcolor{equalteal}{$\\angle dAb$}      vanishes --- the chord and tangent directions merge. Therefore the right lines $Ab$, $Ad$ (which      are always finite) and the intermediate \\\\textcolor{auxpurple}{arc $Acb$} squeeze together and      \\\\textcolor{equalteal}{coincide, becoming equal among themselves}. But the original \\\\textcolor{equalteal}{chord $AB$,      tangent $AD$, and arc $ACB$} are always proportional to these finite three; hence they too must      ultimately stand in the \\\\textcolor{equalteal}{ratio of equality}, $\\text{arc}:\\text{chord}:\\text{tangent}\\to 1:1:1$.      This is the crown of the section: as $B\\to A$, arc, chord, and tangent become interchangeable,      and every later argument about velocities, forces, and curvature rests upon this single equality.      \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "equalteal",
+            "hex": "#00897B"
+          },
+          {
+            "name": "auxpurple",
+            "hex": "#8E24AA"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "lemma_7.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_7.eq0",
+      "latex": "\\text{arc}:\\text{chord}:\\text{tangent}\\to 1:1:1"
+    }
+  ]
+}

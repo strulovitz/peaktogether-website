@@ -1,0 +1,615 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "prop_6.f1",
+  "node_id": "prop_6",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VI; Plate 3, Figure 2.",
+  "caption": "In a space void of resistance, the centripetal force in the middle of a nascent arc is as the versed sine directly and the square of the time inversely.",
+  "n_steps": 4,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The centre S, the body at P, and the tiny nascent arc PQ pose the measurement problem."
+    },
+    {
+      "index": 2,
+      "gloss": "The tangent ZPR is the forceless path; the versed sine measures how far the body falls from it."
+    },
+    {
+      "index": 3,
+      "gloss": "QR is drawn parallel to SP and QT perpendicular to SP, tying orbit geometry to the force direction."
+    },
+    {
+      "index": 4,
+      "gloss": "The force-measure solid SP²·QT²/QR is the master formula for every later proposition."
+    }
+  ],
+  "ops": [
+    {
+      "name": "S",
+      "draw": {
+        "local_color": {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.6,
+        -2.2
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        1.9
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.55,
+        2.55
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "local_color": {
+          "name": "arcblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "arc",
+      "center": "S",
+      "frm": "P",
+      "to": "Q",
+      "direction": "ccw"
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "S",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.6,
+        -2.2
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        1.9
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.55,
+        2.55
+      ]
+    },
+    {
+      "name": "Z",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$Z$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        0.9
+      ]
+    },
+    {
+      "name": "R",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.35,
+        0.75
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "arc",
+      "center": "S",
+      "frm": "P",
+      "to": "Q",
+      "direction": "ccw"
+    },
+    {
+      "name": "ZPR",
+      "draw": {
+        "local_color": {
+          "name": "tangreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$\\text{tangent }ZPR$",
+          "placement": "E"
+        },
+        "marker": "none"
+      },
+      "op": "line",
+      "a": "Z",
+      "b": "R"
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "QR",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "Q",
+      "b": "R"
+    },
+    {
+      "name": "S",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.6,
+        -2.2
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        1.9
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.55,
+        2.55
+      ]
+    },
+    {
+      "name": "Z",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$Z$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        0.9
+      ]
+    },
+    {
+      "name": "R",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.9,
+        1.05
+      ]
+    },
+    {
+      "name": "T",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$T$",
+          "placement": "SW"
+        },
+        "marker": "none"
+      },
+      "op": "foot",
+      "point": "Q",
+      "line": "S P"
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "arc",
+      "center": "S",
+      "frm": "P",
+      "to": "Q",
+      "direction": "ccw"
+    },
+    {
+      "name": "ZPR",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "line",
+      "a": "Z",
+      "b": "R"
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "QR",
+      "draw": {
+        "local_color": {
+          "name": "parblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$QR\\parallel SP$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "parallel",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "QT",
+      "draw": {
+        "local_color": {
+          "name": "perpred",
+          "hex": "#D81B60"
+        },
+        "step": 3,
+        "is_heart": true,
+        "label": {
+          "tex": "$QT\\perp SP$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "perpendicular",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "QTP",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "angle_mark",
+      "a": "Q",
+      "vertex": "T",
+      "b": "P",
+      "right": false
+    },
+    {
+      "name": "S",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.6,
+        -2.2
+      ]
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "E"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.4,
+        1.9
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.55,
+        2.55
+      ]
+    },
+    {
+      "name": "R",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.9,
+        1.05
+      ]
+    },
+    {
+      "name": "Z",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$Z$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        0.9
+      ]
+    },
+    {
+      "name": "T",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "label": {
+          "tex": "$T$",
+          "placement": "SW"
+        },
+        "marker": "none"
+      },
+      "op": "foot",
+      "point": "Q",
+      "line": "S P"
+    },
+    {
+      "name": "P",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "arc",
+      "center": "S",
+      "frm": "P",
+      "to": "Q",
+      "direction": "ccw"
+    },
+    {
+      "name": "ZPR",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "line",
+      "a": "Z",
+      "b": "R"
+    },
+    {
+      "name": "SP",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "S",
+      "b": "P"
+    },
+    {
+      "name": "QR",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "parallel",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "QT",
+      "draw": {
+        "step": 4,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "perpendicular",
+      "through": "Q",
+      "to": "S"
+    },
+    {
+      "name": "quad",
+      "draw": {
+        "local_color": {
+          "name": "measpurple",
+          "hex": "#8E24AA"
+        },
+        "step": 4,
+        "is_heart": true,
+        "label": {
+          "tex": "$SP^2\\!\\cdot\\!QT^2/QR$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "S",
+        "Q",
+        "P"
+      ]
+    }
+  ]
+}

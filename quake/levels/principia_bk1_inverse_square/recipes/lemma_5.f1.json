@@ -1,0 +1,374 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_5.f1",
+  "node_id": "lemma_5",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma V; Plate 2, Fig. 1.",
+  "caption": "In similar figures all homologous sides are proportional, and the areas are in the duplicate ratio of the homologous sides.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "Two similar triangles displayed side by side: a larger figure ABC and a smaller figure DEF of the very same shape."
+    },
+    {
+      "index": 2,
+      "gloss": "One pair of homologous sides AB and DE is highlighted; all homologous sides share one ratio k, and the areas stand in the duplicate ratio k squared."
+    }
+  ],
+  "ops": [
+    {
+      "name": "A",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.2,
+        3.0
+      ]
+    },
+    {
+      "name": "fig1",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "name": "F",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$F$",
+          "placement": "N"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.6,
+        1.5
+      ]
+    },
+    {
+      "name": "fig2",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "D",
+        "E",
+        "F"
+      ]
+    },
+    {
+      "name": "A",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.2,
+        3.0
+      ]
+    },
+    {
+      "name": "fig1",
+      "draw": {
+        "local_color": {
+          "name": "simblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "C"
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        8.0,
+        0.0
+      ]
+    },
+    {
+      "name": "F",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$F$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.6,
+        1.5
+      ]
+    },
+    {
+      "name": "fig2",
+      "draw": {
+        "local_color": {
+          "name": "simgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "D",
+        "E",
+        "F"
+      ]
+    },
+    {
+      "name": "sideAB",
+      "draw": {
+        "local_color": {
+          "name": "sideorange",
+          "hex": "#E8770A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "sideDE",
+      "draw": {
+        "local_color": {
+          "name": "sideorange",
+          "hex": "#E8770A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "D",
+      "b": "E"
+    }
+  ]
+}

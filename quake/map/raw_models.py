@@ -24,7 +24,7 @@ PairId   = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+$")]
 DrawBlockId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+\.fig$")]
 TextBlockId = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.s[0-9]+\.txt$")]
 EqId     = Annotated[str, Field(pattern=r"^[a-z][a-z0-9_]*\.eq[0-9]+$")]
-OpName   = Annotated[str, Field(pattern=r"^[A-Za-z][A-Za-z0-9_']*$")]
+OpName   = Annotated[str, Field(pattern=r"^[A-Za-z][A-Za-z0-9_'\s]*$")]
 Ref      = OpName
 
 

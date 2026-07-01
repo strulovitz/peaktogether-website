@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_2",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition II (reuses Prop. I figure).",
+  "figures": [
+    {
+      "figure_id": "prop_2.f1",
+      "asy_path": "figures/prop_2.f1.asy",
+      "recipe_path": "recipes/prop_2.f1.json",
+      "n_steps": 3,
+      "caption": "Every body that moves in a curve and describes areas proportional to the times about a point is urged by a centripetal force directed to that point.",
+      "colors_used": [
+        {
+          "name": "centerorange",
+          "hex": "#E8770A"
+        },
+        {
+          "name": "fanpurple",
+          "hex": "#8E24AA"
+        },
+        {
+          "name": "deflectblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "radialred",
+          "hex": "#D81B60"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_2.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_2.s1.fig",
+        "figure_id": "prop_2.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_2.s1.txt",
+        "latex": "Proposition I proved that a central force produces \\textcolor{fanpurple}{equal triangles SAB, SBC, SCD — all equal areas} swept in equal times. Proposition II is its converse: now the equal areas are the PREMISE, and centripetal force is the conclusion. About the fixed \\textcolor{centerorange}{centre S} the body follows the polygonal path $A\\,B\\,C\\,D\\,E$, and we are GIVEN that it describes areas $\\propto$ times. This is the observational direction — exactly what Kepler measured for Mars: if you OBSERVE $\\triangle SAB=\\triangle SBC=\\triangle SCD$, must the force point to $S$?",
+        "colors_used": [
+          {
+            "name": "fanpurple",
+            "hex": "#8E24AA"
+          },
+          {
+            "name": "centerorange",
+            "hex": "#E8770A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_2.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_2.s2.fig",
+        "figure_id": "prop_2.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_2.s2.txt",
+        "latex": "By \\textcolor{deflectblue}{Law I} the body leaving $B$ would run straight on to $c$ (so $Bc$ continues the line $AB$), yet it turns to $C$: some impulse deflected it by $cC$. Now $\\triangle SBc=\\triangle SAB$ because $Sc$ and $AB$ share the base $SB$ and $Bc$ lies on $AB$; but we are GIVEN $\\triangle SBC=\\triangle SAB$, hence $\\triangle SBC=\\triangle SBc$. By \\textcolor{deflectblue}{Euclid I.40, equal triangles on the same base SB lie between the same parallels}, so $C$ and $c$ are equidistant from line $SB$ — that is, $cC \\parallel BS$. The deflecting impulse (by \\textcolor{deflectblue}{Law II}, along $cC$) therefore points exactly along $BS$, straight toward the centre.",
+        "colors_used": [
+          {
+            "name": "deflectblue",
+            "hex": "#1E6FE0"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_2.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "prop_2.s3.fig",
+        "figure_id": "prop_2.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "prop_2.s3.txt",
+        "latex": "The identical reasoning holds at $C$ ($dD \\parallel CS$), at $D$, and at every vertex: each deflection lies parallel to the radius, so the impulse always aims at $S$. Taking the polygon to its limit, the \\textcolor{radialred}{radial force directions BS, CS, DS} converge continuously on the centre — the force is centripetal. Thus the equal-area observation ALONE locks the direction toward $S$, however the magnitude may vary with distance; combined with Proposition I this makes swept area the definitive test of a central force. \\textit{Q.E.D.}",
+        "colors_used": [
+          {
+            "name": "radialred",
+            "hex": "#D81B60"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_2.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_2.eq0",
+      "latex": "\\text{areas} \\propto \\text{times} \\;\\Rightarrow\\; F \\to S"
+    }
+  ]
+}

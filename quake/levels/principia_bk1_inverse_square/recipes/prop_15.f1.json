@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "prop_15.f1",
+  "node_id": "prop_15",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XV; (no printed figure).",
+  "caption": "The periodic times in ellipses are in the sesquiplicate ratio of the greater axes — Kepler's Third Law.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The periodic times in ellipses are in the sesquiplicate ratio of their greater axes."
+    },
+    {
+      "index": 2,
+      "gloss": "The lesser axis is the mean proportional between the greater axis and the latus rectum; subducting the subduplicate ratio leaves the sesquiplicate."
+    }
+  ],
+  "ops": [
+    {
+      "name": "term_1_1",
+      "draw": {
+        "local_color": {
+          "name": "timeblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$T^2$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_1"
+    },
+    {
+      "name": "term_1_2",
+      "draw": {
+        "local_color": {
+          "name": "axisorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$a^3$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_2"
+    },
+    {
+      "name": "term_1_3",
+      "draw": {
+        "local_color": {
+          "name": "ratiopurple",
+          "hex": "#8E24AA"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\tfrac{3}{2}\\ \\text{(sesquiplicate)}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_3"
+    },
+    {
+      "name": "term_2_1",
+      "draw": {
+        "local_color": {
+          "name": "timeblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$T \\propto \\dfrac{\\pi a b}{\\text{(areal velocity)}}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_1"
+    },
+    {
+      "name": "term_2_2",
+      "draw": {
+        "local_color": {
+          "name": "meangreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$b^2 = aL$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_2"
+    },
+    {
+      "name": "term_2_3",
+      "draw": {
+        "local_color": {
+          "name": "axisorange",
+          "hex": "#E8770A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$T \\propto a^{3/2}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_3"
+    }
+  ]
+}

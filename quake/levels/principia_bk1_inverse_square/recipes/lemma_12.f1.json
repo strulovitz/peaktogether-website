@@ -1,0 +1,276 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "lemma_12.f1",
+  "node_id": "lemma_12",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I (Lemma XII cited later in Prop. XI); Plate 4, Fig. 1.",
+  "caption": "All parallelograms described about conjugate diameters of a given ellipse or hyperbola are equal to one another.",
+  "n_steps": 1,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "An ellipse with one pair of skewed conjugate diameters and the parallelogram circumscribed about it, touching the curve at the four diameter endpoints."
+    }
+  ],
+  "ops": [
+    {
+      "name": "O",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$O$",
+          "placement": "center"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "maj",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.0,
+        0.0
+      ]
+    },
+    {
+      "name": "min",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        2.4
+      ]
+    },
+    {
+      "name": "ell",
+      "draw": {
+        "local_color": {
+          "name": "ellblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "ellipse_axes",
+      "center": "O",
+      "major_end": "maj",
+      "minor_end": "min"
+    },
+    {
+      "name": "P",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$P$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.4,
+        1.27
+      ]
+    },
+    {
+      "name": "Q",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$Q$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -3.4,
+        -1.27
+      ]
+    },
+    {
+      "name": "R",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$R$",
+          "placement": "NW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -1.5,
+        2.22
+      ]
+    },
+    {
+      "name": "S",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$S$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.5,
+        -2.22
+      ]
+    },
+    {
+      "name": "diamPQ",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "P",
+      "b": "Q"
+    },
+    {
+      "name": "diamRS",
+      "draw": {
+        "local_color": {
+          "name": "conjorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "R",
+      "b": "S"
+    },
+    {
+      "name": "V1",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$$",
+          "placement": "NE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        5.5,
+        3.4
+      ]
+    },
+    {
+      "name": "V2",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$$",
+          "placement": "SE"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        2.5,
+        -1.8
+      ]
+    },
+    {
+      "name": "V3",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$$",
+          "placement": "SW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -5.5,
+        -3.4
+      ]
+    },
+    {
+      "name": "V4",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$$",
+          "placement": "NW"
+        },
+        "marker": "dot"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        -2.5,
+        1.8
+      ]
+    },
+    {
+      "name": "box",
+      "draw": {
+        "local_color": {
+          "name": "pargreen",
+          "hex": "#00A35A"
+        },
+        "step": 1,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "V1",
+        "V2",
+        "V3",
+        "V4"
+      ]
+    }
+  ]
+}

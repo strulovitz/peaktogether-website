@@ -1,0 +1,87 @@
+{
+  "schema_version": "1.0",
+  "node_id": "prop_4",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.",
+  "figures": [
+    {
+      "figure_id": "prop_4.f1",
+      "asy_path": "figures/prop_4.f1.asy",
+      "recipe_path": "recipes/prop_4.f1.json",
+      "n_steps": 2,
+      "caption": "The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.",
+      "colors_used": [
+        {
+          "name": "velblue",
+          "hex": "#1E6FE0"
+        },
+        {
+          "name": "radgreen",
+          "hex": "#00A35A"
+        },
+        {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "prop_4.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "prop_4.s1.fig",
+        "figure_id": "prop_4.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "prop_4.s1.txt",
+        "latex": "The \\textcolor{forceorange}{pull toward the centre} is as the \\textcolor{velblue}{square of the speed} divided by the \\textcolor{radgreen}{distance from the centre}.",
+        "colors_used": [
+          {
+            "name": "forceorange",
+            "hex": "#E8770A"
+          },
+          {
+            "name": "velblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "prop_4.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "prop_4.s2.fig",
+        "figure_id": "prop_4.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "prop_4.s2.txt",
+        "latex": "In a small \\textcolor{velblue}{arc of the circle} the \\textcolor{radgreen}{radius} leads to the \\textcolor{velblue}{versed sine}, which gives the force by Cor.~4 Prop.~1 and Lem.~7.",
+        "colors_used": [
+          {
+            "name": "velblue",
+            "hex": "#1E6FE0"
+          },
+          {
+            "name": "radgreen",
+            "hex": "#00A35A"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "prop_4.s2",
+  "ceiling_equations": [
+    {
+      "eq_id": "prop_4.eq0",
+      "latex": "F \\propto \\dfrac{v^2}{r}"
+    }
+  ]
+}
