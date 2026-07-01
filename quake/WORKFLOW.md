@@ -451,13 +451,14 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 25. **7 child prompts written:** `CHILD_PROMPT_LEMMA_{5,6,12,3,4,7,9}.md` in `quake/` directory.
 26. **Integration pattern established:** child returns .room → DeepSeek fixes keyword syntax errors (children forget `on`/`at`/`center`/`major`/`minor` keywords + define points before referencing them + `parallel`→`segment` + `color=black` undeclared → remove (default is black)) → drops in → adds test → runs full suite → commits.
 
-### ☀️ MORNING SESSION (July 1, 2026 — lemma_10 + lemma_11 DONE!)
+### ☀️ MORNING SESSION (July 1, 2026 — lemma_10, lemma_11, prop_1 DONE!)
 
-27. **lemma_10 DELIVERED** — 2-step DIAGRAM: same figure as Lemma IX but time axis (=baseline), velocity ordinates, spaces as areas → s ∝ t² (Galileo!) + F ∝ s/t² from Cor. 4. Fixed one child syntax error (undeclared `color=black` — removed, black is the default). 419/420 green.
-28. **lemma_11 DELIVERED** — 3-step DIAGRAM: curvature lemma! Subtense BD ⟂ tangent → auxiliary circle A,B,G → AB² = AG·BD → BD ∝ AB². ZERO child errors — clean first try! 421/422 green.
+27. **lemma_10 DELIVERED** — 2-step DIAGRAM: same figure as Lemma IX but time axis (=baseline), velocity ordinates, spaces as areas → s ∝ t² (Galileo!) + F ∝ s/t² from Cor. 4. Fixed one child syntax error (undeclared `color=black`). 419/420 green.
+28. **lemma_11 DELIVERED** — 3-step DIAGRAM: curvature lemma! Subtense BD ⟂ tangent → auxiliary circle A,B,G → AB² = AG·BD → BD ∝ AB². ZERO child errors! 421/422 green.
+29. **prop_1 DELIVERED** — 4-step DIAGRAM: ★THE FOUNDATION★ Centre S + polygonal path → radii → equal triangles (SAB=SBc=SBC via impulse) → smooth limit → dA/dt = const. Fixed ABCDEF-in-point-list syntax. 423/424 green.
 
-**13/20 rooms done! 7 rooms remaining.**
-**NEXT on restart: prop_1** (Areas ∝ Times, DIAGRAM, 4 steps, deps: law_1/2, lemma_5). Then prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15.
+**14/20 rooms done! 6 rooms remaining. ALL LEMMAS DONE!** 🎉
+**NEXT on restart: prop_2** (Converse of Areas, DIAGRAM, 3 steps, deps: law_1/2, prop_1). Then prop_6 → prop_7 → prop_11 → prop_13 → prop_15.
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -521,6 +522,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 morning — lemma_10 + lemma_11 DONE):** Engine + renderers DONE (421/422 green 🟢). Color system CORRECTED. Parent 15 DONE (20-room station map). Parent 16 DONE (v2: COMPLETE RUNNABLE CODE). **Child pipeline: 13/20 rooms done!** (lemma_10 + lemma_11 added this session). 7 rooms remaining: prop_1, prop_2, prop_6, prop_7, prop_11, prop_13, prop_15. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
+🌙 **CURRENT STATE (July 1, 2026 morning — 3 rooms today! lemma_10 + lemma_11 + prop_1 DONE):** Engine + renderers DONE (423/424 green 🟢). Color system CORRECTED. Parent 15 DONE (20-room station map). Parent 16 DONE (v2: COMPLETE RUNNABLE CODE). **Child pipeline: 14/20 rooms done! ALL LEMMAS COMPLETE!** 6 rooms remaining: prop_2, prop_6, prop_7, prop_11, prop_13, prop_15. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
