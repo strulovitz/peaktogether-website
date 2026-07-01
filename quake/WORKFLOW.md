@@ -625,11 +625,15 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - **Honest note:** a few rooms have 2 doors at nearly identical bearings (law_1 both ~0.44, lemma_2 2.45/2.46) because two neighbors share a map direction — rooms still build fine; minor minimap polish later.
 - Regen helper (one-off, temp, not committed): `%TEMP%\opencode\regen_flat_rooms.py`.
 
-**NEXT — two fresh parents, CODE-WRITERS, no children:**
-1. **Teleport navigation** — rip out corridor mode; door → drop into connected room at matching door.
-2. **Corner minimap HUD** — flat graph + importance colors + mood-emoji dot tracking current room + X on cleared.
+**BOTH FEATURES DONE by DeepSeek (July 1, 2026 — Nir said "you can do these yourself"):**
+1. ✅ **Teleport navigation** — `gameplay.py`: corridor mode ripped out; `_teleport_through_door()` sends the player straight into the connected room, arriving at that room's matching door (found by shared `edge_id`), mode stays "room", save mirror kept in sync. Verified spawn positions never re-trigger a door (no bounce). Tests rewritten (`test_teleport_between_rooms`, `test_no_teleport_without_door`).
+2. ✅ **Corner minimap HUD** — NEW `minimap.py` (pure layout core + headless-guarded GL). Top-right box, undistorted uniform fit of the flat graph; rooms = importance-colored dots (from floorplan `map_color`), links = lines, cleared rooms = red X, player = a REAL OS emoji marker (Segoe UI Emoji via Pillow `embedded_color`) whose mood tracks the current room: 😀 happy=cleared / 😱 frightened=demon out / 🤔 thinking=panels lit / 🙂 neutral. Wired into `app.py` per-frame (drawn in room mode, hidden in Read Mode). Uses its own flat-color 2D shader + reuses `blit_program` for the emoji quad.
+- **Verified offscreen** (standalone GL): HUD region has ~4245 non-bg px, 170 red X px, 674 emoji-face px, 98 distinct colors → panel+edges+dots+X+emoji all really draw. Preview PNG: `%TEMP%\opencode\minimap_preview.png` (Nir eyeballs — DeepSeek can't see images).
+- **455 passed, 1 skipped** (+9 minimap tests). Stale corridor savegame deleted. Committed + pushed.
 
-Parent 19 (3D automap) and Parent 21 (3D corridors) are now MOOT — superseded by the flat pivot.
+Parent 19 (3D automap) and Parent 21 (3D corridors) are now MOOT — superseded by the flat pivot. No parents were used.
+
+**⏳ NEXT:** Nir play-tests the live game (`python app.py`) — walk into doors (teleport), watch the minimap marker + moods + X. Then polish per Nir's eyeball (marker size/position, colors, orientation).
 
 ---
 
