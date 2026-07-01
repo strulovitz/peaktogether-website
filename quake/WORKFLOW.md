@@ -449,9 +449,14 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 23. **lemma_9 DELIVERED** — 3-step DIAGRAM: triangles under curve → duplicate ratio AD²:AE² (bridge to dynamics/Lemma X). Fixed `tangent_at` keyword syntax. 416/416 green.
 24. **7 rooms built this session! 11/20 rooms done. 416/416 green.**
 25. **7 child prompts written:** `CHILD_PROMPT_LEMMA_{5,6,12,3,4,7,9}.md` in `quake/` directory.
-26. **Integration pattern established:** child returns .room → DeepSeek fixes keyword syntax errors (children forget `on`/`at`/`center`/`major`/`minor` keywords + define points before referencing them + `parallel`→`segment`) → drops in → adds test → runs full suite → commits.
+26. **Integration pattern established:** child returns .room → DeepSeek fixes keyword syntax errors (children forget `on`/`at`/`center`/`major`/`minor` keywords + define points before referencing them + `parallel`→`segment` + `color=black` undeclared → remove (default is black)) → drops in → adds test → runs full suite → commits.
 
-**NEXT on restart: lemma_10** (Spaces as Square of Times, DIAGRAM, 2 steps, depends on lemma_9). Then lemma_11 → prop_1 → ... → prop_15. 9 rooms remaining.
+### ☀️ MORNING SESSION (July 1, 2026 — 1 more room!)
+
+27. **lemma_10 DELIVERED** — 2-step DIAGRAM: same figure as Lemma IX but time axis (=baseline), velocity ordinates, spaces as areas → s ∝ t² (Galileo!) + F ∝ s/t² from Cor. 4. Fixed one child syntax error (undeclared `color=black` — removed, black is the default). 419/420 green.
+
+**12/20 rooms done! 8 rooms remaining.**
+**NEXT on restart: lemma_11** (Evanescent Subtense, DIAGRAM, 3 steps, depends on lemma_6/7). Then prop_1 → prop_2 → prop_6 → prop_7 → prop_11 → prop_13 → prop_15.
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -515,6 +520,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 early morning — END OF MARATHON SESSION):** Engine + renderers DONE (416/416 green 🟢). Color system CORRECTED. Parent 15 DONE (20-room station map). Parent 16 DONE (v2: COMPLETE RUNNABLE CODE). **Child pipeline in full swing: 11/20 rooms done!** 7 rooms built this session (lemma_5,6,12,3,4,7,9). 9 rooms remaining. Next on restart: **lemma_10** (Spaces as Square of Times). Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
+🌙 **CURRENT STATE (July 1, 2026 morning — lemma_10 DONE):** Engine + renderers DONE (419/420 green 🟢). Color system CORRECTED. Parent 15 DONE (20-room station map). Parent 16 DONE (v2: COMPLETE RUNNABLE CODE). **Child pipeline: 12/20 rooms done!** (lemma_10 added this session). 8 rooms remaining: lemma_11, prop_1, prop_2, prop_6, prop_7, prop_11, prop_13, prop_15. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
