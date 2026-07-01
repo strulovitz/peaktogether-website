@@ -1,4 +1,4 @@
-# PARENT 20 — MISSION: REAL 3D CORRIDORS (SOLID TUNNELS BETWEEN ROOMS)
+# PARENT 20 — MISSION: REAL 3D WIREFRAME CORRIDORS (BOX TUNNELS YOU WALK THROUGH)
 
 > **Role:** You are a fresh Opus 4.8 architect. You design this yourself — **no children.**
 > **Launch files (4, pasted by Nir):**
@@ -9,166 +9,178 @@
 
 ---
 
-## §0 — YOUR PREDECESSOR FAILED. DO NOT REPEAT HIS MISTAKES.
+## §0 — THE CURRENT FAILURE (why you are here)
 
-Parent 18 was given this same mission. He delivered a wireframe graph fix and called it "corridors." He was fired. You are his replacement. Read the five failure modes below and **do none of them**:
+There is currently NO real corridor between rooms. When the player exits a door, they see a 2D flat top-down map of circles and lines on the XZ plane — what Nir calls "the ugly map." This is completely wrong. A corridor IS a 3D wireframe box tunnel that the player walks through — the edges of the walls/floors/ceiling drawn as lines in 3D space, meeting the Old Testament spec exactly. The "ugly map" was a rendering mistake (drawing the floorplan from above), not a problem with the wireframe concept.
 
-1. **Parent 18 reinterpreted the mission into something easier.** The handoff said "solid 3D walkable tunnels." He built a wireframe graph improvement. Do not do this.
-2. **Parent 18 read the Old Testament and obeyed it over Nir.** The Old Testament §3.1 says "Transparent wireframe only. Do not upgrade corridors to shaded/solid polygons." **Nir has overruled this.** The corridors are solid 3D tunnels. The Old Testament was written before Nir saw the wireframe map and hated it. Nir's word overrules all scripture on this point.
-3. **Parent 18 asked Nir questions the answers were already in the context.** Do not demand re-pastes.
-4. **Parent 18 offered menus of options instead of reading the spec and building what it says.** Do not do that.
-5. **Parent 18 dressed up guesses as diligence.** If you don't know, say so honestly and ask.
+Your predecessor (Parent 18) failed because he interpreted "wireframe" as "fix the 2D map" instead of "build 3D box tunnels drawn as wireframe edges."
 
 ---
 
-## §1 — YOUR ONE JOB
+## §1 — THE SPEC (verbatim from the Old Testament §3.1)
 
-Design and specify **real 3D walkable solid tunnel geometry** that connects two rooms. When the player walks through a room's door, they enter a rendered hallway. They walk through it and emerge at the connected room's door. No teleport. No wireframe. Solid walls, floor, and ceiling.
+This IS the corridor. Read every word:
 
-The corridor is its own short, standalone 3D space — a box-shaped tunnel. It has ONE entry door (matching the door they exited from) and ONE exit door (matching the door of the destination room).
+> *"The player walks the concept graph as a live, glowing, see-through 3D map. Pure transit: no enemies, no panels, no shooting targets, no reading."*
+
+> *"Wireframe only. Lines and node rings; no shaded polygons. 'Transparent' here means empty faces with visible edges, not alpha translucency."*
+
+> *"Depth-tested, NO alpha blending. Depth test on, depth write on, blend off, depthFunc = LEQUAL. Near geometry occludes far. This is the single most important rendering decision."*
+
+> *"Distance-dimming in the line shader: the current section renders near pure white, fading with view-space distance toward dark grey — never pure black (so far structure stays a faint felt presence; vanishing into black is what disorients)."*
+
+> *"Crossings visible as true 3D over/under passes."*
+
+> *"~3 floor guide-lines (Half-Life style), procedural, on the felt floor, with arrowheads, pointing to the selected destinations (rule in §8). They do double duty: navigation and vertigo mitigation (a committed 'floor' in a mode that otherwise has no ground plane)."*
+
+**TRANSLATION FOR YOU:**
+A corridor IS:
+- A 3D box tunnel (walls, floor, ceiling) drawn as wireframe EDGES only — no filled surfaces, no shaded polygons
+- The player stands INSIDE this 3D box, looking through its transparent edges
+- The edges are pure white up close, dimming to dark grey far away (NEVER black)
+- The floor has ≤3 colored guide-lines with arrowheads, painted onto the floor, one color per destination room
+- Crossings: a corridor at height layer 2 passes physically OVER one at layer 1 — 3D over/under, edges drawn at true heights
+- Depth-tested: the near edge of the box you're in occludes the far edge of a different corridor
+- No blending, no alpha, no translucency — depth test is how occlusion works
+
+A corridor is NOT:
+- A 2D flat top-down map of circles and lines on the XZ plane (the current "ugly map")
+- Filled solid surfaces (no shaded walls, no textured polygons)
+- A teleport from one door to another
+
+### Floor guide-lines (Old Testament §8.2)
+
+> *"From the player's current/nearest node c, over uncleared reachable rooms: Slot 1 (always): the single nearest uncleared room (min graph_dist; tie → lowest id). Slots 2–3: by descending score with W_imp = 0.6, W_dist = 0.4, excluding slot 1. Fewer than 3 candidates → fewer lines (never invent lines)."*
+
+> *"Each line follows the actual corridor route to its target, ends in an arrowhead, and is colored by the target's importance color (matching its map ring)."*
+
+The guide-lines ALREADY EXIST in code. `select_targets()` in `guidelines.py` works and has 8 passing tests. `_arrowhead_xz()` builds correct arrowhead geometry. The routes are computed in `_route_xz()` using BFS through the corridor graph. The draw function `_gl_draw_strip()` is currently stubbed (returns immediately, does nothing). **You need to un-stub it** so the colored lines and arrowheads actually reach the GPU.
+
+### Movement (Old Testament §8.3)
+
+> *"Free walk with gentle rail assist. The Mover walks normally inside an invisible corridor collision volume (floor + soft side boundaries + ramps + platforms + room sockets) — you cannot fall through the wireframe."*
+
+The player walks INSIDE the 3D box. The box has collision — walls, floor, ceiling keep the player contained. When the player reaches the far end, the existing door-entry transition fires (walking onto a room's socket teleports you into that room at its door spawn).
+
+### Distance-dimming (how far corridors are seen)
+
+> *"the current section renders near pure white, fading with view-space distance toward dark grey — never pure black."*
+
+Every wireframe edge uses the dimming shader. The corridor the player is CURRENTLY IN is bright white up close. Other corridors in the distance are darker grey — visible, felt, never vanishing. The segments OF the current corridor that are farther from the player ALSO dim slightly — this creates the sense of depth within the tunnel itself.
 
 ---
 
-## §2 — WHAT EXISTS (verbatim excerpts from the real code)
+## §2 — WHAT ALREADY EXISTS (verbatim from the real code)
 
-### Room rendering (solid, working)
-Rooms are rendered via `draw_room(mvp, room, pack, state)` in `render_room.py`. The function:
-- Takes a projection matrix (world→clip), a `RoomRuntime` object, the `Pack`, and `GameState`
-- Renders walls (lit, solid color + optional textures from `pack.asset_dir`), floor, ceiling
-- Panel quads with textures loaded from pack.asset_dir (grey fallback if texture missing)
-- Ceiling equations (textured quads near the ceiling with blood-red tint)
-- Uses `moderngl` with depth test, two-sided lighting, ambient + directional
+### The wireframe renderer (Parent 11 — works, renders correctly)
+`render_wire.py` already has:
+- `build_wire_mesh(fp)` — builds line segments from the floorplan (corridor paths + room rings)
+- `render_mode_a(ctx, window, view, proj, fp, state, guidelines_fn, targets)` — full Mode A pipeline: draws wireframe to offscreen FBO → bloom → composite to screen
+- The shader (`wire_quad_program`) does thick camera-facing quads with distance-dimming (white→grey, never black), depth-tested, no blend
+- `_draw_wire(ctx, fp, view, proj, aspect)` — the actual GL draw
 
-A corridor is a much simpler version of a room: just walls, floor, ceiling — no panels, no demon, no ceiling equations. It should reuse the same solid rendering pipeline.
+**The problem:** this renderer draws the FLOORPLAN DATA (which is a 2D top-down graph — room rings at socket_y=0, corridor lines at cruise_y). It draws a MAP. What Nir wants is a 3D BOX TUNNEL the player is INSIDE. The tunnel's wireframe edges are the 12 edges of a rectangular box (4 bottom edges for the floor, 4 top edges for the ceiling, 4 vertical edges for the walls).
 
-### Door data (one door connects to one corridor)
-`DoorRT` (from `raw_models.py` / Apocrypha):
-- `edge_id: str` — the corridor/edge this door connects to (e.g. `"edge.lemma_2.to.lemma_3"`)
-- `neighbor_id: NodeId` — the room on the other side
-- `wall: Literal["N","E","S","W"]` — which wall the door is on
-- `center_xyz: Vec3` — door center in room-local coords
-- `width_m: float`, `height_m: float` — door opening dimensions
-- `bearing_rad: float` — map bearing of the connecting corridor (direction it leaves the room node)
-- `normal_yaw_rad: float` — outward normal of the door (facing direction of the wall)
+### Room rendering (solid — reference for "box" concept)
+`draw_room(mvp, room, pack, state)` in `render_room.py` renders a solid room box. It knows how to build wall quads, floor, ceiling — with dimensions from `RoomRuntime.dimensions_m` which is `(W, H, D)`.
 
-Room doors: `room.doors` is `list[DoorRT]`. Each door has an `edge_id` and a `neighbor_id`.
+### Door data
+`DoorRT` has: `edge_id`, `neighbor_id`, `wall` (N/E/S/W), `center_xyz`, `width_m`, `height_m`, `bearing_rad`, `normal_yaw_rad`.
 
-### Door exit transition (working)
-In `gameplay.py ~130-165`: when `nav.door_at(state.pos)` returns an `edge_id` in room mode, the player is placed at `(room.map_xz + 2m toward corridor far end, heading=atan2(dz,dx))` in floorplan world coords, then `state.mode = "corridor"`, and `ModeSwitch(to="corridor", via_edge_id=eid)` is emitted.
+### Door exit (gameplay.py ~130-165)
+In room mode, `nav.door_at(state.pos)` returns the door's `edge_id`. Code finds the corridor in the floorplan, places player at room's `map_xz + 2m toward corridor`, heading toward far end. Emits `ModeSwitch(to="corridor", via_edge_id=eid)`.
 
-### Door entry transition (working)
-In `gameplay.py ~166-190`: when the player in corridor mode reaches within `SOCKET_ENTER_RADIUS_M` of a room's `map_xz`, they teleport into that room at `room.doors[0].spawn_xyz` with `room.doors[0].spawn_heading_rad`, and `state.mode = "room"`.
+### Door entry (gameplay.py ~166-190)
+In corridor mode, player within `SOCKET_ENTER_RADIUS_M` of a room's `map_xz` → teleports into room at `room.doors[0].spawn_xyz`, heading `room.doors[0].spawn_heading_rad`.
 
-### Room nav (working)
-`_RoomNav` in `nav_collision.py` handles:
-- Wall/floor/ceiling collision (box with door cutouts)
-- `door_at(point)` → returns door's `edge_id` if player is in the door opening
-- `nearest_panel(ray, max_dist)` → panel picking (irrelevant for corridors)
-- `resolve_player_motion(start, delta)` → collision-resolved position
-
-### Corridor nav (placeholder, wireframe-based)
-`_CorridorNav` in `nav_collision.py` was built for the wireframe map — it finds the nearest corridor centerline and clamps the player to it in XZ. This is NOT useful for solid tunnel corridors.
-
-### App mode dispatch (how to hook in)
-In `app.py ~468-480`:
+### App dispatch (app.py ~468-480)
 ```python
 if state.mode == "corridor":
-    # currently calls render_mode_a() (wireframe) — needs to become solid corridor render
+    # currently calls render_mode_a() with the floorplan wireframe map
 else:
-    # room rendering via draw_room()
+    # draw_room() for room mode
 ```
 
-Also at ~416-419:
-```python
-if state.mode == "corridor":
-    nav = _active_corridor[1] if _active_corridor[1] is not None else corridor_nav
-else:
-    nav = room_navs.get(state.current_room_id)
-```
+### Guidelines code (guidelines.py)
+- `select_targets(fp, current, cleared, cfg)` → list of ≤3 NodeId targets (WORKS, 8 tests green)
+- `_route_xz(fp, current, target)` → XZ polyline along corridor path (WORKS)
+- `_arrowhead_xz(p_prev, p_tip, size)` → left/tip/right barb points (WORKS)
+- `draw_guidelines(view, fp, targets)` → orchestrates route + arrowhead — (WORKS for logic)
+- `_gl_draw_strip(...)` → STUBBED, just `return` (DOES NOTHING — needs un-stubbing with real `wire_program(ctx)` GL draw)
 
-### TARDIS principle (critical)
-Room interiors are separate spaces. Room A's origin has NO spatial relationship to Room B's origin. The corridor must also be its own standalone space — it does NOT live in floorplan coords and does NOT need to be "between" room A and B in a shared world. It's a transitional 3D box you walk through.
+### Floorplan data
+`Floorplan` has: `rooms` (list of FloorRoom), `corridors` (list of Corridor with `source`, `target`, `path_xz`, `cruise_y`, `width_m`, `height_level`), `crossings` (list of Crossing with `over_corridor`, `under_corridor`, `at_xz`, `over_y`, `under_y`).
+
+### TARDIS
+Rooms don't share a coordinate system. A corridor is ALSO its own independent space — it does NOT live in the floorplan coordinate system. It's a standalone 3D box you walk through between two rooms.
 
 ---
 
-## §3 — WHAT NIR WANTS (his words)
+## §3 — THE DESIGN YOU MUST DELIVER
 
-1. Walk through a door → enter a real 3D corridor with walls, floor, ceiling (solid, rendered, NOT wireframe)
-2. Walk through the corridor → arrive at the connected room
-3. Simple box-shaped tunnel — straight, short, entry at one end, exit at the other
-4. No wireframe map. No teleport between doors. No ugly graph.
+### A. What IS the corridor?
+A single 3D rectangular box (a tunnel). The player stands inside it. Its 12 edges are drawn as wireframe lines — thick, glowing, white-to-grey-with-distance. The floor has ≤3 colored guide-lines with arrowheads showing which way to walk. Reaching the far end triggers the existing room-entry mechanic.
 
----
+### B. How the tunnel relates to doors
+The player exits room A through door D_A (which is a rectangular opening on wall W_A). The corridor's entry face matches D_A's dimensions. The corridor runs straight for a length L (configurable, e.g. 8m). The corridor's exit face matches the destination door D_B's dimensions. The player walks through and arrives at room B.
 
-## §4 — THE DESIGN (what you must deliver)
+Because of TARDIS, the corridor is its OWN coordinate space. It does not need to "be between" the two rooms in world space. It's a standalone 3D box you teleport into when you exit a room door, and teleport out of into the next room.
 
-### A. CorridorGeometry data model
-A corridor is a single 3D box defined by:
-- **Entry end:** matches the exit door's dimensions exactly (width_m × height_m opening)
-- **Exit end:** matches the entry door's dimensions
-- **Length:** configurable default (e.g. 8m), makes the corridor feel like a short walkway
-- **Walls, floor, ceiling:** simple solid surfaces (no panels, no textures needed — lit solid color like room walls)
+### C. Rendering
+The corridor renders the 12 edges of its box (4 bottom, 4 top, 4 vertical) using the EXISTING wireframe shader (`wire_quad_program` — thick camera-facing quads, distance-dimming white→grey, depth-tested, no blend). No filled faces. No alpha. No shaded surfaces. Wireframe edges only.
 
-The corridor is a new runtime concept. It can be:
-- Generated at runtime from the two DoorRT objects (door A = entry, door B = exit)
-- Or built at build-time as part of the pack (like room runtimes)
+In addition: the distant graph (other corridors, room rings) IS visible through the transparent box — the full floorplan wireframe renders faintly beyond the tunnel walls. This is the "see-through" promise of §3.1: the player sees the tunnel edges they're inside AND the rest of the glowing graph receding into grey distance.
 
-Given TARDIS, runtime generation from doors is clean: you know the entry door (where you just walked through) and the exit door (the connected room's door you're heading toward). Build the box between them.
+### D. Guide-lines
+The ≤3 colored guide-lines on the corridor floor. They follow BFS routes from the player's current/nearest node through the corridor graph to the selected target rooms. They ride the walkable floor height. Colored by target room's importance. Arrowheads at the tip. Rendered using the simple `wire_program(ctx)` (bright line strip, no dimming).
 
-### B. Corridor renderer
-Reuse the solid room rendering pipeline. A corridor is essentially a room with no panels, no demon, and no ceiling equations. `draw_room()` or a thin wrapper around the same wall/floor/ceiling primitives works. Must inherit the same lighting, depth test, and perspective as rooms.
+### E. Navigation
+Box collision: walls, floor, ceiling constrain the player. At the far end, `door_at(point)` returns the destination door's `edge_id`, and the existing gameplay.py door-entry code handles the rest. Player walks inside the box toward the far end. Gentle rail assist toward the centerline.
 
-### C. Corridor navigation
-A corridor nav that:
-- Box collision (walls, floor, ceiling) — identical to `_RoomNav` without door cutouts on the side walls (only entry/exit at the ends)
-- `door_at(point)` — returns the destination door's `edge_id` when the player walks through the exit end (so gameplay.py's existing door-to-room transition fires)
-- `resolve_player_motion(start, delta)` — box collision within the corridor
+### F. Crossings (bridges/underpasses)
+The floorplan already has `crossings` with `over_y`/`under_y`. The wireframe edges of a corridor that is a "bridge" are drawn at their true `over_y` height. Edges of the "under" corridor pass below at `under_y`. Both are visible through the transparent tunnel the player is inside. This is the whole point of 3D wireframe.
 
-### D. Mode integration
-The player enters a corridor from a room. Currently `gameplay.py` sets `state.mode = "corridor"` and places the player in floorplan coords. This needs to change:
-- The corridor has its OWN coordinate space (like a room does)
-- Player is placed at the corridor's entry end, facing toward the exit end
-- `app.py` renders the corridor as a solid space (not wireframe)
-- When player reaches the exit end and `door_at()` fires, gameplay.py's existing room-entry code handles the rest (teleport to room.spawn)
-
-### E. Acceptance criteria
-- Walk through any room door → renders as a solid 3D tunnel (not wireframe, not invisible)
-- Walk through tunnel → reach other end → enter destination room at its door spawn
+### G. Acceptance criteria
+- Exit door → player stands inside a 3D wireframe box tunnel (edges drawn, walls visible as lines)
+- Floor has ≤3 colored guide-lines with arrowheads
+- Edges dim with distance (near=white, far=grey, never black)
+- Distant graph (other corridors, room rings) faintly visible through the box
+- Walk through tunnel → reach far end → enter destination room at door spawn
+- Crossings visible as 3D over/under wireframe passes
 - Works for ANY connected room pair in the Principia pack
 
-### F. Honest gaps
-List anything you're unsure about that depends on files you haven't seen.
+### H. Honest gaps
+List anything you're unsure about.
 
 ---
 
-## §5 — WHAT NOT TO DO
+## §4 — WHAT NOT TO DO
 
-- Do NOT make wireframe corridors. Solid only.
-- Do NOT place corridors in 2D floorplan coords. They are their own TARDIS space.
-- Do NOT change the room renderer's contract unless absolutely necessary.
-- Do NOT offer Nir menus of options. Read the spec and build what it says.
-- Do NOT tell Nir you lost his text and need it re-pasted. It's here.
-- **Do NOT write code.** Design document only. DeepSeek implements.
-- **Do NOT ask questions the scripture already answers.**
+- Do NOT make a 2D top-down map. The corridor is a 3D box the player stands inside.
+- Do NOT fill the box with solid shaded surfaces. Wireframe edges only.
+- Do NOT use alpha blending. Depth test is the occlusion mechanism.
+- Do NOT make edges fade to pure black. Dark grey floor only.
+- Do NOT offer menus of options to Nir. Read the spec, build what it says.
+- Do NOT tell Nir you lost his text and demand re-pastes.
+- Do NOT write code. Design document only. DeepSeek implements.
+- Do NOT ask questions the scripture already answers (all of §1 above).
 - **"Tests pass" is NOT visual success.** Render and show a PNG.
 
 ---
 
-## §6 — HOW TO GET MORE INFORMATION
+## §5 — HOW TO GET MORE INFORMATION
 
-Ask DeepSeek (via Nir) for exact verbatim sections of any file. Useful files you may need:
-- `quake/render_room.py` — how draw_room() renders solid rooms
-- `quake/nav_collision.py` — _RoomNav and _CorridorNav (room nav to replicate)
-- `quake/map/raw_models.py` — RoomRuntime, DoorRT, BuildConfig definitions
-- `quake/build/room_maker.py` — how room runtimes are assembled
-- `quake/gameplay.py` — exact door-exit / door-entry transition code
+Ask DeepSeek (via Nir) for exact verbatim sections. Useful files:
+- `quake/render_wire.py` — the existing wireframe renderer (Parent 11, works)
+- `quake/render_room.py` — how solid room boxes are built (reference for "box geometry")
+- `quake/guidelines.py` — select_targets, _route_xz, _arrowhead_xz, draw_guidelines, _gl_draw_strip
+- `quake/nav_collision.py` — _RoomNav (box collision to replicate for corridor nav)
+- `quake/map/raw_models.py` — Corridor, Crossing, Floorplan, BuildConfig, DoorRT
+- `quake/gameplay.py` — door exit/entry transitions
 - `quake/app.py` — render dispatch and mode handling
-- Any `room_runtime/*.json` from the Principia pack
 
 ---
 
-## §7 — TALK FIRST
+## §6 — TALK FIRST
 
-State your understanding of the problem, your proposed approach, and your first questions. **Wait for Nir's confirmation before designing.**
-
-Nir has been patient far beyond what your predecessor earned. Do not waste it. Read this entire document. Build solid walkable tunnels between his rooms. That is the entire job.
+State your understanding of the problem, your proposed approach at a high level, and your first questions. **Wait for Nir's confirmation before designing.**
