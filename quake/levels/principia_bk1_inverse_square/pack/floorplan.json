@@ -1,0 +1,814 @@
+{
+  "schema_version": "1.0",
+  "level_id": "principia_bk1_inverse_square",
+  "seed": 1729001,
+  "rooms": [
+    {
+      "room_id": "law_1",
+      "map_xz": [
+        17.879045449427036,
+        -16.190777756383905
+      ],
+      "importance": 4,
+      "map_radius_m": 5.0,
+      "map_color": "#E8743B",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "law_2",
+      "map_xz": [
+        12.700350389741594,
+        -4.814825640364767
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_10",
+      "map_xz": [
+        8.27538370413519,
+        1.5862452091644956
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_11",
+      "map_xz": [
+        -5.905362410653506,
+        4.781149781708795
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_12",
+      "map_xz": [
+        -33.48938703317542,
+        33.631865288330424
+      ],
+      "importance": 3,
+      "map_radius_m": 4.0,
+      "map_color": "#E6B800",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_2",
+      "map_xz": [
+        18.702913806498152,
+        -31.039696526978975
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_3",
+      "map_xz": [
+        14.743772004853264,
+        -24.313090515865944
+      ],
+      "importance": 3,
+      "map_radius_m": 4.0,
+      "map_color": "#E6B800",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_4",
+      "map_xz": [
+        14.733093080113512,
+        -32.01514701175049
+      ],
+      "importance": 4,
+      "map_radius_m": 5.0,
+      "map_color": "#E8743B",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_5",
+      "map_xz": [
+        -37.97505977568142,
+        16.37912758147371
+      ],
+      "importance": 3,
+      "map_radius_m": 4.0,
+      "map_color": "#E6B800",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_6",
+      "map_xz": [
+        -7.899184221159193,
+        12.346595427291334
+      ],
+      "importance": 4,
+      "map_radius_m": 5.0,
+      "map_color": "#E8743B",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_7",
+      "map_xz": [
+        -4.483793352449856,
+        7.640142031929403
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "lemma_9",
+      "map_xz": [
+        4.073564492602921,
+        8.652610850828276
+      ],
+      "importance": 3,
+      "map_radius_m": 4.0,
+      "map_color": "#E6B800",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_1",
+      "map_xz": [
+        11.954575221665916,
+        -12.433173880706457
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_11",
+      "map_xz": [
+        -7.132115167462176,
+        -0.029389641353593673
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_13",
+      "map_xz": [
+        0.007105774345150338,
+        3.2218333364511977
+      ],
+      "importance": 4,
+      "map_radius_m": 5.0,
+      "map_color": "#E8743B",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_15",
+      "map_xz": [
+        -15.084438493352694,
+        1.394482088125282
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_2",
+      "map_xz": [
+        19.70984287549191,
+        -12.695503635029283
+      ],
+      "importance": 4,
+      "map_radius_m": 5.0,
+      "map_color": "#E8743B",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_4",
+      "map_xz": [
+        -11.993904956478524,
+        6.550626546839793
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_6",
+      "map_xz": [
+        2.0496386120957095,
+        -2.653073533709293
+      ],
+      "importance": 5,
+      "map_radius_m": 6.0,
+      "map_color": "#D81B60",
+      "socket_y": 0.0
+    },
+    {
+      "room_id": "prop_7",
+      "map_xz": [
+        -0.8660400005575732,
+        40.0
+      ],
+      "importance": 3,
+      "map_radius_m": 4.0,
+      "map_color": "#E6B800",
+      "socket_y": 0.0
+    }
+  ],
+  "corridors": [
+    {
+      "corridor_id": "edge.lemma_10.to.law_2",
+      "source": "lemma_10",
+      "target": "law_2",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          8.27538370413519,
+          1.5862452091644956
+        ],
+        [
+          12.700350389741594,
+          -4.814825640364767
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_10.to.lemma_9",
+      "source": "lemma_10",
+      "target": "lemma_9",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          8.27538370413519,
+          1.5862452091644956
+        ],
+        [
+          4.073564492602921,
+          8.652610850828276
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_11.to.lemma_6",
+      "source": "lemma_11",
+      "target": "lemma_6",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -5.905362410653506,
+          4.781149781708795
+        ],
+        [
+          -7.899184221159193,
+          12.346595427291334
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_11.to.lemma_7",
+      "source": "lemma_11",
+      "target": "lemma_7",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -5.905362410653506,
+          4.781149781708795
+        ],
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_3.to.lemma_2",
+      "source": "lemma_3",
+      "target": "lemma_2",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          14.743772004853264,
+          -24.313090515865944
+        ],
+        [
+          18.702913806498152,
+          -31.039696526978975
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_4.to.lemma_2",
+      "source": "lemma_4",
+      "target": "lemma_2",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          14.733093080113512,
+          -32.01514701175049
+        ],
+        [
+          18.702913806498152,
+          -31.039696526978975
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_4.to.lemma_3",
+      "source": "lemma_4",
+      "target": "lemma_3",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          14.733093080113512,
+          -32.01514701175049
+        ],
+        [
+          14.743772004853264,
+          -24.313090515865944
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_7.to.lemma_6",
+      "source": "lemma_7",
+      "target": "lemma_6",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ],
+        [
+          -7.899184221159193,
+          12.346595427291334
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_9.to.lemma_5",
+      "source": "lemma_9",
+      "target": "lemma_5",
+      "height_level": 1,
+      "cruise_y": 3.0,
+      "path_xz": [
+        [
+          4.073564492602921,
+          8.652610850828276
+        ],
+        [
+          1.2412279501087,
+          9.17305821535493
+        ],
+        [
+          -6.648227817480829,
+          10.622761102066157
+        ],
+        [
+          -16.955998084818823,
+          12.516833995345293
+        ],
+        [
+          -37.97505977568142,
+          16.37912758147371
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.lemma_9.to.lemma_7",
+      "source": "lemma_9",
+      "target": "lemma_7",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          4.073564492602921,
+          8.652610850828276
+        ],
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_1.to.law_1",
+      "source": "prop_1",
+      "target": "law_1",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          11.954575221665916,
+          -12.433173880706457
+        ],
+        [
+          17.879045449427036,
+          -16.190777756383905
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_1.to.law_2",
+      "source": "prop_1",
+      "target": "law_2",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          11.954575221665916,
+          -12.433173880706457
+        ],
+        [
+          12.700350389741594,
+          -4.814825640364767
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_1.to.lemma_3",
+      "source": "prop_1",
+      "target": "lemma_3",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          11.954575221665916,
+          -12.433173880706457
+        ],
+        [
+          14.743772004853264,
+          -24.313090515865944
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_11.to.lemma_12",
+      "source": "prop_11",
+      "target": "lemma_12",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -7.132115167462176,
+          -0.029389641353593673
+        ],
+        [
+          -33.48938703317542,
+          33.631865288330424
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_11.to.lemma_7",
+      "source": "prop_11",
+      "target": "lemma_7",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -7.132115167462176,
+          -0.029389641353593673
+        ],
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_11.to.prop_6",
+      "source": "prop_11",
+      "target": "prop_6",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -7.132115167462176,
+          -0.029389641353593673
+        ],
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_13.to.lemma_7",
+      "source": "prop_13",
+      "target": "lemma_7",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          0.007105774345150338,
+          3.2218333364511977
+        ],
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_13.to.prop_6",
+      "source": "prop_13",
+      "target": "prop_6",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          0.007105774345150338,
+          3.2218333364511977
+        ],
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_15.to.prop_11",
+      "source": "prop_15",
+      "target": "prop_11",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -15.084438493352694,
+          1.394482088125282
+        ],
+        [
+          -7.132115167462176,
+          -0.029389641353593673
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_15.to.prop_4",
+      "source": "prop_15",
+      "target": "prop_4",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -15.084438493352694,
+          1.394482088125282
+        ],
+        [
+          -11.993904956478524,
+          6.550626546839793
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_2.to.law_1",
+      "source": "prop_2",
+      "target": "law_1",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          19.70984287549191,
+          -12.695503635029283
+        ],
+        [
+          17.879045449427036,
+          -16.190777756383905
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_2.to.prop_1",
+      "source": "prop_2",
+      "target": "prop_1",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          19.70984287549191,
+          -12.695503635029283
+        ],
+        [
+          11.954575221665916,
+          -12.433173880706457
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_4.to.lemma_11",
+      "source": "prop_4",
+      "target": "lemma_11",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          -11.993904956478524,
+          6.550626546839793
+        ],
+        [
+          -5.905362410653506,
+          4.781149781708795
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_4.to.lemma_7",
+      "source": "prop_4",
+      "target": "lemma_7",
+      "height_level": 1,
+      "cruise_y": 3.0,
+      "path_xz": [
+        [
+          -11.993904956478524,
+          6.550626546839793
+        ],
+        [
+          -6.578734429827017,
+          7.336222348108947
+        ],
+        [
+          -4.483793352449856,
+          7.640142031929403
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_6.to.lemma_10",
+      "source": "prop_6",
+      "target": "lemma_10",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ],
+        [
+          8.27538370413519,
+          1.5862452091644956
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_6.to.lemma_11",
+      "source": "prop_6",
+      "target": "lemma_11",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ],
+        [
+          -5.905362410653506,
+          4.781149781708795
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_6.to.prop_1",
+      "source": "prop_6",
+      "target": "prop_1",
+      "height_level": 0,
+      "cruise_y": 0.0,
+      "path_xz": [
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ],
+        [
+          11.954575221665916,
+          -12.433173880706457
+        ]
+      ],
+      "width_m": 3.0
+    },
+    {
+      "corridor_id": "edge.prop_7.to.prop_6",
+      "source": "prop_7",
+      "target": "prop_6",
+      "height_level": 2,
+      "cruise_y": 6.0,
+      "path_xz": [
+        [
+          -0.8660400005575732,
+          40.0
+        ],
+        [
+          1.2412279501087,
+          9.17305821535493
+        ],
+        [
+          1.2992428924766326,
+          8.324365361439353
+        ],
+        [
+          2.0496386120957095,
+          -2.653073533709293
+        ]
+      ],
+      "width_m": 3.0
+    }
+  ],
+  "crossings": [
+    {
+      "crossing_id": "crossing_0",
+      "over_corridor": "edge.prop_4.to.lemma_7",
+      "under_corridor": "edge.lemma_11.to.lemma_6",
+      "at_xz": [
+        -6.578734429827017,
+        7.336222348108947
+      ],
+      "over_y": 3.0,
+      "under_y": 0.0
+    },
+    {
+      "crossing_id": "crossing_1",
+      "over_corridor": "edge.lemma_9.to.lemma_5",
+      "under_corridor": "edge.lemma_7.to.lemma_6",
+      "at_xz": [
+        -6.648227817480829,
+        10.622761102066157
+      ],
+      "over_y": 3.0,
+      "under_y": 0.0
+    },
+    {
+      "crossing_id": "crossing_2",
+      "over_corridor": "edge.lemma_9.to.lemma_5",
+      "under_corridor": "edge.prop_11.to.lemma_12",
+      "at_xz": [
+        -16.955998084818823,
+        12.516833995345293
+      ],
+      "over_y": 3.0,
+      "under_y": 0.0
+    },
+    {
+      "crossing_id": "crossing_3",
+      "over_corridor": "edge.prop_7.to.prop_6",
+      "under_corridor": "edge.lemma_9.to.lemma_5",
+      "at_xz": [
+        1.2412279501087,
+        9.17305821535493
+      ],
+      "over_y": 6.0,
+      "under_y": 3.0
+    },
+    {
+      "crossing_id": "crossing_4",
+      "over_corridor": "edge.prop_7.to.prop_6",
+      "under_corridor": "edge.lemma_9.to.lemma_7",
+      "at_xz": [
+        1.2992428924766326,
+        8.324365361439353
+      ],
+      "over_y": 6.0,
+      "under_y": 0.0
+    }
+  ]
+}

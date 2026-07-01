@@ -1,0 +1,21 @@
+{
+  "schema_version": "1.0",
+  "profile_id": "default",
+  "levels": {
+    "golden": {
+      "rooms": {},
+      "level_complete": false
+    }
+  },
+  "player": {
+    "level_id": "golden",
+    "mode": "corridor",
+    "current_room_id": null,
+    "position_xyz": [
+      5.669,
+      0.0,
+      3.78
+    ],
+    "heading_rad": 3.7296
+  }
+}

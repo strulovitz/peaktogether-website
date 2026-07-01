@@ -1,0 +1,110 @@
+{
+  "schema_version": "1.0",
+  "figure_id": "law_2.f1",
+  "node_id": "law_2",
+  "edition": "Newton, Principia, Axioms or Laws of Motion, Law II, p.19 (Motte trans., 1729)",
+  "caption": "The alteration of motion is proportional to, and directed along, the impressed force.",
+  "n_steps": 2,
+  "steps": [
+    {
+      "index": 1,
+      "gloss": "The alteration of motion is proportional to the motive force impressed."
+    },
+    {
+      "index": 2,
+      "gloss": "The change of motion is made in the direction of the right line in which the force is impressed."
+    }
+  ],
+  "ops": [
+    {
+      "name": "term_1_1",
+      "draw": {
+        "local_color": {
+          "name": "motionblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$\\Delta(\\text{motion})$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_1"
+    },
+    {
+      "name": "term_1_2",
+      "draw": {
+        "local_color": {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\mathbf{F}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_2"
+    },
+    {
+      "name": "term_2_1",
+      "draw": {
+        "local_color": {
+          "name": "motionblue",
+          "hex": "#1E6FE0"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\Delta(\\text{motion})$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_1"
+    },
+    {
+      "name": "term_2_2",
+      "draw": {
+        "local_color": {
+          "name": "forceorange",
+          "hex": "#E8770A"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\mathbf{F}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_2"
+    },
+    {
+      "name": "term_2_3",
+      "draw": {
+        "local_color": {
+          "name": "dirgreen",
+          "hex": "#00A35A"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$\\parallel\\;\\text{(right line of }\\mathbf{F}\\text{)}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_3"
+    }
+  ]
+}

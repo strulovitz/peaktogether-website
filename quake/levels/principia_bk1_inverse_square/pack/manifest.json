@@ -1,0 +1,3291 @@
+{
+  "schema_version": "1.0",
+  "level_id": "principia_bk1",
+  "assets": {
+    "lemma_2.f1.off": {
+      "asset_id": "lemma_2.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_2.f1.off.png",
+      "master_path": "assets/lemma_2.f1.off@master.png",
+      "px_w": 1012,
+      "px_h": 549,
+      "content_bbox": [
+        7,
+        5,
+        1005,
+        544
+      ],
+      "dpi": 220
+    },
+    "lemma_2.f1.on.1": {
+      "asset_id": "lemma_2.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_2.f1.on.1.png",
+      "master_path": "assets/lemma_2.f1.on.1@master.png",
+      "px_w": 1012,
+      "px_h": 549,
+      "content_bbox": [
+        7,
+        1,
+        1005,
+        544
+      ],
+      "dpi": 220
+    },
+    "lemma_2.f1.on.2": {
+      "asset_id": "lemma_2.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_2.f1.on.2.png",
+      "master_path": "assets/lemma_2.f1.on.2@master.png",
+      "px_w": 1012,
+      "px_h": 549,
+      "content_bbox": [
+        7,
+        5,
+        1005,
+        544
+      ],
+      "dpi": 220
+    },
+    "lemma_2.f1.on.3": {
+      "asset_id": "lemma_2.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_2.f1.on.3.png",
+      "master_path": "assets/lemma_2.f1.on.3@master.png",
+      "px_w": 1012,
+      "px_h": 549,
+      "content_bbox": [
+        7,
+        1,
+        1005,
+        544
+      ],
+      "dpi": 220
+    },
+    "lemma_3.f1.off": {
+      "asset_id": "lemma_3.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_3.f1.off.png",
+      "master_path": "assets/lemma_3.f1.off@master.png",
+      "px_w": 1012,
+      "px_h": 578,
+      "content_bbox": [
+        7,
+        6,
+        1005,
+        573
+      ],
+      "dpi": 220
+    },
+    "lemma_3.f1.on.1": {
+      "asset_id": "lemma_3.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_3.f1.on.1.png",
+      "master_path": "assets/lemma_3.f1.on.1@master.png",
+      "px_w": 1012,
+      "px_h": 578,
+      "content_bbox": [
+        7,
+        6,
+        1005,
+        573
+      ],
+      "dpi": 220
+    },
+    "lemma_3.f1.on.2": {
+      "asset_id": "lemma_3.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_3.f1.on.2.png",
+      "master_path": "assets/lemma_3.f1.on.2@master.png",
+      "px_w": 1012,
+      "px_h": 578,
+      "content_bbox": [
+        7,
+        6,
+        1005,
+        573
+      ],
+      "dpi": 220
+    },
+    "lemma_4.f1.off": {
+      "asset_id": "lemma_4.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_4.f1.off.png",
+      "master_path": "assets/lemma_4.f1.off@master.png",
+      "px_w": 787,
+      "px_h": 1030,
+      "content_bbox": [
+        8,
+        6,
+        779,
+        1025
+      ],
+      "dpi": 220
+    },
+    "lemma_4.f1.on.1": {
+      "asset_id": "lemma_4.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_4.f1.on.1.png",
+      "master_path": "assets/lemma_4.f1.on.1@master.png",
+      "px_w": 787,
+      "px_h": 1030,
+      "content_bbox": [
+        8,
+        6,
+        779,
+        1025
+      ],
+      "dpi": 220
+    },
+    "lemma_4.f1.on.2": {
+      "asset_id": "lemma_4.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_4.f1.on.2.png",
+      "master_path": "assets/lemma_4.f1.on.2@master.png",
+      "px_w": 787,
+      "px_h": 1030,
+      "content_bbox": [
+        8,
+        6,
+        779,
+        1025
+      ],
+      "dpi": 220
+    },
+    "lemma_4.f1.on.3": {
+      "asset_id": "lemma_4.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_4.f1.on.3.png",
+      "master_path": "assets/lemma_4.f1.on.3@master.png",
+      "px_w": 787,
+      "px_h": 1030,
+      "content_bbox": [
+        8,
+        6,
+        779,
+        1025
+      ],
+      "dpi": 220
+    },
+    "lemma_5.f1.off": {
+      "asset_id": "lemma_5.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_5.f1.off.png",
+      "master_path": "assets/lemma_5.f1.off@master.png",
+      "px_w": 1012,
+      "px_h": 442,
+      "content_bbox": [
+        7,
+        5,
+        1005,
+        436
+      ],
+      "dpi": 220
+    },
+    "lemma_5.f1.on.1": {
+      "asset_id": "lemma_5.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_5.f1.on.1.png",
+      "master_path": "assets/lemma_5.f1.on.1@master.png",
+      "px_w": 1012,
+      "px_h": 442,
+      "content_bbox": [
+        7,
+        5,
+        1005,
+        436
+      ],
+      "dpi": 220
+    },
+    "lemma_5.f1.on.2": {
+      "asset_id": "lemma_5.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_5.f1.on.2.png",
+      "master_path": "assets/lemma_5.f1.on.2@master.png",
+      "px_w": 1012,
+      "px_h": 442,
+      "content_bbox": [
+        7,
+        5,
+        1005,
+        436
+      ],
+      "dpi": 220
+    },
+    "lemma_6.f1.off": {
+      "asset_id": "lemma_6.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_6.f1.off.png",
+      "master_path": "assets/lemma_6.f1.off@master.png",
+      "px_w": 754,
+      "px_h": 438,
+      "content_bbox": [
+        0,
+        6,
+        746,
+        432
+      ],
+      "dpi": 220
+    },
+    "lemma_6.f1.on.1": {
+      "asset_id": "lemma_6.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_6.f1.on.1.png",
+      "master_path": "assets/lemma_6.f1.on.1@master.png",
+      "px_w": 754,
+      "px_h": 438,
+      "content_bbox": [
+        0,
+        6,
+        746,
+        432
+      ],
+      "dpi": 220
+    },
+    "lemma_6.f1.on.2": {
+      "asset_id": "lemma_6.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_6.f1.on.2.png",
+      "master_path": "assets/lemma_6.f1.on.2@master.png",
+      "px_w": 754,
+      "px_h": 438,
+      "content_bbox": [
+        0,
+        6,
+        746,
+        432
+      ],
+      "dpi": 220
+    },
+    "lemma_6.f1.on.3": {
+      "asset_id": "lemma_6.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_6.f1.on.3.png",
+      "master_path": "assets/lemma_6.f1.on.3@master.png",
+      "px_w": 755,
+      "px_h": 438,
+      "content_bbox": [
+        0,
+        6,
+        747,
+        432
+      ],
+      "dpi": 220
+    },
+    "lemma_7.f1.off": {
+      "asset_id": "lemma_7.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_7.f1.off.png",
+      "master_path": "assets/lemma_7.f1.off@master.png",
+      "px_w": 1151,
+      "px_h": 690,
+      "content_bbox": [
+        7,
+        0,
+        1151,
+        684
+      ],
+      "dpi": 220
+    },
+    "lemma_7.f1.on.1": {
+      "asset_id": "lemma_7.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_7.f1.on.1.png",
+      "master_path": "assets/lemma_7.f1.on.1@master.png",
+      "px_w": 1151,
+      "px_h": 690,
+      "content_bbox": [
+        7,
+        0,
+        1151,
+        684
+      ],
+      "dpi": 220
+    },
+    "lemma_7.f1.on.2": {
+      "asset_id": "lemma_7.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_7.f1.on.2.png",
+      "master_path": "assets/lemma_7.f1.on.2@master.png",
+      "px_w": 1152,
+      "px_h": 691,
+      "content_bbox": [
+        7,
+        0,
+        1152,
+        685
+      ],
+      "dpi": 220
+    },
+    "lemma_7.f1.on.3": {
+      "asset_id": "lemma_7.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_7.f1.on.3.png",
+      "master_path": "assets/lemma_7.f1.on.3@master.png",
+      "px_w": 1152,
+      "px_h": 691,
+      "content_bbox": [
+        7,
+        0,
+        1152,
+        685
+      ],
+      "dpi": 220
+    },
+    "lemma_9.f1.off": {
+      "asset_id": "lemma_9.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_9.f1.off.png",
+      "master_path": "assets/lemma_9.f1.off@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "lemma_9.f1.on.1": {
+      "asset_id": "lemma_9.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_9.f1.on.1.png",
+      "master_path": "assets/lemma_9.f1.on.1@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "lemma_9.f1.on.2": {
+      "asset_id": "lemma_9.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_9.f1.on.2.png",
+      "master_path": "assets/lemma_9.f1.on.2@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "lemma_9.f1.on.3": {
+      "asset_id": "lemma_9.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_9.f1.on.3.png",
+      "master_path": "assets/lemma_9.f1.on.3@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "lemma_10.f1.off": {
+      "asset_id": "lemma_10.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_10.f1.off.png",
+      "master_path": "assets/lemma_10.f1.off@master.png",
+      "px_w": 416,
+      "px_h": 356,
+      "content_bbox": [
+        7,
+        5,
+        409,
+        350
+      ],
+      "dpi": 220
+    },
+    "lemma_10.f1.on.1": {
+      "asset_id": "lemma_10.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_10.f1.on.1.png",
+      "master_path": "assets/lemma_10.f1.on.1@master.png",
+      "px_w": 416,
+      "px_h": 356,
+      "content_bbox": [
+        7,
+        5,
+        409,
+        350
+      ],
+      "dpi": 220
+    },
+    "lemma_10.f1.on.2": {
+      "asset_id": "lemma_10.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_10.f1.on.2.png",
+      "master_path": "assets/lemma_10.f1.on.2@master.png",
+      "px_w": 416,
+      "px_h": 356,
+      "content_bbox": [
+        7,
+        5,
+        410,
+        350
+      ],
+      "dpi": 220
+    },
+    "lemma_11.f1.off": {
+      "asset_id": "lemma_11.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_11.f1.off.png",
+      "master_path": "assets/lemma_11.f1.off@master.png",
+      "px_w": 794,
+      "px_h": 565,
+      "content_bbox": [
+        0,
+        4,
+        786,
+        559
+      ],
+      "dpi": 220
+    },
+    "lemma_11.f1.on.1": {
+      "asset_id": "lemma_11.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_11.f1.on.1.png",
+      "master_path": "assets/lemma_11.f1.on.1@master.png",
+      "px_w": 794,
+      "px_h": 565,
+      "content_bbox": [
+        0,
+        4,
+        786,
+        559
+      ],
+      "dpi": 220
+    },
+    "lemma_11.f1.on.2": {
+      "asset_id": "lemma_11.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_11.f1.on.2.png",
+      "master_path": "assets/lemma_11.f1.on.2@master.png",
+      "px_w": 795,
+      "px_h": 565,
+      "content_bbox": [
+        0,
+        4,
+        787,
+        559
+      ],
+      "dpi": 220
+    },
+    "lemma_11.f1.on.3": {
+      "asset_id": "lemma_11.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_11.f1.on.3.png",
+      "master_path": "assets/lemma_11.f1.on.3@master.png",
+      "px_w": 795,
+      "px_h": 565,
+      "content_bbox": [
+        0,
+        4,
+        787,
+        559
+      ],
+      "dpi": 220
+    },
+    "lemma_12.f1.off": {
+      "asset_id": "lemma_12.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/lemma_12.f1.off.png",
+      "master_path": "assets/lemma_12.f1.off@master.png",
+      "px_w": 1272,
+      "px_h": 792,
+      "content_bbox": [
+        14,
+        13,
+        1270,
+        789
+      ],
+      "dpi": 220
+    },
+    "lemma_12.f1.on.1": {
+      "asset_id": "lemma_12.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/lemma_12.f1.on.1.png",
+      "master_path": "assets/lemma_12.f1.on.1@master.png",
+      "px_w": 1287,
+      "px_h": 807,
+      "content_bbox": [
+        0,
+        0,
+        1287,
+        807
+      ],
+      "dpi": 220
+    },
+    "law_1.f1.off": {
+      "asset_id": "law_1.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/law_1.f1.off.png",
+      "master_path": "assets/law_1.f1.off@master.png",
+      "px_w": 626,
+      "px_h": 1444,
+      "content_bbox": [
+        7,
+        5,
+        619,
+        1439
+      ],
+      "dpi": 220
+    },
+    "law_1.f1.on.1": {
+      "asset_id": "law_1.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/law_1.f1.on.1.png",
+      "master_path": "assets/law_1.f1.on.1@master.png",
+      "px_w": 626,
+      "px_h": 1444,
+      "content_bbox": [
+        7,
+        5,
+        619,
+        1439
+      ],
+      "dpi": 220
+    },
+    "law_1.f1.on.2": {
+      "asset_id": "law_1.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/law_1.f1.on.2.png",
+      "master_path": "assets/law_1.f1.on.2@master.png",
+      "px_w": 626,
+      "px_h": 1444,
+      "content_bbox": [
+        7,
+        5,
+        619,
+        1439
+      ],
+      "dpi": 220
+    },
+    "law_1.f1.on.3": {
+      "asset_id": "law_1.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/law_1.f1.on.3.png",
+      "master_path": "assets/law_1.f1.on.3@master.png",
+      "px_w": 626,
+      "px_h": 1444,
+      "content_bbox": [
+        7,
+        5,
+        619,
+        1439
+      ],
+      "dpi": 220
+    },
+    "law_1.f1.on.4": {
+      "asset_id": "law_1.f1.on.4",
+      "kind": "figure_on",
+      "wall_path": "assets/law_1.f1.on.4.png",
+      "master_path": "assets/law_1.f1.on.4@master.png",
+      "px_w": 626,
+      "px_h": 1444,
+      "content_bbox": [
+        7,
+        5,
+        619,
+        1439
+      ],
+      "dpi": 220
+    },
+    "law_2.f1.off": {
+      "asset_id": "law_2.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/law_2.f1.off.png",
+      "master_path": "assets/law_2.f1.off@master.png",
+      "px_w": 393,
+      "px_h": 70,
+      "content_bbox": [
+        0,
+        0,
+        393,
+        70
+      ],
+      "dpi": 220
+    },
+    "law_2.f1.on.1": {
+      "asset_id": "law_2.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/law_2.f1.on.1.png",
+      "master_path": "assets/law_2.f1.on.1@master.png",
+      "px_w": 407,
+      "px_h": 70,
+      "content_bbox": [
+        0,
+        0,
+        407,
+        70
+      ],
+      "dpi": 220
+    },
+    "law_2.f1.on.2": {
+      "asset_id": "law_2.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/law_2.f1.on.2.png",
+      "master_path": "assets/law_2.f1.on.2@master.png",
+      "px_w": 363,
+      "px_h": 70,
+      "content_bbox": [
+        0,
+        0,
+        363,
+        70
+      ],
+      "dpi": 220
+    },
+    "prop_1.f1.off": {
+      "asset_id": "prop_1.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_1.f1.off.png",
+      "master_path": "assets/prop_1.f1.off@master.png",
+      "px_w": 786,
+      "px_h": 1290,
+      "content_bbox": [
+        8,
+        0,
+        778,
+        1290
+      ],
+      "dpi": 220
+    },
+    "prop_1.f1.on.1": {
+      "asset_id": "prop_1.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_1.f1.on.1.png",
+      "master_path": "assets/prop_1.f1.on.1@master.png",
+      "px_w": 786,
+      "px_h": 1290,
+      "content_bbox": [
+        8,
+        0,
+        778,
+        1290
+      ],
+      "dpi": 220
+    },
+    "prop_1.f1.on.2": {
+      "asset_id": "prop_1.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_1.f1.on.2.png",
+      "master_path": "assets/prop_1.f1.on.2@master.png",
+      "px_w": 786,
+      "px_h": 1304,
+      "content_bbox": [
+        8,
+        0,
+        778,
+        1304
+      ],
+      "dpi": 220
+    },
+    "prop_1.f1.on.3": {
+      "asset_id": "prop_1.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_1.f1.on.3.png",
+      "master_path": "assets/prop_1.f1.on.3@master.png",
+      "px_w": 786,
+      "px_h": 1306,
+      "content_bbox": [
+        8,
+        0,
+        778,
+        1306
+      ],
+      "dpi": 220
+    },
+    "prop_1.f1.on.4": {
+      "asset_id": "prop_1.f1.on.4",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_1.f1.on.4.png",
+      "master_path": "assets/prop_1.f1.on.4@master.png",
+      "px_w": 786,
+      "px_h": 1297,
+      "content_bbox": [
+        8,
+        0,
+        778,
+        1297
+      ],
+      "dpi": 220
+    },
+    "prop_2.f1.off": {
+      "asset_id": "prop_2.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_2.f1.off.png",
+      "master_path": "assets/prop_2.f1.off@master.png",
+      "px_w": 1499,
+      "px_h": 1642,
+      "content_bbox": [
+        0,
+        4,
+        1499,
+        1642
+      ],
+      "dpi": 220
+    },
+    "prop_2.f1.on.1": {
+      "asset_id": "prop_2.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_2.f1.on.1.png",
+      "master_path": "assets/prop_2.f1.on.1@master.png",
+      "px_w": 1499,
+      "px_h": 1642,
+      "content_bbox": [
+        0,
+        4,
+        1499,
+        1642
+      ],
+      "dpi": 220
+    },
+    "prop_2.f1.on.2": {
+      "asset_id": "prop_2.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_2.f1.on.2.png",
+      "master_path": "assets/prop_2.f1.on.2@master.png",
+      "px_w": 1499,
+      "px_h": 1642,
+      "content_bbox": [
+        0,
+        4,
+        1499,
+        1642
+      ],
+      "dpi": 220
+    },
+    "prop_2.f1.on.3": {
+      "asset_id": "prop_2.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_2.f1.on.3.png",
+      "master_path": "assets/prop_2.f1.on.3@master.png",
+      "px_w": 1515,
+      "px_h": 1644,
+      "content_bbox": [
+        0,
+        5,
+        1515,
+        1644
+      ],
+      "dpi": 220
+    },
+    "prop_4.f1.off": {
+      "asset_id": "prop_4.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_4.f1.off.png",
+      "master_path": "assets/prop_4.f1.off@master.png",
+      "px_w": 59,
+      "px_h": 148,
+      "content_bbox": [
+        0,
+        0,
+        59,
+        148
+      ],
+      "dpi": 220
+    },
+    "prop_4.f1.on.1": {
+      "asset_id": "prop_4.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_4.f1.on.1.png",
+      "master_path": "assets/prop_4.f1.on.1@master.png",
+      "px_w": 97,
+      "px_h": 148,
+      "content_bbox": [
+        0,
+        0,
+        97,
+        148
+      ],
+      "dpi": 220
+    },
+    "prop_4.f1.on.2": {
+      "asset_id": "prop_4.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_4.f1.on.2.png",
+      "master_path": "assets/prop_4.f1.on.2@master.png",
+      "px_w": 59,
+      "px_h": 148,
+      "content_bbox": [
+        0,
+        0,
+        59,
+        148
+      ],
+      "dpi": 220
+    },
+    "prop_6.f1.off": {
+      "asset_id": "prop_6.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_6.f1.off.png",
+      "master_path": "assets/prop_6.f1.off@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_6.f1.on.1": {
+      "asset_id": "prop_6.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_6.f1.on.1.png",
+      "master_path": "assets/prop_6.f1.on.1@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_6.f1.on.2": {
+      "asset_id": "prop_6.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_6.f1.on.2.png",
+      "master_path": "assets/prop_6.f1.on.2@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_6.f1.on.3": {
+      "asset_id": "prop_6.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_6.f1.on.3.png",
+      "master_path": "assets/prop_6.f1.on.3@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_6.f1.on.4": {
+      "asset_id": "prop_6.f1.on.4",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_6.f1.on.4.png",
+      "master_path": "assets/prop_6.f1.on.4@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_7.f1.off": {
+      "asset_id": "prop_7.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_7.f1.off.png",
+      "master_path": "assets/prop_7.f1.off@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_7.f1.on.1": {
+      "asset_id": "prop_7.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_7.f1.on.1.png",
+      "master_path": "assets/prop_7.f1.on.1@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_7.f1.on.2": {
+      "asset_id": "prop_7.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_7.f1.on.2.png",
+      "master_path": "assets/prop_7.f1.on.2@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_7.f1.on.3": {
+      "asset_id": "prop_7.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_7.f1.on.3.png",
+      "master_path": "assets/prop_7.f1.on.3@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.off": {
+      "asset_id": "prop_11.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_11.f1.off.png",
+      "master_path": "assets/prop_11.f1.off@master.png",
+      "px_w": 1558,
+      "px_h": 1544,
+      "content_bbox": [
+        0,
+        0,
+        1558,
+        1544
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.on.1": {
+      "asset_id": "prop_11.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_11.f1.on.1.png",
+      "master_path": "assets/prop_11.f1.on.1@master.png",
+      "px_w": 1559,
+      "px_h": 1544,
+      "content_bbox": [
+        0,
+        0,
+        1559,
+        1544
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.on.2": {
+      "asset_id": "prop_11.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_11.f1.on.2.png",
+      "master_path": "assets/prop_11.f1.on.2@master.png",
+      "px_w": 1559,
+      "px_h": 1544,
+      "content_bbox": [
+        0,
+        0,
+        1559,
+        1544
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.on.3": {
+      "asset_id": "prop_11.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_11.f1.on.3.png",
+      "master_path": "assets/prop_11.f1.on.3@master.png",
+      "px_w": 1559,
+      "px_h": 1544,
+      "content_bbox": [
+        0,
+        0,
+        1559,
+        1544
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.on.4": {
+      "asset_id": "prop_11.f1.on.4",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_11.f1.on.4.png",
+      "master_path": "assets/prop_11.f1.on.4@master.png",
+      "px_w": 1559,
+      "px_h": 1544,
+      "content_bbox": [
+        0,
+        0,
+        1559,
+        1544
+      ],
+      "dpi": 220
+    },
+    "prop_11.f1.on.5": {
+      "asset_id": "prop_11.f1.on.5",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_11.f1.on.5.png",
+      "master_path": "assets/prop_11.f1.on.5@master.png",
+      "px_w": 1576,
+      "px_h": 1576,
+      "content_bbox": [
+        0,
+        0,
+        1576,
+        1576
+      ],
+      "dpi": 220
+    },
+    "prop_13.f1.off": {
+      "asset_id": "prop_13.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_13.f1.off.png",
+      "master_path": "assets/prop_13.f1.off@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_13.f1.on.1": {
+      "asset_id": "prop_13.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_13.f1.on.1.png",
+      "master_path": "assets/prop_13.f1.on.1@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_13.f1.on.2": {
+      "asset_id": "prop_13.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_13.f1.on.2.png",
+      "master_path": "assets/prop_13.f1.on.2@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_13.f1.on.3": {
+      "asset_id": "prop_13.f1.on.3",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_13.f1.on.3.png",
+      "master_path": "assets/prop_13.f1.on.3@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_13.f1.on.4": {
+      "asset_id": "prop_13.f1.on.4",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_13.f1.on.4.png",
+      "master_path": "assets/prop_13.f1.on.4@master.png",
+      "px_w": 200,
+      "px_h": 150,
+      "content_bbox": [
+        0,
+        0,
+        200,
+        150
+      ],
+      "dpi": 220
+    },
+    "prop_15.f1.off": {
+      "asset_id": "prop_15.f1.off",
+      "kind": "figure_off",
+      "wall_path": "assets/prop_15.f1.off.png",
+      "master_path": "assets/prop_15.f1.off@master.png",
+      "px_w": 1221,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        1221,
+        84
+      ],
+      "dpi": 220
+    },
+    "prop_15.f1.on.1": {
+      "asset_id": "prop_15.f1.on.1",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_15.f1.on.1.png",
+      "master_path": "assets/prop_15.f1.on.1@master.png",
+      "px_w": 796,
+      "px_h": 67,
+      "content_bbox": [
+        0,
+        0,
+        796,
+        67
+      ],
+      "dpi": 220
+    },
+    "prop_15.f1.on.2": {
+      "asset_id": "prop_15.f1.on.2",
+      "kind": "figure_on",
+      "wall_path": "assets/prop_15.f1.on.2.png",
+      "master_path": "assets/prop_15.f1.on.2@master.png",
+      "px_w": 1221,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        1221,
+        84
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s1.txt.off": {
+      "asset_id": "lemma_2.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_2.s1.txt.off.png",
+      "master_path": "assets/lemma_2.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 214,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        209
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s1.txt.on": {
+      "asset_id": "lemma_2.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_2.s1.txt.on.png",
+      "master_path": "assets/lemma_2.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 214,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        209
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s2.txt.off": {
+      "asset_id": "lemma_2.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_2.s2.txt.off.png",
+      "master_path": "assets/lemma_2.s2.txt.off@master.png",
+      "px_w": 866,
+      "px_h": 177,
+      "content_bbox": [
+        13,
+        12,
+        863,
+        173
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s2.txt.on": {
+      "asset_id": "lemma_2.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_2.s2.txt.on.png",
+      "master_path": "assets/lemma_2.s2.txt.on@master.png",
+      "px_w": 866,
+      "px_h": 177,
+      "content_bbox": [
+        13,
+        12,
+        863,
+        173
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s3.txt.off": {
+      "asset_id": "lemma_2.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_2.s3.txt.off.png",
+      "master_path": "assets/lemma_2.s3.txt.off@master.png",
+      "px_w": 869,
+      "px_h": 433,
+      "content_bbox": [
+        13,
+        12,
+        866,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_2.s3.txt.on": {
+      "asset_id": "lemma_2.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_2.s3.txt.on.png",
+      "master_path": "assets/lemma_2.s3.txt.on@master.png",
+      "px_w": 869,
+      "px_h": 433,
+      "content_bbox": [
+        13,
+        12,
+        866,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_3.s1.txt.off": {
+      "asset_id": "lemma_3.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_3.s1.txt.off.png",
+      "master_path": "assets/lemma_3.s1.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 691,
+      "content_bbox": [
+        13,
+        12,
+        868,
+        687
+      ],
+      "dpi": 220
+    },
+    "lemma_3.s1.txt.on": {
+      "asset_id": "lemma_3.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_3.s1.txt.on.png",
+      "master_path": "assets/lemma_3.s1.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 691,
+      "content_bbox": [
+        13,
+        12,
+        868,
+        687
+      ],
+      "dpi": 220
+    },
+    "lemma_3.s2.txt.off": {
+      "asset_id": "lemma_3.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_3.s2.txt.off.png",
+      "master_path": "assets/lemma_3.s2.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_3.s2.txt.on": {
+      "asset_id": "lemma_3.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_3.s2.txt.on.png",
+      "master_path": "assets/lemma_3.s2.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s1.txt.off": {
+      "asset_id": "lemma_4.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_4.s1.txt.off.png",
+      "master_path": "assets/lemma_4.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s1.txt.on": {
+      "asset_id": "lemma_4.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_4.s1.txt.on.png",
+      "master_path": "assets/lemma_4.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s2.txt.off": {
+      "asset_id": "lemma_4.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_4.s2.txt.off.png",
+      "master_path": "assets/lemma_4.s2.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 469,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        464
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s2.txt.on": {
+      "asset_id": "lemma_4.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_4.s2.txt.on.png",
+      "master_path": "assets/lemma_4.s2.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 469,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        464
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s3.txt.off": {
+      "asset_id": "lemma_4.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_4.s3.txt.off.png",
+      "master_path": "assets/lemma_4.s3.txt.off@master.png",
+      "px_w": 869,
+      "px_h": 647,
+      "content_bbox": [
+        11,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_4.s3.txt.on": {
+      "asset_id": "lemma_4.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_4.s3.txt.on.png",
+      "master_path": "assets/lemma_4.s3.txt.on@master.png",
+      "px_w": 869,
+      "px_h": 647,
+      "content_bbox": [
+        11,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_5.s1.txt.off": {
+      "asset_id": "lemma_5.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_5.s1.txt.off.png",
+      "master_path": "assets/lemma_5.s1.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 604,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_5.s1.txt.on": {
+      "asset_id": "lemma_5.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_5.s1.txt.on.png",
+      "master_path": "assets/lemma_5.s1.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 604,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_5.s2.txt.off": {
+      "asset_id": "lemma_5.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_5.s2.txt.off.png",
+      "master_path": "assets/lemma_5.s2.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_5.s2.txt.on": {
+      "asset_id": "lemma_5.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_5.s2.txt.on.png",
+      "master_path": "assets/lemma_5.s2.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s1.txt.off": {
+      "asset_id": "lemma_6.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_6.s1.txt.off.png",
+      "master_path": "assets/lemma_6.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 434,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s1.txt.on": {
+      "asset_id": "lemma_6.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_6.s1.txt.on.png",
+      "master_path": "assets/lemma_6.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 434,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s2.txt.off": {
+      "asset_id": "lemma_6.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_6.s2.txt.off.png",
+      "master_path": "assets/lemma_6.s2.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 349,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        344
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s2.txt.on": {
+      "asset_id": "lemma_6.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_6.s2.txt.on.png",
+      "master_path": "assets/lemma_6.s2.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 349,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        344
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s3.txt.off": {
+      "asset_id": "lemma_6.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_6.s3.txt.off.png",
+      "master_path": "assets/lemma_6.s3.txt.off@master.png",
+      "px_w": 869,
+      "px_h": 519,
+      "content_bbox": [
+        11,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "lemma_6.s3.txt.on": {
+      "asset_id": "lemma_6.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_6.s3.txt.on.png",
+      "master_path": "assets/lemma_6.s3.txt.on@master.png",
+      "px_w": 869,
+      "px_h": 519,
+      "content_bbox": [
+        11,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s1.txt.off": {
+      "asset_id": "lemma_7.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_7.s1.txt.off.png",
+      "master_path": "assets/lemma_7.s1.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        635
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s1.txt.on": {
+      "asset_id": "lemma_7.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_7.s1.txt.on.png",
+      "master_path": "assets/lemma_7.s1.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        635
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s2.txt.off": {
+      "asset_id": "lemma_7.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_7.s2.txt.off.png",
+      "master_path": "assets/lemma_7.s2.txt.off@master.png",
+      "px_w": 869,
+      "px_h": 597,
+      "content_bbox": [
+        12,
+        11,
+        865,
+        592
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s2.txt.on": {
+      "asset_id": "lemma_7.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_7.s2.txt.on.png",
+      "master_path": "assets/lemma_7.s2.txt.on@master.png",
+      "px_w": 869,
+      "px_h": 597,
+      "content_bbox": [
+        12,
+        11,
+        865,
+        592
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s3.txt.off": {
+      "asset_id": "lemma_7.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_7.s3.txt.off.png",
+      "master_path": "assets/lemma_7.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_7.s3.txt.on": {
+      "asset_id": "lemma_7.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_7.s3.txt.on.png",
+      "master_path": "assets/lemma_7.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s1.txt.off": {
+      "asset_id": "lemma_9.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_9.s1.txt.off.png",
+      "master_path": "assets/lemma_9.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 434,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s1.txt.on": {
+      "asset_id": "lemma_9.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_9.s1.txt.on.png",
+      "master_path": "assets/lemma_9.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 434,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s2.txt.off": {
+      "asset_id": "lemma_9.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_9.s2.txt.off.png",
+      "master_path": "assets/lemma_9.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 603,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s2.txt.on": {
+      "asset_id": "lemma_9.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_9.s2.txt.on.png",
+      "master_path": "assets/lemma_9.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 603,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s3.txt.off": {
+      "asset_id": "lemma_9.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_9.s3.txt.off.png",
+      "master_path": "assets/lemma_9.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_9.s3.txt.on": {
+      "asset_id": "lemma_9.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_9.s3.txt.on.png",
+      "master_path": "assets/lemma_9.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        642
+      ],
+      "dpi": 220
+    },
+    "lemma_10.s1.txt.off": {
+      "asset_id": "lemma_10.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_10.s1.txt.off.png",
+      "master_path": "assets/lemma_10.s1.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 604,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_10.s1.txt.on": {
+      "asset_id": "lemma_10.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_10.s1.txt.on.png",
+      "master_path": "assets/lemma_10.s1.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 604,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        599
+      ],
+      "dpi": 220
+    },
+    "lemma_10.s2.txt.off": {
+      "asset_id": "lemma_10.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_10.s2.txt.off.png",
+      "master_path": "assets/lemma_10.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 666,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        661
+      ],
+      "dpi": 220
+    },
+    "lemma_10.s2.txt.on": {
+      "asset_id": "lemma_10.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_10.s2.txt.on.png",
+      "master_path": "assets/lemma_10.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 666,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        661
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s1.txt.off": {
+      "asset_id": "lemma_11.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_11.s1.txt.off.png",
+      "master_path": "assets/lemma_11.s1.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 468,
+      "content_bbox": [
+        13,
+        12,
+        868,
+        464
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s1.txt.on": {
+      "asset_id": "lemma_11.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_11.s1.txt.on.png",
+      "master_path": "assets/lemma_11.s1.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 468,
+      "content_bbox": [
+        13,
+        12,
+        868,
+        464
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s2.txt.off": {
+      "asset_id": "lemma_11.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_11.s2.txt.off.png",
+      "master_path": "assets/lemma_11.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 433,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s2.txt.on": {
+      "asset_id": "lemma_11.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_11.s2.txt.on.png",
+      "master_path": "assets/lemma_11.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 433,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        429
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s3.txt.off": {
+      "asset_id": "lemma_11.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_11.s3.txt.off.png",
+      "master_path": "assets/lemma_11.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 562,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        557
+      ],
+      "dpi": 220
+    },
+    "lemma_11.s3.txt.on": {
+      "asset_id": "lemma_11.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_11.s3.txt.on.png",
+      "master_path": "assets/lemma_11.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 562,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        557
+      ],
+      "dpi": 220
+    },
+    "lemma_12.s1.txt.off": {
+      "asset_id": "lemma_12.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/lemma_12.s1.txt.off.png",
+      "master_path": "assets/lemma_12.s1.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        635
+      ],
+      "dpi": 220
+    },
+    "lemma_12.s1.txt.on": {
+      "asset_id": "lemma_12.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/lemma_12.s1.txt.on.png",
+      "master_path": "assets/lemma_12.s1.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        635
+      ],
+      "dpi": 220
+    },
+    "law_1.s1.txt.off": {
+      "asset_id": "law_1.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_1.s1.txt.off.png",
+      "master_path": "assets/law_1.s1.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 136,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_1.s1.txt.on": {
+      "asset_id": "law_1.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_1.s1.txt.on.png",
+      "master_path": "assets/law_1.s1.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 136,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_1.s2.txt.off": {
+      "asset_id": "law_1.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_1.s2.txt.off.png",
+      "master_path": "assets/law_1.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 93,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        88
+      ],
+      "dpi": 220
+    },
+    "law_1.s2.txt.on": {
+      "asset_id": "law_1.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_1.s2.txt.on.png",
+      "master_path": "assets/law_1.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 93,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        88
+      ],
+      "dpi": 220
+    },
+    "law_1.s3.txt.off": {
+      "asset_id": "law_1.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_1.s3.txt.off.png",
+      "master_path": "assets/law_1.s3.txt.off@master.png",
+      "px_w": 866,
+      "px_h": 136,
+      "content_bbox": [
+        13,
+        11,
+        863,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_1.s3.txt.on": {
+      "asset_id": "law_1.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_1.s3.txt.on.png",
+      "master_path": "assets/law_1.s3.txt.on@master.png",
+      "px_w": 866,
+      "px_h": 136,
+      "content_bbox": [
+        13,
+        11,
+        863,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_1.s4.txt.off": {
+      "asset_id": "law_1.s4.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_1.s4.txt.off.png",
+      "master_path": "assets/law_1.s4.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 135,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_1.s4.txt.on": {
+      "asset_id": "law_1.s4.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_1.s4.txt.on.png",
+      "master_path": "assets/law_1.s4.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 135,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        131
+      ],
+      "dpi": 220
+    },
+    "law_2.s1.txt.off": {
+      "asset_id": "law_2.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_2.s1.txt.off.png",
+      "master_path": "assets/law_2.s1.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 391,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        386
+      ],
+      "dpi": 220
+    },
+    "law_2.s1.txt.on": {
+      "asset_id": "law_2.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_2.s1.txt.on.png",
+      "master_path": "assets/law_2.s1.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 391,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        386
+      ],
+      "dpi": 220
+    },
+    "law_2.s2.txt.off": {
+      "asset_id": "law_2.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/law_2.s2.txt.off.png",
+      "master_path": "assets/law_2.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "law_2.s2.txt.on": {
+      "asset_id": "law_2.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/law_2.s2.txt.on.png",
+      "master_path": "assets/law_2.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "prop_1.s1.txt.off": {
+      "asset_id": "prop_1.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_1.s1.txt.off.png",
+      "master_path": "assets/prop_1.s1.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        642
+      ],
+      "dpi": 220
+    },
+    "prop_1.s1.txt.on": {
+      "asset_id": "prop_1.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_1.s1.txt.on.png",
+      "master_path": "assets/prop_1.s1.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 647,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        642
+      ],
+      "dpi": 220
+    },
+    "prop_1.s2.txt.off": {
+      "asset_id": "prop_1.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_1.s2.txt.off.png",
+      "master_path": "assets/prop_1.s2.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 690,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        685
+      ],
+      "dpi": 220
+    },
+    "prop_1.s2.txt.on": {
+      "asset_id": "prop_1.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_1.s2.txt.on.png",
+      "master_path": "assets/prop_1.s2.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 690,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        685
+      ],
+      "dpi": 220
+    },
+    "prop_1.s3.txt.off": {
+      "asset_id": "prop_1.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_1.s3.txt.off.png",
+      "master_path": "assets/prop_1.s3.txt.off@master.png",
+      "px_w": 862,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        859,
+        635
+      ],
+      "dpi": 220
+    },
+    "prop_1.s3.txt.on": {
+      "asset_id": "prop_1.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_1.s3.txt.on.png",
+      "master_path": "assets/prop_1.s3.txt.on@master.png",
+      "px_w": 862,
+      "px_h": 640,
+      "content_bbox": [
+        13,
+        11,
+        859,
+        635
+      ],
+      "dpi": 220
+    },
+    "prop_1.s4.txt.off": {
+      "asset_id": "prop_1.s4.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_1.s4.txt.off.png",
+      "master_path": "assets/prop_1.s4.txt.off@master.png",
+      "px_w": 869,
+      "px_h": 718,
+      "content_bbox": [
+        13,
+        11,
+        866,
+        713
+      ],
+      "dpi": 220
+    },
+    "prop_1.s4.txt.on": {
+      "asset_id": "prop_1.s4.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_1.s4.txt.on.png",
+      "master_path": "assets/prop_1.s4.txt.on@master.png",
+      "px_w": 869,
+      "px_h": 718,
+      "content_bbox": [
+        13,
+        11,
+        866,
+        713
+      ],
+      "dpi": 220
+    },
+    "prop_2.s1.txt.off": {
+      "asset_id": "prop_2.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_2.s1.txt.off.png",
+      "master_path": "assets/prop_2.s1.txt.off@master.png",
+      "px_w": 857,
+      "px_h": 511,
+      "content_bbox": [
+        13,
+        12,
+        854,
+        507
+      ],
+      "dpi": 220
+    },
+    "prop_2.s1.txt.on": {
+      "asset_id": "prop_2.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_2.s1.txt.on.png",
+      "master_path": "assets/prop_2.s1.txt.on@master.png",
+      "px_w": 857,
+      "px_h": 511,
+      "content_bbox": [
+        13,
+        12,
+        854,
+        507
+      ],
+      "dpi": 220
+    },
+    "prop_2.s2.txt.off": {
+      "asset_id": "prop_2.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_2.s2.txt.off.png",
+      "master_path": "assets/prop_2.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 511,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        507
+      ],
+      "dpi": 220
+    },
+    "prop_2.s2.txt.on": {
+      "asset_id": "prop_2.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_2.s2.txt.on.png",
+      "master_path": "assets/prop_2.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 511,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        507
+      ],
+      "dpi": 220
+    },
+    "prop_2.s3.txt.off": {
+      "asset_id": "prop_2.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_2.s3.txt.off.png",
+      "master_path": "assets/prop_2.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 477,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        473
+      ],
+      "dpi": 220
+    },
+    "prop_2.s3.txt.on": {
+      "asset_id": "prop_2.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_2.s3.txt.on.png",
+      "master_path": "assets/prop_2.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 477,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        473
+      ],
+      "dpi": 220
+    },
+    "prop_4.s1.txt.off": {
+      "asset_id": "prop_4.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_4.s1.txt.off.png",
+      "master_path": "assets/prop_4.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 93,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        88
+      ],
+      "dpi": 220
+    },
+    "prop_4.s1.txt.on": {
+      "asset_id": "prop_4.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_4.s1.txt.on.png",
+      "master_path": "assets/prop_4.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 93,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        88
+      ],
+      "dpi": 220
+    },
+    "prop_4.s2.txt.off": {
+      "asset_id": "prop_4.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_4.s2.txt.off.png",
+      "master_path": "assets/prop_4.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 135,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        130
+      ],
+      "dpi": 220
+    },
+    "prop_4.s2.txt.on": {
+      "asset_id": "prop_4.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_4.s2.txt.on.png",
+      "master_path": "assets/prop_4.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 135,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        130
+      ],
+      "dpi": 220
+    },
+    "prop_6.s1.txt.off": {
+      "asset_id": "prop_6.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_6.s1.txt.off.png",
+      "master_path": "assets/prop_6.s1.txt.off@master.png",
+      "px_w": 864,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        861,
+        471
+      ],
+      "dpi": 220
+    },
+    "prop_6.s1.txt.on": {
+      "asset_id": "prop_6.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_6.s1.txt.on.png",
+      "master_path": "assets/prop_6.s1.txt.on@master.png",
+      "px_w": 864,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        861,
+        471
+      ],
+      "dpi": 220
+    },
+    "prop_6.s2.txt.off": {
+      "asset_id": "prop_6.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_6.s2.txt.off.png",
+      "master_path": "assets/prop_6.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 518,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_6.s2.txt.on": {
+      "asset_id": "prop_6.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_6.s2.txt.on.png",
+      "master_path": "assets/prop_6.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 518,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_6.s3.txt.off": {
+      "asset_id": "prop_6.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_6.s3.txt.off.png",
+      "master_path": "assets/prop_6.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "prop_6.s3.txt.on": {
+      "asset_id": "prop_6.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_6.s3.txt.on.png",
+      "master_path": "assets/prop_6.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        471
+      ],
+      "dpi": 220
+    },
+    "prop_6.s4.txt.off": {
+      "asset_id": "prop_6.s4.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_6.s4.txt.off.png",
+      "master_path": "assets/prop_6.s4.txt.off@master.png",
+      "px_w": 872,
+      "px_h": 518,
+      "content_bbox": [
+        12,
+        12,
+        868,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_6.s4.txt.on": {
+      "asset_id": "prop_6.s4.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_6.s4.txt.on.png",
+      "master_path": "assets/prop_6.s4.txt.on@master.png",
+      "px_w": 872,
+      "px_h": 518,
+      "content_bbox": [
+        12,
+        12,
+        868,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_7.s1.txt.off": {
+      "asset_id": "prop_7.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_7.s1.txt.off.png",
+      "master_path": "assets/prop_7.s1.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 469,
+      "content_bbox": [
+        12,
+        11,
+        864,
+        464
+      ],
+      "dpi": 220
+    },
+    "prop_7.s1.txt.on": {
+      "asset_id": "prop_7.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_7.s1.txt.on.png",
+      "master_path": "assets/prop_7.s1.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 469,
+      "content_bbox": [
+        12,
+        11,
+        864,
+        464
+      ],
+      "dpi": 220
+    },
+    "prop_7.s2.txt.off": {
+      "asset_id": "prop_7.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_7.s2.txt.off.png",
+      "master_path": "assets/prop_7.s2.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 477,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_7.s2.txt.on": {
+      "asset_id": "prop_7.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_7.s2.txt.on.png",
+      "master_path": "assets/prop_7.s2.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 477,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_7.s3.txt.off": {
+      "asset_id": "prop_7.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_7.s3.txt.off.png",
+      "master_path": "assets/prop_7.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 548,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        543
+      ],
+      "dpi": 220
+    },
+    "prop_7.s3.txt.on": {
+      "asset_id": "prop_7.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_7.s3.txt.on.png",
+      "master_path": "assets/prop_7.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 548,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        543
+      ],
+      "dpi": 220
+    },
+    "prop_11.s1.txt.off": {
+      "asset_id": "prop_11.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_11.s1.txt.off.png",
+      "master_path": "assets/prop_11.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 435,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        431
+      ],
+      "dpi": 220
+    },
+    "prop_11.s1.txt.on": {
+      "asset_id": "prop_11.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_11.s1.txt.on.png",
+      "master_path": "assets/prop_11.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 435,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        431
+      ],
+      "dpi": 220
+    },
+    "prop_11.s2.txt.off": {
+      "asset_id": "prop_11.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_11.s2.txt.off.png",
+      "master_path": "assets/prop_11.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 390,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_11.s2.txt.on": {
+      "asset_id": "prop_11.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_11.s2.txt.on.png",
+      "master_path": "assets/prop_11.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 390,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_11.s3.txt.off": {
+      "asset_id": "prop_11.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_11.s3.txt.off.png",
+      "master_path": "assets/prop_11.s3.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_11.s3.txt.on": {
+      "asset_id": "prop_11.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_11.s3.txt.on.png",
+      "master_path": "assets/prop_11.s3.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_11.s4.txt.off": {
+      "asset_id": "prop_11.s4.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_11.s4.txt.off.png",
+      "master_path": "assets/prop_11.s4.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_11.s4.txt.on": {
+      "asset_id": "prop_11.s4.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_11.s4.txt.on.png",
+      "master_path": "assets/prop_11.s4.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 476,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        472
+      ],
+      "dpi": 220
+    },
+    "prop_11.s5.txt.off": {
+      "asset_id": "prop_11.s5.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_11.s5.txt.off.png",
+      "master_path": "assets/prop_11.s5.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 519,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_11.s5.txt.on": {
+      "asset_id": "prop_11.s5.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_11.s5.txt.on.png",
+      "master_path": "assets/prop_11.s5.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 519,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_13.s1.txt.off": {
+      "asset_id": "prop_13.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_13.s1.txt.off.png",
+      "master_path": "assets/prop_13.s1.txt.off@master.png",
+      "px_w": 862,
+      "px_h": 305,
+      "content_bbox": [
+        13,
+        12,
+        859,
+        301
+      ],
+      "dpi": 220
+    },
+    "prop_13.s1.txt.on": {
+      "asset_id": "prop_13.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_13.s1.txt.on.png",
+      "master_path": "assets/prop_13.s1.txt.on@master.png",
+      "px_w": 862,
+      "px_h": 305,
+      "content_bbox": [
+        13,
+        12,
+        859,
+        301
+      ],
+      "dpi": 220
+    },
+    "prop_13.s2.txt.off": {
+      "asset_id": "prop_13.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_13.s2.txt.off.png",
+      "master_path": "assets/prop_13.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 390,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_13.s2.txt.on": {
+      "asset_id": "prop_13.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_13.s2.txt.on.png",
+      "master_path": "assets/prop_13.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 390,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_13.s3.txt.off": {
+      "asset_id": "prop_13.s3.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_13.s3.txt.off.png",
+      "master_path": "assets/prop_13.s3.txt.off@master.png",
+      "px_w": 871,
+      "px_h": 427,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        422
+      ],
+      "dpi": 220
+    },
+    "prop_13.s3.txt.on": {
+      "asset_id": "prop_13.s3.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_13.s3.txt.on.png",
+      "master_path": "assets/prop_13.s3.txt.on@master.png",
+      "px_w": 871,
+      "px_h": 427,
+      "content_bbox": [
+        13,
+        11,
+        868,
+        422
+      ],
+      "dpi": 220
+    },
+    "prop_13.s4.txt.off": {
+      "asset_id": "prop_13.s4.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_13.s4.txt.off.png",
+      "master_path": "assets/prop_13.s4.txt.off@master.png",
+      "px_w": 868,
+      "px_h": 391,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_13.s4.txt.on": {
+      "asset_id": "prop_13.s4.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_13.s4.txt.on.png",
+      "master_path": "assets/prop_13.s4.txt.on@master.png",
+      "px_w": 868,
+      "px_h": 391,
+      "content_bbox": [
+        13,
+        11,
+        865,
+        386
+      ],
+      "dpi": 220
+    },
+    "prop_15.s1.txt.off": {
+      "asset_id": "prop_15.s1.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_15.s1.txt.off.png",
+      "master_path": "assets/prop_15.s1.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 518,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_15.s1.txt.on": {
+      "asset_id": "prop_15.s1.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_15.s1.txt.on.png",
+      "master_path": "assets/prop_15.s1.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 518,
+      "content_bbox": [
+        13,
+        12,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_15.s2.txt.off": {
+      "asset_id": "prop_15.s2.txt.off",
+      "kind": "text_off",
+      "wall_path": "assets/prop_15.s2.txt.off.png",
+      "master_path": "assets/prop_15.s2.txt.off@master.png",
+      "px_w": 867,
+      "px_h": 519,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "prop_15.s2.txt.on": {
+      "asset_id": "prop_15.s2.txt.on",
+      "kind": "text_on",
+      "wall_path": "assets/prop_15.s2.txt.on.png",
+      "master_path": "assets/prop_15.s2.txt.on@master.png",
+      "px_w": 867,
+      "px_h": 519,
+      "content_bbox": [
+        13,
+        11,
+        864,
+        514
+      ],
+      "dpi": 220
+    },
+    "lemma_2.eq0.neutral": {
+      "asset_id": "lemma_2.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_2.eq0.neutral.png",
+      "master_path": "assets/lemma_2.eq0.neutral@master.png",
+      "px_w": 781,
+      "px_h": 63,
+      "content_bbox": [
+        0,
+        0,
+        781,
+        63
+      ],
+      "dpi": 220
+    },
+    "lemma_2.eq1.neutral": {
+      "asset_id": "lemma_2.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_2.eq1.neutral.png",
+      "master_path": "assets/lemma_2.eq1.neutral@master.png",
+      "px_w": 929,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        929,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_3.eq0.neutral": {
+      "asset_id": "lemma_3.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_3.eq0.neutral.png",
+      "master_path": "assets/lemma_3.eq0.neutral@master.png",
+      "px_w": 739,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        739,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_4.eq0.neutral": {
+      "asset_id": "lemma_4.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_4.eq0.neutral.png",
+      "master_path": "assets/lemma_4.eq0.neutral@master.png",
+      "px_w": 596,
+      "px_h": 81,
+      "content_bbox": [
+        0,
+        0,
+        596,
+        81
+      ],
+      "dpi": 220
+    },
+    "lemma_4.eq1.neutral": {
+      "asset_id": "lemma_4.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_4.eq1.neutral.png",
+      "master_path": "assets/lemma_4.eq1.neutral@master.png",
+      "px_w": 638,
+      "px_h": 95,
+      "content_bbox": [
+        0,
+        0,
+        638,
+        95
+      ],
+      "dpi": 220
+    },
+    "lemma_5.eq0.neutral": {
+      "asset_id": "lemma_5.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_5.eq0.neutral.png",
+      "master_path": "assets/lemma_5.eq0.neutral@master.png",
+      "px_w": 425,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        425,
+        84
+      ],
+      "dpi": 220
+    },
+    "lemma_5.eq1.neutral": {
+      "asset_id": "lemma_5.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_5.eq1.neutral.png",
+      "master_path": "assets/lemma_5.eq1.neutral@master.png",
+      "px_w": 192,
+      "px_h": 81,
+      "content_bbox": [
+        0,
+        0,
+        192,
+        81
+      ],
+      "dpi": 220
+    },
+    "lemma_6.eq0.neutral": {
+      "asset_id": "lemma_6.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_6.eq0.neutral.png",
+      "master_path": "assets/lemma_6.eq0.neutral@master.png",
+      "px_w": 382,
+      "px_h": 36,
+      "content_bbox": [
+        0,
+        0,
+        382,
+        36
+      ],
+      "dpi": 220
+    },
+    "lemma_7.eq0.neutral": {
+      "asset_id": "lemma_7.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_7.eq0.neutral.png",
+      "master_path": "assets/lemma_7.eq0.neutral@master.png",
+      "px_w": 487,
+      "px_h": 42,
+      "content_bbox": [
+        0,
+        0,
+        487,
+        42
+      ],
+      "dpi": 220
+    },
+    "lemma_9.eq0.neutral": {
+      "asset_id": "lemma_9.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_9.eq0.neutral.png",
+      "master_path": "assets/lemma_9.eq0.neutral@master.png",
+      "px_w": 498,
+      "px_h": 41,
+      "content_bbox": [
+        0,
+        0,
+        498,
+        41
+      ],
+      "dpi": 220
+    },
+    "lemma_10.eq0.neutral": {
+      "asset_id": "lemma_10.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_10.eq0.neutral.png",
+      "master_path": "assets/lemma_10.eq0.neutral@master.png",
+      "px_w": 418,
+      "px_h": 74,
+      "content_bbox": [
+        0,
+        0,
+        418,
+        74
+      ],
+      "dpi": 220
+    },
+    "lemma_11.eq0.neutral": {
+      "asset_id": "lemma_11.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_11.eq0.neutral.png",
+      "master_path": "assets/lemma_11.eq0.neutral@master.png",
+      "px_w": 380,
+      "px_h": 49,
+      "content_bbox": [
+        0,
+        0,
+        380,
+        49
+      ],
+      "dpi": 220
+    },
+    "lemma_12.eq0.neutral": {
+      "asset_id": "lemma_12.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_12.eq0.neutral.png",
+      "master_path": "assets/lemma_12.eq0.neutral@master.png",
+      "px_w": 877,
+      "px_h": 41,
+      "content_bbox": [
+        0,
+        0,
+        877,
+        41
+      ],
+      "dpi": 220
+    },
+    "law_1.eq0.neutral": {
+      "asset_id": "law_1.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_1.eq0.neutral.png",
+      "master_path": "assets/law_1.eq0.neutral@master.png",
+      "px_w": 506,
+      "px_h": 42,
+      "content_bbox": [
+        0,
+        0,
+        506,
+        42
+      ],
+      "dpi": 220
+    },
+    "law_2.eq0.neutral": {
+      "asset_id": "law_2.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_2.eq0.neutral.png",
+      "master_path": "assets/law_2.eq0.neutral@master.png",
+      "px_w": 246,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        246,
+        45
+      ],
+      "dpi": 220
+    },
+    "law_2.eq1.neutral": {
+      "asset_id": "law_2.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_2.eq1.neutral.png",
+      "master_path": "assets/law_2.eq1.neutral@master.png",
+      "px_w": 236,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        236,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_1.eq0.neutral": {
+      "asset_id": "prop_1.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_1.eq0.neutral.png",
+      "master_path": "assets/prop_1.eq0.neutral@master.png",
+      "px_w": 433,
+      "px_h": 85,
+      "content_bbox": [
+        0,
+        0,
+        433,
+        85
+      ],
+      "dpi": 220
+    },
+    "prop_2.eq0.neutral": {
+      "asset_id": "prop_2.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_2.eq0.neutral.png",
+      "master_path": "assets/prop_2.eq0.neutral@master.png",
+      "px_w": 404,
+      "px_h": 35,
+      "content_bbox": [
+        0,
+        0,
+        404,
+        35
+      ],
+      "dpi": 220
+    },
+    "prop_4.eq0.neutral": {
+      "asset_id": "prop_4.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_4.eq0.neutral.png",
+      "master_path": "assets/prop_4.eq0.neutral@master.png",
+      "px_w": 120,
+      "px_h": 88,
+      "content_bbox": [
+        0,
+        0,
+        120,
+        88
+      ],
+      "dpi": 220
+    },
+    "prop_6.eq0.neutral": {
+      "asset_id": "prop_6.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_6.eq0.neutral.png",
+      "master_path": "assets/prop_6.eq0.neutral@master.png",
+      "px_w": 647,
+      "px_h": 93,
+      "content_bbox": [
+        0,
+        0,
+        647,
+        93
+      ],
+      "dpi": 220
+    },
+    "prop_7.eq0.neutral": {
+      "asset_id": "prop_7.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_7.eq0.neutral.png",
+      "master_path": "assets/prop_7.eq0.neutral@master.png",
+      "px_w": 259,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        259,
+        84
+      ],
+      "dpi": 220
+    },
+    "prop_11.eq0.neutral": {
+      "asset_id": "prop_11.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_11.eq0.neutral.png",
+      "master_path": "assets/prop_11.eq0.neutral@master.png",
+      "px_w": 154,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        154,
+        84
+      ],
+      "dpi": 220
+    },
+    "prop_13.eq0.neutral": {
+      "asset_id": "prop_13.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_13.eq0.neutral.png",
+      "master_path": "assets/prop_13.eq0.neutral@master.png",
+      "px_w": 478,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        478,
+        84
+      ],
+      "dpi": 220
+    },
+    "prop_15.eq0.neutral": {
+      "asset_id": "prop_15.eq0.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_15.eq0.neutral.png",
+      "master_path": "assets/prop_15.eq0.neutral@master.png",
+      "px_w": 127,
+      "px_h": 40,
+      "content_bbox": [
+        0,
+        0,
+        127,
+        40
+      ],
+      "dpi": 220
+    },
+    "prop_15.eq1.neutral": {
+      "asset_id": "prop_15.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_15.eq1.neutral.png",
+      "master_path": "assets/prop_15.eq1.neutral@master.png",
+      "px_w": 185,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        185,
+        45
+      ],
+      "dpi": 220
+    }
+  }
+}

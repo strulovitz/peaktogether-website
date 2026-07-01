@@ -1,0 +1,261 @@
+{
+  "schema_version": "1.0",
+  "room_id": "lemma_7",
+  "dimensions_m": [
+    28.666625,
+    5.24375,
+    22.05125
+  ],
+  "panel_pairs": [
+    {
+      "pair_id": "lemma_7.s1",
+      "step_index": 1,
+      "drawing_off_asset": "lemma_7.f1.off",
+      "drawing_on_asset": "lemma_7.f1.on.1",
+      "text_off_asset": "lemma_7.s1.txt.off",
+      "text_on_asset": "lemma_7.s1.txt.on",
+      "drawing_placement": {
+        "wall": "E",
+        "slot_index": 0,
+        "wall_slot": "E-0",
+        "center_xyz": [
+          14.3333125,
+          1.55,
+          -0.7641457140683645
+        ],
+        "width_m": 1.92,
+        "height_m": 1.1516666666666666,
+        "yaw_rad": -1.5707963267948966
+      },
+      "text_placement": {
+        "wall": "E",
+        "slot_index": 1,
+        "wall_slot": "E-1",
+        "center_xyz": [
+          14.3333125,
+          2.0156250000000004,
+          -4.639770714068371
+        ],
+        "width_m": 5.43125,
+        "height_m": 3.7312500000000006,
+        "yaw_rad": -1.5707963267948966
+      }
+    },
+    {
+      "pair_id": "lemma_7.s2",
+      "step_index": 2,
+      "drawing_off_asset": "lemma_7.f1.off",
+      "drawing_on_asset": "lemma_7.f1.on.2",
+      "text_off_asset": "lemma_7.s2.txt.off",
+      "text_on_asset": "lemma_7.s2.txt.on",
+      "drawing_placement": {
+        "wall": "W",
+        "slot_index": 0,
+        "wall_slot": "W-0",
+        "center_xyz": [
+          -14.3333125,
+          1.55,
+          0.37978799098875093
+        ],
+        "width_m": 1.9183333333333332,
+        "height_m": 1.15,
+        "yaw_rad": 1.5707963267948966
+      },
+      "text_placement": {
+        "wall": "W",
+        "slot_index": 1,
+        "wall_slot": "W-1",
+        "center_xyz": [
+          -14.3333125,
+          2.15,
+          4.251454657655435
+        ],
+        "width_m": 5.425,
+        "height_m": 4.0,
+        "yaw_rad": 1.5707963267948966
+      }
+    },
+    {
+      "pair_id": "lemma_7.s3",
+      "step_index": 3,
+      "drawing_off_asset": "lemma_7.f1.off",
+      "drawing_on_asset": "lemma_7.f1.on.3",
+      "text_off_asset": "lemma_7.s3.txt.off",
+      "text_on_asset": "lemma_7.s3.txt.on",
+      "drawing_placement": {
+        "wall": "S",
+        "slot_index": 0,
+        "wall_slot": "S-0",
+        "center_xyz": [
+          8.746770078230137,
+          1.55,
+          -11.025625
+        ],
+        "width_m": 1.92,
+        "height_m": 1.1516666666666666,
+        "yaw_rad": 0.0
+      },
+      "text_placement": {
+        "wall": "S",
+        "slot_index": 1,
+        "wall_slot": "S-1",
+        "center_xyz": [
+          4.877395078230132,
+          2.171875,
+          -11.025625
+        ],
+        "width_m": 5.41875,
+        "height_m": 4.04375,
+        "yaw_rad": 0.0
+      }
+    }
+  ],
+  "final_pair_id": "lemma_7.s3",
+  "hidden_door_wall_slot": "S-0",
+  "doors": [
+    {
+      "edge_id": "edge.lemma_11.to.lemma_7",
+      "neighbor_id": "lemma_11",
+      "bearing_rad": -2.032223333677689,
+      "wall": "S",
+      "center_xyz": [
+        -8.407195074682589,
+        1.3,
+        -11.025625
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 0.0,
+      "spawn_xyz": [
+        -7.6948329505283874,
+        0.0,
+        -9.592956090561913
+      ],
+      "spawn_heading_rad": 1.109369319912104
+    },
+    {
+      "edge_id": "edge.prop_11.to.lemma_7",
+      "neighbor_id": "prop_11",
+      "bearing_rad": -1.9032817326699234,
+      "wall": "S",
+      "center_xyz": [
+        -3.8071950746825944,
+        1.3,
+        -11.025625
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 0.0,
+      "spawn_xyz": [
+        -3.284965755759242,
+        0.0,
+        -9.513250529686232
+      ],
+      "spawn_heading_rad": 1.2383109209198695
+    },
+    {
+      "edge_id": "edge.prop_4.to.lemma_7",
+      "neighbor_id": "prop_4",
+      "bearing_rad": -2.9975245970399107,
+      "wall": "W",
+      "center_xyz": [
+        -14.3333125,
+        1.3,
+        -2.0793786756779102
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 1.5707963267948966,
+      "spawn_xyz": [
+        -12.749888284121193,
+        0.0,
+        -1.8496663499995014
+      ],
+      "spawn_heading_rad": 0.14406805654988242
+    },
+    {
+      "edge_id": "edge.lemma_7.to.lemma_6",
+      "neighbor_id": "lemma_6",
+      "bearing_rad": 2.1985517320007655,
+      "wall": "N",
+      "center_xyz": [
+        -8.001103120222764,
+        1.3,
+        11.025625
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 3.141592653589793,
+      "spawn_xyz": [
+        -7.0613757906052985,
+        0.0,
+        9.73066841927228
+      ],
+      "spawn_heading_rad": -0.9430409215890272
+    },
+    {
+      "edge_id": "edge.prop_13.to.lemma_7",
+      "neighbor_id": "prop_13",
+      "bearing_rad": -0.7772505450587239,
+      "wall": "S",
+      "center_xyz": [
+        11.206770078230138,
+        1.3,
+        -11.025625
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 0.0,
+      "spawn_xyz": [
+        10.066218904509107,
+        0.0,
+        -9.903509578074262
+      ],
+      "spawn_heading_rad": 2.364342108531069
+    },
+    {
+      "edge_id": "edge.lemma_9.to.lemma_7",
+      "neighbor_id": "lemma_9",
+      "bearing_rad": 0.1177680950972572,
+      "wall": "E",
+      "center_xyz": [
+        14.3333125,
+        1.3,
+        1.6958542859316363
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": -1.5707963267948966,
+      "spawn_xyz": [
+        12.744395141428457,
+        0.0,
+        1.5078605955321063
+      ],
+      "spawn_heading_rad": -3.023824558492536
+    }
+  ],
+  "enemy": {
+    "enemy_id": "lemma_7.demon",
+    "spawn_xyz": [
+      8.746770078230137,
+      0.1,
+      -8.425625
+    ],
+    "health": 5
+  },
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_7.eq0",
+      "asset_id": "lemma_7.eq0.neutral",
+      "pos_xyz": [
+        0.0,
+        5.143750000000001,
+        0.0
+      ],
+      "size_m": [
+        1.0,
+        0.5
+      ]
+    }
+  ]
+}

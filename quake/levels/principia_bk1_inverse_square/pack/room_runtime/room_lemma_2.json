@@ -1,0 +1,194 @@
+{
+  "schema_version": "1.0",
+  "room_id": "lemma_2",
+  "dimensions_m": [
+    14.713291666666668,
+    3.90625,
+    11.317916666666667
+  ],
+  "panel_pairs": [
+    {
+      "pair_id": "lemma_2.s1",
+      "step_index": 1,
+      "drawing_off_asset": "lemma_2.f1.off",
+      "drawing_on_asset": "lemma_2.f1.on.1",
+      "text_off_asset": "lemma_2.s1.txt.off",
+      "text_on_asset": "lemma_2.s1.txt.on",
+      "drawing_placement": {
+        "wall": "N",
+        "slot_index": 0,
+        "wall_slot": "N-0",
+        "center_xyz": [
+          -0.9874130273501978,
+          1.55,
+          5.6589583333333335
+        ],
+        "width_m": 1.6866666666666668,
+        "height_m": 0.915,
+        "yaw_rad": 3.141592653589793
+      },
+      "text_placement": {
+        "wall": "N",
+        "slot_index": 1,
+        "wall_slot": "N-1",
+        "center_xyz": [
+          2.7715453059831363,
+          1.55,
+          5.6589583333333335
+        ],
+        "width_m": 5.43125,
+        "height_m": 2.7062500000000003,
+        "yaw_rad": 3.141592653589793
+      }
+    },
+    {
+      "pair_id": "lemma_2.s2",
+      "step_index": 2,
+      "drawing_off_asset": "lemma_2.f1.off",
+      "drawing_on_asset": "lemma_2.f1.on.2",
+      "text_off_asset": "lemma_2.s2.txt.off",
+      "text_on_asset": "lemma_2.s2.txt.on",
+      "drawing_placement": {
+        "wall": "E",
+        "slot_index": 0,
+        "wall_slot": "E-0",
+        "center_xyz": [
+          7.356645833333334,
+          1.55,
+          4.315625000000002
+        ],
+        "width_m": 1.6866666666666668,
+        "height_m": 0.915,
+        "yaw_rad": -1.5707963267948966
+      },
+      "text_placement": {
+        "wall": "E",
+        "slot_index": 1,
+        "wall_slot": "E-1",
+        "center_xyz": [
+          7.356645833333334,
+          1.55,
+          0.5629166666666672
+        ],
+        "width_m": 5.41875,
+        "height_m": 1.3375,
+        "yaw_rad": -1.5707963267948966
+      }
+    },
+    {
+      "pair_id": "lemma_2.s3",
+      "step_index": 3,
+      "drawing_off_asset": "lemma_2.f1.off",
+      "drawing_on_asset": "lemma_2.f1.on.3",
+      "text_off_asset": "lemma_2.s3.txt.off",
+      "text_on_asset": "lemma_2.s3.txt.on",
+      "drawing_placement": {
+        "wall": "S",
+        "slot_index": 0,
+        "wall_slot": "S-0",
+        "center_xyz": [
+          6.0133125000000005,
+          1.55,
+          -5.6589583333333335
+        ],
+        "width_m": 1.6866666666666668,
+        "height_m": 0.915,
+        "yaw_rad": 0.0
+      },
+      "text_placement": {
+        "wall": "S",
+        "slot_index": 1,
+        "wall_slot": "S-1",
+        "center_xyz": [
+          2.263729166666667,
+          1.55,
+          -5.6589583333333335
+        ],
+        "width_m": 5.4125,
+        "height_m": 1.10625,
+        "yaw_rad": 0.0
+      }
+    }
+  ],
+  "final_pair_id": "lemma_2.s3",
+  "hidden_door_wall_slot": "S-0",
+  "doors": [
+    {
+      "edge_id": "edge.lemma_4.to.lemma_2",
+      "neighbor_id": "lemma_4",
+      "bearing_rad": -2.900649558186019,
+      "wall": "W",
+      "center_xyz": [
+        -7.356645833333334,
+        1.3,
+        -1.8076493219764798
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 1.5707963267948966,
+      "spawn_xyz": [
+        -5.802864446672867,
+        0.0,
+        -1.4258595860386507
+      ],
+      "spawn_heading_rad": 0.2409430954037739
+    },
+    {
+      "edge_id": "edge.lemma_3.to.lemma_2",
+      "neighbor_id": "lemma_3",
+      "bearing_rad": 2.102776010300492,
+      "wall": "N",
+      "center_xyz": [
+        -3.3307463606835315,
+        1.3,
+        5.6589583333333335
+      ],
+      "width_m": 2.0,
+      "height_m": 2.6,
+      "normal_yaw_rad": 3.141592653589793,
+      "spawn_xyz": [
+        -2.519161665666268,
+        0.0,
+        4.280070998264317
+      ],
+      "spawn_heading_rad": -1.0388166432893016
+    }
+  ],
+  "enemy": {
+    "enemy_id": "lemma_2.demon",
+    "spawn_xyz": [
+      6.0133125000000005,
+      0.1,
+      -3.0589583333333334
+    ],
+    "health": 5
+  },
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_2.eq0",
+      "asset_id": "lemma_2.eq0.neutral",
+      "pos_xyz": [
+        -1.0,
+        3.80625,
+        0.0
+      ],
+      "size_m": [
+        1.0,
+        0.5
+      ]
+    },
+    {
+      "eq_id": "lemma_2.eq1",
+      "asset_id": "lemma_2.eq1.neutral",
+      "pos_xyz": [
+        1.0,
+        3.80625,
+        0.0
+      ],
+      "size_m": [
+        1.0,
+        0.5
+      ]
+    }
+  ]
+}

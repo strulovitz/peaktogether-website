@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "pack_id": "principia_bk1",
+  "groups": {},
+  "grey_ink": null,
+  "grey_text": null,
+  "bg_key": "#ff00ff",
+  "map_importance": {
+    "1": "#4F6D7A",
+    "2": "#3FA796",
+    "3": "#E6B800",
+    "4": "#E8743B",
+    "5": "#F5F2E8"
+  },
+  "map_node_default": "#9AA0A6"
+}
