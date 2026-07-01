@@ -95,6 +95,7 @@ class FrameOutcome:
     progress_changed: bool = False
     mode_switched_to: Optional[str] = None      # "corridor" | "room" | None
     switched_room_id: Optional[str] = None
+    travel_edge_id: Optional[str] = None        # when entering corridor via a specific door
     read_toggle_signaled: bool = False          # gameplay emitted read_toggled(on=True)
     recompute_guidelines: bool = False          # gameplay emitted GuidelinesRecomputed
 
@@ -133,6 +134,7 @@ def apply_events(state: Any, events: List[Any]) -> FrameOutcome:
         elif kind == "mode_switch":
             out.mode_switched_to = ev.to
             out.switched_room_id = ev.room_id
+            out.travel_edge_id = getattr(ev, "via_edge_id", None)
         elif kind == "read_toggled":
             # gameplay only ever emits on=True as a "the player pressed read"
             # signal; app owns the actual on/off toggle and panel resolution.
@@ -207,6 +209,46 @@ def _read_toggle_pick(read_state: ReadState, state: Any, actions: Any,
 # tiny function each. Do NOT assert these API names elsewhere as fact.
 # (Preserved verbatim from the M0 stub; raw-geometry wrappers removed.)
 # ---------------------------------------------------------------------------
+
+def _single_corridor_floorplan(fp, edge_id):
+    """Build a minimal Floorplan with just the 2 rooms + 1 corridor for edge_id.
+    Falls back to the full floorplan if the corridor is not found."""
+    from map.raw_models import Floorplan as _FP
+    corridor = None
+    # Match by corridor_id, or by source/target pair from edge_id pattern
+    parts = edge_id.split(".to.")
+    src_cand = parts[0].replace("edge.", "") if len(parts) == 2 else None
+    tgt_cand = parts[1] if len(parts) == 2 else None
+    for c in fp.corridors:
+        if c.corridor_id == edge_id:
+            corridor = c
+            break
+        if src_cand and tgt_cand and (
+            (c.source == src_cand and c.target == tgt_cand) or
+            (c.source == tgt_cand and c.target == src_cand)
+        ):
+            corridor = c
+            break
+    if corridor is None:
+        return fp
+    src_room = None
+    tgt_room = None
+    for r in fp.rooms:
+        if r.room_id == corridor.source:
+            src_room = r
+        if r.room_id == corridor.target:
+            tgt_room = r
+    return _FP(
+        schema_version=fp.schema_version,
+        level_id=fp.level_id,
+        seed=fp.seed,
+        rooms=[r for r in (src_room, tgt_room) if r is not None],
+        corridors=[corridor],
+        crossings=[],
+    )
+
+# Module-level active-corridor state (non-persisted, reset on room entry)
+_active_corridor = [None, None]  # [floorplan, nav] — list to avoid global keyword
 
 def _gl_clear(ctx: Any, r: float, g: float, b: float, a: float) -> None:
     ctx.clear(r, g, b, a)
@@ -347,7 +389,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
 
             # (3) choose nav from the PRE-step mode
             if state.mode == "corridor":
-                nav = corridor_nav
+                nav = _active_corridor[1] if _active_corridor[1] is not None else corridor_nav
             else:
                 nav = room_navs.get(state.current_room_id)
                 if nav is None:
@@ -374,6 +416,15 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                 if outcome.switched_room_id not in room_navs:
                     room_navs[outcome.switched_room_id] = \
                         build_room_nav(pack.rooms[outcome.switched_room_id])
+                _active_corridor[0] = None
+                _active_corridor[1] = None
+
+            # 6d) entering corridor via a specific door -> build single-corridor fp
+            if outcome.mode_switched_to == "corridor" and outcome.travel_edge_id is not None:
+                _active_corridor[0] = _single_corridor_floorplan(
+                    pack.floorplan, outcome.travel_edge_id)
+                _active_corridor[1] = build_corridor_nav(_active_corridor[0])
+                _log(f"frame {frame}: single-corridor mode for edge {outcome.travel_edge_id}")
 
             # 6b) recompute guidelines when signaled (gameplay sends targets=[])
             if outcome.recompute_guidelines:
@@ -408,10 +459,11 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (10) render by mode
             try:
                 if state.mode == "corridor":
+                    render_fp = _active_corridor[0] if _active_corridor[0] is not None else pack.floorplan
                     def _gl(v, p, aspect):
                         vp = np.ascontiguousarray(p @ v, dtype=np.float32)
-                        draw_guidelines(vp, pack.floorplan, targets)
-                    render_mode_a(ctx, window, view, proj, pack.floorplan, state,
+                        draw_guidelines(vp, render_fp, targets)
+                    render_mode_a(ctx, window, view, proj, render_fp, state,
                                   guidelines_fn=_gl, targets=targets)
                 else:
                     _gl_clear(ctx, 0.05, 0.06, 0.08, 1.0)

@@ -3,7 +3,7 @@
 The brain of the game: pure, headless, deterministic game-logic step.
 NO GL, NO window, NO IO, NO RNG. All shared types imported from contracts.
 """
-from math import cos, sin, sqrt
+from math import cos, sin, sqrt, atan2
 
 from contracts import (Actions, GameState, Pack, NavQuery, Event, PanelLit,
     DoorOpened, DemonSpawned, DemonHit, DemonKilled, RoomCleared, LevelComplete,
@@ -134,34 +134,35 @@ def step(state: GameState, actions: Actions, pack: Pack,
         eid = nav.door_at(state.pos)
         if eid is not None:
             from logutil import log as _log
-            current_room = pack.rooms.get(state.current_room_id)
-            if current_room is not None:
-                from_door = None
-                for d in current_room.doors:
-                    if d.edge_id == eid:
-                        from_door = d
-                        break
-                if from_door is not None:
-                    neighbor_id = from_door.neighbor_id
-                    neighbor_room = pack.rooms.get(neighbor_id)
-                    if neighbor_room is not None:
-                        # Find the door in the neighbor that leads back here
-                        spawn_pos = neighbor_room.doors[0].spawn_xyz if neighbor_room.doors else (0.0, 0.0, 0.0)
-                        spawn_heading = neighbor_room.doors[0].spawn_heading_rad if neighbor_room.doors else 0.0
-                        for nd in neighbor_room.doors:
-                            if nd.neighbor_id == state.current_room_id:
-                                spawn_pos = nd.spawn_xyz
-                                spawn_heading = nd.spawn_heading_rad
-                                break
-                        _log(f"gameplay: door traversal {state.current_room_id} -> {neighbor_id}")
-                        events.append(ModeSwitch(to="room", room_id=neighbor_id,
-                                                 via_edge_id=eid))
-                        state.current_room_id = neighbor_id
-                        state.pos = spawn_pos
-                        state.heading_rad = spawn_heading
-                        events.append(GuidelinesRecomputed(targets=[]))
-                        if neighbor_id not in _demon_hp:
-                            _demon_hp[neighbor_id] = neighbor_room.enemy.health
+            _log(f"gameplay: exiting room {state.current_room_id} via door {eid}")
+            sx, sz = 0.0, 0.0
+            for fr in pack.floorplan.rooms:
+                if fr.room_id == state.current_room_id:
+                    sx, sz = fr.map_xz[0], fr.map_xz[1]
+                    break
+            # Find corridor and go toward the FAR end from current room
+            for cor in pack.floorplan.corridors:
+                if cor.corridor_id == eid or (
+                    cor.source == state.current_room_id and cor.target == eid.split(".to.")[-1].split(".f")[0]
+                ):
+                    # Determine which end is the far end (where we're heading)
+                    if cor.source == state.current_room_id:
+                        tx, tz = cor.path_xz[-1][0], cor.path_xz[-1][1]
+                    else:
+                        tx, tz = cor.path_xz[0][0], cor.path_xz[0][1]
+                    dx, dz = tx - sx, tz - sz
+                    dist = sqrt(dx * dx + dz * dz)
+                    if dist > 0:
+                        dx /= dist; dz /= dist
+                    state.pos = (sx + dx * 2.0, 0.0, sz + dz * 2.0)
+                    state.heading_rad = atan2(dz, dx)
+                    break
+            else:
+                state.pos = (sx, 0.0, sz)
+            events.append(ModeSwitch(to="corridor", room_id=state.current_room_id,
+                                     via_edge_id=eid))
+            state.mode = "corridor"
+            state.current_room_id = None
     elif state.mode == "corridor":
         for room in pack.floorplan.rooms:
             dx_sock = state.pos[0] - room.map_xz[0]
