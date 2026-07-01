@@ -138,7 +138,7 @@ class Spec:
 _HEX_RE = re.compile(r"^#[0-9a-fA-F]{6}$")
 _NODEID_RE = re.compile(r"^[a-z][a-z0-9_]*$")
 _COLORNAME_RE = re.compile(r"^[a-z][a-z0-9_]*$")
-_SPAN_RE = re.compile(r"\{([a-z][a-z0-9_]*)\|((?:[^{}]|\{[^{}]*\})*)\}")
+_SPAN_RE = re.compile(r"(?:\\)?\{([a-z][a-z0-9_]*)\|((?:[^{}]|\{[^{}]*\})*)\}")
 _TEXTCOLOR_RE = re.compile(r"\\textcolor\{([^}]+)\}\{")
 _AT_DIRS = {"N", "S", "E", "W", "NE", "NW", "SE", "SW", "center"}
 _DEFAULT_STABILO = "#FFE000"

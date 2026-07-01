@@ -44,7 +44,7 @@
       },
       "text": {
         "block_id": "lemma_2.s1.txt",
-        "latex": "In the figure $AacE$, bounded by the right lines $\\\\textcolor{sideorange}{Aa}$ and $\\\\textcolor{basegreen}{AE}$ and by \\\\textcolor{curveblue}{the curve $acE$}, take any number of \\emph{equal} bases $AB$, $BC$, $CD$, $\\&c.$ along \\\\textcolor{basegreen}{the base $AE$}. This is the curvilinear figure whose area we mean to measure.",
+        "latex": "In the figure $AacE$, bounded by the right lines $\\textcolor{sideorange}{Aa}$ and $\\textcolor{basegreen}{AE}$ and by \\textcolor{curveblue}{the curve $acE$}, take any number of \\emph{equal} bases $AB$, $BC$, $CD$, $\\&c.$ along \\textcolor{basegreen}{the base $AE$}. This is the curvilinear figure whose area we mean to measure.",
         "colors_used": [
           {
             "name": "sideorange",
@@ -71,7 +71,7 @@
       },
       "text": {
         "block_id": "lemma_2.s2.txt",
-        "latex": "On these equal bases erect \\\\textcolor{inscpurple}{the inscribed parallelograms $Ab$, $Bc$, $Cd$, $\\&c.$}, with sides $Bb$, $Cc$, $Dd$ parallel to $\\\\textcolor{sideorange}{Aa}$. \\\\textcolor{inscpurple}{The inscribed figure $AKbLcMdD$} lies wholly \\emph{under} \\\\textcolor{curveblue}{the curve}.",
+        "latex": "On these equal bases erect \\textcolor{inscpurple}{the inscribed parallelograms $Ab$, $Bc$, $Cd$, $\\&c.$}, with sides $Bb$, $Cc$, $Dd$ parallel to $\\textcolor{sideorange}{Aa}$. \\textcolor{inscpurple}{The inscribed figure $AKbLcMdD$} lies wholly \\emph{under} \\textcolor{curveblue}{the curve}.",
         "colors_used": [
           {
             "name": "inscpurple",
@@ -98,7 +98,7 @@
       },
       "text": {
         "block_id": "lemma_2.s3.txt",
-        "latex": "Complete \\\\textcolor{circred}{the circumscribed parallelograms $aKbl$, $bLcm$, $cMdn$, $\\&c.$}, rising \\emph{above} \\\\textcolor{curveblue}{the curve}. Their excess over \\\\textcolor{inscpurple}{the inscribed figure} is the sum $Kl + Lm + Mn + Do$, equal to the single rectangle $ABla$ on the base $\\\\textcolor{basegreen}{AB}$. As $\\\\textcolor{basegreen}{AB}$ is diminished \\emph{in infinitum} this rectangle becomes less than any given space; hence (by Lem.~I) \\\\textcolor{inscpurple}{the inscribed} and \\\\textcolor{circred}{the circumscribed} figures, and therefore the intermediate curvilinear figure, become ultimately equal. \\textit{Q.E.D.}",
+        "latex": "Complete \\textcolor{circred}{the circumscribed parallelograms $aKbl$, $bLcm$, $cMdn$, $\\&c.$}, rising \\emph{above} \\textcolor{curveblue}{the curve}. Their excess over \\textcolor{inscpurple}{the inscribed figure} is the sum $Kl + Lm + Mn + Do$, equal to the single rectangle $ABla$ on the base $\\textcolor{basegreen}{AB}$. As $\\textcolor{basegreen}{AB}$ is diminished \\emph{in infinitum} this rectangle becomes less than any given space; hence (by Lem.~I) \\textcolor{inscpurple}{the inscribed} and \\textcolor{circred}{the circumscribed} figures, and therefore the intermediate curvilinear figure, become ultimately equal. \\textit{Q.E.D.}",
         "colors_used": [
           {
             "name": "circred",

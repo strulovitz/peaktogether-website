@@ -40,7 +40,7 @@
       },
       "text": {
         "block_id": "lemma_6.s1.txt",
-        "latex": "Here is \\\\textcolor{arcblue}{the arc $ACB$}, a piece of curve fixed in position, rising from the point of contact $A$ up through $C$ to a nearby point $B$. The phrase \\emph{continuous curvature} means the curve bends \\emph{smoothly} — at every point, including $A$, it has one definite direction and no sharp corner. This smoothness is Newton's standing assumption, the supposition he will not let go of. \\\\textcolor{arcblue}{This arc} is the object whose ultimate behaviour near $A$ we mean to investigate.",
+        "latex": "Here is \\textcolor{arcblue}{the arc $ACB$}, a piece of curve fixed in position, rising from the point of contact $A$ up through $C$ to a nearby point $B$. The phrase \\emph{continuous curvature} means the curve bends \\emph{smoothly} — at every point, including $A$, it has one definite direction and no sharp corner. This smoothness is Newton's standing assumption, the supposition he will not let go of. \\textcolor{arcblue}{This arc} is the object whose ultimate behaviour near $A$ we mean to investigate.",
         "colors_used": [
           {
             "name": "arcblue",
@@ -59,7 +59,7 @@
       },
       "text": {
         "block_id": "lemma_6.s2.txt",
-        "latex": "Now join $A$ to $B$ by \\\\textcolor{chordgreen}{the straight chord $AB$}, a shortcut that cuts beneath \\\\textcolor{arcblue}{the arc}. Imagine the point $B$ now sliding down \\\\textcolor{arcblue}{the curve} toward $A$. As $B$ draws nearer, \\\\textcolor{chordgreen}{the chord $AB$} grows shorter and shorter, and its direction settles into the direction of the curve at $A$. It is this swivelling of \\\\textcolor{chordgreen}{the chord} that the next step compares against the tangent.",
+        "latex": "Now join $A$ to $B$ by \\textcolor{chordgreen}{the straight chord $AB$}, a shortcut that cuts beneath \\textcolor{arcblue}{the arc}. Imagine the point $B$ now sliding down \\textcolor{arcblue}{the curve} toward $A$. As $B$ draws nearer, \\textcolor{chordgreen}{the chord $AB$} grows shorter and shorter, and its direction settles into the direction of the curve at $A$. It is this swivelling of \\textcolor{chordgreen}{the chord} that the next step compares against the tangent.",
         "colors_used": [
           {
             "name": "chordgreen",
@@ -82,7 +82,7 @@
       },
       "text": {
         "block_id": "lemma_6.s3.txt",
-        "latex": "Draw \\\\textcolor{tanorange}{the tangent $AD$}, the straight line that just grazes \\\\textcolor{arcblue}{the curve} at $A$, matching its direction there and extending both ways. Between \\\\textcolor{tanorange}{the tangent} and \\\\textcolor{chordgreen}{the chord} opens \\\\textcolor{anglered}{the angle $BAD$}. As $B$ approaches $A$, \\\\textcolor{chordgreen}{the chord} swivels toward \\\\textcolor{tanorange}{the tangent}, and \\\\textcolor{anglered}{this angle} is diminished \\emph{in infinitum}. For if \\\\textcolor{anglered}{the angle} did \\emph{not} vanish, \\\\textcolor{arcblue}{the arc} would meet \\\\textcolor{tanorange}{the tangent} at a finite rectilinear angle — a sharp elbow at $A$ — and the curvature there would not be continuous, against the supposition. Hence ultimately $\\angle BAD \\to 0$. \\textit{Q.E.D.}",
+        "latex": "Draw \\textcolor{tanorange}{the tangent $AD$}, the straight line that just grazes \\textcolor{arcblue}{the curve} at $A$, matching its direction there and extending both ways. Between \\textcolor{tanorange}{the tangent} and \\textcolor{chordgreen}{the chord} opens \\textcolor{anglered}{the angle $BAD$}. As $B$ approaches $A$, \\textcolor{chordgreen}{the chord} swivels toward \\textcolor{tanorange}{the tangent}, and \\textcolor{anglered}{this angle} is diminished \\emph{in infinitum}. For if \\textcolor{anglered}{the angle} did \\emph{not} vanish, \\textcolor{arcblue}{the arc} would meet \\textcolor{tanorange}{the tangent} at a finite rectilinear angle — a sharp elbow at $A$ — and the curvature there would not be continuous, against the supposition. Hence ultimately $\\angle BAD \\to 0$. \\textit{Q.E.D.}",
         "colors_used": [
           {
             "name": "tanorange",

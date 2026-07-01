@@ -48,7 +48,7 @@
       },
       "text": {
         "block_id": "lemma_4.s1.txt",
-        "latex": "Here is the \\\\textcolor{figaviolet}{first figure $AacE$ with its inscribed rank of parallelograms}, erected on three equal bases $AB$, $BC$, $CE$ along \\\\textcolor{basegreen}{the baseline $AE$}. \\\\textcolor{curveblue}{The curve $aE$} rises gently above the base, and each strip reaches up to meet it just as in Lemma II. We give this figure exactly three parallelograms because Lemma IV requires that the two figures carry an \\emph{equal number} of strips in each rank. Call these three parallelograms $p_1$, $p_2$, $p_3$, taken in order from $A$ toward $E$; they are the building blocks whose ratios we will compare.",
+        "latex": "Here is the \\textcolor{figaviolet}{first figure $AacE$ with its inscribed rank of parallelograms}, erected on three equal bases $AB$, $BC$, $CE$ along \\textcolor{basegreen}{the baseline $AE$}. \\textcolor{curveblue}{The curve $aE$} rises gently above the base, and each strip reaches up to meet it just as in Lemma II. We give this figure exactly three parallelograms because Lemma IV requires that the two figures carry an \\emph{equal number} of strips in each rank. Call these three parallelograms $p_1$, $p_2$, $p_3$, taken in order from $A$ toward $E$; they are the building blocks whose ratios we will compare.",
         "colors_used": [
           {
             "name": "figaviolet",
@@ -75,7 +75,7 @@
       },
       "text": {
         "block_id": "lemma_4.s2.txt",
-        "latex": "Below sits the \\\\textcolor{figbteal}{second figure $PprT$ with its own rank of three parallelograms} on the equal bases $PQ$, $QR$, $RT$ of \\\\textcolor{basegreen}{the baseline $PT$}. Notice that \\\\textcolor{curvered}{the curve $prT$} leans the other way --- it descends from $p$ toward $T$ --- so this figure is shaped quite differently from the first. Yet it carries the \\emph{same count} of strips, which we name $q_1$, $q_2$, $q_3$ in order from $P$ toward $T$. The whole point of Lemma IV is that the figures may differ wildly in form, provided their corresponding strips agree in ultimate ratio.",
+        "latex": "Below sits the \\textcolor{figbteal}{second figure $PprT$ with its own rank of three parallelograms} on the equal bases $PQ$, $QR$, $RT$ of \\textcolor{basegreen}{the baseline $PT$}. Notice that \\textcolor{curvered}{the curve $prT$} leans the other way --- it descends from $p$ toward $T$ --- so this figure is shaped quite differently from the first. Yet it carries the \\emph{same count} of strips, which we name $q_1$, $q_2$, $q_3$ in order from $P$ toward $T$. The whole point of Lemma IV is that the figures may differ wildly in form, provided their corresponding strips agree in ultimate ratio.",
         "colors_used": [
           {
             "name": "figbteal",
@@ -102,7 +102,7 @@
       },
       "text": {
         "block_id": "lemma_4.s3.txt",
-        "latex": "The \\\\textcolor{corrorange}{correspondence lines} pair each strip of the upper figure with its mate below: $p_1$ with $q_1$, $p_2$ with $q_2$, $p_3$ with $q_3$. By hypothesis every such pair shares one ultimate ratio $k$, so that $p_i / q_i \\to k$ each to each respectively. Then, by composition, the sum of \\\\textcolor{figaviolet}{all the upper parallelograms} is to the sum of \\\\textcolor{figbteal}{all the lower parallelograms} in that same ratio $k$, since adding terms of equal ratio preserves the ratio. Finally, by Lemma III each rank of parallelograms is ultimately equal to its own curvilinear figure --- so the sums may be replaced by the whole figures, giving $AacE : PprT = k$. Thus two figures whose corresponding strips share an ultimate ratio are themselves in that very ratio. \\textit{Q.E.D.}",
+        "latex": "The \\textcolor{corrorange}{correspondence lines} pair each strip of the upper figure with its mate below: $p_1$ with $q_1$, $p_2$ with $q_2$, $p_3$ with $q_3$. By hypothesis every such pair shares one ultimate ratio $k$, so that $p_i / q_i \\to k$ each to each respectively. Then, by composition, the sum of \\textcolor{figaviolet}{all the upper parallelograms} is to the sum of \\textcolor{figbteal}{all the lower parallelograms} in that same ratio $k$, since adding terms of equal ratio preserves the ratio. Finally, by Lemma III each rank of parallelograms is ultimately equal to its own curvilinear figure --- so the sums may be replaced by the whole figures, giving $AacE : PprT = k$. Thus two figures whose corresponding strips share an ultimate ratio are themselves in that very ratio. \\textit{Q.E.D.}",
         "colors_used": [
           {
             "name": "corrorange",

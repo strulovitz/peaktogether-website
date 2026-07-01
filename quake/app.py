@@ -52,8 +52,8 @@ from readmode import draw_read
 # MODULE CONSTANTS
 # ---------------------------------------------------------------------------
 
-PACK_DIR = str(Path(__file__).parent / "tests" / "golden_pack")
-SAVE_PATH = "savegame.json"
+PACK_DIR = str(Path(__file__).parent / "levels" / "principia_bk1_inverse_square" / "pack")
+SAVE_PATH = str(Path(__file__).parent / "savegame.json")
 
 PITCH_CLAMP_RAD = 1.2217          # ±70°
 EYE_HEIGHT_M = 1.6
