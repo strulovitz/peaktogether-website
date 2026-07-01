@@ -1,0 +1,45 @@
+room      prop_15
+kind      equation
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XV; (no printed figure).
+caption   The periodic times in ellipses are in the sesquiplicate ratio of the greater axes — Kepler's Third Law.
+final     2
+ceiling   prop15 :: T^2 \propto a^3
+ceiling   prop15b :: \text{(Kepler III)}
+
+station 1
+  gloss   The periodic times in ellipses are in the sesquiplicate ratio of their greater axes.
+  color   timeblue     #1E6FE0
+  color   axisorange   #E8770A
+  color   ratiopurple  #8E24AA
+  panel
+    term    timeblue     $T^2$
+    term    axisorange   $a^3$   heart stabilo=#F6D3AC
+    term    ratiopurple  $\tfrac{3}{2}\ \text{(sesquiplicate)}$
+    layout  $\,{timeblue|T^2}\;\propto\;{axisorange|a^3}\qquad\Longleftrightarrow\qquad T\;\propto\;a^{ {ratiopurple|3/2} }\,$
+  text
+    Kepler had noticed a haunting regularity in the heavens: the farther a planet \
+    orbits from the Sun, the longer its year — and the relationship is exact. Squaring \
+    {timeblue|the periodic time $T$} always tracks {axisorange|the cube of the greater axis $a$}, \
+    so that {timeblue|$T^2$} $\propto$ {axisorange|$a^3$}. Equivalently, {timeblue|the period} \
+    grows as {ratiopurple|the $3/2$ power} — what Newton calls the {ratiopurple|sesquiplicate ratio} — \
+    of the axis. What Kepler found only by patient observation, Newton now {axisorange|proves} from \
+    the inverse-square law: "the periodic times in ellipses are in the sesquiplicate ratio of their greater axes."
+
+station 2
+  gloss   The lesser axis is the mean proportional between the greater axis and the latus rectum; subducting the subduplicate ratio leaves the sesquiplicate.
+  color   timeblue     #1E6FE0
+  color   axisorange   #E8770A
+  color   meangreen    #00A35A
+  panel
+    term    timeblue     $T \propto \dfrac{\pi a b}{\text{(areal velocity)}}$
+    term    meangreen    $b^2 = aL$   heart stabilo=#B7E9CF
+    term    axisorange   $T \propto a^{3/2}$
+    layout  $\,{timeblue|T \propto \pi a b}\;\xrightarrow{\;{meangreen|b^2=aL}\;}\;T \propto a\sqrt{aL}\;=\;a^{3/2}\sqrt{L}\;\Longrightarrow\;{axisorange|T^2 \propto a^3}\,$
+  text
+    Here is the engine of the proof. By Prop. I the areal velocity is constant, so \
+    {timeblue|the periodic time is the whole area $\pi a b$ divided by that steady rate}. \
+    By Cor. Prop. XIV {meangreen|the lesser axis $b$ is the mean proportional between the greater axis \
+    $a$ and the latus rectum $L$}, giving {meangreen|$b^2 = aL$}, whence $b \propto \sqrt{aL}$. \
+    Since the force is as $1/SP^2$ (Prop. XI), the latus rectum enters only in its subduplicate ratio; \
+    subducting that half-power leaves {axisorange|the sesquiplicate ratio $T \propto a^{3/2}$}, that is \
+    {axisorange|$T^2 \propto a^3$}. Thus from ellipse, area, and inverse-square, Kepler's crown descends by pure geometry. \textit{Q.E.I.}
