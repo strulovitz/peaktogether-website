@@ -82,13 +82,60 @@ def _create_pyglet_window(width: int, height: int, title: str):
     """INTEGRATION: confirm exact API — pyglet 2.1.x Window constructor args."""
     import pyglet  # local import: never required just to import this module
 
-    return pyglet.window.Window(
+    win = pyglet.window.Window(
         width=width,
         height=height,
         caption=title,
         resizable=True,
         vsync=True,
     )
+
+    # Manual key + mouse state (pyglet 2.1.14 KeyStateHandler broken on Windows)
+    _pressed: set[int] = set()
+    _mouse_dx: float = 0.0
+    _mouse_dy: float = 0.0
+    _mouse_left: bool = False
+
+    @win.event
+    def on_key_press(symbol, modifiers):
+        _pressed.add(symbol)
+
+    @win.event
+    def on_key_release(symbol, modifiers):
+        _pressed.discard(symbol)
+
+    @win.event
+    def on_mouse_motion(x, y, dx, dy):
+        nonlocal _mouse_dx, _mouse_dy
+        _mouse_dx += dx
+        _mouse_dy += dy
+
+    @win.event
+    def on_mouse_press(x, y, button, modifiers):
+        nonlocal _mouse_left
+        if button == 1:
+            _mouse_left = True
+
+    @win.event
+    def on_mouse_release(x, y, button, modifiers):
+        nonlocal _mouse_left
+        if button == 1:
+            _mouse_left = False
+
+    def _consume_mouse():
+        nonlocal _mouse_dx, _mouse_dy
+        dx, dy = _mouse_dx, _mouse_dy
+        _mouse_dx = 0.0
+        _mouse_dy = 0.0
+        return dx, dy
+
+    win._quake_keystate = _pressed
+    win._quake_mousedx = _consume_mouse
+    win._quake_mouseleft = lambda: _mouse_left
+
+    win.set_exclusive_mouse(True)
+
+    return win
 
 
 def _create_gl_context():

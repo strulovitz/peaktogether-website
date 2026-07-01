@@ -188,19 +188,18 @@ def _now() -> float:
 def _key_down(window, key_name: str) -> bool:
     """Is the named key currently held down?
 
-    INTEGRATION: confirm exact API — pyglet 2.1.x keyboard state handler.
-    Expected pattern: a pyglet.window.key.KeyStateHandler pushed onto the
-    window, indexed by pyglet.window.key.<NAME>. We look it up defensively.
+    Uses manual _pressed: set[int] set on window._quake_keystate
+    (pyglet 2.1.14 KeyStateHandler is broken on Windows).
     """
     try:
-        import pyglet  # INTEGRATION: confirm exact API
-        ks = getattr(window, "_quake_keystate", None)
-        if ks is None:
+        import pyglet
+        pressed = getattr(window, "_quake_keystate", None)
+        if pressed is None:
             return False
         symbol = getattr(pyglet.window.key, key_name.upper(), None)
         if symbol is None:
             return False
-        return bool(ks[symbol])
+        return symbol in pressed
     except Exception:
         return False
 
@@ -208,17 +207,13 @@ def _key_down(window, key_name: str) -> bool:
 def _mouse_delta(window) -> tuple[float, float]:
     """Accumulated mouse (dx, dy) since last poll, then reset.
 
-    INTEGRATION: confirm exact API — pyglet mouse motion is delivered via
-    on_mouse_motion(x, y, dx, dy) handlers; we expect the shell to have
-    accumulated dx/dy into window._quake_mouse_dxdy.
+    Uses window._quake_mousedx() which returns (dx, dy) and resets internally.
     """
     try:
-        dxdy = getattr(window, "_quake_mouse_dxdy", None)
-        if dxdy is None:
+        fn = getattr(window, "_quake_mousedx", None)
+        if fn is None:
             return (0.0, 0.0)
-        dx, dy = float(dxdy[0]), float(dxdy[1])
-        window._quake_mouse_dxdy = [0.0, 0.0]  # reset accumulator
-        return (dx, dy)
+        return fn()
     except Exception:
         return (0.0, 0.0)
 
@@ -226,11 +221,13 @@ def _mouse_delta(window) -> tuple[float, float]:
 def _mouse_left_down(window) -> bool:
     """Is the left mouse button currently held?
 
-    INTEGRATION: confirm exact API — pyglet mouse button state. We expect
-    the shell to track left-button down-state in window._quake_mouse_left.
+    Uses window._quake_mouseleft() which returns bool.
     """
     try:
-        return bool(getattr(window, "_quake_mouse_left", False))
+        fn = getattr(window, "_quake_mouseleft", None)
+        if fn is None:
+            return False
+        return bool(fn())
     except Exception:
         return False
 
