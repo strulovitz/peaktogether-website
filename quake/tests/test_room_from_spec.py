@@ -102,7 +102,7 @@ import re
 _TC = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
-@pytest.mark.parametrize("name", ["lemma_2", "lemma_3", "lemma_4", "lemma_5", "lemma_6", "lemma_7", "lemma_9", "lemma_10", "lemma_11", "lemma_12", "prop_1", "prop_2", "prop_6", "prop_7", "prop_4", "law_1", "law_2"])
+@pytest.mark.parametrize("name", ["lemma_2", "lemma_3", "lemma_4", "lemma_5", "lemma_6", "lemma_7", "lemma_9", "lemma_10", "lemma_11", "lemma_12", "prop_1", "prop_2", "prop_6", "prop_7", "prop_11", "prop_4", "law_1", "law_2"])
 def test_textcolor_scan_consistency(name):
     room = emit_room_source(parse(_spec(name)))
     for b in room.blocks:
@@ -415,6 +415,24 @@ def test_prop_7_geometry():
     assert room.final_pair_id == "prop_7.s3"
     used = {(c.name, c.hex) for c in room.figures[0].colors_used}
     assert {"circblue", "centerorange", "radgreen", "tanteal", "diampurple", "constred"} <= {n for n, _ in used}
+
+
+# ---- prop_11 geometry room ----
+
+def test_prop_11_geometry():
+    spec = parse(_spec("prop_11"))
+    validate(spec)
+    assert spec.kind == "geometry"
+    assert len(spec.stations) == 5
+    assert spec.final_step == 5
+    recipe = emit_recipe(spec)
+    assert recipe is not None
+    assert recipe.n_steps == 5
+    room = emit_room_source(spec)
+    assert len(room.blocks) == 5
+    assert room.final_pair_id == "prop_11.s5"
+    used = {(c.name, c.hex) for c in room.figures[0].colors_used}
+    assert {"ellblue", "fociorange", "radgreen", "equalpurple", "parteal", "latusred", "resultblue"} <= {n for n, _ in used}
 
 
 # ---- rejection tests ----

@@ -1,0 +1,154 @@
+room prop_11
+kind geometry
+import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XI; Plate 4, Figure 2.
+caption If a body revolves in an ellipse, find the law of the centripetal force tending to the focus of the ellipse.
+final 5
+ceiling prop11 :: F \propto \dfrac{1}{SP^2}
+
+station 1
+  gloss An ellipse orbit with the force directed to focus S; P is the revolving body.
+  color ellblue #1E6FE0
+  color fociorange #E8770A
+  color radgreen #00A35A
+  panel
+    point C @(0,0) label=$C$ at=S marker=dot
+    point A @(-5,0) label=$A$ at=W marker=dot
+    point Ap @(5,0) label=$A'$ at=E marker=dot
+    point B @(0,3) label=$B$ at=N marker=dot
+    point Bp @(0,-3) label=$B'$ at=S marker=dot
+    point S @(-4,0) label=$S$ at=SW marker=dot
+    point H @(4,0) label=$H$ at=SE marker=dot
+    point P @(2.5,2.34) label=$P$ at=NE marker=dot
+    ellipse_axes ell center C major A minor B color=ellblue
+    segment MAJ A Ap
+    segment MIN B Bp
+    point S2 @(-4,0) color=fociorange heart
+    point H2 @(4,0) color=fociorange heart
+    segment SP S P color=radgreen heart
+  text
+    Kepler discovered that the planets sweep out {ellblue|ellipses}, not circles, \
+    with the Sun sitting at one focus rather than at the centre. Newton now poses \
+    the crowning question of Book I: what force law actually PRODUCES such an orbit? \
+    The two {fociorange|foci $S$ and $H$} lie on the major axis, and $S$ is the force \
+    centre while $H$ is the empty focus. Drawing the {radgreen|radius $SP$} from the \
+    force to the body $P$, we measure force by the Prop. VI apparatus and will find \
+    it varies as $1/SP^2$.
+
+station 2
+  gloss The construction HI parallel to the tangent gives EP = AC, the semi-major axis.
+  color ellblue #1E6FE0
+  color equalpurple #8E24AA
+  color radgreen #00A35A
+  panel
+    point C @(0,0) label=$C$ at=S marker=dot
+    point A @(-5,0) label=$A$ at=W marker=dot
+    point Ap @(5,0) label=$A'$ at=E marker=dot
+    point B @(0,3) marker=dot
+    point S @(-4,0) label=$S$ at=SW marker=dot
+    point H @(4,0) label=$H$ at=SE marker=dot
+    point P @(2.5,2.34) label=$P$ at=NE marker=dot
+    point E @(-2.5,-2.34) label=$E$ at=SW marker=dot
+    ellipse_axes ell center C major A minor B color=ellblue
+    segment MAJ A Ap
+    segment SP S P color=radgreen
+    segment HP H P color=radgreen
+    segment PE P E color=equalpurple heart
+    segment EC E C color=equalpurple
+  text
+    Draw $HI$ parallel to the tangent at $P$, meeting the diameter $EC$ produced. \
+    The great focal property of the {ellblue|ellipse} is that $PS+PH=2AC$: the sum \
+    of the two {radgreen|focal radii} is constant and equals the major axis. From \
+    this Newton deduces the pivotal equality {equalpurple|$EP = AC$}, the semi-major \
+    axis itself. This single relation binds the ellipse's focal geometry to the \
+    measurable lengths the force calculation will demand.
+
+station 3
+  gloss Conjugate diameters DK and PG, the ordinate Qv, and the parallelogram QxPR.
+  color ellblue #1E6FE0
+  color parteal #00897B
+  color radgreen #00A35A
+  panel
+    point C @(0,0) label=$C$ at=SW marker=dot
+    point A @(-5,0) marker=dot
+    point B @(0,3) marker=dot
+    point S @(-4,0) label=$S$ at=SW marker=dot
+    point P @(2.5,2.34) label=$P$ at=NE marker=dot
+    point G @(-2.5,-2.34) label=$G$ at=SW marker=dot
+    point D @(-2.8,1.68) label=$D$ at=NW marker=dot
+    point K @(2.8,-1.68) label=$K$ at=SE marker=dot
+    point Q @(3.4,1.71) label=$Q$ at=E marker=dot
+    point v @(2.87,1.98) label=$v$ at=N marker=dot
+    point x @(3.03,1.53) label=$x$ at=SE marker=dot
+    point R @(3.87,1.89) label=$R$ at=E marker=dot
+    ellipse_axes ell center C major A minor B color=ellblue
+    segment PG P G color=parteal heart
+    segment DK D K color=parteal heart
+    segment SP S P color=radgreen
+    point T @(1.7,0.9) label=$T$ at=S marker=dot
+    segment QT Q T
+    segment Qv Q v color=parteal
+    polygon PAR P v Q x color=parteal
+    segment PR P R color=parteal
+  text
+    Draw the tangent at $P$ and the {parteal|conjugate diameters $DK$ and $PG$}: a \
+    pair through the centre $C$ where each runs parallel to the tangent at the end \
+    of the other. Let $Q$ be a body-point near $P$, with the ordinate $Qv$ dropped \
+    to the diameter $PG$, and complete the {parteal|parallelogram $QxPR$}. This is \
+    the ellipse's version of the $QR$ construction of Prop. VI, whose nascent limit \
+    measures the deflection. By Lemma VII the {radgreen|chord $SP$} and its tangent \
+    coincide in the ultimate ratio, licensing this passage to the limit.
+
+station 4
+  gloss Lemma XII gives CD to CB; the latus rectum L = 2BC^2/AC enters the ratio chain.
+  color ellblue #1E6FE0
+  color parteal #00897B
+  color latusred #D81B60
+  panel
+    point C @(0,0) label=$C$ at=SW marker=dot
+    point A @(-5,0) marker=dot
+    point B @(0,3) label=$B$ at=N marker=dot
+    point S @(-4,0) label=$S$ at=SW marker=dot
+    point P @(2.5,2.34) label=$P$ at=NE marker=dot
+    point G @(-2.5,-2.34) marker=dot
+    point D @(-2.8,1.68) label=$D$ at=NW marker=dot
+    point K @(2.8,-1.68) marker=dot
+    point Ls @(-4,1.8) label=$L_1$ at=NW marker=dot
+    point Le @(-4,-1.8) label=$L_2$ at=SW marker=dot
+    ellipse_axes ell center C major A minor B color=ellblue
+    segment PG P G color=parteal
+    segment DK D K color=parteal
+    segment CB C B color=parteal
+    segment CD C D color=parteal
+    segment LAT Ls Le color=latusred heart
+  text
+    Lemma XII states that all parallelograms circumscribed about {parteal|conjugate \
+    diameters} of an ellipse are equal, giving the constant-area bridge $CD^2 : CB^2$. \
+    Through this the {parteal|semi-diameters} that fill the messy ratio chain collapse \
+    onto the fixed axis constants. The decisive quantity is the {latusred|latus rectum \
+    $L = 2\,BC^2/AC$}, the chord through the focus $S$ perpendicular to the major axis. \
+    Newton assembles $L\cdot QR : QT^2$, and Lemma XII lets every ellipse-shape factor \
+    cancel against another, leaving only $SP^2$.
+
+station 5
+  gloss Compounding the ratios yields L*QR / QT^2 = SP^2, so force varies as 1/SP^2.
+  color ellblue #1E6FE0
+  color radgreen #00A35A
+  color resultblue #1E6FE0
+  panel
+    point C @(0,0) label=$C$ at=S marker=dot
+    point A @(-5,0) marker=dot
+    point B @(0,3) marker=dot
+    point S @(-4,0) label=$S$ at=SW marker=dot
+    point P @(2.5,2.34) label=$P$ at=NE marker=dot
+    ellipse_axes ell center C major A minor B color=ellblue
+    segment SP S P color=radgreen
+    circle_cr fld S radiusval 6.79 color=resultblue heart
+  text
+    Compounding the pieces, the rectangle $PvG : Qv^2 = PC^2 : CD^2$, and by the \
+    similar triangles $QxT,\,PEF$ we get $QT^2 : EP^2 = PF^2 : CA^2$; joining these \
+    with Lemma XII forces {resultblue|$L\cdot QR / QT^2 = SP^2$}. Substituting into \
+    the Prop. VI measure $F \propto 1/(SP^2 \cdot QT^2/QR)$ makes it become \
+    $1/(SP^2\cdot SP^2)$ divided cleanly, so the {resultblue|force varies as \
+    $1/SP^2$}. Thus the {radgreen|distance $SP$} to the focus alone governs the pull: \
+    the same {resultblue|inverse-square law} that Newton would recognise as universal \
+    gravitation holds every planet in its {ellblue|Keplerian ellipse}. \textit{Q.E.I.}
