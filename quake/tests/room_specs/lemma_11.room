@@ -1,0 +1,90 @@
+room      lemma_11
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma XI; Plate 2, Fig. 4.
+caption   The evanescent subtense of the angle of contact, in all curves of finite curvature, is ultimately in the duplicate ratio of the subtense of the conterminate arc.
+final     3
+ceiling   lem11 :: BD \propto AB^{2} \;(\text{ultimately})
+
+station 1
+  gloss   The smooth curve through A with its tangent AD; a point B slides along the arc toward A.
+  color   tanblue   #1E6FE0
+  color   arcgreen  #00A35A
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    ptC @(1.8,1.4) label=$C$ at=NW
+    point    B   @(3.4,2.3) marker=dot label=$B$ at=NE
+    point    D   @(5.4,0)   marker=dot label=$D$ at=E
+    polyline arc A ptC B    color=arcgreen
+    segment  tanAD A D      color=tanblue heart label=$AD$ at=SE
+    segment  chordAB A B    color=arcgreen label=$AB$ at=NW
+  text
+    Lemmas VI and VII told us that as $B$ slides toward $A$ the {arcgreen|arc $AB$} \
+    and its chord merge with {tanblue|the tangent $AD$}, and the angle between them \
+    vanishes. But that only says the gap closes — it does not say \textit{how fast}. \
+    The deep question of curvature is: as the small distance $AB$ shrinks, by what \
+    power does the curve peel away from its {tanblue|flat tangent}? Everything about \
+    force and orbit in the later Propositions rests on the answer, so we measure the \
+    departure of the {arcgreen|curve} from the line it kisses at $A$.
+
+station 2
+  gloss   BD is the subtense of the angle of contact; the auxiliary BG, AG build a right triangle inscribed in a circle.
+  color   tanblue   #1E6FE0
+  color   arcgreen  #00A35A
+  color   subred    #D81B60
+  color   auxpurple #8E24AA
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    ptC @(1.8,1.4) label=$C$ at=NW
+    point    B   @(3.4,2.3) marker=dot label=$B$ at=NE
+    point    D   @(5.4,0)   marker=dot label=$D$ at=E
+    point    Dfoot @(3.4,0) marker=dot label=$D$ at=S
+    point    G   @(0.55,4.05) marker=dot label=$G$ at=N
+    point    J   @(0.5,3.7)  marker=dot label=$J$ at=W
+    polyline arc A ptC B    color=arcgreen
+    segment  tanAD A D      color=tanblue
+    segment  chordAB A B    color=arcgreen
+    segment  subBD B Dfoot  color=subred heart label=$BD$ at=E
+    segment  auxBG B G      color=auxpurple label=$BG$ at=NE
+    segment  auxAG A G      color=auxpurple label=$AG$ at=W
+    circle_3 aux A B G      color=auxpurple
+  text
+    Drop {subred|$BD$ perpendicular to the tangent} — this is the "subtense of the \
+    angle of contact," the precise measure of how far the {arcgreen|curve} has risen \
+    above {tanblue|$AD$}. Now the clever auxiliary: draw $BG\perp AB$ and $AG\perp AD$, \
+    meeting at $G$. Because both $\angle ABG$ and $\angle AGD$ are right, the points \
+    $A,B,G$ lie on {auxpurple|a circle with $AG$ as its diameter}. A chord dropped \
+    from that circle gives the exact relation $AB^{2}=AG\times BD$ — trapping the tiny \
+    {subred|departure $BD$} inside a clean, computable ratio.
+
+station 3
+  gloss   As B→A, GJ vanishes and AG/Ag→1, so AB² : Ab² becomes the duplicate ratio of BD : bd.
+  color   tanblue   #1E6FE0
+  color   arcgreen  #00A35A
+  color   subred    #D81B60
+  color   auxpurple #8E24AA
+  color   relorange #E8770A
+  panel
+    point    A   @(0,0)    marker=dot label=$A$ at=SW
+    point    B   @(3.4,2.3) marker=dot label=$B$ at=NE
+    point    D   @(5.4,0)   marker=dot label=$D$ at=E
+    point    Dfoot @(3.4,0) marker=dot label=$D$ at=S
+    point    G   @(0.55,4.05) marker=dot label=$G$ at=N
+    point    J   @(0.5,3.7)  marker=dot label=$J$ at=W
+    point    ptC @(1.8,1.4)
+    polyline arc A ptC B    color=arcgreen
+    segment  tanAD A D      color=tanblue
+    segment  chordAB A B    color=relorange
+    segment  subBD B Dfoot  color=relorange
+    segment  auxAG A G      color=auxpurple label=$AG$ at=W
+    segment  auxGJ G J      color=relorange heart label=$GJ$ at=W
+    circle_3 aux A B G      color=auxpurple
+  text
+    Now shrink everything: let $B,D,G$ approach $A$. The intersection $J$ of $BG$ and \
+    $AG$ races toward $A$ so that {relorange|$GJ$ becomes less than any assignable \
+    length}, whence $AG:Ag$ differs from equality by nothing in the limit. With \
+    {relorange|$AB^{2}=AG\times BD$} and $Ab^{2}=Ag\times bd$, the ratio $AB^{2}:Ab^{2}$ \
+    is compounded of $AG:Ag$ and $BD:bd$; since the first factor becomes unity, by \
+    Lemma I the ultimate ratio $AB^{2}:Ab^{2}$ equals $BD:bd$. Thus the {subred|subtense} \
+    goes as the \textit{square} of the {arcgreen|arc} — every smooth bend, circle or \
+    parabola alike, peels from its {tanblue|tangent} quadratically, the universal \
+    signature of finite curvature. \textit{Q.E.D.}
