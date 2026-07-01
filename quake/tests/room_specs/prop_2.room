@@ -1,0 +1,69 @@
+room      prop_2
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition II (reuses Prop. I figure).
+caption   Every body that moves in a curve and describes areas proportional to the times about a point is urged by a centripetal force directed to that point.
+final 3
+ceiling prop2 :: \text{areas} \propto \text{times} \;\Rightarrow\; F \to S
+
+station 1
+  gloss The given: a body sweeps equal triangles SAB, SBC, SCD about a fixed centre S in equal times.
+  color centerorange #E8770A
+  color fanpurple #8E24AA
+  panel
+    point S @(0,4) color=centerorange label=$S$ at=N
+    point A @(-6,0) label=$A$ at=SW
+    point B @(-3,0) label=$B$ at=S
+    point C @(0,0) label=$C$ at=S
+    point D @(3,0) label=$D$ at=S
+    point E @(6,0) label=$E$ at=SE
+    polyline path A B C D E color=fanpurple
+    segment SA A S
+    segment SB B S
+    segment SC C S
+    segment SD D S
+    segment SE E S
+    polygon triSAB S A B color=fanpurple heart
+    polygon triSBC S B C color=fanpurple heart
+    polygon triSCD S C D color=fanpurple heart
+  text
+    Proposition I proved that a central force produces {fanpurple|equal triangles SAB, SBC, SCD — all equal areas} swept in equal times. Proposition II is its converse: now the equal areas are the PREMISE, and centripetal force is the conclusion. About the fixed {centerorange|centre S} the body follows the polygonal path $A\,B\,C\,D\,E$, and we are GIVEN that it describes areas $\propto$ times. This is the observational direction — exactly what Kepler measured for Mars: if you OBSERVE $\triangle SAB=\triangle SBC=\triangle SCD$, must the force point to $S$?
+
+station 2
+  gloss At B, Euclid I.40 forces the deflection cC to lie parallel to the radius BS.
+  color deflectblue #1E6FE0
+  panel
+    point S @(0,4) label=$S$ at=N
+    point A @(-6,0) label=$A$ at=SW
+    point B @(-3,0) label=$B$ at=SW
+    point C @(0,0) label=$C$ at=SE
+    point c @(3,0) label=$c$ at=S
+    segment SA A S
+    segment SB B S
+    segment SC C S
+    segment Sc c S
+    segment inertial B c label=$Bc$ at=S
+    segment path1 A B
+    segment path2 B C
+    segment cC c C color=deflectblue heart label=$cC \parallel BS$ at=NE
+    parallel BSpar B S color=deflectblue label=$\parallel BS$ at=W
+  text
+    By {deflectblue|Law I} the body leaving $B$ would run straight on to $c$ (so $Bc$ continues the line $AB$), yet it turns to $C$: some impulse deflected it by $cC$. Now $\triangle SBc=\triangle SAB$ because $Sc$ and $AB$ share the base $SB$ and $Bc$ lies on $AB$; but we are GIVEN $\triangle SBC=\triangle SAB$, hence $\triangle SBC=\triangle SBc$. By {deflectblue|Euclid I.40, equal triangles on the same base SB lie between the same parallels}, so $C$ and $c$ are equidistant from line $SB$ — that is, $cC \parallel BS$. The deflecting impulse (by {deflectblue|Law II}, along $cC$) therefore points exactly along $BS$, straight toward the centre.
+
+station 3
+  gloss The same argument at every vertex: dD ∥ CS, etc., so the force is centripetal everywhere.
+  color radialred #D81B60
+  panel
+    point S @(0,4) label=$S$ at=N
+    point A @(-6,0) label=$A$ at=SW
+    point B @(-3,0) label=$B$ at=SW
+    point C @(0,0) label=$C$ at=S
+    point D @(3,0) label=$D$ at=SE
+    point E @(6,0) label=$E$ at=SE
+    polyline path A B C D E
+    ray fB B S color=radialred heart label=$BS$ at=W
+    ray fC C S color=radialred heart label=$CS$ at=E
+    ray fD D S color=radialred label=$DS$ at=E
+    segment SA A S
+    segment SE E S
+  text
+    The identical reasoning holds at $C$ ($dD \parallel CS$), at $D$, and at every vertex: each deflection lies parallel to the radius, so the impulse always aims at $S$. Taking the polygon to its limit, the {radialred|radial force directions BS, CS, DS} converge continuously on the centre — the force is centripetal. Thus the equal-area observation ALONE locks the direction toward $S$, however the magnitude may vary with distance; combined with Proposition I this makes swept area the definitive test of a central force. \textit{Q.E.D.}
