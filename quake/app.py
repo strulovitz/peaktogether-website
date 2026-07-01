@@ -364,6 +364,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     smoke = smoke_frames > 0
     frame = 0
     last_t = time.perf_counter()
+    gcur = _start_node(pack)
 
     try:
         while True:
@@ -476,7 +477,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                     render_fp = pack.floorplan
                     def _gl(v, p, aspect):
                         vp = np.ascontiguousarray(p @ v, dtype=np.float32)
-                        draw_guidelines(vp, render_fp, targets)
+                        draw_guidelines(vp, render_fp, targets, gcur)
                     render_mode_a(ctx, window, view, proj, render_fp, state,
                                   guidelines_fn=_gl, targets=targets)
                 else:

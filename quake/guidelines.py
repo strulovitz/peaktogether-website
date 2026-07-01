@@ -360,18 +360,9 @@ def draw_guidelines(
     view: ViewMatrix,
     fp: Floorplan,
     targets: list[NodeId],
+    current: NodeId | None = None,
 ) -> None:
-    """Draw Half-Life-style floor guide-lines. Headless-safe.
-
-    The current room is inferred as the first corridor-graph node the routes
-    emanate from is supplied via the floorplan + the caller's targets. Since
-    the frozen signature does not pass `current`, we trace routes from each
-    room reachable; in practice the caller passes targets from select_targets
-    invoked with a known `current`. We resolve `current` from the floorplan's
-    first room if needed; the route helper tolerates that.
-
-    NOTE: per the brief, if targets is empty or GL is unavailable, draw nothing.
-    """
+    """Draw Half-Life-style floor guide-lines. Headless-safe."""
     if not HAVE_GL or not targets:
         return
 
@@ -379,11 +370,8 @@ def draw_guidelines(
     if not fp.rooms:
         return
 
-    # Without an explicit `current` in the signature, the convention is that
-    # routes start from the player's current room. The gameplay layer that
-    # owns GameState supplies targets; here we derive `current` as the common
-    # source. Fall back to the first room.
-    current = fp.rooms[0].room_id
+    if current is None or current not in rooms:
+        current = fp.rooms[0].room_id
 
     for tid in targets:
         if tid not in rooms:
