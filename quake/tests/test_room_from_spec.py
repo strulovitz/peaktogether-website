@@ -102,7 +102,7 @@ import re
 _TC = re.compile(r"\\textcolor\{([^}]+)\}\{")
 
 
-@pytest.mark.parametrize("name", ["lemma_2", "lemma_3", "lemma_4", "lemma_5", "lemma_6", "lemma_7", "lemma_9", "lemma_10", "lemma_11", "lemma_12", "prop_1", "prop_2", "prop_6", "prop_4", "law_1", "law_2"])
+@pytest.mark.parametrize("name", ["lemma_2", "lemma_3", "lemma_4", "lemma_5", "lemma_6", "lemma_7", "lemma_9", "lemma_10", "lemma_11", "lemma_12", "prop_1", "prop_2", "prop_6", "prop_7", "prop_4", "law_1", "law_2"])
 def test_textcolor_scan_consistency(name):
     room = emit_room_source(parse(_spec(name)))
     for b in room.blocks:
@@ -397,6 +397,24 @@ def test_prop_6_geometry():
     assert "pen measpurple = rgb(" in asy
     assert "pen tangreen = rgb(" in asy
     assert "usersetting();" in asy
+
+
+# ---- prop_7 geometry room ----
+
+def test_prop_7_geometry():
+    spec = parse(_spec("prop_7"))
+    validate(spec)
+    assert spec.kind == "geometry"
+    assert len(spec.stations) == 3
+    assert spec.final_step == 3
+    recipe = emit_recipe(spec)
+    assert recipe is not None
+    assert recipe.n_steps == 3
+    room = emit_room_source(spec)
+    assert len(room.blocks) == 3
+    assert room.final_pair_id == "prop_7.s3"
+    used = {(c.name, c.hex) for c in room.figures[0].colors_used}
+    assert {"circblue", "centerorange", "radgreen", "tanteal", "diampurple", "constred"} <= {n for n, _ in used}
 
 
 # ---- rejection tests ----
