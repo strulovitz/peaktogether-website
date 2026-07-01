@@ -74,4 +74,4 @@ def test_progress_event_set_contains_expected():
 @skip_if_no_gl
 def test_full_loop_smoke():
     """main() opens a window, loads the golden pack, runs 60 frames, exits 0."""
-    assert app.main() == 0
+    assert app.main(smoke_frames=60) == 0

@@ -66,7 +66,7 @@ WINDOW_W = 1280
 WINDOW_H = 720
 WINDOW_TITLE = "QUAKE — Golden Level"
 
-_SMOKE_FRAMES = 60
+_SMOKE_FRAMES = 0
 
 # Events that change persisted progress -> trigger a debounced save.
 _PROGRESS_EVENTS = frozenset(
@@ -240,7 +240,7 @@ def _window_present(window: Any) -> None:
 # THIN SHELL — main(). Skips all GL work headlessly; returns 0 cleanly.
 # ---------------------------------------------------------------------------
 
-def main() -> int:
+def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     """Full per-frame loop. Returns 0 on clean exit, 1 on startup failure.
 
     Headless (no GL): returns 0 immediately — the smoke-launch path.
@@ -283,17 +283,19 @@ def main() -> int:
         except Exception:
             targets = []
     except Exception as e:
+        import traceback
+        traceback.print_exc(file=sys.stderr)
         print(f"[QUAKE] startup failed: {e}", file=sys.stderr)
         return 1
 
     # ---- FRAME LOOP -------------------------------------------------------
-    smoke = _SMOKE_FRAMES > 0
+    smoke = smoke_frames > 0
     frame = 0
     last_t = time.perf_counter()
 
     try:
         while True:
-            if smoke and frame >= _SMOKE_FRAMES:
+            if smoke and frame >= smoke_frames:
                 break
             if not smoke and _window_should_close(window):
                 break
