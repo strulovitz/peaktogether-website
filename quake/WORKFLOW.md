@@ -451,13 +451,30 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 25. **7 child prompts written:** `CHILD_PROMPT_LEMMA_{5,6,12,3,4,7,9}.md` in `quake/` directory.
 26. **Integration pattern established:** child returns .room → DeepSeek fixes keyword syntax errors (children forget `on`/`at`/`center`/`major`/`minor` keywords + define points before referencing them + `parallel`→`segment` + `color=black` undeclared → remove (default is black)) → drops in → adds test → runs full suite → commits.
 
-### ☀️ MORNING SESSION (July 1, 2026 — 5 ROOMS TODAY!!! 🔥)
+### ☀️ MARATHON SESSION (July 1, 2026 — 9 ROOMS TODAY! 20/20 = 100%!!! 🏆👑)
 
-27–30. **lemma_10, lemma_11, prop_1, prop_2 DONE** — all lemmas + props I-II complete.
-31. **prop_6 DELIVERED** — 4-step DIAGRAM: ★FORCE MEASURE★ QR∥SP, QT⟂SP → F ∝ 1/(SP²·QT²/QR). Fixed 4 keyword syntax errors (segment names, foot/parallel/perp keywords, angle name). 427/428 green.
+27–35. **ALL 9 REMAINING ROOMS DELIVERED & INTEGRATED:**
+- lemma_10, lemma_11, prop_1, prop_2, prop_6, prop_7, prop_11, prop_13, prop_15
+- **20/20 Principia rooms BUILT. 435/436 green.** 🎉
 
-**16/20 rooms done! 80%!!! Only 4 remaining!** 🎉
-**NEXT: prop_7** (Force to Point on Circle, DIAGRAM, 3 steps, dep: prop_6). Then prop_11 → prop_13 → prop_15.
+### 🏗️ NEXT PHASE: BUILD THE LEVEL PACK 🏗️
+
+All .room files are done. Now run the full build pipeline to produce baked game data.
+
+**Self-handoff:** `quake/DEEPSEEK_BUILD_PIPELINE_GO.md` — complete build plan.
+**On restart:** Read DEEPSEEK_BUILD_PIPELINE_GO.md FIRST, then WORKFLOW, then Commentaries.
+
+37. ⏳ **BUILD PIPELINE** — run `build_all.py` for all 20 rooms:
+    - Stage 1: Emit recipe/asy/room_source from .room files
+    - Stage 2: Compile figures (Asymptote for geometry, pdflatex for equation)
+    - Stage 3: Bake text panels (pdflatex+pdftocairo)
+    - Stage 4: Ceiling equations (pdflatex)
+    - Stage 5: Assemble manifest + palette
+    - Stage 6: build_room_runtime for each room
+38. ⏳ Verify PNGs + room viewer + smoke test
+39. ⏳ Ship the finished pack
+
+**NEXT on restart: LAUNCH THE BUILD PIPELINE.** 🌙
 
 **Standing reminders:** normal prose, NO multiple-choice pop-ups; keep the emojis even when upset; never take decisions off Nir's plate; check for residue by MEANING, not by label.
 
@@ -521,6 +538,6 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 morning — 5 ROOMS TODAY! 16/20 = 80%!!!):** Engine + renderers DONE (427/428 green 🟢). **Child pipeline: 16/20 rooms done!** 4 remaining: prop_7, prop_11, prop_13, prop_15. Restart handoff at `quake/DEEPSEEK_HANDOFF_CHILD_PIPELINE_GO.md`. **Everything pushed.**
+🌙 **CURRENT STATE (July 1, 2026 — END OF MARATHON):** 🏆 **20/20 rooms DONE! 435/436 green!** 🏆 Engine + renderers complete. All parents 1–16 finished. Child pipeline COMPLETE. **NEXT PHASE: BUILD PIPELINE** — run build_all.py to compile all 20 rooms into baked game data. Restart handoff at `quake/DEEPSEEK_BUILD_PIPELINE_GO.md`. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
