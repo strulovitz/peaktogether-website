@@ -1,0 +1,92 @@
+room      prop_6
+kind      geometry
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VI; Plate 3, Figure 2.
+caption   In a space void of resistance, the centripetal force in the middle of a nascent arc is as the versed sine directly and the square of the time inversely.
+final     4
+ceiling   prop6 :: F \propto \dfrac{\text{versed sine}}{t^2} \qquad F \propto \dfrac{1}{SP^2\cdot QT^2/QR}
+
+station 1
+  gloss The centre S, the body at P, and the tiny nascent arc PQ pose the measurement problem.
+  color centerorange #E8770A
+  color arcblue #1E6FE0
+  panel
+    point S @(-2.6,-2.2) color=centerorange label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=NE marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    arc P Q S color=arcblue heart
+    segment SP S P
+  text
+    Place the {centerorange|centre of force $S$} and let the body ride the curve at $P$. In the very next \
+    instant it sweeps the {arcblue|nascent arc $PQ$ — the body's path in the least time}, and this arc is the \
+    heart of everything that follows. Prop. I already told us that a central force makes the areas swept \
+    proportional to the times — but it never told us HOW STRONG the force is. The whole of celestial \
+    mechanics now waits on one question: can we read the magnitude of the force off the shape of the orbit alone?
+
+station 2
+  gloss The tangent ZPR is the forceless path; the versed sine measures how far the body falls from it.
+  color tangreen #00A35A
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    point R @(1.35,0.75) label=$R$ at=S
+    arc P Q S
+    line ZPR Z R color=tangreen heart label=$\text{tangent }ZPR$ at=E
+    segment SP S P
+    segment QR Q R
+  text
+    Draw the {tangreen|tangent $ZPR$ at $P$ — the straight path the body WOULD take if the force suddenly \
+    vanished}; this line is the heart of the argument. The distance by which the curve pulls away from that \
+    tangent is the versed sine $QR$, drawn from the nearby point $Q$ back toward the tangent. By Cor. 4 of \
+    Prop. I this fall in a given time is directly as the force. And by Cor. 2 and 3 of Lem. II, lengthening the \
+    time in any ratio augments the arc in that ratio and the versed sine in the DUPLICATE ratio — so the versed \
+    sine is as the force times the square of the time.
+
+station 3
+  gloss QR is drawn parallel to SP and QT perpendicular to SP, tying orbit geometry to the force direction.
+  color parblue #1E6FE0
+  color perpred #D81B60
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    point R @(1.9,1.05) label=$R$ at=SE
+    foot T from Q to S P label=$T$ at=SW
+    arc P Q S
+    line ZPR Z R
+    segment SP S P
+    parallel QR through Q to S P color=parblue heart label=$QR\parallel SP$ at=NE
+    perp QT through Q to S P color=perpred heart label=$QT\perp SP$ at=W
+    angle QTP Q T P
+  text
+    Here is Newton's decisive stroke: draw {parblue|$QR$ PARALLEL to the radius $SP$} rather than straight to \
+    the tangent, and this parallel is one heart of the construction. Then drop {perpred|$QT$ PERPENDICULAR to \
+    $SP$}, the second heart, giving a right angle at $T$. Because $QR\parallel SP$, the versed sine now speaks \
+    directly in the language of the force's own direction. And because $QT\perp SP$, the triangle $SQP$ has \
+    area $\tfrac{1}{2}\,SP\cdot QT$ — which, by Prop. I, is proportional to the time in which the arc is swept.
+
+station 4
+  gloss The force-measure solid SP²·QT²/QR is the master formula for every later proposition.
+  color measpurple #8E24AA
+  panel
+    point S @(-2.6,-2.2) label=$S$ at=SW marker=dot
+    point P @(2.4,1.9) label=$P$ at=E marker=dot
+    point Q @(1.55,2.55) label=$Q$ at=N marker=dot
+    point R @(1.9,1.05) label=$R$ at=SE
+    point Z @(3.4,0.9) label=$Z$ at=SE
+    foot T from Q to S P label=$T$ at=SW
+    arc P Q S
+    line ZPR Z R
+    segment SP S P
+    parallel QR through Q to S P
+    perp QT through Q to S P
+    polygon quad S Q P color=measpurple heart label=$SP^2\!\cdot\!QT^2/QR$ at=center
+  text
+    Now assemble the master key. The versed sine gives $F \propto QR/t^2$, while the swept area sets \
+    $t \propto SP\cdot QT$; substitute and the force becomes reciprocally as the {measpurple|force-measure \
+    solid $SP^2\cdot QT^2/QR$}, taken in the limit as $Q\to P$ (Cor. 4 of Lem. X), and this solid is the heart \
+    of the whole method. For ANY curve, pick $P$ and a nearby $Q$, draw $QR\parallel SP$ and $QT\perp SP$, and \
+    compute this limit — it is the single most used formula in all of Book I. Props. 7, 11, and 13 will feed \
+    the circle, the ellipse, and the parabola into exactly this construction. \textit{Q.E.D.}
