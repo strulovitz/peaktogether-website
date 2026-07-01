@@ -611,6 +611,28 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 
 ---
 
+### 🌊 THE BIG PIVOT (July 1, 2026 evening — ABANDON 3D CORRIDORS → FLAT + TELEPORT + MINIMAP) 🌊
+
+**Nir's decision:** True-3D Quake with walkable 3D corridors was too much for DeepSeek + Opus. Parent 21's corridors never worked (no collision, wrong dimming, rooms overlap). **We are going FLAT.** The game keeps its first-person 3D *rooms* (walk in, shoot panels, kill demon) but the *level structure* becomes a flat 2D graph with:
+- **No corridors, no walking between rooms.** A door **teleports** you into the connected room, as if you stepped out the far side.
+- **A corner minimap HUD** drawing the flat force-directed graph: rooms as dots colored by importance (the map palette), links as lines.
+- **A player marker = a real OS emoji glyph** (😀😱🤔 rendered from the Windows emoji font to a texture — NOT hand-drawn) that tracks which room you're in and changes mood: **happy** = demon killed, **frightened** = demon out/alive (hidden door open), **thinking** = panels colored but demon not out yet.
+- **X marks** on cleared rooms; colors by importance like our old map.
+
+**Why this is sound (verified, not hand-waved):** all needed data already exists — `floorplan.json` (room `map_xz`, `importance`, `map_color`), the graph edges (`corridors` list = which rooms connect), and `GameState` (`current_room_id`, `cleared`). The dot tracker is layout-independent (current_room → map_xz). Teleport is a small change to `gameplay.py` (door → connected room instead of corridor mode).
+
+**PREP DONE (July 1, 2026):** Reverted ONLY `map/layout_force.py` to commit `844dedd` (pre-"planets" simultaneous spring layout). Regenerated floorplan with seed 1729001 → **0 crossings, 1 height level (truly flat!)**. Rebuilt all 20 room runtimes → doors now point along the new flat **compass-accurate** bearings (kept bearing-accuracy, portal_spec unchanged). **446 passed, 1 skipped.** Committed + pushed.
+- **Honest note:** a few rooms have 2 doors at nearly identical bearings (law_1 both ~0.44, lemma_2 2.45/2.46) because two neighbors share a map direction — rooms still build fine; minor minimap polish later.
+- Regen helper (one-off, temp, not committed): `%TEMP%\opencode\regen_flat_rooms.py`.
+
+**NEXT — two fresh parents, CODE-WRITERS, no children:**
+1. **Teleport navigation** — rip out corridor mode; door → drop into connected room at matching door.
+2. **Corner minimap HUD** — flat graph + importance colors + mood-emoji dot tracking current room + X on cleared.
+
+Parent 19 (3D automap) and Parent 21 (3D corridors) are now MOOT — superseded by the flat pivot.
+
+---
+
 ## 11. CONVENTIONS
 - Each game lives in its own top-level folder; never put game files in repo root.
 - BIBLE = verbatim scriptures; DeepSeek additions are clearly-marked inline commentaries.
@@ -618,7 +640,7 @@ Talk-first: let Parent 16 propose its format + questions. It'll need the Parent 
 - Default branch is **master** (not main).
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then the **handoff note** (`quake/DEEPSEEK_RESTART_BUILD_PARENT_17_GO.md`). Then ask Nir what's next.
-🌙 **CURRENT STATE (July 1, 2026 — PARENT 21 INTEGRATED!):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 Build pipeline COMPLETE (all 6 stages). **Parent 21 DONE — Real 3D wireframe corridor box-tunnels integrated.** Descent QED pattern: box-chain tunnels (one box per path_xz segment, 12 edges each, ramp-interpolated heights, full collision, guide-lines on tunnel floor, depth-test bridges/underpasses). Full floorplan renders. **Parent 19** (Descent-style 3D wireframe automap, code-writer) handoff CLEAN and READY. **Everything pushed.** 🚀
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
+🌙 **CURRENT STATE (July 1, 2026 — THE FLAT PIVOT!):** 🏆 **20/20 rooms DONE. 446/446 GREEN.** 🏆 **BIG DECISION: abandoned 3D walkable corridors → going FLAT** (2D graph + teleport doors + corner minimap HUD with a mood-emoji player marker + X on cleared rooms; rooms stay first-person 3D). **PREP DONE:** reverted `layout_force.py` to `844dedd`, regenerated a truly FLAT floorplan (0 crossings), rebuilt all 20 room runtimes with compass-accurate doors, pushed. **NEXT: two code-writer parents (no children) — (1) teleport navigation, (2) corner minimap HUD.** Parents 19 & 21 are now moot. See "THE BIG PIVOT" section above for full detail. **Everything pushed.** 🚀
 
 AGENTS.md (`C:\Users\nir_s\.config\opencode\AGENTS.md`) routes startup **directly to Quake**. AGENTS.md lives outside the git repo, so it is NOT on GitHub — it persists locally on Nir's machine.
