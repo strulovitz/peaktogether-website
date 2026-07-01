@@ -46,7 +46,7 @@ from guidelines import select_targets, draw_guidelines
 from render_wire import draw_graph, render_mode_a
 from render_room import draw_room
 from readmode import draw_read
-from minimap import draw_minimap
+from minimap import draw_minimap, marker_mood, MOVE_THRESHOLD_M
 from logutil import log as _log
 
 
@@ -366,6 +366,9 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     frame = 0
     last_t = time.perf_counter()
     gcur = _start_node(pack)
+    # Track where the player arrived (for the 'moved 1 m' marker mood).
+    arrival_room = state.current_room_id
+    arrival_pos = tuple(state.pos)
 
     try:
         while True:
@@ -429,6 +432,9 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                         build_room_nav(pack.rooms[outcome.switched_room_id])
                 _active_corridor[0] = None
                 _active_corridor[1] = None
+                # Just teleported: reset the 'moved 1 m' arrival tracker.
+                arrival_room = outcome.switched_room_id
+                arrival_pos = tuple(state.pos)
 
             # 6d) entering corridor via a specific door -> build single-corridor fp
             if outcome.mode_switched_to == "corridor" and outcome.travel_edge_id is not None:
@@ -496,7 +502,16 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (11b) corner minimap HUD (flat pivot) — over the room, not in Read Mode
             if state.mode == "room" and not read_state.active:
                 try:
-                    draw_minimap(pack.floorplan, state, pack.floorplan.level_id, w, h)
+                    if state.current_room_id == arrival_room:
+                        ddx = state.pos[0] - arrival_pos[0]
+                        ddz = state.pos[2] - arrival_pos[2]
+                        moved = (ddx * ddx + ddz * ddz) > (MOVE_THRESHOLD_M ** 2)
+                    else:
+                        moved = False
+                    mood = marker_mood(state, pack.floorplan.level_id,
+                                       state.current_room_id, moved)
+                    draw_minimap(pack.floorplan, state, pack.floorplan.level_id,
+                                 w, h, mood)
                 except Exception as e:
                     _log(f"frame {frame}: minimap crashed: {e}")
 

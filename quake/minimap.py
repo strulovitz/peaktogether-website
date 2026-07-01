@@ -18,6 +18,7 @@ SPLIT:
 from __future__ import annotations
 
 import math
+import os
 from typing import Dict, Optional, Tuple
 
 try:
@@ -30,13 +31,21 @@ except Exception:  # pragma: no cover
 # PURE CORE
 # ---------------------------------------------------------------------------
 
-# Mood -> emoji glyph (real Segoe UI Emoji codepoints).
-MOOD_EMOJI = {
-    "happy": "\U0001F600",        # 😀 demon killed
-    "frightened": "\U0001F631",   # 😱 demon out & alive
-    "thinking": "\U0001F914",     # 🤔 panels colored, demon not out
-    "neutral": "\U0001F642",      # 🙂 nothing done yet
+# The 5 marker moods (Nir's state machine) -> PNG files in hud/emoji/.
+#   arrived  : just spawned/teleported, hasn't moved 1 m yet   (flushed)
+#   moving   : moved >= 1 m, nothing else yet                  (thinking)
+#   panels   : shot panels -> they are colorful                (monocle)
+#   demon    : released the hidden demon                       (fearful)
+#   cleared  : killed the demon                                (grinning)
+_EMOJI_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "hud", "emoji")
+MOOD_FILE = {
+    "arrived": "Flushed-Face-Emoji.png",
+    "moving": "Thinking-Face-Emoji.png",
+    "panels": "Face-with-Monocle-Emoji.png",
+    "demon": "Fearful-Face-Emoji.png",
+    "cleared": "Grinning-Face-with-Smiling-Eyes-Emoji.png",
 }
+MOVE_THRESHOLD_M = 1.0
 
 # Importance -> dot radius scale (bigger = more important), matching the map idea.
 _BASE_DOT_NDC_Y = 0.016
@@ -106,16 +115,17 @@ def project_rooms(rooms_xz: Dict[str, Tuple[float, float]],
     return out
 
 
-def room_mood(state, level_id: str, room_id: Optional[str]) -> str:
-    """Determine the mood of the player's marker for `room_id`. Pure.
+def marker_mood(state, level_id: str, room_id: Optional[str], moved: bool) -> str:
+    """The player marker's mood for `room_id` (Nir's 5-state machine). Pure.
 
-    happy: demon killed (room cleared) · frightened: hidden door open (demon out
-    & alive) · thinking: some panels lit · neutral: nothing done yet.
+    Priority (later game stages win):
+      cleared (demon killed) > demon (hidden door open) > panels (some lit) >
+      moving (walked >= 1 m) > arrived (just spawned/teleported).
     """
     if room_id is None:
-        return "neutral"
+        return "arrived"
     if room_id in getattr(state, "cleared", set()):
-        return "happy"
+        return "cleared"
     save = getattr(state, "save", None)
     lvl = None
     if save is not None and getattr(save, "levels", None):
@@ -123,10 +133,10 @@ def room_mood(state, level_id: str, room_id: Optional[str]) -> str:
     rp = lvl.rooms.get(room_id) if (lvl is not None and getattr(lvl, "rooms", None)) else None
     if rp is not None:
         if getattr(rp, "hidden_door_open", False):
-            return "frightened"
+            return "demon"
         if getattr(rp, "pairs_on", None):
-            return "thinking"
-    return "neutral"
+            return "panels"
+    return "moving" if moved else "arrived"
 
 
 def _disc_verts(segments: int = 20):
@@ -187,21 +197,10 @@ def _emoji_texture(ctx, mood: str):
     if tex is not None:
         return tex
     try:
-        from PIL import Image, ImageDraw, ImageFont
-        glyph = MOOD_EMOJI.get(mood, MOOD_EMOJI["neutral"])
-        px = 128
-        font = ImageFont.truetype(r"C:\Windows\Fonts\seguiemj.ttf", 109)
-        img = Image.new("RGBA", (px, px), (0, 0, 0, 0))
-        d = ImageDraw.Draw(img)
-        # center the glyph
-        try:
-            bbox = d.textbbox((0, 0), glyph, font=font, embedded_color=True)
-            gw, gh = bbox[2] - bbox[0], bbox[3] - bbox[1]
-            ox = (px - gw) // 2 - bbox[0]
-            oy = (px - gh) // 2 - bbox[1]
-        except Exception:
-            ox, oy = 8, 8
-        d.text((ox, oy), glyph, font=font, embedded_color=True)
+        from PIL import Image
+        fname = MOOD_FILE.get(mood, MOOD_FILE["arrived"])
+        path = os.path.join(_EMOJI_DIR, fname)
+        img = Image.open(path).convert("RGBA")
         tex = ctx.texture(img.size, 4, img.tobytes())
         try:
             tex.build_mipmaps()
@@ -241,8 +240,12 @@ def _draw_lines(ctx, prog, verts, color, mode):
 
 
 def draw_minimap(floorplan, state, level_id: str,
-                 win_w: int, win_h: int) -> None:
-    """Draw the corner minimap HUD over the current frame. Headless-safe."""
+                 win_w: int, win_h: int, mood: str = "arrived") -> None:
+    """Draw the corner minimap HUD over the current frame. Headless-safe.
+
+    `mood` selects the player-marker emoji (see MOOD_FILE); the app computes it
+    via marker_mood() because the 'moved 1 m' state needs the frame loop.
+    """
     if not HAVE_GL:
         return
     ctx = _get_ctx()
@@ -317,7 +320,6 @@ def draw_minimap(floorplan, state, level_id: str,
     cur = getattr(state, "current_room_id", None)
     marker = pos.get(cur) if cur is not None else None
     if marker is not None:
-        mood = room_mood(state, level_id, cur)
         tex = _emoji_texture(ctx, mood)
         if tex is not None:
             blit = _blit_cache.get(id(ctx))
@@ -331,13 +333,14 @@ def draw_minimap(floorplan, state, level_id: str,
                 hx = half / aspect
                 hy = half
                 mx, my = marker
+                # V flipped (bottom=1, top=0) so the PNG shows upright on screen.
                 quad = [
-                    mx - hx, my - hy, 0.0, 0.0,
-                    mx + hx, my - hy, 1.0, 0.0,
-                    mx + hx, my + hy, 1.0, 1.0,
-                    mx - hx, my - hy, 0.0, 0.0,
-                    mx + hx, my + hy, 1.0, 1.0,
-                    mx - hx, my + hy, 0.0, 1.0,
+                    mx - hx, my - hy, 0.0, 1.0,
+                    mx + hx, my - hy, 1.0, 1.0,
+                    mx + hx, my + hy, 1.0, 0.0,
+                    mx - hx, my - hy, 0.0, 1.0,
+                    mx + hx, my + hy, 1.0, 0.0,
+                    mx - hx, my + hy, 0.0, 0.0,
                 ]
                 vbo = ctx.buffer(np.array(quad, dtype="f4").tobytes())
                 vao = ctx.vertex_array(

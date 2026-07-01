@@ -1,8 +1,10 @@
 """Tests for the flat-pivot minimap HUD (pure core only — no GL)."""
 from types import SimpleNamespace
 
-from minimap import (compute_box, project_rooms, room_mood, hex_to_rgb,
-                     MOOD_EMOJI)
+import os
+
+from minimap import (compute_box, project_rooms, marker_mood, hex_to_rgb,
+                     MOOD_FILE, _EMOJI_DIR)
 
 
 def test_hex_to_rgb():
@@ -63,27 +65,30 @@ def _state(cleared=(), rooms_prog=None, current="r1"):
     return SimpleNamespace(cleared=set(cleared), save=save, current_room_id=current)
 
 
-def test_room_mood_happy_when_cleared():
+def test_mood_cleared_beats_all():
     st = _state(cleared={"r1"})
-    assert room_mood(st, "lvl1", "r1") == "happy"
+    assert marker_mood(st, "lvl1", "r1", moved=True) == "cleared"
 
 
-def test_room_mood_frightened_when_door_open():
+def test_mood_demon_when_door_open():
     st = _state(rooms_prog={"r1": {"hidden_door_open": True, "pairs_on": ["a"]}})
-    assert room_mood(st, "lvl1", "r1") == "frightened"
+    assert marker_mood(st, "lvl1", "r1", moved=True) == "demon"
 
 
-def test_room_mood_thinking_when_panels_lit():
+def test_mood_panels_when_lit():
     st = _state(rooms_prog={"r1": {"hidden_door_open": False, "pairs_on": ["a"]}})
-    assert room_mood(st, "lvl1", "r1") == "thinking"
+    assert marker_mood(st, "lvl1", "r1", moved=True) == "panels"
 
 
-def test_room_mood_neutral_by_default():
+def test_mood_arrived_vs_moving():
     st = _state(rooms_prog={"r1": {"hidden_door_open": False, "pairs_on": []}})
-    assert room_mood(st, "lvl1", "r1") == "neutral"
-    assert room_mood(_state(), "lvl1", None) == "neutral"
+    assert marker_mood(st, "lvl1", "r1", moved=False) == "arrived"
+    assert marker_mood(st, "lvl1", "r1", moved=True) == "moving"
+    # fresh arrival with no progress at all
+    assert marker_mood(_state(rooms_prog=None), "lvl1", "r1", moved=False) == "arrived"
 
 
-def test_all_moods_have_emoji():
-    for mood in ("happy", "frightened", "thinking", "neutral"):
-        assert mood in MOOD_EMOJI and len(MOOD_EMOJI[mood]) >= 1
+def test_all_moods_have_existing_png():
+    for mood in ("arrived", "moving", "panels", "demon", "cleared"):
+        assert mood in MOOD_FILE
+        assert os.path.exists(os.path.join(_EMOJI_DIR, MOOD_FILE[mood]))
