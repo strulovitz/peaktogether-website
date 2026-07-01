@@ -318,7 +318,16 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
         # Best-effort resume; a bad/absent save is never fatal.
         try:
             state = state_load(SAVE_PATH, pack)
-            _log("main: save loaded")
+            # If savegame has old corridor-mode state, restart in a room (keep progress)
+            if state.mode != "room" or state.current_room_id is None:
+                _log("main: stale savegame (corridor mode) — restarting in first room")
+                fresh = new_state(pack)
+                state.pos = fresh.pos
+                state.heading_rad = fresh.heading_rad
+                state.mode = fresh.mode
+                state.current_room_id = fresh.current_room_id
+            else:
+                _log("main: save loaded")
         except Exception:
             state = new_state(pack)
             _log("main: fresh state created")
