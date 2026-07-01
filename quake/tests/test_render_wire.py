@@ -96,11 +96,13 @@ def test_crossing_heights():
         _room("c", (5.0, -5.0)),
         _room("d", (5.0, 5.0)),
     ]
+    # Paths must have interior vertices for cruise_y to appear —
+    # endpoints get socket_y (0.0) per the shared height rule.
     corridors = [
         _corridor("edge.over.to.b", "a", "b",
-                  [(0.0, 0.0), (10.0, 0.0)], cruise_y=4.5),
+                  [(0.0, 0.0), (2.0, 0.0), (8.0, 0.0), (10.0, 0.0)], cruise_y=4.5),
         _corridor("edge.under.to.d", "c", "d",
-                  [(5.0, -5.0), (5.0, 5.0)], cruise_y=0.0),
+                  [(5.0, -5.0), (5.0, -2.0), (5.0, 2.0), (5.0, 5.0)], cruise_y=0.0),
     ]
     fp = _floorplan(rooms, corridors)
     mesh = build_wire_mesh(fp)

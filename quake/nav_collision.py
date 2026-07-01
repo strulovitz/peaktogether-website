@@ -162,10 +162,12 @@ class _CorridorNav:
         self._corridors = list(fp.corridors)
         self._rooms = list(fp.rooms)
 
-    # --- corridor segment selection -------------------------------------
-    def _nearest_segment(self, p_xz: Vec2):
-        """Find nearest (corridor, segment_index, closest_xz, t, dist) over all
-        corridor path segments."""
+    def _nearest_segment(self, p_xz: Vec2, p_y: float | None = None):
+        """Nearest corridor segment. When two corridors overlap in XZ (a
+        crossing), prefer the one whose interpolated floor Y is closest to the
+        player's current Y — so walking a bridge never snaps you to the
+        corridor passing underneath."""
+        from corridor_height import floor_height
         best = None
         for cor in self._corridors:
             path = cor.path_xz
@@ -177,28 +179,30 @@ class _CorridorNav:
                 cpt, t = _closest_on_segment_xz(p_xz, a, b)
                 dx = p_xz[0] - cpt[0]
                 dz = p_xz[1] - cpt[1]
-                dist = math.hypot(dx, dz)
-                if best is None or dist < best[4]:
-                    best = (cor, i, cpt, t, dist)
+                dist_xz = math.hypot(dx, dz)
+                if p_y is None:
+                    key = (dist_xz, 0.0)
+                else:
+                    seg_y = floor_height(cor, i, t, self._rooms)
+                    key = (dist_xz, abs(seg_y - p_y))
+                if best is None or key < best[5]:
+                    best = (cor, i, cpt, t, dist_xz, key)
         return best
 
     def resolve_player_motion(self, start: Vec3, delta: Vec3) -> Vec3:
-        # Proposed XZ target
+        from corridor_height import floor_height
         tx = start[0] + delta[0]
         tz = start[2] + delta[2]
         target_xz = (tx, tz)
 
-        best = self._nearest_segment(target_xz)
+        best = self._nearest_segment(target_xz, p_y=start[1])
         if best is None:
-            # No corridors: fall back to passing motion through unchanged.
             return (tx, start[1] + delta[1], tz)
 
-        cor, seg_i, cpt, t, dist = best
+        cor, seg_i, cpt, t, dist, _key = best
         half_w = cor.width_m / 2.0
 
-        # Clamp XZ to within half-width of centerline, with soft slide.
         if dist > half_w:
-            # vector from centerline point to target
             ox = tx - cpt[0]
             oz = tz - cpt[1]
             n = math.hypot(ox, oz)
@@ -206,65 +210,18 @@ class _CorridorNav:
                 ux, uz = ox / n, oz / n
             else:
                 ux, uz = 0.0, 0.0
-            # Hard clamp position is at half_w from centerline.
             clamp_x = cpt[0] + ux * half_w
             clamp_z = cpt[1] + uz * half_w
-            # Soft nudge: blend between clamp position and centerline by
-            # CORRIDOR_SLIDE_SOFTNESS. 0 => hard at boundary, 1 => full pull to centerline.
             rx = clamp_x + (cpt[0] - clamp_x) * CORRIDOR_SLIDE_SOFTNESS
             rz = clamp_z + (cpt[1] - clamp_z) * CORRIDOR_SLIDE_SOFTNESS
             fx, fz = rx, rz
-            # recompute t along segment for the clamped position
             path = cor.path_xz
             _, t = _closest_on_segment_xz((fx, fz), path[seg_i], path[seg_i + 1])
         else:
             fx, fz = tx, tz
 
-        # Floor height: interpolate cruise_y along the segment. path_xz is 2D
-        # so the corridor has a single cruise_y; ramps are modeled where the
-        # corridor's cruise_y differs from a node socket. We interpolate
-        # between the endpoint heights. The endpoint heights default to
-        # cruise_y, but if a corridor encodes ramps via per-vertex y we use
-        # the helper below.
-        y = self._floor_height(cor, seg_i, t)
-
+        y = floor_height(cor, seg_i, t, self._rooms)
         return (fx, y, fz)
-
-    def _floor_height(self, cor: Corridor, seg_i: int, t: float) -> float:
-        """Interpolate floor height along the segment.
-
-        path_xz entries are 2D. Ramp support: endpoint heights are derived
-        from the connected node sockets when available; otherwise cruise_y.
-        We interpolate linearly with t.
-        """
-        path = cor.path_xz
-        y_start = self._height_at_vertex(cor, seg_i)
-        y_end = self._height_at_vertex(cor, seg_i + 1)
-        return y_start + (y_end - y_start) * t
-
-    def _height_at_vertex(self, cor: Corridor, idx: int) -> float:
-        """Height at a corridor vertex.
-
-        The first vertex connects to `source` socket; the last to `target`.
-        If a matching room socket exists, use its socket_y to create ramps.
-        Otherwise use cruise_y.
-        """
-        path = cor.path_xz
-        if idx == 0:
-            sy = self._socket_y(cor.source)
-            if sy is not None:
-                return sy
-        if idx == len(path) - 1:
-            sy = self._socket_y(cor.target)
-            if sy is not None:
-                return sy
-        return cor.cruise_y
-
-    def _socket_y(self, node_id: NodeId):
-        for r in self._rooms:
-            if r.room_id == node_id:
-                return r.socket_y
-        return None
 
     def nearest_panel(self, ray: Ray, max_dist: float) -> PanelHit | None:
         return None  # corridors have no panels

@@ -409,11 +409,10 @@ class BuildConfig(BaseModel):
     guide_max_lines: int = 3
     # room / panel sizing (amendment §4(f))
     room_px_per_m: float = 360
-    text_px_per_m: float = 160
     panel_min_w_m: float = 0.6
-    panel_max_w_m: float = 4.0
+    panel_max_w_m: float = 3.2
     panel_min_h_m: float = 0.5
-    panel_max_h_m: float = 3.0
+    panel_max_h_m: float = 2.4
     panel_gap_m: float = 0.25
     pair_gap_m: float = 0.8
     wall_margin_m: float = 0.6

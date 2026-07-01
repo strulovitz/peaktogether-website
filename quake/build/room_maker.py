@@ -77,8 +77,7 @@ def build_room_runtime(
 
         drawing_w = _clamp(d_px_w / cfg.room_px_per_m, cfg.panel_min_w_m, cfg.panel_max_w_m)
         drawing_h = drawing_w * (d_px_h / max(d_px_w, 1))
-        tppm = getattr(cfg, "text_px_per_m", cfg.room_px_per_m)
-        text_w = _clamp(t_px_w / tppm, cfg.panel_min_w_m, cfg.panel_max_w_m)
+        text_w = _clamp(t_px_w / cfg.room_px_per_m, cfg.panel_min_w_m, cfg.panel_max_w_m)
         text_h = text_w * (t_px_h / max(t_px_w, 1))
 
         block_w = drawing_w + cfg.panel_gap_m + text_w

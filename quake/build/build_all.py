@@ -139,8 +139,6 @@ def main():
 
     # Build config
     build_cfg = BuildConfig(
-        room_px_per_m=600, panel_max_w_m=5.5, panel_max_h_m=3.5,
-        wall_margin_m=0.5, panel_gap_m=0.2, pair_gap_m=0.4,
         room_sizing_max_iters=1000,
         room_grow_step_m=1.5, room_pack_slack=0.9,
     )

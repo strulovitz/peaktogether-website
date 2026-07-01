@@ -2,20 +2,20 @@
   "schema_version": "1.0",
   "profile_id": "default",
   "levels": {
-    "golden": {
+    "principia_bk1_inverse_square": {
       "rooms": {},
       "level_complete": false
     }
   },
   "player": {
-    "level_id": "golden",
-    "mode": "corridor",
-    "current_room_id": null,
+    "level_id": "principia_bk1_inverse_square",
+    "mode": "room",
+    "current_room_id": "law_1",
     "position_xyz": [
-      5.669,
+      11.700000000000001,
       0.0,
-      3.78
+      -9.0
     ],
-    "heading_rad": 3.7296
+    "heading_rad": 3.9772519093222236
   }
 }
