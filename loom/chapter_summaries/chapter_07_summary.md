@@ -67,3 +67,19 @@ Case studies: Dalek ring-mod (~30 Hz carrier), Jaws, Psycho strings, Silent Hill
 
 - Philharmonia samples make dissonance easy (just play a minor 2nd) but roughness/AM effects would need DSP — probably unnecessary for our audience. Skip the roughness band entirely?
 - Part C's length suggests the authors were passionate about this — worth an easter-egg "haunted spell" for older players? 👻 (Tastefully!)
+
+---
+
+## PART 2 (corrected version — audience: ~20-year-olds)
+
+Correction: the "family site → kids" assumption in Part 1 was wrong. The game is for ~20-year-old players. This changes the Chapter 7 takeaways substantially — for the better.
+
+### Revised Ch.7 game notes (audience: ~20-year-olds)
+
+- Part C is now fully usable, not something to soften. The fear/tension toolbox is exactly what makes games gripping for adult players:
+  - Roughness band (20–150 Hz AM) — fair game for failed casts, corrupted spells, or menacing entities. Worth the DSP effort after all.
+  - Tritones, minor 2nds, clusters — real dissonance for real stakes, not gentle wobbles.
+  - Full BPM range: exploration ~80–110, combat/challenge 120–160, and yes — >160 + dissonance chaotic-panic tier for climactic boss spells (the DOOM/Dead Space playbook).
+- Dark spell tier becomes a core feature, not an easter egg: a "forbidden spellbook" of functions rendered with the horror palette — the Dalek-style ring-mod, Jaws-style accelerating semitones — is a legitimate design pillar now. 🖤
+- The Resident Evil save-room contrast still applies (it's an adult-game pattern anyway): calm study area ↔ tense casting encounters. Contrast is what makes the tension land.
+- What stays unchanged: consonance/dissonance as instant feedback, evaluative conditioning (BRECVEMA) as the learning loop, mode-as-data (minor when f<0), adaptive tempo — these were audience-independent.
