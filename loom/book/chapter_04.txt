@@ -1,0 +1,96 @@
+Chapter 4: Timbre as a Second Dimension
+
+
+========================================
+PART A — Preliminary Concepts (February 9, 2025)
+========================================
+
+4.1 Introduction
+So far, our Helical Sonification System (HSS) has relied mainly on pitch to represent data. Chapter 4 introduces timbre (essentially the "tone color" or spectral quality of the sound) as a second dimension. This allows us to convey more information simultaneously and can make the sonification feel more "musical" or expressive.
+
+
+4.2 Why Timbre?
+Definition. Timbre is the quality of a sound that distinguishes it from other sounds of the same pitch and loudness. For instance, a trumpet and a flute playing the same note have different timbres.
+
+Dimensions of Timbre. Timbre is inherently multi-dimensional (involving spectral content, attack transients, vibrato, etc.). However, in this chapter, we focus on one simple timbre parameter—often called "brightness" or spectral centroid—to keep things tractable.
+
+
+4.3 One-Dimensional Timbre Parameter
+Spectral Centroid or Filter Cutoff. We can simplify timbre to one dimension by:
+- Controlling a filter cutoff in a synthesizer,
+- Scaling the amplitude of higher harmonics,
+- Or adjusting a single "brightness" knob in a digital audio engine.
+
+In all these cases, one real number (call it T) can shift the perceived "color" from dark (low T) to bright (high T).
+
+
+4.4 Mapping Data to Timbre
+Approach. We might let the same data f(x) that drives pitch also drive timbre, or we might use a second data dimension g(x). Either way, we define a function:
+timbreParam = β · d,
+where d is the data or some function of it, and β is a user-chosen sensitivity factor.
+
+Example. If d ∈ [0, 5], setting β = 2 means timbreParam ranges from 0 to 10. A higher value might yield more harmonics, harsher tone, or a more intense filter cutoff.
+
+
+4.5 Avoiding Complexity
+It's easy for timbre mappings to become overly complex, overwhelming the listener. At this stage, we:
+- Use one dimension for timbre,
+- Keep pitch the primary dimension,
+- Possibly combine with amplitude or a second harmonic to represent brightness.
+
+
+4.6 Conclusion
+By adding a timbre axis, we greatly expand the expressive power of HSS. We can encode additional data in a clearly audible way, so that two values (pitch and timbre) vary in tandem. However, we should be mindful of psychoacoustic factors that can make complex timbres difficult to interpret if not handled carefully.
+
+Next: We discuss these psychoacoustic and implementation details in depth in the Expanded Discussion for Chapter 4.
+
+
+========================================
+PART B — Expanded Discussion (February 9, 2025)
+========================================
+
+4.1 Recap of Psychoacoustics for Timbre
+Multi-Dimensional Nature of Timbre. While a single parameter (e.g., brightness) is convenient, research (e.g., John Grey, 1977, or Stephen McAdams) shows timbre can be conceptualized in a space of at least three dimensions:
+- Spectral Centroid (Brightness)—the "center of mass" of frequencies,
+- Attack/Decay Transients—how quickly a sound begins or ends,
+- Spectral Flux—how partials change over time.
+
+For simplicity, we reduce this to a single timbre axis, acknowledging the complexity of real-world timbres.
+
+
+4.2 Typical Implementations of a Single Timbre Axis
+Method 1: Harmonic Scaling. One straightforward approach: add or remove strength in upper harmonics. If our base waveform is a sine wave, we can add a second or third harmonic whose amplitude is controlled by our timbre parameter T.
+wave(t) = A·sin(2πft) + T · B·sin(2π · 2f · t).
+Larger T = stronger second harmonic = perceived as brighter or buzzier.
+
+Method 2: Filter Cutoff. Another approach is using a low-pass or band-pass filter. If the cutoff frequency f_c is:
+f_c = f_min + T · (f_max − f_min),
+then higher T = higher cutoff = more high-frequency content passes, yielding a brighter sound.
+
+Method 3: Sample-based or Wavetable Interpolation. In more advanced systems, we could crossfade between a dark timbre sample and a bright timbre sample. But for a simple demonstration, adding a second harmonic (Method 1) is typically enough.
+
+
+4.3 Mapping Data to Timbre (Implementation Details)
+Data Range. If your data g(x) is in the range [0, 5], define a scaling factor β. Then timbreParam = β · g(x).
+- If β = 2, timbreParam can go up to 10,
+- meaning your harmonic amplitude or filter cutoff might range from near 0 up to a bright threshold.
+
+Combining with Pitch. We still use a for pitch (as in Chapter 3). Now we have two data mappings:
+θ = a · f(x), T = β · f(x).
+(Or f(x) vs. g(x) if you have separate data streams.)
+
+
+4.4 Practical Warnings
+- Listener Overload: If pitch is already varying quickly, adding fast timbre changes can confuse the ear. Consider smoothing or simpler motion for timbre.
+- Too Bright or Too Loud: High harmonic levels can create harsh, unpleasant sounds, especially over consumer speakers or headphones.
+- Musical Context: Some scales or chord progressions depend on timbre changes for expressiveness. A timbre axis can highlight tension/resolution in a piece, but it might also overshadow pitch if overused.
+
+
+4.5 Case Study: Single Data Stream for Pitch & Timbre
+Suppose we have one-dimensional data (e.g., a sine wave from 0 to 5). We might do:
+θ = a · d, T = β · d.
+Then each data point d yields a pitch class (snapped to a scale) plus a timbre parameter. Over time, as d rises or falls, both pitch and brightness shift in tandem, creating a distinctive sonic "shape."
+
+
+4.6 Conclusion
+Timbre provides a powerful second dimension to the Helical Sonification System, enabling richer encoding of data. By carefully choosing the mapping function and limiting the parameter range, we can produce noticeable yet not overwhelming timbral shifts. Combined with pitch, this leads to a more expressive and information-rich sonification.
