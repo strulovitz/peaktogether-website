@@ -84,7 +84,7 @@ def build_room_runtime(
         drawing_w = drawing_h * d_ar
         if drawing_w > cfg.panel_max_w_m:
             drawing_w = cfg.panel_max_w_m
-            drawing_h = drawing_w / max(d_ar, 1e-6)
+            drawing_h = max(drawing_w / d_ar, 1.0)
 
         block_w = drawing_w + cfg.panel_gap_m + text_w
         block_h = max(drawing_h, text_h)
