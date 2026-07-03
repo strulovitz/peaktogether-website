@@ -241,17 +241,34 @@ def build_room_runtime(
         health=3,   # Nir: 3 hits -> the demon explodes
     )
 
-    # Step I — ceiling equations
+    # Step I — ceiling equations (one per station, above its wall on the ceiling)
     ceiling_rts = []
     eqs = list(room.ceiling_equations)
-    n_eq = len(eqs)
     for i, eq in enumerate(eqs):
-        x_offset = (i - (n_eq - 1) / 2.0) * 2.0
+        # Match equation i to station i (panel_pairs is step-index ordered)
+        if i < len(panel_pairs):
+            pp = panel_pairs[i]
+            wall = pp.text_placement.wall
+            cx_station = pp.text_placement.center_xyz[0]
+            cz_station = pp.text_placement.center_xyz[2]
+            CEILING_INSET = 0.7  # metres in from the wall so the equation is readable
+            if wall == "N":
+                eq_pos = (cx_station, H - 0.1, D / 2.0 - CEILING_INSET)
+            elif wall == "S":
+                eq_pos = (cx_station, H - 0.1, -D / 2.0 + CEILING_INSET)
+            elif wall == "E":
+                eq_pos = (W / 2.0 - CEILING_INSET, H - 0.1, cz_station)
+            else:  # W
+                eq_pos = (-W / 2.0 + CEILING_INSET, H - 0.1, cz_station)
+        else:
+            # Fallback: fewer stations than equations — place centered
+            x_offset = (i - len(eqs) / 2.0 + 0.5) * 2.0
+            eq_pos = (x_offset, H - 0.1, 0.0)
         ceiling_rts.append(
             CeilingEqRT(
                 eq_id=eq.eq_id,
                 asset_id=f"{eq.eq_id}.neutral",
-                pos_xyz=(x_offset, H - 0.1, 0.0),
+                pos_xyz=eq_pos,
                 size_m=(1.0, 0.5),
             )
         )
