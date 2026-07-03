@@ -856,7 +856,7 @@ def _build_station_number_quads(room):
         hw, hh = tp.width_m / 2.0, tp.height_m / 2.0
         c = np.asarray(tp.center_xyz, dtype=np.float32)
         # upper-left corner of text panel
-        tl = c - along * hw * 0.85 + up * hh * 0.85 + inward * 0.015
+        tl = c - along * hw * 0.85 + up * hh * 0.85 + inward * 0.05
         nw, nh = 0.25, 0.20
         bl = tl - up * nh
         br = tl + along * nw - up * nh
