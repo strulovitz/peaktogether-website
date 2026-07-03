@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 22:50
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -204,9 +204,7 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 tex.def
 File: l3backend-pdftex.def 2026-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count304
-)
-(C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk1_inverse_square\
-pack\_bake\law_2.s1.txt.on.aux)
+) (law_2.s1.txt.on.aux)
 \openout1 = `law_2.s1.txt.on.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 5.
@@ -275,31 +273,36 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 8.
 
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
-Runaway argument?
-{\Delta (\text {motion})\} \propto \textcolor {force}{F\}$ --- the se\ETC.
-! File ended while scanning use of \@textcolor.
-<inserted text> 
-                \par 
-<*> ...verse_square/pack/_bake/law_2.s1.txt.on.tex
-                                                  
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+)
+[1
 
-! Emergency stop.
-<*> ...verse_square/pack/_bake/law_2.s1.txt.on.tex
-                                                  
-*** (job aborted, no legal \end found)
 
- 
+Non-PDF special ignored!
+<special> papersize=288.00043pt,130.66663pt
+{C:/Users/nir_s/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(law_2.s1.txt.on.aux)
+ ***********
+LaTeX2e <2026-06-01>
+L3 programming layer <2026-06-18>
+ ***********
+ ) 
 Here is how much of TeX's memory you used:
- 4305 strings out of 467510
- 68510 string characters out of 5408795
- 479086 words of memory out of 5000000
- 33500 multiletter control sequences out of 15000+600000
- 632673 words of font info for 59 fonts, out of 8000000 for 9000
+ 4329 strings out of 467510
+ 68965 string characters out of 5408795
+ 482077 words of memory out of 5000000
+ 33516 multiletter control sequences out of 15000+600000
+ 634993 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,6n,71p,812b,253s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 59i,8n,71p,810b,253s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk
+1_inverse_square\pack\_bake\law_2.s1.txt.on.pdf (1 page, 43410 bytes).
+PDF statistics:
+ 26 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+

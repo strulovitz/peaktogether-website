@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 22:47
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 23:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -274,14 +274,6 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 6.
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-! Missing $ inserted.
-<inserted text> 
-                $
-l.7 \end{varwidth}
-                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
 [1
 
 
@@ -301,14 +293,14 @@ Here is how much of TeX's memory you used:
  33514 multiletter control sequences out of 15000+600000
  634993 words of font info for 69 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,7n,71p,599b,253s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 59i,7n,71p,597b,253s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
 cmbx12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
 fonts/cm/cmmi12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmsy10.pfb>
 Output written on C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk
-1_inverse_square\pack\_bake\law_2.s1.txt.off.pdf (1 page, 46196 bytes).
+1_inverse_square\pack\_bake\law_2.s1.txt.off.pdf (1 page, 43299 bytes).
 PDF statistics:
  26 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

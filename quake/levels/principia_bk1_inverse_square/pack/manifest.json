@@ -607,12 +607,12 @@
       "kind": "figure_off",
       "wall_path": "assets/law_2.f1.off.png",
       "master_path": "assets/law_2.f1.off@master.png",
-      "px_w": 417,
+      "px_w": 467,
       "px_h": 70,
       "content_bbox": [
         0,
         0,
-        417,
+        467,
         70
       ],
       "dpi": 220
@@ -622,12 +622,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.1.png",
       "master_path": "assets/law_2.f1.on.1@master.png",
-      "px_w": 412,
+      "px_w": 481,
       "px_h": 70,
       "content_bbox": [
         0,
         0,
-        412,
+        481,
         70
       ],
       "dpi": 220
@@ -637,12 +637,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.2.png",
       "master_path": "assets/law_2.f1.on.2@master.png",
-      "px_w": 397,
+      "px_w": 467,
       "px_h": 70,
       "content_bbox": [
         0,
         0,
-        397,
+        467,
         70
       ],
       "dpi": 220
@@ -2047,13 +2047,13 @@
       "kind": "text_off",
       "wall_path": "assets/law_2.s1.txt.off.png",
       "master_path": "assets/law_2.s1.txt.off@master.png",
-      "px_w": 80,
-      "px_h": 60,
+      "px_w": 867,
+      "px_h": 391,
       "content_bbox": [
-        0,
-        0,
-        80,
-        60
+        13,
+        11,
+        864,
+        386
       ],
       "dpi": 220
     },
@@ -2062,13 +2062,13 @@
       "kind": "text_on",
       "wall_path": "assets/law_2.s1.txt.on.png",
       "master_path": "assets/law_2.s1.txt.on@master.png",
-      "px_w": 80,
-      "px_h": 60,
+      "px_w": 867,
+      "px_h": 391,
       "content_bbox": [
-        0,
-        0,
-        80,
-        60
+        13,
+        11,
+        864,
+        386
       ],
       "dpi": 220
     },
@@ -2077,13 +2077,13 @@
       "kind": "text_off",
       "wall_path": "assets/law_2.s2.txt.off.png",
       "master_path": "assets/law_2.s2.txt.off@master.png",
-      "px_w": 80,
-      "px_h": 60,
+      "px_w": 868,
+      "px_h": 478,
       "content_bbox": [
-        0,
-        0,
-        80,
-        60
+        13,
+        11,
+        865,
+        473
       ],
       "dpi": 220
     },
@@ -2092,13 +2092,13 @@
       "kind": "text_on",
       "wall_path": "assets/law_2.s2.txt.on.png",
       "master_path": "assets/law_2.s2.txt.on@master.png",
-      "px_w": 80,
-      "px_h": 60,
+      "px_w": 868,
+      "px_h": 478,
       "content_bbox": [
-        0,
-        0,
-        80,
-        60
+        13,
+        11,
+        865,
+        473
       ],
       "dpi": 220
     },

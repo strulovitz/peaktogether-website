@@ -37,7 +37,7 @@ void drawAll(int highlight) {
   if (on2) fill(box(_layoutpos_2 + (-4, -0.5), _layoutpos_2 + (4, 0.5)), STABILO_2_1);
 
   // ink pass
-  label("$\\Delta(\\text{motion})\\ \\;\\propto\\; F\\$", _layoutpos_1, on1 ? motion : BLACK);
-  label("$\\Delta(\\text{motion})\\ \\;\\parallel\\; F\\$", _layoutpos_2, on2 ? line : BLACK);
+  label("$( \\Delta(\\text{motion}) ) \\;\\propto\\; ( F )$", _layoutpos_1, on1 ? motion : BLACK);
+  label("$( \\Delta(\\text{motion}) ) \\;\\parallel\\; ( F )$", _layoutpos_2, on2 ? line : BLACK);
 }
 drawAll(highlight);

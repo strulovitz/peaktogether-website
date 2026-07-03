@@ -1378,7 +1378,12 @@ def _expand_text(st: Station, decl: dict) -> str:
             else:
                 frags.append(p.words)
         return " ".join(frags) if frags else ""
-    return _SPAN_RE.sub(lambda m: f"\\textcolor{{{m.group(1)}}}{{{m.group(2)}}}", raw)
+    def _fix_span(m):
+        txt = m.group(2)
+        if txt.endswith("\\"):
+            txt = txt[:-1]
+        return f"\\textcolor{{{m.group(1)}}}{{{txt}}}"
+    return _SPAN_RE.sub(_fix_span, raw)
 
 
 def _scan_colors_used(expanded_latex: str, decl: dict, st: Station) -> list:

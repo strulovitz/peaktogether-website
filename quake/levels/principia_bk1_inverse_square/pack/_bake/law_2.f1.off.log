@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 22:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=pdflatex 2026.7.3)  3 JUL 2026 23:30
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -284,7 +284,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 
 
 Non-PDF special ignored!
-<special> papersize=155.08296pt,42.31999pt
+<special> papersize=166.60045pt,42.31999pt
 {C:/Users/nir_s/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
 (law_2.f1.off.aux)
  ***********
@@ -306,7 +306,7 @@ fonts/cm/cmmi12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/p
 ublic/amsfonts/cm/cmr17.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts
 /type1/public/amsfonts/cm/cmsy10.pfb>
 Output written on C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk
-1_inverse_square\pack\_bake\law_2.f1.off.pdf (1 page, 35949 bytes).
+1_inverse_square\pack\_bake\law_2.f1.off.pdf (1 page, 35962 bytes).
 PDF statistics:
  26 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)

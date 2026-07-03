@@ -44,7 +44,7 @@
       },
       "text": {
         "block_id": "law_2.s1.txt",
-        "latex": "\\textcolor{motion}{The alteration of motion} is ever proportional to the \\textcolor{force}{motive force impress'd}: \"if any \\textcolor{force}{force} generates a \\textcolor{motion}{motion}, a double \\textcolor{force}{force} will generate double the \\textcolor{motion}{motion},\" and a triple \\textcolor{force}{force} triple the \\textcolor{motion}{motion}. This holds whether the \\textcolor{force}{force} be impress'd altogether and at once, or gradually and successively. The exact scaling is the heart of the law --- $\\textcolor{motion}{\\Delta(\\text{motion})\\} \\propto \\textcolor{force}{F\\}$ --- the seed from which $F = ma$ grows.",
+        "latex": "\\textcolor{motion}{The alteration of motion} is ever proportional to the \\textcolor{force}{motive force impress'd}: \"if any \\textcolor{force}{force} generates a \\textcolor{motion}{motion}, a double \\textcolor{force}{force} will generate double the \\textcolor{motion}{motion},\" and a triple \\textcolor{force}{force} triple the \\textcolor{motion}{motion}. This holds whether the \\textcolor{force}{force} be impress'd altogether and at once, or gradually and successively. The exact scaling is the heart of the law --- $\\textcolor{motion}{\\Delta(\\text{motion})} \\propto \\textcolor{force}{F}$ --- the seed from which $F = ma$ grows.",
         "colors_used": [
           {
             "name": "motion",
@@ -67,7 +67,7 @@
       },
       "text": {
         "block_id": "law_2.s2.txt",
-        "latex": "The \\textcolor{line}{alteration is made in the direction of the right line} in which that \\textcolor{force}{force} is impress'd --- \\textcolor{line}{always directed the same way} with the generating \\textcolor{force}{force}. If the body \\textcolor{old}{moved before}, this new \\textcolor{line}{motion} is added to or subducted from the \\textcolor{old}{former motion}, according as they directly conspire or are directly contrary. When they are \\textcolor{line}{obliquely joyned}, the \\textcolor{force}{force} and the \\textcolor{old}{prior motion} compound by the parallelogram rule, so as to produce a new \\textcolor{line}{motion compounded from the determination of both} --- hence $\\textcolor{line}{\\Delta(\\text{motion})\\} \\parallel \\textcolor{force}{F\\}$.",
+        "latex": "The \\textcolor{line}{alteration is made in the direction of the right line} in which that \\textcolor{force}{force} is impress'd --- \\textcolor{line}{always directed the same way} with the generating \\textcolor{force}{force}. If the body \\textcolor{old}{moved before}, this new \\textcolor{line}{motion} is added to or subducted from the \\textcolor{old}{former motion}, according as they directly conspire or are directly contrary. When they are \\textcolor{line}{obliquely joyned}, the \\textcolor{force}{force} and the \\textcolor{old}{prior motion} compound by the parallelogram rule, so as to produce a new \\textcolor{line}{motion compounded from the determination of both} --- hence $\\textcolor{line}{\\Delta(\\text{motion})} \\parallel \\textcolor{force}{F}$.",
         "colors_used": [
           {
             "name": "line",
