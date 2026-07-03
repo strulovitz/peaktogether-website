@@ -45,6 +45,7 @@ from gameplay import step, reticle_ray
 from guidelines import select_targets, draw_guidelines
 from render_wire import draw_graph, render_mode_a
 from render_room import draw_room
+import render_room
 from readmode import draw_read
 from minimap import draw_minimap, marker_mood, MOVE_THRESHOLD_M
 from logutil import log as _log
@@ -421,6 +422,20 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
 
             # (5) apply events to mirror state + summarize follow-ups (pure)
             outcome = apply_events(state, events)
+
+            # (5b) demon lifecycle -> feed render_room's per-room clocks
+            for _ev in events:
+                if _ev.event == "demon_spawned":
+                    render_room.demon_on_spawned(_ev.room_id)
+                elif _ev.event == "demon_killed":
+                    render_room.demon_on_killed(_ev.room_id)
+            if state.mode == "room" and state.current_room_id is not None:
+                _rid = state.current_room_id
+                _room = pack.rooms.get(_rid)
+                if _room is not None and getattr(_room, "enemy", None) is not None:
+                    _dead = _rid in state.cleared
+                    if _rid in render_room._DEMON_ALIVE_CLOCK or _dead:
+                        render_room.demon_tick(_rid, dt, _dead)
             if outcome.mode_switched_to:
                 _log(f"frame {frame}: mode switch -> {outcome.mode_switched_to} room={outcome.switched_room_id}")
 

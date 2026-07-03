@@ -237,7 +237,7 @@ def build_room_runtime(
     enemy = EnemyRT(
         enemy_id=f"{room.node_id}.demon",
         spawn_xyz=(ex, 0.1, ez),
-        health=5,
+        health=3,   # Nir: 3 hits -> the demon explodes
     )
 
     # Step I — ceiling equations

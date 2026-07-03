@@ -17,12 +17,41 @@ WALK_SPEED_M_S = 2.4
 AIM_CONE_RAD = 0.30
 SHOOT_MAX_DIST = 50.0
 DEMON_RADIUS = 0.6
+# Demon body hit-sphere (matches demon.py: body blob ~1.2 m across, centered
+# ~0.6 m above spawn_xyz). Generous radius so the visible demon is easy to hit.
+DEMON_BODY_CENTER_DY = 0.6
+DEMON_HIT_RADIUS = 0.9
 SOCKET_ENTER_RADIUS_M = 1.0
 EYE_HEIGHT_M = 1.6
 # PITCH_CLAMP_RAD imported from contracts (1.2217, +/-70 degrees)
 
 # ===== DEMON HP TRACKING (module-level mutable) =====
 _demon_hp: dict[NodeId, int] = {}
+
+
+def _ray_hits_demon(eye: Vec3, direction: Vec3, spawn_xyz: Vec3) -> bool:
+    """Ray-vs-sphere against the demon body (sphere at spawn_xyz raised by
+    DEMON_BODY_CENTER_DY, radius DEMON_HIT_RADIUS). True if the shot ray hits
+    within SHOOT_MAX_DIST. PURE."""
+    cx = spawn_xyz[0]
+    cy = spawn_xyz[1] + DEMON_BODY_CENTER_DY
+    cz = spawn_xyz[2]
+    dlen = sqrt(direction[0] ** 2 + direction[1] ** 2 + direction[2] ** 2)
+    if dlen <= 0.0:
+        return False
+    ux, uy, uz = direction[0] / dlen, direction[1] / dlen, direction[2] / dlen
+    mx, my, mz = eye[0] - cx, eye[1] - cy, eye[2] - cz
+    b = mx * ux + my * uy + mz * uz
+    c = mx * mx + my * my + mz * mz - DEMON_HIT_RADIUS * DEMON_HIT_RADIUS
+    if c > 0.0 and b > 0.0:      # origin outside sphere and pointing away
+        return False
+    disc = b * b - c
+    if disc < 0.0:
+        return False
+    t = -b - sqrt(disc)
+    if t < 0.0:
+        t = 0.0
+    return t <= SHOOT_MAX_DIST
 
 
 def reticle_ray(eye: Vec3, heading: float, pitch: float,
@@ -197,26 +226,15 @@ def step(state: GameState, actions: Actions, pack: Pack,
                               actions.aim_x, actions.aim_y)
             hit = nav.nearest_panel(ray, SHOOT_MAX_DIST)
 
-            # Demon hit detection: ray passing near the demon spawn?
-            demon_hit = False
-            dir_len = sqrt(ray.direction[0] ** 2 + ray.direction[1] ** 2
-                           + ray.direction[2] ** 2)
-            if dir_len > 0:
-                check_dist = 15.0
-                ux = ray.direction[0] / dir_len
-                uy = ray.direction[1] / dir_len
-                uz = ray.direction[2] / dir_len
-                hit_x = eye[0] + ux * check_dist
-                hit_y = eye[1] + uy * check_dist
-                hit_z = eye[2] + uz * check_dist
-                dx_d = hit_x - room.enemy.spawn_xyz[0]
-                dy_d = hit_y - room.enemy.spawn_xyz[1]
-                dz_d = hit_z - room.enemy.spawn_xyz[2]
-                demon_hit = sqrt(dx_d * dx_d + dy_d * dy_d + dz_d * dz_d) <= DEMON_RADIUS
-
             # Current room progress
             lvl_prog = state.save.levels.setdefault(level_id, LevelProgress())
             rp = lvl_prog.rooms.setdefault(state.current_room_id, RoomProgress())
+
+            # Demon hit: proper ray-vs-sphere against the demon's body, but ONLY
+            # once the hidden door has opened (i.e. the demon has appeared).
+            demon_hit = False
+            if rp.hidden_door_open:
+                demon_hit = _ray_hits_demon(eye, ray.direction, room.enemy.spawn_xyz)
 
             # Current demon HP
             curr_hp = _demon_hp.get(state.current_room_id, room.enemy.health)

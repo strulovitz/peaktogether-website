@@ -354,6 +354,8 @@ def test_level_complete():
     state.cleared.add("a")
     lvl = state.save.levels.setdefault("lvl1", LevelProgress())
     lvl.rooms["a"] = RoomProgress(room_cleared=True, enemy_defeated=True)
+    # demon has already appeared (hidden door opened) so it is hittable
+    lvl.rooms["b"] = RoomProgress(hidden_door_open=True)
     state.heading_rad = math.pi / 2  # forward = (0,0,1) +Z toward demon at (0,1.6,5)
     gp._demon_hp["b"] = 1
     nav = _stub_nav()

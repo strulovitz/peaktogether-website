@@ -607,6 +607,54 @@ _mesh_cache: dict = {}            # room_id -> RoomMesh
 _vao_cache:  dict = {}            # room_id -> dict of VAOs
 _texture_cache: dict = {}         # asset_id -> texture|None
 
+# ---- DEMON (Parent 22): per-room sphere sets + clocks fed by app.py -------
+import demon as demonmod
+
+_DEMON_SPHERES: dict = {}         # room_id -> list[DemonSphere]
+_DEMON_RENDERERS: dict = {}       # id(ctx) -> DemonRenderer
+_DEMON_DEATH_CLOCK: dict = {}     # room_id -> seconds since kill
+_DEMON_ALIVE_CLOCK: dict = {}     # room_id -> seconds since spawn
+
+
+def _room_demon_spheres(room):
+    """Build & cache the demon sphere set for this room (deterministic)."""
+    rid = room.room_id
+    sph = _DEMON_SPHERES.get(rid)
+    if sph is None:
+        seed = 1729 + (abs(hash(rid)) & 0xFFFF)
+        sph = demonmod.build_demon_spheres(body_span_m=1.2, n_body=100, seed=seed)
+        _DEMON_SPHERES[rid] = sph
+    return sph
+
+
+def _get_demon_renderer(ctx, prog):
+    r = _DEMON_RENDERERS.get(id(ctx))
+    if r is None:
+        r = demonmod.DemonRenderer(ctx=ctx, prog=prog)
+        _DEMON_RENDERERS[id(ctx)] = r
+    return r
+
+
+def demon_on_spawned(room_id: str) -> None:
+    _DEMON_ALIVE_CLOCK.setdefault(room_id, 0.0)
+
+
+def demon_on_killed(room_id: str) -> None:
+    if room_id not in _DEMON_DEATH_CLOCK:
+        _DEMON_DEATH_CLOCK[room_id] = 0.0
+        # freeze fly directions the instant it dies (deterministic per room)
+        sph = _DEMON_SPHERES.get(room_id)
+        if sph is not None:
+            demonmod.seed_explosion(sph, seed=4242 + (abs(hash(room_id)) & 0xFFFF))
+
+
+def demon_tick(room_id: str, dt: float, dead: bool) -> None:
+    if dead:
+        if room_id in _DEMON_DEATH_CLOCK:
+            _DEMON_DEATH_CLOCK[room_id] += dt
+    else:
+        _DEMON_ALIVE_CLOCK[room_id] = _DEMON_ALIVE_CLOCK.get(room_id, 0.0) + dt
+
 def _get_ctx():
     import moderngl
     return moderngl.get_context()          # FIX: reuse the real context
@@ -722,6 +770,16 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
         return
     prog=_program(ctx)
     if prog is None: return
+
+    # Has this room's hidden door opened (demon revealed)? Gates the alcove + demon.
+    try:
+        level_id = pack.floorplan.level_id
+        lvl = state.save.levels.get(level_id)
+        room_save = lvl.rooms.get(room.room_id) if lvl is not None else None
+        door_open = bool(room_save and room_save.hidden_door_open)
+    except Exception:
+        door_open = False
+
     # ---- assert OUR full GL state every frame ----
     ctx.enable(moderngl.DEPTH_TEST); ctx.depth_func="<="; ctx.depth_mask=True
     ctx.disable(moderngl.BLEND)
@@ -740,8 +798,8 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # 3) door jambs
     if vaos["jamb"] is not None:
         _set(prog,"u_tint",JAMB_RGB); vaos["jamb"].render()
-    # 4) alcove
-    if vaos["alcove"] is not None:
+    # 4) alcove — revealed ONLY once the hidden door has opened (demon appears)
+    if door_open and vaos["alcove"] is not None:
         _set(prog,"u_tint",ALCOVE_RGB); vaos["alcove"].render()
 
     # 2+5) panels (textured, blend ON for transparent PNGs)
@@ -769,4 +827,18 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
             if tex is not None: tex.use(0); _set(prog,"u_tex",0)
             vao.render()
         ctx.disable(moderngl.BLEND)
+        _set(prog,"u_use_tint",0)
+
+    # 7) DEMON — revealed with the alcove; bobs while alive; explodes on kill.
+    #    Drawn last: it overwrites u_mvp per-sphere (view @ model), so nothing
+    #    after it depends on the shared view mvp. Opaque -> blend off, depth on.
+    if door_open and getattr(room, "enemy", None) is not None:
+        t_death = _DEMON_DEATH_CLOCK.get(room.room_id)   # None while alive
+        if not (t_death is not None and demonmod.is_gone(t_death)):
+            spheres = _room_demon_spheres(room)
+            renderer = _get_demon_renderer(ctx, prog)
+            alive_t = _DEMON_ALIVE_CLOCK.get(room.room_id, 0.0)
+            ctx.disable(moderngl.BLEND)
+            renderer.draw(view=view, root_xyz=room.enemy.spawn_xyz,
+                          spheres=spheres, t_since_death=t_death, bob_t=alive_t)
         _set(prog,"u_use_tint",0)
