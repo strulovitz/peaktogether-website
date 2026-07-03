@@ -80,32 +80,11 @@ def build_room_runtime(
         text_h = text_w * (t_px_h / max(t_px_w, 1))
 
         d_ar = d_px_w / max(d_px_h, 1)                      # width / height
-        # An equation figure is a small/thin rendered line (min side < 250 px);
-        # a geometry figure is a large detailed drawing (min side 500+ px).
-        is_equation = min(d_px_w, d_px_h) < 250
-        if is_equation:
-            # EQUATION figure: size it to the EXPLANATION's AREA (a sensible
-            # MIDDLE — comparable overall size to the text, neither a tiny strip
-            # nor a full-wall banner), keeping the equation's own proportion.
-            # Geometry figures keep the height-match behavior below, unchanged.
-            area = text_w * text_h
-            drawing_h = math.sqrt(area / d_ar)
-            drawing_w = drawing_h * d_ar
-            eq_max_w = 13.0
-            if drawing_w > eq_max_w:
-                drawing_w = eq_max_w
-                drawing_h = drawing_w / d_ar
-            if drawing_h > cfg.panel_max_h_m:
-                drawing_h = cfg.panel_max_h_m
-                drawing_w = drawing_h * d_ar
-        else:
-            # Geometry (and tall equations): as tall as the text, aspect kept,
-            # width capped at the normal max.
-            drawing_h = _clamp(text_h, cfg.panel_min_h_m, cfg.panel_max_h_m)
-            drawing_w = drawing_h * d_ar
-            if drawing_w > cfg.panel_max_w_m:
-                drawing_w = cfg.panel_max_w_m
-                drawing_h = drawing_w / max(d_ar, 1e-6)
+        drawing_h = _clamp(text_h, cfg.panel_min_h_m, cfg.panel_max_h_m)
+        drawing_w = drawing_h * d_ar
+        if drawing_w > cfg.panel_max_w_m:
+            drawing_w = cfg.panel_max_w_m
+            drawing_h = drawing_w / max(d_ar, 1e-6)
 
         block_w = drawing_w + cfg.panel_gap_m + text_w
         block_h = max(drawing_h, text_h)
