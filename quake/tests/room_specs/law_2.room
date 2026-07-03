@@ -1,7 +1,7 @@
 room      law_2
 kind      equation
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II.
-caption   Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
+caption   Law II --- The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
 final     2
 
 station 1
@@ -16,7 +16,7 @@ station 1
     term    force   $F$
     layout  $\{motion|\Delta(\text{motion})\} \;\propto\; \{force|F\}$
   text
-    {motion|The alteration of motion} is ever proportional to the {force|motive force impress'd}: "if any {force|force} generates a {motion|motion}, a double {force|force} will generate double the {motion|motion}," and a triple {force|force} triple the {motion|motion}. This holds whether the {force|force} be impress'd altogether and at once, or gradually and successively. The exact scaling is the heart of the law — $\{motion|\Delta(\text{motion})\} \propto \{force|F\}$ — the seed from which $F = ma$ grows.
+    {motion|The alteration of motion} is ever proportional to the {force|motive force impress'd}: "if any {force|force} generates a {motion|motion}, a double {force|force} will generate double the {motion|motion}," and a triple {force|force} triple the {motion|motion}. This holds whether the {force|force} be impress'd altogether and at once, or gradually and successively. The exact scaling is the heart of the law --- $\{motion|\Delta(\text{motion})\} \propto \{force|F\}$ --- the seed from which $F = ma$ grows.
 
 station 2
   ceiling   eq_dir :: \Delta p \parallel F
@@ -31,4 +31,4 @@ station 2
     term    force  $F$
     layout  $\{line|\Delta(\text{motion})\} \;\parallel\; \{force|F\}$
   text
-    The {line|alteration is made in the direction of the right line} in which that {force|force} is impress'd — {line|always directed the same way} with the generating {force|force}. If the body {old|moved before}, this new {line|motion} is added to or subducted from the {old|former motion}, according as they directly conspire or are directly contrary. When they are {line|obliquely joyned}, the {force|force} and the {old|prior motion} compound by the parallelogram rule, so as to produce a new {line|motion compounded from the determination of both} — hence $\{line|\Delta(\text{motion})\} \parallel \{force|F\}$.
+    The {line|alteration is made in the direction of the right line} in which that {force|force} is impress'd --- {line|always directed the same way} with the generating {force|force}. If the body {old|moved before}, this new {line|motion} is added to or subducted from the {old|former motion}, according as they directly conspire or are directly contrary. When they are {line|obliquely joyned}, the {force|force} and the {old|prior motion} compound by the parallelogram rule, so as to produce a new {line|motion compounded from the determination of both} --- hence $\{line|\Delta(\text{motion})\} \parallel \{force|F\}$.

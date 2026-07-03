@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=latex 2026.6.29)  3 JUL 2026 20:12
+This is pdfTeX, Version 3.141592653-2.6-1.40.29 (MiKTeX 26.5) (preloaded format=latex 2026.7.3)  3 JUL 2026 22:45
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -14,30 +14,30 @@ Document Class: article 2025/01/22 v1.4n Standard LaTeX document class
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/base\size12.clo
 File: size12.clo 2025/01/22 v1.4n Standard LaTeX file (size option)
 )
-\c@part=\count275
-\c@section=\count276
-\c@subsection=\count277
-\c@subsubsection=\count278
-\c@paragraph=\count279
-\c@subparagraph=\count280
-\c@figure=\count281
-\c@table=\count282
+\c@part=\count276
+\c@section=\count277
+\c@subsection=\count278
+\c@subsubsection=\count279
+\c@paragraph=\count280
+\c@subparagraph=\count281
+\c@figure=\count282
+\c@table=\count283
 \abovecaptionskip=\skip49
 \belowcaptionskip=\skip50
-\bibindent=\dimen148
+\bibindent=\dimen150
 )
 *\usepackage{graphicx}
 
 *\let\paperwidth\paperwidthsave
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphicx.sty
-Package: graphicx 2024/12/31 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
+Package: graphicx 2026-05-17 v1.2e Enhanced LaTeX Graphics (DPC,SPQR)
 
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/graphics\keyval.sty
-Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+Package: keyval 2026-05-17 v1.15 key=value parser (DPC)
 \KV@toks@=\toks17
 )
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/graphics\graphics.sty
-Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+Package: graphics 2026-05-17 v1.4h Standard LaTeX Graphics (DPC,SPQR)
 
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/graphics\trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
@@ -51,14 +51,14 @@ Package graphics Info: Driver file: dvips.def on input line 106.
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/graphics-def\dvips.def
 File: dvips.def 2025/01/21 v3.2a Graphics/color driver for dvips
 ))
-\Gin@req@height=\dimen149
-\Gin@req@width=\dimen150
+\Gin@req@height=\dimen151
+\Gin@req@width=\dimen152
 )
 *\newbox\ASYbox
 \ASYbox=\box53
 
 *\newdimen\ASYdimen
-\ASYdimen=\dimen151
+\ASYdimen=\dimen153
 
 *\def\ASYprefix{C:\\Users\\nir\_s\\peaktogether-website\\quake\\levels\\princip
 ia\_bk1\_inverse\_square\\pack\\\_bake\\}
@@ -112,12 +112,12 @@ ia\_bk1\_inverse\_square\\pack\\\_bake\\}
 
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/l3backend\l3backend-dvi
 ps.def
-File: l3backend-dvips.def 2025-10-09 L3 backend support: dvips
+File: l3backend-dvips.def 2026-02-18 L3 backend support: dvips
 \l__pdfannot_backend_content_box=\box54
 \l__pdfannot_backend_model_box=\box55
-\g__pdfannot_backend_int=\count283
-\g__pdfannot_backend_link_int=\count284
-\g__pdfannot_backend_link_sf_int=\count285
+\g__pdfannot_backend_int=\count284
+\g__pdfannot_backend_link_int=\count285
+\g__pdfannot_backend_link_sf_int=\count286
 )
 (C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk1_inverse_square\
 pack\_bake\texput.aux)
@@ -940,4 +940,4 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 *\immediate\write16{>dim(\the\ht\ASYbox)dim}
 >dim(8.2pt)dim
 
-*
+*\i

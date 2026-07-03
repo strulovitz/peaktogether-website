@@ -1,4 +1,4 @@
-// figure.law_2.f1.asy -- Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
+// figure.law_2.f1.asy -- Law II --- The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
 // Self-contained convention. Compile: asy -u "highlight=k" figure.law_2.f1.asy
 // highlight=-1 => OFF (all black). highlight=k => step k colors + step k heart Stabilo.
 
