@@ -1029,11 +1029,12 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # 8) DEMON — revealed with the alcove; bobs while alive; explodes on kill.
     #    Drawn last: it overwrites u_mvp per-sphere (view @ model), so nothing
     #    after it depends on the shared view mvp. Opaque -> blend off, depth on.
-    if door_open and getattr(room, "enemy", None) is not None and room.room_id not in state.cleared:
+    if door_open and getattr(room, "enemy", None) is not None:
         if room.room_id not in _DEMON_POS:      # resumed game (spawn event missed)
             demon_on_spawned(room.room_id, room.enemy.spawn_xyz)
         t_death = _DEMON_DEATH_CLOCK.get(room.room_id)   # None while alive
-        if not (t_death is not None and demonmod.is_gone(t_death)):
+        cleared_and_gone = room.room_id in state.cleared and (t_death is None or demonmod.is_gone(t_death))
+        if not (t_death is not None and demonmod.is_gone(t_death)) and not cleared_and_gone:
             spheres = _room_demon_spheres(room)
             renderer = _get_demon_renderer(ctx, prog)
             alive_t = _DEMON_ALIVE_CLOCK.get(room.room_id, 0.0)
