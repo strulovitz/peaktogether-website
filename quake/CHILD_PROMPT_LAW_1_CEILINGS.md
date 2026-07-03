@@ -1,6 +1,20 @@
 # CHILD PROMPT — law_1: Write the FULL .room file from scratch
 
-Build the complete Quake `.room` file for Law I.
+You are building content for a game where the player walks through Newton's Principia as a 3D dungeon. Each "room" is one idea from the book. The player shoots panels on the walls to reveal colored text/figures, kills a demon, and then the room's ceiling equations appear in blood-red.
+
+## The room: Law I (Inertia)
+
+You are writing a complete `.room` text file. Here is Newton's actual text from the 1729 Motte translation:
+
+---
+
+**LAW I.**
+
+*Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impress'd thereon.*
+
+PROJECTILES persevere in their motions, so far as they are not retarded by the resistance of the air, or impelled downwards by the force of gravity. A top, whose parts by their cohesion are perpetually drawn aside from rectilinear motions, does not cease its rotation, otherwise than as it is retarded by the air. The greater bodies of the planets and comets, meeting with less resistance in more free spaces, preserve the motions both progressive and circular for a much longer time.
+
+---
 
 ## The format
 
@@ -8,38 +22,41 @@ Build the complete Quake `.room` file for Law I.
 room <id>
 kind text
 import <citation>
-caption <one line>
+caption <one line — Newton's own statement of the law>
 final <step#>
 
 station <n>
   ceiling <eq_id> :: <LaTeX>
-  gloss <one sentence>
+  gloss <one sentence — what this station teaches>
   color <name> <#hex>
   panel
-    phrase <colorname> "<book words>" [heart]
+    phrase <colorname> "<Newton's exact words>" [heart]
   text
-    <prose with {colorname|words} spans and $math$>
+    <explanation with {colorname|words} spans and $math$>
 ```
 
-The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation — a LaTeX formula capturing the key mathematical or physical result of that step, which will be displayed in blood-red on the ceiling above that station when the player kills the demon. Colors are local per station. The `heart` marks the current step's key element. Uncolored = black. Never grey.
+- `ceiling`: goes INSIDE each station. A LaTeX formula capturing the key result of THAT step, displayed in blood-red on the ceiling when the demon dies.
+- `color`: declared per station. Each important concept gets a distinct color. Matching words in the text use `{colorname|words}`.
+- `heart`: marks the CURRENT step's key element — it gets a bright Stabilo highlighter. One `heart` per station.
+- Uncolored elements are black. Never grey.
+- Text panels should be 3–4+ sentences. Explain, don't just repeat.
 
-## The room: law_1
+## Example ceiling equation (from a different room)
 
-Newton, Principia, Axioms or Laws of Motion, Law I:
-**Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impress'd.**
-
-This is the principle of inertia. Newton gives three physical illustrations.
+```
+ceiling   eq0 :: \frac{p_i}{q_i} \to k \;\Longrightarrow\; \frac{\sum p_i}{\sum q_i} = k
+```
 
 ## The 4 stations
 
-**Station 1:** The statement of Law I itself. Three key concepts: rest (a state of staying still), uniform straight-line motion, and impressed forces (which alone can change either state). The heart is "forces impress'd" — the cause of change.
+**Station 1 — The law itself:** Newton's statement of inertia. Three concepts: rest, uniform straight-line motion, and impressed forces as the only cause of change. The heart is "forces impress'd."
 
-**Station 2:** Newton's first illustration. A spinning top does not cease its rotation except as retarded by the resistance of the air. Without air resistance, it would spin forever. The heart is "a spinning top."
+**Station 2 — The spinning top:** Newton's first illustration — a top persists in rotation perpetually, retarded only by air. Without air it would spin forever. The heart is "a spinning top."
 
-**Station 3:** Newton's second illustration. The planets and comets — vast bodies moving in spaces with very little resistance — preserve both their progressive and circular motions for immensely long times. The heart is "the planets and comets."
+**Station 3 — Planets and comets:** Newton's second illustration — the vast bodies of planets and comets move in nearly empty space, preserving both progressive and circular motions for immense times with almost no resistance. The heart is "the planets and comets."
 
-**Station 4:** Newton's third illustration. Projectiles — stones, arrows, cannonballs — keep moving except as hindered by air resistance and pulled downward by gravity. The heart is "projectiles."
+**Station 4 — Projectiles:** Newton's third illustration — stones, arrows, cannonballs keep moving except as hindered by air resistance and gravity. The heart is "projectiles."
 
 ## What you produce
 
-The complete `.room` file — header, 4 stations, everything from scratch. Each station MUST contain its own `ceiling` line. Use the name `law_1` as the room id.
+The complete `.room` file. 4 stations, each with its own `ceiling` line. Room id: `law_1`. Kind: `text`. Import: "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law I."
