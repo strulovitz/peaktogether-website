@@ -224,6 +224,7 @@ class Pack:
     manifest: Manifest
     palette: Palette
     asset_dir: str
+    room_names: dict[str, str] = field(default_factory=dict)
 
 
 # --- NavQuery protocol (implemented by nav_collision builders) ------------------

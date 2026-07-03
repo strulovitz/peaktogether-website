@@ -739,6 +739,131 @@ def _upload_texture(ctx, asset_id, pack):
     _texture_cache[asset_id]=tex
     return tex
 
+_GOLD_TEX_CACHE: dict = {}  # key -> texture | None
+
+
+def _bake_gold_texture(ctx, text: str, font_size: int):
+    """Bake golden text to a GL texture using Pillow. Cached. Returns Texture or None."""
+    key = f"gold_{text}_{font_size}"
+    if key in _GOLD_TEX_CACHE:
+        return _GOLD_TEX_CACHE[key]
+    tex = None
+    try:
+        from PIL import Image, ImageDraw, ImageFont
+        font = None
+        for fp in ("C:/Windows/Fonts/segoeuib.ttf",
+                   "segoeuib.ttf",
+                   "C:/Windows/Fonts/segoeui.ttf",
+                   "C:/Windows/Fonts/arialbd.ttf",
+                   "arialbd.ttf"):
+            try:
+                font = ImageFont.truetype(fp, font_size)
+                break
+            except Exception:
+                continue
+        if font is None:
+            font = ImageFont.load_default()
+        tmp = Image.new("RGBA", (1, 1))
+        tmpd = ImageDraw.Draw(tmp)
+        bb = tmpd.textbbox((0, 0), text, font=font)
+        tw, th = bb[2] - bb[0], bb[3] - bb[1]
+        pad = 10
+        img = Image.new("RGBA", (tw + pad * 2, th + pad * 2), (0, 0, 0, 0))
+        draw = ImageDraw.Draw(img)
+        draw.text((pad - bb[0], pad - bb[1]), text, fill=(255, 215, 0, 255), font=font)
+        img = img.transpose(Image.FLIP_TOP_BOTTOM).transpose(Image.FLIP_LEFT_RIGHT)
+        tex = ctx.texture(img.size, 4, img.tobytes())
+    except Exception:
+        tex = None
+    _GOLD_TEX_CACHE[key] = tex
+    return tex
+
+
+_GOLD_VAOS: dict = {}  # room_id -> {"doors": [(PanelQuad, VAO), ...], "floor": (PanelQuad, VAO) | None}
+
+
+def _build_door_label_quads(room, pack):
+    """Build PanelQuads for golden door titles showing neighbor room names."""
+    quads = []
+    W, H, D = room.dimensions_m
+    uv = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], dtype=np.float32)
+    names = getattr(pack, "room_names", {}) or {}
+    up = np.array([0.0, 1.0, 0.0], dtype=np.float32)
+    for door in room.doors:
+        neighbor_name = names.get(door.neighbor_id, door.neighbor_id)
+        wall = door.wall
+        along, inward = _wall_basis(wall)
+        along_coord = _wall_along_coord(wall, door.center_xyz)
+        label_y = door.height_m + 0.18
+        label_center_xyz = _point_on_wall(wall, along_coord, label_y, W, D)
+        label_w = door.width_m
+        label_h = 0.25
+        c = np.asarray(label_center_xyz, dtype=np.float32) + inward * 0.012
+        hw, hh = label_w / 2.0, label_h / 2.0
+        bl = c - along * hw - up * hh
+        br = c + along * hw - up * hh
+        tr = c + along * hw + up * hh
+        tl = c - along * hw + up * hh
+        corners = np.array([bl, br, tr, tl], dtype=np.float32)
+        quads.append(PanelQuad(
+            pair_id=f"door_label_{door.edge_id}",
+            is_drawing=True,
+            off_asset_id=f"GOLD:{neighbor_name}",
+            on_asset_id=f"GOLD:{neighbor_name}",
+            corners=corners,
+            uv=uv.copy(),
+        ))
+    return quads
+
+
+def _build_floor_label_quad(room, pack):
+    """Build a PanelQuad for the room name on the floor centre. Returns PanelQuad or None."""
+    names = getattr(pack, "room_names", {}) or {}
+    room_name = names.get(room.room_id, room.room_id)
+    if not room_name:
+        return None
+    W, H, D = room.dimensions_m
+    uv = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], dtype=np.float32)
+    label_w = min(W * 0.6, 5.0)
+    label_h = 0.55
+    label_y = 0.015
+    cx, cz = 0.0, 0.0
+    hw, hh = label_w / 2.0, label_h / 2.0
+    bl = np.array([cx - hw, label_y, cz - hh], dtype=np.float32)
+    br = np.array([cx + hw, label_y, cz - hh], dtype=np.float32)
+    tr = np.array([cx + hw, label_y, cz + hh], dtype=np.float32)
+    tl = np.array([cx - hw, label_y, cz + hh], dtype=np.float32)
+    corners = np.array([bl, br, tr, tl], dtype=np.float32)
+    return PanelQuad(
+        pair_id="floor_label",
+        is_drawing=True,
+        off_asset_id=f"GOLD:{room_name}",
+        on_asset_id=f"GOLD:{room_name}",
+        corners=corners,
+        uv=uv.copy(),
+    )
+
+
+def _ensure_gold_vaos(ctx, prog, room, pack):
+    """Build/cache golden-text VAOs for this room (door labels + floor name)."""
+    rid = room.room_id
+    if rid in _GOLD_VAOS:
+        return _GOLD_VAOS[rid]
+    door_quads = _build_door_label_quads(room, pack)
+    floor_quad = _build_floor_label_quad(room, pack)
+    door_vaos = []
+    for dq in door_quads:
+        pos, uvs = _quad_arrays(dq)
+        door_vaos.append((dq, _tris_vao(ctx, prog, pos, uvs)))
+    floor_vao = None
+    if floor_quad is not None:
+        pos, uvs = _quad_arrays(floor_quad)
+        floor_vao = (_tris_vao(ctx, prog, pos, uvs), floor_quad)
+    result = {"doors": door_vaos, "floor": floor_vao}
+    _GOLD_VAOS[rid] = result
+    return result
+
+
 def _tris_vao(ctx, prog, tris, uvs):
     pos=tris.reshape(-1,3).astype(np.float32)
     uv =uvs.reshape(-1,2).astype(np.float32)
@@ -881,7 +1006,27 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
         ctx.disable(moderngl.BLEND)
         _set(prog,"u_use_tint",0)
 
-    # 7) DEMON — revealed with the alcove; bobs while alive; explodes on kill.
+    # 7) golden text — door titles + floor room name (blended, textured)
+    gold = _ensure_gold_vaos(ctx, prog, room, pack)
+    ctx.enable(moderngl.BLEND); ctx.blend_func = (moderngl.SRC_ALPHA, moderngl.ONE_MINUS_SRC_ALPHA)
+    _set(prog, "u_use_tint", 0)
+    _set_mvp(prog, view)
+    for q, vao in gold["doors"]:
+        neighbor_name = q.off_asset_id.replace("GOLD:", "")
+        tex = _bake_gold_texture(ctx, neighbor_name, 36)
+        if tex is not None:
+            tex.use(0); _set(prog, "u_tex", 0)
+        vao.render()
+    if gold["floor"] is not None:
+        fvao, fq = gold["floor"]
+        room_name = fq.off_asset_id.replace("GOLD:", "")
+        tex = _bake_gold_texture(ctx, room_name, 72)
+        if tex is not None:
+            tex.use(0); _set(prog, "u_tex", 0)
+        fvao.render()
+    ctx.disable(moderngl.BLEND)
+
+    # 8) DEMON — revealed with the alcove; bobs while alive; explodes on kill.
     #    Drawn last: it overwrites u_mvp per-sphere (view @ model), so nothing
     #    after it depends on the shared view mvp. Opaque -> blend off, depth on.
     if door_open and getattr(room, "enemy", None) is not None:

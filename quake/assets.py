@@ -10,6 +10,7 @@ All shared types come from contracts.py — never redefined here.
 from __future__ import annotations
 
 import glob
+import json
 import os
 
 from contracts import (
@@ -118,10 +119,25 @@ def load_pack(dir: str) -> Pack:
     # ------------------------------------------------------------------ #
     # 7. asset_dir == dir (relative paths resolve from here).
     # ------------------------------------------------------------------ #
+    # 8. Load concept_graph.json for human-readable room names.
+    # ------------------------------------------------------------------ #
+    room_names: dict[str, str] = {}
+    cg_path = os.path.join(dir, "..", "concept_graph.json")
+    if not os.path.isfile(cg_path):
+        cg_path = os.path.join(dir, "concept_graph.json")
+    try:
+        with open(cg_path, "r", encoding="utf-8") as f:
+            cg = json.load(f)
+        for node in cg.get("nodes", []):
+            room_names[node["id"]] = node.get("name", node["id"])
+    except Exception:
+        pass
+    # ------------------------------------------------------------------ #
     return Pack(
         floorplan=floorplan,
         rooms=rooms,
         manifest=manifest,
         palette=palette,
         asset_dir=dir,
+        room_names=room_names,
     )
