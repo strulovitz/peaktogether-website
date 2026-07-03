@@ -844,6 +844,35 @@ def _build_floor_label_quad(room, pack):
     )
 
 
+def _build_station_number_quads(room):
+    """Build PanelQuads for gold station numbers (1,2,3...) in upper-left of text panels."""
+    quads = []
+    uv = np.array([[0.0, 0.0], [1.0, 0.0], [1.0, 1.0], [0.0, 1.0]], dtype=np.float32)
+    for i, pp in enumerate(room.panel_pairs):
+        tp = pp.text_placement
+        wall = tp.wall
+        along, inward = _wall_basis(wall)
+        up = np.array([0.0, 1.0, 0.0], dtype=np.float32)
+        hw, hh = tp.width_m / 2.0, tp.height_m / 2.0
+        c = np.asarray(tp.center_xyz, dtype=np.float32)
+        # upper-left corner of text panel
+        tl = c - along * hw * 0.85 + up * hh * 0.85 + inward * 0.015
+        nw, nh = 0.25, 0.20
+        bl = tl - up * nh
+        br = tl + along * nw - up * nh
+        tr = tl + along * nw
+        corners = np.array([bl, br, tr, tl], dtype=np.float32)
+        quads.append(PanelQuad(
+            pair_id=f"station_num_{i+1}",
+            is_drawing=True,
+            off_asset_id=f"GOLD:{i+1}",
+            on_asset_id=f"GOLD:{i+1}",
+            corners=corners,
+            uv=uv.copy(),
+        ))
+    return quads
+
+
 def _ensure_gold_vaos(ctx, prog, room, pack):
     """Build/cache golden-text VAOs for this room (door labels + floor name)."""
     rid = room.room_id
@@ -851,6 +880,7 @@ def _ensure_gold_vaos(ctx, prog, room, pack):
         return _GOLD_VAOS[rid]
     door_quads = _build_door_label_quads(room, pack)
     floor_quad = _build_floor_label_quad(room, pack)
+    station_quads = _build_station_number_quads(room)
     door_vaos = []
     for dq in door_quads:
         pos, uvs = _quad_arrays(dq)
@@ -859,7 +889,11 @@ def _ensure_gold_vaos(ctx, prog, room, pack):
     if floor_quad is not None:
         pos, uvs = _quad_arrays(floor_quad)
         floor_vao = (_tris_vao(ctx, prog, pos, uvs), floor_quad)
-    result = {"doors": door_vaos, "floor": floor_vao}
+    station_vaos = []
+    for sq in station_quads:
+        pos, uvs = _quad_arrays(sq)
+        station_vaos.append((sq, _tris_vao(ctx, prog, pos, uvs)))
+    result = {"doors": door_vaos, "floor": floor_vao, "stations": station_vaos}
     _GOLD_VAOS[rid] = result
     return result
 
@@ -1030,6 +1064,12 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
         if tex is not None:
             tex.use(0); _set(prog, "u_tex", 0)
         fvao.render()
+    for q, vao in gold.get("stations", []):
+        num = q.off_asset_id.replace("GOLD:", "")
+        tex = _bake_gold_texture(ctx, num, 24)
+        if tex is not None:
+            tex.use(0); _set(prog, "u_tex", 0)
+        vao.render()
     ctx.disable(moderngl.BLEND)
 
     # 8) DEMON — revealed with the alcove; bobs while alive; explodes on kill.
