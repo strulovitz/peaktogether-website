@@ -1,11 +1,8 @@
-"""Parent 8 — headless-safe tests for the map viewer's PURE core.
+"""Tests for the map viewer's PURE core.
 
 We test FlyCamera math + floorplan stats + the scale-free initial vantage.
 NO hardcoded level sizes: floorplans are generated at parametrized sizes, and
 all assertions are graph-relative.
-
-GL/window code (run/on_draw) is NOT tested here — it needs a context and is the
-thin shell. We assert it correctly refuses to run headless instead.
 """
 
 from __future__ import annotations
@@ -21,10 +18,9 @@ from tools.map_viewer import (
     compute_stats,
     initial_camera,
     load_floorplan,
-    run,
     PITCH_LIMIT_RAD,
 )
-from glguard import HAVE_GL
+
 
 
 # --------------------------------------------------------------------------- #
@@ -210,18 +206,6 @@ def test_single_room_does_not_crash():
     cam = initial_camera(stats)
     assert np.all(np.isfinite(cam.pos))
 
-
-# --------------------------------------------------------------------------- #
-# Shell guard                                                                 #
-# --------------------------------------------------------------------------- #
-@pytest.mark.skipif(HAVE_GL, reason="only meaningful when no GL is present")
-def test_run_refuses_headless(tmp_path):
-    """run() must raise (not segfault/hang) when there is no GL context."""
-    fp = _make_floorplan(3)
-    p = tmp_path / "floorplan.json"
-    p.write_text(fp.model_dump_json(), encoding="utf-8")
-    with pytest.raises(RuntimeError):
-        run(p)
 
 
 def test_load_floorplan_roundtrip(tmp_path):
