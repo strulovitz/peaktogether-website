@@ -23,6 +23,7 @@ from __future__ import annotations
 
 import math
 import os
+import time
 from dataclasses import dataclass, field
 
 import numpy as np
@@ -383,6 +384,12 @@ def _flip_u(uv: np.ndarray) -> np.ndarray:
     out = uv.copy()
     out[:, 0] = 1.0 - out[:, 0]
     return out
+
+
+def _expand_quad(corners: np.ndarray, factor: float) -> np.ndarray:
+    """Scale a (4,3) quad about its own center by `factor` (for the glow halo)."""
+    c = corners.mean(axis=0)
+    return (c + (corners - c) * factor).astype(np.float32)
 
 
 def _build_panel_quads(room: RoomRuntime):
@@ -757,6 +764,24 @@ def _get_room_vaos(ctx, prog, room):
     for q in mesh.ceiling_quads:
         pos,uvs=_quad_arrays(q)
         d["ceiling"].append((q,_tris_vao(ctx,prog,pos,uvs)))
+    # final-proof-panel glow: a larger quad sitting just BEHIND the final
+    # drawing panel (the hidden door). Rendered pulsing-gold once that panel is
+    # lit, so the player knows which panel opens the door.
+    d["final_pair"]=room.final_pair_id
+    d["final_glow"]=None
+    _fwall=None
+    for pr in room.panel_pairs:
+        if pr.pair_id==room.final_pair_id:
+            _fwall=pr.drawing_placement.wall; break
+    if _fwall is not None:
+        _,_inward=_wall_basis(_fwall)
+        for q in mesh.panel_quads:
+            if q.pair_id==room.final_pair_id and q.is_drawing:
+                gc=_expand_quad(q.corners,1.20) - _inward*0.012  # slightly behind panel
+                gpos=np.array([gc[0],gc[1],gc[2], gc[0],gc[2],gc[3]],dtype=np.float32).reshape(-1,3,3)
+                guv=np.zeros((2,3,2),np.float32)
+                d["final_glow"]=_tris_vao(ctx,prog,gpos,guv)
+                break
     _vao_cache[rid]=d
     return d
 
@@ -801,6 +826,16 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # 4) alcove — revealed ONLY once the hidden door has opened (demon appears)
     if door_open and vaos["alcove"] is not None:
         _set(prog,"u_tint",ALCOVE_RGB); vaos["alcove"].render()
+
+    # final-proof-panel glow: once the final panel is lit (and before the door
+    # opens), it pulses gold so the player knows THIS panel opens the door.
+    if (not door_open) and vaos.get("final_glow") is not None \
+            and panel_is_on(vaos.get("final_pair"), state.lit, room):
+        pulse = 0.55 + 0.45 * math.sin(time.perf_counter() * 3.0)
+        _set(prog,"u_use_tint",2)
+        _set(prog,"u_tint",(1.0*pulse, 0.8*pulse, 0.12*pulse))
+        vaos["final_glow"].render()
+        _set(prog,"u_use_tint",0)
 
     # 2+5) panels (textured, blend ON for transparent PNGs)
     ctx.enable(moderngl.BLEND)
