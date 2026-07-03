@@ -3,7 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VI; Plate 2, Fig. 1.
 caption   As a point B on a curve approaches the point of contact A, the angle between the chord AB and the tangent AD is diminished without limit and ultimately vanishes.
 final     3
-ceiling   eq0 :: B \to A \;\Rightarrow\; \angle BAD \to 0
+ceiling   eq0 :: \text{arc } ACB : \text{ continuous curvature at } A
+ceiling   eq1 :: B \to A \;\Rightarrow\; \lvert AB \rvert \to 0
+ceiling   eq2 :: B \to A \;\Rightarrow\; \angle BAD \to 0
 
 station 1
   gloss   The arc ACB rising from A, given in position, with smooth continuous curvature.

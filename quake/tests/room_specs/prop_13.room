@@ -3,7 +3,10 @@ kind geometry
 import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XIII; Plate 5, Figure 3.
 caption If a body moves in the perimeter of a parabola, find the law of the centripetal force tending to the focus.
 final 4
-ceiling prop13 :: Qv^2 = 4PS\cdot Pv \qquad F \propto \dfrac{1}{SP^2}
+ceiling eq0 :: \text{parabola: focus } S,\ \text{radius } SP,\quad F \to S
+ceiling eq1 :: QR \parallel SP,\quad QT \perp SP,\quad Qv \parallel \text{tangent},\ Qv \cap PG = v
+ceiling eq2 :: QR = Pv \implies Qv^2 = 4PS\cdot Pv = 4PS\cdot QR
+ceiling eq3 :: \lim_{Q\to P}\frac{Qv}{Qx}=1,\ \ QT^2 \propto SP\cdot QR \implies F \propto \dfrac{1}{SP^2}
 
 station 1
   gloss A body moves on a parabola with force directed to the focus S.

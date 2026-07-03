@@ -3,7 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma XI; Plate 2, Fig. 4.
 caption   The evanescent subtense of the angle of contact, in all curves of finite curvature, is ultimately in the duplicate ratio of the subtense of the conterminate arc.
 final     3
-ceiling   lem11 :: BD \propto AB^{2} \;(\text{ultimately})
+ceiling   eq0 :: \angle BAD \to 0,\quad \text{arc } AB \sim AB \;(\text{Lem. VI, VII})
+ceiling   eq1 :: A,B,G \text{ concyclic on diam. } AG \;\Rightarrow\; AB^{2}=AG\times BD
+ceiling   eq2 :: GJ\to 0 \Rightarrow \frac{AG}{Ag}\to 1 \Rightarrow \frac{AB^{2}}{Ab^{2}}=\frac{BD}{bd}
 
 station 1
   gloss   The smooth curve through A with its tangent AD; a point B slides along the arc toward A.

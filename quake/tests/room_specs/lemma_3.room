@@ -3,7 +3,8 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma III; Plate 1, Fig. 6.
 caption   The same ultimate equality of inscribed and circumscribed figures holds even when the breadths of the parallelograms are unequal.
 final     2
-ceiling   eq0 :: FAaf > (\text{circ}-\text{insc}) \cdot AF\to0 \;\Rightarrow\; FAaf\to0
+ceiling   eq0 :: \text{circ}-\text{insc} \;=\; \textstyle\sum (\text{unequal breadths})\;\longrightarrow\;0
+ceiling   eq1 :: FAaf \;>\; (\text{circ}-\text{insc}), \quad AF\to0 \;\Rightarrow\; FAaf\to0 \;\Rightarrow\; \text{insc}=\text{circ}
 
 station 1
   gloss   The curve aE over the baseline AE, with stepped rectangles of unequal breadths AB, BC, CD standing under the curve.

@@ -3,8 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IV; Plate 1, Fig. 7.
 caption   If corresponding parallelograms in two figures share one ultimate ratio each-to-each, then the whole figures are in that same ratio.
 final     3
-ceiling   eq0 :: \frac{p_i}{q_i} \;\longrightarrow\; k \quad (\text{each to each, ultimately})
-ceiling   eq1 :: \frac{\sum p_i}{\sum q_i} = k \;\longrightarrow\; \frac{AacE}{PprT} = k \quad (\text{by Lem. 3})
+ceiling   eq0 :: AacE = p_1 + p_2 + p_3 \quad (\text{three strips on equal bases } AB,BC,CE)
+ceiling   eq1 :: PprT = q_1 + q_2 + q_3 \quad (\text{equal count of strips on } PQ,QR,RT)
+ceiling   eq2 :: \frac{p_i}{q_i} \to k \;\Longrightarrow\; \frac{\sum p_i}{\sum q_i} = k \;\Longrightarrow\; \frac{AacE}{PprT} = k \quad (\text{by Lem. 3})
 
 station 1
   gloss   The first figure AacE with its rank of inscribed parallelograms on equal bases.

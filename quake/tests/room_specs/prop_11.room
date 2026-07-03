@@ -3,7 +3,11 @@ kind geometry
 import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XI; Plate 4, Figure 2.
 caption If a body revolves in an ellipse, find the law of the centripetal force tending to the focus of the ellipse.
 final 5
-ceiling prop11 :: F \propto \dfrac{1}{SP^2}
+ceiling eq0 :: F \propto \dfrac{1}{SP^2}
+ceiling eq1 :: PS + PH = 2AC \;\Rightarrow\; EP = AC
+ceiling eq2 :: Pv \cdot vG : Qv^2 = PC^2 : CD^2
+ceiling eq3 :: L = \dfrac{2\,BC^2}{AC}, \qquad CD^2 : CB^2 \;\text{const (Lem. XII)}
+ceiling eq4 :: \dfrac{L \cdot QR}{QT^2} = SP^2 \;\Rightarrow\; F \propto \dfrac{1}{SP^2}
 
 station 1
   gloss An ellipse orbit with the force directed to focus S; P is the revolving body.

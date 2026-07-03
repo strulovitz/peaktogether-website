@@ -3,7 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition II (reuses Prop. I figure).
 caption   Every body that moves in a curve and describes areas proportional to the times about a point is urged by a centripetal force directed to that point.
 final 3
-ceiling prop2 :: \text{areas} \propto \text{times} \;\Rightarrow\; F \to S
+ceiling eq0 :: \triangle SAB = \triangle SBC = \triangle SCD \;\;(\text{areas} \propto \text{times, GIVEN})
+ceiling eq1 :: \triangle SBC = \triangle SBc \;\overset{\text{Eucl. I.40}}{\Longrightarrow}\; cC \parallel BS \;\Rightarrow\; F \parallel BS
+ceiling eq2 :: \forall\, \text{vertex}: \; F \parallel \text{(radius)} \;\Rightarrow\; F \to S \;\;(\text{centripetal})
 
 station 1
   gloss The given: a body sweeps equal triangles SAB, SBC, SCD about a fixed centre S in equal times.

@@ -3,7 +3,10 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition I; Plate 2, Fig. 5.
 caption   The areas which revolving bodies describe by radii drawn to an immoveable centre of force are proportional to the times in which they are described.
 final     4
-ceiling   prop1 :: \dfrac{dA}{dt} = \text{const}\;( \text{areas} \propto \text{times})
+ceiling   eq0 :: \Delta t_1 = \Delta t_2 = \cdots \quad\Rightarrow\quad AB,\,BC,\,CD,\ldots \text{ (inertial steps, Law I)}
+ceiling   eq1 :: A_{\triangle}(SAB) = A_{\triangle}(SBC) = A_{\triangle}(SCD) = \cdots
+ceiling   eq2 :: Bc = AB,\ \ Cc \parallel SB \;\Rightarrow\; [SBC] = [SBc] = [SAB]
+ceiling   eq3 :: \lim_{\Delta t \to 0}\ \text{polygon} \to \text{curve},\quad \dfrac{dA}{dt} = \text{const}\;(\text{areas} \propto \text{times})
 
 station 1
   gloss   The centre of force S is fixed; the body flies in straight polygonal jumps ABCDEF, one per equal time-slice.

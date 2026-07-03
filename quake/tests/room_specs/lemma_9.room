@@ -3,7 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IX; Plate 2.
 caption   The areas of triangles formed by ordinates under a curve are ultimately one to the other in the duplicate ratio of the sides.
 final     3
-ceiling   lem9 :: \triangle ABD : \triangle ACE \to AD^2 : AE^2
+ceiling   eq0 :: \triangle ABD,\ \triangle ACE \ \text{under curve } ABC \text{ on base } AE
+ceiling   eq1 :: Ad:Ae = AD:AE,\quad \triangle ABD:\triangle ACE = Abd:Ace
+ceiling   eq2 :: Afd:Age = Ad^2:Ae^2 = AD^2:AE^2 \implies \triangle ABD:\triangle ACE \to AD^2:AE^2
 
 station 1
   gloss   A curve crosses a baseline at A; ordinates drop from two curve points to form two shrinking triangles whose area ratio we seek.

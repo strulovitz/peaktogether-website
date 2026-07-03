@@ -3,7 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VII; Plate 2, Fig. 1.
 caption   The ultimate ratio of the arc, the chord, and the tangent, any one to any other, is the ratio of equality.
 final     3
-ceiling   eq0 :: \text{arc}:\text{chord}:\text{tangent}\to 1:1:1
+ceiling   eq0 :: B \to A \;\Rightarrow\; \{\text{arc } ACB,\; AB,\; AD\} \to 0
+ceiling   eq1 :: Acb \sim ACB,\quad bd \parallel BD,\quad Ab,\,Ad \text{ finite}
+ceiling   eq2 :: \angle dAb \to 0 \;\Rightarrow\; \text{arc}:\text{chord}:\text{tangent}\to 1:1:1
 
 station 1
   gloss   The original arc ACB rising from A, with its chord AB and tangent AD, exactly the figure of the preceding lemma.

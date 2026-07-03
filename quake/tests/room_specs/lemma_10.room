@@ -3,7 +3,8 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma X; Plate 2.
 caption   The spaces which a body describes from rest under any finite force are, from the very beginning of the motion, in the duplicate ratio of the times.
 final     2
-ceiling   lem10 :: s \propto t^2 \qquad F \propto \frac{s}{t^2}\;(\text{Cor. }4)
+ceiling   eq0 :: \text{time}=AD,\,AE \qquad \text{velocity}=DB,\,EC
+ceiling   eq1 :: \triangle ABD : \triangle ACE \to AD^2 : AE^2 \;\Rightarrow\; s \propto t^2 \qquad F \propto \frac{s}{t^2}\;(\text{Cor. }4)
 
 station 1
   gloss   The same figure as Lemma IX, now read as physics: the baseline is TIME, the ordinates are VELOCITY, and the curve is the growth of speed under a force.
