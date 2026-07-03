@@ -265,12 +265,19 @@ def build_room_runtime(
             i = len(ceiling_rts)
             x_offset = (i - len(list(room.ceiling_equations)) / 2.0 + 0.5) * 2.0
             eq_pos = (x_offset, H - 0.1, 0.0)
+        # Size from actual PNG aspect ratio (not a fixed box)
+        aid = f"{eq.eq_id}.neutral"
+        entry = manifest.assets.get(aid)
+        if entry and entry.px_h > 0:
+            w_m = min((entry.px_w / entry.px_h) * 0.5, 3.0)
+        else:
+            w_m = 1.0
         ceiling_rts.append(
             CeilingEqRT(
                 eq_id=eq.eq_id,
-                asset_id=f"{eq.eq_id}.neutral",
+                asset_id=aid,
                 pos_xyz=eq_pos,
-                size_m=(1.0, 0.5),
+                size_m=(w_m, 0.5),
             )
         )
 
