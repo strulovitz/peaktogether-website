@@ -21,7 +21,7 @@ station <n>
     <prose with {colorname|words} spans and $math$>
 ```
 
-The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation. Geometry ops take `color=NAME heart label=$..$ at=DIR marker=dot stabilo=#hex @(x,y)` for free points. Colors are local per station. Uncolored = black. Never grey.
+The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation — a LaTeX formula capturing the key mathematical result of that step, displayed in blood-red on the ceiling above that station when the demon dies. Geometry ops take `color=NAME heart label=$..$ at=DIR marker=dot stabilo=#hex @(x,y)` for free points. Colors are local per station. Uncolored = black. Never grey.
 
 ## The room: lemma_2
 

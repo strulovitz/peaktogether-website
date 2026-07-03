@@ -21,7 +21,7 @@ station <n>
     <prose with {colorname|words} spans and $math$>
 ```
 
-The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation. Colors are local per station. The `heart` marks the current step's key element. Uncolored = black. Never grey.
+The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation — a LaTeX formula capturing the key mathematical or physical result of that step, which will be displayed in blood-red on the ceiling above that station when the player kills the demon. Colors are local per station. The `heart` marks the current step's key element. Uncolored = black. Never grey.
 
 ## The room: law_1
 
