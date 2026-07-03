@@ -313,11 +313,13 @@
 5. `parallel()` / `perp()` used geometry-module point constructors whose `explicit` keyword blocked pair variables → switched to basic pair arithmetic (`path = A--(A+10*unit(dir))`).
 **Result:** 20/20 .asy compile. Full 6-stage build pipeline re-run: 438 PNGs, 219 assets, 20 room runtimes. 468/468 green.
 
-✅ **AMENDMENT — Ceiling equations per-station (in progress), July 3, 2026.**
-**Problem:** 15 of 20 rooms had only 1 ceiling equation regardless of station count. Root cause: DeepSeek's child prompts showed a single `ceiling` example line; children faithfully copied one-per-room. Also: 4 rooms (law_1, law_2, prop_4, lemma_2) were DeepSeek-written, not child-written, and had deficient ceiling lines.
-**Fixes applied:**
-1. **Position:** `build/room_maker.py` now places each ceiling equation near its station's wall on the ceiling (index-matched to panel_pairs), 0.7m inward from the wall. Was: `(x_offset, H-0.1, 0.0)` center. All 20 room runtimes rebuilt.
-2. **Count — ALL 16 child rooms DONE ✅ (verified by file count July 3, 2026):** every child room has station-count == ceiling-count. lemma_3,4,5,6,7,9,10,11,12 + prop_1,2,6,7,11,13,15 all confirmed matching in `tests/room_specs/`.
-3. **DeepSeek-written rooms — 4 rooms need FULL REWRITE from scratch (July 3, 2026):** `law_1`, `law_2`, `prop_4`, `lemma_2` were written by DeepSeek, not children. Each needs a child to write a COMPLETE new .room file (stations, panels, text, colors, and per-station ceiling equations — nothing special about the ceiling, the whole room is rewritten). Prompts: `CHILD_PROMPT_LAW_1_NEW.md`, `CHILD_PROMPT_LAW_2_NEW.md`, `CHILD_PROMPT_PROP_4_NEW.md`, `CHILD_PROMPT_LEMMA_2_NEW.md`. On restart: Nir pastes to Opus → DeepSeek applies → rebuild.
+✅ **AMENDMENT — DeepSeek rooms rewritten + demon/alcove/panel fixes, July 3, 2026 evening.**
+- **4 DeepSeek rooms FULLY REWRITTEN by children** — `law_1`, `law_2`, `prop_4`, `lemma_2`. All have per-station ceilings, proper colors, complete text. All 20/20 rooms now have child-authored .room files. 468/468 green.
+- **Demon bugs FIXED:** (1) dead demon no longer reappears on room re-entry — skips draw when `room_id in state.cleared` but allows death explosion to play. (2) alcove now visible — draws after panels with depth test disabled.
+- **Panel improvements:** (1) Non-geometry panel text: Asymptote font increased from default 10pt → 28pt for text/equation rooms. (2) Ceiling equations use actual PNG aspect ratio for width (capped 3m, was fixed 1m). (3) Gold station numbers (matching door title style) in upper-left of each explanation panel.
+- **Law_2 text FIXED:** em-dash `—` replaced with `---`; display braces `\{` `\}` replaced with `(` `)` in layout; `_expand_text` now strips trailing `\` from `_SPAN_RE` group(2) to prevent unbalanced `\textcolor` braces. Same span-boundary fix applied to `build_all.py` equation figure `@master` rendering. MiKTeX update check run once via Console.
+- **Headless test skip REMOVED** — `@pytest.mark.skipif(HAVE_GL)` deleted; 0 skipped tests.
+
+**Open:** controls hint; law_2 has minor `\$` LaTeX warning (cosmetic, panels work).
 
 *DeepSeek maintains this Commentaries and updates §4–§5 as decisions change. Ask for any scripture, whole or in part, at any time.*

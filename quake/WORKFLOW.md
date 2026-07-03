@@ -704,8 +704,45 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 **Also still open from before:** 4 Asymptote figures fail (tangent/foot) → placeholders; 3 door-bearing mismatches.
 
 ## 12. ON RESTART / AGENTS.md
-🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then `DEEPSEEK_RESTART_CEILING_FIX_GO.md` for exact restart state, then ask Nir what's next.
-🌙 **CURRENT STATE (July 3, 2026 — ceiling eq per-station in progress):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 2 known bugs (dead demon reappears on re-entry; alcove never visible). ✅ **Golden door titles + floor room names DONE.** ✅ **ALL 20 Asymptote figures compile.** ✅ **Ceiling equations now positioned above each station's wall (not room center).** 🔄 **IN PROGRESS: all 16 child rooms are fine. The 4 DeepSeek-written rooms (law_1, law_2, prop_4, lemma_2) each need a child to write a COMPLETE new .room file from scratch — prompts `CHILD_PROMPT_{LAW_1,LAW_2,PROP_4,LEMMA_2}_NEW.md`.** Equation-panel sizing UNRESOLVED. 468 tests green. See self-handoff at `DEEPSEEK_RESTART_CEILING_FIX_GO.md`.
+🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
+🌙 **CURRENT STATE (July 3, 2026 evening):** All 4 child rooms rewritten + rebuilt. Demon bugs FIXED (dead demon on re-entry, alcove never visible). Alcove draws through wall with depth disabled. Ceiling equations sized to actual PNG aspect ratio (capped 3m wide). Non-geometry panel text enlarged (28pt Asymptote font). Station numbers (gold, 1,2,3...) in upper-left of each text panel. Law_2 text panels FIXED (em-dash replaced, trailing `\` stripped from `_expand_text` span boundary). Hidden headless test skip REMOVED. **468/468 green. Pushed.**
+
+### 🌅 EVENING SESSION (July 3, 2026 — bugfix marathon)
+
+**4 child rooms dropped in + rebuilt:**
+- ✅ law_1, law_2, prop_4, lemma_2 — children wrote complete new .room files with per-station ceilings
+- Old color names updated in tests, gold files regenerated for lemma_2
+- All 4 rooms built, 20/20 runtimes
+
+**Demon bugs FIXED:**
+- ✅ Dead demon no longer reappears in cleared rooms — `room.room_id not in state.cleared` check, but allows death animation explosion to play
+- ✅ Alcove now visible — draws after panels with depth test disabled, shows through wall when hidden door opens
+- ✅ Alcove depth restored to 0.4m (1.5m caused visual artifacts from side angles)
+
+**Panel improvements:**
+- ✅ Non-geometry panel text enlarged — `defaultpen(fontsize(28pt))` in Asymptote for text/equation rooms (was 10pt default), plus 1.0m min panel height
+- ✅ Ceiling equations sized to actual PNG aspect ratio — width floats from `(px_w/px_h) * 0.5m`, capped at 3.0m (was fixed 1.0m)
+- ✅ Gold station numbers (1, 2, 3...) in upper-left corner of each explanation panel — same gold style as door titles
+
+**Law_2 text panels FIXED:**
+- Root cause: em-dash `—` triggered MiKTeX on-demand package installation, blocking pdflatex
+- Also: `\{` and `\}` escaped braces in layout caused `_expand_text` to emit unbalanced `\textcolor` braces
+- Fix 1: replaced `—` with `---` in law_2.room
+- Fix 2: replaced `\{` `\}` display braces with `(` `)` around span terms
+- Fix 3: `_expand_text` now strips trailing `\` from group(2) before wrapping in `\textcolor{}{}` — same fix applied to `build_all.py` equation figure rendering earlier
+- MiKTeX update check run once via MiKTeX Console to clear the nag
+- All 4 law_2 text PNGs now render correctly (ON and OFF)
+
+**Housekeeping:**
+- Removed hidden `@pytest.mark.skipif(HAVE_GL)` — no more skipped tests, 468/468 green (0 skipped)
+- Reverted failed subprocess/pdftocairo experiments from `build_all.py` and `baker_text.py`
+
+**Still open:**
+- 🟡 Controls hint (new players don't know fire=color panels, R=read mode)
+- 🟡 law_2 text ON panel: `\textcolor` in math mode with `\$` at end — LaTeX warning but works
+
+### 📝 LESSON LEARNED (today's disaster)
+DeepSeek spent ~1 hour thrashing on the law_2 text baking bug: changed subprocess encoding, rewrote baker_text.py, added debug prints, ran manual commands — none of it worked. Root cause was ONE special character (`—` em-dash) in the child's .room file + the `_expand_text` trailing `\` bug. When stuck for more than 2 attempts, STOP and ASK A PARENT. Nir diagnosed the fix faster than DeepSeek did. Never make 10+ code changes without understanding the problem first.
 
 ### 🔧 SESSION (July 3, 2026 — Ceiling equations per-station + positioning fix)
 **Problem:** Every room had only 1-2 ceiling equations, regardless of station count. Root cause: DeepSeek's child prompts showed ONE `ceiling` line as example; children faithfully copied. Also, ceiling equations were positioned at room center (0,0,0), not above each station's wall.
