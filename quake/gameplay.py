@@ -172,8 +172,8 @@ def step(state: GameState, actions: Actions, pack: Pack,
     # Forward and strafe in XZ (FROZEN COMPASS)
     fwd_x = cos(state.heading_rad)
     fwd_z = sin(state.heading_rad)
-    str_x = sin(state.heading_rad)   # right strafe = rotate forward +90deg in XZ
-    str_z = -cos(state.heading_rad)
+    str_x = -sin(state.heading_rad)   # right strafe (D=+1 -> right, A=-1 -> left)
+    str_z = cos(state.heading_rad)
 
     dx = (fwd_x * actions.move_y + str_x * actions.move_x) * WALK_SPEED_M_S * dt
     dz = (fwd_z * actions.move_y + str_z * actions.move_x) * WALK_SPEED_M_S * dt

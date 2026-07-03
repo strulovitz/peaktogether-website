@@ -55,6 +55,55 @@ def _norm3(a: Vec3) -> Vec3:
 # ----------------------------------------------------------------------------
 # PURE HELPER: ray_rect_hit
 # ----------------------------------------------------------------------------
+def _wall_basis_nav(wall: str):
+    """(along, inward) unit vectors for a wall — identical to render_room's
+    _wall_basis so the shot hit-rectangle matches the drawn panel exactly.
+
+    N: z=+D/2 inward -Z, along +X;  S: z=-D/2 inward +Z, along -X;
+    E: x=+W/2 inward -X, along -Z;  W: x=-W/2 inward +X, along +Z.
+    """
+    if wall == "N":
+        return (1.0, 0.0, 0.0), (0.0, 0.0, -1.0)
+    if wall == "S":
+        return (-1.0, 0.0, 0.0), (0.0, 0.0, 1.0)
+    if wall == "E":
+        return (0.0, 0.0, -1.0), (-1.0, 0.0, 0.0)
+    if wall == "W":
+        return (0.0, 0.0, 1.0), (1.0, 0.0, 0.0)
+    raise ValueError(f"unknown wall {wall!r}")
+
+
+def ray_rect_hit_wall(
+    ray: Ray, wall: str, center: Vec3, width: float, height: float
+) -> float | None:
+    """Intersect ray with a wall-mounted panel rectangle. The plane normal and
+    in-plane horizontal axis come from the WALL (not yaw_rad), so the hit test
+    always matches how render_room draws the panel. Vertical axis is world up.
+    Returns distance along the ray to the hit, or None.
+    """
+    u, n = _wall_basis_nav(wall)   # (along = horizontal in-plane, inward normal)
+    v = (0.0, 1.0, 0.0)
+
+    o = ray.origin
+    d = ray.direction
+    denom = _dot3(n, d)
+    if abs(denom) < _EPS:
+        return None
+
+    t = _dot3(n, _sub(center, o)) / denom
+    if t < 0.0:
+        return None
+
+    hit = (o[0] + d[0] * t, o[1] + d[1] * t, o[2] + d[2] * t)
+    rel = _sub(hit, center)
+    pu = _dot3(rel, u)
+    pv = _dot3(rel, v)
+
+    if abs(pu) <= width / 2.0 + _EPS and abs(pv) <= height / 2.0 + _EPS:
+        return t
+    return None
+
+
 def ray_rect_hit(
     ray: Ray, center: Vec3, width: float, height: float, yaw_rad: float
 ) -> float | None:
@@ -360,14 +409,14 @@ class _RoomNav:
         best: PanelHit | None = None
 
         for pair in self._pairs:
-            # Drawing panel
+            # Drawing panel — hit-test from the WALL field (matches renderer).
             dp = pair.drawing_placement
-            d_dist = ray_rect_hit(ray, dp.center_xyz, dp.width_m,
-                                  dp.height_m, dp.yaw_rad)
+            d_dist = ray_rect_hit_wall(ray, dp.wall, dp.center_xyz,
+                                       dp.width_m, dp.height_m)
             # Text panel
             tp = pair.text_placement
-            t_dist = ray_rect_hit(ray, tp.center_xyz, tp.width_m,
-                                  tp.height_m, tp.yaw_rad)
+            t_dist = ray_rect_hit_wall(ray, tp.wall, tp.center_xyz,
+                                       tp.width_m, tp.height_m)
 
             candidates = []
             if d_dist is not None and d_dist <= max_dist + _EPS:

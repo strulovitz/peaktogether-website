@@ -572,7 +572,10 @@ def build_room_mesh(room: RoomRuntime) -> RoomMesh:
 
 
 def panel_is_on(pair_id: PairId, lit: set[str], room: RoomRuntime) -> bool:
-    """A pair is "on" iff any of its asset IDs are in the `lit` set."""
+    """A pair is "on" iff its pair_id is in `lit` (how gameplay.resolve_shot
+    records it) OR any of its asset IDs are in `lit` (legacy asset-keyed form)."""
+    if pair_id in lit:
+        return True
     for pair in room.panel_pairs:
         if pair.pair_id != pair_id:
             continue

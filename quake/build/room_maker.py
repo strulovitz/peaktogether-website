@@ -75,11 +75,20 @@ def build_room_runtime(
         d_px_w, d_px_h = d_entry.px_w, d_entry.px_h
         t_px_w, t_px_h = t_entry.px_w, t_entry.px_h
 
-        drawing_w = _clamp(d_px_w / cfg.room_px_per_m, cfg.panel_min_w_m, cfg.panel_max_w_m)
-        drawing_h = drawing_w * (d_px_h / max(d_px_w, 1))
         tppm = getattr(cfg, "text_px_per_m", cfg.room_px_per_m)
         text_w = _clamp(t_px_w / tppm, cfg.panel_min_w_m, cfg.panel_max_w_m)
         text_h = text_w * (t_px_h / max(t_px_w, 1))
+
+        # Drawing displayed as tall as the text panel, keeping the figure's own
+        # proportions (never stretched). Width follows the image aspect; if that
+        # would exceed the max panel width, cap width and shrink height (aspect
+        # still preserved).
+        d_ar = d_px_w / max(d_px_h, 1)                      # width / height
+        drawing_h = _clamp(text_h, cfg.panel_min_h_m, cfg.panel_max_h_m)
+        drawing_w = drawing_h * d_ar
+        if drawing_w > cfg.panel_max_w_m:
+            drawing_w = cfg.panel_max_w_m
+            drawing_h = drawing_w / max(d_ar, 1e-6)
 
         block_w = drawing_w + cfg.panel_gap_m + text_w
         block_h = max(drawing_h, text_h)
