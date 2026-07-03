@@ -3,16 +3,16 @@
   "figure_id": "prop_4.f1",
   "node_id": "prop_4",
   "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.",
-  "caption": "The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.",
+  "caption": "The centripetal forces of bodies, which by equoble motions describe different circles, tend to the centres of the same circles; and are one to the other, as the squares of the arcs described in equal times applied to the radii of the circles.",
   "n_steps": 2,
   "steps": [
     {
       "index": 1,
-      "gloss": "The centripetal pull grows with the square of the speed and is inversely as the distance from the centre."
+      "gloss": "The centripetal pull toward the centre grows with the square of the speed and shrinks with the radius."
     },
     {
       "index": 2,
-      "gloss": "A small circular arc swept in equal time; the versed sine gives the force."
+      "gloss": "From versed sine and Lemma VII the pull resolves into the square of the speed over the radius."
     }
   ],
   "ops": [
@@ -20,13 +20,13 @@
       "name": "term_1_1",
       "draw": {
         "local_color": {
-          "name": "velblue",
-          "hex": "#1E6FE0"
+          "name": "force",
+          "hex": "#1f6feb"
         },
         "step": 1,
-        "is_heart": true,
+        "is_heart": false,
         "label": {
-          "tex": "$v^2$",
+          "tex": "$F$",
           "placement": "center"
         },
         "marker": "none"
@@ -38,13 +38,13 @@
       "name": "term_1_2",
       "draw": {
         "local_color": {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "nil",
+          "hex": "#000000"
         },
         "step": 1,
         "is_heart": false,
         "label": {
-          "tex": "$F$",
+          "tex": "$\\propto$",
           "placement": "center"
         },
         "marker": "none"
@@ -56,8 +56,44 @@
       "name": "term_1_3",
       "draw": {
         "local_color": {
-          "name": "radgreen",
-          "hex": "#00A35A"
+          "name": "speed",
+          "hex": "#d1242f"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$v^2$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_3"
+    },
+    {
+      "name": "term_1_4",
+      "draw": {
+        "local_color": {
+          "name": "nil",
+          "hex": "#000000"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\big/$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_4"
+    },
+    {
+      "name": "term_1_5",
+      "draw": {
+        "local_color": {
+          "name": "radius",
+          "hex": "#953800"
         },
         "step": 1,
         "is_heart": false,
@@ -68,19 +104,19 @@
         "marker": "none"
       },
       "op": "label",
-      "at": "termpos_1_3"
+      "at": "termpos_1_5"
     },
     {
       "name": "term_2_1",
       "draw": {
         "local_color": {
-          "name": "velblue",
-          "hex": "#1E6FE0"
+          "name": "force",
+          "hex": "#1f6feb"
         },
         "step": 2,
-        "is_heart": true,
+        "is_heart": false,
         "label": {
-          "tex": "$v^2$",
+          "tex": "$F$",
           "placement": "center"
         },
         "marker": "none"
@@ -92,8 +128,98 @@
       "name": "term_2_2",
       "draw": {
         "local_color": {
-          "name": "radgreen",
-          "hex": "#00A35A"
+          "name": "nil",
+          "hex": "#000000"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\propto$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_2"
+    },
+    {
+      "name": "term_2_3",
+      "draw": {
+        "local_color": {
+          "name": "chord",
+          "hex": "#d1242f"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\dfrac{\\text{arc}^2}{D}$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_3"
+    },
+    {
+      "name": "term_2_4",
+      "draw": {
+        "local_color": {
+          "name": "nil",
+          "hex": "#000000"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\Big/ t^2 \\;\\propto\\;$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_4"
+    },
+    {
+      "name": "term_2_5",
+      "draw": {
+        "local_color": {
+          "name": "chord",
+          "hex": "#d1242f"
+        },
+        "step": 2,
+        "is_heart": true,
+        "label": {
+          "tex": "$v^2$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_5"
+    },
+    {
+      "name": "term_2_6",
+      "draw": {
+        "local_color": {
+          "name": "nil",
+          "hex": "#000000"
+        },
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$\\big/$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_2_6"
+    },
+    {
+      "name": "term_2_7",
+      "draw": {
+        "local_color": {
+          "name": "radius",
+          "hex": "#953800"
         },
         "step": 2,
         "is_heart": false,
@@ -104,7 +230,7 @@
         "marker": "none"
       },
       "op": "label",
-      "at": "termpos_2_2"
+      "at": "termpos_2_7"
     }
   ]
 }

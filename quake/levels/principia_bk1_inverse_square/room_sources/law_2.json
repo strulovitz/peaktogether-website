@@ -1,26 +1,34 @@
 {
   "schema_version": "1.0",
   "node_id": "law_2",
-  "edition": "Newton, Principia, Axioms or Laws of Motion, Law II, p.19 (Motte trans., 1729)",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II.",
   "figures": [
     {
       "figure_id": "law_2.f1",
       "asy_path": "figures/law_2.f1.asy",
       "recipe_path": "recipes/law_2.f1.json",
       "n_steps": 2,
-      "caption": "The alteration of motion is proportional to, and directed along, the impressed force.",
+      "caption": "Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.",
       "colors_used": [
         {
-          "name": "motionblue",
-          "hex": "#1E6FE0"
+          "name": "motion",
+          "hex": "#C21807"
         },
         {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "force",
+          "hex": "#1B5E9C"
         },
         {
-          "name": "dirgreen",
-          "hex": "#00A35A"
+          "name": "plain",
+          "hex": "#000000"
+        },
+        {
+          "name": "line",
+          "hex": "#C21807"
+        },
+        {
+          "name": "old",
+          "hex": "#6A1B9A"
         }
       ]
     }
@@ -36,15 +44,15 @@
       },
       "text": {
         "block_id": "law_2.s1.txt",
-        "latex": "The Law sets \\textcolor{motionblue}{the alteration of motion} in strict proportion to \\textcolor{forceorange}{the motive force impressed}. As Newton explains, if any force generates a motion, then \\textcolor{forceorange}{a double force} will generate \\textcolor{motionblue}{double the motion}, a triple force triple the motion — whether \\textcolor{forceorange}{that force} be impressed altogether and at once, or gradually and successively. The \\textcolor{motionblue}{change $\\Delta(\\text{motion})$} scales exactly with the impressed \\textcolor{forceorange}{$\\mathbf{F}$}.",
+        "latex": "\\textcolor{motion}{The alteration of motion} is ever proportional to the \\textcolor{force}{motive force impress'd}: \"if any \\textcolor{force}{force} generates a \\textcolor{motion}{motion}, a double \\textcolor{force}{force} will generate double the \\textcolor{motion}{motion},\" and a triple \\textcolor{force}{force} triple the \\textcolor{motion}{motion}. This holds whether the \\textcolor{force}{force} be impress'd altogether and at once, or gradually and successively. The exact scaling is the heart of the law — $\\textcolor{motion}{\\Delta(\\text{motion})\\} \\propto \\textcolor{force}{F\\}$ — the seed from which $F = ma$ grows.",
         "colors_used": [
           {
-            "name": "motionblue",
-            "hex": "#1E6FE0"
+            "name": "motion",
+            "hex": "#C21807"
           },
           {
-            "name": "forceorange",
-            "hex": "#E8770A"
+            "name": "force",
+            "hex": "#1B5E9C"
           }
         ]
       }
@@ -59,19 +67,19 @@
       },
       "text": {
         "block_id": "law_2.s2.txt",
-        "latex": "The \\textcolor{motionblue}{change of motion} is made \\textcolor{dirgreen}{in the direction of the right line} in which \\textcolor{forceorange}{the force} is impressed. This motion, being always directed the same way with \\textcolor{forceorange}{the generating force}, if the body moved before, is \\textcolor{dirgreen}{added to or subducted from} the former motion — according as they directly conspire with or are directly contrary to each other; or \\textcolor{dirgreen}{obliquely joined}, when they are oblique, so as to produce a new motion compounded from the determination of both. Thus \\textcolor{motionblue}{$\\Delta(\\text{motion})$} runs \\textcolor{dirgreen}{parallel} to \\textcolor{forceorange}{$\\mathbf{F}$}.",
+        "latex": "The \\textcolor{line}{alteration is made in the direction of the right line} in which that \\textcolor{force}{force} is impress'd — \\textcolor{line}{always directed the same way} with the generating \\textcolor{force}{force}. If the body \\textcolor{old}{moved before}, this new \\textcolor{line}{motion} is added to or subducted from the \\textcolor{old}{former motion}, according as they directly conspire or are directly contrary. When they are \\textcolor{line}{obliquely joyned}, the \\textcolor{force}{force} and the \\textcolor{old}{prior motion} compound by the parallelogram rule, so as to produce a new \\textcolor{line}{motion compounded from the determination of both} — hence $\\textcolor{line}{\\Delta(\\text{motion})\\} \\parallel \\textcolor{force}{F\\}$.",
         "colors_used": [
           {
-            "name": "motionblue",
-            "hex": "#1E6FE0"
+            "name": "line",
+            "hex": "#C21807"
           },
           {
-            "name": "dirgreen",
-            "hex": "#00A35A"
+            "name": "force",
+            "hex": "#1B5E9C"
           },
           {
-            "name": "forceorange",
-            "hex": "#E8770A"
+            "name": "old",
+            "hex": "#6A1B9A"
           }
         ]
       }
@@ -81,11 +89,13 @@
   "ceiling_equations": [
     {
       "eq_id": "law_2.eq0",
-      "latex": "\\Delta(\\text{motion}) \\propto \\mathbf{F}"
+      "latex": "\\Delta p \\propto F",
+      "step_index": 1
     },
     {
       "eq_id": "law_2.eq1",
-      "latex": "\\Delta(\\text{motion}) \\parallel \\mathbf{F}"
+      "latex": "\\Delta p \\parallel F",
+      "step_index": 2
     }
   ]
 }

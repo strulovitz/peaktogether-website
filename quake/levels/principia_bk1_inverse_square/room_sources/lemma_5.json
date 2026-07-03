@@ -81,11 +81,13 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_5.eq0",
-      "latex": "\\frac{AB}{DE} \\;=\\; \\frac{BC}{EF} \\;=\\; \\frac{CA}{FD} \\;=\\; k"
+      "latex": "\\frac{AB}{DE} \\;=\\; \\frac{BC}{EF} \\;=\\; \\frac{CA}{FD} \\;=\\; k",
+      "step_index": 1
     },
     {
       "eq_id": "lemma_5.eq1",
-      "latex": "\\frac{\\text{area}_1}{\\text{area}_2} \\;=\\; k^2"
+      "latex": "\\frac{\\text{area}_1}{\\text{area}_2} \\;=\\; k^2",
+      "step_index": 2
     }
   ]
 }

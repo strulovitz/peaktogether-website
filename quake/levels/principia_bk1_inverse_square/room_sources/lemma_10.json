@@ -77,7 +77,13 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_10.eq0",
-      "latex": "s \\propto t^2 \\qquad F \\propto \\frac{s}{t^2}\\;(\\text{Cor. }4)"
+      "latex": "\\text{time}=AD,\\,AE \\qquad \\text{velocity}=DB,\\,EC",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_10.eq1",
+      "latex": "\\triangle ABD : \\triangle ACE \\to AD^2 : AE^2 \\;\\Rightarrow\\; s \\propto t^2 \\qquad F \\propto \\frac{s}{t^2}\\;(\\text{Cor. }4)",
+      "step_index": 2
     }
   ]
 }

@@ -2,17 +2,17 @@
   "schema_version": "1.0",
   "figure_id": "law_2.f1",
   "node_id": "law_2",
-  "edition": "Newton, Principia, Axioms or Laws of Motion, Law II, p.19 (Motte trans., 1729)",
-  "caption": "The alteration of motion is proportional to, and directed along, the impressed force.",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II.",
+  "caption": "Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.",
   "n_steps": 2,
   "steps": [
     {
       "index": 1,
-      "gloss": "The alteration of motion is proportional to the motive force impressed."
+      "gloss": "The alteration of motion scales exactly with the impressed force."
     },
     {
       "index": 2,
-      "gloss": "The change of motion is made in the direction of the right line in which the force is impressed."
+      "gloss": "The change of motion lies along the same right line as the force."
     }
   ],
   "ops": [
@@ -20,8 +20,8 @@
       "name": "term_1_1",
       "draw": {
         "local_color": {
-          "name": "motionblue",
-          "hex": "#1E6FE0"
+          "name": "motion",
+          "hex": "#C21807"
         },
         "step": 1,
         "is_heart": true,
@@ -38,13 +38,13 @@
       "name": "term_1_2",
       "draw": {
         "local_color": {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "plain",
+          "hex": "#000000"
         },
         "step": 1,
         "is_heart": false,
         "label": {
-          "tex": "$\\mathbf{F}$",
+          "tex": "$\\;\\propto\\;$",
           "placement": "center"
         },
         "marker": "none"
@@ -53,14 +53,32 @@
       "at": "termpos_1_2"
     },
     {
+      "name": "term_1_3",
+      "draw": {
+        "local_color": {
+          "name": "force",
+          "hex": "#1B5E9C"
+        },
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$F$",
+          "placement": "center"
+        },
+        "marker": "none"
+      },
+      "op": "label",
+      "at": "termpos_1_3"
+    },
+    {
       "name": "term_2_1",
       "draw": {
         "local_color": {
-          "name": "motionblue",
-          "hex": "#1E6FE0"
+          "name": "line",
+          "hex": "#C21807"
         },
         "step": 2,
-        "is_heart": false,
+        "is_heart": true,
         "label": {
           "tex": "$\\Delta(\\text{motion})$",
           "placement": "center"
@@ -74,13 +92,13 @@
       "name": "term_2_2",
       "draw": {
         "local_color": {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "plain",
+          "hex": "#000000"
         },
         "step": 2,
         "is_heart": false,
         "label": {
-          "tex": "$\\mathbf{F}$",
+          "tex": "$\\;\\parallel\\;$",
           "placement": "center"
         },
         "marker": "none"
@@ -92,13 +110,13 @@
       "name": "term_2_3",
       "draw": {
         "local_color": {
-          "name": "dirgreen",
-          "hex": "#00A35A"
+          "name": "force",
+          "hex": "#1B5E9C"
         },
         "step": 2,
-        "is_heart": true,
+        "is_heart": false,
         "label": {
-          "tex": "$\\parallel\\;\\text{(right line of }\\mathbf{F}\\text{)}$",
+          "tex": "$F$",
           "placement": "center"
         },
         "marker": "none"

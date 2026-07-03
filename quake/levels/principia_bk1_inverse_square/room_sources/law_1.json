@@ -8,43 +8,55 @@
       "asy_path": "figures/law_1.f1.asy",
       "recipe_path": "figures/law_1.f1.asy",
       "n_steps": 4,
-      "caption": "Law I -- Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed.",
+      "caption": "Law I — Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impress'd thereon.",
       "colors_used": [
         {
-          "name": "restblue",
-          "hex": "#1E6FE0"
+          "name": "rest",
+          "hex": "#1B6FB3"
         },
         {
-          "name": "motiongreen",
-          "hex": "#00A35A"
+          "name": "uniform",
+          "hex": "#2E8B57"
         },
         {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "force",
+          "hex": "#B22222"
         },
         {
-          "name": "topblue",
-          "hex": "#1E6FE0"
+          "name": "top",
+          "hex": "#C77800"
         },
         {
-          "name": "dragred",
-          "hex": "#D81B60"
+          "name": "cohesion",
+          "hex": "#6A0DAD"
         },
         {
-          "name": "planetpurple",
-          "hex": "#8E24AA"
+          "name": "air",
+          "hex": "#4682B4"
         },
         {
-          "name": "freeteal",
-          "hex": "#00897B"
+          "name": "bodies",
+          "hex": "#8B0000"
         },
         {
-          "name": "projblue",
-          "hex": "#1E6FE0"
+          "name": "free",
+          "hex": "#2E8B57"
         },
         {
-          "name": "gravorange",
-          "hex": "#E8770A"
+          "name": "motions",
+          "hex": "#1B6FB3"
+        },
+        {
+          "name": "proj",
+          "hex": "#B22222"
+        },
+        {
+          "name": "resist",
+          "hex": "#4682B4"
+        },
+        {
+          "name": "gravity",
+          "hex": "#6A0DAD"
         }
       ]
     }
@@ -60,19 +72,19 @@
       },
       "text": {
         "block_id": "law_1.s1.txt",
-        "latex": "Every body perseveres in its \\textcolor{restblue}{state of rest}, or of \\textcolor{motiongreen}{uniform motion in a right line}, unless compelled to change that state by \\textcolor{forceorange}{forces impress'd}.",
+        "latex": "Every body perseveres in \\textcolor{rest}{a state of rest}, or of \\textcolor{uniform}{uniform motion in a right line}, \\     unless compelled to change that state. A body left to itself does nothing on its own — it neither \\     slows, speeds, nor turns. The sole agent that alters this perseverance is a \\textcolor{force}{force impress'd thereon}, \\     so that with $\\sum \\vec{F} = 0$ we have $\\vec{v} = \\text{const}$: velocity, in both speed and direction, is preserved.",
         "colors_used": [
           {
-            "name": "restblue",
-            "hex": "#1E6FE0"
+            "name": "rest",
+            "hex": "#1B6FB3"
           },
           {
-            "name": "motiongreen",
-            "hex": "#00A35A"
+            "name": "uniform",
+            "hex": "#2E8B57"
           },
           {
-            "name": "forceorange",
-            "hex": "#E8770A"
+            "name": "force",
+            "hex": "#B22222"
           }
         ]
       }
@@ -87,15 +99,19 @@
       },
       "text": {
         "block_id": "law_1.s2.txt",
-        "latex": "\\textcolor{topblue}{A top} does not cease its rotation, otherwise than as it is \\textcolor{dragred}{retarded by the air}.",
+        "latex": "\\textcolor{top}{A top}, whose parts by their \\textcolor{cohesion}{cohesion} are perpetually drawn aside from rectilinear motions, \\     does not cease its rotation otherwise than as it is retarded by \\textcolor{air}{the air}. Each part is forever pulled \\     inward from the straight line it would take, yet the whole endures because no force impels it to stop. \\     Remove the \\textcolor{air}{air} and the top would spin forever, its angular speed unchanged, $\\omega = \\text{const}$.",
         "colors_used": [
           {
-            "name": "topblue",
-            "hex": "#1E6FE0"
+            "name": "top",
+            "hex": "#C77800"
           },
           {
-            "name": "dragred",
-            "hex": "#D81B60"
+            "name": "cohesion",
+            "hex": "#6A0DAD"
+          },
+          {
+            "name": "air",
+            "hex": "#4682B4"
           }
         ]
       }
@@ -110,15 +126,19 @@
       },
       "text": {
         "block_id": "law_1.s3.txt",
-        "latex": "The greater bodies of \\textcolor{planetpurple}{the planets and comets}, meeting less resistance in \\textcolor{freeteal}{more free spaces}, preserve their motions for a much longer time.",
+        "latex": "The greater bodies of the \\textcolor{bodies}{planets and comets}, meeting with less resistance in \\textcolor{free}{more free spaces}, \\     preserve the \\textcolor{motions}{motions both progressive and circular} for a much longer time. In the near-void between \\     the stars scarcely anything retards them, so their onward drift and their orbital turning both endure. \\     These are the law's strongest witnesses: across immense times, $\\vec{v}_{\\text{prog}}$ and $\\vec{\\omega}_{\\text{orb}}$ hold nearly constant.",
         "colors_used": [
           {
-            "name": "planetpurple",
-            "hex": "#8E24AA"
+            "name": "bodies",
+            "hex": "#8B0000"
           },
           {
-            "name": "freeteal",
-            "hex": "#00897B"
+            "name": "free",
+            "hex": "#2E8B57"
+          },
+          {
+            "name": "motions",
+            "hex": "#1B6FB3"
           }
         ]
       }
@@ -133,19 +153,19 @@
       },
       "text": {
         "block_id": "law_1.s4.txt",
-        "latex": "\\textcolor{projblue}{Projectiles} persevere, so far as not \\textcolor{dragred}{retarded by the resistance of the air}, or impell'd downwards by \\textcolor{gravorange}{gravity}.",
+        "latex": "\\textcolor{proj}{Projectiles} persevere in their motions, so far as they are not retarded by the \\textcolor{resist}{resistance of the air}, \\     or impelled downwards by the \\textcolor{gravity}{force of gravity}. A stone or a cannonball, once flung, would fly straight \\     on forever were these two forces absent — shot fast enough horizontally, it would circle the whole Earth. \\     What we see as a falling arc is only the \\textcolor{proj}{projectile's} straight perseverance bent by $\\vec{a} = \\vec{g} + \\tfrac{\\vec{F}_{\\text{air}}}{m}$.",
         "colors_used": [
           {
-            "name": "projblue",
-            "hex": "#1E6FE0"
+            "name": "proj",
+            "hex": "#B22222"
           },
           {
-            "name": "dragred",
-            "hex": "#D81B60"
+            "name": "resist",
+            "hex": "#4682B4"
           },
           {
-            "name": "gravorange",
-            "hex": "#E8770A"
+            "name": "gravity",
+            "hex": "#6A0DAD"
           }
         ]
       }
@@ -155,7 +175,23 @@
   "ceiling_equations": [
     {
       "eq_id": "law_1.eq0",
-      "latex": "\\text{no force} \\Rightarrow \\text{no change of motion}"
+      "latex": "\\sum \\vec{F} = 0 \\;\\Longrightarrow\\; \\vec{v} = \\text{const}",
+      "step_index": 1
+    },
+    {
+      "eq_id": "law_1.eq1",
+      "latex": "\\omega = \\text{const} \\quad (\\text{air resistance} \\to 0)",
+      "step_index": 2
+    },
+    {
+      "eq_id": "law_1.eq2",
+      "latex": "\\vec{v}_{\\text{prog}},\\, \\vec{\\omega}_{\\text{orb}} = \\text{const} \\;\\; (t \\to \\infty)",
+      "step_index": 3
+    },
+    {
+      "eq_id": "law_1.eq3",
+      "latex": "\\vec{a} = \\vec{g} + \\frac{\\vec{F}_{\\text{air}}}{m}",
+      "step_index": 4
     }
   ]
 }

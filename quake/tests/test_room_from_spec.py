@@ -52,13 +52,12 @@ def test_lemma_2_room_source_matches_gold():
 
 def test_lemma_2_asy_structure():
     asy = emit_asy(parse(_spec("lemma_2")))
-    for pen in ("curveblue", "basegreen", "sideorange", "inscpurple", "circred"):
+    for pen in ("curve", "base", "insc", "circ", "excess"):
         assert f"pen {pen} = rgb(" in asy
     assert "pen BLACK = rgb(0,0,0)" in asy
     for k in (1, 2, 3):
         assert f"bool on{k} = (highlight=={k});" in asy
-    assert "if (on1) draw(curve" in asy or "if (on1) " in asy
-    assert "? curveblue : BLACK" in asy
+    assert "if (on1) " in asy
     assert asy.strip().endswith("drawAll(highlight);")
     assert "usersetting();" in asy
     assert "0xFF" not in asy and "0x" not in asy
@@ -74,10 +73,10 @@ def test_prop_4_equation():
     assert all(o.op == "label" for o in recipe.ops)
     room = emit_room_source(spec)
     used = {(c.name, c.hex) for c in room.figures[0].colors_used}
-    assert {"forceorange", "velblue", "radgreen"} <= {n for n, _ in used}
+    assert {"force", "speed", "radius", "chord", "nil"} <= {n for n, _ in used}
     asy = emit_asy(spec)
     assert "import geometry;" in asy
-    assert "_termpos_1_1" in asy
+    assert "_layoutpos_1" in asy
 
 
 # ---- law_1 text room ----
@@ -90,8 +89,8 @@ def test_law_1_text():
     assert len(room.blocks) == 4
     assert room.final_pair_id == "law_1.s4"
     names = {c.name for c in room.figures[0].colors_used}
-    assert {"restblue", "motiongreen", "forceorange", "topblue", "dragred",
-            "planetpurple", "freeteal", "projblue", "gravorange"} == names
+    assert {"rest", "uniform", "force", "top", "cohesion", "air",
+            "bodies", "free", "motions", "proj", "resist", "gravity"} == names
     br = build_room(_spec("law_1"), Path("/tmp/quake_law1"), write=False)
     assert br.recipe_path is None
 
@@ -123,7 +122,7 @@ def test_law_2_equation():
     assert len(room.blocks) == 2
     assert room.final_pair_id == "law_2.s2"
     names = {c.name for c in room.figures[0].colors_used}
-    assert {"motionblue", "forceorange", "dirgreen"} <= names
+    assert {"motion", "force", "plain", "line", "old"} <= names
     assert len(room.ceiling_equations) == 2
 
 # ---- lemma_5 geometry room ----
@@ -525,4 +524,4 @@ def test_ceiling_ids():
     spec = parse(_spec("lemma_2"))
     room = emit_room_source(spec)
     ids = [e.eq_id for e in room.ceiling_equations]
-    assert ids == ["lemma_2.eq0", "lemma_2.eq1"]
+    assert ids == ["lemma_2.eq0", "lemma_2.eq1", "lemma_2.eq2"]

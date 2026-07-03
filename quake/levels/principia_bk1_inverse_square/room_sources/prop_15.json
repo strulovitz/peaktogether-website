@@ -89,11 +89,13 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_15.eq0",
-      "latex": "T^2 \\propto a^3"
+      "latex": "T^2 \\propto a^3",
+      "step_index": 1
     },
     {
       "eq_id": "prop_15.eq1",
-      "latex": "\\text{(Kepler III)}"
+      "latex": "\\text{(Kepler III)}",
+      "step_index": 2
     }
   ]
 }

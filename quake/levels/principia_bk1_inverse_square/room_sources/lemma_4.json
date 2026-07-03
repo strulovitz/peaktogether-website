@@ -124,11 +124,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_4.eq0",
-      "latex": "\\frac{p_i}{q_i} \\;\\longrightarrow\\; k \\quad (\\text{each to each, ultimately})"
+      "latex": "AacE = p_1 + p_2 + p_3 \\quad (\\text{three strips on equal bases } AB,BC,CE)",
+      "step_index": 1
     },
     {
       "eq_id": "lemma_4.eq1",
-      "latex": "\\frac{\\sum p_i}{\\sum q_i} = k \\;\\longrightarrow\\; \\frac{AacE}{PprT} = k \\quad (\\text{by Lem. 3})"
+      "latex": "PprT = q_1 + q_2 + q_3 \\quad (\\text{equal count of strips on } PQ,QR,RT)",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_4.eq2",
+      "latex": "\\frac{p_i}{q_i} \\to k \\;\\Longrightarrow\\; \\frac{\\sum p_i}{\\sum q_i} = k \\;\\Longrightarrow\\; \\frac{AacE}{PprT} = k \\quad (\\text{by Lem. 3})",
+      "step_index": 3
     }
   ]
 }

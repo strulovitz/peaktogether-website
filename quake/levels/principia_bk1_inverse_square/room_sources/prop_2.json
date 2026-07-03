@@ -96,7 +96,18 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_2.eq0",
-      "latex": "\\text{areas} \\propto \\text{times} \\;\\Rightarrow\\; F \\to S"
+      "latex": "\\triangle SAB = \\triangle SBC = \\triangle SCD \\;\\;(\\text{areas} \\propto \\text{times, GIVEN})",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_2.eq1",
+      "latex": "\\triangle SBC = \\triangle SBc \\;\\overset{\\text{Eucl. I.40}}{\\Longrightarrow}\\; cC \\parallel BS \\;\\Rightarrow\\; F \\parallel BS",
+      "step_index": 2
+    },
+    {
+      "eq_id": "prop_2.eq2",
+      "latex": "\\forall\\, \\text{vertex}: \\; F \\parallel \\text{(radius)} \\;\\Rightarrow\\; F \\to S \\;\\;(\\text{centripetal})",
+      "step_index": 3
     }
   ]
 }

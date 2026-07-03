@@ -127,7 +127,23 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_1.eq0",
-      "latex": "\\dfrac{dA}{dt} = \\text{const}\\;( \\text{areas} \\propto \\text{times})"
+      "latex": "\\Delta t_1 = \\Delta t_2 = \\cdots \\quad\\Rightarrow\\quad AB,\\,BC,\\,CD,\\ldots \\text{ (inertial steps, Law I)}",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_1.eq1",
+      "latex": "A_{\\triangle}(SAB) = A_{\\triangle}(SBC) = A_{\\triangle}(SCD) = \\cdots",
+      "step_index": 2
+    },
+    {
+      "eq_id": "prop_1.eq2",
+      "latex": "Bc = AB,\\ \\ Cc \\parallel SB \\;\\Rightarrow\\; [SBC] = [SBc] = [SAB]",
+      "step_index": 3
+    },
+    {
+      "eq_id": "prop_1.eq3",
+      "latex": "\\lim_{\\Delta t \\to 0}\\ \\text{polygon} \\to \\text{curve},\\quad \\dfrac{dA}{dt} = \\text{const}\\;(\\text{areas} \\propto \\text{times})",
+      "step_index": 4
     }
   ]
 }

@@ -127,7 +127,23 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_13.eq0",
-      "latex": "Qv^2 = 4PS\\cdot Pv \\qquad F \\propto \\dfrac{1}{SP^2}"
+      "latex": "\\text{parabola: focus } S,\\ \\text{radius } SP,\\quad F \\to S",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_13.eq1",
+      "latex": "QR \\parallel SP,\\quad QT \\perp SP,\\quad Qv \\parallel \\text{tangent},\\ Qv \\cap PG = v",
+      "step_index": 2
+    },
+    {
+      "eq_id": "prop_13.eq2",
+      "latex": "QR = Pv \\implies Qv^2 = 4PS\\cdot Pv = 4PS\\cdot QR",
+      "step_index": 3
+    },
+    {
+      "eq_id": "prop_13.eq3",
+      "latex": "\\lim_{Q\\to P}\\frac{Qv}{Qx}=1,\\ \\ QT^2 \\propto SP\\cdot QR \\implies F \\propto \\dfrac{1}{SP^2}",
+      "step_index": 4
     }
   ]
 }

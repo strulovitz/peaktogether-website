@@ -1,50 +1,69 @@
 room      law_1
 kind      text
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law I.
-caption   Law I -- Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed.
+caption   Law I — Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impress'd thereon.
 final     4
 
 station 1
-  ceiling   eq0 :: \text{no force} \Rightarrow \text{no change of motion}
-  gloss   The statement of the first law: rest, uniform motion, and impressed forces.
-  color   restblue    #1E6FE0
-  color   motiongreen #00A35A
-  color   forceorange #E8770A
+  ceiling   eq1 :: \sum \vec{F} = 0 \;\Longrightarrow\; \vec{v} = \text{const}
+  gloss   Law I fixes rest and uniform straight-line motion as the natural states a body keeps until an impressed force changes them.
+  color   rest #1B6FB3
+  color   uniform #2E8B57
+  color   force #B22222
   panel
-    phrase  restblue    "a state of rest"
-    phrase  motiongreen "uniform motion in a right line"
-    phrase  forceorange "forces impress'd" heart
+    phrase  rest "a state of rest"
+    phrase  uniform "uniform motion in a right line"
+    phrase  force "forces impress'd thereon" heart
   text
-    Every body perseveres in its {restblue|state of rest}, or of {motiongreen|uniform motion in a right line}, unless compelled to change that state by {forceorange|forces impress'd}.
+    Every body perseveres in {rest|a state of rest}, or of {uniform|uniform motion in a right line}, \\
+    unless compelled to change that state. A body left to itself does nothing on its own — it neither \\
+    slows, speeds, nor turns. The sole agent that alters this perseverance is a {force|force impress'd thereon}, \\
+    so that with $\sum \vec{F} = 0$ we have $\vec{v} = \text{const}$: velocity, in both speed and direction, is preserved.
 
 station 2
-  gloss   The spinning top persists in rotation until the air retards it.
-  color   topblue #1E6FE0
-  color   dragred #D81B60
+  ceiling   eq2 :: \omega = \text{const} \quad (\text{air resistance} \to 0)
+  gloss   The spinning top perseveres in its rotation, ceasing only as the air retards it.
+  color   top #C77800
+  color   cohesion #6A0DAD
+  color   air #4682B4
   panel
-    phrase  topblue "a spinning top" heart
-    phrase  dragred "retarded by the air"
+    phrase  top "a top" heart
+    phrase  cohesion "cohesion"
+    phrase  air "the air"
   text
-    {topblue|A top} does not cease its rotation, otherwise than as it is {dragred|retarded by the air}.
+    {top|A top}, whose parts by their {cohesion|cohesion} are perpetually drawn aside from rectilinear motions, \\
+    does not cease its rotation otherwise than as it is retarded by {air|the air}. Each part is forever pulled \\
+    inward from the straight line it would take, yet the whole endures because no force impels it to stop. \\
+    Remove the {air|air} and the top would spin forever, its angular speed unchanged, $\omega = \text{const}$.
 
 station 3
-  gloss   Planets and comets move freely in space for vast times.
-  color   planetpurple #8E24AA
-  color   freeteal     #00897B
+  ceiling   eq3 :: \vec{v}_{\text{prog}},\, \vec{\omega}_{\text{orb}} = \text{const} \;\; (t \to \infty)
+  gloss   Planets and comets, in nearly empty space, preserve both their progressive and circular motions for immense times.
+  color   bodies #8B0000
+  color   free #2E8B57
+  color   motions #1B6FB3
   panel
-    phrase  planetpurple "the planets and comets" heart
-    phrase  freeteal     "more free spaces"
+    phrase  bodies "planets and comets" heart
+    phrase  free "more free spaces"
+    phrase  motions "motions both progressive and circular"
   text
-    The greater bodies of {planetpurple|the planets and comets}, meeting less resistance in {freeteal|more free spaces}, preserve their motions for a much longer time.
+    The greater bodies of the {bodies|planets and comets}, meeting with less resistance in {free|more free spaces}, \\
+    preserve the {motions|motions both progressive and circular} for a much longer time. In the near-void between \\
+    the stars scarcely anything retards them, so their onward drift and their orbital turning both endure. \\
+    These are the law's strongest witnesses: across immense times, $\vec{v}_{\text{prog}}$ and $\vec{\omega}_{\text{orb}}$ hold nearly constant.
 
 station 4
-  gloss   Projectiles preserve their motion except as hindered by air resistance and gravity.
-  color   projblue    #1E6FE0
-  color   dragred     #D81B60
-  color   gravorange  #E8770A
+  ceiling   eq4 :: \vec{a} = \vec{g} + \frac{\vec{F}_{\text{air}}}{m}
+  gloss   Projectiles persevere in their motions except as air resistance and gravity impress forces upon them.
+  color   proj #B22222
+  color   resist #4682B4
+  color   gravity #6A0DAD
   panel
-    phrase  projblue    "projectiles" heart
-    phrase  dragred     "the resistance of the air"
-    phrase  gravorange  "gravity"
+    phrase  proj "projectiles" heart
+    phrase  resist "resistance of the air"
+    phrase  gravity "force of gravity"
   text
-    {projblue|Projectiles} persevere, so far as not {dragred|retarded by the resistance of the air}, or impell'd downwards by {gravorange|gravity}.
+    {proj|Projectiles} persevere in their motions, so far as they are not retarded by the {resist|resistance of the air}, \\
+    or impelled downwards by the {gravity|force of gravity}. A stone or a cannonball, once flung, would fly straight \\
+    on forever were these two forces absent — shot fast enough horizontally, it would circle the whole Earth. \\
+    What we see as a falling arc is only the {proj|projectile's} straight perseverance bent by $\vec{a} = \vec{g} + \tfrac{\vec{F}_{\text{air}}}{m}$.

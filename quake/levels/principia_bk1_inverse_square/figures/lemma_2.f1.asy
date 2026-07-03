@@ -1,4 +1,4 @@
-// figure.lemma_2.f1.asy -- Inscribed and circumscribed parallelograms on equal bases under the curve aE; as the bases shrink, the inscribed and circumscribed figures and the curvilinear figure become ultimately equal.
+// figure.lemma_2.f1.asy -- If in any figure AacE there be inscribed parallelograms on equal bases and circumscribed parallelograms completed: as the bases are diminished without limit, the inscribed, circumscribed, and curvilinear figures have the ultimate ratio of equality.
 // Self-contained convention. Compile: asy -u "highlight=k" figure.lemma_2.f1.asy
 // highlight=-1 => OFF (all black). highlight=k => step k colors + step k heart Stabilo.
 
@@ -12,61 +12,48 @@ usersetting();
 
 // ---- palette (LOCAL; pure black when uncolored) ----
 pen BLACK = rgb(0,0,0) + linewidth(1.0pt);
-pen curveblue = rgb(30/255, 111/255, 224/255) + linewidth(1.6pt);
-pen basegreen = rgb(0/255, 163/255, 90/255) + linewidth(1.6pt);
-pen sideorange = rgb(232/255, 119/255, 10/255) + linewidth(1.6pt);
-pen inscpurple = rgb(142/255, 36/255, 170/255) + linewidth(1.6pt);
-pen circred = rgb(216/255, 27/255, 96/255) + linewidth(1.6pt);
+pen curve = rgb(31/255, 111/255, 235/255) + linewidth(1.6pt);
+pen base = rgb(184/255, 134/255, 11/255) + linewidth(1.6pt);
+pen insc = rgb(207/255, 59/255, 47/255) + linewidth(1.6pt);
+pen circ = rgb(46/255, 160/255, 67/255) + linewidth(1.6pt);
+pen excess = rgb(207/255, 59/255, 47/255) + linewidth(1.6pt);
 
 // ---- bright Stabilo markers (current-step heart only; laid UNDER the ink) ----
 pen STABILO_1_1 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
 pen STABILO_2_1 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
+pen STABILO_2_2 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
+pen STABILO_2_3 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
 pen STABILO_3_1 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
+pen STABILO_3_2 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
+pen STABILO_3_3 = rgb(255/255, 224/255, 0/255) + opacity(0.45) + linewidth(9pt) + squarecap;
 
 // ---- ZONE 2: construction ----
 pair A = (0.0,0.0);
-pair _u_E = (8.0,0.0);
-pair B = (2.0,0.0);
-pair C = (4.0,0.0);
-pair D = (6.0,0.0);
-pair ptA = (0.0,1.4);
-pair ptb = (2.0,2.6);
-pair ptc = (4.0,3.4);
-pair ptd = (6.0,3.9);
-pair ptE = (8.0,4.2);
-path curve = ptA--ptb--ptc--ptd--ptE;
-path baseAE = A--_u_E;
-path sideAa = A--ptA;
-// series inscribed: built in series-support block below
-// series circumscribed: built in series-support block below
-
-// ---- series support (rect loops, gold lemma_2 pattern) ----
-pair[] _P = {ptA, ptb, ptc, ptd, ptE};
-real curveY(real x) {
-  for (int i=0; i<_P.length-1; ++i) {
-    if (x >= _P[i].x && x <= _P[i+1].x) {
-      real t = (x - _P[i].x)/(_P[i+1].x - _P[i].x);
-      return _P[i].y + t*(_P[i+1].y - _P[i].y);
-    }
-  }
-  return _P[_P.length-1].y;
-}
-// rectangles for series inscribed (kind=inscribed_rects, count=4)
-path[] inscribed;
-real[] _xs_inscribed = {ptA.x, ptb.x, ptc.x, ptd.x, ptE.x};
-for (int i=0; i<_xs_inscribed.length-1; ++i) {
-  real x0=_xs_inscribed[i], x1=_xs_inscribed[i+1];
-  real h = curveY(min(x0,x1));
-  inscribed.push((x0,0)--(x1,0)--(x1,h)--(x0,h)--cycle);
-}
-// rectangles for series circumscribed (kind=circumscribed_rects, count=4)
-path[] circumscribed;
-real[] _xs_circumscribed = {ptA.x, ptb.x, ptc.x, ptd.x, ptE.x};
-for (int i=0; i<_xs_circumscribed.length-1; ++i) {
-  real x0=_xs_circumscribed[i], x1=_xs_circumscribed[i+1];
-  real h = curveY(max(x0,x1));
-  circumscribed.push((x0,0)--(x1,0)--(x1,h)--(x0,h)--cycle);
-}
+pair _u_E = (9.0,0.0);
+pair a = (0.0,4.0);
+pair B = (3.0,0.0);
+pair C = (6.0,0.0);
+pair D = (9.0,0.0);
+pair p1 = (1.5,3.6);
+pair p2 = (4.5,2.6);
+pair p3 = (7.5,1.3);
+path ae = A--_u_E;
+path aa = A--a;
+path curve = a--p1--p2--p3--_u_E;
+path ab = A--B;
+path bc = B--C;
+path cd = C--D;
+pair b = (3.0,2.6);
+pair c = (6.0,1.3);
+path ae2 = A--_u_E;
+path pa = A--B--b--a--cycle;
+path pb = B--C--c--b--cycle;
+path pc = C--D--_u_E--c--cycle;
+pair l = (0.0,3.6);
+pair e_top = (9.0,1.3);
+pair c_bot = (6.0,1.3);
+path ae3 = A--_u_E;
+path pex = A--B--b--l--cycle;
 
 // ---- ZONE 4: render (highlight-driven) ----
 void drawAll(int highlight) {
@@ -76,28 +63,61 @@ void drawAll(int highlight) {
 
   // STABILO underlay (current step's heart only)
   if (on1) draw(curve, STABILO_1_1);
-  if (on2) for (path _r : inscribed) draw(_r, STABILO_2_1);
-  if (on3) for (path _r : circumscribed) draw(_r, STABILO_3_1);
+  if (on2) draw(pa, STABILO_2_1);
+  if (on2) draw(pb, STABILO_2_2);
+  if (on2) draw(pc, STABILO_2_3);
+  if (on3) draw(pa, STABILO_3_1);
+  if (on3) draw(pb, STABILO_3_2);
+  if (on3) draw(pc, STABILO_3_3);
 
   // ink pass
-  for (path _r : circumscribed) draw(_r, on3 ? circred : BLACK);
-  for (path _r : inscribed) filldraw(_r, rgb(142/255,36/255,170/255)+opacity(0.12), on2 ? inscpurple : BLACK);
-  dot(A, on1 ? BLACK : BLACK);
-  dot(_u_E, on1 ? BLACK : BLACK);
-  dot(B, on1 ? BLACK : BLACK);
-  dot(C, on1 ? BLACK : BLACK);
-  dot(D, on1 ? BLACK : BLACK);
-  draw(curve, on1 ? curveblue : BLACK);
-  draw(baseAE, on1 ? basegreen : BLACK);
-  draw(sideAa, on1 ? sideorange : BLACK);
+  draw(ae3, on3 ? BLACK : BLACK);
+  draw(curve, on3 ? curve : BLACK);
+  draw(pa, on3 ? circ : BLACK);
+  draw(pb, on3 ? circ : BLACK);
+  draw(pc, on3 ? circ : BLACK);
+  draw(pex, on3 ? excess : BLACK);
+  draw(ae2, on2 ? BLACK : BLACK);
+  draw(curve, on2 ? curve : BLACK);
+  draw(pa, on2 ? insc : BLACK);
+  draw(pb, on2 ? insc : BLACK);
+  draw(pc, on2 ? insc : BLACK);
+  draw(ae, on1 ? base : BLACK);
+  draw(aa, on1 ? BLACK : BLACK);
+  draw(curve, on1 ? curve : BLACK);
+  draw(ab, on1 ? base : BLACK);
+  draw(bc, on1 ? base : BLACK);
+  draw(cd, on1 ? base : BLACK);
   label("$A$", A, SW);
   label("$E$", _u_E, SE);
+  label("$a$", a, NW);
   label("$B$", B, S);
   label("$C$", C, S);
-  label("$D$", D, S);
-  label("$a$", ptA, NW);
-  label("$b$", ptb, N);
-  label("$c$", ptc, N);
-  label("$d$", ptd, N);
+  pair _lbl_ae = point(ae, 0.5);
+  label("$AE$", _lbl_ae, S);
+  pair _lbl_curve = point(curve, 0.5);
+  label("$acE$", _lbl_curve, NE);
+  label("$A$", A, SW);
+  label("$E$", _u_E, SE);
+  label("$a$", a, NW);
+  label("$B$", B, S);
+  label("$C$", C, S);
+  label("$D$", D, SE);
+  label("$b$", b, NE);
+  label("$c$", c, NE);
+  pair _lbl_curve = point(curve, 0.5);
+  label("$acE$", _lbl_curve, NE);
+  label("$A$", A, SW);
+  label("$E$", _u_E, SE);
+  label("$a$", a, NW);
+  label("$l$", l, W);
+  label("$B$", B, S);
+  label("$C$", C, S);
+  label("$b$", b, NE);
+  label("$c$", c, NE);
+  pair _lbl_curve = point(curve, 0.5);
+  label("$acE$", _lbl_curve, NE);
+  pair _lbl_pex = point(pex, 0.5);
+  label("$ABla$", _lbl_pex, N);
 }
 drawAll(highlight);

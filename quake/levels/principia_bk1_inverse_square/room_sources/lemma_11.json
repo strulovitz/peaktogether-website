@@ -124,7 +124,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_11.eq0",
-      "latex": "BD \\propto AB^{2} \\;(\\text{ultimately})"
+      "latex": "\\angle BAD \\to 0,\\quad \\text{arc } AB \\sim AB \\;(\\text{Lem. VI, VII})",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_11.eq1",
+      "latex": "A,B,G \\text{ concyclic on diam. } AG \\;\\Rightarrow\\; AB^{2}=AG\\times BD",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_11.eq2",
+      "latex": "GJ\\to 0 \\Rightarrow \\frac{AG}{Ag}\\to 1 \\Rightarrow \\frac{AB^{2}}{Ab^{2}}=\\frac{BD}{bd}",
+      "step_index": 3
     }
   ]
 }

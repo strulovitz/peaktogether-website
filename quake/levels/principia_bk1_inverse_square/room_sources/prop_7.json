@@ -112,7 +112,18 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_7.eq0",
-      "latex": "F \\propto \\dfrac{1}{SP^2}\\cdot\\dfrac{1}{PV^3}"
+      "latex": "F \\propto \\dfrac{1}{SP^2}\\cdot\\dfrac{QR}{QT^2}",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_7.eq1",
+      "latex": "\\angle VPA = 90^\\circ \\;\\Rightarrow\\; \\triangle ZQR \\sim \\triangle ZTP \\sim \\triangle ZPA",
+      "step_index": 2
+    },
+    {
+      "eq_id": "prop_7.eq2",
+      "latex": "QR\\cdot L : QT^2 = AV^2 : PV^2 \\;\\Rightarrow\\; F \\propto \\dfrac{1}{SP^2}\\cdot\\dfrac{1}{PV^3}",
+      "step_index": 3
     }
   ]
 }

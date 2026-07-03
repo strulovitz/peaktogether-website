@@ -1,28 +1,41 @@
 room      prop_4
 kind      equation
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.
-caption   The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.
+caption   The centripetal forces of bodies, which by equoble motions describe different circles, tend to the centres of the same circles; and are one to the other, as the squares of the arcs described in equal times applied to the radii of the circles.
 final     2
 
 station 1
-  ceiling   eq0 :: F \propto \dfrac{v^2}{r}
-  gloss   The centripetal pull grows with the square of the speed and is inversely as the distance from the centre.
-  color   velblue   #1E6FE0
-  color   radgreen  #00A35A
-  color   forceorange #E8770A
+  ceiling   eq_force :: F \propto \dfrac{v^2}{r}
+  gloss   The centripetal pull toward the centre grows with the square of the speed and shrinks with the radius.
+  color   force #1f6feb
+  color   speed #d1242f
+  color   radius #953800
+  color   nil #000000
   panel
-    term  velblue   $v^2$  heart
-    term  forceorange  $F$
-    term  radgreen  $r$
+    term    force   $F$
+    term    nil     $\propto$
+    term    speed   $v^2$  heart stabilo=#ffd6d6
+    term    nil     $\big/$
+    term    radius  $r$
+    layout  ${force|$F$} \;\propto\; \dfrac{{speed|$v^2$}}{{radius|$r$}}$
   text
-    The {forceorange|pull toward the centre} is as the {velblue|square of the speed} divided by the {radgreen|distance from the centre}.
+    The {force|centripetal force} — Newton's {force|pull toward the centre} — scales as the {speed|square of the speed} divided by the {radius|radius}. Double the {speed|speed} and the {force|pull} quadruples; double the {radius|radius} and the {force|pull} halves. Here the {speed|$v^2$} is the heart: it is the {speed|square}, not the speed itself, that governs how hard the body is drawn inward. Thus {force|$F$} answers to {speed|$v^2$} directly and to {radius|$r$} inversely.
 
 station 2
-  gloss   A small circular arc swept in equal time; the versed sine gives the force.
-  color   velblue   #1E6FE0
-  color   radgreen  #00A35A
+  ceiling   eq_deriv :: F \propto \dfrac{\text{versed sine}}{t^2} \propto \dfrac{(\text{arc})^2}{D\,t^2} \propto \dfrac{v^2}{r}
+  gloss   From versed sine and Lemma VII the pull resolves into the square of the speed over the radius.
+  color   chord #d1242f
+  color   force #1f6feb
+  color   radius #953800
+  color   nil #000000
   panel
-    term  velblue   $v^2$  heart
-    term  radgreen  $r$
+    term    force   $F$
+    term    nil     $\propto$
+    term    chord   $\dfrac{\text{arc}^2}{D}$
+    term    nil     $\Big/ t^2 \;\propto\;$
+    term    chord   $v^2$  heart stabilo=#ffd6d6
+    term    nil     $\big/$
+    term    radius  $r$
+    layout  ${force|$F$} \;\propto\; \dfrac{{chord|$v^2$}}{{radius|$r$}}$
   text
-    In a small {velblue|arc of the circle} the {radgreen|radius} leads to the {velblue|versed sine}, which gives the force by Cor.~4 Prop.~1 and Lem.~7.
+    By Prop. I and Cor. 4 the {force|centripetal force} in a least arc is as the versed sine of that arc taken in equal times. By Lemma VII the versed sine is as the {chord|arc squared} divided by the diameter, so {force|$F$} answers to {chord|$\text{arc}^2$}$/D$. Since the arc is as $v\,t$ and the diameter is as the {radius|radius}, the times cancel and the diameters give the {radius|$r$}, leaving the {chord|$v^2$} standing as the heart. The proof chain therefore closes on {force|$F$} $\propto$ {chord|$v^2$}$/${radius|$r$}.

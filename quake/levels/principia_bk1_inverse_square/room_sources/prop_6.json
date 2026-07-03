@@ -127,7 +127,23 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_6.eq0",
-      "latex": "F \\propto \\dfrac{\\text{versed sine}}{t^2} \\qquad F \\propto \\dfrac{1}{SP^2\\cdot QT^2/QR}"
+      "latex": "\\text{areas} \\propto \\text{times} \\;\\Rightarrow\\; ?\\;=\\;\\lVert F\\rVert \\quad (\\text{Prop. I})",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_6.eq1",
+      "latex": "\\text{versed sine} \\propto F\\cdot t^2 \\qquad\\Longrightarrow\\qquad F \\propto \\dfrac{QR}{t^2}",
+      "step_index": 2
+    },
+    {
+      "eq_id": "prop_6.eq2",
+      "latex": "QR \\parallel SP,\\quad QT \\perp SP \\quad\\Rightarrow\\quad [\\triangle SQP] = \\tfrac{1}{2}\\,SP\\cdot QT \\propto t",
+      "step_index": 3
+    },
+    {
+      "eq_id": "prop_6.eq3",
+      "latex": "F \\propto \\dfrac{QR}{t^2} \\;\\propto\\; \\dfrac{QR}{(SP\\cdot QT)^2} \\;=\\; \\dfrac{1}{SP^2\\cdot QT^2/QR}",
+      "step_index": 4
     }
   ]
 }

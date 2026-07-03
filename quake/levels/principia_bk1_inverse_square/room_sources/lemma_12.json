@@ -58,7 +58,8 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_12.eq0",
-      "latex": "\\text{parallelogram about conjugate diameters} = \\text{const} = 4ab"
+      "latex": "\\text{parallelogram about conjugate diameters} = \\text{const} = 4ab",
+      "step_index": 1
     }
   ]
 }

@@ -3,20 +3,20 @@
   "figure_id": "lemma_2.f1",
   "node_id": "lemma_2",
   "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II; Plate 1, Fig. 6.",
-  "caption": "Inscribed and circumscribed parallelograms on equal bases under the curve aE; as the bases shrink, the inscribed and circumscribed figures and the curvilinear figure become ultimately equal.",
+  "caption": "If in any figure AacE there be inscribed parallelograms on equal bases and circumscribed parallelograms completed: as the bases are diminished without limit, the inscribed, circumscribed, and curvilinear figures have the ultimate ratio of equality.",
   "n_steps": 3,
   "steps": [
     {
       "index": 1,
-      "gloss": "The curvilinear figure AacE: the curve aE, the baseline AE on equal bases, and the side Aa."
+      "gloss": "The curvilinear figure is bounded below by AE, at left by Aa, and above by the curve acE, with the base cut into equal parts."
     },
     {
       "index": 2,
-      "gloss": "The inscribed parallelograms Ab, Bc, Cd, standing under the curve on the equal bases."
+      "gloss": "The inscribed rectangles rise only to the lower corner of the curve on each base, lying wholly beneath it."
     },
     {
       "index": 3,
-      "gloss": "The circumscribed parallelograms completed above the curve; their excess over the inscribed figure is the single rectangle ABla, which vanishes as AB shrinks."
+      "gloss": "The circumscribed rectangles overtop the curve; their total excess collapses into the single vanishing rectangle ABla."
     }
   ],
   "ops": [
@@ -29,7 +29,7 @@
           "tex": "$A$",
           "placement": "SW"
         },
-        "marker": "dot"
+        "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
@@ -46,12 +46,29 @@
           "tex": "$E$",
           "placement": "SE"
         },
-        "marker": "dot"
+        "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
-        8.0,
+        9.0,
         0.0
+      ]
+    },
+    {
+      "name": "a",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$a$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        4.0
       ]
     },
     {
@@ -63,11 +80,11 @@
           "tex": "$B$",
           "placement": "S"
         },
-        "marker": "dot"
+        "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
-        2.0,
+        3.0,
         0.0
       ]
     },
@@ -80,24 +97,7 @@
           "tex": "$C$",
           "placement": "S"
         },
-        "marker": "dot"
-      },
-      "op": "free_point",
-      "rough_xy": [
-        4.0,
-        0.0
-      ]
-    },
-    {
-      "name": "D",
-      "draw": {
-        "step": 1,
-        "is_heart": false,
-        "label": {
-          "tex": "$D$",
-          "placement": "S"
-        },
-        "marker": "dot"
+        "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
@@ -106,13 +106,194 @@
       ]
     },
     {
-      "name": "ptA",
+      "name": "D",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        9.0,
+        0.0
+      ]
+    },
+    {
+      "name": "p1",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        1.5,
+        3.6
+      ]
+    },
+    {
+      "name": "p2",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        4.5,
+        2.6
+      ]
+    },
+    {
+      "name": "p3",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        7.5,
+        1.3
+      ]
+    },
+    {
+      "name": "ae",
       "draw": {
         "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
+          "name": "base",
+          "hex": "#b8860b"
         },
         "step": 1,
+        "is_heart": false,
+        "label": {
+          "tex": "$AE$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "aa",
+      "draw": {
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "a"
+    },
+    {
+      "name": "curve",
+      "draw": {
+        "local_color": {
+          "name": "curve",
+          "hex": "#1f6feb"
+        },
+        "step": 1,
+        "is_heart": true,
+        "label": {
+          "tex": "$acE$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "a",
+        "p1",
+        "p2",
+        "p3",
+        "E"
+      ]
+    },
+    {
+      "name": "ab",
+      "draw": {
+        "local_color": {
+          "name": "base",
+          "hex": "#b8860b"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "B"
+    },
+    {
+      "name": "bc",
+      "draw": {
+        "local_color": {
+          "name": "base",
+          "hex": "#b8860b"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "B",
+      "b": "C"
+    },
+    {
+      "name": "cd",
+      "draw": {
+        "local_color": {
+          "name": "base",
+          "hex": "#b8860b"
+        },
+        "step": 1,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "C",
+      "b": "D"
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        9.0,
+        0.0
+      ]
+    },
+    {
+      "name": "a",
+      "draw": {
+        "step": 2,
         "is_heart": false,
         "label": {
           "tex": "$a$",
@@ -123,117 +304,98 @@
       "op": "free_point",
       "rough_xy": [
         0.0,
-        1.4
+        4.0
       ]
     },
     {
-      "name": "ptb",
+      "name": "B",
       "draw": {
-        "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
-        },
-        "step": 1,
+        "step": 2,
         "is_heart": false,
         "label": {
-          "tex": "$b$",
-          "placement": "N"
+          "tex": "$B$",
+          "placement": "S"
         },
         "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
-        2.0,
-        2.6
+        3.0,
+        0.0
       ]
     },
     {
-      "name": "ptc",
+      "name": "C",
       "draw": {
-        "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
-        },
-        "step": 1,
+        "step": 2,
         "is_heart": false,
         "label": {
-          "tex": "$c$",
-          "placement": "N"
-        },
-        "marker": "none"
-      },
-      "op": "free_point",
-      "rough_xy": [
-        4.0,
-        3.4
-      ]
-    },
-    {
-      "name": "ptd",
-      "draw": {
-        "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
-        },
-        "step": 1,
-        "is_heart": false,
-        "label": {
-          "tex": "$d$",
-          "placement": "N"
+          "tex": "$C$",
+          "placement": "S"
         },
         "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
         6.0,
-        3.9
+        0.0
       ]
     },
     {
-      "name": "ptE",
+      "name": "D",
       "draw": {
-        "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
-        },
-        "step": 1,
+        "step": 2,
         "is_heart": false,
+        "label": {
+          "tex": "$D$",
+          "placement": "SE"
+        },
         "marker": "none"
       },
       "op": "free_point",
       "rough_xy": [
-        8.0,
-        4.2
+        9.0,
+        0.0
       ]
     },
     {
-      "name": "curve",
+      "name": "b",
       "draw": {
-        "local_color": {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$b$",
+          "placement": "NE"
         },
-        "step": 1,
-        "is_heart": true,
         "marker": "none"
       },
-      "op": "polyline",
-      "points": [
-        "ptA",
-        "ptb",
-        "ptc",
-        "ptd",
-        "ptE"
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        2.6
       ]
     },
     {
-      "name": "baseAE",
+      "name": "c",
       "draw": {
-        "local_color": {
-          "name": "basegreen",
-          "hex": "#00A35A"
+        "step": 2,
+        "is_heart": false,
+        "label": {
+          "tex": "$c$",
+          "placement": "NE"
         },
-        "step": 1,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        1.3
+      ]
+    },
+    {
+      "name": "ae2",
+      "draw": {
+        "step": 2,
         "is_heart": false,
         "marker": "none"
       },
@@ -242,53 +404,373 @@
       "b": "E"
     },
     {
-      "name": "sideAa",
+      "name": "curve",
       "draw": {
         "local_color": {
-          "name": "sideorange",
-          "hex": "#E8770A"
+          "name": "curve",
+          "hex": "#1f6feb"
         },
-        "step": 1,
+        "step": 2,
         "is_heart": false,
+        "label": {
+          "tex": "$acE$",
+          "placement": "NE"
+        },
         "marker": "none"
       },
-      "op": "segment",
-      "a": "A",
-      "b": "ptA"
+      "op": "polyline",
+      "points": [
+        "a",
+        "b",
+        "c",
+        "E"
+      ]
     },
     {
-      "name": "inscribed",
+      "name": "pa",
       "draw": {
         "local_color": {
-          "name": "inscpurple",
-          "hex": "#8E24AA"
+          "name": "insc",
+          "hex": "#cf3b2f"
         },
         "step": 2,
         "is_heart": true,
         "marker": "none"
       },
-      "op": "series",
-      "along": "baseAE",
-      "to_curve": "curve",
-      "count": 4,
-      "kind": "inscribed_rects"
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "b",
+        "a"
+      ]
     },
     {
-      "name": "circumscribed",
+      "name": "pb",
       "draw": {
         "local_color": {
-          "name": "circred",
-          "hex": "#D81B60"
+          "name": "insc",
+          "hex": "#cf3b2f"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "B",
+        "C",
+        "c",
+        "b"
+      ]
+    },
+    {
+      "name": "pc",
+      "draw": {
+        "local_color": {
+          "name": "insc",
+          "hex": "#cf3b2f"
+        },
+        "step": 2,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "C",
+        "D",
+        "E",
+        "c"
+      ]
+    },
+    {
+      "name": "A",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$A$",
+          "placement": "SW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        0.0
+      ]
+    },
+    {
+      "name": "E",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$E$",
+          "placement": "SE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        9.0,
+        0.0
+      ]
+    },
+    {
+      "name": "a",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$a$",
+          "placement": "NW"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        4.0
+      ]
+    },
+    {
+      "name": "l",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$l$",
+          "placement": "W"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        0.0,
+        3.6
+      ]
+    },
+    {
+      "name": "B",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$B$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        0.0
+      ]
+    },
+    {
+      "name": "C",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$C$",
+          "placement": "S"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        0.0
+      ]
+    },
+    {
+      "name": "D",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        9.0,
+        0.0
+      ]
+    },
+    {
+      "name": "b",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$b$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        3.0,
+        3.6
+      ]
+    },
+    {
+      "name": "c",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$c$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        2.6
+      ]
+    },
+    {
+      "name": "e_top",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        9.0,
+        1.3
+      ]
+    },
+    {
+      "name": "c_bot",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "free_point",
+      "rough_xy": [
+        6.0,
+        1.3
+      ]
+    },
+    {
+      "name": "ae3",
+      "draw": {
+        "step": 3,
+        "is_heart": false,
+        "marker": "none"
+      },
+      "op": "segment",
+      "a": "A",
+      "b": "E"
+    },
+    {
+      "name": "curve",
+      "draw": {
+        "local_color": {
+          "name": "curve",
+          "hex": "#1f6feb"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$acE$",
+          "placement": "NE"
+        },
+        "marker": "none"
+      },
+      "op": "polyline",
+      "points": [
+        "a",
+        "b",
+        "c",
+        "E"
+      ]
+    },
+    {
+      "name": "pa",
+      "draw": {
+        "local_color": {
+          "name": "circ",
+          "hex": "#2ea043"
         },
         "step": 3,
         "is_heart": true,
         "marker": "none"
       },
-      "op": "series",
-      "along": "baseAE",
-      "to_curve": "curve",
-      "count": 4,
-      "kind": "circumscribed_rects"
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "b",
+        "a"
+      ]
+    },
+    {
+      "name": "pb",
+      "draw": {
+        "local_color": {
+          "name": "circ",
+          "hex": "#2ea043"
+        },
+        "step": 3,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "B",
+        "C",
+        "c",
+        "b"
+      ]
+    },
+    {
+      "name": "pc",
+      "draw": {
+        "local_color": {
+          "name": "circ",
+          "hex": "#2ea043"
+        },
+        "step": 3,
+        "is_heart": true,
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "C",
+        "D",
+        "e_top",
+        "c_bot"
+      ]
+    },
+    {
+      "name": "pex",
+      "draw": {
+        "local_color": {
+          "name": "excess",
+          "hex": "#cf3b2f"
+        },
+        "step": 3,
+        "is_heart": false,
+        "label": {
+          "tex": "$ABla$",
+          "placement": "N"
+        },
+        "marker": "none"
+      },
+      "op": "polygon",
+      "points": [
+        "A",
+        "B",
+        "b",
+        "l"
+      ]
     }
   ]
 }

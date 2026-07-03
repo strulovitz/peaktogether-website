@@ -7,13 +7,13 @@
       "kind": "figure_off",
       "wall_path": "assets/lemma_2.f1.off.png",
       "master_path": "assets/lemma_2.f1.off@master.png",
-      "px_w": 1012,
-      "px_h": 549,
+      "px_w": 200,
+      "px_h": 150,
       "content_bbox": [
-        7,
-        5,
-        1005,
-        544
+        0,
+        0,
+        200,
+        150
       ],
       "dpi": 220
     },
@@ -22,13 +22,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.1.png",
       "master_path": "assets/lemma_2.f1.on.1@master.png",
-      "px_w": 1012,
-      "px_h": 549,
+      "px_w": 200,
+      "px_h": 150,
       "content_bbox": [
-        7,
-        1,
-        1005,
-        544
+        0,
+        0,
+        200,
+        150
       ],
       "dpi": 220
     },
@@ -37,13 +37,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.2.png",
       "master_path": "assets/lemma_2.f1.on.2@master.png",
-      "px_w": 1012,
-      "px_h": 549,
+      "px_w": 200,
+      "px_h": 150,
       "content_bbox": [
-        7,
-        5,
-        1005,
-        544
+        0,
+        0,
+        200,
+        150
       ],
       "dpi": 220
     },
@@ -52,13 +52,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.3.png",
       "master_path": "assets/lemma_2.f1.on.3@master.png",
-      "px_w": 1012,
-      "px_h": 549,
+      "px_w": 200,
+      "px_h": 150,
       "content_bbox": [
-        7,
-        1,
-        1005,
-        544
+        0,
+        0,
+        200,
+        150
       ],
       "dpi": 220
     },
@@ -532,12 +532,12 @@
       "kind": "figure_off",
       "wall_path": "assets/law_1.f1.off.png",
       "master_path": "assets/law_1.f1.off@master.png",
-      "px_w": 626,
+      "px_w": 784,
       "px_h": 1444,
       "content_bbox": [
         7,
         5,
-        619,
+        777,
         1439
       ],
       "dpi": 220
@@ -547,12 +547,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.1.png",
       "master_path": "assets/law_1.f1.on.1@master.png",
-      "px_w": 626,
+      "px_w": 784,
       "px_h": 1444,
       "content_bbox": [
         7,
         5,
-        619,
+        777,
         1439
       ],
       "dpi": 220
@@ -562,12 +562,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.2.png",
       "master_path": "assets/law_1.f1.on.2@master.png",
-      "px_w": 626,
+      "px_w": 784,
       "px_h": 1444,
       "content_bbox": [
         7,
         5,
-        619,
+        777,
         1439
       ],
       "dpi": 220
@@ -577,12 +577,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.3.png",
       "master_path": "assets/law_1.f1.on.3@master.png",
-      "px_w": 626,
+      "px_w": 784,
       "px_h": 1444,
       "content_bbox": [
         7,
         5,
-        619,
+        777,
         1439
       ],
       "dpi": 220
@@ -592,12 +592,12 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.4.png",
       "master_path": "assets/law_1.f1.on.4@master.png",
-      "px_w": 626,
+      "px_w": 784,
       "px_h": 1444,
       "content_bbox": [
         7,
         5,
-        619,
+        777,
         1439
       ],
       "dpi": 220
@@ -607,12 +607,12 @@
       "kind": "figure_off",
       "wall_path": "assets/law_2.f1.off.png",
       "master_path": "assets/law_2.f1.off@master.png",
-      "px_w": 393,
+      "px_w": 417,
       "px_h": 70,
       "content_bbox": [
         0,
         0,
-        393,
+        417,
         70
       ],
       "dpi": 220
@@ -622,13 +622,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.1.png",
       "master_path": "assets/law_2.f1.on.1@master.png",
-      "px_w": 407,
-      "px_h": 70,
+      "px_w": 400,
+      "px_h": 100,
       "content_bbox": [
         0,
         0,
-        407,
-        70
+        400,
+        100
       ],
       "dpi": 220
     },
@@ -637,13 +637,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.2.png",
       "master_path": "assets/law_2.f1.on.2@master.png",
-      "px_w": 363,
-      "px_h": 70,
+      "px_w": 400,
+      "px_h": 100,
       "content_bbox": [
         0,
         0,
-        363,
-        70
+        400,
+        100
       ],
       "dpi": 220
     },
@@ -787,13 +787,13 @@
       "kind": "figure_off",
       "wall_path": "assets/prop_4.f1.off.png",
       "master_path": "assets/prop_4.f1.off@master.png",
-      "px_w": 59,
-      "px_h": 148,
+      "px_w": 400,
+      "px_h": 100,
       "content_bbox": [
         0,
         0,
-        59,
-        148
+        400,
+        100
       ],
       "dpi": 220
     },
@@ -802,13 +802,13 @@
       "kind": "figure_on",
       "wall_path": "assets/prop_4.f1.on.1.png",
       "master_path": "assets/prop_4.f1.on.1@master.png",
-      "px_w": 97,
-      "px_h": 148,
+      "px_w": 400,
+      "px_h": 100,
       "content_bbox": [
         0,
         0,
-        97,
-        148
+        400,
+        100
       ],
       "dpi": 220
     },
@@ -817,13 +817,13 @@
       "kind": "figure_on",
       "wall_path": "assets/prop_4.f1.on.2.png",
       "master_path": "assets/prop_4.f1.on.2@master.png",
-      "px_w": 59,
-      "px_h": 148,
+      "px_w": 400,
+      "px_h": 100,
       "content_bbox": [
         0,
         0,
-        59,
-        148
+        400,
+        100
       ],
       "dpi": 220
     },
@@ -1178,12 +1178,12 @@
       "wall_path": "assets/lemma_2.s1.txt.off.png",
       "master_path": "assets/lemma_2.s1.txt.off@master.png",
       "px_w": 867,
-      "px_h": 214,
+      "px_h": 349,
       "content_bbox": [
         13,
         11,
         864,
-        209
+        344
       ],
       "dpi": 220
     },
@@ -1193,12 +1193,12 @@
       "wall_path": "assets/lemma_2.s1.txt.on.png",
       "master_path": "assets/lemma_2.s1.txt.on@master.png",
       "px_w": 867,
-      "px_h": 214,
+      "px_h": 349,
       "content_bbox": [
         13,
         11,
         864,
-        209
+        344
       ],
       "dpi": 220
     },
@@ -1207,13 +1207,13 @@
       "kind": "text_off",
       "wall_path": "assets/lemma_2.s2.txt.off.png",
       "master_path": "assets/lemma_2.s2.txt.off@master.png",
-      "px_w": 866,
-      "px_h": 177,
+      "px_w": 868,
+      "px_h": 384,
       "content_bbox": [
-        13,
         12,
-        863,
-        173
+        11,
+        864,
+        379
       ],
       "dpi": 220
     },
@@ -1222,13 +1222,13 @@
       "kind": "text_on",
       "wall_path": "assets/lemma_2.s2.txt.on.png",
       "master_path": "assets/lemma_2.s2.txt.on@master.png",
-      "px_w": 866,
-      "px_h": 177,
+      "px_w": 868,
+      "px_h": 384,
       "content_bbox": [
-        13,
         12,
-        863,
-        173
+        11,
+        864,
+        379
       ],
       "dpi": 220
     },
@@ -1237,13 +1237,13 @@
       "kind": "text_off",
       "wall_path": "assets/lemma_2.s3.txt.off.png",
       "master_path": "assets/lemma_2.s3.txt.off@master.png",
-      "px_w": 869,
-      "px_h": 433,
+      "px_w": 867,
+      "px_h": 561,
       "content_bbox": [
         13,
         12,
-        866,
-        429
+        864,
+        557
       ],
       "dpi": 220
     },
@@ -1252,13 +1252,13 @@
       "kind": "text_on",
       "wall_path": "assets/lemma_2.s3.txt.on.png",
       "master_path": "assets/lemma_2.s3.txt.on@master.png",
-      "px_w": 869,
-      "px_h": 433,
+      "px_w": 867,
+      "px_h": 561,
       "content_bbox": [
         13,
         12,
-        866,
-        429
+        864,
+        557
       ],
       "dpi": 220
     },
@@ -1928,12 +1928,12 @@
       "wall_path": "assets/law_1.s1.txt.off.png",
       "master_path": "assets/law_1.s1.txt.off@master.png",
       "px_w": 871,
-      "px_h": 136,
+      "px_h": 348,
       "content_bbox": [
         13,
         11,
         868,
-        131
+        343
       ],
       "dpi": 220
     },
@@ -1943,12 +1943,12 @@
       "wall_path": "assets/law_1.s1.txt.on.png",
       "master_path": "assets/law_1.s1.txt.on@master.png",
       "px_w": 871,
-      "px_h": 136,
+      "px_h": 348,
       "content_bbox": [
         13,
         11,
         868,
-        131
+        343
       ],
       "dpi": 220
     },
@@ -1958,12 +1958,12 @@
       "wall_path": "assets/law_1.s2.txt.off.png",
       "master_path": "assets/law_1.s2.txt.off@master.png",
       "px_w": 867,
-      "px_h": 93,
+      "px_h": 349,
       "content_bbox": [
         13,
         11,
         864,
-        88
+        344
       ],
       "dpi": 220
     },
@@ -1973,12 +1973,12 @@
       "wall_path": "assets/law_1.s2.txt.on.png",
       "master_path": "assets/law_1.s2.txt.on@master.png",
       "px_w": 867,
-      "px_h": 93,
+      "px_h": 349,
       "content_bbox": [
         13,
         11,
         864,
-        88
+        344
       ],
       "dpi": 220
     },
@@ -1987,13 +1987,13 @@
       "kind": "text_off",
       "wall_path": "assets/law_1.s3.txt.off.png",
       "master_path": "assets/law_1.s3.txt.off@master.png",
-      "px_w": 866,
-      "px_h": 136,
+      "px_w": 867,
+      "px_h": 391,
       "content_bbox": [
         13,
         11,
-        863,
-        131
+        864,
+        386
       ],
       "dpi": 220
     },
@@ -2002,13 +2002,13 @@
       "kind": "text_on",
       "wall_path": "assets/law_1.s3.txt.on.png",
       "master_path": "assets/law_1.s3.txt.on@master.png",
-      "px_w": 866,
-      "px_h": 136,
+      "px_w": 867,
+      "px_h": 391,
       "content_bbox": [
         13,
         11,
-        863,
-        131
+        864,
+        386
       ],
       "dpi": 220
     },
@@ -2018,12 +2018,12 @@
       "wall_path": "assets/law_1.s4.txt.off.png",
       "master_path": "assets/law_1.s4.txt.off@master.png",
       "px_w": 867,
-      "px_h": 135,
+      "px_h": 402,
       "content_bbox": [
         13,
         12,
         864,
-        131
+        398
       ],
       "dpi": 220
     },
@@ -2033,12 +2033,12 @@
       "wall_path": "assets/law_1.s4.txt.on.png",
       "master_path": "assets/law_1.s4.txt.on@master.png",
       "px_w": 867,
-      "px_h": 135,
+      "px_h": 402,
       "content_bbox": [
         13,
         12,
         864,
-        131
+        398
       ],
       "dpi": 220
     },
@@ -2047,13 +2047,13 @@
       "kind": "text_off",
       "wall_path": "assets/law_2.s1.txt.off.png",
       "master_path": "assets/law_2.s1.txt.off@master.png",
-      "px_w": 868,
-      "px_h": 391,
+      "px_w": 80,
+      "px_h": 60,
       "content_bbox": [
-        13,
-        11,
-        865,
-        386
+        0,
+        0,
+        80,
+        60
       ],
       "dpi": 220
     },
@@ -2062,13 +2062,13 @@
       "kind": "text_on",
       "wall_path": "assets/law_2.s1.txt.on.png",
       "master_path": "assets/law_2.s1.txt.on@master.png",
-      "px_w": 868,
-      "px_h": 391,
+      "px_w": 80,
+      "px_h": 60,
       "content_bbox": [
-        13,
-        11,
-        865,
-        386
+        0,
+        0,
+        80,
+        60
       ],
       "dpi": 220
     },
@@ -2077,13 +2077,13 @@
       "kind": "text_off",
       "wall_path": "assets/law_2.s2.txt.off.png",
       "master_path": "assets/law_2.s2.txt.off@master.png",
-      "px_w": 867,
-      "px_h": 476,
+      "px_w": 80,
+      "px_h": 60,
       "content_bbox": [
-        13,
-        11,
-        864,
-        471
+        0,
+        0,
+        80,
+        60
       ],
       "dpi": 220
     },
@@ -2092,13 +2092,13 @@
       "kind": "text_on",
       "wall_path": "assets/law_2.s2.txt.on.png",
       "master_path": "assets/law_2.s2.txt.on@master.png",
-      "px_w": 867,
-      "px_h": 476,
+      "px_w": 80,
+      "px_h": 60,
       "content_bbox": [
-        13,
-        11,
-        864,
-        471
+        0,
+        0,
+        80,
+        60
       ],
       "dpi": 220
     },
@@ -2318,12 +2318,12 @@
       "wall_path": "assets/prop_4.s1.txt.off.png",
       "master_path": "assets/prop_4.s1.txt.off@master.png",
       "px_w": 867,
-      "px_h": 93,
+      "px_h": 348,
       "content_bbox": [
         13,
-        11,
+        12,
         864,
-        88
+        344
       ],
       "dpi": 220
     },
@@ -2333,12 +2333,12 @@
       "wall_path": "assets/prop_4.s1.txt.on.png",
       "master_path": "assets/prop_4.s1.txt.on@master.png",
       "px_w": 867,
-      "px_h": 93,
+      "px_h": 348,
       "content_bbox": [
         13,
-        11,
+        12,
         864,
-        88
+        344
       ],
       "dpi": 220
     },
@@ -2347,13 +2347,13 @@
       "kind": "text_off",
       "wall_path": "assets/prop_4.s2.txt.off.png",
       "master_path": "assets/prop_4.s2.txt.off@master.png",
-      "px_w": 867,
-      "px_h": 135,
+      "px_w": 868,
+      "px_h": 392,
       "content_bbox": [
         13,
-        11,
-        864,
-        130
+        12,
+        865,
+        388
       ],
       "dpi": 220
     },
@@ -2362,13 +2362,13 @@
       "kind": "text_on",
       "wall_path": "assets/prop_4.s2.txt.on.png",
       "master_path": "assets/prop_4.s2.txt.on@master.png",
-      "px_w": 867,
-      "px_h": 135,
+      "px_w": 868,
+      "px_h": 392,
       "content_bbox": [
         13,
-        11,
-        864,
-        130
+        12,
+        865,
+        388
       ],
       "dpi": 220
     },
@@ -2917,13 +2917,13 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_2.eq0.neutral.png",
       "master_path": "assets/lemma_2.eq0.neutral@master.png",
-      "px_w": 781,
-      "px_h": 63,
+      "px_w": 377,
+      "px_h": 98,
       "content_bbox": [
         0,
         0,
-        781,
-        63
+        377,
+        98
       ],
       "dpi": 220
     },
@@ -2932,13 +2932,28 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_2.eq1.neutral.png",
       "master_path": "assets/lemma_2.eq1.neutral@master.png",
-      "px_w": 929,
-      "px_h": 45,
+      "px_w": 525,
+      "px_h": 86,
       "content_bbox": [
         0,
         0,
-        929,
-        45
+        525,
+        86
+      ],
+      "dpi": 220
+    },
+    "lemma_2.eq2.neutral": {
+      "asset_id": "lemma_2.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_2.eq2.neutral.png",
+      "master_path": "assets/lemma_2.eq2.neutral@master.png",
+      "px_w": 419,
+      "px_h": 41,
+      "content_bbox": [
+        0,
+        0,
+        419,
+        41
       ],
       "dpi": 220
     },
@@ -2947,12 +2962,27 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_3.eq0.neutral.png",
       "master_path": "assets/lemma_3.eq0.neutral@master.png",
-      "px_w": 739,
+      "px_w": 688,
       "px_h": 45,
       "content_bbox": [
         0,
         0,
-        739,
+        688,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_3.eq1.neutral": {
+      "asset_id": "lemma_3.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_3.eq1.neutral.png",
+      "master_path": "assets/lemma_3.eq1.neutral@master.png",
+      "px_w": 928,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        928,
         45
       ],
       "dpi": 220
@@ -2962,13 +2992,13 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_4.eq0.neutral.png",
       "master_path": "assets/lemma_4.eq0.neutral@master.png",
-      "px_w": 596,
-      "px_h": 81,
+      "px_w": 929,
+      "px_h": 44,
       "content_bbox": [
         0,
         0,
-        596,
-        81
+        929,
+        44
       ],
       "dpi": 220
     },
@@ -2977,12 +3007,27 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_4.eq1.neutral.png",
       "master_path": "assets/lemma_4.eq1.neutral@master.png",
-      "px_w": 638,
+      "px_w": 928,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        928,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_4.eq2.neutral": {
+      "asset_id": "lemma_4.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_4.eq2.neutral.png",
+      "master_path": "assets/lemma_4.eq2.neutral@master.png",
+      "px_w": 851,
       "px_h": 95,
       "content_bbox": [
         0,
         0,
-        638,
+        851,
         95
       ],
       "dpi": 220
@@ -3022,6 +3067,36 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_6.eq0.neutral.png",
       "master_path": "assets/lemma_6.eq0.neutral@master.png",
+      "px_w": 601,
+      "px_h": 36,
+      "content_bbox": [
+        0,
+        0,
+        601,
+        36
+      ],
+      "dpi": 220
+    },
+    "lemma_6.eq1.neutral": {
+      "asset_id": "lemma_6.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_6.eq1.neutral.png",
+      "master_path": "assets/lemma_6.eq1.neutral@master.png",
+      "px_w": 346,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        346,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_6.eq2.neutral": {
+      "asset_id": "lemma_6.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_6.eq2.neutral.png",
+      "master_path": "assets/lemma_6.eq2.neutral@master.png",
       "px_w": 382,
       "px_h": 36,
       "content_bbox": [
@@ -3037,12 +3112,42 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_7.eq0.neutral.png",
       "master_path": "assets/lemma_7.eq0.neutral@master.png",
-      "px_w": 487,
+      "px_w": 615,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        615,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_7.eq1.neutral": {
+      "asset_id": "lemma_7.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_7.eq1.neutral.png",
+      "master_path": "assets/lemma_7.eq1.neutral@master.png",
+      "px_w": 633,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        633,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_7.eq2.neutral": {
+      "asset_id": "lemma_7.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_7.eq2.neutral.png",
+      "master_path": "assets/lemma_7.eq2.neutral@master.png",
+      "px_w": 726,
       "px_h": 42,
       "content_bbox": [
         0,
         0,
-        487,
+        726,
         42
       ],
       "dpi": 220
@@ -3052,13 +3157,43 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_9.eq0.neutral.png",
       "master_path": "assets/lemma_9.eq0.neutral@master.png",
-      "px_w": 498,
+      "px_w": 758,
+      "px_h": 42,
+      "content_bbox": [
+        0,
+        0,
+        758,
+        42
+      ],
+      "dpi": 220
+    },
+    "lemma_9.eq1.neutral": {
+      "asset_id": "lemma_9.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_9.eq1.neutral.png",
+      "master_path": "assets/lemma_9.eq1.neutral@master.png",
+      "px_w": 831,
       "px_h": 41,
       "content_bbox": [
         0,
         0,
-        498,
+        831,
         41
+      ],
+      "dpi": 220
+    },
+    "lemma_9.eq2.neutral": {
+      "asset_id": "lemma_9.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_9.eq2.neutral.png",
+      "master_path": "assets/lemma_9.eq2.neutral@master.png",
+      "px_w": 929,
+      "px_h": 47,
+      "content_bbox": [
+        0,
+        0,
+        929,
+        47
       ],
       "dpi": 220
     },
@@ -3067,13 +3202,28 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_10.eq0.neutral.png",
       "master_path": "assets/lemma_10.eq0.neutral@master.png",
-      "px_w": 418,
-      "px_h": 74,
+      "px_w": 638,
+      "px_h": 42,
       "content_bbox": [
         0,
         0,
-        418,
-        74
+        638,
+        42
+      ],
+      "dpi": 220
+    },
+    "lemma_10.eq1.neutral": {
+      "asset_id": "lemma_10.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_10.eq1.neutral.png",
+      "master_path": "assets/lemma_10.eq1.neutral@master.png",
+      "px_w": 928,
+      "px_h": 75,
+      "content_bbox": [
+        0,
+        0,
+        928,
+        75
       ],
       "dpi": 220
     },
@@ -3082,13 +3232,43 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/lemma_11.eq0.neutral.png",
       "master_path": "assets/lemma_11.eq0.neutral@master.png",
-      "px_w": 380,
-      "px_h": 49,
+      "px_w": 709,
+      "px_h": 45,
       "content_bbox": [
         0,
         0,
-        380,
-        49
+        709,
+        45
+      ],
+      "dpi": 220
+    },
+    "lemma_11.eq1.neutral": {
+      "asset_id": "lemma_11.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_11.eq1.neutral.png",
+      "master_path": "assets/lemma_11.eq1.neutral@master.png",
+      "px_w": 849,
+      "px_h": 47,
+      "content_bbox": [
+        0,
+        0,
+        849,
+        47
+      ],
+      "dpi": 220
+    },
+    "lemma_11.eq2.neutral": {
+      "asset_id": "lemma_11.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/lemma_11.eq2.neutral.png",
+      "master_path": "assets/lemma_11.eq2.neutral@master.png",
+      "px_w": 572,
+      "px_h": 95,
+      "content_bbox": [
+        0,
+        0,
+        572,
+        95
       ],
       "dpi": 220
     },
@@ -3112,13 +3292,58 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/law_1.eq0.neutral.png",
       "master_path": "assets/law_1.eq0.neutral@master.png",
-      "px_w": 506,
-      "px_h": 42,
+      "px_w": 405,
+      "px_h": 60,
       "content_bbox": [
         0,
         0,
-        506,
-        42
+        405,
+        60
+      ],
+      "dpi": 220
+    },
+    "law_1.eq1.neutral": {
+      "asset_id": "law_1.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_1.eq1.neutral.png",
+      "master_path": "assets/law_1.eq1.neutral@master.png",
+      "px_w": 502,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        502,
+        45
+      ],
+      "dpi": 220
+    },
+    "law_1.eq2.neutral": {
+      "asset_id": "law_1.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_1.eq2.neutral.png",
+      "master_path": "assets/law_1.eq2.neutral@master.png",
+      "px_w": 441,
+      "px_h": 47,
+      "content_bbox": [
+        0,
+        0,
+        441,
+        47
+      ],
+      "dpi": 220
+    },
+    "law_1.eq3.neutral": {
+      "asset_id": "law_1.eq3.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/law_1.eq3.neutral.png",
+      "master_path": "assets/law_1.eq3.neutral@master.png",
+      "px_w": 195,
+      "px_h": 94,
+      "content_bbox": [
+        0,
+        0,
+        195,
+        94
       ],
       "dpi": 220
     },
@@ -3127,13 +3352,13 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/law_2.eq0.neutral.png",
       "master_path": "assets/law_2.eq0.neutral@master.png",
-      "px_w": 246,
-      "px_h": 45,
+      "px_w": 130,
+      "px_h": 42,
       "content_bbox": [
         0,
         0,
-        246,
-        45
+        130,
+        42
       ],
       "dpi": 220
     },
@@ -3142,12 +3367,12 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/law_2.eq1.neutral.png",
       "master_path": "assets/law_2.eq1.neutral@master.png",
-      "px_w": 236,
+      "px_w": 120,
       "px_h": 45,
       "content_bbox": [
         0,
         0,
-        236,
+        120,
         45
       ],
       "dpi": 220
@@ -3157,13 +3382,58 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/prop_1.eq0.neutral.png",
       "master_path": "assets/prop_1.eq0.neutral@master.png",
-      "px_w": 433,
-      "px_h": 85,
+      "px_w": 928,
+      "px_h": 45,
       "content_bbox": [
         0,
         0,
-        433,
-        85
+        928,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_1.eq1.neutral": {
+      "asset_id": "prop_1.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_1.eq1.neutral.png",
+      "master_path": "assets/prop_1.eq1.neutral@master.png",
+      "px_w": 673,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        673,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_1.eq2.neutral": {
+      "asset_id": "prop_1.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_1.eq2.neutral.png",
+      "master_path": "assets/prop_1.eq2.neutral@master.png",
+      "px_w": 788,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        788,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_1.eq3.neutral": {
+      "asset_id": "prop_1.eq3.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_1.eq3.neutral.png",
+      "master_path": "assets/prop_1.eq3.neutral@master.png",
+      "px_w": 839,
+      "px_h": 84,
+      "content_bbox": [
+        0,
+        0,
+        839,
+        84
       ],
       "dpi": 220
     },
@@ -3172,13 +3442,43 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/prop_2.eq0.neutral.png",
       "master_path": "assets/prop_2.eq0.neutral@master.png",
-      "px_w": 404,
-      "px_h": 35,
+      "px_w": 842,
+      "px_h": 45,
       "content_bbox": [
         0,
         0,
-        404,
-        35
+        842,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_2.eq1.neutral": {
+      "asset_id": "prop_2.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_2.eq1.neutral.png",
+      "master_path": "assets/prop_2.eq1.neutral@master.png",
+      "px_w": 753,
+      "px_h": 55,
+      "content_bbox": [
+        0,
+        0,
+        753,
+        55
+      ],
+      "dpi": 220
+    },
+    "prop_2.eq2.neutral": {
+      "asset_id": "prop_2.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_2.eq2.neutral.png",
+      "master_path": "assets/prop_2.eq2.neutral@master.png",
+      "px_w": 759,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        759,
+        45
       ],
       "dpi": 220
     },
@@ -3197,17 +3497,77 @@
       ],
       "dpi": 220
     },
+    "prop_4.eq1.neutral": {
+      "asset_id": "prop_4.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_4.eq1.neutral.png",
+      "master_path": "assets/prop_4.eq1.neutral@master.png",
+      "px_w": 491,
+      "px_h": 88,
+      "content_bbox": [
+        0,
+        0,
+        491,
+        88
+      ],
+      "dpi": 220
+    },
     "prop_6.eq0.neutral": {
       "asset_id": "prop_6.eq0.neutral",
       "kind": "ceiling_neutral",
       "wall_path": "assets/prop_6.eq0.neutral.png",
       "master_path": "assets/prop_6.eq0.neutral@master.png",
-      "px_w": 647,
+      "px_w": 610,
+      "px_h": 45,
+      "content_bbox": [
+        0,
+        0,
+        610,
+        45
+      ],
+      "dpi": 220
+    },
+    "prop_6.eq1.neutral": {
+      "asset_id": "prop_6.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_6.eq1.neutral.png",
+      "master_path": "assets/prop_6.eq1.neutral@master.png",
+      "px_w": 665,
+      "px_h": 85,
+      "content_bbox": [
+        0,
+        0,
+        665,
+        85
+      ],
+      "dpi": 220
+    },
+    "prop_6.eq2.neutral": {
+      "asset_id": "prop_6.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_6.eq2.neutral.png",
+      "master_path": "assets/prop_6.eq2.neutral@master.png",
+      "px_w": 885,
+      "px_h": 52,
+      "content_bbox": [
+        0,
+        0,
+        885,
+        52
+      ],
+      "dpi": 220
+    },
+    "prop_6.eq3.neutral": {
+      "asset_id": "prop_6.eq3.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_6.eq3.neutral.png",
+      "master_path": "assets/prop_6.eq3.neutral@master.png",
+      "px_w": 705,
       "px_h": 93,
       "content_bbox": [
         0,
         0,
-        647,
+        705,
         93
       ],
       "dpi": 220
@@ -3217,12 +3577,42 @@
       "kind": "ceiling_neutral",
       "wall_path": "assets/prop_7.eq0.neutral.png",
       "master_path": "assets/prop_7.eq0.neutral@master.png",
-      "px_w": 259,
+      "px_w": 256,
+      "px_h": 91,
+      "content_bbox": [
+        0,
+        0,
+        256,
+        91
+      ],
+      "dpi": 220
+    },
+    "prop_7.eq1.neutral": {
+      "asset_id": "prop_7.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_7.eq1.neutral.png",
+      "master_path": "assets/prop_7.eq1.neutral@master.png",
+      "px_w": 731,
+      "px_h": 42,
+      "content_bbox": [
+        0,
+        0,
+        731,
+        42
+      ],
+      "dpi": 220
+    },
+    "prop_7.eq2.neutral": {
+      "asset_id": "prop_7.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_7.eq2.neutral.png",
+      "master_path": "assets/prop_7.eq2.neutral@master.png",
+      "px_w": 761,
       "px_h": 84,
       "content_bbox": [
         0,
         0,
-        259,
+        761,
         84
       ],
       "dpi": 220
@@ -3242,18 +3632,123 @@
       ],
       "dpi": 220
     },
+    "prop_11.eq1.neutral": {
+      "asset_id": "prop_11.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_11.eq1.neutral.png",
+      "master_path": "assets/prop_11.eq1.neutral@master.png",
+      "px_w": 520,
+      "px_h": 38,
+      "content_bbox": [
+        0,
+        0,
+        520,
+        38
+      ],
+      "dpi": 220
+    },
+    "prop_11.eq2.neutral": {
+      "asset_id": "prop_11.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_11.eq2.neutral.png",
+      "master_path": "assets/prop_11.eq2.neutral@master.png",
+      "px_w": 437,
+      "px_h": 47,
+      "content_bbox": [
+        0,
+        0,
+        437,
+        47
+      ],
+      "dpi": 220
+    },
+    "prop_11.eq3.neutral": {
+      "asset_id": "prop_11.eq3.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_11.eq3.neutral.png",
+      "master_path": "assets/prop_11.eq3.neutral@master.png",
+      "px_w": 720,
+      "px_h": 88,
+      "content_bbox": [
+        0,
+        0,
+        720,
+        88
+      ],
+      "dpi": 220
+    },
+    "prop_11.eq4.neutral": {
+      "asset_id": "prop_11.eq4.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_11.eq4.neutral.png",
+      "master_path": "assets/prop_11.eq4.neutral@master.png",
+      "px_w": 457,
+      "px_h": 91,
+      "content_bbox": [
+        0,
+        0,
+        457,
+        91
+      ],
+      "dpi": 220
+    },
     "prop_13.eq0.neutral": {
       "asset_id": "prop_13.eq0.neutral",
       "kind": "ceiling_neutral",
       "wall_path": "assets/prop_13.eq0.neutral.png",
       "master_path": "assets/prop_13.eq0.neutral@master.png",
-      "px_w": 478,
-      "px_h": 84,
+      "px_w": 627,
+      "px_h": 41,
       "content_bbox": [
         0,
         0,
-        478,
-        84
+        627,
+        41
+      ],
+      "dpi": 220
+    },
+    "prop_13.eq1.neutral": {
+      "asset_id": "prop_13.eq1.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_13.eq1.neutral.png",
+      "master_path": "assets/prop_13.eq1.neutral@master.png",
+      "px_w": 844,
+      "px_h": 44,
+      "content_bbox": [
+        0,
+        0,
+        844,
+        44
+      ],
+      "dpi": 220
+    },
+    "prop_13.eq2.neutral": {
+      "asset_id": "prop_13.eq2.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_13.eq2.neutral.png",
+      "master_path": "assets/prop_13.eq2.neutral@master.png",
+      "px_w": 708,
+      "px_h": 47,
+      "content_bbox": [
+        0,
+        0,
+        708,
+        47
+      ],
+      "dpi": 220
+    },
+    "prop_13.eq3.neutral": {
+      "asset_id": "prop_13.eq3.neutral",
+      "kind": "ceiling_neutral",
+      "wall_path": "assets/prop_13.eq3.neutral.png",
+      "master_path": "assets/prop_13.eq3.neutral@master.png",
+      "px_w": 739,
+      "px_h": 91,
+      "content_bbox": [
+        0,
+        0,
+        739,
+        91
       ],
       "dpi": 220
     },

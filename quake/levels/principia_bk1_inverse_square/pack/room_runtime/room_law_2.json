@@ -2,9 +2,9 @@
   "schema_version": "1.0",
   "room_id": "law_2",
   "dimensions_m": [
-    12.285,
-    3.3960784313725494,
-    9.45
+    11.700000000000001,
+    3.2,
+    9.0
   ],
   "panel_pairs": [
     {
@@ -16,28 +16,28 @@
       "text_on_asset": "law_2.s1.txt.on",
       "drawing_placement": {
         "wall": "W",
-        "slot_index": 0,
-        "wall_slot": "W-0",
+        "slot_index": 2,
+        "wall_slot": "W-2",
         "center_xyz": [
-          -6.1425,
+          -5.8500000000000005,
           1.55,
-          -2.1249999999999982
+          0.19999999999999574
         ],
-        "width_m": 4.0,
-        "height_m": 0.687960687960688,
+        "width_m": 2.0,
+        "height_m": 0.5,
         "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
         "wall": "W",
-        "slot_index": 1,
-        "wall_slot": "W-1",
+        "slot_index": 3,
+        "wall_slot": "W-3",
         "center_xyz": [
-          -6.1425,
+          -5.8500000000000005,
           1.55,
-          2.1250000000000018
+          1.6999999999999957
         ],
-        "width_m": 4.0,
-        "height_m": 1.8018433179723503,
+        "width_m": 0.6,
+        "height_m": 0.44999999999999996,
         "yaw_rad": 1.5707963267948966
       }
     },
@@ -49,35 +49,35 @@
       "text_off_asset": "law_2.s2.txt.off",
       "text_on_asset": "law_2.s2.txt.on",
       "drawing_placement": {
-        "wall": "E",
+        "wall": "W",
         "slot_index": 0,
-        "wall_slot": "E-0",
+        "wall_slot": "W-0",
         "center_xyz": [
-          6.1425,
+          -5.8500000000000005,
           1.55,
-          2.125
+          -3.0
         ],
-        "width_m": 4.0,
-        "height_m": 0.7713498622589532,
-        "yaw_rad": -1.5707963267948966
+        "width_m": 2.0,
+        "height_m": 0.5,
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "E",
+        "wall": "W",
         "slot_index": 1,
-        "wall_slot": "E-1",
+        "wall_slot": "W-1",
         "center_xyz": [
-          6.1425,
+          -5.8500000000000005,
           1.55,
-          -2.1249999999999982
+          -1.5
         ],
-        "width_m": 4.0,
-        "height_m": 2.196078431372549,
-        "yaw_rad": -1.5707963267948966
+        "width_m": 0.6,
+        "height_m": 0.44999999999999996,
+        "yaw_rad": 1.5707963267948966
       }
     }
   ],
   "final_pair_id": "law_2.s2",
-  "hidden_door_wall_slot": "E-0",
+  "hidden_door_wall_slot": "W-0",
   "doors": [
     {
       "edge_id": "edge.lemma_10.to.law_2",
@@ -85,17 +85,17 @@
       "bearing_rad": 0.818195800500329,
       "wall": "N",
       "center_xyz": [
-        4.424800515385245,
+        4.21409572893833,
         1.3,
-        4.725
+        4.5
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": 3.141592653589793,
       "spawn_xyz": [
-        3.3311377487435077,
+        3.1204329622965923,
         0.0,
-        3.5571379564085737
+        3.332137956408574
       ],
       "spawn_heading_rad": -2.3233968530894646
     },
@@ -105,17 +105,17 @@
       "bearing_rad": -0.6416451475098787,
       "wall": "S",
       "center_xyz": [
-        4.6425,
+        4.3500000000000005,
         1.3,
-        -4.725
+        -4.5
       ],
       "width_m": 2.0,
       "height_m": 2.6,
       "normal_yaw_rad": 0.0,
       "spawn_xyz": [
-        3.3607204827292447,
+        3.068220482729245,
         0.0,
-        -3.767377282482735
+        -3.5423772824827355
       ],
       "spawn_heading_rad": 2.4999475060799146
     }
@@ -123,9 +123,9 @@
   "enemy": {
     "enemy_id": "law_2.demon",
     "spawn_xyz": [
-      3.5425,
+      -3.2500000000000004,
       0.1,
-      2.125
+      -3.0
     ],
     "health": 3
   },
@@ -134,9 +134,9 @@
       "eq_id": "law_2.eq0",
       "asset_id": "law_2.eq0.neutral",
       "pos_xyz": [
-        -5.4425,
-        3.2960784313725493,
-        2.1250000000000018
+        -5.15,
+        3.1,
+        1.6999999999999957
       ],
       "size_m": [
         1.0,
@@ -147,9 +147,9 @@
       "eq_id": "law_2.eq1",
       "asset_id": "law_2.eq1.neutral",
       "pos_xyz": [
-        5.4425,
-        3.2960784313725493,
-        -2.1249999999999982
+        -5.15,
+        3.1,
+        -1.5
       ],
       "size_m": [
         1.0,

@@ -8,19 +8,27 @@
       "asy_path": "figures/prop_4.f1.asy",
       "recipe_path": "recipes/prop_4.f1.json",
       "n_steps": 2,
-      "caption": "The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.",
+      "caption": "The centripetal forces of bodies, which by equoble motions describe different circles, tend to the centres of the same circles; and are one to the other, as the squares of the arcs described in equal times applied to the radii of the circles.",
       "colors_used": [
         {
-          "name": "velblue",
-          "hex": "#1E6FE0"
+          "name": "force",
+          "hex": "#1f6feb"
         },
         {
-          "name": "radgreen",
-          "hex": "#00A35A"
+          "name": "speed",
+          "hex": "#d1242f"
         },
         {
-          "name": "forceorange",
-          "hex": "#E8770A"
+          "name": "radius",
+          "hex": "#953800"
+        },
+        {
+          "name": "nil",
+          "hex": "#000000"
+        },
+        {
+          "name": "chord",
+          "hex": "#d1242f"
         }
       ]
     }
@@ -36,19 +44,19 @@
       },
       "text": {
         "block_id": "prop_4.s1.txt",
-        "latex": "The \\textcolor{forceorange}{pull toward the centre} is as the \\textcolor{velblue}{square of the speed} divided by the \\textcolor{radgreen}{distance from the centre}.",
+        "latex": "The \\textcolor{force}{centripetal force} — Newton's \\textcolor{force}{pull toward the centre} — scales as the \\textcolor{speed}{square of the speed} divided by the \\textcolor{radius}{radius}. Double the \\textcolor{speed}{speed} and the \\textcolor{force}{pull} quadruples; double the \\textcolor{radius}{radius} and the \\textcolor{force}{pull} halves. Here the \\textcolor{speed}{$v^2$} is the heart: it is the \\textcolor{speed}{square}, not the speed itself, that governs how hard the body is drawn inward. Thus \\textcolor{force}{$F$} answers to \\textcolor{speed}{$v^2$} directly and to \\textcolor{radius}{$r$} inversely.",
         "colors_used": [
           {
-            "name": "forceorange",
-            "hex": "#E8770A"
+            "name": "force",
+            "hex": "#1f6feb"
           },
           {
-            "name": "velblue",
-            "hex": "#1E6FE0"
+            "name": "speed",
+            "hex": "#d1242f"
           },
           {
-            "name": "radgreen",
-            "hex": "#00A35A"
+            "name": "radius",
+            "hex": "#953800"
           }
         ]
       }
@@ -63,15 +71,19 @@
       },
       "text": {
         "block_id": "prop_4.s2.txt",
-        "latex": "In a small \\textcolor{velblue}{arc of the circle} the \\textcolor{radgreen}{radius} leads to the \\textcolor{velblue}{versed sine}, which gives the force by Cor.~4 Prop.~1 and Lem.~7.",
+        "latex": "By Prop. I and Cor. 4 the \\textcolor{force}{centripetal force} in a least arc is as the versed sine of that arc taken in equal times. By Lemma VII the versed sine is as the \\textcolor{chord}{arc squared} divided by the diameter, so \\textcolor{force}{$F$} answers to \\textcolor{chord}{$\\text{arc}^2$}$/D$. Since the arc is as $v\\,t$ and the diameter is as the \\textcolor{radius}{radius}, the times cancel and the diameters give the \\textcolor{radius}{$r$}, leaving the \\textcolor{chord}{$v^2$} standing as the heart. The proof chain therefore closes on \\textcolor{force}{$F$} $\\propto$ \\textcolor{chord}{$v^2$}$/$\\textcolor{radius}{$r$}.",
         "colors_used": [
           {
-            "name": "velblue",
-            "hex": "#1E6FE0"
+            "name": "force",
+            "hex": "#1f6feb"
           },
           {
-            "name": "radgreen",
-            "hex": "#00A35A"
+            "name": "chord",
+            "hex": "#d1242f"
+          },
+          {
+            "name": "radius",
+            "hex": "#953800"
           }
         ]
       }
@@ -81,7 +93,13 @@
   "ceiling_equations": [
     {
       "eq_id": "prop_4.eq0",
-      "latex": "F \\propto \\dfrac{v^2}{r}"
+      "latex": "F \\propto \\dfrac{v^2}{r}",
+      "step_index": 1
+    },
+    {
+      "eq_id": "prop_4.eq1",
+      "latex": "F \\propto \\dfrac{\\text{versed sine}}{t^2} \\propto \\dfrac{(\\text{arc})^2}{D\\,t^2} \\propto \\dfrac{v^2}{r}",
+      "step_index": 2
     }
   ]
 }

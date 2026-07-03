@@ -1,0 +1,129 @@
+{
+  "schema_version": "1.0",
+  "node_id": "lemma_2",
+  "edition": "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II; Plate 1, Fig. 6.",
+  "figures": [
+    {
+      "figure_id": "lemma_2.f1",
+      "asy_path": "figures/lemma_2.f1.asy",
+      "recipe_path": "recipes/lemma_2.f1.json",
+      "n_steps": 3,
+      "caption": "If in any figure AacE there be inscribed parallelograms on equal bases and circumscribed parallelograms completed: as the bases are diminished without limit, the inscribed, circumscribed, and curvilinear figures have the ultimate ratio of equality.",
+      "colors_used": [
+        {
+          "name": "curve",
+          "hex": "#1f6feb"
+        },
+        {
+          "name": "base",
+          "hex": "#b8860b"
+        },
+        {
+          "name": "insc",
+          "hex": "#cf3b2f"
+        },
+        {
+          "name": "circ",
+          "hex": "#2ea043"
+        },
+        {
+          "name": "excess",
+          "hex": "#cf3b2f"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "pair_id": "lemma_2.s1",
+      "step_index": 1,
+      "drawing": {
+        "block_id": "lemma_2.s1.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 1
+      },
+      "text": {
+        "block_id": "lemma_2.s1.txt",
+        "latex": "Newton considers a plane figure $AacE$ bounded by the straight side \\textcolor{base}{Aa},\nthe baseline \\textcolor{base}{AE}, and the curve \\textcolor{curve}{acE}.\nThe baseline is divided into the equal bases $AB$, $BC$, $CD$, so that \\textcolor{base}{the base}\nis partitioned into segments of one common breadth.\nThe whole question concerns the area enclosed beneath \\textcolor{curve}{the curve} \u00e2\u20ac\u201d\nfor it is \\textcolor{curve}{this curve} that is the heart of the figure and of the Lemma.",
+        "colors_used": [
+          {
+            "name": "base",
+            "hex": "#b8860b"
+          },
+          {
+            "name": "curve",
+            "hex": "#1f6feb"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_2.s2",
+      "step_index": 2,
+      "drawing": {
+        "block_id": "lemma_2.s2.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 2
+      },
+      "text": {
+        "block_id": "lemma_2.s2.txt",
+        "latex": "Within the figure Newton inscribes \\textcolor{insc}{the parallelograms $Ab$, $Bc$, $Cd$},\neach raised on one of the equal bases and reaching upward only to the lower vertex\nof \\textcolor{curve}{the curve} on that base.\nBecause \\textcolor{insc}{each inscribed rectangle} stops short of \\textcolor{curve}{the curve},\ntheir united area \u00e2\u20ac\u201d the step-figure $AKbLcMdD$ \u00e2\u20ac\u201d lies \\textcolor{insc}{entirely below} it.\nThus \\textcolor{insc}{the inscribed figure} is a deficient approximation, always less than\nthe true curvilinear area.",
+        "colors_used": [
+          {
+            "name": "insc",
+            "hex": "#cf3b2f"
+          },
+          {
+            "name": "curve",
+            "hex": "#1f6feb"
+          }
+        ]
+      }
+    },
+    {
+      "pair_id": "lemma_2.s3",
+      "step_index": 3,
+      "drawing": {
+        "block_id": "lemma_2.s3.fig",
+        "figure_id": "lemma_2.f1",
+        "highlight_step": 3
+      },
+      "text": {
+        "block_id": "lemma_2.s3.txt",
+        "latex": "Finally Newton circumscribes \\textcolor{circ}{the parallelograms $aKbl$, $bLcm$, $cMdn$},\neach rising above \\textcolor{curve}{the curve} to its upper vertex.\nThe difference between \\textcolor{circ}{the circumscribed figure} and the inscribed figure\nis the sum of the little tops $Kl$, $Lm$, $Mn$, $Do$; since all bases are equal,\nthis sum is \\textcolor{excess}{the single rectangle $ABla$}, of breadth $AB$ and height $Aa$.\nBut as $AB$ is diminished $in\\ infinitum$, \\textcolor{excess}{this rectangle} becomes less\nthan any given space, so by Lemma~I the inscribed and \\textcolor{circ}{circumscribed} figures\nbecome ultimately equal, and $much\\ more$ is \\textcolor{curve}{the intermediate curvilinear figure}\nequal to either.\n$Q.E.D.$",
+        "colors_used": [
+          {
+            "name": "circ",
+            "hex": "#2ea043"
+          },
+          {
+            "name": "curve",
+            "hex": "#1f6feb"
+          },
+          {
+            "name": "excess",
+            "hex": "#cf3b2f"
+          }
+        ]
+      }
+    }
+  ],
+  "final_pair_id": "lemma_2.s3",
+  "ceiling_equations": [
+    {
+      "eq_id": "lemma_2.eq0",
+      "latex": "\\text{Area}(AacE)=\\int_{A}^{E} f\\,dx",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_2.eq1",
+      "latex": "I_n=\\sum_{k} f(x_k)\\,\\Delta x \\le \\text{Area}(AacE)",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_2.eq2",
+      "latex": "C_n-I_n=AB\\cdot Aa \\;\\longrightarrow\\; 0",
+      "step_index": 3
+    }
+  ]
+}

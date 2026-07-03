@@ -92,7 +92,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_7.eq0",
-      "latex": "\\text{arc}:\\text{chord}:\\text{tangent}\\to 1:1:1"
+      "latex": "B \\to A \\;\\Rightarrow\\; \\{\\text{arc } ACB,\\; AB,\\; AD\\} \\to 0",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_7.eq1",
+      "latex": "Acb \\sim ACB,\\quad bd \\parallel BD,\\quad Ab,\\,Ad \\text{ finite}",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_7.eq2",
+      "latex": "\\angle dAb \\to 0 \\;\\Rightarrow\\; \\text{arc}:\\text{chord}:\\text{tangent}\\to 1:1:1",
+      "step_index": 3
     }
   ]
 }

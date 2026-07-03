@@ -104,7 +104,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_9.eq0",
-      "latex": "\\triangle ABD : \\triangle ACE \\to AD^2 : AE^2"
+      "latex": "\\triangle ABD,\\ \\triangle ACE \\ \\text{under curve } ABC \\text{ on base } AE",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_9.eq1",
+      "latex": "Ad:Ae = AD:AE,\\quad \\triangle ABD:\\triangle ACE = Abd:Ace",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_9.eq2",
+      "latex": "Afd:Age = Ad^2:Ae^2 = AD^2:AE^2 \\implies \\triangle ABD:\\triangle ACE \\to AD^2:AE^2",
+      "step_index": 3
     }
   ]
 }

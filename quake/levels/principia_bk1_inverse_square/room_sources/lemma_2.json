@@ -8,27 +8,27 @@
       "asy_path": "figures/lemma_2.f1.asy",
       "recipe_path": "recipes/lemma_2.f1.json",
       "n_steps": 3,
-      "caption": "Inscribed and circumscribed parallelograms on equal bases under the curve aE; as the bases shrink, the inscribed and circumscribed figures and the curvilinear figure become ultimately equal.",
+      "caption": "If in any figure AacE there be inscribed parallelograms on equal bases and circumscribed parallelograms completed: as the bases are diminished without limit, the inscribed, circumscribed, and curvilinear figures have the ultimate ratio of equality.",
       "colors_used": [
         {
-          "name": "curveblue",
-          "hex": "#1E6FE0"
+          "name": "curve",
+          "hex": "#1f6feb"
         },
         {
-          "name": "basegreen",
-          "hex": "#00A35A"
+          "name": "base",
+          "hex": "#b8860b"
         },
         {
-          "name": "sideorange",
-          "hex": "#E8770A"
+          "name": "insc",
+          "hex": "#cf3b2f"
         },
         {
-          "name": "inscpurple",
-          "hex": "#8E24AA"
+          "name": "circ",
+          "hex": "#2ea043"
         },
         {
-          "name": "circred",
-          "hex": "#D81B60"
+          "name": "excess",
+          "hex": "#cf3b2f"
         }
       ]
     }
@@ -44,19 +44,15 @@
       },
       "text": {
         "block_id": "lemma_2.s1.txt",
-        "latex": "In the figure $AacE$, bounded by the right lines $\\textcolor{sideorange}{Aa}$ and $\\textcolor{basegreen}{AE}$ and by \\textcolor{curveblue}{the curve $acE$}, take any number of \\emph{equal} bases $AB$, $BC$, $CD$, $\\&c.$ along \\textcolor{basegreen}{the base $AE$}. This is the curvilinear figure whose area we mean to measure.",
+        "latex": "Newton considers a plane figure $AacE$ bounded by the straight side \\textcolor{base}{Aa},\nthe baseline \\textcolor{base}{AE}, and the curve \\textcolor{curve}{acE}.\nThe baseline is divided into the equal bases $AB$, $BC$, $CD$, so that \\textcolor{base}{the base}\nis partitioned into segments of one common breadth.\nThe whole question concerns the area enclosed beneath \\textcolor{curve}{the curve} —\nfor it is \\textcolor{curve}{this curve} that is the heart of the figure and of the Lemma.",
         "colors_used": [
           {
-            "name": "sideorange",
-            "hex": "#E8770A"
+            "name": "base",
+            "hex": "#b8860b"
           },
           {
-            "name": "basegreen",
-            "hex": "#00A35A"
-          },
-          {
-            "name": "curveblue",
-            "hex": "#1E6FE0"
+            "name": "curve",
+            "hex": "#1f6feb"
           }
         ]
       }
@@ -71,19 +67,15 @@
       },
       "text": {
         "block_id": "lemma_2.s2.txt",
-        "latex": "On these equal bases erect \\textcolor{inscpurple}{the inscribed parallelograms $Ab$, $Bc$, $Cd$, $\\&c.$}, with sides $Bb$, $Cc$, $Dd$ parallel to $\\textcolor{sideorange}{Aa}$. \\textcolor{inscpurple}{The inscribed figure $AKbLcMdD$} lies wholly \\emph{under} \\textcolor{curveblue}{the curve}.",
+        "latex": "Within the figure Newton inscribes \\textcolor{insc}{the parallelograms $Ab$, $Bc$, $Cd$},\neach raised on one of the equal bases and reaching upward only to the lower vertex\nof \\textcolor{curve}{the curve} on that base.\nBecause \\textcolor{insc}{each inscribed rectangle} stops short of \\textcolor{curve}{the curve},\ntheir united area — the step-figure $AKbLcMdD$ — lies \\textcolor{insc}{entirely below} it.\nThus \\textcolor{insc}{the inscribed figure} is a deficient approximation, always less than\nthe true curvilinear area.",
         "colors_used": [
           {
-            "name": "inscpurple",
-            "hex": "#8E24AA"
+            "name": "insc",
+            "hex": "#cf3b2f"
           },
           {
-            "name": "sideorange",
-            "hex": "#E8770A"
-          },
-          {
-            "name": "curveblue",
-            "hex": "#1E6FE0"
+            "name": "curve",
+            "hex": "#1f6feb"
           }
         ]
       }
@@ -98,23 +90,19 @@
       },
       "text": {
         "block_id": "lemma_2.s3.txt",
-        "latex": "Complete \\textcolor{circred}{the circumscribed parallelograms $aKbl$, $bLcm$, $cMdn$, $\\&c.$}, rising \\emph{above} \\textcolor{curveblue}{the curve}. Their excess over \\textcolor{inscpurple}{the inscribed figure} is the sum $Kl + Lm + Mn + Do$, equal to the single rectangle $ABla$ on the base $\\textcolor{basegreen}{AB}$. As $\\textcolor{basegreen}{AB}$ is diminished \\emph{in infinitum} this rectangle becomes less than any given space; hence (by Lem.~I) \\textcolor{inscpurple}{the inscribed} and \\textcolor{circred}{the circumscribed} figures, and therefore the intermediate curvilinear figure, become ultimately equal. \\textit{Q.E.D.}",
+        "latex": "Finally Newton circumscribes \\textcolor{circ}{the parallelograms $aKbl$, $bLcm$, $cMdn$},\neach rising above \\textcolor{curve}{the curve} to its upper vertex.\nThe difference between \\textcolor{circ}{the circumscribed figure} and the inscribed figure\nis the sum of the little tops $Kl$, $Lm$, $Mn$, $Do$; since all bases are equal,\nthis sum is \\textcolor{excess}{the single rectangle $ABla$}, of breadth $AB$ and height $Aa$.\nBut as $AB$ is diminished $in\\ infinitum$, \\textcolor{excess}{this rectangle} becomes less\nthan any given space, so by Lemma~I the inscribed and \\textcolor{circ}{circumscribed} figures\nbecome ultimately equal, and $much\\ more$ is \\textcolor{curve}{the intermediate curvilinear figure}\nequal to either.\n$Q.E.D.$",
         "colors_used": [
           {
-            "name": "circred",
-            "hex": "#D81B60"
+            "name": "circ",
+            "hex": "#2ea043"
           },
           {
-            "name": "curveblue",
-            "hex": "#1E6FE0"
+            "name": "curve",
+            "hex": "#1f6feb"
           },
           {
-            "name": "inscpurple",
-            "hex": "#8E24AA"
-          },
-          {
-            "name": "basegreen",
-            "hex": "#00A35A"
+            "name": "excess",
+            "hex": "#cf3b2f"
           }
         ]
       }
@@ -124,11 +112,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_2.eq0",
-      "latex": "\\lim_{AB \\to 0}\\; \\bigl(\\text{circumscribed} - \\text{inscribed}\\bigr) = ABla \\;\\longrightarrow\\; 0"
+      "latex": "\\text{Area}(AacE)=\\int_{A}^{E} f\\,dx",
+      "step_index": 1
     },
     {
       "eq_id": "lemma_2.eq1",
-      "latex": "\\text{inscribed} \\;=\\; \\text{circumscribed} \\;=\\; \\text{curvilinear area} \\quad (\\text{ultimately})"
+      "latex": "I_n=\\sum_{k} f(x_k)\\,\\Delta x \\le \\text{Area}(AacE)",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_2.eq2",
+      "latex": "C_n-I_n=AB\\cdot Aa \\;\\longrightarrow\\; 0",
+      "step_index": 3
     }
   ]
 }

@@ -89,7 +89,13 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_3.eq0",
-      "latex": "FAaf > (\\text{circ}-\\text{insc}) \\cdot AF\\to0 \\;\\Rightarrow\\; FAaf\\to0"
+      "latex": "\\text{circ}-\\text{insc} \\;=\\; \\textstyle\\sum (\\text{unequal breadths})\\;\\longrightarrow\\;0",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_3.eq1",
+      "latex": "FAaf \\;>\\; (\\text{circ}-\\text{insc}), \\quad AF\\to0 \\;\\Rightarrow\\; FAaf\\to0 \\;\\Rightarrow\\; \\text{insc}=\\text{circ}",
+      "step_index": 2
     }
   ]
 }

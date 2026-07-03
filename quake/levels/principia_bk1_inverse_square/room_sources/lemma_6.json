@@ -108,7 +108,18 @@
   "ceiling_equations": [
     {
       "eq_id": "lemma_6.eq0",
-      "latex": "B \\to A \\;\\Rightarrow\\; \\angle BAD \\to 0"
+      "latex": "\\text{arc } ACB : \\text{ continuous curvature at } A",
+      "step_index": 1
+    },
+    {
+      "eq_id": "lemma_6.eq1",
+      "latex": "B \\to A \\;\\Rightarrow\\; \\lvert AB \\rvert \\to 0",
+      "step_index": 2
+    },
+    {
+      "eq_id": "lemma_6.eq2",
+      "latex": "B \\to A \\;\\Rightarrow\\; \\angle BAD \\to 0",
+      "step_index": 3
     }
   ]
 }
