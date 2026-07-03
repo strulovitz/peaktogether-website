@@ -27,17 +27,8 @@ pair A = (0.0,0.0);
 pair ptC = (2.4,2.0);
 pair B = (5.0,3.0);
 path arc = A--ptC--B;
-pair A = (0.0,0.0);
-pair ptC = (2.4,2.0);
-pair B = (5.0,3.0);
-path arc = A--ptC--B;
 path chordAB = A--B;
-pair A = (0.0,0.0);
-pair ptC = (2.4,2.0);
-pair B = (5.0,3.0);
 pair D = (5.6,1.4);
-path arc = A--ptC--B;
-path chordAB = A--B;
 path tanAD = A--D;
 pair BAD = A + 0.7*unit((unit(B-A)+unit(D-A))/2);
 

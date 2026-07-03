@@ -911,13 +911,26 @@ def _stabilo_pen_table(spec: Spec) -> dict:
 
 
 def _emit_construction(spec: Spec) -> list:
+    """Emit Asymptote construction lines; each name is emitted only once (dedup).
+    Bugfix (2026-07-03): previously every station's panel re-emitted *all*
+    points/curves it references, causing `pair P = …` to appear 4 times across
+    4 stations.  Asymptote forbids redefinition.  Now a name is emitted the
+    first time it appears (station order); later mentions are silently skipped.
+    """
     out: list = []
     needs_series = any(g.op == "series" for st in spec.stations for g in st.geo_ops)
     series_curves: set = set()
+    emitted: set = set()  # safe-named names already written (dedup)
+    type_map: dict = {}   # safe_name -> op_type (for tangent_at curve-type dispatch)
 
     for st in spec.stations:
         for g in st.geo_ops:
-            out.extend(_GEO_SNIPPET(g, series_curves))
+            safe_nm = _safe_name(g.name)
+            type_map[safe_nm] = g.op
+            if safe_nm in emitted:
+                continue
+            emitted.add(safe_nm)
+            out.extend(_GEO_SNIPPET(g, series_curves, type_map))
 
     if needs_series:
         out.append("")
@@ -938,8 +951,24 @@ def _safe_name(name: str) -> str:
     return f"_u_{name}" if name in _ASY_RESERVED else name
 
 
-def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
+def _GEO_SNIPPET(g: GeoOp, series_curves: set, type_map: dict = None) -> list:
     a = g.args
+    # ---- Sanitise ALL argument references through _safe_name -----------------
+    # Bugfix (2026-07-03): _safe_name was only applied to the DEFINITION target
+    # (g.name), never to argument REFS.  Reserved colliders (S,N,E,W,…) therefore
+    # appeared bare in arg positions, causing 'undefined identifier' errors.
+    # Example: `parabola(S, D1)` where S→_u_S in the def but not here.
+    # Also tangents/tangent needed geometry-module `point()` wrapping (the bare
+    # pair signature was removed from modern Asymptote).
+    safe_a: dict = {}
+    for k, v in a.items():
+        if isinstance(v, str):
+            safe_a[k] = _safe_name(v)
+        elif isinstance(v, list):
+            safe_a[k] = [_safe_name(x) if isinstance(x, str) else x for x in v]
+        else:
+            safe_a[k] = v
+    a = safe_a
     op = g.op
     nm = _safe_name(g.name)
     if op == "point":
@@ -961,11 +990,12 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
         else:
             parts = [str(line_arg)]
         if len(parts) == 2:
-            return [f"point _ft_{nm} = foot(point({a['point']}), line(point({parts[0]}), point({parts[1]})));",
-                    f"pair {nm} = _ft_{nm};"]
-        # Fallback: single point, use direction from origin
-        return [f"point _ft_{nm} = foot(point({a['point']}), line(point((0,0)), point({parts[0]})));",
-                f"pair {nm} = _ft_{nm};"]
+            return [
+                f"pair _v_{nm} = {parts[1]} - {parts[0]};",
+                f"real _t_{nm} = dot({a['point']} - {parts[0]}, _v_{nm}) / dot(_v_{nm}, _v_{nm});",
+                f"pair {nm} = {parts[0]} + _t_{nm} * _v_{nm};",
+            ]
+        return [f"pair {nm} = {parts[0]};"]
     if op == "reflect":
         return [f"transform _r_{nm} = reflect(line({_line_pts(a['over'])}));",
                 f"pair {nm} = _r_{nm} * {a['point']};"]
@@ -976,13 +1006,36 @@ def _GEO_SNIPPET(g: GeoOp, series_curves: set) -> list:
     if op == "ray":
         return [f"path {nm} = {a['a']}--(shift(10*unit({a['b']}-{a['a']}))*{a['a']});"]
     if op == "parallel":
-        return [f"line {nm} = parallel({a['through']}, {a['to']});"]
+        return [
+            f"pair _vd_{nm} = ({a['to']} == (0,0)) ? (1,0) : {a['to']};",
+            f"path {nm} = {a['through']}--({a['through']} + 10*unit(_vd_{nm}));",
+        ]
     if op == "perp":
-        return [f"line {nm} = perpendicular({a['through']}, {a['to']});"]
+        return [
+            f"pair _vd_{nm} = ({a['to']} == (0,0)) ? (1,0) : {a['to']};",
+            f"pair _perp_{nm} = (-_vd_{nm}.y, _vd_{nm}.x);",
+            f"path {nm} = {a['through']}--({a['through']} + 10*unit(_perp_{nm}));",
+        ]
     if op == "tangent_at":
-        return [f"line {nm} = tangent({a['curve']}, {a['at']});"]
+        curve_type = (type_map or {}).get(a['curve'], "")
+        if curve_type == "parabola_fd":
+            return [
+                f"point _tmp_{nm} = point({a['at']});",
+                f"line _ax_{nm} = line({a['curve']}.V, {a['curve']}.F);",
+                f"line _perp_{nm} = perpendicular(_tmp_{nm}, _ax_{nm});",
+                f"point[] _ips_{nm} = intersectionpoints(_perp_{nm}, {a['curve']});",
+                f"abscissa _absc_{nm} = angabscissa({a['curve']}, _ips_{nm}[0]);",
+                f"line {nm} = tangent({a['curve']}, _absc_{nm});",
+            ]
+        # Non-parabola curves: use times() + dir() for the tangent direction
+        return [
+            f"real[] _ts_{nm} = times({a['curve']}, {a['at']});",
+            f"pair _d_{nm} = dir({a['curve']}, _ts_{nm}[0]);",
+            f"line {nm} = line({a['at']}, {a['at']} + _d_{nm});",
+        ]
     if op == "tangent_from":
-        return [f"line[] _t_{nm} = tangents({a['curve']}, {a['frm']});",
+        return [f"point _tmp_{nm} = point({a['frm']});",
+                f"line[] _t_{nm} = tangents({a['curve']}, _tmp_{nm});",
                 f"line {nm} = _t_{nm}[0];"]
     if op == "bisector":
         return [f"line {nm} = bisector({a['a']}, {a['vertex']}, {a['b']});"]

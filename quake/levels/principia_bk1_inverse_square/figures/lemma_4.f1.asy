@@ -36,7 +36,7 @@ pair ptb = (2.0,7.0);
 pair ptc = (4.0,7.7);
 pair ptE = (6.0,8.1);
 path curveA = ptA--ptb--ptc--ptE;
-path baseAE = A--E;
+path baseAE = A--_u_E;
 // series rankA: built in series-support block below
 pair P = (0.0,0.0);
 pair T = (6.0,0.0);

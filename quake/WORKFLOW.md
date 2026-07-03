@@ -705,7 +705,18 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
-🌙 **CURRENT STATE (July 3, 2026 — demon integrated, iterating on bugs):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 4 known bugs (dead demon reappears on re-entry; alcove never visible; ceiling equations centered not on-wall; a few rooms show black boxes). Equation-panel sizing UNRESOLVED (awaiting Nir's choice 1/2/3 above). Two golden-text feature requests queued. 468 tests green. **KEY RULE Nir hammered: fix CENTRALLY (shared builders/renderer), never per-room.** Everything pushed. See the July 3 session entries above.
+🌙 **CURRENT STATE (July 3, 2026 — demon integrated, golden text DONE, Asymptote FIXED):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 3 known bugs (dead demon reappears on re-entry; alcove never visible; ceiling equations centered not on-wall). ✅ **Golden door titles + floor room names DONE.** ✅ **ALL 20 Asymptote figures NOW COMPILE — the 4 "black squares" rooms are FIXED.** Equation-panel sizing UNRESOLVED (awaiting Nir's choice). 468 tests green. Everything pushed. See the July 3 session entries above.
+
+### 🔧 SESSION (July 3, 2026 — Asymptote translator BUGFIX: ALL 20 figures compile!)
+**Root cause:** `build/room_from_spec.py` Asymptote emitter had 4 bugs that produced invalid `.asy` code for 4 rooms (prop_13, prop_6, prop_7, lemma_9):
+1. `_safe_name()` applied only to definition targets, never to argument REFERENCES — reserved colliders (S,N,E,W) appeared bare in arg positions → undefined identifiers.
+2. Variables redefined across stations (same `point P = …` emitted 4×) — Asymptote forbids redefinition.
+3. `tangent()` / `tangents()` used wrong type signatures for Asymptote 3.12 geometry module (`tangent(parabola, pair)` → must use `tangent(parabola, abscissa)` via axis-perpendicular projection).
+4. `foot()` & `projection()` → replaced with analytic vector math (dot-product projection) to avoid geometry-module coordinate-system side effects.
+5. `parallel()` / `perp()` → `explicit` keyword on geometry `point()` constructors blocked pair variables → switched to basic pair arithmetic (`path = A--(A + 10*unit(dir))`).
+
+**Fix location:** `quake/build/room_from_spec.py` — `_GEO_SNIPPET()`, `_emit_construction()`
+**Result:** 20/20 .asy files compile → 20/20 rooms have real figures (no black squares). Full build pipeline re-run: all 6 stages green. 468/468 tests green. **Prop. XIII panels are now REAL rendered geometry!**
 
 🌙 **PRIOR STATE (July 1, 2026 — FLAT PIVOT SHIPPED!):** 🏆 **20/20 rooms DONE. 455 GREEN.** 🏆 **Abandoned 3D corridors → FLAT** (2D graph + teleport doors + corner minimap HUD; rooms stay first-person 3D). **DONE by DeepSeek (Nir said do it myself, no parents):** (1) flat 0-crossing floorplan regenerated + rooms rebuilt with compass doors; (2) **teleport navigation** (`gameplay.py` `_teleport_through_door`); (3) **corner minimap HUD** (`minimap.py`) — importance dots + links + red X on cleared + **Nir's 5 custom emoji PNGs** as the mood marker (arrived/moving/panels/demon/cleared). Nir play-tested & loves it; upside-down marker FIXED. **NEXT (tomorrow): POLISH** — game graphics + wall panel text/figures, clearer controls (fire=color panels), optional minimap tweaks. Parents 19 & 21 moot. See "THE BIG PIVOT" section above. **Everything pushed.** 🚀
 

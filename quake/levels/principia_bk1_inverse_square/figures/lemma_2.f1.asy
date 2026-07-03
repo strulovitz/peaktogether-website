@@ -35,7 +35,7 @@ pair ptc = (4.0,3.4);
 pair ptd = (6.0,3.9);
 pair ptE = (8.0,4.2);
 path curve = ptA--ptb--ptc--ptd--ptE;
-path baseAE = A--E;
+path baseAE = A--_u_E;
 path sideAa = A--ptA;
 // series inscribed: built in series-support block below
 // series circumscribed: built in series-support block below

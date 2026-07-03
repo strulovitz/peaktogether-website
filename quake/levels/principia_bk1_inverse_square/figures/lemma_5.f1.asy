@@ -30,17 +30,9 @@ path fig1 = A--B--C--cycle;
 pair D = (6.0,0.0);
 pair _u_E = (8.0,0.0);
 pair F = (6.6,1.5);
-path fig2 = D--E--F--cycle;
-pair A = (0.0,0.0);
-pair B = (4.0,0.0);
-pair C = (1.2,3.0);
-path fig1 = A--B--C--cycle;
-pair D = (6.0,0.0);
-pair _u_E = (8.0,0.0);
-pair F = (6.6,1.5);
-path fig2 = D--E--F--cycle;
+path fig2 = D--_u_E--F--cycle;
 path sideAB = A--B;
-path sideDE = D--E;
+path sideDE = D--_u_E;
 
 // ---- ZONE 4: render (highlight-driven) ----
 void drawAll(int highlight) {

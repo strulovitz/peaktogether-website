@@ -28,22 +28,13 @@ pair D = (1.4,0.0);
 pair _u_E = (3.0,0.0);
 pair B = (1.4,1.0);
 pair C = (3.0,2.2);
-path AE = A--E;
+path AE = A--_u_E;
 path AD = A--D;
 path curve = A--B--C;
 path DB = D--B;
-path EC = E--C;
-pair A = (0.0,0.0);
-pair D = (1.4,0.0);
-pair _u_E = (3.0,0.0);
-pair B = (1.4,1.0);
-pair C = (3.0,2.2);
-path AE = A--E;
-path curve = A--B--C;
-path DB = D--B;
-path EC = E--C;
+path EC = _u_E--C;
 path triABD = A--B--D--cycle;
-path triACE = A--C--E--cycle;
+path triACE = A--C--_u_E--cycle;
 
 // ---- ZONE 4: render (highlight-driven) ----
 void drawAll(int highlight) {

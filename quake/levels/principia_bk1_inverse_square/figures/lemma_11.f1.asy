@@ -31,34 +31,14 @@ pair D = (5.4,0.0);
 path arc = A--ptC--B;
 path tanAD = A--D;
 path chordAB = A--B;
-pair A = (0.0,0.0);
-pair ptC = (1.8,1.4);
-pair B = (3.4,2.3);
-pair D = (5.4,0.0);
 pair Dfoot = (3.4,0.0);
 pair G = (0.55,4.05);
 pair J = (0.5,3.7);
-path arc = A--ptC--B;
-path tanAD = A--D;
-path chordAB = A--B;
 path subBD = B--Dfoot;
 path auxBG = B--G;
 path auxAG = A--G;
 path aux = circle(A, B, G);
-pair A = (0.0,0.0);
-pair B = (3.4,2.3);
-pair D = (5.4,0.0);
-pair Dfoot = (3.4,0.0);
-pair G = (0.55,4.05);
-pair J = (0.5,3.7);
-pair ptC = (1.8,1.4);
-path arc = A--ptC--B;
-path tanAD = A--D;
-path chordAB = A--B;
-path subBD = B--Dfoot;
-path auxAG = A--G;
 path auxGJ = G--J;
-path aux = circle(A, B, G);
 
 // ---- ZONE 4: render (highlight-driven) ----
 void drawAll(int highlight) {
