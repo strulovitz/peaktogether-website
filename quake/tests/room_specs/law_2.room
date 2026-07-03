@@ -3,10 +3,9 @@ kind      equation
 import    Newton, Principia, Axioms or Laws of Motion, Law II, p.19 (Motte trans., 1729)
 caption   The alteration of motion is proportional to, and directed along, the impressed force.
 final     2
-ceiling   eq0 :: \Delta(\text{motion}) \propto \mathbf{F}
-ceiling   eq1 :: \Delta(\text{motion}) \parallel \mathbf{F}
 
 station 1
+  ceiling   eq0 :: \Delta(\text{motion}) \propto \mathbf{F}
   gloss   The alteration of motion is proportional to the motive force impressed.
   color   motionblue   #1E6FE0
   color   forceorange  #E8770A
@@ -18,6 +17,7 @@ station 1
     The Law sets {motionblue|the alteration of motion} in strict proportion to {forceorange|the motive force impressed}. As Newton explains, if any force generates a motion, then {forceorange|a double force} will generate {motionblue|double the motion}, a triple force triple the motion — whether {forceorange|that force} be impressed altogether and at once, or gradually and successively. The {motionblue|change $\Delta(\text{motion})$} scales exactly with the impressed {forceorange|$\mathbf{F}$}.
 
 station 2
+  ceiling   eq1 :: \Delta(\text{motion}) \parallel \mathbf{F}
   gloss   The change of motion is made in the direction of the right line in which the force is impressed.
   color   motionblue   #1E6FE0
   color   forceorange  #E8770A

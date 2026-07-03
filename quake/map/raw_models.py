@@ -377,6 +377,7 @@ class CeilingEq(BaseModel):
     model_config = ConfigDict(extra="forbid")
     eq_id: EqId
     latex: str
+    step_index: int  # 1-based station number this equation belongs to
 
 class RoomSource(BaseModel):
     model_config = ConfigDict(extra="forbid")

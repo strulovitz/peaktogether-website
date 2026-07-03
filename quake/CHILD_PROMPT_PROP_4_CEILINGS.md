@@ -4,27 +4,25 @@ Build the complete Quake `.room` file for Prop. IV, Theorem IV.
 
 ## The format
 
-You write in the ROOMSPEC format. Header:
-
 ```
 room <id>
-kind <geometry|equation|text>
+kind equation
 import <citation>
 caption <one line>
 final <step#>
-ceiling <eq_id> :: <LaTeX>     (one per station)
 
 station <n>
+  ceiling <eq_id> :: <LaTeX>
   gloss <one sentence>
-  color <name> <#hex>          (repeat; local to this station)
+  color <name> <#hex>
   panel
-    <ops>
+    term <colorname> $<latex>$ [heart] [stabilo=#hex]
+    layout $...$   (optional; with {name|$frag$} spans)
   text
     <prose with {colorname|words} spans and $math$>
 ```
 
-For equation rooms: panel uses `term <colorname> $<latex>$ [heart]` and optionally `layout $...$` with `{name|$frag$}` spans.
-Colors are local per station. The `heart` marks the current step's key element. Uncolored = black. Never grey.
+The `ceiling` line goes INSIDE the station block, just after `station <n>`. Each station has exactly one `ceiling` equation that captures what that specific step proves. Colors are local per station. The `heart` marks the current step's key element. Uncolored = black. Never grey.
 
 ## The room: prop_4
 
@@ -41,4 +39,4 @@ Newton's proof: in a circle, a body moves from P to Q in a small time. The centr
 
 ## What you produce
 
-The complete `.room` file text — header, 2 stations, everything. One `ceiling` equation per station. Use the name `prop_4` as the room id. Kind is `equation`.
+The complete `.room` file — header, 2 stations, everything from scratch. Each station MUST contain its own `ceiling` line. Use the name `prop_4` as the room id.

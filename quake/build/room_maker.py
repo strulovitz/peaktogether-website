@@ -243,11 +243,11 @@ def build_room_runtime(
 
     # Step I — ceiling equations (one per station, above its wall on the ceiling)
     ceiling_rts = []
-    eqs = list(room.ceiling_equations)
-    for i, eq in enumerate(eqs):
-        # Match equation i to station i (panel_pairs is step-index ordered)
-        if i < len(panel_pairs):
-            pp = panel_pairs[i]
+    for eq in room.ceiling_equations:
+        # Match by step_index (1-based) to the correct station (panel_pairs is step-ordered)
+        si = getattr(eq, "step_index", 0)
+        if 1 <= si <= len(panel_pairs):
+            pp = panel_pairs[si - 1]
             wall = pp.text_placement.wall
             cx_station = pp.text_placement.center_xyz[0]
             cz_station = pp.text_placement.center_xyz[2]
@@ -261,8 +261,9 @@ def build_room_runtime(
             else:  # W
                 eq_pos = (-W / 2.0 + CEILING_INSET, H - 0.1, cz_station)
         else:
-            # Fallback: fewer stations than equations — place centered
-            x_offset = (i - len(eqs) / 2.0 + 0.5) * 2.0
+            # Fallback: no step_index or out of range — place centered
+            i = len(ceiling_rts)
+            x_offset = (i - len(list(room.ceiling_equations)) / 2.0 + 0.5) * 2.0
             eq_pos = (x_offset, H - 0.1, 0.0)
         ceiling_rts.append(
             CeilingEqRT(

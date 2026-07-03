@@ -3,9 +3,9 @@ kind      text
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law I.
 caption   Law I -- Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed.
 final     4
-ceiling   eq0 :: \text{no force} \Rightarrow \text{no change of motion}
 
 station 1
+  ceiling   eq0 :: \text{no force} \Rightarrow \text{no change of motion}
   gloss   The statement of the first law: rest, uniform motion, and impressed forces.
   color   restblue    #1E6FE0
   color   motiongreen #00A35A

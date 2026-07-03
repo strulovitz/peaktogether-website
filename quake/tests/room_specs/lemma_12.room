@@ -3,9 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I (Lemma XII cited later in Prop. XI); Plate 4, Fig. 1.
 caption   All parallelograms described about conjugate diameters of a given ellipse or hyperbola are equal to one another.
 final     1
-ceiling   eq0 :: \text{parallelogram about conjugate diameters} = \text{const} = 4ab
 
 station 1
+  ceiling   eq0 :: \text{parallelogram about conjugate diameters} = \text{const} = 4ab
   gloss   An ellipse with one pair of skewed conjugate diameters and the parallelogram circumscribed about it, touching the curve at the four diameter endpoints.
   color   ellblue    #1E6FE0
   color   conjorange #E8770A

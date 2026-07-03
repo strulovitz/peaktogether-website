@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IX; Plate 2.
 caption   The areas of triangles formed by ordinates under a curve are ultimately one to the other in the duplicate ratio of the sides.
 final     3
-ceiling   eq0 :: \triangle ABD,\ \triangle ACE \ \text{under curve } ABC \text{ on base } AE
-ceiling   eq1 :: Ad:Ae = AD:AE,\quad \triangle ABD:\triangle ACE = Abd:Ace
-ceiling   eq2 :: Afd:Age = Ad^2:Ae^2 = AD^2:AE^2 \implies \triangle ABD:\triangle ACE \to AD^2:AE^2
 
 station 1
+  ceiling   eq0 :: \triangle ABD,\ \triangle ACE \ \text{under curve } ABC \text{ on base } AE
   gloss   A curve crosses a baseline at A; ordinates drop from two curve points to form two shrinking triangles whose area ratio we seek.
   color   lineblue   #1E6FE0
   color   curvegreen #00A35A
@@ -34,6 +32,7 @@ station 1
     namely $AD^2 : AE^2$.
 
 station 2
+  ceiling   eq1 :: Ad:Ae = AD:AE,\quad \triangle ABD:\triangle ACE = Abd:Ace
   gloss   The blow-up: AD and AE produced to fixed distant points d and e, ordinates db, ec drawn parallel, a similar curve Abc, and the tangent Ag cutting all four ordinates.
   color   auxpurple #8E24AA
   color   lineblue   #1E6FE0
@@ -65,6 +64,7 @@ station 2
     $\triangle ABD$, $\triangle ACE$ stay in constant ratio to the blown-up areas $Abd$, $Ace$.
 
 station 3
+  ceiling   eq2 :: Afd:Age = Ad^2:Ae^2 = AD^2:AE^2 \implies \triangle ABD:\triangle ACE \to AD^2:AE^2
   gloss   As B,C meet A the angle cAg vanishes, the curvilinear areas collapse onto the triangles Afd and Age, and Lemma V gives the duplicate ratio.
   color   arearred #D81B60
   color   lineblue   #1E6FE0

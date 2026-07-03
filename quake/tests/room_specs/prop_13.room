@@ -3,12 +3,9 @@ kind geometry
 import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XIII; Plate 5, Figure 3.
 caption If a body moves in the perimeter of a parabola, find the law of the centripetal force tending to the focus.
 final 4
-ceiling eq0 :: \text{parabola: focus } S,\ \text{radius } SP,\quad F \to S
-ceiling eq1 :: QR \parallel SP,\quad QT \perp SP,\quad Qv \parallel \text{tangent},\ Qv \cap PG = v
-ceiling eq2 :: QR = Pv \implies Qv^2 = 4PS\cdot Pv = 4PS\cdot QR
-ceiling eq3 :: \lim_{Q\to P}\frac{Qv}{Qx}=1,\ \ QT^2 \propto SP\cdot QR \implies F \propto \dfrac{1}{SP^2}
 
 station 1
+  ceiling eq0 :: \text{parabola: focus } S,\ \text{radius } SP,\quad F \to S
   gloss A body moves on a parabola with force directed to the focus S.
   color parabblue #1E6FE0
   color fociorange #E8770A
@@ -28,6 +25,7 @@ station 1
     Newton answers yes, by the same Prop. VI machinery.
 
 station 2
+  ceiling eq1 :: QR \parallel SP,\quad QT \perp SP,\quad Qv \parallel \text{tangent},\ Qv \cap PG = v
   gloss From the next place Q draw QR parallel to SP, QT perpendicular, and Qv parallel to the tangent.
   color parabblue #1E6FE0
   color constpurple #8E24AA
@@ -55,6 +53,7 @@ station 2
     of the curve.
 
 station 3
+  ceiling eq2 :: QR = Pv \implies Qv^2 = 4PS\cdot Pv = 4PS\cdot QR
   gloss Similar triangles give QR = Pv, and the conic property gives Qv squared = 4PS times QR.
   color parabblue #1E6FE0
   color relgreen #00A35A
@@ -83,6 +82,7 @@ station 3
     geometry has collapsed cleanly into the focal distance.
 
 station 4
+  ceiling eq3 :: \lim_{Q\to P}\frac{Qv}{Qx}=1,\ \ QT^2 \propto SP\cdot QR \implies F \propto \dfrac{1}{SP^2}
   gloss As Q meets P the ratio Qv to Qx tends to unity, yielding force reciprocal to SP squared.
   color parabblue #1E6FE0
   color resultred #D81B60

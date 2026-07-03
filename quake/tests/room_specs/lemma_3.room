@@ -3,10 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma III; Plate 1, Fig. 6.
 caption   The same ultimate equality of inscribed and circumscribed figures holds even when the breadths of the parallelograms are unequal.
 final     2
-ceiling   eq0 :: \text{circ}-\text{insc} \;=\; \textstyle\sum (\text{unequal breadths})\;\longrightarrow\;0
-ceiling   eq1 :: FAaf \;>\; (\text{circ}-\text{insc}), \quad AF\to0 \;\Rightarrow\; FAaf\to0 \;\Rightarrow\; \text{insc}=\text{circ}
 
 station 1
+  ceiling   eq0 :: \text{circ}-\text{insc} \;=\; \textstyle\sum (\text{unequal breadths})\;\longrightarrow\;0
   gloss   The curve aE over the baseline AE, with stepped rectangles of unequal breadths AB, BC, CD standing under the curve.
   color   stepblue  #1E6FE0
   color   basegreen #00A35A
@@ -34,6 +33,7 @@ station 1
     In the same figure as before (Pl.~1, Fig.~6), \{stepblue|the curve $acE$} stands above \{basegreen|the base $AE$}, but now we take \emph{unequal} bases $AB$, $BC$, $CD$, $\&c.$, the first wide and those following narrower. Upon them we erect \{stepblue|the stepped parallelograms} under the curve, just as in \textbf{Lemma~II}, except that here their breadths need not agree. The earlier lemma proved the ultimate equality of inscribed and circumscribed figures only for equal bases; this lemma asserts that the same conclusion survives when the breadths differ. We must therefore show that the total excess of the circumscribed figure over the inscribed one still vanishes as every base shrinks. The whole of that excess will be trapped within a single rectangle built on the \emph{widest} base.
 
 station 2
+  ceiling   eq1 :: FAaf \;>\; (\text{circ}-\text{insc}), \quad AF\to0 \;\Rightarrow\; FAaf\to0 \;\Rightarrow\; \text{insc}=\text{circ}
   gloss   The bounding parallelogram FAaf on the greatest breadth AF contains the entire error between inscribed and circumscribed figures; as AF shrinks the parallelogram, and hence the error, becomes less than any given rectangle.
   color   boundred    #D81B60
   color   widthorange #E8770A

@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma XI; Plate 2, Fig. 4.
 caption   The evanescent subtense of the angle of contact, in all curves of finite curvature, is ultimately in the duplicate ratio of the subtense of the conterminate arc.
 final     3
-ceiling   eq0 :: \angle BAD \to 0,\quad \text{arc } AB \sim AB \;(\text{Lem. VI, VII})
-ceiling   eq1 :: A,B,G \text{ concyclic on diam. } AG \;\Rightarrow\; AB^{2}=AG\times BD
-ceiling   eq2 :: GJ\to 0 \Rightarrow \frac{AG}{Ag}\to 1 \Rightarrow \frac{AB^{2}}{Ab^{2}}=\frac{BD}{bd}
 
 station 1
+  ceiling   eq0 :: \angle BAD \to 0,\quad \text{arc } AB \sim AB \;(\text{Lem. VI, VII})
   gloss   The smooth curve through A with its tangent AD; a point B slides along the arc toward A.
   color   tanblue   #1E6FE0
   color   arcgreen  #00A35A
@@ -29,6 +27,7 @@ station 1
     departure of the {arcgreen|curve} from the line it kisses at $A$.
 
 station 2
+  ceiling   eq1 :: A,B,G \text{ concyclic on diam. } AG \;\Rightarrow\; AB^{2}=AG\times BD
   gloss   BD is the subtense of the angle of contact; the auxiliary BG, AG build a right triangle inscribed in a circle.
   color   tanblue   #1E6FE0
   color   arcgreen  #00A35A
@@ -59,6 +58,7 @@ station 2
     {subred|departure $BD$} inside a clean, computable ratio.
 
 station 3
+  ceiling   eq2 :: GJ\to 0 \Rightarrow \frac{AG}{Ag}\to 1 \Rightarrow \frac{AB^{2}}{Ab^{2}}=\frac{BD}{bd}
   gloss   As B→A, GJ vanishes and AG/Ag→1, so AB² : Ab² becomes the duplicate ratio of BD : bd.
   color   tanblue   #1E6FE0
   color   arcgreen  #00A35A

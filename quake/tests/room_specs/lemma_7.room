@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VII; Plate 2, Fig. 1.
 caption   The ultimate ratio of the arc, the chord, and the tangent, any one to any other, is the ratio of equality.
 final     3
-ceiling   eq0 :: B \to A \;\Rightarrow\; \{\text{arc } ACB,\; AB,\; AD\} \to 0
-ceiling   eq1 :: Acb \sim ACB,\quad bd \parallel BD,\quad Ab,\,Ad \text{ finite}
-ceiling   eq2 :: \angle dAb \to 0 \;\Rightarrow\; \text{arc}:\text{chord}:\text{tangent}\to 1:1:1
 
 station 1
+  ceiling   eq0 :: B \to A \;\Rightarrow\; \{\text{arc } ACB,\; AB,\; AD\} \to 0
   gloss   The original arc ACB rising from A, with its chord AB and tangent AD, exactly the figure of the preceding lemma.
   color   arcblue  #1E6FE0
   panel
@@ -29,6 +27,7 @@ station 1
     their proportions still while we examine them.
 
 station 2
+  ceiling   eq1 :: Acb \sim ACB,\quad bd \parallel BD,\quad Ab,\,Ad \text{ finite}
   gloss   The auxiliary blow-up: AB and AD produced to distant b and d, the parallel bd, and a similar arc Acb that stays finite.
   color   auxpurple #8E24AA
   color   arcblue   #1E6FE0
@@ -59,6 +58,7 @@ station 2
     finite triangle $Abd$ and arc $Acb$} above.
 
 station 3
+  ceiling   eq2 :: \angle dAb \to 0 \;\Rightarrow\; \text{arc}:\text{chord}:\text{tangent}\to 1:1:1
   gloss   By Lemma VI the angle dAb vanishes, so Ab, Ad, and arc Acb coincide and become equal; hence AB, AD, ACB acquire the ratio of equality.
   color   equalteal #00897B
   color   auxpurple #8E24AA

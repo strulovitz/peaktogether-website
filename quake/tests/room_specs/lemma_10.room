@@ -3,10 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma X; Plate 2.
 caption   The spaces which a body describes from rest under any finite force are, from the very beginning of the motion, in the duplicate ratio of the times.
 final     2
-ceiling   eq0 :: \text{time}=AD,\,AE \qquad \text{velocity}=DB,\,EC
-ceiling   eq1 :: \triangle ABD : \triangle ACE \to AD^2 : AE^2 \;\Rightarrow\; s \propto t^2 \qquad F \propto \frac{s}{t^2}\;(\text{Cor. }4)
 
 station 1
+  ceiling   eq0 :: \text{time}=AD,\,AE \qquad \text{velocity}=DB,\,EC
   gloss   The same figure as Lemma IX, now read as physics: the baseline is TIME, the ordinates are VELOCITY, and the curve is the growth of speed under a force.
   color   timeblue #1E6FE0
   color   velgreen #00A35A
@@ -32,6 +31,7 @@ station 1
     motion, with time below and speed above.
 
 station 2
+  ceiling   eq1 :: \triangle ABD : \triangle ACE \to AD^2 : AE^2 \;\Rightarrow\; s \propto t^2 \qquad F \propto \frac{s}{t^2}\;(\text{Cor. }4)
   gloss   By Lemma IX the two triangular areas are the spaces described, and since they stand in the duplicate ratio of the times we obtain s proportional to t squared, whence Cor. 4 gives force proportional to space over time squared.
   color   spacered #D81B60
   color   timeblue #1E6FE0

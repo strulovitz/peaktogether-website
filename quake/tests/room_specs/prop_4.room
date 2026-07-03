@@ -3,9 +3,9 @@ kind      equation
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.
 caption   The centripetal force of a body moving uniformly in a circle is as the square of the speed divided by the radius.
 final     2
-ceiling   eq0 :: F \propto \dfrac{v^2}{r}
 
 station 1
+  ceiling   eq0 :: F \propto \dfrac{v^2}{r}
   gloss   The centripetal pull grows with the square of the speed and is inversely as the distance from the centre.
   color   velblue   #1E6FE0
   color   radgreen  #00A35A

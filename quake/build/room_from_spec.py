@@ -113,6 +113,7 @@ class Station:
     layout: Optional[str] = None
     text_raw: str = ""
     line_no: int = 0
+    ceilings: list = field(default_factory=list)
 
 
 @dataclass
@@ -274,6 +275,12 @@ def _parse_station_body(logical: list, i: int, n: int, st: Station) -> int:
                 st.gloss = stripped[len("gloss"):].strip()
             elif kw == "color":
                 st.colors.append(_parse_color(stripped, ln))
+            elif kw == "ceiling":
+                rest = stripped[len("ceiling"):].strip()
+                if "::" not in rest:
+                    raise SpecError(ln, "`ceiling` must be: ceiling <eq_label> :: <LaTeX>")
+                lbl, latex = rest.split("::", 1)
+                st.ceilings.append(CeilingDecl(lbl.strip(), latex.strip(), ln))
             elif kw == "panel":
                 section = "panel"
             elif kw == "text":
@@ -1334,8 +1341,18 @@ def emit_room_source(spec: Spec) -> RoomSource:
                            latex=expanded, colors_used=scanned),
         ))
 
-    ceilings = [CeilingEq(eq_id=f"{node}.eq{i}", latex=c.latex)
-                for i, c in enumerate(spec.ceilings)]
+    # Collect ceiling equations: per-station ceilings (new) + header ceilings (legacy)
+    ceilings: list = []
+    idx = 0
+    for st in spec.stations:
+        for c in st.ceilings:
+            ceilings.append(CeilingEq(
+                eq_id=f"{node}.eq{idx}", latex=c.latex, step_index=st.n))
+            idx += 1
+    for c in spec.ceilings:
+        ceilings.append(CeilingEq(
+            eq_id=f"{node}.eq{idx}", latex=c.latex, step_index=0))
+        idx += 1
 
     room = RoomSource(
         schema_version=SCHEMA_VERSION,

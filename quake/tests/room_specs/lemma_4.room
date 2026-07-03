@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma IV; Plate 1, Fig. 7.
 caption   If corresponding parallelograms in two figures share one ultimate ratio each-to-each, then the whole figures are in that same ratio.
 final     3
-ceiling   eq0 :: AacE = p_1 + p_2 + p_3 \quad (\text{three strips on equal bases } AB,BC,CE)
-ceiling   eq1 :: PprT = q_1 + q_2 + q_3 \quad (\text{equal count of strips on } PQ,QR,RT)
-ceiling   eq2 :: \frac{p_i}{q_i} \to k \;\Longrightarrow\; \frac{\sum p_i}{\sum q_i} = k \;\Longrightarrow\; \frac{AacE}{PprT} = k \quad (\text{by Lem. 3})
 
 station 1
+  ceiling   eq0 :: AacE = p_1 + p_2 + p_3 \quad (\text{three strips on equal bases } AB,BC,CE)
   gloss   The first figure AacE with its rank of inscribed parallelograms on equal bases.
   color   figaviolet #8E24AA
   color   curveblue  #1E6FE0
@@ -29,6 +27,7 @@ station 1
     Here is the \{figaviolet|first figure $AacE$ with its inscribed rank of parallelograms}, erected on three equal bases $AB$, $BC$, $CE$ along \{basegreen|the baseline $AE$}. \{curveblue|The curve $aE$} rises gently above the base, and each strip reaches up to meet it just as in Lemma II. We give this figure exactly three parallelograms because Lemma IV requires that the two figures carry an \emph{equal number} of strips in each rank. Call these three parallelograms $p_1$, $p_2$, $p_3$, taken in order from $A$ toward $E$; they are the building blocks whose ratios we will compare.
 
 station 2
+  ceiling   eq1 :: PprT = q_1 + q_2 + q_3 \quad (\text{equal count of strips on } PQ,QR,RT)
   gloss   The second figure PprT with its own rank of equal-count parallelograms, a differently shaped curve.
   color   figbteal   #00897B
   color   curvered   #D81B60
@@ -50,6 +49,7 @@ station 2
     Below sits the \{figbteal|second figure $PprT$ with its own rank of three parallelograms} on the equal bases $PQ$, $QR$, $RT$ of \{basegreen|the baseline $PT$}. Notice that \{curvered|the curve $prT$} leans the other way --- it descends from $p$ toward $T$ --- so this figure is shaped quite differently from the first. Yet it carries the \emph{same count} of strips, which we name $q_1$, $q_2$, $q_3$ in order from $P$ toward $T$. The whole point of Lemma IV is that the figures may differ wildly in form, provided their corresponding strips agree in ultimate ratio.
 
 station 3
+  ceiling   eq2 :: \frac{p_i}{q_i} \to k \;\Longrightarrow\; \frac{\sum p_i}{\sum q_i} = k \;\Longrightarrow\; \frac{AacE}{PprT} = k \quad (\text{by Lem. 3})
   gloss   Correspondence lines pairing rank-to-rank; the shared ultimate ratio k carries to the whole figures by Lem. III.
   color   corrorange #E8770A
   color   figaviolet #8E24AA

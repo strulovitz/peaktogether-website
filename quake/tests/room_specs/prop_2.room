@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition II (reuses Prop. I figure).
 caption   Every body that moves in a curve and describes areas proportional to the times about a point is urged by a centripetal force directed to that point.
 final 3
-ceiling eq0 :: \triangle SAB = \triangle SBC = \triangle SCD \;\;(\text{areas} \propto \text{times, GIVEN})
-ceiling eq1 :: \triangle SBC = \triangle SBc \;\overset{\text{Eucl. I.40}}{\Longrightarrow}\; cC \parallel BS \;\Rightarrow\; F \parallel BS
-ceiling eq2 :: \forall\, \text{vertex}: \; F \parallel \text{(radius)} \;\Rightarrow\; F \to S \;\;(\text{centripetal})
 
 station 1
+  ceiling eq0 :: \triangle SAB = \triangle SBC = \triangle SCD \;\;(\text{areas} \propto \text{times, GIVEN})
   gloss The given: a body sweeps equal triangles SAB, SBC, SCD about a fixed centre S in equal times.
   color centerorange #E8770A
   color fanpurple #8E24AA
@@ -31,6 +29,7 @@ station 1
     Proposition I proved that a central force produces {fanpurple|equal triangles SAB, SBC, SCD — all equal areas} swept in equal times. Proposition II is its converse: now the equal areas are the PREMISE, and centripetal force is the conclusion. About the fixed {centerorange|centre S} the body follows the polygonal path $A\,B\,C\,D\,E$, and we are GIVEN that it describes areas $\propto$ times. This is the observational direction — exactly what Kepler measured for Mars: if you OBSERVE $\triangle SAB=\triangle SBC=\triangle SCD$, must the force point to $S$?
 
 station 2
+  ceiling eq1 :: \triangle SBC = \triangle SBc \;\overset{\text{Eucl. I.40}}{\Longrightarrow}\; cC \parallel BS \;\Rightarrow\; F \parallel BS
   gloss At B, Euclid I.40 forces the deflection cC to lie parallel to the radius BS.
   color deflectblue #1E6FE0
   panel
@@ -52,6 +51,7 @@ station 2
     By {deflectblue|Law I} the body leaving $B$ would run straight on to $c$ (so $Bc$ continues the line $AB$), yet it turns to $C$: some impulse deflected it by $cC$. Now $\triangle SBc=\triangle SAB$ because $Sc$ and $AB$ share the base $SB$ and $Bc$ lies on $AB$; but we are GIVEN $\triangle SBC=\triangle SAB$, hence $\triangle SBC=\triangle SBc$. By {deflectblue|Euclid I.40, equal triangles on the same base SB lie between the same parallels}, so $C$ and $c$ are equidistant from line $SB$ — that is, $cC \parallel BS$. The deflecting impulse (by {deflectblue|Law II}, along $cC$) therefore points exactly along $BS$, straight toward the centre.
 
 station 3
+  ceiling eq2 :: \forall\, \text{vertex}: \; F \parallel \text{(radius)} \;\Rightarrow\; F \to S \;\;(\text{centripetal})
   gloss The same argument at every vertex: dD ∥ CS, etc., so the force is centripetal everywhere.
   color radialred #D81B60
   panel

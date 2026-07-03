@@ -3,11 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma VI; Plate 2, Fig. 1.
 caption   As a point B on a curve approaches the point of contact A, the angle between the chord AB and the tangent AD is diminished without limit and ultimately vanishes.
 final     3
-ceiling   eq0 :: \text{arc } ACB : \text{ continuous curvature at } A
-ceiling   eq1 :: B \to A \;\Rightarrow\; \lvert AB \rvert \to 0
-ceiling   eq2 :: B \to A \;\Rightarrow\; \angle BAD \to 0
 
 station 1
+  ceiling   eq0 :: \text{arc } ACB : \text{ continuous curvature at } A
   gloss   The arc ACB rising from A, given in position, with smooth continuous curvature.
   color   arcblue  #1E6FE0
   panel
@@ -19,6 +17,7 @@ station 1
     Here is \{arcblue|the arc $ACB$}, a piece of curve fixed in position, rising from the point of contact $A$ up through $C$ to a nearby point $B$. The phrase \emph{continuous curvature} means the curve bends \emph{smoothly} — at every point, including $A$, it has one definite direction and no sharp corner. This smoothness is Newton's standing assumption, the supposition he will not let go of. \{arcblue|This arc} is the object whose ultimate behaviour near $A$ we mean to investigate.
 
 station 2
+  ceiling   eq1 :: B \to A \;\Rightarrow\; \lvert AB \rvert \to 0
   gloss   The chord AB cutting straight across the arc; as B slides toward A it grows ever shorter.
   color   chordgreen #00A35A
   color   arcblue    #1E6FE0
@@ -32,6 +31,7 @@ station 2
     Now join $A$ to $B$ by \{chordgreen|the straight chord $AB$}, a shortcut that cuts beneath \{arcblue|the arc}. Imagine the point $B$ now sliding down \{arcblue|the curve} toward $A$. As $B$ draws nearer, \{chordgreen|the chord $AB$} grows shorter and shorter, and its direction settles into the direction of the curve at $A$. It is this swivelling of \{chordgreen|the chord} that the next step compares against the tangent.
 
 station 3
+  ceiling   eq2 :: B \to A \;\Rightarrow\; \angle BAD \to 0
   gloss   The tangent AD grazes the curve at A; the angle BAD between chord and tangent shrinks to zero as B approaches A.
   color   tanorange  #E8770A
   color   chordgreen #00A35A

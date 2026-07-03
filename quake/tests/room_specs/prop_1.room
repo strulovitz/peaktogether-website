@@ -3,12 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition I; Plate 2, Fig. 5.
 caption   The areas which revolving bodies describe by radii drawn to an immoveable centre of force are proportional to the times in which they are described.
 final     4
-ceiling   eq0 :: \Delta t_1 = \Delta t_2 = \cdots \quad\Rightarrow\quad AB,\,BC,\,CD,\ldots \text{ (inertial steps, Law I)}
-ceiling   eq1 :: A_{\triangle}(SAB) = A_{\triangle}(SBC) = A_{\triangle}(SCD) = \cdots
-ceiling   eq2 :: Bc = AB,\ \ Cc \parallel SB \;\Rightarrow\; [SBC] = [SBc] = [SAB]
-ceiling   eq3 :: \lim_{\Delta t \to 0}\ \text{polygon} \to \text{curve},\quad \dfrac{dA}{dt} = \text{const}\;(\text{areas} \propto \text{times})
 
 station 1
+  ceiling   eq0 :: \Delta t_1 = \Delta t_2 = \cdots \quad\Rightarrow\quad AB,\,BC,\,CD,\ldots \text{ (inertial steps, Law I)}
   gloss   The centre of force S is fixed; the body flies in straight polygonal jumps ABCDEF, one per equal time-slice.
   color   centerorange #E8770A
   color   pathblue     #1E6FE0
@@ -32,6 +29,7 @@ station 1
     \emph{any} central force whatsoever.
 
 station 2
+  ceiling   eq1 :: A_{\triangle}(SAB) = A_{\triangle}(SBC) = A_{\triangle}(SCD) = \cdots
   gloss   The radii SA,SB,SC,SD,SE,SF are the sweeping lines that trace out the swept triangles.
   color   pathblue  #1E6FE0
   color   radigreen #00A35A
@@ -62,6 +60,7 @@ station 2
     angular momentum, hiding in plain geometric sight.
 
 station 3
+  ceiling   eq2 :: Bc = AB,\ \ Cc \parallel SB \;\Rightarrow\; [SBC] = [SBc] = [SAB]
   gloss   The three key triangles SAB, SBc, SBC are equal — the heart of the impulse argument.
   color   radigreen    #00A35A
   color   arearpurple  #8E24AA
@@ -89,6 +88,7 @@ station 3
     {arearpurple|triangular area} untouched.
 
 station 4
+  ceiling   eq3 :: \lim_{\Delta t \to 0}\ \text{polygon} \to \text{curve},\quad \dfrac{dA}{dt} = \text{const}\;(\text{areas} \propto \text{times})
   gloss   The impulse Cc is always parallel to the radius; in the limit the polygon becomes a smooth curve and areas ∝ times.
   color   pathblue     #1E6FE0
   color   radigreen    #00A35A

@@ -3,10 +3,9 @@ kind      equation
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XV; (no printed figure).
 caption   The periodic times in ellipses are in the sesquiplicate ratio of the greater axes — Kepler's Third Law.
 final     2
-ceiling   prop15 :: T^2 \propto a^3
-ceiling   prop15b :: \text{(Kepler III)}
 
 station 1
+  ceiling   prop15 :: T^2 \propto a^3
   gloss   The periodic times in ellipses are in the sesquiplicate ratio of their greater axes.
   color   timeblue     #1E6FE0
   color   axisorange   #E8770A
@@ -26,6 +25,7 @@ station 1
     the inverse-square law: "the periodic times in ellipses are in the sesquiplicate ratio of their greater axes."
 
 station 2
+  ceiling   prop15b :: \text{(Kepler III)}
   gloss   The lesser axis is the mean proportional between the greater axis and the latus rectum; subducting the subduplicate ratio leaves the sesquiplicate.
   color   timeblue     #1E6FE0
   color   axisorange   #E8770A

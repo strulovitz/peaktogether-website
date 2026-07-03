@@ -3,12 +3,9 @@ kind      geometry
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VI; Plate 3, Figure 2.
 caption   In a space void of resistance, the centripetal force in the middle of a nascent arc is as the versed sine directly and the square of the time inversely.
 final     4
-ceiling eq0 :: \text{areas} \propto \text{times} \;\Rightarrow\; ?\;=\;\lVert F\rVert \quad (\text{Prop. I})
-ceiling eq1 :: \text{versed sine} \propto F\cdot t^2 \qquad\Longrightarrow\qquad F \propto \dfrac{QR}{t^2}
-ceiling eq2 :: QR \parallel SP,\quad QT \perp SP \quad\Rightarrow\quad [\triangle SQP] = \tfrac{1}{2}\,SP\cdot QT \propto t
-ceiling eq3 :: F \propto \dfrac{QR}{t^2} \;\propto\; \dfrac{QR}{(SP\cdot QT)^2} \;=\; \dfrac{1}{SP^2\cdot QT^2/QR}
 
 station 1
+  ceiling eq0 :: \text{areas} \propto \text{times} \;\Rightarrow\; ?\;=\;\lVert F\rVert \quad (\text{Prop. I})
   gloss The centre S, the body at P, and the tiny nascent arc PQ pose the measurement problem.
   color centerorange #E8770A
   color arcblue #1E6FE0
@@ -26,6 +23,7 @@ station 1
     mechanics now waits on one question: can we read the magnitude of the force off the shape of the orbit alone?
 
 station 2
+  ceiling eq1 :: \text{versed sine} \propto F\cdot t^2 \qquad\Longrightarrow\qquad F \propto \dfrac{QR}{t^2}
   gloss The tangent ZPR is the forceless path; the versed sine measures how far the body falls from it.
   color tangreen #00A35A
   panel
@@ -47,6 +45,7 @@ station 2
     sine is as the force times the square of the time.
 
 station 3
+  ceiling eq2 :: QR \parallel SP,\quad QT \perp SP \quad\Rightarrow\quad [\triangle SQP] = \tfrac{1}{2}\,SP\cdot QT \propto t
   gloss QR is drawn parallel to SP and QT perpendicular to SP, tying orbit geometry to the force direction.
   color parblue #1E6FE0
   color perpred #D81B60
@@ -71,6 +70,7 @@ station 3
     area $\tfrac{1}{2}\,SP\cdot QT$ — which, by Prop. I, is proportional to the time in which the arc is swept.
 
 station 4
+  ceiling eq3 :: F \propto \dfrac{QR}{t^2} \;\propto\; \dfrac{QR}{(SP\cdot QT)^2} \;=\; \dfrac{1}{SP^2\cdot QT^2/QR}
   gloss The force-measure solid SP²·QT²/QR is the master formula for every later proposition.
   color measpurple #8E24AA
   panel

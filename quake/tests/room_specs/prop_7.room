@@ -3,11 +3,9 @@ kind geometry
 import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition VII; Plate 3, Figure 3.
 caption If a body revolves in the circumference of a circle, find the law of centripetal force directed to any given point.
 final 3
-ceiling eq0 :: F \propto \dfrac{1}{SP^2}\cdot\dfrac{QR}{QT^2}
-ceiling eq1 :: \angle VPA = 90^\circ \;\Rightarrow\; \triangle ZQR \sim \triangle ZTP \sim \triangle ZPA
-ceiling eq2 :: QR\cdot L : QT^2 = AV^2 : PV^2 \;\Rightarrow\; F \propto \dfrac{1}{SP^2}\cdot\dfrac{1}{PV^3}
 
 station 1
+  ceiling eq0 :: F \propto \dfrac{1}{SP^2}\cdot\dfrac{QR}{QT^2}
   gloss The circle is the orbit and S is a force centre placed anywhere inside it, not just the centre.
   color circblue #1E6FE0
   color centerorange #E8770A
@@ -28,6 +26,7 @@ station 1
     which is the distance whose powers Prop. VI taught us to track.
 
 station 2
+  ceiling eq1 :: \angle VPA = 90^\circ \;\Rightarrow\; \triangle ZQR \sim \triangle ZTP \sim \triangle ZPA
   gloss The tangent, the chord PV through S, and the diameter VA seed the right angle at P.
   color circblue #1E6FE0
   color tanteal #00897B
@@ -53,6 +52,7 @@ station 2
     The {diampurple|chord $PV$ through $S$} is the intrinsic length that will ultimately govern the whole force law.
 
 station 3
+  ceiling eq2 :: QR\cdot L : QT^2 = AV^2 : PV^2 \;\Rightarrow\; F \propto \dfrac{1}{SP^2}\cdot\dfrac{1}{PV^3}
   gloss The QT and LR construction collapses QT squared over QR into PV cubed, giving the force law.
   color circblue #1E6FE0
   color tanteal #00897B

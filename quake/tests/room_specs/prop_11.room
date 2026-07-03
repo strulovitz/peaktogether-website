@@ -3,13 +3,9 @@ kind geometry
 import Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section III, Proposition XI; Plate 4, Figure 2.
 caption If a body revolves in an ellipse, find the law of the centripetal force tending to the focus of the ellipse.
 final 5
-ceiling eq0 :: F \propto \dfrac{1}{SP^2}
-ceiling eq1 :: PS + PH = 2AC \;\Rightarrow\; EP = AC
-ceiling eq2 :: Pv \cdot vG : Qv^2 = PC^2 : CD^2
-ceiling eq3 :: L = \dfrac{2\,BC^2}{AC}, \qquad CD^2 : CB^2 \;\text{const (Lem. XII)}
-ceiling eq4 :: \dfrac{L \cdot QR}{QT^2} = SP^2 \;\Rightarrow\; F \propto \dfrac{1}{SP^2}
 
 station 1
+  ceiling eq0 :: F \propto \dfrac{1}{SP^2}
   gloss An ellipse orbit with the force directed to focus S; P is the revolving body.
   color ellblue #1E6FE0
   color fociorange #E8770A
@@ -39,6 +35,7 @@ station 1
     it varies as $1/SP^2$.
 
 station 2
+  ceiling eq1 :: PS + PH = 2AC \;\Rightarrow\; EP = AC
   gloss The construction HI parallel to the tangent gives EP = AC, the semi-major axis.
   color ellblue #1E6FE0
   color equalpurple #8E24AA
@@ -67,6 +64,7 @@ station 2
     measurable lengths the force calculation will demand.
 
 station 3
+  ceiling eq2 :: Pv \cdot vG : Qv^2 = PC^2 : CD^2
   gloss Conjugate diameters DK and PG, the ordinate Qv, and the parallelogram QxPR.
   color ellblue #1E6FE0
   color parteal #00897B
@@ -103,6 +101,7 @@ station 3
     coincide in the ultimate ratio, licensing this passage to the limit.
 
 station 4
+  ceiling eq3 :: L = \dfrac{2\,BC^2}{AC}, \qquad CD^2 : CB^2 \;\text{const (Lem. XII)}
   gloss Lemma XII gives CD to CB; the latus rectum L = 2BC^2/AC enters the ratio chain.
   color ellblue #1E6FE0
   color parteal #00897B
@@ -134,6 +133,7 @@ station 4
     cancel against another, leaving only $SP^2$.
 
 station 5
+  ceiling eq4 :: \dfrac{L \cdot QR}{QT^2} = SP^2 \;\Rightarrow\; F \propto \dfrac{1}{SP^2}
   gloss Compounding the ratios yields L*QR / QT^2 = SP^2, so force varies as 1/SP^2.
   color ellblue #1E6FE0
   color radgreen #00A35A
