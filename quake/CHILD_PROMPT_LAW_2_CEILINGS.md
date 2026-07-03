@@ -1,59 +1,78 @@
-# CHILD PROMPT — law_2: Write the FULL .room file from scratch
+# QUAKE CHILD PROMPT — law_2.room
 
-You are building content for a game where the player walks through Newton's Principia as a 3D dungeon. Each "room" is one idea. The player shoots panels on the walls to reveal colored text, kills a demon, and then the room's ceiling equations appear in blood-red above each station.
+You are a Quake content child. Write ONE `.room` file for law_2. Return ONLY the `.room` file text (in a fenced code block).
 
-## The room: Law II (F = ma)
+## THE .room FORMAT (v2.0 — ceiling inside each station)
 
-You are writing a complete `.room` text file. Here is Newton's actual text from the 1729 Motte translation:
+```
+HEADER (before first station):
+  room <node_id> | kind geometry|equation|text | import <citation> | caption <line>
+  final <step#>
 
----
+COLOR RULE: colors are local per station; matching words in text share them; uncolored
+= plain BLACK (never grey); exactly the step's HEART element carries `heart`.
 
-**LAW II.**
+EQUATION ops:  term <colorname> $<latex>$ [heart] [stabilo=#hex]
+All kinds: optional `layout $...$` with {name|$frag$} spans for structured eq display.
 
-*The alteration of motion is ever proportional to the motive force impress'd; and is made in the direction of the right line in which that force is impress'd.*
+One STATION per step, contiguous from 1:
+  station <n>
+    ceiling <eq_id> :: <LaTeX>     (goes INSIDE the station — one per station)
+    gloss <one sentence>
+    color <name> <#hex>            (repeat; LOCAL to this station)
+    panel
+      <ops — see above>
+    text
+      <prose with {colorname|words} spans and $math$>
+```
+
+## YOUR ROOM — law_2
+
+**law_2 · EQUATION/TEXT · 2 step-pairs · importance 5 · Axioms p.19**
+
+```
+import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II.
+caption   Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
+
+s1 (proportionality): equation-as-figure. ♥ = motionblue term (the whole proportion).
+  Colors: motionblue(#1E6FE0) forceorange(#E8770A)
+
+s2 (direction/composition): ♥ = dirgreen. Colors:
+  motionblue(#1E6FE0) forceorange(#E8770A) dirgreen(#00A35A)
+
+colors_used: motionblue, forceorange, dirgreen
+```
+
+### Newton's text (verbatim, from the 1729 Motte translation):
+
+**LAW II.** *The alteration of motion is ever proportional to the motive force impress'd; and is made in the direction of the right line in which that force is impress'd.*
 
 If any force generates a motion, a double force will generate double the motion, a triple force triple the motion, whether that force be impress'd altogether and at once, or gradually and successively. And this motion (being always directed the same way with the generating force) if the body moved before, is added to or subducted from the former motion, according as they directly conspire with or are directly contrary to each other; or obliquely joyned, when they are oblique, so as to produce a new motion compounded from the determination of both.
 
----
+### GUIDANCE
 
-## The format — equation room
+This is an **EQUATION** room. The "figure" is the equation itself — colored terms with a Stabilo heart. Use `term` for colored LaTeX fragments and `layout` to display the structured equation. This is F = ma expressed geometrically by Newton.
 
-```
-room <id>
-kind equation
-import <citation>
-caption <one line — Newton's statement of the law>
-final <step#>
+**Station 1 — Proportionality (text panel):** Explain Newton's proportionality: the alteration of motion scales exactly with the impressed force. Double force → double motion. Triple force → triple motion. Whether impressed all at once or gradually. The equation panel shows {motionblue|Δ(motion)} ∝ {forceorange|F}. The heart is {motionblue|Δ(motion)}. Newton wrote: "If any force generates a motion, a double force will generate double the motion." Use his words. Write 3–4 sentences.
 
-station <n>
-  ceiling <eq_id> :: <LaTeX>
-  gloss <one sentence>
-  color <name> <#hex>
-  panel
-    term <colorname> $<latex>$ [heart] [stabilo=#hex]
-    layout $...$   (optional structured display with {name|$frag$} spans)
-  text
-    <explanation with {colorname|words} spans and $math$>
-```
+**Station 2 — Direction (text panel):** Explain that the change occurs along the SAME line as the force. If the body moved before, the new motion is {dirgreen|added or subtracted} — or compounded obliquely. The heart is {dirgreen|the right-line direction}. Newton explains the parallelogram rule for forces. Write 3–4 sentences.
 
-- `ceiling`: INSIDE each station. LaTeX formula capturing THAT step's key result. Displayed blood-red on ceiling when demon dies.
-- `term`: a colored LaTeX fragment. `heart` marks the current step's key element (Stabilo highlight). `stabilo=#hex` sets the highlighter color.
-- `layout`: optional — assembles the terms into a structured equation with `{colorname|$fragment$}` spans.
-- Colors are local per station. Uncolored = black. Never grey. Text panels: 3–4+ sentences, explain, not repeat.
+**Ceiling equations:** One per station — a short LaTeX formula capturing what that step proves. Blood-red on ceiling when demon dies.
 
-## Example ceiling equations
+## GOLD EXAMPLE (for format reference)
 
-```
-ceiling   eq0 :: \Delta(\text{motion}) \propto \mathbf{F}
-ceiling   eq1 :: \Delta(\text{motion}) \parallel \mathbf{F}
-```
+See the lemma_2 room in the next prompt — same structure, just with geometry ops instead of equation ops.
 
-## The 2 stations
+## RULES
 
-**Station 1 — Proportionality:** Δ(motion) ∝ F. Newton explains: if any force generates a motion, double the force generates double the motion, triple generates triple — whether impressed all at once or gradually. The alteration of motion scales exactly with the impressed force. The heart is Δ(motion).
+1. Colors are LOCAL per station.
+2. Every station has exactly one `heart` with optional `stabilo=#hex`.
+3. Uncolored = BLACK. Never grey.
+4. Every used color must be declared.
+5. Every declared color must be used.
+6. `text` block: use `{colorname|words}` spans and `$math$`.
+7. `layout` assembles terms into a structured equation with `{name|$frag$}` spans.
+8. ceiling INSIDE the station — one per station.
+9. Use `\\` to continue long lines.
 
-**Station 2 — Direction:** Δ(motion) ∥ F. The change of motion occurs along the right line of the generating force. If the body was moving before, the new motion is added to or subtracted from the former — or compounded obliquely — always directed the same way as the force. The heart is the parallel (∥) relation.
-
-## What you produce
-
-Complete `.room` file — header, 2 stations, each with its own `ceiling`. Room id: `law_2`. Kind: `equation`. Import: "Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II."
+Return ONLY the `.room` file text.
