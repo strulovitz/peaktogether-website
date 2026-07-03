@@ -188,7 +188,7 @@
       "b": "a"
     },
     {
-      "name": "curve",
+      "name": "curv",
       "draw": {
         "local_color": {
           "name": "curve",
@@ -404,7 +404,7 @@
       "b": "E"
     },
     {
-      "name": "curve",
+      "name": "curv",
       "draw": {
         "local_color": {
           "name": "curve",
@@ -670,7 +670,7 @@
       "b": "E"
     },
     {
-      "name": "curve",
+      "name": "curv",
       "draw": {
         "local_color": {
           "name": "curve",

@@ -39,7 +39,7 @@ pair p2 = (4.5,2.6);
 pair p3 = (7.5,1.3);
 path ae = A--_u_E;
 path aa = A--a;
-path curve = a--p1--p2--p3--_u_E;
+path curv = a--p1--p2--p3--_u_E;
 path ab = A--B;
 path bc = B--C;
 path cd = C--D;
@@ -62,7 +62,7 @@ void drawAll(int highlight) {
   bool on3 = (highlight==3);
 
   // STABILO underlay (current step's heart only)
-  if (on1) draw(curve, STABILO_1_1);
+  if (on1) draw(curv, STABILO_1_1);
   if (on2) draw(pa, STABILO_2_1);
   if (on2) draw(pb, STABILO_2_2);
   if (on2) draw(pc, STABILO_2_3);
@@ -72,19 +72,19 @@ void drawAll(int highlight) {
 
   // ink pass
   draw(ae3, on3 ? BLACK : BLACK);
-  draw(curve, on3 ? curve : BLACK);
+  draw(curv, on3 ? curve : BLACK);
   draw(pa, on3 ? circ : BLACK);
   draw(pb, on3 ? circ : BLACK);
   draw(pc, on3 ? circ : BLACK);
   draw(pex, on3 ? excess : BLACK);
   draw(ae2, on2 ? BLACK : BLACK);
-  draw(curve, on2 ? curve : BLACK);
+  draw(curv, on2 ? curve : BLACK);
   draw(pa, on2 ? insc : BLACK);
   draw(pb, on2 ? insc : BLACK);
   draw(pc, on2 ? insc : BLACK);
   draw(ae, on1 ? base : BLACK);
   draw(aa, on1 ? BLACK : BLACK);
-  draw(curve, on1 ? curve : BLACK);
+  draw(curv, on1 ? curve : BLACK);
   draw(ab, on1 ? base : BLACK);
   draw(bc, on1 ? base : BLACK);
   draw(cd, on1 ? base : BLACK);
@@ -95,8 +95,8 @@ void drawAll(int highlight) {
   label("$C$", C, S);
   pair _lbl_ae = point(ae, 0.5);
   label("$AE$", _lbl_ae, S);
-  pair _lbl_curve = point(curve, 0.5);
-  label("$acE$", _lbl_curve, NE);
+  pair _lbl_curv = point(curv, 0.5);
+  label("$acE$", _lbl_curv, NE);
   label("$A$", A, SW);
   label("$E$", _u_E, SE);
   label("$a$", a, NW);
@@ -105,8 +105,8 @@ void drawAll(int highlight) {
   label("$D$", D, SE);
   label("$b$", b, NE);
   label("$c$", c, NE);
-  pair _lbl_curve = point(curve, 0.5);
-  label("$acE$", _lbl_curve, NE);
+  pair _lbl_curv = point(curv, 0.5);
+  label("$acE$", _lbl_curv, NE);
   label("$A$", A, SW);
   label("$E$", _u_E, SE);
   label("$a$", a, NW);
@@ -115,8 +115,8 @@ void drawAll(int highlight) {
   label("$C$", C, S);
   label("$b$", b, NE);
   label("$c$", c, NE);
-  pair _lbl_curve = point(curve, 0.5);
-  label("$acE$", _lbl_curve, NE);
+  pair _lbl_curv = point(curv, 0.5);
+  label("$acE$", _lbl_curv, NE);
   pair _lbl_pex = point(pex, 0.5);
   label("$ABla$", _lbl_pex, N);
 }

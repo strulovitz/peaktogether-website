@@ -7,13 +7,13 @@
       "kind": "figure_off",
       "wall_path": "assets/lemma_2.f1.off.png",
       "master_path": "assets/lemma_2.f1.off@master.png",
-      "px_w": 200,
-      "px_h": 150,
+      "px_w": 1128,
+      "px_h": 543,
       "content_bbox": [
-        0,
-        0,
-        200,
-        150
+        7,
+        5,
+        1120,
+        538
       ],
       "dpi": 220
     },
@@ -22,13 +22,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.1.png",
       "master_path": "assets/lemma_2.f1.on.1@master.png",
-      "px_w": 200,
-      "px_h": 150,
+      "px_w": 1128,
+      "px_h": 543,
       "content_bbox": [
-        0,
-        0,
-        200,
-        150
+        7,
+        5,
+        1120,
+        538
       ],
       "dpi": 220
     },
@@ -37,13 +37,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.2.png",
       "master_path": "assets/lemma_2.f1.on.2@master.png",
-      "px_w": 200,
-      "px_h": 150,
+      "px_w": 1128,
+      "px_h": 543,
       "content_bbox": [
-        0,
-        0,
-        200,
-        150
+        7,
+        5,
+        1120,
+        538
       ],
       "dpi": 220
     },
@@ -52,13 +52,13 @@
       "kind": "figure_on",
       "wall_path": "assets/lemma_2.f1.on.3.png",
       "master_path": "assets/lemma_2.f1.on.3@master.png",
-      "px_w": 200,
-      "px_h": 150,
+      "px_w": 1128,
+      "px_h": 543,
       "content_bbox": [
-        0,
-        0,
-        200,
-        150
+        7,
+        5,
+        1120,
+        538
       ],
       "dpi": 220
     },

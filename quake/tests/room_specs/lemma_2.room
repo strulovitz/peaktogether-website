@@ -21,7 +21,7 @@ station 1
     point   p3 @(7.5,1.3)
     segment ae A E  color=base  label=$AE$ at=S
     segment aa A a
-    polyline curve a p1 p2 p3 E  color=curve  heart  label=$acE$ at=NE
+    polyline curv a p1 p2 p3 E  color=curve  heart  label=$acE$ at=NE
     segment ab A B  color=base
     segment bc B C  color=base
     segment cd C D  color=base
@@ -48,7 +48,7 @@ station 2
     point   b @(3,2.6)  label=$b$ at=NE
     point   c @(6,1.3)  label=$c$ at=NE
     segment ae2 A E
-    polyline curve a b c E  color=curve  label=$acE$ at=NE
+    polyline curv a b c E  color=curve  label=$acE$ at=NE
     polygon pa A B b a  color=insc  heart
     polygon pb B C c b  color=insc  heart
     polygon pc C D E c  color=insc  heart
@@ -80,7 +80,7 @@ station 3
     point   e_top @(9,1.3)
     point   c_bot @(6,1.3)
     segment ae3 A E
-    polyline curve a b c E  color=curve  label=$acE$ at=NE
+    polyline curv a b c E  color=curve  label=$acE$ at=NE
     polygon pa A B b a  color=circ  heart
     polygon pb B C c b  color=circ  heart
     polygon pc C D e_top c_bot  color=circ  heart
