@@ -43,7 +43,7 @@ from contracts import (
 
 # ---- PINNED CONSTANTS (pure builders) ----
 DOOR_JAMB_DEPTH_M = 0.3
-ALCOVE_DEPTH_M = 0.4
+ALCOVE_DEPTH_M = 1.5
 PANEL_INSET_M = 0.02  # panel sits just off the wall to avoid z-fight
 CEILING_DROP_M = 0.05  # ceiling-equation quad hangs just below the ceiling (no z-fight)
 
