@@ -1,60 +1,24 @@
-# CHILD PROMPT — law_1: Write ceiling equations
+# CHILD PROMPT — law_1: Write ceiling equations per station
 
-Your only task: replace the single `ceiling` line in this `.room` file with one ceiling equation per station (4 stations = 4 equations). Each equation should capture the key physical/mathematical idea of that specific step, in LaTeX. Do NOT change any other part of the file — not the stations, not the colors, not the text, not the phrases.
+**Your task:** Write one ceiling equation per station for this room. You are working from the original Newton text, NOT from any prior AI's work.
 
-Here is the current file:
+**The room:** Law I — Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed (inertia). Newton then gives three physical illustrations.
+
+**The 4 stations:**
+
+- **Station 1:** The statement of the law itself: rest, uniform straight-line motion, and the role of impressed forces. The heart is "forces impressed."
+
+- **Station 2:** Newton's first illustration — a spinning top that persists in rotation and is only retarded by the resistance of the air. Without air, it would spin forever. The heart is "a spinning top."
+
+- **Station 3:** Newton's second illustration — the planets and comets, moving in spaces with very little resistance, preserve both their progressive and circular motions for immense times. The heart is "the planets and comets."
+
+- **Station 4:** Newton's third illustration — projectiles (stones, arrows, cannonballs) keep moving except as hindered by air resistance and pulled down by gravity. The heart is "projectiles."
+
+**Format:** Give me one `ceiling` line per station, each capturing that step's key idea as a LaTeX equation or statement:
 
 ```
-room      law_1
-kind      text
-import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law I.
-caption   Law I -- Every body perseveres in its state of rest, or of uniform motion in a right line, unless it is compelled to change that state by forces impressed.
-final     4
-ceiling   eq0 :: \text{no force} \Rightarrow \text{no change of motion}
-
-station 1
-  gloss   The statement of the first law: rest, uniform motion, and impressed forces.
-  color   restblue    #1E6FE0
-  color   motiongreen #00A35A
-  color   forceorange #E8770A
-  panel
-    phrase  restblue    "a state of rest"
-    phrase  motiongreen "uniform motion in a right line"
-    phrase  forceorange "forces impress'd" heart
-  text
-    Every body perseveres in its {restblue|state of rest}, or of {motiongreen|uniform motion in a right line}, unless compelled to change that state by {forceorange|forces impress'd}.
-
-station 2
-  gloss   The spinning top persists in rotation until the air retards it.
-  color   topblue #1E6FE0
-  color   dragred #D81B60
-  panel
-    phrase  topblue "a spinning top" heart
-    phrase  dragred "retarded by the air"
-  text
-    {topblue|A top} does not cease its rotation, otherwise than as it is {dragred|retarded by the air}.
-
-station 3
-  gloss   Planets and comets move freely in space for vast times.
-  color   planetpurple #8E24AA
-  color   freeteal     #00897B
-  panel
-    phrase  planetpurple "the planets and comets" heart
-    phrase  freeteal     "more free spaces"
-  text
-    The greater bodies of {planetpurple|the planets and comets}, meeting less resistance in {freeteal|more free spaces}, preserve their motions for a much longer time.
-
-station 4
-  gloss   Projectiles preserve their motion except as hindered by air resistance and gravity.
-  color   projblue    #1E6FE0
-  color   dragred     #D81B60
-  color   gravorange  #E8770A
-  panel
-    phrase  projblue    "projectiles" heart
-    phrase  dragred     "the resistance of the air"
-    phrase  gravorange  "gravity"
-  text
-    {projblue|Projectiles} persevere, so far as not {dragred|retarded by the resistance of the air}, or impell'd downwards by {gravorange|gravity}.
+ceiling   eq0 :: <for station 1>
+ceiling   eq1 :: <for station 2>
+ceiling   eq2 :: <for station 3>
+ceiling   eq3 :: <for station 4>
 ```
-
-Give me ONLY the new `ceiling` lines, one per station. Format: `ceiling   eq0 :: <LaTeX>`, `ceiling   eq1 :: <LaTeX>`, etc.

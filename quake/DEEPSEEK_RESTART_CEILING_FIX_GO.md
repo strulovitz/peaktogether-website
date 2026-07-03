@@ -12,14 +12,16 @@
 
 All 16 child-created rooms are DONE with their ceiling fixes. Lemmas 5,12 and prop_15 were already correct.
 
-### REMAINING (4 rooms, no children — DeepSeek had written these):
+### REMAINING (4 rooms, child prompts rewritten):
+
+Each child prompt gives the Newton source material and asks for per-station ceiling equations — NO prior AI work is fed to the child. Files:
 
 | File | Status |
 |------|--------|
-| `CHILD_PROMPT_PROP_4_CEILINGS.md` | ⏳ Nir pasting to Opus |
-| `CHILD_PROMPT_LAW_1_CEILINGS.md` | ⏳ Nir pasting to Opus |
-| `CHILD_PROMPT_LAW_2_CEILINGS.md` | ⏳ Nir pasting to Opus |
-| `CHILD_PROMPT_LEMMA_2_CEILING.md` | ⏳ Nir pasting to Opus |
+| `CHILD_PROMPT_PROP_4_CEILINGS.md` | ⏳ Paste to Opus |
+| `CHILD_PROMPT_LAW_1_CEILINGS.md` | ⏳ Paste to Opus |
+| `CHILD_PROMPT_LAW_2_CEILINGS.md` | ⏳ Paste to Opus |
+| `CHILD_PROMPT_LEMMA_2_CEILING.md` | ⏳ Paste to Opus |
 
 ## TO DO ON RESTART
 
