@@ -842,6 +842,8 @@ def emit_asy(spec: Spec) -> str:
     L.append("import graph;")
     L.append('settings.outformat = "png";')
     L.append("unitsize(1cm);")
+    if not is_geometry:
+        L.append("defaultpen(fontsize(28pt));")
     L.append("")
     L.append("int highlight = -1;")
     L.append("usersetting();")

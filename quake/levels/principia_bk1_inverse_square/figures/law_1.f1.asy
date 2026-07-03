@@ -6,6 +6,7 @@ import geometry;
 import graph;
 settings.outformat = "png";
 unitsize(1cm);
+defaultpen(fontsize(28pt));
 
 int highlight = -1;
 usersetting();

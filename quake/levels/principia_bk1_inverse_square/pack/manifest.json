@@ -532,13 +532,13 @@
       "kind": "figure_off",
       "wall_path": "assets/law_1.f1.off.png",
       "master_path": "assets/law_1.f1.off@master.png",
-      "px_w": 784,
-      "px_h": 1444,
+      "px_w": 1506,
+      "px_h": 1492,
       "content_bbox": [
-        7,
-        5,
-        777,
-        1439
+        15,
+        11,
+        1505,
+        1487
       ],
       "dpi": 220
     },
@@ -547,13 +547,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.1.png",
       "master_path": "assets/law_1.f1.on.1@master.png",
-      "px_w": 784,
-      "px_h": 1444,
+      "px_w": 1506,
+      "px_h": 1492,
       "content_bbox": [
-        7,
-        5,
-        777,
-        1439
+        15,
+        11,
+        1505,
+        1487
       ],
       "dpi": 220
     },
@@ -562,13 +562,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.2.png",
       "master_path": "assets/law_1.f1.on.2@master.png",
-      "px_w": 784,
-      "px_h": 1444,
+      "px_w": 1506,
+      "px_h": 1492,
       "content_bbox": [
-        7,
-        5,
-        777,
-        1439
+        15,
+        11,
+        1505,
+        1487
       ],
       "dpi": 220
     },
@@ -577,13 +577,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.3.png",
       "master_path": "assets/law_1.f1.on.3@master.png",
-      "px_w": 784,
-      "px_h": 1444,
+      "px_w": 1506,
+      "px_h": 1492,
       "content_bbox": [
-        7,
-        5,
-        777,
-        1439
+        15,
+        11,
+        1505,
+        1487
       ],
       "dpi": 220
     },
@@ -592,13 +592,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_1.f1.on.4.png",
       "master_path": "assets/law_1.f1.on.4@master.png",
-      "px_w": 784,
-      "px_h": 1444,
+      "px_w": 1506,
+      "px_h": 1492,
       "content_bbox": [
-        7,
-        5,
-        777,
-        1439
+        15,
+        11,
+        1505,
+        1487
       ],
       "dpi": 220
     },
