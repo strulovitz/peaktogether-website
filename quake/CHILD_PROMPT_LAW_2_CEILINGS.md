@@ -34,13 +34,8 @@ One STATION per step, contiguous from 1:
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Axioms, or Laws of Motion, Law II.
 caption   Law II — The alteration of motion is ever proportional to the motive force impressed; and is made in the direction of the right line in which that force is impressed.
 
-s1 (proportionality): equation-as-figure. ♥ = motionblue term (the whole proportion).
-  Colors: motionblue(#1E6FE0) forceorange(#E8770A)
-
-s2 (direction/composition): ♥ = dirgreen. Colors:
-  motionblue(#1E6FE0) forceorange(#E8770A) dirgreen(#00A35A)
-
-colors_used: motionblue, forceorange, dirgreen
+s1 (proportionality): equation-as-figure. Δ(motion) ∝ F. Double force → double motion. The heart is Δ(motion).
+s2 (direction/composition): Δ(motion) ∥ F. The change occurs along the same right line as the force. The heart is the parallel direction.
 ```
 
 ### Newton's text (verbatim, from the 1729 Motte translation):
@@ -53,15 +48,11 @@ If any force generates a motion, a double force will generate double the motion,
 
 This is an **EQUATION** room. The "figure" is the equation itself — colored terms with a Stabilo heart. Use `term` for colored LaTeX fragments and `layout` to display the structured equation. This is F = ma expressed geometrically by Newton.
 
-**Station 1 — Proportionality (text panel):** Explain Newton's proportionality: the alteration of motion scales exactly with the impressed force. Double force → double motion. Triple force → triple motion. Whether impressed all at once or gradually. The equation panel shows {motionblue|Δ(motion)} ∝ {forceorange|F}. The heart is {motionblue|Δ(motion)}. Newton wrote: "If any force generates a motion, a double force will generate double the motion." Use his words. Write 3–4 sentences.
+**Station 1 — Proportionality (text panel):** Explain Newton's proportionality: the alteration of motion scales exactly with the impressed force. Double force → double motion. Triple force → triple motion. Whether impressed all at once or gradually. The equation panel shows Δ(motion) ∝ F. The heart is Δ(motion). Newton wrote: "If any force generates a motion, a double force will generate double the motion." Use his words. Write 3–4 sentences.
 
-**Station 2 — Direction (text panel):** Explain that the change occurs along the SAME line as the force. If the body moved before, the new motion is {dirgreen|added or subtracted} — or compounded obliquely. The heart is {dirgreen|the right-line direction}. Newton explains the parallelogram rule for forces. Write 3–4 sentences.
+**Station 2 — Direction (text panel):** Explain that the change occurs along the SAME line as the force. If the body moved before, the new motion is added or subtracted — or compounded obliquely. Newton explains the parallelogram rule for forces. The heart is the right-line direction (∥ relation). Write 3–4 sentences.
 
 **Ceiling equations:** One per station — a short LaTeX formula capturing what that step proves. Blood-red on ceiling when demon dies.
-
-## GOLD EXAMPLE (for format reference)
-
-See the lemma_2 room in the next prompt — same structure, just with geometry ops instead of equation ops.
 
 ## RULES
 

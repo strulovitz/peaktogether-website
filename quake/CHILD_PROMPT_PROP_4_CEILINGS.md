@@ -34,11 +34,8 @@ One STATION per step, contiguous from 1:
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section II, Proposition IV.
 caption   The centripetal forces of bodies, which by equoble motions describe different circles, tend to the centres of the same circles; and are one to the other, as the squares of the arcs described in equal times applied to the radii of the circles.
 
-s1 (equation): equation-as-figure — F→forceorange(#E8770A) ∝ v²→velblue(#1E6FE0) / r→radgreen(#00A35A). ♥ = v² velblue.
-  Colors: forceorange(#E8770A) velblue(#1E6FE0) radgreen(#00A35A)
-
-s2 (sketch/derivation): small circle, equal-time arc → velblue, radius → radgreen ♥; versed sine ↔ force (by Cor. 4 Prop. 1, Lem. 7).
-  Colors: velblue(#1E6FE0) radgreen(#00A35A)
+s1 (equation): equation-as-figure — F ∝ v² / r. The centripetal force grows with the square of the speed and inversely with the radius. The heart is v² (the square of the speed).
+s2 (sketch/derivation): small circle, equal-time arc, versed sine gives force (by Cor. 4 Prop. 1, Lem. 7). Combined: F ∝ v²/r. The heart is v².
 ```
 
 ### Newton's text (verbatim, from the 1729 Motte translation):
@@ -53,9 +50,9 @@ These forces tend to the centres of the circles (by prop. 2. and cor. 2. prop. 1
 
 This is THE canonical example of an "equation-as-figure" room in Quake doctrine. The equation IS the figure — color its important terms, match explanatory words in the same colors.
 
-**Station 1 — The equation (text panel):** The centripetal force grows with the square of the speed and inversely with the distance. The equation panel displays {velblue|v²} (the square of the speed) divided by {radgreen|r} (the radius), scaling {forceorange|F} (the centripetal pull toward the centre). The heart is {velblue|v²}. Use Newton's own phrase "the pull toward the centre." Write 3–4 sentences.
+**Station 1 — The equation (text panel):** The centripetal force grows with the square of the speed and inversely with the distance. The equation panel displays v² (the square of the speed) divided by r (the radius), scaling F (the centripetal pull toward the centre). The heart is v². Use Newton's own phrase "the pull toward the centre." Write 3–4 sentences.
 
-**Station 2 — The derivation (text panel):** By Prop. I and Cor. 4, the centripetal force in a small arc is as the versed sine ÷ time². By Lemma VII, the versed sine ∝ arc²/diameter. Combined with arc ∝ speed × time, this yields F ∝ v²/r. The heart is {velblue|v²}. Explain the proof chain in plain words. Write 3–4 sentences.
+**Station 2 — The derivation (text panel):** By Prop. I and Cor. 4, the centripetal force in a small arc is as the versed sine ÷ time². By Lemma VII, the versed sine ∝ arc²/diameter. Combined with arc ∝ speed × time, this yields F ∝ v²/r. The heart is v². Explain the proof chain in plain words. Write 3–4 sentences.
 
 **Ceiling equations:** One per station — a short LaTeX formula. Blood-red on ceiling when demon dies.
 

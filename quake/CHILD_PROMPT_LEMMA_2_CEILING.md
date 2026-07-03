@@ -39,11 +39,9 @@ One STATION per step, contiguous from 1:
 import    Newton, Principia, Andrew Motte trans., 1729 (Wikisource); Book I, Section I, Lemma II; Plate 1, Fig. 6.
 caption   If in any figure AacE there be inscribed parallelograms on equal bases and circumscribed parallelograms completed: as the bases are diminished without limit, the inscribed, circumscribed, and curvilinear figures have the ultimate ratio of equality.
 
-s1 Curvilinear figure: curve acE → curveblue(#1E6FE0) ♥; base AE → basegreen(#00A35A); side Aa → sideorange(#E8770A).
-s2 Inscribed parallelograms Ab,Bc,Cd → inscpurple(#8E24AA) ♥.
-s3 Circumscribed parallelograms → circred(#D81B60) ♥; excess = rectangle ABla.
-
-colors_used: curveblue, basegreen, sideorange, inscpurple, circred
+s1 Curvilinear figure: the curve acE, the baseline AE, the vertical side Aa. The heart is the curve itself.
+s2 Inscribed parallelograms Ab, Bc, Cd fill from below. The heart is the inscribed rectangles.
+s3 Circumscribed parallelograms rise above; their excess is the vanishing rectangle ABla. The heart is the circumscribed (final proof).
 ```
 
 ### Newton's text (verbatim, from the 1729 Motte translation):
@@ -56,11 +54,11 @@ For the difference of the inscrib'd and circumscrib'd figures is the sum of the 
 
 This is the "gold" room — the pipeline proof-of-concept. It is a **geometry** (DIAGRAM) room. The figure shows the curve aE, the baseline AE divided into equal bases, with inscribed rectangles below and circumscribed rectangles above.
 
-**Station 1 (text panel):** Introduce the figure. The curvilinear area AacE with {curveblue|the curve aE}, {basegreen|the baseline AE}, and {sideorange|the vertical side Aa}. The equal bases AB, BC, CD partition the baseline. The heart is {curveblue|the curve}. Write 3–4 sentences.
+**Station 1 (text panel):** Introduce the figure. The curvilinear area AacE with the curve aE, the baseline AE, and the vertical side Aa. The equal bases AB, BC, CD partition the baseline. The heart is the curve. Write 3–4 sentences.
 
-**Station 2 (text panel):** The inscribed parallelograms Ab, Bc, Cd fill the figure from below. Their total area {inscpurple|AKbLcMdD} lies entirely under {curveblue|the curve}. The heart is {inscpurple|the inscribed rectangles}. Write 3–4 sentences.
+**Station 2 (text panel):** The inscribed parallelograms Ab, Bc, Cd fill the figure from below. Their total area lies entirely under the curve. The heart is the inscribed rectangles. Write 3–4 sentences.
 
-**Station 3 (text panel):** The circumscribed parallelograms aKbl, bLcm, cMdn rise above the curve. Their excess over the inscribed figure is the single rectangle ABla. As AB → 0, this excess vanishes — so by Lemma I, {inscpurple|the inscribed}, {circred|the circumscribed}, and the curvilinear area become ultimately EQUAL. The heart is {circred|the circumscribed} — the final proof. End with Q.E.D. Write 4–5 sentences.
+**Station 3 (text panel):** The circumscribed parallelograms aKbl, bLcm, cMdn rise above the curve. Their excess over the inscribed figure is the single rectangle ABla. As AB → 0, this excess vanishes — so by Lemma I, the inscribed, the circumscribed, and the curvilinear area become ultimately EQUAL. The heart is the circumscribed — the final proof. End with Q.E.D. Write 4–5 sentences.
 
 **Ceiling equations:** One per station — a short LaTeX formula capturing what that step proves. Blood-red on ceiling when demon dies.
 
