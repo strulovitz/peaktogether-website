@@ -983,6 +983,10 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     ctx.enable(moderngl.BLEND)
     ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
     for q,vao in vaos["panels"]:
+        # when hidden door is open, skip the final pair's drawing panel so
+        # the alcove behind it becomes visible
+        if door_open and q.pair_id == room.final_pair_id and q.is_drawing:
+            continue
         on = panel_is_on(q.pair_id, state.lit, room)   # pure helper (same module)
         asset = q.on_asset_id if on else q.off_asset_id
         tex=_upload_texture(ctx,asset,pack)
