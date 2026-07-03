@@ -965,9 +965,6 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     # 3) door jambs
     if vaos["jamb"] is not None:
         _set(prog,"u_tint",JAMB_RGB); vaos["jamb"].render()
-    # 4) alcove — revealed ONLY once the hidden door has opened (demon appears)
-    if door_open and vaos["alcove"] is not None:
-        _set(prog,"u_tint",ALCOVE_RGB); vaos["alcove"].render()
 
     # final-proof-panel glow: once the final panel is lit (and before the door
     # opens), it pulses gold so the player knows THIS panel opens the door.
@@ -983,10 +980,6 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     ctx.enable(moderngl.BLEND)
     ctx.blend_func=(moderngl.SRC_ALPHA,moderngl.ONE_MINUS_SRC_ALPHA)
     for q,vao in vaos["panels"]:
-        # when hidden door is open, skip the final pair's drawing panel so
-        # the alcove behind it becomes visible
-        if door_open and q.pair_id == room.final_pair_id and q.is_drawing:
-            continue
         on = panel_is_on(q.pair_id, state.lit, room)   # pure helper (same module)
         asset = q.on_asset_id if on else q.off_asset_id
         tex=_upload_texture(ctx,asset,pack)
@@ -998,6 +991,15 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
         vao.render()
     _set(prog,"u_use_tint",0)
     ctx.disable(moderngl.BLEND)
+
+    # 4) alcove — drawn after panels with depth disabled, so it shows
+    #     through the wall when the hidden door has opened
+    if door_open and vaos["alcove"] is not None:
+        ctx.disable(moderngl.DEPTH_TEST)
+        _set(prog,"u_use_tint",2); _set(prog,"u_tint",ALCOVE_RGB)
+        vaos["alcove"].render()
+        ctx.enable(moderngl.DEPTH_TEST); ctx.depth_func="<="
+        _set(prog,"u_use_tint",0)
 
     # 6) ceiling equations — blood-red tint when cleared, or toggled with C key
     if (room.room_id in state.cleared or _show_ceilings) and vaos["ceiling"]:
