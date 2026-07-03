@@ -15,30 +15,30 @@
       "text_off_asset": "lemma_9.s1.txt.off",
       "text_on_asset": "lemma_9.s1.txt.on",
       "drawing_placement": {
-        "wall": "S",
+        "wall": "W",
         "slot_index": 0,
-        "wall_slot": "S-0",
+        "wall_slot": "W-0",
         "center_xyz": [
-          6.452187499999997,
-          1.9,
-          -7.142708333333333
+          -9.285520833333333,
+          1.55,
+          -1.1008122041762025
         ],
-        "width_m": 4.666666666666666,
-        "height_m": 3.5,
-        "yaw_rad": 0.0
+        "width_m": 3.6166666666666663,
+        "height_m": 2.7125,
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "S",
+        "wall": "W",
         "slot_index": 1,
-        "wall_slot": "S-1",
+        "wall_slot": "W-1",
         "center_xyz": [
-          1.2094791666666644,
-          2.171875,
-          -7.142708333333333
+          -9.285520833333333,
+          1.55,
+          3.616896129157139
         ],
         "width_m": 5.41875,
-        "height_m": 4.04375,
-        "yaw_rad": 0.0
+        "height_m": 2.7125,
+        "yaw_rad": 1.5707963267948966
       }
     },
     {
@@ -83,35 +83,35 @@
       "text_off_asset": "lemma_9.s3.txt.off",
       "text_on_asset": "lemma_9.s3.txt.on",
       "drawing_placement": {
-        "wall": "W",
+        "wall": "S",
         "slot_index": 0,
-        "wall_slot": "W-0",
+        "wall_slot": "S-0",
         "center_xyz": [
-          -9.285520833333333,
-          1.55,
-          -1.1008122041762025
+          6.452187499999997,
+          1.9,
+          -7.142708333333333
         ],
-        "width_m": 3.6166666666666663,
-        "height_m": 2.7125,
-        "yaw_rad": 1.5707963267948966
+        "width_m": 4.666666666666666,
+        "height_m": 3.5,
+        "yaw_rad": 0.0
       },
       "text_placement": {
-        "wall": "W",
+        "wall": "S",
         "slot_index": 1,
-        "wall_slot": "W-1",
+        "wall_slot": "S-1",
         "center_xyz": [
-          -9.285520833333333,
-          1.55,
-          3.616896129157139
+          1.2094791666666644,
+          2.171875,
+          -7.142708333333333
         ],
         "width_m": 5.41875,
-        "height_m": 2.7125,
-        "yaw_rad": 1.5707963267948966
+        "height_m": 4.04375,
+        "yaw_rad": 0.0
       }
     }
   ],
   "final_pair_id": "lemma_9.s3",
-  "hidden_door_wall_slot": "W-0",
+  "hidden_door_wall_slot": "S-0",
   "doors": [
     {
       "edge_id": "edge.lemma_10.to.lemma_9",
@@ -177,9 +177,9 @@
   "enemy": {
     "enemy_id": "lemma_9.demon",
     "spawn_xyz": [
-      -6.685520833333333,
+      6.452187499999997,
       0.1,
-      -1.1008122041762025
+      -4.542708333333334
     ],
     "health": 3
   },

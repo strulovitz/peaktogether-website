@@ -167,6 +167,7 @@ def build_room_runtime(
     # Step G — panels
     wall_counters = {}
     placement_rts = []
+    placement_by_key = {}          # (pair_id, which) -> PanelPlacementRT
     for slot in pack.placements:
         idx = wall_counters.get(slot.wall, 0)
         wall_counters[slot.wall] = idx + 1
@@ -187,22 +188,26 @@ def build_room_runtime(
         )
         center_xyz = (cx, y, cz)
         yaw = _wall_yaw(slot.wall)
-        placement_rts.append(
-            PanelPlacementRT(
-                wall=slot.wall,
-                slot_index=idx,
-                wall_slot=wall_slot,
-                center_xyz=center_xyz,
-                width_m=slot.width_m,
-                height_m=slot.height_m,
-                yaw_rad=yaw,
-            )
+        prt = PanelPlacementRT(
+            wall=slot.wall,
+            slot_index=idx,
+            wall_slot=wall_slot,
+            center_xyz=center_xyz,
+            width_m=slot.width_m,
+            height_m=slot.height_m,
+            yaw_rad=yaw,
         )
+        placement_rts.append(prt)
+        # Map by (pair_id, which): first_fit emits placements in width-sorted
+        # order, NOT pair order, so positional indexing swapped dimensions
+        # between steps (stretched equations). Key by id to stay correct.
+        placement_by_key[(slot.pair_id, slot.which)] = prt
 
     panel_pairs = []
     for pi, r in enumerate(resolved):
-        drawing_placement = placement_rts[pi * 2]
-        text_placement = placement_rts[pi * 2 + 1]
+        pid = r["block"].pair_id
+        drawing_placement = placement_by_key[(pid, "drawing")]
+        text_placement = placement_by_key[(pid, "text")]
         panel_pairs.append(
             PanelPairRT(
                 pair_id=r["block"].pair_id,

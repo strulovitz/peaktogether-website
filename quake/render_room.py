@@ -621,6 +621,9 @@ _DEMON_SPHERES: dict = {}         # room_id -> list[DemonSphere]
 _DEMON_RENDERERS: dict = {}       # id(ctx) -> DemonRenderer
 _DEMON_DEATH_CLOCK: dict = {}     # room_id -> seconds since kill
 _DEMON_ALIVE_CLOCK: dict = {}     # room_id -> seconds since spawn
+_DEMON_POS: dict = {}             # room_id -> (x, z) current position
+_DEMON_YAW: dict = {}             # room_id -> facing yaw (rad)
+_DEMON_SPAWN_Y: dict = {}         # room_id -> floor y for the demon root
 
 
 def _room_demon_spheres(room):
@@ -642,8 +645,22 @@ def _get_demon_renderer(ctx, prog):
     return r
 
 
-def demon_on_spawned(room_id: str) -> None:
+def demon_on_spawned(room_id: str, spawn_xyz=None) -> None:
     _DEMON_ALIVE_CLOCK.setdefault(room_id, 0.0)
+    if spawn_xyz is not None and room_id not in _DEMON_POS:
+        _DEMON_POS[room_id] = (spawn_xyz[0], spawn_xyz[2])
+        _DEMON_YAW[room_id] = 0.0
+        _DEMON_SPAWN_Y[room_id] = spawn_xyz[1]
+
+
+def demon_update(room_id: str, dt: float, player_xz) -> None:
+    """Alive-only: creep toward the player, and aim (+ slow scan) at them."""
+    if room_id not in _DEMON_POS:
+        return
+    t = _DEMON_ALIVE_CLOCK.get(room_id, 0.0)
+    pos = demonmod.approach(_DEMON_POS[room_id], player_xz, dt)
+    _DEMON_POS[room_id] = pos
+    _DEMON_YAW[room_id] = demonmod.face_yaw(pos, player_xz) + demonmod.scan_yaw(t)
 
 
 def demon_on_killed(room_id: str) -> None:
@@ -868,12 +885,18 @@ def draw_room(view: ViewMatrix, room: RoomRuntime, pack: Pack, state: GameState)
     #    Drawn last: it overwrites u_mvp per-sphere (view @ model), so nothing
     #    after it depends on the shared view mvp. Opaque -> blend off, depth on.
     if door_open and getattr(room, "enemy", None) is not None:
+        if room.room_id not in _DEMON_POS:      # resumed game (spawn event missed)
+            demon_on_spawned(room.room_id, room.enemy.spawn_xyz)
         t_death = _DEMON_DEATH_CLOCK.get(room.room_id)   # None while alive
         if not (t_death is not None and demonmod.is_gone(t_death)):
             spheres = _room_demon_spheres(room)
             renderer = _get_demon_renderer(ctx, prog)
             alive_t = _DEMON_ALIVE_CLOCK.get(room.room_id, 0.0)
+            sp = room.enemy.spawn_xyz
+            pos_xz = _DEMON_POS.get(room.room_id, (sp[0], sp[2]))
+            yaw = _DEMON_YAW.get(room.room_id, 0.0)
+            root = (pos_xz[0], _DEMON_SPAWN_Y.get(room.room_id, sp[1]), pos_xz[1])
             ctx.disable(moderngl.BLEND)
-            renderer.draw(view=view, root_xyz=room.enemy.spawn_xyz,
-                          spheres=spheres, t_since_death=t_death, bob_t=alive_t)
+            renderer.draw(view=view, root_xyz=root, spheres=spheres, yaw=yaw,
+                          t_since_death=t_death, bob_t=alive_t)
         _set(prog,"u_use_tint",0)

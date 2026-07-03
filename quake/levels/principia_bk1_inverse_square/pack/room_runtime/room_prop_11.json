@@ -16,28 +16,28 @@
       "text_on_asset": "prop_11.s1.txt.on",
       "drawing_placement": {
         "wall": "N",
-        "slot_index": 0,
-        "wall_slot": "N-0",
+        "slot_index": 6,
+        "wall_slot": "N-6",
         "center_xyz": [
-          10.274024460828379,
-          1.7718749999999999,
+          -17.94039143458549,
+          1.55,
           22.18125
         ],
-        "width_m": 3.24375,
-        "height_m": 3.24375,
+        "width_m": 2.7451627266839385,
+        "height_m": 2.7187500000000004,
         "yaw_rad": 3.141592653589793
       },
       "text_placement": {
         "wall": "N",
-        "slot_index": 1,
-        "wall_slot": "N-1",
+        "slot_index": 7,
+        "wall_slot": "N-7",
         "center_xyz": [
-          14.805274460828379,
-          1.7718749999999999,
+          -13.658435071243522,
+          1.55,
           22.18125
         ],
         "width_m": 5.41875,
-        "height_m": 3.24375,
+        "height_m": 2.7187500000000004,
         "yaw_rad": 3.141592653589793
       }
     },
@@ -49,30 +49,30 @@
       "text_off_asset": "prop_11.s2.txt.off",
       "text_on_asset": "prop_11.s2.txt.on",
       "drawing_placement": {
-        "wall": "N",
-        "slot_index": 2,
-        "wall_slot": "N-2",
+        "wall": "S",
+        "slot_index": 0,
+        "wall_slot": "S-0",
         "center_xyz": [
-          19.41660056186464,
-          1.6375000000000002,
-          22.18125
+          -4.272320689563877,
+          1.55,
+          -22.18125
         ],
-        "width_m": 3.0039022020725397,
-        "height_m": 2.9750000000000005,
-        "yaw_rad": 3.141592653589793
+        "width_m": 2.4611803756476687,
+        "height_m": 2.4375,
+        "yaw_rad": 0.0
       },
       "text_placement": {
-        "wall": "N",
-        "slot_index": 3,
-        "wall_slot": "N-3",
+        "wall": "S",
+        "slot_index": 1,
+        "wall_slot": "S-1",
         "center_xyz": [
-          23.827926662900914,
-          1.6375000000000002,
-          22.18125
+          -8.41228587738771,
+          1.55,
+          -22.18125
         ],
         "width_m": 5.41875,
-        "height_m": 2.9750000000000005,
-        "yaw_rad": 3.141592653589793
+        "height_m": 2.4375,
+        "yaw_rad": 0.0
       }
     },
     {
@@ -118,28 +118,28 @@
       "text_on_asset": "prop_11.s4.txt.on",
       "drawing_placement": {
         "wall": "N",
-        "slot_index": 6,
-        "wall_slot": "N-6",
+        "slot_index": 2,
+        "wall_slot": "N-2",
         "center_xyz": [
-          -17.94039143458549,
-          1.55,
+          19.41660056186464,
+          1.6375000000000002,
           22.18125
         ],
-        "width_m": 2.7451627266839385,
-        "height_m": 2.7187500000000004,
+        "width_m": 3.0039022020725397,
+        "height_m": 2.9750000000000005,
         "yaw_rad": 3.141592653589793
       },
       "text_placement": {
         "wall": "N",
-        "slot_index": 7,
-        "wall_slot": "N-7",
+        "slot_index": 3,
+        "wall_slot": "N-3",
         "center_xyz": [
-          -13.658435071243522,
-          1.55,
+          23.827926662900914,
+          1.6375000000000002,
           22.18125
         ],
         "width_m": 5.41875,
-        "height_m": 2.7187500000000004,
+        "height_m": 2.9750000000000005,
         "yaw_rad": 3.141592653589793
       }
     },
@@ -151,35 +151,35 @@
       "text_off_asset": "prop_11.s5.txt.off",
       "text_on_asset": "prop_11.s5.txt.on",
       "drawing_placement": {
-        "wall": "S",
+        "wall": "N",
         "slot_index": 0,
-        "wall_slot": "S-0",
+        "wall_slot": "N-0",
         "center_xyz": [
-          -4.272320689563877,
-          1.55,
-          -22.18125
+          10.274024460828379,
+          1.7718749999999999,
+          22.18125
         ],
-        "width_m": 2.4611803756476687,
-        "height_m": 2.4375,
-        "yaw_rad": 0.0
+        "width_m": 3.24375,
+        "height_m": 3.24375,
+        "yaw_rad": 3.141592653589793
       },
       "text_placement": {
-        "wall": "S",
+        "wall": "N",
         "slot_index": 1,
-        "wall_slot": "S-1",
+        "wall_slot": "N-1",
         "center_xyz": [
-          -8.41228587738771,
-          1.55,
-          -22.18125
+          14.805274460828379,
+          1.7718749999999999,
+          22.18125
         ],
         "width_m": 5.41875,
-        "height_m": 2.4375,
-        "yaw_rad": 0.0
+        "height_m": 3.24375,
+        "yaw_rad": 3.141592653589793
       }
     }
   ],
   "final_pair_id": "prop_11.s5",
-  "hidden_door_wall_slot": "S-0",
+  "hidden_door_wall_slot": "N-0",
   "doors": [
     {
       "edge_id": "edge.prop_11.to.lemma_7",
@@ -265,9 +265,9 @@
   "enemy": {
     "enemy_id": "prop_11.demon",
     "spawn_xyz": [
-      -4.272320689563877,
+      10.274024460828379,
       0.1,
-      -19.581249999999997
+      19.581249999999997
     ],
     "health": 3
   },

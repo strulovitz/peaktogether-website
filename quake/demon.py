@@ -159,9 +159,46 @@ def build_demon_spheres(
     return spheres
 
 
+# ---- SLOW, non-frightening "alive" behavior (Nir) ----
+BOB_SPEED = 1.1              # slow vertical bob
+BOB_AMP = 0.10
+APPROACH_SPEED_M_S = 0.35    # slow creep toward the player
+APPROACH_MIN_DIST_M = 2.5    # never climbs onto the player
+SCAN_AMP_RAD = math.radians(15.0)   # look sweeps +/-15deg (30deg range)
+SCAN_SPEED = 0.6             # slow scan (~10s period)
+
+
 def bob_offset(t: float) -> float:
-    """Gentle vertical bob while alive: y += sin(t*2)*0.1 (matches DOOM)."""
-    return math.sin(t * 2.0) * 0.1
+    """Gentle slow vertical bob while alive."""
+    return math.sin(t * BOB_SPEED) * BOB_AMP
+
+
+def face_yaw(demon_xz: tuple[float, float], player_xz: tuple[float, float]) -> float:
+    """Yaw (about Y) so the demon's authored +Z face points at the player."""
+    dx = player_xz[0] - demon_xz[0]
+    dz = player_xz[1] - demon_xz[1]
+    if abs(dx) < 1e-9 and abs(dz) < 1e-9:
+        return 0.0
+    return math.atan2(dx, dz)
+
+
+def scan_yaw(t: float) -> float:
+    """Slow +/-15deg scanning sweep, centered on the current facing."""
+    return SCAN_AMP_RAD * math.sin(t * SCAN_SPEED)
+
+
+def approach(demon_xz: tuple[float, float], player_xz: tuple[float, float],
+             dt: float) -> tuple[float, float]:
+    """Creep slowly toward the player in XZ, stopping at APPROACH_MIN_DIST_M."""
+    dx = player_xz[0] - demon_xz[0]
+    dz = player_xz[1] - demon_xz[1]
+    dist = math.hypot(dx, dz)
+    if dist <= APPROACH_MIN_DIST_M or dist < 1e-9:
+        return (demon_xz[0], demon_xz[1])
+    step = min(APPROACH_SPEED_M_S * dt, dist - APPROACH_MIN_DIST_M)
+    if step <= 0.0:
+        return (demon_xz[0], demon_xz[1])
+    return (demon_xz[0] + dx / dist * step, demon_xz[1] + dz / dist * step)
 
 
 def seed_explosion(spheres: list[DemonSphere], seed: int = 1729) -> None:
@@ -305,6 +342,7 @@ class DemonRenderer:
         view: np.ndarray,
         root_xyz: tuple[float, float, float],
         spheres: list[DemonSphere],
+        yaw: float = 0.0,
         t_since_death: Optional[float] = None,
         bob_t: float = 0.0,
     ) -> None:
@@ -325,6 +363,7 @@ class DemonRenderer:
         rx, ry, rz = root_xyz
         # bob only while alive
         by = bob_offset(bob_t) if t_since_death is None else 0.0
+        ca, sa = math.cos(yaw), math.sin(yaw)   # rotate the whole demon about Y
 
         for s in spheres:
             if t_since_death is None:
@@ -335,6 +374,9 @@ class DemonRenderer:
                 r = s.radius * mult
                 if r <= 1e-5:
                     continue
+            # face the player: rotate the authored offset about Y by yaw
+            ox, oy, oz = off
+            off = (ox * ca + oz * sa, oy, -ox * sa + oz * ca)
             world_off = (rx + off[0], ry + off[1] + by, rz + off[2])
             model = _mat_translate_scale(world_off, r)
             mvp = view @ model  # row-major: clip = view * model * pos

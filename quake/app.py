@@ -426,7 +426,9 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
             # (5b) demon lifecycle -> feed render_room's per-room clocks
             for _ev in events:
                 if _ev.event == "demon_spawned":
-                    render_room.demon_on_spawned(_ev.room_id)
+                    _r = pack.rooms.get(_ev.room_id)
+                    _sp = _r.enemy.spawn_xyz if (_r and getattr(_r, "enemy", None)) else None
+                    render_room.demon_on_spawned(_ev.room_id, _sp)
                 elif _ev.event == "demon_killed":
                     render_room.demon_on_killed(_ev.room_id)
             if state.mode == "room" and state.current_room_id is not None:
@@ -436,6 +438,9 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                     _dead = _rid in state.cleared
                     if _rid in render_room._DEMON_ALIVE_CLOCK or _dead:
                         render_room.demon_tick(_rid, dt, _dead)
+                        if not _dead:
+                            render_room.demon_update(
+                                _rid, dt, (state.pos[0], state.pos[2]))
             if outcome.mode_switched_to:
                 _log(f"frame {frame}: mode switch -> {outcome.mode_switched_to} room={outcome.switched_room_id}")
 

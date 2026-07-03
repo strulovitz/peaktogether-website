@@ -15,40 +15,6 @@
       "text_off_asset": "prop_2.s1.txt.off",
       "text_on_asset": "prop_2.s1.txt.on",
       "drawing_placement": {
-        "wall": "W",
-        "slot_index": 0,
-        "wall_slot": "W-0",
-        "center_xyz": [
-          -9.122333853532279,
-          1.746875,
-          -1.3543168301148585
-        ],
-        "width_m": 2.9156097746650427,
-        "height_m": 3.19375,
-        "yaw_rad": 1.5707963267948966
-      },
-      "text_placement": {
-        "wall": "W",
-        "slot_index": 1,
-        "wall_slot": "W-1",
-        "center_xyz": [
-          -9.122333853532279,
-          1.746875,
-          3.0128630572176673
-        ],
-        "width_m": 5.41875,
-        "height_m": 3.19375,
-        "yaw_rad": 1.5707963267948966
-      }
-    },
-    {
-      "pair_id": "prop_2.s2",
-      "step_index": 2,
-      "drawing_off_asset": "prop_2.f1.off",
-      "drawing_on_asset": "prop_2.f1.on.2",
-      "text_off_asset": "prop_2.s2.txt.off",
-      "text_on_asset": "prop_2.s2.txt.on",
-      "drawing_placement": {
         "wall": "E",
         "slot_index": 0,
         "wall_slot": "E-0",
@@ -73,6 +39,40 @@
         "width_m": 5.35625,
         "height_m": 3.1937500000000005,
         "yaw_rad": -1.5707963267948966
+      }
+    },
+    {
+      "pair_id": "prop_2.s2",
+      "step_index": 2,
+      "drawing_off_asset": "prop_2.f1.off",
+      "drawing_on_asset": "prop_2.f1.on.2",
+      "text_off_asset": "prop_2.s2.txt.off",
+      "text_on_asset": "prop_2.s2.txt.on",
+      "drawing_placement": {
+        "wall": "W",
+        "slot_index": 0,
+        "wall_slot": "W-0",
+        "center_xyz": [
+          -9.122333853532279,
+          1.746875,
+          -1.3543168301148585
+        ],
+        "width_m": 2.9156097746650427,
+        "height_m": 3.19375,
+        "yaw_rad": 1.5707963267948966
+      },
+      "text_placement": {
+        "wall": "W",
+        "slot_index": 1,
+        "wall_slot": "W-1",
+        "center_xyz": [
+          -9.122333853532279,
+          1.746875,
+          3.0128630572176673
+        ],
+        "width_m": 5.41875,
+        "height_m": 3.19375,
+        "yaw_rad": 1.5707963267948966
       }
     },
     {

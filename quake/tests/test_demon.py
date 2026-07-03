@@ -101,6 +101,35 @@ def test_explosion_fully_shrunk_by_end():
     assert demon.is_gone(0.6) is False
 
 
+def test_face_yaw_points_at_player():
+    # demon at origin; player due +Z -> yaw 0 (authored face is +Z)
+    assert abs(demon.face_yaw((0.0, 0.0), (0.0, 5.0))) < 1e-9
+    # player due +X -> yaw pi/2
+    assert abs(demon.face_yaw((0.0, 0.0), (5.0, 0.0)) - math.pi / 2) < 1e-9
+    # player due -X -> yaw -pi/2
+    assert abs(demon.face_yaw((0.0, 0.0), (-5.0, 0.0)) + math.pi / 2) < 1e-9
+
+
+def test_scan_yaw_within_15_degrees():
+    lim = math.radians(15.0) + 1e-9
+    for t in [0.0, 1.0, 2.5, 7.3, 20.0]:
+        assert -lim <= demon.scan_yaw(t) <= lim
+
+
+def test_approach_moves_toward_player_and_stops():
+    # far away -> steps closer by ~speed*dt
+    p = demon.approach((0.0, 0.0), (10.0, 0.0), 1.0)
+    assert 0.0 < p[0] <= demon.APPROACH_SPEED_M_S + 1e-9
+    # within min distance -> does not move
+    q = demon.approach((0.0, 0.0), (1.0, 0.0), 1.0)
+    assert q == (0.0, 0.0)
+    # never overshoots past the min-distance ring
+    r = (0.0, 0.0)
+    for _ in range(10000):
+        r = demon.approach(r, (10.0, 0.0), 1.0)
+    assert abs(math.hypot(10.0 - r[0], -r[1]) - demon.APPROACH_MIN_DIST_M) < 1e-6
+
+
 def test_unit_sphere_mesh_shape():
     verts, idx = demon.build_unit_sphere_mesh(lat_bands=6, lon_bands=8)
     assert verts.shape[1] == 6                   # pos + normal

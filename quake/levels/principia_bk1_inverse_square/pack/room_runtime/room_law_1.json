@@ -49,30 +49,30 @@
       "text_off_asset": "law_1.s2.txt.off",
       "text_on_asset": "law_1.s2.txt.on",
       "drawing_placement": {
-        "wall": "E",
-        "slot_index": 2,
-        "wall_slot": "E-2",
+        "wall": "W",
+        "slot_index": 0,
+        "wall_slot": "W-0",
         "center_xyz": [
-          21.132956198060942,
+          -21.132956198060942,
           1.55,
-          -2.7008686858224777
+          -15.63012898199446
         ],
-        "width_m": 0.36578081717451527,
-        "height_m": 0.84375,
-        "yaw_rad": -1.5707963267948966
+        "width_m": 0.25198234072022163,
+        "height_m": 0.58125,
+        "yaw_rad": 1.5707963267948966
       },
       "text_placement": {
-        "wall": "E",
-        "slot_index": 3,
-        "wall_slot": "E-3",
+        "wall": "W",
+        "slot_index": 1,
+        "wall_slot": "W-1",
         "center_xyz": [
-          21.132956198060942,
+          -21.132956198060942,
           1.55,
-          -5.793134094409744
+          -12.594762811634354
         ],
         "width_m": 5.41875,
-        "height_m": 0.84375,
-        "yaw_rad": -1.5707963267948966
+        "height_m": 0.58125,
+        "yaw_rad": 1.5707963267948966
       }
     },
     {
@@ -117,35 +117,35 @@
       "text_off_asset": "law_1.s4.txt.off",
       "text_on_asset": "law_1.s4.txt.on",
       "drawing_placement": {
-        "wall": "W",
-        "slot_index": 0,
-        "wall_slot": "W-0",
+        "wall": "E",
+        "slot_index": 2,
+        "wall_slot": "E-2",
         "center_xyz": [
-          -21.132956198060942,
+          21.132956198060942,
           1.55,
-          -15.63012898199446
+          -2.7008686858224777
         ],
-        "width_m": 0.25198234072022163,
-        "height_m": 0.58125,
-        "yaw_rad": 1.5707963267948966
+        "width_m": 0.36578081717451527,
+        "height_m": 0.84375,
+        "yaw_rad": -1.5707963267948966
       },
       "text_placement": {
-        "wall": "W",
-        "slot_index": 1,
-        "wall_slot": "W-1",
+        "wall": "E",
+        "slot_index": 3,
+        "wall_slot": "E-3",
         "center_xyz": [
-          -21.132956198060942,
+          21.132956198060942,
           1.55,
-          -12.594762811634354
+          -5.793134094409744
         ],
         "width_m": 5.41875,
-        "height_m": 0.58125,
-        "yaw_rad": 1.5707963267948966
+        "height_m": 0.84375,
+        "yaw_rad": -1.5707963267948966
       }
     }
   ],
   "final_pair_id": "law_1.s4",
-  "hidden_door_wall_slot": "W-0",
+  "hidden_door_wall_slot": "E-2",
   "doors": [
     {
       "edge_id": "edge.prop_1.to.law_1",
@@ -191,9 +191,9 @@
   "enemy": {
     "enemy_id": "law_1.demon",
     "spawn_xyz": [
-      -18.53295619806094,
+      18.53295619806094,
       0.1,
-      -15.63012898199446
+      -2.7008686858224777
     ],
     "health": 3
   },
