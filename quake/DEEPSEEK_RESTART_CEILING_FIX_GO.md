@@ -11,11 +11,12 @@
 ### ALL 16 child rooms: DONE ✅ (verified by file count July 3, 2026)
 Every child room has station-count == ceiling-count: lemma_3,4,5,6,7,9,10,11,12 + prop_1,2,6,7,11,13,15. Nothing missing here.
 
-### DeepSeek-written rooms: 1 of 4 done, 3 STILL PENDING (verified by file count)
-- ✅ `law_2` — 2 stations / 2 ceilings — DONE (`CHILD_PROMPT_LAW_2_CEILINGS.md` no longer needed)
-- 🔴 `law_1` — 4 stations / 1 ceiling → **needs 3 more** — prompt: `CHILD_PROMPT_LAW_1_CEILINGS.md`
-- 🔴 `prop_4` — 2 stations / 1 ceiling → **needs 1 more** — prompt: `CHILD_PROMPT_PROP_4_CEILINGS.md`
-- 🔴 `lemma_2` — 3 stations / 2 ceilings → **needs 1 more** — prompt: `CHILD_PROMPT_LEMMA_2_CEILING.md`
+### DeepSeek-written rooms: 4 rooms need FULL REWRITE from scratch
+These 4 rooms were written by DeepSeek, not children. All need a child to write a COMPLETE new .room file. Each station needs its own ceiling equation. The prompts (old name in git history, renamed to `*_NEW.md`):
+- 🔴 `law_1` — `CHILD_PROMPT_LAW_1_NEW.md`
+- 🔴 `law_2` — `CHILD_PROMPT_LAW_2_NEW.md`
+- 🔴 `prop_4` — `CHILD_PROMPT_PROP_4_NEW.md`
+- 🔴 `lemma_2` — `CHILD_PROMPT_LEMMA_2_NEW.md`
 
 Children will write COMPLETE .room files from scratch — stations, panels, text, colors, AND ceiling equations. Each prompt gives: Newton source material + station descriptions + ROOMSPEC format reference + asks for complete .room file.
 
