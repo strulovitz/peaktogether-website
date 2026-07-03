@@ -317,7 +317,7 @@
 **Problem:** 15 of 20 rooms had only 1 ceiling equation regardless of station count. Root cause: DeepSeek's child prompts showed a single `ceiling` example line; children faithfully copied one-per-room. Also: 4 rooms (law_1, law_2, prop_4, lemma_2) were DeepSeek-written, not child-written, and had deficient ceiling lines.
 **Fixes applied:**
 1. **Position:** `build/room_maker.py` now places each ceiling equation near its station's wall on the ceiling (index-matched to panel_pairs), 0.7m inward from the wall. Was: `(x_offset, H-0.1, 0.0)` center. All 20 room runtimes rebuilt.
-2. **Count — 15/16 child rooms DONE:** Each child was re-contacted for per-station ceiling equations. lemma_6,3,4,7,9,10,11 + prop_1,2,6,7,11,13 all updated in `tests/room_specs/`. (lemma_5,12 and prop_15 were already correct.)
-3. **4 DeepSeek-written rooms PENDING:** Child prompts written at `CHILD_PROMPT_PROP_4_CEILINGS.md`, `CHILD_PROMPT_LAW_1_CEILINGS.md`, `CHILD_PROMPT_LAW_2_CEILINGS.md`, `CHILD_PROMPT_LEMMA_2_CEILING.md`. On restart: Nir pastes to Opus → DeepSeek applies → rebuild.
+2. **Count — ALL 16 child rooms DONE ✅ (verified by file count July 3, 2026):** every child room has station-count == ceiling-count. lemma_3,4,5,6,7,9,10,11,12 + prop_1,2,6,7,11,13,15 all confirmed matching in `tests/room_specs/`.
+3. **DeepSeek-written rooms — 1 of 4 done, 3 PENDING (verified July 3, 2026):** `law_2` ✅ (2 stations / 2 ceilings). **STILL NEED per-station ceilings:** `law_1` (4 stations / 1 ceiling → needs 3 more), `prop_4` (2 / 1 → needs 1), `lemma_2` (3 / 2 → needs 1). Child prompts written at `CHILD_PROMPT_LAW_1_CEILINGS.md`, `CHILD_PROMPT_PROP_4_CEILINGS.md`, `CHILD_PROMPT_LEMMA_2_CEILING.md` (`CHILD_PROMPT_LAW_2_CEILINGS.md` no longer needed). On restart: Nir pastes to Opus → DeepSeek applies → rebuild.
 
 *DeepSeek maintains this Commentaries and updates §4–§5 as decisions change. Ask for any scripture, whole or in part, at any time.*

@@ -705,14 +705,14 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then `DEEPSEEK_RESTART_CEILING_FIX_GO.md` for exact restart state, then ask Nir what's next.
-🌙 **CURRENT STATE (July 3, 2026 — ceiling eq per-station in progress):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 2 known bugs (dead demon reappears on re-entry; alcove never visible). ✅ **Golden door titles + floor room names DONE.** ✅ **ALL 20 Asymptote figures compile.** ✅ **Ceiling equations now positioned above each station's wall (not room center).** 🔄 **IN PROGRESS: adding per-station ceiling equations — 15 of 16 child rooms DONE, 4 DeepSeek-written rooms awaiting child answers (prop_4, law_1, law_2, lemma_2).** Equation-panel sizing UNRESOLVED. 468 tests green. See self-handoff at `DEEPSEEK_RESTART_CEILING_FIX_GO.md`.
+🌙 **CURRENT STATE (July 3, 2026 — ceiling eq per-station in progress):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 2 known bugs (dead demon reappears on re-entry; alcove never visible). ✅ **Golden door titles + floor room names DONE.** ✅ **ALL 20 Asymptote figures compile.** ✅ **Ceiling equations now positioned above each station's wall (not room center).** 🔄 **IN PROGRESS: adding per-station ceiling equations — ALL 16 child rooms DONE ✅ (verified by file count). Of the 4 DeepSeek-written rooms, law_2 ✅ done; 3 still need per-station ceilings: law_1 (4 stations/1 ceiling → needs 3), prop_4 (2/1 → needs 1), lemma_2 (3/2 → needs 1).** Equation-panel sizing UNRESOLVED. 468 tests green. See self-handoff at `DEEPSEEK_RESTART_CEILING_FIX_GO.md`.
 
 ### 🔧 SESSION (July 3, 2026 — Ceiling equations per-station + positioning fix)
 **Problem:** Every room had only 1-2 ceiling equations, regardless of station count. Root cause: DeepSeek's child prompts showed ONE `ceiling` line as example; children faithfully copied. Also, ceiling equations were positioned at room center (0,0,0), not above each station's wall.
 
 **Positioning fix:** `build/room_maker.py` Step I now matches each ceiling equation to its station (by index) and places it near that station's wall on the ceiling (0.7m inward from the wall). 20/20 rooms rebuilt.
 
-**Per-station fix — 15/16 child rooms DONE:** Each child (lemma_6,3,4,7,9,10,11 + prop_1,2,6,7,11,13) was asked for per-station ceiling equations. All answered. `.room` files updated with ceiling eq0..eqN matching station count.
+**Per-station fix — ALL 16 child rooms DONE ✅ (verified by file count July 3, 2026):** every child room now has station-count == ceiling-count (lemma_3,4,5,6,7,9,10,11,12 + prop_1,2,6,7,11,13,15). Re-contacted children (lemma_6,3,4,7,9,10,11 + prop_1,2,6,7,11,13) answered; lemma_5,12 + prop_15 were already correct. **DeepSeek-written rooms: law_2 ✅ done (2/2); law_1 (needs 3), prop_4 (needs 1), lemma_2 (needs 1) STILL PENDING.**
 
 **4 DeepSeek-written rooms pending:** These rooms (law_1, law_2, prop_4, lemma_2) had no original child — DeepSeek wrote them directly. Child prompts written (`CHILD_PROMPT_*_CEILINGS.md`). Nir will paste these to Opus. On restart, apply child answers and rebuild.
 
