@@ -622,13 +622,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.1.png",
       "master_path": "assets/law_2.f1.on.1@master.png",
-      "px_w": 400,
-      "px_h": 100,
+      "px_w": 412,
+      "px_h": 70,
       "content_bbox": [
         0,
         0,
-        400,
-        100
+        412,
+        70
       ],
       "dpi": 220
     },
@@ -637,13 +637,13 @@
       "kind": "figure_on",
       "wall_path": "assets/law_2.f1.on.2.png",
       "master_path": "assets/law_2.f1.on.2@master.png",
-      "px_w": 400,
-      "px_h": 100,
+      "px_w": 397,
+      "px_h": 70,
       "content_bbox": [
         0,
         0,
-        400,
-        100
+        397,
+        70
       ],
       "dpi": 220
     },
@@ -787,13 +787,13 @@
       "kind": "figure_off",
       "wall_path": "assets/prop_4.f1.off.png",
       "master_path": "assets/prop_4.f1.off@master.png",
-      "px_w": 400,
-      "px_h": 100,
+      "px_w": 205,
+      "px_h": 133,
       "content_bbox": [
         0,
         0,
-        400,
-        100
+        205,
+        133
       ],
       "dpi": 220
     },
@@ -802,13 +802,13 @@
       "kind": "figure_on",
       "wall_path": "assets/prop_4.f1.on.1.png",
       "master_path": "assets/prop_4.f1.on.1@master.png",
-      "px_w": 400,
-      "px_h": 100,
+      "px_w": 205,
+      "px_h": 133,
       "content_bbox": [
         0,
         0,
-        400,
-        100
+        205,
+        133
       ],
       "dpi": 220
     },
@@ -817,13 +817,13 @@
       "kind": "figure_on",
       "wall_path": "assets/prop_4.f1.on.2.png",
       "master_path": "assets/prop_4.f1.on.2@master.png",
-      "px_w": 400,
-      "px_h": 100,
+      "px_w": 205,
+      "px_h": 133,
       "content_bbox": [
         0,
         0,
-        400,
-        100
+        205,
+        133
       ],
       "dpi": 220
     },

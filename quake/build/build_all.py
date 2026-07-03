@@ -257,8 +257,12 @@ def main():
                 layout_plain = st.layout if st.layout else " ".join(t.latex for t in st.term_ops)
                 if layout_plain.startswith("$") and layout_plain.endswith("$"):
                     layout_plain = layout_plain[1:-1].strip()
-                layout_colored = _SPAN_RE.sub(
-                    lambda m: f"\\textcolor{{{m.group(1)}}}{{{m.group(2)}}}", layout_plain)
+                def _fix_eq_span(m):
+                    txt = m.group(2)
+                    if txt.endswith("\\"):
+                        txt = txt[:-1]
+                    return f"\\textcolor{{{m.group(1)}}}{{{txt}}}"
+                layout_colored = _SPAN_RE.sub(_fix_eq_span, layout_plain)
                 off_layout = _SPAN_RE.sub(lambda m: m.group(2), layout_plain)
                 color_defs = "\n".join(
                     f"\\definecolor{{{c.name}}}{{HTML}}{{{c.hex.lstrip('#')}}}"
@@ -267,6 +271,7 @@ def main():
                 for dpi, suffix in [(220, ""), (440, "@master")]:
                     for variant, stem in [("off", ".off"), (f"on.{st.n}", f".on.{st.n}")]:
                         lay = off_layout if variant == "off" else layout_colored
+                        lay = lay.replace("$", "")
                         tex_src = (
                             r"\documentclass[border=8pt]{standalone}" + "\n"
                             r"\usepackage{amsmath,amssymb,mathtools,xcolor,varwidth}" + "\n"

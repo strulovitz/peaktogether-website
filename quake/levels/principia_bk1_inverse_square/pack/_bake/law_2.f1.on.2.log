@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.10)  3 JUL 2026 16:43
+This is pdfTeX, Version 3.141592653-2.6-1.40.28 (MiKTeX 25.12) (preloaded format=pdflatex 2026.5.10)  3 JUL 2026 18:10
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -279,31 +279,36 @@ LaTeX Font Info:    Trying to load font information for U+msb on input line 11.
 
 (C:\Users\nir_s\AppData\Local\Programs\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-))
-Runaway argument?
-{\Delta (\text {motion})\} \;\parallel \; \textcolor {force}{F\} \] \end \ETC.
-! File ended while scanning use of \@textcolor.
-<inserted text> 
-                \par 
-<*> ...inverse_square/pack/_bake/law_2.f1.on.2.tex
-                                                  
-I suspect you have forgotten a `}', causing me
-to read past where you wanted me to stop.
-I'll try to recover; but if the error is serious,
-you'd better type `E' or `X' now and fix your file.
+)
+[1
 
-! Emergency stop.
-<*> ...inverse_square/pack/_bake/law_2.f1.on.2.tex
-                                                  
-*** (job aborted, no legal \end found)
 
- 
+Non-PDF special ignored!
+<special> papersize=142.12297pt,42.31999pt
+{C:/Users/nir_s/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map}]
+(law_2.f1.on.2.aux)
+ ***********
+LaTeX2e <2025-11-01>
+L3 programming layer <2025-12-24>
+ ***********
+ ) 
 Here is how much of TeX's memory you used:
- 4322 strings out of 467871
- 68878 string characters out of 5418376
- 472370 words of memory out of 5000000
- 33166 multiletter control sequences out of 15000+600000
- 631527 words of font info for 55 fonts, out of 8000000 for 9000
+ 4348 strings out of 467871
+ 69467 string characters out of 5418376
+ 473370 words of memory out of 5000000
+ 33182 multiletter control sequences out of 15000+600000
+ 633433 words of font info for 63 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 59i,5n,71p,344b,266s stack positions out of 10000i,1000n,20000p,200000b,200000s
-!  ==> Fatal error occurred, no output PDF file produced!
+ 59i,7n,71p,344b,272s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/cm/
+cmbx12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/public/ams
+fonts/cm/cmmi12.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts/type1/p
+ublic/amsfonts/cm/cmr17.pfb><C:/Users/nir_s/AppData/Local/Programs/MiKTeX/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on C:\Users\nir_s\peaktogether-website\quake\levels\principia_bk
+1_inverse_square\pack\_bake\law_2.f1.on.2.pdf (1 page, 35972 bytes).
+PDF statistics:
+ 26 PDF objects out of 1000 (max. 8388607)
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
