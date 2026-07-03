@@ -338,6 +338,10 @@ class DemonRenderer:
             world_off = (rx + off[0], ry + off[1] + by, rz + off[2])
             model = _mat_translate_scale(world_off, r)
             mvp = view @ model  # row-major: clip = view * model * pos
-            self.prog["u_mvp"].write(mvp.astype("f4").tobytes())
+            # Upload TRANSPOSED — moderngl expects column-major, exactly like
+            # render_room._set_mvp does (`.T`). Without this the transform is
+            # scrambled and the spheres smear into one giant surface.
+            self.prog["u_mvp"].write(
+                np.ascontiguousarray(mvp.T, dtype="f4").tobytes())
             self.prog["u_tint"].value = s.color
             self._vao.render(moderngl.TRIANGLES, vertices=self._index_count)
