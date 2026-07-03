@@ -680,9 +680,32 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 - Handoff: `quake/BIBLE/PROMPT_TO_OPUS_QUAKE_PARENT_22_HANDOFF.md` (code-first — parent WRITES the code). Launch files = Commentaries + OT + NT + handoff. Talk-first.
 - Key integration seams flagged for the parent: spheres vs billboard-circles; how animation-time reaches the renderer for the explosion; reconciling the demon hit-target (`gameplay` uses a 0.6 m radius at `spawn_xyz`) with the now-visible body.
 
+### ☀️ SESSION (July 3, 2026 continued — Parent 22 demon INTEGRATED + real-play iteration)
+
+**Parent 22 delivered the demon** (moderngl port of the DOOM demon, 116 balls). Saved verbatim to `QUAKE_PARENT_22_FROZEN_DELIVERABLE.md`. DeepSeek created `quake/demon.py`, `tests/test_demon.py`, wired `render_room.py` + `app.py`, set demon `health=3`, replaced the broken demon hit-test (was a point 15 m along the ray → unhittable) with a proper ray-vs-sphere. 468 tests green.
+
+**Demon: MOSTLY WORKING but has BUGS (fix next session):**
+- ✅ 116-ball demon renders (100 pink body + 5 upper/5 lower teeth + 2 blue eyes each w/ black pupil + white glint). Fixed a **smear bug**: `DemonRenderer.draw` uploaded the MVP without transposing (moderngl wants column-major, like `render_room._set_mvp` does with `.T`) → every sphere scrambled into one surface. Now transposes.
+- ✅ Faces the player, slowly creeps toward them (0.35 m/s, stops at 2.5 m), gentle ±15° scan, slow bob. Pure fns in `demon.py` (`face_yaw`/`scan_yaw`/`approach`), wired via `render_room.demon_update` from `app.py`.
+- ✅ Final proof panel **glows gold** once lit (cue the hidden door). No crosshair (Nir's choice).
+- 🔴 **BUG: returning to a cleared room → the demon is STILL THERE** (should stay dead/gone). The `_DEMON_DEATH_CLOCK` / `state.cleared` gating in `render_room.draw_room` doesn't persist the "gone" state per room across re-entry. Fix: if `room_id in state.cleared`, never draw the demon (treat as gone from the start).
+- 🔴 **BUG: the alcove is NEVER visible.** Gated on `hidden_door_open` in `render_room.draw_room` but it's not showing. Investigate `state.save.levels[level_id].rooms[room_id].hidden_door_open` read + the alcove VAO.
+- 🔴 **BUG: blood-red ceiling equations render in the CENTER of the room instead of above their station/wall.** The ceiling-eq `pos_xyz` placement is wrong/centralized.
+- 🔴 **BUG: a few rooms show BLACK BOXES instead of panels** (an explanation next to a black box sunk into the wall) — a missing/failed texture or a bad panel. Find which rooms; likely the 4 Asymptote-failed figures or a texture-resolve miss (should fall back to a lit grey placeholder, not black).
+
+**⚠️ NIR'S STANDING INSTRUCTION (I violated it, do NOT repeat):** FIX THINGS IN ONE CENTRAL PLACE WITH CENTRAL RULES — do NOT tweak individual rooms. All room geometry/panel/demon/ceiling behavior must come from the shared builders (`build/room_maker.py`, `render_room.py`), never per-room special-casing.
+
+**❌ EQUATION-PANEL SIZING — UNRESOLVED, do it PROPERLY next time:** Equation rooms (`law_2`, `prop_15`, `prop_4`) have the equation figure as a **wide thin line** (aspect ~5.8:1 to ~12:1). I thrashed badly: tiny (5.5×0.95) → Nir "tiny"; area-match (8.8 wide) → Nir "humongous, half the wall"; banner (12 wide) → wrong. **Currently REVERTED to the plain height-match baseline** (equation = same width as text, ~5.4×0.9, short). The geometric truth: keeping proportion, a thin line can be narrow-and-short OR tall-and-very-wide, never both. **Nir must pick:** (1) keep it text-width & short [current], (2) a specific width in meters, or (3) fill the explanation's box (same W&H, mild stretch). Ask Nir, then set it in ONE place. Geometry drawing sizing (drawing_h = text_h, aspect-kept, cap panel_max_w_m=5.5) is Nir-APPROVED — don't touch it.
+
+**🕹️ FEATURE REQUESTS (LATER, Nir — not yet):**
+1. **Above each door: a golden, normal-sized title** naming the room it leads to (so Nir can tell me which room causes a bug).
+2. **In the center of each room's floor: the room's name in BIG golden text.**
+
+**Also still open from before:** 4 Asymptote figures fail (tangent/foot) → placeholders; 3 door-bearing mismatches.
+
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
-🌙 **CURRENT STATE (July 3, 2026 — QUAKE is being FINISHED, not polished):** Real-play bugs fixed (strafe, wall-shooting, drawing sizing) — all Nir-confirmed, 455 green. **Parent 22 handoff written & pushed = BUILD THE DEMON** (+ alcove reveal + explosion + red ceiling equations). NEXT: Nir launches Parent 22 in a fresh Opus 4.8 chat (4 blob links given); it's talk-first, DeepSeek feeds verbatim code/data on request, then integrates the demon code + renders offscreen PNGs for Nir to judge.
+🌙 **CURRENT STATE (July 3, 2026 — demon integrated, iterating on bugs):** Demon mostly works (renders, faces+tracks player, glows-gold final panel, explodes on 3 hits) but has 4 known bugs (dead demon reappears on re-entry; alcove never visible; ceiling equations centered not on-wall; a few rooms show black boxes). Equation-panel sizing UNRESOLVED (awaiting Nir's choice 1/2/3 above). Two golden-text feature requests queued. 468 tests green. **KEY RULE Nir hammered: fix CENTRALLY (shared builders/renderer), never per-room.** Everything pushed. See the July 3 session entries above.
 
 🌙 **PRIOR STATE (July 1, 2026 — FLAT PIVOT SHIPPED!):** 🏆 **20/20 rooms DONE. 455 GREEN.** 🏆 **Abandoned 3D corridors → FLAT** (2D graph + teleport doors + corner minimap HUD; rooms stay first-person 3D). **DONE by DeepSeek (Nir said do it myself, no parents):** (1) flat 0-crossing floorplan regenerated + rooms rebuilt with compass doors; (2) **teleport navigation** (`gameplay.py` `_teleport_through_door`); (3) **corner minimap HUD** (`minimap.py`) — importance dots + links + red X on cleared + **Nir's 5 custom emoji PNGs** as the mood marker (arrived/moving/panels/demon/cleared). Nir play-tested & loves it; upside-down marker FIXED. **NEXT (tomorrow): POLISH** — game graphics + wall panel text/figures, clearer controls (fire=color panels), optional minimap tweaks. Parents 19 & 21 moot. See "THE BIG PIVOT" section above. **Everything pushed.** 🚀
 
