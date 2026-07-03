@@ -6,43 +6,28 @@
 
 ## WHAT WE'RE IN THE MIDDLE OF
 
-**Adding per-station ceiling equations.** The existing 20 `.room` files had only 1-2 ceiling equations per room. Each station should have its own ceiling equation (one per step).
+**Adding per-station ceiling equations.** Each station needs its own ceiling equation.
 
-### Progress so far (15/19 done):
+### 15/16 child rooms: ceiling lines FIXED
+Children were re-contacted and provided per-station ceiling equations. Updated in `tests/room_specs/`. These files are child work.
 
-All 16 child-created rooms are DONE with their ceiling fixes. Lemmas 5,12 and prop_15 were already correct.
+### 4 DeepSeek-written rooms: FULL REWRITE needed
+These rooms (law_1, law_2, prop_4, lemma_2) were originally written by DeepSeek, not children. Children will write COMPLETE .room files from scratch — stations, panels, text, colors, AND ceiling equations. Child prompts ready:
 
-### REMAINING (4 rooms, child prompts rewritten):
+- `CHILD_PROMPT_PROP_4_CEILINGS.md` — prop_4 (equation, 2 stations)
+- `CHILD_PROMPT_LAW_1_CEILINGS.md` — law_1 (text, 4 stations)
+- `CHILD_PROMPT_LAW_2_CEILINGS.md` — law_2 (equation, 2 stations)
+- `CHILD_PROMPT_LEMMA_2_CEILING.md` — lemma_2 (geometry, 3 stations)
 
-Each child prompt gives the Newton source material and asks for per-station ceiling equations — NO prior AI work is fed to the child. Files:
-
-| File | Status |
-|------|--------|
-| `CHILD_PROMPT_PROP_4_CEILINGS.md` | ⏳ Paste to Opus |
-| `CHILD_PROMPT_LAW_1_CEILINGS.md` | ⏳ Paste to Opus |
-| `CHILD_PROMPT_LAW_2_CEILINGS.md` | ⏳ Paste to Opus |
-| `CHILD_PROMPT_LEMMA_2_CEILING.md` | ⏳ Paste to Opus |
+Each prompt gives: Newton source material + station descriptions + ROOMSPEC format reference + asks for complete .room file.
 
 ## TO DO ON RESTART
 
-1. Ask Nir which child answered. He will paste the child's response.
-2. Update the `.room` file:
-   - `tests/room_specs/prop_4.room` — replace the 1 ceiling line with child's 2
-   - `tests/room_specs/law_1.room` — replace the 1 ceiling line with child's 4
-   - `tests/room_specs/law_2.room` — replace the 2 ceiling lines with child's 2
-   - `tests/room_specs/lemma_2.room` — add child's eq2 as the third ceiling line
+1. Ask Nir which child answered. He pastes the child's complete .room file.
+2. Replace the ENTIRE existing .room file in `tests/room_specs/<room>.room` with the child's file.
 3. After ALL 4 are done:
-   - Rebuild all `.room` files → `.asy` + `room_source` (run build_all.py or just stage 1 + stage 4 + stage 6)
-   - Recompile ceiling equation PNGs (stage 4)
-   - Rebuild room runtimes (stage 6)
+   - Rebuild: run `python build/build_all.py` from `quake/` directory
    - Run `pytest quake/tests/` — must be 468+ green
-   - Smoke test
+   - Smoke test: `python -c "import sys; sys.path.insert(0,'quake'); from app import main; main(smoke_frames=1)"`
    - Update WORKFLOW.md and Commentaries
    - Push to GitHub
-
-## STANDING RULES (from WORKFLOW §10)
-- NEVER add hard constraints Nir didn't approve
-- Fix CENTRALLY, never per-room
-- Test with actual game before declaring victory
-- Ask before touching code
-- Keep the emojis 😊
