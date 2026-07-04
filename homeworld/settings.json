@@ -1,0 +1,10 @@
+{
+    "title": "Homeworld: A Good Basis",
+    "version": "0.1.0",
+    "width": 1280,
+    "height": 720,
+    "fullscreen": false,
+    "vsync": true,
+    "bloom_strength": 0.8,
+    "seed": 1234
+}

@@ -1,0 +1,4 @@
+numpy
+moderngl
+pyglet>=2.0.9
+Pillow
