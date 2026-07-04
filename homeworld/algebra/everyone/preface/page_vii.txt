@@ -1,0 +1,77 @@
+% ============================================================
+% PAGE: vii  (Preface, continued — "The Plan for the Book")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{vii}
+
+\bigskip
+
+\section*{The Plan for the Book}
+
+That example is part of a new start. I believe it is a better start (for the reader and the
+course). By working with specific matrices to introduce the algebra, the subject unfolds.
+Chapter 1 develops the matrix equation $A = C$ times $R$. $C$ takes independent vectors
+like $a_1$ and $a_2$ from the column space of $A$. $R$ takes independent vectors from the row
+space of $A$. Those two ``vector spaces'' are at the center of linear algebra. We meet them
+properly in Chapter 3. But you will know about independence from examples in Chapter 1.
+
+\bigskip
+
+\emph{The big step is to factor $A$ into $C$ times $R$.} Matrix multiplication is a crucial operation,
+and Chapter 1 ends with four different ways to do it---seen on the back cover of the book.
+This sets the path to all the great factorizations of linear algebra:
+
+\bigskip
+
+\begin{tabbing}
+$A = LU$ \qquad\qquad \= Chapter 2 solves $n$ equations $Ax = b$ in $n$ unknowns: $A$ is square \\[6pt]
+$A = CR$ \> Chapter 3 reduces to $r$ independent columns and $r$ independent rows \\[6pt]
+$A = QR$ \> Chapter 4 changes the columns of $A$ into perpendicular columns of $Q$ \\[6pt]
+$S = Q\Lambda Q^{\mathrm{T}}$ \> Chapter 6 has \textbf{eigenvectors} in $Q$. The eigenvalues of $S$ are in $\Lambda$ \\[6pt]
+$A = U\Sigma V^{\mathrm{T}}$ \> Chapter 7 has \textbf{singular vectors} in $U$ and $V$ and \textbf{singular values} in $\Sigma$
+\end{tabbing}
+
+\bigskip
+
+The columns of $A$ are in $m$-dimensional space $\mathbf{R}^m$, the rows are in $\mathbf{R}^n$. The $m$ by $n$ matrix
+multiplies vectors $x$ in $\mathbf{R}^n$ to produce $Ax$ in $\mathbf{R}^m$. But the real action of $A$ is seen in the
+four fundamental subspaces.
+
+\bigskip
+
+Chapter 2 only allows one solution $x_{\text{row}}$. The matrix $A$ is square and invertible.
+Chapter 3 finds every solution to $Ax = b$ by adding every $x_{\text{null}}$. Chapter 4 deals with equations
+that don't have a solution (because $b$ has a piece from the mysterious fourth subspace).
+I hope you will like the ``big picture of linear algebra'' on page 124: \textbf{all four subspaces}.
+
+\bigskip
+
+Those five factorizations are a perfect way to organize and remember linear algebra.
+The eigenvalues in the matrix $\Lambda$ and the singular values in $\Sigma$ come from $S$ and $A$
+in a beautiful way---but not a simple way. Those numbers in $Sx = \lambda x$ and $Av = \sigma u$ see
+deeply into the symmetric matrix $S$ and the $m$ by $n$ matrix $A$. Often $S$ appears in engineering
+and physics. Often $A$ is a matrix of data. And data is now coming from everywhere.
+
+\bigskip
+
+Please don't miss Tim Baumann's page 272 on compressing photographs by the SVD.
+
+\bigskip
+
+Chapter 5 explains the amazing formulas produced by determinants. Amazing but
+unfortunately difficult to compute! We solve equations $Ax = b$ before (not after) we
+find the determinant of $A$. Those equations ask us to produce $b$ from the columns of $A$.
+
+$$
+Ax = x_1 (\text{column } 1) + x_2 (\text{column } 2) + \cdots + x_n (\text{column } n) = \textbf{ right side } b.
+$$
+
+\bigskip
+
+In principle, determinants lead to eigenvalues (Chapter 6) and singular values (Chapter 7).
+In practice, we look for other ways to find and use those important numbers. And yet
+determinants tell us about geometry too---like the volume of a tilted box in $n$ dimensions.
+
+\bigskip
+
+A short course can go directly from dimensions in 3.5 to eigenvalues for $2 \times 2$ matrices.
