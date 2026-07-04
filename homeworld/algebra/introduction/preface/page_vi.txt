@@ -1,0 +1,114 @@
+% ============================================================
+% PAGE: vi  (Preface, continued)
+% ============================================================
+
+\noindent \textbf{vi} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+That picture illustrated two basic operations---adding vectors $a_1 + a_2$ and multiplying
+a vector by $2$. Combining those operations produced a ``linear combination'' $2a_1 + a_2$:
+
+\bigskip
+
+\begin{center}
+\fbox{\parbox{0.7\textwidth}{\centering
+\textbf{Linear combination} $= ca_1 + da_2$ \ for any numbers $c$ and $d$
+}}
+\end{center}
+
+\bigskip
+
+Those numbers $c$ and $d$ can be negative. In that case $ca_1$ and $da_2$ will reverse their direc-
+tions: they go right to left. Also very important, $c$ and $d$ can involve fractions. Here is a
+picture with a lot more linear combinations. \textbf{Eventually we want all vectors} $ca_1 + da_2$.
+
+\bigskip
+\bigskip
+
+% --- FIGURE: plane of linear combinations ---
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book)
+% ------------------------------------------------------------
+% This figure shows a large parallelogram-shaped grid representing an infinite
+% plane spanned by vectors a_1 and a_2, drawn in a 3D perspective (slanted/
+% skewed rectangular grid pattern, like graph paper viewed at an angle).
+%
+% Structure of the grid: the plane is drawn as a grid of parallelogram cells,
+% formed by two families of parallel lines:
+%   - One family of lines runs in the direction of a_1 (and its multiples).
+%   - The other family of lines runs in the direction of a_2 (and its multiples).
+%
+% Labeled points/vectors, arranged roughly along a diagonal from lower-left to
+% upper-right:
+%   - Bottom-left corner: -a_1 - a_2
+%   - Along the bottom edge, moving right: -a_2, then a_1 - a_2, then 2a_1 - a_2
+%   - Along a line above that: -a_1 - (1/2)a_2, then (unlabeled grid point),
+%     then 2a_1 - (1/2)a_2
+%   - Middle row (through origin): -a_1, then 0 (the origin, marked with a dot),
+%     then a_1 (marked with dot and arrow), then 2a_1 (marked with dot and arrow)
+%     — this row is drawn with bold/thick lines for the segments 0 -> a_1 and
+%     a_1 -> 2a_1, emphasizing the vector a_1 and its scalar multiple.
+%   - Row above the middle: -a_1 + (1/2)a_2
+%   - Top row: -a_1 + a_2, then a_2 (marked with a bold dot and arrow, connected
+%     to origin by a bold/thick line representing vector a_2), then a_1 + a_2,
+%     then 2a_1 + a_2 (top-right corner)
+%
+% Key visual emphasis:
+%   - The vectors a_1 (from 0 to a_1) and a_2 (from 0 to a_2) are drawn as bold
+%     arrows, distinguishing them from the thin grid lines that represent the
+%     rest of the plane.
+%   - The grid extends the pattern to show integer and half-integer combinations
+%     (c, d = -1, -1/2, 0, 1/2, 1, 2), illustrating how combinations ca_1 + da_2
+%     tile out to fill the entire plane.
+%   - The overall shape is a large parallelogram (in perspective, appearing as a
+%     rhombus-like tilted plane) subdivided into smaller parallelogram cells,
+%     conveying the idea of a continuous 2D plane embedded in 3D space, spanned
+%     by the two vectors.
+% ------------------------------------------------------------
+
+\bigskip
+\bigskip
+
+Here is the key! \textbf{The combinations $ca_1 + da_2$ fill a whole plane.} It is an infinite plane
+in 3-dimensional space. By using more and more fractions and decimals $c$ and $d$, we fill in
+a complete plane. \emph{Every point on the plane is a combination of $a_1$ and $a_2$}.
+
+\bigskip
+
+Now comes a fundamental idea in linear algebra: \textbf{a matrix}. The matrix $A$ holds
+$n$ column vectors $a_1, a_2, \dots, a_n$. At this point our matrix has two columns $a_1$ and $a_2$, and
+those are vectors in 3-dimensional space. So the matrix has \textbf{three rows and two columns}.
+
+\bigskip
+
+\begin{center}
+\fbox{\parbox{0.75\textwidth}{
+\begin{tabular}{@{}l@{\hspace{1.5cm}}c@{}}
+\begin{minipage}{4cm}
+3 by 2 matrix \\
+$m = 3$ rows \\
+$n = 2$ columns
+\end{minipage}
+&
+$A = \begin{bmatrix} a_1 & a_2 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 3 & 4 \\ 1 & 2 \end{bmatrix}$
+\end{tabular}
+}}
+\end{center}
+
+\bigskip
+
+The combinations of those two columns produced a plane in three-dimensional space.
+There is a natural name for that plane. \textbf{It is the column space of the matrix.} For any $A$,
+\textbf{the column space of $A$ contains all combinations of the columns.}
+
+\bigskip
+
+Here are the four ideas introduced so far. You will see them all in Chapter 1.
+
+\begin{enumerate}
+    \item Column vectors $a_1$ and $a_2$ in three dimensions
+    \item Linear combinations $ca_1 + da_2$ of those vectors
+    \item The matrix $A$ contains the columns $a_1$ and $a_2$
+    \item Column space of the matrix $=$ \emph{all linear combinations of the columns} $=$ \emph{plane}
+\end{enumerate}
