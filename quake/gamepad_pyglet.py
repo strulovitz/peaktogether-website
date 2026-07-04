@@ -123,6 +123,31 @@ class GamepadManager:
         except Exception:
             return False
 
+    def pump(self) -> None:
+        """Service the controller devices each frame BEFORE read().
+
+        A pyglet manual-loop game (no pyglet.app.run()) must pump device input itself;
+        window.dispatch_events() does NOT do it. Both calls below are non-blocking and never
+        touch the window message queue (so keyboard/mouse are unaffected):
+          - XInput (Xbox): its background thread posts state -> dispatch_posted_events() delivers it.
+          - DirectInput (joystick): drain the device's buffered data directly (non-blocking).
+        """
+        # XInput (Xbox): deliver thread-posted controller state to the main thread.
+        try:
+            import pyglet
+            pyglet.app.platform_event_loop.dispatch_posted_events()
+        except Exception:
+            pass
+        # DirectInput (T.16000M): drain the device buffer directly (non-blocking, no msg pump).
+        if self._joy is not None:
+            try:
+                dev = getattr(self._joy, "device", None)
+                disp = getattr(dev, "_dispatch_events", None)
+                if disp is not None:
+                    disp()
+            except Exception:
+                pass
+
     def read(self) -> GamepadContribution:
         c = GamepadContribution()
 

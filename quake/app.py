@@ -398,6 +398,15 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
                     dt = MAX_DT
 
             # (1) input
+            # Controllers: pyglet's DirectInput (joystick) updates via platform-event-loop
+            # wait objects, and XInput (Xbox) posts state from a background thread — neither
+            # is serviced by window.dispatch_events(). Pump the controller devices (safe,
+            # non-blocking) so their values are fresh before poll() reads them.
+            if gamepad is not None:
+                try:
+                    gamepad.pump()
+                except Exception:
+                    pass
             try:
                 actions = poll(window, bindings, gamepad)
             except Exception as e:
