@@ -290,6 +290,16 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
 
     Headless (no GL): returns 0 immediately — the smoke-launch path.
     """
+    # Peak Together bootstrap: makes asset paths work inside the frozen exe and
+    # routes the savegame + crash log to %LOCALAPPDATA%\PeakTogether\Quake.
+    global SAVE_PATH
+    try:
+        from pt_runtime import bootstrap, user_path
+        bootstrap("Quake", "Quake")
+        SAVE_PATH = user_path("savegame.json")
+    except Exception as e:
+        _log(f"pt_runtime bootstrap skipped: {e}")
+
     if not HAVE_GL:
         _log("main: HAVE_GL=False, exiting (headless)")
         return 0

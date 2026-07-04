@@ -1,4 +1,10 @@
 savegame.json
 __pycache__/
 *.pyc
+quake.log
+# packaging build artifacts (never commit)
+.pyi-build/
+.venv-build/
+dist/
+release/
 
