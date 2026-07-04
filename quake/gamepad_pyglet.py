@@ -25,7 +25,7 @@ CALIB_FRAMES = 60
 STICK_DZ_RADIAL = 0.12
 SCALAR_DZ = 0.08
 SLIDER_DZ = 0.10        # deadzone around the throttle's absolute center 0
-SLIDER_GAIN = 1.5       # slider contribution into move_y (pre-clamp); >1 so full slider saturates
+SLIDER_GAIN = 2.5       # throttle -> move_y RUN speed (full throttle ~= 2.5x walk). >1 = run.
 TRIGGER_TH = 0.5        # signed trigger fire threshold
 
 
@@ -167,9 +167,10 @@ class GamepadManager:
                 c.move_y += -jy                    # push forward = -y = forward(+)
                 twist = _clamp1(raw["rz"] - self._joy_calib.rest("rz"))
                 c.yaw_rate += _scalar_deadzone(twist)
-                # throttle slider: absolute center-0, NOT calibrated, deadzone then gain into move_y
+                # throttle slider: absolute center-0, NOT calibrated, deadzone then gain into move_y.
+                # NEGATED: pushing the throttle forward (away, +z) must move FORWARD in-game.
                 slider = _scalar_deadzone(_clamp1(raw["z"]), SLIDER_DZ)
-                c.move_y += slider * SLIDER_GAIN   # pre-clamp; build_actions clamps to [-1,1]
+                c.move_y += -slider * SLIDER_GAIN   # run throttle (build_actions clamps to MAX_MOVE_Y)
 
         # --- Xbox -> mirrors the MOUSE (Mover-look + Shooter-reticle + fire) ---
         if self._ctrl is not None:

@@ -34,6 +34,11 @@ from contracts import Actions
 DEFAULT_YAW_SENS = 2.2     # rad/s per unit input
 DEFAULT_PITCH_SENS = 1.8
 
+# Forward/back (move_y) may exceed the normalized 1.0 so the joystick throttle can RUN
+# (gameplay multiplies move_y by WALK_SPEED_M_S; move_y ~2.5 => ~2.5x walk). Keyboard W/S
+# and the analog stick each still contribute at most 1.0; only the throttle drives it higher.
+MAX_MOVE_Y = 2.5
+
 _DEFAULT_DT = 0.016        # ~60fps safe default for the first poll()
 
 
@@ -126,7 +131,7 @@ def build_actions(
     return Actions(
         # MOVER (owns the body) — rotation derives ONLY from mover rates.
         move_x=float(_clamp(sample.mover_axis_x, -1.0, 1.0)),
-        move_y=float(_clamp(sample.mover_axis_y, -1.0, 1.0)),
+        move_y=float(_clamp(sample.mover_axis_y, -MAX_MOVE_Y, MAX_MOVE_Y)),
         heading_delta=float(sample.mover_yaw_rate * cfg_yaw_sens * dt),
         pitch_delta=float(sample.mover_pitch_rate * cfg_pitch_sens * dt),
         # SHOOTER (owns the reticle) — NO yaw/pitch authority.
