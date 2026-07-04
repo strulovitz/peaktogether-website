@@ -1,0 +1,93 @@
+% ============================================================
+% PAGE: vii  (Preface, continued — "Matrix Multiplication A = CR")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{vii}
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{7cm}c@{}}
+\textbf{Now we include 2 more columns in $A$} & \multirow{2}{*}{$A = \begin{bmatrix} 2 & 1 & 3 & 0 \\ 3 & 4 & 7 & 0 \\ 1 & 2 & 3 & -1 \end{bmatrix}$} \\
+The 4 columns are in 3-dimensional space &
+\end{tabular}
+\end{center}
+
+\bigskip
+
+Linear algebra aims for an understanding of every column space. Let me try this one.
+
+\bigskip
+
+\begin{quote}
+Columns 1 and 2 produce the same plane as before (same $a_1$ and $a_2$)
+
+\medskip
+Column 3 contributes nothing new \textbf{because $a_3$ is on that plane}: $a_3 = a_1 + a_2$
+
+\medskip
+Column 4 is \textbf{not on the plane}: Adding in $c_4 a_4$ raises or lowers the plane
+
+\medskip
+The column space of this matrix $A$ is the \textbf{whole 3-dimensional space}: all points!
+\end{quote}
+
+\bigskip
+
+You see how we go a column at a time, left to right. Each column can be \textbf{independent}
+of the previous columns or it can be a \textbf{combination} of those columns. To produce every
+point in 3-dimensional space, you need three independent columns.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Matrix Multiplication $A = CR$}}
+\end{center}
+
+\bigskip
+
+Using the words ``linear combination'' and ``independent columns'' gives a good picture
+of that $3$ by $4$ matrix $A$. Column $3$ is a linear combination: \textbf{column 1 + column 2}.
+\textbf{Columns 1, 2, 4 are independent}. The only way to produce the zero vector as a
+combination of the independent columns $1, 2, 4$ is to multiply all those columns by \textbf{zero}.
+
+\bigskip
+
+We are so close to a key idea of Chapter 1 that I have to go on. Matrix multiplication
+is the perfect way to write down what we know. From the $4$ columns of $A$ we pick out the
+independent columns $a_1, a_2, a_4$ in the column matrix $C$. \textbf{Every column of $R$ tells us the
+combination of $a_1, a_2, a_4$ in $C$ that produces a column of $A$. $A$ equals $C$ times $R$}:
+
+$$
+A = \begin{bmatrix} 2 & 1 & 3 & 0 \\ 3 & 4 & 7 & 0 \\ 1 & 2 & 3 & -1 \end{bmatrix}
+=
+\begin{bmatrix} 2 & 1 & 0 \\ 3 & 4 & 0 \\ 1 & 2 & -1 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 1 & 0 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+= CR
+$$
+
+\bigskip
+
+Column $3$ of $A$ is dependent on columns $1$ and $2$ of $A$, and column $3$ of $R$ shows how.
+Add the independent columns $1$ and $2$ of $C$ to get column $a_3 = a_1 + a_2 = (3,7,3)$ of $A$.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Matrix multiplication : Each column $j$ of $CR$ is $C$ times column $j$ of $R$}}
+\end{center}
+
+\bigskip
+
+Section 1.3 of the book will \emph{multiply a matrix times a vector} (two ways). Then Section
+1.4 will \emph{multiply a matrix times a matrix}. This is the key operation of linear algebra.
+It is important that there is more than one good way to do this multiplication.
+
+\bigskip
+
+I am going to stop here. The normal purpose of the Preface is to tell you about the
+big picture. The next pages will give you two ways to organize this subject---especially
+the first seven chapters that more than fill up most linear algebra courses. Then come
+optional chapters, leading to the most active topic in applications today: \textbf{deep learning}.
