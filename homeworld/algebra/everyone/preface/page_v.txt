@@ -1,0 +1,115 @@
+% ============================================================
+% PAGE: v  (Preface)
+% ============================================================
+
+\section*{Preface}
+
+This is a linear algebra textbook with a new start. Chapter 1 begins as usual with vectors.
+We see their linear combinations and dot products. Then the new ideas come with matrices.
+Let me illustrate those ideas right away by an example.
+
+\bigskip
+
+Suppose we are given a 3 by 3 matrix $A$ with columns $a_1, a_2, a_3$:
+
+$$
+A =
+\begin{bmatrix}
+a_1 & a_2 & a_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 2 & 3 \\
+3 & 4 & 7 \\
+4 & 2 & 6
+\end{bmatrix}.
+$$
+
+Those columns are three-dimensional vectors. The first vectors $a_1$ and $a_2$ connect the
+center point $(0,0,0)$ to the points $(1,3,4)$ and $(2,4,2)$. The picture shows those points in
+3-dimensional space ($xyz$ space). The key to this matrix is the third vector $a_3$ going to the
+point $(3,7,6)$.
+
+\bigskip
+
+When I look at those vectors, I see something exceptional. Adding columns 1 and 2
+produces column 3. In other words $a_1 + a_2 = a_3$. In a 3-dimensional picture, $a_1$ and $a_2$
+go from the center point $(0,0,0)$ to the points $(1,3,4)$ and $(2,4,2)$. The picture shows how
+to add those vectors. It is normal that all combinations of two vectors will fill up a plane.
+(The plane is actually infinite, we just drew the part between the vectors.) What is
+really exceptional is that \textbf{the third point $a_3 = (3,7,6)$ lies on this plane of $a_1$ and $a_2$.}
+
+\bigskip
+
+Most points don't lie on that plane. Most vectors $a_3$ are \emph{not} combinations of $a_1$ and
+$a_2$. Most 3 by 3 matrices have \emph{independent} columns. Then the matrix will be invertible.
+But these three columns are \emph{dependent} because they lie on the same plane: $a_1 + a_2 = a_3$.
+
+\bigskip
+
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book, reproduced
+% here as a detailed text description since it cannot be
+% rendered as an actual image)
+% ------------------------------------------------------------
+%
+% The figure is a hand-drawn-style geometric diagram illustrating
+% three vectors sharing a common plane in 3-dimensional space.
+% It is captioned "Three vectors sharing a plane inside
+% 3-dimensional space."
+%
+% The diagram is structured as follows:
+%
+% - There is a solid black dot at the lower-left of the figure,
+%   labeled below it as the origin: $(0,0,0)$.
+%
+% - From this origin point, two arrows (vectors) are drawn:
+%     * One arrow points up and to the right (a shorter, steeper
+%       arrow) to a point labeled $a_1 = (1,3,4)$. This vector
+%       is drawn above the other one.
+%     * A second arrow points to the right and slightly upward
+%       (a longer, shallower arrow) to a point labeled
+%       $a_2 = (2,4,2)$. This vector is drawn below/to the right
+%       of $a_1$.
+%
+% - From the tips of $a_1$ and $a_2$, additional thin lines are
+%   drawn to complete a parallelogram (this is the standard
+%   "vector addition parallelogram" construction): a line is drawn
+%   from the tip of $a_1$ parallel to $a_2$, and a line is drawn
+%   from the tip of $a_2$ parallel to $a_1$. These two construction
+%   lines meet at a fourth point in the upper-right of the diagram.
+%
+% - This meeting point (the fourth corner of the parallelogram) is
+%   labeled $a_3 = (3,7,6) = a_1 + a_2$, confirming visually that
+%   $a_3$ is the vector sum of $a_1$ and $a_2$, and therefore lies
+%   in the same plane spanned by $a_1$ and $a_2$.
+%
+% - There is also a bold arrow drawn directly from the origin
+%   $(0,0,0)$ to this point $a_3$, representing the vector $a_3$
+%   itself (as opposed to just the construction lines forming the
+%   parallelogram).
+%
+% - The overall visual effect is a rhombus/parallelogram shape
+%   with the origin at the bottom-left corner, $a_1$ at the top
+%   corner, $a_2$ at the bottom-right-ish corner, and $a_3$ at the
+%   far corner (top-right), with thin diagonal lines inside the
+%   parallelogram showing the two smaller triangles formed by the
+%   vector-addition construction.
+%
+% - To the right of the point $a_3$, in bold text, is the label:
+%   "Three vectors sharing a plane inside 3-dimensional space" —
+%   this serves as the caption/explanation of the figure.
+%
+% - The whole figure visually reinforces the textual claim just
+%   made: that even though $a_1, a_2, a_3$ are vectors in
+%   3-dimensional space, all three happen to lie in a single common
+%   2-dimensional plane (because $a_3$ is a linear combination,
+%   specifically the sum, of $a_1$ and $a_2$), which is the
+%   geometric meaning of the columns of $A$ being linearly
+%   dependent.
+% ------------------------------------------------------------
+
+\bigskip
+\begin{center}
+v
+\end{center}
