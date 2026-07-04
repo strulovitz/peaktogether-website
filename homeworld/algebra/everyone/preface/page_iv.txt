@@ -1,0 +1,46 @@
+% ============================================================
+% PAGE: iv  (Table of Contents, continued)
+% ============================================================
+
+\hfill \textbf{Table of Contents}
+
+\bigskip
+\noindent iv
+
+\bigskip
+
+\subsection*{7 \quad The Singular Value Decomposition (SVD) \dotfill 258}
+\begin{itemize}
+    \item[7.1] Singular Values and Singular Vectors \dotfill 259
+    \item[7.2] Compressing Images by the SVD \dotfill 269
+    \item[7.3] Principal Component Analysis \dotfill 274
+    \item[7.4] The Victory of Orthogonality (and a Revolution) \dotfill 280
+\end{itemize}
+
+\subsection*{8 \quad Learning from Data \dotfill 286}
+\begin{itemize}
+    \item[8.1] Piecewise Linear Learning Functions \dotfill 289
+    \item[8.2] Convolutional Neural Nets \dotfill 299
+    \item[8.3] Minimizing Loss by Gradient Descent \dotfill 306
+    \item[8.4] Mean, Variance, and Covariance \dotfill 321
+\end{itemize}
+
+\bigskip
+\noindent\rule{\textwidth}{0.8pt}
+\bigskip
+
+\begin{tabbing}
+\textbf{Appendix 1} \quad \= The Ranks of $AB$ and $A + B$ \dotfill \= 334 \\[4pt]
+\textbf{Appendix 2} \> Eigenvalues and Singular Values: Rank One \dotfill \> 335 \\[4pt]
+\textbf{Appendix 3} \> Counting Parameters in the Basic Factorizations \dotfill \> 336 \\[4pt]
+\textbf{Appendix 4} \> Codes and Algorithms for Numerical Linear Algebra \dotfill \> 337 \\[4pt]
+\textbf{Appendix 5} \> Matrix Factorizations \dotfill \> 338 \\[4pt]
+\textbf{Appendix 6} \> The Column--Row Factorization of a Matrix \dotfill \> 340 \\[4pt]
+\textbf{Appendix 7} \> The Jordan Form of a Square Matrix \dotfill \> 343 \\[4pt]
+\textbf{Appendix 8} \> Tensors \dotfill \> 344 \\[4pt]
+\textbf{Appendix 9} \> The Condition Number \dotfill \> 345 \\[4pt]
+\textbf{Appendix 10} \> Markov Matrices and Perron--Frobenius \dotfill \> 346 \\[4pt]
+\textbf{Index} \> \dotfill \> 348 \\[4pt]
+\textbf{Index of Symbols} \> \dotfill \> 354 \\[4pt]
+\textbf{Six Great Theorems / Linear Algebra in a Nutshell} \> \dotfill \> 356
+\end{tabbing}
