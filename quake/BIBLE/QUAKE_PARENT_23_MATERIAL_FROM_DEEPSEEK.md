@@ -268,6 +268,20 @@ it's backwards in-game, flip the sign.
 
 ---
 
+## UPDATE — Nir's decisions on the joystick (confirmed this session)
+
+- **HAT: DROPPED.** Nir explicitly does NOT want the hat used in the game. Do not map hat_x/hat_y.
+- **Throttle slider `z`:** confirmed live, absolute non-centering slider (observed range -1.00..0.00
+  as Nir moved it; it holds position rather than springing to center).
+- **Fire buttons on the T.16000M:** **button 0 = primary (index-finger trigger)**, **button 1 =
+  secondary**. Both confirmed. (Note: the boyfriend is the MOVER, not the shooter — so a joystick
+  fire button is optional/nice-to-have; the girlfriend/Xbox owns firing. Propose to Nir whether
+  the joystick trigger should also fire, or do nothing.)
+- **OPEN — pitch source for the Mover, now that the hat is out.** Propose an approach for Nir to
+  judge by feel: (a) throttle slider `z` -> `mover_pitch_rate`; (b) no joystick pitch at all
+  (mouse can still pitch; panels sit near eye height and the Shooter's reticle tilts ±17°); or
+  (c) another idea. Do NOT freeze this — let Nir decide in-game.
+
 ## READY FOR YOU
 
 You have: the exact seam (`_read_raw_sample`), the exact wiring point in `app.py`, and the
