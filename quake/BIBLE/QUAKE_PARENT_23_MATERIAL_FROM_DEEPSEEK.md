@@ -309,6 +309,41 @@ turn — turning is done by the mouse; a joystick twist→yaw is a natural addit
 call), and exactly how the Xbox right stick reproduces the mouse's coupled yaw+pitch+reticle feel
 without double-counting.
 
+## UPDATE #3 — SLIDER = speed control (Nir), + calibration answer (FINAL)
+
+**Nir wants the throttle slider USED (do NOT skip it).** It is a **walking-speed throttle** for
+crossing the huge rooms fast:
+- **Slider live full range confirmed by a clean full-sweep probe: `z` = −1.000 .. +1.000,
+  physical center = 0.000 (smooth continuous ramp).**
+- **Confirmed direction (verbatim from the trace):**
+  - **center `z ≈ 0` → neutral (nothing)**
+  - **top / far / away from player `z = +1.0` → fast FORWARD**
+  - **bottom / back / close to player `z = −1.0` → fast BACKWARD**
+- **Middle = neutral.** The slider **adds a speed term on top of** the normal stick/keyboard
+  walking (`move_y`): `move_y += z_after_deadzone`. Apply a center deadzone (e.g. |z| < ~0.12 → 0)
+  so a mid-set slider is truly neutral, and **scale it so full deflection is clearly FASTER than
+  normal WALK_SPEED** (the whole point — the rooms are huge and slow to cross on keyboard). The
+  direction above matches intuition (push away = go forward); if it feels reversed in-game, flip
+  the sign — one constant.
+- **⚠️ IMPORTANT — do NOT rest-calibrate the slider.** The sticks/twist get the Descent 60-frame
+  rest-capture, but the throttle must use its **absolute normalized position (center 0)** WITHOUT
+  rest-subtraction — otherwise "physical middle = neutral" breaks (wherever the lever happens to
+  sit at launch would wrongly become neutral). So: calibrate/deadzone the sticks; for the slider,
+  use raw normalized `z` with a center deadzone only.
+
+**Calibration question (your Q1) — Nir CONFIRMS: startup-only, no re-calibrate key.** ~1s
+rest-capture for the sticks at launch; keyboard + mouse fully live during it. Same as Descent.
+
+**Hat: still dropped** (your Q2 for the hat = yes, skip it). **Slider: NOT skipped** (see above).
+
+**So the joystick (T.16000M) MOVER mapping is now:**
+- `x` → `move_x` (strafe)
+- `y` → `move_y` (forward = −y)
+- `rz` (twist) → `mover_yaw_rate` (your proposed turn addition — Nir confirms by feel)
+- `z` (throttle) → **speed throttle added to `move_y`** (center 0 = neutral + deadzone, scaled up
+  for fast traverse; direction tunable)
+- **no pitch** (Nir's ruling)
+
 ## READY FOR YOU
 
 You have: the exact seam (`_read_raw_sample`), the exact wiring point in `app.py`, and the
