@@ -703,6 +703,24 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 
 **Also still open from before:** 4 Asymptote figures fail (tangent/foot) → placeholders; 3 door-bearing mismatches.
 
+### 🎮 SESSION (July 4, 2026 — CONTROLLER SUPPORT + PACKAGING! Parent 23)
+
+**Part 1 — Joystick + Xbox controller support (DONE, Nir-confirmed working):**
+- Nir wanted Descent-style co-op: boyfriend = keyboard OR **Thrustmaster T.16000M** (Mover); girlfriend = mouse OR **Xbox** (aimer). Additive — keyboard/mouse always live.
+- **Key lesson:** Descent uses **pygame** (its pygame window pumps the controllers). Quake uses **pyglet** — pygame joystick reading returns frozen values without a pygame window. Wasted several probes before realizing this. Answer: **pyglet-native** input (`pyglet.input.get_joysticks()` for the T.16000M DirectInput joystick; `get_controllers()` for the Xbox XInput controller — both detected on Nir's PC).
+- Launched **Parent 23** (Opus, code-first, no children). Handoff `PROMPT_TO_OPUS_QUAKE_PARENT_23_HANDOFF.md` + material `QUAKE_PARENT_23_MATERIAL_FROM_DEEPSEEK.md` (verbatim input code + live probe results + Nir's rulings). Deliverable saved verbatim `QUAKE_PARENT_23_FROZEN_DELIVERABLE.md`.
+- New file `quake/gamepad_pyglet.py` (GamepadManager: 60-frame calib for sticks/twist, radial DZ 0.12 / scalar 0.08, signed trigger fire `>0.5` — NO abs() auto-fire; slider NOT calibrated). `_read_raw_sample`/`poll` gained `gamepad=None` (additive; pure core untouched). `app.py` builds the manager once + calls `gamepad.pump()` each frame before `poll`.
+- **CRITICAL integration fix:** the manual game loop (`window.dispatch_events()` only) does NOT service controllers — DirectInput uses platform-event-loop wait objects, XInput posts from a background thread. `platform_event_loop.step(0)` HANGS (its PeekMessage drain busy-loops). Fix = `GamepadManager.pump()`: `platform_event_loop.dispatch_posted_events()` (XInput) + call the DI device's `_dispatch_events()` directly (non-blocking buffer drain). Verified via a faithful manual-loop probe.
+- **Mapping (Nir-confirmed by feel):** T.16000M → stick=strafe/walk, twist=yaw, **throttle slider = RUN forward/back** (center=neutral, top=+1=forward; direction flipped after Nir found it reversed; runs up to ~2.5× walk via loosened `move_y` clamp `MAX_MOVE_Y=2.5` — keyboard/strafe still ±1). NO joystick pitch (Nir's ruling: only the girlfriend/Xbox looks up/down). Xbox → right stick = yaw+pitch+reticle (mirrors the mouse), right trigger/A = fire. 468 green throughout.
+
+**Part 2 — Packaging (DONE, exe builds + launches clean; Descent pattern):**
+- `quake/pt_runtime.py` — bootstrap (copied/adapted from Descent): when frozen, chdir to `sys._MEIPASS` + install crash-log/MessageBox; save + crash log → `%LOCALAPPDATA%\PeakTogether\Quake`. Only chdir/excepthook when actually frozen (dev/tests unaffected). `app.py main()` calls `bootstrap("Quake","Quake")` + routes `SAVE_PATH` to `user_path`.
+- `quake/packaging/quake_windows.spec` — one-folder build; bundles ONLY runtime data roots `levels/` + `hud/` (no BIBLE/principia/tests/tools/bake). hiddenimports glcontext/pydantic/pydantic_core. `console=False`, `upx=False`. exe name "Quake".
+- `quake/build_windows_release.ps1` — clean → build venv (`requirements-runtime.txt` = moderngl/pyglet/numpy/pillow/pydantic/networkx + `requirements-build.txt` = pyinstaller) → PyInstaller (**workpath `.\.pyi-build`, NOT `.\build`** — `quake/build/` holds SOURCE build scripts!) → README (with controls) → zip → SHA-256.
+- **Built + verified:** `release\PeakTogether-Quake-Windows-<date>.zip` (127.7 MB: 1008 pack PNGs + 41 libs), exe launches, runs 8s, no crash log. `.gitignore` ignores dist/release/.venv-build/.pyi-build (source committed, artifacts not).
+- **NEXT:** Nir play-tests the extracted zip standalone (incl. controllers), then **upload to both places like Descent** (GitHub Release + itch.io). Then Part 3 = website Quake page (like Descent's).
+- **⚠️ Public name TBD:** currently ships as "Quake" (id Software trademark) — Nir may want a public title like Descent's "Descent QED" (e.g. "Quake: Principia"). One variable to change in spec + build script.
+
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
 🌙 **CURRENT STATE (July 3, 2026 evening):** All 4 child rooms rewritten + rebuilt. Demon bugs FIXED (dead demon on re-entry, alcove never visible). Alcove draws through wall with depth disabled. Ceiling equations sized to actual PNG aspect ratio (capped 3m wide). Non-geometry panel text enlarged (28pt Asymptote font). Station numbers (gold, 1,2,3...) in upper-left of each text panel. Law_2 text panels FIXED (em-dash replaced, trailing `\` stripped from `_expand_text` span boundary). Hidden headless test skip REMOVED. **468/468 green. Pushed.**
