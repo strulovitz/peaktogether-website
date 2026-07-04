@@ -1,0 +1,62 @@
+% ============================================================
+% PAGE: iii  (Table of Contents)
+% ============================================================
+
+\section*{Table of Contents}
+
+\textbf{Preface} \dotfill v
+
+\bigskip
+
+\subsection*{1 \quad Vectors and Matrices \dotfill 1}
+\begin{itemize}
+    \item[1.1] Linear Combinations of Vectors \dotfill 2
+    \item[1.2] Lengths and Angles from Dot Products \dotfill 11
+    \item[1.3] Matrices and Column Spaces \dotfill 20
+    \item[1.4] Matrix Multiplication and $A = CR$ \dotfill 29
+\end{itemize}
+
+\subsection*{2 \quad Solving Linear Equations $Ax = b$ \dotfill 39}
+\begin{itemize}
+    \item[2.1] The Idea of Elimination \dotfill 40
+    \item[2.2] Elimination Matrices and Inverse Matrices \dotfill 49
+    \item[2.3] Matrix Computations and $A = LU$ \dotfill 57
+    \item[2.4] Permutations and Transposes \dotfill 64
+\end{itemize}
+
+\subsection*{3 \quad The Four Fundamental Subspaces \dotfill 74}
+\begin{itemize}
+    \item[3.1] Vector Spaces and Subspaces \dotfill 75
+    \item[3.2] The Nullspace of $A$: Solving $Ax = 0$ \dotfill 83
+    \item[3.3] The Complete Solution to $Ax = b$ \dotfill 96
+    \item[3.4] Independence, Basis, and Dimension \dotfill 107
+    \item[3.5] Dimensions of the Four Subspaces \dotfill 121
+\end{itemize}
+
+\subsection*{4 \quad Orthogonality \dotfill 134}
+\begin{itemize}
+    \item[4.1] Orthogonality of the Four Subspaces \dotfill 135
+    \item[4.2] Projections onto Subspaces \dotfill 143
+    \item[4.3] Least Squares Approximations \dotfill 153
+    \item[4.4] Orthogonal Matrices and Gram--Schmidt \dotfill 165
+\end{itemize}
+
+\subsection*{5 \quad Determinants and Linear Transformations \dotfill 177}
+\begin{itemize}
+    \item[5.1] 3 by 3 Determinants \dotfill 178
+    \item[5.2] Properties and Applications of Determinants \dotfill 184
+    \item[5.3] Linear Transformations \dotfill 192
+\end{itemize}
+
+\subsection*{6 \quad Eigenvalues and Eigenvectors \dotfill 201}
+\begin{itemize}
+    \item[6.1] Introduction to Eigenvalues \dotfill 202
+    \item[6.2] Diagonalizing a Matrix \dotfill 215
+    \item[6.3] Symmetric Positive Definite Matrices \dotfill 227
+    \item[6.4] Systems of Differential Equations \dotfill 243
+\end{itemize}
+
+\bigskip
+\begin{center}
+iii
+\end{center}
