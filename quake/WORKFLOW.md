@@ -721,6 +721,12 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 - **NEXT:** Nir play-tests the extracted zip standalone (incl. controllers), then **upload to both places like Descent** (GitHub Release + itch.io). Then Part 3 = website Quake page (like Descent's).
 - **⚠️ Public name TBD:** currently ships as "Quake" (id Software trademark) — Nir may want a public title like Descent's "Descent QED" (e.g. "Quake: Principia"). One variable to change in spec + build script.
 
+**Part 2b — Named "Quake: Principia" + SHIPPED to both places (DONE July 4-5, 2026):**
+- Renamed to **"Quake: Principia"** (Nir's pick): exe/folder `Quake Principia` (no colon — Windows filename), window title + crash dialog `Quake: Principia`, appdata slug `QuakePrincipia`. Rebuilt + verified launch. 468 green. Nir confirmed the zip plays **standalone on his laptop**.
+- **GitHub Release (mirror) — LIVE:** tag `quake-principia-v1.0.0` (zip + .sha256) via `gh release create`. https://github.com/strulovitz/peaktogether-website/releases/tag/quake-principia-v1.0.0
+- **itch.io (primary) — LIVE:** installed **butler** v15.27.0 to `C:\Users\nir_s\butler\` (download host = `broth.itch.zone`; `broth.itch.ovh` no longer resolves). Nir ran `butler login` + created the empty page; DeepSeek ran `butler push "dist\Quake Principia" strulovitz/quake-principia:windows --userversion 1.0.0`. Build #1772759 up. **Page still a DRAFT** — set Public after Part 3 screenshots. https://strulovitz.itch.io/quake-principia
+- **NEXT: Part 3** — website "Quake: Principia" page under `arcade/` (like `arcade/descent-qed/`): description + Play/GitHub links + screenshot gallery + gameplay video; add same shots to itch + set Public; link from peaktogether.me menu. Dreamhost upload via FileZilla (Nir).
+
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
 🌙 **CURRENT STATE (July 3, 2026 evening):** All 4 child rooms rewritten + rebuilt. Demon bugs FIXED (dead demon on re-entry, alcove never visible). Alcove draws through wall with depth disabled. Ceiling equations sized to actual PNG aspect ratio (capped 3m wide). Non-geometry panel text enlarged (28pt Asymptote font). Station numbers (gold, 1,2,3...) in upper-left of each text panel. Law_2 text panels FIXED (em-dash replaced, trailing `\` stripped from `_expand_text` span boundary). Hidden headless test skip REMOVED. **468/468 green. Pushed.**
