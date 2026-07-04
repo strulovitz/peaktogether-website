@@ -1,0 +1,100 @@
+% ============================================================
+% PAGE: iv  (Table of Contents, continued — Chapters 7–10, Appendices, Indexes)
+% ============================================================
+
+\noindent \textbf{iv} \hfill \textbf{Table of Contents}
+
+\bigskip
+
+\noindent \textbf{7 \quad The Singular Value Decomposition (SVD)} \dotfill \textbf{286}
+
+\begin{tabbing}
+\hspace{1cm} \= 7.1 \quad \= Singular Values and Singular Vectors \dotfill \= 287 \\
+\> 7.2 \> Image Processing by Linear Algebra \dotfill \> 297 \\
+\> 7.3 \> Principal Component Analysis (PCA by the SVD) \dotfill \> 302 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{8 \quad Linear Transformations} \dotfill \textbf{308}
+
+\begin{tabbing}
+\hspace{1cm} \= 8.1 \quad \= The Idea of a Linear Transformation \dotfill \= 309 \\
+\> 8.2 \> The Matrix of a Linear Transformation \dotfill \> 318 \\
+\> 8.3 \> The Search for a Good Basis \dotfill \> 327 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{9 \quad Linear Algebra in Optimization} \dotfill \textbf{335}
+
+\begin{tabbing}
+\hspace{1cm} \= 9.1 \quad \= Minimizing a Multivariable Function \dotfill \= 336 \\
+\> 9.2 \> Backpropagation and Stochastic Gradient Descent \dotfill \> 346 \\
+\> 9.3 \> Constraints, Lagrange Multipliers, Minimum Norms \dotfill \> 355 \\
+\> 9.4 \> Linear Programming, Game Theory, and Duality \dotfill \> 364 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{10 \quad Learning from Data} \dotfill \textbf{370}
+
+\begin{tabbing}
+\hspace{1cm} \= 10.1 \quad \= Piecewise Linear Learning Functions \dotfill \= 372 \\
+\> 10.2 \> Creating and Experimenting \dotfill \> 381 \\
+\> 10.3 \> Mean, Variance, and Covariance \dotfill \> 386 \\
+\end{tabbing}
+
+\bigskip
+\bigskip
+
+\noindent \textbf{Appendix 1} \quad The Ranks of $AB$ and $A + B$ \dotfill \textbf{400}
+
+\bigskip
+
+\noindent \textbf{Appendix 2} \quad Matrix Factorizations \dotfill \textbf{401}
+
+\bigskip
+
+\noindent \textbf{Appendix 3} \quad Counting Parameters in the Basic Factorizations \dotfill \textbf{403}
+
+\bigskip
+
+\noindent \textbf{Appendix 4} \quad Codes and Algorithms for Numerical Linear Algebra \dotfill \textbf{404}
+
+\bigskip
+
+\noindent \textbf{Appendix 5} \quad The Jordan Form of a Square Matrix \dotfill \textbf{405}
+
+\bigskip
+
+\noindent \textbf{Appendix 6} \quad Tensors \dotfill \textbf{406}
+
+\bigskip
+
+\noindent \textbf{Appendix 7} \quad The Condition Number of a Matrix Problem \dotfill \textbf{407}
+
+\bigskip
+
+\noindent \textbf{Appendix 8} \quad Markov Matrices and Perron-Frobenius \dotfill \textbf{408}
+
+\bigskip
+
+\noindent \textbf{Appendix 9} \quad Elimination and Factorization \dotfill \textbf{410}
+
+\bigskip
+
+\noindent \textbf{Appendix 10} \quad Computer Graphics \dotfill \textbf{413}
+
+\bigskip
+\bigskip
+
+\noindent \textbf{Index of Equations} \dotfill \textbf{419}
+
+\bigskip
+
+\noindent \textbf{Index of Notations} \dotfill \textbf{422}
+
+\bigskip
+
+\noindent \textbf{Index} \dotfill \textbf{423}
