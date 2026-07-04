@@ -67,7 +67,7 @@ FIXED_DT = 1.0 / 60.0             # deterministic dt in smoke mode / first frame
 
 WINDOW_W = 1280
 WINDOW_H = 720
-WINDOW_TITLE = "QUAKE — Golden Level"
+WINDOW_TITLE = "Quake: Principia"
 
 _SMOKE_FRAMES = 0
 
@@ -295,7 +295,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     global SAVE_PATH
     try:
         from pt_runtime import bootstrap, user_path
-        bootstrap("Quake", "Quake")
+        bootstrap("QuakePrincipia", "Quake: Principia")
         SAVE_PATH = user_path("savegame.json")
     except Exception as e:
         _log(f"pt_runtime bootstrap skipped: {e}")

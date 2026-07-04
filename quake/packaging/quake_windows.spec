@@ -60,7 +60,7 @@ pyz = PYZ(a.pure, a.zipped_data)
 exe = EXE(
     pyz, a.scripts, [],
     exclude_binaries=True,
-    name="Quake",
+    name="Quake Principia",
     debug=False,
     strip=False,
     upx=False,        # IMPORTANT: no UPX -> fewer antivirus false positives
@@ -70,6 +70,6 @@ exe = EXE(
 coll = COLLECT(
     exe, a.binaries, a.zipfiles, a.datas,
     strip=False, upx=False, upx_exclude=[],
-    name="Quake",
+    name="Quake Principia",
     contents_directory=".",
 )

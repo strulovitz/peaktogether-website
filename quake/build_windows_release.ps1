@@ -1,6 +1,6 @@
 $ErrorActionPreference = "Stop"
 $Version = if ($env:PT_VERSION) { $env:PT_VERSION } else { Get-Date -Format "yyyy.MM.dd" }
-$ZipName = "PeakTogether-Quake-Windows-$Version.zip"
+$ZipName = "PeakTogether-QuakePrincipia-Windows-$Version.zip"
 
 if (!(Test-Path ".\app.py")) { throw "Run from the quake\ folder (.\app.py not found)." }
 
@@ -22,19 +22,19 @@ $Python = ".\.venv-build\Scripts\python.exe"
 Write-Host "Building..."
 & $Python -m PyInstaller ".\packaging\quake_windows.spec" --noconfirm --clean --workpath ".\.pyi-build" --distpath ".\dist"
 
-if (!(Test-Path ".\dist\Quake\Quake.exe")) { throw "Build failed: exe missing." }
+if (!(Test-Path ".\dist\Quake Principia\Quake Principia.exe")) { throw "Build failed: exe missing." }
 
 New-Item -ItemType Directory -Force ".\release" | Out-Null
 
 @"
-Quake  -  Peak Together
+Quake: Principia  -  Peak Together
 
 A first-person walk through Newton's Principia as a 3D dungeon.
 
 How to play:
 1. If you're reading this inside the zip, extract the zip first.
 2. Open the extracted folder.
-3. Double-click "Quake.exe".
+3. Double-click "Quake Principia.exe".
 
 No Python. No terminal. No installer. No admin needed.
 To uninstall: delete this folder.
@@ -53,14 +53,14 @@ CONTROLS (co-op: one player moves, one player aims -- or one person does both):
        right stick = look + aim, right trigger or A = shoot
 
 If it crashes, a log is written to:
-%LOCALAPPDATA%\PeakTogether\Quake\crash-log.txt
+%LOCALAPPDATA%\PeakTogether\QuakePrincipia\crash-log.txt
 
 Website: https://peaktogether.me
 Source:  https://github.com/strulovitz/peaktogether-website
-"@ | Set-Content -Path ".\dist\Quake\README - How to Play.txt" -Encoding UTF8
+"@ | Set-Content -Path ".\dist\Quake Principia\README - How to Play.txt" -Encoding UTF8
 
 Write-Host "Zipping..."
-Compress-Archive -Path ".\dist\Quake\*" -DestinationPath ".\release\$ZipName" -Force
+Compress-Archive -Path ".\dist\Quake Principia\*" -DestinationPath ".\release\$ZipName" -Force
 
 $Hash = Get-FileHash ".\release\$ZipName" -Algorithm SHA256
 "$($Hash.Hash)  $ZipName" | Set-Content -Path ".\release\$ZipName.sha256.txt" -Encoding ASCII
