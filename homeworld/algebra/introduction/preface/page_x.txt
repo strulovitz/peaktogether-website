@@ -1,0 +1,95 @@
+% ============================================================
+% PAGE: x  (Preface, concluded — "Applications in the Book and on the Website")
+% ============================================================
+
+\noindent \textbf{x} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{Applications in the Book and on the Website}}
+\end{center}
+
+\bigskip
+
+I hope this book will be useful to you long after the linear algebra course is complete.
+It is all the applications of linear algebra that make this possible. Matrices carry data,
+and other matrices \emph{operate on that data}. The goal is to ``see into a matrix'' by understand-
+ing its eigenvalues and eigenvectors and singular values and singular vectors. And each
+application has special matrices---here are four examples:
+
+\bigskip
+
+\begin{tabbing}
+\hspace{1cm}\textbf{Markov matrices $M$} \hspace{1.5cm} \= Each column is a set of probabilities adding to 1. \\[0.5cm]
+\textbf{Incidence matrices $A$} \> Graphs and networks start with a set of nodes. The matrix \\
+\> $A$ tells the \emph{connections} (edges) between those nodes. \\[0.5cm]
+\textbf{Transform matrices $F$} \> The Fourier matrix uncovers the \emph{frequencies} in the data. \\[0.5cm]
+\textbf{Covariance matrices $C$} \> The \textbf{variance} is key information about a random variable. \\
+\> \emph{The covariance explains dependence between variables.}
+\end{tabbing}
+
+\bigskip
+
+We included those applications and more in this Sixth Edition. For the crucial computation
+of matrix weights in deep learning, Chapter 9 presents the ideas of \textbf{optimization}. This is
+where linear algebra meets calculus: \textbf{derivative = zero} becomes a matrix equation at the
+minimum point because $F(x)$ has many variables.
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+Several topics from the Fifth Edition gave up their places but not their importance.
+Those sections simply moved onto the Web. The website for this new Sixth Edition is
+
+\begin{center}
+\textbf{math.mit.edu/linearalgebra}
+\end{center}
+
+That website includes sample sections from this new edition and solutions to all Problem
+Sets. These sections (and more) are saved online from the Fifth Edition:
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{7.5cm}p{7.5cm}@{}}
+\textbf{Fourier Series} & \textbf{Norms and Condition Numbers} \\[0.3cm]
+\textbf{Iterative Methods and Preconditioners} & \textbf{Linear Algebra for Cryptography}
+\end{tabular}
+\end{center}
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+Here is a small touch of linear algebra---three questions before this course gets serious:
+
+\begin{enumerate}
+    \item Suppose you draw three straight line segments of lengths $r$ and $s$ and $t$ on this page.
+    What are the conditions on those three lengths to allow you to make the segments
+    into a triangle? In this question you can choose the directions of the three lines.
+
+    \item Now suppose the directions of three straight lines $u, v, w$ are fixed and different.
+    But you could stretch those lines to $au, bv, cw$ with any numbers $a, b, c$.
+    Can you always make a closed triangle out of the three vectors $au, bv, cw$?
+
+    \item Linear algebra doesn't stay in a plane! Suppose you have \textbf{four lines} $u, v, w, z$
+    in different directions in 3-dimensional space. Can you always choose the numbers
+    $a, b, c, d$ (zeros not allowed) so that $au + bv + cw + dz = 0$?
+\end{enumerate}
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+For typesetting this book, maintaining its website, offering quality textbooks to Indian fans,
+I am grateful to Ashley C. Fernandes of Wellesley Publishers (www.wellesleypublishers.com)
+
+\bigskip
+\bigskip
+
+\noindent gilstrang@gmail.com \hfill \textit{Gilbert Strang}
