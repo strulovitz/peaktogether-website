@@ -2,11 +2,14 @@
 
 Owns the pyglet window, the moderngl context, the fixed-timestep
 accumulator (10 Hz pulses -> tick_cb; every display frame -> frame_cb
-with interpolation alpha), and the render pipeline.
+with interpolation alpha), and the render pipeline:
 
-Walking skeleton: single scene pass with additive blending; bloom FBOs
-arrive in the next package. Additive blending is order-independent, so
-no sorting is ever needed — overlapping glow simply gets brighter.
+    scene pass (additive line ribbons, into an RGBA16F framebuffer)
+      -> bloom (downsample, Gaussian blur, composite + tone map)
+        -> screen
+
+Additive blending is order-independent, so no sorting is ever needed --
+overlapping glow simply gets brighter.
 """
 
 import datetime
@@ -21,8 +24,9 @@ from pyglet.window import key
 from .camera import Camera
 from .shaders import LINE_VERT, LINE_FRAG
 from .batches import build_vertices
+from .bloom import Bloom
 
-PULSE_DT = 0.1                       # 10 Hz logic pulse (frozen)
+PULSE_DT = 0.1                        # 10 Hz logic pulse (frozen)
 _INITIAL_VBO_BYTES = 4 * 1024 * 1024  # room for ~20k segments
 
 
@@ -56,8 +60,15 @@ class Forge:
         self._vbo = self.ctx.buffer(reserve=_INITIAL_VBO_BYTES, dynamic=True)
         self._vao = self._make_vao()
 
+        self._bloom = Bloom(
+            self.ctx,
+            strength=float(settings.get("bloom_strength", 0.85)),
+            exposure=float(settings.get("exposure", 2.5)),
+        )
+
         self.camera = Camera()
         self._vobjects = []
+        self._debug_lines = []
         self._want_screenshot = False
 
         # F12 = screenshot (system button). push_handlers keeps pyglet's
@@ -131,8 +142,11 @@ class Forge:
         w, h = self.window.get_framebuffer_size()
         if w <= 0 or h <= 0:
             return
-        self.ctx.viewport = (0, 0, w, h)
-        self.ctx.clear(0.0, 0.0, 0.0, 1.0)
+
+        # ---- scene pass: line ribbons into the RGBA16F framebuffer ----
+        self._bloom.ensure_size(w, h)
+        self._bloom.scene_fbo.use()
+        self._bloom.scene_fbo.clear(0.0, 0.0, 0.0, 1.0)
         self.ctx.disable(moderngl.DEPTH_TEST)
         self.ctx.enable(moderngl.BLEND)
         self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)  # additive glow
@@ -141,14 +155,18 @@ class Forge:
         self._prog["u_mvp"].write(np.ascontiguousarray(mvp.T, dtype=np.float32))
 
         data = build_vertices(self._vobjects, self.camera.eye())
-        if data.shape[0] == 0:
-            return
-        if data.nbytes > self._vbo.size:
-            self._vbo.release()
-            self._vbo = self.ctx.buffer(reserve=2 * data.nbytes, dynamic=True)
-            self._vao = self._make_vao()
-        self._vbo.write(data.tobytes())
-        self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
+        if data.shape[0] > 0:
+            if data.nbytes > self._vbo.size:
+                self._vbo.release()
+                self._vbo = self.ctx.buffer(
+                    reserve=2 * data.nbytes, dynamic=True
+                )
+                self._vao = self._make_vao()
+            self._vbo.write(data.tobytes())
+            self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
+
+        # ---- bloom: downsample, blur, composite + tone map to screen ----
+        self._bloom.apply(self.ctx.screen, w, h)
 
     def _count_fps(self):
         self._fps_frames += 1
