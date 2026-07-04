@@ -1,0 +1,96 @@
+% ============================================================
+% PAGE: v  (Preface — begins)
+% ============================================================
+
+\begin{center}
+{\Huge \textbf{Preface}}
+\end{center}
+
+\bigskip
+\bigskip
+
+One goal of this Preface can be achieved right away. You need to know about the video
+lectures for MIT's Linear Algebra course \textbf{Math 18.06}. Those videos go with this book,
+and they are part of MIT's OpenCourseWare. The direct links to linear algebra are
+
+\bigskip
+
+\begin{center}
+https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
+
+\medskip
+
+https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/
+\end{center}
+
+\bigskip
+
+On YouTube those lectures are at \textbf{https://ocw.mit.edu/1806videos} and \textbf{/1806scvideos}
+
+\bigskip
+
+The first link brings the original lectures from the dawn of OpenCourseWare. Problem
+solutions by graduate students (really good) and also a short introduction to linear algebra
+were added to the new 2011 lectures. And the course today has a new start---the crucial
+ideas of linear independence and the column space of a matrix have moved near the front.
+
+\bigskip
+
+I would like to tell you about those ideas in this Preface.
+
+\bigskip
+
+Start with two column vectors $a_1$ and $a_2$. They can have three components each,
+so they correspond to points in 3-dimensional space. The picture needs a center point
+which locates the zero vector:
+
+$$
+a_1 = \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
+\qquad
+a_2 = \begin{bmatrix} 1 \\ 4 \\ 2 \end{bmatrix}
+\qquad
+\textbf{zero vector} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+$$
+
+\bigskip
+
+The vectors are drawn on this 2-dimensional page. But we all have practice in visualizing
+three-dimensional pictures. Here are $a_1, a_2, 2a_1$, and the vector sum $a_1 + a_2$.
+
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book)
+% ------------------------------------------------------------
+% The figure shows a 2D projection representing 3D vectors emanating from a
+% common origin point labeled 0 (with the zero vector displayed as a column
+% (0,0,0) at the lower left).
+%
+% From this origin, several lines radiate outward:
+%
+%   - A solid line goes up-and-right to a point labeled a_2 = (1,4,2)
+%     (upper area of the figure).
+%   - A solid line goes right (lower, shorter) to a point labeled
+%     a_1 = (2,3,1).
+%   - A solid line, longer, continues in roughly the same direction as a_1
+%     to a further point labeled 2a_1 = (4,6,2) — showing that 2a_1 is twice
+%     as far from the origin as a_1, along the same ray.
+%   - A solid line from the origin goes to an intermediate point (between the
+%     a_1/a_2 directions) which is labeled at the top as a_1 + a_2 = (3,7,3) —
+%     this point is reached by the parallelogram rule (vector addition).
+%   - Dashed lines connect a_2 to (a_1 + a_2), and connect a_1 to (a_1 + a_2),
+%     forming a parallelogram whose fourth vertex is the sum vector —
+%     illustrating the "tip-to-tail" or parallelogram construction of vector
+%     addition.
+%   - A further dashed line extends from (a_1 + a_2) out to a point labeled
+%     2a_1 + a_2 at the far right, showing the parallelogram construction for
+%     adding 2a_1 and a_2 (completing the picture that combines scalar
+%     multiplication and addition).
+%
+% The overall effect is a classic "vector addition parallelogram" diagram,
+% extended to also show the scalar multiple 2a_1, all radiating from a common
+% origin 0, with labeled coordinate vectors at each vertex.
+% ------------------------------------------------------------
+
+\bigskip
+\begin{center}
+v
+\end{center}
