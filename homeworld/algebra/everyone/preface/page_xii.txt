@@ -1,0 +1,46 @@
+% ============================================================
+% PAGE: xii  (Preface, continued — "Dictionary of Matrices")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent xii
+
+\bigskip
+
+\section*{Dictionary of Matrices}
+
+A good way to tell you what this book contains is to name the matrices you will meet.
+This wide variety of matrices is a special feature of linear algebra.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{4.2cm} p{4.2cm} p{4.2cm}@{}}
+\emph{Chapter 1} & \emph{Chapter 2} & \emph{Chapter 3} \\[4pt]
+Identity matrix $I$ & Elimination matrix $E$ & Echelon matrix $R$ \\[2pt]
+Column basis $C$ & Lower triangular $L$ & Free matrix $F$ \\[2pt]
+Row basis $R$ & Upper triangular $U$ & Special solutions $S$ \\[2pt]
+Rank 1 matrix $uv^{\mathrm{T}}$ & Inverse matrix $A^{-1}$ & Mixing matrix $M = W^{-1}$ \\[2pt]
+ & Transpose matrix $A^{\mathrm{T}}$ & Incidence matrix $A$ \\[2pt]
+ & Permutation $P$ & Laplacian matrix $L$ \\[2pt]
+ & Fourier matrix $F$ & Pseudoinverse $A^{+}$ \\[10pt]
+
+\emph{Chapter 4} & \emph{Chapter 5} & \\[4pt]
+Orthogonal matrix $Q$ & Cofactor matrix $C$ & \\[2pt]
+Projection matrix $P$ & Change of basis $B$ & \\[2pt]
+Least squares $A^{\mathrm{T}}A$ & Tilted box $E$ & \\[2pt]
+Upper triangular $R$ & House matrix $H$ & \\[2pt]
+Reflection matrix $H$ & & \\[10pt]
+
+\emph{Chapter 6} & \emph{Chapter 7} & \emph{Chapter 8} \\[4pt]
+Symmetric matrix $S$ & Singular values $\Sigma$ & Weight matrix $A$ \\[2pt]
+Eigenvectors $X$ & Left singular vectors $U$ & Convolution $C$ \\[2pt]
+Eigenvalues $\Lambda$ & Right singular vectors $V$ & Jacobian matrix $J$ \\[2pt]
+Fibonacci matrix $F$ & Compressed matrix $A_k$ & Hessian matrix $H$ \\[2pt]
+Jordan matrix $J$ & Sample covariance $AA^{\mathrm{T}}$ & Covariance matrix $V$ \\[2pt]
+Similar matrix $BAB^{-1}$ & Hilbert matrix $H$ & Shift matrix $S$ \\[2pt]
+Exponential $e^{At}$ & & \\
+\end{tabular}
+\end{center}
