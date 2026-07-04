@@ -5,7 +5,54 @@ Peak Together monorepo (github.com/strulovitz/peaktogether-website). Game code
 lives under `homeworld/`; the design scriptures live under `homeworld/BIBLE/`;
 the Strang book excerpts live under `homeworld/algebra/`.
 
+## PROJECT OVERVIEW & STATE
+**Homeworld: A Good Basis** — a free, open-source, two-player-one-screen remake of
+Homeworld (1999) where commanding the fleet IS doing linear algebra (every ship is
+a column vector; the fleet is a matrix; the 16-mission journey home to Hiigara is
+"the search for a good basis"). Teaches Gilbert Strang's linear algebra. Python +
+moderngl + pyglet + numpy + Pillow, Windows-first. NO audio, ever (Apocrypha
+Amendment A).
+
+**Team model:** Nir (owner — pastes text between chats, runs the game, can't code
+or do math) → Claude Fable (the Parent/architect in OpenRouter — designs AND writes
+all code, delivered as complete files) → DeepSeek (librarian/runner in OpenCode —
+saves Fable verbatim to BIBLE, drops code files in exactly, updates this file,
+commits with Fable's exact message, pushes; never designs or writes game code).
+
+**Scriptures (all verbatim in `homeworld/BIBLE/`):** Old Testament (vision + every
+mechanic + 16-mission campaign + engineering doctrine — wins over all), New
+Testament (forge/fleet/helm module design + INTERFACES v1.0 + the Referee + the
+12-line fleet self-test), Apocrypha (content/campaign/bridge/intel/guidestone +
+Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minutes
+Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
+"FABLE DELIVERABLE N" file per code package.
+
+**Current state (July 4, 2026):** **forge is FEATURE-COMPLETE** (NT build steps 1–4
+= Fable deliverables 1–3: walking skeleton → bloom → text + all remaining
+primitives). All syntax-checked (py_compile), committed with Fable's exact
+messages, pushed. AWAITING Nir's visual confirmation of `run.bat` (the forge
+acceptance demo). Requirements already installed on Nir's machine: numpy 2.4.6,
+moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
+
+**Next packages (NT build order):** (1) Nir confirms forge demo → (2) **helm**
+(keyboard=Pilot + mouse=Navigator action layer + demo) → (3) **fleet** (ships as
+matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
+`fleet.demo` = 12/12) → (4) **app.py wiring** = three ships flying combination
+orders (Mission 1 buildable) → then Apocrypha modules (content, campaign+Mission 1,
+bridge+Big Picture, intel) → Missions 2–16. In parallel: keep filing Strang book
+pages (Chapter 1 next) into `homeworld/algebra/`.
+
+**Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
+iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
+(+ combined `preface.txt`). Chapter 1 folders exist, empty, awaiting pages.
+
+**Run:** `cd C:\Users\nir_s\peaktogether-website\homeworld` then `.\run.bat`.
+
 ## FILE INDEX
+homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
+homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-3 — WORKING
+homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
 homeworld/run.bat — double-click launcher (runs `python -m forge.demo`) — WORKING
 homeworld/settings.json — human-editable config (v0.3.0; title, size, vsync, bloom_strength, exposure, seed) — WORKING
