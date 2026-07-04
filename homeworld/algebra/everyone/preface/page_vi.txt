@@ -1,0 +1,95 @@
+% ============================================================
+% PAGE: vi  (Preface, continued)
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent vi
+
+\bigskip
+
+That picture reveals the most important fact about those three vectors $a_1, a_2, a_3$.
+But we need the right language to describe it. Our goal is to see the idea, and to get better
+and better at expressing it. Here are three steps in a good direction.
+
+\bigskip
+
+\noindent\textbf{1 \quad Idea in words} \hfill Column 3 is the sum of column 1 and column 2
+
+\bigskip
+
+\noindent\textbf{2 \quad Idea in symbols} \hfill $a_3 = a_1 + a_2$
+
+\bigskip
+
+\noindent\textbf{3 \quad Matrix times vector}
+$$
+\begin{bmatrix} a_3 \end{bmatrix}
+=
+\begin{bmatrix} a_1 & a_2 \end{bmatrix}
+\begin{bmatrix} 1 \\ 1 \end{bmatrix}
+$$
+
+\bigskip
+
+Step 3 shows how a matrix $C$ multiplies a vector $x$. The columns $a_1$ and $a_2$ in $C$ multiply
+the numbers $x_1 = 1$ and $x_2 = 1$ in $x$. \emph{The output $Cx$ is a combination of the columns.}
+Here that column combination is $a_1 + a_2$.
+
+One more crucial step allows several combinations at once. This is the way forward.
+We cannot take this step with pictures or words. \textbf{A matrix multiplies a matrix.}
+
+\bigskip
+
+\noindent\textbf{4 \quad Matrix times matrix} \quad $A = CR$ is
+$$
+\begin{bmatrix} a_1 & a_2 & a_3 \end{bmatrix}
+=
+\begin{bmatrix} a_1 & a_2 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{bmatrix}
+$$
+
+\bigskip
+
+Those three columns of $R$ give three combinations in $A$ of the two columns in $C$:
+
+\medskip
+
+\noindent \textbf{Column 1:} $\; 1a_1 + 0a_2 = a_1$ \hfill \textbf{Column 2:} $\; 0a_1 + 1a_2 = a_2$
+
+\noindent \textbf{Column 3:} $\; 1a_1 + 1a_2 = (1,3,4) + (2,4,2) = (3,7,6) = a_3$
+
+\bigskip
+
+That matrix multiplication $A = CR$ displays major information:
+
+\begin{itemize}
+    \item $A$ has dependent columns: the combination of columns $1 + 2 - 3$ gives $(0,0,0)$
+    \item $A$ also has dependent rows: some combination of its rows will give $(0,0,0)$!
+    \item The ``column space'' of this $A$ is only a plane and not the whole 3D space
+    \item The ``row space'' of this $A$ is also a plane and not the whole 3D space
+    \item The square matrix $A$ has no inverse. Its determinant is zero. It is unusual.
+\end{itemize}
+
+\bigskip
+
+\section*{Subspaces of Vector Spaces}
+
+In Chapters 1 to 4, the organizing ideas are \textbf{vector spaces}. The columns of $A$ are in
+$m$-dimensional space $\mathbf{R}^m$. The rows are in $n$-dimensional space $\mathbf{R}^n$. But the action is in
+\textbf{four subspaces} inside $\mathbf{R}^m$ and $\mathbf{R}^n$. The matrix $A$ multiplies $x_{\text{row}}$ in its \emph{row space} and $x_{\text{null}}$
+in its \emph{nullspace}. The output is $Ax_{\text{row}} = b$ in its \emph{column space} because $Ax_{\text{null}} = \text{zero}$.
+Then the complete solution to $Ax = b$ has a row space part and a nullspace part:
+
+$$
+\boxed{
+x = x_{\text{row}} + \text{any } x_{\text{null}}
+\qquad
+Ax = Ax_{\text{row}} + Ax_{\text{null}} = b + 0 = b
+}
+$$
+
+\bigskip
+
+\emph{Every linear equation $Ax = b$ is solved this way: particular $x_{\text{row}}$ + any homogeneous $x_{\text{null}}$.}
