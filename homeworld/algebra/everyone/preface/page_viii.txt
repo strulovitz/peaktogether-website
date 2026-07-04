@@ -1,0 +1,78 @@
+% ============================================================
+% PAGE: viii  (Preface, continued — "Final Chapter: Learning from Data")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent viii
+
+\bigskip
+
+\section*{Final Chapter: Learning from Data}
+
+We added Chapter 8 on \textbf{data science}. The data often comes in a rectangular matrix $A$.
+Each row measures $n$ properties of a sample. That number $n$ is large, and the number of
+samples is often very large. Out of this big matrix, applied linear algebra has to find out
+what is important. The goal is to produce understanding that leads to a decision.
+
+\bigskip
+
+In machine learning the output is a \textbf{nonlinear function of the input}. Deep learning
+aims to find that function from the training data. It produces (often with giant computa-
+tions) a learning function $F(x, v)$. The input vectors $v$ contain the features of each training
+sample (many $v$'s from many samples). The vector $x$ contains the weights assigned to those
+features. And hidden inside $F$ is a nonlinear function that mixes the inputs and the weights.
+A favorite is the simple function $\text{ReLU}(y) = \text{maximum of } 0 \text{ and } y$: a \emph{ramp function}.
+
+\bigskip
+
+Optimizing the weights to learn from the training data $v$ is the big computation.
+When that is well done, we can input new samples that the system has never seen.
+The success of deep learning is that $F(x, v)$ is often close to the correct output.
+The system has identified an image, or translated a sentence, or chosen a winning move.
+
+\bigskip
+
+This is \emph{piecewise linear algebra}, a mixture of weight matrices and ReLU. It is included
+with no expectation of testing students. This is a chapter to use later, in any way you want.
+You could experiment with the website \texttt{playground.tensorflow.org}.
+
+\bigskip
+
+Machine learning has become important and powerful---based on linear algebra and
+calculus (optimizing the weights) and on statistics (controlling the mean and variance).
+\emph{But it is not required or even expected to be part of the course. What I hope is that the
+faster start allows you to reach eigenvalues and singular values---those are true highlights
+of this subject.} Chapters 2 to 7 confirm the jump of intuition near the end of Chapter 1:
+
+\bigskip
+
+\begin{quote}
+If all columns of $A$ lie on an $r$-dimensional plane, then all rows of $A$ also lie on a
+(usually different) $r$-dimensional plane. That fact has far-reaching consequences.
+\end{quote}
+
+\bigskip
+
+This is a textbook for a normal linear algebra class---to explain the key ideas of this
+beautiful subject to \emph{everyone}. As clearly as I can. Thank you.
+
+\bigskip
+\hfill Gilbert Strang
+
+\bigskip
+
+After writing this introduction, I looked back at the opening example. That 3 by 3 matrix
+$A$ has dependent columns (column $1$ + column $2$ = column $3$). By linear algebra,
+$A$ must also have dependent rows. The numbers to show this are $-5$ and $3$:
+
+$$
+-5(\text{row } 1) + 3(\text{row } 2) = \text{row } 3 \text{ of } A
+\qquad\qquad
+-5(1,2,3) + 3(3,4,7) = (4,2,6).
+$$
+
+\bigskip
+
+The number of independent rows equals the number of independent columns. \emph{Wonderful!}
