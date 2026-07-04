@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quake — Peak Together</title>
+    <title>Quake: Principia — Peak Together</title>
     <link rel="stylesheet" href="/style.css?v=24">
 </head>
 <body>
@@ -14,167 +14,182 @@
         <article class="page gp">
 
             <!-- ① TITLE BLOCK -->
-            <span class="game-badge building">🔨 Building</span>
-            <h1>⛏️ Quake</h1>
+            <span class="game-badge playable">▶ Playable</span>
+            <h1>⛏️ Quake: Principia</h1>
             <p class="gp-hook">
-                Inspired by <strong>Quake</strong> (1996) — where a force-directed 3D graph becomes a walkable dungeon
-                and <strong>every room is one proposition from Newton's Principia</strong>. Walls carry the step-by-step
-                geometric proof; you read a panel by <em>shooting</em> it. The final lit proof-wall is a hidden door —
-                shoot it, and the room's one demon emerges.
+                Inspired by <strong>Quake</strong> (1996) — a true-3D dungeon where <strong>every room is one
+                proposition from Newton's <em>Principia</em></strong>. The walls carry the step-by-step geometric
+                proof; you "read" a panel by <em>shooting</em> it, watching it glow from black-and-white to color.
+                Light up the final proof-wall and it becomes a hidden door — shoot it, and the room's one demon emerges.
             </p>
 
-            <!-- Sneak-peek screenshot (early Doom engine demo) -->
-            <img class="gp-hero-img" src="/images/quake-cothon1.png" alt="Quake — a glimpse of the original game that inspired our remake">
+            <!-- Looping, muted gameplay clip (served free via jsDelivr CDN from the git repo) -->
+            <div class="pt-clip">
+                <video class="pt-clip__video" autoplay loop muted playsinline preload="metadata"
+                       poster="/images/quake-principia-clip-poster.jpg"
+                       aria-label="Gameplay footage of Quake: Principia, looping silently">
+                    <source src="https://cdn.jsdelivr.net/gh/strulovitz/peaktogether-website@master/arcade/quake/quake-principia-clip.mp4" type="video/mp4" />
+                    <img src="/images/quake-principia-clip-poster.jpg" alt="Quake: Principia gameplay" />
+                </video>
+            </div>
 
             <div class="gp-cta">
-                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" class="big-button" target="_blank" rel="noopener">👀 Sneak Peek on GitHub</a>
-                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/quake" class="gp-ghost-btn" target="_blank" rel="noopener">Quake Source Code</a>
+                <a href="https://strulovitz.itch.io/quake-principia" class="big-button" target="_blank" rel="noopener">▶ Play on Windows — Free</a>
+                <a href="https://github.com/strulovitz/peaktogether-website/releases/tag/quake-principia-v1.0.0" class="gp-ghost-btn" target="_blank" rel="noopener">Mirror (GitHub)</a>
             </div>
-            <p class="gp-setup-line">Early demo available — Python source, run it yourself. The real thing is being built right now. 🔨</p>
+            <p class="gp-setup-line">No Python. No terminal. No installer. Just unzip and double-click. 💙</p>
 
             <!-- ② THE NOSTALGIA HOOK -->
             <h2>You remember this.</h2>
             <p>
-                In 1996, <strong>Quake</strong> did something no shooter had done before: it gave you a <em>true 3D world</em>
-                — not a flat plane faking depth. Corridors crossed over and under each other as bridges. The engine knew
-                exactly where you were in all three dimensions. We kept that feeling — the dark stone walls, the echoing
-                footsteps, the demon waiting in the dark — and poured something completely new inside.
+                In 1996, <strong>Quake</strong> did something no shooter had done before: it gave you a <em>true 3D
+                world</em> — not a flat plane faking depth. Corridors crossed over and under each other as bridges. The
+                engine knew exactly where you were in all three dimensions. We kept that feeling — the dark stone walls,
+                the echoing footsteps, the demon waiting in the dark — and poured something completely new inside.
             </p>
 
             <div class="gp-thennow">
                 <figure>
-                    <img src="/images/quake-shambler2-wide.png" alt="Quake (1996) — the original box cover">
+                    <img src="/images/quake-shambler2-wide.png" alt="Quake (1996) — the original">
                     <figcaption>Then — the original <em>Quake</em> (1996)</figcaption>
                 </figure>
                 <figure>
-                    <img src="/images/doom-demo-screenshot.png" alt="Early Doom prototype — a room with panels and a demon">
-                    <figcaption>Now — our Doom prototype (sneak peek)</figcaption>
+                    <img src="/images/quake-principia-colored-walls.png" alt="Quake: Principia — a room with the proof panels shot and glowing in color">
+                    <figcaption>Now — <em>Quake: Principia</em></figcaption>
                 </figure>
             </div>
 
             <!-- ③ THE TWIST -->
             <h2>Here's what's different — and amazing.</h2>
             <p>
-                This isn't a shooter. <strong>Every room is a proposition from Newton's Principia</strong> — the 1687 book
-                that invented physics. Each logical dependency between propositions is a corridor. The result is a
-                <strong>concept-graph dungeon</strong>: you walk from idea to idea, and the geometry of the map <em>is</em>
+                This isn't a shooter. <strong>Every room is a proposition from Newton's <em>Principia</em></strong> — the
+                1687 book that invented physics. Each logical dependency between propositions is a corridor. The result is
+                a <strong>concept-graph dungeon</strong>: you walk from idea to idea, and the geometry of the map <em>is</em>
                 the structure of Newton's argument.
             </p>
             <p>
-                Walls carry the <strong>step-by-step geometric proof</strong>. Each step is a drawing panel (a real Asymptote
-                figure) and a full-LaTeX text panel. You "read" a panel by <strong>shooting it</strong> — it glows from grey
-                to colored. The final lit proof-wall is a hidden door. Shoot it, and the room's one demon emerges. Kill it,
-                and the <strong>ceiling equations bleed red</strong> — the room is cleared, and you've earned the insight.
+                Walls carry the <strong>step-by-step geometric proof</strong>. Each step is a drawing panel (a real
+                Asymptote figure) beside a full-LaTeX text panel. You "read" a panel by <strong>shooting it</strong> — it
+                glows from black-and-white to colored, with the matching words and shapes lit in the same colors so the
+                picture and the sentence teach each other. Light up every panel and the final proof-wall becomes a
+                <strong>hidden door</strong>. Shoot it, and the room's one demon emerges. Kill it, and the <strong>ceiling
+                equations bleed red</strong> — the room is cleared, and you've earned the insight.
             </p>
             <p>
-                Corridors cross at different heights — a force-directed graph layout inevitably has crossings, so we made
-                them a <strong>feature</strong>: bridges and underpasses. True 3D, with two render modes: <strong>wireframe
-                corridor</strong> (transparent, distance-dimmed, with Half-Life guide-lines) for transit, and <strong>solid
-                room</strong> (walls, panels, demon, ceiling equations) for combat and reading.
+                Get it wrong? <strong>Nothing bad happens.</strong> There's no health bar, no lives, no game-over — the
+                challenge is understanding, not survival. You're not being tested; you're being shown.
             </p>
 
-            <!-- ④ THE MOUNTAIN YOU'RE CLIMBING -->
+            <!-- ④ REAL SCREENSHOTS GALLERY -->
+            <h2>📸 Gallery — real in-game screenshots</h2>
+            <p class="gp-muted">Straight from our own engine. Click any photo to view it full-size.</p>
+            <div class="gp-gallery three">
+                <img src="/images/quake-principia-colored-walls.png" alt="Quake: Principia — proof panels shot and glowing in color">
+                <img src="/images/quake-principia-non-geometry-panel.png" alt="Quake: Principia — an equation-as-figure panel with matching colored terms">
+                <img src="/images/quake-principia-equations-on-ceiling.png" alt="Quake: Principia — blood-red equations bleeding across the ceiling after a clear">
+                <img src="/images/quake-principia-glowing-secret-door.png" alt="Quake: Principia — the final proof-wall glowing gold as a hidden door">
+                <img src="/images/quake-principia-demon.png" alt="Quake: Principia — the demon emerging from behind the proof-wall">
+            </div>
+
+            <!-- ⑤ THE MOUNTAIN YOU'RE CLIMBING -->
             <h2>🏔️ The mountain you're climbing</h2>
             <p>
                 <strong>The peak:</strong> Newton's <em>Principia Mathematica</em> — the 1687 book that gave us the laws of
-                motion, universal gravitation, and the mathematical framework for classical physics. Every proposition builds
-                on earlier ones in a strict logical chain, which maps <em>perfectly</em> to a graph of rooms and corridors.
+                motion, universal gravitation, and the mathematical framework for classical physics. Every proposition
+                builds on earlier ones in a strict logical chain, which maps <em>perfectly</em> to a graph of rooms and
+                corridors. This first level walks Book I, Sections I–III — Newton's "first and last ratios" leading toward
+                the inverse-square law.
             </p>
             <p>
-                The 1846 Andrew Motte English translation is our source — we have clean OCR text, per-page images, and a
-                page-numbers index. Each figure from the book is rebuilt in Asymptote (a modern LaTeX geometry tool), with
-                per-step highlighting so you can watch a geometric proof unfold one construction at a time.
+                The Motte English translation is our source. Each figure from the book is rebuilt in Asymptote (a modern
+                LaTeX geometry tool), with per-step highlighting so you can watch a geometric proof unfold one construction
+                at a time — <strong>faithful to the printed page</strong>, never a simplification.
             </p>
             <p><strong>What you'll actually understand by the end:</strong></p>
             <ul class="gp-list">
-                <li>How Newton proved that Kepler's equal-area law follows from a central force.</li>
-                <li>Why orbits are conic sections — and what that has to do with your living room.</li>
+                <li>How Newton reasoned with <em>vanishing</em> quantities — calculus, before calculus had a name.</li>
+                <li>Why arcs, chords, and tangents become equal "in the last ratio."</li>
                 <li>How geometric reasoning (not algebra!) built the foundations of physics.</li>
-                <li>What "fidelity to the printed page" means — we reproduce the <em>real</em> proof, not a simplification.</li>
+                <li>What "fidelity to the printed page" means — we reproduce the <em>real</em> proof.</li>
             </ul>
-
-            <!-- ⑤ BUILDING IN PUBLIC -->
-            <h2>🔨 Building in public — follow along</h2>
-            <p>
-                We're building this engine from scratch — true 3D, pure Python, with <strong>moderngl + pyglet</strong>
-                for direct GPU control. No Unity. No Unreal. No Godot. Just us and the pipeline. Every commit is on
-                GitHub, and we document the whole journey.
-            </p>
-            <p>
-                Our early prototype was a <strong>Doom/Wolfenstein-style demo</strong> (Ursina/Panda3D), which you can
-                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" target="_blank" rel="noopener">download and run</a>
-                right now! It's a single room with a round demon and two explanation panels on the wall. Shoot the panels
-                and they flip from black-and-white "off" to colored "on." Shoot the demon three times and he dies — his
-                "blood" sprays an equation across the ceiling. It's a tiny working proof-of-concept: one room, two panels,
-                one demon, one ceiling equation. But a flat engine couldn't do the bridge/underpass crossings that are
-                the whole point of Quake, so we pivoted to a from-scratch true-3D rebuild.
-            </p>
-
-            <div class="gp-gallery four">
-                <img src="/images/quake-shambler.png" alt="Quake — Shambler">
-                <img src="/images/quake-cothon1.png" alt="Quake — Cthon">
-                <img src="/images/quake-grunt.png" alt="Quake — Grunt">
-                <img src="/images/quake-grunt2.jpg" alt="Quake — Grunt 2">
-            </div>
-
-            <p class="gp-muted">Screenshots from the original Quake (1996) — the inspiration for our remake. Our own engine screenshots are coming soon! 📸</p>
 
             <!-- ⑥ HOW YOU TWO PLAY -->
             <h2>❤️ How you two play</h2>
             <p>
-                Quake is built for <strong>two people on one screen</strong> — with a co-op design that gives each player
-                a real, distinct job.
+                Quake: Principia is built for <strong>two people on one screen</strong> — a co-op design that gives each
+                player a real, distinct job. (Playing solo works too — one person can do both.)
             </p>
             <div class="gp-roles">
                 <div class="gp-role">
                     <h3>🕹️ Player 1 — The Mover</h3>
                     <p>
-                        Owns the body and heading. Walks through the 3D dungeon with WASD and mouse-look.
-                        Enters rooms, navigates corridors, and <strong>decides where to go</strong>.
-                        The camera follows the Mover with a critically-damped spring — smooth, comfortable, no motion sickness.
+                        Owns the body and heading. Walks the 3D dungeon and <strong>decides where to go</strong>, stepping
+                        through doorways into each new proposition. Plays on <strong>keyboard</strong> — or, if you have one,
+                        a <strong>Thrustmaster T.16000M flight stick</strong>.
                     </p>
                 </div>
                 <div class="gp-role">
-                    <h3>🎯 Player 2 — The Shooter</h3>
+                    <h3>🎯 Player 2 — The Aimer</h3>
                     <p>
-                        Owns the reticle. Aims freely within a cone, completely independent of the camera.
-                        Fires at panels to "read" them (grey → colored), lights up the hidden proof-wall
-                        to reveal the demon, and fights the single enemy in each room.
-                        The Shooter's aim <strong>never</strong> rotates the camera — zero couch co-op conflict.
+                        Owns the reticle. Aims freely, reads the panels, shoots them to light them up, opens the hidden
+                        proof-wall, and fights the room's single demon. Plays on <strong>mouse</strong> — or an
+                        <strong>Xbox controller</strong>. The Aimer's aim never yanks the camera around, so there's zero
+                        couch-co-op fighting over the view.
                     </p>
                 </div>
             </div>
+
+            <!-- ⑥b CONTROLS -->
+            <h2>🎮 Controls</h2>
             <p>
-                Neither of you can win alone. One explores and navigates; the other reads and shoots.
-                You have to <strong>talk to each other</strong> — that's the whole point.
-                <span class="gp-solo">Playing solo? You can play both roles yourself; it's just more fun with someone beside you. 💕</span>
+                Keyboard + mouse is all you need. A flight joystick and an Xbox controller are <strong>optional</strong> —
+                not required, just more fun — and they work <em>at the same time</em> as the keyboard and mouse.
             </p>
+
+            <h3>⌨️ Keyboard + Mouse</h3>
+            <ul>
+                <li><code>W</code> <code>A</code> <code>S</code> <code>D</code> &mdash; move &amp; strafe</li>
+                <li><strong>Mouse</strong> &mdash; look around and aim the reticle</li>
+                <li><strong>Left-click</strong> &mdash; shoot a panel (colors it) / shoot the hidden door / shoot the demon</li>
+                <li><code>R</code> &mdash; read a panel up close (toggle)</li>
+                <li><code>Esc</code> &mdash; quit</li>
+            </ul>
+
+            <h3>🕹️ Optional controllers (not required — just more fun)</h3>
+            <p>
+                A quick ~1-second calibration runs at startup for the joystick — just keep the stick centered for a moment.
+            </p>
+            <p><strong>Thrustmaster T.16000M flight stick</strong> → the Mover:</p>
+            <ul>
+                <li>Move the stick — walk &amp; strafe.</li>
+                <li>Twist the stick — turn left / right.</li>
+                <li>Throttle slider — run forward / backward (push forward to run ahead, pull back to reverse; centered = stop).</li>
+            </ul>
+            <p style="margin-top: 1.5rem;"><strong>Xbox controller</strong> → the Aimer:</p>
+            <ul>
+                <li><strong>Right stick</strong> — look around &amp; aim the reticle.</li>
+                <li><strong>Right trigger</strong> or <strong>A</strong> — shoot.</li>
+            </ul>
 
             <!-- ⑦ GOD-MODE & COMFORT -->
             <h2>🛡️ God-mode — you cannot die</h2>
             <p>
-                There is no health bar. No lives. No game-over screen. The challenge is understanding, not survival.
-                Infinite ammo, one demon per room (hidden behind the final proof-wall), no level boss.
-                You're here to learn Newton's Principia, not to grind.
+                There is no health bar. No lives. No game-over screen. Infinite ammo, one demon per room (hidden behind
+                the final proof-wall), no level boss. You're here to learn Newton's <em>Principia</em>, not to grind.
             </p>
 
             <!-- ⑧ TECH BEHIND IT -->
             <h2>⚙️ The tech</h2>
             <p>
-                <strong>Language:</strong> Pure Python (Windows-first). <strong>Graphics:</strong> moderngl + pyglet
-                (direct OpenGL pipeline, no engine hiding the work). <strong>Math:</strong> NumPy, NetworkX, Pydantic v2.
-                <strong>Build pipeline:</strong> Asymptote (geometry figures), Matplotlib, Tectonic (LaTeX), PyInstaller (packaging).
-            </p>
-            <p>
-                <strong>Custom 3D engine:</strong> we author our own GLSL shaders. Two render modes — wireframe corridor
-                (depth-tested, distance-dimmed) and solid room (textured panels, walls with holes for doors at their true
-                map bearings, hidden alcove, blood-red ceiling tint). Room-local axes are parallel to map axes (global
-                compass). Every door is placed at the corridor's exact map bearing.
+                <strong>Language:</strong> pure Python (Windows-first). <strong>Graphics:</strong> moderngl + pyglet
+                (a direct OpenGL pipeline — no engine hiding the work, our own GLSL shaders). <strong>Math:</strong> NumPy,
+                NetworkX, Pydantic v2. <strong>Build pipeline:</strong> Asymptote (geometry figures), Matplotlib, LaTeX,
+                PyInstaller (packaging). Every commit is on GitHub — we build in public.
             </p>
 
-            <!-- ⑨ GALLERY -->
-            <h2>📸 Originals that inspired us</h2>
-            <p class="gp-muted">The original Quake (1996) — the game we're remaking with math inside. Click any photo to view it full-size.</p>
+            <!-- ⑨ ORIGINALS -->
+            <h2>📼 The originals that inspired us</h2>
+            <p class="gp-muted">The original Quake (1996) — the game we're remaking with math inside.</p>
             <div class="gp-gallery four">
                 <img src="/images/quake-shambler.png" alt="Quake Shambler">
                 <img src="/images/quake-cothon1.png" alt="Quake Cthon">
@@ -183,22 +198,44 @@
             </div>
 
             <!-- ⑩ DOWNLOAD & PLAY -->
-            <h2>⬇️ Try the early prototype (sneak peek)</h2>
-            <p>A single room, two panels, one demon — a tiny working proof-of-concept. <strong>Requires Python:</strong></p>
+            <h2>⬇️ Download &amp; play (Windows)</h2>
+            <p>The easy way — <strong>no Python, no terminal, no installer:</strong></p>
             <div class="gp-cta">
-                <a href="https://github.com/strulovitz/peaktogether-website/tree/master/doom" class="big-button" target="_blank" rel="noopener">▶ Download from GitHub</a>
+                <a href="https://strulovitz.itch.io/quake-principia" class="big-button" target="_blank" rel="noopener">▶ Play on Windows — Free</a>
+                <a href="https://github.com/strulovitz/peaktogether-website/releases/tag/quake-principia-v1.0.0" class="gp-ghost-btn" target="_blank" rel="noopener">Mirror (GitHub)</a>
             </div>
             <ol class="gp-list">
-                <li>Get the code from <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a> (free, open-source).</li>
-                <li>Make sure you have <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a> installed.</li>
-                <li>Install the libraries: <code>pip install ursina</code></li>
-                <li>Run it: <code>cd doom</code> then <code>python main.py</code></li>
+                <li>Download the Windows <code>.zip</code>.</li>
+                <li>Right-click it → <strong>Extract All…</strong></li>
+                <li>Open the extracted folder.</li>
+                <li>Double-click <strong>“Quake Principia.exe”</strong> — that's it! 🎉</li>
+                <li>Grab your partner — and a flight joystick + Xbox controller if you have them. 🎮</li>
             </ol>
-            <p class="gp-setup-line">The real Quake engine (moderngl + pyglet) is being built right now — follow the <a href="https://github.com/strulovitz/peaktogether-website/tree/master/quake" target="_blank" rel="noopener">quake/</a> folder on GitHub! 🔥</p>
+            <p class="gp-setup-line">To uninstall, just delete the folder. It installs nothing and never touches your system.</p>
+
+            <p class="gp-muted">
+                🛡️ <strong>Heads-up:</strong> we're a brand-new, free, open-source project, so Windows may say
+                <em>“Unknown publisher.”</em> That's expected for small free games — click
+                <strong>“More info” → “Run anyway.”</strong> The game needs no admin permission, installs nothing,
+                and doesn't touch your Python or system. <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Source code</a>.
+            </p>
+
+            <!-- ⑩b RUN FROM SOURCE (developers) -->
+            <h3>🧑‍💻 Prefer to run from source? (for developers)</h3>
+            <ol class="gp-list">
+                <li>Get the code from <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a> (free, open-source — no account, no payment, ever).</li>
+                <li>Make sure you have <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a> installed.</li>
+                <li>Install the libraries: <code>pip install moderngl pyglet numpy pillow pydantic networkx</code></li>
+                <li>Run it: <code>cd quake</code> then <code>python app.py</code></li>
+            </ol>
+            <p class="gp-muted">
+                First time running a game like this? Our <a href="/how-it-works/">How It Works</a> page walks you
+                through everything in plain English.
+            </p>
 
             <!-- ⑪ FOOTER STRIP -->
             <div class="gp-footstrip">
-                <span>⛏️ Next up → <em>first playable Principia level</em></span>
+                <span>⛏️ Now playable → <em>Newton's Principia, Book I</em></span>
                 <span>🔓 Free &amp; open-source</span>
                 <span><a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Contribute on GitHub →</a></span>
             </div>
