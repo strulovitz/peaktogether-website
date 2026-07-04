@@ -1,0 +1,92 @@
+% ============================================================
+% PAGE: ix  (Preface, continued — "Five Factorizations of a Matrix" and "Deep Learning")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{ix}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{Five Factorizations of a Matrix}}
+\end{center}
+
+\bigskip
+
+Here are the organizing principles of linear algebra. When our matrix has a special property,
+these factorizations will show it. Chapter after chapter, they express the key idea in a direct
+and useful way.
+
+\bigskip
+
+The usefulness increases as you go down the list. \textbf{Orthogonal matrices} are the win-
+ners in the end, because their columns are perpendicular unit vectors. That is perfection.
+
+$$
+\text{2 by 2 Orthogonal Matrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} = \text{Rotation by Angle } \theta
+$$
+
+\bigskip
+
+\textbf{Here are the five factorizations from Chapters 1, 2, 4, 6, 7:}
+
+\bigskip
+
+\begin{tabbing}
+\hspace{0.3cm}\textbf{1} \hspace{1cm} \= $A = CR$ \hspace{1cm} \= $=$ \ $R$ combines independent columns in $C$ to give all columns of $A$ \\[0.4cm]
+\textbf{2} \> $A = LU$ \> $=$ \ Lower triangular $L$ times Upper triangular $U$ \\[0.4cm]
+\textbf{4} \> $A = QR$ \> $=$ \ Orthogonal matrix $Q$ times Upper triangular $R$ \\[0.4cm]
+\textbf{6} \> $S = Q\Lambda Q^{\mathrm{T}}$ \> $=$ \ (Orthogonal $Q$) (Eigenvalues in $\Lambda$) (Orthogonal $Q^{\mathrm{T}}$) \\[0.4cm]
+\textbf{7} \> $A = U\Sigma V^{\mathrm{T}}$ \> $=$ \ (Orthogonal $U$) (Singular values in $\Sigma$) (Orthogonal $V^{\mathrm{T}}$) \\
+\end{tabbing}
+
+\bigskip
+
+May I call your attention to the last one? It is the \textbf{Singular Value Decomposition (SVD)}.
+It applies to every matrix $A$. Those factors $U$ and $V$ have perpendicular columns---all of
+length one. Multiplying any vector by $U$ or $V$ leaves a vector of the same length---so
+computations don't blow up or down. And $\Sigma$ is a positive diagonal matrix of ``singular
+values''. If you learn about eigenvalues and eigenvectors in Chapter 6, \emph{please} continue
+a few pages to singular values in Section 7.1.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Deep Learning}}
+\end{center}
+
+\bigskip
+
+For a true picture of linear algebra, applications have to be included. Completeness is
+totally impossible. At this moment, the dominating direction of applied mathematics
+has one special requirement: \emph{It cannot be entirely linear!}
+
+\bigskip
+
+One name for that direction is ``deep learning''. It is an extremely successful approach to
+a fundamental scientific problem: \textbf{Learning from data}. In many cases the data comes in a
+matrix. Our goal is to look inside the matrix for the connections between variables. Instead
+of solving matrix equations or differential equations that express known input-output rules,
+\emph{we have to find those rules}. The success of deep learning is to build a function $F(x, v)$
+with inputs $x$ and $v$ of two kinds:
+
+\bigskip
+
+\begin{quote}
+The vectors $v$ describes the features of the training data.
+
+\medskip
+The matrices $x$ assign weights to those features.
+
+\medskip
+The function $F(x, v)$ is close to the correct output for that training data $v$.
+
+\medskip
+\textbf{When $v$ changes to unseen test data, $F(x, v)$ stays close to correct.}
+\end{quote}
+
+\bigskip
+
+This success comes partly from the form of the learning function $F$, which allows it to
+include vast amounts of data. In the end, a linear function $F$ would be totally inadequate.
+The favorite choice for $F$ is \textbf{piecewise linear}. This combines simplicity with generality.
