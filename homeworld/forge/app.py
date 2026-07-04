@@ -1,15 +1,12 @@
 """The Forge class: window, GL context, main loop (NEW_TESTAMENT 1.2).
 
-Owns the pyglet window, the moderngl context, the fixed-timestep
-accumulator (10 Hz pulses -> tick_cb; every display frame -> frame_cb
-with interpolation alpha), and the render pipeline:
+Render pipeline per frame:
+    scene pass into RGBA16F FBO (additive):
+        line ribbons -> image panels -> labels
+    bloom (downsample, blur, composite + tone map) -> screen
+    screen overlay (crisp, after bloom): fps corner + F1 debug lines
 
-    scene pass (additive line ribbons, into an RGBA16F framebuffer)
-      -> bloom (downsample, Gaussian blur, composite + tone map)
-        -> screen
-
-Additive blending is order-independent, so no sorting is ever needed --
-overlapping glow simply gets brighter.
+Additive blending is order-independent: no sorting, ever.
 """
 
 import datetime
@@ -25,6 +22,8 @@ from .camera import Camera
 from .shaders import LINE_VERT, LINE_FRAG
 from .batches import build_vertices
 from .bloom import Bloom
+from .text import GlyphAtlas, TextRenderer, PanelRenderer, make_quad_program
+from .vobjects import Label, ImagePanel
 
 PULSE_DT = 0.1                        # 10 Hz logic pulse (frozen)
 _INITIAL_VBO_BYTES = 4 * 1024 * 1024  # room for ~20k segments
@@ -66,20 +65,26 @@ class Forge:
             exposure=float(settings.get("exposure", 2.5)),
         )
 
+        self._quad_prog = make_quad_program(self.ctx)
+        self._atlas = GlyphAtlas(self.ctx, px=48)
+        self._text = TextRenderer(self.ctx, self._atlas, self._quad_prog)
+        self._panels = PanelRenderer(self.ctx, self._quad_prog)
+
         self.camera = Camera()
         self._vobjects = []
         self._debug_lines = []
+        self._show_debug = False
         self._want_screenshot = False
+        self._fps_value = 0.0
 
-        # F12 = screenshot (system button). push_handlers keeps pyglet's
-        # default handler alive, so ESC still closes the window.
         def _on_key_press(symbol, modifiers):
             if symbol == key.F12:
                 self._want_screenshot = True
+            elif symbol == key.F1:
+                self._show_debug = not self._show_debug
 
         self.window.push_handlers(on_key_press=_on_key_press)
 
-        # fps counter shown in the window title once per second
         self._fps_frames = 0
         self._fps_t0 = time.perf_counter()
 
@@ -94,8 +99,6 @@ class Forge:
             self._vobjects.remove(vob)
 
     def set_debug_lines(self, lines):
-        # Text rendering arrives with forge/text.py in a later package.
-        # The interface exists now so callers never change.
         self._debug_lines = list(lines)
 
     def screenshot(self, path=None):
@@ -115,7 +118,7 @@ class Forge:
             if self.window.has_exit:
                 break
             now = time.perf_counter()
-            real_dt = min(now - prev, 0.25)  # clamp to survive hitches
+            real_dt = min(now - prev, 0.25)
             prev = now
             accumulator += real_dt
             while accumulator >= PULSE_DT:
@@ -143,16 +146,18 @@ class Forge:
         if w <= 0 or h <= 0:
             return
 
-        # ---- scene pass: line ribbons into the RGBA16F framebuffer ----
+        # ---- scene pass into the RGBA16F framebuffer ----
         self._bloom.ensure_size(w, h)
         self._bloom.scene_fbo.use()
         self._bloom.scene_fbo.clear(0.0, 0.0, 0.0, 1.0)
         self.ctx.disable(moderngl.DEPTH_TEST)
         self.ctx.enable(moderngl.BLEND)
-        self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)  # additive glow
+        self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
 
-        mvp = self.camera.proj(w / h) @ self.camera.view()
-        self._prog["u_mvp"].write(np.ascontiguousarray(mvp.T, dtype=np.float32))
+        view = self.camera.view()
+        mvp = self.camera.proj(w / h) @ view
+        mvp_t = np.ascontiguousarray(mvp.T, dtype=np.float32)
+        self._prog["u_mvp"].write(mvp_t)
 
         data = build_vertices(self._vobjects, self.camera.eye())
         if data.shape[0] > 0:
@@ -165,14 +170,37 @@ class Forge:
             self._vbo.write(data.tobytes())
             self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
 
-        # ---- bloom: downsample, blur, composite + tone map to screen ----
+        panels = [v for v in self._vobjects
+                  if isinstance(v, ImagePanel) and v.visible]
+        labels = [v for v in self._vobjects
+                  if isinstance(v, Label) and v.visible]
+        if panels:
+            self._panels.draw(panels, view, mvp_t)
+        if labels:
+            self._text.draw_labels(labels, view, mvp_t)
+
+        # ---- bloom -> screen ----
         self._bloom.apply(self.ctx.screen, w, h)
+
+        # ---- crisp screen overlay, after bloom ----
+        self.ctx.enable(moderngl.BLEND)
+        self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
+        items = [(f"{self._fps_value:.0f} fps", 10, 10, 18,
+                  (0.5, 0.85, 1.0, 0.9))]
+        if self._show_debug:
+            y = h - 34
+            for line in self._debug_lines:
+                items.append((line, 10, y, 20, (0.9, 0.9, 0.9, 0.95)))
+                y -= 26
+        self._text.draw_screen(items, w, h)
 
     def _count_fps(self):
         self._fps_frames += 1
         now = time.perf_counter()
         if now - self._fps_t0 >= 1.0:
-            fps = self._fps_frames / (now - self._fps_t0)
-            self.window.set_caption(f"{self._caption_base} — {fps:.0f} fps")
+            self._fps_value = self._fps_frames / (now - self._fps_t0)
+            self.window.set_caption(
+                f"{self._caption_base} — {self._fps_value:.0f} fps"
+            )
             self._fps_frames = 0
             self._fps_t0 = now

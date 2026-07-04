@@ -3,13 +3,12 @@
 Every line segment becomes a camera-facing ribbon (two triangles).
 For a segment p0 -> p1 with half-width w and camera eye e:
     side = normalize( (p1 - p0) x (e - p0) )
-    quad corners: p0 -/+ w*side, p1 +/- w*side
 Each vertex carries a ribbon coordinate u in [-1, +1] across the
 width; the fragment shader turns that into a hot core + soft edge.
 
-Everything is vectorized numpy over ALL segments at once. The walking
-skeleton rebuilds all geometry every frame (a few thousand segments is
-trivial); the static/dynamic batch split is a later optimization.
+Everything is vectorized numpy over ALL segments at once. The
+walking-skeleton policy of rebuilding all geometry every frame stands
+(a few thousand segments is trivial at 60 fps).
 
 Output vertex format (float32): x, y, z, r, g, b, a, u  -> '3f 4f 1f'.
 """
@@ -20,7 +19,9 @@ _U_PATTERN = np.array([-1.0, 1.0, 1.0, -1.0, 1.0, -1.0], dtype=np.float64)
 
 
 def build_vertices(vobjects, eye):
-    """Collect all visible vobjects and expand to a (M, 8) float32 array."""
+    """Collect all visible segment-based vobjects, expand to (M, 8) f32.
+    Objects whose segments() are empty (e.g. Label, ImagePanel) are
+    skipped automatically."""
     seg_list, col_list, wid_list = [], [], []
     for vob in vobjects:
         if not vob.visible:
@@ -30,11 +31,16 @@ def build_vertices(vobjects, eye):
         if n == 0:
             continue
         seg_list.append(s)
+        sc = vob.segment_colors()
         c = np.empty((n, 4), dtype=np.float64)
-        c[:, 0] = vob.color[0] * vob.glow
-        c[:, 1] = vob.color[1] * vob.glow
-        c[:, 2] = vob.color[2] * vob.glow
-        c[:, 3] = vob.color[3]
+        if sc is None:
+            c[:, 0] = vob.color[0] * vob.glow
+            c[:, 1] = vob.color[1] * vob.glow
+            c[:, 2] = vob.color[2] * vob.glow
+            c[:, 3] = vob.color[3]
+        else:
+            c[:, :3] = sc[:, :3] * vob.glow
+            c[:, 3] = sc[:, 3]
         col_list.append(c)
         wid_list.append(np.full(n, vob.width, dtype=np.float64))
     if not seg_list:
@@ -53,8 +59,6 @@ def _expand(segs, cols, wids, eye):
     norms = np.linalg.norm(side, axis=1)
     bad = norms < 1e-9
     if np.any(bad):
-        # Segment points straight at the eye (or is degenerate):
-        # fall back to any vector perpendicular to d.
         for i in np.where(bad)[0]:
             alt = np.cross(d[i], np.array([0.0, 1.0, 0.0]))
             if np.linalg.norm(alt) < 1e-9:
