@@ -1,0 +1,70 @@
+% ============================================================
+% PAGE: xi  (Preface, continued — "Gratitude for Help")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{xi}
+
+\bigskip
+
+\section*{Gratitude for Help}
+
+This book was written during the months of lockdown for the coronavirus. Life was limited
+but time for writing was nearly unlimited. Difficult for our society but perfect for an author.
+The idea for a new and more active start had just gone into a new video for Math 18.06 on
+OpenCourseWare. (The matrix multiplication $A = CR$ in Section 1.4 is part of the idea,
+with independent columns of $A$ going into $C$.) Developing that idea into this textbook
+has been exciting every morning.
+
+\bigskip
+
+The time was right but help was needed. It came in the best possible way. My good
+friend Ashley C. Fernandes in Mumbai received handwritten pages every day. Then he
+returned \LaTeX\ pages overnight. Those pages went back and forth many times. Working
+with Ashley has made \emph{Linear Algebra for Everyone} possible; this is our eighth book. I am
+truly grateful for these happy months.
+
+\bigskip
+
+Another good fortune has been help from Daniel Drucker. He is the most careful reader
+I know. Let me leave you to decide on this one: ``To be really picky, in the Preface you say
+that the three columns lie \emph{on} the same plane, but in the figure you say that the three vectors
+are \emph{in} a plane.'' I won't do that again. It made my day when Dan liked the small matrices
+on the front cover. The goals of the text are clarity and simplicity:
+
+\bigskip
+
+\begin{quote}
+The basic ideas of matrix multiplication evolve step by step in Chapter 1.
+
+\medskip
+Columns of $CR$ are combinations of columns of $C$
+
+\medskip
+There are four different ways to multiply $AB$ (see the back cover)
+
+\medskip
+The key property is $AB$ times $C = A$ times $BC$
+\end{quote}
+
+\bigskip
+
+This is the tenth cover created by two artists: Gail Corbett and Lois Sellers. You
+might have seen the rectangles for the four subspaces on \emph{Introduction to Linear Algebra}.
+Before that came \emph{Essays on Linear Algebra} with Alberto Giacometti's ``Walking Man''
+and \emph{Calculus} with a famous curve painted by Jasper Johns. Perhaps the most beautiful was
+the photograph on the finite element book. These are very happy memories for an author.
+
+\bigskip
+
+\begin{quote}
+The whole idea of helping students is beautiful.
+\end{quote}
+
+\bigskip
+\bigskip
+
+\begin{center}
+\emph{My greatest gratitude is to my wife Jill and our sons David and John and Robert.}
+
+\emph{\textbf{This book is dedicated to them.}}
+\end{center}
