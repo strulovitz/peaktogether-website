@@ -727,6 +727,14 @@ All **455 green** throughout. Commits `f753264` (fixes + regen runtimes) and the
 - **itch.io (primary) — LIVE:** installed **butler** v15.27.0 to `C:\Users\nir_s\butler\` (download host = `broth.itch.zone`; `broth.itch.ovh` no longer resolves). Nir ran `butler login` + created the empty page; DeepSeek ran `butler push "dist\Quake Principia" strulovitz/quake-principia:windows --userversion 1.0.0`. Build #1772759 up. **Page still a DRAFT** — set Public after Part 3 screenshots. https://strulovitz.itch.io/quake-principia
 - **NEXT: Part 3** — website "Quake: Principia" page under `arcade/` (like `arcade/descent-qed/`): description + Play/GitHub links + screenshot gallery + gameplay video; add same shots to itch + set Public; link from peaktogether.me menu. Dreamhost upload via FileZilla (Nir).
 
+**Part 3 — Website page (BUILT + pushed July 5, 2026):**
+- Upgraded `arcade/quake/index.html` from "🔨 Building" to **"▶ Playable"**: real gameplay clip, real screenshot gallery (Nir's 5 shots), accurate controls (keyboard/mouse + T.16000M Mover + Xbox Aimer), Play(itch)/Mirror(GitHub) CTA, download + run-from-source. Title "Quake: Principia".
+- **Video:** Nir's 61s 720p 34MB capture → web-optimized with ffmpeg (muted H.264 crf28 +faststart) to **4.6 MB** at `arcade/quake/quake-principia-clip.mp4`, committed to git, served free via **jsDelivr CDN** (verified HTTP 200) — NOT Dreamhost. Poster `images/quake-principia-clip-poster.jpg`.
+- 5 screenshots copied to `images/quake-principia-{demon,colored-walls,equations-on-ceiling,non-geometry-panel,glowing-secret-door}.png` (committed).
+- `arcade/index.html` landing: Quake moved to Playable, new blurb + real-screenshot thumbs.
+- No CSS change (reused Descent's `.gp-*` classes) → no style.css cache bump.
+- **REMAINING (Nir's manual steps):** (1) **FileZilla → Dreamhost:** upload `arcade/quake/index.html`, `arcade/index.html`, and the 6 new `images/quake-principia-*` files (NOT the mp4 — jsDelivr serves it). (2) **itch.io:** add the 5 screenshots + a cover image on the page editor, then set visibility **Public**. Optionally add Quake to the header "Play Free" menu.
+
 ## 12. ON RESTART / AGENTS.md
 🌙 **ON RESTART:** Read this WORKFLOW.md first, then the **Commentaries**, then ask Nir what's next.
 🌙 **CURRENT STATE (July 3, 2026 evening):** All 4 child rooms rewritten + rebuilt. Demon bugs FIXED (dead demon on re-entry, alcove never visible). Alcove draws through wall with depth disabled. Ceiling equations sized to actual PNG aspect ratio (capped 3m wide). Non-geometry panel text enlarged (28pt Asymptote font). Station numbers (gold, 1,2,3...) in upper-left of each text panel. Law_2 text panels FIXED (em-dash replaced, trailing `\` stripped from `_expand_text` span boundary). Hidden headless test skip REMOVED. **468/468 green. Pushed.**
