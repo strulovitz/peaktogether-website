@@ -240,12 +240,7 @@ def _axis_pair(window, neg_key: str, pos_key: str) -> float:
     return pos - neg
 
 
-def _read_raw_sample(window, bindings) -> RawSample:
-    """Translate the current device state into a RawSample.
-
-    Uses ONLY the wrapped integration helpers above so the device-specific
-    surface is small and fixable in one place. Honors DEFAULT_BINDINGS shape.
-    """
+def _read_raw_sample(window, bindings, gamepad=None) -> RawSample:
     mover = bindings.get("mover", {})
     shooter = bindings.get("shooter", {})
     shared = bindings.get("shared", {})
@@ -254,9 +249,8 @@ def _read_raw_sample(window, bindings) -> RawSample:
     ax = mover.get("axis_x", ["a", "d"])
     ay = mover.get("axis_y", ["w", "s"])
     mover_axis_x = _axis_pair(window, ax[0], ax[1])
-    # W=forward(+1), S=back(-1): pos_key is forward (ay[0]=w), so swap.
-    fwd = 1.0 if _key_down(window, ay[0]) else 0.0
-    back = 1.0 if _key_down(window, ay[1]) else 0.0
+    fwd = 1.0 if _key_down(window, ay[0]) else 0.0     # W=forward(+1)
+    back = 1.0 if _key_down(window, ay[1]) else 0.0    # S=back(-1)
     mover_axis_y = fwd - back
 
     # --- mover look rates (mouse) ---
@@ -265,12 +259,23 @@ def _read_raw_sample(window, bindings) -> RawSample:
     mover_pitch_rate = mdy if mover.get("pitch") == "mouse_dy" else 0.0
 
     # --- shooter aim (mouse delta by default) ---
-    # In two-player split a separate device feeds this; for the documented
-    # single-player default the shooter aims via the same mouse deltas.
     shooter_aim_x = mdx if shooter.get("aim_x") == "mouse_dx" else 0.0
     shooter_aim_y = mdy if shooter.get("aim_y") == "mouse_dy" else 0.0
-    shooter_fire_down = _mouse_left_down(window) \
-        if shooter.get("fire") == "mouse_left" else False
+    shooter_fire_down = _mouse_left_down(window) if shooter.get("fire") == "mouse_left" else False
+
+    # --- controllers (ADDITIVE on top of keyboard/mouse; Parent 23) ---
+    if gamepad is not None:
+        try:
+            g = gamepad.read()
+            mover_axis_x += g.move_x
+            mover_axis_y += g.move_y
+            mover_yaw_rate += g.yaw_rate
+            mover_pitch_rate += g.pitch_rate
+            shooter_aim_x += g.aim_x
+            shooter_aim_y += g.aim_y
+            shooter_fire_down = shooter_fire_down or g.fire_down
+        except Exception:
+            pass  # any controller hiccup -> keyboard/mouse only, no crash
 
     # --- shared buttons (level down-state) ---
     read_down = _key_down(window, shared.get("read", "r"))
@@ -278,48 +283,25 @@ def _read_raw_sample(window, bindings) -> RawSample:
     pause_down = _key_down(window, shared.get("pause", "escape"))
 
     return RawSample(
-        mover_axis_x=mover_axis_x,
-        mover_axis_y=mover_axis_y,
-        mover_yaw_rate=mover_yaw_rate,
-        mover_pitch_rate=mover_pitch_rate,
-        shooter_aim_x=shooter_aim_x,
-        shooter_aim_y=shooter_aim_y,
+        mover_axis_x=mover_axis_x, mover_axis_y=mover_axis_y,
+        mover_yaw_rate=mover_yaw_rate, mover_pitch_rate=mover_pitch_rate,
+        shooter_aim_x=shooter_aim_x, shooter_aim_y=shooter_aim_y,
         shooter_fire_down=shooter_fire_down,
-        read_down=read_down,
-        interact_down=interact_down,
-        pause_down=pause_down,
+        read_down=read_down, interact_down=interact_down, pause_down=pause_down,
     )
 
 
-def poll(window, bindings) -> Actions:
-    """Read devices via `bindings`, assemble a RawSample, build Actions.
-
-    Maintains a module-owned EdgeTracker and a dt clock. On the first call
-    dt defaults to ~60fps. Headless safety: if the window cannot supply real
-    device state, the wrapped helpers degrade to neutral (no crash on
-    import; poll itself is simply not exercised in headless tests).
-    """
+def poll(window, bindings, gamepad=None) -> Actions:
     global _SHELL_TRACKER, _SHELL_LAST_TIME
-
     if _SHELL_TRACKER is None:
         _SHELL_TRACKER = EdgeTracker()
-
     now = _now()
     if _SHELL_LAST_TIME is None:
         dt = _DEFAULT_DT
     else:
         dt = max(0.0, now - _SHELL_LAST_TIME)
     _SHELL_LAST_TIME = now
-
     if bindings is None:
         bindings = DEFAULT_BINDINGS
-
-    sample = _read_raw_sample(window, bindings)
-
-    return build_actions(
-        sample,
-        _SHELL_TRACKER,
-        dt,
-        DEFAULT_YAW_SENS,
-        DEFAULT_PITCH_SENS,
-    )
+    sample = _read_raw_sample(window, bindings, gamepad)
+    return build_actions(sample, _SHELL_TRACKER, dt, DEFAULT_YAW_SENS, DEFAULT_PITCH_SENS)

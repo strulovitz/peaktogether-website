@@ -301,6 +301,13 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
     try:
         _log("main: creating window")
         window, ctx = _unpack_window(make_window(WINDOW_W, WINDOW_H, WINDOW_TITLE))
+        # --- controllers (Parent 23): open once; None if no devices -> keyboard+mouse only ---
+        try:
+            from gamepad_pyglet import make_gamepad_manager
+            gamepad = make_gamepad_manager(window)
+        except Exception as e:
+            _log(f"gamepad init skipped: {e}")
+            gamepad = None
         _log("main: window created OK")
 
         # Compile all three programs now (blit is used by the read overlay).
@@ -392,7 +399,7 @@ def main(smoke_frames: int = _SMOKE_FRAMES) -> int:
 
             # (1) input
             try:
-                actions = poll(window, bindings)
+                actions = poll(window, bindings, gamepad)
             except Exception as e:
                 _log(f"frame {frame}: poll() crashed: {e}")
                 raise
