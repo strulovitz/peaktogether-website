@@ -1,0 +1,64 @@
+% ============================================================
+% PAGE: ix  (Preface, continued — "Websites for Linear Algebra")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{ix}
+
+\bigskip
+
+\section*{Websites for Linear Algebra}
+
+The dedicated website for this textbook is \textbf{math.mit.edu/everyone}. Several key sections
+of the book can be downloaded. That site also has brief solutions to the problem sets.
+(For homework, the instructor may ask for more detailed solutions.) Every class will find
+a balance between learning the essential ideas of this subject and practicing the steps on
+small matrices.
+
+\bigskip
+
+The most beautiful website for linear algebra is \textbf{3Blue1Brown.com}, created by
+Grant Sanderson. He chose that name based on an unusual genetic feature of his eyes.
+
+\bigskip
+
+For blackboard lectures you could go to the OpenCourseWare site \textbf{ocw.mit.edu} created
+by MIT. The videos for Math 18.06 and Math 18.06SC and Math 18.065 have had millions
+of viewers, very often accessed through YouTube. 18.06 is MIT's large linear algebra
+course. The 18.06SC videos include problem solutions by the instructors. 18.065 is the
+newer course that leads to Chapter 8 of this book and to \textbf{math.mit.edu/learningfromdata}.
+
+\bigskip
+
+Important to add: The \emph{``new start''} in this book was first tested in 18.065---which begins
+with a substantial review of linear algebra. Two more online materials were added in 2020
+to the 18.06 site:
+
+\bigskip
+
+\begin{quote}
+A 70-minute video outlines the new start in teaching and learning linear algebra. That
+``2020 vision'' has guided Sections 1.3 and 1.4 of this new book. I am convinced
+that working with the columns of actual matrices is a direct route to understanding
+linear independence and column spaces and matrix multiplication. The column-row
+factorization $A = CR$ is at the heart of solving linear equations $Ax = b$.
+\end{quote}
+
+\begin{quote}
+Professor Raj Rao has developed a very successful course on computational linear
+algebra and machine learning at the University of Michigan. The key idea is to im-
+plement (in class!) what you learn. The website \textbf{mynerva.io} describes the course
+and the online textbook and future plans. That textbook is complementary to this one.
+\end{quote}
+
+\bigskip
+
+Properly used, the Web has become truly valuable to students and all readers. It pro-
+vides a different way to explain linear algebra, and it is alive! Please use the video lectures
+to see the flow of the course. And please use the book to capture that flow and hold it and
+practice it and understand it.
+
+\bigskip
+
+This book begins with independent vectors from the column space and row space:
+$A = CR$. The book ends with \emph{orthogonal} vectors from those spaces: the $u$'s and $v$'s
+in the SVD with $Av = \sigma u$. In between this we have the central ideas of linear algebra.
