@@ -282,6 +282,33 @@ it's backwards in-game, flip the sign.
   (mouse can still pitch; panels sit near eye height and the Shooter's reticle tilts ±17°); or
   (c) another idea. Do NOT freeze this — let Nir decide in-game.
 
+## UPDATE #2 — Nir's ROLE/PITCH ruling (this resolves the pitch question)
+
+Nir's exact intent (verbatim paraphrase): *"The boyfriend does not look up or down — same as now
+with the keyboard. The girlfriend looks up/down with her Xbox, just like she does now with her
+mouse. The mouse stays active (Xbox works IN ADDITION to the mouse), just like the joystick works
+IN ADDITION to the keyboard."*
+
+**The clean design rule Nir is describing:**
+- **The Xbox MIRRORS the mouse.** Whatever the girlfriend's mouse drives today, the Xbox drives
+  too, ADDITIVELY. Today the mouse drives (see ANSWER #1 `_read_raw_sample`): the mover's
+  **yaw** (`mover_yaw_rate = mouse_dx`) and **pitch/look up-down** (`mover_pitch_rate = mouse_dy`),
+  the shooter's **reticle** (`shooter_aim_x/y = mouse_dx/dy`), and **fire** (`mouse_left`). So the
+  Xbox (right stick + trigger/A) should reproduce that girlfriend role, including **look up/down**.
+- **The joystick MIRRORS/extends the keyboard.** Today the keyboard drives ONLY movement
+  (`move_x` strafe A/D, `move_y` forward/back W/S) — it has **no pitch**. So the joystick drives
+  movement and **has NO up/down look (no pitch), by Nir's explicit instruction.**
+- **Both keyboard and mouse remain fully active at all times.** Controllers are strictly additive.
+
+**RESOLVED (pitch source):** the joystick has **no pitch**. Up/down look belongs to the
+girlfriend's Xbox (mirroring the mouse's `mouse_dy` → pitch). Do not put pitch on the joystick.
+
+**Still yours to propose + let Nir confirm by feel (do NOT freeze):** whether the boyfriend's
+joystick should also **turn left/right (yaw)** via the twist axis `rz` (the keyboard today has no
+turn — turning is done by the mouse; a joystick twist→yaw is a natural addition, but it's Nir's
+call), and exactly how the Xbox right stick reproduces the mouse's coupled yaw+pitch+reticle feel
+without double-counting.
+
 ## READY FOR YOU
 
 You have: the exact seam (`_read_raw_sample`), the exact wiring point in `app.py`, and the
