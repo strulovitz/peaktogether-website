@@ -1,0 +1,805 @@
+% ============================================================
+% PAGE: iii  (Table of Contents — Chapters 1–6)
+% ============================================================
+
+\begin{center}
+{\Huge \textbf{Table of Contents}}
+\end{center}
+
+\bigskip
+\bigskip
+\bigskip
+
+\noindent \textbf{Preface} \dotfill \textbf{v}
+
+\bigskip
+
+\noindent \textbf{1 \quad Vectors and Matrices} \dotfill \textbf{1}
+
+\begin{tabbing}
+\hspace{1cm} \= 1.1 \quad \= Vectors and Linear Combinations \dotfill \= 2 \\
+\> 1.2 \> Lengths and Angles from Dot Products \dotfill \> 9 \\
+\> 1.3 \> Matrices and Their Column Spaces \dotfill \> 18 \\
+\> 1.4 \> Matrix Multiplication $AB$ and $CR$ \dotfill \> 27 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{2 \quad Solving Linear Equations $Ax = b$} \dotfill \textbf{39}
+
+\begin{tabbing}
+\hspace{1cm} \= 2.1 \quad \= Elimination and Back Substitution \dotfill \= 40 \\
+\> 2.2 \> Elimination Matrices and Inverse Matrices \dotfill \> 49 \\
+\> 2.3 \> Matrix Computations and $A = LU$ \dotfill \> 57 \\
+\> 2.4 \> Permutations and Transposes \dotfill \> 64 \\
+\> 2.5 \> Derivatives and Finite Difference Matrices \dotfill \> 74 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{3 \quad The Four Fundamental Subspaces} \dotfill \textbf{84}
+
+\begin{tabbing}
+\hspace{1cm} \= 3.1 \quad \= Vector Spaces and Subspaces \dotfill \= 85 \\
+\> 3.2 \> Computing the Nullspace by Elimination: $A = CR$ \dotfill \> 93 \\
+\> 3.3 \> The Complete Solution to $Ax = b$ \dotfill \> 104 \\
+\> 3.4 \> Independence, Basis, and Dimension \dotfill \> 115 \\
+\> 3.5 \> Dimensions of the Four Subspaces \dotfill \> 129 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{4 \quad Orthogonality} \dotfill \textbf{143}
+
+\begin{tabbing}
+\hspace{1cm} \= 4.1 \quad \= Orthogonality of Vectors and Subspaces \dotfill \= 144 \\
+\> 4.2 \> Projections onto Lines and Subspaces \dotfill \> 151 \\
+\> 4.3 \> Least Squares Approximations \dotfill \> 163 \\
+\> 4.4 \> Orthonormal Bases and Gram-Schmidt \dotfill \> 176 \\
+\> 4.5 \> The Pseudoinverse of a Matrix \dotfill \> 190 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{5 \quad Determinants} \dotfill \textbf{198}
+
+\begin{tabbing}
+\hspace{1cm} \= 5.1 \quad \= 3 by 3 Determinants and Cofactors \dotfill \= 199 \\
+\> 5.2 \> Computing and Using Determinants \dotfill \> 205 \\
+\> 5.3 \> Areas and Volumes by Determinants \dotfill \> 211 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{6 \quad Eigenvalues and Eigenvectors} \dotfill \textbf{216}
+
+\begin{tabbing}
+\hspace{1cm} \= 6.1 \quad \= Introduction to Eigenvalues: $Ax = \lambda x$ \dotfill \= 217 \\
+\> 6.2 \> Diagonalizing a Matrix \dotfill \> 232 \\
+\> 6.3 \> Symmetric Positive Definite Matrices \dotfill \> 246 \\
+\> 6.4 \> Complex Numbers and Vectors and Matrices \dotfill \> 262 \\
+\> 6.5 \> Solving Linear Differential Equations \dotfill \> 270 \\
+\end{tabbing}
+
+\bigskip
+\bigskip
+
+\begin{center}
+iii
+\end{center}
+
+
+
+% ============================================================
+% PAGE: iv  (Table of Contents, continued — Chapters 7–10, Appendices, Indexes)
+% ============================================================
+
+\noindent \textbf{iv} \hfill \textbf{Table of Contents}
+
+\bigskip
+
+\noindent \textbf{7 \quad The Singular Value Decomposition (SVD)} \dotfill \textbf{286}
+
+\begin{tabbing}
+\hspace{1cm} \= 7.1 \quad \= Singular Values and Singular Vectors \dotfill \= 287 \\
+\> 7.2 \> Image Processing by Linear Algebra \dotfill \> 297 \\
+\> 7.3 \> Principal Component Analysis (PCA by the SVD) \dotfill \> 302 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{8 \quad Linear Transformations} \dotfill \textbf{308}
+
+\begin{tabbing}
+\hspace{1cm} \= 8.1 \quad \= The Idea of a Linear Transformation \dotfill \= 309 \\
+\> 8.2 \> The Matrix of a Linear Transformation \dotfill \> 318 \\
+\> 8.3 \> The Search for a Good Basis \dotfill \> 327 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{9 \quad Linear Algebra in Optimization} \dotfill \textbf{335}
+
+\begin{tabbing}
+\hspace{1cm} \= 9.1 \quad \= Minimizing a Multivariable Function \dotfill \= 336 \\
+\> 9.2 \> Backpropagation and Stochastic Gradient Descent \dotfill \> 346 \\
+\> 9.3 \> Constraints, Lagrange Multipliers, Minimum Norms \dotfill \> 355 \\
+\> 9.4 \> Linear Programming, Game Theory, and Duality \dotfill \> 364 \\
+\end{tabbing}
+
+\bigskip
+
+\noindent \textbf{10 \quad Learning from Data} \dotfill \textbf{370}
+
+\begin{tabbing}
+\hspace{1cm} \= 10.1 \quad \= Piecewise Linear Learning Functions \dotfill \= 372 \\
+\> 10.2 \> Creating and Experimenting \dotfill \> 381 \\
+\> 10.3 \> Mean, Variance, and Covariance \dotfill \> 386 \\
+\end{tabbing}
+
+\bigskip
+\bigskip
+
+\noindent \textbf{Appendix 1} \quad The Ranks of $AB$ and $A + B$ \dotfill \textbf{400}
+
+\bigskip
+
+\noindent \textbf{Appendix 2} \quad Matrix Factorizations \dotfill \textbf{401}
+
+\bigskip
+
+\noindent \textbf{Appendix 3} \quad Counting Parameters in the Basic Factorizations \dotfill \textbf{403}
+
+\bigskip
+
+\noindent \textbf{Appendix 4} \quad Codes and Algorithms for Numerical Linear Algebra \dotfill \textbf{404}
+
+\bigskip
+
+\noindent \textbf{Appendix 5} \quad The Jordan Form of a Square Matrix \dotfill \textbf{405}
+
+\bigskip
+
+\noindent \textbf{Appendix 6} \quad Tensors \dotfill \textbf{406}
+
+\bigskip
+
+\noindent \textbf{Appendix 7} \quad The Condition Number of a Matrix Problem \dotfill \textbf{407}
+
+\bigskip
+
+\noindent \textbf{Appendix 8} \quad Markov Matrices and Perron-Frobenius \dotfill \textbf{408}
+
+\bigskip
+
+\noindent \textbf{Appendix 9} \quad Elimination and Factorization \dotfill \textbf{410}
+
+\bigskip
+
+\noindent \textbf{Appendix 10} \quad Computer Graphics \dotfill \textbf{413}
+
+\bigskip
+\bigskip
+
+\noindent \textbf{Index of Equations} \dotfill \textbf{419}
+
+\bigskip
+
+\noindent \textbf{Index of Notations} \dotfill \textbf{422}
+
+\bigskip
+
+\noindent \textbf{Index} \dotfill \textbf{423}
+
+
+
+% ============================================================
+% PAGE: v  (Preface — begins)
+% ============================================================
+
+\begin{center}
+{\Huge \textbf{Preface}}
+\end{center}
+
+\bigskip
+\bigskip
+
+One goal of this Preface can be achieved right away. You need to know about the video
+lectures for MIT's Linear Algebra course \textbf{Math 18.06}. Those videos go with this book,
+and they are part of MIT's OpenCourseWare. The direct links to linear algebra are
+
+\bigskip
+
+\begin{center}
+https://ocw.mit.edu/courses/18-06-linear-algebra-spring-2010/
+
+\medskip
+
+https://ocw.mit.edu/courses/18-06sc-linear-algebra-fall-2011/
+\end{center}
+
+\bigskip
+
+On YouTube those lectures are at \textbf{https://ocw.mit.edu/1806videos} and \textbf{/1806scvideos}
+
+\bigskip
+
+The first link brings the original lectures from the dawn of OpenCourseWare. Problem
+solutions by graduate students (really good) and also a short introduction to linear algebra
+were added to the new 2011 lectures. And the course today has a new start---the crucial
+ideas of linear independence and the column space of a matrix have moved near the front.
+
+\bigskip
+
+I would like to tell you about those ideas in this Preface.
+
+\bigskip
+
+Start with two column vectors $a_1$ and $a_2$. They can have three components each,
+so they correspond to points in 3-dimensional space. The picture needs a center point
+which locates the zero vector:
+
+$$
+a_1 = \begin{bmatrix} 2 \\ 3 \\ 1 \end{bmatrix}
+\qquad
+a_2 = \begin{bmatrix} 1 \\ 4 \\ 2 \end{bmatrix}
+\qquad
+\textbf{zero vector} = \begin{bmatrix} 0 \\ 0 \\ 0 \end{bmatrix}.
+$$
+
+\bigskip
+
+The vectors are drawn on this 2-dimensional page. But we all have practice in visualizing
+three-dimensional pictures. Here are $a_1, a_2, 2a_1$, and the vector sum $a_1 + a_2$.
+
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book)
+% ------------------------------------------------------------
+% The figure shows a 2D projection representing 3D vectors emanating from a
+% common origin point labeled 0 (with the zero vector displayed as a column
+% (0,0,0) at the lower left).
+%
+% From this origin, several lines radiate outward:
+%
+%   - A solid line goes up-and-right to a point labeled a_2 = (1,4,2)
+%     (upper area of the figure).
+%   - A solid line goes right (lower, shorter) to a point labeled
+%     a_1 = (2,3,1).
+%   - A solid line, longer, continues in roughly the same direction as a_1
+%     to a further point labeled 2a_1 = (4,6,2) — showing that 2a_1 is twice
+%     as far from the origin as a_1, along the same ray.
+%   - A solid line from the origin goes to an intermediate point (between the
+%     a_1/a_2 directions) which is labeled at the top as a_1 + a_2 = (3,7,3) —
+%     this point is reached by the parallelogram rule (vector addition).
+%   - Dashed lines connect a_2 to (a_1 + a_2), and connect a_1 to (a_1 + a_2),
+%     forming a parallelogram whose fourth vertex is the sum vector —
+%     illustrating the "tip-to-tail" or parallelogram construction of vector
+%     addition.
+%   - A further dashed line extends from (a_1 + a_2) out to a point labeled
+%     2a_1 + a_2 at the far right, showing the parallelogram construction for
+%     adding 2a_1 and a_2 (completing the picture that combines scalar
+%     multiplication and addition).
+%
+% The overall effect is a classic "vector addition parallelogram" diagram,
+% extended to also show the scalar multiple 2a_1, all radiating from a common
+% origin 0, with labeled coordinate vectors at each vertex.
+% ------------------------------------------------------------
+
+\bigskip
+\begin{center}
+v
+\end{center}
+
+
+
+% ============================================================
+% PAGE: vi  (Preface, continued)
+% ============================================================
+
+\noindent \textbf{vi} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+That picture illustrated two basic operations---adding vectors $a_1 + a_2$ and multiplying
+a vector by $2$. Combining those operations produced a ``linear combination'' $2a_1 + a_2$:
+
+\bigskip
+
+\begin{center}
+\fbox{\parbox{0.7\textwidth}{\centering
+\textbf{Linear combination} $= ca_1 + da_2$ \ for any numbers $c$ and $d$
+}}
+\end{center}
+
+\bigskip
+
+Those numbers $c$ and $d$ can be negative. In that case $ca_1$ and $da_2$ will reverse their direc-
+tions: they go right to left. Also very important, $c$ and $d$ can involve fractions. Here is a
+picture with a lot more linear combinations. \textbf{Eventually we want all vectors} $ca_1 + da_2$.
+
+\bigskip
+\bigskip
+
+% --- FIGURE: plane of linear combinations ---
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book)
+% ------------------------------------------------------------
+% This figure shows a large parallelogram-shaped grid representing an infinite
+% plane spanned by vectors a_1 and a_2, drawn in a 3D perspective (slanted/
+% skewed rectangular grid pattern, like graph paper viewed at an angle).
+%
+% Structure of the grid: the plane is drawn as a grid of parallelogram cells,
+% formed by two families of parallel lines:
+%   - One family of lines runs in the direction of a_1 (and its multiples).
+%   - The other family of lines runs in the direction of a_2 (and its multiples).
+%
+% Labeled points/vectors, arranged roughly along a diagonal from lower-left to
+% upper-right:
+%   - Bottom-left corner: -a_1 - a_2
+%   - Along the bottom edge, moving right: -a_2, then a_1 - a_2, then 2a_1 - a_2
+%   - Along a line above that: -a_1 - (1/2)a_2, then (unlabeled grid point),
+%     then 2a_1 - (1/2)a_2
+%   - Middle row (through origin): -a_1, then 0 (the origin, marked with a dot),
+%     then a_1 (marked with dot and arrow), then 2a_1 (marked with dot and arrow)
+%     — this row is drawn with bold/thick lines for the segments 0 -> a_1 and
+%     a_1 -> 2a_1, emphasizing the vector a_1 and its scalar multiple.
+%   - Row above the middle: -a_1 + (1/2)a_2
+%   - Top row: -a_1 + a_2, then a_2 (marked with a bold dot and arrow, connected
+%     to origin by a bold/thick line representing vector a_2), then a_1 + a_2,
+%     then 2a_1 + a_2 (top-right corner)
+%
+% Key visual emphasis:
+%   - The vectors a_1 (from 0 to a_1) and a_2 (from 0 to a_2) are drawn as bold
+%     arrows, distinguishing them from the thin grid lines that represent the
+%     rest of the plane.
+%   - The grid extends the pattern to show integer and half-integer combinations
+%     (c, d = -1, -1/2, 0, 1/2, 1, 2), illustrating how combinations ca_1 + da_2
+%     tile out to fill the entire plane.
+%   - The overall shape is a large parallelogram (in perspective, appearing as a
+%     rhombus-like tilted plane) subdivided into smaller parallelogram cells,
+%     conveying the idea of a continuous 2D plane embedded in 3D space, spanned
+%     by the two vectors.
+% ------------------------------------------------------------
+
+\bigskip
+\bigskip
+
+Here is the key! \textbf{The combinations $ca_1 + da_2$ fill a whole plane.} It is an infinite plane
+in 3-dimensional space. By using more and more fractions and decimals $c$ and $d$, we fill in
+a complete plane. \emph{Every point on the plane is a combination of $a_1$ and $a_2$}.
+
+\bigskip
+
+Now comes a fundamental idea in linear algebra: \textbf{a matrix}. The matrix $A$ holds
+$n$ column vectors $a_1, a_2, \dots, a_n$. At this point our matrix has two columns $a_1$ and $a_2$, and
+those are vectors in 3-dimensional space. So the matrix has \textbf{three rows and two columns}.
+
+\bigskip
+
+\begin{center}
+\fbox{\parbox{0.75\textwidth}{
+\begin{tabular}{@{}l@{\hspace{1.5cm}}c@{}}
+\begin{minipage}{4cm}
+3 by 2 matrix \\
+$m = 3$ rows \\
+$n = 2$ columns
+\end{minipage}
+&
+$A = \begin{bmatrix} a_1 & a_2 \end{bmatrix} = \begin{bmatrix} 2 & 1 \\ 3 & 4 \\ 1 & 2 \end{bmatrix}$
+\end{tabular}
+}}
+\end{center}
+
+\bigskip
+
+The combinations of those two columns produced a plane in three-dimensional space.
+There is a natural name for that plane. \textbf{It is the column space of the matrix.} For any $A$,
+\textbf{the column space of $A$ contains all combinations of the columns.}
+
+\bigskip
+
+Here are the four ideas introduced so far. You will see them all in Chapter 1.
+
+\begin{enumerate}
+    \item Column vectors $a_1$ and $a_2$ in three dimensions
+    \item Linear combinations $ca_1 + da_2$ of those vectors
+    \item The matrix $A$ contains the columns $a_1$ and $a_2$
+    \item Column space of the matrix $=$ \emph{all linear combinations of the columns} $=$ \emph{plane}
+\end{enumerate}
+
+
+
+% ============================================================
+% PAGE: vii  (Preface, continued — "Matrix Multiplication A = CR")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{vii}
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{7cm}c@{}}
+\textbf{Now we include 2 more columns in $A$} & \multirow{2}{*}{$A = \begin{bmatrix} 2 & 1 & 3 & 0 \\ 3 & 4 & 7 & 0 \\ 1 & 2 & 3 & -1 \end{bmatrix}$} \\
+The 4 columns are in 3-dimensional space &
+\end{tabular}
+\end{center}
+
+\bigskip
+
+Linear algebra aims for an understanding of every column space. Let me try this one.
+
+\bigskip
+
+\begin{quote}
+Columns 1 and 2 produce the same plane as before (same $a_1$ and $a_2$)
+
+\medskip
+Column 3 contributes nothing new \textbf{because $a_3$ is on that plane}: $a_3 = a_1 + a_2$
+
+\medskip
+Column 4 is \textbf{not on the plane}: Adding in $c_4 a_4$ raises or lowers the plane
+
+\medskip
+The column space of this matrix $A$ is the \textbf{whole 3-dimensional space}: all points!
+\end{quote}
+
+\bigskip
+
+You see how we go a column at a time, left to right. Each column can be \textbf{independent}
+of the previous columns or it can be a \textbf{combination} of those columns. To produce every
+point in 3-dimensional space, you need three independent columns.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Matrix Multiplication $A = CR$}}
+\end{center}
+
+\bigskip
+
+Using the words ``linear combination'' and ``independent columns'' gives a good picture
+of that $3$ by $4$ matrix $A$. Column $3$ is a linear combination: \textbf{column 1 + column 2}.
+\textbf{Columns 1, 2, 4 are independent}. The only way to produce the zero vector as a
+combination of the independent columns $1, 2, 4$ is to multiply all those columns by \textbf{zero}.
+
+\bigskip
+
+We are so close to a key idea of Chapter 1 that I have to go on. Matrix multiplication
+is the perfect way to write down what we know. From the $4$ columns of $A$ we pick out the
+independent columns $a_1, a_2, a_4$ in the column matrix $C$. \textbf{Every column of $R$ tells us the
+combination of $a_1, a_2, a_4$ in $C$ that produces a column of $A$. $A$ equals $C$ times $R$}:
+
+$$
+A = \begin{bmatrix} 2 & 1 & 3 & 0 \\ 3 & 4 & 7 & 0 \\ 1 & 2 & 3 & -1 \end{bmatrix}
+=
+\begin{bmatrix} 2 & 1 & 0 \\ 3 & 4 & 0 \\ 1 & 2 & -1 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 1 & 0 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{bmatrix}
+= CR
+$$
+
+\bigskip
+
+Column $3$ of $A$ is dependent on columns $1$ and $2$ of $A$, and column $3$ of $R$ shows how.
+Add the independent columns $1$ and $2$ of $C$ to get column $a_3 = a_1 + a_2 = (3,7,3)$ of $A$.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Matrix multiplication : Each column $j$ of $CR$ is $C$ times column $j$ of $R$}}
+\end{center}
+
+\bigskip
+
+Section 1.3 of the book will \emph{multiply a matrix times a vector} (two ways). Then Section
+1.4 will \emph{multiply a matrix times a matrix}. This is the key operation of linear algebra.
+It is important that there is more than one good way to do this multiplication.
+
+\bigskip
+
+I am going to stop here. The normal purpose of the Preface is to tell you about the
+big picture. The next pages will give you two ways to organize this subject---especially
+the first seven chapters that more than fill up most linear algebra courses. Then come
+optional chapters, leading to the most active topic in applications today: \textbf{deep learning}.
+
+
+
+% ============================================================
+% PAGE: viii  (Preface, continued — "The Four Fundamental Subspaces")
+% ============================================================
+
+\noindent \textbf{viii} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{The Four Fundamental Subspaces}}
+\end{center}
+
+\bigskip
+
+You have just seen how the course begins---with the columns of a matrix $A$. There were
+two key steps. One step was to take all combinations $ca_1 + da_2 + ea_3 + fa_4$ of the
+columns. This led to the \textbf{column space of $A$}. The other step was to \textbf{factor the matrix into
+$C$ times $R$}. That matrix $C$ holds a full set of \textbf{independent columns}.
+
+\bigskip
+
+I fully recognize that this is only the Preface to the book. You have had zero practice
+with the column space of a matrix (and even less practice with $C$ and $R$). But the good
+thing is: Those are the right directions to start. Eventually, \emph{every matrix will lead to four
+fundamental spaces}. Together with the column space of $A$ comes the \textbf{row space---all
+combinations of the rows}. When we take all combinations of the $n$ columns and all
+combinations of the $m$ rows---those combinations fill up ``spaces'' of vectors.
+
+\bigskip
+
+The other two subspaces complete the picture. Suppose the row space is a plane in
+three dimensions. Then there is one special direction in the 3D picture---\textbf{that direction is
+perpendicular to the row space}. That perpendicular line is the \textbf{nullspace} of the matrix.
+We will see that the vectors in the nullspace (perpendicular to all the rows) solve $Ax = 0$:
+the most basic of linear equations.
+
+\bigskip
+
+And if vectors perpendicular to all the rows are important, so are the vectors
+perpendicular to all the columns. Here is the picture of the \textbf{Four Fundamental Subspaces}.
+
+\bigskip
+\bigskip
+
+% --- FIGURE: The Big Picture of the Four Fundamental Subspaces ---
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book — "The Big Picture")
+% ------------------------------------------------------------
+% The figure shows two diamond/rhombus shapes side by side, connected
+% conceptually through the center text "The Big Picture (m rows and n columns)".
+%
+% Left diamond (Row space side):
+%   - A diamond shape (rotated square) drawn in the upper-left, labeled at its
+%     top-left corner: "Row space, Dimension r"
+%   - Inside the upper portion of the diamond: "combinations of the rows"
+%   - The diamond narrows to a point in the middle, where it meets a second,
+%     smaller diamond below it
+%   - At the pinch point (middle-left), a small right-angle mark indicates
+%     perpendicularity, with the label "n dimensional space" to the left
+%   - The lower diamond (below the pinch point) is labeled inside:
+%     "perpendicular to the rows"
+%   - At the bottom-left corner of this lower diamond:
+%     "Nullspace of A, dimension n-r"
+%
+% Right diamond (Column space side):
+%   - Mirrors the left side but tilted at a different angle (rotated clockwise),
+%     positioned upper-right
+%   - Top-right label: "Column space, Dimension r"
+%   - Inside the upper portion: "combinations of the columns"
+%   - The diamond narrows to a pinch point in the middle, with a right-angle
+%     mark indicating perpendicularity
+%   - To the right of the pinch point: "m dimensional space"
+%   - The lower portion (below the pinch) is labeled: "perpendicular to the
+%     columns"
+%   - Bottom-right corner label: "Nullspace of A^T, dimension m-r"
+%
+% Overall composition:
+%   Each side forms an hourglass-like or "bowtie" shape made of two diamonds
+%   joined at a point, where the joining point has a right-angle symbol showing
+%   that the top diamond (row/column space) is perpendicular to the bottom
+%   diamond (nullspace). The two bowtie figures (left = row space / nullspace
+%   of A; right = column space / nullspace of A^T) are positioned symmetrically
+%   with the caption "The Big Picture" centered between them, visually pairing
+%   row-space concepts with column-space concepts as parallel, mirrored
+%   structures.
+% ------------------------------------------------------------
+
+\bigskip
+\bigskip
+
+\noindent \textbf{The Four Fundamental Subspaces: An $m$ by $n$ matrix with $r$ independent columns.}
+
+\bigskip
+
+This picture of four subspaces comes in Chapter 3. The idea of perpendicular spaces is
+developed in Chapter 4. And special ``basis vectors'' for all four subspaces are discovered
+in Chapter 7. That step is the final piece in the \textbf{Fundamental Theorem of Linear Algebra}.
+The theorem includes an amazing fact about any matrix, square or rectangular:
+
+\begin{center}
+\textbf{The number of independent columns equals the number of independent rows.}
+\end{center}
+
+
+
+% ============================================================
+% PAGE: ix  (Preface, continued — "Five Factorizations of a Matrix" and "Deep Learning")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{ix}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{Five Factorizations of a Matrix}}
+\end{center}
+
+\bigskip
+
+Here are the organizing principles of linear algebra. When our matrix has a special property,
+these factorizations will show it. Chapter after chapter, they express the key idea in a direct
+and useful way.
+
+\bigskip
+
+The usefulness increases as you go down the list. \textbf{Orthogonal matrices} are the win-
+ners in the end, because their columns are perpendicular unit vectors. That is perfection.
+
+$$
+\text{2 by 2 Orthogonal Matrix} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \end{bmatrix} = \text{Rotation by Angle } \theta
+$$
+
+\bigskip
+
+\textbf{Here are the five factorizations from Chapters 1, 2, 4, 6, 7:}
+
+\bigskip
+
+\begin{tabbing}
+\hspace{0.3cm}\textbf{1} \hspace{1cm} \= $A = CR$ \hspace{1cm} \= $=$ \ $R$ combines independent columns in $C$ to give all columns of $A$ \\[0.4cm]
+\textbf{2} \> $A = LU$ \> $=$ \ Lower triangular $L$ times Upper triangular $U$ \\[0.4cm]
+\textbf{4} \> $A = QR$ \> $=$ \ Orthogonal matrix $Q$ times Upper triangular $R$ \\[0.4cm]
+\textbf{6} \> $S = Q\Lambda Q^{\mathrm{T}}$ \> $=$ \ (Orthogonal $Q$) (Eigenvalues in $\Lambda$) (Orthogonal $Q^{\mathrm{T}}$) \\[0.4cm]
+\textbf{7} \> $A = U\Sigma V^{\mathrm{T}}$ \> $=$ \ (Orthogonal $U$) (Singular values in $\Sigma$) (Orthogonal $V^{\mathrm{T}}$) \\
+\end{tabbing}
+
+\bigskip
+
+May I call your attention to the last one? It is the \textbf{Singular Value Decomposition (SVD)}.
+It applies to every matrix $A$. Those factors $U$ and $V$ have perpendicular columns---all of
+length one. Multiplying any vector by $U$ or $V$ leaves a vector of the same length---so
+computations don't blow up or down. And $\Sigma$ is a positive diagonal matrix of ``singular
+values''. If you learn about eigenvalues and eigenvectors in Chapter 6, \emph{please} continue
+a few pages to singular values in Section 7.1.
+
+\bigskip
+\bigskip
+
+\begin{center}
+{\Large \textbf{Deep Learning}}
+\end{center}
+
+\bigskip
+
+For a true picture of linear algebra, applications have to be included. Completeness is
+totally impossible. At this moment, the dominating direction of applied mathematics
+has one special requirement: \emph{It cannot be entirely linear!}
+
+\bigskip
+
+One name for that direction is ``deep learning''. It is an extremely successful approach to
+a fundamental scientific problem: \textbf{Learning from data}. In many cases the data comes in a
+matrix. Our goal is to look inside the matrix for the connections between variables. Instead
+of solving matrix equations or differential equations that express known input-output rules,
+\emph{we have to find those rules}. The success of deep learning is to build a function $F(x, v)$
+with inputs $x$ and $v$ of two kinds:
+
+\bigskip
+
+\begin{quote}
+The vectors $v$ describes the features of the training data.
+
+\medskip
+The matrices $x$ assign weights to those features.
+
+\medskip
+The function $F(x, v)$ is close to the correct output for that training data $v$.
+
+\medskip
+\textbf{When $v$ changes to unseen test data, $F(x, v)$ stays close to correct.}
+\end{quote}
+
+\bigskip
+
+This success comes partly from the form of the learning function $F$, which allows it to
+include vast amounts of data. In the end, a linear function $F$ would be totally inadequate.
+The favorite choice for $F$ is \textbf{piecewise linear}. This combines simplicity with generality.
+
+
+
+% ============================================================
+% PAGE: x  (Preface, concluded — "Applications in the Book and on the Website")
+% ============================================================
+
+\noindent \textbf{x} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{Applications in the Book and on the Website}}
+\end{center}
+
+\bigskip
+
+I hope this book will be useful to you long after the linear algebra course is complete.
+It is all the applications of linear algebra that make this possible. Matrices carry data,
+and other matrices \emph{operate on that data}. The goal is to ``see into a matrix'' by understand-
+ing its eigenvalues and eigenvectors and singular values and singular vectors. And each
+application has special matrices---here are four examples:
+
+\bigskip
+
+\begin{tabbing}
+\hspace{1cm}\textbf{Markov matrices $M$} \hspace{1.5cm} \= Each column is a set of probabilities adding to 1. \\[0.5cm]
+\textbf{Incidence matrices $A$} \> Graphs and networks start with a set of nodes. The matrix \\
+\> $A$ tells the \emph{connections} (edges) between those nodes. \\[0.5cm]
+\textbf{Transform matrices $F$} \> The Fourier matrix uncovers the \emph{frequencies} in the data. \\[0.5cm]
+\textbf{Covariance matrices $C$} \> The \textbf{variance} is key information about a random variable. \\
+\> \emph{The covariance explains dependence between variables.}
+\end{tabbing}
+
+\bigskip
+
+We included those applications and more in this Sixth Edition. For the crucial computation
+of matrix weights in deep learning, Chapter 9 presents the ideas of \textbf{optimization}. This is
+where linear algebra meets calculus: \textbf{derivative = zero} becomes a matrix equation at the
+minimum point because $F(x)$ has many variables.
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+Several topics from the Fifth Edition gave up their places but not their importance.
+Those sections simply moved onto the Web. The website for this new Sixth Edition is
+
+\begin{center}
+\textbf{math.mit.edu/linearalgebra}
+\end{center}
+
+That website includes sample sections from this new edition and solutions to all Problem
+Sets. These sections (and more) are saved online from the Fifth Edition:
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{7.5cm}p{7.5cm}@{}}
+\textbf{Fourier Series} & \textbf{Norms and Condition Numbers} \\[0.3cm]
+\textbf{Iterative Methods and Preconditioners} & \textbf{Linear Algebra for Cryptography}
+\end{tabular}
+\end{center}
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+Here is a small touch of linear algebra---three questions before this course gets serious:
+
+\begin{enumerate}
+    \item Suppose you draw three straight line segments of lengths $r$ and $s$ and $t$ on this page.
+    What are the conditions on those three lengths to allow you to make the segments
+    into a triangle? In this question you can choose the directions of the three lines.
+
+    \item Now suppose the directions of three straight lines $u, v, w$ are fixed and different.
+    But you could stretch those lines to $au, bv, cw$ with any numbers $a, b, c$.
+    Can you always make a closed triangle out of the three vectors $au, bv, cw$?
+
+    \item Linear algebra doesn't stay in a plane! Suppose you have \textbf{four lines} $u, v, w, z$
+    in different directions in 3-dimensional space. Can you always choose the numbers
+    $a, b, c, d$ (zeros not allowed) so that $au + bv + cw + dz = 0$?
+\end{enumerate}
+
+\bigskip
+\noindent\rule{\textwidth}{0.5pt}
+
+\bigskip
+
+For typesetting this book, maintaining its website, offering quality textbooks to Indian fans,
+I am grateful to Ashley C. Fernandes of Wellesley Publishers (www.wellesleypublishers.com)
+
+\bigskip
+\bigskip
+
+\noindent gilstrang@gmail.com \hfill \textit{Gilbert Strang}
+
+
+

@@ -1,0 +1,758 @@
+% ============================================================
+% PAGE: iii  (Table of Contents)
+% ============================================================
+
+\section*{Table of Contents}
+
+\textbf{Preface} \dotfill v
+
+\bigskip
+
+\subsection*{1 \quad Vectors and Matrices \dotfill 1}
+\begin{itemize}
+    \item[1.1] Linear Combinations of Vectors \dotfill 2
+    \item[1.2] Lengths and Angles from Dot Products \dotfill 11
+    \item[1.3] Matrices and Column Spaces \dotfill 20
+    \item[1.4] Matrix Multiplication and $A = CR$ \dotfill 29
+\end{itemize}
+
+\subsection*{2 \quad Solving Linear Equations $Ax = b$ \dotfill 39}
+\begin{itemize}
+    \item[2.1] The Idea of Elimination \dotfill 40
+    \item[2.2] Elimination Matrices and Inverse Matrices \dotfill 49
+    \item[2.3] Matrix Computations and $A = LU$ \dotfill 57
+    \item[2.4] Permutations and Transposes \dotfill 64
+\end{itemize}
+
+\subsection*{3 \quad The Four Fundamental Subspaces \dotfill 74}
+\begin{itemize}
+    \item[3.1] Vector Spaces and Subspaces \dotfill 75
+    \item[3.2] The Nullspace of $A$: Solving $Ax = 0$ \dotfill 83
+    \item[3.3] The Complete Solution to $Ax = b$ \dotfill 96
+    \item[3.4] Independence, Basis, and Dimension \dotfill 107
+    \item[3.5] Dimensions of the Four Subspaces \dotfill 121
+\end{itemize}
+
+\subsection*{4 \quad Orthogonality \dotfill 134}
+\begin{itemize}
+    \item[4.1] Orthogonality of the Four Subspaces \dotfill 135
+    \item[4.2] Projections onto Subspaces \dotfill 143
+    \item[4.3] Least Squares Approximations \dotfill 153
+    \item[4.4] Orthogonal Matrices and Gram--Schmidt \dotfill 165
+\end{itemize}
+
+\subsection*{5 \quad Determinants and Linear Transformations \dotfill 177}
+\begin{itemize}
+    \item[5.1] 3 by 3 Determinants \dotfill 178
+    \item[5.2] Properties and Applications of Determinants \dotfill 184
+    \item[5.3] Linear Transformations \dotfill 192
+\end{itemize}
+
+\subsection*{6 \quad Eigenvalues and Eigenvectors \dotfill 201}
+\begin{itemize}
+    \item[6.1] Introduction to Eigenvalues \dotfill 202
+    \item[6.2] Diagonalizing a Matrix \dotfill 215
+    \item[6.3] Symmetric Positive Definite Matrices \dotfill 227
+    \item[6.4] Systems of Differential Equations \dotfill 243
+\end{itemize}
+
+\bigskip
+\begin{center}
+iii
+\end{center}
+
+
+
+% ============================================================
+% PAGE: iv  (Table of Contents, continued)
+% ============================================================
+
+\hfill \textbf{Table of Contents}
+
+\bigskip
+\noindent iv
+
+\bigskip
+
+\subsection*{7 \quad The Singular Value Decomposition (SVD) \dotfill 258}
+\begin{itemize}
+    \item[7.1] Singular Values and Singular Vectors \dotfill 259
+    \item[7.2] Compressing Images by the SVD \dotfill 269
+    \item[7.3] Principal Component Analysis \dotfill 274
+    \item[7.4] The Victory of Orthogonality (and a Revolution) \dotfill 280
+\end{itemize}
+
+\subsection*{8 \quad Learning from Data \dotfill 286}
+\begin{itemize}
+    \item[8.1] Piecewise Linear Learning Functions \dotfill 289
+    \item[8.2] Convolutional Neural Nets \dotfill 299
+    \item[8.3] Minimizing Loss by Gradient Descent \dotfill 306
+    \item[8.4] Mean, Variance, and Covariance \dotfill 321
+\end{itemize}
+
+\bigskip
+\noindent\rule{\textwidth}{0.8pt}
+\bigskip
+
+\begin{tabbing}
+\textbf{Appendix 1} \quad \= The Ranks of $AB$ and $A + B$ \dotfill \= 334 \\[4pt]
+\textbf{Appendix 2} \> Eigenvalues and Singular Values: Rank One \dotfill \> 335 \\[4pt]
+\textbf{Appendix 3} \> Counting Parameters in the Basic Factorizations \dotfill \> 336 \\[4pt]
+\textbf{Appendix 4} \> Codes and Algorithms for Numerical Linear Algebra \dotfill \> 337 \\[4pt]
+\textbf{Appendix 5} \> Matrix Factorizations \dotfill \> 338 \\[4pt]
+\textbf{Appendix 6} \> The Column--Row Factorization of a Matrix \dotfill \> 340 \\[4pt]
+\textbf{Appendix 7} \> The Jordan Form of a Square Matrix \dotfill \> 343 \\[4pt]
+\textbf{Appendix 8} \> Tensors \dotfill \> 344 \\[4pt]
+\textbf{Appendix 9} \> The Condition Number \dotfill \> 345 \\[4pt]
+\textbf{Appendix 10} \> Markov Matrices and Perron--Frobenius \dotfill \> 346 \\[4pt]
+\textbf{Index} \> \dotfill \> 348 \\[4pt]
+\textbf{Index of Symbols} \> \dotfill \> 354 \\[4pt]
+\textbf{Six Great Theorems / Linear Algebra in a Nutshell} \> \dotfill \> 356
+\end{tabbing}
+
+
+
+% ============================================================
+% PAGE: v  (Preface)
+% ============================================================
+
+\section*{Preface}
+
+This is a linear algebra textbook with a new start. Chapter 1 begins as usual with vectors.
+We see their linear combinations and dot products. Then the new ideas come with matrices.
+Let me illustrate those ideas right away by an example.
+
+\bigskip
+
+Suppose we are given a 3 by 3 matrix $A$ with columns $a_1, a_2, a_3$:
+
+$$
+A =
+\begin{bmatrix}
+a_1 & a_2 & a_3
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 & 2 & 3 \\
+3 & 4 & 7 \\
+4 & 2 & 6
+\end{bmatrix}.
+$$
+
+Those columns are three-dimensional vectors. The first vectors $a_1$ and $a_2$ connect the
+center point $(0,0,0)$ to the points $(1,3,4)$ and $(2,4,2)$. The picture shows those points in
+3-dimensional space ($xyz$ space). The key to this matrix is the third vector $a_3$ going to the
+point $(3,7,6)$.
+
+\bigskip
+
+When I look at those vectors, I see something exceptional. Adding columns 1 and 2
+produces column 3. In other words $a_1 + a_2 = a_3$. In a 3-dimensional picture, $a_1$ and $a_2$
+go from the center point $(0,0,0)$ to the points $(1,3,4)$ and $(2,4,2)$. The picture shows how
+to add those vectors. It is normal that all combinations of two vectors will fill up a plane.
+(The plane is actually infinite, we just drew the part between the vectors.) What is
+really exceptional is that \textbf{the third point $a_3 = (3,7,6)$ lies on this plane of $a_1$ and $a_2$.}
+
+\bigskip
+
+Most points don't lie on that plane. Most vectors $a_3$ are \emph{not} combinations of $a_1$ and
+$a_2$. Most 3 by 3 matrices have \emph{independent} columns. Then the matrix will be invertible.
+But these three columns are \emph{dependent} because they lie on the same plane: $a_1 + a_2 = a_3$.
+
+\bigskip
+
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book, reproduced
+% here as a detailed text description since it cannot be
+% rendered as an actual image)
+% ------------------------------------------------------------
+%
+% The figure is a hand-drawn-style geometric diagram illustrating
+% three vectors sharing a common plane in 3-dimensional space.
+% It is captioned "Three vectors sharing a plane inside
+% 3-dimensional space."
+%
+% The diagram is structured as follows:
+%
+% - There is a solid black dot at the lower-left of the figure,
+%   labeled below it as the origin: $(0,0,0)$.
+%
+% - From this origin point, two arrows (vectors) are drawn:
+%     * One arrow points up and to the right (a shorter, steeper
+%       arrow) to a point labeled $a_1 = (1,3,4)$. This vector
+%       is drawn above the other one.
+%     * A second arrow points to the right and slightly upward
+%       (a longer, shallower arrow) to a point labeled
+%       $a_2 = (2,4,2)$. This vector is drawn below/to the right
+%       of $a_1$.
+%
+% - From the tips of $a_1$ and $a_2$, additional thin lines are
+%   drawn to complete a parallelogram (this is the standard
+%   "vector addition parallelogram" construction): a line is drawn
+%   from the tip of $a_1$ parallel to $a_2$, and a line is drawn
+%   from the tip of $a_2$ parallel to $a_1$. These two construction
+%   lines meet at a fourth point in the upper-right of the diagram.
+%
+% - This meeting point (the fourth corner of the parallelogram) is
+%   labeled $a_3 = (3,7,6) = a_1 + a_2$, confirming visually that
+%   $a_3$ is the vector sum of $a_1$ and $a_2$, and therefore lies
+%   in the same plane spanned by $a_1$ and $a_2$.
+%
+% - There is also a bold arrow drawn directly from the origin
+%   $(0,0,0)$ to this point $a_3$, representing the vector $a_3$
+%   itself (as opposed to just the construction lines forming the
+%   parallelogram).
+%
+% - The overall visual effect is a rhombus/parallelogram shape
+%   with the origin at the bottom-left corner, $a_1$ at the top
+%   corner, $a_2$ at the bottom-right-ish corner, and $a_3$ at the
+%   far corner (top-right), with thin diagonal lines inside the
+%   parallelogram showing the two smaller triangles formed by the
+%   vector-addition construction.
+%
+% - To the right of the point $a_3$, in bold text, is the label:
+%   "Three vectors sharing a plane inside 3-dimensional space" —
+%   this serves as the caption/explanation of the figure.
+%
+% - The whole figure visually reinforces the textual claim just
+%   made: that even though $a_1, a_2, a_3$ are vectors in
+%   3-dimensional space, all three happen to lie in a single common
+%   2-dimensional plane (because $a_3$ is a linear combination,
+%   specifically the sum, of $a_1$ and $a_2$), which is the
+%   geometric meaning of the columns of $A$ being linearly
+%   dependent.
+% ------------------------------------------------------------
+
+\bigskip
+\begin{center}
+v
+\end{center}
+
+
+
+% ============================================================
+% PAGE: vi  (Preface, continued)
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent vi
+
+\bigskip
+
+That picture reveals the most important fact about those three vectors $a_1, a_2, a_3$.
+But we need the right language to describe it. Our goal is to see the idea, and to get better
+and better at expressing it. Here are three steps in a good direction.
+
+\bigskip
+
+\noindent\textbf{1 \quad Idea in words} \hfill Column 3 is the sum of column 1 and column 2
+
+\bigskip
+
+\noindent\textbf{2 \quad Idea in symbols} \hfill $a_3 = a_1 + a_2$
+
+\bigskip
+
+\noindent\textbf{3 \quad Matrix times vector}
+$$
+\begin{bmatrix} a_3 \end{bmatrix}
+=
+\begin{bmatrix} a_1 & a_2 \end{bmatrix}
+\begin{bmatrix} 1 \\ 1 \end{bmatrix}
+$$
+
+\bigskip
+
+Step 3 shows how a matrix $C$ multiplies a vector $x$. The columns $a_1$ and $a_2$ in $C$ multiply
+the numbers $x_1 = 1$ and $x_2 = 1$ in $x$. \emph{The output $Cx$ is a combination of the columns.}
+Here that column combination is $a_1 + a_2$.
+
+One more crucial step allows several combinations at once. This is the way forward.
+We cannot take this step with pictures or words. \textbf{A matrix multiplies a matrix.}
+
+\bigskip
+
+\noindent\textbf{4 \quad Matrix times matrix} \quad $A = CR$ is
+$$
+\begin{bmatrix} a_1 & a_2 & a_3 \end{bmatrix}
+=
+\begin{bmatrix} a_1 & a_2 \end{bmatrix}
+\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \end{bmatrix}
+$$
+
+\bigskip
+
+Those three columns of $R$ give three combinations in $A$ of the two columns in $C$:
+
+\medskip
+
+\noindent \textbf{Column 1:} $\; 1a_1 + 0a_2 = a_1$ \hfill \textbf{Column 2:} $\; 0a_1 + 1a_2 = a_2$
+
+\noindent \textbf{Column 3:} $\; 1a_1 + 1a_2 = (1,3,4) + (2,4,2) = (3,7,6) = a_3$
+
+\bigskip
+
+That matrix multiplication $A = CR$ displays major information:
+
+\begin{itemize}
+    \item $A$ has dependent columns: the combination of columns $1 + 2 - 3$ gives $(0,0,0)$
+    \item $A$ also has dependent rows: some combination of its rows will give $(0,0,0)$!
+    \item The ``column space'' of this $A$ is only a plane and not the whole 3D space
+    \item The ``row space'' of this $A$ is also a plane and not the whole 3D space
+    \item The square matrix $A$ has no inverse. Its determinant is zero. It is unusual.
+\end{itemize}
+
+\bigskip
+
+\section*{Subspaces of Vector Spaces}
+
+In Chapters 1 to 4, the organizing ideas are \textbf{vector spaces}. The columns of $A$ are in
+$m$-dimensional space $\mathbf{R}^m$. The rows are in $n$-dimensional space $\mathbf{R}^n$. But the action is in
+\textbf{four subspaces} inside $\mathbf{R}^m$ and $\mathbf{R}^n$. The matrix $A$ multiplies $x_{\text{row}}$ in its \emph{row space} and $x_{\text{null}}$
+in its \emph{nullspace}. The output is $Ax_{\text{row}} = b$ in its \emph{column space} because $Ax_{\text{null}} = \text{zero}$.
+Then the complete solution to $Ax = b$ has a row space part and a nullspace part:
+
+$$
+\boxed{
+x = x_{\text{row}} + \text{any } x_{\text{null}}
+\qquad
+Ax = Ax_{\text{row}} + Ax_{\text{null}} = b + 0 = b
+}
+$$
+
+\bigskip
+
+\emph{Every linear equation $Ax = b$ is solved this way: particular $x_{\text{row}}$ + any homogeneous $x_{\text{null}}$.}
+
+
+
+% ============================================================
+% PAGE: vii  (Preface, continued — "The Plan for the Book")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{vii}
+
+\bigskip
+
+\section*{The Plan for the Book}
+
+That example is part of a new start. I believe it is a better start (for the reader and the
+course). By working with specific matrices to introduce the algebra, the subject unfolds.
+Chapter 1 develops the matrix equation $A = C$ times $R$. $C$ takes independent vectors
+like $a_1$ and $a_2$ from the column space of $A$. $R$ takes independent vectors from the row
+space of $A$. Those two ``vector spaces'' are at the center of linear algebra. We meet them
+properly in Chapter 3. But you will know about independence from examples in Chapter 1.
+
+\bigskip
+
+\emph{The big step is to factor $A$ into $C$ times $R$.} Matrix multiplication is a crucial operation,
+and Chapter 1 ends with four different ways to do it---seen on the back cover of the book.
+This sets the path to all the great factorizations of linear algebra:
+
+\bigskip
+
+\begin{tabbing}
+$A = LU$ \qquad\qquad \= Chapter 2 solves $n$ equations $Ax = b$ in $n$ unknowns: $A$ is square \\[6pt]
+$A = CR$ \> Chapter 3 reduces to $r$ independent columns and $r$ independent rows \\[6pt]
+$A = QR$ \> Chapter 4 changes the columns of $A$ into perpendicular columns of $Q$ \\[6pt]
+$S = Q\Lambda Q^{\mathrm{T}}$ \> Chapter 6 has \textbf{eigenvectors} in $Q$. The eigenvalues of $S$ are in $\Lambda$ \\[6pt]
+$A = U\Sigma V^{\mathrm{T}}$ \> Chapter 7 has \textbf{singular vectors} in $U$ and $V$ and \textbf{singular values} in $\Sigma$
+\end{tabbing}
+
+\bigskip
+
+The columns of $A$ are in $m$-dimensional space $\mathbf{R}^m$, the rows are in $\mathbf{R}^n$. The $m$ by $n$ matrix
+multiplies vectors $x$ in $\mathbf{R}^n$ to produce $Ax$ in $\mathbf{R}^m$. But the real action of $A$ is seen in the
+four fundamental subspaces.
+
+\bigskip
+
+Chapter 2 only allows one solution $x_{\text{row}}$. The matrix $A$ is square and invertible.
+Chapter 3 finds every solution to $Ax = b$ by adding every $x_{\text{null}}$. Chapter 4 deals with equations
+that don't have a solution (because $b$ has a piece from the mysterious fourth subspace).
+I hope you will like the ``big picture of linear algebra'' on page 124: \textbf{all four subspaces}.
+
+\bigskip
+
+Those five factorizations are a perfect way to organize and remember linear algebra.
+The eigenvalues in the matrix $\Lambda$ and the singular values in $\Sigma$ come from $S$ and $A$
+in a beautiful way---but not a simple way. Those numbers in $Sx = \lambda x$ and $Av = \sigma u$ see
+deeply into the symmetric matrix $S$ and the $m$ by $n$ matrix $A$. Often $S$ appears in engineering
+and physics. Often $A$ is a matrix of data. And data is now coming from everywhere.
+
+\bigskip
+
+Please don't miss Tim Baumann's page 272 on compressing photographs by the SVD.
+
+\bigskip
+
+Chapter 5 explains the amazing formulas produced by determinants. Amazing but
+unfortunately difficult to compute! We solve equations $Ax = b$ before (not after) we
+find the determinant of $A$. Those equations ask us to produce $b$ from the columns of $A$.
+
+$$
+Ax = x_1 (\text{column } 1) + x_2 (\text{column } 2) + \cdots + x_n (\text{column } n) = \textbf{ right side } b.
+$$
+
+\bigskip
+
+In principle, determinants lead to eigenvalues (Chapter 6) and singular values (Chapter 7).
+In practice, we look for other ways to find and use those important numbers. And yet
+determinants tell us about geometry too---like the volume of a tilted box in $n$ dimensions.
+
+\bigskip
+
+A short course can go directly from dimensions in 3.5 to eigenvalues for $2 \times 2$ matrices.
+
+
+
+% ============================================================
+% PAGE: viii  (Preface, continued — "Final Chapter: Learning from Data")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent viii
+
+\bigskip
+
+\section*{Final Chapter: Learning from Data}
+
+We added Chapter 8 on \textbf{data science}. The data often comes in a rectangular matrix $A$.
+Each row measures $n$ properties of a sample. That number $n$ is large, and the number of
+samples is often very large. Out of this big matrix, applied linear algebra has to find out
+what is important. The goal is to produce understanding that leads to a decision.
+
+\bigskip
+
+In machine learning the output is a \textbf{nonlinear function of the input}. Deep learning
+aims to find that function from the training data. It produces (often with giant computa-
+tions) a learning function $F(x, v)$. The input vectors $v$ contain the features of each training
+sample (many $v$'s from many samples). The vector $x$ contains the weights assigned to those
+features. And hidden inside $F$ is a nonlinear function that mixes the inputs and the weights.
+A favorite is the simple function $\text{ReLU}(y) = \text{maximum of } 0 \text{ and } y$: a \emph{ramp function}.
+
+\bigskip
+
+Optimizing the weights to learn from the training data $v$ is the big computation.
+When that is well done, we can input new samples that the system has never seen.
+The success of deep learning is that $F(x, v)$ is often close to the correct output.
+The system has identified an image, or translated a sentence, or chosen a winning move.
+
+\bigskip
+
+This is \emph{piecewise linear algebra}, a mixture of weight matrices and ReLU. It is included
+with no expectation of testing students. This is a chapter to use later, in any way you want.
+You could experiment with the website \texttt{playground.tensorflow.org}.
+
+\bigskip
+
+Machine learning has become important and powerful---based on linear algebra and
+calculus (optimizing the weights) and on statistics (controlling the mean and variance).
+\emph{But it is not required or even expected to be part of the course. What I hope is that the
+faster start allows you to reach eigenvalues and singular values---those are true highlights
+of this subject.} Chapters 2 to 7 confirm the jump of intuition near the end of Chapter 1:
+
+\bigskip
+
+\begin{quote}
+If all columns of $A$ lie on an $r$-dimensional plane, then all rows of $A$ also lie on a
+(usually different) $r$-dimensional plane. That fact has far-reaching consequences.
+\end{quote}
+
+\bigskip
+
+This is a textbook for a normal linear algebra class---to explain the key ideas of this
+beautiful subject to \emph{everyone}. As clearly as I can. Thank you.
+
+\bigskip
+\hfill Gilbert Strang
+
+\bigskip
+
+After writing this introduction, I looked back at the opening example. That 3 by 3 matrix
+$A$ has dependent columns (column $1$ + column $2$ = column $3$). By linear algebra,
+$A$ must also have dependent rows. The numbers to show this are $-5$ and $3$:
+
+$$
+-5(\text{row } 1) + 3(\text{row } 2) = \text{row } 3 \text{ of } A
+\qquad\qquad
+-5(1,2,3) + 3(3,4,7) = (4,2,6).
+$$
+
+\bigskip
+
+The number of independent rows equals the number of independent columns. \emph{Wonderful!}
+
+
+
+% ============================================================
+% PAGE: ix  (Preface, continued — "Websites for Linear Algebra")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{ix}
+
+\bigskip
+
+\section*{Websites for Linear Algebra}
+
+The dedicated website for this textbook is \textbf{math.mit.edu/everyone}. Several key sections
+of the book can be downloaded. That site also has brief solutions to the problem sets.
+(For homework, the instructor may ask for more detailed solutions.) Every class will find
+a balance between learning the essential ideas of this subject and practicing the steps on
+small matrices.
+
+\bigskip
+
+The most beautiful website for linear algebra is \textbf{3Blue1Brown.com}, created by
+Grant Sanderson. He chose that name based on an unusual genetic feature of his eyes.
+
+\bigskip
+
+For blackboard lectures you could go to the OpenCourseWare site \textbf{ocw.mit.edu} created
+by MIT. The videos for Math 18.06 and Math 18.06SC and Math 18.065 have had millions
+of viewers, very often accessed through YouTube. 18.06 is MIT's large linear algebra
+course. The 18.06SC videos include problem solutions by the instructors. 18.065 is the
+newer course that leads to Chapter 8 of this book and to \textbf{math.mit.edu/learningfromdata}.
+
+\bigskip
+
+Important to add: The \emph{``new start''} in this book was first tested in 18.065---which begins
+with a substantial review of linear algebra. Two more online materials were added in 2020
+to the 18.06 site:
+
+\bigskip
+
+\begin{quote}
+A 70-minute video outlines the new start in teaching and learning linear algebra. That
+``2020 vision'' has guided Sections 1.3 and 1.4 of this new book. I am convinced
+that working with the columns of actual matrices is a direct route to understanding
+linear independence and column spaces and matrix multiplication. The column-row
+factorization $A = CR$ is at the heart of solving linear equations $Ax = b$.
+\end{quote}
+
+\begin{quote}
+Professor Raj Rao has developed a very successful course on computational linear
+algebra and machine learning at the University of Michigan. The key idea is to im-
+plement (in class!) what you learn. The website \textbf{mynerva.io} describes the course
+and the online textbook and future plans. That textbook is complementary to this one.
+\end{quote}
+
+\bigskip
+
+Properly used, the Web has become truly valuable to students and all readers. It pro-
+vides a different way to explain linear algebra, and it is alive! Please use the video lectures
+to see the flow of the course. And please use the book to capture that flow and hold it and
+practice it and understand it.
+
+\bigskip
+
+This book begins with independent vectors from the column space and row space:
+$A = CR$. The book ends with \emph{orthogonal} vectors from those spaces: the $u$'s and $v$'s
+in the SVD with $Av = \sigma u$. In between this we have the central ideas of linear algebra.
+
+
+
+% ============================================================
+% PAGE: x  (Preface, continued — "Computational Linear Algebra")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent x
+
+\bigskip
+
+\section*{Computational Linear Algebra}
+
+We need to solve large problems quickly and accurately. Linear algebra is often the key to
+computations in engineering and science and management and finance. This page aims to
+provide an update on hard power and soft power---computers and math.
+
+\bigskip
+
+The 500 fastest computers in the world are listed on \textbf{top500.org/news}. The leaders are
+mostly paid for and controlled by governments, and we can give their locations: Kobe,
+Oak Ridge, Livermore, Wuxi, Guangzhou. The next group includes Italy, Switzerland,
+Germany, France, Korea, Australia, Taiwan, UAE, UK, Russia, Spain, Saudi Arabia,
+Finland, Norway, and Brazil. The scientific interest is in their speed and special processors.
+A good source of information is \textbf{top500.org/resources/frequently-asked-questions}.
+
+\bigskip
+
+The benchmark tests are linear algebra problems---factoring a big matrix into $L$ times
+$U$ (lower triangular times upper triangular) and then solving a system of linear equations
+$Ax = b$. The actual test is in the High Performance LINPACK benchmark. Those prob-
+lems are at the heart of Chapters 2 and 3, now speeded up by parallel processing.
+
+\bigskip
+
+The top machine achieves $415$ petaflops $= 415$ times $10^{15}$ double precision floating
+point operations per second. This is with extremely careful coding for special hardware.
+The important point is that ordinary computers have also seen a tremendous increase in
+speed. And there are comparable savings from better algorithms.
+
+\bigskip
+
+\section*{Numerical Linear Algebra}
+
+This is the subject of major research: \emph{fast algorithms for matrix computations}. The first
+was thousands of years ago with ``elimination''. For that idea and any new one, part of
+the test is to count the steps: in this case $n^3/3$ for $n$ linear equations with $n$ unknowns.
+To compute eigenvalues and now singular values, big progress brought that also to $cn^3$.
+Favorite textbooks among many good ones are
+
+\begin{itemize}
+    \item L. N. Trefethen and David Bau, \emph{Numerical Linear Algebra}, SIAM (1997)
+    \item Gene Golub and Charles van Loan, \emph{Matrix Computations}, Johns Hopkins (2013).
+\end{itemize}
+
+For the mathematics of linear algebra (not focused on computation) we mention
+
+\begin{itemize}
+    \item Roger Horn and Charles Johnson, \emph{Matrix Analysis}, Cambridge (2013)
+    \item R. Bhatia, \emph{Matrix Analysis}, Springer and \emph{Positive Definite Matrices}, Princeton
+\end{itemize}
+
+\bigskip
+
+\section*{Randomized Numerical Linear Algebra}
+
+The usual algorithms meet a barrier when the problem becomes very large. We can hardly
+store and read all the data. Even matrix multiplication $AB$ becomes impossible. Eigenval-
+ues hit their own barrier at matrix size $n = 10^4$ or $10^5$.
+
+\bigskip
+
+A solution has been found if the matrix has enough structure. Random samples
+tell us about the matrix! This is a deep and beautiful subject---see a masterpiece by
+P. G. Martinsson and J. A. Tropp in \emph{Acta Numerica} (2020) and arXiv: 2002.01387.
+
+
+
+% ============================================================
+% PAGE: xi  (Preface, continued — "Gratitude for Help")
+% ============================================================
+
+\noindent \textbf{Preface} \hfill \textbf{xi}
+
+\bigskip
+
+\section*{Gratitude for Help}
+
+This book was written during the months of lockdown for the coronavirus. Life was limited
+but time for writing was nearly unlimited. Difficult for our society but perfect for an author.
+The idea for a new and more active start had just gone into a new video for Math 18.06 on
+OpenCourseWare. (The matrix multiplication $A = CR$ in Section 1.4 is part of the idea,
+with independent columns of $A$ going into $C$.) Developing that idea into this textbook
+has been exciting every morning.
+
+\bigskip
+
+The time was right but help was needed. It came in the best possible way. My good
+friend Ashley C. Fernandes in Mumbai received handwritten pages every day. Then he
+returned \LaTeX\ pages overnight. Those pages went back and forth many times. Working
+with Ashley has made \emph{Linear Algebra for Everyone} possible; this is our eighth book. I am
+truly grateful for these happy months.
+
+\bigskip
+
+Another good fortune has been help from Daniel Drucker. He is the most careful reader
+I know. Let me leave you to decide on this one: ``To be really picky, in the Preface you say
+that the three columns lie \emph{on} the same plane, but in the figure you say that the three vectors
+are \emph{in} a plane.'' I won't do that again. It made my day when Dan liked the small matrices
+on the front cover. The goals of the text are clarity and simplicity:
+
+\bigskip
+
+\begin{quote}
+The basic ideas of matrix multiplication evolve step by step in Chapter 1.
+
+\medskip
+Columns of $CR$ are combinations of columns of $C$
+
+\medskip
+There are four different ways to multiply $AB$ (see the back cover)
+
+\medskip
+The key property is $AB$ times $C = A$ times $BC$
+\end{quote}
+
+\bigskip
+
+This is the tenth cover created by two artists: Gail Corbett and Lois Sellers. You
+might have seen the rectangles for the four subspaces on \emph{Introduction to Linear Algebra}.
+Before that came \emph{Essays on Linear Algebra} with Alberto Giacometti's ``Walking Man''
+and \emph{Calculus} with a famous curve painted by Jasper Johns. Perhaps the most beautiful was
+the photograph on the finite element book. These are very happy memories for an author.
+
+\bigskip
+
+\begin{quote}
+The whole idea of helping students is beautiful.
+\end{quote}
+
+\bigskip
+\bigskip
+
+\begin{center}
+\emph{My greatest gratitude is to my wife Jill and our sons David and John and Robert.}
+
+\emph{\textbf{This book is dedicated to them.}}
+\end{center}
+
+
+
+% ============================================================
+% PAGE: xii  (Preface, continued — "Dictionary of Matrices")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent xii
+
+\bigskip
+
+\section*{Dictionary of Matrices}
+
+A good way to tell you what this book contains is to name the matrices you will meet.
+This wide variety of matrices is a special feature of linear algebra.
+
+\bigskip
+
+\begin{center}
+\begin{tabular}{@{}p{4.2cm} p{4.2cm} p{4.2cm}@{}}
+\emph{Chapter 1} & \emph{Chapter 2} & \emph{Chapter 3} \\[4pt]
+Identity matrix $I$ & Elimination matrix $E$ & Echelon matrix $R$ \\[2pt]
+Column basis $C$ & Lower triangular $L$ & Free matrix $F$ \\[2pt]
+Row basis $R$ & Upper triangular $U$ & Special solutions $S$ \\[2pt]
+Rank 1 matrix $uv^{\mathrm{T}}$ & Inverse matrix $A^{-1}$ & Mixing matrix $M = W^{-1}$ \\[2pt]
+ & Transpose matrix $A^{\mathrm{T}}$ & Incidence matrix $A$ \\[2pt]
+ & Permutation $P$ & Laplacian matrix $L$ \\[2pt]
+ & Fourier matrix $F$ & Pseudoinverse $A^{+}$ \\[10pt]
+
+\emph{Chapter 4} & \emph{Chapter 5} & \\[4pt]
+Orthogonal matrix $Q$ & Cofactor matrix $C$ & \\[2pt]
+Projection matrix $P$ & Change of basis $B$ & \\[2pt]
+Least squares $A^{\mathrm{T}}A$ & Tilted box $E$ & \\[2pt]
+Upper triangular $R$ & House matrix $H$ & \\[2pt]
+Reflection matrix $H$ & & \\[10pt]
+
+\emph{Chapter 6} & \emph{Chapter 7} & \emph{Chapter 8} \\[4pt]
+Symmetric matrix $S$ & Singular values $\Sigma$ & Weight matrix $A$ \\[2pt]
+Eigenvectors $X$ & Left singular vectors $U$ & Convolution $C$ \\[2pt]
+Eigenvalues $\Lambda$ & Right singular vectors $V$ & Jacobian matrix $J$ \\[2pt]
+Fibonacci matrix $F$ & Compressed matrix $A_k$ & Hessian matrix $H$ \\[2pt]
+Jordan matrix $J$ & Sample covariance $AA^{\mathrm{T}}$ & Covariance matrix $V$ \\[2pt]
+Similar matrix $BAB^{-1}$ & Hilbert matrix $H$ & Shift matrix $S$ \\[2pt]
+Exponential $e^{At}$ & & \\
+\end{tabular}
+\end{center}
+
+
+
