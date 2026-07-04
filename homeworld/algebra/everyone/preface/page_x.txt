@@ -1,0 +1,75 @@
+% ============================================================
+% PAGE: x  (Preface, continued — "Computational Linear Algebra")
+% ============================================================
+
+\hfill \textit{Linear Algebra for Everyone}
+
+\bigskip
+\noindent x
+
+\bigskip
+
+\section*{Computational Linear Algebra}
+
+We need to solve large problems quickly and accurately. Linear algebra is often the key to
+computations in engineering and science and management and finance. This page aims to
+provide an update on hard power and soft power---computers and math.
+
+\bigskip
+
+The 500 fastest computers in the world are listed on \textbf{top500.org/news}. The leaders are
+mostly paid for and controlled by governments, and we can give their locations: Kobe,
+Oak Ridge, Livermore, Wuxi, Guangzhou. The next group includes Italy, Switzerland,
+Germany, France, Korea, Australia, Taiwan, UAE, UK, Russia, Spain, Saudi Arabia,
+Finland, Norway, and Brazil. The scientific interest is in their speed and special processors.
+A good source of information is \textbf{top500.org/resources/frequently-asked-questions}.
+
+\bigskip
+
+The benchmark tests are linear algebra problems---factoring a big matrix into $L$ times
+$U$ (lower triangular times upper triangular) and then solving a system of linear equations
+$Ax = b$. The actual test is in the High Performance LINPACK benchmark. Those prob-
+lems are at the heart of Chapters 2 and 3, now speeded up by parallel processing.
+
+\bigskip
+
+The top machine achieves $415$ petaflops $= 415$ times $10^{15}$ double precision floating
+point operations per second. This is with extremely careful coding for special hardware.
+The important point is that ordinary computers have also seen a tremendous increase in
+speed. And there are comparable savings from better algorithms.
+
+\bigskip
+
+\section*{Numerical Linear Algebra}
+
+This is the subject of major research: \emph{fast algorithms for matrix computations}. The first
+was thousands of years ago with ``elimination''. For that idea and any new one, part of
+the test is to count the steps: in this case $n^3/3$ for $n$ linear equations with $n$ unknowns.
+To compute eigenvalues and now singular values, big progress brought that also to $cn^3$.
+Favorite textbooks among many good ones are
+
+\begin{itemize}
+    \item L. N. Trefethen and David Bau, \emph{Numerical Linear Algebra}, SIAM (1997)
+    \item Gene Golub and Charles van Loan, \emph{Matrix Computations}, Johns Hopkins (2013).
+\end{itemize}
+
+For the mathematics of linear algebra (not focused on computation) we mention
+
+\begin{itemize}
+    \item Roger Horn and Charles Johnson, \emph{Matrix Analysis}, Cambridge (2013)
+    \item R. Bhatia, \emph{Matrix Analysis}, Springer and \emph{Positive Definite Matrices}, Princeton
+\end{itemize}
+
+\bigskip
+
+\section*{Randomized Numerical Linear Algebra}
+
+The usual algorithms meet a barrier when the problem becomes very large. We can hardly
+store and read all the data. Even matrix multiplication $AB$ becomes impossible. Eigenval-
+ues hit their own barrier at matrix size $n = 10^4$ or $10^5$.
+
+\bigskip
+
+A solution has been found if the matrix has enough structure. Random samples
+tell us about the matrix! This is a deep and beautiful subject---see a masterpiece by
+P. G. Martinsson and J. A. Tropp in \emph{Acta Numerica} (2020) and arXiv: 2002.01387.
