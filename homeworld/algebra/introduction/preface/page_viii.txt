@@ -1,0 +1,102 @@
+% ============================================================
+% PAGE: viii  (Preface, continued — "The Four Fundamental Subspaces")
+% ============================================================
+
+\noindent \textbf{viii} \hfill \textit{Introduction to Linear Algebra}
+
+\bigskip
+
+\begin{center}
+{\Large \textbf{The Four Fundamental Subspaces}}
+\end{center}
+
+\bigskip
+
+You have just seen how the course begins---with the columns of a matrix $A$. There were
+two key steps. One step was to take all combinations $ca_1 + da_2 + ea_3 + fa_4$ of the
+columns. This led to the \textbf{column space of $A$}. The other step was to \textbf{factor the matrix into
+$C$ times $R$}. That matrix $C$ holds a full set of \textbf{independent columns}.
+
+\bigskip
+
+I fully recognize that this is only the Preface to the book. You have had zero practice
+with the column space of a matrix (and even less practice with $C$ and $R$). But the good
+thing is: Those are the right directions to start. Eventually, \emph{every matrix will lead to four
+fundamental spaces}. Together with the column space of $A$ comes the \textbf{row space---all
+combinations of the rows}. When we take all combinations of the $n$ columns and all
+combinations of the $m$ rows---those combinations fill up ``spaces'' of vectors.
+
+\bigskip
+
+The other two subspaces complete the picture. Suppose the row space is a plane in
+three dimensions. Then there is one special direction in the 3D picture---\textbf{that direction is
+perpendicular to the row space}. That perpendicular line is the \textbf{nullspace} of the matrix.
+We will see that the vectors in the nullspace (perpendicular to all the rows) solve $Ax = 0$:
+the most basic of linear equations.
+
+\bigskip
+
+And if vectors perpendicular to all the rows are important, so are the vectors
+perpendicular to all the columns. Here is the picture of the \textbf{Four Fundamental Subspaces}.
+
+\bigskip
+\bigskip
+
+% --- FIGURE: The Big Picture of the Four Fundamental Subspaces ---
+% ------------------------------------------------------------
+% FIGURE DESCRIPTION (genuine diagram in the book — "The Big Picture")
+% ------------------------------------------------------------
+% The figure shows two diamond/rhombus shapes side by side, connected
+% conceptually through the center text "The Big Picture (m rows and n columns)".
+%
+% Left diamond (Row space side):
+%   - A diamond shape (rotated square) drawn in the upper-left, labeled at its
+%     top-left corner: "Row space, Dimension r"
+%   - Inside the upper portion of the diamond: "combinations of the rows"
+%   - The diamond narrows to a point in the middle, where it meets a second,
+%     smaller diamond below it
+%   - At the pinch point (middle-left), a small right-angle mark indicates
+%     perpendicularity, with the label "n dimensional space" to the left
+%   - The lower diamond (below the pinch point) is labeled inside:
+%     "perpendicular to the rows"
+%   - At the bottom-left corner of this lower diamond:
+%     "Nullspace of A, dimension n-r"
+%
+% Right diamond (Column space side):
+%   - Mirrors the left side but tilted at a different angle (rotated clockwise),
+%     positioned upper-right
+%   - Top-right label: "Column space, Dimension r"
+%   - Inside the upper portion: "combinations of the columns"
+%   - The diamond narrows to a pinch point in the middle, with a right-angle
+%     mark indicating perpendicularity
+%   - To the right of the pinch point: "m dimensional space"
+%   - The lower portion (below the pinch) is labeled: "perpendicular to the
+%     columns"
+%   - Bottom-right corner label: "Nullspace of A^T, dimension m-r"
+%
+% Overall composition:
+%   Each side forms an hourglass-like or "bowtie" shape made of two diamonds
+%   joined at a point, where the joining point has a right-angle symbol showing
+%   that the top diamond (row/column space) is perpendicular to the bottom
+%   diamond (nullspace). The two bowtie figures (left = row space / nullspace
+%   of A; right = column space / nullspace of A^T) are positioned symmetrically
+%   with the caption "The Big Picture" centered between them, visually pairing
+%   row-space concepts with column-space concepts as parallel, mirrored
+%   structures.
+% ------------------------------------------------------------
+
+\bigskip
+\bigskip
+
+\noindent \textbf{The Four Fundamental Subspaces: An $m$ by $n$ matrix with $r$ independent columns.}
+
+\bigskip
+
+This picture of four subspaces comes in Chapter 3. The idea of perpendicular spaces is
+developed in Chapter 4. And special ``basis vectors'' for all four subspaces are discovered
+in Chapter 7. That step is the final piece in the \textbf{Fundamental Theorem of Linear Algebra}.
+The theorem includes an amazing fact about any matrix, square or rectangular:
+
+\begin{center}
+\textbf{The number of independent columns equals the number of independent rows.}
+\end{center}
