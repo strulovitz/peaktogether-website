@@ -79,36 +79,37 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 - `forge/__init__.py` — exports.
 - `requirements.txt`, `run.bat`, `settings.json` (v0.3.0: bloom_strength 0.85, exposure 2.5, seed 1234).
 
-## 5. CURRENT SITUATION (July 5, 2026, end of day — ~31% DeepSeek context)
+## 5. CURRENT SITUATION (July 5, 2026 — after A1.1, before Parent 2 launch)
 
 ### The game state (verified — every module below has its code dropped in, compiles, and its imports resolve):
 | Module | Fable Deliverable | Status | Notes |
 |--------|-------------------|--------|-------|
-| **forge** | #1, #2, #3 (NT 1-4) | ✅ Nir confirmed | Camera, GLSL line-ribbon + bloom + textured-quad shaders, batches, Bloom, GlyphAtlas+TextRenderer+PanelRenderer, FULL vobjects vocabulary (Line, Arrow, DashedLine, Grid, WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel, SolidMesh — A1), **SolidRenderer (A1)**. Render pipeline: SOLID pass (depth write, no blend) → GLOW pass (depth test, no write, additive) → bloom → crisp overlay. F12 screenshot, F1 debug. |
+| **forge** | #1, #2, #3 (NT 1-4) + #9 (A1.1) | ✅ Nir confirmed | Camera, GLSL dual-render-target shaders (SOLID+GLOW), batches, Bloom (dual-attachment FBO, bloom on GLOW only), GlyphAtlas+TextRenderer+PanelRenderer, FULL vobjects vocabulary (Line, Arrow, DashedLine, Grid, WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel, SolidMesh), **SolidRenderer**. Render pipeline: SOLID pass (depth write, no blend) → GLOW pass (depth test, no write, additive) → OVERLAY pass (depth OFF, for .overlay=True objects) → bloom (GLOW buffer only) → composite → crisp HUD. F12 screenshot, F1 debug. |
 | **helm** | #4 (NT step 5) | ✅ Nir confirmed | actions.py (frozen list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl), helm.py (Helm orchestrator), helm_demo.py. Every key tested. |
-| **fleet** | #5 (NT 6-7) | ✅ Nir confirmed | referee.py (12 canonical NumPy fns — the math conscience), orders.py (12 types), events.py, ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), fleet_demo.py. FLEET SELF-TEST PASSED (12/12). |
-| **app.py wiring** | #6 (NT step 9) | ✅ Wiring verified | Root game shell: wires forge+helm+fleet. Shakedown: mothership + 3 fighters (squad 1) + corvette+collector+frigate (squad 2). Keyboard combination-order console (ghost legs/arrow, ENTER commit, X diagonal/staged, Q/E squad switch, TAB select, C recenter, camera, P pause). |
-| **content** | #7 (Apocrypha 1) | ✅ Content check verified | content_db.py (ContentDB: loads + LOUDLY validates), content_demo.py (CONTENT CHECK PASSED), content/ DATA folder: ships.json, 5 mesh JSONs, narrator/core.json (7 lines), book/ch1_excerpts.json (2 PLACEHOLDERS awaiting Nir's Strang paste). |
-| **SOLID SHIPS** | #8 (A1) | ✅ Built, NOT SEEN BY NIR | **Amendment A1**: ships now solid opaque lit meshes (Blinn-Phong, 264–396 tris/class) from shipwright.py. shaders.py MESH shader, solid.py SolidMesh+SolidRenderer, bloom.py depth buffer, forge.py new pipeline. **Nir has NOT yet seen/played this — the context-window restart is happening now so he can run it with fresh context.** |
-| **BIBLE** | — | ✅ A1 in scriptures | Amendment A1 banner at top of OT+NT+Apocrypha. 8 deliverable files saved verbatim. |
-| **Structure** | — | ✅ FLATTENED | All 26+ modules are flat siblings in homeworld/. No packages, no __init__.py, no -m, no hacks. content/ is a DATA folder (like Quake's levels/). RULE #0 permanent. run.bat deleted (Nir's choice). |
+| **fleet** | #5 (NT 6-7) | ✅ Nir confirmed (12/12) | referee.py (12 canonical NumPy fns — the math conscience), orders.py (12 types), events.py, ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), fleet_demo.py. FLEET SELF-TEST PASSED (12/12). |
+| **app.py wiring** | #6 (NT step 9) + #9 (A1.1 blocks) | ✅ Nir confirmed | Root game shell: wires forge+helm+fleet+content. Shakedown: dark mothership at (0,0,0) + 3 fighters (squad 1) + corvette+collector+frigate (squad 2). Keyboard combination-order console. Overlay axes e1/e2/e3 (10 units) on mothership. settings.json v0.7.1. |
+| **content** | #7 (Apocrypha 1) | ✅ Content check verified | content_db.py (ContentDB: loads + LOUDLY validates), content_demo.py (CONTENT CHECK PASSED), content/ DATA folder: ships.json (mothership steel-blue [0.45,0.55,0.7]), 5 mesh JSONs, narrator/core.json (7 lines), book/ch1_excerpts.json (2 PLACEHOLDERS). |
+| **SOLID SHIPS (A1)** | #8 (A1) | ✅ Nir confirmed (superseded by A1.1) | Original solid-shaded ships. **Superseded** by A1.1 which fixes "too shiny" + adds dual render targets + overlay axes. |
+| **A1.1 — no bloom** | #9 (A1.1) | ✅ Nir confirmed — "looks great!!!" | Dual render targets (ships never bloom, by construction). Dark mothership at origin. Overlay axes on top of hull. Dim lamp nozzles ≤1. Ships crisp like real Homeworld hulls. |
+| **BIBLE** | — | ✅ A1.1 in scriptures | Amendment banners in OT+NT+Apocrypha include A1+A1.1. 9 Fable deliverable files + Ten Commandments v1.0 + Parent 1→2 Handoff saved verbatim. |
+| **Structure** | — | ✅ FLATTENED | All 26+ modules are flat siblings in homeworld/. No packages, no __init__.py, no -m, no hacks. content/ is a DATA folder. RULE #0 permanent. run.bat deleted. |
 
 ### Runs
 | What | Command | Status |
 |------|---------|--------|
-| The full game | `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python app.py` | ⏳ **AWAITING Nir's art-director play-test** (solid ships!) |
+| The full game | `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python app.py` | ✅ **Nir confirmed "looks great!!!"** |
 | Fleet self-test | `python fleet_demo.py` (from homeworld/) | ✅ 12/12 PASS |
 | Content check | `python content_demo.py` (from homeworld/) | ✅ CONTENT CHECK PASSED |
 | Helm demo | `python helm_demo.py` (from homeworld/) | ✅ Nir confirmed |
-| Forge demo | `python forge_demo.py` (from homeworld/) | ✅ Nir confirmed (but shows old wireframe test — low priority) |
+| Forge demo | `python forge_demo.py` (from homeworld/) | ✅ Nir confirmed (old wireframe test — low priority) |
 
 ### Data folders (not code — fine per RULE #0 clause 3b)
 - `content/` — ships.json, meshes/ (5 .json), narrator/ (core.json, 7 lines), book/ (ch1_excerpts.json, 2 PLACEHOLDERS), missions/ (empty)
 - `algebra/` — Strang book OCR: everyone/ + introduction/ (prefaces done, Chapter 1 empty awaiting pages)
-- `BIBLE/` — verbatim scriptures (OT+NT+Apocrypha+Book of Prompts) + 2 brainstorms + 8 Fable deliverable files
+- `BIBLE/` — verbatim scriptures (OT v2.1 + NT v1.0 + Apocrypha v1.0 + Book of Prompts + Ten Commandments v1.0 + Parent 1→2 Handoff) + 2 brainstorms + 9 Fable deliverable files
 - `notes/` — amendment_a1_art_direction.md
 
-### What's NOT yet built (next after Nir's A1 art review)
+### What's NOT yet built (next after Nir launches Parent 2)
 1. **Bridge** (NT/Apocrypha) — forge 2D overlay + widget kit + FLEET ZONE console. The Navigator picks up the mouse. 2nd player joins.
 2. **Campaign + Mission 1** (Apocrypha) — minute-by-minute mission script. First real playable mission.
 3. **Missions 2–16** — the full 16-mission journey home to Hiigara.
@@ -286,3 +287,18 @@ Nir saw the solid ships — they were too shiny. Fable delivered the full archit
 5. **Flattened per RULE #0:** shaders.py (no imports), bloom.py (`from shaders import`), forge.py (all `from camera import` etc.), shipwright.py (no imports), content/ships.json, app.py (2 blocks), settings.json (v0.7.1).
 6. **Verified:** all 5 files py_compile OK; `python fleet_demo.py` → 12/12 GREEN; app.py imports resolve; zero `-m`/packages.
 7. Updated COMMENTARIES.md + WORKFLOW.md. Committed with Fable's exact message + pushed.
+
+### July 5, 2026 — Parent 1 died; salvaged 2 critical documents + Parent 1→2 handoff
+Parent 1's OpenRouter context filled up. Before starting Parent 2, Nir salvaged two critical documents:
+1. **`HOMEWORLD TEN COMMANDMENTS BY FABLE.md`** — the ORIGINAL founding document (v1.0), even more foundational than the Bible. Written before the Old Testament v2.1. Math typos fixed by DeepSeek (zero-width joiners, broken subscripts/superscripts — cross-referenced with OT v2.1).
+2. **`HANDOFF PARENT 1 TO PARENT 2 BY FABLE.md`** — Fable's honest goodbye letter from chat #1. Records exact state at handoff: v0.7.1, all confirmed, A1+A1.1, 12/12 green, bridge next.
+3. **Parent 1 also wrote the Parent 2 launch handoff himself** (not DeepSeek's job). Saved in the BIBLE folder above.
+4. Updated WORKFLOW.md, COMMENTARIES.md, wrote fresh `DEEPSEEK_RESTART_HOMEWORLD_GO.md`. Committed + pushed.
+
+### CURRENT STATE (July 5, 2026 — after A1.1, before Parent 2 launch)
+- **v0.7.1** — forge ✅, helm ✅, fleet ✅ (12/12), app.py ✅, content ✅, A1 ✅, A1.1 ✅
+- **Dual render targets active** — ships never bloom (solid buffer untouched), holograms glow (glow buffer → bloom → tone-mapped)
+- **Dark mothership at origin** — dark slate hull, steel-blue accent, 10-unit overlay axes e1/e2/e3 on top
+- **All code FLAT** — 26+ .py siblings in homeworld/, `python app.py` runs clean, no `-m`, no packages
+- **BIBLE folder:** 2 brainstorms + OT v2.1 + NT v1.0 + Apocrypha v1.0 + Book of Prompts + 9 Fable deliverables + Ten Commandments v1.0 + Parent 1→2 Handoff
+- **NEXT: Parent 2 — bridge (Navigator's mouse console + 2nd player joins).** Parent 1 already wrote the handoff. On restart, Nir launches Parent 2.

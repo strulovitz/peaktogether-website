@@ -24,8 +24,9 @@ mechanic + 16-mission campaign + engineering doctrine — wins over all), New
 Testament (forge/fleet/helm module design + INTERFACES v1.0 + the Referee + the
 12-line fleet self-test), Apocrypha (content/campaign/bridge/intel/guidestone +
 Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minutes
-Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
-"FABLE DELIVERABLE N" file per code package.
+Doctrine), Book of Prompts (birth-prompt templates), Ten Commandments (the ORIGINAL
+founding document v1.0 — even more foundational than the OT v2.1), Parent 1→2
+Handoff (Fable's honest goodbye letter), 2 brainstorms, and 9 Fable deliverable files.
 
 **Current state (July 5, 2026):** forge ✅, helm ✅, fleet ✅ (12/12), app.py wiring ✅,
 content data layer ✅, **AMENDMENT A1 ✅**, and **AMENDMENT A1.1 ✅** (Fable deliverable 9).
@@ -56,7 +57,7 @@ file that arrives with `from .` / `-m` is converted to flat absolute imports on 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-8 — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts/Ten Commandments/Parent 1→2 Handoff) + 2 brainstorms + Fable deliverables 1-9 — WORKING
 homeworld/notes/amendment_a1_art_direction.md — AMENDMENT A1: ships = solid opaque lit meshes; math layer = glowing holograms over them; "looks like a game a gamer would choose" outranks aesthetic theory (owner is arbiter) — WORKING
 homeworld/shaders.py — GLSL: line ribbon + MESH (Blinn-Phong key/fill/rim/spec, two-sided) + bloom pipeline + textured-quad shaders (Amendment A1) — WORKING
 homeworld/solid.py — SolidMesh (opaque lit triangle vobject, per-vertex color+emissive, set_transform/set_highlight) + SolidRenderer (batched, depth test, no blend) (Amendment A1) — WORKING
