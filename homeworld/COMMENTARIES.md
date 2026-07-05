@@ -135,6 +135,7 @@ content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 mes
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — Amendment A1 recorded into the SCRIPTURES: add-only "⚖️ OWNER AMENDMENTS (READ FIRST)" banner at the top of the Old Testament + New Testament + Apocrypha (solid ships override the wireframe/holographic aesthetic; Fable's text kept verbatim below) — by DeepSeek (Nir's instruction: owner amendments belong in the Bible, not only notes/COMMENTARIES)
 July 5, 2026 — AMENDMENT A1: solid shaded ships — mesh shader, depth pipeline, procedural shipwright — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*.py→root, content/shipwright.py→shipwright.py, forge/__init__ dropped; all 5 ships build headlessly)
 July 5, 2026 — Apocrypha step 1: content data layer (ContentDB, ships.json, 5 meshes, narrator core, book placeholders) + app wiring — by Parent Fable (via DeepSeek; flattened per RULE #0: content/db.py→content_db.py, content/demo.py→content_demo.py, __init__ dropped; content/ kept as DATA folder; CONTENT CHECK PASSED)
 July 5, 2026 — FLATTENED to Quake structure: all 23 modules moved out of forge/helm/fleet subfolders into homeworld/ root as flat siblings (forge.py, helm.py, sim.py, …); removed the app.py sys.path bootstrap; plain absolute imports; `python app.py` runs like Quake (no -m, no hacks); 12/12 still green — by DeepSeek (Nir's order; RULE #0 now mandates flat + flatten every Fable delivery)

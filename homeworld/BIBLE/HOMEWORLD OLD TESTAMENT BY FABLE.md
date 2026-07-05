@@ -1,6 +1,31 @@
 # THE BIBLE — HOMEWORLD: A GOOD BASIS
 ## Founding Design Document, v2.1 — Peak Together — July 4, 2026
 
+---
+
+> ## ⚖️ OWNER AMENDMENTS (add-only, maintained by DeepSeek — READ FIRST) ⚖️
+>
+> **These are Nir's (the owner's) binding decisions made after this document was written.
+> They OVERRIDE anything below that conflicts. Fable's original text is preserved verbatim
+> underneath — do not delete it — but where it disagrees with an amendment here, the
+> amendment wins. New amendments are appended to this list.**
+>
+> **Amendment A1 — ART DIRECTION: SHIPS ARE SOLID, NOT WIREframe (July 5, 2026).**
+> Glowing-wireframe ships FAIL Bible Law 1 ("gaming first — would a gamer choose to play
+> this?"). SHIPS are now **solid, opaque, lit triangle meshes** — per-pixel Blinn-Phong
+> (key + fill + rim + specular), flat-shaded paneled hulls with per-face color variation,
+> emissive engine nozzles/windows feeding bloom; hundreds+ triangles per class, generated
+> by `shipwright.py` (procedural today; Blender/OBJ import is a sanctioned future path).
+> **Only THE MATH LAYER** (arrows, grids, spans, ghost vectors, trails, labels) stays
+> glowing holographic — drawn additively OVER the solid world with depth testing so hulls
+> occlude it correctly. Render order: solid pass (depth write) → glow pass (depth test, no
+> write) → bloom → crisp overlay. **Wherever this document calls ships "wireframe" or
+> "holographic," that is superseded — ships are solid; the math around them glows.**
+> "It must look like a game a gamer would choose" outranks any aesthetic theory in any
+> design document; the owner is the sole arbiter. (Full text: `notes/amendment_a1_art_direction.md`.)
+
+---
+
 NOTE TO ALL READERS (human, Opus parent/child, DeepSeek): All mathematics in this
 document is written in LaTeX. Inline math is delimited by $...$ and display math by
 $$...$$. Matrices use \begin{bmatrix}...\end{bmatrix}, read column by column is

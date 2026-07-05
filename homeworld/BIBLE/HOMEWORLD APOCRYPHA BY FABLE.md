@@ -1,6 +1,26 @@
 # THE APOCRYPHA — HOMEWORLD: A GOOD BASIS
 ## Module Design: content, campaign, bridge, intel, guidestone — v1.0
 ## Peak Together — July 4, 2026
+
+---
+
+> ## ⚖️ OWNER AMENDMENTS (add-only, maintained by DeepSeek — READ FIRST) ⚖️
+>
+> **These are Nir's (the owner's) binding decisions made after this document was written.
+> They OVERRIDE anything below that conflicts. Fable's original text is preserved verbatim
+> underneath. New amendments are appended to this list.**
+>
+> **Amendment A1 — SHIPS ARE SOLID, NOT WIREframe (July 5, 2026).** Ships now render as
+> **solid, opaque, lit triangle meshes** generated procedurally by `shipwright.py` (per-class
+> lofted hulls + wings/fins/masts/towers + emissive nozzles, per-pixel Blinn-Phong). Wherever
+> this document describes ship **meshes as "simple wireframes" (vertices + edge lists)** or the
+> Mothership/ships as a "wireframe" — that is superseded for RENDERING: ships are solid. (The
+> `content/meshes/*.json` wireframe data files may still exist, but the game builds ship hulls
+> from `shipwright.py`.) **Only the MATH LAYER** (arrows, grids, ghosts, trails, labels) stays
+> glowing holographic, over the solids, depth-tested. (Full text:
+> `notes/amendment_a1_art_direction.md` + Old Testament amendments.)
+
+---
 ## Requires: BIBLE.md v2.1 and NEW_TESTAMENT.md v1.0. Precedence: Bible wins over
 ## all; New Testament wins over this document on forge/helm/fleet questions; this
 ## document wins over any later chat on campaign/bridge/intel/content questions.

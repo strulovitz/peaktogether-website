@@ -1,5 +1,25 @@
 # THE NEW TESTAMENT — HOMEWORLD: A GOOD BASIS
 ## Module Design: forge, fleet, helm — v1.0 — Peak Together — July 4, 2026
+
+---
+
+> ## ⚖️ OWNER AMENDMENTS (add-only, maintained by DeepSeek — READ FIRST) ⚖️
+>
+> **These are Nir's (the owner's) binding decisions made after this document was written.
+> They OVERRIDE anything below that conflicts. Fable's original text is preserved verbatim
+> underneath. New amendments are appended to this list.**
+>
+> **Amendment A1 — SHIPS ARE SOLID, NOT WIREframe (July 5, 2026).** Ships are now **solid,
+> opaque, lit triangle meshes** (per-pixel Blinn-Phong: key + fill + rim + specular, paneled
+> hulls, emissive nozzles/windows feeding bloom), built by `shipwright.py`. **Only the MATH
+> LAYER** (arrows, grids, ghosts, trails, labels) stays glowing holographic, drawn additively
+> OVER the solids with depth testing. forge's render pipeline is now: **solid pass (depth
+> write) → glow pass (depth test, no write) → bloom → overlay** (see `shaders.py` MESH shader,
+> `solid.py`, updated `bloom.py`/`forge.py`). Wherever this document's "Homeworld-of-wireframes
+> aesthetic" or wireframe-ship language appears, it is superseded — **ships are solid; the math
+> layer glows.** (Full text: `notes/amendment_a1_art_direction.md` + Old Testament amendments.)
+
+---
 ## Requires: BIBLE.md v2.1 (the Old Testament). If this document contradicts the
 ## Bible, the Bible wins. If code contradicts this document, this document wins
 ## until the owner approves an interface version bump.
