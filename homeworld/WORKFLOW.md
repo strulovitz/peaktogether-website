@@ -387,3 +387,31 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 4. When a branch dies, store its hand-off note as `handoff_mXX.md` in BIBLE.
 - **Launch a branch:** fresh Fable ← founding docs → `charter.md` → current `app.py` → ONE `brief_mXX.md` → "build it."
 - **Suggested build order (Fable's, Nir may reorder):** M2 (proves protocol) → M5 (the jewel) → M10 (adrenaline) → M1, M4, M8, M11, M3, M6, M9, M12, M13, M14, M7, M15, M16 (last — needs the others).
+
+---
+
+## 📍 CURRENT SITUATION & ROAD AHEAD (detailed — July 5, 2026)
+
+### Where we are (v0.7.1)
+The **engine is complete**, the **template game is complete AND correct** (the "always space" console after the spreadsheet correction), and **the entire mission-brief tree is planted** in `homeworld/BIBLE/`. Fable-Trunk's whole design memory now lives in the repo — he is no longer a single point of failure.
+
+**What runs today (`python app.py`):** a two-player-one-screen shell. The **Pilot** flies squads by linear combinations `c1·e1+c2·e2+c3·e3` (keyboard), with a live ghost construction (dashed legs → white diagonal arrow). The **Navigator** works the mouse **Bridge console** (`console.py`) with three zones — **FORMATION P** (the squad's live positions as a 3×n matrix, rows e1/e2/e3 in red/green/blue, changing every pulse as ships move), **ORDER** (c1/c2/c3 sliders that share the very same coefficients the Pilot's keys edit, plus the staged-vs-diagonal fuel line = the triangle inequality), and **TRANSFORM M** (an editable 3×3 that ghost-previews `p→M·p` on the whole squad in space, shows signed `det(M)` and `rank(M)` with a COLLAPSE warning, and on APPLY submits an `ApplyTransform` order so the fleet flies to `M·p`, drawing the amber `real_eigen_axis` fixed-axis line). Mothership = origin; solid ships that never bloom (A1.1); holograms glow; panel alpha 0.85.
+
+**Code:** 32 flat `.py` files in `homeworld/` (engine, input, sim/math, app+console, demos). `python fleet_demo.py` = **12/12 GREEN** (the regression ritual). All flat, no `-m`, no packages.
+
+**The tree (`homeworld/BIBLE/`):** `charter.md` (LIVING branch constitution), `brief_m01.md`…`brief_m16.md` (16 frozen mission briefs), `trunk_handoff.md` (the will), 6 `FABLE-TRUNK-ANSWER-0N-*.md` verbatim archives, plus all founding scriptures + 13 Fable deliverables.
+
+### What we still need to do
+1. **🎁 IMMEDIATE NEXT (Nir's chosen task after this restart): PACKAGING & DISTRIBUTION — a "SNEAK PEEK" build.** Turn the current template game into a finished-feeling, distributable demo.
+   - **Path:** PyInstaller (sanctioned by the founding docs / Book of Prompts). ⚠️ **ASK NIR before installing PyInstaller** (never install without permission).
+   - **Bundle:** `app.py` + all flat modules + the `content/` DATA folder + `settings.json` (PyInstaller `--add-data`), so the built app finds its data. Add an app name, version bump (suggest **v0.8.0 "sneak peek"**), optional window title/banner + icon (if Nir provides one).
+   - **Test:** Nir runs the built `.exe` (he is the visual judge) — verify content loads, ships fly, the TRANSFORM console works, no crash. Ship a short README (controls, two-player note, "sneak peek" caveat). Zip it. Maybe a **GitHub Release** and/or **itch.io** page (Descent QED shipped to both — confirm with Nir).
+   - **Keep it FLAT**; build output (`build/`, `dist/`, `*.spec`) gitignored; don't break `fleet_demo.py` 12/12.
+   - **Open questions for Nir:** (a) PyInstaller OK to install? (b) one-file `.exe` or one-folder? (c) GitHub Release / itch.io / local zip? (d) title-screen/menu or launch straight into the sneak-peek scene? (e) icon/art?
+2. **Launch branch-parents** to build the 16 mini-games (order M2 → M5 → M10 → …). Each: fresh Fable ← founding docs → `charter.md` → current `app.py` → ONE brief → "build it." DeepSeek flattens, integrates, keeps `charter.md` current, stores `handoff_mXX.md`.
+3. **campaign runner + mission stitching + title flow** (later, per Apocrypha) — wire the 16 mini-games into the 16-mission journey; the final SVD "jump home."
+4. **Content debts:** the 2 PLACEHOLDER Strang book excerpts in `content/book/ch1_excerpts.json` (needed when a mission uses them); Chapter-1 OCR pages into `algebra/` as Nir pastes them.
+5. **Deferred:** joystick/Xbox mappers (stubs with full impl notes — sanctioned DeepSeek task when Nir invokes it); FOLLOW/POV camera modes; audio (FORBIDDEN without Nir's approval).
+
+### The reason this is exciting
+Every mission is one Strang mechanic wrapped in fiction, and every mechanic is **the same object shown two ways** (matrix on the console ↔ ships in space). The sneak peek proves the template is a real, felt game before we mass-produce the 16 branches.

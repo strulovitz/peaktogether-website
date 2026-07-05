@@ -1,4 +1,4 @@
-# COMMENTARIES — repository memory. Updated: July 5, 2026 (helm complete)
+# COMMENTARIES — repository memory. Updated: July 5, 2026 (corrected B3 "always space" + full mission-brief tree planted; NEXT = packaging/distribution sneak peek)
 
 Note: "repository" here means the Homeworld game root at `homeworld/` inside the
 Peak Together monorepo (github.com/strulovitz/peaktogether-website). Game code
@@ -13,36 +13,61 @@ a column vector; the fleet is a matrix; the 16-mission journey home to Hiigara i
 moderngl + pyglet + numpy + Pillow, Windows-first. NO audio, ever (Apocrypha
 Amendment A).
 
-**Team model:** Nir (owner — pastes text between chats, runs the game, can't code
-or do math) → Claude Fable (the Parent/architect in OpenRouter — designs AND writes
-all code, delivered as complete files) → DeepSeek (librarian/runner in OpenCode —
-saves Fable verbatim to BIBLE, drops code files in exactly, updates this file,
-commits with Fable's exact message, pushes; never designs or writes game code).
+**Team model (now a TREE 🌳):** Nir (owner — pastes text between chats, runs the game,
+can't code or do math; his word overrides every doc) → **Claude Fable the TRUNK/
+grandparent** (Opus in OpenRouter — built the engine + template game + the BRANCH
+CHARTER + all 16 mission briefs + the trunk will; his memory is now fully externalized
+into the repo so he can die with nothing lost) → **branch-parents** (a fresh Fable chat
+per mini-game: inherits {founding docs + charter.md + current app.py + ONE brief}, builds
+ONE mini-game, ships whole files, writes a hand-off, dies) → **DeepSeek** (librarian/
+runner in OpenCode — saves Fable verbatim to BIBLE, FLATTENS + drops code in, runs checks,
+keeps fleet_demo 12/12 green, updates this file + WORKFLOW, commits with Fable's exact
+message, pushes; answers branch batches with surgical excerpts incl. what earlier branches
+built; never designs game code).
 
-**Scriptures (all verbatim in `homeworld/BIBLE/`):** Old Testament (vision + every
-mechanic + 16-mission campaign + engineering doctrine — wins over all), New
-Testament (forge/fleet/helm module design + INTERFACES v1.0 + the Referee + the
-12-line fleet self-test), Apocrypha (content/campaign/bridge/intel/guidestone +
-Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minutes
-Doctrine), Book of Prompts (birth-prompt templates), Ten Commandments (the ORIGINAL
-founding document v1.0 — even more foundational than the OT v2.1), Parent 1→2
-Handoff (Fable's honest goodbye letter), 2 brainstorms, and 9 Fable deliverable files.
+**Scriptures + THE TREE (all verbatim in `homeworld/BIBLE/`):** Ten Commandments (original
+founding doc v1.0), Old Testament (Bible — vision + every mechanic + 16-mission campaign +
+doctrine — wins over all), New Testament (forge/fleet/helm design + INTERFACES v1.0 + the
+Referee + the 12-line self-test), Apocrypha (content/campaign/bridge/intel/guidestone +
+Amendment A "no audio" + B "Guidestone garnish" + First-Five-Minutes Doctrine), Book of
+Prompts, Parent 1→2 Handoff, 2 brainstorms, Fable deliverables 1–13.
+**THE MISSION-BRIEF TREE (Fable-Trunk answers 01–06, stored + split):** `charter.md`
+(the branch constitution — repo map + THE LAWS + workflow; **LIVING doc, DeepSeek keeps
+it current**), `brief_m01.md`…`brief_m16.md` (all 16 frozen mission briefs), `trunk_handoff.md`
+(the trunk's will — protocol + DeepSeek's standing duties + suggested build order), plus 6
+verbatim archives `FABLE-TRUNK-ANSWER-01..06-*.md`.
 
-**Current state (July 5, 2026):** forge ✅, helm ✅, fleet ✅ (12/12), app.py wiring ✅,
-content data layer ✅, **AMENDMENT A1 ✅**, and **AMENDMENT A1.1 ✅** (Fable deliverable 9).
-**A1.1 — ships never bloom (architectural fix):** Dual render targets — location 0 = SOLID
-buffer (ships, untouched by bloom or tone mapping), location 1 = GLOW buffer (holograms only,
-feeds bloom). Mothership at (0,0,0) with dark slate hull; 10-unit overlay basis axes e1/e2/e3
-drawn ON TOP of hulls (depth test OFF for overlay objects). Engine nozzles/lamps use dim
-emissive values ≤1 (no HDR). COMPOSITE_FRAG reads 3 textures (solid + glow + blurred glow)
-and tone-maps ONLY the hologram layer. Ships stay crisp like real Homeworld hulls. settings
-v0.7.1. 12/12 fleet green. Python CODE all FLAT. NOTE: run.bat deleted (Nir) — run with
-`python app.py`.
+**Current state (July 5, 2026) — v0.7.1, ENGINE COMPLETE + TEMPLATE GAME (corrected B3
+"always space") + FULL TREE PLANTED:** forge ✅, helm ✅, fleet ✅ (12/12), content ✅,
+A1 ✅, A1.1 ✅ (ships never bloom — dual render targets, dark mothership at origin, overlay
+basis axes), **and the CORRECTED B3 console ✅**. The playable template `python app.py` is the
+two-seat "always space" shell: **PILOT** (keyboard: W/S A/D R/F coeffs, ENTER commit, X mode,
+BACKSPACE clear, Q/E squad, TAB select, C recenter, P pause, F1/F12/ESC) + **NAVIGATOR**
+(mouse Bridge console `console.py`, 3 zones): FORMATION P (live 3×n positions, rows e1/e2/e3
+red/green/blue), ORDER (c1/c2/c3 sliders sharing the Pilot's coeffs + fuel line), TRANSFORM M
+(editable 3×3, ghost preview p→M·p, det/rank readouts + collapse warning, APPLY/RESET/SCOPE →
+`ApplyTransform` order → the fleet flies to M·p; amber `real_eigen_axis` line). Panel alpha
+0.85. Python CODE all FLAT (32 `.py` siblings; run `python app.py`, NEVER `-m`). run.bat deleted.
 
-**Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet → (4) ✅ app
-wiring → (5) ✅ content → (6) ✅ **A1 solid ships** → iterate art per Nir → then **bridge**
-(forge 2D overlay + widget kit + FLEET ZONE console — Navigator's mouse, 2nd player joins) →
-**campaign + Mission 1** → Missions 2–16. In parallel: fill PLACEHOLDER book excerpts.
+**⚠️ THE SPREADSHEET LESSON (locked):** B3 first shipped a K/B/M/S/J/U capability-signature
+console — Nir rejected it as a meaningless "grocery spreadsheet." The console is now SPACE
+(positions + transforms). The signature matrix belongs ONLY to combat (M4) / economy (M3).
+"ALWAYS SPACE" is Law #1 of the charter.
+
+**NEXT: PACKAGING & DISTRIBUTION — a "SNEAK PEEK" build (Nir's next task, after an OpenCode
+restart).** Package the current template game as a finished-feeling playable demo via
+**PyInstaller** (the sanctioned path). ⚠️ ASK NIR before installing PyInstaller (never
+install without permission). Bundle `app.py` + all flat modules + `content/` DATA + settings.json
+(`--add-data`); version bump (e.g. v0.8.0 "sneak peek"); optional title/banner + icon; test the
+.exe (Nir judges); zip; maybe GitHub Release / itch.io (Descent QED shipped to both — ask Nir).
+Keep everything FLAT; build output (`build/`, `dist/`) gitignored. THEN: launch branch-parents
+to build the 16 mini-games (Fable's suggested order: M2 → M5 → M10 → …).
+
+**DeepSeek's standing duties for the tree (from `trunk_handoff.md`):** (1) keep `charter.md`
+current when a branch adds a referee fn / order / helper; (2) guard THE LAWS (referee-only math,
+whole files, keyboard=Pilot/mouse=Navigator, never punish, 12/12 green, app.py never edited by a
+branch — branches copy it to `mXX_name.py`); (3) answer branch batches with cross-pollination;
+(4) store each dead branch's hand-off as `handoff_mXX.md`.
 
 **Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
@@ -144,6 +169,7 @@ content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 mes
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — DETAILED STATE SNAPSHOT written to all 3 memory places (DEEPSEEK_RESTART_HOMEWORLD_GO.md rewritten, COMMENTARIES + WORKFLOW updated). Full mission-brief TREE planted in BIBLE (charter.md + brief_m01..m16.md + trunk_handoff.md + 6 verbatim FABLE-TRUNK-ANSWER archives). Fable-Trunk's memory fully externalized. NEXT = packaging/distribution "sneak peek" (PyInstaller, ask before installing). — by DeepSeek
 July 5, 2026 — corrected B3: ALWAYS SPACE — console rebuilt as FORMATION P (live positions) + ORDER (shared coefficient sliders) + TRANSFORM M (editable 3×3, p→M·p ghost preview, det/rank/collapse readouts, amber fixed-axis line); new ApplyTransform order + sim branch (p→M·pos, reuses cruise) + TRANSFORM_APPLIED event; new referee.determinant(M) (signed) — by Parent Fable (via DeepSeek; the K/B/M/S/J/U signature matrix removed from the console per Nir, returns only to combat M4/economy M3; all flat; determinant/ApplyTransform verified headlessly [det 2I=8, mirror=-1, rotation axis=[0,1,0], fighter (6,0,0)→(0,0,-6)]; fleet 12/12 still green)
 July 5, 2026 — bridge: FLEET ZONE console (B3) — console.py (Bridge: live fleet matrix, ships as columns, rank/resources/selected readouts, TAB-follows-selection column highlight) + app.py re-emitted whole with 6 additive wiring changes (two-player) — by Parent Fable (via DeepSeek; console.py NEW + already flat; app.py diff verified = only docstring/import Bridge/self.bridge/tick pause-restructure+on_pulse/on_frame/print, feel-numbers untouched; fleet 12/12 still green)
 July 5, 2026 — House rule: console/panel backgrounds use alpha 0.85 (owner-standardized). demo2d.py panel_bg 0.75→0.85; widgets.py already complies — by DeepSeek (Fable maintenance task, B3 prep)
