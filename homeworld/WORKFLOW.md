@@ -398,7 +398,11 @@ Nir's instruction: package the current template game as a standalone Windows "sn
 - **One code change to `app.py`:** `main()` calls `bootstrap("Homeworld","Homeworld: A Good Basis")` before `App().run()` (same as Quake's `main()`).
 - **🛑 NAMING — SHORT + NO SPACES (RULE #-1, Nir):** exe = **`Homeworld.exe`**, folder = **`dist\Homeworld\`**, zip = **`PeakTogether-Homeworld-Windows-<date>.zip`**, readme = `README-How-to-Play.txt`. Window title stays `Homeworld: A Good Basis` (display text only). (First attempt used the long `Homeworld-A-Good-Basis`; Nir corrected it — early Quake shipped as short `Quake`. Whole first attempt was deleted and rebuilt fresh.)
 - **⚠️ Trademark note:** "Homeworld" is a Relic/Gearbox trademark (like Quake was id's). Ships as `Homeworld` for the sneak peek; Nir may pick a distinct public title later (one variable in spec + ps1).
-- **NEXT (Nir's manual steps, mirrors Descent/Quake):** test the zip standalone on his laptop (no Python) → ship to **itch.io (butler)** + **GitHub Release (gh)** → later a `arcade/homeworld/` website page.
+- **✅ BUILT + LAPTOP-TESTED:** `python .\build_windows_release.ps1` → `release\PeakTogether-Homeworld-Windows-2026.07.05.zip` (28.8 MB, SHA-256 sidecar). Nir extracted + ran `Homeworld.exe` standalone on his laptop (no Python) — **works great.**
+- **✅ SHIPPED to both homes (like Descent/Quake):**
+  - **GitHub Release (mirror) — LIVE, prerelease:** tag `homeworld-sneak-peek-v0.1.0`, title "Homeworld: A Good Basis - SNEAK PEEK", zip + `.sha256.txt` attached. https://github.com/strulovitz/peaktogether-website/releases/tag/homeworld-sneak-peek-v0.1.0
+  - **itch.io (primary) — build UP:** `strulovitz/homeworld-a-good-basis`, channel `windows`, build #1774567, version `0.1.0-sneak-peek` (pushed via butler `push ".\dist\Homeworld"`). **Page still a DRAFT** — Nir sets Public after adding a cover + screenshots. https://strulovitz.itch.io/homeworld-a-good-basis
+- **REMAINING (cosmetic, whenever Nir wants):** (1) itch.io — add cover image + screenshots, then set visibility **Public**; (2) a `peaktogether.me/arcade/homeworld/` website page (like `arcade/quake/`) with gameplay video + shots + controls; (3) optional in-window "SNEAK PEEK" banner (that's a Fable/game-code change, not packaging).
 
 ---
 
