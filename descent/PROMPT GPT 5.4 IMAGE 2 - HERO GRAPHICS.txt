@@ -1,0 +1,13 @@
+Create a wide, cinematic hero illustration in a warm, polished Pixar / modern 3D-animated-film style — cute, friendly, and full of wonder, NOT gritty or scary.
+
+SCENE: A first-person view from inside the cozy cockpit of a small, rounded, friendly spaceship as it dives at high speed down the throat of a long octagonal mining tunnel. Dramatic one-point perspective: the eight tunnel walls converge toward a bright vanishing point in the center, giving a thrilling sense of "diving in." The dark navy mine walls are semi-transparent, showing faint glowing wireframe edges (like a half-blueprint, half-real world). Bright cyan-blue light strips run along the tunnel's corner edges, streaking toward the center with motion-blur to convey speed.
+
+THE MAGIC: The whole tunnel is built from floating, glowing mathematical equations — handwritten-chalk-meets-neon, drifting like holograms along the walls. Each equation sits on a softly glowing colored panel (some red, some yellow, some blue, a few green and purple). At the glowing center of the tunnel, like a destination star the ship is flying toward, floats the famous Basel formula, rendered CLEAN and LEGIBLE: 1/1² + 1/2² + 1/3² + … = π²/6 , with the large golden "π²/6" shining brightest of all. A small soft-green crosshair sits in the center of the cockpit view. Optional tiny detail far ahead: one cute, friendly, non-humanoid hovering robot (a chunky little floating machine with a single glowing eye-strip — NO arms, legs, or face).
+
+MOOD: awe, adventure, cozy-epic — "the most epic date night your brain has ever been on." Cinematic depth, gentle lens bloom on the glowing parts.
+
+PALETTE: dark near-black navy background (#0B1020) with rare, intensely saturated glows only — cyan/blue light strips, warm orange and teal and lavender equation panels, and a golden π²/6. Keep most of the frame dark so the glowing math pops.
+
+COMPOSITION & FORMAT: 16:9 wide landscape, centered one-point perspective, room at the very center for the glowing formula. High detail, smooth rendering, soft volumetric light.
+
+AVOID: photorealistic grime, horror, dark/scary tone, humans or human faces, humanoid robots, cluttered or garbled/unreadable text, watermarks, logos.
