@@ -323,3 +323,13 @@ Parent 1's OpenRouter context filled up. Before starting Parent 2, Nir salvaged 
 5. **Verified:** py_compile OK; all B2 imports resolve; `referee.rank` of the demo matrix = **2** (matches Fable's "FLEET RANK 2 / 3"); `python fleet_demo.py` → **12/12 GREEN**.
 6. Recorded B2 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
 7. ⏳ **Nir to run `python widgets_demo.py`** and REPORT BACK: (1) no crashlog? (2) buttons/slider/matrix feel responsive (esp. wheel-over-cell + click-drag-to-edit)? (3) any lag on the highlight (10 Hz by design)? (4) panel darkness 0.85 (B2) vs 0.75 (B1) — which? Then **B3 = console.py (FLEET ZONE)** — which WILL touch root app.py (Fable re-emits it whole).
+
+### July 5, 2026 — bridge B3 (FLEET ZONE console) delivered — GAME IS NOW TWO-PLAYER 🎮
+1. **Nir confirmed B2 works** (responsive, no lag, no crash). Chose **0.85** as the standard panel opacity → applied to demo2d.py, noted house rule in COMMENTARIES, pushed (commit `9676dd5`).
+2. **Answered Fable's Batch-2 questions** — pasted the whole current `app.py` verbatim + FleetSnapshot field names + column ordering (ascending ship id) + fleet_matrix/rank/resources attrs + ships.json signature table.
+3. **B3 DELIVERED — the FLEET ZONE console (APOCRYPHA 3.4).** Saved verbatim to `BIBLE/FABLE-DELIVERABLE-12-FLEET-ZONE-console-(B3).md`. `console.py` NEW (Bridge class, already flat imports). `app.py` **re-emitted WHOLE** with 6 additive wiring changes.
+4. **VERIFIED `app.py` via git diff** — the ONLY changes are exactly Fable's 6: (a) docstring PILOT/NAVIGATOR, (b) `from console import Bridge`, (c) `self.bridge = Bridge(self.forge.overlay2d)`, (d) tick `if not self.paused:` restructure + `self.bridge.on_pulse(...)`, (e) `self.bridge.on_frame(w,h)` block, (f) one print line. Every owner feel-number (COEFF_RATE 2.0, SNAP 0.5, camera 42.0) untouched.
+5. **console.py** = Bridge: right panel + WidgetManager; live fleet matrix A with ships as columns (rows K/B/M/S/J/U), RANK/RESOURCES/SELECTED readouts, and the selected ship's column highlighted — **following the Pilot's TAB**. Read-only MatrixGrid; reads snapshots only, never mutates fleet. Mouse-only.
+6. **Verified:** py_compile OK (console + app); imports resolve; `python fleet_demo.py` → **12/12 GREEN**.
+7. Recorded B3 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
+8. ⏳ **Nir + a partner to run `python app.py`** and REPORT BACK: (1) runs clean, no crashlog? (2) matrix reads clearly — 7 columns comfortable? (3) does TAB→column-highlight feel like a two-seat conversation? (4) anything you tried to click and were disappointed? (shapes B4 = CONTEXT + BUILD zones). Then **B4**.
