@@ -374,4 +374,5 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 **Trunk answers stored so far (`homeworld/BIBLE/`):**
 - Answer 01: `FABLE-TRUNK-ANSWER-01-charter-and-briefs-m01-m02.md` → split `charter.md`, `brief_m01.md` (span), `brief_m02.md` (dot product).
 - Answer 02: `FABLE-TRUNK-ANSWER-02-briefs-m03-m04-m05.md` → split `brief_m03.md` (rank / A=CR / "Salvage Run"), `brief_m04.md` (Ax=b combat / "Shield Recipe"), `brief_m05.md` (nullspace cloak / "Ghost Fleet").
-- **NEXT:** "continue" → M6 (escape route), M7 (Big Picture star map), M8 (Gram–Schmidt drill).
+- Answer 03: `FABLE-TRUNK-ANSWER-03-briefs-m06-m07-m08.md` → split `brief_m06.md` (complete solution x=x_p+x_n / "Blockade Run"), `brief_m07.md` (Fundamental Theorem star map / "Karos Graveyard"), `brief_m08.md` (Gram–Schmidt drill / "Narrow Corridor").
+- **NEXT:** "continue" → M9 (least squares), M10 (determinant gate emergency), M11 (eigenvector docking).
