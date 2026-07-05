@@ -333,3 +333,20 @@ Parent 1's OpenRouter context filled up. Before starting Parent 2, Nir salvaged 
 6. **Verified:** py_compile OK (console + app); imports resolve; `python fleet_demo.py` → **12/12 GREEN**.
 7. Recorded B3 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
 8. ⏳ **Nir + a partner to run `python app.py`** and REPORT BACK: (1) runs clean, no crashlog? (2) matrix reads clearly — 7 columns comfortable? (3) does TAB→column-highlight feel like a two-seat conversation? (4) anything you tried to click and were disappointed? (shapes B4 = CONTEXT + BUILD zones). Then **B4**.
+
+### 🛑🛑🛑 July 5, 2026 — CRITICAL DESIGN CORRECTION (Nir): the console must be the FORMATION/TRANSFORMATION matrix, NOT the capability spreadsheet 🛑🛑🛑
+**Nir ran B3 and rejected the core premise.** The FLEET ZONE console shows the CAPABILITY/SIGNATURE matrix A (rows K,B,M,S,J,U) — Nir calls it a meaningless "grocery spreadsheet" (5 bananas / 7 oranges). **That is NOT the game.**
+
+**Nir's true design (the spec):** matrix on one side, **ships' REAL POSITIONS (vectors in space)** on the other, **directly and INSTANTLY linked**. The player commands the fleet by **building/choosing/adjusting a TRANSFORMATION MATRIX** that acts on ALL ship positions at once — **rotate / scatter / scale / form up** — instead of mindless mouse-clicking like the original Homeworld. The player must THINK to choose the matrix that produces the formation they want. #components = dimension of space (3→3D, 2→2D). It is ALWAYS space, never abstract "properties." Who's "2 cruisers vs 3 harvesters" — meaningless; a matrix as a motion of space is self-evident and visual.
+
+**GOOD NEWS — re-centering, not rewrite (verified in code):**
+- The Bible (OT Part 1) already defines BOTH matrices: FORMATION MATRIX P (3×n, positions as columns) AND capability matrix A (6×n). We built the console on A; Nir wants P.
+- `sim.py: formation_matrix(ids)` already builds P (columns = each ship's live `pos`); updates every pulse.
+- `snap.pos` (n×3) is already on the snapshot → transpose = live 3×n formation matrix. The "instant link" is ~one wire.
+- The **editable MatrixGrid** (B2) is the perfect input for a transformation matrix M.
+- The **referee** already has the spatial math: `spanned_volume`/determinant (volume spread/collapse; det=0 → fleet collapses to plane/line = singular), `real_eigen_axis`/`weak_axis` (eigenvectors = fixed axes), `rank` (collapse dimension).
+- `engine_vectors` e1,e2,e3 = colored basis axes already on the mothership.
+
+**MISSING (design work for Fable):** a TRANSFORMATION order — apply M to a squad's/fleet's positions `p → M·(p−center)+center` (rotate/scatter/scale), replacing/augmenting the current translation-only `MoveCombination` (which adds one `c1e1+c2e2+c3e3` vector to every ship). Wire editable MatrixGrid → M → commit → fleet visibly transforms in 3D instantly. Readouts become spatial: det(M), rank(M), eigenvector(s).
+
+**Status:** relayed to Parent 2 (Fable) verbatim + these technical facts. Awaiting Fable's redesign of the console + command model. The capability matrix (K,B,M,S,J,U) is demoted (at most a minor combat sub-system), NOT the heart of the game. B4 (build/context zones) is on hold pending this redesign.
