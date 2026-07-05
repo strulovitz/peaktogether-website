@@ -1,12 +1,12 @@
-"""The Forge class: window, GL context, main loop (NEW_TESTAMENT 1.2).
+"""The Forge class: window, GL context, main loop.
 
-Render pipeline per frame:
-    scene pass into RGBA16F FBO (additive):
-        line ribbons -> image panels -> labels
+Render pipeline per frame (Amendment A1):
+    scene FBO (RGBA16F + depth):
+        1. SOLID pass  — opaque lit ships, depth test + write, no blend
+        2. GLOW pass   — additive lines/panels/labels, depth test ON,
+                         depth write OFF (holograms occluded by hulls)
     bloom (downsample, blur, composite + tone map) -> screen
-    screen overlay (crisp, after bloom): fps corner + F1 debug lines
-
-Additive blending is order-independent: no sorting, ever.
+    crisp screen overlay (fps corner, F1 debug lines)
 """
 
 import datetime
@@ -22,11 +22,12 @@ from camera import Camera
 from shaders import LINE_VERT, LINE_FRAG
 from batches import build_vertices
 from bloom import Bloom
+from solid import SolidMesh, SolidRenderer
 from text import GlyphAtlas, TextRenderer, PanelRenderer, make_quad_program
 from vobjects import Label, ImagePanel
 
-PULSE_DT = 0.1                        # 10 Hz logic pulse (frozen)
-_INITIAL_VBO_BYTES = 4 * 1024 * 1024  # room for ~20k segments
+PULSE_DT = 0.1
+_INITIAL_VBO_BYTES = 4 * 1024 * 1024
 
 
 class Forge:
@@ -39,31 +40,26 @@ class Forge:
         self._caption_base = f"{title} — forge v{version}"
 
         config = pyglet.gl.Config(
-            double_buffer=True, major_version=3, minor_version=3, depth_size=24
-        )
+            double_buffer=True, major_version=3, minor_version=3,
+            depth_size=24)
         self.window = pyglet.window.Window(
-            width=width,
-            height=height,
-            caption=self._caption_base,
-            resizable=True,
-            config=config,
+            width=width, height=height, caption=self._caption_base,
+            resizable=True, config=config,
             vsync=bool(settings.get("vsync", True)),
-            fullscreen=bool(settings.get("fullscreen", False)),
-        )
+            fullscreen=bool(settings.get("fullscreen", False)))
         self.window.switch_to()
         self.ctx = moderngl.create_context()
 
         self._prog = self.ctx.program(
-            vertex_shader=LINE_VERT, fragment_shader=LINE_FRAG
-        )
+            vertex_shader=LINE_VERT, fragment_shader=LINE_FRAG)
         self._vbo = self.ctx.buffer(reserve=_INITIAL_VBO_BYTES, dynamic=True)
         self._vao = self._make_vao()
 
         self._bloom = Bloom(
             self.ctx,
             strength=float(settings.get("bloom_strength", 0.85)),
-            exposure=float(settings.get("exposure", 2.5)),
-        )
+            exposure=float(settings.get("exposure", 2.5)))
+        self._solid = SolidRenderer(self.ctx)
 
         self._quad_prog = make_quad_program(self.ctx)
         self._atlas = GlyphAtlas(self.ctx, px=48)
@@ -88,7 +84,7 @@ class Forge:
         self._fps_frames = 0
         self._fps_t0 = time.perf_counter()
 
-    # ---- frozen interface (NEW_TESTAMENT 1.2) ----
+    # ---- frozen interface ----
 
     def add(self, vob):
         if vob not in self._vobjects:
@@ -110,7 +106,6 @@ class Forge:
         return path
 
     def run(self, tick_cb, frame_cb):
-        """Main loop. tick_cb(dt) at exactly 10 Hz; frame_cb(alpha) per frame."""
         prev = time.perf_counter()
         accumulator = 0.0
         while not self.window.has_exit:
@@ -138,34 +133,44 @@ class Forge:
 
     def _make_vao(self):
         return self.ctx.vertex_array(
-            self._prog, [(self._vbo, "3f 4f 1f", "in_pos", "in_color", "in_u")]
-        )
+            self._prog, [(self._vbo, "3f 4f 1f", "in_pos", "in_color", "in_u")])
 
     def _render(self):
         w, h = self.window.get_framebuffer_size()
         if w <= 0 or h <= 0:
             return
 
-        # ---- scene pass into the RGBA16F framebuffer ----
         self._bloom.ensure_size(w, h)
-        self._bloom.scene_fbo.use()
-        self._bloom.scene_fbo.clear(0.0, 0.0, 0.0, 1.0)
-        self.ctx.disable(moderngl.DEPTH_TEST)
-        self.ctx.enable(moderngl.BLEND)
-        self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
+        fbo = self._bloom.scene_fbo
+        fbo.depth_mask = True
+        fbo.use()
+        fbo.clear(0.0, 0.0, 0.0, 1.0, depth=1.0)
 
         view = self.camera.view()
         mvp = self.camera.proj(w / h) @ view
         mvp_t = np.ascontiguousarray(mvp.T, dtype=np.float32)
-        self._prog["u_mvp"].write(mvp_t)
 
+        # ---- 1. SOLID pass: opaque lit ships ----
+        solids = [v for v in self._vobjects
+                  if isinstance(v, SolidMesh) and v.visible]
+        if solids:
+            self.ctx.enable(moderngl.DEPTH_TEST)
+            self.ctx.disable(moderngl.BLEND)
+            self._solid.draw(solids, mvp_t, self.camera.eye())
+
+        # ---- 2. GLOW pass: additive holograms, occluded by hulls ----
+        self.ctx.enable(moderngl.DEPTH_TEST)
+        fbo.depth_mask = False
+        self.ctx.enable(moderngl.BLEND)
+        self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
+
+        self._prog["u_mvp"].write(mvp_t)
         data = build_vertices(self._vobjects, self.camera.eye())
         if data.shape[0] > 0:
             if data.nbytes > self._vbo.size:
                 self._vbo.release()
-                self._vbo = self.ctx.buffer(
-                    reserve=2 * data.nbytes, dynamic=True
-                )
+                self._vbo = self.ctx.buffer(reserve=2 * data.nbytes,
+                                            dynamic=True)
                 self._vao = self._make_vao()
             self._vbo.write(data.tobytes())
             self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
@@ -182,7 +187,8 @@ class Forge:
         # ---- bloom -> screen ----
         self._bloom.apply(self.ctx.screen, w, h)
 
-        # ---- crisp screen overlay, after bloom ----
+        # ---- crisp overlay ----
+        self.ctx.disable(moderngl.DEPTH_TEST)
         self.ctx.enable(moderngl.BLEND)
         self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
         items = [(f"{self._fps_value:.0f} fps", 10, 10, 18,
@@ -200,7 +206,6 @@ class Forge:
         if now - self._fps_t0 >= 1.0:
             self._fps_value = self._fps_frames / (now - self._fps_t0)
             self.window.set_caption(
-                f"{self._caption_base} — {self._fps_value:.0f} fps"
-            )
+                f"{self._caption_base} — {self._fps_value:.0f} fps")
             self._fps_frames = 0
             self._fps_t0 = now

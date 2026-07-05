@@ -1,23 +1,17 @@
-"""app.py — the game shell of Homeworld: A Good Basis (NT Parts 4-5).
+"""app.py — the game shell of Homeworld: A Good Basis.
 
-Owns nothing but the wiring: forge renders, helm inputs, fleet
-simulates, content supplies data; app translates actions into orders,
-routes events, and interpolates snapshots into visuals at 60 fps.
-
-SHAKEDOWN SCENARIO (until campaign/ and bridge/ arrive):
-mothership + three fighters (squad 1) + corvette, collector, frigate
-(squad 2). All ship classes and meshes come from content/ships.json.
+Amendment A1: ships are solid lit hulls (shipwright.py);
+the math layer (basis arrows, combination ghost, trails, selection
+ring) remains glowing holograms drawn over them.
 
     W/S  A/D  R/F   edit the combination coefficients (c3, c1, c2)
-    ENTER           commit: the squad flies  c1*e1 + c2*e2 + c3*e3
-    X               toggle diagonal flight vs component-by-component
-    BACKSPACE       reset coefficients        Q / E  switch squad
-    TAB / SHIFT+TAB select next / previous ship (white highlight)
-    C               recenter the camera on the selected ship
-    ARROWS, PGUP/DN orbit / zoom     P pause    F1 debug    F12 shot
+    ENTER commit | X diagonal/staged | BACKSPACE clear | Q/E squad
+    TAB select ship | C recenter camera | arrows/PgUp/PgDn camera
+    P pause | F1 debug | F12 screenshot | ESC quit
 """
 
 import json
+import math
 import os
 import sys
 import time
@@ -26,19 +20,20 @@ import traceback
 import numpy as np
 
 from forge import Forge
-from vobjects import Grid, Arrow, DashedLine, Label, Trail, WireMesh
+from vobjects import Grid, Arrow, DashedLine, Label, Line, Trail
+from solid import SolidMesh
 from helm import Helm
 from sim import FleetSim
 from orders import MoveCombination
 from content_db import ContentDB
+from shipwright import build_ship
 
-COEFF_RATE = 2.0          # coefficient units per second of held key
-COEFF_SNAP = 0.5          # commit snaps coefficients to this grid
+COEFF_RATE = 2.0
+COEFF_SNAP = 0.5
+_MESH_CACHE = {}
 
 
 def _aim_matrix(forward):
-    """3x3 rotation whose columns (right, up, forward) map mesh-local
-    axes (+z = nose) into world space."""
     f = np.asarray(forward, dtype=np.float64)
     n = np.linalg.norm(f)
     f = f / n if n > 1e-9 else np.array([0.0, 0.0, 1.0])
@@ -51,34 +46,37 @@ def _aim_matrix(forward):
     return np.column_stack([r, u, f])
 
 
+def _circle_points(center, radius, n=40):
+    a = np.linspace(0.0, 2.0 * np.pi, n + 1)
+    return np.stack([center[0] + radius * np.cos(a),
+                     np.full(n + 1, center[1]),
+                     center[2] + radius * np.sin(a)], axis=1)
+
+
 class ShipView:
-    """The visual twin of one ship: content-defined wire mesh + trail."""
+    """Solid lit hull + holographic trail."""
 
     def __init__(self, forge_, klass, content):
-        self.base, self.edges = content.mesh_for_class(klass)
-        self.color = content.color_for_class(klass)
-        self.mesh = WireMesh(self.base, self.edges, color=self.color,
-                             width=0.05)
+        if klass not in _MESH_CACHE:
+            _MESH_CACHE[klass] = build_ship(klass, content.ship_class(klass))
+        verts, tris, colors, emissive = _MESH_CACHE[klass]
+        self.solid = SolidMesh(verts, tris, colors, emissive)
+        self.radius = max(1.0, 1.2 * float(
+            np.max(np.linalg.norm(verts[:, [0, 2]], axis=1))))
         self.trail = Trail(max_points=60, color=(0.5, 0.8, 1.0, 0.45),
                            width=0.04)
         self.dir = np.array([0.0, 0.0, 1.0])
-        forge_.add(self.mesh)
+        forge_.add(self.solid)
         forge_.add(self.trail)
 
     def update(self, pos, velocity, selected):
         if np.linalg.norm(velocity) > 1e-6:
             self.dir = velocity / np.linalg.norm(velocity)
-        R = _aim_matrix(self.dir)
-        self.mesh.set_data(self.base @ R.T + pos, self.edges)
-        if selected:
-            self.mesh.set_color((1.0, 1.0, 1.0, 1.0))
-            self.mesh.glow = 1.5
-        else:
-            self.mesh.set_color(self.color)
-            self.mesh.glow = 1.0
+        self.solid.set_highlight(selected)
+        self.solid.set_transform(_aim_matrix(self.dir), pos)
 
     def remove(self, forge_):
-        forge_.remove(self.mesh)
+        forge_.remove(self.solid)
         forge_.remove(self.trail)
 
 
@@ -92,9 +90,8 @@ class App:
         self.helm = Helm(self.settings)
         self.helm.attach(self.forge.window)
 
-        # ---- simulation + shakedown fleet ----
         self.sim = FleetSim(self.settings.get("seed", 1234), self.content)
-        self.sim.spawn("mothership", (0.0, 0.0, 0.0))
+        self.sim.spawn("mothership", (0.0, 0.0, -12.0))
         self.sim.spawn("fighter", (6.0, 0.0, 3.0), squad=1)
         self.sim.spawn("fighter", (8.0, 0.0, -2.0), squad=1)
         self.sim.spawn("fighter", (4.0, 0.0, -6.0), squad=1)
@@ -102,7 +99,6 @@ class App:
         self.sim.spawn("collector", (-11.0, 0.0, -1.0), squad=2)
         self.sim.spawn("frigate", (-6.0, 0.0, -8.0), squad=2)
 
-        # ---- static scene ----
         self.forge.add(Grid(center=(0, 0, 0), u=(1, 0, 0), v=(0, 0, 1),
                             n=12, spacing=2.0))
         basis_colors = [(1.0, 0.3, 0.3, 1.0), (0.3, 1.0, 0.4, 1.0),
@@ -114,11 +110,9 @@ class App:
             self.forge.add(Label(name, 3.6 * e, size=0.8,
                                  color=(col[0], col[1], col[2], 0.9)))
 
-        # ---- combination ghost (the order being composed) ----
         self.ghost_legs = [
             DashedLine((0, 0, 0), (0, 0, 0), dash=0.4, color=basis_colors[i])
-            for i in range(3)
-        ]
+            for i in range(3)]
         self.ghost_diag = Arrow((0, 0, 0), (0, 0, 1), head_size=0.7,
                                 color=(1.0, 1.0, 1.0, 0.9), glow=1.2)
         self.ghost_label = Label("", (0, 0, 0), size=0.8,
@@ -127,7 +121,12 @@ class App:
             g.visible = False
             self.forge.add(g)
 
-        # ---- state ----
+        self.sel_ring = Line(_circle_points((0, 0, 0), 1.0),
+                             color=(1.0, 1.0, 1.0, 0.8), glow=1.3,
+                             width=0.05)
+        self.sel_ring.visible = False
+        self.forge.add(self.sel_ring)
+
         self.views = {}
         self.coeffs = np.zeros(3)
         self.diagonal = True
@@ -141,10 +140,10 @@ class App:
         self.forge.camera.distance = 42.0
         self.forge.camera.set_orbit((0.0, 0.0, 0.0))
 
-        print("Homeworld: A Good Basis — shakedown shell.")
-        print("W/S A/D R/F edit coefficients | ENTER commit | X mode | "
+        print("Homeworld: A Good Basis — shakedown shell (solid ships).")
+        print("W/S A/D R/F coefficients | ENTER commit | X mode | "
               "BACKSPACE clear | Q/E squad")
-        print("TAB select | C recenter camera | arrows/PgUp/PgDn camera | "
+        print("TAB select | C recenter | arrows/PgUp/PgDn camera | "
               "P pause | F1 debug | ESC quit")
 
     # ---- helpers ----
@@ -255,8 +254,7 @@ class App:
         self.forge.camera.orbit_input(
             axes["CAM_YAW"] * 1.8 * fdt,
             axes["CAM_PITCH"] * 1.2 * fdt,
-            axes["CAM_ZOOM"] * 0.9 * fdt,
-        )
+            axes["CAM_ZOOM"] * 0.9 * fdt)
 
         snap = self.snap
         sel = self._selected_id()
@@ -265,8 +263,14 @@ class App:
             p = snap.prev_pos[k] + (snap.pos[k] - snap.prev_pos[k]) * alpha
             v = snap.pos[k] - snap.prev_pos[k]
             self.views[sid].update(p, v, sid == sel)
+            if sid == sel:
+                self.sel_ring.visible = True
+                self.sel_ring.set_data(_circle_points(
+                    p - np.array([0.0, 0.4, 0.0]), self.views[sid].radius))
             if snap.squad[k] == self.cmd_squad:
                 squad_positions.append(p)
+        if sel is None:
+            self.sel_ring.visible = False
 
         self._update_ghost(squad_positions)
 

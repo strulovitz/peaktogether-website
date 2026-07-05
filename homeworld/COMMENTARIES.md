@@ -27,22 +27,23 @@ Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minut
 Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 "FABLE DELIVERABLE N" file per code package.
 
-**Current state (July 5, 2026):** forge ✅ (Nir-confirmed), helm ✅ (Nir-confirmed),
-fleet ✅ (12/12), **app.py wiring ✅** (first playable), and **content data layer ✅**
-(Apocrypha step 1 = Fable deliverable 7: ContentDB loads+validates ships.json + 5
-wireframe meshes + narrator/core.json + book placeholders; app now spawns squad 2
-= corvette+collector+frigate, Q/E switches commanded squad, fleet rank 5). Python
-CODE is FLAT (content_db.py + content_demo.py); the `content/` DATA folder stays (like
-Quake's levels/). `python content_demo.py` prints CONTENT CHECK PASSED (DeepSeek-verified).
-All syntax-checked; committed with Fable's exact messages, pushed. AWAITING Nir's run of
-`python content_demo.py` + play-test of the 7-ship scene. Requirements already installed:
-numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
+**Current state (July 5, 2026):** forge ✅, helm ✅, fleet ✅ (12/12), app.py wiring ✅,
+content data layer ✅, and **AMENDMENT A1: SOLID SHADED SHIPS ✅** (Fable deliverable 8).
+Nir ruled glowing-wireframe ships FAIL Bible Law 1 (gaming first). Now ships are **solid,
+opaque, lit triangle meshes** (per-pixel Blinn-Phong: key+fill+rim+specular, paneled hulls,
+emissive engine nozzles/windows feeding bloom) generated procedurally by `shipwright.py`
+(264–396 tris/class); the math layer (arrows/grids/ghosts/trails) stays glowing holographic,
+drawn over the solids with depth test. New render pipeline: solid pass (depth write) → glow
+pass (depth test, no write) → bloom → overlay. Python CODE all FLAT (shaders.py, solid.py,
+bloom.py, forge.py, shipwright.py — no packages). All ships build headlessly (verified);
+committed with Fable's exact messages, pushed. AWAITING Nir's play-test **as art director**
+(which ship best/worst, too dark/bright, panel variation, engine glow — all one-number knobs).
+settings.json → v0.7.0. NOTE: run.bat deleted (Nir) — run with `python app.py`.
 
-**Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet (12/12)
-→ (4) ✅ app.py wiring → (5) ✅ **content data layer** → then **bridge** (forge 2D
-overlay + widget kit + FLEET ZONE console — Navigator's mouse, 2nd player joins) →
-**campaign + Mission 1** (minute-by-minute) → Missions 2–16. In parallel: keep filing
-Strang book pages + fill the PLACEHOLDER book excerpts (content/book/).
+**Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet → (4) ✅ app
+wiring → (5) ✅ content → (6) ✅ **A1 solid ships** → iterate art per Nir → then **bridge**
+(forge 2D overlay + widget kit + FLEET ZONE console — Navigator's mouse, 2nd player joins) →
+**campaign + Mission 1** → Missions 2–16. In parallel: fill PLACEHOLDER book excerpts.
 
 **Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
@@ -57,7 +58,13 @@ file that arrives with `from .` / `-m` is converted to flat absolute imports on 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-7 — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-8 — WORKING
+homeworld/notes/amendment_a1_art_direction.md — AMENDMENT A1: ships = solid opaque lit meshes; math layer = glowing holograms over them; "looks like a game a gamer would choose" outranks aesthetic theory (owner is arbiter) — WORKING
+homeworld/shaders.py — GLSL: line ribbon + MESH (Blinn-Phong key/fill/rim/spec, two-sided) + bloom pipeline + textured-quad shaders (Amendment A1) — WORKING
+homeworld/solid.py — SolidMesh (opaque lit triangle vobject, per-vertex color+emissive, set_transform/set_highlight) + SolidRenderer (batched, depth test, no blend) (Amendment A1) — WORKING
+homeworld/shipwright.py — procedural solid-ship generator: lofted hulls + wings/fins/masts/towers + emissive nozzles, per-class deterministic; build_ship(klass, spec) -> verts/tris/colors/emissive (264-396 tris/class) (Amendment A1) — WORKING
+homeworld/forge.py — Forge class (window, GL, 10 Hz loop): render pipeline SOLID pass (depth write) -> GLOW pass (depth test, no write) -> bloom -> overlay (Amendment A1) — WORKING
+homeworld/bloom.py — Bloom: scene FBO now RGBA16F + DEPTH (solids need depth); downsample/Gaussian/composite+tonemap (Amendment A1) — WORKING
 homeworld/app.py — THE GAME SHELL (root): wires forge+helm+fleet+content; shakedown scenario (7 ships in 2 squads: mothership + 3 fighters squad 1, corvette+collector+frigate squad 2; keyboard combination-order console; Q/E switch commanded squad). Runs `python app.py` — FLAT, no `-m`, no hacks. (NT step 9 / Apocrypha 1) — WORKING (awaiting Nir play-test)
 homeworld/content_db.py — ContentDB (was content/db.py): loads + LOUDLY validates the content/ data tree (ships, meshes, narrator, book, missions) (Apocrypha 1.1-1.4) — WORKING
 homeworld/content_demo.py — content check (was content/demo.py): prints CONTENT CHECK PASSED + placeholder ledger; run `python content_demo.py` (NEVER `-m`) — WORKING (verified)
@@ -128,6 +135,7 @@ content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 mes
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — AMENDMENT A1: solid shaded ships — mesh shader, depth pipeline, procedural shipwright — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*.py→root, content/shipwright.py→shipwright.py, forge/__init__ dropped; all 5 ships build headlessly)
 July 5, 2026 — Apocrypha step 1: content data layer (ContentDB, ships.json, 5 meshes, narrator core, book placeholders) + app wiring — by Parent Fable (via DeepSeek; flattened per RULE #0: content/db.py→content_db.py, content/demo.py→content_demo.py, __init__ dropped; content/ kept as DATA folder; CONTENT CHECK PASSED)
 July 5, 2026 — FLATTENED to Quake structure: all 23 modules moved out of forge/helm/fleet subfolders into homeworld/ root as flat siblings (forge.py, helm.py, sim.py, …); removed the app.py sys.path bootstrap; plain absolute imports; `python app.py` runs like Quake (no -m, no hacks); 12/12 still green — by DeepSeek (Nir's order; RULE #0 now mandates flat + flatten every Fable delivery)
 July 5, 2026 — NT step 9: app.py wiring — forge+helm+fleet, shakedown scenario with combination orders — by Parent Fable (via DeepSeek; RULE #0 sys.path bootstrap so `python app.py` works with the flat packages, no -m; wiring imports verified)
