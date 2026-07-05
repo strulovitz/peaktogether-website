@@ -71,7 +71,7 @@ homeworld/content_demo.py — content check (was content/demo.py): prints CONTEN
 homeworld/content/ — DATA folder (like Quake's levels/): ships.json + meshes/{mothership,fighter,corvette,collector,frigate}.json + narrator/core.json + book/ch1_excerpts.json (2 PLACEHOLDER excerpts awaiting Strang paste) — WORKING
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
-homeworld/run.bat — double-click launcher (runs `python app.py` — the real game shell) — WORKING
+run.bat — DELETED (Nir's choice — always runs with `python app.py` directly) — GONE
 homeworld/settings.json — human-editable config (v0.5.0; title, size, vsync, bloom_strength, exposure, seed, input) — WORKING
 —— STRUCTURE: ALL modules are FLAT siblings in homeworld/ (no forge/helm/fleet subfolders, no __init__.py, no packages — Quake-style). ——
 homeworld/forge.py — Forge class (was forge/app.py): window, GL, 10 Hz loop, scene FBO -> panels -> labels -> bloom -> screen overlay (fps, F1), PULSE_DT (NT 1) — WORKING

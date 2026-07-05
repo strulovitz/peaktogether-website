@@ -79,16 +79,42 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 - `forge/__init__.py` — exports.
 - `requirements.txt`, `run.bat`, `settings.json` (v0.3.0: bloom_strength 0.85, exposure 2.5, seed 1234).
 
-## 5. CURRENT SITUATION (July 5, 2026)
-- ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
-- ✅ **helm is COMPLETE + CONFIRMED by Nir** — NT step 5 (Fable deliverable 4). Nir tried every key: all mapped actions, W+S cancel, TAB/SHIFT+TAB select, mouse pointer/buttons/wheel, unmapped key = no crash. Runs Quake-style: `python demo.py` from inside `helm\`. `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json v0.4.0 (adds `input` section).
-- ✅ **fleet is COMPLETE + CONFIRMED (12/12)** — NT steps 6-7 (Fable deliverable 5). `fleet/` package = referee.py (canonical NumPy verdict fns — the math conscience), orders.py (12 frozen order types), events.py (frozen Event), ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), demo.py (headless self-test), __init__.py. `python fleet\demo.py` prints FLEET SELF-TEST PASSED (12/12). Nir confirmed.
-- ✅ **app.py wiring is BUILT** — NT step 9 (Fable deliverable 6). Root `app.py` wires forge+helm+fleet into the game shell + SHAKEDOWN SCENARIO (mothership + 3 fighters in squad 1 + the keyboard combination-order console: live ghost legs/arrow, ENTER to commit, X = diagonal vs staged, TAB select, C recenter, camera orbit). **First PLAYABLE build.** Runs `python app.py` / double-click `run.bat` (NO `-m`, NO hacks — the whole game is now FLAT, see below). settings.json → v0.5.0. Wiring imports verified by DeepSeek.
-- ✅ **FLATTENED to Quake structure (July 5, 2026)** — forge/, helm/, fleet/ subfolders **eliminated**; all modules now flat siblings in `homeworld/` (forge.py, helm.py, sim.py, referee.py, camera.py, vobjects.py, actions.py, …). No packages, no `__init__.py`, no sys.path bootstrap. `python app.py` runs exactly like Quake. 12/12 fleet self-test still green.
-- ✅ **content data layer BUILT (Apocrypha step 1 = Fable deliverable 7)** — `content_db.py` (ContentDB: loads+validates), `content_demo.py` (`python content_demo.py` → CONTENT CHECK PASSED), and the `content/` DATA folder (ships.json + 5 meshes + narrator/core.json + book/ch1_excerpts.json w/ 2 PLACEHOLDER excerpts). app.py now spawns 7 ships in 2 squads (Q/E switches commanded squad), meshes come from content/, fleet rank 5. Flattened per RULE #0 (code flat; content/ is a data folder like Quake's levels/). settings.json → v0.6.0.
-- ⏳ **AWAITING Nir:** run `python content_demo.py` (CONTENT CHECK PASSED + placeholder ledger) and play-test the 7-ship scene (Q/E squads, five distinct silhouettes, F1 shows rank 5). Report any ugly mesh (2-min JSON edits). Then Fable builds **bridge** (Navigator's mouse console, 2nd player).
-- ✅ **AMENDMENT A1: SOLID SHADED SHIPS (Fable deliverable 8)** — Nir ruled glowing-wireframe ships FAIL Bible Law 1. Now ships are **solid opaque lit meshes** (Blinn-Phong key/fill/rim/spec, paneled hulls, emissive nozzles→bloom) built procedurally by `shipwright.py` (264–396 tris/class); math layer stays glowing holographic over them. New forge pipeline: solid pass (depth write) → glow pass (depth test, no write) → bloom → overlay. Flattened per RULE #0 (shaders.py, solid.py, bloom.py, forge.py, shipwright.py all flat; forge/__init__ dropped). All 5 ships build headlessly (verified). settings.json → v0.7.0.
-- ⏳ **AWAITING Nir's art-director play-test** (`python app.py`): which ship best/worst, too dark/bright, panel variation nice/noisy, engine glow more/less — every one is a one-number knob Fable can tweak. Then **bridge** (2nd player).
+## 5. CURRENT SITUATION (July 5, 2026, end of day — ~31% DeepSeek context)
+
+### The game state (verified — every module below has its code dropped in, compiles, and its imports resolve):
+| Module | Fable Deliverable | Status | Notes |
+|--------|-------------------|--------|-------|
+| **forge** | #1, #2, #3 (NT 1-4) | ✅ Nir confirmed | Camera, GLSL line-ribbon + bloom + textured-quad shaders, batches, Bloom, GlyphAtlas+TextRenderer+PanelRenderer, FULL vobjects vocabulary (Line, Arrow, DashedLine, Grid, WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel, SolidMesh — A1), **SolidRenderer (A1)**. Render pipeline: SOLID pass (depth write, no blend) → GLOW pass (depth test, no write, additive) → bloom → crisp overlay. F12 screenshot, F1 debug. |
+| **helm** | #4 (NT step 5) | ✅ Nir confirmed | actions.py (frozen list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl), helm.py (Helm orchestrator), helm_demo.py. Every key tested. |
+| **fleet** | #5 (NT 6-7) | ✅ Nir confirmed | referee.py (12 canonical NumPy fns — the math conscience), orders.py (12 types), events.py, ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), fleet_demo.py. FLEET SELF-TEST PASSED (12/12). |
+| **app.py wiring** | #6 (NT step 9) | ✅ Wiring verified | Root game shell: wires forge+helm+fleet. Shakedown: mothership + 3 fighters (squad 1) + corvette+collector+frigate (squad 2). Keyboard combination-order console (ghost legs/arrow, ENTER commit, X diagonal/staged, Q/E squad switch, TAB select, C recenter, camera, P pause). |
+| **content** | #7 (Apocrypha 1) | ✅ Content check verified | content_db.py (ContentDB: loads + LOUDLY validates), content_demo.py (CONTENT CHECK PASSED), content/ DATA folder: ships.json, 5 mesh JSONs, narrator/core.json (7 lines), book/ch1_excerpts.json (2 PLACEHOLDERS awaiting Nir's Strang paste). |
+| **SOLID SHIPS** | #8 (A1) | ✅ Built, NOT SEEN BY NIR | **Amendment A1**: ships now solid opaque lit meshes (Blinn-Phong, 264–396 tris/class) from shipwright.py. shaders.py MESH shader, solid.py SolidMesh+SolidRenderer, bloom.py depth buffer, forge.py new pipeline. **Nir has NOT yet seen/played this — the context-window restart is happening now so he can run it with fresh context.** |
+| **BIBLE** | — | ✅ A1 in scriptures | Amendment A1 banner at top of OT+NT+Apocrypha. 8 deliverable files saved verbatim. |
+| **Structure** | — | ✅ FLATTENED | All 26+ modules are flat siblings in homeworld/. No packages, no __init__.py, no -m, no hacks. content/ is a DATA folder (like Quake's levels/). RULE #0 permanent. run.bat deleted (Nir's choice). |
+
+### Runs
+| What | Command | Status |
+|------|---------|--------|
+| The full game | `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python app.py` | ⏳ **AWAITING Nir's art-director play-test** (solid ships!) |
+| Fleet self-test | `python fleet_demo.py` (from homeworld/) | ✅ 12/12 PASS |
+| Content check | `python content_demo.py` (from homeworld/) | ✅ CONTENT CHECK PASSED |
+| Helm demo | `python helm_demo.py` (from homeworld/) | ✅ Nir confirmed |
+| Forge demo | `python forge_demo.py` (from homeworld/) | ✅ Nir confirmed (but shows old wireframe test — low priority) |
+
+### Data folders (not code — fine per RULE #0 clause 3b)
+- `content/` — ships.json, meshes/ (5 .json), narrator/ (core.json, 7 lines), book/ (ch1_excerpts.json, 2 PLACEHOLDERS), missions/ (empty)
+- `algebra/` — Strang book OCR: everyone/ + introduction/ (prefaces done, Chapter 1 empty awaiting pages)
+- `BIBLE/` — verbatim scriptures (OT+NT+Apocrypha+Book of Prompts) + 2 brainstorms + 8 Fable deliverable files
+- `notes/` — amendment_a1_art_direction.md
+
+### What's NOT yet built (next after Nir's A1 art review)
+1. **Bridge** (NT/Apocrypha) — forge 2D overlay + widget kit + FLEET ZONE console. The Navigator picks up the mouse. 2nd player joins.
+2. **Campaign + Mission 1** (Apocrypha) — minute-by-minute mission script. First real playable mission.
+3. **Missions 2–16** — the full 16-mission journey home to Hiigara.
+4. **Content book excerpts** — Nir pastes Strang text into the PLACEHOLDER slots in content/book/ch1_excerpts.json.
+5. **Joystick + Xbox mappers** — stubs exist with complete implementation instructions.
+6. **FOLLOW/POV camera modes** — deferred.
 - ⏳ **AWAITING Nir's play-test** of `run.bat`: compose W (blue leg) + D (red leg) → ghost arrow → ENTER → fighters fly the diagonal; then X + compose + ENTER → they fly staged (two sides of the parallelogram). Fable also wants Nir's gamer feel on compose-then-commit (feel-knobs COEFF_RATE=2.0, COEFF_SNAP=0.5 are one-line changes).
 - ⏳ **NEXT (after Nir plays):** content loader + real ship meshes → bridge (Navigator's mouse console, 2nd player) → campaign + Mission 1.
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
@@ -123,8 +149,65 @@ Per the New Testament build order + Fable's stated plan:
 - Commit + push after every meaningful change.
 
 ## 9. SESSION LOG
-### July 4, 2026 — Homeworld born; books filed; scriptures saved; forge built to feature-complete
-1. Created `homeworld/algebra/{everyone,introduction}/{preface,chapter 1}/` structure.
+## 9. SESSION LOG
+
+### TODAY (July 5, 2026) — THE ENTIRE DAY — from helm through solid ships (8 Fable deliverables!)
+This was the biggest single-day session in Homeworld history. DeepSeek's context is now ~31% full. Here's every beat, in order, for the restart:
+
+#### FABLE DELIVERABLE 4 — helm complete (NT step 5)
+- Nir pasted Fable's helm answer. I saved it verbatim to `BIBLE/FABLE DELIVERABLE 4 - helm complete (NT step 5).md`.
+- Created the `helm/` package: actions.py, keyboard_map.py, mouse_map.py, joystick_map.py (stub), gamepad_map.py (stub), __init__.py, demo.py. Updated `settings.json` → v0.4.0.
+- Fable passed `python -m helm.demo` to Nir. **Nir HATED `-m` and was FURIOUS.** This started the whole flattening saga.
+- I tried several bad things: inconsistent cd/path commands, a sys.path bootstrap hack, a run.bat Nir hated. Nir kept correcting me.
+- **Nir confirmed helm works** (every key tested). Pushed. See RULE #0 below for what I learned.
+
+**CRITICAL LESSON — the `-m` saga:** Fable built Homeworld as PACKAGES (forge/, helm/, fleet/) with relative imports (`from .`), which force `-m` to run. Nir never agreed to `-m`; every previous Peak Together game (Quake, Descent) was BORN FLAT and ran `python app.py`. I kept trying workarounds (sys.path bootstrap) instead of properly flattening. Nir called me out repeatedly until I finally understood: the whole game must be FLAT — all .py files as siblings in homeworld/ — like Quake. This led to the big flatten operation.
+
+#### FABLE DELIVERABLE 5 — fleet core (NT steps 6-7)
+- Saved verbatim to `BIBLE/FABLE DELIVERABLE 5 - fleet core (NT steps 6-7).md`.
+- Created `fleet/` package: referee.py, orders.py, events.py, ships.py, snapshot.py, sim.py, __init__.py, demo.py. Dropped in Quake-style (flat absolute imports).
+- `python fleet_demo.py` → FLEET SELF-TEST PASSED (12/12). Pushed.
+
+#### FABLE DELIVERABLE 6 — app.py wiring (NT step 9) — FIRST PLAYABLE BUILD
+- Nir confirmed 12/12 to Fable. Fable sent the wiring.
+- Saved verbatim → `BIBLE/FABLE DELIVERABLE 6 - app.py wiring (NT step 9).md`.
+- Created root `app.py` (game shell: forge+helm+fleet), updated `run.bat` (`python app.py` — Fable got it right!), `settings.json` → v0.5.0.
+- **RULE #0 failure (again):** I added a sys.path bootstrap to app.py instead of truly flattening. Nir caught this and was furious.
+
+#### THE BIG FLATTENING (Nir's order)
+- **Nir told me to make it like Quake. I FINALLY did it right:** moved ALL 23 module files out of forge/, helm/, fleet/ into homeworld/ root as flat siblings.
+- Renamed collisions: forge/app.py→forge.py, helm/__init__.py→helm.py, forge/demo→forge_demo.py, helm/demo→helm_demo.py, fleet/demo→fleet_demo.py.
+- Deleted forge/__init__.py, fleet/__init__.py, and the empty subfolders.
+- Removed the sys.path bootstrap from app.py; all imports now plain flat absolute.
+- Verified: all 23 files compile; fleet_demo 12/12; app imports resolve; zero `-m`/`from .`/packages anywhere.
+- **Wrote RULE #0** — the permanent iron rule against `-m`, packages, and sys.path hacks. Also mandates flattening every future Fable delivery on drop-in.
+- Added RULE #0 clause 3b: DATA folders (content/, algebra/, BIBLE/) are fine — only Python CODE must be flat.
+- Nir told me to delete run.bat (he runs `python app.py` directly). Deleted it.
+
+#### FABLE DELIVERABLE 7 — content data layer (Apocrypha step 1)
+- Saved verbatim → `BIBLE/FABLE DELIVERABLE 7 - content data layer (Apocrypha step 1).md`.
+- Flattened per RULE #0: content/db.py→content_db.py, content/demo.py→content_demo.py (`from content_db import`), dropped content/__init__.py. Kept content/ as a pure DATA folder.
+- Created the content/ data tree: ships.json + 5 mesh JSONs + narrator/core.json + book/ch1_excerpts.json (2 PLACEHOLDER excerpts awaiting Nir's Strang paste).
+- app.py now spawns 7 ships in 2 squads (Q/E switches commands), meshes from content/, fleet rank 5.
+- Verified: `python content_demo.py` → CONTENT CHECK PASSED. Pushed.
+- **Nir never got to run this** (we moved straight to Amendment A1 after he saw the wireframe ships).
+
+#### FABLE DELIVERABLE 8 — AMENDMENT A1: solid shaded ships
+- Nir judged the glowing-wireframe ships as ugly — they FAIL Bible Law 1 ("gaming first — would a gamer choose to play this?"). Fable agreed and amended the art direction.
+- Saved verbatim → `BIBLE/FABLE DELIVERABLE 8 - solid shaded ships (Amendment A1).md`.
+- Ships are now SOLID, OPAQUE, LIT triangle meshes: per-pixel Blinn-Phong (key+fill+rim+specular), paneled hulls with per-face color variation, emissive engine nozzles/windows feeding bloom. The math layer stays glowing holographic over them.
+- Flattened per RULE #0: forge/shaders.py→shaders.py (updated with MESH shader), forge/solid.py→solid.py (new), forge/bloom.py→bloom.py (updated with depth buffer), forge/app.py→forge.py (updated render pipeline), content/shipwright.py→shipwright.py (new procedural ship builder). Dropped forge/__init__.py.
+- Render pipeline: SOLID pass (depth write) → GLOW pass (depth test, no write) → bloom → overlay.
+- Art-direction note saved at `notes/amendment_a1_art_direction.md`.
+- Verified: all files compile; ALL 5 SHIPS build headlessly (264–396 tris each); shipwright generates real geometry; app imports resolve. Pushed.
+- **Nir has NOT yet play-tested this** (context-window restart happens now). The solid ships await his eyes as art director.
+
+#### Amendment A1 recorded into the SCRIPTURES (Nir's catch)
+- Nir asked why A1 wasn't put into the Old Testament. I had put it only in notes/COMMENTARIES. He was right: the Bible is the top-precedence source of truth.
+- Added an **add-only "⚖️ OWNER AMENDMENTS (READ FIRST)" banner** to the top of the Old Testament + New Testament + Apocrypha (all three). Each banner records A1 (solid ships) and says it overrides anything below that conflicts. Fable's original words preserved verbatim below.
+- Made it a standing rule: all future owner amendments go into the scripture banners. Pushed.
+
+### Earlier sessions (condensed backup — see previous session log for detail)
 2. Filed **Linear Algebra for Everyone** preface pages iii–xii + combined `preface.txt`.
 3. Filed **Introduction to Linear Algebra** preface pages iii–x + combined `preface.txt`.
 4. Created `homeworld/BIBLE/`; saved (verbatim) the 2 brainstorms + Old Testament + New Testament + Apocrypha + Book of Prompts.
