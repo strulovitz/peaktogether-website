@@ -377,4 +377,13 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 - Answer 03: `FABLE-TRUNK-ANSWER-03-briefs-m06-m07-m08.md` → split `brief_m06.md` (complete solution x=x_p+x_n / "Blockade Run"), `brief_m07.md` (Fundamental Theorem star map / "Karos Graveyard"), `brief_m08.md` (Gram–Schmidt drill / "Narrow Corridor").
 - Answer 04: `FABLE-TRUNK-ANSWER-04-briefs-m09-m10-m11.md` → split `brief_m09.md` (projection/least squares / "Nebula of Noise"), `brief_m10.md` (determinant gate / "Collapsing Gate"), `brief_m11.md` (eigenvector docking / "Calm Axis").
 - Answer 05: `FABLE-TRUNK-ANSWER-05-briefs-m12-m13-m14.md` → split `brief_m12.md` (eigen-dynamics / "The Swarm"), `brief_m13.md` (diagonalization / "Shield Harmonics"), `brief_m14.md` (change of basis / "The Defector's Ship").
-- **NEXT:** "continue" (last one) → M15 (Guidestone / SVD transmission), M16 (SVD boss fight & jump home) + a trunk hand-off note.
+- Answer 06 (FINALE): `FABLE-TRUNK-ANSWER-06-briefs-m15-m16-and-trunk-handoff.md` → split `brief_m15.md` (SVD compression / "Transmit the Map Home"), `brief_m16.md` (SVD boss + jump / "The Victory of Orthogonality"), `trunk_handoff.md` (the trunk's will).
+- **✅ THE TREE IS PLANTED:** charter + briefs M1–M16 + trunk_handoff, all in `homeworld/BIBLE/`. None of it depends on Fable's memory anymore.
+
+### 🌳 DEEPSEEK'S STANDING DUTIES for the tree (from trunk_handoff.md — READ WHEN A BRANCH IS LAUNCHED)
+1. **Keep `charter.md` CURRENT** (it's a LIVING doc; briefs are frozen): when a branch adds a referee fn (eigen_pairs, inverse, svd_frames…), a new order, or a reusable helper, append it to the charter's repo map so later branches inherit it.
+2. **Guard the laws:** referee-only math, whole files, keyboard=Pilot / mouse=Navigator, never punish, `fleet_demo.py` 12/12 green, **`app.py` itself is NEVER edited by a branch** (branches copy it to `mXX_name.py`).
+3. **Answer branch batches** with surgical excerpts INCLUDING what EARLIER branches built (cross-pollination: M6←M5, M9←M4, M13←M11, M16←nearly all).
+4. When a branch dies, store its hand-off note as `handoff_mXX.md` in BIBLE.
+- **Launch a branch:** fresh Fable ← founding docs → `charter.md` → current `app.py` → ONE `brief_mXX.md` → "build it."
+- **Suggested build order (Fable's, Nir may reorder):** M2 (proves protocol) → M5 (the jewel) → M10 (adrenaline) → M1, M4, M8, M11, M3, M6, M9, M12, M13, M14, M7, M15, M16 (last — needs the others).
