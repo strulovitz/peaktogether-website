@@ -8,7 +8,7 @@ consumes PointerState directly; there are no named Navigator buttons.
 
 from pyglet.window import mouse
 
-from .actions import PointerState
+from actions import PointerState
 
 
 class MouseMapper:

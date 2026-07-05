@@ -11,7 +11,7 @@ console warning and are skipped — never a crash.
 
 from pyglet.window import key as pkey
 
-from .actions import ActionEvent, PILOT_AXES, ALL_BUTTONS
+from actions import ActionEvent, PILOT_AXES, ALL_BUTTONS
 
 # key name -> (action, axis_value or None for buttons)
 _DEFAULTS = {

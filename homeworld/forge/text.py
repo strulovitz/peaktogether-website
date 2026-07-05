@@ -20,7 +20,7 @@ import numpy as np
 import moderngl
 from PIL import Image, ImageDraw, ImageFont
 
-from .shaders import TEXT_VERT, TEXT_FRAG
+from shaders import TEXT_VERT, TEXT_FRAG
 
 EXTRA_GLYPHS = "×·⟂ΣΛσλθρε≈≤≥−→‖"
 _FALLBACK_CHAR = "?"

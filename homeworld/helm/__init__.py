@@ -16,14 +16,14 @@ An unavailable device produces a loud console warning and falls back
 to keyboard/mouse — never a crash.
 """
 
-from .actions import (
+from actions import (
     ACTIONS_VERSION, PILOT_AXES, PILOT_BUTTONS, SYSTEM_BUTTONS,
     ALL_BUTTONS, ActionEvent, PointerState,
 )
-from .keyboard_map import KeyboardMapper
-from .mouse_map import MouseMapper
-from .joystick_map import JoystickMapper
-from .gamepad_map import GamepadMapper
+from keyboard_map import KeyboardMapper
+from mouse_map import MouseMapper
+from joystick_map import JoystickMapper
+from gamepad_map import GamepadMapper
 
 _EMPTY_POINTER = PointerState(0.0, 0.0, False, False, 0.0)
 

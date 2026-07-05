@@ -14,7 +14,7 @@ shader from gl_VertexID -- no vertex buffers involved.
 
 import moderngl
 
-from .shaders import FULLSCREEN_VERT, BLIT_FRAG, BLUR_FRAG, COMPOSITE_FRAG
+from shaders import FULLSCREEN_VERT, BLIT_FRAG, BLUR_FRAG, COMPOSITE_FRAG
 
 
 class Bloom:

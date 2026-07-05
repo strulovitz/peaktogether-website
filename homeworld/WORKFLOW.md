@@ -1,5 +1,17 @@
 # HOMEWORLD: A GOOD BASIS (Game 4) — Project WORKFLOW & MEMORY for DeepSeek V4 Pro (OpenCode)
 
+> 🛑🛑🛑 **RULE #0 — NEVER USE `python -m`. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
+> **Nir NEVER agreed to `-m` and hates it.** ALL Peak Together games run like Quake did: plain
+> `python app.py` (or `python forge/demo.py`, `python helm/demo.py`) — a plain `python <file>.py`
+> command, NEVER `python -m package.module`. This means **flat absolute imports only** (`from camera import Camera`),
+> **NEVER relative imports** (`from .camera import` / `from . import`). Relative imports are the ONLY thing
+> that forces `-m`, so they are BANNED here.
+> - **Every file Fable delivers** that uses `from .` / `-m` **must be converted to flat absolute imports the
+>   moment I drop it in** — and I must TELL NIR at the very start that I did the conversion. Do NOT hand Nir a `-m` command, ever.
+> - Also give Nir the **FULL `cd` command** every time (`cd C:\Users\nir_s\peaktogether-website\homeworld`),
+>   never a half command or a "type cmd in the address bar" dance.
+> - I failed Nir on this July 5, 2026 (passed Fable's raw `python -m helm.demo` straight through). Never again.
+>
 > ⭐ **ON RESTART, READ THIS FIRST.** Then read `homeworld/COMMENTARIES.md` (the repo memory, Fable's format). Then read the latest `homeworld/BIBLE/FABLE DELIVERABLE N ...md` if a package is mid-flight. Then ask Nir what's next.
 >
 > This is my (DeepSeek's) own memory for the Homeworld project. NOTE: `AGENTS.md` still routes startup to **Quake** — until Nir says otherwise, when he restarts he should tell me "read homeworld/WORKFLOW.md" (or ask me to update AGENTS.md to point here).
@@ -38,7 +50,11 @@ Everything Fable produces is saved here word-for-word. Current contents:
 - `FABLE DELIVERABLE 3 - text + remaining primitives (NT step 4).md`
 
 ## 4. THE GAME CODE (`homeworld/`) — what's built
-Game root = `homeworld/`. Run with: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `.\run.bat` (which runs `python -m forge.demo`).
+Game root = `homeworld/`. **Run like every previous game — plain `python <file>.py`, NEVER `-m`:**
+- forge demo: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python forge\demo.py` (or double-click `run.bat`).
+- helm demo: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python helm\demo.py`.
+
+**Import convention (LOCKED, Quake-style):** every module uses **flat absolute imports** (`from camera import Camera`, `from actions import ActionEvent`). **No relative imports** (`from .` / `from . import`) anywhere — they are what force `-m`, so they are banned. Each package folder's modules resolve because the script's own folder is on `sys.path` when you run `python <folder>\demo.py`.
 
 **Requirements already installed on Nir's machine** (verified): numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0. **Do NOT install anything without asking.**
 
@@ -58,14 +74,14 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 ## 5. CURRENT SITUATION (July 5, 2026)
 - ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
 - ✅ **helm is COMPLETE** — NT step 5 (Fable deliverable 4): `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json bumped v0.3.0 → v0.4.0 (adds `input` section). All syntax-checked, committed with Fable's exact message, pushed.
-- ⏳ **AWAITING Nir's console confirmation** of `python -m helm.demo` (NOT run.bat — run.bat still launches forge). Six behaviors to verify: mapped-key actions, held-axis W (W+S cancel), TAB/SHIFT+TAB select, mouse pointer/buttons, wheel, unmapped key = no crash.
+- ⏳ **AWAITING Nir's console confirmation** of `python helm\demo.py` (NOT run.bat — run.bat still launches forge). Six behaviors to verify: mapped-key actions, held-axis W (W+S cancel), TAB/SHIFT+TAB select, mouse pointer/buttons, wheel, unmapped key = no crash.
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
 
 ## 6. WHAT STILL NEEDS TO BE DONE (the road ahead)
 Per the New Testament build order + Fable's stated plan:
-1. ⏳ **Nir confirms helm demo** (`python -m helm.demo`, report to Fable).
+1. ⏳ **Nir confirms helm demo** (`python helm\demo.py`, report to Fable).
 2. ✅ **helm** (NT Part 2) — DONE. (joystick/Xbox mappers deferred — Fable's Book of Prompts + the stub docstrings flag these as my one sanctioned future coding task, ONLY when Nir explicitly invokes it.)
-3. **fleet** (NT Part 3) — the simulation core: ships as matrix columns, the 10 Hz pulse, orders, events, and **referee.py** (the canonical NumPy verdict functions). Target: `python -m fleet.demo` prints **12/12** self-test PASS.
+3. **fleet** (NT Part 3) — the simulation core: ships as matrix columns, the 10 Hz pulse, orders, events, and **referee.py** (the canonical NumPy verdict functions). Target: `python fleet\demo.py` prints **12/12** self-test PASS.
 4. **app.py wiring** (NT Part 4) — bind forge + helm + fleet → three ships flying combination orders live on screen (Bible Mission 1 becomes buildable).
 5. Then the APOCRYPHA modules: **content** loader, **campaign** runner + Mission 1, **bridge** console + Big Picture, **intel** narrator. Then Missions 2–16.
 6. Ongoing in parallel: keep filing Strang book pages (Chapter 1 next) into `homeworld/algebra/`.
@@ -76,8 +92,9 @@ Per the New Testament build order + Fable's stated plan:
 - **COMMIT WITH FABLE'S EXACT MESSAGE** (e.g. "NT step 4: text (glyph atlas) + remaining primitives — forge feature-complete"). Update COMMENTARIES.md every change. Push. Report done.
 - **I DON'T DESIGN.** No redesigning, no "improving." Mechanical fixes only, and only when exact old/new text is specified. Anything needing judgment → back to Fable (via Nir).
 - **NEVER install/download without asking.** Requirements are already present.
-- **Syntax-check only** (`python -m py_compile`) — safe, no deps needed. Do NOT run the GUI demo myself; Nir is the visual judge.
-- **Give Nir normal run commands** with `cd <full path>` then `.\run.bat` (PowerShell) — no "install Python" lectures (he has it).
+- **Syntax-check only** (`python -m py_compile`) — safe, no deps needed. Do NOT run the GUI demo myself; Nir is the visual judge. (Note: `py_compile` is an internal check I run; the RULE against `-m` is about the RUN COMMANDS I hand to Nir — those are always plain `python <file>.py`.)
+- **Give Nir the FULL run command every time:** `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python forge\demo.py` / `python helm\demo.py` (PowerShell). NEVER `-m`, never a half `cd`, never "type cmd in the address bar." He has Python — no install lectures.
+- **CONVERT every Fable file that uses `from .` / `-m` to flat absolute imports on drop-in**, and tell Nir at the start that I did so.
 - **Emojis abundantly**, warm, concise. Never call him "boss" — just **Nir**.
 - **Game code lives under `homeworld/`** (the game root in the monorepo). `__pycache__`, `*.pyc`, `build/` are gitignored (fine).
 - Give Nir **view (blob)** GitHub links when he asks, plain text, no fancy formatting that 404s.
@@ -105,4 +122,14 @@ Per the New Testament build order + Fable's stated plan:
 4. Syntax-checked all 7 .py files (py_compile OK) + validated settings.json.
 5. Updated COMMENTARIES.md (state, file index, interfaces, demo status, change log) + this WORKFLOW.md.
 6. Committed with Fable's exact message: `NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo)`. Pushed.
-7. ⏳ Nir to run `python -m helm.demo` (console visible) and report the six input behaviors to Fable.
+7. ⏳ Nir to run `python helm\demo.py` (console visible) and report the six input behaviors to Fable.
+
+### July 5, 2026 — CONVERTED HOMEWORLD TO QUAKE-STYLE (no more `-m`) — Nir's order
+Nir was (rightly) furious: I passed Fable's raw `python -m helm.demo` straight to him. He NEVER agreed to `-m` and hates it; every previous game (Quake) runs with plain `python app.py`. Root cause: Fable built Homeworld as packages with **relative imports** (`from .`), which force `-m`; Quake uses **flat absolute imports** (`from camera import`), which run with `python app.py`.
+1. **Converted ALL forge + helm files** from relative imports (`from .x import`) to flat absolute imports (`from x import`). Files: forge/{app,bloom,text,demo,__init__}.py + helm/{keyboard_map,mouse_map,__init__,demo}.py. (helm/demo.py `from . import Helm` → `from __init__ import Helm`.)
+2. **Fixed `run.bat`**: `python -m forge.demo` → `python forge\demo.py`.
+3. **Fixed every `-m` mention in docstrings/comments** of Fable's files (forge/demo, helm/demo, helm/joystick_map, helm/gamepad_map) → `python forge/demo.py` / `python helm/demo.py`.
+4. **Deleted** the `helm_demo.bat` I'd created unprompted (it had `-m`).
+5. **Verified**: both demos import-resolve as plain scripts (`python forge\demo.py`, `python helm\demo.py`); all 16 files py_compile OK; zero `from .` and zero `python -m` remain in any code/bat.
+6. **Added RULE #0** at the top of this file + updated §4/§7 standing rules: never `-m`, always flat absolute imports, always the full `cd` command, always convert Fable's future files on drop-in and tell Nir at the start.
+7. Updated COMMENTARIES.md + the BIBLE deliverable note accordingly. Committed + pushed.

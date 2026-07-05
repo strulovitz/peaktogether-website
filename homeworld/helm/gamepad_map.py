@@ -16,7 +16,7 @@ DeepSeek (NEW_TESTAMENT 2.5). Implementation instructions, complete:
    click, B = secondary, right stick vertical = wheel.
 5. Implement ONLY the Mapper protocol (attach / poll_events /
    poll_axes / poll_pointer). DO NOT touch any file outside helm/.
-   DO NOT rename any action. Test with: python -m helm.demo.
+   DO NOT rename any action. Test with: python helm/demo.py.
 """
 
 

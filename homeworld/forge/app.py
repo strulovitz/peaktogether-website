@@ -18,12 +18,12 @@ import moderngl
 import pyglet
 from pyglet.window import key
 
-from .camera import Camera
-from .shaders import LINE_VERT, LINE_FRAG
-from .batches import build_vertices
-from .bloom import Bloom
-from .text import GlyphAtlas, TextRenderer, PanelRenderer, make_quad_program
-from .vobjects import Label, ImagePanel
+from camera import Camera
+from shaders import LINE_VERT, LINE_FRAG
+from batches import build_vertices
+from bloom import Bloom
+from text import GlyphAtlas, TextRenderer, PanelRenderer, make_quad_program
+from vobjects import Label, ImagePanel
 
 PULSE_DT = 0.1                        # 10 Hz logic pulse (frozen)
 _INITIAL_VBO_BYTES = 4 * 1024 * 1024  # room for ~20k segments

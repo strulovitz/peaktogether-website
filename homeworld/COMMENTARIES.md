@@ -31,7 +31,7 @@ Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 own eyes: text readable, det box flat at vol 0.00) and **helm is COMPLETE** (NT step
 5 = Fable deliverable 4: actions + keyboard+mouse mappers + joystick/gamepad stubs +
 demo). All syntax-checked (py_compile), committed with Fable's exact messages, pushed.
-AWAITING Nir's console confirmation of `python -m helm.demo` (six input behaviors).
+AWAITING Nir's console confirmation of `python helm\demo.py` (six input behaviors).
 Requirements already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0,
 pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
 
@@ -47,7 +47,11 @@ pages (Chapter 1 next) into `homeworld/algebra/`.
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
 (+ combined `preface.txt`). Chapter 1 folders exist, empty, awaiting pages.
 
-**Run:** `cd C:\Users\nir_s\peaktogether-website\homeworld` then `.\run.bat`.
+**Run (Quake-style, NEVER `-m`):** `cd C:\Users\nir_s\peaktogether-website\homeworld` then
+`python forge\demo.py` (forge) or `python helm\demo.py` (helm), or double-click `run.bat`.
+**Import convention LOCKED:** flat absolute imports only (`from camera import Camera`); NO
+relative imports (`from .`) anywhere — they force `-m`, which Nir never agreed to. Every Fable
+file that arrives with `from .` / `-m` is converted to flat absolute imports on drop-in.
 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
@@ -55,7 +59,7 @@ homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's P
 homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-4 — WORKING
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
-homeworld/run.bat — double-click launcher (runs `python -m forge.demo`) — WORKING
+homeworld/run.bat — double-click launcher (runs `python forge\demo.py`) — WORKING
 homeworld/settings.json — human-editable config (v0.4.0; title, size, vsync, bloom_strength, exposure, seed, input) — WORKING
 homeworld/forge/__init__.py — forge package exports (Forge, PULSE_DT, Camera, full VObject vocabulary) — WORKING
 homeworld/forge/app.py — Forge class: window, GL, 10 Hz loop, scene FBO -> panels -> labels -> bloom -> screen overlay (fps, F1) — WORKING
@@ -94,13 +98,14 @@ mappers. Next module: fleet.
 forge.demo — CONFIRMED on owner's machine — WORKING (Nir's eyes: text readable in
 Consolas; determinant box flat when vol 0.00). Requirements already installed:
 numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0; run via run.bat.
-helm.demo — built; awaiting owner's console test (`python -m helm.demo`): six
+helm.demo — built; awaiting owner's console test (`python helm\demo.py`): six
 behaviors (mapped-key press/release actions; held-axis W with W+S cancel; TAB /
 SHIFT+TAB select; mouse pointer/buttons; wheel; unmapped key = no crash).
 fleet.demo — not built yet (self-test target: 12/12).
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — Converted Homeworld to Quake-style: flat absolute imports everywhere, run `python <file>.py` (NEVER `-m`); fixed run.bat + all docstrings + WORKFLOW/COMMENTARIES — by DeepSeek (Nir's order; Nir never agreed to `-m`)
 July 5, 2026 — NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo) — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT step 4: text (glyph atlas) + remaining primitives — forge feature-complete — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT step 3: bloom (RGBA16F scene FBO, gaussian blur, composite + tone map) — by Parent Fable (via DeepSeek)

@@ -6,9 +6,9 @@ window + camera + bloom + the full frozen primitive vocabulary
 (NT 1.4) + glyph-atlas text + screen overlay.
 """
 
-from .app import Forge, PULSE_DT
-from .camera import Camera
-from .vobjects import (
+from app import Forge, PULSE_DT
+from camera import Camera
+from vobjects import (
     VObject, Line, Arrow, DashedLine, Grid, WireSphere,
     WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel,
 )

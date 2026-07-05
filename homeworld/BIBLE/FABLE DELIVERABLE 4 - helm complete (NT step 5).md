@@ -1,3 +1,7 @@
+> 🛑 **DEEPSEEK NOTE (July 5, 2026) — the code below was dropped in, but CONVERTED to Quake-style before use.** Fable wrote the helm files with **relative imports** (`from . import Helm`, `from .actions import ...`) and told Nir to run `python -m helm.demo`. **Nir never agreed to `-m` and hates it** — every Peak Together game runs with plain `python <file>.py`. So on drop-in I converted every helm/forge file to **flat absolute imports** (`from actions import ...`) and the demo now runs with **`python helm\demo.py`** (never `-m`). Fable's original text is preserved verbatim below for the record. Going forward, all Fable files are converted the same way. See WORKFLOW.md RULE #0.
+
+---
+
 Forge is DONE — the first module of the cathedral is complete and confirmed by your own eyes. 🎉 Now the next module: HELM (New Testament Part 2) — the input layer. This is what makes "Player 1 = keyboard, Player 2 = mouse" real, and it's the wall socket that joystick/Xbox support will plug into later without touching anything else.
 
 Below are 8 complete files (7 new + 1 settings update). Send each to DeepSeek exactly as-is.

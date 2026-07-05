@@ -12,7 +12,7 @@ DeepSeek (NEW_TESTAMENT 2.5). Implementation instructions, complete:
    TRIM_Y / TRIM_Z.
 4. Implement ONLY the Mapper protocol below (attach / poll_events /
    poll_axes / poll_pointer). DO NOT touch any file outside helm/.
-   DO NOT rename any action. Test with: python -m helm.demo after
+   DO NOT rename any action. Test with: python helm/demo.py after
    setting settings.json input.pilot_device to "joystick".
 """
 
