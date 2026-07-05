@@ -1,4 +1,4 @@
-# COMMENTARIES — repository memory. Updated: July 4, 2026 (forge feature-complete)
+# COMMENTARIES — repository memory. Updated: July 5, 2026 (helm complete)
 
 Note: "repository" here means the Homeworld game root at `homeworld/` inside the
 Peak Together monorepo (github.com/strulovitz/peaktogether-website). Game code
@@ -27,16 +27,17 @@ Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minut
 Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 "FABLE DELIVERABLE N" file per code package.
 
-**Current state (July 4, 2026):** **forge is FEATURE-COMPLETE** (NT build steps 1–4
-= Fable deliverables 1–3: walking skeleton → bloom → text + all remaining
-primitives). All syntax-checked (py_compile), committed with Fable's exact
-messages, pushed. AWAITING Nir's visual confirmation of `run.bat` (the forge
-acceptance demo). Requirements already installed on Nir's machine: numpy 2.4.6,
-moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
+**Current state (July 5, 2026):** **forge is FEATURE-COMPLETE** (confirmed by Nir's
+own eyes: text readable, det box flat at vol 0.00) and **helm is COMPLETE** (NT step
+5 = Fable deliverable 4: actions + keyboard+mouse mappers + joystick/gamepad stubs +
+demo). All syntax-checked (py_compile), committed with Fable's exact messages, pushed.
+AWAITING Nir's console confirmation of `python -m helm.demo` (six input behaviors).
+Requirements already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0,
+pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
 
-**Next packages (NT build order):** (1) Nir confirms forge demo → (2) **helm**
-(keyboard=Pilot + mouse=Navigator action layer + demo) → (3) **fleet** (ships as
-matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
+**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** built
+(keyboard=Pilot + mouse=Navigator action layer + demo; Nir confirming) → (3) **fleet**
+(ships as matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
 `fleet.demo` = 12/12) → (4) **app.py wiring** = three ships flying combination
 orders (Mission 1 buildable) → then Apocrypha modules (content, campaign+Mission 1,
 bridge+Big Picture, intel) → Missions 2–16. In parallel: keep filing Strang book
@@ -51,11 +52,11 @@ iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-3 — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-4 — WORKING
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
 homeworld/run.bat — double-click launcher (runs `python -m forge.demo`) — WORKING
-homeworld/settings.json — human-editable config (v0.3.0; title, size, vsync, bloom_strength, exposure, seed) — WORKING
+homeworld/settings.json — human-editable config (v0.4.0; title, size, vsync, bloom_strength, exposure, seed, input) — WORKING
 homeworld/forge/__init__.py — forge package exports (Forge, PULSE_DT, Camera, full VObject vocabulary) — WORKING
 homeworld/forge/app.py — Forge class: window, GL, 10 Hz loop, scene FBO -> panels -> labels -> bloom -> screen overlay (fps, F1) — WORKING
 homeworld/forge/camera.py — Camera: ORBIT mode + look_at/perspective math (NT 1.3) — WORKING
@@ -64,30 +65,43 @@ homeworld/forge/bloom.py — Bloom: 3-FBO classic bloom (RGBA16F scene, downsamp
 homeworld/forge/text.py — GlyphAtlas + TextRenderer (3D labels + screen overlay) + PanelRenderer (ImagePanels) (NT 1.7) — WORKING
 homeworld/forge/vobjects.py — FULL primitives: Line, Arrow, DashedLine, Grid, WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel (NT 1.4) — WORKING
 homeworld/forge/batches.py — CPU segment->camera-facing-ribbon expansion (+ per-segment color for Trail), vectorized numpy (NT 1.5) — WORKING
-homeworld/forge/demo.py — FULL forge acceptance demo: trail, floating text, flattening det box, live SVD image panel, ellipsoid, F1 overlay (NT Part 6) — WORKING (awaiting owner's eyes)
+homeworld/forge/demo.py — FULL forge acceptance demo: trail, floating text, flattening det box, live SVD image panel, ellipsoid, F1 overlay (NT Part 6) — WORKING (confirmed by Nir)
+homeworld/helm/__init__.py — Helm orchestrator: pilot+navigator device factory (settings-driven), .attach/.poll/.poll_axes_only, graceful fallback to keyboard/mouse (NT 2.3) — WORKING
+homeworld/helm/actions.py — THE FROZEN ACTION LIST (v1): PILOT_AXES, PILOT_BUTTONS, SYSTEM_BUTTONS, ActionEvent, PointerState (NT 2.2) — WORKING
+homeworld/helm/keyboard_map.py — KeyboardMapper (Pilot baseline): frozen default bindings + settings overrides, held-key axes, press/release events, TAB/SHIFT+TAB select (NT 2.4) — WORKING
+homeworld/helm/mouse_map.py — MouseMapper (Navigator baseline): PointerState (x/y/primary/secondary/wheel), pyglet-native bottom-left origin (NT 2.2) — WORKING
+homeworld/helm/joystick_map.py — JoystickMapper STUB (NotImplementedError + full T16000M impl instructions; sanctioned DeepSeek future work, NT 2.5) — STUB
+homeworld/helm/gamepad_map.py — GamepadMapper STUB (NotImplementedError + full Xbox impl instructions; sanctioned DeepSeek future work, NT 2.5) — STUB
+homeworld/helm/demo.py — helm acceptance demo: 10 Hz poll loop printing actions/axes/pointer/wheel to console (NT Part 6) — WORKING (awaiting owner's console test)
 
 ## INTERFACES
 INTERFACES.md not yet committed as a standalone file. Frozen contracts in force
-come from NEW_TESTAMENT.md Part 5 (v1.0). forge is now FEATURE-COMPLETE:
+come from NEW_TESTAMENT.md Part 5 (v1.0). forge is FEATURE-COMPLETE:
 Forge(settings), .window, .camera, .add/.remove, .set_debug_lines (F1 overlay
 live), .screenshot, .run(tick_cb, frame_cb); Camera .set_orbit, .orbit_input,
 .eye, .view, .proj; the FULL VObject vocabulary (Line, Arrow, DashedLine, Grid,
 WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel); bloom;
 glyph-atlas text (3D labels + screen overlay).
-Not yet implemented (later packages): FOLLOW/POV camera modes; forge is
-otherwise done. Next modules: helm, then fleet.
+helm is COMPLETE (NT 2.2/2.3, ACTIONS_VERSION 1): Helm(settings), .attach(window),
+.poll() -> (events, axes, pointer) once per PULSE, .poll_axes_only() once per FRAME;
+ActionEvent(action, value), PointerState(x, y, primary, secondary, wheel); the frozen
+action list PILOT_AXES (CAM_YAW/PITCH/ZOOM, TRIM_X/Y/Z) + PILOT_BUTTONS + SYSTEM_BUTTONS.
+Keyboard (Pilot) + mouse (Navigator) live; joystick/gamepad are stubs (NT 2.5).
+Not yet implemented (later packages): FOLLOW/POV camera modes; joystick/gamepad
+mappers. Next module: fleet.
 
 ## DEMO STATUS
-forge.demo — not yet confirmed on owner's machine — PENDING (requirements already
-installed: numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0; run via
-run.bat). Now the FULL acceptance demo (trail, floating text, flattening
-determinant box counting to vol 0.00, live SVD image panel rank 1->32, ellipsoid,
-fps corner, F1 debug overlay).
-helm.demo — not built yet.
+forge.demo — CONFIRMED on owner's machine — WORKING (Nir's eyes: text readable in
+Consolas; determinant box flat when vol 0.00). Requirements already installed:
+numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0; run via run.bat.
+helm.demo — built; awaiting owner's console test (`python -m helm.demo`): six
+behaviors (mapped-key press/release actions; held-axis W with W+S cancel; TAB /
+SHIFT+TAB select; mouse pointer/buttons; wheel; unmapped key = no crash).
 fleet.demo — not built yet (self-test target: 12/12).
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo) — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT step 4: text (glyph atlas) + remaining primitives — forge feature-complete — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT step 3: bloom (RGBA16F scene FBO, gaussian blur, composite + tone map) — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT steps 1-2: forge walking skeleton (window, camera, ribbons, grid, first arrow) — by Parent Fable (via DeepSeek)

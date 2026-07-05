@@ -1,11 +1,16 @@
 {
     "title": "Homeworld: A Good Basis",
-    "version": "0.3.0",
+    "version": "0.4.0",
     "width": 1280,
     "height": 720,
     "fullscreen": false,
     "vsync": true,
     "bloom_strength": 0.85,
     "exposure": 2.5,
-    "seed": 1234
+    "seed": 1234,
+    "input": {
+        "pilot_device": "keyboard",
+        "navigator_device": "mouse",
+        "keyboard_overrides": {}
+    }
 }

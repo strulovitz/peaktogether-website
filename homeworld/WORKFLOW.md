@@ -55,15 +55,16 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 - `forge/__init__.py` — exports.
 - `requirements.txt`, `run.bat`, `settings.json` (v0.3.0: bloom_strength 0.85, exposure 2.5, seed 1234).
 
-## 5. CURRENT SITUATION (July 4, 2026)
-- ✅ **forge is FEATURE-COMPLETE** — deliverables 1–3 applied, all syntax-checked, all committed + pushed.
-- ⏳ **AWAITING Nir's eyeball confirmation** of the forge acceptance demo (`.\run.bat`). Fable asked Nir to report: "exactly that" / "different: ..." / crashlog. Specifically: (a) is the text clean/readable (Consolas)? (b) does `vol 0.00` line up with the box being perfectly flat?
+## 5. CURRENT SITUATION (July 5, 2026)
+- ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
+- ✅ **helm is COMPLETE** — NT step 5 (Fable deliverable 4): `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json bumped v0.3.0 → v0.4.0 (adds `input` section). All syntax-checked, committed with Fable's exact message, pushed.
+- ⏳ **AWAITING Nir's console confirmation** of `python -m helm.demo` (NOT run.bat — run.bat still launches forge). Six behaviors to verify: mapped-key actions, held-axis W (W+S cancel), TAB/SHIFT+TAB select, mouse pointer/buttons, wheel, unmapped key = no crash.
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
 
 ## 6. WHAT STILL NEEDS TO BE DONE (the road ahead)
 Per the New Testament build order + Fable's stated plan:
-1. ⏳ **Nir confirms forge demo** (run it, report to Fable). Fable may also tune bloom defaults if Nir picks new numbers.
-2. **helm** (NT Part 2) — the input module: keyboard (Pilot) + mouse (Navigator) action layer + a demo where every keypress prints its action name. (joystick/Xbox mappers deferred — Fable's Book of Prompts flags these as my one sanctioned future coding task, ONLY when Nir explicitly invokes it.)
+1. ⏳ **Nir confirms helm demo** (`python -m helm.demo`, report to Fable).
+2. ✅ **helm** (NT Part 2) — DONE. (joystick/Xbox mappers deferred — Fable's Book of Prompts + the stub docstrings flag these as my one sanctioned future coding task, ONLY when Nir explicitly invokes it.)
 3. **fleet** (NT Part 3) — the simulation core: ships as matrix columns, the 10 Hz pulse, orders, events, and **referee.py** (the canonical NumPy verdict functions). Target: `python -m fleet.demo` prints **12/12** self-test PASS.
 4. **app.py wiring** (NT Part 4) — bind forge + helm + fleet → three ships flying combination orders live on screen (Bible Mission 1 becomes buildable).
 5. Then the APOCRYPHA modules: **content** loader, **campaign** runner + Mission 1, **bridge** console + Big Picture, **intel** narrator. Then Missions 2–16.
@@ -96,3 +97,12 @@ Per the New Testament build order + Fable's stated plan:
 5. Applied Fable's forge deliverables 1–3 (NT steps 1–4): walking skeleton → bloom → text + remaining primitives. **forge feature-complete.** Each saved verbatim to BIBLE + committed with Fable's exact message + pushed.
 6. Verified Nir has all requirements installed (numpy/moderngl/pyglet/Pillow).
 7. Wrote this WORKFLOW.md + expanded COMMENTARIES.md. Pushed. (Nir about to restart OpenCode at ~29% context.)
+
+### July 5, 2026 — forge confirmed by Nir; helm built (NT step 5)
+1. Nir ran the forge demo and confirmed (a) text readable (Consolas) + (b) determinant box flat at `vol 0.00`. **forge officially DONE.**
+2. Applied Fable's **deliverable 4 = helm complete** (NT step 5). Saved verbatim to `BIBLE/FABLE DELIVERABLE 4 - helm complete (NT step 5).md`.
+3. Created the `homeworld/helm/` package — 7 files exactly as Fable gave them: `actions.py`, `keyboard_map.py`, `mouse_map.py`, `joystick_map.py` (stub), `gamepad_map.py` (stub), `__init__.py`, `demo.py`. Updated `settings.json` → v0.4.0 (adds `input` section).
+4. Syntax-checked all 7 .py files (py_compile OK) + validated settings.json.
+5. Updated COMMENTARIES.md (state, file index, interfaces, demo status, change log) + this WORKFLOW.md.
+6. Committed with Fable's exact message: `NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo)`. Pushed.
+7. ⏳ Nir to run `python -m helm.demo` (console visible) and report the six input behaviors to Fable.
