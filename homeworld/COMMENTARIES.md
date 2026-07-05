@@ -27,22 +27,22 @@ Amendment A "no audio" + Amendment B "Guidestone ≈50 lines" + First-Five-Minut
 Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 "FABLE DELIVERABLE N" file per code package.
 
-**Current state (July 5, 2026):** **forge is FEATURE-COMPLETE** (confirmed by Nir's
-own eyes: text readable, det box flat at vol 0.00), **helm is COMPLETE** (confirmed —
-every key works), **fleet is COMPLETE** (12/12 self-test), and **app.py wiring is
-BUILT** (NT step 9 = Fable deliverable 6: root game shell wiring forge+helm+fleet,
-shakedown scenario — mothership + 3 fighters + keyboard combination-order console).
-**This is the first PLAYABLE build.** All syntax-checked (py_compile) + wiring imports
-verified; committed with Fable's exact messages, pushed. AWAITING Nir's play-test of
-`run.bat` (compose a combination order, commit, watch the fighters fly). Requirements
-already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14,
-Pillow 12.2.0 (never install without asking).
+**Current state (July 5, 2026):** forge ✅ (Nir-confirmed), helm ✅ (Nir-confirmed),
+fleet ✅ (12/12), **app.py wiring ✅** (first playable), and **content data layer ✅**
+(Apocrypha step 1 = Fable deliverable 7: ContentDB loads+validates ships.json + 5
+wireframe meshes + narrator/core.json + book placeholders; app now spawns squad 2
+= corvette+collector+frigate, Q/E switches commanded squad, fleet rank 5). Python
+CODE is FLAT (content_db.py + content_demo.py); the `content/` DATA folder stays (like
+Quake's levels/). `python content_demo.py` prints CONTENT CHECK PASSED (DeepSeek-verified).
+All syntax-checked; committed with Fable's exact messages, pushed. AWAITING Nir's run of
+`python content_demo.py` + play-test of the 7-ship scene. Requirements already installed:
+numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
 
 **Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet (12/12)
-→ (4) ✅ **app.py wiring** built (Nir play-testing) → then **content loader + real
-ship meshes** → **bridge** (Navigator's mouse console — 2nd player) → **campaign +
-Mission 1** (minute-by-minute script) → Missions 2–16. In parallel: keep filing Strang
-book pages (Chapter 1 next) into `homeworld/algebra/`.
+→ (4) ✅ app.py wiring → (5) ✅ **content data layer** → then **bridge** (forge 2D
+overlay + widget kit + FLEET ZONE console — Navigator's mouse, 2nd player joins) →
+**campaign + Mission 1** (minute-by-minute) → Missions 2–16. In parallel: keep filing
+Strang book pages + fill the PLACEHOLDER book excerpts (content/book/).
 
 **Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
@@ -57,8 +57,11 @@ file that arrives with `from .` / `-m` is converted to flat absolute imports on 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-6 — WORKING
-homeworld/app.py — THE GAME SHELL (root): wires forge+helm+fleet; shakedown scenario (mothership + 3 fighters + keyboard combination-order console: ghost legs/arrow, commit, diagonal/staged, TAB select, camera). Runs `python app.py` — FLAT, plain absolute imports, no `-m`, no hacks. (NT step 9) — WORKING (awaiting Nir play-test)
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-7 — WORKING
+homeworld/app.py — THE GAME SHELL (root): wires forge+helm+fleet+content; shakedown scenario (7 ships in 2 squads: mothership + 3 fighters squad 1, corvette+collector+frigate squad 2; keyboard combination-order console; Q/E switch commanded squad). Runs `python app.py` — FLAT, no `-m`, no hacks. (NT step 9 / Apocrypha 1) — WORKING (awaiting Nir play-test)
+homeworld/content_db.py — ContentDB (was content/db.py): loads + LOUDLY validates the content/ data tree (ships, meshes, narrator, book, missions) (Apocrypha 1.1-1.4) — WORKING
+homeworld/content_demo.py — content check (was content/demo.py): prints CONTENT CHECK PASSED + placeholder ledger; run `python content_demo.py` (NEVER `-m`) — WORKING (verified)
+homeworld/content/ — DATA folder (like Quake's levels/): ships.json + meshes/{mothership,fighter,corvette,collector,frigate}.json + narrator/core.json + book/ch1_excerpts.json (2 PLACEHOLDER excerpts awaiting Strang paste) — WORKING
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
 homeworld/run.bat — double-click launcher (runs `python app.py` — the real game shell) — WORKING
@@ -118,12 +121,14 @@ fleet.demo — DeepSeek verified **FLEET SELF-TEST PASSED (12/12)** via `python 
 (headless, no window); Nir confirmed 12/12. Each PASS line re-proves a Bible worked
 example through the real referee (shield solve, jamming/nullspace, gate determinant, weak-axis
 targeting, SVD energy, determinism, performance floor).
-app.py (run.bat) — the first PLAYABLE build: wiring imports verified by DeepSeek; awaiting
-Nir's play-test (compose c1*e1+c2*e2+c3*e3, ENTER to commit, watch squad fly; X toggles
-diagonal vs staged path — Bible mechanic 2.1). Feel-knobs: COEFF_RATE=2.0, COEFF_SNAP=0.5.
+app.py (game) — the playable build: wiring imports verified; awaiting Nir's play-test (now
+7 ships in 2 squads, Q/E switches commanded squad, meshes from content/, fleet rank 5).
+content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 meshes 16-24 edges,
+7 narrator lines, 2 PLACEHOLDER book excerpts); awaiting Nir's run.
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — Apocrypha step 1: content data layer (ContentDB, ships.json, 5 meshes, narrator core, book placeholders) + app wiring — by Parent Fable (via DeepSeek; flattened per RULE #0: content/db.py→content_db.py, content/demo.py→content_demo.py, __init__ dropped; content/ kept as DATA folder; CONTENT CHECK PASSED)
 July 5, 2026 — FLATTENED to Quake structure: all 23 modules moved out of forge/helm/fleet subfolders into homeworld/ root as flat siblings (forge.py, helm.py, sim.py, …); removed the app.py sys.path bootstrap; plain absolute imports; `python app.py` runs like Quake (no -m, no hacks); 12/12 still green — by DeepSeek (Nir's order; RULE #0 now mandates flat + flatten every Fable delivery)
 July 5, 2026 — NT step 9: app.py wiring — forge+helm+fleet, shakedown scenario with combination orders — by Parent Fable (via DeepSeek; RULE #0 sys.path bootstrap so `python app.py` works with the flat packages, no -m; wiring imports verified)
 July 5, 2026 — NT steps 6-7: fleet core (referee, orders, events, sim, snapshot) + 12-line self-test — by Parent Fable (via DeepSeek; dropped in Quake-style flat absolute imports; 12/12 verified)

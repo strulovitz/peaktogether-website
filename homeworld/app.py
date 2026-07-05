@@ -1,22 +1,20 @@
 """app.py — the game shell of Homeworld: A Good Basis (NT Parts 4-5).
 
 Owns nothing but the wiring: forge renders, helm inputs, fleet
-simulates; app translates actions into orders, routes events, and
-interpolates snapshots into visuals at 60 fps over the 10 Hz pulse.
+simulates, content supplies data; app translates actions into orders,
+routes events, and interpolates snapshots into visuals at 60 fps.
 
-Until campaign/ and bridge/ arrive, app hosts the SHAKEDOWN SCENARIO:
-a mothership, three fighters in squad 1, and the Pilot's combination
-console (Bible 2.1) driven entirely by the keyboard:
+SHAKEDOWN SCENARIO (until campaign/ and bridge/ arrive):
+mothership + three fighters (squad 1) + corvette, collector, frigate
+(squad 2). All ship classes and meshes come from content/ships.json.
 
     W/S  A/D  R/F   edit the combination coefficients (c3, c1, c2)
-    ENTER           commit: squad 1 flies  c1*e1 + c2*e2 + c3*e3
+    ENTER           commit: the squad flies  c1*e1 + c2*e2 + c3*e3
     X               toggle diagonal flight vs component-by-component
-    BACKSPACE       reset coefficients to zero
+    BACKSPACE       reset coefficients        Q / E  switch squad
     TAB / SHIFT+TAB select next / previous ship (white highlight)
     C               recenter the camera on the selected ship
-    ARROWS, PGUP/DN orbit / zoom the camera
-    P               pause        F1 debug text      F12 screenshot
-    ESC             quit
+    ARROWS, PGUP/DN orbit / zoom     P pause    F1 debug    F12 shot
 """
 
 import json
@@ -32,39 +30,10 @@ from vobjects import Grid, Arrow, DashedLine, Label, Trail, WireMesh
 from helm import Helm
 from sim import FleetSim
 from orders import MoveCombination
+from content_db import ContentDB
 
 COEFF_RATE = 2.0          # coefficient units per second of held key
 COEFF_SNAP = 0.5          # commit snaps coefficients to this grid
-
-# ---- placeholder wireframes (until content/meshes/ arrives) ----
-
-FIGHTER_VERTS = [
-    [0.0, 0.0, 1.6],                      # nose
-    [-1.1, 0.0, -1.0], [1.1, 0.0, -1.0],  # wingtips
-    [0.0, 0.7, -0.9], [0.0, -0.35, -0.9], # fin, belly
-    [0.0, 0.0, -1.2],                     # tail
-]
-FIGHTER_EDGES = [
-    [0, 1], [0, 2], [0, 3], [0, 4],
-    [1, 5], [2, 5], [3, 5], [4, 5],
-    [1, 3], [3, 2], [2, 4], [4, 1],
-]
-
-MOTHERSHIP_VERTS = [
-    [0.0, 0.0, 4.0], [0.0, 0.0, -4.0],
-    [2.2, 0.0, 0.0], [0.0, 2.2, 0.0], [-2.2, 0.0, 0.0], [0.0, -2.2, 0.0],
-]
-MOTHERSHIP_EDGES = [
-    [0, 2], [0, 3], [0, 4], [0, 5],
-    [1, 2], [1, 3], [1, 4], [1, 5],
-    [2, 3], [3, 4], [4, 5], [5, 2],
-]
-
-SHIP_STYLE = {
-    "fighter": (FIGHTER_VERTS, FIGHTER_EDGES, 1.0, (0.55, 0.9, 1.0, 1.0)),
-    "mothership": (MOTHERSHIP_VERTS, MOTHERSHIP_EDGES, 1.6,
-                   (1.0, 0.85, 0.5, 1.0)),
-}
 
 
 def _aim_matrix(forward):
@@ -83,15 +52,13 @@ def _aim_matrix(forward):
 
 
 class ShipView:
-    """The visual twin of one ship: wire mesh + fading trail."""
+    """The visual twin of one ship: content-defined wire mesh + trail."""
 
-    def __init__(self, forge_, klass):
-        verts, edges, scale, color = SHIP_STYLE.get(
-            klass, SHIP_STYLE["fighter"])
-        self.base = np.asarray(verts, dtype=np.float64) * scale
-        self.edges = edges
-        self.color = color
-        self.mesh = WireMesh(self.base, edges, color=color, width=0.05)
+    def __init__(self, forge_, klass, content):
+        self.base, self.edges = content.mesh_for_class(klass)
+        self.color = content.color_for_class(klass)
+        self.mesh = WireMesh(self.base, self.edges, color=self.color,
+                             width=0.05)
         self.trail = Trail(max_points=60, color=(0.5, 0.8, 1.0, 0.45),
                            width=0.04)
         self.dir = np.array([0.0, 0.0, 1.0])
@@ -120,16 +87,20 @@ class App:
         with open("settings.json", "r", encoding="utf-8") as f:
             self.settings = json.load(f)
 
+        self.content = ContentDB("content")
         self.forge = Forge(self.settings)
         self.helm = Helm(self.settings)
         self.helm.attach(self.forge.window)
 
         # ---- simulation + shakedown fleet ----
-        self.sim = FleetSim(self.settings.get("seed", 1234))
+        self.sim = FleetSim(self.settings.get("seed", 1234), self.content)
         self.sim.spawn("mothership", (0.0, 0.0, 0.0))
         self.sim.spawn("fighter", (6.0, 0.0, 3.0), squad=1)
         self.sim.spawn("fighter", (8.0, 0.0, -2.0), squad=1)
         self.sim.spawn("fighter", (4.0, 0.0, -6.0), squad=1)
+        self.sim.spawn("corvette", (-8.0, 0.0, 5.0), squad=2)
+        self.sim.spawn("collector", (-11.0, 0.0, -1.0), squad=2)
+        self.sim.spawn("frigate", (-6.0, 0.0, -8.0), squad=2)
 
         # ---- static scene ----
         self.forge.add(Grid(center=(0, 0, 0), u=(1, 0, 0), v=(0, 0, 1),
@@ -161,6 +132,7 @@ class App:
         self.coeffs = np.zeros(3)
         self.diagonal = True
         self.sel_index = 0
+        self.cmd_squad = 1
         self.paused = False
         self.snap = self.sim.snapshot()
         self._sync_views()
@@ -171,7 +143,7 @@ class App:
 
         print("Homeworld: A Good Basis — shakedown shell.")
         print("W/S A/D R/F edit coefficients | ENTER commit | X mode | "
-              "BACKSPACE clear")
+              "BACKSPACE clear | Q/E squad")
         print("TAB select | C recenter camera | arrows/PgUp/PgDn camera | "
               "P pause | F1 debug | ESC quit")
 
@@ -186,6 +158,10 @@ class App:
         self.sel_index %= len(self.snap.ship_ids)
         return self.snap.ship_ids[self.sel_index]
 
+    def _squads(self):
+        squads = sorted({int(s) for s in self.snap.squad if s > 0})
+        return squads if squads else [1]
+
     def _sync_views(self):
         alive = set(self.snap.ship_ids)
         for sid in list(self.views.keys()):
@@ -193,7 +169,7 @@ class App:
                 self.views.pop(sid).remove(self.forge)
         for sid, klass in zip(self.snap.ship_ids, self.snap.klasses):
             if sid not in self.views:
-                self.views[sid] = ShipView(self.forge, klass)
+                self.views[sid] = ShipView(self.forge, klass, self.content)
 
     # ---- the 10 Hz pulse ----
 
@@ -221,6 +197,15 @@ class App:
             self.sel_index += 1
         elif action == "SELECT_PREV":
             self.sel_index -= 1
+        elif action in ("SQUAD_NEXT", "SQUAD_PREV"):
+            squads = self._squads()
+            if self.cmd_squad in squads:
+                i = squads.index(self.cmd_squad)
+                step = 1 if action == "SQUAD_NEXT" else -1
+                self.cmd_squad = squads[(i + step) % len(squads)]
+            else:
+                self.cmd_squad = squads[0]
+            print(f"commanding squad {self.cmd_squad}")
         elif action == "ORDER_CANCEL":
             self.coeffs[:] = 0.0
         elif action == "FLIGHT_MODE_TOGGLE":
@@ -241,11 +226,12 @@ class App:
                 print("FLEET: nothing to commit — coefficients are zero")
                 return
             self.sim.submit(MoveCombination(
-                squad=1, coeffs=tuple(float(v) for v in c),
+                squad=self.cmd_squad,
+                coeffs=tuple(float(v) for v in c),
                 diagonal=self.diagonal))
             terms = " + ".join(f"{c[i]:g}*e{i + 1}" for i in range(3)
                                if abs(c[i]) > 1e-9)
-            print(f"ORDER: squad 1 <- {terms}  "
+            print(f"ORDER: squad {self.cmd_squad} <- {terms}  "
                   f"({'diagonal' if self.diagonal else 'staged'})")
             self.coeffs[:] = 0.0
 
@@ -279,20 +265,22 @@ class App:
             p = snap.prev_pos[k] + (snap.pos[k] - snap.prev_pos[k]) * alpha
             v = snap.pos[k] - snap.prev_pos[k]
             self.views[sid].update(p, v, sid == sel)
-            if snap.squad[k] == 1:
+            if snap.squad[k] == self.cmd_squad:
                 squad_positions.append(p)
 
         self._update_ghost(squad_positions)
 
         c = self._snapped()
-        klass = ""
+        sel_name = ""
         if sel is not None:
             klass = snap.klasses[snap.ship_ids.index(sel)]
+            sel_name = self.content.ship_class(klass)["display_name"]
         self.forge.set_debug_lines([
             f"pulse {snap.pulse}   fleet rank {snap.rank}",
             f"coeffs ({c[0]:+.1f}, {c[1]:+.1f}, {c[2]:+.1f})   "
-            f"mode {'diagonal' if self.diagonal else 'staged'}",
-            f"selected ship #{sel} ({klass})",
+            f"mode {'diagonal' if self.diagonal else 'staged'}   "
+            f"squad {self.cmd_squad}",
+            f"selected ship #{sel} ({sel_name})",
         ] + (["PAUSED"] if self.paused else []))
 
     def _update_ghost(self, squad_positions):

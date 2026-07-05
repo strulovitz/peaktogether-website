@@ -1,0 +1,65 @@
+[
+    {
+        "id": "reject_outside_colspace",
+        "on": {"event": "ORDER_REJECTED"},
+        "text": "Admiral, that combination lies outside our column space. Suggest adding an independent vessel.",
+        "cite": "BIBLE.md 2.3 canonical rejection; concept: Strang 6e, Section 3.1",
+        "tags": ["reject", "teach"],
+        "cooldown_s": 20,
+        "once": false
+    },
+    {
+        "id": "rank_up",
+        "on": {"event": "RANK_CHANGED"},
+        "text": "Fleet rank has grown, Command. We can reach places we could not reach before.",
+        "cite": "concept: Strang 6e, Section 1.4 — PLACEHOLDER, replace with book quote",
+        "tags": ["teach"],
+        "cooldown_s": 30,
+        "once": false
+    },
+    {
+        "id": "ship_built_independent",
+        "on": {"event": "SHIP_BUILT"},
+        "text": "New vessel online — an independent column. The fleet reaches in a new direction.",
+        "cite": "concept: Strang 6e, Section 1.3 — PLACEHOLDER, replace with book quote",
+        "tags": ["teach"],
+        "cooldown_s": 30,
+        "once": false
+    },
+    {
+        "id": "shield_down",
+        "on": {"event": "SHIELD_DOWN"},
+        "text": "Shield channels zeroed. Target defenses are down, Command.",
+        "cite": "",
+        "tags": ["story"],
+        "cooldown_s": 10,
+        "once": false
+    },
+    {
+        "id": "pivot_zero",
+        "on": {"event": "PIVOT_ZERO"},
+        "text": "A dead pylon in the pivot position, Command. We must exchange rows.",
+        "cite": "concept: Strang 6e, Section 2.7 — PLACEHOLDER, replace with book quote",
+        "tags": ["teach"],
+        "cooldown_s": 30,
+        "once": false
+    },
+    {
+        "id": "solved",
+        "on": {"event": "SOLVED"},
+        "text": "Codes accepted. The system is solved. Well done, Command.",
+        "cite": "",
+        "tags": ["story"],
+        "cooldown_s": 10,
+        "once": false
+    },
+    {
+        "id": "harvest_flavor",
+        "on": {"event": "RESOURCE_TICK"},
+        "text": "Collectors report steady intake.",
+        "cite": "",
+        "tags": ["flavor"],
+        "cooldown_s": 60,
+        "once": false
+    }
+]

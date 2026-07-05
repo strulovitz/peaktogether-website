@@ -1,0 +1,19 @@
+[
+    {
+        "id": "ch1_placeholder_combination",
+        "kind": "example",
+        "cite": "PLACEHOLDER — replace with book example (Strang 6e, Section 1.1)",
+        "text": "PLACEHOLDER: linear combination c1*v + c2*w. The owner will paste the verbatim book example here.",
+        "matrices": {"v": [1, 0, 0], "w": [0, 0, 1]},
+        "notes": "used by mission m01 waypoint teaching beats"
+    },
+    {
+        "id": "ch1_placeholder_freighter",
+        "kind": "exercise",
+        "cite": "PLACEHOLDER — replace with solved exercise (Strang 6e, Section 1.1 or 1.2)",
+        "text": "PLACEHOLDER: express a given point as a combination of the basis vectors.",
+        "matrices": {"target": [2, 0, 3]},
+        "solution": {"c": [2, 3]},
+        "notes": "m01 finale: damaged freighter sits at 2*e1 + 3*e3"
+    }
+]
