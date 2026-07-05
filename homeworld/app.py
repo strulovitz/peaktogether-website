@@ -4,14 +4,19 @@ Amendment A1: ships are solid lit hulls (shipwright.py);
 the math layer (basis arrows, combination ghost, trails, selection
 ring) remains glowing holograms drawn over them.
 
+Corrected B3 (Part 2 §2.1 / M1 / M8 / M10 — always space): the
+Navigator's console carries the live FORMATION matrix, the shared
+coefficient sliders, and the TRANSFORM matrix p -> M p, ghost-
+previewed in space and fired with APPLY.
+
     PILOT (keyboard):
     W/S  A/D  R/F   edit the combination coefficients (c3, c1, c2)
     ENTER commit | X diagonal/staged | BACKSPACE clear | Q/E squad
     TAB select ship | C recenter camera | arrows/PgUp/PgDn camera
     P pause | F1 debug | F12 screenshot | ESC quit
 
-    NAVIGATOR (mouse): the bridge console on the right — the fleet
-    matrix A live, ships as columns; the Pilot's TAB lights a column.
+    NAVIGATOR (mouse): sliders drive the same ghost construction the
+    Pilot sees; the TRANSFORM grid reshapes the whole formation at once.
 """
 
 import json
@@ -28,10 +33,11 @@ from vobjects import Grid, Arrow, DashedLine, Label, Line, Trail
 from solid import SolidMesh
 from helm import Helm
 from sim import FleetSim
-from orders import MoveCombination
+from orders import MoveCombination, ApplyTransform
 from content_db import ContentDB
 from shipwright import build_ship
 from console import Bridge
+from referee import real_eigen_axis
 
 COEFF_RATE = 2.0
 COEFF_SNAP = 0.5
@@ -94,7 +100,9 @@ class App:
         self.forge = Forge(self.settings)
         self.helm = Helm(self.settings)
         self.helm.attach(self.forge.window)
-        self.bridge = Bridge(self.forge.overlay2d)
+        self.bridge = Bridge(self.forge.overlay2d,
+                             on_coeff=self._nav_coeff,
+                             on_transform=self._nav_transform)
 
         self.sim = FleetSim(self.settings.get("seed", 1234), self.content)
         self.sim.spawn("mothership", (0.0, 0.0, 0.0))     # the ORIGIN.
@@ -137,6 +145,14 @@ class App:
         self.sel_ring.visible = False
         self.forge.add(self.sel_ring)
 
+        # transform preview: dashed ghosts p -> M p, plus the fixed axis
+        self.tr_ghost_pool = []
+        self.axis_line = Line(np.array([[0.0, 0.0, 0.0], [0.0, 0.0, 1.0]]),
+                              color=(1.0, 0.8, 0.4, 0.5), glow=1.0, width=0.04)
+        self.axis_line.overlay = True
+        self.axis_line.visible = False
+        self.forge.add(self.axis_line)
+
         self.views = {}
         self.coeffs = np.zeros(3)
         self.diagonal = True
@@ -155,7 +171,19 @@ class App:
               "BACKSPACE clear | Q/E squad")
         print("TAB select | C recenter | arrows/PgUp/PgDn camera | "
               "P pause | F1 debug | ESC quit")
-        print("NAVIGATOR: mouse on the bridge console (right panel).")
+        print("NAVIGATOR: mouse — sliders fly the ghost, TRANSFORM reshapes "
+              "the formation.")
+
+    # ---- console callbacks ----
+
+    def _nav_coeff(self, i, v):
+        self.coeffs[i] = float(v)
+
+    def _nav_transform(self, matrix, scope_all):
+        squad = 0 if scope_all else self.cmd_squad
+        self.sim.submit(ApplyTransform(squad=squad, matrix=matrix))
+        print(f"ORDER: transform "
+              f"{'whole fleet' if scope_all else f'squad {squad}'} <- M")
 
     # ---- helpers ----
 
@@ -199,7 +227,12 @@ class App:
             self._sync_views()
             for k, sid in enumerate(self.snap.ship_ids):
                 self.views[sid].trail.push(self.snap.pos[k])
-        self.bridge.on_pulse(pointer, self.snap, self._selected_id())
+        self.bridge.on_pulse(pointer, self.snap, {
+            "selected": self._selected_id(),
+            "coeffs": self._snapped(),
+            "squad": self.cmd_squad,
+            "diagonal": self.diagonal,
+        })
 
     def _on_action(self, action):
         if action == "SELECT_NEXT":
@@ -252,6 +285,8 @@ class App:
         elif ev.kind == "SHIP_BUILT":
             print(f"FLEET: built {ev.data['klass']} "
                   f"(rank {'up' if ev.data['rank_increased'] else 'same'})")
+        elif ev.kind == "TRANSFORM_APPLIED":
+            print(f"FLEET: transform applied to {ev.data['ships']} ships")
 
     # ---- every display frame ----
 
@@ -269,8 +304,10 @@ class App:
         snap = self.snap
         sel = self._selected_id()
         squad_positions = []
+        positions = {}
         for k, sid in enumerate(snap.ship_ids):
             p = snap.prev_pos[k] + (snap.pos[k] - snap.prev_pos[k]) * alpha
+            positions[sid] = p
             v = snap.pos[k] - snap.prev_pos[k]
             self.views[sid].update(p, v, sid == sel)
             if sid == sel:
@@ -283,6 +320,7 @@ class App:
             self.sel_ring.visible = False
 
         self._update_ghost(squad_positions)
+        self._update_transform_ghosts(positions)
 
         c = self._snapped()
         sel_name = ""
@@ -290,7 +328,7 @@ class App:
             klass = snap.klasses[snap.ship_ids.index(sel)]
             sel_name = self.content.ship_class(klass)["display_name"]
         self.forge.set_debug_lines([
-            f"pulse {snap.pulse}   fleet rank {snap.rank}",
+            f"pulse {snap.pulse}",
             f"coeffs ({c[0]:+.1f}, {c[1]:+.1f}, {c[2]:+.1f})   "
             f"mode {'diagonal' if self.diagonal else 'staged'}   "
             f"squad {self.cmd_squad}",
@@ -319,6 +357,41 @@ class App:
         self.ghost_label.set_data(pos=cursor + np.array([0.0, 1.0, 0.0]))
         self.ghost_label.set_text(
             f"({c[0]:+.1f}, {c[1]:+.1f}, {c[2]:+.1f})")
+
+    def _update_transform_ghosts(self, positions):
+        if not self.bridge.transform_active():
+            for g in self.tr_ghost_pool:
+                g.visible = False
+            self.axis_line.visible = False
+            return
+        M = self.bridge.transform_matrix()
+        snap = self.snap
+        pairs = []
+        for k, sid in enumerate(snap.ship_ids):
+            if self.bridge.scope_all or snap.squad[k] == self.cmd_squad:
+                a = positions[sid]
+                b = M @ a
+                if np.linalg.norm(b - a) > 1e-6:
+                    pairs.append((a, b))
+        while len(self.tr_ghost_pool) < len(pairs):
+            g = DashedLine((0, 0, 0), (0, 0, 0), dash=0.5,
+                           color=(0.9, 0.9, 1.0, 0.7))
+            self.forge.add(g)
+            self.tr_ghost_pool.append(g)
+        for g, (a, b) in zip(self.tr_ghost_pool, pairs):
+            g.set_data(a, b, dash=0.5)
+            g.visible = True
+        for g in self.tr_ghost_pool[len(pairs):]:
+            g.visible = False
+        axis = real_eigen_axis(M)
+        self.axis_line.visible = False
+        if axis is not None:
+            a = np.asarray(axis, dtype=np.float64)
+            n = np.linalg.norm(a)
+            if n > 1e-9:
+                a = a / n * 14.0
+                self.axis_line.set_data(np.stack([-a, a]))
+                self.axis_line.visible = True
 
     def run(self):
         self.forge.run(self.tick, self.frame)

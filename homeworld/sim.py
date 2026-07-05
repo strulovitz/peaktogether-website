@@ -22,7 +22,7 @@ from snapshot import FleetSnapshot, copy_context
 from orders import (
     MoveCombination, Trim, SetIntake, FireSolution, LeastSquaresFire,
     GramSchmidtDrill, RowOperation, BackSubstitute, BuildShip,
-    JamStation, AssignSquad,
+    JamStation, AssignSquad, ApplyTransform,
 )
 
 _CRUISE_FACTOR = 3.0     # cruise speed = trim_speed * this
@@ -239,6 +239,21 @@ class FleetSim:
                         cursor = cursor + float(c) * e
                         plan.append(cursor.copy())
                     self._plans[s.ship_id] = plan
+
+        elif isinstance(order, ApplyTransform):
+            members = [s for s in self.living()
+                       if order.squad == 0 or s.squad == order.squad]
+            if not members:
+                return self._reject(events, order,
+                                    f"squad {order.squad} has no ships")
+            M = np.asarray(order.matrix, dtype=np.float64)
+            if M.shape != (3, 3) or not np.all(np.isfinite(M)):
+                return self._reject(events, order,
+                                    "transform must be a finite 3x3 matrix")
+            for s in members:
+                self._plans[s.ship_id] = [M @ s.pos]
+            events.append(Event("TRANSFORM_APPLIED", {
+                "squad": order.squad, "ships": len(members)}))
 
         elif isinstance(order, SetIntake):
             s = self.ships.get(order.ship_id)

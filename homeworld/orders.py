@@ -5,6 +5,9 @@ Navigator's console both translate their inputs into these orders
 and submit them to FleetSim. Orders are validated at tick time;
 invalid orders produce ORDER_REJECTED events that explain and
 suggest — never punish (Iron Rule 3).
+
+Owner-approved addition (corrected B3): ApplyTransform — Part 2
+"always space": a matrix that moves the whole formation at once.
 """
 
 from dataclasses import dataclass
@@ -75,3 +78,9 @@ class JamStation:
 class AssignSquad:
     ship_ids: tuple
     squad: int
+
+
+@dataclass(frozen=True)                     # Part 2 "always space" (M8/M10):
+class ApplyTransform:                        # positions p -> M @ p, about the
+    squad: int                               # origin (Mom). squad 0 = ALL ships
+    matrix: tuple                            # 3x3, row-major tuple of tuples

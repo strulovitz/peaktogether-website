@@ -127,3 +127,13 @@ def svd_partial(G, k):
     total = float(np.sum(s ** 2))
     energy = float(np.sum(s[:k] ** 2) / total) if total > 0.0 else 1.0
     return G_k, energy
+
+
+def determinant(M):
+    """Signed determinant of a square matrix: the volume factor of the
+    transform, with orientation (negative = reflection). Raw value — the
+    tolerance doctrine applies to VERDICTS made from it, not to the number."""
+    M = np.asarray(M, dtype=np.float64)
+    if M.ndim != 2 or M.shape[0] != M.shape[1]:
+        raise ValueError("determinant needs a square matrix, got %r" % (M.shape,))
+    return float(np.linalg.det(M))
