@@ -314,3 +314,12 @@ Parent 1's OpenRouter context filled up. Before starting Parent 2, Nir salvaged 
 6. **Verified:** py_compile OK (overlay2d/demo2d/forge); imports resolve; `python fleet_demo.py` → **12/12 GREEN**. (GUI demo is Nir's visual judgment — can't self-run.)
 7. Recorded INTERFACES v1.1 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
 8. ⏳ **Nir to run `python demo2d.py`** and REPORT BACK to Fable: (1) runs without crashlog? (2) panel crisp/text sharp? (3) resize behaves? (4) old demos still pass? (5) gamer-feel on panel darkness (one-number knob 0.75 in panel_bg). Then B2 = widgets.py.
+
+### July 5, 2026 — bridge B2 (widget kit) delivered + integrated
+1. **Nir confirmed B1 works** (panel, slider, clock, images, resize all great).
+2. **B2 DELIVERED — the widget kit (APOCRYPHA 3.3).** Saved verbatim to `BIBLE/FABLE-DELIVERABLE-11-widget-kit-(B2).md`. Both files NEW (`widgets.py` + `widgets_demo.py`), **already written flat by Fable** (imports `from forge import Forge`, `from helm import Helm`, `from referee import rank`, run `python widgets_demo.py` — he learned!). Only cleanup: removed the obsolete "DEEPSEEK: fix import" notes (imports were already house-correct).
+3. **widgets.py** = Widget base + WidgetManager (hit-test topmost-first, drag capture until release, wheel-to-hovered) + Button/Slider/MatrixGrid/ValueReadout/HintCard, retained-mode on overlay2d. **Mouse-only** (keyboard belongs to the Pilot, by law). **NO shared files touched** → zero regression risk.
+4. **widgets_demo.py** = 3×3 MatrixGrid whose rank is computed live by the **real `referee.rank`** (edit bottom row: 2→3), a slider, two buttons (one disabled/grey), a hint card.
+5. **Verified:** py_compile OK; all B2 imports resolve; `referee.rank` of the demo matrix = **2** (matches Fable's "FLEET RANK 2 / 3"); `python fleet_demo.py` → **12/12 GREEN**.
+6. Recorded B2 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
+7. ⏳ **Nir to run `python widgets_demo.py`** and REPORT BACK: (1) no crashlog? (2) buttons/slider/matrix feel responsive (esp. wheel-over-cell + click-drag-to-edit)? (3) any lag on the highlight (10 Hz by design)? (4) panel darkness 0.85 (B2) vs 0.75 (B1) — which? Then **B3 = console.py (FLEET ZONE)** — which WILL touch root app.py (Fable re-emits it whole).
