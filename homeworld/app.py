@@ -398,6 +398,8 @@ class App:
 
 
 def main():
+    from pt_runtime import bootstrap
+    bootstrap("Homeworld", "Homeworld: A Good Basis")
     App().run()
 
 

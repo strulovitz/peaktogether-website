@@ -388,6 +388,18 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 - **Launch a branch:** fresh Fable ← founding docs → `charter.md` → current `app.py` → ONE `brief_mXX.md` → "build it."
 - **Suggested build order (Fable's, Nir may reorder):** M2 (proves protocol) → M5 (the jewel) → M10 (adrenaline) → M1, M4, M8, M11, M3, M6, M9, M12, M13, M14, M7, M15, M16 (last — needs the others).
 
+### 🎁 SESSION (July 5, 2026 — PACKAGING & DISTRIBUTION "SNEAK PEEK", mirrors Descent/Quake, SHORT names)
+Nir's instruction: package the current template game as a standalone Windows "sneak peek", **exactly like Descent QED + Quake: Principia** (copy the proven PyInstaller pattern, don't invent). Both prior games (also FLAT, like Homeworld) use the same 5 pieces, so I created them in `homeworld/`:
+1. **`pt_runtime.py`** — frozen-exe bootstrap (slug `Homeworld`, title `Homeworld: A Good Basis`). When frozen, `bootstrap()` chdir's to `sys._MEIPASS` (the `_internal` folder) so CWD-relative loads (`open("settings.json")`, `ContentDB("content")`) resolve; crash log → `%LOCALAPPDATA%\PeakTogether\Homeworld`.
+2. **`requirements-runtime.txt`** — moderngl 5.12.0 / pyglet 2.1.14 / numpy 2.4.6 / Pillow 12.2.0 (Homeworld imports NO pydantic/networkx).
+3. **`requirements-build.txt`** — `pyinstaller>=6.11,<7`.
+4. **`packaging/homeworld_windows.spec`** — one-folder build (Descent flat-rglob + Quake `glcontext` hiddenimport). Bundles only runtime DATA (`settings.json` + whole `content/` tree); excludes dev dirs. No UPX, no console, optional `icon.ico`.
+5. **`build_windows_release.ps1`** — ONE command: clean → isolated `.venv-build` (PyInstaller installed there, NOT global) → PyInstaller → player README → zip + SHA-256.
+- **One code change to `app.py`:** `main()` calls `bootstrap("Homeworld","Homeworld: A Good Basis")` before `App().run()` (same as Quake's `main()`).
+- **🛑 NAMING — SHORT + NO SPACES (RULE #-1, Nir):** exe = **`Homeworld.exe`**, folder = **`dist\Homeworld\`**, zip = **`PeakTogether-Homeworld-Windows-<date>.zip`**, readme = `README-How-to-Play.txt`. Window title stays `Homeworld: A Good Basis` (display text only). (First attempt used the long `Homeworld-A-Good-Basis`; Nir corrected it — early Quake shipped as short `Quake`. Whole first attempt was deleted and rebuilt fresh.)
+- **⚠️ Trademark note:** "Homeworld" is a Relic/Gearbox trademark (like Quake was id's). Ships as `Homeworld` for the sneak peek; Nir may pick a distinct public title later (one variable in spec + ps1).
+- **NEXT (Nir's manual steps, mirrors Descent/Quake):** test the zip standalone on his laptop (no Python) → ship to **itch.io (butler)** + **GitHub Release (gh)** → later a `arcade/homeworld/` website page.
+
 ---
 
 ## 📍 CURRENT SITUATION & ROAD AHEAD (detailed — July 5, 2026)
