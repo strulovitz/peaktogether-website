@@ -370,3 +370,8 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 - **Launch protocol for a branch:** open fresh Fable → paste founding docs → `charter.md` → current `app.py` → ONE `brief_mXX.md` → "build it." Branch asks 1–3 batches, proposes design (Nir yes), ships.
 - **Files stored this turn (in `homeworld/BIBLE/`):** `FABLE-TRUNK-ANSWER-01-charter-and-briefs-m01-m02.md` (full verbatim), `charter.md` (the branch constitution), `brief_m01.md` (span / "Plane of Refugees"), `brief_m02.md` (dot product / "Dust Stream"). Committed + pushed.
 - **NEXT:** Nir says "continue" to Fable → he delivers briefs M3, M4, M5 (M5 = the nullspace cloak, his favorite). DeepSeek keeps archiving + splitting each answer.
+
+**Trunk answers stored so far (`homeworld/BIBLE/`):**
+- Answer 01: `FABLE-TRUNK-ANSWER-01-charter-and-briefs-m01-m02.md` → split `charter.md`, `brief_m01.md` (span), `brief_m02.md` (dot product).
+- Answer 02: `FABLE-TRUNK-ANSWER-02-briefs-m03-m04-m05.md` → split `brief_m03.md` (rank / A=CR / "Salvage Run"), `brief_m04.md` (Ax=b combat / "Shield Recipe"), `brief_m05.md` (nullspace cloak / "Ghost Fleet").
+- **NEXT:** "continue" → M6 (escape route), M7 (Big Picture star map), M8 (Gram–Schmidt drill).
