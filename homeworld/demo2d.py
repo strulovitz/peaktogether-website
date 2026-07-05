@@ -62,7 +62,7 @@ def main():
 
     # ---- the 2D console mock-up (positions filled in by _relayout) --------
     cyan = (0.35, 0.75, 1.0, 0.9)
-    panel_bg = Rect2D(0, 0, 10, 10, (0.05, 0.09, 0.13, 0.75), filled=True)
+    panel_bg = Rect2D(0, 0, 10, 10, (0.05, 0.09, 0.13, 0.85), filled=True)
     panel_frame = Rect2D(0, 0, 10, 10, cyan, filled=False)
     title = Label2D("OVERLAY2D — CONSOLE DEMO", 0, 0, px=16,
                     color=(0.7, 0.95, 1.0, 1.0))
