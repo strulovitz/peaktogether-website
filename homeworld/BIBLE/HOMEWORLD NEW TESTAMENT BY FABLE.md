@@ -18,6 +18,13 @@
 > `solid.py`, updated `bloom.py`/`forge.py`). Wherever this document's "Homeworld-of-wireframes
 > aesthetic" or wireframe-ship language appears, it is superseded — **ships are solid; the math
 > layer glows.** (Full text: `notes/amendment_a1_art_direction.md` + Old Testament amendments.)
+>
+> **Amendment A1.1 — SHIPS NEVER BLOOM; DUAL RENDER TARGETS; DARK MOTHERSHIP AT ORIGIN (July 5, 2026).**
+> Ships must NEVER bloom, by construction. Scene FBO has two RGBA16F color attachments: SOLID buffer
+> (ships, untoched, crisp) + GLOW buffer (holograms only, additive, feeds bloom pipeline). Mothership
+> at (0,0,0) dark slate; 10-unit overlay axes e1/e2/e3 on top of her hull (depth test OFF). Engine
+> nozzles = dim lamps ≤1 (no HDR emissive). Wherever A1 says emissive "feeds bloom," that is
+> superseded — ships never interact with bloom. (Deliverable 9 in BIBLE.)
 
 ---
 ## Requires: BIBLE.md v2.1 (the Old Testament). If this document contradicts the

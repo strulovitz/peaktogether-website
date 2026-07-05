@@ -1,13 +1,14 @@
 """GLSL shader sources.
 
-Families: line ribbons (glow layer), bloom pipeline, textured quads
-(text/panels), and — per Amendment A1 — the SOLID MESH shader:
-per-pixel Blinn-Phong with a warm key light, cool fill light, rim
-light and specular highlight. Vertices arrive pre-transformed to
-world space; per-vertex color = painted hull panels; per-vertex
-emissive = engine nozzles / windows (HDR values > 1 feed bloom).
-Two-sided: normals are flipped for back faces, so procedural geometry
-never suffers winding bugs.
+Amendment A1.1 (owner): ships must NEVER bloom. The scene renders to
+TWO color attachments:
+    location 0 — SOLID buffer: lit ships, linear, untouched by bloom
+                 or tone mapping (crisp panel detail).
+    location 1 — GLOW buffer: holograms (lines, labels, panels),
+                 additive; this buffer alone is blurred and tone
+                 mapped, then added on top of the solid buffer.
+Line/text shaders write 0 to the solid buffer (additive +0 = no-op);
+the mesh shader writes 0 to the glow buffer.
 """
 
 LINE_VERT = """
@@ -29,10 +30,12 @@ LINE_FRAG = """
 #version 330
 in vec4 v_color;
 in float v_u;
-out vec4 f_color;
+layout(location = 0) out vec4 f_solid;
+layout(location = 1) out vec4 f_glow;
 void main() {
     float k = 1.0 - v_u * v_u;
-    f_color = vec4(v_color.rgb * k * k * v_color.a, 1.0);
+    f_solid = vec4(0.0);
+    f_glow = vec4(v_color.rgb * k * k * v_color.a, 1.0);
 }
 """
 
@@ -63,7 +66,8 @@ in vec3 v_pos;
 in vec3 v_normal;
 in vec4 v_color;
 in vec3 v_emissive;
-out vec4 f_color;
+layout(location = 0) out vec4 f_solid;
+layout(location = 1) out vec4 f_glow;
 void main() {
     vec3 KEY_DIR  = vec3(0.4581, 0.8144, 0.3563);
     vec3 KEY_COL  = vec3(1.05, 1.00, 0.92);
@@ -78,13 +82,14 @@ void main() {
     float dk = max(dot(n, KEY_DIR), 0.0);
     float df = max(dot(n, FILL_DIR), 0.0);
     vec3 h = normalize(KEY_DIR + vdir);
-    float spec = pow(max(dot(n, h), 0.0), 44.0) * 0.55;
-    float rim = pow(1.0 - max(dot(n, vdir), 0.0), 3.0) * 0.22;
+    float spec = pow(max(dot(n, h), 0.0), 44.0) * 0.45;
+    float rim = pow(1.0 - max(dot(n, vdir), 0.0), 3.0) * 0.18;
 
     vec3 albedo = v_color.rgb;
     vec3 c = albedo * (AMBIENT + KEY_COL * dk + FILL_COL * df)
            + KEY_COL * spec + albedo * rim + v_emissive;
-    f_color = vec4(c, 1.0);
+    f_solid = vec4(c, 1.0);
+    f_glow = vec4(0.0);
 }
 """
 
@@ -129,16 +134,18 @@ void main() {
 
 COMPOSITE_FRAG = """
 #version 330
-uniform sampler2D u_scene;
-uniform sampler2D u_bloom;
+uniform sampler2D u_scene;   // solid ships, linear — passed through
+uniform sampler2D u_glow;    // hologram layer, full resolution
+uniform sampler2D u_bloom;   // blurred hologram layer
 uniform float u_strength;
 uniform float u_exposure;
 in vec2 v_uv;
 out vec4 f_color;
 void main() {
-    vec3 c = texture(u_scene, v_uv).rgb
+    vec3 g = texture(u_glow, v_uv).rgb
            + u_strength * texture(u_bloom, v_uv).rgb;
-    c = vec3(1.0) - exp(-c * u_exposure);
+    g = vec3(1.0) - exp(-g * u_exposure);   // tone map holograms ONLY
+    vec3 c = texture(u_scene, v_uv).rgb + g;
     f_color = vec4(c, 1.0);
 }
 """
@@ -163,9 +170,11 @@ TEXT_FRAG = """
 uniform sampler2D u_tex;
 in vec2 v_uv;
 in vec4 v_color;
-out vec4 f_color;
+layout(location = 0) out vec4 f_solid;
+layout(location = 1) out vec4 f_glow;
 void main() {
     float a = texture(u_tex, v_uv).r;
-    f_color = vec4(v_color.rgb * a * v_color.a, 1.0);
+    f_solid = vec4(0.0);
+    f_glow = vec4(v_color.rgb * a * v_color.a, 1.0);
 }
 """

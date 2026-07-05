@@ -1,10 +1,9 @@
-"""Bloom pipeline + the scene framebuffer (Amendment A1 update).
+"""Scene framebuffer + bloom (Amendment A1.1).
 
-The scene FBO is now RGBA16F color + a DEPTH buffer, because solid
-ships need depth testing. The bloom chain itself is unchanged:
-downsample to 1/4, separable Gaussian blur, composite with soft
-exposure tone map. Emissive mesh parts (engine nozzles, windows) and
-the glow layer both feed bloom naturally.
+Scene FBO: two RGBA16F color attachments (solid ships / holograms)
+sharing one depth buffer. Bloom downsamples and blurs ONLY the glow
+attachment; the composite adds tone-mapped glow over the untouched
+solid buffer. Ships can never bloom, by construction.
 """
 
 import moderngl
@@ -33,7 +32,8 @@ class Bloom:
         self._bw = 0
         self._bh = 0
         self.scene_fbo = None
-        self._scene_tex = None
+        self._solid_tex = None
+        self._glow_tex = None
         self._scene_depth = None
         self._tex_b = None
         self._tex_c = None
@@ -43,8 +43,9 @@ class Bloom:
     def ensure_size(self, w, h):
         if (w, h) == (self._w, self._h):
             return
-        for obj in (self.scene_fbo, self._scene_tex, self._scene_depth,
-                    self._fbo_b, self._fbo_c, self._tex_b, self._tex_c):
+        for obj in (self.scene_fbo, self._solid_tex, self._glow_tex,
+                    self._scene_depth, self._fbo_b, self._fbo_c,
+                    self._tex_b, self._tex_c):
             if obj is not None:
                 obj.release()
 
@@ -52,11 +53,13 @@ class Bloom:
         self._bw = max(w // 4, 1)
         self._bh = max(h // 4, 1)
 
-        self._scene_tex = self.ctx.texture((w, h), 4, dtype="f2")
-        self._scene_tex.filter = (moderngl.LINEAR, moderngl.LINEAR)
+        self._solid_tex = self.ctx.texture((w, h), 4, dtype="f2")
+        self._solid_tex.filter = (moderngl.LINEAR, moderngl.LINEAR)
+        self._glow_tex = self.ctx.texture((w, h), 4, dtype="f2")
+        self._glow_tex.filter = (moderngl.LINEAR, moderngl.LINEAR)
         self._scene_depth = self.ctx.depth_renderbuffer((w, h))
         self.scene_fbo = self.ctx.framebuffer(
-            color_attachments=[self._scene_tex],
+            color_attachments=[self._solid_tex, self._glow_tex],
             depth_attachment=self._scene_depth)
 
         self._tex_b = self.ctx.texture((self._bw, self._bh), 4, dtype="f2")
@@ -72,8 +75,9 @@ class Bloom:
         ctx.disable(moderngl.BLEND)
         ctx.disable(moderngl.DEPTH_TEST)
 
+        # downsample the GLOW buffer only
         self._fbo_b.use()
-        self._scene_tex.use(0)
+        self._glow_tex.use(0)
         self._blit["u_tex"].value = 0
         self._vao_blit.render(moderngl.TRIANGLES, vertices=3)
 
@@ -90,10 +94,12 @@ class Bloom:
 
         screen_fbo.viewport = (0, 0, w, h)
         screen_fbo.use()
-        self._scene_tex.use(0)
-        self._tex_b.use(1)
+        self._solid_tex.use(0)
+        self._glow_tex.use(1)
+        self._tex_b.use(2)
         self._comp["u_scene"].value = 0
-        self._comp["u_bloom"].value = 1
+        self._comp["u_glow"].value = 1
+        self._comp["u_bloom"].value = 2
         self._comp["u_strength"].value = self.strength
         self._comp["u_exposure"].value = self.exposure
         self._vao_comp.render(moderngl.TRIANGLES, vertices=3)

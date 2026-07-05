@@ -1,23 +1,19 @@
-"""shipwright — procedural solid-ship generator (Amendment A1).
+"""shipwright — procedural solid-ship generator (Amendment A1.1).
 
-Each class is BUILT, not hand-typed: lofted hull sections (rounded or
-boxy cross-sections), slab wings/fins/masts, command towers, engine
-nozzles with emissive exhaust discs, painted per-face hull panels
-with deterministic per-class variation. Hundreds to ~1500 triangles
-per ship. Deterministic: same class name -> identical mesh, always.
-
-build_ship(klass, spec) -> (vertices (N,3), triangles (M,3),
-colors (N,4), emissive (N,3)); spec is the ships.json entry (its
-"color" drives the palette).
+Change log vs A1: NO ship part uses HDR emissive anymore — engine
+nozzles, windows and intake maws are dim lit "lamps" (values <= 1)
+in the solid buffer, which never blooms. The mothership hull is dark
+slate (owner ruling: she carries the bright origin axes on her back,
+so the hull must stay dark for contrast).
 """
 
 import zlib
 
 import numpy as np
 
-ENGINE_CYAN = (0.5, 1.8, 2.4)
-ENGINE_WARM = (2.0, 1.3, 0.55)
-MAW_AMBER = (2.0, 1.15, 0.35)
+ENGINE_CYAN = (0.20, 0.75, 0.95)
+ENGINE_WARM = (0.85, 0.55, 0.22)
+MAW_AMBER = (0.85, 0.50, 0.18)
 DARK = (0.15, 0.16, 0.19, 1.0)
 
 
@@ -210,24 +206,25 @@ def _frigate(spec):
 
 def _mothership(spec):
     b, rng = Builder(), _rng("mothership")
-    base = _hull(spec["color"])
-    acc = (spec["color"][0] * 0.85, spec["color"][1] * 0.85,
-           spec["color"][2] * 0.85, 1.0)
+    base = (0.155, 0.165, 0.195)            # dark slate — owner ruling:
+    acc = (spec["color"][0] * 0.6,          # she carries the origin axes
+           spec["color"][1] * 0.6,
+           spec["color"][2] * 0.6, 1.0)
     rings = [_ring(z, rx, ry, 16, 0.65, y0) for z, rx, ry, y0 in [
         (7.20, 0.50, 0.45, 0.00), (5.60, 1.70, 1.25, 0.10),
         (3.60, 2.35, 1.80, 0.15), (1.20, 2.65, 2.10, 0.15),
         (-1.40, 2.70, 2.15, 0.15), (-3.80, 2.45, 2.00, 0.10),
         (-5.80, 1.70, 1.50, 0.00), (-7.00, 1.00, 0.95, 0.00)]]
-    _loft(b, rings, base, rng, var=0.12)
+    _loft(b, rings, base, rng, var=0.10)
     _box(b, (0.0, 2.55, 2.20), (1.10, 0.90, 1.80), _panel(base, rng))
     _box(b, (0.0, 3.25, 1.80), (0.70, 0.60, 1.00), _panel(base, rng))
     b.face([(-0.30, 3.30, 2.32), (0.30, 3.30, 2.32),
             (0.30, 3.50, 2.32), (-0.30, 3.50, 2.32)],
-           (0.10, 0.10, 0.10, 1.0), (1.6, 1.1, 0.5))
+           (0.10, 0.10, 0.10, 1.0), (0.85, 0.60, 0.28))
     for s in (1, -1):
         b.face([(s * 2.74, -0.30, 2.50), (s * 2.74, -0.30, -2.50),
                 (s * 2.74, 0.30, -2.50), (s * 2.74, 0.30, 2.50)],
-               (0.08, 0.08, 0.09, 1.0), (1.3, 0.85, 0.35))
+               (0.08, 0.08, 0.09, 1.0), (0.70, 0.45, 0.18))
     _slab(b, [(0, 2.20, -3.00), (0, 3.40, -4.20), (0, 3.40, -4.80),
               (0, 2.00, -4.40)], (1, 0, 0), 0.09, acc)
     _nozzle(b, 0.0, 0.30, -7.40, 0.42, ENGINE_WARM, n=12)
@@ -247,7 +244,7 @@ _RECIPES = {
 
 def build_ship(klass, spec):
     recipe = _RECIPES.get(klass)
-    if recipe is None:                      # generic fallback hull
+    if recipe is None:
         b, rng = Builder(), _rng(klass)
         base = _hull(spec.get("color", [0.6, 0.7, 0.8, 1.0]))
         rings = [_ring(z, r, r * 0.8, 12) for z, r in [

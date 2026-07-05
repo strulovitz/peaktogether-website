@@ -1,12 +1,15 @@
 """The Forge class: window, GL context, main loop.
 
-Render pipeline per frame (Amendment A1):
-    scene FBO (RGBA16F + depth):
-        1. SOLID pass  — opaque lit ships, depth test + write, no blend
-        2. GLOW pass   — additive lines/panels/labels, depth test ON,
-                         depth write OFF (holograms occluded by hulls)
-    bloom (downsample, blur, composite + tone map) -> screen
-    crisp screen overlay (fps corner, F1 debug lines)
+Render pipeline (Amendment A1.1):
+    scene FBO (solid buffer + glow buffer + depth):
+        1. SOLID pass    — opaque lit ships, depth write, no blend
+        2. GLOW pass     — additive holograms, depth test ON, write OFF
+        3. OVERLAY pass  — holograms with vob.overlay == True, depth
+                           test OFF (drawn on top of hulls: the origin
+                           axes over the mothership)
+    bloom (glow buffer only) -> composite -> screen -> crisp HUD text
+
+Ships never bloom and are never tone mapped; holograms glow.
 """
 
 import datetime
@@ -135,6 +138,18 @@ class Forge:
         return self.ctx.vertex_array(
             self._prog, [(self._vbo, "3f 4f 1f", "in_pos", "in_color", "in_u")])
 
+    def _draw_lines(self, vobs):
+        data = build_vertices(vobs, self.camera.eye())
+        if data.shape[0] == 0:
+            return
+        if data.nbytes > self._vbo.size:
+            self._vbo.release()
+            self._vbo = self.ctx.buffer(reserve=2 * data.nbytes,
+                                        dynamic=True)
+            self._vao = self._make_vao()
+        self._vbo.write(data.tobytes())
+        self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
+
     def _render(self):
         w, h = self.window.get_framebuffer_size()
         if w <= 0 or h <= 0:
@@ -150,7 +165,7 @@ class Forge:
         mvp = self.camera.proj(w / h) @ view
         mvp_t = np.ascontiguousarray(mvp.T, dtype=np.float32)
 
-        # ---- 1. SOLID pass: opaque lit ships ----
+        # ---- 1. SOLID pass ----
         solids = [v for v in self._vobjects
                   if isinstance(v, SolidMesh) and v.visible]
         if solids:
@@ -158,36 +173,41 @@ class Forge:
             self.ctx.disable(moderngl.BLEND)
             self._solid.draw(solids, mvp_t, self.camera.eye())
 
-        # ---- 2. GLOW pass: additive holograms, occluded by hulls ----
+        # ---- 2. GLOW pass (depth-tested holograms) ----
         self.ctx.enable(moderngl.DEPTH_TEST)
         fbo.depth_mask = False
         self.ctx.enable(moderngl.BLEND)
         self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)
-
         self._prog["u_mvp"].write(mvp_t)
-        data = build_vertices(self._vobjects, self.camera.eye())
-        if data.shape[0] > 0:
-            if data.nbytes > self._vbo.size:
-                self._vbo.release()
-                self._vbo = self.ctx.buffer(reserve=2 * data.nbytes,
-                                            dynamic=True)
-                self._vao = self._make_vao()
-            self._vbo.write(data.tobytes())
-            self._vao.render(mode=moderngl.TRIANGLES, vertices=data.shape[0])
+
+        normal = [v for v in self._vobjects
+                  if not getattr(v, "overlay", False)]
+        overlay = [v for v in self._vobjects
+                   if getattr(v, "overlay", False)]
+        self._draw_lines(normal)
 
         panels = [v for v in self._vobjects
                   if isinstance(v, ImagePanel) and v.visible]
-        labels = [v for v in self._vobjects
-                  if isinstance(v, Label) and v.visible]
+        labels_n = [v for v in normal
+                    if isinstance(v, Label) and v.visible]
+        labels_o = [v for v in overlay
+                    if isinstance(v, Label) and v.visible]
         if panels:
             self._panels.draw(panels, view, mvp_t)
-        if labels:
-            self._text.draw_labels(labels, view, mvp_t)
+        if labels_n:
+            self._text.draw_labels(labels_n, view, mvp_t)
 
-        # ---- bloom -> screen ----
+        # ---- 3. OVERLAY pass (origin axes etc. — on top of hulls) ----
+        self.ctx.disable(moderngl.DEPTH_TEST)
+        self._prog["u_mvp"].write(mvp_t)
+        self._draw_lines(overlay)
+        if labels_o:
+            self._text.draw_labels(labels_o, view, mvp_t)
+
+        # ---- bloom (glow buffer only) -> screen ----
         self._bloom.apply(self.ctx.screen, w, h)
 
-        # ---- crisp overlay ----
+        # ---- crisp HUD overlay ----
         self.ctx.disable(moderngl.DEPTH_TEST)
         self.ctx.enable(moderngl.BLEND)
         self.ctx.blend_func = (moderngl.ONE, moderngl.ONE)

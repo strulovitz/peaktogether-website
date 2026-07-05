@@ -276,3 +276,13 @@ Nir judged the glowing wireframe ships ugly (they FAIL Bible Law 1: "gaming firs
 4. **Verified:** all files py_compile OK; **all 5 ships build headlessly** (264–396 tris each); app wiring imports resolve; zero `-m`/relative/package imports. Could not run the window (Nir is the visual judge — this is an art-director review).
 5. Updated COMMENTARIES.md + this WORKFLOW.md. Committed with Fable's exact message + pushed.
 6. ⏳ Nir to `python app.py` and review AS ART DIRECTOR: best/worst ship, too dark/bright, panel variation, engine glow (all one-number knobs).
+
+### July 5, 2026 — AMENDMENT A1.1: ships never bloom (dual render targets) + dark mothership at origin + overlay axes
+Nir saw the solid ships — they were too shiny. Fable delivered the full architectural fix:
+1. **Saved verbatim** to `BIBLE/FABLE DELIVERABLE 9 - A1.1 dual render targets no bloom ships.md`.
+2. **Dual render targets:** SOLID buffer (location 0 — ships, untouched by bloom/tone-map, crisp panel detail) + GLOW buffer (location 1 — holograms only, feeds bloom). LINE_FRAG/MESH_FRAG/TEXT_FRAG all emit to both locations. COMPOSITE_FRAG reads 3 textures: u_scene (pass-through), u_glow (full-res), u_bloom (blurred) — tone maps ONLY the hologram layer.
+3. **Dark mothership at origin (0,0,0).** Hull = dark slate (0.155, 0.165, 0.195), accent = steel-blue [0.45,0.55,0.7]. Accent parts only 60% bright. Engine nozzles/windows/lamps use dim emissive values ≤1 (no HDR).
+4. **Overlay axes:** 10-unit long bright e1/e2/e3 with `.overlay = True` → rendered in a 3rd pass with depth test OFF, drawn ON TOP of the mothership. "She is the coordinate system made flesh."
+5. **Flattened per RULE #0:** shaders.py (no imports), bloom.py (`from shaders import`), forge.py (all `from camera import` etc.), shipwright.py (no imports), content/ships.json, app.py (2 blocks), settings.json (v0.7.1).
+6. **Verified:** all 5 files py_compile OK; `python fleet_demo.py` → 12/12 GREEN; app.py imports resolve; zero `-m`/packages.
+7. Updated COMMENTARIES.md + WORKFLOW.md. Committed with Fable's exact message + pushed.

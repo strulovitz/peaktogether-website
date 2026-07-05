@@ -28,17 +28,15 @@ Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 "FABLE DELIVERABLE N" file per code package.
 
 **Current state (July 5, 2026):** forge ✅, helm ✅, fleet ✅ (12/12), app.py wiring ✅,
-content data layer ✅, and **AMENDMENT A1: SOLID SHADED SHIPS ✅** (Fable deliverable 8).
-Nir ruled glowing-wireframe ships FAIL Bible Law 1 (gaming first). Now ships are **solid,
-opaque, lit triangle meshes** (per-pixel Blinn-Phong: key+fill+rim+specular, paneled hulls,
-emissive engine nozzles/windows feeding bloom) generated procedurally by `shipwright.py`
-(264–396 tris/class); the math layer (arrows/grids/ghosts/trails) stays glowing holographic,
-drawn over the solids with depth test. New render pipeline: solid pass (depth write) → glow
-pass (depth test, no write) → bloom → overlay. Python CODE all FLAT (shaders.py, solid.py,
-bloom.py, forge.py, shipwright.py — no packages). All ships build headlessly (verified);
-committed with Fable's exact messages, pushed. AWAITING Nir's play-test **as art director**
-(which ship best/worst, too dark/bright, panel variation, engine glow — all one-number knobs).
-settings.json → v0.7.0. NOTE: run.bat deleted (Nir) — run with `python app.py`.
+content data layer ✅, **AMENDMENT A1 ✅**, and **AMENDMENT A1.1 ✅** (Fable deliverable 9).
+**A1.1 — ships never bloom (architectural fix):** Dual render targets — location 0 = SOLID
+buffer (ships, untouched by bloom or tone mapping), location 1 = GLOW buffer (holograms only,
+feeds bloom). Mothership at (0,0,0) with dark slate hull; 10-unit overlay basis axes e1/e2/e3
+drawn ON TOP of hulls (depth test OFF for overlay objects). Engine nozzles/lamps use dim
+emissive values ≤1 (no HDR). COMPOSITE_FRAG reads 3 textures (solid + glow + blurred glow)
+and tone-maps ONLY the hologram layer. Ships stay crisp like real Homeworld hulls. settings
+v0.7.1. 12/12 fleet green. Python CODE all FLAT. NOTE: run.bat deleted (Nir) — run with
+`python app.py`.
 
 **Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet → (4) ✅ app
 wiring → (5) ✅ content → (6) ✅ **A1 solid ships** → iterate art per Nir → then **bridge**
@@ -135,6 +133,7 @@ content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 mes
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — Amendment A1.1: ships never bloom (dual render targets — solid buffer untouched + glow buffer feeds bloom only), dark mothership at origin (0,0,0), overlay axes (10-unit long e1/e2/e3 drawn on top of hulls with depth test off), engine nozzles = dim lamps (<1 emissive, no HDR), mothership color steel-blue [0.45,0.55,0.7] — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*→flat; settings v0.7.1; 12/12 still green)
 July 5, 2026 — Amendment A1 recorded into the SCRIPTURES: add-only "⚖️ OWNER AMENDMENTS (READ FIRST)" banner at the top of the Old Testament + New Testament + Apocrypha (solid ships override the wireframe/holographic aesthetic; Fable's text kept verbatim below) — by DeepSeek (Nir's instruction: owner amendments belong in the Bible, not only notes/COMMENTARIES)
 July 5, 2026 — AMENDMENT A1: solid shaded ships — mesh shader, depth pipeline, procedural shipwright — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*.py→root, content/shipwright.py→shipwright.py, forge/__init__ dropped; all 5 ships build headlessly)
 July 5, 2026 — Apocrypha step 1: content data layer (ContentDB, ships.json, 5 meshes, narrator core, book placeholders) + app wiring — by Parent Fable (via DeepSeek; flattened per RULE #0: content/db.py→content_db.py, content/demo.py→content_demo.py, __init__ dropped; content/ kept as DATA folder; CONTENT CHECK PASSED)

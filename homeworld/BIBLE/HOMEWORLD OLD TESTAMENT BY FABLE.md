@@ -23,8 +23,20 @@
 > "holographic," that is superseded — ships are solid; the math around them glows.**
 > "It must look like a game a gamer would choose" outranks any aesthetic theory in any
 > design document; the owner is the sole arbiter. (Full text: `notes/amendment_a1_art_direction.md`.)
-
----
+>
+> **Amendment A1.1 — SHIPS NEVER BLOOM; DUAL RENDER TARGETS; DARK MOTHERSHIP AT ORIGIN (July 5, 2026).**
+> A1's "emissive engine nozzles/windows feeding bloom" was wrong — ships must NEVER bloom, by
+> construction. The scene FBO now has TWO color attachments sharing one depth buffer: SOLID buffer
+> (ships, linear, untouched by bloom or tone map → crisp panel detail like real Homeworld hulls) +
+> GLOW buffer (holograms — lines/labels/panels — additive; this buffer alone is downsampled, blurred,
+> and tone-mapped, then added on top of the SOLID buffer). Mothership is at the origin (0,0,0) with a
+> dark slate hull (0.155,0.165,0.195) and steel-blue accent [0.45,0.55,0.7]; bright 10-unit long
+> basis axes e1/e2/e3 are drawn in a separate OVERLAY pass (depth test OFF) ON TOP of her hull —
+> "she is the coordinate system made flesh." Engine nozzles, windows, and intake maws are dim lit
+> "lamps" (emissive values ≤1, never HDR), painted into the solid buffer. COMPOSITE_FRAG reads 3
+> textures (u_scene + u_glow + u_bloom) and tone-maps ONLY the hologram layer. Wherever this document
+> or A1 says emissive ship parts "feed bloom," that is superseded — ships never interact with the
+> bloom pipeline. (Deliverable 9 in BIBLE.)
 
 NOTE TO ALL READERS (human, Opus parent/child, DeepSeek): All mathematics in this
 document is written in LaTeX. Inline math is delimited by $...$ and display math by

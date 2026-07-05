@@ -91,7 +91,7 @@ class App:
         self.helm.attach(self.forge.window)
 
         self.sim = FleetSim(self.settings.get("seed", 1234), self.content)
-        self.sim.spawn("mothership", (0.0, 0.0, -12.0))
+        self.sim.spawn("mothership", (0.0, 0.0, 0.0))     # the ORIGIN.
         self.sim.spawn("fighter", (6.0, 0.0, 3.0), squad=1)
         self.sim.spawn("fighter", (8.0, 0.0, -2.0), squad=1)
         self.sim.spawn("fighter", (4.0, 0.0, -6.0), squad=1)
@@ -105,10 +105,14 @@ class App:
                         (0.35, 0.55, 1.0, 1.0)]
         for e, col, name in zip(self.sim.engine_vectors, basis_colors,
                                 ("e1", "e2", "e3")):
-            self.forge.add(Arrow((0, 0, 0), 3.0 * e, head_size=0.5,
-                                 color=col))
-            self.forge.add(Label(name, 3.6 * e, size=0.8,
-                                 color=(col[0], col[1], col[2], 0.9)))
+            axis = Arrow((0, 0, 0), 10.0 * e, head_size=0.8, color=col,
+                         glow=1.2)
+            axis.overlay = True          # drawn ON TOP of the mothership
+            self.forge.add(axis)
+            tag = Label(name, 10.9 * e, size=0.9,
+                        color=(col[0], col[1], col[2], 0.95))
+            tag.overlay = True
+            self.forge.add(tag)
 
         self.ghost_legs = [
             DashedLine((0, 0, 0), (0, 0, 0), dash=0.4, color=basis_colors[i])

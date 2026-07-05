@@ -19,6 +19,12 @@
 > from `shipwright.py`.) **Only the MATH LAYER** (arrows, grids, ghosts, trails, labels) stays
 > glowing holographic, over the solids, depth-tested. (Full text:
 > `notes/amendment_a1_art_direction.md` + Old Testament amendments.)
+>
+> **Amendment A1.1 — SHIPS NEVER BLOOM; DUAL RENDER TARGETS; DARK MOTHERSHIP AT ORIGIN (July 5, 2026).**
+> Ships must NEVER bloom, by construction. Scene FBO has two RGBA16F color attachments: SOLID buffer
+> (ships, untoched, crisp) + GLOW buffer (holograms only, additive, feeds bloom). Mothership at
+> (0,0,0) dark slate; 10-unit overlay axes e1/e2/e3 on top of her hull. Engine nozzles = dim lamps
+> ≤1. Wherever A1 says emissive "feeds bloom," superseded. (Deliverable 9 in BIBLE.)
 
 ---
 ## Requires: BIBLE.md v2.1 and NEW_TESTAMENT.md v1.0. Precedence: Bible wins over
