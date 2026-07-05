@@ -1,16 +1,18 @@
 # HOMEWORLD: A GOOD BASIS (Game 4) — Project WORKFLOW & MEMORY for DeepSeek V4 Pro (OpenCode)
 
-> 🛑🛑🛑 **RULE #0 — NEVER USE `python -m`. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
+> 🛑🛑🛑 **RULE #0 — NEVER USE `python -m`. ALWAYS GIVE NIR 2 CLEAN COMMANDS. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
 > **Nir NEVER agreed to `-m` and hates it.** ALL Peak Together games run like Quake did: plain
-> `python app.py` (or `python forge/demo.py`, `python helm/demo.py`) — a plain `python <file>.py`
-> command, NEVER `python -m package.module`. This means **flat absolute imports only** (`from camera import Camera`),
-> **NEVER relative imports** (`from .camera import` / `from . import`). Relative imports are the ONLY thing
-> that forces `-m`, so they are BANNED here.
+> `python app.py` (or `python demo.py`) — a plain `python <filename>.py` command, NEVER `python -m package.module`.
+> This means **flat absolute imports only** (`from camera import Camera`), **NEVER relative imports**
+> (`from .camera import` / `from . import`). Relative imports are the ONLY thing that forces `-m`, so they are BANNED here.
 > - **Every file Fable delivers** that uses `from .` / `-m` **must be converted to flat absolute imports the
->   moment I drop it in** — and I must TELL NIR at the very start that I did the conversion. Do NOT hand Nir a `-m` command, ever.
-> - Also give Nir the **FULL `cd` command** every time (`cd C:\Users\nir_s\peaktogether-website\homeworld`),
->   never a half command or a "type cmd in the address bar" dance.
-> - I failed Nir on this July 5, 2026 (passed Fable's raw `python -m helm.demo` straight through). Never again.
+>   moment I drop it in** — and I must TELL NIR at the very start that I did the conversion.
+> - **The 2-line command format I give Nir EVERY time:** `cd` straight into the folder where the file lives,
+>   then `python <filename>.py` from there. **BOTH LINES CONSISTENT — if the cd is into `helm\`, the second line
+>   is `python demo.py`, NOT `python helm\demo.py`.**
+> - **Full paths only** — `cd C:\Users\nir_s\peaktogether-website\homeworld\helm`, NEVER a half-path or "type cmd".
+> - I failed Nir on July 5, 2026 (passed Fable's raw `python -m helm.demo` straight through, then gave inconsistent
+>   cd/file commands). Never again.
 >
 > ⭐ **ON RESTART, READ THIS FIRST.** Then read `homeworld/COMMENTARIES.md` (the repo memory, Fable's format). Then read the latest `homeworld/BIBLE/FABLE DELIVERABLE N ...md` if a package is mid-flight. Then ask Nir what's next.
 >
