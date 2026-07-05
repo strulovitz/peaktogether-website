@@ -1,4 +1,4 @@
-"""python helm/demo.py — the helm acceptance demo (NT Part 6).
+"""python helm_demo.py — the helm acceptance demo (NT Part 6).
 
 EXPECTED (plain words, for the project owner):
 A small dark window opens (it must have FOCUS — click it once). The
@@ -25,7 +25,7 @@ import traceback
 
 import pyglet
 
-from __init__ import Helm
+from helm import Helm
 
 
 def _load_settings():

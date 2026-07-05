@@ -1,4 +1,4 @@
-"""python fleet/demo.py — the headless self-test (NT Part 6).
+"""python fleet_demo.py — the headless self-test (NT Part 6).
 
 This is the project's regression suite: it recomputes the Bible's
 worked examples through the REAL referee and simulation and prints

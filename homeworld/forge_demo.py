@@ -1,4 +1,4 @@
-"""python forge/demo.py — the FULL forge acceptance demo (NT Part 6).
+"""python forge_demo.py — the FULL forge acceptance demo (NT Part 6).
 
 EXPECTED (plain words, for the project owner):
 Everything from the previous build (glowing cyan grid, red/green/blue
@@ -26,7 +26,7 @@ import traceback
 
 import numpy as np
 
-from app import Forge
+from forge import Forge
 from vobjects import (
     Arrow, DashedLine, Grid, WireSphere, SpannedBox, Ellipsoid,
     Trail, Label, ImagePanel,

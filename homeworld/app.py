@@ -27,21 +27,11 @@ import traceback
 
 import numpy as np
 
-# --- Quake-style path setup (RULE #0: run with `python app.py`, NEVER `-m`) ---
-# forge/helm/fleet are sibling package folders using flat absolute imports.
-# Put each on sys.path (ahead of this root folder) so their internal imports
-# resolve, and so `from app import Forge` inside forge finds forge/app.py
-# rather than this root app.py. This is DeepSeek's RULE #0 conversion of
-# Fable's file (the only change from the verbatim BIBLE version).
-_HERE = os.path.dirname(os.path.abspath(__file__))
-for _pkg in ("forge", "helm", "fleet"):
-    _dir = os.path.join(_HERE, _pkg)
-    if _dir not in sys.path:
-        sys.path.insert(0, _dir)
-
-from forge import Forge, Grid, Arrow, DashedLine, Label, Trail, WireMesh
+from forge import Forge
+from vobjects import Grid, Arrow, DashedLine, Label, Trail, WireMesh
 from helm import Helm
-from fleet import FleetSim, MoveCombination
+from sim import FleetSim
+from orders import MoveCombination
 
 COEFF_RATE = 2.0          # coefficient units per second of held key
 COEFF_SNAP = 0.5          # commit snaps coefficients to this grid

@@ -1,18 +1,21 @@
 # HOMEWORLD: A GOOD BASIS (Game 4) — Project WORKFLOW & MEMORY for DeepSeek V4 Pro (OpenCode)
 
-> 🛑🛑🛑 **RULE #0 — NEVER USE `python -m`. ALWAYS GIVE NIR 2 CLEAN COMMANDS. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
-> **Nir NEVER agreed to `-m` and hates it.** ALL Peak Together games run like Quake did: plain
-> `python app.py` (or `python demo.py`) — a plain `python <filename>.py` command, NEVER `python -m package.module`.
-> This means **flat absolute imports only** (`from camera import Camera`), **NEVER relative imports**
-> (`from .camera import` / `from . import`). Relative imports are the ONLY thing that forces `-m`, so they are BANNED here.
-> - **Every file Fable delivers** that uses `from .` / `-m` **must be converted to flat absolute imports the
->   moment I drop it in** — and I must TELL NIR at the very start that I did the conversion.
-> - **The 2-line command format I give Nir EVERY time:** `cd` straight into the folder where the file lives,
->   then `python <filename>.py` from there. **BOTH LINES CONSISTENT — if the cd is into `helm\`, the second line
->   is `python demo.py`, NOT `python helm\demo.py`.**
-> - **Full paths only** — `cd C:\Users\nir_s\peaktogether-website\homeworld\helm`, NEVER a half-path or "type cmd".
-> - I failed Nir on July 5, 2026 (passed Fable's raw `python -m helm.demo` straight through, then gave inconsistent
->   cd/file commands). Never again.
+> 🛑🛑🛑 **RULE #0 — HOMEWORLD IS FLAT. NEVER `-m`. FLATTEN EVERY FABLE DELIVERY. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
+> **Nir NEVER agreed to `-m` and hates it. Nir wants Homeworld exactly like our previous games (Quake/Descent): FLAT.**
+> 1. **FLAT STRUCTURE — no subfolders, no packages, ever.** ALL game `.py` files live **directly in `homeworld/`** as plain siblings
+>    (like Quake: app.py, camera.py, sim.py, forge.py, helm.py all next to each other). There are **NO `forge/`, `helm/`, `fleet/`
+>    subfolders** and **no `__init__.py`**. (BIBLE/ and algebra/ are docs/text folders — those stay.)
+> 2. **Fable builds in subfolders/packages. I MUST FLATTEN every delivery on drop-in:** move his files into `homeworld/` root,
+>    convert package imports to flat absolute imports (`from camera import Camera`), rename collisions (a package's `__init__.py`
+>    holding a class → `<name>.py`; a module `app.py` inside a package → `<pkgname>.py`; each `demo.py` → `<pkg>_demo.py`),
+>    and delete the empty folders. Then TELL NIR at the very start that I flattened it.
+> 3. **NEVER `python -m`, NEVER relative imports (`from .`), NEVER a sys.path bootstrap/hack.** Flat + plain absolute imports
+>    is the ONLY allowed way. Everything runs with plain `python <file>.py` from `homeworld/`.
+> 4. **The 2-line command I give Nir EVERY time (full paths, consistent):**
+>    `cd C:\Users\nir_s\peaktogether-website\homeworld`
+>    then `python app.py` (the game) — or `python fleet_demo.py` / `python helm_demo.py` / `python forge_demo.py` for a module test.
+> - I failed Nir repeatedly on July 5, 2026 (passed a raw `-m` command; then added a sys.path bootstrap hack instead of truly
+>   flattening). The bootstrap is GONE; the whole game is now flat. Never reintroduce folders, packages, `-m`, or hacks.
 >
 > ⭐ **ON RESTART, READ THIS FIRST.** Then read `homeworld/COMMENTARIES.md` (the repo memory, Fable's format). Then read the latest `homeworld/BIBLE/FABLE DELIVERABLE N ...md` if a package is mid-flight. Then ask Nir what's next.
 >
@@ -52,11 +55,11 @@ Everything Fable produces is saved here word-for-word. Current contents:
 - `FABLE DELIVERABLE 3 - text + remaining primitives (NT step 4).md`
 
 ## 4. THE GAME CODE (`homeworld/`) — what's built
-Game root = `homeworld/`. **Run like every previous game — plain `python <file>.py`, NEVER `-m`:**
-- forge demo: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python forge\demo.py` (or double-click `run.bat`).
-- helm demo: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python helm\demo.py`.
+Game root = `homeworld/`. **FLAT like Quake — all `.py` files live directly in `homeworld/`, no subfolders. Run with plain `python <file>.py`, NEVER `-m`:**
+- The game: `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python app.py` (or double-click `run.bat`).
+- Module self-tests (optional): `python fleet_demo.py` (headless 12/12) · `python forge_demo.py` (window) · `python helm_demo.py` (window) — all from the same `homeworld/` folder.
 
-**Import convention (LOCKED, Quake-style):** every module uses **flat absolute imports** (`from camera import Camera`, `from actions import ActionEvent`). **No relative imports** (`from .` / `from . import`) anywhere — they are what force `-m`, so they are banned. Each package folder's modules resolve because the script's own folder is on `sys.path` when you run `python <folder>\demo.py`.
+**Structure convention (LOCKED, Quake-style):** ALL modules are flat siblings in `homeworld/` (app.py, forge.py, helm.py, sim.py, referee.py, camera.py, vobjects.py, …). Every module uses **flat absolute imports** (`from camera import Camera`, `from sim import FleetSim`). **NO subfolders, NO packages, NO `__init__.py`, NO relative imports (`from .`), NO `-m`, NO sys.path hacks.** Fable delivers in subfolders → **I flatten every delivery on drop-in** (see RULE #0).
 
 **Requirements already installed on Nir's machine** (verified): numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0. **Do NOT install anything without asking.**
 
@@ -77,7 +80,8 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 - ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
 - ✅ **helm is COMPLETE + CONFIRMED by Nir** — NT step 5 (Fable deliverable 4). Nir tried every key: all mapped actions, W+S cancel, TAB/SHIFT+TAB select, mouse pointer/buttons/wheel, unmapped key = no crash. Runs Quake-style: `python demo.py` from inside `helm\`. `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json v0.4.0 (adds `input` section).
 - ✅ **fleet is COMPLETE + CONFIRMED (12/12)** — NT steps 6-7 (Fable deliverable 5). `fleet/` package = referee.py (canonical NumPy verdict fns — the math conscience), orders.py (12 frozen order types), events.py (frozen Event), ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), demo.py (headless self-test), __init__.py. `python fleet\demo.py` prints FLEET SELF-TEST PASSED (12/12). Nir confirmed.
-- ✅ **app.py wiring is BUILT** — NT step 9 (Fable deliverable 6). Root `app.py` wires forge+helm+fleet into the game shell + SHAKEDOWN SCENARIO (mothership + 3 fighters in squad 1 + the keyboard combination-order console: live ghost legs/arrow, ENTER to commit, X = diagonal vs staged, TAB select, C recenter, camera orbit). **First PLAYABLE build.** Runs `python app.py` / double-click `run.bat` (NO `-m`; I added a small RULE #0 sys.path bootstrap at the top of app.py so it can import the flat forge/helm/fleet packages — the only change from Fable's verbatim file). settings.json → v0.5.0. Wiring imports verified by DeepSeek.
+- ✅ **app.py wiring is BUILT** — NT step 9 (Fable deliverable 6). Root `app.py` wires forge+helm+fleet into the game shell + SHAKEDOWN SCENARIO (mothership + 3 fighters in squad 1 + the keyboard combination-order console: live ghost legs/arrow, ENTER to commit, X = diagonal vs staged, TAB select, C recenter, camera orbit). **First PLAYABLE build.** Runs `python app.py` / double-click `run.bat` (NO `-m`, NO hacks — the whole game is now FLAT, see below). settings.json → v0.5.0. Wiring imports verified by DeepSeek.
+- ✅ **FLATTENED to Quake structure (July 5, 2026)** — forge/, helm/, fleet/ subfolders **eliminated**; all 23 modules now flat siblings in `homeworld/` (forge.py, helm.py, sim.py, referee.py, camera.py, vobjects.py, actions.py, …). No packages, no `__init__.py`, no sys.path bootstrap. `python app.py` runs exactly like Quake. 12/12 fleet self-test still green.
 - ⏳ **AWAITING Nir's play-test** of `run.bat`: compose W (blue leg) + D (red leg) → ghost arrow → ENTER → fighters fly the diagonal; then X + compose + ENTER → they fly staged (two sides of the parallelogram). Fable also wants Nir's gamer feel on compose-then-commit (feel-knobs COEFF_RATE=2.0, COEFF_SNAP=0.5 are one-line changes).
 - ⏳ **NEXT (after Nir plays):** content loader + real ship meshes → bridge (Navigator's mouse console, 2nd player) → campaign + Mission 1.
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
@@ -98,7 +102,7 @@ Per the New Testament build order + Fable's stated plan:
 - **I DON'T DESIGN.** No redesigning, no "improving." Mechanical fixes only, and only when exact old/new text is specified. Anything needing judgment → back to Fable (via Nir).
 - **NEVER install/download without asking.** Requirements are already present.
 - **Syntax-check only** (`python -m py_compile`) — safe, no deps needed. Do NOT run the GUI demo myself; Nir is the visual judge. (Note: `py_compile` is an internal check I run; the RULE against `-m` is about the RUN COMMANDS I hand to Nir — those are always plain `python <file>.py`.)
-- **Give Nir the FULL run command every time:** `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python forge\demo.py` / `python helm\demo.py` (PowerShell). NEVER `-m`, never a half `cd`, never "type cmd in the address bar." He has Python — no install lectures.
+- **Give Nir the FULL run command every time:** `cd C:\Users\nir_s\peaktogether-website\homeworld` then `python app.py` (the game), or `python fleet_demo.py` / `python forge_demo.py` / `python helm_demo.py` for a module test (PowerShell). NEVER `-m`, never a half `cd`, never "type cmd in the address bar." He has Python — no install lectures.
 - **CONVERT every Fable file that uses `from .` / `-m` to flat absolute imports on drop-in**, and tell Nir at the start that I did so.
 - **Emojis abundantly**, warm, concise. Never call him "boss" — just **Nir**.
 - **Game code lives under `homeworld/`** (the game root in the monorepo). `__pycache__`, `*.pyc`, `build/` are gitignored (fine).
@@ -155,3 +159,12 @@ Nir was (rightly) furious: I passed Fable's raw `python -m helm.demo` straight t
 5. Could NOT run the actual game (opens a window → Nir is the visual judge). Any forge-API mismatch inside App.__init__ would surface as a crash on Nir's run (normal loop) — not my job to change (that's Fable's design).
 6. Updated COMMENTARIES.md + this WORKFLOW.md. Committed with Fable's exact message + pushed.
 7. ⏳ Nir to double-click run.bat, fly a combination order, and report back (+ gamer feel on compose-then-commit).
+
+### July 5, 2026 — FLATTENED to Quake structure (Nir's order; ends the -m/hack pain for good)
+Nir was right and furious: I kept hacking around the fact that Fable builds in subfolders (forge/, helm/, fleet/) while our previous games (Quake/Descent) were **born flat**. A root app.py reaching into subfolders is the only thing that forces `-m` or a sys.path hack. Fix = make Homeworld look like Quake: FLAT.
+1. **Moved all 23 modules** out of forge/, helm/, fleet/ into `homeworld/` root as plain siblings (via `git mv`, preserving history). Renamed collisions: `forge/app.py`→`forge.py` (the Forge class), `helm/__init__.py`→`helm.py` (the Helm class), `forge/demo.py`→`forge_demo.py`, `helm/demo.py`→`helm_demo.py`, `fleet/demo.py`→`fleet_demo.py`. Deleted `forge/__init__.py` + `fleet/__init__.py` (re-export-only). Deleted the subfolders.
+2. **Removed the sys.path bootstrap from app.py** and fixed its imports to flat siblings: `from forge import Forge`, `from vobjects import Grid, Arrow, DashedLine, Label, Trail, WireMesh`, `from helm import Helm`, `from sim import FleetSim`, `from orders import MoveCombination`.
+3. Fixed demo imports: forge_demo `from forge import Forge`; helm_demo `from helm import Helm`; docstrings updated to the new `python <file>.py` names.
+4. **Verified:** all 23 flat files py_compile OK; app.py wiring imports resolve (no window, no bootstrap); `python fleet_demo.py` → **FLEET SELF-TEST PASSED (12/12)**. Zero `-m`, zero `from .`, zero `import fleet` anywhere. (One empty `fleet/` folder is locked on disk by a stray handle — harmless, untracked by git, won't be pushed; clears on reboot.)
+5. **Updated RULE #0** to mandate the FLAT structure + flattening every future Fable delivery on drop-in. Updated §4 + docs. Committed + pushed.
+6. ⏳ Nir to double-click run.bat (or `python app.py`) and play-test the shakedown scenario.
