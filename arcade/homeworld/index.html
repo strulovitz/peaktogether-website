@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homeworld: A Good Basis — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main>
+        <article class="page gp">
+
+            <!-- ① TITLE BLOCK -->
+            <span class="game-badge building">🔨 Building — Sneak Peek</span>
+            <h1>🌌 Homeworld: A Good Basis</h1>
+            <p class="gp-hook">
+                Inspired by <strong>Homeworld</strong> (1999) — a two-player, one-screen space RTS where
+                <strong>commanding your fleet <em>is</em> doing linear algebra</strong>. Every ship is a column
+                vector, your whole fleet is a matrix, and instead of clicking each ship you <em>think</em>: you
+                build a <strong>transformation matrix</strong> that rotates, scales, or scatters the entire
+                formation at once. The long journey home to Hiigara is "the search for a good basis."
+            </p>
+
+            <!-- Looping, muted gameplay clip (served free via jsDelivr CDN from the git repo) -->
+            <div class="pt-clip">
+                <video class="pt-clip__video" autoplay loop muted playsinline preload="metadata"
+                       poster="/images/homeworld-combined-poster.jpg"
+                       aria-label="Gameplay footage of Homeworld: A Good Basis, looping silently">
+                    <source src="https://cdn.jsdelivr.net/gh/strulovitz/peaktogether-website@master/arcade/homeworld/homeworld-combined.mp4" type="video/mp4" />
+                    <img src="/images/homeworld-combined-poster.jpg" alt="Homeworld: A Good Basis gameplay" />
+                </video>
+            </div>
+
+            <img class="gp-hero-img" src="/images/homeworld-spin-plus-grow-swirl.png" alt="Homeworld: A Good Basis — a fleet of glowing spaceships swirling outward around a dark mothership at the origin, with red, green, and blue basis axes radiating from her hull like a coordinate system made flesh">
+
+            <div class="gp-cta">
+                <a href="https://strulovitz.itch.io/homeworld-a-good-basis" class="big-button" target="_blank" rel="noopener">🌌 Try the Sneak Peek (Windows) — Free</a>
+                <a href="https://github.com/strulovitz/peaktogether-website/releases/tag/homeworld-sneak-peek-v0.1.0" class="gp-ghost-btn" target="_blank" rel="noopener">Mirror (GitHub)</a>
+            </div>
+            <p class="gp-setup-line">An early <strong>sneak peek</strong> — the template game is playable now; the full 16-mission journey home is still being built. 💙</p>
+
+            <!-- ② THE NOSTALGIA HOOK -->
+            <h2>You remember this.</h2>
+            <p>
+                In 1999, <strong>Homeworld</strong> did something no game had done before — a real-time strategy game
+                set in <strong>true 3D space</strong>, with a lonely mothership leading a ragtag fleet across the
+                stars toward a lost home planet. It was beautiful, and it was <em>about</em> something. We kept that
+                feeling — the fleet, the vastness, the pull of home — and poured a whole branch of mathematics inside.
+            </p>
+
+            <div class="gp-thennow">
+                <figure>
+                    <img src="/images/homeworld-3.jpg" alt="Homeworld (1999) — the original">
+                    <figcaption>Then — the original <em>Homeworld</em> (1999)</figcaption>
+                </figure>
+                <figure>
+                    <img src="/images/homeworld-expand-scatter-2-2-2.png" alt="Homeworld: A Good Basis — the fleet expanding outward under a scaling matrix">
+                    <figcaption>Now — <em>Homeworld: A Good Basis</em></figcaption>
+                </figure>
+            </div>
+
+            <!-- ③ THE TWIST -->
+            <h2>Here's what's different — and amazing.</h2>
+            <p>
+                This isn't point-and-click. <strong>Your fleet's positions <em>are</em> a matrix</strong> — one column
+                per ship, live on the Bridge console — and the ships flying in space are the very same numbers, shown
+                the other way. Move one, and the other moves instantly. Two pictures of one object.
+            </p>
+            <p>
+                Instead of clicking each ship, you <strong>command the whole formation with a transformation</strong>.
+                Dial a <strong>3×3 matrix</strong> and watch a ghost-preview show where every ship will go: a rotation
+                swings the fleet around the mothership, a scaling scatters or tightens it, a shear leans it into a
+                parallelogram. The console shows the <strong>determinant</strong> (how much the fleet's volume grows or
+                flips), the <strong>rank</strong> (and a warning if your matrix would <em>collapse</em> the fleet onto a
+                plane or a line!), and the amber <strong>eigen-axis</strong> — the one direction the transformation
+                leaves fixed. You have to <em>think</em> to choose the matrix that makes the shape you want.
+            </p>
+            <p>
+                Get it wrong? <strong>Nothing bad happens.</strong> There's no punishment and no game-over — the
+                challenge is understanding, not survival. You're not being tested; you're being shown.
+            </p>
+
+            <!-- ④ REAL SCREENSHOTS GALLERY -->
+            <h2>📸 Gallery — real in-game screenshots</h2>
+            <p class="gp-muted">Straight from our own engine. Click any photo to view it full-size.</p>
+            <div class="gp-gallery four">
+                <img src="/images/homeworld-spin-plus-grow-swirl.png" alt="Homeworld: A Good Basis — the fleet swirling outward under a spin-and-grow matrix">
+                <img src="/images/homeworld-battle-line.png" alt="Homeworld: A Good Basis — the formation stretched into a long battle line along the red axis">
+                <img src="/images/homeworld-expand-scatter-2-2-2.png" alt="Homeworld: A Good Basis — the fleet doubled outward by the scaling matrix 2·I">
+                <img src="/images/homeworld-sheer.png" alt="Homeworld: A Good Basis — the formation sheared into a leaning parallelogram">
+            </div>
+
+            <!-- ⑤ THE MOUNTAIN YOU'RE CLIMBING -->
+            <h2>🏔️ The mountain you're climbing</h2>
+            <p>
+                <strong>The peak:</strong> <em>linear algebra</em> — the mathematics of vectors, matrices, and the
+                spaces they live in, taught the way <strong>Gilbert Strang</strong> teaches it. It's the language
+                underneath computer graphics, machine learning, quantum mechanics, and search engines. And it is,
+                secretly, the perfect language for commanding a fleet in space.
+            </p>
+            <p>
+                The 16-mission campaign is a journey home, and each mission is one big idea wrapped in a story:
+                spanning a plane of refugees, the dot product as a dust stream, rank and the nullspace "cloak,"
+                least-squares through a nebula of noise, eigenvectors as the calm axis you dock along, and finally
+                the <strong>singular value decomposition</strong> — the grand finale, "The Victory of Orthogonality."
+                The whole arc is <em>"the search for a good basis"</em> — the right set of directions that makes a
+                hard problem simple.
+            </p>
+            <p><strong>What you'll actually feel by the end:</strong></p>
+            <ul class="gp-list">
+                <li>Why a matrix is a <em>motion of space</em> — not a spreadsheet of numbers.</li>
+                <li>What the determinant and rank really <em>mean</em> (volume, flips, and collapse).</li>
+                <li>Why eigenvectors are the directions that don't turn.</li>
+                <li>What a "good basis" is — and why finding one is the whole game.</li>
+            </ul>
+
+            <!-- ⑥ HOW YOU TWO PLAY -->
+            <h2>❤️ How you two play</h2>
+            <p>
+                Homeworld: A Good Basis is built for <strong>two people on one screen</strong> — a co-op design that
+                gives each player a real, distinct job. (Playing solo works too — one person can do both.)
+            </p>
+            <div class="gp-roles">
+                <div class="gp-role">
+                    <h3>🕹️ Player 1 — The Pilot</h3>
+                    <p>
+                        Flies the fleet by <strong>linear combinations</strong>. Dials coefficients on
+                        <strong>e1, e2, e3</strong> (the red, green, blue basis axes) to build a movement vector,
+                        watches the ghost construction draw itself in space, and commits the order. Plays on the
+                        <strong>keyboard</strong>.
+                    </p>
+                </div>
+                <div class="gp-role">
+                    <h3>🎯 Player 2 — The Navigator</h3>
+                    <p>
+                        Works the <strong>Bridge console</strong> with the <strong>mouse</strong>: reads the live
+                        formation matrix, drags the order sliders, and — the heart of the game — edits the
+                        <strong>transformation matrix M</strong> to reshape the entire fleet at once. Rotate, scale,
+                        scatter, mirror, or collapse; then hit <strong>APPLY</strong> and watch the ships fly.
+                    </p>
+                </div>
+            </div>
+
+            <!-- ⑥b CONTROLS -->
+            <h2>🎮 Controls</h2>
+            <p>Keyboard for the Pilot, mouse for the Navigator — that's all you need.</p>
+
+            <h3>⌨️ Pilot (keyboard)</h3>
+            <ul>
+                <li><code>W</code>/<code>S</code> <code>A</code>/<code>D</code> <code>R</code>/<code>F</code> &mdash; edit the combination coefficients c1, c2, c3</li>
+                <li><code>Enter</code> &mdash; commit the order (the fleet flies the combination)</li>
+                <li><code>X</code> &mdash; toggle diagonal / staged flight</li>
+                <li><code>Backspace</code> &mdash; clear the coefficients</li>
+                <li><code>Q</code>/<code>E</code> &mdash; switch which squad you command</li>
+                <li><code>Tab</code> &mdash; select the next ship &nbsp;·&nbsp; <code>C</code> &mdash; recenter the camera</li>
+                <li><strong>Arrows</strong> / <code>PgUp</code> / <code>PgDn</code> &mdash; orbit &amp; zoom the camera</li>
+                <li><code>P</code> pause &nbsp;·&nbsp; <code>F1</code> debug &nbsp;·&nbsp; <code>F12</code> screenshot &nbsp;·&nbsp; <code>Esc</code> quit</li>
+            </ul>
+
+            <h3>🖱️ Navigator (mouse — the Bridge console)</h3>
+            <ul>
+                <li><strong>ORDER sliders</strong> &mdash; drive the same combination the Pilot is building.</li>
+                <li><strong>TRANSFORM grid</strong> &mdash; scroll or drag a cell to edit the 3×3 matrix M, preview p → M·p on the whole formation, then click <strong>APPLY</strong> to reshape the fleet. Watch det, rank, the collapse warning, and the amber fixed-axis line.</li>
+            </ul>
+
+            <!-- ⑦ NO-FAIL LEARNING -->
+            <h2>🛡️ You cannot lose</h2>
+            <p>
+                There's no health bar, no lives, no game-over screen. Bad orders are simply explained, never punished.
+                You're here to <em>see</em> linear algebra move — not to grind.
+            </p>
+
+            <!-- ⑧ TECH BEHIND IT -->
+            <h2>⚙️ The tech</h2>
+            <p>
+                <strong>Language:</strong> pure Python (Windows-first). <strong>Graphics:</strong> moderngl + pyglet
+                (a direct OpenGL pipeline — our own GLSL shaders, dual render targets so the solid ships stay crisp
+                while the math holograms glow). <strong>Math:</strong> NumPy, with a dedicated "referee" module that is
+                the single source of mathematical truth. <strong>Packaging:</strong> PyInstaller. Every commit is on
+                GitHub — we build in public.
+            </p>
+
+            <!-- ⑨ ORIGINALS -->
+            <h2>📼 The original that inspired us</h2>
+            <p class="gp-muted">The original <em>Homeworld</em> (1999) — the game we're remaking with linear algebra inside.</p>
+            <div class="gp-gallery four">
+                <img src="/images/homeworld-6.jpg" alt="Homeworld (1999)">
+                <img src="/images/homeworld-4.jpg" alt="Homeworld (1999)">
+                <img src="/images/homeworld-3.jpg" alt="Homeworld (1999)">
+                <img src="/images/homeworld-2.jpg" alt="Homeworld (1999)">
+            </div>
+
+            <!-- ⑩ DOWNLOAD & PLAY -->
+            <h2>⬇️ Try the Sneak Peek (Windows)</h2>
+            <p>The easy way — <strong>no Python, no terminal, no installer:</strong></p>
+            <div class="gp-cta">
+                <a href="https://strulovitz.itch.io/homeworld-a-good-basis" class="big-button" target="_blank" rel="noopener">🌌 Try the Sneak Peek — Free</a>
+                <a href="https://github.com/strulovitz/peaktogether-website/releases/tag/homeworld-sneak-peek-v0.1.0" class="gp-ghost-btn" target="_blank" rel="noopener">Mirror (GitHub)</a>
+            </div>
+            <ol class="gp-list">
+                <li>Download the Windows <code>.zip</code>.</li>
+                <li>Right-click it → <strong>Extract All…</strong></li>
+                <li>Open the extracted folder.</li>
+                <li>Double-click <strong>“Homeworld.exe”</strong> — that's it! 🎉</li>
+                <li>Grab your partner: one on the keyboard (Pilot), one on the mouse (Navigator). ❤️</li>
+            </ol>
+            <p class="gp-setup-line">To uninstall, just delete the folder. It installs nothing and never touches your system.</p>
+
+            <p class="gp-muted">
+                🛡️ <strong>Heads-up:</strong> we're a brand-new, free, open-source project, so Windows may say
+                <em>“Unknown publisher.”</em> That's expected for small free games — click
+                <strong>“More info” → “Run anyway.”</strong> The game needs no admin permission, installs nothing,
+                and doesn't touch your Python or system. <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Source code</a>.
+            </p>
+
+            <!-- ⑩b RUN FROM SOURCE (developers) -->
+            <h3>🧑‍💻 Prefer to run from source? (for developers)</h3>
+            <ol class="gp-list">
+                <li>Get the code from <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a> (free, open-source — no account, no payment, ever).</li>
+                <li>Make sure you have <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a> installed.</li>
+                <li>Install the libraries: <code>pip install moderngl pyglet numpy pillow</code></li>
+                <li>Run it: <code>cd homeworld</code> then <code>python app.py</code></li>
+            </ol>
+            <p class="gp-muted">
+                First time running a game like this? Our <a href="/how-it-works/">How It Works</a> page walks you
+                through everything in plain English.
+            </p>
+
+            <!-- ⑪ FOOTER STRIP -->
+            <div class="gp-footstrip">
+                <span>🔨 Building → <em>a sneak peek of the fleet is playable now</em></span>
+                <span>🔓 Free &amp; open-source</span>
+                <span><a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Contribute on GitHub →</a></span>
+            </div>
+
+            <a href="/arcade/" class="back-link">← Back to The Arcade</a>
+        </article>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+
+            var big = document.createElement('img');
+            big.className = 'lightbox-img';
+            big.alt = '';
+
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+
+            overlay.appendChild(big);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+
+            function openBox(src, alt) {
+                big.setAttribute('src', src);
+                big.setAttribute('alt', alt || '');
+                overlay.classList.add('open');
+                document.body.classList.add('lightbox-locked');
+            }
+            function closeBox() {
+                overlay.classList.remove('open');
+                document.body.classList.remove('lightbox-locked');
+                big.setAttribute('src', '');
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () {
+                    openBox(this.getAttribute('src'), this.getAttribute('alt'));
+                });
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target === closeBtn) closeBox();
+            });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    })();
+    </script>
+</body>
+</html>
