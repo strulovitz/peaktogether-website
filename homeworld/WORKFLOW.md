@@ -1,5 +1,7 @@
 # HOMEWORLD: A GOOD BASIS (Game 4) — Project WORKFLOW & MEMORY for DeepSeek V4 Pro (OpenCode)
 
+> 🛑 **RULE #-1 — NEVER put SPACES in filenames. Use hyphens `-`.** Nir hates spaces in filenames (they force `%20` in URLs and look bad). Every file I create or save (BIBLE scriptures, notes, handoffs, anything) MUST use hyphens, never spaces. On July 5, 2026 all 17 BIBLE docs + 2 `chapter 1` folders were renamed space→hyphen and pushed (commit `892f2c4`). Keep it that way forever.
+>
 > 🛑🛑🛑 **RULE #0 — HOMEWORLD IS FLAT. NEVER `-m`. FLATTEN EVERY FABLE DELIVERY. SAY THIS AT THE START OF EVERY SESSION.** 🛑🛑🛑
 > **Nir NEVER agreed to `-m` and hates it. Nir wants Homeworld exactly like our previous games (Quake/Descent): FLAT.**
 > 1. **FLAT STRUCTURE — no subfolders, no packages, ever.** ALL game `.py` files live **directly in `homeworld/`** as plain siblings
