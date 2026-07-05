@@ -376,4 +376,5 @@ Fable owned the miss ("I fucked up the game… B3 misread the founding design; c
 - Answer 02: `FABLE-TRUNK-ANSWER-02-briefs-m03-m04-m05.md` → split `brief_m03.md` (rank / A=CR / "Salvage Run"), `brief_m04.md` (Ax=b combat / "Shield Recipe"), `brief_m05.md` (nullspace cloak / "Ghost Fleet").
 - Answer 03: `FABLE-TRUNK-ANSWER-03-briefs-m06-m07-m08.md` → split `brief_m06.md` (complete solution x=x_p+x_n / "Blockade Run"), `brief_m07.md` (Fundamental Theorem star map / "Karos Graveyard"), `brief_m08.md` (Gram–Schmidt drill / "Narrow Corridor").
 - Answer 04: `FABLE-TRUNK-ANSWER-04-briefs-m09-m10-m11.md` → split `brief_m09.md` (projection/least squares / "Nebula of Noise"), `brief_m10.md` (determinant gate / "Collapsing Gate"), `brief_m11.md` (eigenvector docking / "Calm Axis").
-- **NEXT:** "continue" → final act: M12, M13, M14 — then M15, M16 to close the tree.
+- Answer 05: `FABLE-TRUNK-ANSWER-05-briefs-m12-m13-m14.md` → split `brief_m12.md` (eigen-dynamics / "The Swarm"), `brief_m13.md` (diagonalization / "Shield Harmonics"), `brief_m14.md` (change of basis / "The Defector's Ship").
+- **NEXT:** "continue" (last one) → M15 (Guidestone / SVD transmission), M16 (SVD boss fight & jump home) + a trunk hand-off note.
