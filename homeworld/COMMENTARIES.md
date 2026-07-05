@@ -29,20 +29,20 @@ Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 
 **Current state (July 5, 2026):** **forge is FEATURE-COMPLETE** (confirmed by Nir's
 own eyes: text readable, det box flat at vol 0.00), **helm is COMPLETE** (confirmed —
-every key works), and **fleet is COMPLETE** (NT steps 6-7 = Fable deliverable 5:
-referee + orders + events + ships + snapshot + sim + 12-line self-test). fleet's
-headless self-test prints **FLEET SELF-TEST PASSED (12/12)** — verified by DeepSeek,
-awaiting Nir's own console run. All syntax-checked (py_compile), committed with
-Fable's exact messages, pushed. Requirements already installed on Nir's machine:
-numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
+every key works), **fleet is COMPLETE** (12/12 self-test), and **app.py wiring is
+BUILT** (NT step 9 = Fable deliverable 6: root game shell wiring forge+helm+fleet,
+shakedown scenario — mothership + 3 fighters + keyboard combination-order console).
+**This is the first PLAYABLE build.** All syntax-checked (py_compile) + wiring imports
+verified; committed with Fable's exact messages, pushed. AWAITING Nir's play-test of
+`run.bat` (compose a combination order, commit, watch the fighters fly). Requirements
+already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14,
+Pillow 12.2.0 (never install without asking).
 
-**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** confirmed
-→ (3) ✅ **fleet** built (12/12 self-test green; Nir confirming) → (4) **app.py wiring**
-(NT build step 9) = bind forge + helm + fleet → three glowing ships fly a combination
-order on screen, commanded by the keyboard (Mission 1 becomes buildable) → then
-Apocrypha modules (content, campaign+Mission 1, bridge+Big Picture, intel) →
-Missions 2–16. In parallel: keep filing Strang book pages (Chapter 1 next) into
-`homeworld/algebra/`.
+**Next packages (NT/Apocrypha):** (1) ✅ forge → (2) ✅ helm → (3) ✅ fleet (12/12)
+→ (4) ✅ **app.py wiring** built (Nir play-testing) → then **content loader + real
+ship meshes** → **bridge** (Navigator's mouse console — 2nd player) → **campaign +
+Mission 1** (minute-by-minute script) → Missions 2–16. In parallel: keep filing Strang
+book pages (Chapter 1 next) into `homeworld/algebra/`.
 
 **Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
@@ -57,11 +57,12 @@ file that arrives with `from .` / `-m` is converted to flat absolute imports on 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-5 — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-6 — WORKING
+homeworld/app.py — THE GAME SHELL (root): wires forge+helm+fleet; shakedown scenario (mothership + 3 fighters + keyboard combination-order console: ghost legs/arrow, commit, diagonal/staged, TAB select, camera). Runs `python app.py` (RULE #0 sys.path bootstrap added to import the flat packages). (NT step 9) — WORKING (awaiting Nir play-test)
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
-homeworld/run.bat — double-click launcher (runs `python forge\demo.py`) — WORKING
-homeworld/settings.json — human-editable config (v0.4.0; title, size, vsync, bloom_strength, exposure, seed, input) — WORKING
+homeworld/run.bat — double-click launcher (runs `python app.py` — the real game shell) — WORKING
+homeworld/settings.json — human-editable config (v0.5.0; title, size, vsync, bloom_strength, exposure, seed, input) — WORKING
 homeworld/forge/__init__.py — forge package exports (Forge, PULSE_DT, Camera, full VObject vocabulary) — WORKING
 homeworld/forge/app.py — Forge class: window, GL, 10 Hz loop, scene FBO -> panels -> labels -> bloom -> screen overlay (fps, F1) — WORKING
 homeworld/forge/camera.py — Camera: ORBIT mode + look_at/perspective math (NT 1.3) — WORKING
@@ -115,12 +116,16 @@ helm.demo — CONFIRMED on owner's machine (Nir tried every key: mapped-key pres
 actions; held-axis W with W+S cancel; TAB / SHIFT+TAB select; mouse pointer/buttons; wheel;
 unmapped key = no crash — all as designed). helm is DONE.
 fleet.demo — DeepSeek verified **FLEET SELF-TEST PASSED (12/12)** via `python fleet\demo.py`
-(headless, no window); awaiting Nir's own console run. Each PASS line re-proves a Bible worked
+(headless, no window); Nir confirmed 12/12. Each PASS line re-proves a Bible worked
 example through the real referee (shield solve, jamming/nullspace, gate determinant, weak-axis
 targeting, SVD energy, determinism, performance floor).
+app.py (run.bat) — the first PLAYABLE build: wiring imports verified by DeepSeek; awaiting
+Nir's play-test (compose c1*e1+c2*e2+c3*e3, ENTER to commit, watch squad fly; X toggles
+diagonal vs staged path — Bible mechanic 2.1). Feel-knobs: COEFF_RATE=2.0, COEFF_SNAP=0.5.
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — NT step 9: app.py wiring — forge+helm+fleet, shakedown scenario with combination orders — by Parent Fable (via DeepSeek; RULE #0 sys.path bootstrap so `python app.py` works with the flat packages, no -m; wiring imports verified)
 July 5, 2026 — NT steps 6-7: fleet core (referee, orders, events, sim, snapshot) + 12-line self-test — by Parent Fable (via DeepSeek; dropped in Quake-style flat absolute imports; 12/12 verified)
 July 5, 2026 — Converted Homeworld to Quake-style: flat absolute imports everywhere, run `python <file>.py` (NEVER `-m`); fixed run.bat + all docstrings + WORKFLOW/COMMENTARIES — by DeepSeek (Nir's order; Nir never agreed to `-m`)
 July 5, 2026 — NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo) — by Parent Fable (via DeepSeek)
