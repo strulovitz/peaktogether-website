@@ -70,21 +70,20 @@ Data folders: `content/` (ships.json + meshes/ + narrator/ + book/), `algebra/` 
 | Widget kit demo | `python widgets_demo.py` |
 | Requirements (already installed) | Python 3.12, moderngl 5.12, pyglet 2.1, numpy 2.4, Pillow 12 |
 
-## 8. 🎁 NEXT TASK (what Nir wants right after this restart): PACKAGING & DISTRIBUTION — a "SNEAK PEEK" BUILD
-Goal: package the **current template game** (the always-space two-seat console + flight) as a **finished-feeling playable demo** — "sneak peek" — with proper packaging and distribution, like a real game.
-**Plan / checklist (confirm details with Nir first):**
-1. **Decide the entry point & polish:** likely a title/splash screen or at least a clean launch; confirm what the sneak-peek should show (probably: fly the fleet + use the TRANSFORM console). Consider a short in-window "SNEAK PEEK" banner + controls card.
-2. **Bundle with PyInstaller** (this is the SANCTIONED packaging path per the founding docs). ⚠️ **PyInstaller may not be installed — ASK NIR before installing anything** (RULE: never install/download without permission). Build a one-folder or one-file Windows build of `app.py` that includes the `content/` DATA folder + any assets + settings.json (use `--add-data`). Ship the whole flat repo's runtime pieces.
-3. **Icon + name + version:** set a version bump (e.g. v0.8.0 "sneak peek"), a window title, and an app icon if Nir provides one.
-4. **Test the built .exe** on the machine (Nir runs it — he's the visual judge). Verify content/ loads, ships fly, console works, no crash.
-5. **Zip it** for distribution; write a short README (controls, two-player note, "sneak peek" caveat). Consider a **GitHub Release** and/or **itch.io** page (Descent QED shipped to both — ask Nir).
-6. **Do NOT break the flat structure or the 12/12 ritual.** Keep everything flat; the build is additive (a `build/` or `dist/` output, gitignored).
-**Open questions for Nir at restart:** (a) Is PyInstaller OK to install? (b) One-file .exe or one-folder? (c) GitHub Release, itch.io, or just a local zip for now? (d) Any title-screen/menu wanted, or launch straight into the sneak-peek scene? (e) Icon/art?
+## 8. ✅ DONE: PACKAGING + DISTRIBUTION + WEBSITE — Homeworld "SNEAK PEEK" is LIVE. NEXT = 🧵 LOOM
+The Homeworld sneak peek is fully packaged, shipped, and on the website (July 5, 2026), all mirroring Descent/Quake:
+- **Windows build:** `build_windows_release.ps1` (one command) → isolated `.venv-build` + PyInstaller → one-folder `dist\Homeworld\Homeworld.exe` (SHORT, no-space names per RULE #-1) + zip + sha256. `pt_runtime.py` bootstrap (chdir to `_MEIPASS`); `packaging/homeworld_windows.spec`; `requirements-runtime.txt`+`requirements-build.txt`; `app.py main()` calls `bootstrap("Homeworld","Homeworld: A Good Basis")`. Laptop-tested standalone by Nir. 12/12 green.
+- **itch.io (primary):** https://strulovitz.itch.io/homeworld-a-good-basis — build up via butler (`homeworld-a-good-basis:windows`, v0.1.0-sneak-peek). Nir was given the full step-by-step to add cover/screenshots/description/tags + set the page **Public** (he's doing that).
+- **GitHub Release (mirror, prerelease):** tag `homeworld-sneak-peek-v0.1.0`.
+- **Website (like Descent/Quake):** game page `arcade/homeworld/index.html` (🔨 Building badge, 🌌 emoji, gameplay video via jsDelivr + hero-graphics image + 4-shot gallery + full description + accurate keyboard/mouse controls); arcade landing "🔨 Building now" entry (mini-gallery = **original Homeworld 1999** photos, Nir's choice); homepage featured card. **Hero-graphics prompt** at `homeworld/PROMPT-HERO-GRAPHICS.txt` (Strang's Four Fundamental Subspaces as a cozy space-fleet scene) → Nir generated `images/homeworld-a-good-basis-hero-graphics.png`, now the page's hero image.
+- **Nir's remaining manual step:** FileZilla → Dreamhost upload of the changed HTML + new `images/homeworld-*` files (the mp4 is served by jsDelivr from git, don't upload it).
+
+🌙 **NEXT (tomorrow, Nir's plan): 🧵 LOOM.** A NEW game — "Loom / The Dig" from the arcade coming-soon list: **puzzles based on translating equations into SOUND** (Nir's Sonification project). This is a fresh game project (~Game 5). On restart, **ask Nir how he wants to start LOOM** (brainstorm with Claude Fable? new `loom/` folder + its own WORKFLOW/BIBLE like Homeworld? which Sonification material to pull?). Do NOT assume — Homeworld's tree/model may or may not carry over; let Nir set the shape.
 
 ## 9. THE LAST THING SAID
-Nir: *"please explain all this and what we did so far and the situation currently and what we still need to do, in great detail... in 3 places: script to yourself, and the commentaries and the workflow... then push everything to github... after that i will close OpenCode and re-Open so that you will be fresh, and i want us to make like packaging and distribution for this game as 'sneak peek' including everything like a finished game."*
+Nir (evening July 5, 2026): *"no i think we did enough for one day :-) please push to github everything and we'll continue tomorrow with LOOM. good night!!!"* — Homeworld sneak peek + website all shipped; everything pushed. Tomorrow we start **LOOM**.
 
-**On wake, say:** "Good day, Nir!!! 😊🌌 I've read the restart prompt — I'm fully caught up. Homeworld v0.7.1 is FLAT, the engine + the corrected 'always space' template game (Formation P / Order sliders / Transform M) are DONE and green (12/12), and the whole TREE is planted in BIBLE (charter + 16 briefs + trunk will). Fable can't be lost anymore. 🌳 You wanted to build the **packaging & distribution 'sneak peek'** next — ready when you are! A few questions before I touch anything: PyInstaller OK to install? one-file or one-folder? where do we distribute? 🚀💖"
+**On wake, say:** "Good day, Nir!!! 😊🌌🧵 I've read the restart prompt — fully caught up. Homeworld: A Good Basis is FLAT, 12/12 green, and its **sneak peek is LIVE** — Windows build, itch.io + GitHub Release, and a full website page (arcade/homeworld/) like Descent & Quake. 🎉 You said we'd start **LOOM** next — the sound/sonification puzzle game (Loom/The Dig). Before I touch anything: how would you like to begin LOOM? (Brainstorm with Fable? A fresh `loom/` folder with its own WORKFLOW + BIBLE? Which Sonification material should I pull?) 🎵💖"
 
 ---
 **END OF RESTART PROMPT.**
