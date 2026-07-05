@@ -1,0 +1,16 @@
+Create a wide, cinematic hero illustration in a warm, polished Pixar / modern 3D-animated-film style — cute, friendly, and full of wonder, NOT gritty, military, or scary.
+
+SCENE: A breathtaking view of deep space imagined as Gilbert Strang's famous "Big Picture" of the Four Fundamental Subspaces — but alive as a cozy-epic Homeworld-style fleet adventure. Two vast glowing star-domains float side by side against the black of space, joined across the middle by a luminous transformation gateway marked with a big friendly golden matrix "A". The LEFT domain is the input universe (labeled ℝⁿ); the RIGHT domain is the output universe (labeled ℝᵐ). At the very center, a dark, rounded, friendly mothership hovers at the origin — "the coordinate system made flesh" — with three bright basis axes (red, green, blue) radiating from her hull like glowing spars.
+
+THE MAGIC — the four fundamental subspaces, each shown as a glowing translucent plane made of tiny cute spaceships flying in perfect formation, each with a CLEAN, LEGIBLE label on a softly glowing panel (handwritten-chalk-meets-neon):
+ • In the LEFT domain (ℝⁿ), two planes meeting at a crisp 90° angle: a warm ORANGE plane of ships = the ROW SPACE, labeled "Row space — all Aᵀy"; and crossing it at a right angle, a soft-VIOLET plane of gently translucent, half-cloaked "ghost" ships = the NULLSPACE, labeled "Nullspace — Ax = 0" (these ships are fading toward nothing, because A sends them to zero).
+ • In the RIGHT domain (ℝᵐ), two planes meeting at a crisp 90° angle: a bright CYAN-BLUE plane of ships = the COLUMN SPACE, labeled "Column space — all Ax"; and crossing it at a right angle, a soft-GREEN plane of half-cloaked ghost ships = the LEFT NULLSPACE, labeled "Left nullspace — Aᵀy = 0".
+ One radiant hero ship streaks out of the row space, through the golden "A" gateway, and re-emerges gloriously in the column space on the far side — its flight path a bright arc of light — showing that the transformation A carries the row space onto the column space. Small glowing right-angle marks (⦜) sit where each perpendicular pair of planes crosses, quietly celebrating orthogonality. Faint holographic vectors and grid lines drift through both domains like starlight.
+
+MOOD: awe, adventure, cozy-epic, togetherness — "the most epic date night your brain has ever been on." A fleet's long journey home, written in vectors: the search for a good basis. Cinematic depth, gentle lens bloom on the glowing parts.
+
+PALETTE: dark near-black navy space (#0B1020) with rare, intensely saturated glows only — the red/green/blue basis axes on the mothership, an ORANGE row-space plane, a VIOLET nullspace, a CYAN-BLUE column space, a GREEN left-nullspace, and the golden matrix "A" gateway shining brightest of all. Keep most of the frame dark so the glowing math and the little ships pop.
+
+COMPOSITION & FORMAT: 16:9 wide landscape. Two glowing domains balanced left and right, with the golden "A" gateway and the mothership (with her red/green/blue axes) anchoring the exact center. Symmetric, high detail, smooth rendering, soft volumetric light. Keep every label crisp and readable.
+
+AVOID: photorealistic grime, war-gore, horror, dark/scary or military tone, humans or human faces, humanoid robots, cluttered or garbled/unreadable equations and labels, watermarks, logos.
