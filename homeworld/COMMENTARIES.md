@@ -35,9 +35,8 @@ AWAITING Nir's console confirmation of `python helm\demo.py` (six input behavior
 Requirements already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0,
 pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
 
-**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** built
-(keyboard=Pilot + mouse=Navigator action layer + demo; Nir confirming) → (3) **fleet**
-(ships as matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
+**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** built +
+CONFIRMED by Nir (every key works) → (3) **fleet** (ships as matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
 `fleet.demo` = 12/12) → (4) **app.py wiring** = three ships flying combination
 orders (Mission 1 buildable) → then Apocrypha modules (content, campaign+Mission 1,
 bridge+Big Picture, intel) → Missions 2–16. In parallel: keep filing Strang book
@@ -98,9 +97,9 @@ mappers. Next module: fleet.
 forge.demo — CONFIRMED on owner's machine — WORKING (Nir's eyes: text readable in
 Consolas; determinant box flat when vol 0.00). Requirements already installed:
 numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0; run via run.bat.
-helm.demo — built; awaiting owner's console test (`python helm\demo.py`): six
-behaviors (mapped-key press/release actions; held-axis W with W+S cancel; TAB /
-SHIFT+TAB select; mouse pointer/buttons; wheel; unmapped key = no crash).
+helm.demo — CONFIRMED on owner's machine (Nir tried every key: mapped-key press/release
+actions; held-axis W with W+S cancel; TAB / SHIFT+TAB select; mouse pointer/buttons; wheel;
+unmapped key = no crash — all as designed). helm is DONE.
 fleet.demo — not built yet (self-test target: 12/12).
 bridge.demo / campaign.demo / intel.demo — not built yet.
 

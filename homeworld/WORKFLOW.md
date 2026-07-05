@@ -75,8 +75,8 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 
 ## 5. CURRENT SITUATION (July 5, 2026)
 - ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
-- ✅ **helm is COMPLETE** — NT step 5 (Fable deliverable 4): `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json bumped v0.3.0 → v0.4.0 (adds `input` section). All syntax-checked, committed with Fable's exact message, pushed.
-- ⏳ **AWAITING Nir's console confirmation** of `python helm\demo.py` (NOT run.bat — run.bat still launches forge). Six behaviors to verify: mapped-key actions, held-axis W (W+S cancel), TAB/SHIFT+TAB select, mouse pointer/buttons, wheel, unmapped key = no crash.
+- ✅ **helm is COMPLETE + CONFIRMED by Nir** — NT step 5 (Fable deliverable 4). Nir tried every key: all mapped actions, W+S cancel, TAB/SHIFT+TAB select, mouse pointer/buttons/wheel, unmapped key = no crash. Runs Quake-style: `python demo.py` from inside `helm\`. `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json v0.4.0 (adds `input` section).
+- ⏳ **NEXT: fleet** (NT Part 3) — the simulation core. Nir to tell Fable "helm confirmed, every key works — go build fleet." Target: `python demo.py` (from inside `fleet\`) prints **FLEET SELF-TEST PASSED (12/12)**.
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
 
 ## 6. WHAT STILL NEEDS TO BE DONE (the road ahead)
