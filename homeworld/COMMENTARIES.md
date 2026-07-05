@@ -79,6 +79,8 @@ homeworld/shaders.py — GLSL: line ribbon + bloom pipeline + textured-quad (tex
 homeworld/bloom.py — Bloom: 3-FBO classic bloom (RGBA16F scene, downsample, Gaussian, composite + tone map) (NT 1.6) — WORKING
 homeworld/text.py — GlyphAtlas + TextRenderer (3D labels + screen overlay) + PanelRenderer (ImagePanels) (NT 1.7) — WORKING
 homeworld/vobjects.py — FULL primitives: Line, Arrow, DashedLine, Grid, WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel (NT 1.4) — WORKING
+homeworld/overlay2d.py — 2D screen-space UI layer (INTERFACES v1.1, B1): Rect2D/Line2D/Label2D/Image2D items + Overlay2D renderer (own shader OVERLAY2D_VERT/FRAG, standard alpha blend, painter's algorithm, text_width helper). Wired into Forge (.overlay2d, drawn after bloom, before HUD) — WORKING
+homeworld/demo2d.py — 2D overlay acceptance demo (was forge/demo2d.py): console mock-up (panel, slider, clock, 2 images) over a 3D world; run `python demo2d.py` — WORKING
 homeworld/batches.py — CPU segment->camera-facing-ribbon expansion (+ per-segment color for Trail), vectorized numpy (NT 1.5) — WORKING
 homeworld/forge_demo.py — FULL forge acceptance demo: trail, floating text, flattening det box, live SVD image panel, ellipsoid, F1 overlay (NT Part 6) — WORKING (confirmed by Nir)
 homeworld/helm.py — Helm orchestrator (was helm/__init__.py): pilot+navigator device factory (settings-driven), .attach/.poll/.poll_axes_only, graceful fallback to keyboard/mouse (NT 2.3) — WORKING
@@ -104,6 +106,7 @@ live), .screenshot, .run(tick_cb, frame_cb); Camera .set_orbit, .orbit_input,
 .eye, .view, .proj; the FULL VObject vocabulary (Line, Arrow, DashedLine, Grid,
 WireSphere, WireMesh, SpannedBox, Ellipsoid, Trail, Label, ImagePanel); bloom;
 glyph-atlas text (3D labels + screen overlay).
+INTERFACES v1.1 (owner-approved via APOCRYPHA 3.1): forge/overlay2d.py adds the entire 2D UI vocabulary — Rect2D(x,y,w,h,color,filled=False), Line2D(x0,y0,x1,y1,color), Label2D(text,x,y,px=16,color), Image2D(image,x,y,w,h) — all with .visible/.color/.set_color, window-pixel coords, origin bottom-left; setters set_rect/set_points/set_text/set_pos/set_image; Rect2D/Line2D have .thickness (px). Renderer Overlay2D(ctx, atlas): add/remove/clear/text_width(text,px)/draw(w,h). Forge gains .overlay2d, drawn after bloom composite, before HUD text, standard alpha blending, insertion-order painter's algorithm. No further UI primitives without amendment. (Delivered flat per RULE #0: overlay2d.py + demo2d.py, run `python demo2d.py`.)
 helm is COMPLETE (NT 2.2/2.3, ACTIONS_VERSION 1): Helm(settings), .attach(window),
 .poll() -> (events, axes, pointer) once per PULSE, .poll_axes_only() once per FRAME;
 ActionEvent(action, value), PointerState(x, y, primary, secondary, wheel); the frozen
@@ -134,6 +137,7 @@ content_demo.py — DeepSeek verified **CONTENT CHECK PASSED** (5 classes, 5 mes
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — forge: add 2D overlay layer (INTERFACES v1.1, bridge B1) — Rect2D/Line2D/Label2D/Image2D + Overlay2D renderer + demo2d acceptance demo — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/overlay2d.py→overlay2d.py, forge/demo2d.py→demo2d.py, demo imports→flat, run `python demo2d.py`; two wiring insertions into forge.py: import + self.overlay2d in __init__ + self.overlay2d.draw(w,h) after bloom composite/before HUD; fleet 12/12 still green)
 July 5, 2026 — Amendment A1.1: ships never bloom (dual render targets — solid buffer untouched + glow buffer feeds bloom only), dark mothership at origin (0,0,0), overlay axes (10-unit long e1/e2/e3 drawn on top of hulls with depth test off), engine nozzles = dim lamps (<1 emissive, no HDR), mothership color steel-blue [0.45,0.55,0.7] — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*→flat; settings v0.7.1; 12/12 still green)
 July 5, 2026 — Amendment A1 recorded into the SCRIPTURES: add-only "⚖️ OWNER AMENDMENTS (READ FIRST)" banner at the top of the Old Testament + New Testament + Apocrypha (solid ships override the wireframe/holographic aesthetic; Fable's text kept verbatim below) — by DeepSeek (Nir's instruction: owner amendments belong in the Bible, not only notes/COMMENTARIES)
 July 5, 2026 — AMENDMENT A1: solid shaded ships — mesh shader, depth pipeline, procedural shipwright — by Parent Fable (via DeepSeek; flattened per RULE #0: forge/*.py→root, content/shipwright.py→shipwright.py, forge/__init__ dropped; all 5 ships build headlessly)

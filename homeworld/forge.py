@@ -28,6 +28,7 @@ from bloom import Bloom
 from solid import SolidMesh, SolidRenderer
 from text import GlyphAtlas, TextRenderer, PanelRenderer, make_quad_program
 from vobjects import Label, ImagePanel
+from overlay2d import Overlay2D
 
 PULSE_DT = 0.1
 _INITIAL_VBO_BYTES = 4 * 1024 * 1024
@@ -68,6 +69,7 @@ class Forge:
         self._atlas = GlyphAtlas(self.ctx, px=48)
         self._text = TextRenderer(self.ctx, self._atlas, self._quad_prog)
         self._panels = PanelRenderer(self.ctx, self._quad_prog)
+        self.overlay2d = Overlay2D(self.ctx, self._atlas)
 
         self.camera = Camera()
         self._vobjects = []
@@ -206,6 +208,9 @@ class Forge:
 
         # ---- bloom (glow buffer only) -> screen ----
         self._bloom.apply(self.ctx.screen, w, h)
+
+        # ---- 2D UI overlay (INTERFACES v1.1) — before HUD so fps/F1 stay on top ----
+        self.overlay2d.draw(w, h)
 
         # ---- crisp HUD overlay ----
         self.ctx.disable(moderngl.DEPTH_TEST)

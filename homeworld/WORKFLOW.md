@@ -304,3 +304,13 @@ Parent 1's OpenRouter context filled up. Before starting Parent 2, Nir salvaged 
 - **All code FLAT** — 26+ .py siblings in homeworld/, `python app.py` runs clean, no `-m`, no packages
 - **BIBLE folder:** 2 brainstorms + OT v2.1 + NT v1.0 + Apocrypha v1.0 + Book of Prompts + 9 Fable deliverables + Ten Commandments v1.0 + Parent 1→2 Handoff
 - **NEXT: Parent 2 — bridge (Navigator's mouse console + 2nd player joins).** Parent 1 already wrote the handoff. On restart, Nir launches Parent 2.
+
+### July 5, 2026 — Filenames de-spaced + Parent 2 launched + bridge B1 (2D overlay) delivered
+1. **Renamed all files with spaces → hyphens** (17 BIBLE docs + 2 `chapter 1` folders), pushed (commit `892f2c4`). Added permanent RULE: never spaces in filenames (commit `ea44718`).
+2. **Parent 1 died twice on launch** (flat-structure confusion). Nir's fix: relaunch fresh, DON'T mention flat to the parent, DeepSeek silently flattens every delivery.
+3. **Parent 2 (fresh Fable) launched** — approved INTERFACES v1.1, Mission 1 = "Kharak Burns" (2e1+3e2, documents win over the hand-off's mis-memory), loose ends all noted (no action). Parent 2 split bridge into B1 (2D overlay) → B2 (widget kit) → B3 (FLEET ZONE console).
+4. **Answered Parent 2's Batch-1 surgical questions** from the real repo (render pipeline order, text/atlas signatures, shader names, blend gotcha, versions).
+5. **B1 DELIVERED — the 2D overlay (INTERFACES v1.1).** Saved verbatim to `BIBLE/FABLE-DELIVERABLE-10-2D-overlay-INTERFACES-v1.1-(B1).md`. Flattened per RULE #0: `forge/overlay2d.py`→`overlay2d.py`, `forge/demo2d.py`→`demo2d.py` (imports→flat: `from forge import Forge` etc., fallback deleted, run `python demo2d.py`). Two wiring insertions into `forge.py`: import Overlay2D + `self.overlay2d = Overlay2D(self.ctx, self._atlas)` in `__init__` + `self.overlay2d.draw(w, h)` in `_render` after bloom composite, before HUD.
+6. **Verified:** py_compile OK (overlay2d/demo2d/forge); imports resolve; `python fleet_demo.py` → **12/12 GREEN**. (GUI demo is Nir's visual judgment — can't self-run.)
+7. Recorded INTERFACES v1.1 in COMMENTARIES (interfaces + file index + change log). Committed with Fable's exact message + pushed.
+8. ⏳ **Nir to run `python demo2d.py`** and REPORT BACK to Fable: (1) runs without crashlog? (2) panel crisp/text sharp? (3) resize behaves? (4) old demos still pass? (5) gamer-feel on panel darkness (one-number knob 0.75 in panel_bg). Then B2 = widgets.py.
