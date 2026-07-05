@@ -28,19 +28,21 @@ Doctrine), Book of Prompts (birth-prompt templates), 2 brainstorms, and one
 "FABLE DELIVERABLE N" file per code package.
 
 **Current state (July 5, 2026):** **forge is FEATURE-COMPLETE** (confirmed by Nir's
-own eyes: text readable, det box flat at vol 0.00) and **helm is COMPLETE** (NT step
-5 = Fable deliverable 4: actions + keyboard+mouse mappers + joystick/gamepad stubs +
-demo). All syntax-checked (py_compile), committed with Fable's exact messages, pushed.
-AWAITING Nir's console confirmation of `python helm\demo.py` (six input behaviors).
-Requirements already installed on Nir's machine: numpy 2.4.6, moderngl 5.12.0,
-pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
+own eyes: text readable, det box flat at vol 0.00), **helm is COMPLETE** (confirmed —
+every key works), and **fleet is COMPLETE** (NT steps 6-7 = Fable deliverable 5:
+referee + orders + events + ships + snapshot + sim + 12-line self-test). fleet's
+headless self-test prints **FLEET SELF-TEST PASSED (12/12)** — verified by DeepSeek,
+awaiting Nir's own console run. All syntax-checked (py_compile), committed with
+Fable's exact messages, pushed. Requirements already installed on Nir's machine:
+numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0 (never install without asking).
 
-**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** built +
-CONFIRMED by Nir (every key works) → (3) **fleet** (ships as matrix columns + 10 Hz pulse + orders/events + **referee.py**; target
-`fleet.demo` = 12/12) → (4) **app.py wiring** = three ships flying combination
-orders (Mission 1 buildable) → then Apocrypha modules (content, campaign+Mission 1,
-bridge+Big Picture, intel) → Missions 2–16. In parallel: keep filing Strang book
-pages (Chapter 1 next) into `homeworld/algebra/`.
+**Next packages (NT build order):** (1) ✅ forge confirmed → (2) ✅ **helm** confirmed
+→ (3) ✅ **fleet** built (12/12 self-test green; Nir confirming) → (4) **app.py wiring**
+(NT build step 9) = bind forge + helm + fleet → three glowing ships fly a combination
+order on screen, commanded by the keyboard (Mission 1 becomes buildable) → then
+Apocrypha modules (content, campaign+Mission 1, bridge+Big Picture, intel) →
+Missions 2–16. In parallel: keep filing Strang book pages (Chapter 1 next) into
+`homeworld/algebra/`.
 
 **Books filed so far (`homeworld/algebra/`):** Linear Algebra for Everyone preface
 iii–xii (+ combined `preface.txt`); Introduction to Linear Algebra preface iii–x
@@ -55,7 +57,7 @@ file that arrives with `from .` / `-m` is converted to flat absolute imports on 
 ## FILE INDEX
 homeworld/WORKFLOW.md — DeepSeek's project memory (what we did, current state, road ahead, standing rules) — WORKING
 homeworld/COMMENTARIES.md — this file: the living repository memory (Fable's Part-5 format) — WORKING
-homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-4 — WORKING
+homeworld/BIBLE/ — verbatim scriptures (OT/NT/Apocrypha/Book of Prompts) + 2 brainstorms + Fable deliverables 1-5 — WORKING
 homeworld/algebra/ — Strang book OCR: everyone/ (preface iii-xii + preface.txt) + introduction/ (preface iii-x + preface.txt), each with an empty chapter 1/ — WORKING
 homeworld/requirements.txt — Python dependencies (numpy, moderngl, pyglet, Pillow) — WORKING
 homeworld/run.bat — double-click launcher (runs `python forge\demo.py`) — WORKING
@@ -75,7 +77,15 @@ homeworld/helm/keyboard_map.py — KeyboardMapper (Pilot baseline): frozen defau
 homeworld/helm/mouse_map.py — MouseMapper (Navigator baseline): PointerState (x/y/primary/secondary/wheel), pyglet-native bottom-left origin (NT 2.2) — WORKING
 homeworld/helm/joystick_map.py — JoystickMapper STUB (NotImplementedError + full T16000M impl instructions; sanctioned DeepSeek future work, NT 2.5) — STUB
 homeworld/helm/gamepad_map.py — GamepadMapper STUB (NotImplementedError + full Xbox impl instructions; sanctioned DeepSeek future work, NT 2.5) — STUB
-homeworld/helm/demo.py — helm acceptance demo: 10 Hz poll loop printing actions/axes/pointer/wheel to console (NT Part 6) — WORKING (awaiting owner's console test)
+homeworld/helm/demo.py — helm acceptance demo: 10 Hz poll loop printing actions/axes/pointer/wheel to console (NT Part 6) — WORKING (confirmed by Nir)
+homeworld/fleet/__init__.py — fleet package exports: referee, FleetSim, Ship, Event, FleetSnapshot, all 12 order types (NT Part 3) — WORKING
+homeworld/fleet/referee.py — THE REFEREE: canonical NumPy verdict fns (rank, is_solvable, residual, least_squares, nullspace_basis, in_nullspace, spanned_volume, real_eigen_axis, weak_axis, gram_penalty, cr_factor, svd_partial) — the game's math conscience (NT 3.6) — WORKING
+homeworld/fleet/orders.py — THE FROZEN ORDER TYPES v1: MoveCombination, Trim, SetIntake, FireSolution, LeastSquaresFire, GramSchmidtDrill, RowOperation, BackSubstitute, BuildShip, JamStation, AssignSquad (NT 3.3) — WORKING
+homeworld/fleet/events.py — THE FROZEN EVENT TYPES v1: Event(kind, data) + the frozen kind list (NT 3.4) — WORKING
+homeworld/fleet/ships.py — Ship dataclass + BUILTIN_CLASSES placeholder table (mothership/fighter/corvette/collector/frigate) + get_class (NT 3.2) — WORKING
+homeworld/fleet/snapshot.py — FleetSnapshot (frozen, copied arrays) + copy_context; the read-only view forge/bridge read (NT 3.5) — WORKING
+homeworld/fleet/sim.py — FleetSim: the 9-phase fixed-order 10 Hz pulse (prev_pos, orders, movement, drills, harvest, combat, sensors, structure, events) + snapshot/save/load; deterministic (own RNG) (NT 3.5) — WORKING
+homeworld/fleet/demo.py — fleet headless self-test: re-proves 12 Bible worked examples through referee+sim, prints FLEET SELF-TEST PASSED (12/12) (NT Part 6) — WORKING (12/12, awaiting owner's run)
 
 ## INTERFACES
 INTERFACES.md not yet committed as a standalone file. Frozen contracts in force
@@ -90,8 +100,12 @@ helm is COMPLETE (NT 2.2/2.3, ACTIONS_VERSION 1): Helm(settings), .attach(window
 ActionEvent(action, value), PointerState(x, y, primary, secondary, wheel); the frozen
 action list PILOT_AXES (CAM_YAW/PITCH/ZOOM, TRIM_X/Y/Z) + PILOT_BUTTONS + SYSTEM_BUTTONS.
 Keyboard (Pilot) + mouse (Navigator) live; joystick/gamepad are stubs (NT 2.5).
+fleet is COMPLETE (NT Part 3): FleetSim(seed, content=None) with .submit(order), .tick(dt)
+-> [events], .snapshot() -> FleetSnapshot, .spawn/.install_context/.set_engine_vectors,
+.save(path)/.load(path); referee module (frozen verdict fns, TOL_RANK/TOL_RESIDUAL/TOL_IMAG);
+12 frozen order types; Event(kind, data); Ship + BUILTIN_CLASSES. Deterministic 9-phase pulse.
 Not yet implemented (later packages): FOLLOW/POV camera modes; joystick/gamepad
-mappers. Next module: fleet.
+mappers. Next: app.py root wiring (forge + helm + fleet).
 
 ## DEMO STATUS
 forge.demo — CONFIRMED on owner's machine — WORKING (Nir's eyes: text readable in
@@ -100,10 +114,14 @@ numpy 2.4.6, moderngl 5.12.0, pyglet 2.1.14, Pillow 12.2.0; run via run.bat.
 helm.demo — CONFIRMED on owner's machine (Nir tried every key: mapped-key press/release
 actions; held-axis W with W+S cancel; TAB / SHIFT+TAB select; mouse pointer/buttons; wheel;
 unmapped key = no crash — all as designed). helm is DONE.
-fleet.demo — not built yet (self-test target: 12/12).
+fleet.demo — DeepSeek verified **FLEET SELF-TEST PASSED (12/12)** via `python fleet\demo.py`
+(headless, no window); awaiting Nir's own console run. Each PASS line re-proves a Bible worked
+example through the real referee (shield solve, jamming/nullspace, gate determinant, weak-axis
+targeting, SVD energy, determinism, performance floor).
 bridge.demo / campaign.demo / intel.demo — not built yet.
 
 ## CHANGE LOG (newest first, keep the last ~30 entries)
+July 5, 2026 — NT steps 6-7: fleet core (referee, orders, events, sim, snapshot) + 12-line self-test — by Parent Fable (via DeepSeek; dropped in Quake-style flat absolute imports; 12/12 verified)
 July 5, 2026 — Converted Homeworld to Quake-style: flat absolute imports everywhere, run `python <file>.py` (NEVER `-m`); fixed run.bat + all docstrings + WORKFLOW/COMMENTARIES — by DeepSeek (Nir's order; Nir never agreed to `-m`)
 July 5, 2026 — NT step 5: helm complete (actions, keyboard+mouse mappers, joystick/gamepad stubs, demo) — by Parent Fable (via DeepSeek)
 July 4, 2026 — NT step 4: text (glyph atlas) + remaining primitives — forge feature-complete — by Parent Fable (via DeepSeek)

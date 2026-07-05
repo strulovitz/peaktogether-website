@@ -76,14 +76,15 @@ Built across NT build steps 1–4 (Fable's deliverables 1–3):
 ## 5. CURRENT SITUATION (July 5, 2026)
 - ✅ **forge is FEATURE-COMPLETE + CONFIRMED by Nir** — deliverables 1–3 applied; Nir's eyes confirmed: text readable (Consolas), det box flat at `vol 0.00`.
 - ✅ **helm is COMPLETE + CONFIRMED by Nir** — NT step 5 (Fable deliverable 4). Nir tried every key: all mapped actions, W+S cancel, TAB/SHIFT+TAB select, mouse pointer/buttons/wheel, unmapped key = no crash. Runs Quake-style: `python demo.py` from inside `helm\`. `helm/` package = actions.py (frozen action list v1), keyboard_map.py (Pilot), mouse_map.py (Navigator), joystick_map.py + gamepad_map.py (stubs w/ full impl instructions), __init__.py (Helm orchestrator), demo.py. settings.json v0.4.0 (adds `input` section).
-- ⏳ **NEXT: fleet** (NT Part 3) — the simulation core. Nir to tell Fable "helm confirmed, every key works — go build fleet." Target: `python demo.py` (from inside `fleet\`) prints **FLEET SELF-TEST PASSED (12/12)**.
+- ✅ **fleet is COMPLETE** — NT steps 6-7 (Fable deliverable 5). `fleet/` package = referee.py (canonical NumPy verdict fns — the math conscience), orders.py (12 frozen order types), events.py (frozen Event), ships.py (Ship + BUILTIN_CLASSES), snapshot.py (FleetSnapshot), sim.py (FleetSim — deterministic 9-phase 10 Hz pulse), demo.py (headless self-test), __init__.py. **DeepSeek verified `python fleet\demo.py` prints FLEET SELF-TEST PASSED (12/12).** Dropped in Quake-style (flat absolute imports, no `-m`). ⏳ Awaiting Nir's own console run.
+- ⏳ **NEXT: app.py wiring** (NT build step 9) — bind forge + helm + fleet at the repo root → three glowing ships fly a combination order on screen, commanded by the keyboard. That's when Mission 1 becomes buildable. Nir to tell Fable "12/12 confirmed — go wire app.py."
 - The last thing before Nir restarts OpenCode: WORKFLOW.md + COMMENTARIES written; everything pushed.
 
 ## 6. WHAT STILL NEEDS TO BE DONE (the road ahead)
 Per the New Testament build order + Fable's stated plan:
 1. ⏳ **Nir confirms helm demo** (`python helm\demo.py`, report to Fable).
 2. ✅ **helm** (NT Part 2) — DONE. (joystick/Xbox mappers deferred — Fable's Book of Prompts + the stub docstrings flag these as my one sanctioned future coding task, ONLY when Nir explicitly invokes it.)
-3. **fleet** (NT Part 3) — the simulation core: ships as matrix columns, the 10 Hz pulse, orders, events, and **referee.py** (the canonical NumPy verdict functions). Target: `python fleet\demo.py` prints **12/12** self-test PASS.
+3. ✅ **fleet** (NT Part 3) — DONE. Ships as matrix columns, the 10 Hz pulse, orders, events, and **referee.py** (the canonical NumPy verdict functions). `python fleet\demo.py` prints **FLEET SELF-TEST PASSED (12/12)** (DeepSeek-verified; Nir confirming).
 4. **app.py wiring** (NT Part 4) — bind forge + helm + fleet → three ships flying combination orders live on screen (Bible Mission 1 becomes buildable).
 5. Then the APOCRYPHA modules: **content** loader, **campaign** runner + Mission 1, **bridge** console + Big Picture, **intel** narrator. Then Missions 2–16.
 6. Ongoing in parallel: keep filing Strang book pages (Chapter 1 next) into `homeworld/algebra/`.
@@ -135,3 +136,11 @@ Nir was (rightly) furious: I passed Fable's raw `python -m helm.demo` straight t
 5. **Verified**: both demos import-resolve as plain scripts (`python forge\demo.py`, `python helm\demo.py`); all 16 files py_compile OK; zero `from .` and zero `python -m` remain in any code/bat.
 6. **Added RULE #0** at the top of this file + updated §4/§7 standing rules: never `-m`, always flat absolute imports, always the full `cd` command, always convert Fable's future files on drop-in and tell Nir at the start.
 7. Updated COMMENTARIES.md + the BIBLE deliverable note accordingly. Committed + pushed.
+
+### July 5, 2026 — fleet built + 12/12 (NT steps 6-7)
+1. Applied Fable's **deliverable 5 = fleet core**. Saved verbatim to `BIBLE/FABLE DELIVERABLE 5 - fleet core (NT steps 6-7).md`.
+2. Created the `homeworld/fleet/` package — 8 files: referee.py, orders.py, events.py, ships.py, snapshot.py, sim.py, __init__.py, demo.py.
+3. **Dropped in Quake-style per RULE #0** — converted the 3 files with relative imports (sim.py, __init__.py, demo.py) to flat absolute imports (`import referee`, `from sim import FleetSim`, etc.). referee/orders/events/ships/snapshot had no relative imports.
+4. **Verified**: all 8 files py_compile OK; zero `from .` and zero `-m`; ran `python fleet\demo.py` → **FLEET SELF-TEST PASSED (12/12)**.
+5. Updated COMMENTARIES.md (state, file index, interfaces, demo status, change log) + this WORKFLOW.md. Committed with Fable's exact message + pushed.
+6. ⏳ Nir to run `python fleet\demo.py` and report "12/12" to Fable → then Fable wires app.py (forge+helm+fleet, Mission 1 buildable).
