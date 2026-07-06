@@ -17,7 +17,7 @@ def test_core_is_pygame_free():
         "import sys\n"
         "sys.path.insert(0, r'" + player + "')\n"
         "import core.spell_model, core.tuning, core.conductor, "
-        "core.audio, core.notation\n"
+        "core.audio, core.notation, core.echo_logic\n"
         "assert 'pygame' not in sys.modules, 'core/ pulled in pygame!'\n"
     )
     result = subprocess.run([sys.executable, "-c", code],

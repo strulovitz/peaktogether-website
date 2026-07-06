@@ -50,7 +50,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
           conductor.py                [MEAT]    THE HEART: playhead, scrub, triggers
           audio.py                    [MEAT]    AudioSink protocol + FakeAudioSink
           notation.py                 [MEAT]    notation_table.json lookups (staff)
-          echo_logic.py               [BONE M3] Echo puzzle state machine (pure)
+          echo_logic.py               [MEAT]    Echo puzzle state machine (pure, M3)
           choice_logic.py             [BONE M5] Choice puzzle logic (pure)
           lab_remap.py                [BONE M6] the frozen Lab arithmetic (NT I.4)
           pack_model.py               [BONE M7] pack.json loading/validation
@@ -62,6 +62,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
           bench_keyboard.py           [MEAT]    piano widget (click = sound)
           bench_staff.py              [MEAT]    staff renderer (noteheads only)
           bench_transport.py          [MEAT]    play/pause + timeline (scrub surface 1)
+          bench_buttons.py            [MEAT]    OK/Cancel bench buttons (M3, Parent 4)
           graph_view.py               [MEAT]    graph + its scrub surface (surface 2)
           helix_view.py               [BONE M4] demoscene wireframe helix
           story_view.py               [BONE M5] slides, captions, dialogue menus
@@ -100,6 +101,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
         test_input_mapper.py          [MEAT]    InputMapper key->action (M2)
         test_bench_fixtures.py        [MEAT]    generated fixture validation (M2)
         test_length_choice.py         [MEAT]    FIT-THE-BEAT sample-length rule (M2)
+        test_echo_logic.py            [MEAT]    Echo state machine behavior (M3)
       packs/                          (future Problem Packs live here)
       prompts/                        (Story Weaver prompt, per the Apocrypha)
 
@@ -146,3 +148,9 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
               (Fable wrote, not landed) -> Parent 4; notation_table.json still temporary.
 - 2026-07-06  LAYOUT FROZEN by Nir (played m2_demo, approved as-is; layout.py numbers are
               now permanent - do not move the keyboard/staff/etc).
+- 2026-07-06  M3 POUR 1 (Parent 4): core/echo_logic.py fattened -> MEAT with ADDITIVE read-only
+              accessors (reveal_mode, prefix_len, cursor, preview_midi, slot_states) for the
+              staff's solid/hollow/dashed slots; ui/bench_buttons.py born (BenchButton; OK must
+              be disabled unless a preview exists - commit() raises on wiring misuse). Hint-name
+              mapping: kind too_low -> pack hint_higher text, kind too_high -> pack hint_lower
+              text (crossed names, documented). +test_echo_logic.py (14 tests). 79 tests pass.
