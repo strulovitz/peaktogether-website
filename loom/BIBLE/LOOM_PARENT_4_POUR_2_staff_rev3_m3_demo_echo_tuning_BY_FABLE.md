@@ -1,0 +1,675 @@
+# LOOM — PARENT 4 (FABLE) — POUR 2 — VERBATIM, WORD-FOR-WORD, AS-IS, BY FABLE
+
+> Saved verbatim by DeepSeek at Nir's instruction. Parent 4 (Claude Fable)'s
+> second pour for M3 (the Echo): bench_staff.py rev 3 (additive echo kwarg) +
+> echo_tuning.json + m3_demo.py + test_bench_buttons.py + landing notes.
+> Do not edit — this is the archive.
+
+---
+
+POUR 2, coming right up! 💚 79 green is a lovely launchpad, and A1–A5 gave me everything — the wiring style, the frozen button rects, and the staff's blessing. Here is the complete second pour.
+
+Deliverables in this pour:
+
+    player/ui/bench_staff.py rev 3 — the additive echo kwarg (full replacement file, rev 2 untouched where unchanged)
+    player/data/echo_tuning.json — feel constants in data, never code
+    player/m3_demo.py — the Echo, end to end, on real instruments
+    tests/test_bench_buttons.py — the activation contract, headless
+    Notes for DeepSeek + one design decision flagged for Nir's ear
+
+POUR 2 design decisions (click for rationale)
+
+    Duck-typed echo arg with string states. bench_staff.py compares the literals "confirmed" / "provisional" / "placeholder" (mirroring core.echo_logic's constants) instead of importing them — the demos run with player/ on sys.path, where a ui → core relative import would be fragile. Anything with slot_states(), preview_midi, cursor works.
+    Placeholders are pitch-silent. Dashes sit at a neutral height between the two staves — a dash at the target's pitch would hand over the answer visually. The cursor's dash is brightened ("answer here"), and dashes still blend toward the glow on crossing flashes: rhythm information leaks, pitch never does.
+    The provisional notehead draws at preview_midi — the player sees their own guess, hollow, via the same NotationTable lookup as everything else (per A5).
+    Grow-mode round edge (⚠️ flagged for Nir below). While a grow puzzle is unfinished, the playable/scrubbable world ends at the current round's last note — the transport can't wander into unrevealed notes. Implemented as one clamp + a pre-pause; deleting one line lifts it if Nir prefers total freedom.
+    The auto-play is a courtesy, not a cage. Any manual transport grab during LISTENING simply ends the courtesy (listening_finished()) — the player has taken control, and free re-listening is eternal anyway.
+    The delayed replays are lead-ins, not timers. The three small delays (intro, grow replay, celebration) exist so sounds don't pile up — they never pressure the player. All live in echo_tuning.json.
+    Wrong commit makes no sound at all. Only the gentle text. Correct commit = the target's own sample at low gain (the fifth-below garnish from NT §II.2 stays parked as a comment — smallest honest v1).
+
+📄 1. player/ui/bench_staff.py — rev 3 (full replacement)
+
+```python
+"""
+bench_staff.py — the full grand staff, noteheads only. [M2 — Parent 3,
+rev 2; M3 echo slots — Parent 4, rev 3]
+
+Scripture: BIBLE par.2 (noteheads only — no stems/beams/time
+signatures; LOCKED) + NIR'S M2 AMENDMENT (July 2026, recorded in the
+Commentaries): the Bench ALWAYS shows the FULL GRAND STAFF — treble
+above, bass below, middle C living between them. A note draws on the
+treble staff iff midi >= 60, else on the bass staff (NT Stage 5 rule).
+The spell's raw staff.clef field remains valid pack data but the Bench
+no longer hides the bass staff for treble-only spells.
+
+All positions come purely from core/notation.py lookups (zero music
+theory here). Step -> pixel: y = middle_line_y - step * (line_gap/2).
+Ledger lines at even steps beyond +/-4, out to the note's own step.
+Clefs: Segoe UI Symbol glyphs (U+1D11E / U+1D122), letter fallback;
+baked PNGs may replace them later inside this file only.
+
+REV 3 (M3, ADDITIVE — recorded in the Commentaries): draw() gains a
+trailing keyword arg echo=None. When given, it must offer (duck-typed,
+mirroring core/echo_logic — no import, the demos run with player/ on
+sys.path): slot_states() -> tuple of "confirmed"|"provisional"|
+"placeholder", .preview_midi (int|None), .cursor (int|None). Then:
+  "confirmed"    solid notehead at the spell note's own pitch (as rev 2)
+  "provisional"  HOLLOW notehead at echo.preview_midi — the player sees
+                 their OWN guess, through the same NotationTable lookup
+  "placeholder"  a faint dash at a NEUTRAL height between the staves
+                 (never at the target's pitch — that would hand over
+                 the answer); the cursor's dash is brightened; dashes
+                 blend toward the glow on crossing flashes (rhythm may
+                 leak, pitch never does).
+With echo=None the drawing is exactly rev 2 — m2_demo is untouched.
+
+draw(surface, spell, frame, flash_levels, echo=None): frozen surface.
+"""
+
+from __future__ import annotations
+
+import pygame
+
+_GLOW = (255, 196, 64)
+_INK = (230, 230, 230)
+_LINE = (150, 150, 158)
+_BG = (18, 18, 22)
+_PROVISIONAL = (240, 220, 120)     # matches the keyboard's preview outline
+_DASH = (95, 95, 105)
+
+_TREBLE_MID_FRAC = 0.28
+_BASS_MID_FRAC = 0.78
+
+
+def _blend(base, glow, k):
+    return tuple(int(b + (g - b) * k) for b, g in zip(base, glow))
+
+
+class StaffWidget:
+    """Frozen interface."""
+
+    def __init__(self, rect, notation_table) -> None:
+        self.rect = pygame.Rect(rect)
+        self.table = notation_table
+        self._clef_font = None
+        self._sharp_font = None
+
+    def _fonts(self):
+        if self._clef_font is None:
+            try:
+                self._clef_font = pygame.font.SysFont("segoeuisymbol", 44)
+            except Exception:
+                self._clef_font = pygame.font.SysFont(None, 44)
+            self._sharp_font = pygame.font.SysFont("consolas", 18, bold=True)
+        return self._clef_font, self._sharp_font
+
+    def _draw_five_lines(self, surface, x0, x1, middle_y, gap):
+        for line_step in (-4, -2, 0, 2, 4):
+            y = middle_y - line_step * (gap / 2)
+            pygame.draw.line(surface, _LINE, (x0, y), (x1, y), 1)
+
+    def _draw_clef(self, surface, x, middle_y, which):
+        clef_font, _ = self._fonts()
+        glyph = "\U0001D11E" if which == "treble" else "\U0001D122"
+        try:
+            img = clef_font.render(glyph, True, _INK)
+            if img.get_width() < 4:
+                raise ValueError
+        except Exception:
+            img = clef_font.render("G" if which == "treble" else "F",
+                                   True, _INK)
+        surface.blit(img, (x, middle_y - img.get_height() // 2))
+
+    def _draw_notehead(self, surface, x, middle_y, gap, entry, step,
+                       color, active, filled=True):
+        y = middle_y - step * (gap / 2)
+        if step > 4:
+            for ls in range(6, (step // 2) * 2 + 1, 2):
+                ly = middle_y - ls * (gap / 2)
+                pygame.draw.line(surface, _LINE, (x - 12, ly), (x + 12, ly), 1)
+        elif step < -4:
+            for ls in range(-6, (step // 2) * 2 - 1, -2):
+                ly = middle_y - ls * (gap / 2)
+                pygame.draw.line(surface, _LINE, (x - 12, ly), (x + 12, ly), 1)
+        head = pygame.Rect(0, 0, 14, 10)
+        head.center = (x, round(y))
+        if filled:
+            pygame.draw.ellipse(surface, color, head)
+        else:
+            pygame.draw.ellipse(surface, color, head, 2)   # hollow (rev 3)
+        if active:
+            pygame.draw.ellipse(surface, _GLOW, head.inflate(8, 8), 2)
+        if entry.sharp:
+            _, sharp_font = self._fonts()
+            img = sharp_font.render("#", True, color)
+            surface.blit(img, (x - 24, round(y) - img.get_height() // 2))
+
+    def _draw_pitched(self, surface, x, treble_mid, bass_mid, gap, midi,
+                      color, active, filled=True):
+        """One notehead at the grand-staff home of `midi` (rev 3 helper;
+        the rev-2 rule verbatim: treble iff midi >= 60)."""
+        entry = self.table.entry(midi)
+        if midi >= 60:
+            self._draw_notehead(surface, x, treble_mid, gap, entry,
+                                entry.treble_step, color, active, filled)
+        else:
+            self._draw_notehead(surface, x, bass_mid, gap, entry,
+                                entry.bass_step, color, active, filled)
+
+    def draw(self, surface, spell, frame, flash_levels, echo=None) -> None:
+        pygame.draw.rect(surface, _BG, self.rect)
+        gap = 12
+        x0 = self.rect.x + 8
+        x1 = self.rect.right - 8
+        slots_x0 = self.rect.x + 62
+
+        treble_mid = self.rect.y + int(self.rect.h * _TREBLE_MID_FRAC)
+        bass_mid = self.rect.y + int(self.rect.h * _BASS_MID_FRAC)
+        self._draw_five_lines(surface, x0, x1, treble_mid, gap)
+        self._draw_five_lines(surface, x0, x1, bass_mid, gap)
+        self._draw_clef(surface, x0, treble_mid, "treble")
+        self._draw_clef(surface, x0, bass_mid, "bass")
+
+        n = len(spell.notes)
+        if n == 0:
+            return
+        span = x1 - slots_x0
+        states = echo.slot_states() if echo is not None else None
+        neutral_y = (treble_mid + bass_mid) // 2
+
+        for note in spell.notes:
+            x = slots_x0 + int(span * (note.index + 0.5) / n)
+            k = 0.0
+            if flash_levels is not None and note.index < len(flash_levels):
+                k = min(1.0, max(0.0, flash_levels[note.index]))
+            active = (frame is not None
+                      and frame.active_note_index == note.index)
+
+            if states is None:                       # rev-2 path, verbatim
+                color = _blend(_INK, _GLOW, k)
+                self._draw_pitched(surface, x, treble_mid, bass_mid, gap,
+                                   note.midi, color, active)
+                continue
+
+            st = states[note.index]
+            if st == "confirmed":
+                color = _blend(_INK, _GLOW, k)
+                self._draw_pitched(surface, x, treble_mid, bass_mid, gap,
+                                   note.midi, color, active)
+            elif st == "provisional":
+                self._draw_pitched(surface, x, treble_mid, bass_mid, gap,
+                                   echo.preview_midi, _PROVISIONAL,
+                                   False, filled=False)
+            else:                                    # placeholder dash
+                base = (_PROVISIONAL if note.index == echo.cursor
+                        else _DASH)
+                color = _blend(base, _GLOW, k)
+                pygame.draw.line(surface, color,
+                                 (x - 7, neutral_y), (x + 7, neutral_y), 2)
+```
+
+📄 2. player/data/echo_tuning.json
+
+```json
+{
+  "confirm_gain_factor": 0.5,
+  "intro_lead_in_ms": 800,
+  "grow_replay_delay_ms": 700,
+  "complete_replay_delay_ms": 900
+}
+```
+
+📄 3. player/m3_demo.py — the Echo answers back
+
+```python
+"""
+m3_demo.py — Milestone 3: the Echo answers back. [demo scaffolding]
+
+Run (from anywhere):
+    python m3_demo.py                       <- violin line, grow mode
+    python m3_demo.py --mode whole          <- full melody, answer all slots
+    python m3_demo.py --spell fixtures/spells/fixture_bench20.json
+    python m3_demo.py --library "D:/somewhere/philharmonia"
+    python m3_demo.py --beeps               <- EXPLICIT fallback only
+
+DEMO TEXTS ONLY: the intro/hint/success strings below are placeholders;
+in the real game every word comes from pack.json (intro_text,
+hint_higher, hint_lower, success_text) — M7's pack loader.
+
+GROW-MODE ROUND EDGE (design decision, flagged for Nir's ear): while a
+grow puzzle is unfinished, the playable/scrubbable world ends at the
+current round's last note — the transport cannot wander into notes the
+game has not revealed yet. Whole mode (and the COMPLETE celebration)
+roam the full melody. If Nir prefers total freedom even in grow,
+boundary_beats() below shrinks to one line.
+
+NIR'S ACCEPTANCE SCRIPT (printed on startup):
+  1. The first violin note plays by itself; its key, graph segment and
+     staff slot light together. Then it is YOUR turn.
+  2. Click any piano key: it SOUNDS (audition) and a hollow notehead
+     appears at YOUR guess on the staff. OK wakes up.
+  3. Commit a WRONG key: nothing harsh happens - the hollow note fades
+     and a gentle hint says which way to go. Try as often as you like.
+  4. Commit the RIGHT key: a soft, quieter echo of that same note; the
+     notehead turns SOLID; the melody replays one note longer.
+  5. Scrub or replay at ANY time - your answered slots never move. In
+     grow mode the timeline ends at the round's edge.
+  6. Enter = OK, Backspace = Cancel (except while typing in the BPM
+     box). Space = play/pause. Everything also works mouse-only.
+  7. Land the last note: the whole melody replays in celebration.
+  8. The only question: does it feel like the game answering back?
+"""
+
+from __future__ import annotations
+
+import argparse
+import json
+import os
+import sys
+
+HERE = os.path.dirname(os.path.abspath(__file__))
+LOOM_DIR = os.path.dirname(HERE)
+sys.path.insert(0, HERE)
+
+from core.spell_model import load_spell                      # noqa: E402
+from core.tuning import load_tuning                          # noqa: E402
+from core.conductor import Conductor, ConductorState         # noqa: E402
+from core.notation import NotationTable                      # noqa: E402
+from core.echo_logic import EchoLogic, EchoPhase             # noqa: E402
+from m1_demo import (resolve_real_samples, resolve_beeps,    # noqa: E402
+                     note_name, DEFAULT_LIBRARY)
+from m2_demo import resolve_keyboard_coverage                # noqa: E402
+
+DEFAULT_SPELL = os.path.join(LOOM_DIR, "fixtures", "spells",
+                             "fixture_bench8.json")
+TUNING_PATH = os.path.join(HERE, "data", "scrub_tuning.json")
+NOTATION_PATH = os.path.join(HERE, "data", "notation_table.json")
+MAPPING_PATH = os.path.join(HERE, "data", "input_mapping.json")
+ECHO_TUNING_PATH = os.path.join(HERE, "data", "echo_tuning.json")
+
+# ---- demo stand-ins for pack.json texts (the real ones arrive in M7) ----
+INTRO_TEXT = ("Listen: the violin climbs a steady staircase. "
+              "Echo each note back on the piano.")
+ECHO_PROMPT = "Your turn: click the key you heard, then OK."
+GROW_TEXT = "Lovely! Listen - one note longer now..."
+# NOTE THE CROSSED NAMES (echo_logic docstring): kind "too_low" shows the
+# pack's hint_higher text; kind "too_high" shows the pack's hint_lower.
+HINT_WHEN_TOO_LOW = ("Yours was a little low - listen once more, "
+                     "or drag through it slowly.")
+HINT_WHEN_TOO_HIGH = ("Yours was a little high - listen once more, "
+                      "or drag through it slowly.")
+SUCCESS_TEXT = ("You heard it! You played the whole line by ear. "
+                "Hear it once more, beautifully.")
+
+
+def main() -> None:
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--spell", default=DEFAULT_SPELL)
+    ap.add_argument("--mode", default="grow", choices=("grow", "whole"))
+    ap.add_argument("--library", default=DEFAULT_LIBRARY)
+    ap.add_argument("--beeps", action="store_true",
+                    help="EXPLICIT test-tone fallback (never the default)")
+    args = ap.parse_args()
+
+    spell = load_spell(args.spell)
+    tuning = load_tuning(TUNING_PATH)
+    table = NotationTable.load(NOTATION_PATH)
+    with open(ECHO_TUNING_PATH, "r", encoding="utf-8") as f:
+        etune = json.load(f)
+    print(f"Loaded spell {spell.spell_id!r}: {len(spell.notes)} notes, "
+          f"reveal mode {args.mode!r}.")
+
+    kb = spell.raw.get("keyboard", {})
+    base_midi = table.midi_for_name(kb.get("low_note", "C4"))
+    high_midi = table.midi_for_name(kb.get("high_note", "C5"))
+    octaves = 2 if (high_midi - base_midi) > 12 else 1
+    keyboard_midis = list(range(base_midi, base_midi + 12 * octaves + 1))
+
+    if args.beeps:
+        print("NOTE: --beeps requested: test tones, NOT game audio.")
+        resolved = resolve_beeps(spell)
+        coverage = {spell.notes[i].midi: p for i, p in resolved.items()}
+    else:
+        print(f"Resolving REAL instruments from {args.library} ...")
+        resolved = resolve_real_samples(spell, args.library)
+        coverage = resolve_keyboard_coverage(resolved, keyboard_midis)
+    midi_gain = {n.midi: n.gain for n in spell.notes}
+
+    # ---- pygame world starts here ----
+    from ui.audio_pygame import PygameAudioEngine, init_mixer
+    import pygame
+    from ui import layout
+    from ui.input_actions import InputMapper, Action
+    from ui.bench_keyboard import KeyboardWidget
+    from ui.bench_staff import StaffWidget
+    from ui.bench_transport import (TransportWidget, TransportCommand,
+                                    TransportEvent)
+    from ui.bench_buttons import BenchButton
+    from ui.graph_view import GraphView
+
+    init_mixer()
+    pygame.init()
+    screen = pygame.display.set_mode((layout.WINDOW.w, layout.WINDOW.h))
+    pygame.display.set_caption(f"LOOM M3 - {spell.spell_id} ({args.mode})")
+    font = pygame.font.SysFont("consolas", 16)
+    clock = pygame.time.Clock()
+
+    audio = PygameAudioEngine()
+    audio.preload("", sorted(set(resolved.values()) | set(coverage.values())))
+    conductor = Conductor(spell, tuning)
+    mapper = InputMapper.load(MAPPING_PATH)
+    echo = EchoLogic(spell, args.mode)
+
+    keyboard = KeyboardWidget(layout.KEYBOARD, base_midi, octaves)
+    staff = StaffWidget(layout.STAFF, table)
+    transport = TransportWidget(layout.TRANSPORT, initial_bpm=spell.bpm)
+    graph = GraphView(layout.GRAPH)
+    ok_btn = BenchButton(layout.OK_BUTTON, "OK", accent=True)
+    cancel_btn = BenchButton(layout.CANCEL_BUTTON, "Cancel")
+
+    flash_ms = [0.0] * len(spell.notes)
+    ui_state = {"pressed": None}
+    state = {"listen": False, "message": INTRO_TEXT, "pending": None}
+
+    def schedule(ms, fn):
+        """A lead-in before a replay, never a gameplay timer."""
+        state["pending"] = [float(ms), fn]
+
+    def boundary_beats() -> float:
+        """Grow mode: the world ends at the round's edge (see docstring)."""
+        if args.mode == "grow" and echo.phase() is not EchoPhase.COMPLETE:
+            last = echo.notes_to_play()[-1]
+            return spell.notes[last].end_beat
+        return spell.total_beats
+
+    def clamp_b(b: float) -> float:
+        return min(b, max(0.0, boundary_beats() - 0.001))
+
+    def take_over_listening():
+        """The player grabbed the transport: the courtesy auto-play ends
+        (free re-listening is eternal anyway — Forgiving Forever)."""
+        if state["listen"]:
+            state["listen"] = False
+            echo.listening_finished()
+            if echo.phase() is EchoPhase.ECHOING:
+                state["message"] = ECHO_PROMPT
+
+    def start_round_playback():
+        conductor.stop()
+        conductor.play()
+        state["listen"] = True
+
+    def apply(events):
+        for te in events:
+            c = te.command
+            if c in (TransportCommand.PLAY_PAUSE, TransportCommand.STOP,
+                     TransportCommand.JUMP, TransportCommand.SCRUB_BEGIN):
+                take_over_listening()
+            if c is TransportCommand.PLAY_PAUSE:
+                if conductor.state is ConductorState.PLAYING:
+                    conductor.pause()
+                else:
+                    if conductor.playhead_beats >= boundary_beats() - 0.01:
+                        conductor.jump_to_beats(0.0)   # Play always plays
+                    conductor.play()
+            elif c is TransportCommand.STOP:
+                conductor.stop()
+                audio.stop_all(tuning.steal_fade_ms)
+            elif c is TransportCommand.JUMP:
+                conductor.jump_to_beats(clamp_b(te.beats))
+            elif c is TransportCommand.SCRUB_BEGIN:
+                conductor.begin_scrub()
+            elif c is TransportCommand.SCRUB_TO:
+                conductor.scrub_to_beats(clamp_b(te.beats))
+            elif c is TransportCommand.SCRUB_END:
+                conductor.end_scrub()
+            elif c is TransportCommand.SET_BPM:
+                conductor.set_bpm(te.bpm)
+                print(f"(tempo -> {int(te.bpm)} BPM)")
+
+    def do_ok():
+        if not ok_btn.enabled:       # Enter path shares the same guard
+            return
+        result = echo.commit()
+        print(f"(commit: {result.kind} on slot {result.target_index})")
+        if result.kind == "correct":
+            n = spell.notes[result.target_index]
+            # the confirm = the note's OWN voice, quieter (NT par.II.2;
+            # the optional fifth-below garnish stays parked for now)
+            audio.trigger(resolved[result.target_index],
+                          n.gain * etune["confirm_gain_factor"])
+            if result.puzzle_done:
+                state["message"] = SUCCESS_TEXT
+                schedule(etune["complete_replay_delay_ms"],
+                         start_round_playback)
+            elif echo.phase() is EchoPhase.LISTENING:   # grow: next round
+                state["message"] = GROW_TEXT
+                schedule(etune["grow_replay_delay_ms"],
+                         start_round_playback)
+            else:                                       # whole: next slot
+                state["message"] = ECHO_PROMPT
+        elif result.kind == "too_high":
+            state["message"] = HINT_WHEN_TOO_HIGH       # no sound: never harsh
+        else:
+            state["message"] = HINT_WHEN_TOO_LOW
+
+    def do_cancel():
+        if echo.phase() is EchoPhase.ECHOING:
+            echo.cancel()
+            state["message"] = ECHO_PROMPT
+
+    print(__doc__.split("printed on startup):")[-1])
+    schedule(etune["intro_lead_in_ms"], start_round_playback)
+
+    running = True
+    while running:
+        dt_ms = clock.tick(60)
+        for ev in pygame.event.get():
+            if ev.type == pygame.QUIT:
+                running = False
+            # rev 3: while the BPM box is focused, the keyboard belongs to it
+            for action in (mapper.map_event(ev) if not transport.typing else []):
+                if action is Action.QUIT:
+                    running = False
+                elif action is Action.PLAY_PAUSE:
+                    apply([TransportEvent(TransportCommand.PLAY_PAUSE)])
+                elif action is Action.STOP:
+                    apply([TransportEvent(TransportCommand.STOP)])
+                elif action in (Action.NUDGE_LEFT, Action.NUDGE_RIGHT):
+                    take_over_listening()
+                    ph = conductor.playhead_beats
+                    bound = boundary_beats()
+                    if action is Action.NUDGE_RIGHT:
+                        nxt = [n.start_beat for n in spell.notes
+                               if ph + 1e-9 < n.start_beat < bound - 1e-9]
+                        if nxt:
+                            conductor.jump_to_beats(nxt[0])
+                    else:
+                        prv = [n.start_beat for n in spell.notes
+                               if n.start_beat < ph - 1e-9]
+                        if prv:
+                            conductor.jump_to_beats(prv[-1])
+                elif action is Action.OK:
+                    do_ok()
+                elif action is Action.CANCEL:
+                    do_cancel()
+            # pointer events flow raw to the widgets:
+            apply(transport.handle_event(ev, spell.total_beats))
+            apply(graph.handle_event(ev, spell))
+            if ok_btn.handle_event(ev):
+                do_ok()
+            if cancel_btn.handle_event(ev):
+                do_cancel()
+            if ev.type == pygame.MOUSEBUTTONDOWN and ev.button == 1:
+                midi = keyboard.hit_test(ev.pos)
+                if midi is not None:
+                    ui_state["pressed"] = midi
+                    if midi in coverage:                # audition, always
+                        audio.trigger(coverage[midi],
+                                      midi_gain.get(midi, 0.9))
+                    else:
+                        print(f"(no recording for {note_name(midi)})")
+                    echo.preview(midi)   # no-op outside ECHOING, on purpose
+            elif ev.type == pygame.MOUSEBUTTONUP and ev.button == 1:
+                ui_state["pressed"] = None
+
+        # ---- delayed one-shot lead-ins (replays; never gameplay timers) ----
+        if state["pending"] is not None:
+            state["pending"][0] -= dt_ms
+            if state["pending"][0] <= 0:
+                fn = state["pending"][1]
+                state["pending"] = None
+                fn()
+
+        # ---- the wiring loop (conductor.py doctrine + the round edge) ----
+        dt = dt_ms / 1000.0
+        frame = None
+        if conductor.state is ConductorState.PLAYING:
+            bound = boundary_beats()
+            if bound < spell.total_beats:
+                remaining_s = ((bound - conductor.playhead_beats)
+                               * 60.0 / conductor.bpm - 0.002)
+                if dt >= remaining_s:
+                    # land just inside the round's last note, never on the
+                    # next note's fire-line, then rest
+                    frame = conductor.update(max(0.0, remaining_s))
+                    conductor.pause()
+                    if state["listen"]:
+                        state["listen"] = False
+                        echo.listening_finished()
+                        state["message"] = ECHO_PROMPT
+        if frame is None:
+            frame = conductor.update(dt)
+            if frame.completed and state["listen"]:
+                state["listen"] = False
+                echo.listening_finished()     # no-op once COMPLETE
+                if echo.phase() is EchoPhase.ECHOING:
+                    state["message"] = ECHO_PROMPT
+
+        for i in frame.triggers:
+            audio.trigger(resolved[i], spell.notes[i].gain)
+        for i in frame.crossed:
+            flash_ms[i] = tuning.highlight_decay_ms
+        for i in range(len(flash_ms)):
+            flash_ms[i] = max(0.0, flash_ms[i] - dt_ms)
+        levels = [f / tuning.highlight_decay_ms for f in flash_ms]
+        lit = {spell.notes[i].midi: levels[i]
+               for i in range(len(levels)) if levels[i] > 0}
+        if frame.active_note_index is not None:
+            am = spell.notes[frame.active_note_index].midi
+            lit[am] = max(lit.get(am, 0.0), 1.0)
+
+        ok_btn.enabled = (echo.phase() is EchoPhase.ECHOING
+                          and echo.preview_midi is not None)
+        cancel_btn.enabled = echo.phase() is EchoPhase.ECHOING
+
+        # ---- draw ----
+        screen.fill((12, 12, 16))
+        graph.draw(screen, spell, frame, levels)
+        pygame.draw.rect(screen, (18, 18, 22), layout.HELIX)
+        pygame.draw.rect(screen, (70, 70, 80), layout.HELIX, 1)
+        img = font.render("pitch helix - reserved (M4)", True,
+                          (120, 120, 130))
+        screen.blit(img, img.get_rect(center=layout.HELIX.center))
+        staff.draw(screen, spell, frame, levels, echo=echo)
+        keyboard.draw(screen, lit, echo.preview_midi, ui_state["pressed"])
+        transport.draw(screen, frame, spell.total_beats)
+        ok_btn.draw(screen)
+        cancel_btn.draw(screen)
+        # demo-only message band (its real home is the Scene Stage, M5)
+        band = pygame.Rect(0, 0, layout.WINDOW.w, 26)
+        pygame.draw.rect(screen, (24, 24, 30), band)
+        screen.blit(font.render(state["message"], True, (235, 225, 200)),
+                    (12, 5))
+        pygame.display.flip()
+
+    pygame.quit()
+
+
+if __name__ == "__main__":
+    main()
+```
+
+📄 4. tests/test_bench_buttons.py
+
+```python
+"""Headless tests for ui/bench_buttons.py (M3): the activation contract.
+Rect math and event handling need no display or font."""
+
+import pygame
+
+from player.ui.bench_buttons import BenchButton
+
+R = (100, 100, 120, 34)
+
+
+def down(pos):
+    return pygame.event.Event(pygame.MOUSEBUTTONDOWN,
+                              {"button": 1, "pos": pos})
+
+
+def up(pos):
+    return pygame.event.Event(pygame.MOUSEBUTTONUP,
+                              {"button": 1, "pos": pos})
+
+
+def test_click_inside_activates_once():
+    b = BenchButton(R, "OK")
+    assert b.handle_event(down((110, 110))) is False   # press: not yet
+    assert b.handle_event(up((110, 110))) is True      # release inside: fire
+    assert b.handle_event(up((110, 110))) is False     # no double fire
+
+
+def test_drag_off_before_release_aborts():
+    b = BenchButton(R, "OK")
+    b.handle_event(down((110, 110)))
+    assert b.handle_event(up((500, 500))) is False
+
+
+def test_release_inside_without_press_inside_is_nothing():
+    b = BenchButton(R, "Cancel")
+    b.handle_event(down((500, 500)))
+    assert b.handle_event(up((110, 110))) is False
+
+
+def test_disabled_button_is_deaf():
+    b = BenchButton(R, "OK")
+    b.enabled = False
+    b.handle_event(down((110, 110)))
+    assert b.handle_event(up((110, 110))) is False
+    b.enabled = True                                    # re-enabling is clean
+    assert b.handle_event(up((110, 110))) is False      # old press forgotten
+```
+
+📬 5. Notes for DeepSeek (please copy-paste, Nir 🙏)
+
+PARENT 4 (Fable, M3) — POUR 2 landing notes for DeepSeek:
+
+1. bench_staff.py rev 3 is a FULL replacement file: rev-2 behavior is
+   byte-equivalent when echo=None (m2_demo untouched); the echo path is
+   duck-typed on string states — no core import needed from ui/.
+2. New files: player/data/echo_tuning.json, player/m3_demo.py,
+   tests/test_bench_buttons.py. m3_demo imports resolve_keyboard_coverage
+   from m2_demo and the resolver family from m1_demo, verbatim reuse.
+3. If the demo-only top message band (0,0,1280,26) collides badly with
+   the graph's top edge, nudge the band, not the graph — layout is
+   frozen; the band is scaffolding until M5's Scene Stage.
+4. Commentaries par.5 draft:
+   "M3 POUR 2 (Parent 4): bench_staff.py rev 3 — ADDITIVE echo kwarg on
+   draw() (solid confirmed / hollow provisional at preview_midi /
+   neutral-height dashed placeholders, cursor dash brightened; pitch
+   never leaks, rhythm flashes may); player/data/echo_tuning.json (feel
+   constants: confirm gain 0.5, intro/grow/complete lead-ins);
+   m3_demo.py = grow+whole Echo end-to-end on real instruments, with
+   the GROW ROUND-EDGE boundary (playable world ends at the current
+   round's last note until COMPLETE — one-line removable, awaiting
+   Nir's audition verdict); test_bench_buttons.py added."
+5. MAP: flip core/echo_logic.py line to [MEAT] if not already; add
+   m3_demo.py [MEAT demo scaffolding] + data/echo_tuning.json; append
+   the status log line for M3.
+
+🎧 For you, Nir — one decision only YOUR ear can make
+
+When you play python m3_demo.py, please pay special attention to acceptance point 5: in grow mode, I made the timeline end at the current round's edge — you can't scrub into notes the game hasn't revealed yet. My reasoning: grow mode IS the gentle one-note-at-a-time reveal, so wandering ahead would dissolve it. But the counter-argument is the Wandering Ear pillar: total freedom, always. Both are one line of code apart. Play it, feel it, and tell me: does the fence feel protective or confining? 🌱
+
+And then the eight-point script — especially point 8: does it feel like the game answering back? 🌀🎹💚

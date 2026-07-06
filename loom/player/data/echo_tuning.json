@@ -1,0 +1,6 @@
+{
+  "confirm_gain_factor": 0.5,
+  "intro_lead_in_ms": 800,
+  "grow_replay_delay_ms": 700,
+  "complete_replay_delay_ms": 900
+}

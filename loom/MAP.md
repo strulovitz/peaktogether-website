@@ -44,6 +44,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
         app.py                        [BONE M7] real entry point (python app.py)
         m1_demo.py                    [MEAT]    M1 demo: timeline + flashes + audio
         m2_demo.py                    [MEAT]    M2 demo: the whole Music Bench, wired
+        m3_demo.py                    [MEAT]    M3 demo: the Echo, end-to-end (grow/whole)
         core/                         (pure logic, stdlib only, headless-testable)
           spell_model.py              [MEAT]    spell JSON -> SpellData (frozen)
           tuning.py                   [MEAT]    scrub_tuning.json -> ScrubTuning
@@ -75,6 +76,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
                                         compiler/notation_gen.py will regenerate
                                         the identical file (frozen format).
           input_mapping.json          [MEAT]    device -> named action map
+          echo_tuning.json            [MEAT]    Echo feel constants (confirm gain, lead-ins) [M3]
       compiler/                       (Program A — authors' PCs only, never shipped)
         compile_spell.py              [BONE]    CLI: spec.py -> spell JSON + assets
         pipeline.py                   [BONE]    stages 1-7,10,11 of NT Part I.3
@@ -102,6 +104,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
         test_bench_fixtures.py        [MEAT]    generated fixture validation (M2)
         test_length_choice.py         [MEAT]    FIT-THE-BEAT sample-length rule (M2)
         test_echo_logic.py            [MEAT]    Echo state machine behavior (M3)
+        test_bench_buttons.py         [MEAT]    OK/Cancel activation contract (M3)
       packs/                          (future Problem Packs live here)
       prompts/                        (Story Weaver prompt, per the Apocrypha)
 
@@ -154,3 +157,10 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
               be disabled unless a preview exists - commit() raises on wiring misuse). Hint-name
               mapping: kind too_low -> pack hint_higher text, kind too_high -> pack hint_lower
               text (crossed names, documented). +test_echo_logic.py (14 tests). 79 tests pass.
+- 2026-07-06  M3 POUR 2 (Parent 4): bench_staff.py rev 3 - ADDITIVE echo kwarg on draw()
+              (solid confirmed / hollow provisional at preview_midi / neutral-height dashed
+              placeholders, cursor dash brightened; pitch never leaks, rhythm flashes may);
+              data/echo_tuning.json (confirm gain 0.5, intro/grow/complete lead-ins); m3_demo.py
+              = grow+whole Echo end-to-end on real instruments, with the GROW ROUND-EDGE boundary
+              (playable world ends at the round's last note until COMPLETE - one-line removable,
+              awaiting Nir's audition verdict); +test_bench_buttons.py (4 tests). 83 tests pass.
