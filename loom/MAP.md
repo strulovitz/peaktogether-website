@@ -137,3 +137,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
               (uniform length = longest token <= shortest note's seconds; fallback shortest).
               Kills the sustain-pedal note overlap in the 20-note cello demo (now picks 025).
               +test_length_choice.py. 57 tests pass. Amendment in Commentaries §5.
+- 2026-07-06  M2 rev 3 (Parent 3): BPM box - additive Conductor.set_bpm (live tempo,
+              M6 Lab pre-work) + TransportWidget gains typed BPM box (40-200, Enter/Esc/
+              click-away) + up/down spinners on far right + .typing guard (mutes hotkeys).
+              Content default BPM = 110. +test_transport_bpm.py (7 tests). 65 tests pass.

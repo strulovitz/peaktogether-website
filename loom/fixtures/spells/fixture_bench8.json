@@ -6,7 +6,7 @@
   "function_text": "f(x) = x on [0, 1]",
   "instrument": "violin",
   "articulation": "arco-normal",
-  "bpm": 90,
+  "bpm": 110,
   "base_note": "C4",
   "total_beats": 8.0,
   "keyboard": {

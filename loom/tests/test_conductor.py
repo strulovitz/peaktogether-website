@@ -1,4 +1,6 @@
 """The full M1 behavior suite — headless, deterministic, no audio files."""
+import pytest
+
 from core.audio import FakeAudioSink
 from core.conductor import Conductor, ConductorState
 from core.spell_model import SpellData, SpellNote
@@ -191,3 +193,20 @@ def test_wiring_with_fake_audio_sink():
         for i in f.triggers:
             sink.trigger(spell.notes[i].sample, spell.notes[i].gain)
     assert sink.triggered == [(f"s{i}.mp3", 0.9) for i in range(8)]
+
+
+def test_set_bpm_changes_rate_not_position():
+    c = Conductor(make_spell(bpm=120), T)     # 120 bpm
+    c.play()
+    c.update(0.5)
+    pos = c.playhead_beats
+    c.set_bpm(180.0)
+    assert c.playhead_beats == pos                     # position untouched
+    f = c.update(1.0)                                  # 180 bpm = 3 beats/s
+    assert f.playhead_beats == pytest.approx(pos + 3.0, abs=1e-6)
+
+
+def test_set_bpm_rejects_nonpositive():
+    c = Conductor(make_spell(bpm=120), T)
+    with pytest.raises(ValueError):
+        c.set_bpm(0.0)

@@ -83,6 +83,7 @@ class Conductor:
     def __init__(self, spell: SpellData, tuning: ScrubTuning) -> None:
         self._spell = spell
         self._tuning = tuning
+        self._bpm = float(spell.bpm)            # live tempo (set_bpm; M6 Lab pre-work)
         self._state = ConductorState.STOPPED
         self._playhead = 0.0
         self._now_s = 0.0                       # internal clock, advanced by update()
@@ -104,6 +105,10 @@ class Conductor:
     @property
     def spell(self) -> SpellData:
         return self._spell
+
+    @property
+    def bpm(self) -> float:
+        return self._bpm
 
     # ---------------- transport commands ----------------
 
@@ -154,6 +159,17 @@ class Conductor:
         stopped. LOCKED: never auto-resume (BIBLE par.3.2)."""
         self._state = ConductorState.PAUSED
 
+    def set_bpm(self, bpm: float) -> None:
+        """ADDITIVE (Nir, July 2026 — BPM box; also pre-work for M6 Lab).
+        Change the playback tempo LIVE. playhead_beats does NOT move;
+        only the beats-per-second rate changes from this moment on
+        (playhead_seconds reporting follows the current bpm). Raises
+        ValueError if bpm <= 0. Clamping to the UI range (40..200) is
+        the widget's job, NOT the Conductor's."""
+        if bpm <= 0:
+            raise ValueError(f"bpm must be positive, got {bpm}")
+        self._bpm = float(bpm)
+
     # ---------------- the per-frame heartbeat ----------------
 
     def update(self, dt_s: float) -> ConductorFrame:
@@ -163,7 +179,7 @@ class Conductor:
         self._now_s += dt_s
         completed = False
         if self._state is ConductorState.PLAYING and dt_s > 0.0:
-            target = self._playhead + dt_s * self._spell.bpm / 60.0
+            target = self._playhead + dt_s * self._bpm / 60.0
             if target >= self._spell.total_beats:
                 self._sweep(self._spell.total_beats, guarded=False)
                 self._state = ConductorState.STOPPED
@@ -178,7 +194,7 @@ class Conductor:
         return ConductorFrame(
             state=self._state,
             playhead_beats=self._playhead,
-            playhead_seconds=self._playhead * 60.0 / self._spell.bpm,
+            playhead_seconds=self._playhead * 60.0 / self._bpm,
             active_note_index=self._active_index(),
             crossed=crossed,
             triggers=triggers,

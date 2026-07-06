@@ -126,7 +126,7 @@ def main() -> None:
 
     keyboard = KeyboardWidget(layout.KEYBOARD, base_midi, octaves)
     staff = StaffWidget(layout.STAFF, table)
-    transport = TransportWidget(layout.TRANSPORT)
+    transport = TransportWidget(layout.TRANSPORT, initial_bpm=spell.bpm)
     graph = GraphView(layout.GRAPH)
 
     flash_ms = [0.0] * len(spell.notes)
@@ -151,13 +151,18 @@ def main() -> None:
                 conductor.scrub_to_beats(te.beats)
             elif c is TransportCommand.SCRUB_END:
                 conductor.end_scrub()
+            elif c is TransportCommand.SET_BPM:
+                conductor.set_bpm(te.bpm)
+                print(f"(tempo -> {int(te.bpm)} BPM)")
 
     print(__doc__.split("printed on startup):")[-1])
     running = True
     while running:
         dt_ms = clock.tick(60)
         for ev in pygame.event.get():
-            for action in mapper.map_event(ev):
+            # rev 3: while the BPM box is focused, the keyboard belongs to it
+            # (mute the InputMapper hotkeys so Space etc. don't fire mid-typing)
+            for action in (mapper.map_event(ev) if not transport.typing else []):
                 if action is Action.QUIT:
                     running = False
                 elif action is Action.PLAY_PAUSE:

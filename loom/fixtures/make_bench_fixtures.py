@@ -79,7 +79,7 @@ def build(spell_id, display, func_text, f, n_notes, dense, base_midi,
         "spell_id": spell_id, "display_name": display,
         "function_text": func_text,
         "instrument": instrument, "articulation": articulation,
-        "bpm": 90, "base_note": note_name(base_midi),
+        "bpm": 110, "base_note": note_name(base_midi),
         "total_beats": float(n_notes),
         "keyboard": {"low_note": note_name(low), "high_note": note_name(high)},
         "staff": {"clef": "grand" if any(n["midi"] < 60 for n in notes)
