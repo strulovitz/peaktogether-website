@@ -7,4 +7,5 @@ def test_core_is_pygame_free():
     import core.tuning         # noqa: F401
     import core.conductor      # noqa: F401
     import core.audio          # noqa: F401
+    import core.notation       # noqa: F401
     assert "pygame" not in sys.modules
