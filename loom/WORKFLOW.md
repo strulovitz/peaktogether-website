@@ -78,6 +78,20 @@ Everything committed + pushed to `github.com/strulovitz/peaktogether-website` un
 
 ## 7. CURRENT SITUATION (July 6, 2026)
 
+> 🛑🛑 **STOP — READ FIRST (2026-07-06): MAJOR REBOOT DECIDED.** Nir realized the
+> built LOOM design lost the SOUL of his book (HSS): it flattened everything into
+> a single-instrument, single-pitch, ONE-variable melody, and **dropped the
+> timbre axis and the two-variable "surface"/helix heart.** The helix he actually
+> wants: **angle = timbre (instrument family: strings/woodwinds/brass), height =
+> pitch (violin high … double bass low, incl. negative), centered on the (0,0,0)
+> origin in height AND left-right AND forward-back** — the 3D way to hear a
+> function of TWO variables. Nir's call: **"we need to do everything from the
+> start."** He will open a **FRESH Fable chat to RE-DESIGN from scratch** (DeepSeek
+> must NOT design it). Authoritative details: **`loom/HELIX_AND_REBOOT_NIRS_TRUE_VISION.md`.**
+> The M0–M3 code below (83 tests) still exists but serves the OLD flattened
+> conception; whether any is reused is Fable's call in the redesign. Everything
+> from "M3 POUR 2" onward is now historical, pending the reboot.
+
 - ✅ Doctrine phase **COMPLETE**: full scripture trilogy written, saved verbatim, pushed.
 - ✅ Book cleaned; summaries + master summary saved; Commentaries + WORKFLOW written.
 - ✅ **M0 DONE (July 6, 2026):** DeepSeek built + ran the throwaway spike `loom/spikes/m0_latency_spike.py` on Nir's PC against the REAL Philharmonia MP3s. Result: MP3→buffer decode reliable (pygame.mixer.Sound, ~0.5–1 ms/file, 0 failures); output latency 256=5.80 ms / 512=11.61 ms (budget ≤30 ms → PASS, target 256); pygame 2.6.1 / SDL 2.28.4 / numpy 2.4.6 confirmed. **MP3 = GO** (OGG/WAV fallback not needed). Nir ear-confirmed real violin + oboe C-major scales — "sounds good", instant. Full result written into Commentaries §6/§7.
