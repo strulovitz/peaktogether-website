@@ -110,6 +110,11 @@ From BIBLE v1.1 §15, plus New Testament and Apocrypha bindings. Do not reopen w
   3. **Fact corrections:** length tokens are `025/05/1/15` (+ qualitative `long/very-long/phrase`); there is **no `2` token**; `phrase` files are multi-attack gestures and are **never eligible** for spells.
   - Implementation landed: `loom/forge/forge_samples.py` (the Forge — TRUNCATE + natural release, or correlation-matched LOOP-EXTEND, then set-wide RMS loudness match; outputs to git-ignored `loom/forge/forged/`). M1 demo resolver patched to the uniform-length rule.
   - 🎧 **Nir's audition verdict (July 6, 2026 — OPEN / deferred, "continue later"):** the forged violin scale is **not yet perceptually uniform** — the 6th note **C5 (a LOOP-EXTEND note) rings very short**. The Layer-1 demo (uniform `05`) is better but **all-short**, with **E4 & A4 sticking out longer**. **Nir's goal: every note uniformly LONG/sustained (like the Forge intends), not short.** The Forge + demo audio needs another pass (make all notes long + equal; fix loop-extend hold on C5). Not blocking Part 3 / M2.
+- **M2 amendments (by Nir, July 2026 — during Parent 3's Music Bench build):**
+  1. **The Bench staff ALWAYS shows the full grand staff** (treble above, bass below, middle C between). This supersedes BIBLE §2's "grand clef only when required" — the Bench no longer hides the bass staff for treble-only spells. A note draws on the treble iff midi ≥ 60, else on the bass (NT Stage 5 rule). Implemented in `player/ui/bench_staff.py` rev 2.
+  2. **num_notes maximum raised from 16 to 20** (BIBLE §7.2). Nir's call; the widgets were already N-agnostic, so no code enforced 16 — this is purely a doctrine number. The curved demo fixture `fixture_bench20.json` (f(x)=√x, cello, chromatic, C3–C5) uses 20 notes.
+  3. **Bench width + 2-octave keyboard:** keyboard + grand staff now span almost the full 1280 width (`layout.py` rev 2); 2 octaves fill it. Numbers still PROVISIONAL until Nir's final eye-tuning pass.
+  4. **Every keyboard key sounds** (black keys included): the demo resolves the whole visible keyboard from the library (required_samples superset doctrine), not just the spell's own notes. Keys also gained a pressed/released visual (Windows-button feel).
 
 ---
 
