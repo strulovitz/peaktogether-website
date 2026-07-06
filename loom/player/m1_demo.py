@@ -55,7 +55,8 @@ TUNING_PATH = os.path.join(HERE, "data", "scrub_tuning.json")
 BEEP_DIR = os.path.join(LOOM_DIR, "fixtures", "audio_beeps")
 
 NOTE_NAMES = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"]
-LENGTH_RANK = {"2": 5, "15": 4, "1": 3, "05": 2, "025": 1}  # prefer longer ring
+LENGTH_RANK = {"15": 4, "1": 3, "05": 2, "025": 1}   # numeric takes only; no "2" exists
+# "long"/"very-long"/"phrase" are multi-attack or expressive gestures: never eligible.
 DYNAMIC_PREFERENCE = ["forte", "mezzo-forte", "fortissimo", "mezzo-piano", "piano"]
 
 
@@ -63,46 +64,49 @@ def note_name(midi: int) -> str:
     return f"{NOTE_NAMES[midi % 12]}{midi // 12 - 1}"       # MIDI 60 -> C4
 
 
-def resolve_real_samples(spell: SpellData, library_dir: str) -> dict[int, str]:
-    """For each note, find a REAL file in <library>/<instrument>/ matching
-    <instrument>_<note>_<length>_<dynamic>_<articulation>.mp3 (grammar
-    confirmed on Nir's files, Commentaries par.7), preferring longer
-    recorded lengths. Returns {note.index: absolute path}. Halts with a
-    plain-language error if any note has no real recording."""
+def resolve_real_samples(spell, library_dir):
+    """UNIFORM-LENGTH rule: choose ONE length token available for EVERY
+    note of the spell (at its dynamic+articulation), preferring the
+    longest common one. Duration must never vary across a flat melody —
+    pitch is the data, so length must be uniform."""
     instrument = spell.raw.get("instrument")
     articulation = spell.raw.get("articulation", "normal")
     folder = os.path.join(library_dir, instrument)
     if not os.path.isdir(folder):
-        raise SystemExit(
-            f"ERROR: instrument folder not found: {folder}\n"
-            f"Expected the Philharmonia library at: {library_dir}\n"
-            f"(pass --library <path> if it lives elsewhere)")
+        raise SystemExit(f"ERROR: instrument folder not found: {folder}")
     files = os.listdir(folder)
-    resolved: dict[int, str] = {}
-    for n in spell.notes:
-        name = note_name(n.midi)
-        pick = None
+
+    def takes(name):  # {length_token: filename} for this note at any preferred dynamic
         for dyn in DYNAMIC_PREFERENCE:
-            cands = [f for f in files
-                     if f.startswith(f"{instrument}_{name}_")
-                     and f.endswith(f"_{dyn}_{articulation}.mp3")]
-            if cands:
-                def rank(f: str) -> int:
-                    parts = f.split("_")
-                    return LENGTH_RANK.get(parts[2], 0) if len(parts) >= 3 else 0
-                pick = max(cands, key=rank)
-                break
-        if pick is None:
-            near = sorted(f for f in files if f"_{name}_" in f)[:5]
-            raise SystemExit(
-                f"ERROR: no real recording found for {instrument} {name} "
-                f"(articulation {articulation!r}) in {folder}\n"
-                f"Searched pattern: {instrument}_{name}_<length>_<dynamic>_{articulation}.mp3\n"
-                f"Nearby files: {near or '(none with this note name)'}\n"
-                f"This demo does NOT fall back to beeps. "
-                f"Paste this message to DeepSeek.")
-        resolved[n.index] = os.path.join(folder, pick)
-        print(f"  note {n.index}: {name} -> {pick}")
+            found = {}
+            for f in files:
+                parts = f.split("_")
+                if (len(parts) == 5 and parts[0] == instrument and parts[1] == name
+                        and parts[3] == dyn and parts[4] == f"{articulation}.mp3"
+                        and parts[2] in LENGTH_RANK):
+                    found[parts[2]] = f
+            if found:
+                return found
+        return {}
+
+    per_note = {n.index: takes(note_name(n.midi)) for n in spell.notes}
+    missing = [note_name(spell.notes[i].midi) for i, t in per_note.items() if not t]
+    if missing:
+        raise SystemExit(f"ERROR: no usable recordings for {instrument} notes: {missing}")
+    common = set.intersection(*[set(t.keys()) for t in per_note.values()])
+    if not common:
+        raise SystemExit(
+            f"ERROR: no single recorded length covers all notes of "
+            f"{spell.spell_id} on {instrument}. Per-note availability: "
+            f"{ {note_name(spell.notes[i].midi): sorted(t) for i, t in per_note.items()} }\n"
+            f"Fix: run the Sample Forge (loom/forge/) for this spell.")
+    chosen = max(common, key=lambda t: LENGTH_RANK[t])
+    print(f"  uniform length chosen: '{chosen}' (common to all {len(per_note)} notes)")
+    resolved = {}
+    for n in spell.notes:
+        f = per_note[n.index][chosen]
+        resolved[n.index] = os.path.join(folder, f)
+        print(f"  note {n.index}: {note_name(n.midi)} -> {f}")
     return resolved
 
 

@@ -10,3 +10,4 @@ release/
 
 # LOOM generated assets (never commit these)
 loom/fixtures/audio_beeps/
+loom/forge/forged/

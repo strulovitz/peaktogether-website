@@ -104,6 +104,11 @@ From BIBLE v1.1 §15, plus New Testament and Apocrypha bindings. Do not reopen w
 
 - **BIBLE v1.0 → v1.1** (all by Nir's decisions, answering Fable's 6 open questions): heroes named Girlfriend/Boyfriend; silence between puzzles locked; dark/tension palette permanently parked; shipped audio = verbatim Philharmonia MP3s with original filenames; window locked 1280×720; **Laboratory IN for v1 with live sliders**; **Scrubbing added as a core pillar + universal transport feature**; "dumb runtime" refined to permit simple arithmetic on precompiled numbers; spell schema extended (gain, lab block). v1.0 was deleted from the repo; **only v1.1 is authoritative.**
 - **New Testament v1.0 Addendum A** (declared, non-contradicting): global `notation_table.json` asset; per-spell Compiler audition outputs (`preview.wav` + `compile_report.txt`); fixture fake-library convention.
+- **Sample-length uniformity + the Sample Forge (Fable, July 6, 2026 — the day the violin C5 "came up short").** Three recorded lines:
+  1. **Amendment (by Nir, 2026-07-06):** packs may ship **forged samples** — uniform-duration WAV derivatives produced at design time from Philharmonia originals by `loom/forge/`. The originals remain the untouchable source of truth; the sanctioned OGG/WAV-fallback doctrine already covered the container change. The Player still performs zero audio processing.
+  2. **Selection law (Compiler Stage 8 + all resolvers):** sample lengths are chosen **uniformly per spell, never per-note independently** (duration must never carry information in a flat-rhythm spell — pitch is the data, so length must be uniform).
+  3. **Fact corrections:** length tokens are `025/05/1/15` (+ qualitative `long/very-long/phrase`); there is **no `2` token**; `phrase` files are multi-attack gestures and are **never eligible** for spells.
+  - Implementation landed: `loom/forge/forge_samples.py` (the Forge — TRUNCATE + natural release, or correlation-matched LOOP-EXTEND, then set-wide RMS loudness match; outputs to git-ignored `loom/forge/forged/`). M1 demo resolver patched to the uniform-length rule.
 
 ---
 
