@@ -1,0 +1,14 @@
+{
+  "_comment": "BONE M2 - device -> named action map (input_actions.py). Draft; DeepSeek + Nir tune, then freeze. Future joystick/controller = new entries here, ZERO code changes.",
+  "keyboard": {
+    "SPACE": "PLAY_PAUSE", "HOME": "STOP",
+    "LEFT": "NUDGE_LEFT", "RIGHT": "NUDGE_RIGHT",
+    "UP": "MENU_UP", "DOWN": "MENU_DOWN",
+    "RETURN": "MENU_CONFIRM", "BACKSPACE": "MENU_BACK",
+    "ESCAPE": "QUIT"
+  },
+  "mouse": {
+    "_comment": "pointer targets (keys, OK/Cancel, timeline, graph) are hit-tested by widgets; buttons here",
+    "BUTTON_1": "POINTER_PRIMARY"
+  }
+}
