@@ -1,8 +1,9 @@
-# LOOM2 — THE UPANISHADS — VERBATIM, WORD-FOR-WORD, AS-IS, BY FABLE
+# LOOM2 — THE MAHABHARATA — VERBATIM, WORD-FOR-WORD, AS-IS, BY FABLE
 
 > Saved verbatim by DeepSeek at Nir's instruction. The breakthrough that turns a
 > surface from a 1D siren-sweep into a played ORCHESTRA (the Listening Totem).
-> Do not edit — this is the archive.
+> (Renamed from UPANISHADS at Nir's request — "UPANISHADS" is reserved for a
+> later document Fable will give.) Do not edit — this is the archive.
 
 ---
 
