@@ -1,0 +1,21 @@
+{
+  "format": "loom-spell",
+  "format_version": "1.0",
+  "spell_id": "fixture_flat8",
+  "display_name": "Fixture: Eight Even Steps (violin)",
+  "function_text": "hand-written M1 fixture - pentatonic ascent, flat rhythm",
+  "instrument": "violin",
+  "articulation": "arco-normal",
+  "bpm": 90,
+  "notes": [
+    { "index": 0, "note_name": "C4", "midi": 60, "start_beat": 0.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_C4_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 1, "note_name": "D4", "midi": 62, "start_beat": 1.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_D4_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 2, "note_name": "E4", "midi": 64, "start_beat": 2.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_E4_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 3, "note_name": "G4", "midi": 67, "start_beat": 3.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_G4_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 4, "note_name": "A4", "midi": 69, "start_beat": 4.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_A4_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 5, "note_name": "C5", "midi": 72, "start_beat": 5.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_C5_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 6, "note_name": "D5", "midi": 74, "start_beat": 6.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_D5_1_forte_arco-normal.mp3", "gain": 0.9 },
+    { "index": 7, "note_name": "E5", "midi": 76, "start_beat": 7.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "violin_E5_1_forte_arco-normal.mp3", "gain": 0.9 }
+  ],
+  "notes_for_humans": "M1 fixture. The sample names are canonical guesses; the demo resolves each note against the REAL library on disk (any recorded length, preferring longer) and refuses to run if a real file cannot be found."
+}
