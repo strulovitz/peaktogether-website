@@ -9,9 +9,10 @@ almost the full width; staff sits directly above the piano and is a
 FULL GRAND STAFF always (Nir's amendment); transport + OK/Cancel share
 the bottom strip. HELIX keeps its reserved home for M4.
 
-STATUS: still PROVISIONAL until Nir's final eye pass on m2_demo,
-then FROZEN. Every widget takes its rect from here via the wiring;
-widgets never import this module (testability).
+STATUS: FROZEN by Nir (2026-07-06) after his eye pass on m2_demo — he
+approved the layout as-is; these numbers are now permanent (do not move
+the keyboard/staff/etc). Every widget takes its rect from here via the
+wiring; widgets never import this module (testability).
 """
 
 import pygame

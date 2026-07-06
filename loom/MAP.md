@@ -57,7 +57,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
           progress.py                 [BONE M7] local save file (last scene, lab unlocks)
         ui/                           (pygame allowed here and only here)
           audio_pygame.py             [MEAT]    16-voice pool over pygame.mixer
-          layout.py                   [MEAT]    every fixed 1280x720 rectangle (numbers provisional til Nir's eye)
+          layout.py                     [MEAT]    every fixed 1280x720 rectangle (FROZEN by Nir 2026-07-06)
           input_actions.py            [MEAT]    named actions; device->action mapping (KEY events only)
           bench_keyboard.py           [MEAT]    piano widget (click = sound)
           bench_staff.py              [MEAT]    staff renderer (noteheads only)
@@ -144,3 +144,5 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
 - 2026-07-06  M2 COMPLETE. Parent 3 (Fable) RETIRED (final will archived). NEXT = fresh
               Parent 4 for M3 (the Echo). Loose ends: layout eye-freeze (Nir); bench_buttons.py
               (Fable wrote, not landed) -> Parent 4; notation_table.json still temporary.
+- 2026-07-06  LAYOUT FROZEN by Nir (played m2_demo, approved as-is; layout.py numbers are
+              now permanent - do not move the keyboard/staff/etc).

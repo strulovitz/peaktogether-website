@@ -109,7 +109,7 @@ Parent 3 (fresh Fable) built all of M2 "pour-everything-while-fresh" style (Nir'
 - **Nir approved all 5 of Fable's batched questions** (midi_for_name; 3px threshold; Segoe clef glyphs; OK/Cancel → `bench_buttons.py` in M3; helix placeholder now / real helix M4). All M2 amendments recorded in Commentaries §5.
 
 ### 🧾 WHAT'S LEFT (the road ahead)
-- ⏳ **Layout eye-freeze (Nir + DeepSeek, small, not a parent's job):** `layout.py` numbers are still PROVISIONAL. Nir runs `python loom/player/m2_demo.py`, says "move X"; DeepSeek edits the numbers; then mark layout FROZEN.
+- ✅ **Layout FROZEN (Nir, July 6, 2026):** Nir played `python loom/player/m2_demo.py`, approved the layout as-is — `layout.py` numbers are now permanent (keyboard/staff/etc. do not move). Marked FROZEN in `layout.py`, `MAP.md`, and Commentaries §5.
 - 🌀 **bench_buttons.py:** Fable says he WROTE it in his final messages ("ready to land") but the code was NOT pasted into this session — it is NOT yet in the repo. Parent 4 owns OK/Cancel + `bench_buttons.py` as part of M3 (or Nir may paste Fable's version to land it).
 - 🎮 **M3 — THE ECHO (Parent 4, NEXT):** pure echo state machine (preview/commit/cancel/reset; slots solid/hollow/dashed), unlimited gentle retries, staff gains an ADDITIVE optional echo arg, reward playback on completion. **3 OPEN questions for Nir** (Fable proposed defaults): (a) feedback on a wrong commit; (b) auto-sound on a correct commit; (c) strict slot order or not.
 - 🔭 **Then:** M4 helix (`helix_view.py`) — the "center of the game" Nir loves; M5 story+choice; M6 lab (uses `set_bpm`); M7 pack/menu/app/progress.
