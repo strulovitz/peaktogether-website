@@ -99,6 +99,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
         test_m2_widgets.py            [MEAT]    keyboard/transport/graph geometry+maps (M2)
         test_input_mapper.py          [MEAT]    InputMapper key->action (M2)
         test_bench_fixtures.py        [MEAT]    generated fixture validation (M2)
+        test_length_choice.py         [MEAT]    FIT-THE-BEAT sample-length rule (M2)
       packs/                          (future Problem Packs live here)
       prompts/                        (Story Weaver prompt, per the Apocrypha)
 
@@ -132,3 +133,7 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
               generates fixture_bench8 (violin) + fixture_bench20 (cello sqrt, 20 notes -
               Nir raised the cap 16->20). Cello 20-note fixture verified: resolves at length
               '15', all 25 keyboard keys sound. 51 tests pass.
+- 2026-07-06  M2 ghost-pedal fix (Parent 3): FIT-THE-BEAT rule in m1_demo resolver
+              (uniform length = longest token <= shortest note's seconds; fallback shortest).
+              Kills the sustain-pedal note overlap in the 20-note cello demo (now picks 025).
+              +test_length_choice.py. 57 tests pass. Amendment in Commentaries §5.

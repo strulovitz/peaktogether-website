@@ -55,8 +55,26 @@ TUNING_PATH = os.path.join(HERE, "data", "scrub_tuning.json")
 BEEP_DIR = os.path.join(LOOM_DIR, "fixtures", "audio_beeps")
 
 NOTE_NAMES = ["C", "Cs", "D", "Ds", "E", "F", "Fs", "G", "Gs", "A", "As", "B"]
-LENGTH_RANK = {"15": 4, "1": 3, "05": 2, "025": 1}   # numeric takes only; no "2" exists
+LENGTH_RANK = {"15": 4, "1": 3, "05": 2, "025": 1}   # parse eligibility; no "2" exists
+TOKEN_SECONDS = {"025": 0.25, "05": 0.5, "1": 1.0, "15": 1.5}
 # "long"/"very-long"/"phrase" are multi-attack or expressive gestures: never eligible.
+
+
+def choose_uniform_token(common_tokens, min_note_seconds: float) -> str:
+    """FIT-THE-BEAT rule (Nir's ghost-pedal fix, July 2026): from the
+    tokens available for EVERY note, pick the LONGEST whose nominal
+    seconds do not exceed the spell's shortest note duration — so a
+    note never rings over its neighbours (the 'sustain pedal from a
+    horror movie' effect). If nothing fits inside the beat, take the
+    shortest available (least overlap possible). One token for the
+    whole spell — the Selection Law is preserved."""
+    fitting = [t for t in common_tokens
+               if TOKEN_SECONDS[t] <= min_note_seconds + 1e-9]
+    if fitting:
+        return max(fitting, key=lambda t: TOKEN_SECONDS[t])
+    return min(common_tokens, key=lambda t: TOKEN_SECONDS[t])
+
+
 DYNAMIC_PREFERENCE = ["forte", "mezzo-forte", "fortissimo", "mezzo-piano", "piano"]
 
 
@@ -100,8 +118,12 @@ def resolve_real_samples(spell, library_dir):
             f"{spell.spell_id} on {instrument}. Per-note availability: "
             f"{ {note_name(spell.notes[i].midi): sorted(t) for i, t in per_note.items()} }\n"
             f"Fix: run the Sample Forge (loom/forge/) for this spell.")
-    chosen = max(common, key=lambda t: LENGTH_RANK[t])
-    print(f"  uniform length chosen: '{chosen}' (common to all {len(per_note)} notes)")
+    min_note_seconds = (min(n.duration_beats for n in spell.notes)
+                        * 60.0 / spell.bpm)
+    chosen = choose_uniform_token(common, min_note_seconds)
+    print(f"  uniform length chosen: '{chosen}' "
+          f"({TOKEN_SECONDS[chosen]}s samples for {min_note_seconds:.2f}s notes; "
+          f"common to all {len(per_note)} notes)")
     resolved = {}
     for n in spell.notes:
         f = per_note[n.index][chosen]
