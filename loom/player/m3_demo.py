@@ -2,9 +2,9 @@
 m3_demo.py — Milestone 3: the Echo answers back. [demo scaffolding]
 
 Run (from anywhere):
-    python m3_demo.py                       <- violin line, grow mode
+    python m3_demo.py                       <- cello sqrt curve, 2 octaves, grow
     python m3_demo.py --mode whole          <- full melody, answer all slots
-    python m3_demo.py --spell fixtures/spells/fixture_bench20.json
+    python m3_demo.py --spell fixtures/spells/fixture_bench8.json
     python m3_demo.py --library "D:/somewhere/philharmonia"
     python m3_demo.py --beeps               <- EXPLICIT fallback only
 
@@ -20,7 +20,7 @@ roam the full melody. If Nir prefers total freedom even in grow,
 boundary_beats() below shrinks to one line.
 
 NIR'S ACCEPTANCE SCRIPT (printed on startup):
-  1. The first violin note plays by itself; its key, graph segment and
+  1. The first note plays by itself; its key, graph segment and
      staff slot light together. Then it is YOUR turn.
   2. Click any piano key: it SOUNDS (audition) and a hollow notehead
      appears at YOUR guess on the staff. OK wakes up.
@@ -57,14 +57,14 @@ from m1_demo import (resolve_real_samples, resolve_beeps,    # noqa: E402
 from m2_demo import resolve_keyboard_coverage                # noqa: E402
 
 DEFAULT_SPELL = os.path.join(LOOM_DIR, "fixtures", "spells",
-                             "fixture_bench8.json")
+                             "fixture_bench20.json")
 TUNING_PATH = os.path.join(HERE, "data", "scrub_tuning.json")
 NOTATION_PATH = os.path.join(HERE, "data", "notation_table.json")
 MAPPING_PATH = os.path.join(HERE, "data", "input_mapping.json")
 ECHO_TUNING_PATH = os.path.join(HERE, "data", "echo_tuning.json")
 
 # ---- demo stand-ins for pack.json texts (the real ones arrive in M7) ----
-INTRO_TEXT = ("Listen: the violin climbs a steady staircase. "
+INTRO_TEXT = ("Listen: the melody traces the function's curve. "
               "Echo each note back on the piano.")
 ECHO_PROMPT = "Your turn: click the key you heard, then OK."
 GROW_TEXT = "Lovely! Listen - one note longer now..."
