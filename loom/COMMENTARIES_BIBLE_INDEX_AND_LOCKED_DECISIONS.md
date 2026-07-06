@@ -1,6 +1,6 @@
 # LOOM BIBLE — THE COMMENTARIES (catalog · locked decisions · amendment trail)
 
-> Nicknamed **"the Commentaries"** (after the Quake project's document of the same purpose) — the small, maintained guide to the larger LOOM scripture. Maintained by **DeepSeek**. Current as of **July 2, 2026**. This is the ONE digest every new Opus "parent" chat should receive in full, alongside the scriptures it needs. It is **not** the scripture — it is the **map** of it: what exists, what is frozen, what has been amended.
+> Nicknamed **"the Commentaries"** (after the Quake project's document of the same purpose) — the small, maintained guide to the larger LOOM scripture. Maintained by **DeepSeek**. Current as of **July 6, 2026**. This is the ONE digest every new Opus "parent" chat should receive in full, alongside the scriptures it needs. It is **not** the scripture — it is the **map** of it: what exists, what is frozen, what has been amended.
 
 ---
 
@@ -110,17 +110,23 @@ From BIBLE v1.1 §15, plus New Testament and Apocrypha bindings. Do not reopen w
 ## §6 — OPEN QUESTIONS / ENGINEERING ITEMS (assigned to DeepSeek, none block Nir)
 
 None require a Nir decision right now. Engineering items for DeepSeek's build-time test loop (NOT blockers for further design docs):
-1. **M0 spike** — MP3 decode reliability + trigger latency on Nir's Windows PC (target ≤30 ms; fallback OGG/WAV pre-approved).
-2. **`library_profile.json`** — decode the meaning of the Philharmonia filename numeric token + the variant-preference ranking; confirm/amend the "safe instrument roster" (flute, clarinet, oboe, cello, violin, french-horn, trumpet).
+1. ✅ **M0 spike — DONE (July 6, 2026).** MP3 decode reliable + latency tiny; see §7 for the full result. Both biggest unknowns retired.
+2. **`library_profile.json`** — the Philharmonia filename numeric token is now decoded (it is the note LENGTH in seconds: `025`=0.25s, `05`=0.5s, `1`=1.0s, `15`=1.5s, `2`=2.0s; see §7 for the full filename grammar). Still to formalize: the variant-preference ranking + confirm/amend the "safe instrument roster" (flute, clarinet, oboe, cello, violin, french-horn, trumpet) — all 20 owned instrument folders are listed in §7.
 3. Final **scrub tuning constants** (`scrub_tuning.json`) — tuned by ear with Nir.
-4. **pygame vs pygame-ce** (or fallback) — decided by M0/M1 evidence, reported back to confirm/amend BIBLE §14.
+4. ✅ **pygame confirmed by M0** — pygame 2.6.1 (SDL 2.28.4) loads real Philharmonia MP3s into triggerable buffers with ~5.8 ms output latency; BIBLE §14's pygame recommendation stands (no pygame-ce needed).
 
 ---
 
-## §7 — CURRENT FRONTIER (July 2, 2026)
+## §7 — CURRENT FRONTIER (July 6, 2026)
 
 - ✅ Source book read + cleaned into `loom/book/`; Fable's summaries + master summary saved.
 - ✅ **The full scripture trilogy is DONE** (BIBLE v1.1 + New Testament v1.0 + Apocrypha v1.0), all saved verbatim + pushed.
 - ✅ This Commentaries + the WORKFLOW written.
-- ⏳ **NEXT (build phase, when Nir is ready):** (1) DeepSeek runs M0; (2) open Parent A for Compiler module specs; (3) open Parent B for Player core; (4) optionally test-drive the Story Weaver prompt on the Square Root Wikipedia page (needs no code).
-- 🧵 Nir's immediate plan after this: **restart OpenCode (fresh DeepSeek), then start the BIBLE for ANOTHER game** while Claude Fable access lasts (politically fragile — front-load doctrine).
+- ✅ **M0 DONE (July 6, 2026) — both biggest unknowns retired.** DeepSeek built a throwaway spike (`loom/spikes/m0_latency_spike.py`) and ran it on Nir's PC against the REAL Philharmonia MP3s:
+  - **MP3 → buffer decode works:** `pygame.mixer.Sound` loaded real violin + oboe MP3s straight into preloaded buffers, 8/8 notes each, ~0.5–1 ms per file. No decode failures. **Verdict: MP3 is a GO** (the pre-approved OGG/WAV fallback is NOT needed).
+  - **Latency is tiny:** computed output latency = buffer/44100 → **256 samples = 5.80 ms**, **512 samples = 11.61 ms**; both well under the binding **≤30 ms** budget. Software `play()` overhead ≈ 0.004 ms. **Target buffer = 256.**
+  - **Stack confirmed:** pygame **2.6.1**, SDL **2.28.4**, numpy 2.4.6, mixer at 44100 Hz / 16-bit / stereo. BIBLE §14's pygame choice stands.
+  - **Nir ear-confirmed:** played real violin + oboe C-major scales (C4→C5) — "sounds good", notes fire instantly. 🎻🎺
+- ✅ **The Philharmonia library is present on Nir's PC** at `C:\Users\nir_s\Downloads\philharmonia\` (a compile-time resource on the author's machine — the full library is NEVER shipped; packs bundle only the few files they use, verbatim). **20 instrument sub-folders are available:** `banjo`, `bass clarinet`, `bassoon`, `cello`, `clarinet`, `contrabassoon`, `cor anglais`, `double bass`, `flute`, `french horn`, `guitar`, `mandolin`, `oboe`, `percussion`, `saxophone`, `trombone`, `trumpet`, `tuba`, `viola`, `violin`.
+  - **Filename grammar (confirmed on the real files):** `instrument_note_length_dynamic_articulation.mp3`, e.g. `violin_A3_025_forte_arco-normal.mp3`. Note names use `s` for sharps (`As3`, `Cs4`), octaves ~3–8. **LENGTH** token = seconds (`025`=0.25, `05`=0.5, `1`=1.0, `15`=1.5, `2`=2.0). **Dynamics:** pianissimo, piano, mezzo-piano, mezzo-forte, forte, fortissimo (+ crescendo/decrescendo). **Articulations:** the plain sustained note is `arco-normal` (strings) / `normal` (winds); many others exist (pizz-normal, staccato, tremolo, harmonics, con-sord, …).
+- ⏳ **NEXT (Nir's choice — Option 1, working with Fable): open Parent 2** — a fresh Fable chat — to freeze the **Player-core module contracts (the Conductor + Audio Engine, milestone M1)** from the BIBLE + New Testament Part II + these M0 results. A child chat then implements to that frozen contract + tests, and DeepSeek integrates/runs it. (Later parents, by number, take the Compiler and the remaining areas; optional cheap task any time: test-drive the Story Weaver prompt on the Square Root Wikipedia page — needs no code.)

@@ -76,19 +76,20 @@ Everything committed + pushed to `github.com/strulovitz/peaktogether-website` un
 
 ---
 
-## 7. CURRENT SITUATION (end of July 2, 2026)
+## 7. CURRENT SITUATION (July 6, 2026)
 
 - ✅ Doctrine phase **COMPLETE**: full scripture trilogy written, saved verbatim, pushed.
 - ✅ Book cleaned; summaries + master summary saved; Commentaries + WORKFLOW written.
-- ⏳ Build phase **NOT started** (deliberately — context windows are full; Nir will restart).
-- 🧵 **Nir's immediate next intention:** restart OpenCode for a fresh DeepSeek, then **begin the BIBLE for ANOTHER game** with Claude Fable while access lasts (politically fragile).
+- ✅ **M0 DONE (July 6, 2026):** DeepSeek built + ran the throwaway spike `loom/spikes/m0_latency_spike.py` on Nir's PC against the REAL Philharmonia MP3s. Result: MP3→buffer decode reliable (pygame.mixer.Sound, ~0.5–1 ms/file, 0 failures); output latency 256=5.80 ms / 512=11.61 ms (budget ≤30 ms → PASS, target 256); pygame 2.6.1 / SDL 2.28.4 / numpy 2.4.6 confirmed. **MP3 = GO** (OGG/WAV fallback not needed). Nir ear-confirmed real violin + oboe C-major scales — "sounds good", instant. Full result written into Commentaries §6/§7.
+- ✅ **Philharmonia library present** at `C:\Users\nir_s\Downloads\philharmonia\` (compile-time only; never shipped). 20 instrument folders: banjo, bass clarinet, bassoon, cello, clarinet, contrabassoon, cor anglais, double bass, flute, french horn, guitar, mandolin, oboe, percussion, saxophone, trombone, trumpet, tuba, viola, violin. Filename grammar decoded: `instrument_note_length_dynamic_articulation.mp3` (length token = seconds; sharps = `s`; plain note = arco-normal/normal). See Commentaries §7.
+- 🧵 **Nir's choice (July 6): Option 1 — work with Fable, open Parent 2** for the Player core.
 
-### NEXT STEPS for LOOM (when we return to build it), per Fable's recommendation:
-1. **DeepSeek runs Milestone 0** (New Testament §II.8): a ~50-line throwaway app — load 5 Philharmonia MP3s, click-trigger, try mixer buffer 256/512, measure/feel latency, confirm MP3 reliability on Nir's Windows PC. Output: short report + go/no-go on MP3 (fallback: compile-time OGG/WAV, pre-approved). Retires the two biggest unknowns before real code.
-2. **Open Parent A** (BIBLE + New Testament Part I) → frozen module specs for the Compiler's child chats.
-3. **Open Parent B** (BIBLE + New Testament Part II + M0 results) → the Player's core.
-4. **Optionally test-drive the Story Weaver prompt** on the Square Root Wikipedia page — produces story/dialogue/images/specs with NO code yet; cheap way to find prompt polish needs. (First planned content pack: **Square Root**.)
-- Also pending (build-time, DeepSeek): produce `library_profile.json` (decode Philharmonia filename token + instrument roster), and later extract the Story Weaver prompt to its canonical home `loom/prompts/story_weaver_v1.md`.
+### NEXT STEPS for LOOM (build phase):
+1. ✅ **Milestone 0** — DONE (see above).
+2. ⏳ **Open Parent 2** (fresh Fable chat) ← give it: SUMMARIES_BUNDLE + BIBLE (Old Testament) + New Testament + Apocrypha + Commentaries (view/blob links). Task: freeze the **Player-core module contracts (the Conductor + Audio Engine, M1)** from New Testament Part II + the M0 results. Then a child chat implements to that contract + tests; DeepSeek integrates/runs.
+3. **Later parents (by number)** take the Compiler (New Testament Part I) and the remaining areas.
+4. **Optionally test-drive the Story Weaver prompt** on the Square Root Wikipedia page — story/dialogue/images/specs with NO code yet. (First planned content pack: **Square Root**.)
+- Also pending (build-time, DeepSeek): formalize `library_profile.json` (variant-preference ranking + roster; token already decoded), and later extract the Story Weaver prompt to `loom/prompts/story_weaver_v1.md`.
 
 ---
 
