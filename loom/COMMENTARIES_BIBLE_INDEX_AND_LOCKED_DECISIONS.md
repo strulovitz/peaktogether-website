@@ -109,6 +109,7 @@ From BIBLE v1.1 §15, plus New Testament and Apocrypha bindings. Do not reopen w
   2. **Selection law (Compiler Stage 8 + all resolvers):** sample lengths are chosen **uniformly per spell, never per-note independently** (duration must never carry information in a flat-rhythm spell — pitch is the data, so length must be uniform).
   3. **Fact corrections:** length tokens are `025/05/1/15` (+ qualitative `long/very-long/phrase`); there is **no `2` token**; `phrase` files are multi-attack gestures and are **never eligible** for spells.
   - Implementation landed: `loom/forge/forge_samples.py` (the Forge — TRUNCATE + natural release, or correlation-matched LOOP-EXTEND, then set-wide RMS loudness match; outputs to git-ignored `loom/forge/forged/`). M1 demo resolver patched to the uniform-length rule.
+  - 🎧 **Nir's audition verdict (July 6, 2026 — OPEN / deferred, "continue later"):** the forged violin scale is **not yet perceptually uniform** — the 6th note **C5 (a LOOP-EXTEND note) rings very short**. The Layer-1 demo (uniform `05`) is better but **all-short**, with **E4 & A4 sticking out longer**. **Nir's goal: every note uniformly LONG/sustained (like the Forge intends), not short.** The Forge + demo audio needs another pass (make all notes long + equal; fix loop-extend hold on C5). Not blocking Part 3 / M2.
 
 ---
 
