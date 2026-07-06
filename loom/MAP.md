@@ -141,3 +141,6 @@ DeepSeek flips BONE -> MEAT here (one line) when a milestone lands.
               M6 Lab pre-work) + TransportWidget gains typed BPM box (40-200, Enter/Esc/
               click-away) + up/down spinners on far right + .typing guard (mutes hotkeys).
               Content default BPM = 110. +test_transport_bpm.py (7 tests). 65 tests pass.
+- 2026-07-06  M2 COMPLETE. Parent 3 (Fable) RETIRED (final will archived). NEXT = fresh
+              Parent 4 for M3 (the Echo). Loose ends: layout eye-freeze (Nir); bench_buttons.py
+              (Fable wrote, not landed) -> Parent 4; notation_table.json still temporary.
