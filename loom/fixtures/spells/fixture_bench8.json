@@ -1,0 +1,31 @@
+{
+  "format": "loom-spell",
+  "format_version": "1.0",
+  "spell_id": "fixture_bench8",
+  "display_name": "M2 Bench Fixture - a straight line, heard",
+  "function_text": "f(x) = x on [0, 1] (hand-made fixture)",
+  "instrument": "violin",
+  "articulation": "arco-normal",
+  "bpm": 90,
+  "scale": "major",
+  "base_note": "C4",
+  "total_beats": 8.0,
+  "keyboard": { "low_note": "C4", "high_note": "C5" },
+  "staff": { "clef": "treble" },
+  "notes": [
+    {"index": 0, "note_name": "C4", "midi": 60, "start_beat": 0.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_C4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 0,  "graph_segment": {"x_from": 0.0,   "x_to": 0.125}},
+    {"index": 1, "note_name": "D4", "midi": 62, "start_beat": 1.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_D4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 2,  "graph_segment": {"x_from": 0.125, "x_to": 0.25}},
+    {"index": 2, "note_name": "E4", "midi": 64, "start_beat": 2.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_E4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 4,  "graph_segment": {"x_from": 0.25,  "x_to": 0.375}},
+    {"index": 3, "note_name": "F4", "midi": 65, "start_beat": 3.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_F4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 5,  "graph_segment": {"x_from": 0.375, "x_to": 0.5}},
+    {"index": 4, "note_name": "G4", "midi": 67, "start_beat": 4.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_G4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 7,  "graph_segment": {"x_from": 0.5,   "x_to": 0.625}},
+    {"index": 5, "note_name": "A4", "midi": 69, "start_beat": 5.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_A4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 9,  "graph_segment": {"x_from": 0.625, "x_to": 0.75}},
+    {"index": 6, "note_name": "B4", "midi": 71, "start_beat": 6.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_B4_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 11, "graph_segment": {"x_from": 0.75,  "x_to": 0.875}},
+    {"index": 7, "note_name": "C5", "midi": 72, "start_beat": 7.0, "duration_beats": 1.0, "dynamic": "forte", "sample": "audio/violin_C5_05_forte_arco-normal.mp3", "gain": 0.9, "key_index": 12, "graph_segment": {"x_from": 0.875, "x_to": 1.0}}
+  ],
+  "graph": {
+    "points": [[0.0, 0.0], [0.125, 0.125], [0.25, 0.25], [0.375, 0.375], [0.5, 0.5], [0.625, 0.625], [0.75, 0.75], [0.875, 0.875], [1.0, 1.0]],
+    "x_label": "x",
+    "y_label": "f(x)"
+  },
+  "notes_for_humans": "Hand-made M2 fixture. A steady staircase: the straight line's melody, with keyboard/staff/graph blocks for the Bench widgets."
+}
