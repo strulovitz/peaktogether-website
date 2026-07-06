@@ -86,7 +86,11 @@ Everything committed + pushed to `github.com/strulovitz/peaktogether-website` un
 
 ### NEXT STEPS for LOOM (build phase):
 1. ✅ **Milestone 0** — DONE (see above).
-2. ⏳ **Open Parent 2** (fresh Fable chat) ← give it: SUMMARIES_BUNDLE + BIBLE (Old Testament) + New Testament + Apocrypha + Commentaries (view/blob links). Task: freeze the **Player-core module contracts (the Conductor + Audio Engine, M1)** from New Testament Part II + the M0 results. Then a child chat implements to that contract + tests; DeepSeek integrates/runs.
+2. 🟡 **Parent 2 (fresh Fable) LAUNCHED — building the Player core, delivering in 3 parts.**
+   - ✅ **Part 1 of 3 landed + integrated (July 6, 2026):** THE MAP (`loom/MAP.md`) + the four frozen "heart" files, all under a new package layout: `loom/player/core/{spell_model,tuning,audio,conductor}.py` + `loom/player/data/scrub_tuning.json` + empty `__init__.py` in player/, player/core/, player/ui/, compiler/. `.gitignore` now ignores `loom/fixtures/audio_beeps/`. py_compile OK; headless smoke test green (Play fires 0→1→2→3 & stops; scrub forward crosses all; release → PAUSED). Verbatim archive: `BIBLE/LOOM_PARENT_2_PART_1_skeleton_and_heart_BY_FABLE.md`. Map also saved for distribution at `BIBLE/PROJECT_MAP_BY_FABLE.md` (Nir's request).
+   - ⏳ **Part 2 (say "continue" to Fable):** pygame audio engine (`player/ui/audio_pygame.py`) + fixture melodies + beep generator + the **M1 demo** (drag the timeline) + full pytest suite.
+   - ⏳ **Part 3:** all the "bone" placeholder modules (whole game + compiler) with frozen interfaces.
+   - 🧱 **NOTE — LOOM is PACKAGED, not flat** (unlike Homeworld's RULE #0): Fable's design uses `loom/player/core/` etc. with relative imports (`from .spell_model import`) and `__init__.py`. This is correct for LOOM; the flat rule was Homeworld-only. `core/` imports stdlib ONLY; anything importing pygame lives in `player/ui/` or demo files.
 3. **Later parents (by number)** take the Compiler (New Testament Part I) and the remaining areas.
 4. **Optionally test-drive the Story Weaver prompt** on the Square Root Wikipedia page — story/dialogue/images/specs with NO code yet. (First planned content pack: **Square Root**.)
 - Also pending (build-time, DeepSeek): formalize `library_profile.json` (variant-preference ranking + roster; token already decoded), and later extract the Story Weaver prompt to `loom/prompts/story_weaver_v1.md`.

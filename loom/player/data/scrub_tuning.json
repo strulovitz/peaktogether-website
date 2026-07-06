@@ -1,0 +1,7 @@
+{
+  "boundary_guard_fraction": 0.04,
+  "max_triggers_per_frame": 4,
+  "steal_fade_ms": 10,
+  "retrigger_min_ms": 90,
+  "highlight_decay_ms": 300
+}
