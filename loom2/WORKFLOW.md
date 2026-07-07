@@ -94,12 +94,27 @@ remake): Descent QED (Basel), Quake: Principia (Calculus), Homeworld: A Good Bas
   taste); slice walk = one `RING_WIDTH` stop per measure (a procession, never a siren);
   `_build_slice_path` must stay literally in sync with `GlassBlade.intersection_path`
   (G3.6). Next: **Part 3 = `graphics/helix_panel.py`** (say "continue" to Fable).
+- **`LOOM2-PURANAS-PART-3-HELIX-PANEL-BY-FABLE.md`** — **PART 3 of 3 of the PURANAS**
+  (Fable "Parent 2", July 7, 2026): `graphics/helix_panel.py`, THE SONIFIQUATION
+  COORDINATES panel (the soul on screen — wireframe coil B0..C7, instrument-icon
+  billboards at cylindrical (r,θ,z) with perspective scaling, register stacks, strike
+  glows feeding bloom, conductor's arm). Delivered complete + saved verbatim; runnable
+  code extracted to `loom2/graphics/helix_panel.py` (py_compile OK). Fable also delivered
+  **4 GLSL shaders** — placed in `loom2/data/shaders/` (`wire.vert`, `wire.frag`,
+  `icon_billboard.vert`, `icon_billboard.frag`). **🏔️ THE PURANAS ARE COMPLETE — all
+  three heavy modules delivered.** Fable's 3 soft seams to verify at stitch time:
+  (1) `Renderer.ctx` should exist (else falls back to `moderngl.get_context()`);
+  (2) matrix convention (assumes `clip = VP·p`, uploads transposed — flip if Child C's
+  camera uses row-vectors); (3) optionally set `panel.z_per_octave = spec.z_per_octave`
+  on scene change.
 
 Naming: Fable's docs get Hindu scripture names. Lineage: **VEDAS → MAHABHARATA →
-RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA → PURANAS** (in progress). The PURANAS
-(the heavy modules — audio/engine.py ✅, core/game_state.py ✅, graphics/helix_panel.py ⏳ —
-written by a fresh Fable "Parent 2") are being delivered ONE COMPLETE FILE PER ANSWER;
-Nir says "continue" between them.
+RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA → PURANAS** (COMPLETE). The PURANAS
+(the heavy modules — audio/engine.py ✅, core/game_state.py ✅, graphics/helix_panel.py ✅ —
+written by a fresh Fable "Parent 2") were delivered ONE COMPLETE FILE PER ANSWER. 🏔️
+**Fable Parent 2's next offers (Nir's choice): write the hand-off prompt for the next
+chat (children A–G), draft scene JSON + hint/explanation texts, or answer children's
+`# CONTRACT-ISSUE` escalations.**
 
 ### ⚖️ CONTRACT AMENDMENT (approved by Nir, July 7, 2026)
 The Gita's `game_state._quiz_select` (G4.3) must play the quiz option WAV "looping,
@@ -202,11 +217,13 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 4. 🟡 **One OPEN item still awaiting Nir:** UPANISHADS scene 10 (Ocean Swell) format —
    keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call, zero
    cost either way).
-5. 📜 **THE PURANAS — IN PROGRESS** (fresh Fable "Parent 2"): the three HEAVY modules,
-   one complete file per answer. ✅ **Part 1 = `audio/engine.py`** (DONE — verbatim in
-   HINDU/ + extracted to `loom2/audio/engine.py`). ✅ **Part 2 = `core/game_state.py`**
-   (DONE — verbatim in HINDU/ + extracted to `loom2/core/game_state.py`). ⏳ **Part 3 =
-   `graphics/helix_panel.py`** (say "continue" to Fable).
+5. 📜 **THE PURANAS — COMPLETE** 🏔️ (fresh Fable "Parent 2"): the three HEAVY modules,
+   one complete file per answer. ✅ **Part 1 = `audio/engine.py`** (verbatim + extracted
+   to `loom2/audio/engine.py`). ✅ **Part 2 = `core/game_state.py`** (verbatim + extracted
+   to `loom2/core/game_state.py`). ✅ **Part 3 = `graphics/helix_panel.py`** (verbatim +
+   extracted to `loom2/graphics/helix_panel.py`; + 4 GLSL shaders in `loom2/data/shaders/`).
+   NEXT from Fable (Nir's choice): hand-off prompt for the child chats, scene JSON +
+   hint/explanation drafts, or `# CONTRACT-ISSUE` escalations.
 6. 🧵 **THE CHILD-CHAT PLAN (Gita G4.6)** — each child gets ONLY: Gita laws (G1.1) +
    `config.py` + `core/types.py` + its own skeleton(s):
    - Puranas parent (Fable): `audio/engine.py`, `core/game_state.py`, `graphics/helix_panel.py`
