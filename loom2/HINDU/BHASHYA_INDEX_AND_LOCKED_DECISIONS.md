@@ -19,7 +19,36 @@
 
 ## CURRENT FRONTIER (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT (July 7, 2026, evening) — quick orientation
+### 🔖 RESTART SNAPSHOT (July 8, 2026, ~1 AM Israel) — quick orientation
+- **Progress:** Parents **A, B, C COMPLETE**. **PARENT D IS IN FLIGHT** — a live Fable
+  chat writing `graphics/terrain.py` + `graphics/totem.py`. He absorbed ALL scriptures,
+  asked Q1–Q7, and got Nir's decisions (saved verbatim at
+  `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`).
+- **⏭️ TOMORROW'S FIRST ACTION:** Nir re-opens the SAME Parent D chat and writes just
+  **"continue"** (no re-paste — Fable holds the design in context). Fable delivers
+  terrain.py + terrain.vert/.frag + numbered remarks, then totem.py. We stopped ~1 AM
+  because the provider truncated Fable's replies twice (long-message choke). Nothing lost.
+- **PARENT D LOCKED DECISIONS (all Nir's, couriered by DeepSeek):**
+  A1 arm = `90°−measure_phase×360°` (clockwise; matches helix_panel:253).
+  A2 **HARD** discrete color bands (crisp edges = level curves), not smooth.
+  A3 **GOURAUD** shading (per-vertex), not flat.
+  A4 **NO water plane** — below z=0 is the SAME mesh in hard BLUE bands darkening with
+     depth (COLOR_SHALLOW→COLOR_DEEP_WATER); a calculus surface, not a sea; no water VBO.
+  A5 LEFT terrain rings are **calm/static — NO pulsing**; draw only rings inside hearing
+     radius (0.8/1.6/2.4 at default HEARING_R=2.5).
+  A6 ALL totem parts **glow GENTLY** but stay readable (helix ≠ blinding white cylinder).
+  A7 **DRAPED** ground rings (hug the surface, never flat/floating/clipping). 🔓 **Nir
+     EXPLICITLY blesses unfreezing contracts / amending scripture** to do it cleanly —
+     Fable raises a `# CONTRACT-ISSUE`, DeepSeek updates scripture + wires his choice.
+- **⚠️ TWO CLEANUP TODOs (with Nir's OK, NOT done yet):** (1) delete the DeepSeek OPINION
+  in `HAND-OFF-PROMPT-FROM-FABLE-PARENT-C.md` §5 (~L154–155: "…reads well; …is fine too.")
+  — info blocks must be FACTS ONLY. (2) LOCKED LESSON: DeepSeek gives VERIFIED FACTS ONLY;
+  every taste choice goes to NIR; DeepSeek never decides aesthetics. (Tonight DeepSeek
+  wrongly said "flat shading" in chat — Nir wants GOURAUD; caught, never saved.)
+- **After D:** Parent E (slice_mode), Parent F (hud + input_map), Parent G (surfaces +
+  scene + main), then DeepSeek stitches deferred seams + content.
+
+### 🔖 PRIOR SNAPSHOT (July 7, 2026, evening) — quick orientation
 - **Progress:** Parents **A, B, C COMPLETE** → entire **audio package** (quantize, musicians,
   sampler, render_offline, engine) + **graphics camera.py & renderer.py** + **all 8 shader
   stems** delivered, extracted, py_compile-clean, pushed. config.py, core/types.py, 89-sample

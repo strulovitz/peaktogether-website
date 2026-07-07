@@ -174,7 +174,49 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 7, 2026, evening)
+### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026, ~1 AM Israel)
+**Where we are: PARENT D IS IN FLIGHT.** Parents A, B, C are done. Parent D (a live
+Fable chat) has absorbed ALL scriptures, asked his Q1–Q7 batch, and received Nir's
+decisions. He is about to deliver `graphics/terrain.py` + `graphics/totem.py`.
+
+**⏭️ TOMORROW'S FIRST ACTION:** Nir re-opens the SAME Parent D Fable chat and writes
+just **"continue"** (Fable holds the whole design in context — no re-paste needed).
+Fable then delivers `terrain.py` complete + its `terrain.vert`/`terrain.frag` GLSL +
+numbered remarks for DeepSeek; then `totem.py`. We stopped tonight because the
+provider truncated Fable's replies TWICE mid-answer (long-message choke) and it was
+~1 AM in Israel. **Nothing is lost.**
+
+**PARENT D'S Q&A + NIR'S DECISIONS are saved verbatim** at
+`loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`. Locked decisions:
+- **A1** arm = `90° − measure_phase×360°` (clockwise; matches helix_panel line 253).
+- **A2** HARD discrete color bands (sharp thresholds paint the level curves), NOT smooth.
+- **A3** **GOURAUD** shading (per-vertex), NOT flat. (Fable: Gouraud light + hard bands
+  per-fragment = smooth shading AND crisp level curves.)
+- **A4** **NO water plane.** Below z=0 is the SAME mesh, hard BLUE bands darkening with
+  depth (COLOR_SHALLOW→COLOR_DEEP_WATER). A calculus surface, not a sea. No water VBO.
+- **A5** LEFT terrain panel rings are **calm/static — NO pulsing** (distracting). Draw
+  only rings inside hearing radius (0.8/1.6/2.4 at default HEARING_R=2.5).
+- **A6** ALL totem parts (helix, circle, rings, arm) **glow GENTLY** but stay readable
+  (helix still looks like a helix, never a blinding white cylinder). Threshold 0.80.
+- **A7** **DRAPED** ground rings — hug the terrain surface, never flat floating/clipping
+  disks. 🔓 **NIR EXPLICITLY BLESSES unfreezing contracts / amending scripture** to do
+  this cleanly (the frozen `TotemVisual.draw` passes only `ground_z`, not the terrain fn;
+  Fable will raise a `# CONTRACT-ISSUE`, DeepSeek updates scripture + wires whatever he picks).
+
+**⚠️ TWO CLEANUP TODOs (with Nir's approval) — NOT done yet:**
+1. Remove the DeepSeek OPINION in `HAND-OFF-PROMPT-FROM-FABLE-PARENT-C.md` §5 (~lines
+   154–155): *"Per-vertex hypsometric color (Gouraud) reads well; a simple directional
+   term is fine too."* The info block must be FACTS ONLY. Nir stopped the edit tonight;
+   fix tomorrow with his OK. (Also §0 already carries Nir's "ask as many questions as
+   you want" note — that stays.)
+2. **LOCKED LESSON:** DeepSeek gives VERIFIED FACTS ONLY. Every taste/design choice
+   goes to NIR. DeepSeek NEVER decides aesthetics, never says "reads well/looks good."
+   (Tonight DeepSeek wrongly wrote "flat shading, no objection" in chat — Nir wants
+   GOURAUD. Caught & corrected; it was never saved.)
+
+---
+
+### 🔖 PRIOR SNAPSHOT (July 7, 2026, evening)
 **Where we are: building the code, parent by parent. Half the modules are DONE.**
 
 **The worker-parent chain so far (each = a fresh Claude Fable chat, full context/authority):**
@@ -328,7 +370,14 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      reset, clock/pan seam verified). renderer.py uniform names match the shader files.
      **Live GL smoke test deferred to integration** (needs a pyglet window / Parent G's main.py).
      camera_limits de-facto contract locked (target/zoom_min/zoom_max/distance). No CONTRACT-ISSUEs.
-   - Parent D — `graphics/terrain.py` + `graphics/totem.py`  ← **CURRENT NEXT STEP**
+   - 🔵 **Parent D — `graphics/terrain.py` + `graphics/totem.py`  ← IN FLIGHT NOW.**
+     Fable absorbed all scriptures, asked Q1–Q7, got Nir's decisions (saved verbatim at
+     `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`). Stopped ~1 AM July 8 (provider
+     truncated his replies twice). **TOMORROW: Nir writes "continue" in the SAME chat**
+     → Fable delivers terrain.py + terrain.vert/.frag + remarks, then totem.py. Decisions:
+     Gouraud shading; HARD color bands; NO water plane (blue bands darken with depth on the
+     same mesh); calm/static rings on the left panel; gentle glow on all totem parts;
+     DRAPED rings (Nir blesses amending the frozen contract for it).
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
