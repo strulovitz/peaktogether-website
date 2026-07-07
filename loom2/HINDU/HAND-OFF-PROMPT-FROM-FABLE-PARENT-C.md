@@ -64,6 +64,13 @@ Nir — my chunk is done, the letter is written, and LOOM2 has its eyes. Thank y
 # mine. Take everything with a grain of salt and verify anything you doubt.
 # It maps onto Parent C's suggested batch (§5) plus a couple of useful facts.
 
+## 0) A WORD FROM NIR ON QUESTIONS (overrides the "ONE batched list" wording)
+# Parent C's ritual (§2) says "send ONE batched list of questions." Nir wants you
+# to know: that is NOT a limit. You may ask as MANY questions as you want, in as
+# MANY rounds as you want, whenever you want. Batching is welcome for Nir's
+# convenience as courier, but never feel restricted to a single list — ask freely,
+# as much as you need, before AND during coding. — Nir (couriered by DeepSeek)
+
 ## 1) Matrix-upload line — verbatim from graphics/helix_panel.py
   228:  vp_bytes = np.ascontiguousarray(vp.T).tobytes()   # column-major GL
   248:  self._wire["u_mvp"].write(vp_bytes)
