@@ -260,8 +260,9 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    dedicated pass Nir chooses.
 
    **The chunks (former Gita G4.6 child assignments, now parent assignments):**
-   - **Parent A** — `audio/quantize.py` + `audio/musicians.py`  ← **CURRENT NEXT STEP**
-   - Parent B — `audio/sampler.py` + `audio/render_offline.py`
+   - ✅ **Parent A** — `audio/quantize.py` + `audio/musicians.py`  ← **COMPLETE** (both
+     files delivered, extracted, self-tests pass, pushed; hand-off letter saved)
+   - **Parent B** — `audio/sampler.py` + `audio/render_offline.py`  ← **CURRENT NEXT STEP**
    - Parent C — `graphics/renderer.py` + `graphics/camera.py`
    - Parent D — `graphics/terrain.py` + `graphics/totem.py`
    - Parent E — `graphics/slice_mode.py`
@@ -269,10 +270,14 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
 
    **How Nir runs a worker-parent (the culture he set — DO NOT micromanage them):**
-   - The launch document is `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` — Parent 2's
-     verbatim letter with **Nir's bridge + Parent A's launch note folded in after §5**. It
-     gives the parent its chunk + the minimum relevant specs DeepSeek gathered — framed as
-     INFORMATION, never orders. (Parents B–G will each get their own analogous note.)
+   - The launch document for Parent B is `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-A.md`
+     — Parent A's verbatim hand-off letter with a **DeepSeek information block appended at
+     the END, clearly marked "BY DEEPSEEK (NOT FABLE)"** (verified seam quotes, manifest
+     schema, installed decoders, config constants — pure information, no suggestions). It
+     gives the parent its chunk + the relevant specs DeepSeek gathered — framed as
+     INFORMATION, never orders. (Each future parent gets its own analogous hand-off +
+     DeepSeek info block. The pattern started with Parent A, whose launch doc was
+     `HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` = Parent 2's letter + Nir's bridge + note.)
    - The parent is told (explicitly, by Nir): **you are much smarter than DeepSeek, the
      best coder in the world; trust your own judgement and previous Fable sessions; take
      DeepSeek's info with a grain of salt.**
@@ -302,13 +307,15 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 ## 5. RESTART PROTOCOL
 
-1. Read this file first, then `BHASHYA_INDEX_AND_LOCKED_DECISIONS.md`.
+1. Read this file first, then `HINDU/BHASHYA_INDEX_AND_LOCKED_DECISIONS.md` (the BHASHYA
+   now lives in the bible folder `loom2/HINDU/`, since it is commentary on the scriptures).
 2. **Where we are:** the whole scripture canon is down; the PURANAS (3 heavy modules)
-   are complete and in real code. **The current step is launching worker-PARENTS** to
-   build the remaining 14 modules — see §4.6. **Parent A** (`audio/quantize.py` +
-   `audio/musicians.py`) is next; its launch document is
-   `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` (Parent 2's letter + Nir's bridge +
-   Parent A's note, folded together — paste the whole file to a fresh Fable chat).
+   are complete and in real code. **PARENT A is COMPLETE** (`audio/quantize.py` +
+   `audio/musicians.py` — both delivered, extracted, self-tests PASS, pushed). **The
+   current step is launching PARENT B** (`audio/sampler.py` + `audio/render_offline.py`);
+   its launch document is `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-A.md` (Parent A's
+   verbatim hand-off letter + a DeepSeek information block appended at the end, clearly
+   marked NOT Fable — paste the whole file to a fresh Fable chat).
 3. **Your job when a worker-parent replies** (Parent A, B, …): save the answer VERBATIM
    to `loom2/HINDU/`, extract the real code to its package path (`loom2/<pkg>/<file>.py`),
    `python -m py_compile` it, update this WORKFLOW + the BHASHYA, commit + push, give Nir
@@ -322,12 +329,16 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    UPANISHADS → SUTRAS → BHAGAVAD GITA 1–4 → PURANAS 1–3). Sanity checks:
    `python -m py_compile loom2/listening_totem.py loom2/listening_totem_philharmonia.py`
    and `loom2/audio/engine.py loom2/core/game_state.py loom2/graphics/helix_panel.py`
-   should all pass; `sounddevice` (0.5.5) is installed. The 89-file library is in
-   `loom2/samples/`.
+   should all pass; also (run from inside `loom2/`) `python -m audio.quantize` and
+   `python -m audio.musicians` self-tests pass; `sounddevice` (0.5.5) is installed. The
+   89-file library is in `loom2/data/samples/` (path reconciled to match config.SAMPLES_DIR).
 6. **The source book** *Sounding the Unknown* is at `loom/book/chapter_00.txt …
    chapter_10.txt` — the authoritative HSS reference (LOOM v1 lost its soul by
    planning from summaries; LOOM2 must stay grounded in the book + Nir's true helix
    in `loom/HELIX_AND_REBOOT_NIRS_TRUE_VISION.md`).
-7. ⚠️ AGENTS.md still routes startup to older games; LOOM2's authoritative memory
-   is THIS file. Never modify AGENTS.md. Save Fable outputs VERBATIM; commit + push
-   every meaningful step; GitHub blob links; emojis + warmth; he is "Nir".
+7. ⚠️ AGENTS.md still routes startup to older games AND still points at the BHASHYA's
+   OLD path (`loom2\BHASHYA_INDEX_AND_LOCKED_DECISIONS.md`); the BHASHYA has MOVED to
+   `loom2\HINDU\BHASHYA_INDEX_AND_LOCKED_DECISIONS.md` (it is commentary on the scriptures,
+   so it belongs in the bible folder). LOOM2's authoritative memory is THIS file. Never
+   modify AGENTS.md. Save Fable outputs VERBATIM; commit + push every meaningful step;
+   GitHub blob links; emojis + warmth; he is "Nir".
