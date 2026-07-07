@@ -262,7 +262,13 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    **The chunks (former Gita G4.6 child assignments, now parent assignments):**
    - ✅ **Parent A** — `audio/quantize.py` + `audio/musicians.py`  ← **COMPLETE** (both
      files delivered, extracted, self-tests pass, pushed; hand-off letter saved)
-   - **Parent B** — `audio/sampler.py` + `audio/render_offline.py`  ← **CURRENT NEXT STEP**
+   - 🟡 **Parent B** — `audio/sampler.py` ✅ **DONE** (delivered, extracted to
+     `loom2/audio/sampler.py`, py_compile OK, `python -m audio.sampler` gauntlet PASSES —
+     "89 canon samples loaded, resample law verified, parachute armed"; saved verbatim to
+     `loom2/HINDU/LOOM2-PARENT-B-PART-1-SAMPLER-BY-FABLE.md`). Decoder = **pydub + ffmpeg**
+     (both verified present). ⏭️ **NEXT: say "continue" to Parent B for `audio/render_offline.py`**
+     (Part 2 of 2). ⚠️ Standing DeepSeek TODO: sampler.py ships in the EXE → PyInstaller must
+     bundle ffmpeg (or swap `_decode_mono`) at packaging time.
    - Parent C — `graphics/renderer.py` + `graphics/camera.py`
    - Parent D — `graphics/terrain.py` + `graphics/totem.py`
    - Parent E — `graphics/slice_mode.py`
