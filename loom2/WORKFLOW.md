@@ -83,12 +83,21 @@ remake): Descent QED (Basel), Quake: Principia (Calculus), Homeworld: A Good Bas
   pure function of the global sample counter — so voice continuity, shared downbeats,
   and byte-identical offline rendering all fall out of one design (ONE mixer `_mix`, two
   callers: `_callback` + `render_block_offline`). Implements the approved amendment (see
-  below). Next: **Part 2 = `core/game_state.py`** (say "continue" to Fable), then
-  **Part 3 = `graphics/helix_panel.py`**.
+  below). ✅ Done.
+- **`LOOM2-PURANAS-PART-2-GAME-STATE-BY-FABLE.md`** — **PART 2 of 3 of the PURANAS**
+  (Fable "Parent 2", July 7, 2026): `core/game_state.py`, THE CONDUCTOR OF EVERYTHING
+  (mode state machine EXPLORE/QUIZ_LISTEN/SLICE/SCENE_TRANSITION, totem motion, quiz
+  flow, slice auto-walk). Delivered complete + saved verbatim; runnable code extracted
+  to `loom2/core/game_state.py` (py_compile OK). Key design calls: the **intent
+  pattern** (handle_action records, update enacts smooth analog motion); the **quiz
+  exit gesture = TOUCH THE TOTEM** (Fable's one open design choice — Nir may veto by
+  taste); slice walk = one `RING_WIDTH` stop per measure (a procession, never a siren);
+  `_build_slice_path` must stay literally in sync with `GlassBlade.intersection_path`
+  (G3.6). Next: **Part 3 = `graphics/helix_panel.py`** (say "continue" to Fable).
 
 Naming: Fable's docs get Hindu scripture names. Lineage: **VEDAS → MAHABHARATA →
 RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA → PURANAS** (in progress). The PURANAS
-(the heavy modules — audio/engine.py ✅, core/game_state.py ⏳, graphics/helix_panel.py ⏳ —
+(the heavy modules — audio/engine.py ✅, core/game_state.py ✅, graphics/helix_panel.py ⏳ —
 written by a fresh Fable "Parent 2") are being delivered ONE COMPLETE FILE PER ANSWER;
 Nir says "continue" between them.
 
@@ -195,8 +204,9 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    cost either way).
 5. 📜 **THE PURANAS — IN PROGRESS** (fresh Fable "Parent 2"): the three HEAVY modules,
    one complete file per answer. ✅ **Part 1 = `audio/engine.py`** (DONE — verbatim in
-   HINDU/ + extracted to `loom2/audio/engine.py`). ⏳ **Part 2 = `core/game_state.py`**
-   (say "continue" to Fable). ⏳ **Part 3 = `graphics/helix_panel.py`**.
+   HINDU/ + extracted to `loom2/audio/engine.py`). ✅ **Part 2 = `core/game_state.py`**
+   (DONE — verbatim in HINDU/ + extracted to `loom2/core/game_state.py`). ⏳ **Part 3 =
+   `graphics/helix_panel.py`** (say "continue" to Fable).
 6. 🧵 **THE CHILD-CHAT PLAN (Gita G4.6)** — each child gets ONLY: Gita laws (G1.1) +
    `config.py` + `core/types.py` + its own skeleton(s):
    - Puranas parent (Fable): `audio/engine.py`, `core/game_state.py`, `graphics/helix_panel.py`
