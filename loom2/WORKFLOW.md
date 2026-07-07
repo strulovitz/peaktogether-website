@@ -262,14 +262,21 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    **The chunks (former Gita G4.6 child assignments, now parent assignments):**
    - ✅ **Parent A** — `audio/quantize.py` + `audio/musicians.py`  ← **COMPLETE** (both
      files delivered, extracted, self-tests pass, pushed; hand-off letter saved)
-   - 🟡 **Parent B** — `audio/sampler.py` ✅ **DONE** (delivered, extracted to
-     `loom2/audio/sampler.py`, py_compile OK, `python -m audio.sampler` gauntlet PASSES —
-     "89 canon samples loaded, resample law verified, parachute armed"; saved verbatim to
-     `loom2/HINDU/LOOM2-PARENT-B-PART-1-SAMPLER-BY-FABLE.md`). Decoder = **pydub + ffmpeg**
-     (both verified present). ⏭️ **NEXT: say "continue" to Parent B for `audio/render_offline.py`**
-     (Part 2 of 2). ⚠️ Standing DeepSeek TODO: sampler.py ships in the EXE → PyInstaller must
-     bundle ffmpeg (or swap `_decode_mono`) at packaging time.
-   - Parent C — `graphics/renderer.py` + `graphics/camera.py`
+   - ✅ **Parent B** — `audio/sampler.py` + `audio/render_offline.py` **COMPLETE** (both
+     delivered, extracted, py_compile OK; saved verbatim in `loom2/HINDU/` as
+     `LOOM2-PARENT-B-PART-1-SAMPLER-BY-FABLE.md` + `LOOM2-PARENT-B-PART-2-RENDER-OFFLINE-BY-FABLE.md`).
+     `python -m audio.sampler` gauntlet PASSES ("89 canon samples loaded, resample law verified,
+     parachute armed"). Decoder = **pydub + ffmpeg** (both verified present). `render_offline.py`
+     compiles clean and is contract-clean; its **live trial is BLOCKED on Parent G's
+     `core/surfaces.py`** (doesn't exist yet — `from core import surfaces` fails), so the CLI
+     can only be trial-run after Parent G lands. TotemState signature matches (x, y,
+     hearing_radius). DeepSeek **blessed Parent B's CONTRACT-NOTE** (render_option seating
+     lattice: default = integer-cornered window around the hearing circle; optional per-option
+     `domain`/`step`/`z_per_octave` keys in options.json — additive, signature-clean).
+     ⚠️ Standing DeepSeek TODO: sampler.py ships in the EXE → PyInstaller must bundle ffmpeg
+     (or swap `_decode_mono`) at packaging time.
+   - **Parent B** — `audio/sampler.py` + `audio/render_offline.py`  ← ✅ **COMPLETE**
+   - Parent C — `graphics/renderer.py` + `graphics/camera.py`  ← **CURRENT NEXT STEP**
    - Parent D — `graphics/terrain.py` + `graphics/totem.py`
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
