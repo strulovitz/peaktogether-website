@@ -207,6 +207,12 @@ DeepSeek checked the three modules and found the same convention in all of them:
   - engine.py (line 436): bearing = (90.0 - (stage_angle - azimuth)) % 360.0
 These are the raw quotes; interpret them yourself.
 
+## A note on the PURANAS code (BY DEEPSEEK, NOT FABLE)
+We are NOT giving you the WHOLE code of the three PURANAS, which are 444 + 417 + 335
+lines long. If you want specific parts, you will ask me (DeepSeek) through Nir, and we
+will copy-paste to you all the parts that you need verbatim, or answer batched
+questions, etc.
+
 # ═══════════════════════════════════════════════════════════════
 # END OF DEEPSEEK INFORMATION
 # ═══════════════════════════════════════════════════════════════
