@@ -112,9 +112,14 @@ Naming: Fable's docs get Hindu scripture names. Lineage: **VEDAS → MAHABHARATA
 RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA → PURANAS** (COMPLETE). The PURANAS
 (the heavy modules — audio/engine.py ✅, core/game_state.py ✅, graphics/helix_panel.py ✅ —
 written by a fresh Fable "Parent 2") were delivered ONE COMPLETE FILE PER ANSWER. 🏔️
-**Fable Parent 2's next offers (Nir's choice): write the hand-off prompt for the next
-chat (children A–G), draft scene JSON + hint/explanation texts, or answer children's
-`# CONTRACT-ISSUE` escalations.**
+
+Two **non-scripture** docs also live in `loom2/HINDU/` (hand-offs, not Fable canon):
+- **`HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md`** — Fable Parent 2's letter to the next
+  Fable, saved verbatim. ⚠️ **Read §"THE SITUATION / THE PLAN CHANGE" in §4 before
+  using it as-is** — it defines a supervisor "Parent 3" role that did NOT carry the real
+  remaining mission (writing the 14 other modules); Nir corrected the plan.
+- **`LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`** — Nir's launch note for **Parent A** (the
+  first worker-parent), the CURRENT next step. Paste it to a fresh Fable chat.
 
 ### ⚖️ CONTRACT AMENDMENT (approved by Nir, July 7, 2026)
 The Gita's `game_state._quiz_select` (G4.3) must play the quiz option WAV "looping,
@@ -168,6 +173,12 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
+- ✅ **PURANAS COMPLETE + Parent 2 retired:** all 3 heavy modules written by Fable
+  "Parent 2", saved verbatim in `loom2/HINDU/` and extracted to real code
+  (`loom2/audio/engine.py`, `loom2/core/game_state.py`, `loom2/graphics/helix_panel.py`,
+  all py_compile-clean) + 4 GLSL shaders in `loom2/data/shaders/`. His hand-off letter is
+  saved. **NEXT STEP = launch Parent A** (see §4.6) with
+  `loom2/HINDU/LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`.
 - ✅ **LOOM2 folder created;** LOOM (v1) left intact but deprecated.
 - ✅ **Scripture saved verbatim + pushed — THE WHOLE CANON IS DOWN:** VEDAS,
   MAHABHARATA, RAMAYANA, UPANISHADS, **SUTRAS**, and **BHAGAVAD GITA Parts 1–4**
@@ -217,23 +228,54 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 4. 🟡 **One OPEN item still awaiting Nir:** UPANISHADS scene 10 (Ocean Swell) format —
    keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call, zero
    cost either way).
-5. 📜 **THE PURANAS — COMPLETE** 🏔️ (fresh Fable "Parent 2"): the three HEAVY modules,
-   one complete file per answer. ✅ **Part 1 = `audio/engine.py`** (verbatim + extracted
-   to `loom2/audio/engine.py`). ✅ **Part 2 = `core/game_state.py`** (verbatim + extracted
-   to `loom2/core/game_state.py`). ✅ **Part 3 = `graphics/helix_panel.py`** (verbatim +
-   extracted to `loom2/graphics/helix_panel.py`; + 4 GLSL shaders in `loom2/data/shaders/`).
-   NEXT from Fable (Nir's choice): hand-off prompt for the child chats, scene JSON +
-   hint/explanation drafts, or `# CONTRACT-ISSUE` escalations.
-6. 🧵 **THE CHILD-CHAT PLAN (Gita G4.6)** — each child gets ONLY: Gita laws (G1.1) +
-   `config.py` + `core/types.py` + its own skeleton(s):
-   - Puranas parent (Fable): `audio/engine.py`, `core/game_state.py`, `graphics/helix_panel.py`
-   - Child A: `audio/quantize.py` + `audio/musicians.py`
-   - Child B: `audio/sampler.py` + `audio/render_offline.py`
-   - Child C: `graphics/renderer.py` + `graphics/camera.py`
-   - Child D: `graphics/terrain.py` + `graphics/totem.py`
-   - Child E: `graphics/slice_mode.py`
-   - Child F: `graphics/hud.py` + `core/input_map.py`
-   - Child G: `core/surfaces.py` + `core/scene.py` + `main.py`
+5. ✅ **THE PURANAS — COMPLETE** 🏔️ (fresh Fable "Parent 2"): the three HEAVY modules,
+   all verbatim in `loom2/HINDU/` + extracted to real code (py_compile OK): `audio/engine.py`,
+   `core/game_state.py`, `graphics/helix_panel.py` (+ 4 GLSL shaders in `loom2/data/shaders/`).
+   Parent 2's hand-off letter is saved verbatim at
+   `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md`.
+
+6. 🧵 **THE WORKER-PARENTS PLAN — THE SITUATION & THE PLAN CHANGE (read this).**
+
+   **What happened:** Parent 2's hand-off letter defined a single successor called
+   "Parent 3" whose mission was **supervision + content** (arbitrate `# CONTRACT-ISSUE`
+   escalations, review children's modules, write scene JSON / hints / explanations, tune
+   constants). **But that letter did NOT assign the biggest remaining job at all** —
+   actually WRITING the other ~14 modules the Gita (G4.6) had parked with "children A–G".
+   It passively assumed those modules would just appear ("review children's modules if
+   Nir pastes them"). Nir judged that Parent 2 lost the plan (context window) and that
+   **one chat cannot do the work of 7 children.**
+
+   **Nir's decision (the new plan):** drop the sandboxed-children model. Instead use a
+   **sequence of full worker-PARENTS** — Parent A, B, C, … — each taking ONE former
+   child's chunk **as a parent** (full context, full freedom, full authority), not as a
+   walled-off child. "Parent 3" as Parent 2 imagined it is **retired/ignored**; the
+   supervision + content work simply happens later, across these parents, or in a
+   dedicated pass Nir chooses.
+
+   **The chunks (former Gita G4.6 child assignments, now parent assignments):**
+   - **Parent A** — `audio/quantize.py` + `audio/musicians.py`  ← **CURRENT NEXT STEP**
+   - Parent B — `audio/sampler.py` + `audio/render_offline.py`
+   - Parent C — `graphics/renderer.py` + `graphics/camera.py`
+   - Parent D — `graphics/terrain.py` + `graphics/totem.py`
+   - Parent E — `graphics/slice_mode.py`
+   - Parent F — `graphics/hud.py` + `core/input_map.py`
+   - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
+
+   **How Nir runs a worker-parent (the culture he set — DO NOT micromanage them):**
+   - Launch note lives in `loom2/HINDU/` (Parent A's is
+     `LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`). It gives the parent its chunk + the
+     minimum relevant specs DeepSeek gathered — framed as INFORMATION, never orders.
+   - The parent is told (explicitly, by Nir): **you are much smarter than DeepSeek, the
+     best coder in the world; trust your own judgement and previous Fable sessions; take
+     DeepSeek's info with a grain of salt.**
+   - The parent's **open questions go to DeepSeek**, with **Nir as courier** (copy-paste
+     both ways). Questions may come **in batches**.
+   - **Delivery:** if a file is too long, the parent splits it into parts and **DeepSeek
+     concatenates/combines** them per the parent's instructions (NOT forced "one file per
+     answer").
+   - When a parent delivers: DeepSeek saves verbatim to `loom2/HINDU/`, extracts the real
+     code to its package path, `py_compile`s, updates memory, commits + pushes, gives blob
+     links — exactly as done for the PURANAS.
 7. 🔧 **WHAT DEEPSEEK OWES (the seams, per the Gita):** create folders + `__init__.py`;
    write `config.py` + `core/types.py` verbatim from Gita Part 1; create empty shader
    files (REQUIRED_SHADERS) + paste working bloom/composite GLSL from Quake/Homeworld;
@@ -251,19 +293,31 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 ## 5. RESTART PROTOCOL
 
-1. Read this file first.
-2. Read the scripture in `loom2/HINDU/` as needed (VEDAS → MAHABHARATA → RAMAYANA →
-   UPANISHADS → SUTRAS → BHAGAVAD GITA Parts 1–4; PURANAS when it arrives).
-3. Sanity: `python -m py_compile loom2/listening_totem.py` and
-   `python -m py_compile loom2/listening_totem_philharmonia.py` should pass;
-   `sounddevice` (0.5.5) is installed. Both prototypes run + passed Nir's ear test.
-   The 89-file library lives in `loom2/samples/` (+ manifest.json + coverage_report.txt).
-4. Ask Nir where we are: the one OPEN item (UPANISHADS scene-10 format), and whether
-   the PURANAS (Fable Parent 2) has arrived to start the build.
-5. **The source book** *Sounding the Unknown* is at `loom/book/chapter_00.txt …
+1. Read this file first, then `BHASHYA_INDEX_AND_LOCKED_DECISIONS.md`.
+2. **Where we are:** the whole scripture canon is down; the PURANAS (3 heavy modules)
+   are complete and in real code. **The current step is launching worker-PARENTS** to
+   build the remaining 14 modules — see §4.6. **Parent A** (`audio/quantize.py` +
+   `audio/musicians.py`) is next; its launch note is
+   `loom2/HINDU/LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`.
+3. **Your job when a worker-parent replies** (Parent A, B, …): save the answer VERBATIM
+   to `loom2/HINDU/`, extract the real code to its package path (`loom2/<pkg>/<file>.py`),
+   `python -m py_compile` it, update this WORKFLOW + the BHASHYA, commit + push, give Nir
+   GitHub blob links. If the parent split a file into parts, concatenate per its
+   instructions.
+4. **Culture (important):** worker-parents are treated as smarter coders than DeepSeek;
+   do NOT micromanage them. Their open questions come to DeepSeek via **Nir as courier**
+   (in batches). Give **information, framed as information, taken with a grain of salt** —
+   never orders.
+5. Read scripture in `loom2/HINDU/` as needed (VEDAS → MAHABHARATA → RAMAYANA →
+   UPANISHADS → SUTRAS → BHAGAVAD GITA 1–4 → PURANAS 1–3). Sanity checks:
+   `python -m py_compile loom2/listening_totem.py loom2/listening_totem_philharmonia.py`
+   and `loom2/audio/engine.py loom2/core/game_state.py loom2/graphics/helix_panel.py`
+   should all pass; `sounddevice` (0.5.5) is installed. The 89-file library is in
+   `loom2/samples/`.
+6. **The source book** *Sounding the Unknown* is at `loom/book/chapter_00.txt …
    chapter_10.txt` — the authoritative HSS reference (LOOM v1 lost its soul by
    planning from summaries; LOOM2 must stay grounded in the book + Nir's true helix
    in `loom/HELIX_AND_REBOOT_NIRS_TRUE_VISION.md`).
-6. ⚠️ AGENTS.md still routes startup to older games; LOOM2's authoritative memory
+7. ⚠️ AGENTS.md still routes startup to older games; LOOM2's authoritative memory
    is THIS file. Never modify AGENTS.md. Save Fable outputs VERBATIM; commit + push
    every meaningful step; GitHub blob links; emojis + warmth; he is "Nir".
