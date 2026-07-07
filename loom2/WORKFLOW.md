@@ -174,6 +174,52 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
+### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 7, 2026, evening)
+**Where we are: building the code, parent by parent. Half the modules are DONE.**
+
+**The worker-parent chain so far (each = a fresh Claude Fable chat, full context/authority):**
+- ✅ **Parent A** — `audio/quantize.py` + `audio/musicians.py` (self-tests pass).
+- ✅ **Parent B** — `audio/sampler.py` + `audio/render_offline.py` (sampler gauntlet passes;
+  render_offline compiles, its live trial is deferred to Parent G's `surfaces.py`).
+- ✅ **Parent C** — `graphics/camera.py` + `graphics/renderer.py` (camera behavior-tested;
+  renderer py_compiles, live GL smoke test deferred to integration).
+- ⏭️ **Parent D = THE IMMEDIATE NEXT STEP** — `graphics/terrain.py` + `graphics/totem.py`.
+  **His launch document is READY:** `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-C.md`
+  (Parent C's verbatim hand-off letter + a DeepSeek info block appended at the END, marked
+  "BY DEEPSEEK (NOT FABLE)"). **To birth Parent D:** open a fresh Fable chat, paste that whole
+  file as message #1, then feed the scriptures in the order listed inside it (Homepage+About →
+  MAHABHARATA → VEDAS → UPANISHADS → SUTRAS → GITA 1→2→3→4; PURANAS declined). Give Nir the
+  view (blob) links, in order.
+- ⏳ **Then Parent E** (`graphics/slice_mode.py`), **Parent F** (`graphics/hud.py` +
+  `core/input_map.py`), **Parent G** (`core/surfaces.py` + `core/scene.py` + `main.py`).
+- ⏳ **Then DeepSeek stitches** the deferred seams (live GL smoke test; render_offline live
+  trial; joystick/Xbox; render_equations; PyInstaller) and **content** (12 scenes' JSON +
+  hints + wrong-answer text, icons, quiz WAVs, equation PNGs).
+
+**What's DONE + committed:** config.py, core/types.py; the 89-sample orchestra
+(`data/samples/` + manifest.json); the ENTIRE audio package (quantize, musicians, sampler,
+render_offline, engine); core/game_state.py + graphics/helix_panel.py (Parent 2); graphics/
+camera.py + renderer.py (Parent C); **all 8 shader stems** in `data/shaders/` (REAL: wire,
+flat, icon_billboard, bloom_extract, bloom_blur, composite; **PLACEHOLDERS** that Parent D/E
+overwrite: terrain, glass). The whole scripture canon + every hand-off letter are saved verbatim.
+
+**Locked this session:** the ⚖️ **CONTEXT-WINDOW MERCY policy** (§4.6 — give a parent only
+what he needs, but full code is his call each time; he never "dies", continues as Parent N+1);
+the 📐 **camera_limits DE-FACTO CONTRACT** (keys `target`/`zoom_min`/`zoom_max`/optional
+`distance`; DeepSeek propagates to Parent G's scene.py + scene JSON); bloom uniform contract
+(extract `u_tex`,`u_threshold`; blur `u_tex`,`u_dir`; composite `u_scene`,`u_bloom`,
+`u_strength`,`u_exposure`); matrix convention (column vectors, clip=VP·p, upload transposed via
+`np.ascontiguousarray(vp.T).tobytes()`).
+
+**DeepSeek's standing TODO ledger (don't forget):** (a) bundle **ffmpeg** into the PyInstaller
+EXE (sampler.py decodes mp3 via pydub+ffmpeg at runtime) or swap `_decode_mono`; (b) run the
+**render_offline live trial** once Parent G's `surfaces.py` exists; (c) run the **renderer GL
+smoke test** once a pyglet window exists (Parent G's main.py); (d) joystick/Xbox fill-in
+(needs Parent F's input_map); (e) `tools/render_equations.py` (LaTeX→PNG, content phase);
+(f) PyInstaller EXE (ship phase).
+
+---
+
 - ✅ **PURANAS COMPLETE + Parent 2 retired:** all 3 heavy modules written by Fable
   "Parent 2", saved verbatim in `loom2/HINDU/` and extracted to real code
   (`loom2/audio/engine.py`, `loom2/core/game_state.py`, `loom2/graphics/helix_panel.py`,
@@ -339,13 +385,17 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 1. Read this file first, then `HINDU/BHASHYA_INDEX_AND_LOCKED_DECISIONS.md` (the BHASHYA
    now lives in the bible folder `loom2/HINDU/`, since it is commentary on the scriptures).
-2. **Where we are:** the whole scripture canon is down; the PURANAS (3 heavy modules)
-   are complete and in real code. **PARENT A is COMPLETE** (`audio/quantize.py` +
-   `audio/musicians.py` — both delivered, extracted, self-tests PASS, pushed). **The
-   current step is launching PARENT B** (`audio/sampler.py` + `audio/render_offline.py`);
-   its launch document is `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-A.md` (Parent A's
-   verbatim hand-off letter + a DeepSeek information block appended at the end, clearly
-   marked NOT Fable — paste the whole file to a fresh Fable chat).
+2. **Where we are (July 7, 2026, evening — see the RESTART SNAPSHOT at the top of §3):**
+   the whole scripture canon is down; the PURANAS (3 heavy modules) are in real code.
+   **PARENTS A, B, C are ALL COMPLETE** — the entire audio package (quantize, musicians,
+   sampler, render_offline, engine) + graphics camera.py + renderer.py + all 8 shader stems
+   are delivered, extracted, py_compile-clean, pushed. **THE CURRENT STEP IS LAUNCHING
+   PARENT D** (`graphics/terrain.py` + `graphics/totem.py`); its launch document is
+   `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-C.md` (Parent C's verbatim hand-off letter
+   + a DeepSeek info block appended at the end, clearly marked NOT Fable — paste the whole
+   file to a fresh Fable chat, then feed the scriptures in the order listed inside it, and
+   give Nir the view/blob links in order). After Parent D: Parents E, F, G, then stitching +
+   content.
 3. **Your job when a worker-parent replies** (Parent A, B, …): save the answer VERBATIM
    to `loom2/HINDU/`, extract the real code to its package path (`loom2/<pkg>/<file>.py`),
    `python -m py_compile` it, update this WORKFLOW + the BHASHYA, commit + push, give Nir

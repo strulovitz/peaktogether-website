@@ -19,6 +19,25 @@
 
 ## CURRENT FRONTIER (July 7, 2026)
 
+### 🔖 RESTART SNAPSHOT (July 7, 2026, evening) — quick orientation
+- **Progress:** Parents **A, B, C COMPLETE** → entire **audio package** (quantize, musicians,
+  sampler, render_offline, engine) + **graphics camera.py & renderer.py** + **all 8 shader
+  stems** delivered, extracted, py_compile-clean, pushed. config.py, core/types.py, 89-sample
+  orchestra, core/game_state.py, graphics/helix_panel.py all done. Whole scripture canon +
+  every hand-off letter saved verbatim.
+- **⏭️ IMMEDIATE NEXT STEP = launch PARENT D** (`graphics/terrain.py` + `graphics/totem.py`).
+  Launch doc READY = `HAND-OFF-PROMPT-FROM-FABLE-PARENT-C.md` (Parent C letter + DeepSeek info
+  block at end). Paste it to a fresh Fable chat, then feed scriptures (Homepage+About →
+  MAHABHARATA → VEDAS → UPANISHADS → SUTRAS → GITA 1-4; PURANAS declined). Give Nir blob links.
+- **After D:** Parent E (slice_mode), Parent F (hud + input_map), Parent G (surfaces + scene +
+  main), then DeepSeek stitches deferred seams + content.
+- **DeepSeek TODO ledger:** ffmpeg-in-EXE (or swap sampler `_decode_mono`); render_offline live
+  trial (after Parent G's surfaces.py); renderer GL smoke test (after a pyglet window);
+  joystick/Xbox (after Parent F); render_equations (content phase); PyInstaller (ship phase).
+- **When a parent replies:** save verbatim to `loom2/HINDU/` → extract code to package path →
+  `py_compile` (+ any self-test) → update WORKFLOW + this BHASHYA → commit + push → blob links.
+  Parents are smarter coders than DeepSeek; give info framed as info, never orders.
+
 - ⚖️ **AMENDMENT (approved by Nir):** `AudioEngine.set_quiz_wav(path)` added (path=None stops, 30 ms fade; loops the option WAV through the same mix/soft-clip/pan path, routes sensibly under 5.1/7.1, mutually exclusive with voices). The Gita's frozen API had no WAV wire for `_quiz_select` (G4.3); this is the sanctioned fix. **Audio seam is now 5 calls, not 4** (set_voices; set_camera_azimuth; set_quiz_wav; get_measure_phase; get_active_flashes).
 - ✅ **PURANAS Part 1 of 3 = `audio/engine.py`** landed (Fable Parent 2): saved verbatim in HINDU/ + extracted to `loom2/audio/engine.py` (py_compile OK).
 - ✅ **PURANAS Part 2 of 3 = `core/game_state.py`** landed (Fable Parent 2): saved verbatim in HINDU/ + extracted to `loom2/core/game_state.py` (py_compile OK). Fable's one open design call (Nir may veto by taste): **quiz exit gesture = TOUCH THE TOTEM** (any totem move in QUIZ_LISTEN stops the option, land resumes). Stitching note for DeepSeek: keep `game_state._build_slice_path` literally in sync with `GlassBlade.intersection_path` (G3.6) so drawn curve == walked road.
