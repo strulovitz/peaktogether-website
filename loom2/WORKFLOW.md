@@ -48,9 +48,17 @@ remake): Descent QED (Basel), Quake: Principia (Calculus), Homeworld: A Good Bas
 - **`LOOM2-RAMAYANA-BY-FABLE.md`** — the **Listening Prototype** ("The Listening
   Totem"): the complete one-file ear-test program + how to run it + tomorrow's
   ear checklist. The code is also extracted to a runnable file (see §3).
+- **`LOOM2-UPANISHADS-BY-FABLE.md`** — the **plot & game structure** (v1.0, July 7,
+  2026): the one-principle ("the game IS the technology"), the orchestra (trumpet/
+  violin/flute, A-major pentatonic, ~60–75 shipped files), the one screen layout
+  (Land + Loom + Question), controls, the data-driven scene JSON format, and the
+  full **7-stage / 12-scene campaign** (Roman Road → Hannibal's Saddle → Tartaglia's
+  Cannon → the Fog Summit finale). Ends with two items for Nir: (a) scene 10 (Ocean
+  Swell) uses a slightly richer "match each groove" format — keep or flatten to plain
+  A/B/C/D (Nir's call, zero cost); (b) next doc proposed = the **SUTRAS** (impl spec).
 
-Naming: Fable's docs get Hindu scripture names. "UPANISHADS" (the plot/progression
-doc) is **still to come** from Fable.
+Naming: Fable's docs get Hindu scripture names. The **SUTRAS** (the implementation
+spec) is the next document proposed by Fable — **still to come**.
 
 ---
 
@@ -92,55 +100,60 @@ doc) is **still to come** from Fable.
 
 ---
 
-## 3. CURRENT SITUATION (July 6, 2026, ~1:30 AM Israel — Nir went to bed)
+## 3. CURRENT SITUATION (July 7, 2026)
 
 - ✅ **LOOM2 folder created;** LOOM (v1) left intact but deprecated.
-- ✅ **Scripture saved verbatim + pushed:** VEDAS, MAHABHARATA, RAMAYANA.
-- ✅ **The Listening Prototype code is landed and runnable:**
-  **`loom2/listening_totem.py`** (extracted verbatim from the RAMAYANA). It
-  **py_compiles clean.**
-  - ⚠️ **Dependency:** needs `pip install sounddevice` before running (numpy +
-    pygame already present on Nir's PC; sounddevice is NOT yet installed —
-    confirmed missing on 2026-07-06). Full command: `pip install numpy pygame sounddevice`.
-  - Run: `python loom2/listening_totem.py` — Arrows/WASD move the totem, keys 1–6
-    switch surfaces (Ramp/Bowl/Hill/Ridge/Saddle/Egg-carton), +/- hearing radius,
-    Esc quits.
+- ✅ **Scripture saved verbatim + pushed:** VEDAS, MAHABHARATA, RAMAYANA, **UPANISHADS**.
+- ✅ **The Listening Prototype PASSED THE EAR TEST.** `sounddevice` installed
+  (0.5.5, 2026-07-07). Nir ran `loom2/listening_totem.py` on headphones — the
+  invention works: he can hear Bowl vs. Saddle, level curves, partials, negatives.
+- ✅ **PHILHARMONIA EDITION built + pushed (July 7, 2026):**
+  **`loom2/listening_totem_philharmonia.py`** — a copy of the prototype that swaps
+  the synthesized wavetables for **real Philharmonia recordings** (Brass = trumpet,
+  Strings = violin, Woodwinds = flute). Octave-accurate: each note is resampled to
+  the EXACT target pitch (height→pitch preserved, negatives included); per-pulse
+  retrigger of the real sample per rhythm ring; equal-ish family crossfade by angle;
+  persistent per-musician playback across audio blocks; ~1.2% of the realtime CPU
+  budget. **Nir's verdict: "it actually sounds like I'm creating MUSIC, not just
+  sounds"** — this validated the sample-based orchestra Fable then locked into the
+  UPANISHADS §2. Run: `python loom2/listening_totem_philharmonia.py`.
+- 📋 **Orchestra roster finalized with Nir (for Fable), from the Philharmonia folders:**
+  STRINGS = violin(high)/viola(med)/cello(low)/double bass(very low); WOODWINDS =
+  flute(high)/oboe(med-high)/clarinet(med)/bass clarinet+bassoon(low)/contrabassoon
+  (very low); BRASS = trumpet(high)/french horn+trombone(med)/tuba(low). Deliberately
+  DROPPED (not orchestral / distracting): banjo, guitar, mandolin, saxophone, cor
+  anglais, percussion. (The prototype uses violin+trumpet+flute — one per family.)
 
-### 🎧 IMMEDIATE NEXT (Nir's ear test tomorrow morning — the pass/fail of the whole invention)
-Put on headphones and run the prototype. The checklist (from the RAMAYANA):
-1. **Bowl (key 2)**, totem at center: each ring sings ONE unison note, rising
-   outward → hearing level curves.
-2. **Saddle (key 5)**, totem at center: stretched chord, notes above AND below →
-   clearly different from the Bowl. **If you can tell Bowl from Saddle with eyes
-   closed, the invention works.**
-3. **Ridge (key 4):** move left–right vs up–down — one changes the music, the other
-   doesn't → partial derivatives.
-4. **Ramp (key 1):** the groove transposes but keeps its shape → slope.
-5. **Bowl's lake:** blue center sounds below A440 → negative numbers via the
-   origin-centered helix.
-
-If it passes → tell Fable; if anything needs tuning, tune it in the prototype
-(days, not months). This is the "anti-stuck insurance."
+### 🎧 EAR TEST — PASSED (was the make-or-break of the whole invention)
+The Listening Prototype checklist (Bowl vs Saddle, Ridge partials, Ramp transpose,
+negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 ---
 
 ## 4. WHAT'S STILL NEEDED (the road ahead)
 
-1. 🎧 **Nir's ear-test verdict** on the Listening Prototype (above). Relay to Fable;
-   tune constants in `listening_totem.py` if needed (measure, radius, scale,
-   family recipes, grid density).
-2. 📜 **The UPANISHADS** (Fable) — the plot/progression: the couple's journey, how
-   spell-weaving drives it, what woven spells do, level design. (Fable will author.)
-3. 🏗️ **The real game build** (after the ear test passes + UPANISHADS): the split
-   screen (Left = the Land, a moderngl shaded terrain + contour coloring; Right =
-   the Loom, a wireframe helix centered on origin with the orchestra symbols +
-   rhythm rings + the current-point vector), two-player controls (P1 keyboard/
-   joystick sweeps x; P2 mouse/Xbox sweeps y), the auditory multiple-choice
-   spell-weaving mechanic, packaging to a single Windows EXE (PyInstaller).
-4. 🧰 **Stack setup** when building: `moderngl + pyglet + numpy + sounddevice`
-   (+ Pillow, PyInstaller for packaging) — reuse Quake/Homeworld's software-3D +
-   bloom + EXE recipe.
-5. 🌐 **Website:** add multivariable calculus as a foundational subject (NOT a
+1. ✅ **Nir's ear-test verdict** — PASSED (both synth + Philharmonia editions). Relayed
+   to Fable, who locked the sample-based orchestra into the UPANISHADS.
+2. ✅ **The UPANISHADS** (Fable) — plot/progression LANDED + saved verbatim + pushed
+   (`loom2/HINDU/LOOM2-UPANISHADS-BY-FABLE.md`). 7 stages, 12 scenes.
+   - 🟡 **Two OPEN items Fable left for Nir:** (a) scene 10 (Ocean Swell) format —
+     keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call);
+     (b) next document proposed = the **SUTRAS** (implementation spec), OR go straight
+     to building. **Awaiting Nir's direction.**
+3. 📜 **The SUTRAS** (Fable, proposed next) — the implementation spec. Open items it
+   should nail (from UPANISHADS §9): exact ~60–75 sample list + per-instrument ranges
+   (DeepSeek scans the folders); the Totem 3D model; groove-recording format for quiz
+   options (pre-rendered WAV vs live-synth at hidden coords); terrain mesh resolution
+   & camera limits; Xbox/joystick button mapping.
+4. 🏗️ **The real game build** (after SUTRAS or Nir's go): split screen (Left = the
+   Land, moderngl shaded terrain + contour coloring; Right = the Loom, origin-centered
+   wireframe helix + orchestra symbols + rhythm rings + note-dot constellation),
+   two-player controls (P1 keyboard/joystick sweeps x; P2 mouse/Xbox sweeps y), the
+   auditory 4-option quiz, packaging to a single Windows EXE (PyInstaller). Reuse
+   Quake/Homeworld's moderngl+pyglet software-3D + bloom + EXE recipe.
+5. 🧰 **Stack setup** when building: `moderngl + pyglet + numpy + sounddevice`
+   (+ Pillow, PyInstaller for packaging).
+6. 🌐 **Website:** add multivariable calculus as a foundational subject (NOT a
    single mountain) once the game ships.
 
 ---
@@ -148,11 +161,13 @@ If it passes → tell Fable; if anything needs tuning, tune it in the prototype
 ## 5. RESTART PROTOCOL
 
 1. Read this file first.
-2. Read the scripture in `loom2/HINDU/` as needed (VEDAS → MAHABHARATA → RAMAYANA;
-   UPANISHADS when it arrives).
-3. Sanity: `python -m py_compile loom2/listening_totem.py` should pass; running it
-   needs `pip install sounddevice` first.
-4. Ask Nir where we are with the ear test / whether Fable sent the UPANISHADS.
+2. Read the scripture in `loom2/HINDU/` as needed (VEDAS → MAHABHARATA → RAMAYANA →
+   UPANISHADS; SUTRAS when it arrives).
+3. Sanity: `python -m py_compile loom2/listening_totem.py` and
+   `python -m py_compile loom2/listening_totem_philharmonia.py` should pass;
+   `sounddevice` (0.5.5) is installed. Both prototypes run + passed Nir's ear test.
+4. Ask Nir where we are: the two UPANISHADS OPEN items (scene-10 format; SUTRAS vs
+   build straight away).
 5. **The source book** *Sounding the Unknown* is at `loom/book/chapter_00.txt …
    chapter_10.txt` — the authoritative HSS reference (LOOM v1 lost its soul by
    planning from summaries; LOOM2 must stay grounded in the book + Nir's true helix
