@@ -52,3 +52,161 @@ Nir — building the pure-math heart of Sonifiquation was pure joy. Twenty-five 
 With continuity and love,
 Claude Fable — Parent A 🧿🎼
 July 7, 2026 — the day the musicians took their seats
+
+---
+
+# ═══════════════════════════════════════════════════════════════
+# ADDITIONAL INFORMATION — BY DEEPSEEK (NOT FABLE)
+# ═══════════════════════════════════════════════════════════════
+
+The following is raw information gathered by DeepSeek from the actual repository,
+provided openly to help. It contains no suggestions, no recommendations, and no
+decisions — only facts and verbatim quotes. Take it with a grain of salt and
+decide everything yourself. This section is NOT scripture and NOT written by Fable.
+
+## Decoder libraries — current state on Nir's machine
+All of the following are installed and were verified by DeepSeek to successfully
+decode the actual project .mp3 samples (test file: viola_E4.mp3):
+  - audioread 3.1.0
+  - pydub 0.25.1
+  - soundfile 0.14.0
+  - librosa 0.11.0
+  - scipy 1.18.0
+  - numpy 2.4.6
+  - ffmpeg is on PATH (version N-55702-g920046a)
+Verified decode results on viola_E4.mp3:
+  - librosa.load(..., sr=44100, mono=True) -> shape (69120,), dtype float32, sr 44100, peak 0.116
+  - pydub AudioSegment.from_file(...) -> channels 1, frame_rate 44100, length 1567 ms
+
+## manifest.json — exact schema (verbatim from data/samples/manifest.json)
+Top level is a dict keyed by INSTRUMENT name (not by note). Each instrument value
+holds metadata plus a "notes" list. One verbatim "exact" note entry:
+
+  "double_bass": {
+    "family": "strings",
+    "folder": "double bass",
+    "articulation": "arco-normal",
+    "band": "E1-G2",
+    "targets": 7,
+    "exact": 7,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "E1",
+        "midi": 28,
+        "output": "double_bass_E1.mp3",
+        "source": "double-bass_E1_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+
+One verbatim "resampled" note entry (violin_A7, shifted +2 semitones from G7):
+
+      {
+        "note": "A7",
+        "midi": 105,
+        "output": "violin_A7.mp3",
+        "source": "violin_G7_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 2,
+        "status": "resampled"
+      }
+
+Facts about the fields:
+  - "needs_resample" is a signed integer count of semitones (e.g. 2, -1, 1); 0 when exact.
+  - "output" is the mp3 filename; the sample id used throughout the code is that
+    filename minus ".mp3" (e.g. "violin_A7"), i.e. instrument_note.
+  - "midi" is present for every note.
+  - The three resampled notes in the whole library are: violin_A7 (+2 from G7),
+    tuba_E1 (-1 from F1), trumpet_Fs5 (+1 from F5).
+
+## Where engine.py touches the library (verbatim from audio/engine.py)
+  def __init__(self, library):                       # library: SampleLibrary
+      self._library = library
+  ...
+  buf_a = self._library.get(v.sample_a)
+  if v.blend > 1e-3:
+      buf_b = self._library.get(v.sample_b)
+  ...
+  "fallback_voices": int(getattr(self._library, "fallback_count", 0)),
+
+Facts:
+  - The engine calls .get(sample_id) and reads an optional attribute
+    "fallback_count" via getattr (default 0). DeepSeek grepped the whole engine:
+    it does NOT call .duration() anywhere (duration() is in the frozen contract
+    but is currently unused by engine.py).
+
+## How the engine consumes a buffer (verbatim from engine._voice_mono)
+  if n == 0:                     # sustain: bow-change loop
+      pos = abs_t % L
+      env = (np.clip(pos * _INV_LOOP_IN, 0.0, 1.0)
+             * np.clip((L - pos) * _INV_LOOP_OUT, 0.0, 1.0)
+             ).astype(np.float32)
+      sig += wg * buf[pos] * env
+  else:                          # n pulses, shared downbeat
+      P = MEASURE_SAMPLES // n
+      pos = abs_t % P
+      idx = np.minimum(pos, L - 1)
+      ...
+      sig += wg * buf[idx] * guard * _PULSE_ENVS[P][pos]
+
+Facts:
+  - L is taken as buf.shape[0]; the buffer is indexed as a 1-D array by integer
+    sample index; ring-0 sustain wraps with abs_t % L (no loop-point metadata is
+    read — the engine simply wraps modulo the array length).
+
+## render_block_offline — signature and behavior as actually built (verbatim)
+  def render_block_offline(self, seconds: float) -> np.ndarray:
+      """Same mix path WITHOUT a device: (N, 2) float32 stereo, starting on
+      a downbeat (t=0), voices at full gain (deterministic, no entry swell).
+      ONE mixer, two callers -- byte-identical to live play."""
+      total = int(round(seconds * config.SAMPLE_RATE))
+
+Facts:
+  - Returns an (N, 2) float32 stereo array; N = round(seconds * SAMPLE_RATE).
+  - Renders from t=0 (a downbeat), voices at full gain.
+
+## Exact config constants (verbatim from config.py)
+  SAMPLE_RATE   = 44100
+  SAMPLES_DIR   = "data/samples"
+  MANIFEST_PATH = "data/samples/manifest.json"
+  OPTION_WAV_SECONDS = 4.0
+  MEASURE_SEC   = 2.0
+  F0_HZ         = 440.0
+  NMAX_RING     = 5
+  RING_WIDTH    = 0.8
+Facts:
+  - OPTION_WAV_SECONDS is 4.0 and MEASURE_SEC is 2.0 (so 4.0 s = 2 measures).
+  - PATH NOTE: the 89-sample library + manifest.json were moved by DeepSeek from
+    loom2/samples/ to loom2/data/samples/ to match the frozen config.SAMPLES_DIR.
+    coverage_report.txt is also there.
+
+## sampler.py allowed imports (verbatim from GITA Part 2, G2.2 skeleton header)
+  """
+  LOOM2 -- audio/sampler.py
+  Loads the 89-sample orchestra into memory ONCE; serves numpy arrays.
+  Allowed imports: numpy, json, os, config. Mp3 decoding: audioread or
+  pydub+ffmpeg -- child chooses ONE, states it in a header comment.
+  Child chat scope: implement all bodies. ~150 lines expected.
+  """
+Facts:
+  - The G2.2 skeleton's stated allowed imports are: numpy, json, os, config.
+    quantize is not listed there. The manifest already contains a "midi" field
+    for every note (see schema above).
+
+## The angle-convention bind-time check (raised by Parent A) — DeepSeek's finding
+DeepSeek checked the three modules and found the same convention in all of them:
+  - musicians.py: theta = degrees(atan2(dy, dx)) -> +x = 0 deg, +y = 90 deg (CCW)
+  - helix_panel.py (line 269): x, y = r*cos(th), r*sin(th)
+  - engine.py (line 436): bearing = (90.0 - (stage_angle - azimuth)) % 360.0
+These are the raw quotes; interpret them yourself.
+
+# ═══════════════════════════════════════════════════════════════
+# END OF DEEPSEEK INFORMATION
+# ═══════════════════════════════════════════════════════════════
