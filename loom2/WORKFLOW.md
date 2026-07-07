@@ -276,8 +276,13 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      ⚠️ Standing DeepSeek TODO: sampler.py ships in the EXE → PyInstaller must bundle ffmpeg
      (or swap `_decode_mono`) at packaging time.
    - **Parent B** — `audio/sampler.py` + `audio/render_offline.py`  ← ✅ **COMPLETE**
-   - Parent C — `graphics/renderer.py` + `graphics/camera.py`  ← **CURRENT NEXT STEP**
-   - Parent D — `graphics/terrain.py` + `graphics/totem.py`
+   - ✅ **Parent C** — `graphics/renderer.py` + `graphics/camera.py` **COMPLETE** (both
+     delivered, extracted, py_compile OK; saved verbatim as `LOOM2-PARENT-C-PART-1-CAMERA-BY-FABLE.md`
+     + `LOOM2-PARENT-C-PART-2-RENDERER-BY-FABLE.md`). camera.py behavior-tested (clamps,
+     reset, clock/pan seam verified). renderer.py uniform names match the shader files.
+     **Live GL smoke test deferred to integration** (needs a pyglet window / Parent G's main.py).
+     camera_limits de-facto contract locked (target/zoom_min/zoom_max/distance). No CONTRACT-ISSUEs.
+   - Parent D — `graphics/terrain.py` + `graphics/totem.py`  ← **CURRENT NEXT STEP**
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
