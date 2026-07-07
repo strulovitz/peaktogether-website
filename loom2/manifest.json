@@ -1,0 +1,1137 @@
+{
+  "double_bass": {
+    "family": "strings",
+    "folder": "double bass",
+    "articulation": "arco-normal",
+    "band": "E1-G2",
+    "targets": 7,
+    "exact": 7,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "E1",
+        "midi": 28,
+        "output": "double_bass_E1.mp3",
+        "source": "double-bass_E1_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs1",
+        "midi": 30,
+        "output": "double_bass_Fs1.mp3",
+        "source": "double-bass_Fs1_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A1",
+        "midi": 33,
+        "output": "double_bass_A1.mp3",
+        "source": "double-bass_A1_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B1",
+        "midi": 35,
+        "output": "double_bass_B1.mp3",
+        "source": "double-bass_B1_15_mezzo-forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs2",
+        "midi": 37,
+        "output": "double_bass_Cs2.mp3",
+        "source": "double-bass_Cs2_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E2",
+        "midi": 40,
+        "output": "double_bass_E2.mp3",
+        "source": "double-bass_E2_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs2",
+        "midi": 42,
+        "output": "double_bass_Fs2.mp3",
+        "source": "double-bass_Fs2_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "cello": {
+    "family": "strings",
+    "folder": "cello",
+    "articulation": "arco-normal",
+    "band": "A2-G3",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A2",
+        "midi": 45,
+        "output": "cello_A2.mp3",
+        "source": "cello_A2_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B2",
+        "midi": 47,
+        "output": "cello_B2.mp3",
+        "source": "cello_B2_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs3",
+        "midi": 49,
+        "output": "cello_Cs3.mp3",
+        "source": "cello_Cs3_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E3",
+        "midi": 52,
+        "output": "cello_E3.mp3",
+        "source": "cello_E3_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs3",
+        "midi": 54,
+        "output": "cello_Fs3.mp3",
+        "source": "cello_Fs3_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "viola": {
+    "family": "strings",
+    "folder": "viola",
+    "articulation": "arco-normal",
+    "band": "A3-G4",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A3",
+        "midi": 57,
+        "output": "viola_A3.mp3",
+        "source": "viola_A3_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B3",
+        "midi": 59,
+        "output": "viola_B3.mp3",
+        "source": "viola_B3_15_mezzo-piano_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-piano",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs4",
+        "midi": 61,
+        "output": "viola_Cs4.mp3",
+        "source": "viola_Cs4_15_fortissimo_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E4",
+        "midi": 64,
+        "output": "viola_E4.mp3",
+        "source": "viola_E4_15_fortissimo_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs4",
+        "midi": 66,
+        "output": "viola_Fs4.mp3",
+        "source": "viola_Fs4_15_fortissimo_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "violin": {
+    "family": "strings",
+    "folder": "violin",
+    "articulation": "arco-normal",
+    "band": "A4-A7",
+    "targets": 16,
+    "exact": 15,
+    "resampled": 1,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A4",
+        "midi": 69,
+        "output": "violin_A4.mp3",
+        "source": "violin_A4_15_fortissimo_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B4",
+        "midi": 71,
+        "output": "violin_B4.mp3",
+        "source": "violin_B4_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs5",
+        "midi": 73,
+        "output": "violin_Cs5.mp3",
+        "source": "violin_Cs5_15_fortissimo_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E5",
+        "midi": 76,
+        "output": "violin_E5.mp3",
+        "source": "violin_E5_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs5",
+        "midi": 78,
+        "output": "violin_Fs5.mp3",
+        "source": "violin_Fs5_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A5",
+        "midi": 81,
+        "output": "violin_A5.mp3",
+        "source": "violin_A5_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B5",
+        "midi": 83,
+        "output": "violin_B5.mp3",
+        "source": "violin_B5_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs6",
+        "midi": 85,
+        "output": "violin_Cs6.mp3",
+        "source": "violin_Cs6_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E6",
+        "midi": 88,
+        "output": "violin_E6.mp3",
+        "source": "violin_E6_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs6",
+        "midi": 90,
+        "output": "violin_Fs6.mp3",
+        "source": "violin_Fs6_15_mezzo-forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A6",
+        "midi": 93,
+        "output": "violin_A6.mp3",
+        "source": "violin_A6_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B6",
+        "midi": 95,
+        "output": "violin_B6.mp3",
+        "source": "violin_B6_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs7",
+        "midi": 97,
+        "output": "violin_Cs7.mp3",
+        "source": "violin_Cs7_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E7",
+        "midi": 100,
+        "output": "violin_E7.mp3",
+        "source": "violin_E7_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs7",
+        "midi": 102,
+        "output": "violin_Fs7.mp3",
+        "source": "violin_Fs7_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A7",
+        "midi": 105,
+        "output": "violin_A7.mp3",
+        "source": "violin_G7_15_forte_arco-normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "arco-normal",
+        "needs_resample": 2,
+        "status": "resampled"
+      }
+    ]
+  },
+  "contrabassoon": {
+    "family": "wood",
+    "folder": "contrabassoon",
+    "articulation": "normal",
+    "band": "As0-G2",
+    "targets": 9,
+    "exact": 9,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "B0",
+        "midi": 23,
+        "output": "contrabassoon_B0.mp3",
+        "source": "contrabassoon_B0_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs1",
+        "midi": 25,
+        "output": "contrabassoon_Cs1.mp3",
+        "source": "contrabassoon_Cs1_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E1",
+        "midi": 28,
+        "output": "contrabassoon_E1.mp3",
+        "source": "contrabassoon_E1_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs1",
+        "midi": 30,
+        "output": "contrabassoon_Fs1.mp3",
+        "source": "contrabassoon_Fs1_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A1",
+        "midi": 33,
+        "output": "contrabassoon_A1.mp3",
+        "source": "contrabassoon_A1_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B1",
+        "midi": 35,
+        "output": "contrabassoon_B1.mp3",
+        "source": "contrabassoon_B1_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs2",
+        "midi": 37,
+        "output": "contrabassoon_Cs2.mp3",
+        "source": "contrabassoon_Cs2_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E2",
+        "midi": 40,
+        "output": "contrabassoon_E2.mp3",
+        "source": "contrabassoon_E2_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs2",
+        "midi": 42,
+        "output": "contrabassoon_Fs2.mp3",
+        "source": "contrabassoon_Fs2_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "bassoon": {
+    "family": "wood",
+    "folder": "bassoon",
+    "articulation": "normal",
+    "band": "A2-G3",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A2",
+        "midi": 45,
+        "output": "bassoon_A2.mp3",
+        "source": "bassoon_A2_15_piano_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "piano",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B2",
+        "midi": 47,
+        "output": "bassoon_B2.mp3",
+        "source": "bassoon_B2_15_piano_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "piano",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs3",
+        "midi": 49,
+        "output": "bassoon_Cs3.mp3",
+        "source": "bassoon_Cs3_15_fortissimo_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E3",
+        "midi": 52,
+        "output": "bassoon_E3.mp3",
+        "source": "bassoon_E3_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs3",
+        "midi": 54,
+        "output": "bassoon_Fs3.mp3",
+        "source": "bassoon_Fs3_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "clarinet": {
+    "family": "wood",
+    "folder": "clarinet",
+    "articulation": "normal",
+    "band": "A3-G4",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A3",
+        "midi": 57,
+        "output": "clarinet_A3.mp3",
+        "source": "clarinet_A3_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B3",
+        "midi": 59,
+        "output": "clarinet_B3.mp3",
+        "source": "clarinet_B3_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs4",
+        "midi": 61,
+        "output": "clarinet_Cs4.mp3",
+        "source": "clarinet_Cs4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E4",
+        "midi": 64,
+        "output": "clarinet_E4.mp3",
+        "source": "clarinet_E4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs4",
+        "midi": 66,
+        "output": "clarinet_Fs4.mp3",
+        "source": "clarinet_Fs4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "oboe": {
+    "family": "wood",
+    "folder": "oboe",
+    "articulation": "normal",
+    "band": "A4-G5",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A4",
+        "midi": 69,
+        "output": "oboe_A4.mp3",
+        "source": "oboe_A4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B4",
+        "midi": 71,
+        "output": "oboe_B4.mp3",
+        "source": "oboe_B4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs5",
+        "midi": 73,
+        "output": "oboe_Cs5.mp3",
+        "source": "oboe_Cs5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E5",
+        "midi": 76,
+        "output": "oboe_E5.mp3",
+        "source": "oboe_E5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs5",
+        "midi": 78,
+        "output": "oboe_Fs5.mp3",
+        "source": "oboe_Fs5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "flute": {
+    "family": "wood",
+    "folder": "flute",
+    "articulation": "normal",
+    "band": "A5-C7",
+    "targets": 7,
+    "exact": 7,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A5",
+        "midi": 81,
+        "output": "flute_A5.mp3",
+        "source": "flute_A5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B5",
+        "midi": 83,
+        "output": "flute_B5.mp3",
+        "source": "flute_B5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs6",
+        "midi": 85,
+        "output": "flute_Cs6.mp3",
+        "source": "flute_Cs6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E6",
+        "midi": 88,
+        "output": "flute_E6.mp3",
+        "source": "flute_E6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs6",
+        "midi": 90,
+        "output": "flute_Fs6.mp3",
+        "source": "flute_Fs6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A6",
+        "midi": 93,
+        "output": "flute_A6.mp3",
+        "source": "flute_A6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B6",
+        "midi": 95,
+        "output": "flute_B6.mp3",
+        "source": "flute_B6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "tuba": {
+    "family": "brass",
+    "folder": "tuba",
+    "articulation": "normal",
+    "band": "D1-G2",
+    "targets": 7,
+    "exact": 6,
+    "resampled": 1,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "E1",
+        "midi": 28,
+        "output": "tuba_E1.mp3",
+        "source": "tuba_F1_15_mezzo-piano_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-piano",
+        "articulation": "normal",
+        "needs_resample": -1,
+        "status": "resampled"
+      },
+      {
+        "note": "Fs1",
+        "midi": 30,
+        "output": "tuba_Fs1.mp3",
+        "source": "tuba_Fs1_1_forte_normal.mp3",
+        "duration_s": 1.0,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "A1",
+        "midi": 33,
+        "output": "tuba_A1.mp3",
+        "source": "tuba_A1_15_fortissimo_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B1",
+        "midi": 35,
+        "output": "tuba_B1.mp3",
+        "source": "tuba_B1_15_mezzo-piano_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-piano",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs2",
+        "midi": 37,
+        "output": "tuba_Cs2.mp3",
+        "source": "tuba_Cs2_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E2",
+        "midi": 40,
+        "output": "tuba_E2.mp3",
+        "source": "tuba_E2_15_fortissimo_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "fortissimo",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs2",
+        "midi": 42,
+        "output": "tuba_Fs2.mp3",
+        "source": "tuba_Fs2_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "trombone": {
+    "family": "brass",
+    "folder": "trombone",
+    "articulation": "normal",
+    "band": "A2-G3",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A2",
+        "midi": 45,
+        "output": "trombone_A2.mp3",
+        "source": "trombone_A2_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B2",
+        "midi": 47,
+        "output": "trombone_B2.mp3",
+        "source": "trombone_B2_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs3",
+        "midi": 49,
+        "output": "trombone_Cs3.mp3",
+        "source": "trombone_Cs3_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E3",
+        "midi": 52,
+        "output": "trombone_E3.mp3",
+        "source": "trombone_E3_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs3",
+        "midi": 54,
+        "output": "trombone_Fs3.mp3",
+        "source": "trombone_Fs3_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "french_horn": {
+    "family": "brass",
+    "folder": "french horn",
+    "articulation": "normal",
+    "band": "A3-G4",
+    "targets": 5,
+    "exact": 5,
+    "resampled": 0,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A3",
+        "midi": 57,
+        "output": "french_horn_A3.mp3",
+        "source": "french-horn_A3_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B3",
+        "midi": 59,
+        "output": "french_horn_B3.mp3",
+        "source": "french-horn_B3_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs4",
+        "midi": 61,
+        "output": "french_horn_Cs4.mp3",
+        "source": "french-horn_Cs4_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E4",
+        "midi": 64,
+        "output": "french_horn_E4.mp3",
+        "source": "french-horn_E4_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs4",
+        "midi": 66,
+        "output": "french_horn_Fs4.mp3",
+        "source": "french-horn_Fs4_15_mezzo-forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "mezzo-forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  },
+  "trumpet": {
+    "family": "brass",
+    "folder": "trumpet",
+    "articulation": "normal",
+    "band": "A4-D6",
+    "targets": 8,
+    "exact": 7,
+    "resampled": 1,
+    "missing": 0,
+    "notes": [
+      {
+        "note": "A4",
+        "midi": 69,
+        "output": "trumpet_A4.mp3",
+        "source": "trumpet_A4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B4",
+        "midi": 71,
+        "output": "trumpet_B4.mp3",
+        "source": "trumpet_B4_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs5",
+        "midi": 73,
+        "output": "trumpet_Cs5.mp3",
+        "source": "trumpet_Cs5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "E5",
+        "midi": 76,
+        "output": "trumpet_E5.mp3",
+        "source": "trumpet_E5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Fs5",
+        "midi": 78,
+        "output": "trumpet_Fs5.mp3",
+        "source": "trumpet_F5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 1,
+        "status": "resampled"
+      },
+      {
+        "note": "A5",
+        "midi": 81,
+        "output": "trumpet_A5.mp3",
+        "source": "trumpet_A5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "B5",
+        "midi": 83,
+        "output": "trumpet_B5.mp3",
+        "source": "trumpet_B5_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      },
+      {
+        "note": "Cs6",
+        "midi": 85,
+        "output": "trumpet_Cs6.mp3",
+        "source": "trumpet_Cs6_15_forte_normal.mp3",
+        "duration_s": 1.5,
+        "dynamic": "forte",
+        "articulation": "normal",
+        "needs_resample": 0,
+        "status": "exact"
+      }
+    ]
+  }
+}

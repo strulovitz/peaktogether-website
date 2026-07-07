@@ -1,0 +1,18 @@
+LOOM2 SAMPLE LIBRARY -- COVERAGE REPORT
+Built per SUTRAS Part Ten (pentatonic A/B/Cs/E/Fs, real register bands).
+TOTAL: 89 target notes -> 86 exact, 3 resampled (<=+/-2 st), 0 missing.
+Files written to: C:\Users\nir_s\peaktogether-website\loom2\samples
+------------------------------------------------------------------------------
+double_bass    [strings] E1-G2:  7 targets ->  7 exact, 0 resampled, 0 missing
+cello          [strings] A2-G3:  5 targets ->  5 exact, 0 resampled, 0 missing
+viola          [strings] A3-G4:  5 targets ->  5 exact, 0 resampled, 0 missing
+violin         [strings] A4-A7: 16 targets -> 15 exact, 1 resampled, 0 missing
+contrabassoon  [wood   ] As0-G2:  9 targets ->  9 exact, 0 resampled, 0 missing
+bassoon        [wood   ] A2-G3:  5 targets ->  5 exact, 0 resampled, 0 missing
+clarinet       [wood   ] A3-G4:  5 targets ->  5 exact, 0 resampled, 0 missing
+oboe           [wood   ] A4-G5:  5 targets ->  5 exact, 0 resampled, 0 missing
+flute          [wood   ] A5-C7:  7 targets ->  7 exact, 0 resampled, 0 missing
+tuba           [brass  ] D1-G2:  7 targets ->  6 exact, 1 resampled, 0 missing
+trombone       [brass  ] A2-G3:  5 targets ->  5 exact, 0 resampled, 0 missing
+french_horn    [brass  ] A3-G4:  5 targets ->  5 exact, 0 resampled, 0 missing
+trumpet        [brass  ] A4-D6:  8 targets ->  7 exact, 1 resampled, 0 missing
