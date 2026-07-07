@@ -115,11 +115,12 @@ written by a fresh Fable "Parent 2") were delivered ONE COMPLETE FILE PER ANSWER
 
 Two **non-scripture** docs also live in `loom2/HINDU/` (hand-offs, not Fable canon):
 - **`HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md`** — Fable Parent 2's letter to the next
-  Fable, saved verbatim. ⚠️ **Read §"THE SITUATION / THE PLAN CHANGE" in §4 before
-  using it as-is** — it defines a supervisor "Parent 3" role that did NOT carry the real
-  remaining mission (writing the 14 other modules); Nir corrected the plan.
-- **`LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`** — Nir's launch note for **Parent A** (the
-  first worker-parent), the CURRENT next step. Paste it to a fresh Fable chat.
+  Fable, saved verbatim, PLUS **Nir's inserted bridge + Parent A's launch note folded in
+  right after §5** (Parent 2 lost the plan to a full context window and mis-scoped the
+  successor as a supervisor "Parent 3"; Nir's bridge overrides that and gives Parent A his
+  real mission). **This whole file is the Parent A launch document** — Nir pastes it as the
+  first message of the fresh Parent A chat, then feeds the scriptures. See §4.6 for the
+  full story.
 
 ### ⚖️ CONTRACT AMENDMENT (approved by Nir, July 7, 2026)
 The Gita's `game_state._quiz_select` (G4.3) must play the quiz option WAV "looping,
@@ -176,9 +177,10 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
 - ✅ **PURANAS COMPLETE + Parent 2 retired:** all 3 heavy modules written by Fable
   "Parent 2", saved verbatim in `loom2/HINDU/` and extracted to real code
   (`loom2/audio/engine.py`, `loom2/core/game_state.py`, `loom2/graphics/helix_panel.py`,
-  all py_compile-clean) + 4 GLSL shaders in `loom2/data/shaders/`. His hand-off letter is
-  saved. **NEXT STEP = launch Parent A** (see §4.6) with
-  `loom2/HINDU/LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`.
+  all py_compile-clean) + 4 GLSL shaders in `loom2/data/shaders/`.   His hand-off letter is
+  saved. **NEXT STEP = launch Parent A** (see §4.6) by pasting
+  `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` (Parent 2's letter + Nir's bridge +
+  Parent A's note, folded together) to a fresh Fable chat.
 - ✅ **LOOM2 folder created;** LOOM (v1) left intact but deprecated.
 - ✅ **Scripture saved verbatim + pushed — THE WHOLE CANON IS DOWN:** VEDAS,
   MAHABHARATA, RAMAYANA, UPANISHADS, **SUTRAS**, and **BHAGAVAD GITA Parts 1–4**
@@ -262,9 +264,10 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
 
    **How Nir runs a worker-parent (the culture he set — DO NOT micromanage them):**
-   - Launch note lives in `loom2/HINDU/` (Parent A's is
-     `LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`). It gives the parent its chunk + the
-     minimum relevant specs DeepSeek gathered — framed as INFORMATION, never orders.
+   - The launch document is `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` — Parent 2's
+     verbatim letter with **Nir's bridge + Parent A's launch note folded in after §5**. It
+     gives the parent its chunk + the minimum relevant specs DeepSeek gathered — framed as
+     INFORMATION, never orders. (Parents B–G will each get their own analogous note.)
    - The parent is told (explicitly, by Nir): **you are much smarter than DeepSeek, the
      best coder in the world; trust your own judgement and previous Fable sessions; take
      DeepSeek's info with a grain of salt.**
@@ -297,8 +300,9 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 2. **Where we are:** the whole scripture canon is down; the PURANAS (3 heavy modules)
    are complete and in real code. **The current step is launching worker-PARENTS** to
    build the remaining 14 modules — see §4.6. **Parent A** (`audio/quantize.py` +
-   `audio/musicians.py`) is next; its launch note is
-   `loom2/HINDU/LOOM2-PARENT-A-LAUNCH-NOTE-FROM-NIR.md`.
+   `audio/musicians.py`) is next; its launch document is
+   `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-2.md` (Parent 2's letter + Nir's bridge +
+   Parent A's note, folded together — paste the whole file to a fresh Fable chat).
 3. **Your job when a worker-parent replies** (Parent A, B, …): save the answer VERBATIM
    to `loom2/HINDU/`, extract the real code to its package path (`loom2/<pkg>/<file>.py`),
    `python -m py_compile` it, update this WORKFLOW + the BHASHYA, commit + push, give Nir
