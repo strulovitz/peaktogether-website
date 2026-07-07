@@ -48,17 +48,38 @@ remake): Descent QED (Basel), Quake: Principia (Calculus), Homeworld: A Good Bas
 - **`LOOM2-RAMAYANA-BY-FABLE.md`** — the **Listening Prototype** ("The Listening
   Totem"): the complete one-file ear-test program + how to run it + tomorrow's
   ear checklist. The code is also extracted to a runnable file (see §3).
-- **`LOOM2-UPANISHADS-BY-FABLE.md`** — the **plot & game structure** (v1.0, July 7,
-  2026): the one-principle ("the game IS the technology"), the orchestra (trumpet/
-  violin/flute, A-major pentatonic, ~60–75 shipped files), the one screen layout
-  (Land + Loom + Question), controls, the data-driven scene JSON format, and the
-  full **7-stage / 12-scene campaign** (Roman Road → Hannibal's Saddle → Tartaglia's
-  Cannon → the Fog Summit finale). Ends with two items for Nir: (a) scene 10 (Ocean
-  Swell) uses a slightly richer "match each groove" format — keep or flatten to plain
-  A/B/C/D (Nir's call, zero cost); (b) next doc proposed = the **SUTRAS** (impl spec).
+- **`LOOM2-SUTRAS-BY-FABLE.md`** — the **consolidated Amendments I & II** (v1.0,
+  July 7, 2026). Supersedes UPANISHADS §2/§3 and the ±3-octave rule. Locks: the
+  **full 13-instrument orchestra** each played by its real register members (strings
+  = double bass/cello/viola/violin; woodwinds = contrabassoon/bassoon/clarinet/oboe/
+  flute; brass = tuba/trombone/french horn/trumpet); the **full ~6-octave orchestral
+  range** (never resample across registers); the **50/50 "Sonifiquation" screen**
+  (Cartesian left, Sonifiquation-coordinates helix right); camera orbit = surround
+  panning (rotating changes your *seat*, not the song); instrument-icon billboards in
+  the helix; **Slice Mode "the Glass Blade"** 🔪; pre-rendered quiz-option WAVs; and
+  **Part Ten = the DEEPSEEK TASK** to build the sample library (DONE — see §3).
+- **`LOOM2-BHAGAVAD-GITA-PART-1..4-BY-FABLE.md`** — the **modular architecture &
+  frozen contracts** (v1.0, July 7, 2026), 4 parts:
+  - **Part 1** — Foundation & Map: the Laws of the Gita (children fill bodies only;
+    signatures/constants frozen), the full project tree, and the COMPLETE `config.py`
+    (all frozen constants incl. the 89-sample REGISTER_MAP baked in as canon) +
+    `core/types.py` (Voice, SceneSpec, CameraState, Mode/Action enums — the vocabulary
+    of every seam).
+  - **Part 2** — Audio contracts: `audio/{quantize,sampler,musicians,engine,
+    render_offline}.py` (empty-body skeletons). Seam = 4 calls (build_voices →
+    set_voices; set_camera_azimuth; get_measure_phase; get_active_flashes).
+  - **Part 3** — Graphics contracts: `graphics/{renderer,camera,terrain,totem,
+    helix_panel,slice_mode,hud}.py`. One shared OrbitCamera drives both panels.
+  - **Part 4** — Core & main contracts: `core/{surfaces,scene,game_state,input_map}.py`
+    + `main.py` (frozen boot & frame order). Ends with the **child-chat assignment
+    plan** (see §6) and what DeepSeek owes (folders, __init__.py, shaders, joystick/
+    xbox fill-in, scene JSON, PyInstaller).
 
-Naming: Fable's docs get Hindu scripture names. The **SUTRAS** (the implementation
-spec) is the next document proposed by Fable — **still to come**.
+Naming: Fable's docs get Hindu scripture names. Lineage: **VEDAS → MAHABHARATA →
+RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA** (all landed). **NEXT = the PURANAS**
+(the heavy modules — audio/engine.py, core/game_state.py, graphics/helix_panel.py —
+written by a fresh Fable "Parent 2"). **Still to come.** Nir can ask Fable for the
+**Parent 1 → Parent 2 hand-off prompt** when ready.
 
 ---
 
@@ -103,7 +124,10 @@ spec) is the next document proposed by Fable — **still to come**.
 ## 3. CURRENT SITUATION (July 7, 2026)
 
 - ✅ **LOOM2 folder created;** LOOM (v1) left intact but deprecated.
-- ✅ **Scripture saved verbatim + pushed:** VEDAS, MAHABHARATA, RAMAYANA, **UPANISHADS**.
+- ✅ **Scripture saved verbatim + pushed — THE WHOLE CANON IS DOWN:** VEDAS,
+  MAHABHARATA, RAMAYANA, UPANISHADS, **SUTRAS**, and **BHAGAVAD GITA Parts 1–4**
+  (architecture & frozen contracts). Next scripture = the **PURANAS** (heavy modules),
+  still to come from a fresh Fable "Parent 2".
 - ✅ **The Listening Prototype PASSED THE EAR TEST.** `sounddevice` installed
   (0.5.5, 2026-07-07). Nir ran `loom2/listening_totem.py` on headphones — the
   invention works: he can hear Bowl vs. Saddle, level curves, partials, negatives.
@@ -117,6 +141,15 @@ spec) is the next document proposed by Fable — **still to come**.
   budget. **Nir's verdict: "it actually sounds like I'm creating MUSIC, not just
   sounds"** — this validated the sample-based orchestra Fable then locked into the
   UPANISHADS §2. Run: `python loom2/listening_totem_philharmonia.py`.
+- ✅ **SAMPLE LIBRARY BUILT (SUTRAS Part Ten, DeepSeek, July 7, 2026):**
+  `loom2/build_sample_library.py` scanned `Downloads\philharmonia` and produced
+  `loom2/samples/` = **89 pentatonic notes (A/B/Cs/E/Fs) across all 13 orchestra
+  instruments**, in their real register bands. **86 exact, 3 resampled (≤±2 st:
+  violin_A7←G7 +2, tuba_E1←F1 −1, trumpet_Fs5←F5 +1), 0 missing.** ~1.8 MB total.
+  Plus `loom2/manifest.json` (per-note source/duration/dynamic/articulation/resample)
+  + `loom2/coverage_report.txt`. Committed to git (Fable's ruling: 1.8 MB is nothing,
+  players should hear music on clone; the build script stays as the reproducible
+  recipe). These 89 notes are now CANON — baked into the Gita's `config.REGISTER_MAP`.
 - 📋 **Orchestra roster finalized with Nir (for Fable), from the Philharmonia folders:**
   STRINGS = violin(high)/viola(med)/cello(low)/double bass(very low); WOODWINDS =
   flute(high)/oboe(med-high)/clarinet(med)/bass clarinet+bassoon(low)/contrabassoon
@@ -132,29 +165,39 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 ## 4. WHAT'S STILL NEEDED (the road ahead)
 
-1. ✅ **Nir's ear-test verdict** — PASSED (both synth + Philharmonia editions). Relayed
-   to Fable, who locked the sample-based orchestra into the UPANISHADS.
-2. ✅ **The UPANISHADS** (Fable) — plot/progression LANDED + saved verbatim + pushed
-   (`loom2/HINDU/LOOM2-UPANISHADS-BY-FABLE.md`). 7 stages, 12 scenes.
-   - 🟡 **Two OPEN items Fable left for Nir:** (a) scene 10 (Ocean Swell) format —
-     keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call);
-     (b) next document proposed = the **SUTRAS** (implementation spec), OR go straight
-     to building. **Awaiting Nir's direction.**
-3. 📜 **The SUTRAS** (Fable, proposed next) — the implementation spec. Open items it
-   should nail (from UPANISHADS §9): exact ~60–75 sample list + per-instrument ranges
-   (DeepSeek scans the folders); the Totem 3D model; groove-recording format for quiz
-   options (pre-rendered WAV vs live-synth at hidden coords); terrain mesh resolution
-   & camera limits; Xbox/joystick button mapping.
-4. 🏗️ **The real game build** (after SUTRAS or Nir's go): split screen (Left = the
-   Land, moderngl shaded terrain + contour coloring; Right = the Loom, origin-centered
-   wireframe helix + orchestra symbols + rhythm rings + note-dot constellation),
-   two-player controls (P1 keyboard/joystick sweeps x; P2 mouse/Xbox sweeps y), the
-   auditory 4-option quiz, packaging to a single Windows EXE (PyInstaller). Reuse
-   Quake/Homeworld's moderngl+pyglet software-3D + bloom + EXE recipe.
-5. 🧰 **Stack setup** when building: `moderngl + pyglet + numpy + sounddevice`
-   (+ Pillow, PyInstaller for packaging).
-6. 🌐 **Website:** add multivariable calculus as a foundational subject (NOT a
-   single mountain) once the game ships.
+1. ✅ **Ear test** — PASSED (synth + Philharmonia editions).
+2. ✅ **UPANISHADS + SUTRAS + BHAGAVAD GITA (Parts 1–4)** — all landed, saved verbatim,
+   pushed. Architecture & every module contract are now FROZEN.
+3. ✅ **Sample library (SUTRAS Part Ten)** — DONE (89 notes, 13 instruments; see §3).
+4. 🟡 **One OPEN item still awaiting Nir:** UPANISHADS scene 10 (Ocean Swell) format —
+   keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call, zero
+   cost either way).
+5. 📜 **NEXT SCRIPTURE = the PURANAS** (fresh Fable "Parent 2"): writes the three
+   HEAVY modules first — `audio/engine.py`, `core/game_state.py`,
+   `graphics/helix_panel.py`. Nir asks Fable for the **Parent 1 → Parent 2 hand-off
+   prompt** when ready.
+6. 🧵 **THE CHILD-CHAT PLAN (Gita G4.6)** — each child gets ONLY: Gita laws (G1.1) +
+   `config.py` + `core/types.py` + its own skeleton(s):
+   - Puranas parent (Fable): `audio/engine.py`, `core/game_state.py`, `graphics/helix_panel.py`
+   - Child A: `audio/quantize.py` + `audio/musicians.py`
+   - Child B: `audio/sampler.py` + `audio/render_offline.py`
+   - Child C: `graphics/renderer.py` + `graphics/camera.py`
+   - Child D: `graphics/terrain.py` + `graphics/totem.py`
+   - Child E: `graphics/slice_mode.py`
+   - Child F: `graphics/hud.py` + `core/input_map.py`
+   - Child G: `core/surfaces.py` + `core/scene.py` + `main.py`
+7. 🔧 **WHAT DEEPSEEK OWES (the seams, per the Gita):** create folders + `__init__.py`;
+   write `config.py` + `core/types.py` verbatim from Gita Part 1; create empty shader
+   files (REQUIRED_SHADERS) + paste working bloom/composite GLSL from Quake/Homeworld;
+   fill the empty joystick/Xbox slots from previous games; write `tools/render_equations.py`
+   (LaTeX→PNG via MiKTeX); enter scene JSON content; PyInstaller EXE; GitHub. **Note the
+   Gita path layout uses `data/samples/` — our built library currently lives at
+   `loom2/samples/`; reconcile (move to `loom2/data/samples/` or set config paths) at
+   scaffolding time.**
+8. 🏗️ **Build stack:** `moderngl + pyglet + numpy + sounddevice` (+ Pillow, PyInstaller).
+   Reuse Quake/Homeworld's software-3D + bloom + EXE recipe.
+9. 🌐 **Website:** add multivariable calculus as a foundational subject (NOT a single
+   mountain) once the game ships.
 
 ---
 
@@ -162,12 +205,13 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 
 1. Read this file first.
 2. Read the scripture in `loom2/HINDU/` as needed (VEDAS → MAHABHARATA → RAMAYANA →
-   UPANISHADS; SUTRAS when it arrives).
+   UPANISHADS → SUTRAS → BHAGAVAD GITA Parts 1–4; PURANAS when it arrives).
 3. Sanity: `python -m py_compile loom2/listening_totem.py` and
    `python -m py_compile loom2/listening_totem_philharmonia.py` should pass;
    `sounddevice` (0.5.5) is installed. Both prototypes run + passed Nir's ear test.
-4. Ask Nir where we are: the two UPANISHADS OPEN items (scene-10 format; SUTRAS vs
-   build straight away).
+   The 89-file library lives in `loom2/samples/` (+ manifest.json + coverage_report.txt).
+4. Ask Nir where we are: the one OPEN item (UPANISHADS scene-10 format), and whether
+   the PURANAS (Fable Parent 2) has arrived to start the build.
 5. **The source book** *Sounding the Unknown* is at `loom/book/chapter_00.txt …
    chapter_10.txt` — the authoritative HSS reference (LOOM v1 lost its soul by
    planning from summaries; LOOM2 must stay grounded in the book + Nir's true helix
