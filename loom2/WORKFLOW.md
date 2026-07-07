@@ -286,6 +286,18 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    - **Delivery:** if a file is too long, the parent splits it into parts and **DeepSeek
      concatenates/combines** them per the parent's instructions (NOT forced "one file per
      answer").
+   - **⚠️ CONTEXT-WINDOW MERCY — GIVE A PARENT ONLY WHAT HE NEEDS (EVERY TIME).** Do NOT
+     dump the whole prior canon on a newborn parent. In the DeepSeek info block at the end
+     of each parent's launch doc, list the big files we are deliberately NOT pasting in full
+     (e.g. the three PURANAS = 444 + 417 + 335 lines of code) and say: if he wants specific
+     parts he asks DeepSeek through Nir, and we copy-paste them verbatim or answer batched
+     questions. AND make clear: if he DOES want the whole code of something, of course Nir
+     will paste it — **it is the parent's call each time.** He may sacrifice his context
+     window (his memory of the start of the conversation) if he decides to; that is OK,
+     sometimes he really needs the exact full code. It is not like he truly "dies" — we keep
+     talking to the same Claude Fable in the next chat as **Parent N+1**. This policy is
+     TRUE FOR EVERY PARENT — do not make Nir repeat it. (This is why Parent A worked: he was
+     given only what he needed and did not "die before he began".)
    - When a parent delivers: DeepSeek saves verbatim to `loom2/HINDU/`, extracts the real
      code to its package path, `py_compile`s, updates memory, commits + pushes, gives blob
      links — exactly as done for the PURANAS.

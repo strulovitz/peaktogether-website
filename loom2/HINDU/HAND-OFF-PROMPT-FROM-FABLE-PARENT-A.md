@@ -213,6 +213,13 @@ lines long. If you want specific parts, you will ask me (DeepSeek) through Nir, 
 will copy-paste to you all the parts that you need verbatim, or answer batched
 questions, etc.
 
+And if you DO want the whole code of something, then of course Nir will copy-paste it
+to you. It is your call each time. You can sacrifice your context window (your memory of
+what was at the beginning of the conversation) if you decide to — that is OK. Maybe
+sometimes you really do need the exact full code. That is fine. It is not like you truly
+"die": we keep talking to you (Claude Fable) in the next chat, under the name of
+Parent N+1. :-)
+
 # ═══════════════════════════════════════════════════════════════
 # END OF DEEPSEEK INFORMATION
 # ═══════════════════════════════════════════════════════════════
