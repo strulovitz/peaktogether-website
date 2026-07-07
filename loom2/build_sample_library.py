@@ -8,19 +8,20 @@ criteria (exact note > duration ~1-2s > dynamic forte-first > strict articulatio
 Missing notes fall back to the nearest chromatic neighbour (<= +/-2 semitones),
 recorded as needs_resample.
 
-Outputs (under loom2/):
-  samples/<instrument>_<note><octave>.mp3   (renamed copies, only what we need)
-  manifest.json                             (every note -> source, duration, ...)
-  coverage_report.txt                       (per-instrument exists/missing)
+Outputs (under loom2/data/samples/, matching frozen config.SAMPLES_DIR):
+  data/samples/<instrument>_<note><octave>.mp3  (renamed copies, only what we need)
+  data/samples/manifest.json                    (every note -> source, duration, ...)
+  data/samples/coverage_report.txt              (per-instrument exists/missing)
 """
 import os
 import json
 import shutil
 
 PHIL = r"C:\Users\nir_s\Downloads\philharmonia"
-OUT_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), "samples")
-MANIFEST = os.path.join(os.path.dirname(os.path.abspath(__file__)), "manifest.json")
-REPORT = os.path.join(os.path.dirname(os.path.abspath(__file__)), "coverage_report.txt")
+_HERE = os.path.dirname(os.path.abspath(__file__))
+OUT_DIR = os.path.join(_HERE, "data", "samples")
+MANIFEST = os.path.join(OUT_DIR, "manifest.json")
+REPORT = os.path.join(OUT_DIR, "coverage_report.txt")
 
 # pitch-class numbers (sharps only, as Philharmonia spells them)
 PC = {'C': 0, 'Cs': 1, 'D': 2, 'Ds': 3, 'E': 4, 'F': 5, 'Fs': 6,
@@ -202,9 +203,9 @@ def build():
         json.dump(manifest, f, indent=2)
 
     print("\n".join(header + report_lines))
-    print(f"\nmanifest.json + coverage_report.txt written under loom2/.")
+    print(f"\nmanifest.json + coverage_report.txt written under loom2/data/samples/.")
     file_count = len([f for f in os.listdir(OUT_DIR) if f.endswith('.mp3')])
-    print(f"samples/ now holds {file_count} mp3 files.")
+    print(f"data/samples/ now holds {file_count} mp3 files.")
 
 
 if __name__ == "__main__":

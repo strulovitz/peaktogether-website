@@ -201,13 +201,18 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
   UPANISHADS §2. Run: `python loom2/listening_totem_philharmonia.py`.
 - ✅ **SAMPLE LIBRARY BUILT (SUTRAS Part Ten, DeepSeek, July 7, 2026):**
   `loom2/build_sample_library.py` scanned `Downloads\philharmonia` and produced
-  `loom2/samples/` = **89 pentatonic notes (A/B/Cs/E/Fs) across all 13 orchestra
+  the library = **89 pentatonic notes (A/B/Cs/E/Fs) across all 13 orchestra
   instruments**, in their real register bands. **86 exact, 3 resampled (≤±2 st:
   violin_A7←G7 +2, tuba_E1←F1 −1, trumpet_Fs5←F5 +1), 0 missing.** ~1.8 MB total.
-  Plus `loom2/manifest.json` (per-note source/duration/dynamic/articulation/resample)
-  + `loom2/coverage_report.txt`. Committed to git (Fable's ruling: 1.8 MB is nothing,
+  Plus `manifest.json` (per-note source/duration/dynamic/articulation/resample)
+  + `coverage_report.txt`. Committed to git (Fable's ruling: 1.8 MB is nothing,
   players should hear music on clone; the build script stays as the reproducible
   recipe). These 89 notes are now CANON — baked into the Gita's `config.REGISTER_MAP`.
+  **📍 LOCATION (reconciled July 7): now at `loom2/data/samples/` to match the FROZEN
+  `config.SAMPLES_DIR="data/samples"` (moved via git mv; old `loom2/samples/` removed).**
+- ✅ **SEAMS SCAFFOLDED (DeepSeek, July 7, 2026):** `loom2/config.py` + `loom2/core/types.py`
+  extracted verbatim from Gita Part 1; **Parent A's `quantize.py` self-test now PASSES**
+  (`python -m audio.quantize` → "all sanity checks passed -- 89 notes round-trip clean").
 - 📋 **Orchestra roster finalized with Nir (for Fable), from the Philharmonia folders:**
   STRINGS = violin(high)/viola(med)/cello(low)/double bass(very low); WOODWINDS =
   flute(high)/oboe(med-high)/clarinet(med)/bass clarinet+bassoon(low)/contrabassoon
@@ -279,14 +284,15 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
    - When a parent delivers: DeepSeek saves verbatim to `loom2/HINDU/`, extracts the real
      code to its package path, `py_compile`s, updates memory, commits + pushes, gives blob
      links — exactly as done for the PURANAS.
-7. 🔧 **WHAT DEEPSEEK OWES (the seams, per the Gita):** create folders + `__init__.py`;
-   write `config.py` + `core/types.py` verbatim from Gita Part 1; create empty shader
-   files (REQUIRED_SHADERS) + paste working bloom/composite GLSL from Quake/Homeworld;
-   fill the empty joystick/Xbox slots from previous games; write `tools/render_equations.py`
-   (LaTeX→PNG via MiKTeX); enter scene JSON content; PyInstaller EXE; GitHub. **Note the
-   Gita path layout uses `data/samples/` — our built library currently lives at
-   `loom2/samples/`; reconcile (move to `loom2/data/samples/` or set config paths) at
-   scaffolding time.**
+7. 🔧 **WHAT DEEPSEEK OWES (the seams, per the Gita):** ✅ folders + `__init__.py` (done);
+   ✅ `config.py` + `core/types.py` verbatim from Gita Part 1 (done, July 7); ✅ **PATH
+   RECONCILIATION done** — library MOVED to `loom2/data/samples/` to match FROZEN
+   `config.SAMPLES_DIR="data/samples"` (89 mp3 + manifest.json + coverage_report.txt;
+   `build_sample_library.py` OUT_DIR updated; old `loom2/samples/` removed). STILL owed
+   (mostly blocked until the relevant parent writes its module): empty shader files
+   (REQUIRED_SHADERS) + working bloom/composite GLSL from Quake/Homeworld (needs Parent C's
+   `renderer.py`); joystick/Xbox slots (needs Parent F's `input_map.py`); `tools/render_equations.py`
+   (LaTeX→PNG via MiKTeX, content-phase); scene JSON content (content-phase); PyInstaller EXE.
 8. 🏗️ **Build stack:** `moderngl + pyglet + numpy + sounddevice` (+ Pillow, PyInstaller).
    Reuse Quake/Homeworld's software-3D + bloom + EXE recipe.
 9. 🌐 **Website:** add multivariable calculus as a foundational subject (NOT a single
