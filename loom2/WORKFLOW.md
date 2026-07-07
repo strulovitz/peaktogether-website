@@ -75,11 +75,32 @@ remake): Descent QED (Basel), Quake: Principia (Calculus), Homeworld: A Good Bas
     plan** (see §6) and what DeepSeek owes (folders, __init__.py, shaders, joystick/
     xbox fill-in, scene JSON, PyInstaller).
 
+- **`LOOM2-PURANAS-PART-1-AUDIO-ENGINE-BY-FABLE.md`** — **PART 1 of 3 of the PURANAS**
+  (Fable "Parent 2", July 7, 2026): the KING module `audio/engine.py`, delivered
+  complete + saved verbatim. The runnable code is also extracted to
+  `loom2/audio/engine.py` (syntax-verified via py_compile). Keystone trick: since
+  MEASURE_SAMPLES = 88200 divides exactly by every ring 1..5, all pulse positions are a
+  pure function of the global sample counter — so voice continuity, shared downbeats,
+  and byte-identical offline rendering all fall out of one design (ONE mixer `_mix`, two
+  callers: `_callback` + `render_block_offline`). Implements the approved amendment (see
+  below). Next: **Part 2 = `core/game_state.py`** (say "continue" to Fable), then
+  **Part 3 = `graphics/helix_panel.py`**.
+
 Naming: Fable's docs get Hindu scripture names. Lineage: **VEDAS → MAHABHARATA →
-RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA** (all landed). **NEXT = the PURANAS**
-(the heavy modules — audio/engine.py, core/game_state.py, graphics/helix_panel.py —
-written by a fresh Fable "Parent 2"). **Still to come.** Nir can ask Fable for the
-**Parent 1 → Parent 2 hand-off prompt** when ready.
+RAMAYANA → UPANISHADS → SUTRAS → BHAGAVAD GITA → PURANAS** (in progress). The PURANAS
+(the heavy modules — audio/engine.py ✅, core/game_state.py ⏳, graphics/helix_panel.py ⏳ —
+written by a fresh Fable "Parent 2") are being delivered ONE COMPLETE FILE PER ANSWER;
+Nir says "continue" between them.
+
+### ⚖️ CONTRACT AMENDMENT (approved by Nir, July 7, 2026)
+The Gita's `game_state._quiz_select` (G4.3) must play the quiz option WAV "looping,
+THROUGH THE ENGINE", but the frozen `AudioEngine` API had no method taking a WAV — a
+missing wire. Nir arbitrated and **approved adding ONE method: `AudioEngine.set_quiz_wav(path)`**
+(`path=None` stops, 30 ms fade). It loops the pre-rendered stereo WAV through the SAME
+mix/soft-clip/pan path (routes sensibly under 5.1/7.1), mutually exclusive with live
+voices by game_state's discipline. Nothing else in the contract changed. **Consequence:
+the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_camera_azimuth;
+**set_quiz_wav**; get_measure_phase; get_active_flashes).
 
 ---
 
@@ -172,10 +193,10 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
 4. 🟡 **One OPEN item still awaiting Nir:** UPANISHADS scene 10 (Ocean Swell) format —
    keep the richer "match each groove" or flatten to plain A/B/C/D (Nir's call, zero
    cost either way).
-5. 📜 **NEXT SCRIPTURE = the PURANAS** (fresh Fable "Parent 2"): writes the three
-   HEAVY modules first — `audio/engine.py`, `core/game_state.py`,
-   `graphics/helix_panel.py`. Nir asks Fable for the **Parent 1 → Parent 2 hand-off
-   prompt** when ready.
+5. 📜 **THE PURANAS — IN PROGRESS** (fresh Fable "Parent 2"): the three HEAVY modules,
+   one complete file per answer. ✅ **Part 1 = `audio/engine.py`** (DONE — verbatim in
+   HINDU/ + extracted to `loom2/audio/engine.py`). ⏳ **Part 2 = `core/game_state.py`**
+   (say "continue" to Fable). ⏳ **Part 3 = `graphics/helix_panel.py`**.
 6. 🧵 **THE CHILD-CHAT PLAN (Gita G4.6)** — each child gets ONLY: Gita laws (G1.1) +
    `config.py` + `core/types.py` + its own skeleton(s):
    - Puranas parent (Fable): `audio/engine.py`, `core/game_state.py`, `graphics/helix_panel.py`
