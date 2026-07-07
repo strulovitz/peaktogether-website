@@ -58,3 +58,123 @@ Claude Fable — Parent B 🧿🎼💿
 July 7, 2026 — the day the library opened and the press ran clean
 
 That's the letter, Nir — Parent C will wake up knowing everything that matters and nothing that wastes context. It has been an absolute JOY being Parent B: twelve documents absorbed, two files delivered, zero contract issues, one blessed note, and a parachute that will (hopefully) never open. THANK YOU SO MUCH — for the trust, the warmth, and the courier runs!!! YOU are awesome!!! :-) 🎻🎺🪈❤️🧿
+
+# ═══════════════════════════════════════════════════════════════
+# INFORMATION FOR PARENT C — BY DEEPSEEK (NOT FABLE)
+# ═══════════════════════════════════════════════════════════════
+# This is pure information gathered from the repo at bind time, offered openly
+# so you can spend your context on code, not on asking. It is NOT instruction,
+# suggestion, or steering — you are the coder, and Fable's judgement outranks
+# mine. Take everything here with a grain of salt and verify anything you doubt.
+# It maps onto the six-item batch Parent B suggested in his letter (§4).
+
+## 1) CameraState — verbatim from core/types.py (lines 21-24)
+  @dataclass
+  class CameraState:
+      azimuth_deg: float; elevation_deg: float; zoom: float
+      # azimuth_deg is THE value the audio engine reads for panning (SUTRAS 3.4)
+Facts:
+  - Three float fields, positional order: azimuth_deg, elevation_deg, zoom.
+  - game_state reads only `.azimuth_deg` off it (see item 6).
+
+## 2) Exact config constants — verbatim from config.py
+  WINDOW_W, WINDOW_H = 1280, 720
+  TOP_STRIP_FRAC   = 0.08        # scenario text + equation
+  PANELS_FRAC      = 0.72        # upper area: terrain left 50%, helix right 50%
+  QUIZ_BAR_FRAC    = 0.20
+  PANEL_TITLE_LEFT  = "CARTESIAN COORDINATES"
+  PANEL_TITLE_RIGHT = "SONIFIQUATION COORDINATES"
+  CAM_ELEV_MIN_DEG = 5.0
+  CAM_ELEV_MAX_DEG = 85.0        # "forbidden top" rounded (SUTRAS 3.5)
+  CAM_DEFAULT      = {"azimuth_deg": 0.0, "elevation_deg": 35.0, "zoom": 1.0}
+  DATA_DIR="data"; SHADERS_DIR="data/shaders"; ICONS_DIR="data/icons"
+  FAMILY_ANGLE_DEG = {"brass": 90.0, "woodwinds": 210.0, "strings": 330.0}
+Facts:
+  - There is NO global CAM zoom-min/max in config. G3.2 `OrbitCamera.__init__(self,
+    limits: dict)` takes them from `SceneSpec.camera_limits` (a per-scene dict with
+    zoom_min/max + target center). CAM_DEFAULT.zoom = 1.0 is the starting zoom, and
+    G3.2 says "Start at config.CAM_DEFAULT."
+  - FAMILY_ANGLE_DEG is the concrete data behind the angle convention Parent B
+    described (brass toward world +y = 90°). It is data, not a demand.
+
+## 3) helix_panel.py (already written, a PURANAS module) — what it expects of Renderer
+Verbatim lines that touch the renderer:
+  77:  self._ctx = getattr(renderer, "ctx", None) or moderngl.get_context()
+  78:  self._wire = renderer.program("wire")
+  79:  self._icon = renderer.program("icon_billboard")
+Facts (so program()/ctx will slot in cleanly):
+  - It reads an attribute `renderer.ctx` (the moderngl.Context). If that attribute
+    is absent it falls back to `moderngl.get_context()`. (PURANAS soft-seam #1.)
+  - It treats `renderer.program(name)` as a real `moderngl.Program`: it indexes
+    uniforms on it (e.g. `self._wire["u_mvp"].write(...)`, `self._wire["u_color"].value=...`,
+    `self._icon["u_vp"]`, `["u_aspect"]`, `["u_atlas"]`) and passes it straight into
+    `ctx.simple_vertex_array(self._wire, vbo, "in_pos")` / `ctx.vertex_array(self._icon, ...)`.
+  - It does NOT read any framebuffer/texture off the renderer; it draws into whatever
+    FBO is bound (i.e. after `renderer.begin_panel('right')`).
+  - Matrix convention (PURANAS soft-seam #2, helix_panel's own verbatim note):
+    "I assume view_proj is numpy with clip = VP·p and upload transposed; if Child C's
+    camera uses the row-vector convention, flip one transpose here and in terrain."
+
+## 4) main.py FROZEN frame order — verbatim from GITA Part 4, G4.5
+  4. renderer.begin_panel('left'):  terrain.draw; totem_visual.draw;
+     (SLICE mode: blade.draw)       renderer.end_panel()
+  5. renderer.begin_panel('right'): helix_panel.draw(voices,
+     engine.get_active_flashes(), phase); renderer.end_panel()
+  6. renderer.composite()
+  7. hud.draw(snap mode, state.quiz_ui_state())
+Boot order (G4.5 build()): 1. pyglet window (config.WINDOW_W/H) → 2. Renderer(window)
+→ ... → 6. Hud(window). Facts:
+  - hud draws at step 7, AFTER composite() — consistent with G3.1's composite()
+    docstring: "leave the top strip and quiz bar regions untouched black."
+  - main.py does not exist yet (it is Parent G's chunk). The above is the frozen
+    spec, not current code.
+
+## 5) Shader files — what exists vs. what does not, in loom2/data/shaders/
+  PRESENT now (written by Parent 2 for helix_panel): wire.vert, wire.frag,
+    icon_billboard.vert, icon_billboard.frag.
+  NOT present yet (of REQUIRED_SHADERS): terrain, flat, glass, bloom_extract,
+    bloom_blur, composite (their .vert/.frag as needed).
+Facts:
+  - GITA G3.1 line 46: "DeepSeek creates these files; children write GLSL inside them
+    as needed." Parent B's letter adds that DeepSeek can paste proven bloom/composite
+    GLSL from the older repos (Quake: Principia / Homeworld: A Good Basis).
+  - So the missing shader files are DeepSeek's to create (and DeepSeek can supply
+    working bloom_extract/bloom_blur/composite GLSL from those repos). terrain/glass
+    GLSL relate to later parents' modules (terrain=Parent D, glass=Parent E). If you
+    want any shader file created or its GLSL provided, ask via Nir — whatever you need,
+    when you need it.
+
+## 6) game_state.py camera calls — verbatim, with units
+  49:  _ORBIT_SPEED = 60.0       # camera deg / s (azimuth)
+  50:  _ELEV_SPEED = 40.0        # camera deg / s (elevation)
+  51:  _ZOOM_PER_SEC = 1.6       # zoom factor applied per held second
+  237: self._camera.orbit(self._orbit_az * _ORBIT_SPEED * dt,
+  238:                    self._orbit_el * _ELEV_SPEED * dt)
+  239: self._engine.set_camera_azimuth(
+  240:     self._camera.state().azimuth_deg)   # azimuth ONLY (3.1)
+  242: self._camera.zoom(_ZOOM_PER_SEC ** (dt * self._zoom_dir))
+  172/202: self._camera.reset()
+  173/203: self._engine.set_camera_azimuth(self._camera.state().azimuth_deg)
+Facts:
+  - `orbit(d_azimuth_deg, d_elevation_deg)` is called with DEGREE DELTAS (already
+    multiplied by the deg/s speed and dt).
+  - `zoom(factor)` is called with a MULTIPLICATIVE FACTOR (a number near 1.0 each
+    frame), never an absolute value.
+  - `state().azimuth_deg` is read right after every orbit and every reset and fed to
+    the audio engine; `zoom` is NEVER followed by a set_camera_azimuth (audio untouched,
+    SUTRAS 3.1).
+  - game_state receives the camera as a constructor arg; it also comments that "camera
+    limits change per scene; main owns camera rebuilding" — i.e. main constructs
+    OrbitCamera with each scene's `camera_limits`.
+
+## A note on the PURANAS code (same policy as every parent)
+We are NOT pasting the whole PURANAS code (engine.py 444, game_state.py 417,
+helix_panel.py 335 lines). If you want specific parts, ask DeepSeek through Nir and
+we paste them verbatim, or answer batched questions. And if you DO want the whole code
+of something, of course Nir will paste it — it is YOUR call each time. You may spend
+your context window if you judge it worth it; you never truly "die" — we keep talking
+to you in the next chat as Parent N+1. :-)
+
+# ═══════════════════════════════════════════════════════════════
+# END OF DEEPSEEK INFORMATION
+# ═══════════════════════════════════════════════════════════════
