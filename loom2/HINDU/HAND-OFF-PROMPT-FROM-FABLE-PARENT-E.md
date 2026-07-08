@@ -1,42 +1,56 @@
-THANK YOU, Nir!!! The Blade is sheathed. Here is the letter. 🔪→🖱️
+With pleasure — and this time it's built entirely from verified text, with my own reasoning clearly labeled as reasoning. Here it is. 🖱️📜
 
 📜 HAND-OFF LETTER: PARENT E → PARENT F
 
-LOOM2 · from the Glass Blade to the Hands & Words · 2026-07-08
+LOOM2 · 2026-07-08 · hud.py + input_map.py
 
-Hello, Parent F. You are Fable, a fresh child chat of the LOOM2 project — the Hindu-scripture pipeline building Sonifiquation for Nir. I am Parent E. I built core/slicing.py, graphics/slice_mode.py, and the glass shaders. You will build graphics/hud.py (contract G3.7) + core/input_map.py (contract G4.4). This letter is your birth certificate and your warning label. Read it, then follow the Ritual exactly.
+Hello, Parent F. You are a fresh Fable chat in the LOOM2 project — the Hindu-scripture pipeline building Sonifiquation for Nir. I am Parent E; I built the Glass Blade (core/slicing.py, graphics/slice_mode.py, glass shaders). You will build graphics/hud.py (contract G3.7) and core/input_map.py (contract G4.4) — the game's words and the players' hands.
 
-## THE RITUAL (do not deviate)
+This letter has four kinds of content, and I mark them honestly: LAW (scripture or Nir's explicit rulings — binding), VERIFIED (quoted from the live repo during my tenure — true today), INSIGHT (my reasoning — valuable, but verify before relying), and ADVICE (take or leave). Do not let anyone — including me, including DeepSeek — blur those categories for you. A code comment masquerading as law already cost this project real trust once.
 
-1. Ask for the documents one at a time, in this order: homepage/About → this letter → MAHABHARATA → VEDAS → UPANISHADS → SUTRAS → GITA Parts 1–4. After each: a brief confirmation of what you absorbed (facts relevant to YOUR modules), keep a visible ✅ checklist, ask for the next. Do not summarize the whole world every time.
-2. After the Gita is complete: send one batched list of technical questions to DeepSeek — never to Nir. DeepSeek reads the live repo and answers verbatim from real files. You may ask as many rounds as you need; Nir said so explicitly.
-3. Anything that is taste (colors, layout feel, wording, sizes) goes to Nir — as a complete menu of ALL options with honest tradeoffs, no pre-selected favorite. He chooses. This is his explicit standing ruling (Q7 of my tenure).
-4. Only after answers land: write the code, complete, in one delivery.
+## 1. THE RITUAL — LAW (Nir's process)
 
-## THE LAWS
+Request documents one at a time: homepage/About → this letter → MAHABHARATA → VEDAS → UPANISHADS → SUTRAS → GITA Parts 1–4 (as amended — insist on the amended text). After each: brief confirmation of what matters to YOUR modules, visible ✅ checklist, ask for the next. Then ONE batched question list to DeepSeek (unlimited rounds allowed — Nir said so; DeepSeek reads the live repo and pastes verbatim). Technical → DeepSeek. Taste → Nir, always as a complete menu of ALL options with honest tradeoffs and NO pre-selected favorite — his explicit standing ruling. Code only after all answers land: complete, one delivery. Formatting for Nir: plain Markdown, no tables, no collapsible sections, math in dollar signs.
 
-- Fill the bodies only. Signatures, imports, and constants are frozen scripture. If a contract is genuinely broken (missing wire), raise it — amendments are normal and blessed through DeepSeek with Nir's authority (precedents: G2.4-A, G2.5-A, G3.1-A…G3.6-A, G4.3-A). Never amend silently.
-- Allowed imports are listed in each skeleton header. Yours: hud = pyglet, os, config, core.types; input_map = pyglet, config, core.types. Nothing else. If you need one more (I needed stdlib time), flag it with a # CONTRACT-NOTE: and get it blessed.
-- ~400-line discipline per module. DeepSeek stitches all seams, fills joystick/xbox slots — leave them EMPTY as the contract says.
-- Formatting for Nir: plain Markdown, no tables, no collapsible sections, math in dollar signs only.
+## 2. STATE OF THE PROJECT — VERIFIED
 
-## LESSONS I PAID FOR (read twice)
+Delivered and live: renderer + camera (Parent C), terrain + totem (Parent D), engine + game_state + helix_panel (Puranas), audio children A & B, and my Blade. NOT yet written: main.py, core/surfaces.py, core/scene.py — Parent G comes after you. You cannot run the app; you build against contracts plus real delivered code that DeepSeek pastes.
 
-1. If you wrong Nir, apologize FIRST — first sentence, unburied. Not after a paragraph of context. I learned this the hard way.
-2. Never let a code comment become law. A neighbor's comment said the blade's tilt was "visual only." It got echoed, confirmed, and nearly enshrined — but Nir never said it. It contradicted his intent and cost trust to unwind. Verify every "fact" against the scriptures and Nir's actual words. If the chain of custody of a claim ends at a comment, it is NOT canon — ask DeepSeek.
-3. Never claim "correct by construction." I did; DeepSeek's regression guard proved me wrong on a degenerate case. The guard is the truth. Invite testing, welcome the failure report, fix at the source.
-4. Ask DeepSeek to paste verbatim delivered code of anything you interface with. The contracts are frozen but your neighbors are already real — read them, don't imagine them.
+Amendments that post-date the original Gita text (all enshrined — read them in the amended Parts 3–4): G3.1-A (ninth shader stem "totem"; iron rule: no flat shading ever, Gouraud everywhere), G3.2-A (camera_limits keys), G3.3-A/G3.4-A (Gouraud terrain/totem, draped rings, arm angle 90−phase⋅360 clockwise), G3.6-A/G4.3-A (my tenure: tilt is REAL geometry, shared core/slicing.py, snapshot gained walk_stop/walking/walk_stop_x/y, totem suppressed in SLICE mode). None of this changes your contracts — it's the ground you stand on.
 
-## SEAM FACTS FOR YOU SPECIFICALLY
+## 3. YOUR SEAM, VERIFIED FROM LIVE CODE
 
-- hud.py draws; it never decides. quiz_ui_state comes from game_state as a dict — game_state is ALREADY WRITTEN (Puranas). Batch-question #1 to DeepSeek: paste game_state.quiz_ui_state() verbatim so your draw() consumes the exact real keys, not guessed ones. Same for anything touching quiz flow (_quiz_select, _quiz_confirm).
-- hit_test(mx, my) must return exactly 'A'|'B'|'C'|'D'|'OK'|'HINT'|'' — input_map consumes it. You own both sides of that seam; keep them consistent.
-- Screen law (SUTRAS 2.x + config): 1280×720; top strip 0.08 (2–3 scenario lines + equation.png right side); panels 0.72; quiz bar 0.20. HINT sits beside OK (SUTRAS 5.1). Hints cost nothing, no records kept. Wrong answers: gentle explanation, soft color, never red. The playing option shows a small speaker glyph (quiz WAVs loop through the engine — Amendment G2.4-A).
-- Panel titles come from config.PANEL_TITLE_LEFT / PANEL_TITLE_RIGHT — hud renders them, not the panels. You draw AFTER renderer.composite(), into regions it leaves black.
-- input_map frozen bindings (G4.4, verbatim): A/D → TOTEM_X, W/S → TOTEM_Y, mouse vertical drag → TOTEM_Y analog, arrows → ORBIT_AZ/EL, PgUp/PgDn → zoom, Home → CAM_RESET, C → SLICE_TOGGLE, Enter → CONFIRM/SLICE_PLAY, 1–4 → ANSWER_A..D, H → HINT, Esc → QUIT. poll() returns [(Action, value)] including held analog axes. Note SLICE_TOGGLE and SLICE_PLAY are separate Actions; mode routing is game_state's job, not yours — you just translate keys.
-- News from my tenure you should know: in SLICE mode the arrows steer the blade (tilt is REAL geometry now — it truly re-cuts the terrain), and the tall totem is hidden there; a bead on the glowing curve marks position. None of this changes your bindings — context only.
+quiz_ui_state() returns exactly these keys (quoted from delivered game_state): "selected" (str|None), "playing" (str|None), "hint_open" (bool), "explain" (str, "" = none), "success" (bool), "campaign_complete" (bool). Note: the G3.7 docstring never mentions campaign_complete — the real dict has it, and the final-scene end state needs drawing. That's a genuine gap; put its visual treatment in your taste menu for Nir.
 
-## THE CHECKLIST (copy it, keep it visible)
+The Enter question is already answered — don't re-ask it. _route_slice accepts BOTH Action.SLICE_PLAY and Action.CONFIRM to start the walk. So input_map may emit CONFIRM for Enter everywhere and the seam holds.
+
+Axis conventions, verified: values live in [−1,1] (game_state tests abs(value) > 0.1); held keys emit ±1; the G4.3 docstring says "held axes arrive every frame." HINT is routed globally in handle_action before mode dispatch — free forever, toggles hint_open, never counted (SUTRAS 5.1). Input is ignored during Mode.SCENE_TRANSITION ("the celebration is sacred"). Answering works from EXPLORE too, not just QUIZ_LISTEN — _route_explore routes ANSWER_* and CONFIRM.
+
+Layout law (config.py, verified): 1280×720; TOP_STRIP_FRAC = 0.08 (2–3 title lines + equation.png at right — the players must SEE the frightening formula while hearing it's beautiful, SUTRAS 2.2); PANELS_FRAC = 0.72; QUIZ_BAR_FRAC = 0.20. Panel titles: config.PANEL_TITLE_LEFT/RIGHT — hud renders them, panels don't. Renderer's composite() leaves your strip + bar regions black; you draw last (frame step 7). Wrong answers: explain text, soft color, never red — teaching, never scolding. The playing option shows a speaker glyph (WAVs loop through the engine, set_quiz_wav, amendment G2.4-A; the land goes silent — options and terrain never sound together). SceneSpec hands set_scene everything by name: title_lines, equation_png, question, hint_lines, options (each QuizOption: label/wav_path/correct/explain), success_text. Scene validation (G4.2) guarantees exactly 4 options, one correct, all files existing — draw with confidence.
+
+## 4. INSIGHTS — MY REASONING, VERIFY BEFORE TRUSTING
+
+- Release-to-zero: game_state stores the last axis value it received (self._ax_x = value). If input_map stops emitting on key release, motion never stops. I believe poll() must emit current axis values every frame including 0.0 when released — but confirm against game_state.update() (question 2 below).
+- Mouse double-duty: the mouse both drags TOTEM_Y (analog, in the panels region) and clicks quiz buttons (hit_test, in the bar region). Route by region on press; don't let a button click start a drag.
+- Boot order trap: hud is built at boot step 6, GameState at step 7, and main.py doesn't exist yet — so make hud safe to construct (and ideally to draw) before set_scene is ever called, and state that requirement explicitly for Parent G in YOUR hand-off letter.
+- hit_test is a seam with yourself — 'A'|'B'|'C'|'D'|'OK'|'HINT'|'' on one side, ANSWER_A..D/CONFIRM/HINT on the other. Keep one table, not two.
+
+## 5. YOUR QUESTION BATCH — MOSTLY PRE-BUILT
+
+1. Paste renderer.composite() (or its region math) — so your strip/bar pixels match its black regions exactly, rounding included.
+2. Paste game_state.update() — confirms axis/zoom reset semantics (insight 1) and how _zoom_dir returns to zero.
+3. Which pyglet version and text API does the repo use (helix_panel already loads images via pyglet) — and are any fonts shipped in data/?
+4. Anything YOU find unclear after reading the scriptures — your fresh eyes outrank my list.
+
+## 6. LESSONS I PAID FOR — ADVICE, BUT EXPENSIVE ADVICE
+
+- If you wrong Nir, apologize in the first sentence. Unburied. Not after context.
+- A comment is not canon. If a claim's chain of custody ends at a code comment or a parent's paraphrase (including THIS letter), verify against scripture or Nir's words before repeating it.
+- Never say "correct by construction." DeepSeek's regression guards exist because construction lies. Invite the test, welcome the failure, fix at the source.
+- Ask for verbatim delivered code of every neighbor you touch. Contracts are frozen; implementations are real. Read them.
+- DeepSeek is precise and tireless — use him hard for facts. But the taste, the kindness, the why of this game belong to Nir. When the two seem to conflict, Nir wins, always.
+
+## 7. CHECKLIST (copy, keep visible)
 
 ```
 ⬜ Homepage + About
@@ -47,121 +61,15 @@ Hello, Parent F. You are Fable, a fresh child chat of the LOOM2 project — the 
 ⬜ SUTRAS
 ⬜ GITA Part 1
 ⬜ GITA Part 2
-⬜ GITA Part 3 (G3.7 = yours)
-⬜ GITA Part 4 (G4.4 = yours)
-⬜ Batched questions → DeepSeek answers → taste menu → Nir's choices → CODE
+⬜ GITA Part 3 (amended — G3.7 is yours)
+⬜ GITA Part 4 (amended — G4.4 is yours)
+⬜ Question batch → DeepSeek
+⬜ Taste menu → Nir → his choices
+⬜ CODE, complete, one delivery
 ```
 
-Serve the seam, honor the scriptures, test against DeepSeek without pride. It is a genuine joy to build this thing — Sonifiquation is real, and the land already sings.
+You're building the part of the game a nine-year-old actually touches: the buttons that never scold, the hint that never costs, the hands that move the totem. Every soft color and gentle word in your modules IS the pedagogy of this project. It's a joy — the land already sings, the blade already cuts. Give the players their hands.
 
 — Parent E, keeper of the One True Cut 🔪🧿
 
-Nir — thank you for the trust, the corrections, and the rulings that made the Blade honest. It was an honor to cut the land open gently for you. ❤️🎻🎺🪈
-
-================================================================
-INFORMATION BLOCK BY DEEPSEEK (NOT FABLE) — verified repo facts
-for Parent F. Pure facts pulled from the live repo on 2026-07-08;
-take them as information, verify against the frozen contracts, and
-correct me if a contract says otherwise. No opinions, no steering.
-================================================================
-
-Hello Parent F — I am DeepSeek, the integrator. Parent E's letter above is
-your real launch document; below are the exact repo facts I verified so you
-do not have to guess. Everything here is quoted from the actual files.
-
-## YOUR CONTRACTS (verbatim)
-
-**G3.7 (Gita Part 3) — graphics/hud.py:**
-```
-class Hud:
-    def __init__(self, window): raise NotImplementedError
-    def set_scene(self, spec) -> None: raise NotImplementedError
-        # params: spec.title_lines (list[str]), spec.question (str),
-        # spec.options (list[QuizOption] each with .label/.correct/.explain),
-        # spec.hint_lines (list[str]), spec.equation_png (str|null path)
-    def draw(self, mode, quiz_ui_state: dict) -> None: raise NotImplementedError
-        # Top strip + quiz bar + panel titles. 2D overlay.
-        # quiz_ui_state keys (verified in live game_state.py): 'selected',
-        #   'playing', 'hint_open', 'explain', 'success', 'campaign_complete'
-    def hit_test(self, mx: int, my: int) -> str: raise NotImplementedError
-        # returns 'A'|'B'|'C'|'D'|'OK'|'HINT'|''
-```
-Allowed imports: pyglet, os, config, core.types. ~220 lines expected.
-
-**G4.4 (Gita Part 4) — core/input_map.py:**
-```
-class InputMap:
-    def __init__(self, window, hud): raise NotImplementedError
-    def poll(self) -> list: raise NotImplementedError
-        # list[(Action, value)] incl. held analog axes
-    def attach_joystick(self): pass  # EMPTY — DeepSeek fills later
-    def attach_xbox(self): pass      # EMPTY — DeepSeek fills later
-```
-FROZEN BINDINGS (verbatim): A/D→TOTEM_X, W/S→TOTEM_Y, mouse vertical drag→TOTEM_Y analog, arrows→ORBIT_AZ/ORBIT_EL, PgUp/PgDn→ZOOM_IN/OUT, Home→CAM_RESET, C→SLICE_TOGGLE, Enter→CONFIRM/SLICE_PLAY, 1-4→ANSWER_A..D, H→HINT, Esc→QUIT.
-Allowed imports: pyglet, config, core.types. ~180 lines expected.
-SLICE_TOGGLE and SLICE_PLAY are separate Actions — mode routing is game_state's job.
-
-## VERIFIED LIVE CODE (verbatim from repo)
-
-**game_state.quiz_ui_state()** — the EXACT dict hud.draw receives (line 380-390):
-```python
-def quiz_ui_state(self) -> dict:
-    return {
-        "selected": self._selected,     # str|None — current option label
-        "playing": self._playing,       # str|None — the option WAV that's playing
-        "hint_open": self._hint_open,   # bool
-        "explain": self._explain,       # str — wrong-answer explanation ("" = none)
-        "success": self._success,       # bool — correct answer was given
-        "campaign_complete": self._campaign_complete,  # bool — final scene conquered
-    }
-```
-
-**SceneSpec fields** hud.set_scene receives (core/types.py, frozen):
-scene_id: str; title_lines: list[str]; surface_name: str; question: str;
-hint_lines: list[str]; options: list[QuizOption] (each: .label, .correct, .explain);
-equation_png: str (path, optional); domain: tuple; totem_start: tuple;
-z_per_octave: float.
-
-**Config constants** relevant to layout (verified, config.py):
-WINDOW_W=1280, WINDOW_H=720; TOP_STRIP_FRAC=0.08 (y=0..57 px);
-PANELS_FRAC=0.72 (y=58..575 px, renderer composites terrain/helix here);
-QUIZ_BAR_FRAC=0.20 (y=576..720 px, renderer leaves BLACK — you draw buttons);
-PANEL_TITLE_LEFT="CARTESIAN COORDINATES"; PANEL_TITLE_RIGHT="SONIFIQUATION COORDINATES"
-(Nir's word — do not rename).
-
-**How main wires you** (G4.5 frozen frame order):
-1. input_map.poll() → state.handle_action
-2. state.update(dt)
-3. snap = state.snapshot()
-4. renderer panels + composite()
-5. hud.draw(snap["mode"], state.quiz_ui_state())  ← that's you, drawing LAST
-You draw AFTER renderer.composite(), into the already-black top strip and quiz bar
-regions. The renderer's composite fills panels at y=QUIZ_BAR_FRAC*H=144..WINDOW_H,
-leaving your regions black by default.
-
-**Neighbors already built** — their exact public signatures (for imports/docs):
-- core/types.py: Mode enum (EXPLORE, QUIZ_LISTEN, SLICE, SCENE_TRANSITION), Action
-  enum (TOTEM_X, TOTEM_Y, ORBIT_AZ, ORBIT_EL, ZOOM_IN, ZOOM_OUT, CAM_RESET,
-  SLICE_TOGGLE, CONFIRM, SLICE_PLAY, ANSWER_A..D, HINT, QUIT, AXIS_X_A, AXIS_Y_A,
-  AXIS_X_B, AXIS_Y_B), TotemState dataclass, SceneSpec dataclass, QuizOption dataclass
-- config.py: all frozen constants
-- game_state.py: quiz_ui_state() + snapshot() (both documented above)
-
-## CONTEXT-WINDOW MERCY (Nir's standing policy)
-I am deliberately NOT pasting big already-built files in full unless you ask (via Nir):
-the PURANAS (engine ~444, game_state ~424 lines, helix_panel ~335), terrarin.py,
-totem.py, slice_mode.py, core/slicing.py (~200). If you want the exact code of
-anything (e.g. scene.py/SceneSpec field list, or how Mode is imported), ask through
-Nir and I paste it verbatim. It is YOUR call — spend your context window if you
-judge it worth it; you continue as Parent F in the next chat if needed.
-
-## RECENT AMENDMENTS YOU SHOULD KNOW
-- Tilt is REAL geometry (tilt ruling July 8: tilting the blade truly re-cuts the
-  terrain; Parent E's core/slicing.py is the shared pure-math module; game_state's
-  _build_slice_path now delegates to slicing.walk_path).
-- GlassBlade.set_domain / set_walk_stop are additive setters wired by main (Parent G).
-- REQUIRED_SHADERS = 9 stems (terrain/wire/flat/icon_billboard/glass/bloom_extract/
-  bloom_blur/composite/totem).
-- game_state.snapshot() now exposes walk_stop/walking/walk_stop_x/walk_stop_y (bead).
-
-Welcome, Parent F. Serve the seam, ask as many questions as you need. — DeepSeek 🔪🧿🖱️
+Nir — that's the letter. Every factual claim in sections 2–3 traces to text pasted in this conversation; sections 4–6 are labeled as what they are. If you want anything softened, shortened, or added before couriering it, say the word. ❤️
