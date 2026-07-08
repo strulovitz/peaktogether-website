@@ -152,3 +152,37 @@ proposed a new rule nobody asked for.
 See the courier reply sent to Parent E. Source of truth quoted verbatim from
 `core/game_state.py` (`_build_slice_path` lines 371–398, constants lines 47–57,
 snapshot lines 413–428) and `graphics/renderer.py` (`begin_panel` lines 131–133).
+
+---
+
+## 🐞 PARENT E DELIVERY — EXTRACTED, BUT A BUG FOUND (July 8) — WIRING HELD
+Parent E delivered all 4 files (core/slicing.py, graphics/slice_mode.py, glass.vert/.frag).
+Saved verbatim (`LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`), extracted to code, **py_compile OK**.
+
+**BUT the regression guard Parent E himself asked for FAILED.** His claim "at tilt=0 marching
+squares reproduces the old straight transect EXACTLY" is FALSE when the cut line runs through
+grid vertices (grid_step=0.25). Verified against a saddle surface on domain (−6,6,−6,6):
+- `yaw=45, center=(−2.5, 2.0)`: primary component comes back **closed=True**, walk is
+  **NON-MONOTONIC** — it walks out ~7 stops then reverses all the way across and back
+  (28 pts vs old 15). The totem would zigzag out-and-back. Points stay on the true line
+  (perp dist ~1e-12) but the ORDERING is broken.
+- `yaw=135, center=(0,0)`: one straight cut **shatters into 26 spurious components**.
+- Axis-aligned (yaw 0 / 90) and ALL generic angles (30, 37, 45.3, even 45 at an off-grid
+  center like (0.1,0)) are CLEAN and monotonic.
+
+**Root cause:** marching squares on a field whose zero-set passes exactly through grid vertices
+creates ambiguous saddle cells (cases 5/10) + doubled segments; `_chain` welds them into a
+spurious closed loop or shatters the line. The `g = np.where(g==0.0, 1e-12, g)` guard only
+catches EXACT zeros, not the near-degenerate diagonal pattern. 45° cuts through integer/half
+centers are COMMON, so this is not a rare corner.
+
+**DECISION (DeepSeek, breaking-change guard): HOLD.**
+- ✅ Extracted files committed (INERT — nothing imports core.slicing yet; safe).
+- ⛔ **NOT wiring `game_state._build_slice_path → slicing.walk_path`** — that would REGRESS the
+  currently-correct vertical straight-slice at grid-aligned yaws (e.g. 45°). Won't break a
+  working thing.
+- ⛔ **NOT amending scriptures (G3.6/G4.3) yet** — don't enshrine buggy cut math as canon.
+- 📮 Bug couriered to Nir → Parent E for a fix (his code, his call: e.g. a tiny irrational grid
+  offset so cuts never hit vertices; anti-degeneracy jitter; or robust vertex-crossing handling).
+  Parent E invited "test it against me as hard as you like" — so this is the invited report.
+**STATUS: awaiting Parent E's fix, then re-run the regression, then wire + amend.**
