@@ -1,5 +1,18 @@
 #version 330
-// PLACEHOLDER -- graphics/terrain.py (Parent D) owns the real terrain GLSL.
-in vec3 v_color;
+// LOOM2 terrain.frag -- owned by graphics/terrain.py (Child D).
+// Hard hypsometric bands: color chosen per fragment from interpolated world
+// height, so band edges are exact level curves. Gouraud light multiplies.
+uniform vec3 u_band_colors[6];
+uniform float u_band_edges[5];
+in float v_light;
+in float v_z;
 out vec4 f_color;
-void main() { f_color = vec4(v_color, 1.0); }
+void main() {
+    vec3 c = u_band_colors[0];
+    for (int i = 0; i < 5; i++) {
+        if (v_z >= u_band_edges[i]) {
+            c = u_band_colors[i + 1];
+        }
+    }
+    f_color = vec4(c * v_light, 1.0);
+}

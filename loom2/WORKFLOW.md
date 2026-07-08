@@ -174,17 +174,44 @@ the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_c
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026, ~1 AM Israel)
-**Where we are: PARENT D IS IN FLIGHT.** Parents A, B, C are done. Parent D (a live
-Fable chat) has absorbed ALL scriptures, asked his Q1–Q7 batch, and received Nir's
-decisions. He is about to deliver `graphics/terrain.py` + `graphics/totem.py`.
+### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
+**Where we are: PARENT D — HALF DONE. `terrain.py` HAS LANDED; `totem.py` is next.**
+Parents A, B, C are done. Parent D (a live Fable chat) absorbed ALL scriptures, asked
+Q1–Q7, got Nir's decisions, and on his 3rd attempt (provider had truncated him twice)
+successfully delivered **`graphics/terrain.py` COMPLETE + its `terrain.vert`/`terrain.frag`
+GLSL** — all saved verbatim (`loom2/HINDU/LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`),
+extracted, py_compile-clean, pushed. **`graphics/totem.py` is the remaining half.**
 
-**⏭️ TOMORROW'S FIRST ACTION:** Nir re-opens the SAME Parent D Fable chat and writes
-just **"continue"** (Fable holds the whole design in context — no re-paste needed).
-Fable then delivers `terrain.py` complete + its `terrain.vert`/`terrain.frag` GLSL +
-numbered remarks for DeepSeek; then `totem.py`. We stopped tonight because the
-provider truncated Fable's replies TWICE mid-answer (long-message choke) and it was
-~1 AM in Israel. **Nothing is lost.**
+**⏭️ NEXT ACTION:** Nir re-opens the SAME Parent D chat and writes **"continue"** →
+Fable delivers `totem.py` (the little breathing helix). **HE WILL WRITE IT AGAINST AN
+AMENDED SIGNATURE** (see remark 8 below) unless Nir objects first.
+
+**📐 TERRAIN CANON (locked by Parent D, record for all future modules):**
+- Shader interface: `terrain.vert` = `uniform mat4 u_mvp; in vec3 in_pos; in float in_light;`
+  `terrain.frag` = `uniform vec3 u_band_colors[6]; uniform float u_band_edges[5];`
+- HARD bands + GOURAUD reconciled: per-VERTEX Lambert light (interpolated) × per-FRAGMENT
+  band color from interpolated world-z → smooth shading AND pixel-sharp level curves.
+- Band edges (absolute world z, every scene): **(−1.5, −0.6, 0.0, 1.1, 2.2)**; darkest
+  abyss = `COLOR_DEEP_WATER × 0.55`. (Fable moved deep-water edge −1.0→−0.6 so the bowl,
+  min −1.0, gets a real deep-blue heart.) All tuning = 2 constants at top of terrain.py.
+- Terrain stays ≤1.0 (land never blooms hard); `height_at` is a pure `surface_fn` passthrough
+  (accepts numpy arrays too — totem can drape ring points through it). `release()` added
+  (flagged, not in contract) to free VBO/IBO/VAO on scene change — main should call
+  `old_mesh.release()` in its scene-change path.
+
+**❓ TWO ITEMS AWAITING NIR (from Parent D's terrain delivery):**
+1. **A7 CONTRACT AMENDMENT (Fable will proceed unless Nir objects):** change
+   `TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` →
+   `draw(self, view_proj, totem_state, height_fn, measure_phase)`, where `main` passes
+   `terrain.height_at` so the totem drapes every ring point through the same callable
+   (one param swap, no new seams). Nir already blessed amending the Gita for draped rings.
+   **DeepSeek must amend Gita G3.4 + wire main accordingly.**
+2. **Snow-bloom taste question (Nir's call):** peak-snow pixels sit at ≈0.82–0.84,
+   a hair above the 0.80 bloom bright-pass → snowcaps get a very faint shimmer-glow.
+   KEEP it, or scale terrain fully matte below 0.80? One-constant change either way.
+
+We stopped last night because the provider truncated Fable's replies TWICE mid-answer
+(long-message choke) and it was ~1 AM in Israel. Now terrain is home. **Nothing lost.**
 
 **PARENT D'S Q&A + NIR'S DECISIONS are saved verbatim** at
 `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`. Locked decisions:
@@ -370,14 +397,18 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      reset, clock/pan seam verified). renderer.py uniform names match the shader files.
      **Live GL smoke test deferred to integration** (needs a pyglet window / Parent G's main.py).
      camera_limits de-facto contract locked (target/zoom_min/zoom_max/distance). No CONTRACT-ISSUEs.
-   - 🔵 **Parent D — `graphics/terrain.py` + `graphics/totem.py`  ← IN FLIGHT NOW.**
+   - 🔵 **Parent D — `graphics/terrain.py` ✅ + `graphics/totem.py` ⏳  ← HALF DONE.**
      Fable absorbed all scriptures, asked Q1–Q7, got Nir's decisions (saved verbatim at
-     `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`). Stopped ~1 AM July 8 (provider
-     truncated his replies twice). **TOMORROW: Nir writes "continue" in the SAME chat**
-     → Fable delivers terrain.py + terrain.vert/.frag + remarks, then totem.py. Decisions:
-     Gouraud shading; HARD color bands; NO water plane (blue bands darken with depth on the
-     same mesh); calm/static rings on the left panel; gentle glow on all totem parts;
-     DRAPED rings (Nir blesses amending the frozen contract for it).
+     `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`). **`terrain.py` DELIVERED (July 8,
+     3rd attempt after two truncations)** + `terrain.vert`/`terrain.frag` GLSL: saved verbatim
+     (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`), extracted, py_compile OK, pushed. Decisions
+     realized: Gouraud (per-vertex Lambert) × HARD per-fragment bands; NO water plane (blue
+     bands darken with depth on same mesh); band edges (−1.5,−0.6,0,1.1,2.2); land ≤1.0.
+     **⏳ `totem.py` NEXT: Nir writes "continue" in the SAME chat.** TWO items pending Nir:
+     (1) A7 amendment — Fable will write totem.py against `draw(...,height_fn,...)` (was
+     `ground_z`) so rings drape via `terrain.height_at`, UNLESS Nir objects first; DeepSeek
+     must amend Gita G3.4 + wire main. (2) snow-bloom taste Q — snowcaps ≈0.82–0.84 kiss the
+     0.80 bloom bright-pass (faint glow): keep or make matte? Nir's call.
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
