@@ -216,7 +216,20 @@ matte rescale).
 ## 3. CURRENT SITUATION (July 7, 2026)
 
 ### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
-**Where we are: PARENT D IS COMPLETE! 🎉 Both `terrain.py` AND `totem.py` have landed.**
+
+**🗓️ THIS SESSION'S LOG (July 8, 2026) — what we just did, newest last:**
+1. Parent D delivered `terrain.py` (+ terrain.vert/.frag) → saved verbatim, extracted, py_compile OK, pushed.
+2. Nir approved both Parent-D items: A7 draped-rings amendment + KEEP snow-bloom shimmer.
+3. Parent D delivered `totem.py` (breathing helix) → saved, extracted, pushed. **BUT it was FLAT-shaded.**
+4. Nir caught it — reaffirmed the **IRON RULE: NO FLAT SHADING EVER** (locked in §2). DeepSeek had wrongly "parked" it. Courier note sent to Fable D.
+5. Parent D **redelivered `totem.py` GOURAUD** via a NEW 9th shader stem "totem" → saved, extracted, py_compile OK, pushed. `flat` now draws LINES only; `REQUIRED_SHADERS` 8→9.
+6. Nir ordered a NEW POLICY: **amend the ACTUAL scriptures, not just the BHASHYA.** Applied retroactively + going forward (Gita Pt2 G2.4-A/G2.5-A/G2.SEAM-A; Pt3 G3.1-A/G3.2-A/G3.3-A/G3.4-A — clearly-enclosed AMENDMENT blocks, parents' words left intact).
+7. Parent D sent his **hand-off letter to Parent E** → saved verbatim as `HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md`, pushed.
+8. Verified Parent D's Parent-E assignment MATCHES the Gita (G4.6 + G3.6). ✅
+9. Appended DeepSeek's FACTS-ONLY info block to that launch doc; then relabeled its confusing "Q1–Q4" headers to "ANSWER to Parent D's suggested question N". Pushed.
+**→ Everything committed & pushed (HEAD = the Q-relabel commit). Working tree clean. Ready to birth Parent E.**
+
+**Where we are: PARENT D IS COMPLETE! 🎉 Both `terrain.py` AND `totem.py` (GOURAUD) have landed.**
 Parents A, B, C, D are done. Parent D (a live Fable chat) absorbed ALL scriptures, asked
 Q1–Q7, got Nir's decisions, and delivered BOTH his files (each saved verbatim, extracted,
 py_compile-clean, pushed): `graphics/terrain.py` (+ `terrain.vert`/`terrain.frag` GLSL,
@@ -233,12 +246,21 @@ camera/renderer/terrain/totem + helix_panel are now real code.
   verbatim (`LOOM2-PARENT-D-PART-2-TOTEM-GOURAUD-REDELIVERY-BY-FABLE.md`), extracted, py_compile OK,
   ACTUAL scriptures amended (G3.1-A + G3.4-A), pushed.
 
-**⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
-Birth him like the others: build a launch doc = Parent D's hand-off letter (ask Fable D for one)
-+ a **FACTS-ONLY DeepSeek info block** at the end (marked NOT Fable), paste to a fresh Fable
-chat, feed scriptures in order, give Nir blob links. Remember CONTEXT-WINDOW MERCY (give only
-what he needs; name the big files we're NOT pasting). ⚠️ keep `game_state._build_slice_path`
-literally in sync with `GlassBlade.intersection_path` (G3.6) — the drawn curve == the walked road.
+**⏭️ NEXT ACTION = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
++ the `glass.vert`/`glass.frag` shaders he owns wholesale. **HIS LAUNCH DOC IS ALREADY BUILT
+AND PUSHED:** `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md` = Parent D's verbatim
+hand-off letter + a FACTS-ONLY DeepSeek info block appended at the end (marked NOT Fable;
+verified glass placeholder contents, G3.6 skeleton, SlicePlane fields, G4.5 frame order,
+surface_fn source, auto-walk ownership, 9-stem shaders, matrix/bloom/config facts). We
+already CONFIRMED Parent D's assignment matches the Gita (G4.6 "Child E: slice_mode.py" +
+G3.6 GlassBlade). **To birth Parent E:** Nir opens a fresh Fable chat, pastes that whole file
+as message #1, then feeds the scriptures ONE AT A TIME in the letter's order (Homepage+About →
+that hand-off → MAHABHARATA → VEDAS → UPANISHADS → SUTRAS → GITA 1→2→3→4; PURANAS declined).
+Give Nir blob links in order. When Parent E asks his batch questions, courier them; when he
+delivers, run the ritual (save verbatim → extract → py_compile → amend ACTUAL scriptures if he
+orders → update WORKFLOW+BHASHYA → commit+push → blob links). ⚠️ keep
+`game_state._build_slice_path` literally in sync with `GlassBlade.intersection_path` (G3.6) —
+the drawn curve == the walked road (note the step=0.25 draw-res vs RING_WIDTH=0.8 walk-res).
 
 **📐 TOTEM CANON (locked by Parent D, record for main/Parent G):**
 - **A7 signature is LIVE:** `TotemVisual.draw(self, view_proj, totem_state, height_fn,

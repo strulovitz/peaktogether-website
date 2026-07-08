@@ -28,21 +28,33 @@
 ## CURRENT FRONTIER (July 7, 2026)
 
 ### 🔖 RESTART SNAPSHOT (July 8, 2026) — quick orientation
+
+**🗓️ THIS SESSION (July 8): Parent D finished + handed off to Parent E.** In order: Parent D
+delivered terrain.py (verbatim/extracted/pushed); Nir approved A7 draped-rings + KEEP snow-bloom;
+Parent D delivered totem.py but FLAT → Nir caught it, IRON RULE (no flat shading ever) locked;
+Parent D redelivered totem.py GOURAUD via a new 9th "totem" shader; Nir ordered the NEW POLICY to
+amend the ACTUAL scriptures (applied Gita Pt2 G2.4-A/G2.5-A/G2.SEAM-A + Pt3 G3.1-A/G3.2-A/G3.3-A/
+G3.4-A); Parent D's hand-off letter to Parent E saved verbatim; assignment verified vs Gita;
+DeepSeek FACTS-ONLY info block appended + its "Q1–Q4" headers relabeled. **All pushed, tree clean.**
+
 - **Progress:** Parents **A, B, C, D COMPLETE**. 🎉 Parent D delivered BOTH `graphics/terrain.py`
-  (+ `terrain.vert`/`terrain.frag`) and `graphics/totem.py` (the breathing helix) — each saved
-  verbatim (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`),
-  extracted, py_compile-clean, pushed.
-- **⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
-  Build a launch doc (Parent D hand-off letter + FACTS-ONLY DeepSeek info block), paste to a fresh
-  Fable chat, feed scriptures, give Nir blob links. Keep `game_state._build_slice_path` in sync
-  with `GlassBlade.intersection_path` (G3.6).
+  (+ `terrain.vert`/`terrain.frag`) and `graphics/totem.py` (the breathing GOURAUD helix + the new
+  `totem.vert`/`totem.frag`) — each saved verbatim, extracted, py_compile-clean, pushed.
+- **⏭️ NEXT ACTION = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
+  + `glass.vert`/`glass.frag` (owned wholesale). **LAUNCH DOC ALREADY BUILT + PUSHED:**
+  `HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md` (Parent D's verbatim letter + DeepSeek FACTS-ONLY info
+  block at end, marked NOT Fable). Assignment already VERIFIED against Gita (G4.6 "Child E:
+  slice_mode.py" + G3.6 GlassBlade). Nir opens a fresh Fable chat, pastes that whole file as msg #1,
+  feeds scriptures one at a time in the letter's order, gives blob links. Keep
+  `game_state._build_slice_path` in sync with `GlassBlade.intersection_path` (G3.6).
 - **📐 TOTEM CANON (locked):** A7 signature LIVE = `TotemVisual.draw(self, view_proj, totem_state,
   height_fn, measure_phase)`; main step 4 = `totem_visual.draw(vp_left, snap_totem,
-  terrain.height_at, phase)` — **DeepSeek owes wiring main at Parent G.** Uses shared `flat`
-  program (`u_mvp`/`u_color`/`in_pos`, verified vs flat.{vert,frag}). Breath clock unwraps
-  measure_phase (no `time` import); ~3 s breath never locks to 2 s measure. Warm-gold ribbon helix
-  (dark edge lines keep it readable, A6); rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋) static/calm
-  (A5); circle+arm (A1 `90°−phase×360°`) DRAPED via height_fn, lifted 0.05. Flagged `release()`.
+  terrain.height_at, phase)` — **DeepSeek owes wiring main at Parent G.** Uses the NEW `totem`
+  Gouraud program for the helix surface + shared `flat` (`u_mvp`/`u_color`/`in_pos`) for LINES only.
+  Breath clock unwraps measure_phase (no `time` import); ~3 s breath never locks to 2 s measure.
+  Warm-gold ribbon helix (dark edge lines keep it readable, A6); rings
+  n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋) static/calm (A5); circle+arm (A1 `90°−phase×360°`) DRAPED via
+  height_fn, lifted 0.05. Flagged `release()`.
   🚫→✅ IRON RULE + FIX: NO FLAT SHADING EVER (everything Gouraud). Parent D's first totem
   shipped flat; **redelivered GOURAUD (July 8)** via a NEW 9th shader stem "totem"
   (`data/shaders/totem.vert/.frag`, owned by Child D) — `flat` now draws only LINES;
