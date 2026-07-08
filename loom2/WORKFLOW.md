@@ -247,8 +247,11 @@ the game actually RUN).
   (G4.6 assignment + G4.1 surfaces.py + G4.2 scene.py + G4.5 main.py) + the list of whole Gita
   files he needs (Parts 1–4 amended) + verbatim PURANAS public-API excerpts (engine / game_state /
   helix_panel signatures + docstrings + the two game_state return dicts; bodies omitted).
-- **Parent F's hand-off letter to Parent G** → ⏳ **PENDING SAVE** (Nir pasting it; will be saved
-  verbatim as `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md`).
+- **Parent F's hand-off letter to Parent G** → ✅ **SAVED VERBATIM** as
+  `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md` (the Parent G launch document). It reconciles the
+  amended boot/frame orders (Hud(window, renderer); totem_visual.draw takes terrain.height_at;
+  blade set_domain/update_plane/set_walk_stop; scene_changed rebuild + release; snap["quit"] exit)
+  and carries a §7 question-seed batch for Parent G to send DeepSeek.
 
 **WHAT REMAINS:**
 1. **Parent G (LAST parent):** `core/surfaces.py` + `core/scene.py` + `main.py`. Launch material =

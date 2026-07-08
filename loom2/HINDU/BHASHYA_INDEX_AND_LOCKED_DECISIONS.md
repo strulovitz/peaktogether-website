@@ -15,7 +15,8 @@
   remains = `core/surfaces.py` + `core/scene.py` + `main.py` (makes the game RUN). Launch material
   ready: `MATERIAL-FOR-PARENT-G-HANDOFF.md` (Parent G's verbatim Gita mission + which whole Gita
   files he needs [Parts 1–4 amended] + verbatim PURANAS public-API excerpts). Parent F's hand-off
-  letter to Parent G ⏳ PENDING SAVE (Nir pasting → `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md`).
+  letter to Parent G ✅ SAVED VERBATIM as `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md` (the Parent G
+  launch document; reconciles amended boot/frame orders + carries Parent G's §7 question seeds).
   **After Parent G:** DeepSeek stitching (wire terrain.height_at→TotemVisual.draw; wire Glass
   Blade + suppress tall totem in SLICE; joystick/Xbox; GL smoke test; render_offline live trial;
   PyInstaller+ffmpeg) + content (12 scenes JSON/hints/explanations, equation PNGs, 48 quiz WAVs) +
