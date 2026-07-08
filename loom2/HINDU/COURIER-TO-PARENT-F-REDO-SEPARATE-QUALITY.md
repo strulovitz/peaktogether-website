@@ -7,10 +7,9 @@ Parent F — Nir wants a redo of the two Python programs, and this time with roo
    the whole answer for each module.
 
 2. Make each one MUCH more detailed and MUCH higher quality — real, careful thought, and
-   genuinely BEAUTIFUL for the player to look at and use. The last version was rushed into a
-   single delivery; this time give each module the depth and polish it deserves. Longer is
-   welcome if the quality earns it. This is the part of the game a nine-year-old actually
-   touches — make it lovely.
+   genuinely BEAUTIFUL for the player to look at. The last version was rushed into a single
+   delivery; this time give each module the depth and polish it deserves. Longer is welcome
+   if the quality earns it.
 
 3. Do NOT write a hand-off. Do not think about a hand-off at all. Do not spend a single token
    on it. We will do that later, separately. Ignore it completely for now.
