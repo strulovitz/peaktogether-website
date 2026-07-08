@@ -186,3 +186,30 @@ centers are COMMON, so this is not a rare corner.
   offset so cuts never hit vertices; anti-degeneracy jitter; or robust vertex-crossing handling).
   Parent E invited "test it against me as hard as you like" — so this is the invited report.
 **STATUS: awaiting Parent E's fix, then re-run the regression, then wire + amend.**
+
+### ✅ RESOLVED (July 8) — FIX APPLIED, REGRESSION GREEN, WIRED + AMENDED
+Parent E owned the bug and delivered a 3-layer fix in `core/slicing.py` ONLY (slice_mode +
+shaders + all public signatures untouched): (1) `_grid_axis` irrational sub-cell skew of interior
+grid samples (domain endpoints stay exact) so cuts never pass through grid vertices; (2) a
+magnitude clamp `|g|<eps → +eps` (uniform sign, kills case-5/10 saddle noise); (3) `_clean_segments`
+drops vertex-kiss micro-segments + duplicated edges before chaining. DeepSeek applied all 3 patches
+verbatim, py_compile OK.
+**Regression RE-RUN = ALL GREEN:** the two failing cases now give ncomp=1, closed=False, monotonic,
+stop-count matching the old function (yaw=45 c=(−2.5,2.0): 15 pts; yaw=135 c=(0,0): 23 pts), perp
+≲1e-8; every half-integer center clean; all previously-clean cases byte-stable; a tilted sanity case
+(yaw=0,tilt=30) gives one connected component through the anchor; and a **brutal 30,000-case sweep**
+(yaw 0..180° step 1° × a 0.5 lattice of centers) had **0 failures** (all monotonic, primary component
+within grid_step of the anchor).
+**THEN wired + amended (as Parent E instructed):** game_state now imports core.slicing;
+`_build_slice_path` is one line delegating to `slicing.walk_path` (old body deleted); `_WALK_STEP`
+removed; `_TILT_LIMIT` "visual only" comment corrected; snapshot() exposes additive `walk_stop` /
+`walking` / `walk_stop_x` / `walk_stop_y` for the bead. Scriptures amended: Gita **G3.6-A** (Glass
+Blade tilt-real + setters + glass GLSL interface + look choices) and **G4.3-A** (game_state refactor +
+snapshot bead fields). **PARENT E COMPLETE. 🔪**
+
+**DeepSeek OWES at Parent G (main wiring):** `blade.set_domain(spec.domain)` at scene build;
+per-frame `blade.update_plane(snap["slice_plane"])`, `blade.set_walk_stop(snap["walk_stop"])`, and in
+SLICE mode `blade.draw(vp_left, surface_fn)`; **SUPPRESS/HIDE the tall totem in SLICE mode** (Nir's
+directive — precise bead is the height marker); confirm slice_mode's `self._stops` index matches
+game_state's walk index (identical by construction — both call core.slicing with grid_step 0.25 +
+RING_WIDTH).

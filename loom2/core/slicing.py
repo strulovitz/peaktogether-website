@@ -21,6 +21,9 @@ import config
 
 _EPS = 1e-9
 _KEY_DECIMALS = 6   # endpoint quantization for segment chaining
+_MIN_SEG = 1e-6              # drop degenerate micro-segments (vertex-kiss)
+_SKEW_X = 1.4142135e-3       # irrational sub-cell grid skew: interior grid
+_SKEW_Y = 1.7320508e-3       # vertices never sit on 'nice' cut lines
 
 # marching-squares segment table: edges 0=bottom 1=right 2=top 3=left,
 # case bit0..bit3 = (g00, g10, g11, g01) > 0. Cases 5/10 resolved by center.
@@ -162,22 +165,58 @@ def _chain(segs):
     return paths
 
 
+def _grid_axis(lo, hi, step, skew):
+    """Axis samples covering [lo, hi] with interior points shifted by an
+    irrational sub-cell offset. Domain endpoints stay EXACT (the cut's
+    boundary endpoints must land on the domain edge); interior vertices
+    move ~1e-3*step so that 45-degree cuts through round centers can no
+    longer pass exactly through grid vertices (the degeneracy DeepSeek
+    caught on 2026-07-08)."""
+    n = max(2, int(round((hi - lo) / step)) + 1)
+    ax = np.linspace(lo, hi, n)
+    if n > 2:
+        ax[1:-1] += step * skew
+    return ax
+
+
+def _clean_segments(segs):
+    """Kill the two vertex-degeneracy artifacts even if a cut still hits a
+    vertex: (1) micro 'vertex-kiss' segments (both ends at ~one vertex),
+    (2) the same segment emitted twice by neighboring straddling cells --
+    the doubled edges that chained into spurious loops and the
+    out-and-back walk. Keeps every chaining degree at 2."""
+    out, seen = [], set()
+    for a, b in segs:
+        if math.hypot(b[0] - a[0], b[1] - a[1]) < _MIN_SEG:
+            continue
+        ka = (round(a[0], _KEY_DECIMALS), round(a[1], _KEY_DECIMALS))
+        kb = (round(b[0], _KEY_DECIMALS), round(b[1], _KEY_DECIMALS))
+        if ka == kb:
+            continue
+        key = (ka, kb) if ka <= kb else (kb, ka)
+        if key in seen:
+            continue
+        seen.add(key)
+        out.append((a, b))
+    return out
+
+
 def slice_components(surface_fn, plane, domain, grid_step=0.25):
     """THE CUT. Ordered components, primary (walked) component FIRST --
     the one passing nearest the anchor (with z0 = f(cx,cy) it passes
     through it). Each component is an ordered [(x, y), ...]; closed loops
     repeat their first point last. [] if the blade misses the land."""
     xmin, xmax, ymin, ymax = domain
-    nx = max(2, int(round((xmax - xmin) / grid_step)) + 1)
-    ny = max(2, int(round((ymax - ymin) / grid_step)) + 1)
-    xs, ys = np.linspace(xmin, xmax, nx), np.linspace(ymin, ymax, ny)
+    xs = _grid_axis(xmin, xmax, grid_step, _SKEW_X)
+    ys = _grid_axis(ymin, ymax, grid_step, _SKEW_Y)
     X, Y = np.meshgrid(xs, ys)
     Z = eval_heights(surface_fn, X, Y)
     z0 = plane_anchor_z(surface_fn, plane)
     nxv, nyv, nzv = plane_normal(plane)
     g = nxv * (X - plane.cx) + nyv * (Y - plane.cy) + nzv * (Z - z0)
-    g = np.where(g == 0.0, 1e-12, g)     # no exact zeros: degeneracy guard
-    segs = _cell_segments(g, xs, ys)
+    eps = 1e-9 * max(float(np.abs(g).max()), 1.0)
+    g = np.where(np.abs(g) < eps, eps, g)   # uniform + sign for on-cut
+    segs = _clean_segments(_cell_segments(g, xs, ys))   # vertices: no noise
     if not segs:
         return []
     dxh = math.cos(math.radians(plane.yaw_deg))

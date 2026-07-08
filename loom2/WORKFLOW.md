@@ -246,32 +246,40 @@ camera/renderer/terrain/totem + helix_panel are now real code.
   verbatim (`LOOM2-PARENT-D-PART-2-TOTEM-GOURAUD-REDELIVERY-BY-FABLE.md`), extracted, py_compile OK,
   ACTUAL scriptures amended (G3.1-A + G3.4-A), pushed.
 
-**🔪 PARENT E IS IN FLIGHT (July 8):** launched from `HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md`,
-absorbed all scriptures, sent Q&A BATCH 1. **Nir's calls (saved verbatim at
-`loom2/HINDU/PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`):** Q4 bead = **OPTION 2 additive amendment**
-(expose walk index+walking in `game_state.snapshot()`; add `GlassBlade.set_walk_stop(idx_or_none)`;
-main wires it; Parent E draws a precise bead ON the curve) — Nir authorized amending frozen
-contracts + extra stitching. **DESIGN DIRECTIVE LOCKED: SUPPRESS/HIDE the tall totem in SLICE mode**
-(exact height is critical on one path; the tall totem reads as a confusing "margin of error"; the
-precise glowing bead at z=f(stop) is the true marker — main/frame-order + maybe totem_visual job at
-Parent G, record as amendment when implemented). Q7 look = show Nir ALL options, no pre-selection.
-DeepSeek answered Q1/Q2/Q3/Q5/Q6 with verified facts (couriered). **⏭️ Awaiting Parent E's next
-delivery (his full taste menu + then code).**
+**✅ PARENT E COMPLETE (July 8) — Glass Blade DELIVERED + FIXED + WIRED + AMENDED. 🔪** Parent E
+launched from `HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md`, absorbed all scriptures, sent Q&A BATCH 1,
+then delivered all 4 files (`core/slicing.py` — "The One True Cut," the shared pure-math module;
+`graphics/slice_mode.py` — the Glass Blade; `glass.vert`/`glass.frag`). Full delivery saved verbatim
+at `LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`, extracted, py_compile OK.
 
-**🐞 PARENT E DELIVERED — EXTRACTED, BUG FOUND, WIRING HELD (July 8).** Parent E delivered all 4
-files (`core/slicing.py` — the shared "One True Cut" via marching-squares of the tilted plane vs
-z=f(x,y); `graphics/slice_mode.py` — the Glass Blade; `glass.vert/.frag`). Saved verbatim
-(`LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`), extracted, **py_compile OK**, committed **INERT**
-(nothing imports core.slicing yet). **BUT the regression guard FAILED:** marching squares
-degenerates when the cut runs through grid vertices — `yaw=45, c=(−2.5,2.0)` gives a spurious
-CLOSED loop / non-monotonic out-and-back walk (28 vs old 15 pts); `yaw=135, c=(0,0)` shatters one
-straight line into 26 components. Generic + axis angles are clean. **DeepSeek HELD (breaking-change
-guard):** NOT wiring `game_state._build_slice_path → slicing.walk_path` (would regress the working
-vertical slice at grid-aligned yaws), NOT amending scriptures, until Parent E fixes the degeneracy.
-Bug couriered Nir → Parent E. Full detail in `PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`. **⏭️ Next:
-Parent E's fix → re-run regression → wire game_state + main + amend G3.6/G4.3.**
+**Nir's locked decisions (see `PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`):** TILT IS REAL (tilting the
+blade re-cuts the terrain → true 3D intersection of tilted plane with z=f(x,y), marching-squares zero
+level-set, anchor z0=f(cx,cy)); Q4 bead = additive amendment (walk_stop/walking/walk_stop_xy in
+game_state.snapshot(); GlassBlade.set_walk_stop()); Q7 look = full menu presented → A1 cool
+glass-cyan · B1 unlit tint · C1 warm HDR gold curve · D2 ribbon/no fill · E bead-on-the-wire
+(bored sphere, ~3 s breath) · F4 Fresnel rim · H2 constant pane height; audio on slanted cut =
+NO new rule (normal HSS neighborhoods at each stop); **DESIGN DIRECTIVE: SUPPRESS/HIDE tall totem
+in SLICE mode** (precise bead is the height marker → main stitching job for Parent G).
 
-**⏭️ ORIGINAL NEXT ACTION (now underway) = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
+**BUG + FIX (found & resolved July 8):** regression guard caught marching-squares degeneracy when
+cuts passed through grid vertices (yaw=45 spurious closed loop out-and-back; yaw=135 26 phantom
+components). Parent E owned it and delivered a 3-layer fix in core/slicing.py only: (1) `_grid_axis`
+irrational sub-cell skew so interior grid samples never hit vertices; (2) uniform magnitude clamp
+|g|<eps→+eps kills case-5/10 saddle noise; (3) `_clean_segments` drops vertex-kiss micro-segments
++ duplicated edges before chaining. **Regression RE-RUN = ALL GREEN:** 30k-sweep 0 failures.
+
+**WIRED:** game_state now imports core.slicing; `_build_slice_path` is one line delegating to
+`slicing.walk_path` (old body deleted); `_WALK_STEP` removed; `_TILT_LIMIT` "visual only" corrected;
+snapshot() exposes additive walk_stop/walking/walk_stop_x/walk_stop_y for the bead. **Scripture
+AMENDED:** Gita G3.6-A (Glass Blade contract: tilt-real path, setters, glass GLSL interface, look
+choices) and G4.3-A (game_state refactored + snapshot bead fields).
+
+**DEP-SEEK OWES at Parent G (main wiring):** `blade.set_domain(spec.domain)` at scene build;
+per-frame `blade.update_plane(snap["slice_plane"])`, `bade.set_walk_stop(snap["walk_stop"])`, and
+in SLICE mode `bade.draw(vp_left, surface_fn)`; **hide the tall totem in SLICE mode** (Nir's
+directive). ⏭️ NEXT = **PARENT F** (hud.py + input_map.py).
+
+**⏭️ ORIGINAL NEXT ACTION (COMPLETE) = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
 + the `glass.vert`/`glass.frag` shaders he owns wholesale. **HIS LAUNCH DOC IS ALREADY BUILT
 AND PUSHED:** `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md` = Parent D's verbatim
 hand-off letter + a FACTS-ONLY DeepSeek info block appended at the end (marked NOT Fable;

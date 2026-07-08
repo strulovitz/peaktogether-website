@@ -3,7 +3,7 @@ LOOM2 -- core/game_state.py
 THE CONDUCTOR OF EVERYTHING: mode state machine, totem, quiz, slice walk.
 Owns all mutable game state; graphics draws it, audio receives it.
 Allowed imports: math, config, core.types, core.scene, core.surfaces,
-audio.musicians. (Receives engine & camera as constructor args -- does NOT
+core.slicing, audio.musicians. (Receives engine & camera as constructor args -- does NOT
 import their modules: dependency injection keeps the seams thin.)
 
 IMPLEMENTATION NOTES (bodies only; frozen contracts untouched):
@@ -19,12 +19,10 @@ IMPLEMENTATION NOTES (bodies only; frozen contracts untouched):
   TOUCH THE TOTEM. Any totem movement in QUIZ_LISTEN stops the option and
   the land sings again. Camera orbit/zoom stay allowed while listening
   (view-only; the option WAV is fixed stereo by design, SUTRAS 5.3).
-* Slice transect. The walk itinerary implements the IDENTICAL definition as
-  GlassBlade.intersection_path (G3.6): a straight line in (x,y) through
-  (cx, cy) along yaw, clipped to the scene domain. It is duplicated here
-  (~20 lines of pure math) because graphics imports are forbidden in core.
-  DeepSeek: keep both implementations literally in sync -- same definition,
-  deterministic, so drawn curve == walked road. Walk stops are spaced one
+* Slice transect. The walk itinerary = GlassBlade.intersection_path (G3.6),
+  now via the shared core.slicing (tilt ruling 2026-07-08: TILT IS REAL).
+  One pure-math module imported by BOTH game_state and slice_mode -- one
+  implementation, byte-match by construction. Walk stops are spaced one
   RING_WIDTH apart, so each measure advances the totem by one rhythm ring:
   a procession of neighborhoods, NEVER a siren (VEDAS law, preserved).
 * Celebration. On a correct answer the winning groove keeps looping through
@@ -41,6 +39,7 @@ import config
 from core.types import Mode, Action, TotemState, SlicePlane
 from core import scene as scene_mod
 from core import surfaces
+from core import slicing
 from audio import musicians
 
 # --- conductor's tuning (implementation detail; config stays frozen) -------
@@ -51,8 +50,7 @@ _ELEV_SPEED = 40.0        # camera deg / s (elevation)
 _ZOOM_PER_SEC = 1.6       # zoom factor applied per held second
 _PLANE_YAW_SPEED = 45.0   # blade deg / s
 _PLANE_TILT_SPEED = 30.0  # blade fine-tilt deg / s
-_TILT_LIMIT = 45.0        # blade tilt clamp (visual only)
-_WALK_STEP = config.RING_WIDTH   # one ring of neighborhoods per measure
+_TILT_LIMIT = 45.0        # blade tilt clamp (REAL geometry, tilt ruling 7/8)
 _TRANSITION_SEC = 5.0     # celebration length before the next scene
 _MOVE_EPS = 1e-5
 _ANSWER_ACTIONS = {}      # filled below (Action -> label)
@@ -369,33 +367,14 @@ class GameState:
         self._walking = bool(self._walk_path)
 
     def _build_slice_path(self) -> list:
-        """SAME transect definition as GlassBlade.intersection_path (G3.6):
-        straight line in (x,y) through (cx,cy) along yaw, clipped to the
-        domain by slab intersection, one stop per RING_WIDTH."""
-        p = self._plane
-        xmin, xmax, ymin, ymax = self._spec.domain
-        dx = math.cos(math.radians(p.yaw_deg))
-        dy = math.sin(math.radians(p.yaw_deg))
-        tmin, tmax = -1e18, 1e18
-        for c, d, lo, hi in ((p.cx, dx, xmin, xmax),
-                             (p.cy, dy, ymin, ymax)):
-            if abs(d) < 1e-9:
-                if not lo <= c <= hi:
-                    return []
-                continue
-            t0, t1 = (lo - c) / d, (hi - c) / d
-            if t0 > t1:
-                t0, t1 = t1, t0
-            tmin, tmax = max(tmin, t0), min(tmax, t1)
-        if tmax <= tmin:
-            return []
-        path = []
-        t = tmin
-        while t < tmax - 1e-9:
-            path.append((p.cx + t * dx, p.cy + t * dy))
-            t += _WALK_STEP
-        path.append((p.cx + tmax * dx, p.cy + tmax * dy))
-        return path
+        """The procession itinerary == GlassBlade.intersection_path (G3.6),
+        now via the shared core.slicing (tilt ruling 2026-07-08: TILT IS
+        REAL). One implementation, two importers, byte-match by construction:
+        the true intersection of the (possibly tilted) plane with z=f(x,y),
+        the PRIMARY component, one stop per RING_WIDTH. [] if the blade
+        misses the land."""
+        return slicing.walk_path(self._surface, self._plane,
+                                 self._spec.domain)
 
     # ------------------------------------------------------- read seams
     def quiz_ui_state(self) -> dict:
@@ -413,9 +392,16 @@ class GameState:
     def snapshot(self) -> dict:
         """Read-only bundle for main's draw calls: mode, totem, voices,
         slice plane, current SceneSpec. scene_changed is read-and-clear:
-        main calls snapshot() exactly once per frame (G4.5)."""
+        main calls snapshot() exactly once per frame (G4.5).
+        walk_stop/walking expose the current auto-walk stop for the bead
+        (additive amendment, Q4; Parent E's GlassBlade.set_walk_stop)."""
         changed = self._scene_changed
         self._scene_changed = False
+        if self._walking and self._walk_idx > 0:
+            idx = self._walk_idx - 1         # the stop the totem currently rests at
+            wx, wy = self._walk_path[idx]
+        else:
+            idx, wx, wy = None, None, None
         return {
             "mode": self._mode,
             "totem": self._totem,
@@ -425,6 +411,10 @@ class GameState:
             "scene_changed": changed,
             "quit": self._quit,
             "campaign_complete": self._campaign_complete,
+            "walk_stop": idx,                # add. amend. Q4: bead marker
+            "walking": self._walking,
+            "walk_stop_x": wx,               # ground (x,y) of the current stop
+            "walk_stop_y": wy,               # (slice_mode lifts to z=f(x,y)+LIFT)
         }
 
 

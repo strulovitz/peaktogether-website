@@ -121,6 +121,31 @@ class GameState:
         slice plane, current SceneSpec."""
         raise NotImplementedError
 
+<<<<<<<<<< AMENDMENT G4.3-A — added 2026-07-08 >>>>>>>>>>
+WHAT: game_state's slice machinery is refactored per the tilt ruling (TILT IS
+REAL GEOMETRY, Nir, July 8).
+- game_state ALLOWED IMPORTS now include core.slicing.
+- game_state._build_slice_path is now ONE LINE:
+    return slicing.walk_path(self._surface, self._plane, self._spec.domain)
+  No longer a duplicated ~20-line straight-transect slab clip (the old body is
+  DELETED). The pure math lives in core/slicing.py — one implementation,
+  byte-match by construction, imported by BOTH game_state and GlassBlade.
+- game_state's _WALK_STEP constant is REMOVED (walk spacing is config.RING_WIDTH,
+  already the default inside walk_path).
+- The comment 'visual only' on _TILT_LIMIT is CORRECTED to 'REAL geometry, tilt
+  ruling 7/8' — tilt now truly re-cuts the terrain.
+- game_state.snapshot() now exposes THREE ADDITIVE FIELDS (additive amendment,
+  blessed by Nir, Q4 bead): 'walk_stop' (the current stop index, int|None),
+  'walking' (bool), 'walk_stop_x' / 'walk_stop_y' (ground (x,y) of the current
+  stop, float|None). main wires blade.set_walk_stop(snap["walk_stop"]) each
+  frame, and slice_mode uses the index to draw the breathing bead at the exact
+  current procession stop.
+WHO ORDERED: Nir (tilt-in-real ruling, Q4 bead additive amendment)
+WHICH PARENT: Parent E (core/slicing.py + graphics/slice_mode.py);
+DeepSeek refactored game_state + wired bead fields.
+STATUS: DELIVERED + REGRESSION RE-RUN PASSED; scripture amended.
+<<<<<<<<<< END AMENDMENT G4.3-A >>>>>>>>>>
+
 G4.4 — core/input_map.py
 
 """

@@ -336,4 +336,45 @@ class Hud:
 
 Seam summary for DeepSeek: every draw() receives ready-made state; graphics never computes game logic and never touches audio. The only cross-panel guarantee is OrbitCamera — one instance, two view_proj_* calls. GlassBlade.intersection_path is consumed by game_state (Part 4) to march the totem measure-by-measure.
 
+<<<<<<<<<< AMENDMENT G3.6-A — added 2026-07-08 >>>>>>>>>>
+WHAT: The Glass Blade contract is amended per the tilt ruling (TILT IS REAL
+GEOMETRY, Nir, July 8). The intersection is NO LONGER "a straight line in (x,y)
+through (cx,cy) along yaw" — it is the TRUE 3D intersection of the tilted plane
+with z = f(x,y), via the shared pure-math module core/slicing.py (marching-squares
+extraction of the zero-set of g(x,y) = n·((x,y,f(x,y))−(cx,cy,z0)), with z0 =
+f(cx,cy)). The plane normal n = (−sin(yaw)cos(tilt), cos(yaw)cos(tilt), sin(tilt)),
+unit. At tilt=0 this reproduces the old straight transect. Both game_state and
+GlassBlade import core.slicing — one implementation, byte-match by construction.
+
+Contract additions (additive, blessed by Nir):
+- Allowed imports now include core.slicing.
+- GlassBlade.set_domain(domain): scene domain, wired by main at scene build.
+- GlassBlade.set_walk_stop(index_or_none): current walk stop for the breathing
+  bead, wired by main each frame from game_state.snapshot().walk_stop (an additive
+  amendment to game_state's snapshot — see AMENDMENT G4.3-A).
+- GlassBlade.draw() now draws a camera-facing gold ribbon along every cut component,
+  dashed occlusion where terrain hides the curve, a breathing bored-sphere bead
+  threaded on the ribbon, and a Fresnel-rim frame.
+- GlassBlade.intersection_path() signature unchanged (surface_fn, domain, step) and
+  still returns [(x,y),...] — but now traces the TRUE intersection, not a straight
+  transect. Consumed by game_state._build_slice_path (which now delegates to
+  core.slicing.walk_path — see AMENDMENT G4.3-A).
+- glass.vert interface: mat4 u_mvp; vec3 in_pos; vec2 in_aux (x=arc length, y=Gouraud
+  light); out vec3 v_world + vec2 v_aux.
+- glass.frag interface: int u_mode (0 pane / 1 Fresnel rim / 2 ribbon solid / 3 ribbon
+  dashed / 4 bead / 5 bead ghost); vec4 u_color; vec3 u_cam_pos / u_normal; float u_dash.
+- REQUIRED_SHADERS unchanged (9 stems: terrain/wire/flat/icon_billboard/glass/bloom_extract/
+  bloom_blur/composite/totem).
+- Look choices (all Nir's, locked): A1 cool glass-cyan · B1 unlit tint · C1 warm HDR
+  gold · D2 ribbon/no under-fill · E bead-on-the-wire (bored sphere, ~3 s breath, no
+  diamond/drop-line) · F4 Fresnel rim · H2 constant pane height.
+
+WHO ORDERED: Nir (tilt-in-real ruling, Q4 bead additive amendment, Q7 full-menu
+taste choices)
+WHICH PARENT: Parent E (graphics/slice_mode.py, core/slicing.py, glass GLSL)
+STATUS: DELIVERED + FIX APPLIED (grid-aligned diagonal degeneracy patched by Parent E,
+regression re-run PASSED — 30k-sweep green 2026-07-08), game_state wired, SCRIPTURE
+AMENDED.
+<<<<<<<<<< END AMENDMENT G3.6-A >>>>>>>>>>
+
 End of Part 3. Say "continue" for Part 4 — the core & main contracts (surfaces.py, scene.py, game_state.py, input_map.py, main.py) — and then the Gita is complete and ready for DeepSeek to bind. 📜🧵
