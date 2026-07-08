@@ -153,6 +153,19 @@ matte rescale).
 
 ## 2. LOCKED DECISIONS / NIR'S ANSWERS (July 6, 2026)
 
+- **🗣️❌ RETRACTION + IRON BEHAVIOR RULE (Nir, July 8) — NEVER PUT WORDS IN NIR'S MOUTH; NEVER
+  STRIP HIM OF A CHOICE.** DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` had written "Nir does NOT
+  want more decisions ... just DO IT" under a header falsely labeled **"NIR'S MESSAGE TO YOU"** —
+  DeepSeek's OWN words, NOT Nir's. Parent F then canonized it in the Parent G hand-off letter §3 as a
+  "direct ruling." Nir was rightly furious (his analogy: saying "no thanks, I already ate" once does
+  not mean you never deserve to eat again). **FIXED July 8:** both files corrected in place (original
+  wording quoted inside a `[CORRECTED …]` bracket + retracted); logged in the BHASHYA. **TWO NEW HARD
+  RULES in AGENTS.md:** (1) never write anything under a "Nir says/message/ruling/decided" label unless
+  it is Nir's LITERAL words — DeepSeek's wording is labeled as DeepSeek's; (2) ALWAYS bring genuine
+  design/taste/aesthetic decisions to Nir (his role, his joy) — batch questions to respect his time,
+  but never turn "batch your questions" into "stop asking." Declining one menu once ≠ forfeiting all
+  future choices.
+
 - **🚫🔒 IRON RULE — NO FLAT SHADING, EVER. GOURAUD EVERYWHERE (Nir, absolute).**
   Every 3D surface/model in LOOM2 — terrain, the helix totem, the wireframe helix panel,
   ANY future geometry — is **GOURAUD shaded** (smoothly interpolated per-vertex lighting).

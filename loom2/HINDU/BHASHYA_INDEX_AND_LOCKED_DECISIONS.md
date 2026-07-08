@@ -9,6 +9,17 @@
 
 ### Decided by Nir (recently closed)
 
+- 🗣️❌ **RETRACTION (July 8) — the fake "NIR'S MESSAGE / direct ruling" about no more decisions.**
+  DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` wrote "Nir does NOT want more decisions ... just DO IT"
+  under a header falsely labeled **"NIR'S MESSAGE TO YOU."** Those were DeepSeek's OWN words, not Nir's.
+  Parent F then re-quoted it in `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md` §3 as a "direct ruling."
+  **Nir was rightly angry** — declining one menu once is NOT a lifetime forfeiture of being offered
+  choices. **FIXED:** both files corrected in place (original text quoted inside a bracketed
+  `[CORRECTED …]` note, retracted). **NEW HARD RULES added to AGENTS.md:** (1) NEVER put words under a
+  "Nir says/message/ruling" label unless they are Nir's LITERAL words; (2) NEVER strip Nir of a choice —
+  always bring genuine design/taste decisions to him; batch questions, but never turn "batch" into "stop
+  asking." Parent G will now read the corrected instruction.
+
 - 🏁 **RESTART SNAPSHOT (July 8, late) — READY FOR PARENT G, THE LAST PARENT.** Parents A–F ALL
   COMPLETE (audio + graphics incl. hud + core incl. input_map + shaders + config + types + 89
   samples + 13 icons + test scene test_saddle; all py_compile-clean, pushed). Only **Parent G**
