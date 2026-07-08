@@ -6,7 +6,10 @@ Imports: none (pure data). Every child chat receives this file.
 
 # ---------- audio ----------
 SAMPLE_RATE   = 44100
-BLOCK_SIZE    = 1024
+BLOCK_SIZE    = 4096          # Step-0 audio fix (Fable, 2026-07-08): 1024->4096
+                             # fewer callbacks/sec + more deadline slack vs GIL/render
+                             # contention. Clock/flashes are pure fns of the sample
+                             # counter, so blocksize does not affect timing correctness.
 MEASURE_SEC   = 2.0            # fixed: 120 BPM, four beats (SUTRAS/VEDAS)
 F0_HZ         = 440.0          # A4 at z = 0 (origin-centered helix)
 Z_PER_OCTAVE  = 2.0            # world height units per octave (per-scene override allowed)

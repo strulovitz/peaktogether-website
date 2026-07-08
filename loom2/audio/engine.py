@@ -201,7 +201,9 @@ class AudioEngine:
         self._set_layout(mode)
         self._stream = sd.OutputStream(
             samplerate=config.SAMPLE_RATE, blocksize=config.BLOCK_SIZE,
-            channels=_CHANNELS[mode], dtype="float32", callback=self._callback)
+            channels=_CHANNELS[mode], dtype="float32", callback=self._callback,
+            latency='high')   # Step-0 audio fix (Fable, 2026-07-08): extra
+                              # PortAudio-side buffering for slack vs render contention
         self._stream.start()
 
     def _set_layout(self, mode):
