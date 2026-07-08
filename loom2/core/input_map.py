@@ -72,6 +72,19 @@ DRAG_RESPONSE_EXP = 1.4     # response curve exponent. >1 = fine control
                             # near the anchor, full authority at the edge.
                             # 1.0 would be perfectly linear.
 
+PAD_DEADZONE = 0.25         # analog-stick deadzone (0..1): swallow drift.
+PAD_RESPONSE_EXP = 1.4      # same feel as the mouse virtual joystick.
+
+
+def _pad_curve(v: float) -> float:
+    """Deadzone + response curve for a raw stick axis in [-1, 1] -> shaped
+    [-1, 1]. Below PAD_DEADZONE returns 0.0 (drift is silence)."""
+    mag = abs(v)
+    if mag <= PAD_DEADZONE:
+        return 0.0
+    t = min(1.0, (mag - PAD_DEADZONE) / (1.0 - PAD_DEADZONE))
+    return (t ** PAD_RESPONSE_EXP) * (1.0 if v > 0.0 else -1.0)
+
 # ------------------------------------------------------------- key tables --
 # ONE-SHOT actions: buffered on key-press, delivered exactly once by poll().
 # Both the number row and the numpad answer, both Enters confirm -- players
@@ -112,6 +125,16 @@ _HIT_TO_ACTION = {
     "OK": Action.CONFIRM, "HINT": Action.HINT,
 }
 
+# Game-controller face/shoulder buttons -> one-shot Actions (pyglet Controller
+# button names). Mirrors the keyboard one-shots so a pad player lacks nothing.
+_PAD_BUTTON = {
+    "a": Action.ANSWER_A, "b": Action.ANSWER_B,
+    "x": Action.ANSWER_C, "y": Action.ANSWER_D,
+    "start": Action.CONFIRM, "back": Action.QUIT,
+    "leftshoulder": Action.HINT, "rightshoulder": Action.SLICE_TOGGLE,
+    "guide": Action.CAM_RESET, "dpup": Action.ZOOM_IN, "dpdown": Action.ZOOM_OUT,
+}
+
 
 class InputMap:
     """Devices in, Actions out. Owns zero game logic: it does not know what
@@ -131,6 +154,10 @@ class InputMap:
         self._drag_anchor_y = None  # press-anchor y while dragging, else None
         self._drag_y = 0.0          # latest drag y (window pixels)
         self._quiz_h = int(config.WINDOW_H * config.QUIZ_BAR_FRAC)
+        # controller slots (safe no-ops; filled by attach_joystick/attach_xbox)
+        self._joystick = None          # pyglet.input.Joystick or None
+        self._controller = None        # pyglet.input.Controller or None
+        self._pad_prev = set()         # previous-frame held buttons (edge detect)
         window.push_handlers(
             on_key_press=self._on_key_press,
             on_key_release=self._on_key_release,
@@ -236,13 +263,76 @@ class InputMap:
             # game_state's zero-each-frame intent accumulation resolves it,
             # and solo players (one human, WASD only) are unaffected.
 
+        # -- game controllers (best-effort; SAFE no-op without hardware) --
+        # UNVERIFIED without a physical device; fully guarded so it can NEVER
+        # break the keyboard/mouse game. Axis signs are best-effort (pyglet:
+        # stick up = negative) and trivial to flip if a real pad reads mirrored.
+        self._read_pads(out)
+
         return out
+
+    def _read_pads(self, out: list) -> None:
+        """Append controller-derived actions. Every read is guarded."""
+        js = self._joystick
+        if js is not None:
+            try:
+                jx = _pad_curve(float(js.x))         # boyfriend's x-axis
+                if jx != 0.0:
+                    out.append((Action.TOTEM_X, jx))
+            except Exception:
+                pass
+        c = self._controller
+        if c is not None:
+            try:
+                ly = _pad_curve(-float(c.lefty))     # girlfriend: up = +1
+                if ly != 0.0:
+                    out.append((Action.TOTEM_Y, ly))
+                rx = _pad_curve(float(c.rightx))     # right stick orbits
+                if rx != 0.0:
+                    out.append((Action.ORBIT_AZ, rx))
+                ry = _pad_curve(-float(c.righty))
+                if ry != 0.0:
+                    out.append((Action.ORBIT_EL, ry))
+            except Exception:
+                pass
 
     # ---------------------------------------------- pre-wired empty slots --
     def attach_joystick(self) -> None:
-        """EMPTY. DeepSeek fills from previous working games (P1 x-axis)."""
-        pass
+        """Boyfriend's x-axis on a plugged-in joystick. Best-effort + fully
+        guarded: a SAFE no-op if no device is present or the platform errors
+        (keyboard always works). UNVERIFIED without hardware. DeepSeek, 7/8."""
+        try:
+            joysticks = pyglet.input.get_joysticks()
+        except Exception:
+            joysticks = []
+        for js in joysticks or ():
+            try:
+                js.open()
+                self._joystick = js
+                break
+            except Exception:
+                continue
 
     def attach_xbox(self) -> None:
-        """EMPTY. DeepSeek fills (P2 y-axis on left stick)."""
-        pass
+        """Girlfriend's y-axis + face/shoulder buttons on a game controller
+        (Xbox et al.). Left stick -> TOTEM_Y, right stick -> orbit, buttons ->
+        answers/confirm/hint/slice (see _PAD_BUTTON). Best-effort + fully
+        guarded SAFE no-op without hardware. UNVERIFIED. DeepSeek, 7/8."""
+        try:
+            controllers = pyglet.input.get_controllers()
+        except Exception:
+            controllers = []
+        for c in controllers or ():
+            try:
+                c.open()
+                c.push_handlers(on_button_press=self._on_pad_button)
+                self._controller = c
+                break
+            except Exception:
+                continue
+
+    def _on_pad_button(self, controller, button) -> None:
+        """Controller button press -> one-shot Action (edge, like a keypress)."""
+        act = _PAD_BUTTON.get(button)
+        if act is not None:
+            self._buffer.append((act, 1.0))

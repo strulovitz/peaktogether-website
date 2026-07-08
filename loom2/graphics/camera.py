@@ -142,6 +142,21 @@ class OrbitCamera:
                            elevation_deg=self._elevation_deg,
                            zoom=self._zoom)
 
+    def set_limits(self, limits: dict) -> None:
+        """AMENDMENT G3.2-A (DeepSeek 2026-07-08): mutate limits in place on
+        scene change so GameState's camera reference never goes stale. Updates
+        target, zoom_min, zoom_max, and base_distance; re-clamps zoom. Same
+        perkey defaults as __init__ (camera.py:92-97). Called automatically by
+        main._apply_scene's hasattr guard."""
+        limits = limits or {}
+        self._target = np.array(limits.get("target", (0.0, 0.0, 0.0)),
+                                dtype=np.float64)
+        self._zoom_min = float(limits.get("zoom_min", 0.5))
+        self._zoom_max = float(limits.get("zoom_max", 2.5))
+        self._base_distance = float(limits.get("distance", 14.0))
+        # re-clamp zoom into new range
+        self._zoom = min(self._zoom_max, max(self._zoom_min, self._zoom))
+
     # ---------- internals ----------
 
     def _eye_offset(self, distance: float) -> np.ndarray:

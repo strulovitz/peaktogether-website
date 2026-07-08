@@ -9,6 +9,29 @@
 
 ### Decided by Nir (recently closed)
 
+- 🧵 **DEEPSEEK STITCHING PASS (July 8) — code items finished now that the game runs.** Nir pushed back
+  on "installments"; DeepSeek did all the pure-CODE stitches in one go:
+  - ✅ **SUPPRESS tall totem in SLICE** (Nir's locked directive): `main.py` frame now draws the totem
+    only when NOT in slice; in SLICE the Glass Blade + precise bead is the one height marker.
+  - ✅ **`OrbitCamera.set_limits`** (G3.2-A debt): added to `camera.py` (mutates target/zoom_min/max/
+    base_distance in place + re-clamps zoom); `main._apply_scene`'s hasattr guard now calls it, so
+    per-scene camera limits work without ever rebuilding the shared camera.
+  - ✅ **Joystick/Xbox filled** in `input_map.py` (`attach_joystick`/`attach_xbox` no longer empty):
+    joystick x-axis → boyfriend TOTEM_X; controller left stick → girlfriend TOTEM_Y, right stick →
+    orbit, face/shoulder/dpad buttons → answers/confirm/hint/slice/zoom (`_PAD_BUTTON`). **Fully
+    guarded** (safe no-op without a device; keyboard/mouse always work). ⚠️ **UNVERIFIED — needs a
+    physical controller to test**; axis signs are best-effort (easy to flip). Controllers may also need
+    explicit device pumping in the manual loop (Quake precedent) if unresponsive.
+  - ✅ **render_offline LIVE TRIAL done** (was blocked on surfaces.py): `data/scenes/test_saddle/
+    options.json` + `python -m audio.render_offline` regenerated the 4 quiz WAVs as REAL orchestra
+    renders (A=bowl/pit, B=hill/peak, C=saddle✅, D=ramp/flat; 21 musicians each, 4.0s, ~-2 to -4 dBFS)
+    — replacing the old sine-beep placeholders. (Content design of the 4 options = DeepSeek draft, Nir
+    to approve/adjust by taste.)
+  - ✅ **renderer GL smoke test** — implicitly passed (the full game runs live).
+  **STILL REMAINING (honest):** CONTENT — the 11 other campaign scenes (scenarios/surfaces/quiz
+  options/hints/wrong-answers, Fable drafts + Nir taste), equation PNGs (`tools/render_equations.py`
+  LaTeX→PNG), the ~44 more quiz WAVs; and SHIP — PyInstaller EXE + bundle ffmpeg (or the .npy cache).
+
 - 🎧✅ **AUDIO SAGA CLOSED — ALL 3 PROBLEMS SOLVED (July 8). Parent G was the doctor.** Verified on
   Nir's machine: screech GONE, underruns=0, fast boot.
   1. **SCREECH — SOLVED.** Root cause (Round 2 C/D/E via `diag_frames.py`): vsync was NOT honored on

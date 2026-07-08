@@ -1,0 +1,6 @@
+{
+  "A": {"surface": "bowl",   "xy": [0.0, 0.0], "radius": 2.5, "out": "data/scenes/test_saddle/option_a.wav"},
+  "B": {"surface": "hill",   "xy": [0.0, 0.0], "radius": 2.5, "out": "data/scenes/test_saddle/option_b.wav"},
+  "C": {"surface": "saddle", "xy": [0.0, 0.0], "radius": 2.5, "out": "data/scenes/test_saddle/option_c.wav"},
+  "D": {"surface": "ramp",   "xy": [0.0, 0.0], "radius": 2.5, "out": "data/scenes/test_saddle/option_d.wav"}
+}

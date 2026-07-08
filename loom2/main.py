@@ -253,10 +253,14 @@ def frame(objs: dict, dt: float) -> None:
     vp_left = camera.view_proj_terrain()
     renderer.begin_panel('left')
     terrain.draw(vp_left)
-    objs["totem_visual"].draw(vp_left, snap["totem"],
-                              terrain.height_at, phase)          # G3.4-A: fn!
     if snap["slice_plane"].visible:      # .visible is True exactly in SLICE [Q3]
+        # SLICE mode: SUPPRESS the tall totem (Nir's locked directive) -- the
+        # precise glowing bead on the glass curve at z=f(stop) is the one true
+        # height marker; the tall totem reads as a confusing "margin of error".
         blade.draw(vp_left, objs["surface_fn"])
+    else:
+        objs["totem_visual"].draw(vp_left, snap["totem"],
+                                  terrain.height_at, phase)      # G3.4-A: fn!
     renderer.end_panel()
 
     # 5. RIGHT panel -- SONIFIQUATION COORDINATES.
