@@ -153,6 +153,18 @@ matte rescale).
 
 ## 2. LOCKED DECISIONS / NIR'S ANSWERS (July 6, 2026)
 
+- **🏗️ PARENT G IN FLIGHT — MODULE 1/3 `core/surfaces.py` LANDED (July 8).** The last parent is
+  building his three files, one per answer. DeepSeek answered his 12-question batch from the live repo
+  (verified facts) + relayed Nir's two calls: window caption = **"LOOM2 — Sonifiquation"** (no emoji);
+  cannon_range `k` delegated to Parent G as a coding/visual-fit decision (Nir: fit the whole parabola/
+  battlefield on screen — NOT a taste call). Parent G delivered `core/surfaces.py` (all 9 surfaces +
+  REGISTRY + `get()`), saved verbatim (`LOOM2-PARENT-G-PART-1-SURFACES-BY-FABLE.md`) + extracted.
+  **His self-test `python -m core.surfaces` PASSES** (15 value checks + 9 surfaces × 4 shape mixes +
+  registry error msg); py_compile OK. He baked `K_CANNON = 0.03` (domain v∈[0,10], θ∈[0,90°] → peak
+  z=+3.0) as a named constant with full reasoning. Boot decisions he locked: resizable=False, strict
+  validation, boot sanity print. No `# CONTRACT-ISSUE`. ⏭️ NEXT: Parent G module 2 = `core/scene.py`,
+  then module 3 = `main.py`.
+
 - **🗣️❌ RETRACTION + IRON BEHAVIOR RULE (Nir, July 8) — NEVER PUT WORDS IN NIR'S MOUTH; NEVER
   STRIP HIM OF A CHOICE.** DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` had written "Nir does NOT
   want more decisions ... just DO IT" under a header falsely labeled **"NIR'S MESSAGE TO YOU"** —

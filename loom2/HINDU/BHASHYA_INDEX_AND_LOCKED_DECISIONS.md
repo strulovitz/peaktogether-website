@@ -9,6 +9,17 @@
 
 ### Decided by Nir (recently closed)
 
+- 🏗️ **PARENT G IN FLIGHT (July 8) — MODULE 1 of 3 DELIVERED: `core/surfaces.py`.** Saved verbatim
+  (`LOOM2-PARENT-G-PART-1-SURFACES-BY-FABLE.md`) + extracted to `loom2/core/surfaces.py`. **His
+  self-test `python -m core.surfaces` PASSES** (15 value checks + 9 surfaces × 4 shape mixes +
+  registry error msg — "The land is ready to sing"); py_compile OK. Parent G's boot decisions:
+  **resizable=False**, strict scene validation, boot sanity print, long thoughtful files. **Q11
+  resolved:** he baked `K_CANNON = 0.03` (design domain v∈[0,10], θ∈[0,90°] → peak z=+3.0) as a named
+  constant with full reasoning comment (Nir delegated k as a coding/visual-fit call, not taste).
+  Window caption locked = **"LOOM2 — Sonifiquation"** (no emoji). `get()` raises KeyError listing all
+  valid names; `ridge` uses a `+0.0*y` shape-keeper for the broadcast contract; no `# CONTRACT-ISSUE`.
+  ⏭️ NEXT from Parent G: **module 2 = `core/scene.py`** (say "continue"), then module 3 = `main.py`.
+
 - 🗣️❌ **RETRACTION (July 8) — the fake "NIR'S MESSAGE / direct ruling" about no more decisions.**
   DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` wrote "Nir does NOT want more decisions ... just DO IT"
   under a header falsely labeled **"NIR'S MESSAGE TO YOU."** Those were DeepSeek's OWN words, not Nir's.
