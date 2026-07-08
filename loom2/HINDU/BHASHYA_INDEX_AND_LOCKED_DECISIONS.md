@@ -9,6 +9,25 @@
 
 ### Decided by Nir (recently closed)
 
+- 🎧🔧 **AUDIO DEBUGGING IN PROGRESS (July 8) — Parent G is now the AUDIO DOCTOR.** The assembled
+  game's audio was broken: live "fax machine / morse code" screech + a ~17 s blank-window freeze at
+  startup + a voicing gap vs the philharmonia demo. DeepSeek ran controlled diagnostics (harnesses in
+  `loom2/diag_audio.py` / `diag_live.py` / `diag_game.py`): samples decode fine (fallback 0), offline
+  `_mix` is clean & non-clipping (peak 0.74), audio ALONE = 0 underruns — but audio + graphics =
+  underruns climbing ~4-6/s → **the render loop starves the PortAudio callback (GIL/CPU contention)**;
+  vsync ON/OFF made no difference (ruled out). **THREE problems:** (1) SCREECH = callback starvation;
+  (2) VOICING gap vs `listening_totem_philharmonia.py`; (3) 17 s startup freeze.
+  - **Problem 1 — Step 0 FAILED:** `BLOCK_SIZE 1024→4096` + `OutputStream(latency='high')` only slowed
+    underruns to ~2-3/s; screech unchanged. → needs Fable's ring-buffer / off-audio-thread synthesis
+    redesign (a 4× buffer barely helped ⇒ long GIL-hold stalls, not deadline-by-a-hair). Step-0 changes
+    remain in place pending Fable's decision.
+  - **✅ Problem 3 — FIXED (DeepSeek, Fable-prescribed):** `audio/sampler.py` now caches each decoded+
+    resampled+normalized buffer to `data/samples_cache/<id>.npy` (reused if newer than the mp3 AND the
+    manifest). **First boot ~16.6 s (builds cache), every boot after ~0.12 s** (verified). `main.py`
+    reordered to build `SampleLibrary()` BEFORE the window (Fable-pre-approved delta to frozen G4.5 boot
+    order) so the player never sees a blank window. Cache dir + `diag_offline.wav` gitignored (~26 MB,
+    regenerated per machine). ⏭️ Awaiting Fable's Problem-1 redesign + then Problem 2 (beauty).
+
 - 🏁🎉 **PARENT G COMPLETE (July 8) — ALL THREE MODULES DELIVERED. THE GAME IS ASSEMBLED.** Module 3
   = `main.py` (the heartbeat) saved verbatim (`LOOM2-PARENT-G-PART-3-MAIN-BY-FABLE.md`) + extracted to
   `loom2/main.py`. **VERIFIED:** both self-tests still PASS (surfaces + scene); `main.py` py_compiles;

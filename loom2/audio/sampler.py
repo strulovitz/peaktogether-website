@@ -107,7 +107,24 @@ class SampleLibrary:
         self._is_fallback = set()
         self.fallback_count = 0
 
+        # DECODE CACHE (fix for the ~17 s startup freeze; Fable Rx, 2026-07-08):
+        # decoding 89 mp3s via ffmpeg costs ~17 s EVERY boot. We cache each
+        # FINAL (decoded+resampled+normalized) buffer as a .npy; a later boot
+        # just np.load()s it (near-instant). A cache entry is reused only if it
+        # is newer than BOTH its mp3 AND the manifest, so editing either
+        # rebuilds it. First boot stays slow once; every boot after is fast.
+        cache_dir = samples_dir.rstrip("/\\") + "_cache"     # data/samples_cache
+        try:
+            os.makedirs(cache_dir, exist_ok=True)
+        except OSError:
+            cache_dir = None
+        try:
+            manifest_mtime = os.path.getmtime(manifest_path)
+        except OSError:
+            manifest_mtime = 0.0
+
         absent = []
+        n_cached = n_decoded = 0
         for _instrument, meta in manifest.items():
             for entry in meta.get("notes", ()):
                 out = entry.get("output")
@@ -120,12 +137,34 @@ class SampleLibrary:
                 if not os.path.isfile(path):
                     absent.append(sample_id)      # parachute serves it later
                     continue
-                buf = _decode_mono(path)
                 shift = int(entry.get("needs_resample", 0))
+                cache_path = (os.path.join(cache_dir, sample_id + ".npy")
+                              if cache_dir else None)
+                # fast path: reuse a fresh cache entry
+                if (cache_path and os.path.isfile(cache_path)
+                        and os.path.getmtime(cache_path) >= os.path.getmtime(path)
+                        and os.path.getmtime(cache_path) >= manifest_mtime):
+                    try:
+                        self._buffers[sample_id] = np.load(cache_path)
+                        n_cached += 1
+                        continue
+                    except Exception:
+                        pass                      # corrupt cache -> rebuild
+                buf = _decode_mono(path)
                 if shift:
                     buf = _resample_semitones(buf, shift)
-                self._buffers[sample_id] = _finalize(buf, 0.9)
+                buf = _finalize(buf, 0.9)
+                self._buffers[sample_id] = buf
+                n_decoded += 1
+                if cache_path:
+                    try:
+                        np.save(cache_path, buf)
+                    except Exception as exc:
+                        print(f"[sampler] WARNING: could not cache "
+                              f"{sample_id}: {exc}")
 
+        print(f"[sampler] {n_cached} samples from cache, {n_decoded} decoded"
+              + (f"  (cache: {cache_dir})" if cache_dir else "  (cache disabled)"))
         if absent:
             print(f"[sampler] WARNING: {len(absent)} manifest entries have no "
                   f"file on disk; the parachute will serve them: {absent}")

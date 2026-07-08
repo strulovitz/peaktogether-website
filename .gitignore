@@ -11,3 +11,8 @@ release/
 # LOOM generated assets (never commit these)
 loom/fixtures/audio_beeps/
 loom/forge/forged/
+
+# LOOM2 sample decode cache (regenerated on first boot from data/samples/*.mp3)
+loom2/data/samples_cache/
+# LOOM2 diagnostic render output
+loom2/diag_offline.wav

@@ -124,6 +124,17 @@ def build() -> dict:
     spec0 = scene.load_scene(first_id)
     surface_fn = surfaces.get(spec0.surface_name)
 
+    # 0.5 Sample library BEFORE the window (freeze fix, DeepSeek/Fable 2026-07-08):
+    #     decoding the 89 mp3s costs ~17 s on the FIRST ever boot; building the
+    #     library before the window means the player never stares at a blank
+    #     window (the window now appears already-ready). Cached boots are ~0.1 s
+    #     (sampler .npy cache). This lifts the frozen G4.5 boot step 3 ahead of
+    #     steps 1-2; the library needs neither window nor GL, so it is safe.
+    #     [pre-approved by Fable's Problem-3 prescription]
+    print("[LOOM2] loading the orchestra ... "
+          "(first run decodes samples; later runs are instant)")
+    library = SampleLibrary()
+
     # 1. Bare window -- no GL context here; Renderer owns that [Q7].
     window = pyglet.window.Window(
         width=config.WINDOW_W, height=config.WINDOW_H,
@@ -132,8 +143,7 @@ def build() -> dict:
     # 2. Renderer creates the moderngl context + panel FBOs.
     renderer = Renderer(window)
 
-    # 3.-4. The orchestra: samples, then the live engine.
-    library = SampleLibrary()
+    # 3.-4. The orchestra library is built above; start the live engine.
     engine = AudioEngine(library)
     engine.start()
     try:
