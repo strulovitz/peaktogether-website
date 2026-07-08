@@ -101,6 +101,49 @@ Fable (Parent E) may ask DeepSeek as many questions, in as many rounds, as he ne
 
 ---
 
+## TILT-CUT WORKED APPROACH — DeepSeek's TECHNICAL BLESSINGS (July 8)
+Parent E returned with a worked approach for the REAL tilted cut. Per Nir's routing
+(technical→DeepSeek, taste→Nir), DeepSeek blessed the engineering:
+
+1. **Marching-squares extraction of the zero level set** g(x,y)=n·((x,y,f(x,y))−(cx,cy,z0))=0
+   — BLESSED. Robust for curved paths / multiple components / closed loops; avoids
+   root-chasing divergence near τ→45°. Must reproduce the straight transect exactly at τ=0
+   (regression guard).
+2. **Anchor z0 = f(cx,cy)** — BLESSED (correct choice). Makes g(cx,cy)=0 always, so the cut
+   ALWAYS passes through the ground point under the blade center; every intersection point lies
+   ON the surface at true height f(x,y). (z0=0 or pane-mid rejected.)
+3. **Shared pure-math module `core/slicing.py`** (numpy+math only) imported by BOTH game_state
+   and slice_mode — **BLESSED + recorded as a CONTRACT AMENDMENT** (Nir pre-authorized tilt
+   contract changes). Dissolves the game_state↔slice_mode duplication (Gita forbids graphics
+   imports in core; game_state.py L22-29 duplicated the transect for that reason). Parent E
+   writes `core/slicing.py`; DeepSeek refactors Parent 2's `game_state._build_slice_path` to call
+   it (add `core.slicing` to game_state allowed imports) + amends the scripture. Parent E states
+   the public function signatures as canon.
+4. **Totem walks the component nearest the anchor** (cx,cy) — BLESSED as default (with
+   z0=f(cx,cy) it always passes exactly through the anchor); other components drawn
+   (dashed-capable) but not walked. Multi-loop walking = a later taste change, parked.
+5. **Occlusion: two-pass solid/dashed + ghost bead** — BLESSED (his shader budget).
+6. **Constant pane height** (scene z-range + margin) — fine.
+
+Parent E's LOCKED taste choices (from Nir's menu, per his message): A1 cool glass-cyan · B1
+unlit pure tint · C1 single warm HDR gold curve · D2 ribbon strip / no under-curve fill (no
+integrals) · E "bead on the wire" (bored sphere threaded on the ribbon, ~3s emissive breath, no
+diamond/drop-line) · F4 yes (Fresnel rim, faint bloom only; F1/F2/F3 no) · H2 constant pane
+height.
+
+### 🎻 THE ONE OPEN ITEM = NIR'S CALL — what players HEAR on a slanted cut
+Because z0=f(cx,cy), a tilted cut just carves a CURVED trail across the REAL hills (every point
+is real ground at its true height f(x,y)). Options couriered to Nir:
+- **(i) No new law:** totem walks the curved ground path; at each stop it hears its normal
+  circular neighborhood (height→pitch, angle→timbre, radius→rhythm) exactly as everywhere else —
+  still "a procession of neighborhoods," fully consistent with height-honesty; zero new audio risk.
+- **(ii) Plane-aware:** invent a new sonification law tied to the tilted plane — more novel but
+  new rules, cacophony risk, and it would play something OTHER than true ground height (in tension
+  with the "exact height is sacred" ruling).
+**STATUS: awaiting Nir's decision.**
+
+---
+
 ## DEEPSEEK'S VERIFIED-FACT ANSWERS (Q1, Q2, Q3, Q5, Q6)
 See the courier reply sent to Parent E. Source of truth quoted verbatim from
 `core/game_state.py` (`_build_slice_path` lines 371–398, constants lines 47–57,
