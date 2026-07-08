@@ -170,6 +170,15 @@ matte rescale).
   option b); unknown keys rejected at all 3 levels except G2.5-A per-option extras (tolerated, not
   stored); `SceneError(ValueError)`; UTF-8; 0-byte + 2M-vertex freeze guards; exactly-4-options/
   1-correct. No `# CONTRACT-ISSUE`. ⏭️ NEXT & FINAL: Parent G module 3 = `main.py` (the heartbeat).
+  **🏁 MODULE 3/3 `main.py` LANDED — PARENT G COMPLETE, THE GAME IS ASSEMBLED (July 8):** saved
+  verbatim (`LOOM2-PARENT-G-PART-3-MAIN-BY-FABLE.md`) + extracted to `loom2/main.py`. Both self-tests
+  still PASS; `main.py` py_compiles; **`python -c "import main"` resolves EVERY module** (full wiring
+  import-clean). THIN main = build()/frame()/main() with the frozen boot + frame orders and all amended
+  calls (G3.2-A hasattr set_limits, G3.3-A release, G3.4-A height_fn, G3.6-A set_domain; manual loop
+  dispatch_events/frame/flip vsync-paced + MAX_DT clamp; try/finally engine.stop-first-then-close). ONE
+  benign `# CONTRACT-ISSUE` (flagged): `import time` for perf_counter (Q7 loop needs it). ⏭️ REMAINING =
+  DeepSeek stitching (OrbitCamera.set_limits; joystick/Xbox; **live `python main.py` GL run**;
+  render_offline live trial; PyInstaller+ffmpeg) + content (12 scenes JSON/hints/equation PNGs/quiz WAVs).
 
 - **🗣️❌ RETRACTION + IRON BEHAVIOR RULE (Nir, July 8) — NEVER PUT WORDS IN NIR'S MOUTH; NEVER
   STRIP HIM OF A CHOICE.** DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` had written "Nir does NOT

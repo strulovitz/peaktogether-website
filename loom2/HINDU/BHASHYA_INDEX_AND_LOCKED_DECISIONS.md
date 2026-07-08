@@ -9,6 +9,22 @@
 
 ### Decided by Nir (recently closed)
 
+- 🏁🎉 **PARENT G COMPLETE (July 8) — ALL THREE MODULES DELIVERED. THE GAME IS ASSEMBLED.** Module 3
+  = `main.py` (the heartbeat) saved verbatim (`LOOM2-PARENT-G-PART-3-MAIN-BY-FABLE.md`) + extracted to
+  `loom2/main.py`. **VERIFIED:** both self-tests still PASS (surfaces + scene); `main.py` py_compiles;
+  **import smoke `python -c "import main"` resolves EVERY module** (pyglet, renderer, engine, sampler,
+  game_state, input_map, all graphics) — the full wiring is import-clean. All 12 flagged import
+  assumptions confirmed against the live repo (SampleLibrary@audio.sampler, GlassBlade@graphics.
+  slice_mode, etc. — all correct). THIN main: `build()` (frozen boot order, amended calls; engine.stop
+  on failed boot), `frame()` (frozen frame order: poll→update→snapshot→left(terrain/totem/blade)→right
+  (helix)→composite→hud LAST), `main()` (manual loop dispatch_events/frame/flip, vsync-paced, MAX_DT
+  clamp, try/finally engine.stop-then-close). Honors every amendment (G3.2-A hasattr set_limits guard,
+  G3.3-A release, G3.4-A height_fn, G3.6-A set_domain, Q1/Q2b/Q3/Q8/Q9/Q10). **ONE `# CONTRACT-ISSUE`
+  (benign, flagged not hidden): `import time`** for perf_counter (the header allowed only pyglet/config/
+  project, but the sanctioned Q7 manual loop needs it) — accepted. ⏭️ REMAINING = DeepSeek stitching
+  (add OrbitCamera.set_limits G3.2-A debt; fill joystick/Xbox in input_map; live GL run of `python
+  main.py`; render_offline live trial; PyInstaller+ffmpeg) + content (12 scenes JSON/hints/PNGs/WAVs).
+
 - 🏗️ **PARENT G IN FLIGHT (July 8) — MODULE 2 of 3 DELIVERED: `core/scene.py`.** Saved verbatim
   (`LOOM2-PARENT-G-PART-2-SCENE-BY-FABLE.md`) + extracted to `loom2/core/scene.py`. **His self-test
   `python -m core.scene` PASSES** (loads real campaign.json + test_saddle, all validators green —
