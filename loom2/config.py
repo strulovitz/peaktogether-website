@@ -46,12 +46,32 @@ REGISTER_MAP = {
 # lowest/highest owned note (SUTRAS 1.3). Never resample across registers.
 
 # ---------- screen (SUTRAS Part 2: equal respect 50/50) ----------
+# LAYOUT OVERHAUL (Nir, 2026-07-08): TWO regions only -- NO dedicated text strip.
+# Graphics 80% (the two 50/50 panels) + quiz bar 20%. Scenario text, the equation,
+# and the panel titles are PAINTED ON TOP of the graphics by the HUD (see HUD block).
 WINDOW_W, WINDOW_H = 1280, 720
-TOP_STRIP_FRAC   = 0.08        # scenario text + equation
-PANELS_FRAC      = 0.72        # upper area: terrain left 50%, helix right 50%
-QUIZ_BAR_FRAC    = 0.20
+TOP_STRIP_FRAC   = 0.0         # RETIRED (was 0.08): no strip; text is painted over graphics
+PANELS_FRAC      = 0.80        # upper area = 80% (576 px): terrain left 50%, helix right 50%
+QUIZ_BAR_FRAC    = 0.20        # bottom quiz bar (144 px)
 PANEL_TITLE_LEFT  = "CARTESIAN COORDINATES"
 PANEL_TITLE_RIGHT = "SONIFIQUATION COORDINATES"   # Nir's word. It stays.
+
+# ---------- HUD (Nir's overhaul 2026-07-08; drawn Homeworld-style moderngl overlay, NOT pyglet) ----------
+# Text is painted ON TOP of the graphics (no background box). Every glyph gets a thin
+# BLACK stroke/outline hugging its shape so it stays readable over any landscape.
+# Emojis are allowed inline (baked from the Windows "Segoe UI Emoji" font into the atlas).
+HUD_MAX_TEXT_LINES = 3         # scenario text: up to 3 lines across the top of the graphics
+HUD_TEXT_PX        = 20        # glyph size; ~24 px line pitch (2 px above + 2 px below)
+HUD_LINE_PITCH_PX  = 24
+HUD_TITLE_PX       = 14        # panel titles: smaller, at the bottom of each panel
+# colors RGB 0-255 (Nir's palette; bright + outlined; tweak freely):
+HUD_OUTLINE_RGB  = (0, 0, 0)          # the stroke around every glyph
+HUD_TEXT_RGB     = (255, 255, 255)    # scenario lines: white
+HUD_EQUATION_RGB = (255, 218, 40)     # equation: yellow (centered, bottom of graphics, over the seam)
+HUD_TITLE_RGB    = (255, 255, 255)    # panel titles: white
+HUD_WRONG_RGB    = (255, 45, 150)     # wrong-answer text: bright pink (never red)
+HUD_HINT_RGB     = (60, 240, 90)      # hint text: bright green
+HUD_WIN_RGB      = (255, 218, 40)     # "YOU WIN!!!" big, centered, blinking
 
 # ---------- camera ----------
 CAM_ELEV_MIN_DEG = 5.0

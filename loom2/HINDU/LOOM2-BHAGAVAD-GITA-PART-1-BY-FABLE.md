@@ -116,6 +116,15 @@ PANELS_FRAC      = 0.72        # upper area: terrain left 50%, helix right 50%
 QUIZ_BAR_FRAC    = 0.20
 PANEL_TITLE_LEFT  = "CARTESIAN COORDINATES"
 PANEL_TITLE_RIGHT = "SONIFIQUATION COORDINATES"   # Nir's word. It stays.
+# <<<<<<<<<< AMENDMENT GITA1-SCREEN-A — added 2026-07-08 (Nir direct) >>>>>>>>>>
+# The two lines above (TOP_STRIP_FRAC=0.08, PANELS_FRAC=0.72) are SUPERSEDED in the live
+# config.py: TOP_STRIP_FRAC -> 0.0 (strip RETIRED) and PANELS_FRAC -> 0.80 (graphics 80% =
+# 576 px; quiz bar 20% = 144 px). Scenario text, equation, and panel titles are painted ON
+# TOP of the graphics by the HUD. A HUD block of constants was ADDED to config.py
+# (HUD_MAX_TEXT_LINES, HUD_TEXT_PX, HUD_LINE_PITCH_PX, HUD_TITLE_PX, HUD_*_RGB). See
+# AMENDMENT SUTRAS-2-A and Gita AMENDMENT G3.7-A (HUD = Homeworld moderngl overlay, NOT
+# pyglet). Original values left intact above per amendment policy; the live config is canon.
+# <<<<<<<<<< END AMENDMENT GITA1-SCREEN-A >>>>>>>>>>
 
 # ---------- camera ----------
 CAM_ELEV_MIN_DEG = 5.0

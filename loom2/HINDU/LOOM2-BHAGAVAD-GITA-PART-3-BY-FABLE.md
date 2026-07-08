@@ -377,4 +377,65 @@ regression re-run PASSED — 30k-sweep green 2026-07-08), game_state wired, SCRI
 AMENDED.
 <<<<<<<<<< END AMENDMENT G3.6-A >>>>>>>>>>
 
+<<<<<<<<<< AMENDMENT G3.7-A — added 2026-07-08 >>>>>>>>>>
+WHAT: The HUD (graphics/hud.py) is redesigned per Nir's direct rulings.
+
+1. RENDERING METHOD — Homeworld's proven moderngl 2D overlay, NOT pyglet.
+   The original G3.7 said "2D overlay, pyglet text/sprites; Allowed imports: pyglet, os,
+   config, core.types." Nir's firm ruling: do it the way we KNOW works 100% (Quake &
+   Homeworld never used pyglet text — they drew their own moderngl 2D layer,
+   homeworld/overlay2d.py: a Rect2D/Line2D/Label2D/Image2D vocabulary rendering from a
+   glyph texture atlas through one moderngl shader). LOOM2's HUD is built the SAME way.
+   - Allowed imports now: moderngl, numpy, os, config, core.types (+ Pillow at
+     build/atlas time to bake the glyph+emoji atlas). NOT pyglet.
+   - The HUD uses the shared moderngl context. It may take the renderer (or call
+     moderngl.get_context()) to reach it: additive signature Hud(window, renderer) is
+     blessed (renderer exists at boot step 2, Hud at step 6). hud.draw stays frame step 7,
+     after renderer.composite(), and must set its own 2D state (disable DEPTH_TEST/
+     CULL_FACE, enable BLEND, SRC_ALPHA/ONE_MINUS_SRC_ALPHA) exactly as overlay2d does.
+   - This ALSO enables the two things pyglet could not: per-glyph black outlines and
+     inline color emojis.
+
+2. LAYOUT (see AMENDMENT SUTRAS-2-A + config): NO top strip. Graphics = 80% (panels
+   y[144,720)), quiz bar = 20% (y[0,144)). All HUD text is painted ON TOP of the graphics.
+
+3. TEXT STYLE: every glyph is drawn with a thin BLACK stroke/outline hugging its shape
+   (bake the outline into the atlas). Scenario text = up to 3 lines x 24 px (20 px glyph),
+   WHITE, across the top of the graphics, no background box. Emojis allowed inline (baked
+   from Windows "Segoe UI Emoji"). Font = any standard installed system font (Nir supplies
+   none). Constants in config: HUD_MAX_TEXT_LINES, HUD_TEXT_PX, HUD_LINE_PITCH_PX,
+   HUD_TITLE_PX, HUD_*_RGB.
+
+4. EQUATION: still SceneSpec.equation_png (a proper math image, LaTeX->PNG by DeepSeek),
+   but rendered YELLOW with a black outline, drawn horizontally CENTERED across the screen
+   (straddling the panel seam at x≈640), at the BOTTOM of the graphics area (just above the
+   quiz bar). hud scales it to fit; it is an Image2D, not typed text.
+
+5. PANEL TITLES: drawn by hud at the BOTTOM of each panel (same level as the equation),
+   SMALLER (HUD_TITLE_PX). config.PANEL_TITLE_LEFT left-aligned on the left panel;
+   config.PANEL_TITLE_RIGHT right-aligned on the right panel.
+
+6. QUIZ BAR: buttons A B C D (playing option shows a 🔊 speaker emoji), OK, HINT beside OK.
+   Wrong-answer text = BRIGHT PINK (HUD_WRONG_RGB) with outline (never red); hint text =
+   BRIGHT GREEN (HUD_HINT_RGB) with outline; scenario/titles white; equation/win yellow.
+
+7. WIN / campaign_complete: when quiz_ui_state["campaign_complete"] (or success on the
+   final scene), draw a big "YOU WIN!!!" in the CENTER of the screen, BLINKING
+   (HUD_WIN_RGB, yellow, outlined).
+
+8. hit_test / set_scene / draw signatures unchanged in spirit (hud only DRAWS state from
+   game_state; it computes no game logic and touches no audio). hit_test still returns
+   'A'|'B'|'C'|'D'|'OK'|'HINT'|''. Hud must be constructible AND drawable scene-less
+   (built at boot step 6 before the first set_scene; set_scene fires on the first
+   scene_changed snapshot before the first draw).
+
+WHY: Nir's rulings — (a) use the 100%-proven rendering path, no guessing; (b) the specific
+look he wants (outlined text, colors, centered equation, bottom titles, blinking win) which
+the moderngl-atlas path makes possible.
+WHO ORDERED: Nir (direct, during Parent F's Q&A courier). WHICH PARENT: none (Nir direct);
+Parent F implements against this amended contract.
+STATUS: config.py edited + verified; SUTRAS-2-A + this block written; corrected Parent F
+answer batch couriered. hud.py NOT yet written (Parent F's job).
+<<<<<<<<<< END AMENDMENT G3.7-A >>>>>>>>>>
+
 End of Part 3. Say "continue" for Part 4 — the core & main contracts (surfaces.py, scene.py, game_state.py, input_map.py, main.py) — and then the Gita is complete and ready for DeepSeek to bind. 📜🧵

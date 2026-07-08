@@ -26,6 +26,32 @@ PART TWO — The Equal-Respect Screen & the word "Sonifiquation"
     RIGHT half — SONIFIQUATION COORDINATES: the helix panel. The panel carries this title written in the game. Sonifiquation (portmanteau of sonification + equation) is Nir's coined name for the system, and it appears on-screen and in the credits as such.
 
 2.2 The Equation on Display. Every scene displays its mathematical expression (e.g., z=x2−y2) beautifully rendered (LaTeX → PNG at design time, reusing Nir's MiKTeX pipeline), placed in the top strip beside the scenario text. The players must see the "frightening" formula while hearing and seeing that it is beautiful. That is the whole point.
+
+<<<<<<<<<< AMENDMENT SUTRAS-2-A — added 2026-07-08 >>>>>>>>>>
+WHAT: The screen is redesigned. There is NO dedicated top text strip anymore.
+- The screen is now TWO regions only: GRAPHICS = 80% (576 px, the two 50/50 panels,
+  unchanged left/right split) and the QUIZ BAR = 20% (144 px, bottom). config change:
+  PANELS_FRAC 0.72 -> 0.80, TOP_STRIP_FRAC 0.08 -> 0.0 (retired/unused).
+- The scenario text (2.1's role) is now PAINTED ON TOP of the graphics, across the top
+  ~72 px (up to 3 lines x 24 px), with NO background box. Every glyph is WHITE with a
+  thin BLACK stroke/outline hugging its exact shape, so it reads over any landscape.
+- The equation (2.2) is NO LONGER "in the top strip." It is painted ON TOP of the
+  graphics, horizontally CENTERED across the whole screen (straddling the left/right
+  panel seam at x≈640 — half over the map, half over the helix), at the BOTTOM of the
+  graphics area (just above the 144 px quiz bar), in YELLOW with a black stroke/outline.
+  It stays a proper math image (LaTeX->PNG, so superscripts/fractions look right),
+  rendered by DeepSeek in yellow-with-outline to match this look.
+- Panel titles (2.1): CARTESIAN COORDINATES and SONIFIQUATION COORDINATES sit at the
+  BOTTOM of their panels (same level as the equation), in SMALLER letters, left-aligned
+  and right-aligned respectively.
+- Emojis are allowed inline in the text (see Gita G3.7-A: HUD renders its own atlas, so
+  color emojis from Windows "Segoe UI Emoji" can be baked in).
+WHY: Nir's direct design ruling — the strip wasted screen; text over the graphics is
+tighter and prettier, and the outline keeps it readable everywhere.
+WHO ORDERED: Nir (direct, during Parent F's Q&A). WHICH PARENT: none (Nir direct).
+STATUS: config.py edited + verified (graphics 640x576, fills y[144,720); py_compile OK).
+See Gita G3.7-A for the HUD rendering method (Homeworld moderngl overlay, NOT pyglet).
+<<<<<<<<<< END AMENDMENT SUTRAS-2-A >>>>>>>>>>
 PART THREE — Camera, Rotation & Surround Sound
 
 3.1 Controls:
