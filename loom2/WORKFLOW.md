@@ -319,8 +319,8 @@ camera/renderer/terrain/totem + helix_panel are now real code.
 | Parent C | Graphics foundation | `graphics/camera.py`, `graphics/renderer.py` (+ 8 shader placeholders) | ✅ COMPLETE |
 | Parent D | Land & totem | `graphics/terrain.py`, `graphics/totem.py` (+ terrain.vert/.frag, totem.vert/.frag) | ✅ COMPLETE |
 | Parent E | The Glass Blade | `core/slicing.py`, `graphics/slice_mode.py`, `glass.vert/.frag` | ✅ COMPLETE |
-| **Parent F** | **Hands & words** | **`graphics/hud.py`, `core/input_map.py`** | **⏭️ NEXT** |
-| Parent G | Core & main | `core/surfaces.py`, `core/scene.py`, `main.py` | ⏳ |
+| Parent F | Hands & words | `graphics/hud.py`, `core/input_map.py` | ✅ COMPLETE |
+| **Parent G** | **Core & main** | **`core/surfaces.py`, `core/scene.py`, `main.py`** | **⏭️ NEXT (LAST parent!)** |
 | DeepSeek | Stitch + content | Joystick/Xbox, scene JSON, quiz WAVs, equation PNGs, PyInstaller | ⏳ |
 
 **What every COMPLETE parent delivered:**

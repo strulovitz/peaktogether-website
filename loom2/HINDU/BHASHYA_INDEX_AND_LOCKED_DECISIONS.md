@@ -9,6 +9,25 @@
 
 ### Decided by Nir (recently closed)
 
+- ✅ **PARENT F COMPLETE (July 8) — `graphics/hud.py` + `core/input_map.py` DELIVERED.** 🎧🎮
+  Both saved verbatim (`LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md`) + extracted + py_compile OK.
+  **hud.py** = Homeworld-style moderngl 2D overlay (ONE shader, ONE dynamic VBO, painter's order,
+  window-pixel bottom-left) per G3.7-A; NO pyglet. Built-in `_GlyphAtlas` (1024² RGBA shelf packer;
+  glyphs baked 64px WHITE + baked black stroke, tinted at draw; color emoji cells from `seguiemj.ttf`
+  drawn untinted; LAZY baking so any emoji in scene JSON works). Draws scenario text (white+outline,
+  top of graphics), equation image (yellow, centered on the seam, bottom of graphics), panel titles
+  (14px bottom L/R), quiz bar (A-D/OK/💡HINT, 🔊 on playing button, selected=bright fill+white frame,
+  OK dims when nothing selected, encouragement line, feedback = green hint above pink explain), SLICE
+  helper line, celebration (success_text warm yellow over graphics + "✅ Correct!"), blinking
+  light-blue "YOU WIN!!!" (`WIN_BLINK_FRAMES=30`, frame-counter — no `time` import). `Hud(window,
+  renderer)` (renderer.ctx, fallback get_context); scene-less safe; sets own 2D GL state in `_flush()`.
+  **input_map.py** = keyboard+mouse fully (pyglet WINDOW EVENTS only — ban is on HUD rendering); frozen
+  bindings; held axes re-emitted each poll; ORBIT ±1 (RIGHT/UP=+1); Enter→CONFIRM; Esc→QUIT via
+  handle_action (on_key_press returns True → blocks pyglet auto-close); mouse bottom-left, press<quiz_h
+  →hit_test (click never starts drag) else TOTEM_Y virtual-joystick drag (`DRAG_FULL_PX=160`);
+  attach_joystick/attach_xbox EMPTY (DeepSeek fills). **⏭️ NEXT = the LAST parent, Parent G**
+  (`core/surfaces.py` + `core/scene.py` + `main.py`), then DeepSeek stitch + content.
+
 - 🎨 **LAYOUT + HUD OVERHAUL (July 8, later) — 11 LOCKED DECISIONS.** Full list in WORKFLOW §3
   RESTART SNAPSHOT top block. Headlines: (1) screen = **80% graphics (576px) / 20% quiz (144px)**,
   **NO text strip**; (2) scenario text **painted over the graphics**, 3 lines ×24px, **white +
