@@ -71,7 +71,7 @@ HUD_EQUATION_RGB = (255, 218, 40)     # equation: yellow (centered, bottom of gr
 HUD_TITLE_RGB    = (255, 255, 255)    # panel titles: white
 HUD_WRONG_RGB    = (255, 45, 150)     # wrong-answer text: bright pink (never red)
 HUD_HINT_RGB     = (60, 240, 90)      # hint text: bright green
-HUD_WIN_RGB      = (255, 218, 40)     # "YOU WIN!!!" big, centered, blinking
+HUD_WIN_RGB      = (120, 205, 255)    # "YOU WIN!!!" big, centered, blinking -- light blue
 
 # ---------- camera ----------
 CAM_ELEV_MIN_DEG = 5.0

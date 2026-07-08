@@ -104,8 +104,8 @@ equation PNG for your testing on request.
   OK. **Wrong-answer text = BRIGHT PINK** (`HUD_WRONG_RGB`) + outline (never red). **Hint
   text = BRIGHT GREEN** (`HUD_HINT_RGB`) + outline.
 - **Win screen:** when `campaign_complete` (or success on the final scene), draw a big
-  **"YOU WIN!!!"** in the **CENTER** of the screen, **BLINKING**, yellow + outline
-  (`HUD_WIN_RGB`).
+  **"YOU WIN!!!"** in the **CENTER** of the screen, **BLINKING**, **light blue** + outline
+  (`HUD_WIN_RGB`) — green/pink/yellow are already used elsewhere.
 - All the RGB values live in `config.py` (Nir's palette; tweak freely).
 
 ## input_map.py — answers

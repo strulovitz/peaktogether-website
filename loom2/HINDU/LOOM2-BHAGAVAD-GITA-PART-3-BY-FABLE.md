@@ -417,11 +417,11 @@ WHAT: The HUD (graphics/hud.py) is redesigned per Nir's direct rulings.
 
 6. QUIZ BAR: buttons A B C D (playing option shows a 🔊 speaker emoji), OK, HINT beside OK.
    Wrong-answer text = BRIGHT PINK (HUD_WRONG_RGB) with outline (never red); hint text =
-   BRIGHT GREEN (HUD_HINT_RGB) with outline; scenario/titles white; equation/win yellow.
+   BRIGHT GREEN (HUD_HINT_RGB) with outline; scenario/titles white; equation yellow; win light blue.
 
 7. WIN / campaign_complete: when quiz_ui_state["campaign_complete"] (or success on the
    final scene), draw a big "YOU WIN!!!" in the CENTER of the screen, BLINKING
-   (HUD_WIN_RGB, yellow, outlined).
+   (HUD_WIN_RGB, LIGHT BLUE, outlined) -- green/pink/yellow are already used elsewhere.
 
 8. hit_test / set_scene / draw signatures unchanged in spirit (hud only DRAWS state from
    game_state; it computes no game logic and touches no audio). hit_test still returns
