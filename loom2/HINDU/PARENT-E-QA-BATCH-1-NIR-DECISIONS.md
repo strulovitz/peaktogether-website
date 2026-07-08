@@ -77,6 +77,25 @@ Nir: present the full menu of every option with tradeoffs (glass tint, pane ligh
 color, bead style, etc.). Do not show a single option and ask yes/no — Nir decides from the
 complete list.
 
+### TILT — NIR'S RULING (locked): TILT IS REAL, NOT COSMETIC.
+Tilting the blade **actually changes the cut** — the blade is a true plane, and tilting it
+re-slices the terrain. The drawn curve = the **true 3D intersection** of the tilted plane
+with the surface z=f(x,y) (Parent E's "G1 — truth in space"). "G2 — painted on the screen /
+curve drifts off the real land when tilted" is **REJECTED**, because exact height must stay
+honest (this is the whole reason we suppress the tall totem in slice mode).
+
+Consequence (locked): `tilt_deg` is **NO LONGER "visual only."** Both
+`GlassBlade.intersection_path` AND `game_state._build_slice_path` (Parent 2's code, comment
+"visual only") must incorporate tilt so the walked path follows the REAL intersection.
+DeepSeek is authorized to amend the frozen contracts + Parent 2's game_state code.
+The intersection of a tilted plane with z=f(x,y) is generally a CURVED path across the
+surface (not a straight line) — Parent E works out the geometry/implementation and returns
+with his approach + any consequence questions (especially how the totem/audio should treat a
+tilted cut — that is Nir's call, not DeepSeek's).
+
+CORRECTION LOGGED: DeepSeek earlier wrongly told Nir "we agreed tilt is visual only." That was
+NEVER a Nir decision — it came from Parent 2's code comment, not from Nir. Retracted.
+
 ### Standing note from Nir
 Fable (Parent E) may ask DeepSeek as many questions, in as many rounds, as he needs.
 
