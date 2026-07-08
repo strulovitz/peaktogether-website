@@ -239,11 +239,62 @@
 - 🎨 Nir-owned assets: the 13 instrument-icon cliparts (~128×128, transparent, "four emoji big") for data/icons/; a UI font for data/fonts/.
 
 
-## CURRENT FRONTIER (July 7, 2026)
+## CURRENT FRONTIER (July 9, 2026 — end of the mega-session)
 
-### 🔖 RESTART SNAPSHOT (July 8, 2026, end of session) — quick orientation
+### 🔖 RESTART SNAPSHOT — END OF JULY 8-9 SESSION (2:XX AM) — read this first on restart
 
-**🗓️ FULL SESSION SUMMARY — Parents D & E delivered, Parent F ready to launch.**
+**🏁 THE WHOLE GAME IS ASSEMBLED, RUNNING, AND SINGS. THREE AUDIO PROBLEMS SOLVED.**
+
+**MEGA-SESSION SUMMARY (evening of July 8 into July 9 AM):**
+- Parents A–G ALL COMPLETE. Parent G (the last parent) delivered all three modules
+  (`core/surfaces.py` / `core/scene.py` / `main.py`) — saved verbatim, extracted, self-tests PASS,
+  import-clean, pushed. The game ran.
+- **On first run the audio was broken: "fax machine / morse code" screech + 17 s blank-window freeze
+  + "not as pleasant as the philharmonia demo."** Root cause of the screech (dignosed by Parent G as
+  the audio doctor, Round 2 experiments via `diag_*.py` harnesses): **vsync NOT honored → the manual
+  loop free-ran at ~1000 fps, holding the GIL almost continuously → PortAudio callback starved →
+  underruns → screech.** Fix = pace the loop (`main.py` `vsync=False` + `TARGET_FPS=60` + always
+  `time.sleep` ≥ `MIN_SLEEP=0.003`). **ALL THREE PROBLEMS SOLVED:**
+  1. Screech = paced loop (underruns 0, CPU 3.8%→1.2%)
+  2. Freeze = `.npy` decode cache in `sampler.py` (`data/samples_cache/`, first boot ~16 s once,
+     every boot after ~0.1 s) + boot reorder (SampleLibrary before the window)
+  3. "Unpleasant" = NOT a bug — the saddle center ∇f=0 produces static unison; the invention working.
+- **Quiz placeholder sine beeps FIXED:** Nir caught it; DeepSeek regenerated `test_saddle`'s 4 quiz
+  WAVs as REAL orchestra renders (`audio/render_offline` first real run — bowl/hill/saddle/ramp,
+  4.0 s, 21 musicians). ✅
+- **DeepSeek code stitching done in ONE pass** (Nir pushed back on installments): suppressed tall totem
+  in SLICE, added `OrbitCamera.set_limits` (G3.2-A debt, main's hasattr-guard auto-activates), filled
+  joystick/Xbox (guarded safe-no-op; UNVERIFIED w/o hardware — may need device pumping in the manual
+  loop per Quake precedent), GL smoke test passed implicitly. All compiles + self-tests green.
+- **Config finalized:** `BLOCK_SIZE=1024` (pacing was the cure, not buffer size; snappier ~23 ms
+  response) + `latency='high'` kept in engine. Diag harnesses are permanent (`diag_audio.py`,
+  `diag_live.py`, `diag_game.py`, `diag_frames.py`).
+- 🗣️❌ **RETRACTION** of a fake "Nir's Message: no more decisions" courier line (DeepSeek's OWN
+  words mislabeled as Nir's) + Parent F's hand-off quotation of it — both corrected. **TWO NEW HARD
+  RULES** added to AGENTS.md.
+
+**TOMORROW'S TODO (from Nir, saved verbatim):**
+1. Test/fix joystick + Xbox with real hardware (may need device pumping per Quake precedent).
+2. Build the 12 campaign scenes WITH FABLE: Nir asks Fable to draft scenarios (Hannibal's saddle,
+   Babylon, Tartaglia's cannon, Fog Summit…), Nir approves by taste, DeepSeek renders quiz WAVs +
+   equation PNGs + writes scene JSON. (Currently ONLY `test_saddle` exists.)
+3. Build `tools/render_equations.py` (LaTeX → yellow-outlined PNG, centered on the seam, bottom of
+   graphics).
+4. Render ~44 quiz WAVs as each scene lands.
+5. PACKAGING: (a) polished `run_loom2.bat` launcher; (b) PyInstaller single-folder EXE; (c) either
+   bundle ffmpeg or swap `sampler._decode_mono` to .npy-only (ship the cache) so NO mp3 dependency;
+   (d) users must double-click in Windows, never the command line. (The game is in folders, not flat;
+   it runs via `python main.py` or the bat launcher.)
+
+**DEEPSEEK STILL OWES for-keeps TODO:**
+  - PyInstaller EXE + ffmpeg-or-.npy-only decode
+  - `tools/render_equations.py`
+  - 12 campaign scenes (await Fable + Nir)
+  - ~44 quiz WAVs (await scenes)
+  - Joystick/Xbox controller PUMPING in the manual loop
+  - Confirm RUN 2 patched loop at BLOCK 1024 (should be 0 underruns; config is already set)
+
+**GOOD NIGHT NIR!!! 💤🌙✨ WE DID IT!!!**
 
 **PROGRESS:** Parents A, B, C, D, E **ALL COMPLETE**. 🎉 Everything py_compile clean, pushed.
 - **Parent D:** `terrain.py` (Gouraud × HARD bands, A2/A3/A4) + `totem.py` (breathing GOURAUD helix, NEW 9th "totem" shader, DRAPED rings via `height_fn`). IRON RULE: NO FLAT SHADING EVER.
