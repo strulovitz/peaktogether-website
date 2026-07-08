@@ -217,6 +217,44 @@ matte rescale).
 
 ### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
 
+**🗓️🎨 LAYOUT + HUD OVERHAUL — NIR'S LOCKED DECISIONS (July 8, 2026, later session). These
+supersede the older screen/HUD wording in config.py + SUTRAS Part 2 + Gita G3.7. ⚠️ SCRIPTURE
+AMENDMENTS + config edit + a corrected Parent F courier are PENDING (awaiting Nir's go):**
+1. **SCREEN = TWO regions, NO dedicated text strip.** Graphics = **80% = 576 px** (the two 50/50
+   panels), Quiz bar = **20% = 144 px** (bottom). config change: `PANELS_FRAC 0.72→0.80`,
+   `TOP_STRIP_FRAC → 0` (unused). renderer._PANEL_H recomputes 518→576 automatically (reads config),
+   panels blit to y∈[144,720); NO Parent-C rewrite.
+2. **Scenario text is PAINTED ON TOP of the graphics** (top ~72 px, full width), **no background
+   box**. **3 lines × 24 px** (20 px font + ascender/descender room + 2 px above/below). Style =
+   **white letters, each with a thin BLACK STROKE/OUTLINE hugging the glyph** (Photoshop-style
+   stroke) so text is readable over any landscape.
+3. **HUD RENDERING = HOMEWORLD'S PROVEN WAY (moderngl 2D overlay, `homeworld/overlay2d.py` pattern),
+   NOT pyglet.** Nir's firm ruling: do it the way we KNOW works 100%, no guessing. This ALSO enables
+   the outlined text + emojis (pyglet couldn't). **Contract change to G3.7: allowed imports become
+   moderngl-based (like Homeworld), not pyglet.** NO parents redone (Parent F hasn't coded yet;
+   renderer already exposes `self.ctx`).
+4. **FONT = none from Nir.** Use a standard already-installed system font (as prior games did). The
+   earlier "supply a font" ask was a DeepSeek over-ask — RETRACTED.
+5. **EMOJIS IN TEXT = YES.** Since HUD is our own atlas layer (not pyglet), bake color emojis from
+   the Windows built-in **Segoe UI Emoji** font into our text atlas — NO pyglet, NO downloads. The 3
+   scenario lines may carry emojis (cute/human, Nir's wish). Speaker mark on the playing option = 🔊.
+6. **EQUATION IMAGE placement:** **yellow letters with black stroke/outline**, horizontally
+   **CENTERED across the whole screen** (straddles the left-panel/right-panel seam at x≈640, half
+   over the map, half over the helix), sitting at the **BOTTOM of the graphics area** (just above the
+   144 px quiz bar), painted ON TOP of the graphics.
+7. **PANEL TITLES:** at the **bottom of each panel, same level as the equation**, in **smaller**
+   letters. "CARTESIAN COORDINATES" **left-aligned** (left panel), "SONIFIQUATION COORDINATES"
+   **right-aligned** (right panel).
+8. **ARROW-KEY ORBIT (confirmed natural):** RIGHT arrow → world appears to move LEFT (camera orbits
+   right); UP arrow → camera rises higher so the scene appears to drop lower. (Locks the az/el signs.)
+9. **WIN SCREEN:** big **"YOU WIN!!!"** in the CENTER of the screen, **BLINKING**.
+10. **WRONG-ANSWER text = BRIGHT PINK** (with black stroke/outline); **HINT text = BRIGHT GREEN**
+    (with black stroke/outline) — same outlined style as the yellow/white text. (Never red.)
+11. **ICONS DELIVERED (July 8):** Nir made all **13 instrument PNGs** (128×128, RGBA/transparent),
+    now at `loom2/data/icons/` (double_bass, cello, viola, violin, contrabassoon, bassoon, clarinet,
+    oboe, flute, tuba, trombone, french_horn, trumpet). Source sheets (`loom2-brass/woodwinds/
+    strings.jpg`) left in Downloads on purpose.
+
 **🗓️ THIS SESSION'S LOG (July 8, 2026) — what we just did, newest last:**
 1. Parent D delivered `terrain.py` (+ terrain.vert/.frag) → saved verbatim, extracted, py_compile OK, pushed.
 2. Nir approved both Parent-D items: A7 draped-rings amendment + KEEP snow-bloom shimmer.

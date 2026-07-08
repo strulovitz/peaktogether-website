@@ -9,6 +9,21 @@
 
 ### Decided by Nir (recently closed)
 
+- 🎨 **LAYOUT + HUD OVERHAUL (July 8, later) — 11 LOCKED DECISIONS.** Full list in WORKFLOW §3
+  RESTART SNAPSHOT top block. Headlines: (1) screen = **80% graphics (576px) / 20% quiz (144px)**,
+  **NO text strip**; (2) scenario text **painted over the graphics**, 3 lines ×24px, **white +
+  black stroke/outline**, no box; (3) **HUD = Homeworld's proven moderngl overlay, NOT pyglet**
+  (Nir's firm ruling — do it the way we KNOW works; also enables outlines + emojis); (4) **no font
+  needed from Nir** (system font; earlier ask retracted); (5) **emojis in text = YES** via Windows
+  Segoe UI Emoji baked into our atlas (no pyglet, no downloads); 🔊 speaker mark; (6) **equation** =
+  yellow + black outline, screen-centered straddling the panel seam, bottom of graphics, on top;
+  (7) **panel titles** at bottom of each panel, smaller, CARTESIAN left / SONIFIQUATION right;
+  (8) **arrows** right→world-left / up→camera-higher (locks az/el signs); (9) **win** = big blinking
+  "YOU WIN!!!" center; (10) **wrong = bright pink**, **hint = bright green**, both outlined (never
+  red). ⚠️ **PENDING:** config.py edit (PANELS_FRAC 0.72→0.80) + scripture amendments (SUTRAS Pt2,
+  Gita G3.7) + corrected Parent F courier — awaiting Nir's go. ✅ **DONE:** 13 instrument icons
+  (128×128 RGBA) delivered by Nir → `loom2/data/icons/`, pushed.
+
 - ✅ **PARENT E COMPLETE (July 8) — Glass Blade DELIVERED + FIXED + WIRED + AMENDED. 🔪** All 4 files
   (`core/slicing.py`, `graphics/slice_mode.py`, `glass.vert/.frag`) saved verbatim
   (`LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`) + extracted + py_compile OK. **TILT IS REAL GEOMETRY**
