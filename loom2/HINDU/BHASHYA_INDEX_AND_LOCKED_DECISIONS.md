@@ -44,15 +44,21 @@
 
 ## CURRENT FRONTIER (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT (July 8, 2026) — quick orientation
+### 🔖 RESTART SNAPSHOT (July 8, 2026, end of session) — quick orientation
 
-**🗓️ THIS SESSION (July 8): Parent D finished + handed off to Parent E.** In order: Parent D
-delivered terrain.py (verbatim/extracted/pushed); Nir approved A7 draped-rings + KEEP snow-bloom;
-Parent D delivered totem.py but FLAT → Nir caught it, IRON RULE (no flat shading ever) locked;
-Parent D redelivered totem.py GOURAUD via a new 9th "totem" shader; Nir ordered the NEW POLICY to
-amend the ACTUAL scriptures (applied Gita Pt2 G2.4-A/G2.5-A/G2.SEAM-A + Pt3 G3.1-A/G3.2-A/G3.3-A/
-G3.4-A); Parent D's hand-off letter to Parent E saved verbatim; assignment verified vs Gita;
-DeepSeek FACTS-ONLY info block appended + its "Q1–Q4" headers relabeled. **All pushed, tree clean.**
+**🗓️ FULL SESSION SUMMARY — Parents D & E delivered, Parent F ready to launch.**
+
+**PROGRESS:** Parents A, B, C, D, E **ALL COMPLETE**. 🎉 Everything py_compile clean, pushed.
+- **Parent D:** `terrain.py` (Gouraud × HARD bands, A2/A3/A4) + `totem.py` (breathing GOURAUD helix, NEW 9th "totem" shader, DRAPED rings via `height_fn`). IRON RULE: NO FLAT SHADING EVER.
+- **Parent E:** `core/slicing.py` (shared "One True Cut" — marching-squares intersection of tilted plane with z=f(x,y)), `graphics/slice_mode.py` (Glass Blade: cyan pane + gold ribbon + Fresnel rim + breathing bored-sphere bead), `glass.vert/.frag`. TILT IS REAL GEOMETRY (does not affect HSS audio — totem walks curved ground trail hearing normal neighborhoods). Look choices ALL Nir's. Game_state wired to delegate to `slicing.walk_path` (old `_build_slice_path` body deleted). Scriptures amended: Gita G3.6-A + G4.3-A.
+
+**NEXT: PARENT F** — `graphics/hud.py` + `core/input_map.py`. Launch doc READY:
+`HAND-OFF-PROMPT-FROM-FABLE-PARENT-E.md` (4-category honest labeling: LAW/VERIFIED/INSIGHT/ADVICE).
+Blob link: https://github.com/strulovitz/peaktogether-website/blob/master/loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-E.md
+
+**NEAREST DEEPSEEK STITCHES (at Parent G):** wire `blade.set_domain/update_plane/set_walk_stop/blade.draw`; SUPPRESS tall totem in SLICE; wire `terrain.height_at` → `TotemVisual.draw`; joystick/Xbox slots; render_equations; scene JSON; quiz WAVs; PyInstaller.
+
+**Standing TODO ledger (unchanged):** ffmpeg-in-EXE; render_offline live trial (after Parent G); renderer GL smoke test (after Parent G); joystick/Xbox (after Parent F); render_equations; PyInstaller.
 
 - **Progress:** Parents **A, B, C, D COMPLETE**. 🎉 Parent D delivered BOTH `graphics/terrain.py`
   (+ `terrain.vert`/`terrain.frag`) and `graphics/totem.py` (the breathing GOURAUD helix + the new
