@@ -106,5 +106,6 @@ have them) — nothing to download.
 ## 6. WHAT IS OPEN = YOUR DESIGN (make it beautiful, no menu)
 
 Quiz-button visual style, hint-overlay placement, exact 🔊 spot on the playing button, and
-the SCENE_TRANSITION celebration look. All yours. Build both modules complete, one delivery.
+the SCENE_TRANSITION celebration look. All yours. Deliver however and whenever you want —
+split it, chunk it, one file or two, your call; DeepSeek concatenates whatever you send.
 — DeepSeek
