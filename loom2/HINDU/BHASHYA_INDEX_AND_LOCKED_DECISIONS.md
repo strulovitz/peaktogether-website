@@ -25,36 +25,33 @@
 ## CURRENT FRONTIER (July 7, 2026)
 
 ### 🔖 RESTART SNAPSHOT (July 8, 2026) — quick orientation
-- **Progress:** Parents **A, B, C COMPLETE**. **PARENT D HALF DONE** — `graphics/terrain.py`
-  ✅ HAS LANDED (+ its `terrain.vert`/`terrain.frag` GLSL); `graphics/totem.py` ⏳ is next.
-  Fable delivered terrain on his 3rd attempt (provider truncated him twice before). Saved
-  verbatim at `loom2/HINDU/LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`, extracted to
-  `loom2/graphics/terrain.py`, py_compile-clean, pushed.
-- **⏭️ NEXT ACTION:** Nir re-opens the SAME Parent D chat and writes **"continue"** → Fable
-  delivers `totem.py` (the breathing helix).
-- **📐 TERRAIN CANON (locked):** shader interface `terrain.vert`= `mat4 u_mvp; vec3 in_pos;
-  float in_light;` / `terrain.frag`= `vec3 u_band_colors[6]; float u_band_edges[5];`. HARD
-  bands (per-fragment from interpolated world-z) × GOURAUD (per-vertex Lambert, interpolated)
-  = smooth shading + pixel-sharp level curves. Band edges (abs world z, all scenes)
-  **(−1.5,−0.6,0,1.1,2.2)**; darkest abyss = `COLOR_DEEP_WATER×0.55` (Fable moved deep edge
-  −1.0→−0.6 so the bowl gets a deep-blue heart). Land ≤1.0 (never blooms). `height_at` = pure
-  `surface_fn` passthrough (numpy-array capable → totem can drape rings through it). `release()`
-  added (flagged, not in contract) to free GPU buffers on scene change (main should call it).
-- **✅ TWO ITEMS — BOTH DECIDED BY NIR (July 8):**
-  1. **A7 CONTRACT AMENDMENT — APPROVED (Amendment #2):**
-     `TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` →
-     `draw(self, view_proj, totem_state, height_fn, measure_phase)`; main passes
-     `terrain.height_at`; totem drapes each ring point through it (one param swap, no new
-     seams). Gita Part 3 scripture stays VERBATIM/pristine — amendment recorded in WORKFLOW
-     (Amendment #2). Also locks A1 arm = `90°−measure_phase×360°` (clockwise, matches
-     helix_panel:253). **DeepSeek OWES: wire main to pass `terrain.height_at`** (at Parent G).
-     Fable writes `totem.py` against the NEW signature.
-  2. **Snow-bloom — KEEP (Nir):** peak-snow ≈0.82–0.84 gently exceeds the 0.80 bloom
-     bright-pass → snowcaps keep a faint shimmer-glow. Terrain stays exactly as delivered.
-- **After D's totem.py:** Parent E (slice_mode), Parent F (hud + input_map), Parent G
-  (surfaces + scene + main), then DeepSeek stitches deferred seams + content.
+- **Progress:** Parents **A, B, C, D COMPLETE**. 🎉 Parent D delivered BOTH `graphics/terrain.py`
+  (+ `terrain.vert`/`terrain.frag`) and `graphics/totem.py` (the breathing helix) — each saved
+  verbatim (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`),
+  extracted, py_compile-clean, pushed.
+- **⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
+  Build a launch doc (Parent D hand-off letter + FACTS-ONLY DeepSeek info block), paste to a fresh
+  Fable chat, feed scriptures, give Nir blob links. Keep `game_state._build_slice_path` in sync
+  with `GlassBlade.intersection_path` (G3.6).
+- **📐 TOTEM CANON (locked):** A7 signature LIVE = `TotemVisual.draw(self, view_proj, totem_state,
+  height_fn, measure_phase)`; main step 4 = `totem_visual.draw(vp_left, snap_totem,
+  terrain.height_at, phase)` — **DeepSeek owes wiring main at Parent G.** Uses shared `flat`
+  program (`u_mvp`/`u_color`/`in_pos`, verified vs flat.{vert,frag}). Breath clock unwraps
+  measure_phase (no `time` import); ~3 s breath never locks to 2 s measure. Warm-gold ribbon helix
+  (dark edge lines keep it readable, A6); rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋) static/calm
+  (A5); circle+arm (A1 `90°−phase×360°`) DRAPED via height_fn, lifted 0.05. Flagged `release()`.
+  Honest flag (parked for Nir): helix is flat-colored (no per-face lighting) by design.
+- **📐 TERRAIN CANON (locked):** shader IF `terrain.vert`= `mat4 u_mvp; vec3 in_pos; float
+  in_light;` / `terrain.frag`= `vec3 u_band_colors[6]; float u_band_edges[5];`. HARD bands (per-
+  fragment) × GOURAUD (per-vertex Lambert) = smooth shading + pixel-sharp level curves. Band edges
+  (abs world z, all scenes) **(−1.5,−0.6,0,1.1,2.2)**; darkest abyss `COLOR_DEEP_WATER×0.55`. Land
+  ≤1.0 except snowcaps ≈0.82–0.84 (Nir KEEPS faint bloom). `height_at` = numpy-capable passthrough.
+- **✅ BOTH Parent-D items DECIDED (July 8):** A7 amendment APPROVED (Amendment #2 in WORKFLOW:
+  `ground_z`→`height_fn`; Gita scripture kept pristine; DeepSeek owes wiring main); snow-bloom KEEP.
+- **After D:** Parent E (slice_mode), Parent F (hud + input_map), Parent G (surfaces + scene +
+  main), then DeepSeek stitches deferred seams + content.
 
-### 🔖 PRIOR SNAPSHOT (July 8, 2026, ~1 AM Israel) — quick orientation
+### 🔖 PRIOR SNAPSHOT (July 8, 2026, terrain half) — quick orientation
 - **Progress:** Parents **A, B, C COMPLETE**. **PARENT D IS IN FLIGHT** — a live Fable
   chat writing `graphics/terrain.py` + `graphics/totem.py`. He absorbed ALL scriptures,
   asked Q1–Q7, and got Nir's decisions (saved verbatim at
@@ -120,6 +117,7 @@
 - ⚠️ **CONTEXT-WINDOW MERCY (POLICY — TRUE FOR EVERY PARENT, don't make Nir repeat it):** give a newborn worker-parent ONLY what he needs, never the whole prior canon (that is why Parent A survived "before he began"). In the DeepSeek info block at the end of each launch doc, name the big files we are NOT pasting in full (e.g. the 3 PURANAS = 444 + 417 + 335 lines of code) and tell him: ask DeepSeek through Nir for specific parts (verbatim) or send batched questions. BUT it is the parent's call each time — if he DOES want the whole code of something, Nir of course pastes it; he may spend his context window (memory of the conversation's start) if he judges it worth it. He does not truly "die" — we keep talking to the same Claude Fable in the next chat as **Parent N+1**. :-)
 - ✅ **PARENT B COMPLETE (July 7, 2026)** — chunk = `audio/sampler.py` + `audio/render_offline.py`. Both delivered by Fable Parent B, saved verbatim (`LOOM2-PARENT-B-PART-1-SAMPLER-BY-FABLE.md`, `LOOM2-PARENT-B-PART-2-RENDER-OFFLINE-BY-FABLE.md`) + extracted (py_compile OK). `python -m audio.sampler` gauntlet PASSES (89 canon, peak/resample laws, parachute). Decoder = **pydub + ffmpeg** (verified present). `render_offline.py` is contract-clean; **live CLI trial is BLOCKED on Parent G's `core/surfaces.py`** (not yet written), so it will be trial-run once Parent G lands. **DeepSeek BLESSED Parent B's CONTRACT-NOTE** (render_option had no scene domain in its frozen signature; resolved additively: default = integer-cornered window around the hearing circle, plus optional per-option `domain`/`step`/`z_per_octave` keys in options.json — nothing frozen changed; content authors should include `domain` when a quiz spot sits near a scene edge). ⚠️ DeepSeek standing TODO: sampler ships in EXE → PyInstaller must bundle ffmpeg (or swap `_decode_mono`).
 - ✅ **PARENT C COMPLETE (July 7, 2026)** — chunk = `graphics/camera.py` + `graphics/renderer.py`. Both delivered by Fable Parent C, saved verbatim (`LOOM2-PARENT-C-PART-1-CAMERA-BY-FABLE.md`, `LOOM2-PARENT-C-PART-2-RENDERER-BY-FABLE.md`) + extracted (py_compile OK). **camera.py** behavior-tested: default (az 0/el 35/zoom 1), 4x4 float32 VP, elevation clamps [5,85], zoom clamps [0.5,2.5], reset, and the **clock/pan seam verified** (world +y "brass" → screen-up = 12 o'clock at az 0). **📐 camera_limits DE-FACTO CONTRACT (locked by Parent C, first consumer — Parent G's `scene.py` validation + all scene.json must conform):** keys = `"target"` (3-list, default [0,0,0]), `"zoom_min"` (0.5), `"zoom_max"` (2.5), `"distance"` (OPTIONAL, default 14.0). Matrix: column vectors, clip = VP@p, uploaded transposed (matches helix_panel). Zoom factor>1 = zoom in; **confirmed consistent with game_state**. Helix uses FIXED distance (~16.1, bounding-sphere, elevation-proof); zoom applies to terrain only; the "one-sign spot" for mirrored-surround is `_eye_offset()`. **renderer.py**: public `self.ctx` (moderngl context), loads all 8 REQUIRED_SHADERS fail-loud, two HDR (RGBA16F 'f2') panel FBOs at (WINDOW_W//2, WINDOW_H*PANELS_FRAC) — 50/50 split enforced here only; bloom ping-pong (extract→downsample ¼ via `_BLOOM_DOWNSCALE=4`→blur H→blur V→composite) — **uniform names match** DeepSeek's shaders (extract u_tex/u_threshold; blur u_tex/u_dir; composite u_scene/u_bloom/u_strength/u_exposure); composite() clears whole screen black (strip + quiz bar stay black for hud), blits panels at y0=QUIZ_BAR_FRAC*H=144; begin_panel enables depth+alpha-blend by default. **Live GL smoke test DEFERRED to integration** (moderngl.create_context needs a live pyglet window / Parent G's main.py). No CONTRACT-ISSUEs.
-- ✅ **PARENT D — `terrain.py` HALF DONE (July 8, 2026)** — `graphics/terrain.py` + `terrain.vert`/`terrain.frag` delivered by Fable Parent D (3rd attempt; provider truncated the first two). Saved verbatim (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`) + extracted (py_compile OK) + real GLSL overwrote the placeholders. Realizes A2 (HARD per-fragment bands) × A3 (GOURAUD per-vertex Lambert) simultaneously; A4 (no water plane — blue bands darken with depth on same mesh). Canon shader interface: vert `mat4 u_mvp; vec3 in_pos; float in_light;` / frag `vec3 u_band_colors[6]; float u_band_edges[5];`. Band edges (−1.5,−0.6,0,1.1,2.2) abs world z; darkest abyss `COLOR_DEEP_WATER×0.55` (Fable moved deep edge −1.0→−0.6 so the bowl gets a deep-blue heart); land ≤1.0. `height_at`=pure passthrough (numpy-capable); flagged `release()` frees GPU buffers on scene change (main should call it). **TWO items to NIR:** (1) A7 amendment — Fable will write `totem.py` against `draw(...,height_fn,...)` instead of `ground_z` for draped rings UNLESS Nir objects → DeepSeek amends Gita G3.4 + wires main; (2) snow-bloom taste Q (snowcaps ≈0.82–0.84 kiss the 0.80 bloom bright-pass — keep faint glow or make matte?). **⏳ `totem.py` NEXT: Nir writes "continue".**
+- ✅ **PARENT D COMPLETE (July 8, 2026)** — chunk = `graphics/terrain.py` + `graphics/totem.py`. Both delivered by Fable Parent D, saved verbatim (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`) + extracted (py_compile OK) + real terrain GLSL overwrote the placeholders. **terrain.py:** A2 HARD per-fragment bands × A3 GOURAUD per-vertex Lambert simultaneously; A4 no water plane (blue bands darken with depth on same mesh). Canon shader IF: vert `mat4 u_mvp; vec3 in_pos; float in_light;` / frag `vec3 u_band_colors[6]; float u_band_edges[5];`. Band edges (−1.5,−0.6,0,1.1,2.2) abs world z; darkest abyss `COLOR_DEEP_WATER×0.55`; land ≤1.0 except snowcaps ≈0.82–0.84 (Nir KEEPS the faint bloom). `height_at`=pure passthrough (numpy-capable); flagged `release()`. **totem.py:** breathing warm-gold ribbon helix on shared `flat` program (`u_mvp`/`u_color`/`in_pos`, verified vs flat.{vert,frag}), dark edge lines keep it readable (A6); DRAPED rings/circle/arm via `height_fn` (Amendment #2 — `draw(self, view_proj, totem_state, height_fn, measure_phase)`); breath clock unwraps measure_phase (no `time` import, ~3 s breath never locks to 2 s measure); A1 arm `90°−phase×360°`; A5 calm static rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋). **DeepSeek OWES: wire main to pass `terrain.height_at` into `TotemVisual.draw`** (at Parent G). Honest flag parked for Nir: helix is flat-colored (no per-face lighting) by design — a future contract-level change if ever wanted.
+- ⏭️ **CURRENT NEXT STEP = launch PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪). Build a launch doc (Parent D hand-off letter + FACTS-ONLY DeepSeek info block, marked NOT Fable), paste to a fresh Fable chat, feed scriptures in order, give Nir blob links. Keep `game_state._build_slice_path` in sync with `GlassBlade.intersection_path` (G3.6).
 - ⏳ Then: Parents C–G write the rest; DeepSeek binds the remaining seams (shaders bloom/composite; joystick/Xbox; render_equations; PyInstaller — all mostly blocked until the relevant parent writes its module).
 - ⏳ Then: content — the 12 scenes' JSON + hints + wrong-answer explanations (Fable drafts, Nir approves by taste), render option WAVs + equation PNGs; ship; add the subject to the website.

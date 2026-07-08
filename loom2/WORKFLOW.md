@@ -192,18 +192,40 @@ matte rescale).
 ## 3. CURRENT SITUATION (July 7, 2026)
 
 ### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
-**Where we are: PARENT D — HALF DONE. `terrain.py` HAS LANDED; `totem.py` is next.**
-Parents A, B, C are done. Parent D (a live Fable chat) absorbed ALL scriptures, asked
-Q1–Q7, got Nir's decisions, and on his 3rd attempt (provider had truncated him twice)
-successfully delivered **`graphics/terrain.py` COMPLETE + its `terrain.vert`/`terrain.frag`
-GLSL** — all saved verbatim (`loom2/HINDU/LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`),
-extracted, py_compile-clean, pushed. **`graphics/totem.py` is the remaining half.**
+**Where we are: PARENT D IS COMPLETE! 🎉 Both `terrain.py` AND `totem.py` have landed.**
+Parents A, B, C, D are done. Parent D (a live Fable chat) absorbed ALL scriptures, asked
+Q1–Q7, got Nir's decisions, and delivered BOTH his files (each saved verbatim, extracted,
+py_compile-clean, pushed): `graphics/terrain.py` (+ `terrain.vert`/`terrain.frag` GLSL,
+`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`) and `graphics/totem.py` (the little breathing
+helix, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`). The whole audio package + graphics
+camera/renderer/terrain/totem + helix_panel are now real code.
 
-**⏭️ NEXT ACTION:** Nir re-opens the SAME Parent D chat and writes **"continue"** →
-Fable delivers `totem.py` (the little breathing helix). **HE WILL WRITE IT AGAINST AN
-AMENDED SIGNATURE** (see remark 8 below) unless Nir objects first.
+**⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
+Birth him like the others: build a launch doc = Parent D's hand-off letter (ask Fable D for one)
++ a **FACTS-ONLY DeepSeek info block** at the end (marked NOT Fable), paste to a fresh Fable
+chat, feed scriptures in order, give Nir blob links. Remember CONTEXT-WINDOW MERCY (give only
+what he needs; name the big files we're NOT pasting). ⚠️ keep `game_state._build_slice_path`
+literally in sync with `GlassBlade.intersection_path` (G3.6) — the drawn curve == the walked road.
 
-**📐 TERRAIN CANON (locked by Parent D, record for all future modules):**
+**📐 TOTEM CANON (locked by Parent D, record for main/Parent G):**
+- **A7 signature is LIVE:** `TotemVisual.draw(self, view_proj, totem_state, height_fn,
+  measure_phase)` — `main` frame step 4 = `totem_visual.draw(vp_left, snap_totem,
+  terrain.height_at, phase)`. **DeepSeek OWES: wire main to pass `terrain.height_at`** (at
+  Parent G). `height_fn` = any `(x,y)->z` callable; `terrain.height_at` supports numpy arrays.
+- Uses the shared **`flat`** program (`u_mvp` mat4, `u_color` vec4, `in_pos` vec3) — verified
+  to match `data/shaders/flat.{vert,frag}`.
+- **Breath clock has NO `time` import** — it unwraps `measure_phase` deltas into continuous
+  seconds (`Δt = Δphase × MEASURE_SEC`); the ~3 s breath never phase-locks to the 2 s measure.
+  Audio stays the single king clock.
+- Helix = 160-tri warm-gold ribbon (2.5 coils, r=0.16), emissive breathing 0.65↔1.60, with
+  dark edge lines so it always reads as a helix (A6). Rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋)
+  static/calm (A5); hearing circle + arm (A1: `90°−phase×360°`) all DRAPED via height_fn,
+  lifted 0.05 above ground (no z-fighting). Flagged `release()` (not in contract) frees GPU.
+- **Fable's honest flag (NOT a decision):** the helix is flat-colored per draw (no per-face
+  lighting) — depth + dark edges carry the 3D read (demoscene silhouette). If Nir ever wants a
+  shaded helix, that's a future contract-level change. **← taste item parked for Nir if desired.**
+
+**📐 TERRAIN CANON (locked by Parent D):**
 - Shader interface: `terrain.vert` = `uniform mat4 u_mvp; in vec3 in_pos; in float in_light;`
   `terrain.frag` = `uniform vec3 u_band_colors[6]; uniform float u_band_edges[5];`
 - HARD bands + GOURAUD reconciled: per-VERTEX Lambert light (interpolated) × per-FRAGMENT
@@ -211,24 +233,13 @@ AMENDED SIGNATURE** (see remark 8 below) unless Nir objects first.
 - Band edges (absolute world z, every scene): **(−1.5, −0.6, 0.0, 1.1, 2.2)**; darkest
   abyss = `COLOR_DEEP_WATER × 0.55`. (Fable moved deep-water edge −1.0→−0.6 so the bowl,
   min −1.0, gets a real deep-blue heart.) All tuning = 2 constants at top of terrain.py.
-- Terrain stays ≤1.0 (land never blooms hard); `height_at` is a pure `surface_fn` passthrough
-  (accepts numpy arrays too — totem can drape ring points through it). `release()` added
-  (flagged, not in contract) to free VBO/IBO/VAO on scene change — main should call
-  `old_mesh.release()` in its scene-change path.
+- Terrain stays ≤1.0 EXCEPT snowcaps ≈0.82–0.84 (Nir KEEPS the faint bloom shimmer);
+  `height_at` = pure `surface_fn` passthrough (numpy-capable). `release()` added (flagged, not
+  in contract) to free VBO/IBO/VAO — main should call `old_mesh.release()` on scene change.
 
-**✅ TWO ITEMS — BOTH DECIDED BY NIR (July 8):**
-1. **A7 CONTRACT AMENDMENT — APPROVED ✅ (now Amendment #2 above):** change
-   `TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` →
-   `draw(self, view_proj, totem_state, height_fn, measure_phase)`, where `main` passes
-   `terrain.height_at` so the totem drapes every ring point through the same callable
-   (one param swap, no new seams). Gita scripture stays pristine; the amendment is canon.
-   **DeepSeek OWES: wire main to pass `terrain.height_at` into `TotemVisual.draw`** (when
-   main is written by Parent G). Fable writes `totem.py` against the NEW signature.
-2. **Snow-bloom — KEEP ✅ (Nir):** peak-snow pixels ≈0.82–0.84 gently exceed the 0.80
-   bloom bright-pass → snowcaps keep a faint shimmer-glow. Terrain stays as delivered.
-
-We stopped last night because the provider truncated Fable's replies TWICE mid-answer
-(long-message choke) and it was ~1 AM in Israel. Now terrain is home. **Nothing lost.**
+**✅ BOTH Parent-D taste/contract items DECIDED (July 8):** (1) A7 amendment APPROVED →
+Amendment #2 (draw `ground_z`→`height_fn`); DeepSeek owes wiring main at Parent G. (2)
+snow-bloom KEEP the faint shimmer.
 
 **PARENT D'S Q&A + NIR'S DECISIONS are saved verbatim** at
 `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`. Locked decisions:
@@ -414,18 +425,19 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      reset, clock/pan seam verified). renderer.py uniform names match the shader files.
      **Live GL smoke test deferred to integration** (needs a pyglet window / Parent G's main.py).
      camera_limits de-facto contract locked (target/zoom_min/zoom_max/distance). No CONTRACT-ISSUEs.
-   - 🔵 **Parent D — `graphics/terrain.py` ✅ + `graphics/totem.py` ⏳  ← HALF DONE.**
-     Fable absorbed all scriptures, asked Q1–Q7, got Nir's decisions (saved verbatim at
-     `loom2/HINDU/PARENT-D-QA-BATCH-1-NIR-DECISIONS.md`). **`terrain.py` DELIVERED (July 8,
-     3rd attempt after two truncations)** + `terrain.vert`/`terrain.frag` GLSL: saved verbatim
-     (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`), extracted, py_compile OK, pushed. Decisions
-     realized: Gouraud (per-vertex Lambert) × HARD per-fragment bands; NO water plane (blue
-     bands darken with depth on same mesh); band edges (−1.5,−0.6,0,1.1,2.2); land ≤1.0.
-     **⏳ `totem.py` NEXT: Nir writes "continue" in the SAME chat.** BOTH items DECIDED
-     by Nir (July 8): (1) A7 amendment **APPROVED** → `draw(...,height_fn,...)` (was
-     `ground_z`); Fable writes totem.py against it; rings drape via `terrain.height_at`;
-     Gita stays pristine, recorded as Amendment #2; **DeepSeek owes wiring main.** (2)
-     snow-bloom **KEEP** the faint shimmer (peak ≈0.82–0.84 gently exceeds 0.80 bloom).
+   - ✅ **Parent D — `graphics/terrain.py` + `graphics/totem.py`  ← COMPLETE (July 8).**
+     Both delivered by Fable Parent D, saved verbatim (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`,
+     `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`) + extracted (py_compile OK) + real GLSL overwrote
+     the terrain.* placeholders. **terrain.py:** Gouraud (per-vertex Lambert) × HARD per-fragment
+     bands; NO water plane (blue bands darken with depth on same mesh); edges (−1.5,−0.6,0,1.1,2.2);
+     land ≤1.0 except snowcaps (Nir keeps the faint bloom). **totem.py:** breathing warm-gold ribbon
+     helix (flat program, dark edge lines, A6 glow); DRAPED rings/circle/arm via `height_fn` (A7
+     amendment #2 — `draw(...,height_fn,...)`); breath clock unwraps measure_phase (no `time`
+     import); A1 arm `90°−phase×360°`; A5 calm static rings. **DeepSeek OWES: wire main to pass
+     `terrain.height_at` into `TotemVisual.draw`** (at Parent G). Fable's honest flag (parked for
+     Nir if wanted): helix is flat-colored (no per-face lighting) by design — a future contract-
+     level change if Nir ever wants it shaded.
+   - 🔵 **Parent E — `graphics/slice_mode.py` ("The Glass Blade" 🔪)  ← IMMEDIATE NEXT STEP.**
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`
