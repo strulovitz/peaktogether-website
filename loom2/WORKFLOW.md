@@ -122,7 +122,7 @@ Two **non-scripture** docs also live in `loom2/HINDU/` (hand-offs, not Fable can
   first message of the fresh Parent A chat, then feeds the scriptures. See §4.6 for the
   full story.
 
-### ⚖️ CONTRACT AMENDMENT (approved by Nir, July 7, 2026)
+### ⚖️ CONTRACT AMENDMENT #1 (approved by Nir, July 7, 2026)
 The Gita's `game_state._quiz_select` (G4.3) must play the quiz option WAV "looping,
 THROUGH THE ENGINE", but the frozen `AudioEngine` API had no method taking a WAV — a
 missing wire. Nir arbitrated and **approved adding ONE method: `AudioEngine.set_quiz_wav(path)`**
@@ -131,6 +131,23 @@ mix/soft-clip/pan path (routes sensibly under 5.1/7.1), mutually exclusive with 
 voices by game_state's discipline. Nothing else in the contract changed. **Consequence:
 the audio↔world seam is now 5 calls, not 4** (build_voices→set_voices; set_camera_azimuth;
 **set_quiz_wav**; get_measure_phase; get_active_flashes).
+
+### ⚖️ CONTRACT AMENDMENT #2 — G3.4 TotemVisual.draw (approved by Nir, July 8, 2026)
+Nir's decision A7 requires **DRAPED** ground rings (hearing circle + rhythm rings hug the
+terrain, following every bump/dip — never flat/floating/clipping disks). The frozen
+`TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` passes only
+a scalar `ground_z` — not enough to sample terrain height all around each ring. Nir gave
+explicit blessing to unfreeze the contract. **THE CHANGE (one param swap, no new seams):**
+`ground_z: float` → `height_fn` (a callable `z = height_fn(x, y)`; `main` passes
+`terrain.height_at`, which is a numpy-capable pure passthrough, so the totem drapes every ring
+point efficiently). Fable "Parent D" writes `totem.py` against this NEW signature. **DeepSeek
+owes:** wire `main` to pass `terrain.height_at` into `TotemVisual.draw`. The Gita Part 3
+scripture file stays VERBATIM/pristine — this amendment is the new canon (same discipline as
+Amendment #1). Locked with it: **A1 arm = `90° − measure_phase×360°`** (clockwise from above,
+matching helix_panel.py:253), superseding the "measure_phase*360" wording in the verbatim G3.4
+docstring. **SNOW-BLOOM DECISION (Nir, July 8): KEEP the faint snowcap shimmer** — peak pixels
+at ≈0.82–0.84 gently exceed the 0.80 bloom bright-pass; terrain stays exactly as delivered (no
+matte rescale).
 
 ---
 
@@ -199,16 +216,16 @@ AMENDED SIGNATURE** (see remark 8 below) unless Nir objects first.
   (flagged, not in contract) to free VBO/IBO/VAO on scene change — main should call
   `old_mesh.release()` in its scene-change path.
 
-**❓ TWO ITEMS AWAITING NIR (from Parent D's terrain delivery):**
-1. **A7 CONTRACT AMENDMENT (Fable will proceed unless Nir objects):** change
+**✅ TWO ITEMS — BOTH DECIDED BY NIR (July 8):**
+1. **A7 CONTRACT AMENDMENT — APPROVED ✅ (now Amendment #2 above):** change
    `TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` →
    `draw(self, view_proj, totem_state, height_fn, measure_phase)`, where `main` passes
    `terrain.height_at` so the totem drapes every ring point through the same callable
-   (one param swap, no new seams). Nir already blessed amending the Gita for draped rings.
-   **DeepSeek must amend Gita G3.4 + wire main accordingly.**
-2. **Snow-bloom taste question (Nir's call):** peak-snow pixels sit at ≈0.82–0.84,
-   a hair above the 0.80 bloom bright-pass → snowcaps get a very faint shimmer-glow.
-   KEEP it, or scale terrain fully matte below 0.80? One-constant change either way.
+   (one param swap, no new seams). Gita scripture stays pristine; the amendment is canon.
+   **DeepSeek OWES: wire main to pass `terrain.height_at` into `TotemVisual.draw`** (when
+   main is written by Parent G). Fable writes `totem.py` against the NEW signature.
+2. **Snow-bloom — KEEP ✅ (Nir):** peak-snow pixels ≈0.82–0.84 gently exceed the 0.80
+   bloom bright-pass → snowcaps keep a faint shimmer-glow. Terrain stays as delivered.
 
 We stopped last night because the provider truncated Fable's replies TWICE mid-answer
 (long-message choke) and it was ~1 AM in Israel. Now terrain is home. **Nothing lost.**
@@ -404,11 +421,11 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      (`LOOM2-PARENT-D-PART-1-TERRAIN-BY-FABLE.md`), extracted, py_compile OK, pushed. Decisions
      realized: Gouraud (per-vertex Lambert) × HARD per-fragment bands; NO water plane (blue
      bands darken with depth on same mesh); band edges (−1.5,−0.6,0,1.1,2.2); land ≤1.0.
-     **⏳ `totem.py` NEXT: Nir writes "continue" in the SAME chat.** TWO items pending Nir:
-     (1) A7 amendment — Fable will write totem.py against `draw(...,height_fn,...)` (was
-     `ground_z`) so rings drape via `terrain.height_at`, UNLESS Nir objects first; DeepSeek
-     must amend Gita G3.4 + wire main. (2) snow-bloom taste Q — snowcaps ≈0.82–0.84 kiss the
-     0.80 bloom bright-pass (faint glow): keep or make matte? Nir's call.
+     **⏳ `totem.py` NEXT: Nir writes "continue" in the SAME chat.** BOTH items DECIDED
+     by Nir (July 8): (1) A7 amendment **APPROVED** → `draw(...,height_fn,...)` (was
+     `ground_z`); Fable writes totem.py against it; rings drape via `terrain.height_at`;
+     Gita stays pristine, recorded as Amendment #2; **DeepSeek owes wiring main.** (2)
+     snow-bloom **KEEP** the faint shimmer (peak ≈0.82–0.84 gently exceeds 0.80 bloom).
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
    - Parent G — `core/surfaces.py` + `core/scene.py` + `main.py`

@@ -7,13 +7,18 @@
 - 🟡 UPANISHADS scene 10 (Ocean Swell) format: keep the richer "match each groove" format or flatten to plain A/B/C/D. Nir's call, zero cost either way.
 - 🟢 (optional, low priority) Quiz exit gesture — Fable's `game_state.py` chose **TOUCH THE TOTEM** to leave QUIZ_LISTEN (any totem move stops the option, land resumes; camera stays free while listening). Fable invites a veto by taste if Nir wants a different gesture. Already implemented; changing it is cheap.
 
+### Decided by Nir (recently closed)
+
+- ✅ **A7 draped rings — APPROVED (July 8).** Gita G3.4 amended (Amendment #2 in WORKFLOW): `TotemVisual.draw` `ground_z: float` → `height_fn`; main passes `terrain.height_at`. Fable writes totem.py against it. **DeepSeek owes: wire main** (at Parent G).
+- ✅ **Snow-bloom — KEEP the faint shimmer (July 8).** Peak-snow ≈0.82–0.84 gently exceeds the 0.80 bloom bright-pass; terrain stays as delivered (no matte rescale).
+
 ### DeepSeek build-time items (none block Nir)
 
 - ✅ M0-equivalent ear test — DONE (July 7). sounddevice 0.5.5 installed; both prototypes run; invention validated by ear.
 - ✅ Sample library (SUTRAS Part Ten) — DONE (July 7). loom2/samples/ = 89 notes, 13 instruments (86 exact, 3 resampled ≤±2 st: violin_A7←G7 +2, tuba_E1←F1 −1, trumpet_Fs5←F5 +1; 0 missing). + manifest.json + coverage_report.txt + build_sample_library.py.
 - ✅ PATH RECONCILIATION — DONE (July 7). Decision: MOVE the library to match the FROZEN config (config.SAMPLES_DIR="data/samples"), never edit config. The 89 mp3 + manifest.json + coverage_report.txt now live at loom2/data/samples/ (git mv, history preserved; old loom2/samples/ removed). build_sample_library.py OUT_DIR updated to write to data/samples/ so the reproducible recipe stays consistent. (The ear-test prototypes read from Downloads/philharmonia, NOT loom2/samples/, so the move was safe.)
 - ✅ config.py + core/types.py — DONE (July 7). Extracted verbatim from Gita Part 1 to loom2/config.py + loom2/core/types.py. Parent A's quantize.py self-test PASSES against them (89 notes round-trip clean).
-- 🔧 Seams DeepSeek STILL owes (mostly blocked until the relevant parent writes its module): create the empty shader files (REQUIRED_SHADERS) and paste working bloom/composite GLSL from Quake/Homeworld (needs Parent C's renderer.py); write tools/render_equations.py (LaTeX→PNG via MiKTeX, content-phase); fill the empty joystick/Xbox input slots from prior games (needs Parent F's input_map.py); enter scene JSON content (content-phase); PyInstaller EXE (ship-phase). Folder tree + __init__.py already exist for audio/core/graphics.
+- 🔧 Seams DeepSeek STILL owes (mostly blocked until the relevant parent writes its module): **wire `main` to pass `terrain.height_at` into `TotemVisual.draw`** (Amendment #2, draped rings — done at Parent G when main is written); create the empty shader files (REQUIRED_SHADERS) and paste working bloom/composite GLSL from Quake/Homeworld (needs Parent C's renderer.py); write tools/render_equations.py (LaTeX→PNG via MiKTeX, content-phase); fill the empty joystick/Xbox input slots from prior games (needs Parent F's input_map.py); enter scene JSON content (content-phase); PyInstaller EXE (ship-phase). Folder tree + __init__.py already exist for audio/core/graphics.
 - 🎨 Nir-owned assets: the 13 instrument-icon cliparts (~128×128, transparent, "four emoji big") for data/icons/; a UI font for data/fonts/.
 
 
@@ -35,16 +40,17 @@
   −1.0→−0.6 so the bowl gets a deep-blue heart). Land ≤1.0 (never blooms). `height_at` = pure
   `surface_fn` passthrough (numpy-array capable → totem can drape rings through it). `release()`
   added (flagged, not in contract) to free GPU buffers on scene change (main should call it).
-- **❓ TWO ITEMS AWAITING NIR (from terrain delivery):**
-  1. **A7 CONTRACT AMENDMENT (Fable proceeds unless Nir objects before his next message):**
+- **✅ TWO ITEMS — BOTH DECIDED BY NIR (July 8):**
+  1. **A7 CONTRACT AMENDMENT — APPROVED (Amendment #2):**
      `TotemVisual.draw(self, view_proj, totem_state, ground_z: float, measure_phase)` →
      `draw(self, view_proj, totem_state, height_fn, measure_phase)`; main passes
      `terrain.height_at`; totem drapes each ring point through it (one param swap, no new
-     seams). Nir already blessed amending the Gita for draped rings — **DeepSeek must amend
-     Gita G3.4 + wire main.**
-  2. **Snow-bloom taste question (Nir's call):** peak-snow ≈0.82–0.84 kisses the 0.80 bloom
-     bright-pass → snowcaps get a faint shimmer-glow. KEEP it or scale terrain matte below
-     0.80? One-constant change either way.
+     seams). Gita Part 3 scripture stays VERBATIM/pristine — amendment recorded in WORKFLOW
+     (Amendment #2). Also locks A1 arm = `90°−measure_phase×360°` (clockwise, matches
+     helix_panel:253). **DeepSeek OWES: wire main to pass `terrain.height_at`** (at Parent G).
+     Fable writes `totem.py` against the NEW signature.
+  2. **Snow-bloom — KEEP (Nir):** peak-snow ≈0.82–0.84 gently exceeds the 0.80 bloom
+     bright-pass → snowcaps keep a faint shimmer-glow. Terrain stays exactly as delivered.
 - **After D's totem.py:** Parent E (slice_mode), Parent F (hud + input_map), Parent G
   (surfaces + scene + main), then DeepSeek stitches deferred seams + content.
 
