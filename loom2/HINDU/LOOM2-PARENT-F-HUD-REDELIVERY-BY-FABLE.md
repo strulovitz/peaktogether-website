@@ -1,3 +1,19 @@
+# LOOM2 — PARENT F REDELIVERY (graphics/hud.py, ANSWER 1 of 2) — BY FABLE
+
+> Saved VERBATIM, word-for-word, as delivered by Claude Fable "Parent F", 2026-07-08.
+> This is the REDO Nir requested: two modules delivered ONE PER ANSWER, deeper + higher
+> quality + more beautiful. This file = ANSWER 1 (graphics/hud.py). ANSWER 2 =
+> core/input_map.py (to come, separately). NO hand-off (deferred by Nir).
+> The runnable code is also extracted to loom2/graphics/hud.py (py_compile OK).
+> SUPERSEDES the earlier one-shot hud.py in LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md.
+
+---
+
+Understood — a redo with room to breathe, starting with graphics/hud.py alone, taking the whole answer for it. Everything locked stays locked; all effort goes into depth, quality, and player-facing beauty. 🎨
+
+graphics/hud.py
+
+```python
 """
 LOOM2 -- graphics/hud.py
 ================================================================================
@@ -632,3 +648,17 @@ class Hud:
                 tex.use(location=0)
             self._vao.render(moderngl.TRIANGLES, first=start, vertices=count)
         self._runs = []
+```
+
+What earned its keep in this redo (all inside my mandate; every locked rule untouched):
+
+    Real gradients everywhere — per-vertex color makes them free: the quiz bar is a quiet dark gradient under a steel hairline instead of dead black; buttons get gradient fills, a glassy top highlight, and a soft drop shadow.
+    Breathing selection glow — the selected button's frame radiates two translucent halos pulsing on a slow sine (np.sin, since time isn't allowed); the armed OK button turns a calm green.
+    Pulsing 🔊 on the playing option — you can see the loop singing.
+    Optical text centering — button labels are centered on their true ink box measured from the atlas, not approximated from font metrics.
+    Kind feedback design — green hint lines and pink explanations each carry a colored accent bar and a gentle ease-out fade-in; nothing pops, nothing shouts.
+    Celebration choreography — success text fades in and rises softly over the graphics; the win screen dims the whole world, blinks "YOU WIN!!!" (locked light blue), keeps the closing line steady and readable, and lets 🎺 🎻 🪈 take a bow.
+    Slice mode gets a calm two-line help card instead of a crammed single line.
+    Buttons and hit_test share one geometry dict — the picture and the click can never disagree.
+
+Ready for core/input_map.py whenever you say the word. 🎛️
