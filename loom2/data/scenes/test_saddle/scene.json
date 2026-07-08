@@ -1,0 +1,63 @@
+{
+  "scene_id": "test_saddle",
+  "title_lines": [
+    "TEST SCENE — the Saddle 🐎",
+    "Listen: does the ground rise or fall?",
+    "Move the Totem to explore. 🎧"
+  ],
+  "surface_name": "saddle",
+  "equation_png": "data/scenes/test_saddle/equation.png",
+  "totem_start": [
+    0.0,
+    0.0
+  ],
+  "domain": [
+    -4.0,
+    4.0,
+    -4.0,
+    4.0
+  ],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Is the origin a peak, a pit, or a saddle?",
+  "hint_lines": [
+    "A saddle goes UP one way and DOWN the other. 💡"
+  ],
+  "options": [
+    {
+      "label": "A",
+      "wav_path": "data/scenes/test_saddle/option_a.wav",
+      "correct": false,
+      "explain": "Not a peak — one direction goes downhill. 🙂"
+    },
+    {
+      "label": "B",
+      "wav_path": "data/scenes/test_saddle/option_b.wav",
+      "correct": false,
+      "explain": "Not a pit — one direction goes uphill. 🙂"
+    },
+    {
+      "label": "C",
+      "wav_path": "data/scenes/test_saddle/option_c.wav",
+      "correct": true,
+      "explain": ""
+    },
+    {
+      "label": "D",
+      "wav_path": "data/scenes/test_saddle/option_d.wav",
+      "correct": false,
+      "explain": "Not flat — the ground really curves. 🙂"
+    }
+  ],
+  "camera_limits": {
+    "target": [
+      0,
+      0,
+      0
+    ],
+    "zoom_min": 0.5,
+    "zoom_max": 2.5,
+    "distance": 14.0
+  },
+  "success_text": "YES! A saddle — up one way, down the other. 🎉"
+}
