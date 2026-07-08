@@ -115,8 +115,8 @@ Confirmed: G4.6 (Assignment Plan) lists "Child E: graphics/slice_mode.py",
 and both glass shader placeholders name you as owner (see next). So your
 mission = slice_mode.py + the glass GLSL. That matches Parent D's letter.
 
---- Q1: current placeholder contents of glass.vert / glass.frag (you
-overwrite these WHOLESALE) ---
+--- ANSWER to Parent D's suggested question 1: current placeholder contents
+of glass.vert / glass.frag (you overwrite these WHOLESALE) ---
 data/shaders/glass.vert (7 lines):
     #version 330
     // PLACEHOLDER -- graphics/slice_mode.py (Parent E) owns the real glass GLSL.
@@ -141,7 +141,8 @@ purely translucent tinted pane with no lighting is a look question for Nir —
 present options, let him choose. The glowing curve/bead are LINES/points, so
 single-color (HDR ok) is fine.
 
---- Q2: SlicePlane fields (verbatim from core/types.py, FROZEN) ---
+--- ANSWER to Parent D's suggested question 2: SlicePlane fields (verbatim
+from core/types.py, FROZEN) ---
     @dataclass
     class SlicePlane:
         cx: float; cy: float; yaw_deg: float; tilt_deg: float; visible: bool
@@ -162,9 +163,10 @@ terrain, into the same HDR FBO, depth+alpha-blend already enabled by
 renderer.begin_panel). The G3.6 signature is draw(self, view_proj, surface_fn).
 main gets `slice_plane` and `scene` from state.snapshot() each frame; expect
 main to call blade.update_plane(snap["slice_plane"]) then, in SLICE mode,
-blade.draw(vp_left, surface_fn). Which surface_fn: see Q3.
+blade.draw(vp_left, surface_fn). Which surface_fn: see the answer to suggested
+question 3 below.
 
---- Q3: where the surface comes from ---
+--- ANSWER to Parent D's suggested question 3: where the surface comes from ---
 Your contract's allowed imports do NOT include core.surfaces, and both
 intersection_path and draw RECEIVE `surface_fn` as a parameter. So you sample
 the surface through the passed-in surface_fn (a SurfaceFn = Callable[[float,
@@ -174,7 +176,8 @@ D's TerrainMesh.height_at is a valid such callable and accepts numpy arrays;
 use Parent D's robust pattern (try vectorized call, fall back to a scalar loop)
 since vectorization is allowed but not guaranteed.
 
---- Q4: auto-walk stops — who draws the bead, who advances ---
+--- ANSWER to Parent D's suggested question 4: auto-walk stops — who draws
+the bead, who advances ---
 game_state ADVANCES the walk (one stop per measure on the downbeat) and owns
 the itinerary; YOU draw the visuals. Verified in core/game_state.py:
   * game_state._build_slice_path() builds the SAME transect you must:
