@@ -217,6 +217,60 @@ matte rescale).
 
 ### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
 
+**🏁 CURRENT STATE (July 8, 2026, late) — READY TO START PARENT G, THE LAST PARENT 🏁**
+
+Parents **A, B, C, D, E, F are ALL COMPLETE**. The whole audio package, all graphics
+(camera / renderer / terrain / totem / helix_panel / slice_mode / **hud**), all core
+(game_state / slicing / **input_map**), every shader, config, core/types, the 89-sample
+orchestra, the **13 instrument icons** (`data/icons/`), and a **test scene**
+(`data/scenes/test_saddle/`) are in place, py_compile-clean, and pushed. **Only ONE parent
+remains — Parent G** = `core/surfaces.py` + `core/scene.py` + `main.py` (the pieces that make
+the game actually RUN).
+
+**THIS SESSION did (newest last):**
+- **Layout + HUD overhaul (Nir):** screen = 80% graphics (576 px) / 20% quiz (144 px), NO text
+  strip; scenario text painted OVER the graphics, white glyphs with a baked BLACK outline; **HUD
+  render tech = Homeworld-style moderngl 2D overlay, NOT pyglet.** `config.py` edited
+  (`PANELS_FRAC` 0.72→0.80, `TOP_STRIP_FRAC`→0.0, + a `HUD_*` constants block). Scriptures
+  amended: **SUTRAS-2-A**, **Gita G3.7-A**, **Gita1-SCREEN-A**.
+- **Nir made + delivered the 13 instrument icons** (128×128 RGBA transparent) → `data/icons/`.
+- Equation = a math PNG rendered **yellow + black outline**, centered on the panel seam at the
+  BOTTOM of the graphics. Panel titles 14 px bottom L/R. Wrong = bright pink, hint = bright green,
+  **YOU WIN!!! = light blue (120,205,255)** blinking. Emojis allowed in HUD text (baked from
+  Windows Segoe UI Emoji). Arrow signs locked (RIGHT→ORBIT_AZ +1, UP→ORBIT_EL +1).
+- **Parent F COMPLETE** (`graphics/hud.py` + `core/input_map.py`): delivered first as a one-shot,
+  then (Nir's request) **REDELIVERED one module per answer, deeper + more beautiful**. Both saved
+  verbatim + extracted + py_compile OK. Canonical verbatim files:
+  `LOOM2-PARENT-F-HUD-REDELIVERY-BY-FABLE.md` + `LOOM2-PARENT-F-INPUT-MAP-REDELIVERY-BY-FABLE.md`
+  (these SUPERSEDE the one-shot `LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md`).
+- Prepared **`MATERIAL-FOR-PARENT-G-HANDOFF.md`** — Parent G's verbatim Gita mission
+  (G4.6 assignment + G4.1 surfaces.py + G4.2 scene.py + G4.5 main.py) + the list of whole Gita
+  files he needs (Parts 1–4 amended) + verbatim PURANAS public-API excerpts (engine / game_state /
+  helix_panel signatures + docstrings + the two game_state return dicts; bodies omitted).
+- **Parent F's hand-off letter to Parent G** → ⏳ **PENDING SAVE** (Nir pasting it; will be saved
+  verbatim as `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md`).
+
+**WHAT REMAINS:**
+1. **Parent G (LAST parent):** `core/surfaces.py` + `core/scene.py` + `main.py`. Launch material =
+   `MATERIAL-FOR-PARENT-G-HANDOFF.md` + the 4 whole Gita files (Nir pastes) + Parent F's hand-off.
+2. **DeepSeek stitching** (once Parent G's `main.py` exists): wire `terrain.height_at` →
+   `TotemVisual.draw` (Amendment #2, draped rings); wire the Glass Blade (`set_domain` /
+   `update_plane` / `set_walk_stop` / `blade.draw`) + **SUPPRESS the tall totem in SLICE**;
+   fill joystick/Xbox slots in `input_map` from prior games; renderer GL smoke test;
+   `render_offline` live trial; PyInstaller EXE (bundle ffmpeg for the sampler, or swap
+   `_decode_mono`).
+3. **Content:** the 12 scenes' `scene.json` + hints + wrong-answer explanations (Fable drafts,
+   Nir approves by taste) + real equation PNGs (`tools/render_equations.py`, yellow+outline) + 48
+   quiz option WAVs (via `render_offline`). One test scene (`test_saddle`) already exists.
+4. Then ship + add multivariable calculus to the Peak Together website.
+
+**⚖️ DEEPSEEK BEHAVIOR RULES LOCKED THIS SESSION (Nir — obey verbatim):** (a) NEVER dictate how or
+when a parent delivers — no "one delivery", no chunk counts, no hand-off instruction unless Nir
+asks; (b) NEVER invent words/requirements Nir didn't say (e.g. the "nine-year-old" and "both
+modules one delivery" slips); (c) FACTS only — every taste/design/aesthetic choice goes to Nir;
+(d) a parent has no internet — describe the TECHNOLOGY, never paste giant files or GitHub links at
+him; (e) be modest and faithful to Nir's words; parents are far better coders than DeepSeek.
+
 **🗓️🎨 LAYOUT + HUD OVERHAUL — NIR'S LOCKED DECISIONS (July 8, 2026, later session). These
 supersede the older screen/HUD wording in config.py + SUTRAS Part 2 + Gita G3.7. ⚠️ SCRIPTURE
 AMENDMENTS + config edit + a corrected Parent F courier are PENDING (awaiting Nir's go):**

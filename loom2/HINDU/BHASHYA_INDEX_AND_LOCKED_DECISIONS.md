@@ -9,6 +9,30 @@
 
 ### Decided by Nir (recently closed)
 
+- 🏁 **RESTART SNAPSHOT (July 8, late) — READY FOR PARENT G, THE LAST PARENT.** Parents A–F ALL
+  COMPLETE (audio + graphics incl. hud + core incl. input_map + shaders + config + types + 89
+  samples + 13 icons + test scene test_saddle; all py_compile-clean, pushed). Only **Parent G**
+  remains = `core/surfaces.py` + `core/scene.py` + `main.py` (makes the game RUN). Launch material
+  ready: `MATERIAL-FOR-PARENT-G-HANDOFF.md` (Parent G's verbatim Gita mission + which whole Gita
+  files he needs [Parts 1–4 amended] + verbatim PURANAS public-API excerpts). Parent F's hand-off
+  letter to Parent G ⏳ PENDING SAVE (Nir pasting → `HAND-OFF-PROMPT-FROM-FABLE-PARENT-F.md`).
+  **After Parent G:** DeepSeek stitching (wire terrain.height_at→TotemVisual.draw; wire Glass
+  Blade + suppress tall totem in SLICE; joystick/Xbox; GL smoke test; render_offline live trial;
+  PyInstaller+ffmpeg) + content (12 scenes JSON/hints/explanations, equation PNGs, 48 quiz WAVs) +
+  ship + website. **DeepSeek rules locked (Nir):** never dictate delivery/hand-off; never invent
+  words Nir didn't say; facts only (taste→Nir); parents have no internet (describe tech, no files/
+  links); be modest & faithful.
+
+- 🎧🎮 **PARENT F REDELIVERY COMPLETE (July 8) — improved hud.py + input_map.py, one per answer.**
+  Nir asked for a redo (each module its own answer, deeper/more beautiful, NO hand-off then).
+  Saved verbatim (`LOOM2-PARENT-F-HUD-REDELIVERY-BY-FABLE.md`,
+  `LOOM2-PARENT-F-INPUT-MAP-REDELIVERY-BY-FABLE.md`) + extracted + py_compile OK; SUPERSEDE the
+  one-shot `LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md`. hud.py: gradient bar+buttons, drop shadows,
+  breathing selection glow, pulsing 🔊, optical centering, fade-in feedback, celebration + 🎺🎻🪈
+  bow under YOU WIN. input_map.py: attack ramp (instant release), virtual-joystick mouse axis
+  (deadzone + t^1.4 curve), on_deactivate stuck-key guard, data-driven tables. All frozen
+  contracts/bindings + locked look UNTOUCHED. Then prepared `MATERIAL-FOR-PARENT-G-HANDOFF.md`.
+
 - ✅ **PARENT F REDELIVERY (July 8) — improved hud.py + input_map.py, one per answer.** Nir asked
   for a redo: each module in its OWN answer, deeper/higher-quality/beautiful, NO hand-off (deferred).
   Saved verbatim (`LOOM2-PARENT-F-HUD-REDELIVERY-BY-FABLE.md` + `LOOM2-PARENT-F-INPUT-MAP-REDELIVERY-BY-FABLE.md`)
