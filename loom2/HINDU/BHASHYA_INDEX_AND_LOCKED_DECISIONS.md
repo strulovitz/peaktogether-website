@@ -9,6 +9,20 @@
 
 ### Decided by Nir (recently closed)
 
+- 🏗️ **PARENT G IN FLIGHT (July 8) — MODULE 2 of 3 DELIVERED: `core/scene.py`.** Saved verbatim
+  (`LOOM2-PARENT-G-PART-2-SCENE-BY-FABLE.md`) + extracted to `loom2/core/scene.py`. **His self-test
+  `python -m core.scene` PASSES** (loads real campaign.json + test_saddle, all validators green —
+  "The door is hung, and it only opens for true scenes"); py_compile OK. THE DOOR POLICY = STRICT
+  (Nir's option-a ruling): all 13 SceneSpec fields REQUIRED; camera_limits keys the only defaultable
+  spot (G3.2-A/Q5, option b — fill defaults, fail loud on bad type/range); UNKNOWN keys rejected at
+  all 3 levels (top/options/camera_limits) except G2.5-A per-option extras (domain/step/z_per_octave,
+  tolerated+light-checked, NOT stored). Additive `SceneError(ValueError)`; UTF-8 explicit (emoji);
+  0-byte file guard; `_MAX_GRID_VERTS=2M` freeze guard; bool-is-not-a-number guard; exactly-4-options/
+  exactly-1-correct; duplicate-label + duplicate-scene rejection; totem bounds inclusive. No
+  `# CONTRACT-ISSUE` (one documented near-miss: "camera_limits keys present" softened to "filled with
+  defaults" per G3.2-A — amendment wins). ⏭️ NEXT & FINAL from Parent G: **module 3 = `main.py`** (the
+  heartbeat) — say "continue".
+
 - 🏗️ **PARENT G IN FLIGHT (July 8) — MODULE 1 of 3 DELIVERED: `core/surfaces.py`.** Saved verbatim
   (`LOOM2-PARENT-G-PART-1-SURFACES-BY-FABLE.md`) + extracted to `loom2/core/surfaces.py`. **His
   self-test `python -m core.surfaces` PASSES** (15 value checks + 9 surfaces × 4 shape mixes +

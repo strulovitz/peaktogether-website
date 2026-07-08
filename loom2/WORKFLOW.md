@@ -162,8 +162,14 @@ matte rescale).
   **His self-test `python -m core.surfaces` PASSES** (15 value checks + 9 surfaces × 4 shape mixes +
   registry error msg); py_compile OK. He baked `K_CANNON = 0.03` (domain v∈[0,10], θ∈[0,90°] → peak
   z=+3.0) as a named constant with full reasoning. Boot decisions he locked: resizable=False, strict
-  validation, boot sanity print. No `# CONTRACT-ISSUE`. ⏭️ NEXT: Parent G module 2 = `core/scene.py`,
-  then module 3 = `main.py`.
+  validation, boot sanity print. No `# CONTRACT-ISSUE`.
+  **MODULE 2/3 `core/scene.py` LANDED (July 8):** saved verbatim
+  (`LOOM2-PARENT-G-PART-2-SCENE-BY-FABLE.md`) + extracted; **self-test `python -m core.scene` PASSES**
+  (loads real campaign.json + test_saddle, all validators green), py_compile OK. THE DOOR = STRICT
+  (Nir's option-a): all 13 fields required; camera_limits keys the only defaultable spot (G3.2-A/Q5
+  option b); unknown keys rejected at all 3 levels except G2.5-A per-option extras (tolerated, not
+  stored); `SceneError(ValueError)`; UTF-8; 0-byte + 2M-vertex freeze guards; exactly-4-options/
+  1-correct. No `# CONTRACT-ISSUE`. ⏭️ NEXT & FINAL: Parent G module 3 = `main.py` (the heartbeat).
 
 - **🗣️❌ RETRACTION + IRON BEHAVIOR RULE (Nir, July 8) — NEVER PUT WORDS IN NIR'S MOUTH; NEVER
   STRIP HIM OF A CHOICE.** DeepSeek's `COURIER-TO-PARENT-F-ROUND-2.md` had written "Nir does NOT
