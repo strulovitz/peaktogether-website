@@ -246,7 +246,19 @@ camera/renderer/terrain/totem + helix_panel are now real code.
   verbatim (`LOOM2-PARENT-D-PART-2-TOTEM-GOURAUD-REDELIVERY-BY-FABLE.md`), extracted, py_compile OK,
   ACTUAL scriptures amended (G3.1-A + G3.4-A), pushed.
 
-**⏭️ NEXT ACTION = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
+**🔪 PARENT E IS IN FLIGHT (July 8):** launched from `HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md`,
+absorbed all scriptures, sent Q&A BATCH 1. **Nir's calls (saved verbatim at
+`loom2/HINDU/PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`):** Q4 bead = **OPTION 2 additive amendment**
+(expose walk index+walking in `game_state.snapshot()`; add `GlassBlade.set_walk_stop(idx_or_none)`;
+main wires it; Parent E draws a precise bead ON the curve) — Nir authorized amending frozen
+contracts + extra stitching. **DESIGN DIRECTIVE LOCKED: SUPPRESS/HIDE the tall totem in SLICE mode**
+(exact height is critical on one path; the tall totem reads as a confusing "margin of error"; the
+precise glowing bead at z=f(stop) is the true marker — main/frame-order + maybe totem_visual job at
+Parent G, record as amendment when implemented). Q7 look = show Nir ALL options, no pre-selection.
+DeepSeek answered Q1/Q2/Q3/Q5/Q6 with verified facts (couriered). **⏭️ Awaiting Parent E's next
+delivery (his full taste menu + then code).**
+
+**⏭️ ORIGINAL NEXT ACTION (now underway) = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
 + the `glass.vert`/`glass.frag` shaders he owns wholesale. **HIS LAUNCH DOC IS ALREADY BUILT
 AND PUSHED:** `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md` = Parent D's verbatim
 hand-off letter + a FACTS-ONLY DeepSeek info block appended at the end (marked NOT Fable;
