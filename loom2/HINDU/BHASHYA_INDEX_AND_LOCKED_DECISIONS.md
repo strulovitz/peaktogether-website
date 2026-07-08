@@ -9,6 +9,28 @@
 
 ### Decided by Nir (recently closed)
 
+- 🎧✅ **AUDIO SAGA CLOSED — ALL 3 PROBLEMS SOLVED (July 8). Parent G was the doctor.** Verified on
+  Nir's machine: screech GONE, underruns=0, fast boot.
+  1. **SCREECH — SOLVED.** Root cause (Round 2 C/D/E via `diag_frames.py`): vsync was NOT honored on
+     Nir's machine → the manual loop free-ran at ~1000 fps, holding the GIL almost continuously →
+     PortAudio callback starved → underruns → screech (all frame stages sub-ms; CPU only 3.8%). FIX =
+     pace the loop: `main.py` `vsync=False` + `TARGET_FPS=60`/`FRAME_SEC`/`MIN_SLEEP=0.003` + end-of-loop
+     `time.sleep(max(FRAME_SEC-elapsed, MIN_SLEEP))` so it caps at 60 fps and ALWAYS yields the GIL.
+     Confirmed underruns=0, CPU 3.8%→1.2%. (`diag_game.py` mirrors the paced loop.)
+  2. **17s STARTUP FREEZE — SOLVED.** `.npy` decode cache in `sampler.py` (`data/samples_cache/`, reused
+     if newer than mp3+manifest): first boot ~16.6s once, every boot after ~0.12s. `main.py` builds
+     `SampleLibrary()` before the window so no blank window. Cache gitignored (~26 MB, per-machine).
+  3. **"NOT AS PLEASANT AS THE DEMO" — NOT A BUG.** It was only the dead-center of the saddle: at a
+     critical point ∇f=0, the land is flat every direction, so every musician sings ~the same note = a
+     static unison. Step away and it's music again. That eerie unison IS what a critical point SOUNDS
+     like — the invention working. (Fable: "a player who notices 'it sounds boring HERE' has just heard
+     ∇f=0.")
+  **Config finalized:** `BLOCK_SIZE=1024` (reverted from the failed 4096 Step-0 experiment; the pacing,
+  not buffer size, was the cure — 1024 gives snappier ~23ms response), `latency='high'` kept in
+  `engine._open_stream`. **Diagnostic harnesses are PERMANENT** (Fable's ruling): `diag_audio.py`,
+  `diag_live.py`, `diag_game.py`, `diag_frames.py` stay in `loom2/` for future machine diagnosis.
+  ⏭️ Nir has flagged there are OTHER (non-audio) problems still to address — next up.
+
 - 🎧🔧 **AUDIO DEBUGGING IN PROGRESS (July 8) — Parent G is now the AUDIO DOCTOR.** The assembled
   game's audio was broken: live "fax machine / morse code" screech + a ~17 s blank-window freeze at
   startup + a voicing gap vs the philharmonia demo. DeepSeek ran controlled diagnostics (harnesses in
