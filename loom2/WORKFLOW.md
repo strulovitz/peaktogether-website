@@ -153,6 +153,16 @@ matte rescale).
 
 ## 2. LOCKED DECISIONS / NIR'S ANSWERS (July 6, 2026)
 
+- **🚫🔒 IRON RULE — NO FLAT SHADING, EVER. GOURAUD EVERYWHERE (Nir, absolute).**
+  Every 3D surface/model in LOOM2 — terrain, the helix totem, the wireframe helix panel,
+  ANY future geometry — is **GOURAUD shaded** (smoothly interpolated per-vertex lighting).
+  Flat shading is FORBIDDEN in all of Nir's games. This is NOT a taste choice a parent may
+  make, propose, "park," or default to for convenience — it is a hard, pre-decided
+  requirement. If a frozen contract or shader stands in the way, **amend the contract** to
+  make it Gouraud; do NOT ship flat. Any module that renders geometry flat is a BUG to fix,
+  never an acceptable delivery. (History: Parent D's `totem.py` shipped a flat-colored helix
+  and DeepSeek wrongly "parked" it — corrected July 8; totem is being made Gouraud.)
+
 - **Tech stack (Nir overrides the VEDAS "no OpenGL"):** **use OpenGL** —
   **moderngl + pyglet** (the modern shader stack of Quake & Homeworld: moderngl
   5.12.0 / pyglet 2.1.14), NOT pure-software, NOT PyOpenGL (that was Descent's older
@@ -200,6 +210,14 @@ py_compile-clean, pushed): `graphics/terrain.py` (+ `terrain.vert`/`terrain.frag
 helix, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`). The whole audio package + graphics
 camera/renderer/terrain/totem + helix_panel are now real code.
 
+- **🚫 IRON RULE REMINDER:** NO FLAT SHADING EVER — everything is GOURAUD (see §2 top).
+- **⏳ BLOCKER BEFORE PARENT E:** Parent D's `totem.py` shipped the helix **flat-colored**
+  (one `u_color` per draw, no per-vertex lighting). This VIOLATES the iron rule. Fable D has
+  been asked (courier note saved at `loom2/HINDU/COURIER-TO-PARENT-D-GOURAUD-HELIX.md`) to
+  redeliver a **GOURAUD-shaded helix** — amend the contract / add a shaded program as needed.
+  When his fix arrives: save verbatim → re-extract `totem.py` (+ any new shader) → py_compile →
+  update memory → push. Only THEN launch Parent E.
+
 **⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
 Birth him like the others: build a launch doc = Parent D's hand-off letter (ask Fable D for one)
 + a **FACTS-ONLY DeepSeek info block** at the end (marked NOT Fable), paste to a fresh Fable
@@ -221,9 +239,9 @@ literally in sync with `GlassBlade.intersection_path` (G3.6) — the drawn curve
   dark edge lines so it always reads as a helix (A6). Rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋)
   static/calm (A5); hearing circle + arm (A1: `90°−phase×360°`) all DRAPED via height_fn,
   lifted 0.05 above ground (no z-fighting). Flagged `release()` (not in contract) frees GPU.
-- **Fable's honest flag (NOT a decision):** the helix is flat-colored per draw (no per-face
-  lighting) — depth + dark edges carry the 3D read (demoscene silhouette). If Nir ever wants a
-  shaded helix, that's a future contract-level change. **← taste item parked for Nir if desired.**
+- **🚫 FLAT-SHADING VIOLATION (being fixed):** the delivered helix is flat-colored per draw
+  (no per-face/vertex lighting). This BREAKS the iron rule (§2). Fable D asked to redeliver a
+  GOURAUD helix. NOT acceptable as shipped.
 
 **📐 TERRAIN CANON (locked by Parent D):**
 - Shader interface: `terrain.vert` = `uniform mat4 u_mvp; in vec3 in_pos; in float in_light;`
@@ -434,9 +452,11 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      helix (flat program, dark edge lines, A6 glow); DRAPED rings/circle/arm via `height_fn` (A7
      amendment #2 — `draw(...,height_fn,...)`); breath clock unwraps measure_phase (no `time`
      import); A1 arm `90°−phase×360°`; A5 calm static rings. **DeepSeek OWES: wire main to pass
-     `terrain.height_at` into `TotemVisual.draw`** (at Parent G). Fable's honest flag (parked for
-     Nir if wanted): helix is flat-colored (no per-face lighting) by design — a future contract-
-     level change if Nir ever wants it shaded.
+     `terrain.height_at` into `TotemVisual.draw`** (at Parent G). **🚫 FLAT-SHADING VIOLATION:
+     the delivered helix is flat-colored (no per-vertex lighting) — this BREAKS Nir's iron rule
+     (§2, no flat shading ever). Fable D asked to redeliver a GOURAUD helix (courier note at
+     `loom2/HINDU/COURIER-TO-PARENT-D-GOURAUD-HELIX.md`); NOT acceptable as shipped — fix before
+     Parent E.**
    - 🔵 **Parent E — `graphics/slice_mode.py` ("The Glass Blade" 🔪)  ← IMMEDIATE NEXT STEP.**
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`
