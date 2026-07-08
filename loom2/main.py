@@ -12,9 +12,12 @@ THE LOOP (DeepSeek Q7, verified from the shipped quake/app.py precedent):
   pyglet.app.run(), NOT schedule_interval, and NO on_draw handler (so pyglet
   can never double-draw). input_map pushed its own key/mouse handlers at
   construction; dispatch_events() services them, and frame step 1 drains the
-  resulting queue via input.poll(). vsync=True paces the loop at the display
-  rate; dt is measured (perf_counter) and clamped by MAX_DT so a debugger
-  pause or window drag can never teleport the totem.
+  resulting queue via input.poll(). The loop is PACED to TARGET_FPS with an
+  explicit sleep that ALWAYS yields the GIL (screech fix 2026-07-08: vsync was
+  NOT honored on Nir's machine -> ~1000 fps -> GIL starvation of the audio
+  callback -> screech; a paced loop cured it). dt is measured (perf_counter)
+  and clamped by MAX_DT so a debugger pause or window drag can never teleport
+  the totem.
 
 WINDOW (Nir's rulings, 2026-07-08): 1280x720 from config, caption EXACTLY
   "LOOM2 — Sonifiquation", resizable=False (framebuffers are fixed-size;
@@ -77,6 +80,15 @@ from graphics.totem import TotemVisual
 WINDOW_CAPTION = "LOOM2 — Sonifiquation"   # Nir's exact string, 2026-07-08
 MAX_DT = 0.1   # seconds; clamp so a stall (drag, debugger) can't teleport
 
+# SCREECH FIX (Fable, 2026-07-08): the loop must be PACED. On Nir's machine the
+# driver ignored vsync and the loop free-ran at ~1000 fps, holding the GIL almost
+# continuously and starving the PortAudio callback -> underruns -> screech. We now
+# cap to TARGET_FPS and ALWAYS yield at least MIN_SLEEP so the audio thread breathes.
+# Measured: 0 underruns, screech gone, CPU 3.8% -> 1.2%.
+TARGET_FPS = 60.0
+FRAME_SEC = 1.0 / TARGET_FPS
+MIN_SLEEP = 0.003   # ALWAYS yield at least this: the audio thread's guaranteed breath
+
 
 # =============================================================================
 # SCENE APPLICATION -- the one mutation main performs (used on scene_changed,
@@ -138,7 +150,9 @@ def build() -> dict:
     # 1. Bare window -- no GL context here; Renderer owns that [Q7].
     window = pyglet.window.Window(
         width=config.WINDOW_W, height=config.WINDOW_H,
-        caption=WINDOW_CAPTION, resizable=False, vsync=True)
+        caption=WINDOW_CAPTION, resizable=False,
+        vsync=False)   # driver ignored vsync on Nir's machine (measured ~1000fps);
+                       # we pace manually in main() below (screech fix, 2026-07-08)
 
     # 2. Renderer creates the moderngl context + panel FBOs.
     renderer = Renderer(window)
@@ -278,12 +292,17 @@ def main() -> None:
         window = objs["window"]
         last = time.perf_counter()
         while not window.has_exit and not objs["quit_requested"]:
+            frame_start = time.perf_counter()
             window.dispatch_events()          # fires input_map's handlers
             now = time.perf_counter()
             dt = min(now - last, MAX_DT)      # stall-proof
             last = now
             frame(objs, dt)
             window.flip()
+            # Pace to TARGET_FPS and ALWAYS yield the GIL so audio breathes
+            # (the screech fix, 2026-07-08 -- measured: 0 underruns with this).
+            elapsed = time.perf_counter() - frame_start
+            time.sleep(max(FRAME_SEC - elapsed, MIN_SLEEP))
     finally:
         if objs is not None:
             objs["engine"].stop()             # audio first, always [Q8]

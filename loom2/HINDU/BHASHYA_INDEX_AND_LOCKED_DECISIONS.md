@@ -21,6 +21,17 @@
     underruns to ~2-3/s; screech unchanged. → needs Fable's ring-buffer / off-audio-thread synthesis
     redesign (a 4× buffer barely helped ⇒ long GIL-hold stalls, not deadline-by-a-hair). Step-0 changes
     remain in place pending Fable's decision.
+  - **✅ Problem 1 — ROOT CAUSE FOUND + FIX APPLIED (Round 2, July 8):** Fable's Experiments C/D/E
+    (DeepSeek's `diag_frames.py`) proved the villain: the manual loop **free-ran at ~1000 fps** because
+    **vsync was NOT honored on Nir's machine** (all frame stages are sub-ms; CPU only 3.8%). Spinning
+    1000×/s held the GIL almost continuously → PortAudio callback starved → underruns → screech.
+    Experiment D (add `time.sleep(0.003)`/frame) → **underruns 0, screech GONE, CPU 3.8%→1.2%** (Nir
+    confirmed). NOT a ring-buffer problem. **FIX (Fable's main.py delta, applied by DeepSeek):** in
+    `main.py` set `vsync=False` + add `TARGET_FPS=60/FRAME_SEC/MIN_SLEEP=0.003` and pace the loop
+    (`time.sleep(max(FRAME_SEC-elapsed, MIN_SLEEP))` at end) so the loop caps at 60 fps and ALWAYS
+    yields the GIL. `diag_game.py` mirrors the paced loop for measurement. ⏳ Awaiting Nir's confirm
+    (Run 1: BLOCK_SIZE=4096 → expect underruns 0; Run 2: revert BLOCK_SIZE→1024 keep latency='high', if
+    still 0 keep 1024 for snappier ~23ms response). Then Problem 2 (voicing/beauty).
   - **✅ Problem 3 — FIXED (DeepSeek, Fable-prescribed):** `audio/sampler.py` now caches each decoded+
     resampled+normalized buffer to `data/samples_cache/<id>.npy` (reused if newer than the mp3 AND the
     manifest). **First boot ~16.6 s (builds cache), every boot after ~0.12 s** (verified). `main.py`

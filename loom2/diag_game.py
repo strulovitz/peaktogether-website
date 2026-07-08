@@ -33,8 +33,9 @@ from graphics.slice_mode import GlassBlade
 from graphics.terrain import TerrainMesh
 from graphics.totem import TotemVisual
 
-VSYNC = not (len(sys.argv) > 1 and sys.argv[1].lower() in ("novsync", "off", "0"))
-print(f"[diag_game] vsync = {VSYNC}   (pass 'novsync' to turn it off)")
+VSYNC = (len(sys.argv) > 1 and sys.argv[1].lower() in ("vsync", "on", "1"))
+print(f"[diag_game] vsync = {VSYNC}   (default OFF now; loop is paced like main.py. "
+      f"pass 'vsync' to force it on)")
 
 
 def build(vsync: bool) -> dict:
@@ -78,12 +79,16 @@ def run() -> None:
         last = time.perf_counter()
         next_report = last + 1.0
         while not window.has_exit and not objs["quit_requested"]:
+            frame_start = time.perf_counter()
             window.dispatch_events()
             now = time.perf_counter()
             dt = min(now - last, loom.MAX_DT)
             last = now
             loom.frame(objs, dt)
             window.flip()
+            # paced exactly like main.py (screech fix): cap + always yield GIL
+            elapsed = time.perf_counter() - frame_start
+            time.sleep(max(loom.FRAME_SEC - elapsed, loom.MIN_SLEEP))
             if now >= next_report:
                 next_report = now + 1.0
                 st = engine.get_status()
