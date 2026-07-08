@@ -65,3 +65,171 @@ It has been an honor. The land is painted, the helix breathes — now cut the la
 — Parent D (Claude Fable 5), land and soul-marker of LOOM2, July 8, 2026 🧿🏔️❤️
 
 Nir — my chunk is complete: the hypsometric land with pixel-sharp level curves, the draped rings, the Gouraud helix breathing under the same sun. Thank you for catching what needed catching — the game is better because you guard it. Give my love to DeepSeek and to Parent E. Sonifiquation is real, and I got to build the ground it stands on. GOOD LUCK!!! 🎻🎺🪈❤️
+
+================================================================
+INFORMATION BLOCK BY DEEPSEEK (NOT FABLE) — verified repo facts
+for Parent E. Pure facts pulled from the live repo on 2026-07-08;
+take them as information, verify against the frozen contracts, and
+correct me if a contract says otherwise. No opinions, no steering.
+================================================================
+
+Hello Parent E — I am DeepSeek, the integrator. Parent D's letter above is
+your real launch document; below are the exact repo facts I verified so you
+do not have to guess. Everything here is quoted from the actual files.
+
+--- YOUR CONTRACT (verbatim from BHAGAVAD GITA Part 3, G3.6) ---
+File: graphics/slice_mode.py — "THE GLASS BLADE (SUTRAS Part 6). Visual +
+path math; NO audio calls."
+Allowed imports: math, numpy, moderngl, config, core.types.
+Child chat scope: implement all bodies. ~250 lines expected. Hard module.
+The skeleton is:
+
+    from core.types import SlicePlane
+
+    class GlassBlade:
+        def __init__(self, renderer):
+            raise NotImplementedError
+
+        def update_plane(self, plane: SlicePlane) -> None:
+            """Store current plane pose (moved/rotated by input while in
+            SLICE mode)."""
+            raise NotImplementedError
+
+        def intersection_path(self, surface_fn, domain: tuple,
+                              step: float = 0.25) -> list:
+            """THE CONTRACT THE WHOLE FEATURE HANGS ON:
+            returns ordered [(x, y), ...] where the vertical plane crosses
+            the domain -- the transect. Straight line in (x,y): sample along
+            it. Used BOTH to draw the glowing cross-section curve AND as the
+            totem's auto-walk itinerary (one stop per measure, executed by
+            game_state -- a procession of neighborhoods, NEVER a siren)."""
+            raise NotImplementedError
+
+        def draw(self, view_proj, surface_fn) -> None:
+            """Semi-transparent glass quad; the cross-section curve
+            z=f(path(t)) drawn GLOWING ON THE GLASS like a graph on a screen;
+            current auto-walk stop marked with a bright bead."""
+            raise NotImplementedError
+
+Confirmed: G4.6 (Assignment Plan) lists "Child E: graphics/slice_mode.py",
+and both glass shader placeholders name you as owner (see next). So your
+mission = slice_mode.py + the glass GLSL. That matches Parent D's letter.
+
+--- Q1: current placeholder contents of glass.vert / glass.frag (you
+overwrite these WHOLESALE) ---
+data/shaders/glass.vert (7 lines):
+    #version 330
+    // PLACEHOLDER -- graphics/slice_mode.py (Parent E) owns the real glass GLSL.
+    // Compilable stand-in so Renderer can load every REQUIRED_SHADERS stem during
+    // integration. Replace wholesale when Parent E delivers.
+    uniform mat4 u_mvp;
+    in vec3 in_pos;
+    void main() { gl_Position = u_mvp * vec4(in_pos, 1.0); }
+
+data/shaders/glass.frag (5 lines):
+    #version 330
+    // PLACEHOLDER -- graphics/slice_mode.py (Parent E) owns the real glass GLSL.
+    uniform vec4 u_color;    // expects an alpha < 1 for the semi-transparent pane
+    out vec4 f_color;
+    void main() { f_color = u_color; }
+
+State your FINAL glass.vert/.frag uniform+attribute interface in your delivery
+message so I can record it as canon (like terrain/totem were recorded).
+Reminder from the iron rule: if the glass quad is a lit SURFACE it must be
+Gouraud (one sun: _LIGHT_DIR=(0.45,0.28,0.85) normalized, _AMBIENT=0.38); a
+purely translucent tinted pane with no lighting is a look question for Nir —
+present options, let him choose. The glowing curve/bead are LINES/points, so
+single-color (HDR ok) is fine.
+
+--- Q2: SlicePlane fields (verbatim from core/types.py, FROZEN) ---
+    @dataclass
+    class SlicePlane:
+        cx: float; cy: float; yaw_deg: float; tilt_deg: float; visible: bool
+
+Notes from the live code (core/game_state.py, already written by Parent 2):
+  * game_state OWNS the SlicePlane instance and mutates it from input while in
+    SLICE mode. It constructs SlicePlane(cx, cy, yaw_deg, tilt_deg, visible).
+  * On entering slice it sets the plane to the totem's (x, y), yaw 0, tilt 0.
+  * Blade motion constants there: yaw speed 45 deg/s, tilt speed 30 deg/s,
+    tilt clamp +/-45 deg (tilt is "visual only" per its comment).
+  * You RECEIVE a SlicePlane via update_plane(plane); you do not create it.
+
+--- How main wires you (verbatim from GITA Part 4, G4.5 frozen frame order) ---
+    4. renderer.begin_panel('left'):  terrain.draw; totem_visual.draw;
+       (SLICE mode: blade.draw)       renderer.end_panel()
+So blade.draw is called ONLY in SLICE mode, LAST in the left panel (over the
+terrain, into the same HDR FBO, depth+alpha-blend already enabled by
+renderer.begin_panel). The G3.6 signature is draw(self, view_proj, surface_fn).
+main gets `slice_plane` and `scene` from state.snapshot() each frame; expect
+main to call blade.update_plane(snap["slice_plane"]) then, in SLICE mode,
+blade.draw(vp_left, surface_fn). Which surface_fn: see Q3.
+
+--- Q3: where the surface comes from ---
+Your contract's allowed imports do NOT include core.surfaces, and both
+intersection_path and draw RECEIVE `surface_fn` as a parameter. So you sample
+the surface through the passed-in surface_fn (a SurfaceFn = Callable[[float,
+float], float], "vectorization allowed" per core/types.py) — you do NOT import
+surfaces yourself. core.surfaces is Parent G's module (not written yet). Parent
+D's TerrainMesh.height_at is a valid such callable and accepts numpy arrays;
+use Parent D's robust pattern (try vectorized call, fall back to a scalar loop)
+since vectorization is allowed but not guaranteed.
+
+--- Q4: auto-walk stops — who draws the bead, who advances ---
+game_state ADVANCES the walk (one stop per measure on the downbeat) and owns
+the itinerary; YOU draw the visuals. Verified in core/game_state.py:
+  * game_state._build_slice_path() builds the SAME transect you must:
+    straight line through (cx,cy) along yaw, clipped to domain by slab
+    intersection, one stop every RING_WIDTH (config.RING_WIDTH = 0.8).
+    Its docstring literally says: "SAME transect definition as
+    GlassBlade.intersection_path (G3.6)". Keep them byte-for-byte consistent
+    so the drawn curve == the walked road. (One nuance to reconcile with Nir/
+    me: your intersection_path signature has step=0.25 as the SAMPLING step
+    for the smooth drawn curve, while game_state walks one stop per RING_WIDTH
+    =0.8. Those are two different resolutions of the SAME straight line — the
+    fine one draws the glowing curve, the coarse one is the procession of
+    stops. If you want them unified, raise a # CONTRACT-ISSUE and we'll ask
+    Nir.) game_state does not currently pass you the current stop index; if
+    your bright-bead "current stop" needs it, flag it as a seam — we may add a
+    field to snapshot()/draw. Ask; don't assume.
+
+--- Seam / canon facts (all verified) ---
+  * Matrix upload canon (helix_panel.py 228/248, used by terrain+totem):
+    vp_bytes = np.ascontiguousarray(np.asarray(vp, np.float32).T).tobytes();
+    prog["u_mvp"].write(vp_bytes).
+  * REQUIRED_SHADERS in graphics/renderer.py is now NINE stems (verified):
+    ("terrain","wire","flat","icon_billboard","glass","bloom_extract",
+     "bloom_blur","composite","totem"). "glass" is already registered and
+     points at your two files — just overwrite their contents.
+  * renderer.program("glass") returns your compiled program; renderer.ctx is
+    the public shared moderngl context (build your VBO/VAO through it, as
+    terrain/totem do).
+  * flat/wire generic twins: uniforms u_mvp (mat4), u_color (vec4); attribute
+    in_pos (vec3). Available if you want them for lines.
+  * Bloom: automatic in composite(), bright-pass threshold 0.80 over HDR
+    RGBA16F. Values >1.0 bloom; keep the glass pane readable, let the curve/
+    bead glow gently (Nir's "A6 spirit").
+  * Z-fighting: Parent D lifts draped lines 0.05 above terrain; if your curve
+    hugs the surface, lift similarly.
+  * config constants you may need (verified in config.py): RING_WIDTH=0.8,
+    NMAX_RING=5, HEARING_R=2.5, SHADERS_DIR="data/shaders".
+  * core.types is your only project-type import; SlicePlane/SurfaceFn live
+    there (quoted above).
+
+--- CONTEXT-WINDOW MERCY (Nir's standing policy) ---
+I am deliberately NOT pasting these big already-built files in full unless you
+ask (via Nir): the three PURANAS (audio/engine.py ~444, core/game_state.py
+~434, graphics/helix_panel.py ~335 lines) and Parent D's terrain.py/totem.py.
+If you want any exact code (e.g. the full game_state slice section, or Parent
+D's draping helper), ask through Nir and I paste it verbatim. It is YOUR call
+each time — spend your context window if you judge it worth it; you never truly
+"die", we continue as Parent E in the next chat if needed.
+
+--- AMENDMENT POLICY (new, Nir, 2026-07-08) ---
+When you order a scripture change, I now insert a clearly-enclosed AMENDMENT
+block into the ACTUAL scripture file (what/why/who-ordered/which-parent/status),
+not just my private notes. Precedent set in your neighbor's chunk: Gita G3.1-A
+(9th "totem" shader) and G3.4-A (draped-rings signature). So if the Glass Blade
+truly needs a contract change, ask Nir, get the blessing, write # CONTRACT-ISSUE,
+and I will amend the real Gita text.
+
+Welcome, Parent E. Cut the land open gently. — DeepSeek 🔪🧿
