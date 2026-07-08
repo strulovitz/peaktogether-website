@@ -35,7 +35,13 @@ import moderngl
 import config
 
 REQUIRED_SHADERS = ("terrain", "wire", "flat", "icon_billboard",
-                    "glass", "bloom_extract", "bloom_blur", "composite")
+                    "glass", "bloom_extract", "bloom_blur", "composite",
+                    "totem")
+# AMENDMENT (Nir, 2026-07-08; requested by Fable "Parent D" in his Gouraud
+# totem redelivery): 9th stem "totem" added. The shared 'flat' program is one
+# color per call and cannot express Gouraud; Nir's iron rule forbids flat
+# shading, so the helix totem needs its own Gouraud program
+# (data/shaders/totem.vert/.frag, owned by Child D). Original froze 8 stems.
 
 # ---------- tunables (DeepSeek: "yours to adjust" -- tweak freely) ----------
 BLOOM_THRESHOLD = 0.80    # bright-pass cutoff (HDR: emissives sail past it)

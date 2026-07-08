@@ -190,6 +190,23 @@ class AudioEngine:
         live engine. MUST share code with _callback (one mixer, two callers)."""
         raise NotImplementedError
 
+<<<<<<<<<< AMENDMENT G2.4-A — added 2026-07-08 (approved 2026-07-07) >>>>>>>>>>
+ORDERED BY: Nir. SURFACED BY: Fable "Parent 2" (the PURANAS: engine.py,
+game_state.py, helix_panel.py), while writing game_state._quiz_select (G4.3).
+CHANGE: ONE method added to AudioEngine:
+    def set_quiz_wav(self, path) -> None:
+        """path=str: loop this pre-rendered stereo quiz-option WAV through the
+        SAME mix/soft-clip/pan path as live voices (routes sensibly under
+        5.1/7.1). path=None: stop it (30 ms fade). Mutually exclusive with live
+        voices by game_state's discipline."""
+WHY: G4.3 (game_state._quiz_select) must play the quiz option WAV "looping,
+THROUGH THE ENGINE", but the frozen AudioEngine API (G2.4) had no method taking
+a WAV — a missing wire. This is the sanctioned fix; nothing else changed.
+CONSEQUENCE: the audio<->world seam is now 5 calls, not 4 (set_voices;
+set_camera_azimuth; set_quiz_wav; get_measure_phase; get_active_flashes).
+STATUS: implemented in audio/engine.py (PURANAS Part 1, extracted code).
+<<<<<<<<<< END AMENDMENT G2.4-A >>>>>>>>>>
+
 G2.5 — audio/render_offline.py
 
 """
@@ -217,6 +234,27 @@ def main() -> None:
 if __name__ == "__main__":
     main()
 
+<<<<<<<<<< AMENDMENT G2.5-A — added 2026-07-08 (blessed 2026-07-07) >>>>>>>>>>
+ORDERED BY: Nir (DeepSeek blessed it as courier). REQUESTED BY: Fable "Parent B"
+(the audio/sampler.py + audio/render_offline.py chunk), as a CONTRACT-NOTE.
+CHANGE (additive only — the frozen render_option signature does NOT change):
+render_option's seating lattice defaults to an integer-cornered window around the
+hearing circle. Additionally, options.json entries MAY carry optional per-option
+keys — "domain", "step", "z_per_octave" — to override the seating window/resolution.
+WHY: render_option's frozen signature carried no scene DOMAIN, so a quiz spot near
+a scene edge could seat musicians off-map. Resolved additively: nothing frozen
+changed; content authors should include "domain" when a quiz spot sits near a
+scene edge.
+STATUS: implemented in audio/render_offline.py (Parent B, extracted code).
+<<<<<<<<<< END AMENDMENT G2.5-A >>>>>>>>>>
+
 Seam summary for DeepSeek: game thread computes list[Voice] via musicians.build_voices whenever the totem moves → hands it to AudioEngine.set_voices. Camera orbit calls engine.set_camera_azimuth (azimuth only!). Graphics reads get_measure_phase / get_active_flashes. That's the entire audio↔rest-of-world seam — four calls.
+
+<<<<<<<<<< AMENDMENT G2.SEAM-A — added 2026-07-08 >>>>>>>>>>
+ORDERED BY: Nir. NOTE (correction to the seam summary just above): the seam is
+now FIVE calls, not four — set_quiz_wav was added (see AMENDMENT G2.4-A). Full
+seam: set_voices; set_camera_azimuth; set_quiz_wav; get_measure_phase;
+get_active_flashes.
+<<<<<<<<<< END AMENDMENT G2.SEAM-A >>>>>>>>>>
 
 End of Part 2. Say "continue" for Part 3 — the graphics module contracts (renderer.py, camera.py, terrain.py, totem.py, helix_panel.py, slice_mode.py, hud.py). 📜🎨

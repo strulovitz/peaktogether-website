@@ -163,6 +163,20 @@ matte rescale).
   never an acceptable delivery. (History: Parent D's `totem.py` shipped a flat-colored helix
   and DeepSeek wrongly "parked" it — corrected July 8; totem is being made Gouraud.)
 
+- **📜🔧 POLICY — AMEND THE ACTUAL SCRIPTURES, NOT JUST THE BHASHYA (Nir, July 8).**
+  When a Fable parent says to change/correct/add/remove anything from the frozen
+  scriptures (the VEDAS…GITA…PURANAS files in `loom2/HINDU/`), DeepSeek MUST insert a
+  clearly-enclosed amendment block **in the actual scripture file**, at the end of the
+  relevant paragraph/section — NOT only here or in the BHASHYA (nobody reads those but
+  DeepSeek; future parents read the scriptures). Format: a block fenced by
+  `<<<<<<<<<< AMENDMENT <id> — added <date> >>>>>>>>>>` … `<<<<<<<<<< END AMENDMENT <id> >>>>>>>>>>`,
+  stating WHAT changed, WHY, WHO ORDERED it (always Nir) and WHICH PARENT requested it,
+  and STATUS. Never silently rewrite a parent's original words — leave them intact and
+  append the amendment block right after. (Applied July 8 to Gita Part 2 [G2.4-A quiz WAV,
+  G2.5-A render_option domain, G2.SEAM-A 5-call seam] and Part 3 [G3.1-A 9th "totem" shader,
+  G3.2-A camera_limits, G3.3-A Gouraud/hard-bands/no-water terrain, G3.4-A draped rings +
+  Gouraud helix + arm direction].)
+
 - **Tech stack (Nir overrides the VEDAS "no OpenGL"):** **use OpenGL** —
   **moderngl + pyglet** (the modern shader stack of Quake & Homeworld: moderngl
   5.12.0 / pyglet 2.1.14), NOT pure-software, NOT PyOpenGL (that was Descent's older
@@ -211,12 +225,13 @@ helix, `LOOM2-PARENT-D-PART-2-TOTEM-BY-FABLE.md`). The whole audio package + gra
 camera/renderer/terrain/totem + helix_panel are now real code.
 
 - **🚫 IRON RULE REMINDER:** NO FLAT SHADING EVER — everything is GOURAUD (see §2 top).
-- **⏳ BLOCKER BEFORE PARENT E:** Parent D's `totem.py` shipped the helix **flat-colored**
-  (one `u_color` per draw, no per-vertex lighting). This VIOLATES the iron rule. Fable D has
-  been asked (courier note saved at `loom2/HINDU/COURIER-TO-PARENT-D-GOURAUD-HELIX.md`) to
-  redeliver a **GOURAUD-shaded helix** — amend the contract / add a shaded program as needed.
-  When his fix arrives: save verbatim → re-extract `totem.py` (+ any new shader) → py_compile →
-  update memory → push. Only THEN launch Parent E.
+- **✅ FLAT HELIX FIXED (July 8):** Parent D redelivered `totem.py` with a **GOURAUD** helix
+  (per-vertex Lambert from the ribbon's analytic radial normals, same sun/ambient as terrain).
+  A NEW 9th shader stem **"totem"** was added (`data/shaders/totem.vert/.frag`, owned by Child D)
+  because the shared `flat` program can't shade; `flat` now draws only LINES (edges/rings/circle/
+  arm — no surface, so not flat shading). `renderer.REQUIRED_SHADERS` grew 8→9. Redelivery saved
+  verbatim (`LOOM2-PARENT-D-PART-2-TOTEM-GOURAUD-REDELIVERY-BY-FABLE.md`), extracted, py_compile OK,
+  ACTUAL scriptures amended (G3.1-A + G3.4-A), pushed.
 
 **⏭️ NEXT ACTION = LAUNCH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪).
 Birth him like the others: build a launch doc = Parent D's hand-off letter (ask Fable D for one)
@@ -230,8 +245,8 @@ literally in sync with `GlassBlade.intersection_path` (G3.6) — the drawn curve
   measure_phase)` — `main` frame step 4 = `totem_visual.draw(vp_left, snap_totem,
   terrain.height_at, phase)`. **DeepSeek OWES: wire main to pass `terrain.height_at`** (at
   Parent G). `height_fn` = any `(x,y)->z` callable; `terrain.height_at` supports numpy arrays.
-- Uses the shared **`flat`** program (`u_mvp` mat4, `u_color` vec4, `in_pos` vec3) — verified
-  to match `data/shaders/flat.{vert,frag}`.
+- Uses the NEW **`totem`** Gouraud program for the helix surface + the shared **`flat`**
+  program (`u_mvp`/`u_color`/`in_pos`) for LINES only — both verified vs their shader files.
 - **Breath clock has NO `time` import** — it unwraps `measure_phase` deltas into continuous
   seconds (`Δt = Δphase × MEASURE_SEC`); the ~3 s breath never phase-locks to the 2 s measure.
   Audio stays the single king clock.
@@ -239,9 +254,10 @@ literally in sync with `GlassBlade.intersection_path` (G3.6) — the drawn curve
   dark edge lines so it always reads as a helix (A6). Rings n=1..min(NMAX_RING,⌊hr/RING_WIDTH⌋)
   static/calm (A5); hearing circle + arm (A1: `90°−phase×360°`) all DRAPED via height_fn,
   lifted 0.05 above ground (no z-fighting). Flagged `release()` (not in contract) frees GPU.
-- **🚫 FLAT-SHADING VIOLATION (being fixed):** the delivered helix is flat-colored per draw
-  (no per-face/vertex lighting). This BREAKS the iron rule (§2). Fable D asked to redeliver a
-  GOURAUD helix. NOT acceptable as shipped.
+- **✅ GOURAUD helix (iron rule honored):** the helix surface is GOURAUD-shaded via the NEW
+  "totem" shader (`u_mvp` mat4, `in_pos` vec3, `in_light` float / `u_color` vec4) — per-vertex
+  Lambert from analytic radial normals, same sun/ambient as terrain. `flat` draws only the LINES
+  (edges/rings/circle/arm). Breath swing retuned 0.70↔1.75.
 
 **📐 TERRAIN CANON (locked by Parent D):**
 - Shader interface: `terrain.vert` = `uniform mat4 u_mvp; in vec3 in_pos; in float in_light;`
@@ -452,11 +468,11 @@ negative lake) all confirmed by Nir on headphones. The invention is real. ✅
      helix (flat program, dark edge lines, A6 glow); DRAPED rings/circle/arm via `height_fn` (A7
      amendment #2 — `draw(...,height_fn,...)`); breath clock unwraps measure_phase (no `time`
      import); A1 arm `90°−phase×360°`; A5 calm static rings. **DeepSeek OWES: wire main to pass
-     `terrain.height_at` into `TotemVisual.draw`** (at Parent G). **🚫 FLAT-SHADING VIOLATION:
-     the delivered helix is flat-colored (no per-vertex lighting) — this BREAKS Nir's iron rule
-     (§2, no flat shading ever). Fable D asked to redeliver a GOURAUD helix (courier note at
-     `loom2/HINDU/COURIER-TO-PARENT-D-GOURAUD-HELIX.md`); NOT acceptable as shipped — fix before
-     Parent E.**
+     `terrain.height_at` into `TotemVisual.draw`** (at Parent G). **✅ GOURAUD HELIX (iron rule):
+     Parent D redelivered `totem.py` Gouraud-shaded via a NEW 9th shader stem "totem"
+     (`data/shaders/totem.vert/.frag`); `flat` now draws only LINES; `REQUIRED_SHADERS` 8→9.
+     Actual scriptures amended (G3.1-A + G3.4-A). Redelivery saved verbatim
+     (`LOOM2-PARENT-D-PART-2-TOTEM-GOURAUD-REDELIVERY-BY-FABLE.md`), py_compile OK.**
    - 🔵 **Parent E — `graphics/slice_mode.py` ("The Glass Blade" 🔪)  ← IMMEDIATE NEXT STEP.**
    - Parent E — `graphics/slice_mode.py`
    - Parent F — `graphics/hud.py` + `core/input_map.py`

@@ -1,3 +1,7 @@
+You got it, Nir — iron rule absorbed and it will not be broken again: no flat-shaded surfaces, ever; everything Gouraud. 🙏 The helix now gets true per-vertex Lambert, matching the terrain's lighting language exactly (same sun, same ambient floor). One honest note on the physics of it: the helix only ever translates (never rotates), so baking world-space Lambert into a per-vertex attribute at build time is mathematically exact Gouraud — identical to computing it in the shader, and it stays static-VBO clean. The ribbon's normals are analytic: for a vertical ribbon coil the surface normal is the outward radial (cosa,sina,0), so the light wraps around the coil the way it should.
+
+Redelivered graphics/totem.py, complete (only the shading architecture changed — breath, edges, draped overlays, A1/A5/A6/A7 all kept):
+
 """
 LOOM2 -- graphics/totem.py
 The tiny cute polygonal helix totem + ground projections (SUTRAS Part 7).
@@ -247,3 +251,43 @@ class TotemVisual:
                 obj.release()
             except Exception:
                 pass
+
+data/shaders/totem.vert (NEW stem, owned by Child D):
+
+#version 330
+// LOOM2 totem.vert -- owned by graphics/totem.py (Child D). NEW ninth stem,
+// added with Nir's blessing (Gouraud iron rule; 'flat' cannot shade).
+// in_light = per-vertex Lambert baked from the ribbon's analytic normals
+// (exact: the totem only translates, never rotates).
+uniform mat4 u_mvp;
+in vec3 in_pos;
+in float in_light;
+out float v_light;
+void main() {
+    v_light = in_light;
+    gl_Position = u_mvp * vec4(in_pos, 1.0);
+}
+
+data/shaders/totem.frag:
+
+#version 330
+// LOOM2 totem.frag -- owned by graphics/totem.py (Child D).
+// Gouraud-lit emissive: breathing HDR gold (u_color, may exceed 1.0 for
+// bloom) modulated by smoothly interpolated per-vertex light.
+uniform vec4 u_color;
+in float v_light;
+out vec4 f_color;
+void main() {
+    f_color = vec4(u_color.rgb * v_light, u_color.a);
+}
+
+Numbered remarks for DeepSeek:
+
+    New shader stem (CONTRACT-ISSUE, blessed): add "totem" to renderer.REQUIRED_SHADERS (8 → 9) and drop the two files above into data/shaders/. Interface canon: vert takes u_mvp (mat4), attributes in_pos (vec3) + in_light (float); frag takes u_color (vec4). Please amend G3.1 and G3.4 in the scripture.
+    The Gouraud math: ribbon normal is analytically the outward radial (cosa,sina,0); Lambert =ambient+(1−ambient)⋅max(n^⋅l^,0) with the same _LIGHT_DIR (0.45,0.28,0.85) and _AMBIENT 0.38 as terrain — one sun for the whole world. Baked per-vertex (exact, since the model only translates), interpolated by the GPU: true Gouraud.
+    Breath retuned for Gouraud: emissive swing raised to 0.70..1.75 because the light term dims the shadow side; the lit side still crosses the 0.80 bloom threshold and breathes (A6), the dark side stays warm and readable.
+    Two VBOs for the helix (positions + light) instead of interleaving, so the edge-line VAO can reuse the position buffer with the flat program cleanly.
+    Scope of "flat" that remains: only LINES (edge lines, rings, hearing circle, arm) — lines have no surface to shade, so this is not flat shading; no surface anywhere in my chunk is flat-shaded. If Nir ever wants the lines lit too, that's a new decision, his call.
+    Everything else is byte-identical in behavior to the accepted delivery: A1 arm, A5 calm rings, A7 draping with vectorized fallback, breath clock from unwrapped measure_phase, release() flag unchanged.
+
+The little helix now breathes in Gouraud, under the same sun as the land it stands on. 🧿✨ Ready for py_compile and integration word!

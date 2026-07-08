@@ -45,6 +45,26 @@ REQUIRED_SHADERS = ("terrain", "wire", "flat", "icon_billboard",
                     "glass", "bloom_extract", "bloom_blur", "composite")
 # DeepSeek creates these files; children write GLSL inside them as needed.
 
+<<<<<<<<<< AMENDMENT G3.1-A — added 2026-07-08 >>>>>>>>>>
+ORDERED BY: Nir (iron rule: NO FLAT SHADING EVER — everything Gouraud).
+REQUESTED BY: Fable "Parent D" (the graphics/terrain.py + graphics/totem.py chunk),
+in his Gouraud totem redelivery.
+CHANGE: REQUIRED_SHADERS grows from 8 stems to 9 — a NINTH stem "totem" is added:
+    REQUIRED_SHADERS = ("terrain", "wire", "flat", "icon_billboard",
+                        "glass", "bloom_extract", "bloom_blur", "composite",
+                        "totem")
+WHY: the shared 'flat' program is one flat color per draw call and cannot express
+Gouraud shading, which the iron rule requires for the helix totem's surface. The
+new "totem" program is owned by graphics/totem.py (Child D); its GLSL lives in
+data/shaders/totem.vert + data/shaders/totem.frag.
+INTERFACE (canon):
+    totem.vert: uniform mat4 u_mvp; in vec3 in_pos; in float in_light;
+    totem.frag: uniform vec4 u_color;   // f_color = vec4(u_color.rgb * v_light, u_color.a)
+STATUS: applied in graphics/renderer.py (extracted code) 2026-07-08; both shader
+files created. (The 'flat' program stays for LINES only — edge lines, rings,
+hearing circle, arm — which have no surface to shade, so that is not flat shading.)
+<<<<<<<<<< END AMENDMENT G3.1-A >>>>>>>>>>
+
 G3.2 — graphics/camera.py
 
 """
@@ -86,6 +106,25 @@ class OrbitCamera:
         framing the full 6-octave helix. Rotating one rotates both."""
         raise NotImplementedError
 
+<<<<<<<<<< AMENDMENT G3.2-A — added 2026-07-08 (locked 2026-07-07) >>>>>>>>>>
+ORDERED BY: Nir. ESTABLISHED BY: Fable "Parent C" (the camera.py + renderer.py
+chunk), as the first consumer of SceneSpec.camera_limits.
+CHANGE (de-facto contract nailed down — no signature change): the camera_limits
+dict (from SceneSpec.camera_limits, consumed by OrbitCamera.__init__) has these
+canonical keys, which Parent G's scene.py validation AND every scene.json MUST
+conform to:
+    "target"    : 3-list world point, default [0, 0, 0]
+    "zoom_min"  : float, default 0.5
+    "zoom_max"  : float, default 2.5
+    "distance"  : float, OPTIONAL, default 14.0
+MATRIX CONVENTION (locked, matches helix_panel): column vectors, clip = VP @ p,
+uploaded transposed via np.ascontiguousarray(vp.T).tobytes(). Zoom factor > 1 =
+zoom IN (confirmed consistent with game_state). The helix panel uses a FIXED
+distance (~16.1, bounding-sphere, elevation-proof); zoom applies to terrain only.
+STATUS: implemented + behavior-tested in graphics/camera.py (Parent C).
+DEEPSEEK OWES: propagate these keys to Parent G's scene.py + all scene JSON.
+<<<<<<<<<< END AMENDMENT G3.2-A >>>>>>>>>>
+
 G3.3 — graphics/terrain.py
 
 """
@@ -111,6 +150,34 @@ class TerrainMesh:
         """Exact f(x,y) passthrough -- used to plant the totem on the ground."""
         raise NotImplementedError
 
+<<<<<<<<<< AMENDMENT G3.3-A — added 2026-07-08 >>>>>>>>>>
+ORDERED BY: Nir (decisions A2/A3/A4 + snow-bloom). REQUESTED/DELIVERED BY: Fable
+"Parent D" (the terrain.py + totem.py chunk).
+CLARIFICATIONS to the __init__ docstring above (which said "flat/Gouraud shaded"
+and "Water plane at z=0"):
+  A3 — SHADING IS GOURAUD, NOT FLAT (Nir's iron rule: no flat shading ever).
+       Per-vertex Lambert light (from central differences of the true surface_fn,
+       sun _LIGHT_DIR=(0.45,0.28,0.85), _AMBIENT=0.38), smoothly interpolated.
+  A2 — HARD hypsometric bands: band color is chosen PER FRAGMENT from the
+       interpolated world height, so band edges are pixel-sharp level curves.
+       (Gouraud light × hard per-fragment bands = smooth shading AND crisp curves.)
+       Band edges (absolute world z, identical every scene): (-1.5, -0.6, 0.0,
+       1.1, 2.2); darkest abyss = COLOR_DEEP_WATER * 0.55.
+  A4 — NO separate water plane / no water VBO. Below z=0 is the SAME mesh in hard
+       blue bands darkening with depth. (A static second VBO would have been
+       contract-legal, but Nir's design removes the need.)
+  SNOW-BLOOM (Nir) — terrain colors stay <= 1.0 EXCEPT peak snow (~0.82-0.84),
+       which Nir CHOSE to keep just above the 0.80 bloom bright-pass for a faint
+       shimmer.
+OWNED SHADERS (terrain.py owns these; interface canon):
+  terrain.vert: uniform mat4 u_mvp; in vec3 in_pos; in float in_light;
+  terrain.frag: uniform vec3 u_band_colors[6]; uniform float u_band_edges[5];
+ADDITION (flagged): TerrainMesh.release() frees VBO/IBO/VAO on scene change (not
+in the frozen contract; safe to never call; main should call old_mesh.release()).
+height_at is a pure passthrough that also accepts numpy arrays (fast draping).
+STATUS: implemented in graphics/terrain.py (Parent D, extracted code) 2026-07-08.
+<<<<<<<<<< END AMENDMENT G3.3-A >>>>>>>>>>
+
 G3.4 — graphics/totem.py
 
 """
@@ -134,6 +201,38 @@ class TotemVisual:
         conductor's arm sweeping once per measure (angle = measure_phase*360,
         12 o'clock at phase 0 -- the downbeat)."""
         raise NotImplementedError
+
+<<<<<<<<<< AMENDMENT G3.4-A — added 2026-07-08 >>>>>>>>>>
+ORDERED BY: Nir. REQUESTED BY: Fable "Parent D" (the terrain.py + totem.py chunk).
+Two changes to TotemVisual.draw, both delivered in graphics/totem.py:
+
+(1) DRAPED RINGS — signature change (Nir's decision A7).
+    OLD:  def draw(self, view_proj, totem_state, ground_z: float,
+                   measure_phase: float) -> None
+    NEW:  def draw(self, view_proj, totem_state, height_fn,
+                   measure_phase: float) -> None
+    WHY: A7 requires the hearing circle + rhythm rings + arm to be DRAPED over
+    the terrain (hugging every bump/dip), which needs terrain height sampled all
+    around each ring — a single scalar ground_z is not enough. height_fn(x, y) -> z
+    is a callable; main passes TerrainMesh.height_at (a pure surface-fn passthrough
+    that accepts numpy arrays for fast draping). The totem computes its own ground
+    height from height_fn.
+    DEEPSEEK OWES: wire main's frame step 4 to pass terrain.height_at:
+        totem_visual.draw(vp_left, snap_totem, terrain.height_at, phase)
+
+(2) GOURAUD HELIX — no flat shading (Nir's iron rule).
+    The helix surface is GOURAUD shaded (per-vertex Lambert from the ribbon's
+    analytic radial normals, same sun _LIGHT_DIR=(0.45,0.28,0.85) and _AMBIENT=0.38
+    as terrain.py), drawn with the NEW "totem" shader program (see AMENDMENT G3.1-A).
+    The 'flat' program is used ONLY for LINES (edge lines, rings, hearing circle,
+    arm) — lines have no surface to shade, so this obeys the iron rule.
+
+(3) ARM DIRECTION — clarified (Nir's decision A1).
+    The docstring says "angle = measure_phase*360"; the LOCKED value is
+    angle = 90 - measure_phase*360 degrees (CLOCKWISE from above; phase 0 = 12
+    o'clock = world +y), matching helix_panel.py line 253 verbatim.
+STATUS: all three applied in graphics/totem.py (extracted code) 2026-07-08.
+<<<<<<<<<< END AMENDMENT G3.4-A >>>>>>>>>>
 
 G3.5 — graphics/helix_panel.py
 
