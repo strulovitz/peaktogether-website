@@ -9,6 +9,16 @@
 
 ### Decided by Nir (recently closed)
 
+- 🐞 **PARENT E'S GLASS BLADE — DELIVERED, EXTRACTED, WIRING HELD ON A BUG (July 8).** All 4 files
+  (`core/slicing.py`, `graphics/slice_mode.py`, `glass.vert/.frag`) saved verbatim
+  (`LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`) + extracted + py_compile OK + committed INERT. **The
+  regression guard FAILED:** marching-squares degenerates when the cut passes through grid vertices
+  (yaw=45 through integer/half centers) → spurious closed loop / non-monotonic out-and-back walk
+  (yaw=45 c=(−2.5,2.0)) and 1 line shattering into 26 components (yaw=135 c=(0,0)); generic/axis
+  angles clean. **DeepSeek HELD (breaking-change guard):** not wiring game_state→walk_path (would
+  regress the working vertical slice), not amending G3.6/G4.3, until Parent E fixes it. Bug couriered
+  Nir → Parent E. Full detail in `PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`.
+
 - 🔪 **PARENT E Q&A BATCH 1 — Nir's calls (July 8).** Full Q&A saved verbatim at `PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`. **Q4 (bead) = OPTION 2, the ADDITIVE AMENDMENT** — expose walk index (+walking) in `game_state.snapshot()`, add `GlassBlade.set_walk_stop(idx_or_none)`, main wires it; Parent E draws a precise bead ON the curve. Nir authorized amending the frozen contracts + extra stitching. **PLUS a locked design directive: SUPPRESS/HIDE the tall totem in SLICE mode** — when concentrating on one path exact height is critical and the tall totem reads like a "margin of error" that confuses players; the precise glowing bead (at z=f(stop)) is the true position marker. (main/frame-order + maybe totem_visual job at Parent G — record as amendment when implemented.) **Q7 (look) = show Nir ALL options with tradeoffs, no pre-selection.** Standing note couriered: Fable may ask DeepSeek as many questions/rounds as needed.
 
 - 🚫🔒 **IRON RULE — NO FLAT SHADING, EVER (Nir, absolute).** Every 3D surface/model in LOOM2 is **GOURAUD** shaded. Flat shading is FORBIDDEN in all of Nir's games — not a taste a parent may pick, propose, "park," or default to. If a contract/shader blocks it, amend the contract to make it Gouraud. Flat geometry = a BUG, never an acceptable delivery. (Parent D's totem helix shipped flat; being fixed to Gouraud July 8.)

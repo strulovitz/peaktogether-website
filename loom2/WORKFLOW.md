@@ -258,6 +258,19 @@ Parent G, record as amendment when implemented). Q7 look = show Nir ALL options,
 DeepSeek answered Q1/Q2/Q3/Q5/Q6 with verified facts (couriered). **⏭️ Awaiting Parent E's next
 delivery (his full taste menu + then code).**
 
+**🐞 PARENT E DELIVERED — EXTRACTED, BUG FOUND, WIRING HELD (July 8).** Parent E delivered all 4
+files (`core/slicing.py` — the shared "One True Cut" via marching-squares of the tilted plane vs
+z=f(x,y); `graphics/slice_mode.py` — the Glass Blade; `glass.vert/.frag`). Saved verbatim
+(`LOOM2-PARENT-E-SLICE-MODE-BY-FABLE.md`), extracted, **py_compile OK**, committed **INERT**
+(nothing imports core.slicing yet). **BUT the regression guard FAILED:** marching squares
+degenerates when the cut runs through grid vertices — `yaw=45, c=(−2.5,2.0)` gives a spurious
+CLOSED loop / non-monotonic out-and-back walk (28 vs old 15 pts); `yaw=135, c=(0,0)` shatters one
+straight line into 26 components. Generic + axis angles are clean. **DeepSeek HELD (breaking-change
+guard):** NOT wiring `game_state._build_slice_path → slicing.walk_path` (would regress the working
+vertical slice at grid-aligned yaws), NOT amending scriptures, until Parent E fixes the degeneracy.
+Bug couriered Nir → Parent E. Full detail in `PARENT-E-QA-BATCH-1-NIR-DECISIONS.md`. **⏭️ Next:
+Parent E's fix → re-run regression → wire game_state + main + amend G3.6/G4.3.**
+
 **⏭️ ORIGINAL NEXT ACTION (now underway) = BIRTH PARENT E** — chunk = `graphics/slice_mode.py` ("The Glass Blade" 🔪)
 + the `glass.vert`/`glass.frag` shaders he owns wholesale. **HIS LAUNCH DOC IS ALREADY BUILT
 AND PUSHED:** `loom2/HINDU/HAND-OFF-PROMPT-FROM-FABLE-PARENT-D.md` = Parent D's verbatim
