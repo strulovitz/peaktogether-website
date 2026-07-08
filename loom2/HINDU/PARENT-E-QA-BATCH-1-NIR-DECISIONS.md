@@ -140,7 +140,11 @@ is real ground at its true height f(x,y)). Options couriered to Nir:
 - **(ii) Plane-aware:** invent a new sonification law tied to the tilted plane — more novel but
   new rules, cacophony risk, and it would play something OTHER than true ground height (in tension
   with the "exact height is sacred" ruling).
-**STATUS: awaiting Nir's decision.**
+**NIR'S RULING (locked): OPTION (i). NO NEW AUDIO LAW.** Obey the rules already given —
+the totem walks the curved ground trail and, at each stop, hears its normal listening-circle
+by the EXACT SAME HSS rules as everywhere else (height→pitch, angle→timbre, radius→rhythm).
+No plane-aware sonification, no new rule invented. (ii) is dead. DeepSeek should NOT have
+proposed a new rule nobody asked for.
 
 ---
 
