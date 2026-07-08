@@ -9,6 +9,17 @@
 
 ### Decided by Nir (recently closed)
 
+- ✅ **PARENT F REDELIVERY (July 8) — improved hud.py + input_map.py, one per answer.** Nir asked
+  for a redo: each module in its OWN answer, deeper/higher-quality/beautiful, NO hand-off (deferred).
+  Saved verbatim (`LOOM2-PARENT-F-HUD-REDELIVERY-BY-FABLE.md` + `LOOM2-PARENT-F-INPUT-MAP-REDELIVERY-BY-FABLE.md`)
+  + extracted (overwrote the one-shot versions) + py_compile OK. **hud.py** gained gradient bar+buttons,
+  drop shadows, breathing selection glow (np.sin), pulsing 🔊, optical ink-box centering, fade-in feedback
+  w/ accent bars, celebration choreography, 2-line slice help, 🎺🎻🪈 bow under YOU WIN. **input_map.py**
+  gained an attack ramp (ease 0→1 over 6 frames, instant release), a real virtual-joystick mouse axis
+  (deadzone + t^1.4 curve, `DRAG_FULL_PX/DEADZONE/RESPONSE_EXP` at top), an `on_deactivate` stuck-key
+  guard (alt-tab safe), data-driven tables. All frozen contracts/bindings + locked look UNTOUCHED. These
+  SUPERSEDE the earlier one-shot `LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md`.
+
 - ✅ **PARENT F COMPLETE (July 8) — `graphics/hud.py` + `core/input_map.py` DELIVERED.** 🎧🎮
   Both saved verbatim (`LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md`) + extracted + py_compile OK.
   **hud.py** = Homeworld-style moderngl 2D overlay (ONE shader, ONE dynamic VBO, painter's order,

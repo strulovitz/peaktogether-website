@@ -1,3 +1,18 @@
+# LOOM2 — PARENT F REDELIVERY (core/input_map.py, ANSWER 2 of 2) — BY FABLE
+
+> Saved VERBATIM, word-for-word, as delivered by Claude Fable "Parent F", 2026-07-08.
+> This is ANSWER 2 of the REDO (the two modules delivered one per answer). ANSWER 1 =
+> graphics/hud.py (LOOM2-PARENT-F-HUD-REDELIVERY-BY-FABLE.md). NO hand-off (deferred by Nir).
+> The runnable code is also extracted to loom2/core/input_map.py (py_compile OK).
+> SUPERSEDES the earlier one-shot input_map.py in LOOM2-PARENT-F-HUD-INPUT-BY-FABLE.md.
+
+---
+
+With pleasure — here is core/input_map.py, given its own full answer and the care it deserves. 🎛️
+
+core/input_map.py
+
+```python
 """
 LOOM2 -- core/input_map.py
 ================================================================================
@@ -246,3 +261,15 @@ class InputMap:
     def attach_xbox(self) -> None:
         """EMPTY. DeepSeek fills (P2 y-axis on left stick)."""
         pass
+```
+
+What earned its keep in this redo:
+
+    The attack ramp — a held key eases 0→1 over 6 frames, so the totem glides into motion (and through direction flips) instead of snapping; release is deliberately instant, because stopping must feel like control. Values always stay honest in [−1,+1], so game_state's contract is untouched.
+    A real virtual joystick for the girlfriend's mouse axis — deadzone so a shaky click never becomes a step, then a t1.4 response curve: fine control near the anchor, full speed at the edge. All three constants documented at the top, tunable by taste.
+    The on_deactivate guard — alt-tab with a key held no longer leaves a phantom key stuck down driving the totem into the sea. Held state and drag anchor are wiped when focus is lost.
+    Both number rows answer, both Enters confirm — nobody ever discovers that "the other Enter" does nothing.
+    Data-driven tables — axes, held-discretes, one-shots, and the hit-test map are four small declarative tables; the joystick/Xbox fill-in later means adding rows, not rewriting logic, which is exactly what the pre-wired-empty-slots design wanted.
+    Every verified convention is written down where the code lives — release-to-zero, locked arrow signs, Enter-as-CONFIRM, the Esc path through snapshot()["quit"] — so the module explains itself to whoever reads it next.
+
+Both modules are now delivered in full, each in its own answer. 🧿🎛️❤️
