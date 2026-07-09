@@ -105,10 +105,17 @@ The FLAGSHIP scene. 218 BC. Hannibal's army stands before the Alps. The scouts m
 The oldest two-variable function in history is secretly a rotated saddle. Which sound proves the surveyor's field-corner is a saddle?
 - Surface: `field` — same math as saddle, rotated 45°
 
-**Scene 10: The Ocean Swell (egg_carton)**
-Summits, valleys, and passes repeating. Distinct critical points repeating in all directions.
-- Surface: `egg_carton` — doubly periodic checkerboard of peaks, pits, and saddles
-- 🌊 Note: the original UPANISHADS proposed a richer "match each groove" format for this scene rather than plain A/B/C/D. Nir hasn't yet decided whether to keep the richer format or flatten it. Present your thoughts if you have them, or assume standard A/B/C/D for now.
+**Scene 10: The Ocean Swell (egg_carton — hearing the period)**
+The lesson: hearing how DENSE the hills are. Same-size bumps, same totem radius — but the wave frequency changes. More bumps per cell = tighter, faster-cycling music. Less = sparser.
+
+- **Scene surface** (what the player walks on): a 2×2 grid of hills-and-valleys inside the totem's hearing circle. Standard A/B/C/D quiz.
+- **Quiz options** (rendered from different egg-carton densities, all with same bump size/amplitude, just different spacing):
+  - **A**: 1×1 sparse grid — totem on a HILLTOP (one hill in the center, valley around it, then flat beyond)
+  - **B**: 1×1 sparse grid — totem in a VALLEY (low pitch, surrounded by hills on all sides)
+  - **C**: 2×2 medium grid — CORRECT (matches what the player is standing on)
+  - **D**: 3×3 dense grid — three hills-and-valleys per direction inside the same radius, packed tight
+- This probably needs new surface functions (e.g. `egg_carton_1x1`, `egg_carton_3x3`) — all `A*sin(kx)*sin(ky)` with the same amplitude A=1.6 but different k values. You decide the exact numbers; DeepSeek will implement them in surfaces.py.
+- The player hears: "which of these four grooves is the land under my feet right now?" — the difference is the musical density of the pattern.
 
 ### ACT VI — Second-Derivative Test (Stage 6)
 
