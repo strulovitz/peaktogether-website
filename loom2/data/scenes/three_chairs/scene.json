@@ -1,0 +1,32 @@
+{
+  "scene_id": "three_chairs",
+  "title_lines": [
+    "THE SADDLER'S WORKSHOP \ud83d\udc12\ud83e\ude91 A chair cups you from all sides.",
+    "A horse-saddle dips two ways. But a MONKEY needs three dips \u2014",
+    "two legs and a tail! And here, the professor's test falls silent\u2026 \ud83c\udfa7"
+  ],
+  "surface_name": "monkey_saddle",
+  "equation_png": "data/scenes/three_chairs/equation.png",
+  "totem_start": [0.0, 0.0],
+  "domain": [-3.5, 3.5, -3.5, 3.5],
+  "mesh_step": 0.2,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the monkey's saddle \u2014 THREE ridges up, THREE valleys down? \ud83d\udc12",
+  "hint_lines": [
+    "Count the high sides around the circle! A pit has none, a peak has none",
+    "(everything falls) \u2014 a horse-saddle rises in TWO facing directions.",
+    "The monkey saddle rises in THREE, and falls in the three between. \ud83d\udca1"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/three_chairs/option_a.wav", "correct": false,
+      "explain": "That chair cups you from EVERY side \u2014 a minimum, no high sides at all. The second-derivative test could have told you that one all by itself! \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/three_chairs/option_b.wav", "correct": true,
+      "explain": "" },
+    { "label": "C", "wav_path": "data/scenes/three_chairs/option_c.wav", "correct": false,
+      "explain": "The HORSE-saddle! Two ups facing each other, two downs between. Count again \u2014 the monkey needs one more of each. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/three_chairs/option_d.wav", "correct": false,
+      "explain": "A peak \u2014 every side falls away below you. A maximum, and no seat for a monkey at all. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THREE AND THREE! \ud83d\udc12\ud83c\udf89 Up\u2013down\u2013up\u2013down\u2013up\u2013down around one circle. Here the Hessian is all zeros and the second-derivative test goes silent \u2014 but your ear classified the point anyway. Where algebra shrugs, music speaks."
+}

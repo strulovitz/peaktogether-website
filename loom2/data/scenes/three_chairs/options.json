@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "bowl",          "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/three_chairs/option_a.wav" },
+  "B": { "surface": "monkey_saddle", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/three_chairs/option_b.wav" },
+  "C": { "surface": "saddle",        "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/three_chairs/option_c.wav" },
+  "D": { "surface": "hill",          "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/three_chairs/option_d.wav" }
+}
