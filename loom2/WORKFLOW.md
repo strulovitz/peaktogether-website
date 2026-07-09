@@ -255,7 +255,11 @@ matte rescale).
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 8, 2026)
+### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 9, 2026 — Parent H delivering campaign scenes)
+
+**🏁 CURRENT STATE (July 9, 2026) — PARENT H IS DELIVERING THE 12 CAMPAIGN SCENES 🏁**
+
+**Parent H Part 1 LANDED:** campaign map (12 scenes, 8 parts, correct answers evenly spread 3× each letter) + `roman_road` (ramp) complete with scene.json, options.json, equation.png, 4 quiz WAVs rendered. Fable's answer saved verbatim at `LOOM2-PARENT-H-PART-1-CAMPAIGN-MAP-AND-ROMAN-ROAD-BY-FABLE.md`. ⏭️ Say "continue" for Part 2 (granary_of_egypt + valley_lake).
 
 **🏁 CURRENT STATE (July 8, 2026, late) — READY TO START PARENT G, THE LAST PARENT 🏁**
 
