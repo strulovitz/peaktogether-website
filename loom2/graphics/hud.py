@@ -173,7 +173,7 @@ class _GlyphAtlas:
         glyph rather than crashing mid-scene -- the game never breaks."""
         if ch in self.glyphs or ch in ("\n", "\r"):
             return
-        is_emoji = ord(ch) >= 0x2190 and self._emoji_font is not None
+        is_emoji = ord(ch) >= 0x2600 and self._emoji_font is not None
         font = self._emoji_font if is_emoji else self._font
         stroke = 0 if is_emoji else self.STROKE
         try:
