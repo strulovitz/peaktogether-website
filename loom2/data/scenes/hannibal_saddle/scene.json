@@ -1,0 +1,32 @@
+{
+  "scene_id": "hannibal_saddle",
+  "title_lines": [
+    "THE ALPS, 218 BC \u2694\ufe0f\ud83d\udc18 Hannibal's thirty-seven elephants stand",
+    "before the wall of mountains. The scouts search for the pass \u2014",
+    "the one gate where the range lets an army through. \ud83c\udfa7"
+  ],
+  "surface_name": "saddle",
+  "equation_png": "data/scenes/hannibal_saddle/equation.png",
+  "totem_start": [0.0, 3.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the pass through the mountains? \ud83d\udc18\u2694\ufe0f",
+  "hint_lines": [
+    "At a pass the walls rise on BOTH sides \u2014 and the road falls away",
+    "on BOTH the others. Listen for voices above you east and west,",
+    "below you north and south, and your own A440 exactly in the middle. \ud83d\udca1"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/hannibal_saddle/option_a.wav", "correct": false,
+      "explain": "That was a valley floor \u2014 a PIT. Every direction climbs, so the army would only have to climb back out. A pass must let you DOWN the far side. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/hannibal_saddle/option_b.wav", "correct": false,
+      "explain": "That was one steady mountainside \u2014 uphill toward one side, downhill toward the opposite. A pass is different: it rises BOTH ways along the wall and falls BOTH ways along the road. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/hannibal_saddle/option_c.wav", "correct": true,
+      "explain": "" },
+    { "label": "D", "wav_path": "data/scenes/hannibal_saddle/option_d.wav", "correct": false,
+      "explain": "That was the crest of an endless wall \u2014 the same height all along, falling away on either side. No dip to slip through: a pass is the LOW point of a high wall. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE PASS! \u2694\ufe0f\ud83d\udc18 Walls above you east and west, the road falling away north and south, and you at the balance point \u2014 A440. Up along one line, down along the other: a SADDLE POINT. Hannibal crosses into Italy. \ud83c\udf89"
+}

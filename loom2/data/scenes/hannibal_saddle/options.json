@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "bowl",   "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/hannibal_saddle/option_a.wav" },
+  "B": { "surface": "ramp",   "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/hannibal_saddle/option_b.wav" },
+  "C": { "surface": "saddle", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/hannibal_saddle/option_c.wav" },
+  "D": { "surface": "ridge",  "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/hannibal_saddle/option_d.wav" }
+}
