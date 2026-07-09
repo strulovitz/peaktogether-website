@@ -49,6 +49,7 @@ class SceneSpec:
     mesh_step: float; z_per_octave: float
     question: str; hint_lines: list; options: list            # list[QuizOption]
     camera_limits: dict; success_text: str
+    fog: bool = False                                          # Scene 13 fog finale
 
 @dataclass
 class SlicePlane:

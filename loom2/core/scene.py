@@ -72,6 +72,8 @@ _TOP_LEVEL_KEYS = frozenset({
     "options", "camera_limits", "success_text",
 })
 
+_TOP_LEVEL_OPTIONAL_KEYS = frozenset({"fog"})  # Scene 13 finale
+
 _OPTION_REQUIRED_KEYS = frozenset({"label", "wav_path", "correct", "explain"})
 _OPTION_OPTIONAL_KEYS = frozenset({"domain", "step", "z_per_octave"})  # G2.5-A
 
@@ -305,10 +307,10 @@ def load_scene(scene_id: str) -> SceneSpec:
     missing = _TOP_LEVEL_KEYS - raw.keys()
     if missing:
         _fail(ctx, f"missing required key(s): {sorted(missing)}")
-    unknown = raw.keys() - _TOP_LEVEL_KEYS
+    unknown = raw.keys() - _TOP_LEVEL_KEYS - _TOP_LEVEL_OPTIONAL_KEYS
     if unknown:
         _fail(ctx, f"unknown key(s) {sorted(unknown)}; valid keys are "
-                   f"{sorted(_TOP_LEVEL_KEYS)}")
+                   f"{sorted(_TOP_LEVEL_KEYS | _TOP_LEVEL_OPTIONAL_KEYS)}")
 
     inner_id = _need_str(ctx, "scene_id", raw["scene_id"])
     if inner_id != scene_id:
@@ -337,13 +339,14 @@ def load_scene(scene_id: str) -> SceneSpec:
         _fail(ctx, f"'z_per_octave' must be > 0, got {z_per_octave}")
     camera_limits = _validate_camera_limits(ctx, raw["camera_limits"])
     options = _validate_options(ctx, raw["options"])
+    fog = bool(raw.get("fog", False))
 
     return SceneSpec(
         scene_id=inner_id, title_lines=title_lines, surface_name=surface_name,
         equation_png=equation_png, totem_start=totem_start, domain=domain,
         mesh_step=mesh_step, z_per_octave=z_per_octave, question=question,
         hint_lines=hint_lines, options=options, camera_limits=camera_limits,
-        success_text=success_text,
+        success_text=success_text, fog=fog,
     )
 
 

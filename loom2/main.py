@@ -101,7 +101,8 @@ def _apply_scene(objs: dict, spec) -> None:
     surface_fn = surfaces.get(spec.surface_name)
     objs["terrain"].release()                                    # G3.3-A
     objs["terrain"] = TerrainMesh(objs["renderer"], surface_fn,
-                                  spec.domain, spec.mesh_step)
+                                   spec.domain, spec.mesh_step,
+                                   fog=spec.fog)
     objs["surface_fn"] = surface_fn
     objs["blade"].set_domain(spec.domain)                        # G3.6-A
     objs["hud"].set_scene(spec)
@@ -185,7 +186,8 @@ def build() -> dict:
 
         # 9. Per-scene visuals (frame 1's scene_changed path re-applies these
         #    via _apply_scene -- contractually intended, harmless).
-        terrain = TerrainMesh(renderer, surface_fn, spec0.domain, spec0.mesh_step)
+        terrain = TerrainMesh(renderer, surface_fn, spec0.domain, spec0.mesh_step,
+                               fog=spec0.fog)
         totem_visual = TotemVisual(renderer)
         helix_panel = HelixPanel(renderer)
         blade = GlassBlade(renderer)

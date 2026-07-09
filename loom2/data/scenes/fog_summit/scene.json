@@ -6,6 +6,7 @@
     "peak by ear alone. Everything you have learned is enough. \ud83c\udfa7\u26f0\ufe0f"
   ],
   "surface_name": "fog_hill",
+  "fog": true,
   "equation_png": "data/scenes/fog_summit/equation.png",
   "totem_start": [-2.5, 2.5],
   "domain": [-5.0, 5.0, -5.0, 5.0],

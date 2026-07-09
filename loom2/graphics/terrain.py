@@ -54,7 +54,8 @@ def _band_colors() -> np.ndarray:
 
 
 class TerrainMesh:
-    def __init__(self, renderer, surface_fn, domain: tuple, mesh_step: float):
+    def __init__(self, renderer, surface_fn, domain: tuple, mesh_step: float,
+                 fog: bool = False):
         """Build a triangle mesh of z = f(x,y) over the finite domain
         (SUTRAS Part 8). Per-vertex colors by height: config.COLOR_* bands
         (deep water < shallow < lowland < upland < peak), flat/Gouraud shaded
@@ -111,6 +112,7 @@ class TerrainMesh:
         self._prog["u_band_colors"].write(_band_colors().tobytes())
         self._prog["u_band_edges"].write(
             np.array(_BAND_EDGES, dtype=np.float32).tobytes())
+        self._prog["u_fog"] = 1.0 if fog else 0.0
         self._vbo = ctx.buffer(verts.tobytes())
         self._ibo = ctx.buffer(tris.tobytes())
         self._vao = ctx.vertex_array(
