@@ -128,6 +128,35 @@ The range surface R(v,θ) — players discover the summit at 45° by ear. Then t
 
 ---
 
+## Scene Design Rules (from the UPANISHADS — the soul of the game)
+
+These are verbatim from the scriptures. They matter more than any field format.
+
+### The Confusability Rule
+
+> The four options must differ in a **gross audible feature** (unison vs. spread chord, transposing vs. static, above vs. below) — unless the scene's explicit teaching goal is a subtle distinction, in which case the question text says exactly what tiny difference to listen for.
+
+If two quiz options sound too similar, the player has no fair way to choose — the ear can't learn what it can't distinguish. The difference between options should be OBVIOUS to a first-time listener. The teaching happens when they connect "that obvious difference" to the math concept.
+
+### The Kindness Rule
+
+> Every explanation encourages; wrong answers teach; nothing ever shames.
+
+When a player picks wrong:
+- The explanation tells them what that sound actually WAS and what to listen for next time
+- Wrong-answer text is pink (never red — red means "you failed"; pink means "let's try again")
+- No penalty, no score, no timer — they just try again
+
+### Other locked rules
+
+- **HINT is free forever.** Pressing H costs nothing, records nothing, penalizes nothing. The game wants you to succeed.
+- **No timers, no scores, no shame. Ever.** (VEDAS)
+- **Correct answer → warm celebration, 1–2 sentences connecting sound to idea, on to the next scene.** (UPANISHADS)
+- **2–3 lines of scenario text per scene, no more.** The history sets the mood; the music is the star.
+- **Emojis are welcome** in title_lines, question, hint_lines, success_text, and explain text.
+
+---
+
 ## What a Scene Looks Like (concrete format)
 
 Each scene lives in `data/scenes/<scene_id>/` and requires:
@@ -222,8 +251,6 @@ Here is the one scene that already exists, as reference:
 | `domain` | optional: [xmin, xmax, ymin, ymax] for the musician grid (defaults to reasonable bounds) |
 | `step` | optional: grid spacing (defaults to 1.0) |
 | `z_per_octave` | optional: overrides the scene's value for this option |
-
-Quiz design rule of thumb: the four options differ in a gross audible feature (unison vs spread, transposing vs static, above vs below). Unless the explicit teaching goal is a subtle distinction — then the question says exactly what tiny difference to listen for. Every wrong-answer explanation teaches something. Nothing shames.
 
 ---
 
