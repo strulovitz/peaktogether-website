@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "bowl", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/granary_of_egypt/option_a.wav" },
+  "B": { "surface": "hill", "xy": [2.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/granary_of_egypt/option_b.wav" },
+  "C": { "surface": "hill", "xy": [4.5, 4.5], "radius": 2.5, "domain": [1.5, 7.5, 1.5, 7.5],
+         "out": "data/scenes/granary_of_egypt/option_c.wav" },
+  "D": { "surface": "hill", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/granary_of_egypt/option_d.wav" }
+}

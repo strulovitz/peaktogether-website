@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "bowl", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/valley_lake/option_a.wav" },
+  "B": { "surface": "hill", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/valley_lake/option_b.wav" },
+  "C": { "surface": "bowl", "xy": [2.5, 0.0], "radius": 2.5,
+         "out": "data/scenes/valley_lake/option_c.wav" },
+  "D": { "surface": "ramp", "xy": [0.0, 0.0], "radius": 2.5, "z_per_octave": 200.0,
+         "out": "data/scenes/valley_lake/option_d.wav" }
+}

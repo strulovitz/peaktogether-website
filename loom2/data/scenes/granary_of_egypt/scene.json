@@ -1,0 +1,32 @@
+{
+  "scene_id": "granary_of_egypt",
+  "title_lines": [
+    "EGYPT, 1870 BC \ud83c\udf3e Seven years of plenty fill the granary \u2014",
+    "the overseer must stand on the very top of the golden heap",
+    "to count the harvest. Climb to the summit by ear. \ud83c\udfa7"
+  ],
+  "surface_name": "hill",
+  "equation_png": "data/scenes/granary_of_egypt/equation.png",
+  "totem_start": [2.0, -2.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the very top of the grain heap? \ud83c\udf3e",
+  "hint_lines": [
+    "On the summit, every musician around you sings BELOW the middle \u2014",
+    "the whole chord hangs high and falls away outward. \ud83d\udca1",
+    "On the side of the heap, some still sing above you. Keep climbing!"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/granary_of_egypt/option_a.wav", "correct": false,
+      "explain": "That was the bottom of a PIT \u2014 every voice rose around you. The top of the heap is the exact opposite. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/granary_of_egypt/option_b.wav", "correct": false,
+      "explain": "That was the SIDE of the heap \u2014 voices above you uphill, voices below you downhill. Climb until nobody sings above you! \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/granary_of_egypt/option_c.wav", "correct": false,
+      "explain": "That was the flat ground far from the heap \u2014 one low note, nearly unison. The grain is elsewhere. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/granary_of_egypt/option_d.wav", "correct": true,
+      "explain": "" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE TOP! \ud83c\udf3e Nobody sings above you \u2014 the chord hangs entirely below and falls away in every direction. That is a MAXIMUM. \ud83c\udf89"
+}

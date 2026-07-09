@@ -1,0 +1,32 @@
+{
+  "scene_id": "valley_lake",
+  "title_lines": [
+    "A MOUNTAIN LAKE \ud83c\udfd4\ufe0f\ud83d\udca7 The fishermen say the deepest water",
+    "sings the lowest song \u2014 notes below A440, under the waterline.",
+    "Row out and find the very bottom of the valley. \ud83d\udef6\ud83c\udfa7"
+  ],
+  "surface_name": "bowl",
+  "equation_png": "data/scenes/valley_lake/equation.png",
+  "totem_start": [3.0, 0.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the deepest point of the lake? \ud83d\udef6",
+  "hint_lines": [
+    "At the very bottom, each ring of musicians sings ONE note in unison \u2014",
+    "and every ring outward is higher. Nobody sings below the middle. \ud83d\udca1",
+    "Deep water sits BELOW A440 \u2014 listen for the whole chord hanging low."
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/valley_lake/option_a.wav", "correct": true,
+      "explain": "" },
+    { "label": "B", "wav_path": "data/scenes/valley_lake/option_b.wav", "correct": false,
+      "explain": "That was a SUMMIT \u2014 every voice fell away below you. We want the mirror image: the place where every voice rises above. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/valley_lake/option_c.wav", "correct": false,
+      "explain": "That was the SHORELINE \u2014 low voices over the water, high voices toward the land. Keep rowing toward the low side! \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/valley_lake/option_d.wav", "correct": false,
+      "explain": "Every musician sang one middle note \u2014 flat ground at A440, no valley anywhere. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE DEEPEST POINT! \ud83d\udc99 Every ring in unison, everything rising around you, the whole chord below A440 \u2014 a MINIMUM. You just heard negative numbers. \ud83c\udf89\ud83d\udef6"
+}
