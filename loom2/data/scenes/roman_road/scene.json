@@ -1,0 +1,32 @@
+{
+  "scene_id": "roman_road",
+  "title_lines": [
+    "ROME, 19 BC 🏛️💧 The new aqueduct must fall steadily —",
+    "one perfect, unchanging slope for fifty miles,",
+    "or the water stops. Find that slope by ear. 🎧"
+  ],
+  "surface_name": "ramp",
+  "equation_png": "data/scenes/roman_road/equation.png",
+  "totem_start": [0.0, 0.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is a steady, unchanging slope? 🏛️",
+  "hint_lines": [
+    "A steady slope LEANS the whole orchestra evenly —",
+    "low voices on one side, high on the other, A440 in the middle. 💡",
+    "A pit or a peak curves. A road just leans."
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/roman_road/option_a.wav", "correct": false,
+      "explain": "That land was perfectly FLAT — every musician sang the very same note. A flat channel carries no water. 🙂" },
+    { "label": "B", "wav_path": "data/scenes/roman_road/option_b.wav", "correct": true,
+      "explain": "" },
+    { "label": "C", "wav_path": "data/scenes/roman_road/option_c.wav", "correct": false,
+      "explain": "That was a PIT — the whole chord sat low and rose all around you. Water would pool there, never flow. 🙂" },
+    { "label": "D", "wav_path": "data/scenes/roman_road/option_d.wav", "correct": false,
+      "explain": "That was a HILLTOP — every note hung high, falling away on all sides. Water would scatter, not follow. 🙂" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "AQUA FLUIT! 💧 A slope that never changes — the orchestra leans evenly and keeps its shape wherever you walk. That is a plane: the gradient is the same everywhere. 🎉"
+}
