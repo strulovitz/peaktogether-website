@@ -1,0 +1,17 @@
+Create a wide, cinematic hero illustration in the ethereal, hand-painted fantasy spirit of the 1990 LucasArts adventure "Loom" — dreamlike, musical, and full of gentle wonder, warm and friendly, NOT gritty, dark, or scary.
+
+SCENE: A lone hooded weaver in a flowing grey-blue robe stands with their back to us (face unseen), on a soft misty hillside, raising a slender glowing distaff (a spindle-staff strung with tiny musical notes) as if about to play a melody. Before them a vast celestial LOOM stretches into the distance, its shimmering golden threads woven into a rolling mathematical landscape — a smooth surface of hills and valleys, z = f(x, y), literally spun out of luminous fabric. A tall, gently glowing Listening Totem stands planted on one hilltop, a soft ring of light spreading around it across the woven ground. Two white swans glide silently over a valley of mist. To one side rises a translucent spiral helix of ghostly orchestra instruments (brass, strings, woodwinds) coiling upward like a ribbon of light — the surface's music made visible.
+
+THE MAGIC: The threads of the great Loom are spun from glowing, handwritten-chalk-meets-soft-neon mathematics, drifting like slow embroidery across the hills. Tiny musical notes lift off the landscape like sparks wherever the weaver's gaze falls (height becoming pitch). Three great master-threads arc across the tapestry like banners, each carrying one signature "draft" (spell) of multivariable calculus, rendered CLEAN and LEGIBLE and shining brightest of all:
+ • the GRADIENT thread:  ∇f = ⟨ ∂f/∂x , ∂f/∂y ⟩
+ • the DIVERGENCE thread:  ∇·F = ∂P/∂x + ∂Q/∂y + ∂R/∂z
+ • the CURL thread:  ∇×F
+Softer, smaller equations shimmer in the weave behind them, but these three operator symbols (∇f, ∇·F, ∇×F) read crisp and clear, glowing warm gold and soft cyan like woven fire.
+
+MOOD: hushed wonder, tenderness, cozy-epic — "the most epic date night your brain has ever been on," where two players learn to HEAR the shape of the world. Dreamlike depth, drifting mist, gentle bloom on every glowing thread.
+
+PALETTE: Loom's dreamy misty dawn — soft teals, dawn lavenders and purples, silver-grey havens, pale rose sky — kept gently muted so the glowing GOLD threads, the totem's halo, the musical sparks, and the three equations (gold + soft cyan) shine through the mist like embers. Luminous but tender, never harsh or neon.
+
+COMPOSITION & FORMAT: 16:9 wide landscape. The hooded weaver with the glowing distaff as a foreground silhouette slightly off-center; the woven mathematical terrain sweeping into the misty distance; clear room in the mid-ground for the three glowing equation-threads and the Listening Totem; the instrument-helix rising softly on one side. High detail, soft painterly brushwork, gentle volumetric light. Keep every equation crisp and readable.
+
+AVOID: photorealism, horror, gore, dark/scary tone, visible human faces, cartoon mascots, modern technology, sci-fi chrome, harsh neon, cluttered or garbled/unreadable equations, watermarks, logos.
