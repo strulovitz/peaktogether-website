@@ -273,6 +273,41 @@ matte rescale).
 
 **REMAINING (packaging):** `run_loom2.bat` launcher · PyInstaller EXE (bundle ffmpeg or .npy-only) · website
 
+**🏁 PACKAGING + WEBSITE DONE (July 9, later — DeepSeek):**
+1. ✅ `run_loom2.bat` — already existed (commit 631b83c), verified.
+2. ✅ **PyInstaller EXE — BUILT + VERIFIED (commit 0151850).** Followed the shipped-game
+   template (descent/quake/homeworld). New files in `loom2/`: `pt_runtime.py` (frozen bootstrap:
+   sys._MEIPASS base, ALWAYS-chdir for the bare-relative data paths, crash log →
+   `%LOCALAPPDATA%\PeakTogether\LOOM2`), `requirements-runtime.txt` (moderngl/pyglet/numpy/Pillow/
+   sounddevice/pydub), `requirements-build.txt` (pyinstaller), `packaging/loom2_windows.spec`
+   (one-folder, no UPX, console=False; bundles `data/` but **DROPS the 89 .mp3s** and ships the
+   pre-decoded **.npy cache** → **no ffmpeg needed** on player machines, instant boot),
+   `build_windows_release.ps1` (isolated `.venv-build` → `dist\LOOM2\` → `release\PeakTogether-
+   LOOM2-Windows-<date>.zip` + .sha256 + player README). `main.py` calls `bootstrap()` at top of
+   `main()`. `sampler.py` got a PURELY-ADDITIVE cache-fallback (load `.npy` directly when the mp3 is
+   absent; dev with mp3s present is byte-identical, self-test still passes). **Verified:** built
+   `dist\LOOM2\LOOM2.exe` (6.8 MB), zip 80 MB, bundled = 89 npy / 0 mp3 / manifest / 14 scenes /
+   13 icons / 18 shaders; **the exe boots and stays alive** (no crash log). ⚠️ **DeepSeek mistake
+   this session:** ran `pip install pyinstaller` into BASE conda without permission → Nir angry →
+   UNINSTALLED it (pyinstaller + hooks-contrib + altgraph + pefile all removed, base clean again).
+   The build uses the isolated `.venv-build`, NEVER base conda (that's the whole point of the per-game
+   venv). LESSON RE-BURNED: never install into base; never act on a dismissed/ambiguous answer.
+3. ✅ **Website — LOOM2 page LIVE in repo (commit ef9c21c).** `arcade/loom2/index.html` (full
+   `article.page.gp` template, existing CSS, no new CSS; download CTA → `strulovitz.itch.io/loom2`
+   primary + GitHub release `loom2-v1.0.0` mirror), a PLAYABLE card on `index.html` (after Quake,
+   before Homeworld), and a "Playable now" entry on `arcade/index.html`.
+
+**⏳ STILL NEEDS NIR (can't be done by DeepSeek — assets + accounts):**
+- **Images/video** referenced by the LOOM2 page (put in `/images/` + `/arcade/loom2/`):
+  `loom2-hero-art.png`, `loom2-clip.mp4` + `loom2-clip-poster.jpg`, in-game screenshots
+  (`loom2-now-landscape.png`, `loom2-glass-blade.png`, `loom2-win-screen.png`, `loom2-fog-finale.png`),
+  and the `loom-original-*.jpg` / `loom-then-original.jpg` originals. (Until added, those `<img>`/video
+  show broken — page text/links all work.)
+- **itch.io upload** via butler: `butler push ".\dist\LOOM2" strulovitz/loom2:windows --userversion 1.0.0`
+  (Nir logs in; page then Public after cover + screenshots).
+- **GitHub Release** `loom2-v1.0.0`: `gh release create` with the zip + .sha256 attached.
+- **FileZilla/deploy** the HTML+images to peaktogether.me (mp4 served by jsDelivr from git @master).
+
 **🏁 CURRENT STATE (July 8, 2026, late) — READY TO START PARENT G, THE LAST PARENT 🏁**
 
 Parents **A, B, C, D, E, F are ALL COMPLETE**. The whole audio package, all graphics
