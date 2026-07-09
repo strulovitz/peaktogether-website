@@ -255,11 +255,23 @@ matte rescale).
 
 ## 3. CURRENT SITUATION (July 7, 2026)
 
-### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 9, 2026 — Parent H delivering campaign scenes)
+### 🔖 RESTART SNAPSHOT — READ THIS FIRST (updated July 9, 2026 — afternoon, pre-restart)
 
-**🏁 CURRENT STATE (July 9, 2026) — PARENT H IS DELIVERING THE 12 CAMPAIGN SCENES 🏁**
+**🏁 ALL PARENTS A–H COMPLETE. ALL 13 CAMPAIGN SCENES DELIVERED. GAME IS PLAYABLE END-TO-END. 🏁**
 
-**Parent H Part 1 LANDED:** campaign map (12 scenes, 8 parts, correct answers evenly spread 3× each letter) + `roman_road` (ramp) complete with scene.json, options.json, equation.png, 4 quiz WAVs rendered. Fable's answer saved verbatim at `LOOM2-PARENT-H-PART-1-CAMPAIGN-MAP-AND-ROMAN-ROAD-BY-FABLE.md`. ⏭️ Say "continue" for Part 2 (granary_of_egypt + valley_lake).
+**THIS SESSION (July 9 morning-afternoon):**
+1. ✅ Joystick/Xbox pumping — `pump_controllers()` in input_map.py (Quake precedent). Xbox left-stick Y flipped per Nir. Tested with hardware: works great.
+2. ✅ `tools/render_equations.py` — Real LaTeX (pdflatex+pdftocairo), yellow+black-outline, 600 DPI.
+3. ✅ Parent H — 13 campaign scenes delivered in 8 parts. All saved verbatim. 52 quiz WAVs rendered, 13 equation PNGs rendered, 5 new surfaces added (ridge_y, egg_carton_1x1, egg_carton_3x3, cannon_range10, fog_hill), campaign.json updated. All validate.
+4. ✅ Fog finale — SceneSpec.fog, u_fog uniform in terrain.frag (dims to 10%, totem/helix stay lit). Tested.
+5. ✅ ∂ symbol fix — emoji threshold 0x2190→0x2600, math symbols route through regular font.
+6. ✅ Equation height: 88px (was 44px), via config.HUD_EQUATION_MAX_H_PX.
+
+**13 SCENES:** roman_road(B) · granary_of_egypt(D) · valley_lake(A) · rain_gutter(C) · terraces_of_banaue(B) · ridge_two_hands(D) · water_finds_the_way(A) · hannibal_saddle⭐(C) · fields_of_babylon(D) · ocean_swell(C) · three_chairs(B) · tartaglia_cannon(A) · fog_summit🌫️(D)
+
+**14 SURFACES:** ramp · bowl · hill · ridge · ridge_y · saddle · field · egg_carton · egg_carton_1x1 · egg_carton_3x3 · monkey_saddle · cannon_range · cannon_range10 · fog_hill
+
+**REMAINING (packaging):** `run_loom2.bat` launcher · PyInstaller EXE (bundle ffmpeg or .npy-only) · website
 
 **🏁 CURRENT STATE (July 8, 2026, late) — READY TO START PARENT G, THE LAST PARENT 🏁**
 
