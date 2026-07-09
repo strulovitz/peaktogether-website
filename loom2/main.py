@@ -293,6 +293,16 @@ def main() -> None:
     the audio FIRST, then closes the window [Q8].)
     """
     objs = None
+    # Peak Together frozen-exe bootstrap: chdir to the asset base (so config.py's
+    # relative "data/..." paths resolve whether run as a script or a frozen exe)
+    # and route the crash log to %LOCALAPPDATA%\PeakTogether\LOOM2. Wrapped so dev
+    # never depends on it. MUST run before build() (which loads the campaign scene
+    # and the sample library from data/).
+    try:
+        from pt_runtime import bootstrap
+        bootstrap("LOOM2", WINDOW_CAPTION)
+    except Exception as e:
+        print(f"[LOOM2] pt_runtime bootstrap skipped: {e}")
     try:
         objs = build()
         window = objs["window"]

@@ -134,12 +134,24 @@ class SampleLibrary:
                 if "midi" in entry:
                     self._midi_by_id[sample_id] = int(entry["midi"])
                 path = os.path.join(samples_dir, out)
-                if not os.path.isfile(path):
-                    absent.append(sample_id)      # parachute serves it later
-                    continue
                 shift = int(entry.get("needs_resample", 0))
                 cache_path = (os.path.join(cache_dir, sample_id + ".npy")
                               if cache_dir else None)
+                if not os.path.isfile(path):
+                    # mp3 absent. In the SHIPPED exe we deliberately bundle ONLY
+                    # the pre-decoded .npy cache (no mp3s, no ffmpeg dependency),
+                    # so load the cached buffer directly here. This is purely
+                    # additive: with the mp3s present (dev) we never reach it, and
+                    # if there is genuinely no data anywhere we still parachute.
+                    if cache_path and os.path.isfile(cache_path):
+                        try:
+                            self._buffers[sample_id] = np.load(cache_path)
+                            n_cached += 1
+                            continue
+                        except Exception:
+                            pass
+                    absent.append(sample_id)      # parachute serves it later
+                    continue
                 # fast path: reuse a fresh cache entry
                 if (cache_path and os.path.isfile(cache_path)
                         and os.path.getmtime(cache_path) >= os.path.getmtime(path)
