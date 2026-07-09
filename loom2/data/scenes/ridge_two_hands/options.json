@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "ramp",    "xy": [0.0, 0.0], "radius": 2.5, "z_per_octave": 200.0,
+         "out": "data/scenes/ridge_two_hands/option_a.wav" },
+  "B": { "surface": "ridge_y", "xy": [0.0, 2.0], "radius": 2.5,
+         "out": "data/scenes/ridge_two_hands/option_b.wav" },
+  "C": { "surface": "ramp",    "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/ridge_two_hands/option_c.wav" },
+  "D": { "surface": "ridge",   "xy": [2.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/ridge_two_hands/option_d.wav" }
+}

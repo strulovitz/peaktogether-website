@@ -149,6 +149,16 @@ def ridge(x, y):
     return 1.8 - 0.22 * x ** 2 + 0.0 * y
 
 
+def ridge_y(x, y):
+    """z = 1.8 - 0.22y^2  (no x!)  -- mirror of ridge: x is absent.
+
+    The eastern sibling of the ridge. Every east-west row is frozen at one
+    pitch; the staircase runs north-south. Exists so the quiz can play
+    ∂f/∂x=0 right next to ∂f/∂y=0 — the mirror IS the lesson (Parent H).
+    """
+    return 1.8 - 0.22 * y ** 2 + 0.0 * x
+
+
 # =============================================================================
 # ACT II SURFACES -- saddles: where "which way you walk" changes everything
 # =============================================================================
@@ -316,6 +326,7 @@ def cannon_range(x, y):
 
 REGISTRY = {  # scene.json refers to surfaces ONLY by these names
     "ramp": ramp, "bowl": bowl, "hill": hill, "ridge": ridge,
+    "ridge_y": ridge_y,
     "saddle": saddle, "field": field, "egg_carton": egg_carton,
     "monkey_saddle": monkey_saddle, "cannon_range": cannon_range,
 }

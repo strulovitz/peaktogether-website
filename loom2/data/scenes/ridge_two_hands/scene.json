@@ -1,0 +1,32 @@
+{
+  "scene_id": "ridge_two_hands",
+  "title_lines": [
+    "TWO HANDS, ONE TOTEM \ud83e\udd1d His hand walks east\u2013west: that is \u2202f/\u2202x.",
+    "Her hand walks north\u2013south: that is \u2202f/\u2202y. On this old dyke,",
+    "one of those hands has fallen asleep\u2026 \ud83d\ude34 Which sound is this land? \ud83c\udfa7"
+  ],
+  "surface_name": "ridge",
+  "equation_png": "data/scenes/ridge_two_hands/equation.png",
+  "totem_start": [-1.0, 2.5],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "In which sound does the NORTH\u2013SOUTH hand sleep \u2014 \u2202f/\u2202y = 0? \ud83d\ude34",
+  "hint_lines": [
+    "Frozen unison lines reveal the sleeping direction. \ud83d\udca1",
+    "If north\u2013south sleeps, every north\u2013south row of friends holds ONE note",
+    "while east\u2013west staircases up and down. Try each hand on this dyke!"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/ridge_two_hands/option_a.wav", "correct": false,
+      "explain": "BOTH hands were asleep there \u2014 one note everywhere, flat land. Here, one hand still changes the music. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/ridge_two_hands/option_b.wav", "correct": false,
+      "explain": "Mirror image! There the EAST\u2013WEST hand slept: \u2202f/\u2202x = 0. The frozen rows ran east\u2013west, not north\u2013south. So close \u2014 flip it! \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/ridge_two_hands/option_c.wav", "correct": false,
+      "explain": "Both hands mattered there \u2014 the frozen lines ran diagonally, so his steps AND her steps both change the pitch. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/ridge_two_hands/option_d.wav", "correct": true,
+      "explain": "" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "YES! Every north\u2013south row froze on one note \u2014 her steps changed nothing: \u2202f/\u2202y = 0. And option B hid the mirror, \u2202f/\u2202x = 0. A partial derivative is exactly this: one hand at a time. \ud83c\udf89\ud83e\udd1d"
+}

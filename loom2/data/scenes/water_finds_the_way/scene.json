@@ -1,0 +1,32 @@
+{
+  "scene_id": "water_finds_the_way",
+  "title_lines": [
+    "THE MOUNTAIN SPRING \ud83d\udca7\u26f0\ufe0f The monks must lay a water channel",
+    "down the mountainside \u2014 and water always takes the steepest path,",
+    "cutting straight across the level curves. Find the steepest sound. \ud83c\udfa7"
+  ],
+  "surface_name": "hill",
+  "equation_png": "data/scenes/water_finds_the_way/equation.png",
+  "totem_start": [0.0, -2.5],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the steepest land \u2014 where the water will rush fastest? \ud83d\udca7",
+  "hint_lines": [
+    "Steepness is the WIDTH of the chord: the steeper the land, the farther",
+    "apart the lowest and highest voices inside one circle. \ud83d\udca1",
+    "The low\u2192high line of the chord points straight uphill \u2014 water runs the other way."
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/water_finds_the_way/option_a.wav", "correct": true,
+      "explain": "" },
+    { "label": "B", "wav_path": "data/scenes/water_finds_the_way/option_b.wav", "correct": false,
+      "explain": "Gentle land \u2014 the whole chord huddled within a few notes. Water would wander and dawdle there, not rush. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/water_finds_the_way/option_c.wav", "correct": false,
+      "explain": "Perfectly flat \u2014 one note, no downhill at all. Water just sits still there. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/water_finds_the_way/option_d.wav", "correct": false,
+      "explain": "The summit! It sounds grand, but the very top is LEVEL for the first step \u2014 the gradient there is ZERO, and no direction wins. Water waits there, undecided. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE STEEPEST LINE! \ud83d\udca7 The widest chord \u2014 voices crammed from deep to high across one circle. That low\u2192high line is the GRADIENT: the steepest climb, always perpendicular to Banaue's level paths. Water reads it perfectly, every time. \ud83c\udf89"
+}

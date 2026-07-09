@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "ridge", "xy": [2.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/water_finds_the_way/option_a.wav" },
+  "B": { "surface": "hill",  "xy": [6.0, 0.0], "radius": 2.5, "domain": [3.0, 9.0, -3.0, 3.0],
+         "out": "data/scenes/water_finds_the_way/option_b.wav" },
+  "C": { "surface": "ramp",  "xy": [0.0, 0.0], "radius": 2.5, "z_per_octave": 200.0,
+         "out": "data/scenes/water_finds_the_way/option_c.wav" },
+  "D": { "surface": "hill",  "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/water_finds_the_way/option_d.wav" }
+}
