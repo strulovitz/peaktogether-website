@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "cannon_range10", "xy": [7.5, 5.0], "radius": 2.5, "domain": [0.0, 10.0, 0.0, 10.0],
+         "out": "data/scenes/tartaglia_cannon/option_a.wav" },
+  "B": { "surface": "cannon_range10", "xy": [7.5, 2.0], "radius": 2.5, "domain": [0.0, 10.0, 0.0, 10.0],
+         "out": "data/scenes/tartaglia_cannon/option_b.wav" },
+  "C": { "surface": "cannon_range10", "xy": [7.5, 8.0], "radius": 2.5, "domain": [0.0, 10.0, 0.0, 10.0],
+         "out": "data/scenes/tartaglia_cannon/option_c.wav" },
+  "D": { "surface": "cannon_range10", "xy": [2.0, 5.0], "radius": 2.5, "domain": [0.0, 10.0, 0.0, 10.0],
+         "out": "data/scenes/tartaglia_cannon/option_d.wav" }
+}

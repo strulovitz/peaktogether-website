@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "fog_hill", "xy": [0.6, -0.4], "radius": 2.5,
+         "out": "data/scenes/fog_summit/option_a.wav" },
+  "B": { "surface": "fog_hill", "xy": [-3.5, 3.5], "radius": 2.5,
+         "out": "data/scenes/fog_summit/option_b.wav" },
+  "C": { "surface": "bowl",     "xy": [0.0, 0.0],  "radius": 2.5,
+         "out": "data/scenes/fog_summit/option_c.wav" },
+  "D": { "surface": "fog_hill", "xy": [2.6, -1.8], "radius": 2.5,
+         "out": "data/scenes/fog_summit/option_d.wav" }
+}

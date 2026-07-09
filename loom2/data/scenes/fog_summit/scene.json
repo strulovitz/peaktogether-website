@@ -1,0 +1,32 @@
+{
+  "scene_id": "fog_summit",
+  "title_lines": [
+    "THE FOG SUMMIT \ud83c\udf2b\ufe0f The last mountain has no map. The land is dark,",
+    "the colors are gone \u2014 only the orchestra remains. Find the highest",
+    "peak by ear alone. Everything you have learned is enough. \ud83c\udfa7\u26f0\ufe0f"
+  ],
+  "surface_name": "fog_hill",
+  "equation_png": "data/scenes/fog_summit/equation.png",
+  "totem_start": [-2.5, 2.5],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the true summit of this unseen land? \ud83c\udf2b\ufe0f",
+  "hint_lines": [
+    "At the summit the chord hangs entirely below you, falling away in every ring. \ud83d\udca1",
+    "Follow the rising voices through the dark \u2014 when nobody sings above you,",
+    "plant the totem and compare."
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/fog_summit/option_a.wav", "correct": false,
+      "explain": "The mountainside \u2014 voices still singing ABOVE you, uphill. Climb toward them in the dark! \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/fog_summit/option_b.wav", "correct": false,
+      "explain": "The far skirt \u2014 one low, quiet note. The mountain is elsewhere; walk until the land begins to rise. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/fog_summit/option_c.wav", "correct": false,
+      "explain": "A pit \u2014 and this land has none! In fog, trust the old rule from Egypt: at the top, nobody sings above you. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/fog_summit/option_d.wav", "correct": true,
+      "explain": "" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE SUMMIT, FOUND IN THE DARK. \ud83c\udf2b\ufe0f\u26f0\ufe0f No map, no colors \u2014 only the rule you learned in Egypt: at the top, nobody sings above you. Our stories were imagined \u2014 but the mathematics, and everything your ears just learned, is real. \ud83c\udf89\ud83c\udfbc"
+}

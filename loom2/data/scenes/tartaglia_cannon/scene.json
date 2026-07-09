@@ -1,0 +1,32 @@
+{
+  "scene_id": "tartaglia_cannon",
+  "title_lines": [
+    "VERONA, 1537 \ud83c\udfaf Tartaglia swears the cannon throws farthest at",
+    "exactly 45 degrees, and the Duke demands proof. Walk the ranges:",
+    "east is more powder, north is more elevation. \ud83c\udfa7\ud83d\udca5"
+  ],
+  "surface_name": "cannon_range10",
+  "equation_png": "data/scenes/tartaglia_cannon/equation.png",
+  "totem_start": [5.0, 2.0],
+  "domain": [0.0, 10.0, 0.0, 10.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the perfect elevation \u2014 where BOTH nudges, up and down, lose range? \ud83c\udfaf",
+  "hint_lines": [
+    "The perfect angle is a CREST: north\u2013south nudges fall away on BOTH sides,",
+    "while more powder (east) still climbs. \ud83d\udca1",
+    "If raising or lowering the barrel still helps, you haven't found it \u2014 keep tuning!"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/tartaglia_cannon/option_a.wav", "correct": true,
+      "explain": "" },
+    { "label": "B", "wav_path": "data/scenes/tartaglia_cannon/option_b.wav", "correct": false,
+      "explain": "Eighteen degrees \u2014 too flat! The music still climbed to the north: raise the barrel. When one nudge still helps, the best is farther on. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/tartaglia_cannon/option_c.wav", "correct": false,
+      "explain": "Seventy-two degrees \u2014 too steep! The shot goes up, not out: the music climbed back to the south. Lower the barrel. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/tartaglia_cannon/option_d.wav", "correct": false,
+      "explain": "Almost no powder \u2014 the whole land whispered near one low note, and the angle barely mattered. Load the gun first, THEN tune the angle! \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [5.0, 5.0, 0.0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 16.0 },
+  "success_text": "FORTY-FIVE DEGREES! \ud83c\udfaf\ud83d\udca5 Nudge the barrel either way and the range falls \u2014 you stood on the crest. And more powder always helps: the summit sits on the boundary, full charge at 45\u00b0. Tartaglia wins his wager. \ud83c\udf89"
+}

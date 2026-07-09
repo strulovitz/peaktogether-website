@@ -340,6 +340,25 @@ def cannon_range(x, y):
     return K_CANNON * x ** 2 * np.sin(2.0 * theta_rad)
 
 
+def cannon_range10(x, y):
+    """z = 0.03 * x^2 * sin(18*y°)  -- square-domain cannon range.
+
+    Same physics as cannon_range, remapped: y ∈ [0,10] maps to 0°–90°
+    (one y-unit = 9°). Peak at (10,5) → z=3.0, 45° ridge along y=5.
+    Domain [0,10]². Used by Scene 12 tartaglia_cannon (Parent H).
+    """
+    return 0.03 * x ** 2 * np.sin(2.0 * np.radians(9.0 * y))
+
+
+def fog_hill(x, y):
+    """Shifted Gaussian hill — the secret summit of Scene 13.
+
+    Same formula as hill but centered at (2.6, −1.8) instead of the origin,
+    so veterans can't navigate the Fog Summit from memory. Peak z=2.8.
+    """
+    return 3.4 * np.exp(-((x - 2.6) ** 2 + (y + 1.8) ** 2) / 7.0) - 0.6
+
+
 # =============================================================================
 # THE REGISTRY -- scene.json refers to surfaces ONLY by these names (frozen)
 # =============================================================================
@@ -350,6 +369,7 @@ REGISTRY = {  # scene.json refers to surfaces ONLY by these names
     "saddle": saddle, "field": field, "egg_carton": egg_carton,
     "egg_carton_1x1": egg_carton_1x1, "egg_carton_3x3": egg_carton_3x3,
     "monkey_saddle": monkey_saddle, "cannon_range": cannon_range,
+    "cannon_range10": cannon_range10, "fog_hill": fog_hill,
 }
 
 
