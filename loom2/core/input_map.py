@@ -147,6 +147,7 @@ class InputMap:
         the ONE table both mouse and picture share, so the click and the
         drawn button can never disagree (dependency injected per G4.4;
         this module never imports graphics)."""
+        self._window = window
         self._hud = hud
         self._down = set()          # currently-held key symbols
         self._buffer = []           # one-shot (Action, value) since last poll
@@ -218,12 +219,44 @@ class InputMap:
         self._axis_val = {a: 0.0 for a in self._axis_val}
         return False                  # let others hear the event too
 
+    # --------------------------------------------------------------- pump --
+    def pump_controllers(self) -> None:
+        """Service controller devices so their state is fresh before poll().
+
+        In a pyglet manual-loop game (no pyglet.app.run()), controllers must
+        be pumped explicitly every frame -- window.dispatch_events() services
+        keyboard/mouse but NOT controller devices (Quake precedent, verified).
+        Both calls are non-blocking and fully guarded.
+
+        XInput (Xbox): background thread posts state; dispatch_posted_events()
+          delivers it to the main thread so axes update AND button-push events
+          fire (so _on_pad_button receives them).
+        DirectInput (joystick): drain the device buffer directly so axis
+          attributes (js.x etc.) reflect the latest readings.
+        """
+        # XInput (Xbox): deliver thread-posted state to main thread
+        try:
+            import pyglet
+            pyglet.app.platform_event_loop.dispatch_posted_events()
+        except Exception:
+            pass
+        # DirectInput (joystick): drain device buffer directly (non-blocking)
+        if self._joystick is not None:
+            try:
+                dev = getattr(self._joystick, "device", None)
+                disp = getattr(dev, "_dispatch_events", None)
+                if disp is not None:
+                    disp()
+            except Exception:
+                pass
+
     # --------------------------------------------------------------- poll --
     def poll(self) -> list:
         """Per frame -- main calls exactly once, before update(dt) (frozen
         frame order G4.5 step 1). Returns buffered one-shots followed by the
         current value of every live analog axis. Absence of an axis action
         means 'no intent' -- game_state zeroes intents each frame."""
+        self.pump_controllers()               # fresh controller state FIRST
         out, self._buffer = self._buffer, []
         d = self._down
 
@@ -284,7 +317,7 @@ class InputMap:
         c = self._controller
         if c is not None:
             try:
-                ly = _pad_curve(-float(c.lefty))     # girlfriend: up = +1
+                ly = _pad_curve(float(c.lefty))      # stick down → totem closer
                 if ly != 0.0:
                     out.append((Action.TOTEM_Y, ly))
                 rx = _pad_curve(float(c.rightx))     # right stick orbits
@@ -307,7 +340,7 @@ class InputMap:
             joysticks = []
         for js in joysticks or ():
             try:
-                js.open()
+                js.open(window=self._window)   # Quake precedent: needed for DirectInput
                 self._joystick = js
                 break
             except Exception:

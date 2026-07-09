@@ -366,7 +366,7 @@ class Hud:
                    config.HUD_TITLE_PX, config.HUD_TITLE_RGB, align="right")
         if self._eq_tex is not None:
             iw, ih = self._eq_tex.size
-            s = min(1.0, 44.0 / ih, (self._W * 0.44) / iw)
+            s = min(1.0, config.HUD_EQUATION_MAX_H_PX / ih, (self._W * 0.44) / iw)
             w, h = iw * s, ih * s
             x0 = self._W / 2.0 - w / 2.0        # centered on the panel seam
             self._image(self._eq_tex, x0, qh + 8.0, x0 + w, qh + 8.0 + h)
