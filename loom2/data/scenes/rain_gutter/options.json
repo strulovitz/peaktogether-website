@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "ramp",  "xy": [0.0, 0.0], "radius": 2.5, "z_per_octave": 200.0,
+         "out": "data/scenes/rain_gutter/option_a.wav" },
+  "B": { "surface": "hill",  "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/rain_gutter/option_b.wav" },
+  "C": { "surface": "ridge", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/rain_gutter/option_c.wav" },
+  "D": { "surface": "ridge", "xy": [2.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/rain_gutter/option_d.wav" }
+}

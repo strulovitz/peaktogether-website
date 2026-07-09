@@ -1,0 +1,32 @@
+{
+  "scene_id": "rain_gutter",
+  "title_lines": [
+    "HOLLAND, 1421 \ud83c\udf37\ud83c\udf27\ufe0f The storm rises and two waters press the dyke.",
+    "The keeper must walk the crest \u2014 the one line that stays high",
+    "while the land falls away east and west. Find it by ear. \ud83c\udfa7"
+  ],
+  "surface_name": "ridge",
+  "equation_png": "data/scenes/rain_gutter/equation.png",
+  "totem_start": [1.5, -2.5],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the crest \u2014 where a whole LINE of musicians shares the top note? \ud83c\udf27\ufe0f",
+  "hint_lines": [
+    "On the crest, walking north\u2013south changes NOTHING \u2014",
+    "friends ahead of you and behind you sing your exact note. \ud83d\udca1",
+    "Does the highest note live at one point\u2026 or along a whole row?"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/rain_gutter/option_a.wav", "correct": false,
+      "explain": "EVERY direction was dead there \u2014 one note everywhere, a flat floor. On the dyke, one direction holds still but the other falls to the water. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/rain_gutter/option_b.wav", "correct": false,
+      "explain": "So close! That peak falls away in EVERY direction \u2014 its top note lives at a single point. The crest's top note stretches along a whole line. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/rain_gutter/option_c.wav", "correct": true,
+      "explain": "" },
+    { "label": "D", "wav_path": "data/scenes/rain_gutter/option_d.wav", "correct": false,
+      "explain": "That was the dyke's SLOPE \u2014 the music leaned down toward the water. Climb until the highest voices sing right beside you, ahead and behind. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE CREST! \ud83c\udf27\ufe0f North\u2013south the music froze \u2014 that whole line sings one note, and only east\u2013west falls away. You just heard a direction where nothing changes. Remember it. \ud83c\udf89"
+}

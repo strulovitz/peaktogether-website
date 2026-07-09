@@ -1,0 +1,32 @@
+{
+  "scene_id": "terraces_of_banaue",
+  "title_lines": [
+    "BANAUE, PHILIPPINES \ud83c\udf3e\u26f0\ufe0f For two thousand years the terraces",
+    "have climbed this mountain \u2014 every stone wall traces one height.",
+    "Find where the village walks without climbing. \ud83c\udfa7"
+  ],
+  "surface_name": "hill",
+  "equation_png": "data/scenes/terraces_of_banaue/equation.png",
+  "totem_start": [-2.0, 1.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Where can the farmers walk a level path THROUGH the village \u2014 the center's note carried out to both sides? \ud83c\udf3e",
+  "hint_lines": [
+    "A level path sings ONE note \u2014 listen for the middle note",
+    "stretched sideways by an arc of friends, uphill voices above it,",
+    "downhill voices below it. \ud83d\udca1"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/terraces_of_banaue/option_a.wav", "correct": false,
+      "explain": "That was the SUMMIT \u2014 its height belongs to one single point, so there is no room to walk level there. The paths live on the slopes. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/terraces_of_banaue/option_b.wav", "correct": true,
+      "explain": "" },
+    { "label": "C", "wav_path": "data/scenes/terraces_of_banaue/option_c.wav", "correct": false,
+      "explain": "The whole land was ONE height \u2014 a floor, not a mountainside. Terraces are carved where the land slopes. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/terraces_of_banaue/option_d.wav", "correct": false,
+      "explain": "That was the bottom of a PIT \u2014 lovely level rings around you, but the lowest note itself belongs to a single point, just like a summit. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "A LEVEL PATH! \ud83c\udf3e The middle note stretched along a curve \u2014 walk it and the music never changes. That curve is a CONTOUR, and the terraces you see are contours made of stone. \ud83c\udf89"
+}

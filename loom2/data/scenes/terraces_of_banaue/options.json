@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "hill", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/terraces_of_banaue/option_a.wav" },
+  "B": { "surface": "hill", "xy": [2.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/terraces_of_banaue/option_b.wav" },
+  "C": { "surface": "ramp", "xy": [0.0, 0.0], "radius": 2.5, "z_per_octave": 200.0,
+         "out": "data/scenes/terraces_of_banaue/option_c.wav" },
+  "D": { "surface": "bowl", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/terraces_of_banaue/option_d.wav" }
+}
