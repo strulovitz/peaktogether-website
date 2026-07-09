@@ -231,6 +231,26 @@ def egg_carton(x, y):
     return 1.6 * np.sin(1.5 * x) * np.sin(1.5 * y)
 
 
+def egg_carton_1x1(x, y):
+    """z = 1.6*sin(0.75x)*sin(0.75y)  -- sparse: ~1 swell per totem circle.
+
+    Same amplitude as egg_carton (1.6), half the wave number (0.75 vs 1.5).
+    Half-wavelength ~4.19 — one peak or trough inside the 2×R=5 hearing
+    diameter. Used by Scene 10 quiz options A & B (Parent H).
+    """
+    return 1.6 * np.sin(0.75 * x) * np.sin(0.75 * y)
+
+
+def egg_carton_3x3(x, y):
+    """z = 1.6*sin(2.25x)*sin(2.25y)  -- dense: ~3 swells per totem circle.
+
+    Same amplitude as egg_carton (1.6), 1.5× the wave number (2.25 vs 1.5).
+    Half-wavelength ~1.40 — three peaks per crossing inside the hearing
+    diameter. Used by Scene 10 quiz option D (Parent H).
+    """
+    return 1.6 * np.sin(2.25 * x) * np.sin(2.25 * y)
+
+
 def monkey_saddle(x, y):
     """z = 0.08(x^3 - 3x*y^2)  -- the monkey saddle: three valleys, three ridges.
 
@@ -328,6 +348,7 @@ REGISTRY = {  # scene.json refers to surfaces ONLY by these names
     "ramp": ramp, "bowl": bowl, "hill": hill, "ridge": ridge,
     "ridge_y": ridge_y,
     "saddle": saddle, "field": field, "egg_carton": egg_carton,
+    "egg_carton_1x1": egg_carton_1x1, "egg_carton_3x3": egg_carton_3x3,
     "monkey_saddle": monkey_saddle, "cannon_range": cannon_range,
 }
 

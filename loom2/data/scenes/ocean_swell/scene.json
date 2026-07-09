@@ -1,0 +1,32 @@
+{
+  "scene_id": "ocean_swell",
+  "title_lines": [
+    "THE OPEN PACIFIC \ud83c\udf0a\ud83d\udef6 The wayfinder reads the swell with closed eyes \u2014",
+    "how many waves pass beneath the canoe tells her which sea she sails.",
+    "Count the hills inside your circle. \ud83c\udfa7"
+  ],
+  "surface_name": "egg_carton",
+  "equation_png": "data/scenes/ocean_swell/equation.png",
+  "totem_start": [1.05, 1.05],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which groove is THIS sea \u2014 the swell under your totem right now? \ud83c\udf0a",
+  "hint_lines": [
+    "Stand on any hilltop and listen: how many hills and hollows fit inside",
+    "your circle? One lonely swell\u2026 two\u2026 or three packed tight? \ud83d\udca1",
+    "Same wave height everywhere \u2014 only the SPACING changes."
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/ocean_swell/option_a.wav", "correct": false,
+      "explain": "One great lonely swell \u2014 a single hill filling the whole circle, hollows only at the rim. Wider waves than this sea. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/ocean_swell/option_b.wav", "correct": false,
+      "explain": "That canoe sat DOWN in one wide hollow \u2014 everything rising around it. A wider sea than this one\u2026 and listen from a hilltop! \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/ocean_swell/option_c.wav", "correct": true,
+      "explain": "" },
+    { "label": "D", "wav_path": "data/scenes/ocean_swell/option_d.wav", "correct": false,
+      "explain": "Waves packed TIGHT \u2014 three crests per crossing, the music cycling fast. A choppier sea than the one beneath you. \ud83d\ude42" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "THE WAYFINDER NODS. \ud83c\udf0a\ud83d\udef6 Two swells per crossing \u2014 you heard the PERIOD of the sea. Same height, different spacing: your ear just measured a frequency. \ud83c\udf89"
+}

@@ -1,0 +1,10 @@
+{
+  "A": { "surface": "bowl",   "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/fields_of_babylon/option_a.wav" },
+  "B": { "surface": "ridge",  "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/fields_of_babylon/option_b.wav" },
+  "C": { "surface": "ramp",   "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/fields_of_babylon/option_c.wav" },
+  "D": { "surface": "saddle", "xy": [0.0, 0.0], "radius": 2.5,
+         "out": "data/scenes/fields_of_babylon/option_d.wav" }
+}

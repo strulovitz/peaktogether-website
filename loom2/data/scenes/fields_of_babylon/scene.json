@@ -1,0 +1,32 @@
+{
+  "scene_id": "fields_of_babylon",
+  "title_lines": [
+    "BABYLON, 1800 BC \ud83d\udcdc The surveyor multiplies length by width \u2014",
+    "z = x\u00b7y, the oldest two-variable formula on Earth. And at the",
+    "field's corner hides a shape you met in the Alps\u2026 \ud83c\udfa7\ud83d\udc18"
+  ],
+  "surface_name": "field",
+  "equation_png": "data/scenes/fields_of_babylon/equation.png",
+  "totem_start": [0.0, 0.0],
+  "domain": [-5.0, 5.0, -5.0, 5.0],
+  "mesh_step": 0.25,
+  "z_per_octave": 2.0,
+  "question": "Which sound is the corner's TWIN \u2014 the same shape in disguise? \ud83c\udf3e",
+  "hint_lines": [
+    "Shape is what your ear keeps when the map turns. \ud83d\udca1",
+    "The corner climbs toward NE and SW together, and sinks toward NW and SE \u2014",
+    "which recording does the same trick, just with different compass names?"
+  ],
+  "options": [
+    { "label": "A", "wav_path": "data/scenes/fields_of_babylon/option_a.wav", "correct": false,
+      "explain": "A pit rises EVERY way \u2014 but the corner climbs along one diagonal and sinks along the other. Not a twin. \ud83d\ude42" },
+    { "label": "B", "wav_path": "data/scenes/fields_of_babylon/option_b.wav", "correct": false,
+      "explain": "A crest holds one frozen top line with nothing above it \u2014 the corner has voices above AND below A440. Not a twin. \ud83d\ude42" },
+    { "label": "C", "wav_path": "data/scenes/fields_of_babylon/option_c.wav", "correct": false,
+      "explain": "One single lean \u2014 high toward one side only. The corner climbs toward TWO opposite sides at once. Not a twin. \ud83d\ude42" },
+    { "label": "D", "wav_path": "data/scenes/fields_of_babylon/option_d.wav", "correct": true,
+      "explain": "" }
+  ],
+  "camera_limits": { "target": [0, 0, 0], "zoom_min": 0.5, "zoom_max": 2.5, "distance": 14.0 },
+  "success_text": "TWINS! \ud83c\udf89 Rotate the map 45\u00b0 and 0.16\u00b7x\u00b7y becomes Hannibal's 0.16(x\u00b2 \u2212 y\u00b2) \u2014 the very same saddle. Your ear knew it: shape is real, north is just a choice. \ud83c\udf3e\ud83d\udc18"
+}
