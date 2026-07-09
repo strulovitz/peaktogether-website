@@ -276,12 +276,12 @@ matte rescale).
 
 **14 SURFACES:** ramp · bowl · hill · ridge · ridge_y · saddle · field · egg_carton · egg_carton_1x1 · egg_carton_3x3 · monkey_saddle · cannon_range · cannon_range10 · fog_hill
 
-**⏳ STILL NEEDS NIR (can't be done by DeepSeek — accounts):**
-- **itch.io:** Set page to **Public**, add cover art + screenshots (images in `images/`: `loom2-now-landscape.png`, `loom2-saddle.png`, `loom2-monkey-saddle.png`, `loom2-win-screen.png`).
-- **FileZilla:** Deploy updated HTML + new images to peaktogether.me: `loom-qed-hero-art.png`, `loom-sonifiquation-now.png`, `loom-cover4.jpg`, updated `header.html`, `index.html`, `arcade/index.html`, `arcade/loom2/index.html`.
-- **Test:** Download from itch.io on a fresh PC, verify it boots and plays.
+**✅ FINAL NIR STEPS — ALL DONE (July 10, end of evening):**
+- ✅ **itch.io** — Public with cover art + screenshots.
+- ✅ **FileZilla** — All HTML + images deployed to peaktogether.me, everything is live.
+- ✅ **Test** — Zip downloaded and tested on Nir's laptop — boots and plays perfectly.
 
-**🏁 CURRENT STATE (July 10, 2026, evening) — SHIPPED 🏁**
+**🏁 CURRENT STATE (July 10, 2026, evening) — FULLY SHIPPED. LIVE ON ITCH.IO. LIVE ON PEAKTOGETHER.ME. 🏁**
 
 Parents **A, B, C, D, E, F are ALL COMPLETE**. The whole audio package, all graphics
 (camera / renderer / terrain / totem / helix_panel / slice_mode / **hud**), all core

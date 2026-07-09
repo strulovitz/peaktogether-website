@@ -239,77 +239,23 @@
 - 🎨 Nir-owned assets: the 13 instrument-icon cliparts (~128×128, transparent, "four emoji big") for data/icons/; a UI font for data/fonts/.
 
 
-## CURRENT FRONTIER (July 9, 2026 — afternoon session, pre-restart)
+## CURRENT FRONTIER (July 10, 2026 — SHIPPED 🎵🚀)
 
-### 🔖 RESTART SNAPSHOT — JULY 9 AFTERNOON — READ THIS FIRST
+### 🔖 RESTART SNAPSHOT — JULY 10 EVENING — READ THIS FIRST
 
-**🏁 ALL CODE DONE. ALL 13 CAMPAIGN SCENES DELIVERED. THE GAME IS PLAYABLE END-TO-END. 🏁**
+**🏁 LOOM2 IS FULLY SHIPPED. LIVE ON ITCH.IO. LIVE ON PEAKTOGETHER.ME. 🏁**
 
-### WHAT HAPPENED THIS SESSION (July 9 morning-afternoon)
+### WHAT HAPPENED THIS SESSION (July 10 — website polish + distribution)
 
-**Parents A–H are ALL COMPLETE.** The game code was finished last night. Today we:
+1. **Hero art** — Refined prompt (full curl/divergence/gradient), Nir used it with GPT 5.4 Image 2. New hero image + Then/Now images updated.
+2. **Emoji swap** — 🧿 → 🎵 across all pages (home, arcade, loom2).
+3. **Arcade page** — Replaced The Dig cover with Loom cover (`loom-cover4.jpg`), linked to LOOM2.
+4. **GitHub Release** — `loom2-v1.0.0` created with zip (80.8 MB) + SHA256.
+5. **itch.io** — Butler pushed 130 MB to `strulovitz/loom2-sonifiquation:windows`. Nir set page to Public with cover + screenshots.
+6. **Home page** — Friendlier text (no `python app.py`, mouse before controller).
+7. **Header** — "Play Free" now goes to `/arcade/loom2/`.
+8. **AGENTS.md** — Nir's final warning added as the first rule, read on every startup.
+9. **FileZilla** — Everything deployed to peaktogether.me, fully live.
+10. **Tested** — Nir tested the zip download on his laptop — boots and plays perfectly.
 
-1. **Joystick/Xbox pumping** — Added `pump_controllers()` to `input_map.py` (Quake precedent: XInput `dispatch_posted_events` + DirectInput `device._dispatch_events`). Stored window for `js.open(window=...)`. Flipped Xbox left-stick Y sign per Nir's taste. ✅ Nir tested with real hardware — works great.
-
-2. **`tools/render_equations.py`** — Real LaTeX pipeline (pdflatex + pdftocairo), producing yellow-text + black-outline transparent PNGs at 600 DPI. NO matplotlib — proper LaTeX math quality. Configurable via `HUD_EQUATION_MAX_H_PX` (currently 88px). ✅
-
-3. **Parent H — THE 13 CAMPAIGN SCENES** — Fable delivered all scenes in 8 parts. Each saved verbatim. DeepSeek: created 13 scene folders, wrote scene.json + options.json, rendered 52 quiz WAVs via `render_offline`, rendered 13 equation PNGs, added 5 new surfaces (`ridge_y`, `egg_carton_1x1`, `egg_carton_3x3`, `cannon_range10`, `fog_hill`), updated `campaign.json` (test_saddle retired to dev playground), committed + pushed. All scenes validate. ✅
-
-4. **Fog finale (Scene 13)** — Added `SceneSpec.fog: bool = False` (default safe), added `u_fog` uniform to terrain.frag (dims terrain to 10%, totem/helix stay lit), wired through scene.py → main.py → terrain.py. Nir tested — works beautifully. ✅
-
-5. **∂ symbol fix** — Changed emoji-font threshold from `0x2190` to `0x2600` so math symbols (∂ at U+2202) route through regular system font instead of emoji font. ✅
-
-### SCENE MAP
-
-| # | scene_id | surface | correct |
-|---|----------|---------|---------|
-| 1 | roman_road | ramp | B |
-| 2 | granary_of_egypt | hill | D |
-| 3 | valley_lake | bowl | A |
-| 4 | rain_gutter | ridge | C |
-| 5 | terraces_of_banaue | hill | B |
-| 6 | ridge_two_hands | ridge | D |
-| 7 | water_finds_the_way | hill | A |
-| 8 | hannibal_saddle ⭐ | saddle | C |
-| 9 | fields_of_babylon | field | D |
-| 10 | ocean_swell | egg_carton | C |
-| 11 | three_chairs | monkey_saddle | B |
-| 12 | tartaglia_cannon | cannon_range10 | A |
-| 13 | fog_summit 🌫️ | fog_hill | D |
-
-Correct-letter distribution: A×3, B×3, C×3, D×4 — no pattern.
-
-### NEW SURFACES ADDED (now 14 total)
-
-| Name | Formula | Used by |
-|------|---------|---------|
-| ridge_y | 1.8 − 0.22y² | Scene 6, option B |
-| egg_carton_1x1 | 1.6·sin(0.75x)·sin(0.75y) | Scene 10, options A & B |
-| egg_carton_3x3 | 1.6·sin(2.25x)·sin(2.25y) | Scene 10, option D |
-| cannon_range10 | 0.03·x²·sin(18y°) | Scene 12 (scene + all options) |
-| fog_hill | 3.4·exp(−((x−2.6)²+(y+1.8)²)/7)−0.6 | Scene 13 (scene + A/B/D) |
-
-### SCRIPTURE FILES FROM PARENT H (all verbatim in HINDU/)
-
-1. `LOOM2-PARENT-H-PART-1-CAMPAIGN-MAP-AND-ROMAN-ROAD-BY-FABLE.md`
-2. `LOOM2-PARENT-H-PART-2-GRANARY-AND-VALLEY-LAKE-BY-FABLE.md`
-3. `LOOM2-PARENT-H-PART-3-RAIN-GUTTER-AND-TERRACES-BY-FABLE.md`
-4. `LOOM2-PARENT-H-PART-4-RIDGE-TWO-HANDS-AND-WATER-BY-FABLE.md`
-5. `LOOM2-PARENT-H-PART-5-HANNIBAL-SADDLE-BY-FABLE.md`
-6. `LOOM2-PARENT-H-PART-6-BABYLON-AND-OCEAN-SWELL-BY-FABLE.md`
-7. `LOOM2-PARENT-H-PART-7-THREE-CHAIRS-BY-FABLE.md`
-8. `LOOM2-PARENT-H-PART-8-FINALE-BY-FABLE.md`
-
-### STILL REMAINING (packaging / ship)
-
-1. **`run_loom2.bat` launcher** — double-click from Windows, runs `python main.py`
-2. **PyInstaller single-folder EXE** — must bundle ffmpeg (for sampler mp3 decode) OR swap to .npy-only (ship the cache, no mp3 dependency)
-3. **Website** — add multivariable calculus as a foundational subject on the Peak Together site
-
-### DECIDED THIS SESSION
-
-- Scene 10 (Ocean Swell): standard A/B/C/D quiz, density comparison (1×1 / 2×2 / 3×3 egg carton)
-- Xbox left stick Y: stick DOWN → totem closer (sign flipped)
-- Fog finale: black fog (terrain dims to 10%), totem/helix stay lit — Nir approved
-- Equation max height: 88px (was 44px)
-- No open questions remain — everything is decided
+### ✅ ALL DONE. NOTHING REMAINS. GAME 5 IS SHIPPED. 🎵🎉🚀
