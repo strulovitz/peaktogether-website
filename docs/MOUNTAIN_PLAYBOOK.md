@@ -31,9 +31,9 @@ Completed so far:
 - 🏔️ **Everest = Riemann Hypothesis** — `mathematics/Riemann_hypothesis/` (gold standard, "fattened" with sub-pages).
 - 🏔️ **Annapurna I = Navier–Stokes** — `mathematics/Navier-Stokes_existence_and_smoothness/` (skeleton).
 - 🏔️ **K2 = Turbulence** — `physics/K2_turbulence/` (skeleton; first Physics mountain).
-- 🏔️ **Tirich Mir = Room-Temperature Superconductors** — `chemistry/Tirich_Mir_room_temperature_superconductors/` (skeleton; **first Chemistry mountain**; sherpa = John Bardeen). Built July 2026. This doc was a **richer type** than K2 — see §3a.
+- 🏔️ **Tirich Mir = Room-Temperature Superconductors** — `chemistry/Tirich_Mir_room_temperature_superconductors/` (skeleton; **first Chemistry mountain**; sherpa = John Bardeen). Built July 2026. This doc was a **richer type** than K2 — see §3a. ✅ FULLY DONE: committed, pushed, and Nir bulk-uploaded to peaktogether.me via FileZilla.
 
-**⏭️ NEXT mountain (queued by Nir):** **Istor-o-Nal — Economical Carbon Capture** (finding efficient chemical methods to trap or convert CO₂). Subject = **chemistry**. Nir will paste the Deep Research text in a fresh session.
+**⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one. (An earlier ChatGPT sign-off had floated "Istor-o-Nal — Economical Carbon Capture," but on July 2026 Nir explicitly said the next mountain is undecided. Never put that in his mouth — wait for his pick.)
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
