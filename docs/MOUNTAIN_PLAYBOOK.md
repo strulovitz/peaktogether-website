@@ -291,14 +291,20 @@ The base `.gp-gallery` + `.gp-gallery img` styling and ALL `.lightbox-*` / `.zoo
 (I can't view images myself — write a thematic `alt` from the filename/topic and tell Nir he can refine it.)
 
 ### 8f. The welcome caption (below the scientist's photo only)
-Nir gives a paragraph of text he found on Google — a description of the scientist + a funny life anecdote. Rewrite it in **first person** with two bold framing phrases:
+Nir gives a paragraph of text he found on Google — a description of the scientist + a funny life anecdote. Rewrite it in **first person** with two bold framing phrases. Embed **~10 relevant emojis** throughout to make it light-hearted and fun:
 ```
-<figcaption><strong>Our Sherpa guide welcomes us:</strong> Hi! I'm …[description sentence(s) in first person]… <strong>Let me tell you a funny story!</strong> …[anecdote in first person, as if the scientist is telling it]…</figcaption>
+<figcaption><strong>Our Sherpa guide welcomes us:</strong> Hi! I'm …[description in first person, with emojis]… <strong>Let me tell you a funny story!</strong> …[anecdote in first person, as if the scientist is telling it, with emojis]…</figcaption>
 ```
 - Keep ALL facts verbatim; just shift pronouns and tense to first person.
 - Use curly quotes `“ ”` / `’` and proper typography.
-- Only the scientist's `<figure>` gets a `<figcaption>`. The real-mountain figure stays caption-less (just `<figure><img …></figure>`).
-- After writing: verify the total character length is reasonable (under ~600 chars is comfortable).
+- Add ~10 natural, topic-relevant emojis (Nir likes them — they make the page welcoming).
+
+### 8g. The mountain caption (below the real-mountain photo)
+Nir gives an AI Overview or Google snippet about the mountain — an interesting anecdote / surprising fact. Reproduce it **verbatim** inside a `<figcaption>`, with **~10 relevant emojis** woven in. Do NOT convert to first person (the mountain isn't talking). Structure the caption naturally — bold the sub-topic labels, italicize book titles with `<em>`, and add emojis for warmth. No extra framing phrase.
+```
+<figcaption>…[anecdote text verbatim, with emojis, bold sub-labels, <em>book titles</em>]…</figcaption>
+```
+- Both figures in `.gp-gallery.two` now carry `<figcaption>`s (scientist = first-person welcome, mountain = verbatim anecdote).
 
 ---
 
