@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gasherbrum I – Quantum Gravity — Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=26">
+    <link rel="stylesheet" href="/style.css?v=27">
 </head>
 <body>
 
@@ -13,6 +13,17 @@
     <main class="page">
         <h1>🏔️ Gasherbrum I: Quantum Gravity</h1>
         <p class="subtitle">Uniting general relativity and quantum mechanics into a single framework — the deepest unsolved problem in theoretical physics. Eleven candidate paths to the summit. Together, we climb.</p>
+
+        <div class="gp-gallery two mtn-141">
+            <figure>
+                <img src="/images/gasherbrum-I-quantum-gravity-einstein-sherpa-guide.png" alt="Albert Einstein — the sherpa guide for Gasherbrum I – Quantum Gravity">
+                <figcaption><strong>Our Sherpa guide welcomes us:</strong> Hi! I&rsquo;m Albert Einstein 👨‍🔬, a German-born theoretical physicist 🇩🇪 widely acknowledged as one of the most influential scientists of all time 🌟. I&rsquo;m best known for developing the theory of relativity, which fundamentally altered the human understanding of space, time, and gravity 🌀. Alongside quantum mechanics, my discoveries form the twin pillars of modern physics ⚛️. <strong>Let me tell you a funny story!</strong> 😄 While on a lecture tour, my driver noted he had memorized my relativity speech by heart 🧠. At the next university, we swapped clothes! 👔 The driver delivered the lecture flawlessly 🎤, but when an audience member asked a complex question 🤔, the driver replied, &ldquo;That question is so simple, even my driver can answer it,&rdquo; pointing to me! 👈😆</figcaption>
+            </figure>
+            <figure>
+                <img src="/images/gasherbrum-I-quantum-gravity-real-mountain.png" alt="Gasherbrum I — Hidden Peak, the real mountain">
+                <figcaption><strong>The &ldquo;Hidden Peak&rdquo;:</strong> 🫥 Gasherbrum I, often called &ldquo;Hidden Peak&rdquo; due to its extreme remoteness, earned its famous moniker from Victorian surveyors who couldn&rsquo;t easily spot it behind the surrounding giants 🏔️. It is the 11th highest mountain in the world 🌍, towering at 8,080 meters in the Karakoram range on the border of Pakistan and China 🇵🇰🇨🇳. <strong>A defining moment in mountaineering history took place on its slopes:</strong> 🧗 In 1975, legendary climbers Reinhold Messner and Peter Habeler made history on Gasherbrum I by achieving the first-ever &ldquo;alpine-style&rdquo; ascent of an 8,000-meter peak ⛏️. Instead of relying on the traditional siege tactics — which used massive, slow-moving teams, fixed ropes, and bottled oxygen — they traveled incredibly light, relying solely on their physical endurance, speed, and each other 💨. Messner later famously described his experience atop the mountain as being &ldquo;nothing more than a single, narrow, gasping lung, floating over the mists and summits.&rdquo; 🌫️ Their minimalist, pure-climbing approach revolutionized high-altitude mountaineering forever 🏅.</figcaption>
+            </figure>
+        </div>
 
         <h2>Executive Snapshot</h2>
         <p>
@@ -268,5 +279,34 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt){ big.setAttribute('src', src); big.setAttribute('alt', alt||''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox(){ overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src',''); }
+            for (var i=0;i<imgs.length;i++){ imgs[i].classList.add('zoomable'); imgs[i].addEventListener('click', function(){ openBox(this.getAttribute('src'), this.getAttribute('alt')); }); }
+            overlay.addEventListener('click', function(e){ if (e.target===overlay || e.target===closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function(e){ if (e.key==='Escape'||e.keyCode===27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
 </body>
 </html>
