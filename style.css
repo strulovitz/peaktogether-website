@@ -466,6 +466,27 @@ h1, h2, h3, h4, h5, h6 {
     cursor: default;
 }
 
+/* Level-2 leaf links inside a top-level dropdown (e.g. the Arcade's game list) —
+   direct <a> children of the first-level .submenu, excluding the "All …" heading. */
+.nav-list > li > .submenu > li > a:not(.submenu-heading) {
+    display: block;
+    padding: 9px 20px;
+    margin: 0 8px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #555;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: color 0.15s, background 0.15s, padding 0.15s;
+}
+
+.nav-list > li > .submenu > li > a:not(.submenu-heading):hover {
+    color: var(--orange);
+    background: #fef9f0;
+    padding-left: 24px;
+}
+
 /* ── CTA buttons (Play Free + GitHub) ── */
 .nav-cta {
     display: flex;
