@@ -14,6 +14,11 @@
         <h1>🏔️ Annapurna I: The Navier–Stokes Existence and Smoothness Problem</h1>
         <p class="subtitle">A $1,000,000 Clay Millennium Prize problem on the equations of fluid motion. Six paths to the summit. Together, we climb.</p>
 
+        <div class="gp-gallery two">
+            <img src="/images/annapurna-navier-stokes-ladyzhenskaya-sherpa-guide.png" alt="Olga Ladyzhenskaya — the sherpa guide for Annapurna I – Navier–Stokes">
+            <img src="/images/annapurna-navier-stokes-real-mountain.png" alt="Annapurna I — the real mountain">
+        </div>
+
         <p>
             The Navier–Stokes existence and smoothness problem is one of the seven Clay Millennium Prize
             Problems. It asks whether smooth, finite-energy solutions to the three-dimensional incompressible
@@ -67,5 +72,66 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+
+            var big = document.createElement('img');
+            big.className = 'lightbox-img';
+            big.alt = '';
+
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+
+            overlay.appendChild(big);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+
+            function openBox(src, alt) {
+                big.setAttribute('src', src);
+                big.setAttribute('alt', alt || '');
+                overlay.classList.add('open');
+                document.body.classList.add('lightbox-locked');
+            }
+            function closeBox() {
+                overlay.classList.remove('open');
+                document.body.classList.remove('lightbox-locked');
+                big.setAttribute('src', '');
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () {
+                    openBox(this.getAttribute('src'), this.getAttribute('alt'));
+                });
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target === closeBtn) closeBox();
+            });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    })();
+    </script>
 </body>
 </html>
