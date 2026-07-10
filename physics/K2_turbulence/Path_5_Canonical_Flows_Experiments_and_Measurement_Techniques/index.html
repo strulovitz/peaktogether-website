@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 5: Canonical Flows, Experiments, and Measurement Techniques — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 5: Canonical Flows, Experiments, and Measurement Techniques</h1>
+
+        <h2>Base Camp 5.1: Wall-Bounded Turbulence – Pipes, Channels, and Boundary Layers</h2>
+        <p><strong>Stepping Stones:</strong> Turbulent boundary layer structure (inner region with law-of-the-wall/log-law, outer wake region); pipe and channel flow similarity (universal near-wall behavior); high-Reynolds-number trends (emergence of very-large-scale motions); classic scaling laws (friction factor, Coles' law of the wake).</p>
+        <ul>
+            <li>Pope, <em>Turbulent Flows</em> – Provides a systematic description of canonical wall flows. Pope demonstrates that a flat-plate boundary layer, pipe flow, and channel flow share an essentially identical inner layer behavior (when scaled properly). He derives the logarithmic mean velocity profile (von Kármán "log-law") and discusses its experimental validation and limitations. Pope's treatment is detailed and quantitative, making it a standard reference for understanding wall turbulence (intermediate).</li>
+            <li>Schlichting &amp; Gersten (2000), <em>Boundary-Layer Theory</em> – A classical text with extensive coverage of turbulent boundary layers. Schlichting presents empirical correlations (e.g. skin friction vs. Reynolds number) and phenomenological models (mixing-length theory). He describes the experimental "mean picture" of boundary layers, including the buffer layer, log layer, and intermittent outer region, in a clear manner. This book is frequently recommended for engineers needing a solid base in turbulent boundary layer behavior (intuitive to intermediate).</li>
+            <li>Smits, McKeon &amp; Marusic (2011), "High–Reynolds Number Wall Turbulence" – An Annual Reviews article summarizing discoveries from new facilities (e.g. Princeton Superpipe, high-Re boundary layers). It highlights the appearance of very-large-scale motions (VLSMs) in pipes and superstructures in boundary layers as $Re$ increases – streamwise-elongated regions of momentum defect extending many boundary-layer thicknesses. The authors confirm Townsend's hypothesis that the near-wall cycle remains universal (independent of $Re$) while the outer layer grows new $Re$-dependent motions. This is an excellent up-to-date survey (intermediate).</li>
+            <li>Marusic et al. (2010), "Predictive Model for Wall-Bounded Turbulence" – A research article proposing a model that superposes small-scale attached eddies and large-scale motions to predict mean flow and fluctuations at high $Re$. It gives insight into how coherent structures (discussed in Path 4) populate wall flows. Often cited for providing physical understanding (e.g. how large outer eddies modulate near-wall turbulence). This work connects experimental observations with modeling and is a stepping stone toward flow control (intermediate).</li>
+            <li>Nagib &amp; Chauhan (2008), "Variations of von Kármán Coefficient in Canonical Flows" – Addresses a debated topic: whether the log-law von Kármán constant is truly universal. Using high-quality data, they find slight variations between flows (e.g. pipes vs. boundary layers) and discuss possible causes (instrument resolution, flow development, surface roughness). This paper is a good example of the careful analysis required in experiments and is useful for understanding the precision and subtlety in measuring canonical flows (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 5.2: Free Shear Flows – Jets, Wakes, and Mixing Layers</h2>
+        <p><strong>Stepping Stones:</strong> Self-similarity in jets and wakes (velocity profiles collapse with appropriate scaling); jet spreading rate and centerline decay ($U_c \sim x^{-1}$ in round jets); mixing layer growth and Kelvin–Helmholtz vortices; wake recovery behind bluff bodies.</p>
+        <ul>
+            <li>Pope, <em>Turbulent Flows</em> – Chapter 5 is devoted to free shear flows. Pope begins with the round jet, showing how experimental observations reveal self-similar behavior: the centerline velocity decays and the jet's width grows linearly with downstream distance. He quantitatively defines measures like the jet half-width and documents values (e.g. spread rate, turbulence intensities). The text then covers plane jets, wakes, and mixing layers, highlighting their common features. This comprehensive treatment is highly regarded for learning jet/wake basics (intermediate).</li>
+            <li>Townsend (1976), <em>The Structure of Turbulent Shear Flow</em> – Townsend's classic book extensively describes free shear flows. He introduces the equilibrium similarity hypothesis for wakes and jets and the concept of eddy structures (large-scale vortices) in mixing layers. Townsend's work, though older, is still cited for fundamental scaling arguments (e.g. how a plane wake's velocity deficit decays as $x^{-1/2}$). It's a rigorous yet insightful source (rigorous).</li>
+            <li>Brown &amp; Roshko (1974), "On Density Effects and Large Structure in Turbulent Mixing Layers" – Famous for introducing flow visualization of the spanwise roller vortices and pairing process in mixing layers. They documented that mixing layers contain large coherent eddies that roll up from the Kelvin–Helmholtz instability and subsequently pair, doubling their spacing. This paper is often recommended for its intuitive visual demonstration of coherent structures in a free shear flow (intuitive).</li>
+            <li>Wygnanski &amp; Fiedler (1969), "Some Measurements in the Self-Preserving Jet" – A thorough experimental study confirming the self-similar behavior of high-$Re$ round jets. They carefully measured mean velocity and turbulent intensities, finding that, after an initial development, profiles collapse when scaled by centerline velocity and jet half-width. Their data provided the canonical values of jet spread rate and are frequently used to benchmark simulations and models (rigorous experiment).</li>
+            <li>Hitchen &amp; Brookes (1992), "The Plane Turbulent Wake" – An experimental paper providing detailed measurements of a 2D wake at different Reynolds numbers. They examine how the wake transitions from a near-field dominated by large vortices (von Kármán street) to a self-similar far wake. This paper gives a sense of the complexities (e.g. the wake's slower approach to self-similarity compared to jets) and is a good complement to the simpler jet picture (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 5.3: Experimental Techniques and Flow Diagnostics</h2>
+        <p><strong>Stepping Stones:</strong> Hot-wire anemometry (HWA) – principles and use for point velocity measurements; Laser Doppler Anemometry (LDA/LDV) – non-intrusive point measurements via scattering; Particle Image Velocimetry (PIV) – planar or volumetric flow field measurements; pros/cons (spatial resolution vs. temporal); flow visualization techniques (dye, smoke, schlieren); advancements in high-speed diagnostics.</p>
+        <ul>
+            <li>McComb, <em>The Physics of Fluid Turbulence</em> – Appendix 3.1 is devoted to anemometry and data processing. McComb notes that the invention of laser Doppler anemometry alongside modern computing "revolutionized the experimental study of turbulence." He discusses how new methods have improved upon older techniques (like pitot tubes and hot-wires), enabling better Lagrangian statistics and higher fidelity data. This context is valuable for understanding the evolution and importance of measurement technology (intuitive).</li>
+            <li>Lomas (1986), <em>Fundamentals of Hot Wire Anemometry</em> – A specialized book often recommended on forums for learning HWA. It covers how hot-wires work (King's law relating heat loss to velocity), calibration procedures, frequency response, and pitfalls (end-conduction, wire sag, etc.). Lomas provides a solid grounding in how one extracts reliable turbulence statistics from a single sensor (intuitive to intermediate).</li>
+            <li>Perry (1982), <em>Hot-Wire Anemometry</em> – Another foundational text focusing on practical implementation of HWA in turbulent flows. Perry includes numerous examples from canonical flows, illustrating how to measure spectra, correlations, and conditional averages with hot-wires. This book is valued by experimentalists and recommended for those who need hands-on knowledge of turbulence measurement (intermediate).</li>
+            <li>Adrian &amp; Westerweel (2011), <em>Particle Image Velocimetry</em> – A modern textbook on PIV, covering the theory (cross-correlation to obtain velocity fields from particle images), hardware (cameras, lasers), and error sources. PIV has become crucial for planar measurements of coherent structures and validating simulation, and Adrian's text is the standard. It's gentle enough for newcomers and detailed enough to serve as a reference (intuitive to intermediate).</li>
+            <li>Raffel et al. (2018), <em>Particle Image Velocimetry: A Practical Guide</em> – Complementary to Adrian, this guide provides step-by-step insight into setting up PIV experiments, processing data, and advanced variations (tomographic PIV for 3D flow mapping, time-resolved PIV). It's cited in discussions when researchers ask how to obtain full-field velocity data in turbulent flows, emphasizing best practices (intuitive).</li>
+            <li>Merzkirch (1987), <em>Flow Visualization</em> – Describes visualization methods (smoke, dye, schlieren, spark tracing) that have historically been vital in discovering turbulence structure. Merzkirch's examples (like dye in a water jet or smoke in a boundary layer) vividly show turbulent eddies and are often referenced to qualitatively illustrate phenomena discussed in theory. This book reminds us that seeing the flow can inspire understanding and models (intuitive).</li>
+        </ul>
+
+        <p>(Paths 5.1–5.3 ground our understanding in real flows and data. They remind us that turbulence theory must square with observations in pipes, boundary layers, jets, etc. They also highlight the tools that have enabled discoveries – important as we move next into modeling and simulation in Path 6.)</p>
+
+        <h2>What to Upload Next</h2>
+        <p>To continue our deep exploration, it's recommended to gather key original sources and textbooks for each base camp. Below is a prioritized list of PDFs (5–6 each) grouped by base camp:</p>
+
+        <h3>Base Camp 5.1 (Wall turbulence)</h3>
+        <ul>
+            <li>H. Schlichting (2000) – <em>Boundary-Layer Theory</em> (turbulent BL chapters)</li>
+            <li>I. Marusic et al. (2010) – Science, very-large-scale motions in pipe/BL</li>
+            <li>A. J. Smits, B. J. McKeon &amp; I. Marusic (2011) – ARFM "High-Re wall turbulence"</li>
+            <li>G. I. Taylor (1938) – classic pipe flow turbulence paper</li>
+            <li>C. B. Millikan (1939) – on logarithmic layer</li>
+        </ul>
+
+        <h3>Base Camp 5.2 (Free shear flows)</h3>
+        <ul>
+            <li>M. T. Landahl &amp; E. Mollo-Christensen (1986) – <em>Turbulence and Random Processes in Fluid Mechanics</em> (free shear chapters)</li>
+            <li>J. O. Hinze (1975) – <em>Turbulence</em> (sections on jets/wakes)</li>
+            <li>D. B. Roshko (1954) – NACA report on shear layers</li>
+            <li>B. L. Schwarz &amp; E. J. Wille (1979) – JFM on coherent structures in jet</li>
+            <li>P. E. Dimotakis (1986) – JFM on mixing layer entrainment</li>
+        </ul>
+
+        <h3>Base Camp 5.3 (Measurement techniques)</h3>
+        <ul>
+            <li>H. H. Bruun (1995) – <em>Hot-Wire Anemometry</em></li>
+            <li>M. Raffel et al. (2018) – <em>Particle Image Velocimetry</em></li>
+            <li>P. Sagaut &amp; C. Cambon (2018) – on LES inflow generation (connects to PIV data usage)</li>
+            <li>A. K. Prasad (2000) – Exp. Fluids review on surface measurements</li>
+            <li>G. E. Karniadakis (2005) – <em>Microflows</em> (re: micro PIV, for tech extension)</li>
+        </ul>
+
+        <a href="/physics/K2_turbulence/" class="back-link">← Back to K2 – Turbulence</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

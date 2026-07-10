@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 9: Machine Learning and Data-Driven Turbulence — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 9: Machine Learning and Data-Driven Turbulence</h1>
+
+        <h2>Base Camp 9.1: Data-Driven Turbulence Modeling (Augmenting RANS/LES with ML)</h2>
+        <p><strong>Stepping Stones:</strong> Using ML to learn closure terms or model discrepancies from data; neural-network-based turbulence models (e.g. embedding invariance properties, learning Reynolds stress anisotropy from DNS); examples – Ling et al. (2016) deep network for Reynolds stress tensor, Vollant et al. (2017) random forest for eddy viscosity correction; challenges – generalization beyond training flows, ensuring physical constraints (boundedness, realizability).</p>
+        <ul>
+            <li>Duraisamy et al. (2019), "Turbulence Modeling in the Age of Data" – In addition to UQ, this authoritative review surveys how machine learning is being used to improve turbulence closures. It covers early successes like inferring optimal model corrections from high-fidelity data, as well as key challenges (e.g. maintaining physical consistency and generality). It advocates a perspective that leverages foundational turbulence knowledge (symmetries, constraints) to guide ML, rather than treating it as a black box. This balanced approach is why the paper is widely recommended as a starting point (intermediate).</li>
+            <li>Ling, Kurzawski &amp; Templeton (2016), "Reynolds Stress Closure Using Deep Neural Networks" – A highly cited work where a deep neural network was trained (on DNS data) to predict the anisotropy of the Reynolds stress tensor given local mean flow features. Importantly, they embedded Galilean invariance and frame-indifference into the network architecture using tensor invariants. The result was a model that can, for example, better predict secondary flows in non-circular ducts where conventional models fail. This paper often appears on forums as an example of successful ML augmentation of RANS (intermediate).</li>
+            <li>Wu et al. (2018), "Physics-Informed Machine Learning Approach for Turbulence Modeling" – This study used a deep network to learn a correction term for the Spalart–Allmaras RANS model, constrained by known physical laws (like log-law behavior). By training on a set of flows, the ML-augmented model showed improved predictions on similar flows. It's a good illustration of how incorporating physical knowledge (in loss functions or network structure) can make ML models more robust and interpretable (intermediate).</li>
+            <li>Weatheritt &amp; Sandberg (2016), "A Novel Evolutionary Algorithm Applied to Algebraic Modifications of the RANS Stress–Strain Relationship" – Instead of neural nets, they used genetic programming to evolve new algebraic forms for the Reynolds stress–strain relation (i.e. eddy viscosity models). Their algorithm rediscovered known terms and found new ones that improved accuracy. This is a nice demonstration of data-driven discovery of turbulence model equations, offering interpretability (the output is a readable formula) (intermediate).</li>
+            <li>Xiao et al. (2019), "Quantifying and Reducing Uncertainty in RANS Models with Data" – A blend of UQ (Path 6.4) and ML, this paper uses a Bayesian approach to calibrate turbulence model parameters to data while also learning discrepancies. It serves as an example of how machine learning (in a probabilistic sense) can systematically improve models and quantify confidence. This is an advanced but important direction showing that ML can also yield uncertainty estimates, not just point predictions (rigorous).</li>
+        </ul>
+
+        <h2>Base Camp 9.2: Reduced-Order Modeling and Flow Feature Extraction (POD/DMD/Cluster Analysis)</h2>
+        <p><strong>Stepping Stones:</strong> Using data to extract dominant dynamics; Proper Orthogonal Decomposition (POD) in data-rich environments (link to Path 4.2); Dynamic Mode Decomposition (DMD) – data-driven discovery of coherent oscillatory modes; cluster-based reduced-order models (finding recurrent patterns and transitions); Sparse Identification of Nonlinear Dynamics (SINDy) to infer governing equations from time-series data (e.g. learning a low-dimensional Galerkin model).</p>
+        <ul>
+            <li>Brunton et al. (2020), "Machine Learning for Fluid Mechanics" – An excellent Annual Review focusing on how data-driven methods (especially modal and sparsity-based techniques) can be used to extract coherent structures and reduced models. It covers DMD for identifying oscillatory structures (like global stability modes in a bluff-body wake) and cluster-based models where flow snapshots are grouped into states to build Markov models. It also discusses the Sparse Identification of Dynamics (SINDy) method, which can discover low-dimensional ODEs governing flow observables. This review is highly regarded as a map of how machine learning (broadly defined) intersects with classic fluid dynamics model reduction (intermediate).</li>
+            <li>Schmid (2010), "Dynamic Mode Decomposition of Numerical and Experimental Data" – The seminal paper on DMD, showing how to derive a set of modes from flow field snapshots that have single-frequency (and growth/decay) characteristics. Schmid demonstrated DMD on cylinder wake data, extracting the vortex shedding mode cleanly. DMD has since become a staple for analyzing turbulence data to find coherent structures and oscillations. This paper is technical but is the go-to reference to learn DMD (intermediate).</li>
+            <li>Noack et al. (2003), "Hierarchy of Low-Dimensional Models for the Cylinder Wake" – Built a reduced-order model using POD modes of a cylinder wake and Galerkin projection, then used physical insight to enrich it (transient modes, shift modes) to capture transient dynamics. This is a classic in reduced-order modeling of a turbulent wake and illustrates how data-driven modes can lead to nonlinear ODE models that replicate flow behavior. It's a rich reference for learning how to go from data to models (intermediate).</li>
+            <li>Kutz et al. (2016), <em>Dynamic Mode Decomposition</em> – A monograph on DMD and related techniques. While not solely about turbulence, it contains numerous examples (jet plumes, cavity oscillations) and also draws connections to Koopman theory. It's often suggested for a deeper dive after reading Brunton's review or Schmid's paper. The text also covers variants like extended DMD and multi-time DMD which are useful for complex or turbulent flows (intermediate).</li>
+            <li>Kaiser et al. (2014), "Cluster-Based Reduced-Order Modeling of a Mixing Layer" – Implemented a cluster analysis on flow snapshots from a turbulent mixing layer to identify representative "states" and transition probabilities between them. The resulting model is akin to a coarse-grained Markov chain of the flow's evolution. This is an example of a data-driven finite-state machine for turbulence. It's valuable for showing an alternative to linear modal decomposition, capturing some non-linear dynamics (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 9.3: Super-Resolution, Deep Learning, and Turbulence Closure on the Fly</h2>
+        <p><strong>Stepping Stones:</strong> Using deep neural networks to infer high-resolution flow fields from coarse (super-resolution); deep reinforcement learning for flow control (not exactly modeling, but altering turbulence); physics-informed neural nets (PINNs) – training NNs to satisfy NS equations and match data (e.g. reconstructing flow in unseen regions); application of GANs or other generative models to produce synthetic turbulence realizations for training or inflow conditions.</p>
+        <ul>
+            <li>Fukami et al. (2019), "Super-Resolution Reconstruction of Turbulent Flows with Machine Learning" – Demonstrated that a convolutional neural network can learn to take low-resolution 2D turbulence data and reconstruct the higher-resolution field. The network effectively learned a subgrid-scale model and interpolation scheme combined. This super-resolution approach is like an LES-to-DNS mapping and is a cutting-edge idea for cheap refinement of coarse simulations. It shows the promise and current limits (the method worked for simple turbulence like 2D decaying turbulence) (intermediate).</li>
+            <li>Guastoni et al. (2020), "Convolutional-Network Models to Predict Wall-Bounded Turbulence" – Used deep learning to predict the near-wall velocity fluctuations given the outer flow (and vice versa), essentially learning the turbulent structures. Their networks could reproduce key statistical features and even instantaneous patterns to some degree. This addresses a classic problem (inner–outer interactions in wall turbulence) with a purely data-driven approach. Recommended as an example of ML capturing complex multi-scale relations in turbulence (intermediate).</li>
+            <li>Raissi et al. (2019), "Physics-Informed Neural Networks (PINNs) for Fluid Flows" – Introduced the PINN framework for fluids, where a neural network is trained not only on data but also to satisfy the Navier–Stokes equations as soft constraints. They showed that given a few measurements, a PINN can fill in an entire flow field respecting physical laws (e.g. reconstructing a flow around an airfoil from limited data). While currently feasible mostly for laminar flows, this approach is a harbinger of data-assimilation in turbulence as well. It garners interest for embedding NS knowledge into ML, aligning with the philosophy from Duraisamy's review (intermediate).</li>
+            <li>Novati et al. (2021), "Automating Turbulence Modeling by Reinforcement Learning" – An innovative application of reinforcement learning where an agent learns a policy (adjusting a spatially-local eddy viscosity) to minimize prediction error in a turbulent channel flow. Essentially, the algorithm learned a turbulence model (in an implicit form) by trial and error. This merges ideas of control and modeling and points to a new frontier: AI not just tuning but actively constructing turbulence closures. The results improved upon standard models in certain flows. It's advanced but highlights the creative intersections of ML and turbulence (rigorous).</li>
+            <li>Brunton &amp; Kutz (2019), <em>Data-Driven Science and Engineering</em> – Although general, this textbook covers many tools that have seen turbulent flow applications, from compressed sensing to autoencoders for flow fields. It's a recommended compendium if one wants to understand the algorithms behind the research papers and perhaps apply them to turbulence problems. It contextualizes the role of things like sparsity, neural nets, and reinforcement learning in the broader sweep of computational science (intermediate).</li>
+        </ul>
+
+        <p>(Paths 9.1–9.3 illustrate the rapidly growing synergy between turbulence physics and data science. Machine learning, guided by the rich knowledge base from Paths 1–8, is becoming a powerful tool to tackle longstanding challenges, from modeling and control to inference and analysis of turbulent flows. This final path points toward the future of turbulence research, where classical theory and modern computation unite.)</p>
+
+        <h2>What to Upload Next</h2>
+        <p>To continue our deep exploration, it's recommended to gather key original sources and textbooks for each base camp. Below is a prioritized list of PDFs (5–6 each) grouped by base camp:</p>
+
+        <h3>Base Camp 9.1 (ML for closures)</h3>
+        <ul>
+            <li>K. Duraisamy et al. (2019) – full ARFM PDF</li>
+            <li>J.-X. Wang et al. (2017) – JFM on data-assisted RANS (with field inversion)</li>
+            <li>J. Ling et al. (2016) – JFM deep learning anisotropy</li>
+            <li>A. Milano &amp; W. Jou (2002) – JCP on neural nets for near-wall stresses</li>
+            <li>G. Iaccarino et al. (2021) – Annu. Rev. Fluid Mech. on AI in fluid dynamics (for perspective)</li>
+        </ul>
+
+        <h3>Base Camp 9.2 (ROMs &amp; modal)</h3>
+        <ul>
+            <li>S. L. Brunton et al. (2020) – ARFM full PDF</li>
+            <li>P. J. Schmid (2010) – DMD paper</li>
+            <li>B. R. Noack et al. (2003) – JFM POD Galerkin model</li>
+            <li>E. N. Lorenz (1996) – "Predictability…" (for sparse modeling concepts in fluids)</li>
+            <li>N. S. Kevrekidis et al. (2004) – AIChE J. on nonlinear model reduction (general but relevant)</li>
+        </ul>
+
+        <h3>Base Camp 9.3 (Deep learning for fields)</h3>
+        <ul>
+            <li>Y. Lee &amp; H. You (2019) – PRF on CNN super-resolution of turbulence</li>
+            <li>M. Raissi et al. (2019) – JCP PINNs for NS</li>
+            <li>S. Novati et al. (2021) – Nature Machine Intelligence (RL for closure)</li>
+            <li>T. Rabault et al. (2019) – PRF on RL for flow control around cylinder</li>
+            <li>P.–Å. Kroujiline et al. (2022) – recent arXiv on GAN-generated turbulence</li>
+        </ul>
+
+        <a href="/physics/K2_turbulence/" class="back-link">← Back to K2 – Turbulence</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

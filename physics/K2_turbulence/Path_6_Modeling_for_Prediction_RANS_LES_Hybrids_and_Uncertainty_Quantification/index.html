@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 6: Modeling for Prediction: RANS, LES, Hybrids, and Uncertainty Quantification — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=24">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 6: Modeling for Prediction: RANS, LES, Hybrids, and Uncertainty Quantification</h1>
+
+        <h2>Base Camp 6.1: Reynolds-Averaged Navier–Stokes (RANS) and Turbulence Modeling</h2>
+        <p><strong>Stepping Stones:</strong> Reynolds decomposition and RANS equations; closure problem (Reynolds stresses unknown); eddy-viscosity models (Boussinesq hypothesis leading to $k$–$ε$, $k$–$ω$ models); Reynolds stress transport models; calibrated semi-empirical models (mixing length, algebraic stress).</p>
+        <ul>
+            <li>Pope, <em>Turbulent Flows</em> – Part II of Pope's book covers turbulence modeling approaches. It provides a unified derivation of RANS closure schemes, including turbulent-viscosity models (e.g. the standard $k$–$ε$) and more complex Reynolds-stress transport models. Pope carefully explains the physical assumptions (local isotropy for eddy viscosity, etc.) and common model constants. This is considered the graduate text for learning RANS modeling (intermediate).</li>
+            <li>Wilcox (2006), <em>Turbulence Modeling for CFD</em> – A practitioner-oriented book focusing on RANS models. Wilcox details popular two-equation models (including his $k$–$ω$ model), their derivation, and best practices for use in computational fluid dynamics. It's full of insights on model stability, boundary condition tweaks, and typical performance, making it a go-to reference for engineers implementing RANS (intermediate).</li>
+            <li>Launder &amp; Spalding (1974), "The Numerical Computation of Turbulent Flows" – The classic paper introducing the $k$–$ε$ model, which remains one of the most widely used turbulence models. Launder and Spalding presented transport equations for turbulent kinetic energy ($k$) and its dissipation ($ε$), closing the RANS system. Their pragmatic approach (calibrating to simple flows) and clear exposition make this a canonical reference to understand how model constants are tuned and why $k$–$ε$ became so popular (intermediate).</li>
+            <li>Lumley (1979), "Turbulence Modeling" – A critical review that discusses the limitations of eddy-viscosity models and advocates for Reynolds stress transport models and the use of symmetry principles. Lumley's perspective is often cited for a theoretical critique: he pointed out that Boussinesq's hypothesis cannot capture flows with strong anisotropy or curvature effects. This paper is useful to appreciate why multiple model levels exist (intermediate).</li>
+            <li>Hanjalić &amp; Launder (2011), <em>Modelling Turbulence in Engineering and the Environment</em> – A modern book that covers both the foundations and recent advances (e.g. explicit algebraic stress models, Reynolds-stress models with anisotropy correction). It is recommended for its balanced treatment of theory and application and for offering guidance on choosing models for different flow types. It also touches on DNS/LES as complements to RANS. This broad perspective is valuable for seeing where RANS stands in the landscape (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 6.2: Large Eddy Simulation (LES) – Filtered Equations and Subgrid Modeling</h2>
+        <p><strong>Stepping Stones:</strong> Spatial filtering of Navier–Stokes; resolved vs. subgrid scales; closure via subgrid-scale (SGS) models (Smagorinsky's eddy viscosity, structure-function models, dynamic SGS by Germano); strengths of LES (captures unsteady large eddies) vs. challenges (near-wall resolution, requiring models for high $Re$).</p>
+        <ul>
+            <li>Lesieur, <em>Turbulence in Fluids</em> – Chapter 12 is an up-to-date review of LES techniques. Lesieur covers the classical Smagorinsky model and its weaknesses (over-dissipation, especially near walls). He then discusses dynamic models (which compute coefficients on the fly using resolved scales) and selective multi-scale models. Lesieur's book is frequently recommended because it blends theoretical background (spectral eddy viscosity, etc.) with practical aspects of implementation in one coherent narrative (intermediate).</li>
+            <li>Sagaut (2006), <em>Large Eddy Simulation for Incompressible Flows</em> – A comprehensive textbook on LES. Sagaut derives the filtered equations, explains filter types (top-hat, Gaussian), and systematically presents SGS models from Smagorinsky through dynamic and mixed models. It also addresses important issues like commutation error and the influence of numerical schemes. This is a canonical reference often cited by researchers entering LES development (rigorous).</li>
+            <li>Smagorinsky (1963), "General Circulation Experiments with the Primitive Equations" – The original paper that introduced the Smagorinsky SGS model. Aimed at atmospheric modeling, Smagorinsky assumed an eddy viscosity proportional to the local strain-rate magnitude and grid spacing, effectively creating a simple closure. This model's simplicity and reasonable performance in isotropic regions led to its widespread adoption. Reading this paper gives historical perspective and a sense of how LES emerged from weather modeling (intermediate).</li>
+            <li>Germano et al. (1991), "A Dynamic Subgrid-Scale Eddy Viscosity Model" – A pivotal paper that presented the dynamic SGS model. The Germano identity relates stresses at two filter levels, allowing calculation of the SGS coefficient dynamically. This model adapts to local flow conditions and vanishes near solid walls, solving key issues of Smagorinsky's model. This paper is highly recommended on forums for those delving into LES research (intermediate to rigorous).</li>
+            <li>Meneveau &amp; Katz (2000), "Scale-Invariance and Turbulence Models" – An Annual Review that surveys LES modeling in light of turbulent scaling. They review modern SGS closures (spectral methods, deconvolution, etc.) and discuss how to ensure models respect the scale-invariance of the inertial range. It's praised for connecting LES modeling with the physics of energy cascades and is a good bridge to more advanced LES topics like implicit LES and multiresolution techniques (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 6.3: Hybrid RANS–LES Methods and Near-Wall Modeling</h2>
+        <p><strong>Stepping Stones:</strong> Detached Eddy Simulation (DES) – RANS in near-wall regions, LES in core flow; other hybrids like RANS-LES blending (zonal methods, WMLES, etc.); rationale for hybrids (full LES is too costly for high $Re$ near walls; pure RANS misses unsteadiness in separation regions); examples of hybrid success (aircraft flows, atmospheric boundary layer).</p>
+        <ul>
+            <li>Spalart et al. (1997), "Comments on the Feasibility of LES for Wings and on Hybrid RANS/LES Approach" – The white paper that introduced Detached-Eddy Simulation (DES). Spalart argued that for high-Re engineering flows (e.g. aircraft), pure LES is intractable near walls, so a hybrid is needed. They proposed using a RANS model in the boundary layer and switching to LES in separated regions. This concept paper is often cited as the genesis of hybrid modeling and explains the reasoning and basic formulation of DES (intermediate).</li>
+            <li>Strelets (2001), "Detached Eddy Simulation of Massively Separated Flows" – An early application of DES to a complex flow (delta wing, etc.). Strelets refined the method (DES97) to address some limitations (grid-induced separation issues) and demonstrated DES's ability to predict large-scale unsteady vortices at a fraction of the cost of full LES. This paper is useful to see how hybrid methods are implemented and validated (intermediate).</li>
+            <li>Fröhlich &amp; von Terzi (2008), "Hybrid LES/RANS Methods for the Simulation of Turbulent Flows" – A comprehensive Progress in Aerospace Sciences review. It surveys various hybrid approaches (DES and its variants, zonal RANS–LES coupling, embedded LES) and discusses their strengths and pitfalls. Importantly, it covers best practices to avoid common errors (like the log-layer mismatch). This review is frequently recommended for anyone starting with hybrid simulations (intermediate).</li>
+            <li>Temmerman et al. (2005), "Evaluation of RANS, V-LES and LES for Flow over a Simplified Car Model" – A study comparing pure RANS, very large eddy simulation (coarse LES), and hybrid approaches on a bluff body flow. It highlights where RANS fails (unsteady wake), how LES captures those but at high cost, and how a hybrid can approximate LES results more cheaply. Such case studies help to appreciate the practical outcomes of hybrid modeling (intermediate).</li>
+            <li>Menter et al. (2016), "Scale-Adaptive Simulation" – Discusses a different flavor of hybrid called Scale-Adaptive Simulation (SAS), which modifies RANS equations to allow resolved unsteadiness in detached flow regions. Menter (known for RANS models) explains how SAS tunes the eddy viscosity based on the flow's spectral content. This provides an alternate path to similar goals as DES. The paper is illuminating for understanding the diversity of hybrid strategies (intermediate).</li>
+        </ul>
+
+        <h2>Base Camp 6.4: Uncertainty Quantification (UQ) and Reliability of Turbulence Predictions</h2>
+        <p><strong>Stepping Stones:</strong> Sensitivity of RANS models to calibration (and lack of universal reliability); methods to quantify uncertainties in model outputs (Monte Carlo, polynomial chaos, Bayesian calibration of turbulence model parameters); identifying model-form uncertainty (e.g. epistemic uncertainty from closure assumptions); introduction of data-driven UQ (like ensemble methods, perturbations to Reynolds stress field).</p>
+        <ul>
+            <li>Duraisamy et al. (2019), "Turbulence Modeling in the Age of Data" – A recent Annual Review article that also covers the critical aspect of quantifying and reducing model uncertainties. They survey methods for statistical inference of model parameters and Bayesian approaches to estimate model discrepancies. A key message is that by incorporating data and known physics, one can attach uncertainty bounds to RANS predictions, increasing their credibility. This source is accessible and timely, reflecting the community's push toward UQ in turbulence modeling (intermediate).</li>
+            <li>Oberkampf &amp; Roy (2010), <em>Verification and Validation in Scientific Computing</em> – While general, this book sets out frameworks for UQ. It discusses how to rigorously compare models and experiments, and how to quantify uncertainties in both simulations (numerical errors, model errors) and experiments (measurement noise, bias). For turbulence, their approaches are employed to assess model uncertainty and validate turbulence models against benchmark data. This is a fundamental reference in any modeling UQ discussion (intermediate).</li>
+            <li>Xiao &amp; Cinnella (2019), "Quantifying and Reducing Model-Form Uncertainties in RANS Simulations" – A detailed review (ARFM) focusing on methods to perturb the RANS model itself to estimate uncertainty. They review techniques like eigenvalue perturbation of the Reynolds stress tensor, Bayesian calibration with sparse data, and machine-learning augmentation with quantified uncertainty. This is a must-read for understanding state-of-the-art UQ applied specifically to turbulence closures (rigorous).</li>
+            <li>Emory et al. (2013), "Modeling Structural Uncertainties in RANS Simulations" – Introduces a method to inject perturbations into the Reynolds stress anisotropy to account for unknown model-form errors. By varying the shape of the Reynolds stress tensor within physical bounds, they produce an uncertainty band for mean flow predictions. This approach has become quite influential in industrial CFD UQ and is a good illustration of UQ methodology (intermediate).</li>
+            <li>Dow &amp; Wang (2011), "Quantification of Structural Uncertainties in Turbulence Models" – Presents a framework for evaluating how changes in turbulence model calibration or formulation affect outputs. They focus on sensitivity analysis of model constants and functional forms (e.g. alternative eddy viscosity formulas). This helps identify which uncertainties matter most for a given flow (e.g. free shear flows may be sensitive to the $C_μ$ constant in $k$–$ε$). Understanding such sensitivities is a precursor to rigorous UQ and is practically useful when selecting models (intermediate).</li>
+        </ul>
+
+        <p>(Paths 6.1–6.4 prepare us to predict turbulence in the wild. We see how engineers tame turbulence with models of varying fidelity – from steady RANS to time-resolved LES and hybrids – and how they increasingly account for uncertainties. These tools rely on and inform the fundamental knowledge from earlier paths. Next, Path 7 will consider turbulence from a different viewpoint – following fluid particles – complementing the Eulerian focus so far.)</p>
+
+        <h2>What to Upload Next</h2>
+        <p>To continue our deep exploration, it's recommended to gather key original sources and textbooks for each base camp. Below is a prioritized list of PDFs (5–6 each) grouped by base camp:</p>
+
+        <h3>Base Camp 6.1 (RANS)</h3>
+        <ul>
+            <li>B. E. Launder &amp; D. B. Spalding (1974) – Int. J. Heat Mass Transf. introducing $k$–$ε$</li>
+            <li>D. C. Wilcox (2006) – <em>Turbulence Modeling for CFD</em></li>
+            <li>S. B. Pope (2000) – Part II (DNS &amp; RANS chapters)</li>
+            <li>J. L. Lumley (1979) – lecture on shortcomings of eddy viscosity</li>
+            <li>P. A. Durbin (2018) – <em>Advanced Turbulence Models</em> (elliptic relaxation, etc.)</li>
+        </ul>
+
+        <h3>Base Camp 6.2 (LES)</h3>
+        <ul>
+            <li>P. Sagaut (2006) – <em>Large Eddy Simulation</em></li>
+            <li>U. Schumann (1975) – J. Comp. Phys. first detailed LES paper</li>
+            <li>M. Germano et al. (1991) – dynamic SGS paper</li>
+            <li>C. Meneveau &amp; J. Katz (2000) – ARFM on scale invariance in SGS</li>
+            <li>J. Smagorinsky (1963) – Mon. Wea. Rev. original SGS model</li>
+        </ul>
+
+        <h3>Base Camp 6.3 (Hybrid)</h3>
+        <ul>
+            <li>P. R. Spalart et al. (1997) – DES concept paper (AIAA)</li>
+            <li>S. Deck (2005) – Theor. Comp. Fluid Dyn. on improved DES</li>
+            <li>T. B. Gatski et al. (2014) – <em>Hybrid RANS-LES Methods</em> (book)</li>
+            <li>F. R. Menter (2016) – Flow Turb. Comb. on Scale Adaptive Simulation</li>
+            <li>M. Leschziner (2015) – lecture notes on zonal RANS-LES</li>
+        </ul>
+
+        <h3>Base Camp 6.4 (UQ)</h3>
+        <ul>
+            <li>K. Duraisamy et al. (2019) – Section on UQ (for reference)</li>
+            <li>R. G. Owens (2019) – <em>Uncertainty Quantification in Computational Fluid Dynamics</em></li>
+            <li>X. Xiao et al. (2019) – ARFM on model-form uncertainty</li>
+            <li>W. J. Rider (2011) – Sandia report on uncertainty in turbulence simulations</li>
+            <li>F. Dow &amp; Q. Wang (2011) – AIAA paper on RANS uncertainty</li>
+        </ul>
+
+        <a href="/physics/K2_turbulence/" class="back-link">← Back to K2 – Turbulence</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>
