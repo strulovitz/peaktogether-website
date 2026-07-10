@@ -218,8 +218,8 @@ Nir gives two images per mountain: a **scientist "sherpa guide"** and the **real
 ### 8b. Check dimensions FIRST
 Get pixel sizes (PowerShell + System.Drawing). So far Nir's images have been:
 - scientist portrait = **square, 1024×1024 (1:1)**
-- real mountain = **4:3, 960×720 (W/H ≈ 1.333)**
-The global `.gp-gallery.two` rule is **tuned for exactly this pair of shapes**. If a future pair has **different** aspect ratios, the equal-height math breaks — **update the `nth-child` flex values** so `flex-grow = width/height` of each image (see 8d), or the heights won't match.
+- real mountain = varies — so far 4:3 (K2, Annapurna) up to 1.649 (Everest). **Get the actual pixel dims every time.**
+The global CSS (§8d) provides a **default** 4:3 ratio and a **modifier class** `.mtn-XXX` for other aspect ratios. **If a new mountain has a different shape:** calculate `W/H × 100` (e.g. 1187÷720×100 → 165), define a one-line CSS override `.mtn-165 { flex-grow: 1.649; }`, and add the class to that gallery's `<div>`. Don't change the default — that would break the other mountains.
 
 ### 8c. The markup (scientist FIRST = left on wide / top on narrow)
 Right after `<p class="subtitle">…</p>` on the hub. **Each image is wrapped in a `<figure>`** so it can carry a `<figcaption>` welcome/anecdote below it (see §8f). Even images with no caption yet get a `<figure>` wrapper, so both hub pages stay identical in structure:
@@ -238,12 +238,16 @@ DOM order controls layout: **child 1 = left (wide) / top (narrow)** = the **scie
 
 ### 8d. The CSS (already in global `style.css`, beside `.four`/`.three`)
 ```css
-/* Two figures side by side; images shown in full at the SAME height; each figure's width
-   follows its image's aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3). */
+/* Two figures side by side, images shown in full at the SAME height and NOTHING cropped.
+   Each figure's width is proportional to its image's aspect ratio (W/H) via flex-grow with
+   flex-basis:0, so both images come out exactly the same height. The scientist portrait is
+   square (grow 1). The mountain photo's grow = its own W/H: default is 4:3 (1.333); for a
+   photo with a different shape, add/use a .mtn-### modifier class (### = W/H × 100) on the
+   gallery div. This keeps ALL the logic in this one global file, one ratio per page. */
 .gp-gallery.two { display: flex; align-items: flex-start; }
-.gp-gallery.two > figure { margin: 0; min-width: 0; }
-.gp-gallery.two > figure:nth-child(1) { flex: 1 1 0; }      /* square portrait → flex-grow = 1.0  */
-.gp-gallery.two > figure:nth-child(2) { flex: 1.333 1 0; }  /* 4:3 mountain    → flex-grow = 1.333 */
+.gp-gallery.two > figure { margin: 0; min-width: 0; flex: 1 1 0; }
+.gp-gallery.two > figure:nth-child(2) { flex-grow: 1.333; }          /* 4:3 (default — K2, Annapurna)      */
+.gp-gallery.two.mtn-165 > figure:nth-child(2) { flex-grow: 1.649; }  /* wider (Everest, 1187×720, W/H≈1.649) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption { margin-top: 12px; font-size: 0.95rem; line-height: 1.6; color: #555; }
 ```
@@ -252,8 +256,9 @@ and inside `@media (max-width: 768px) { … }`:
 .gp-gallery.two { flex-direction: column; }
 .gp-gallery.two > figure { width: 100%; flex: none; }
 ```
-**Why it works:** each figure's `flex-grow` = its image's width/height ratio, so flex gives each figure a width proportional to its aspect ratio → **both images render at the exact same height, side by side, nothing cropped.** A caption just hangs below its image (columns can differ in total height; the images stay level). On ≤768px they stack full-width (scientist on top). This is what "correct the height of the scientist" means.
-- If a future pair has **different** aspect ratios, update the two `nth-child` flex-grow values to each image's width/height, or the heights won't match.
+**Why it works:** both figures get `flex-basis: 0`, so flex distributes width **purely by grow value** — each figure's width = (its grow / total grow) × (container − gap). Since the scientist is always square (grow 1), the mountain must get `grow = W/H` to match height. A caption just hangs below its image (columns can differ in total height; the images stay level). On ≤768px they stack full-width (scientist on top). This is what "correct the height of the scientist" means: the square portrait no longer looks taller than the wider mountain.
+- **Default mountain ratio = 4:3 (grow 1.333)** — works for K2, Annapurna, and any future 4:3 mountain photo.
+- **New mountain with a different ratio?** Compute `W/H × 100`, e.g. Everest 1187÷720×100 → 165, add a one-line CSS override `.mtn-165 { flex-grow: 1.649; }` right beside the default, and put `class="gp-gallery two mtn-165"` on that mountain's gallery `<div>`. The scientist stays square (no modifier needed). Only the mountain side varies.
 - If Nir ever wants **edge-to-edge with a small crop** instead of height-matched-no-crop → `aspect-ratio: 4/3; object-fit: cover;` — but **ASK first** (cropping his image is consequential).
 
 ### 8e. The lightbox (click to enlarge — same as the game pages)
