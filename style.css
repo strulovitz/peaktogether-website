@@ -571,6 +571,15 @@ h1, h2, h3, h4, h5, h6 {
         padding-left: 44px;
     }
 
+    /* Level-2 leaf links (e.g. Arcade games) as full-width mobile menu rows */
+    .nav-list > li > .submenu > li > a:not(.submenu-heading) {
+        margin: 0;
+        border-radius: 0;
+        padding: 12px 8px 12px 24px;
+        font-size: 0.95rem;
+        border-bottom: 1px solid #f5efe4;
+    }
+
     .submenu-coming {
         margin: 0;
         padding: 12px 8px 12px 40px;
