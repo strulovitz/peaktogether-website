@@ -34,7 +34,7 @@ Completed so far:
 - 🏔️ **Tirich Mir = Room-Temperature Superconductors** — `chemistry/Tirich_Mir_room_temperature_superconductors/` (skeleton; **first Chemistry mountain**; sherpa = John Bardeen). Built July 2026. This doc was a **richer type** than K2 — see §3a. ✅ FULLY DONE: committed, pushed, and Nir bulk-uploaded to peaktogether.me via FileZilla.
 - 🏔️ **Gasherbrum I = Quantum Gravity** — `physics/Gasherbrum_I_quantum_gravity/` (skeleton; 11 paths; **richer doc type** with whole-mountain sections + images; sherpa = Albert Einstein). Built July 10, 2026. ✅ FULLY DONE: committed, pushed, Nir uploaded to peaktogether.me via FileZilla. Second Physics mountain; mountain photo aspect ratio 1016×720 → CSS class `.mtn-141`.
 
-- 🏔️ **Istor-o-Nal = Economical Carbon Capture** — `chemistry/Istor-o-Nal_economical_carbon_capture/` (skeleton; 10 paths; richer doc type with all whole-mountain sections; **images pending — Nir hasn't provided sherpa + mountain photos yet**). Built July 10, 2026. ✅ Committed + pushed (commit `d760759`). Second Chemistry mountain.
+- 🏔️ **Istor-o-Nal = Economical Carbon Capture** — `chemistry/Istor-o-Nal_economical_carbon_capture/` (skeleton; 10 paths; richer doc type with all whole-mountain sections; sherpa = Jennifer Wilcox; mountain photo 960×720 → 4:3 = default, no CSS modifier needed). Built July 10, 2026. ✅ FULLY DONE: committed, pushed. Second Chemistry mountain.
 
 **⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one.
 
