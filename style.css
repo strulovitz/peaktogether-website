@@ -1511,7 +1511,7 @@ h1, h2, h3, h4, h5, h6 {
 .gp-gallery.two { display: flex; align-items: flex-start; }
 .gp-gallery.two > figure { margin: 0; min-width: 0; }
 .gp-gallery.two > figure:nth-child(1) { flex: 1 1 0; }
-.gp-gallery.two > figure:nth-child(2) { flex: 1.333 1 0; }
+.gp-gallery.two > figure:nth-child(2) { flex: 1.649 1 0; }  /* landscape mountain; flex-grow = widest image W/H (Everest 1.649) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption {
     margin-top: 12px;
