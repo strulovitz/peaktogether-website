@@ -1584,6 +1584,7 @@ h1, h2, h3, h4, h5, h6 {
 .gp-gallery.two > figure { margin: 0; min-width: 0; flex: 1 1 0; }
 .gp-gallery.two > figure:nth-child(2) { flex-grow: 1.333; }          /* 4:3 mountain (960×720) — default (K2, Annapurna) */
 .gp-gallery.two.mtn-165 > figure:nth-child(2) { flex-grow: 1.649; }  /* wider mountain (Everest 1187×720) */
+.gp-gallery.two.mtn-178 > figure:nth-child(2) { flex-grow: 1.778; }  /* 16:9 mountain (Tirich Mir 1280×720) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption {
     margin-top: 12px;
@@ -1750,7 +1751,8 @@ h1, h2, h3, h4, h5, h6 {
     .gp-gallery.three { grid-template-columns: repeat(2, 1fr); }
     .gp-gallery.two { flex-direction: column; }
     .gp-gallery.two > figure,
-    .gp-gallery.two.mtn-165 > figure:nth-child(2) { width: 100%; flex: none; }
+    .gp-gallery.two.mtn-165 > figure:nth-child(2),
+    .gp-gallery.two.mtn-178 > figure:nth-child(2) { width: 100%; flex: none; }
     .gp-footstrip { flex-direction: column; align-items: flex-start; }
 }
 
