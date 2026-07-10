@@ -34,7 +34,9 @@ Completed so far:
 - 🏔️ **Tirich Mir = Room-Temperature Superconductors** — `chemistry/Tirich_Mir_room_temperature_superconductors/` (skeleton; **first Chemistry mountain**; sherpa = John Bardeen). Built July 2026. This doc was a **richer type** than K2 — see §3a. ✅ FULLY DONE: committed, pushed, and Nir bulk-uploaded to peaktogether.me via FileZilla.
 - 🏔️ **Gasherbrum I = Quantum Gravity** — `physics/Gasherbrum_I_quantum_gravity/` (skeleton; 11 paths; **richer doc type** with whole-mountain sections + images; sherpa = Albert Einstein). Built July 10, 2026. ✅ FULLY DONE: committed, pushed, Nir uploaded to peaktogether.me via FileZilla. Second Physics mountain; mountain photo aspect ratio 1016×720 → CSS class `.mtn-141`.
 
-**⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one. (An earlier ChatGPT sign-off had floated "Istor-o-Nal — Economical Carbon Capture," but on July 2026 Nir explicitly said the next mountain is undecided. Never put that in his mouth — wait for his pick.)
+- 🏔️ **Istor-o-Nal = Economical Carbon Capture** — `chemistry/Istor-o-Nal_economical_carbon_capture/` (skeleton; 10 paths; richer doc type with all whole-mountain sections; **images pending — Nir hasn't provided sherpa + mountain photos yet**). Built July 10, 2026. ✅ Committed + pushed (commit `d760759`). Second Chemistry mountain.
+
+**⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
