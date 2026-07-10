@@ -169,7 +169,9 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
   - **Level 1** (top bar): Home · The Arcade · **The Mountains** · How It Works · About · Play/GitHub buttons
   - **Level 2** (inside "The Mountains"): **Mathematics · Physics · Chemistry · Biology** — these are `<li class="has-submenu"><span class="submenu-toggle">Subject</span><ul class="submenu">…</ul></li>`
   - **Level 3** (inside each subject): the mountain links, `<li><a href="/…/">Name</a></li>`
-- **Desktop** = pure CSS `:hover` with invisible "bridge" `::after` zones (in `style.css`). **Mobile (≤900px)** = hamburger toggles `.nav-open`; tapping a `.submenu-toggle` toggles `.submenu-open` (accordion in `components.js`). **DO NOT touch `style.css` menu rules or `components.js`.**
+- **Desktop** = pure CSS `:hover` with invisible "bridge" `::after` zones (in `style.css`). **Mobile (≤900px)** = hamburger toggles `.nav-open`; tapping a `.submenu-toggle` toggles `.submenu-open` (accordion in `components.js`). **DO NOT touch `components.js`.**
+- **Both "The Arcade" and "The Mountains" are now dropdowns** (July 2026). Arcade = "All the games" (`.submenu-heading`) + 4 Level-2 leaf game links; Mountains = "All the mountains" (`.submenu-heading`) + subject sub-dropdowns. There's also a standalone `/mountains/` and `/arcade/` overview page.
+- ⚠️ **If you introduce a NEW menu item type** (e.g. the Level-2 leaf game links were new), it needs styling in **BOTH** the desktop rules **AND** the `@media (max-width: 900px)` block, or it will look like plain text on phones. (This bit us once.) After any menu/CSS change → **bump the `?v=` version (see §7).**
 
 **To add a mountain (the ONLY change I make — purely additive):**
 - A **subject's FIRST mountain** currently shows a placeholder:
@@ -194,10 +196,17 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
 ## 7. THE CSS — ONE global file, single source of truth
 
 **How the whole site is styled (Nir explained this explicitly, July 2026):**
-- **ONE shared stylesheet: `/style.css`.** Every page links `<link href="/style.css?v=24">`. **ALL** visual styling (colors, menu, buttons, galleries, everything) lives there as reusable classes. **Pages never carry their own styling.**
-- `?v=24` is a **cache tag**. When `style.css` changes, either (a) bump the number everywhere so browsers auto-refetch, or (b) accept that a **Ctrl+F5** shows it. Nir is fine with Ctrl+F5 for himself; he just wants everything centralized in the ONE file.
-- **NEVER** add a per-page `<style>` block or inline layout hack. (I did this once on K2 to "avoid Ctrl+F5" and Nir was furious — it fragments the codebase. Do it the site's way: global `style.css`.)
-- **ASK before any CSS architecture decision** (inline vs global, version bump, new class). It's consequential.
+- **ONE shared stylesheet: `/style.css`.** Every page links `<link href="/style.css?v=NN">`. **ALL** visual styling (colors, menu, buttons, galleries, everything) lives there as reusable classes. **Pages never carry their own styling.**
+- 🔴 **`?v=NN` is a cache tag — WHENEVER you edit `style.css`, BUMP the number on EVERY page.** This is NOT optional. Desktop can Ctrl+F5, but **phones/tablets CANNOT** — pull-to-refresh does NOT re-download a same-URL CSS, so without a bump the mobile menu/layout stays broken with the stale CSS. (This bit us: the Arcade mobile menu looked like plain text because the phone kept cached `?v=24`.) Bump across all HTML with a UTF-8 (no-BOM) bulk replace:
+  ```powershell
+  $enc = New-Object System.Text.UTF8Encoding($false)
+  Get-ChildItem -Recurse -Filter *.html | ForEach-Object {
+      $t = [System.IO.File]::ReadAllText($_.FullName)
+      if ($t.Contains('style.css?v=OLD')) { [System.IO.File]::WriteAllText($_.FullName, $t.Replace('style.css?v=OLD','style.css?v=NEW'), $enc) }
+  }
+  ```
+  Then verify 0 remain at the old version, and **tell Nir to re-upload ALL the HTML** (easiest: bulk-upload the whole site folder in FileZilla, overwrite). Current version as of this writing: **v=25**.
+- **NEVER** add a per-page `<style>` block or inline layout hack. (I did this once on K2 to "avoid Ctrl+F5" and Nir was furious — it fragments the codebase. Do it the site's way: global `style.css` + a version bump.)
 - Adding a **new reusable class** to `style.css` (like `.gp-gallery.two`) is the correct, safe way — put it right beside its siblings (`.four`, `.three`).
 
 ---
