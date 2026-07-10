@@ -31,8 +31,17 @@ Completed so far:
 - 🏔️ **Everest = Riemann Hypothesis** — `mathematics/Riemann_hypothesis/` (gold standard, "fattened" with sub-pages).
 - 🏔️ **Annapurna I = Navier–Stokes** — `mathematics/Navier-Stokes_existence_and_smoothness/` (skeleton).
 - 🏔️ **K2 = Turbulence** — `physics/K2_turbulence/` (skeleton; first Physics mountain).
+- 🏔️ **Tirich Mir = Room-Temperature Superconductors** — `chemistry/Tirich_Mir_room_temperature_superconductors/` (skeleton; **first Chemistry mountain**; sherpa = John Bardeen). Built July 2026. This doc was a **richer type** than K2 — see §3a.
+
+**⏭️ NEXT mountain (queued by Nir):** **Istor-o-Nal — Economical Carbon Capture** (finding efficient chemical methods to trap or convert CO₂). Subject = **chemistry**. Nir will paste the Deep Research text in a fresh session.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
+
+### 3a. RICHER doc type (the "Haproyekt Paths & Base-Camps" plan — Tirich Mir precedent)
+Some Deep Research docs (like Tirich Mir / superconductors) carry, IN ADDITION to Paths→BaseCamps→sources, several **whole-mountain sections** that span all paths: Executive Snapshot, Cross-Language Synthesis, Partial Results & Analogs, Risk/Feasibility & Payoff, Path Interactions, Common Pitfalls, a 30/90/180-Day Work Plan, and a Glossary. The locked structure (Nir approved):
+- **HUB page** = title + subtitle + hero gallery + **Executive Snapshot** (as the intro) + **Choose Your Path** grid + ALL the whole-mountain sections (Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary), verbatim.
+- **Each PATH page** = that path's Inventory entry (Idea / Rationale / Prerequisites / Dependencies / Signs of Progress) → its **Base Camps** (stepping stones + the 3 resources each) → that path's slice of the **Full Bibliography** at the bottom (same slot K2 used for "What to Upload Next").
+- **Drop as meta:** the Master Prompt, clarifying Q&A, any duplicate full copy of the report, the "next mountain" sign-off note, and the trailing Citations URL list.
 
 ---
 
@@ -205,7 +214,7 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
       if ($t.Contains('style.css?v=OLD')) { [System.IO.File]::WriteAllText($_.FullName, $t.Replace('style.css?v=OLD','style.css?v=NEW'), $enc) }
   }
   ```
-  Then verify 0 remain at the old version, and **tell Nir to re-upload ALL the HTML** (easiest: bulk-upload the whole site folder in FileZilla, overwrite). Current version as of this writing: **v=25**.
+  Then verify 0 remain at the old version, and **tell Nir to re-upload ALL the HTML** (easiest: bulk-upload the whole site folder in FileZilla, overwrite). Current version as of this writing: **v=26** (bumped v25→v26 for Tirich Mir's `.mtn-178` class).
 - **NEVER** add a per-page `<style>` block or inline layout hack. (I did this once on K2 to "avoid Ctrl+F5" and Nir was furious — it fragments the codebase. Do it the site's way: global `style.css` + a version bump.)
 - Adding a **new reusable class** to `style.css` (like `.gp-gallery.two`) is the correct, safe way — put it right beside its siblings (`.four`, `.three`).
 
@@ -257,6 +266,7 @@ DOM order controls layout: **child 1 = left (wide) / top (narrow)** = the **scie
 .gp-gallery.two > figure { margin: 0; min-width: 0; flex: 1 1 0; }
 .gp-gallery.two > figure:nth-child(2) { flex-grow: 1.333; }          /* 4:3 (default — K2, Annapurna)      */
 .gp-gallery.two.mtn-165 > figure:nth-child(2) { flex-grow: 1.649; }  /* wider (Everest, 1187×720, W/H≈1.649) */
+.gp-gallery.two.mtn-178 > figure:nth-child(2) { flex-grow: 1.778; }  /* 16:9 (Tirich Mir, 1280×720, W/H≈1.778) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption { margin-top: 12px; font-size: 0.95rem; line-height: 1.6; color: #555; }
 ```
@@ -371,6 +381,7 @@ Run after building; confirm:
 4. Build **hub** (`physics|mathematics|…/<Folder>/index.html`) + **one page per path** (`Path_N_<Short_Name>/index.html`).
 5. If images given: **move + rename**, check dimensions, add the **`.gp-gallery two`** block (scientist first) + **lightbox script** to the hub. (Reuse the global CSS; only touch CSS if aspect ratios differ — and ASK if cropping.)
 6. Add the mountain to **`/header.html`** (replace the subject's "Coming soon" for its first mountain, or add a sibling `<li>`). Touch nothing else in the menu.
-7. **VERIFY** (§9): 0 broken math, 0 unescaped `&`, structure counts, menu intact, images wired.
+6b. Add the mountain to the **`/mountains/` overview page** (`mountains/index.html`) — a new `.mountain-card` in `.mountain-grid` (sherpa `<img>` + `.mountain-card-title`), same as the others. This is the "all the mountains" hub, mirroring the Arcade "all the games" page. (Nir asked for this on Tirich Mir — make it standard.)
+7. **VERIFY** (§9): 0 broken math, 0 unescaped `&`, structure counts, menu intact, images wired, mountains-grid card added.
 8. **Report to Nir** the LaTeX/prose fixes (only if any were broken).
 9. **Commit + push.** Then **remind Nir to FileZilla-upload** the changed HTML **+ the new images** (don't forget images!).
