@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>K2 – Turbulence — Peak Together</title>
     <link rel="stylesheet" href="/style.css?v=24">
+    <style>
+        /* Two-up hero gallery: side by side on wide screens, stacked on narrow */
+        .gp-gallery.two { grid-template-columns: repeat(2, 1fr); align-items: start; }
+        @media (max-width: 768px) {
+            .gp-gallery.two { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
 <body>
 
@@ -14,7 +21,10 @@
         <h1>🏔️ K2: Turbulence</h1>
         <p class="subtitle">Understanding and modeling turbulent fluid flow — one of the deepest unsolved problems of classical physics. Nine paths to the summit. Together, we climb.</p>
 
-        <img class="gp-hero-img" src="/images/k2-turbulence-hero-art.png" alt="K2 – Turbulence hero art — the swirling, chaotic eddies of turbulent fluid flow">
+        <div class="gp-gallery two">
+            <img src="/images/k2-turbulence-kolmogorov-sherpa-guide.png" alt="Andrey Kolmogorov — the sherpa guide for K2 – Turbulence">
+            <img src="/images/k2-turbulence-real-mountain.png" alt="K2 — the real mountain, the savage mountain">
+        </div>
 
         <p>
             Turbulence is the swirling, chaotic motion of fluids that surrounds us everywhere — in rivers and
@@ -86,5 +96,66 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+
+            var big = document.createElement('img');
+            big.className = 'lightbox-img';
+            big.alt = '';
+
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+
+            overlay.appendChild(big);
+            overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+
+            function openBox(src, alt) {
+                big.setAttribute('src', src);
+                big.setAttribute('alt', alt || '');
+                overlay.classList.add('open');
+                document.body.classList.add('lightbox-locked');
+            }
+            function closeBox() {
+                overlay.classList.remove('open');
+                document.body.classList.remove('lightbox-locked');
+                big.setAttribute('src', '');
+            }
+
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () {
+                    openBox(this.getAttribute('src'), this.getAttribute('alt'));
+                });
+            }
+
+            overlay.addEventListener('click', function (e) {
+                if (e.target === overlay || e.target === closeBtn) closeBox();
+            });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) {
+                if (e.key === 'Escape' || e.keyCode === 27) closeBox();
+            });
+        }
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initLightbox);
+        } else {
+            initLightbox();
+        }
+    })();
+    </script>
 </body>
 </html>
