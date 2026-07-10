@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 7: Non-Equilibrium Enhancement — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=25">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 7: Non-Equilibrium Enhancement (Photo-induced &amp; Dynamic Superconductivity)</h1>
+
+        <p><strong>Idea:</strong> Use external stimuli (laser pulses, terahertz fields, rapid pressure quenches) to induce or sustain superconductivity at higher temperatures than normally possible.</p>
+        <p><strong>Rationale:</strong> Superconductivity is ordinarily an equilibrium ground-state property, but recent experiments show we can &ldquo;boost&rdquo; it transiently. In 2014, an infrared laser pulse aimed at YBa₂Cu₃O₇ (T<sub>c</sub> ~90 K) was reported to induce a transient superconducting-like state at room temperature for a few picoseconds. The IR pulse excited certain lattice vibrations, which presumably enhanced the pairing interaction temporarily. Similarly, in 2016, researchers observed signatures of superconductivity in K₃C₆₀ (T<sub>c</sub> ~20 K) persisting up to 100 K under mid-IR laser excitation. These findings suggest &ldquo;out-of-equilibrium&rdquo; pathways: one can use light or ultrafast perturbations to change the electronic structure or drive oscillations that favor pairing (a concept called Floquet engineering in physics). Another approach is pressure quenching &ndash; rapidly compressing and decompressing a material to trap a high-pressure phase metastably at ambient conditions (this was attempted, for example, to trap metallic hydrogen or to stabilize high-T<sub>c</sub> hydrides without constant pressure). Non-equilibrium methods won&rsquo;t directly yield a static room-T superconductor, but they could demonstrate that high-T<sub>c</sub> pairing interactions exist and guide how to make them permanent.</p>
+        <p><strong>Prerequisites:</strong> Ultrafast optics and spectroscopy, knowledge of how superconductors respond to high-frequency fields (time-dependent Ginzburg&ndash;Landau theory), and lattice dynamics. Also, familiarity with experimental setups like pump&ndash;probe measurements that detect fleeting states is needed to interpret results.</p>
+        <p><strong>Dependencies:</strong> Insights from Path 2 and 4 might inform what modes to drive (e.g. if a certain lattice mode competes with a charge order, driving it could tip the balance to superconductivity). Path 7 might also leverage materials from Path 1&ndash;6 as testbeds (e.g. using lasers on a high-pressure hydride to see if one can lower the needed pressure).</p>
+        <p><strong>Signs of Progress:</strong> The current milestones are transient and in exotic setups. Progress would be extending the duration and scale of photo-induced superconductivity &ndash; for example, achieving a state lasting nanoseconds or more, or inducing global zero resistance in a thin film (so far, evidence comes from optical properties or c-axis conductivity changes in cuprates). If researchers manage to stabilize a high-T<sub>c</sub> phase &ndash; even in a thin slice of material or under continuous pumping &ndash; that would be a major leap. Another sign would be repeatable non-equilibrium switching of a material from normal to superconducting at high T by an external field, effectively creating a superconducting switch. While practical implementation (like a continually laser-driven superconducting cable) is far-fetched, demonstrating that superconductivity can be turned on and off at, say, 200 K with a stimulus would prove the principle. Over 30 years, these dynamic experiments could also reveal hidden superconducting states (so-called &ldquo;hidden phases&rdquo;) that equilibrium never accesses, guiding the creation of new materials that mimic those driven conditions in static form.</p>
+
+        <h2>Base Camp 7.1: Time-Dependent SC and Floquet Theory</h2>
+        <ul>
+            <li>A. Cavalleri. &ldquo;Photo-Induced Superconductivity.&rdquo; <em>Contemporary Physics</em>, vol. 59, 2018, pp. 31&ndash;46. &ndash; Review by the leader in this field, summarizing experiments on light-induced effects in cuprates, fullerides, etc. and theoretical interpretations. A must-read to understand what has been achieved and the theoretical frameworks (like Floquet Hamiltonians) used to analyze them.</li>
+            <li>M. A. Sentef, et al. &ldquo;Theory of Floquet Band Formation and Local Pseudospin Textures in Pump-Probed Graphene.&rdquo; <em>Nature Communications</em>, vol. 6, 2015, 7047. &ndash; While about graphene, this is a primer on Floquet theory and band engineering via light. Provides technical tools that can be applied to superconductors (e.g. how a periodic drive renormalizes interactions). Good preparation for understanding how one might boost pairing by driving certain modes (the language of Floquet modes is used in analyzing pumped superconductors too).</li>
+            <li>T. Oka and S. Kitamura. &ldquo;Floquet Engineering of Quantum Materials.&rdquo; <em>Annual Review of Condensed Matter Physics</em>, vol. 10, 2019, pp. 387&ndash;408. &ndash; Overview of Floquet engineering (periodic driving) in various contexts, including inducing topological states and possibly superconducting-like states. It helps generalize the idea of Path 7: we are essentially trying to engineer a Hamiltonian with enhanced pairing via time-periodic fields. This shows the breadth of that approach beyond just superconductivity experiments.</li>
+        </ul>
+
+        <h2>Base Camp 7.2: Ultrafast Experimental Techniques</h2>
+        <ul>
+            <li>D. Fausti, et al. &ldquo;Light-Induced Superconductivity in a Stripe-Ordered Cuprate.&rdquo; <em>Science</em>, vol. 331, 2011, pp. 189&ndash;191. &ndash; The first report of transient superconductivity in 1/8-doped LESCO cuprate. Used mid-IR pulses to melt charge stripes and enhance conductivity, interpreted as possible SC up to 50 K (above equilibrium T<sub>c</sub> ~ 8 K). Crucial for seeing how such experiments are done and how results are interpreted. It&rsquo;s a cornerstone of Path 7&rsquo;s experimental side.</li>
+            <li>R. Mankowsky, et al. &ldquo;Nonlinear Lattice Dynamics as a Basis for Enhanced Superconductivity in YBa<sub>2</sub>Cu<sub>3</sub>O<sub>6.5</sub>.&rdquo; <em>Nature</em>, vol. 516, 2014, pp. 71&ndash;73. &ndash; The Nature paper that reported ~3 ps-long signatures of superconductivity at 300 K in YBCO after IR pumping. Key to study: what was measured (c-axis conductivity via THz probe), what was inferred (Josephson plasma resonance appeared, indicating coherence between CuO₂ planes). Understanding this helps us design future experiments and also highlights controversies (proper subtraction of non-SC signals).</li>
+            <li>M. Mitrano, et al. &ldquo;Possible Light-Induced Superconductivity in K<sub>3</sub>C<sub>60</sub> at High Temperature.&rdquo; <em>Nature</em>, vol. 530, 2016, pp. 461&ndash;464. &ndash; Report of optical signatures of a superconducting state in K<sub>3</sub>C<sub>60</sub> up to 100 K when driven by ultrafast pulses. It&rsquo;s valuable as a non-cuprate example, suggesting the phenomenon is broader. It also describes detecting a Meissner-like response (via THz probe showing inductive behavior). Studying this paper teaches how to interpret complex optical data for superconductivity.</li>
+        </ul>
+
+        <h2>Base Camp 7.3: Metastable Phase Creation &amp; Quenching</h2>
+        <ul>
+            <li>K. Shimizu, et al. &ldquo;Superconductivity in Compressed Lithium at 20 K.&rdquo; <em>Nature</em>, vol. 419, 2002, pp. 597&ndash;599. &ndash; Superconducting lithium under high pressure (20 K at ~50 GPa). Not a non-equilibrium example per se, but relevant as lithium can be quenched to metastable phases at ambient once cooled under pressure (demonstrating one approach to metastability). It&rsquo;s instructive for Path 7 in that it hints at which materials might be metastable superconductors if pressure-quenched.</li>
+            <li>W. L. Mao, et al. &ldquo;Bonding Changes in Compressed Superconducting SiH<sub>4</sub> (Silane).&rdquo; <em>Science</em>, vol. 308, 2005, pp. 634&ndash;636. &ndash; An example of using high-pressure to create a superconducting state (silane predicted to be like metallic hydrogen analog) and discussing possibly metastable structures on decompression. This is relevant because one dream is to pressurize a material to induce superconductivity then recover it at STP. It highlights what structural changes to monitor (via Raman, XRD) and challenges (often it reverts).</li>
+            <li>A. G. Gavriliuk, et al. &ldquo;Emergence of High-Temperature Superconductivity in FeSe from Pressure-Driven Low-Temperature Phase.&rdquo; <em>Nature Materials</em>, vol. 17, 2018, pp. 122&ndash;127. &ndash; Under pressure, FeSe&rsquo;s T<sub>c</sub> rises from 8 K to ~37 K, and they discuss cooling under pressure then releasing might retain some high-T<sub>c</sub> phase. This scenario of &ldquo;freeze-in&rdquo; of a high-T<sub>c</sub> phase is exactly what Path 7&rsquo;s metastable approach aims for. Good case study of partial success and characterization methods (looking at retained lattice parameters, magnetization upon pressure release).</li>
+        </ul>
+
+        <h2>Base Camp 7.4: Theory of Non-Equilibrium SC</h2>
+        <ul>
+            <li>M. A. Sentef, et al. &ldquo;Examining Electron-Boson Coupling Using Time-Resolved Spectroscopy.&rdquo; <em>Physical Review X</em>, vol. 3, 2013, 041033. &ndash; A theoretical study on how pump-probe photoemission can reveal electron-boson coupling and even transient superconductivity. Helps in understanding how to interpret non-equilibrium spectra and what theoretical models (like time-dependent Eliashberg equations) are used to simulate these experiments.</li>
+            <li>A. S. Moor, et al. &ldquo;Amplitude Higgs Mode and Its Decay in Superconductors.&rdquo; <em>Physical Review Letters</em>, vol. 118, 2017, 047001. &ndash; Discusses the excited collective modes (Higgs mode) in superconductors, which can be triggered by ultrafast pulses. It&rsquo;s relevant because observing a Higgs mode is evidence of the underlying order, and controlling it might be a path to enhancing superconductivity. The theory insight here could guide what pulse shapes or frequencies to use to maximize an amplitude mode without quenching SC.</li>
+            <li>G. M. Eliashberg. &ldquo;Film Superconductivity Stimulated by a High-Frequency Field.&rdquo; <em>JETP Letters</em>, vol. 11, 1970, pp. 114&ndash;116. &ndash; An old but relevant idea: Eliashberg himself theorized that an AC field could enhance superconductivity under certain conditions (effectively pre-pairing electrons). This is a precursor to modern Floquet SC theory. It&rsquo;s conceptually interesting and shows that the notion of AC-induced SC is not entirely new &ndash; we can draw on these early models when designing modern approaches.</li>
+        </ul>
+
+        <a href="/chemistry/Tirich_Mir_room_temperature_superconductors/" class="back-link">← Back to Tirich Mir – Room-Temperature Superconductors</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 8: Materials Informatics &amp; AI-Guided Discovery — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=25">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 8: Materials Informatics and AI-Guided Discovery</h1>
+
+        <p><strong>Idea:</strong> Use computational methods (high-throughput calculation and artificial intelligence) to find new superconductors systematically rather than trial-and-error.</p>
+        <p><strong>Rationale:</strong> The space of possible compounds is astronomically large, and conventional intuition might miss promising candidates. Computational advances now allow DFT calculations of electron-phonon coupling and stability for thousands of compounds, and machine learning can spot patterns humans overlook. In fact, the hydride breakthrough was computationally guided: structure searches predicted H₃S would be a high-T<sub>c</sub> superconductor before it was experimentally confirmed. Materials databases (like SuperCon or the Materials Project) combined with ML algorithms have been used to successfully predict superconducting transition temperatures within certain families. For example, in 2018 Stanev et al. applied random forest models to over 12,000 known superconductors and identified key features that correlate with higher T<sub>c</sub>. Such models can then screen hypothetical materials. AI might suggest unexpected chemistries (e.g. &ldquo;try a Li-Mg-H ternary hydride&rdquo; which indeed was predicted to have T<sub>c</sub> ~200 °C).</p>
+        <p><strong>Prerequisites:</strong> Computational physics/chemistry (DFT, crystal structure prediction algorithms like USPEX or AIRSS), programming and data science skills to handle large datasets, and a grasp of superconductivity metrics (so the AI can be guided toward relevant property predictions).</p>
+        <p><strong>Dependencies:</strong> This approach complements all other paths by narrowing their focus &ndash; e.g. it can propose which hydrides (Path 1) or which layered oxides (Path 2/3) to experimentally prioritize. It also relies on Path 9 in that our theoretical understanding sets the features and criteria that ML models use (for instance, knowing to include phonon frequency, density of states, etc. as input features).</p>
+        <p><strong>Signs of Progress:</strong> A clear sign is when AI predictions lead to actual discoveries. We have early successes (hydrides). One near-term milestone: prediction of a material that superconducts at, say, ~150 K at ambient, outside the known families, and experimental verification of it. If an ML model combing through chemical space were to spit out an unusual candidate (for example, an alloy or a compound of elements not usually in superconductors) and that material is made and found superconducting, it would validate this path. Another sign is improving the accuracy of T<sub>c</sub> predictions &ndash; if computational methods can reliably predict T<sub>c</sub> within, say, ±20 K, that&rsquo;s enough to trust them for guiding experiments. As this path matures, we might see &ldquo;superconductor genomics&rdquo; projects that enumerate possible room-T materials for experimentalists to pursue, effectively mapping sections of the periodic table and structure space as likely or unlikely. The ultimate success metric is of course if this approach finds the room-temperature superconductor (or convincingly tells us where not to bother looking).</p>
+
+        <h2>Base Camp 8.1: High-Throughput DFT &amp; Materials Databases</h2>
+        <ul>
+            <li>Richard M. Martin. <em>Electronic Structure: Basic Theory and Practical Methods</em>. Cambridge University Press, 2004. &ndash; Reference for DFT fundamentals and practical aspects. Aiming to use DFT to predict new superconductors requires solid understanding of its capabilities and limits. Martin&rsquo;s book is a go-to for learning how to set up calculations, interpret total energies, etc., which is essential for screening materials in silico.</li>
+            <li>C. J. Pickard and R. J. Needs. &ldquo;High-Pressure Phases of Silane.&rdquo; <em>Physical Review Letters</em>, vol. 97, 2006, 045504. &ndash; Early example of an ab initio structure prediction (AIRSS method) that led to proposing a high-T<sub>c</sub> phase. It illustrates the process of unconstrained crystal structure search &ndash; a key component of Path 8, especially for things like hydrides. Reading such work shows how to handle the combinatorial explosion of possibilities systematically.</li>
+            <li>A. C. Fisher, et al. &ldquo;The SuperCon Database.&rdquo; <em>IEEE Transactions on Applied Superconductivity</em>, vol. 21, 2011, pp. 2858&ndash;2861. &ndash; Introduction to a large database of known superconductors with their properties. It&rsquo;s crucial for machine learning efforts: one needs data to train on. This reference describes what data is available and its structure, so we can plan how to utilize it (for example, which features can be extracted easily to feed into ML models).</li>
+        </ul>
+
+        <h2>Base Camp 8.2: Feature Engineering &amp; ML Models</h2>
+        <ul>
+            <li>L. Ward, et al. &ldquo;Matminer: An Open Source Toolkit for Materials Data Mining.&rdquo; <em>Computational Materials Science</em>, vol. 152, 2018, pp. 60&ndash;69. &ndash; Toolkit that provides ready-made routines to featurize materials (Magpie descriptors, etc.). It will be very useful for quickly preparing input for ML models &ndash; essentially the &ldquo;hammer and chisel&rdquo; for carving information out of raw material compositions/structures. Documentation and examples from this paper will speed up our ML workflow.</li>
+            <li>V. Stanev, C. Oses, A. G. Kusne, et al. &ldquo;Machine Learning Modeling of Superconducting Critical Temperature.&rdquo; <em>npj Computational Materials</em>, vol. 4, 2018, 29. &ndash; Key paper where random forest models were applied to 12,000 superconductors to predict T<sub>c</sub>. They also combined different feature sets (Magpie vs AFLOW) for better prediction. It serves as both a methodology template and a benchmark for our ML efforts (we can compare our simpler models to theirs). They even published their model and code, which we can adapt.</li>
+            <li>B. S. Conduit, et al. &ldquo;Design of a Nickelate Superconductor.&rdquo; <em>Physical Review B</em>, vol. 93, 2016, 020408(R). &ndash; An example of theory-guided materials design resulting in prediction of a new nickelate compound as a potential superconductor. It&rsquo;s not ML-based but rather using DFT and chemical intuition. However, it&rsquo;s instructive as a case study in how to propose a new material (La₃Ni₂O₇ was predicted to be near superconducting, and indeed recently La₃Ni₂O₇ under pressure was found superconducting ~80 K!). This underscores the power of guided discovery and provides a success story blueprint.</li>
+        </ul>
+
+        <h2>Base Camp 8.3: AI Discoveries &amp; Applications</h2>
+        <ul>
+            <li>O. Isayev, et al. &ldquo;Materials Cartography: Representing and Mining Materials Space Using Structural and Electronic Fingerprints.&rdquo; <em>Chemistry of Materials</em>, vol. 27, 2015, pp. 735&ndash;743. &ndash; Discusses representing materials in a form amenable to ML (fingerprints) and mapping similarities. This could help us visualize and cluster known superconductors to see trends (e.g. maybe discover that certain structural motifs correlate with high T<sub>c</sub>). It&rsquo;s a more general perspective that can spark ideas on how to navigate materials space.</li>
+            <li>Lilia Boeri, et al. &ldquo;The Search for Room-Temperature Superconductivity: From Hydrogen to Layered Materials.&rdquo; <em>Journal of Physics: Condensed Matter</em>, vol. 34, 2022, 183002. &ndash; Recent review focusing on computational materials design for superconductors, from hydrides to other avenues. It blends Path 1 and Path 8 thinking and likely outlines current targets and challenges. Good for identifying which spaces have been over/under-explored and how computations + AI are being combined by experts.</li>
+            <li>J. Ren and O. Rubel. &ldquo;Superconductivity Prediction and Interpretation from Database Analysis by Use of Random Forest Method.&rdquo; <em>Physical Review B</em>, vol. 100, 2019, 094519. &ndash; Another ML approach to predict superconductivity. They use a smaller set of features targeted to known superconductivity criteria. Interesting because they attempt to interpret the random forest (i.e., extract human-understandable rules). This aligns with our need to not only predict but learn what features matter (for theoretical guidance). It may provide complementary insight to Stanev&rsquo;s work.</li>
+        </ul>
+
+        <h2>Base Camp 8.4: Data-Driven Discoveries in Practice</h2>
+        <ul>
+            <li>R. Xie, et al. &ldquo;Crystal Graph Convolutional Neural Networks for an Accurate and Interpretable Prediction of Material Properties.&rdquo; <em>Physical Review Letters</em>, vol. 120, 2018, 145301. &ndash; Introduces CGCNN, a model that directly uses crystal structure as input to predict properties. This is cutting-edge ML for materials. It might be applicable if we want to predict T<sub>c</sub> based on full structure (not just composition) for, say, a family of compounds. Also, interpretability aspects might help identify which structural features (like particular bonds or motifs) correlate with superconductivity.</li>
+            <li>J. W. G. Bos and J. P. Attfield. &ldquo;Creation and Validation of a New Intermetallic Superconductor: La<sub>3</sub>Ni<sub>2</sub>B<sub>2</sub>N<sub>x</sub>.&rdquo; <em>Science</em>, vol. 323, 2009, pp. 1323&ndash;1325. &ndash; An example where chemical analogy and database pattern spotting led to a new superconductor discovery (La₃Ni₂B₂N<sub>x</sub>, T<sub>c</sub> ~ 7.8 K). It shows a smaller-scale approach to materials design working. It&rsquo;s instructive for how to go from an idea (&ldquo;this structure type might also superconduct&rdquo;) to experiment, validating Path 8 principles in a pre-ML era style.</li>
+            <li>K. Yang, et al. &ldquo;Superconducting Tc Predictions for Hydrogen-Rich Materials Under High Pressure Considering Intermediate Van der Waals Interactions.&rdquo; <em>Physical Review B</em>, vol. 98, 2018, 100102(R). &ndash; A study combining structure search and T<sub>c</sub> calculations for hydrides, addressing an oft-neglected factor (van der Waals). It represents the detail one must handle in realistic predictions. It&rsquo;s useful for learning how predictions are refined and made credible, which is the endgame of Path 8: a prediction so solid that experimentalists will invest the effort to test it.</li>
+        </ul>
+
+        <a href="/chemistry/Tirich_Mir_room_temperature_superconductors/" class="back-link">← Back to Tirich Mir – Room-Temperature Superconductors</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

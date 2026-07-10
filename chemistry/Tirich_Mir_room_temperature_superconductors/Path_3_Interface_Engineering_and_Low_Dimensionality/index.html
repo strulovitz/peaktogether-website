@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 3: Interface Engineering &amp; Low-Dimensionality — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=25">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>Path 3: Interface Engineering &amp; Low-Dimensionality</h1>
+
+        <p><strong>Idea:</strong> Create novel superconductors by combining materials or reducing dimensionality to monolayers, using interfaces to enhance pairing (sometimes dubbed &ldquo;flat-band&rdquo; or interface superconductivity).</p>
+        <p><strong>Rationale:</strong> Low-dimensional systems can exhibit enhanced fluctuations and even new pairing interactions. A striking example is one-unit-cell FeSe on SrTiO₃, which shows T<sub>c</sub> ~ 109 K (much higher than bulk FeSe&rsquo;s 8 K) due to epitaxial strain and cross-interface phonon interactions. Likewise, in 2018 scientists found that stacking two graphene sheets at a &ldquo;magic&rdquo; relative angle (~1.1°) yields flat electronic bands and superconductivity around 1&ndash;3 K. While that T<sub>c</sub> is low, it confirmed that tailoring the band structure (a nearly flat band means a high density of states) can induce Cooper pairing in pure carbon &ndash; a remarkable proof-of-concept. Interface-focused ideas date back decades (e.g. Ginzburg&rsquo;s 1960s proposal of an excitonic superconductor at a metal&ndash;semiconductor interface). Now, we have experimental tools like molecular beam epitaxy to craft precise multilayers and 2D materials. By designing interfaces that provide additional pairing glue &ndash; for instance, a high-energy phonon mode in a substrate that interacts with electrons in a monolayer, or interface-enhanced electron pairing via quantum confinement &ndash; one might boost T<sub>c</sub>.</p>
+        <p><strong>Prerequisites:</strong> Solid understanding of 2D superconductivity and the Kosterlitz-Thouless transition (vortex physics in thin films), knowledge of van der Waals heterostructures and band engineering, and skills in nanofabrication or at least interpreting its results.</p>
+        <p><strong>Dependencies:</strong> Success here can intertwine with Path 4 (excitonic mechanisms) &ndash; some interface structures might realize electron&ndash;hole pairing &ndash; and Path 2&rsquo;s materials (e.g. making a cuprate or nickelate interface with another oxide to push Tc). It also relies on insights from Path 9 about how reduced dimensionality affects pairing strength.</p>
+        <p><strong>Signs of Progress:</strong> Achieving higher T<sub>c</sub> in known systems by interface modification would be an immediate sign. For instance, if the FeSe/STO approach could be extended to other films or optimized to exceed 120 K, or if magic-angle graphene multilayers could be tuned up from 3 K to tens of kelvin, that would validate the strategy. Another sign would be discovering superconductivity in a new 2D material (e.g. a monolayer transition-metal dichalcogenide or a twisted multi-layer structure) at unexpectedly high T<sub>c</sub>. Finally, a clear &ldquo;flat-band&rdquo; signature correlated with high pairing strength &ndash; such as a van Hove singularity in the electronic spectrum coinciding with enhanced superconductivity &ndash; would indicate that engineering electronic structure is a fruitful path.</p>
+
+        <h2>Base Camp 3.1: 2D SC Fundamentals</h2>
+        <ul>
+            <li>A. M. Goldman and N. Marković. &ldquo;Superconductor-Insulator Transitions in the Two-Dimensional Limit.&rdquo; <em>Physics Today</em>, vol. 51, No. 11, 1998, pp. 39&ndash;44. &ndash; Overview of behavior of thin-film superconductors, including phase fluctuations and the superconductor&ndash;insulator transition. Provides understanding of the Kosterlitz-Thouless transition and why 2D superconductors have unique challenges and phenomena, which is crucial when working with monolayers or interfaces.</li>
+            <li>J. M. Kosterlitz and D. J. Thouless. &ldquo;Ordering, Metastability and Phase-Transitions in Two-Dimensional Systems.&rdquo; <em>Journal of Physics C: Solid State Physics</em>, vol. 6, 1973, pp. 1181&ndash;1203. &ndash; Original paper on the KT transition. While advanced, it&rsquo;s the theoretical bedrock for understanding how a 2D superconductor can lose phase coherence via vortex unbinding at T<sub>BKT</sub> &lt; T<sub>c</sub>. For interface/2D paths, one must be mindful of this mechanism.</li>
+            <li>Y. Iwasa, T. Inoue, and M. Taniguchi. &ldquo;Electric-Field-Induced Superconductivity in Two-Dimensional Materials.&rdquo; <em>Science</em>, vol. 350, 2015, p. 646. &ndash; Review of gating experiments that induce superconductivity in 2D materials (like LAO/STO interface or MoS₂ under ionic liquid gate). It demonstrates another facet of 2D SC: carrier concentration can be tuned continuously. Useful for envisioning how we might optimize an interface superconductor by field effect.</li>
+        </ul>
+
+        <h2>Base Camp 3.2: Twisted Bilayer Graphene and Flat Bands</h2>
+        <ul>
+            <li>Yuan Cao, et al. &ldquo;Unconventional Superconductivity in Magic-Angle Graphene Superlattices.&rdquo; <em>Nature</em>, vol. 556, 2018, pp. 43&ndash;50. &ndash; The discovery paper for superconductivity in magic-angle TBG. Essential reading to see how moiré flat bands can lead to correlated insulating states and superconductivity, and to appreciate the similarities to cuprates (e.g. phase diagram with insulator and SC) in a purely carbon system.</li>
+            <li>E. Y. Andrei and A. H. MacDonald. &ldquo;Graphene Bilayers with a Twist.&rdquo; <em>Nature</em>, vol. 576, 2019, pp. 41&ndash;47. &ndash; Accessible review discussing how the twist angle leads to band flattening, and summarizing experimental/theoretical status of magic-angle graphene. Excellent for getting an intuitive sense of why flat bands are exciting for high-T<sub>c</sub> (lots of states to pair) and what the challenges are (inhomogeneity, need for tuning angle precisely).</li>
+            <li>M. Yankowitz, et al. &ldquo;Tuning Superconductivity in Twisted Bilayer Graphene.&rdquo; <em>Science</em>, vol. 363, 2019, pp. 1059&ndash;1064. &ndash; Follow-up study showing that applying pressure or adjusting doping moves magic-angle graphene through different phases, including enhancing superconductivity. This demonstrates experimental control knobs and further solidifies that it&rsquo;s a real, tunable SC &ndash; instructive for how one might optimize a 2D superconductor&rsquo;s T<sub>c</sub>.</li>
+        </ul>
+
+        <h2>Base Camp 3.3: Interface Superconductors &ndash; FeSe/STO, LAO/STO</h2>
+        <ul>
+            <li>J. F. Ge, et al. &ldquo;Superconductivity Above 100 K in Single-Layer FeSe Films on SrTiO₃.&rdquo; <em>Nature Materials</em>, vol. 14, 2015, pp. 285&ndash;289. &ndash; Seminal paper where one monolayer of FeSe on STO showed T<sub>c</sub> ~ 109 K (compared to 8 K bulk). Key to learn how interface can enhance pairing (the paper suggests an interfacial phonon mode is responsible). It&rsquo;s a blueprint for other interface designs.</li>
+            <li>D. Huang and J. E. Hoffman. &ldquo;Monolayer FeSe on SrTiO₃.&rdquo; <em>Annual Review of Condensed Matter Physics</em>, vol. 8, 2017, pp. 311&ndash;336. &ndash; A thorough review on the FeSe/STO system, discussing experimental and theoretical progress. Great for understanding how pairing may be enhanced by &ldquo;forward scattering&rdquo; electrons with an interface phonon, and what measurements (STM, ARPES) reveal about the mechanism.</li>
+            <li>A. Ohtomo and H. Y. Hwang. &ldquo;A High-Mobility Electron Gas at the LaAlO₃/SrTiO₃ Heterointerface.&rdquo; <em>Nature</em>, vol. 427, 2004, pp. 423&ndash;426. &ndash; Discovery of the LAO/STO 2D electron gas which later was found to superconduct ~0.2 K. While the SC here is low-T, this system is the basis for electric-field-tunable superconductivity and demonstrates creating an interface can generate carriers and even superconductivity where none existed. It&rsquo;s historically and conceptually important for Path 3.</li>
+        </ul>
+
+        <h2>Base Camp 3.4: Fabrication &amp; Characterization of Heterostructures</h2>
+        <ul>
+            <li>Ivan Božović. &ldquo;Atomic-Layer Engineering of Superconducting Oxides: Yesterday, Today, Tomorrow.&rdquo; <em>IEEE Transactions on Applied Superconductivity</em>, vol. 11, 2001, pp. 2686&ndash;2695. &ndash; Overview by a leader in thin-film synthesis, explaining how techniques like molecular beam epitaxy can create custom layered structures. Inspires how we might build e.g. a superlattice tailored for higher T<sub>c</sub> and highlights potential pitfalls (strain relaxation, interdiffusion).</li>
+            <li>Harald Y. Hwang, et al. &ldquo;Emergent Phenomena at Oxide Interfaces.&rdquo; <em>Nature Materials</em>, vol. 11, 2012, pp. 103&ndash;113. &ndash; General review of what unique phases (including SC) appear at oxide interfaces. Useful to broaden thinking beyond just FeSe/STO: many interfaces (like between two insulators) can surprise us with superconductivity or other orders &ndash; encourages exploration.</li>
+            <li>Kenji Ueno, et al. &ldquo;Discovery of Electrostatic Induced Superconductivity in KTaO₃.&rdquo; <em>Nature Nanotechnology</em>, vol. 6, 2011, pp. 408&ndash;412. &ndash; An example of creating superconductivity via gating an interface (here KTaO₃). It&rsquo;s a complementary approach: instead of permanently doping, use a field to induce carriers. This experiment resulting in 50&ndash;70 mK T<sub>c</sub> in KTaO₃ 2D gas hints at what might be possible if one could gate a better system to high carrier density &ndash; potentially tie-in with Path 7 as well.</li>
+        </ul>
+
+        <a href="/chemistry/Tirich_Mir_room_temperature_superconductors/" class="back-link">← Back to Tirich Mir – Room-Temperature Superconductors</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>
