@@ -1,0 +1,13 @@
+Create a wide, cinematic hero illustration in a warm, polished Pixar / modern 3D-animated-film style — cute, friendly, and full of wonder, NOT gritty or scary.
+
+SCENE: A first-person view from inside the cozy cockpit of a small, rounded, friendly spaceship as it flies low and fast across a vast, glowing 3D "math landscape" on a dark navy grid floor that recedes to a bright vanishing point (dramatic one-point perspective, a thrilling sense of "flying in"). Marching away from the ship into the distance is a long row of glowing colored bars — a rainbow gradient from warm orange/red in front to cool cyan far away — and each bar is SHORTER than the one before, shrinking toward zero: these are the terms 1, 1/2, 1/3, 1/4, … of the harmonic series. Rising behind the little bars stands a tall, translucent cyan-blue glass WALL, built of stacked steps that keep climbing higher and higher toward the sky — it never stops growing, towering over the shrinking bars. Gentle motion-blur streaks convey speed.
+
+THE MAGIC: floating, glowing holographic equations drift through the air like handwritten-chalk-meets-neon. A smooth amber-gold curve arcs gently upward just above the tops of the shrinking bars, softly labeled "y = ln N + γ". At the bright glowing center of the scene, like a destination star the ship flies toward, floats the harmonic series rendered CLEAN and LEGIBLE: "1 + 1/2 + 1/3 + 1/4 + 1/5 + ⋯ = ∞", with the large golden "∞" shining brightest of all — the astonishing punchline that a sum of ever-shrinking pieces still grows without end. A small soft-green crosshair sits in the center of the cockpit view.
+
+MOOD: awe, adventure, cozy-epic — "the most epic date night your brain has ever been on." The wonder of something that shrinks toward nothing yet climbs forever. Cinematic depth, gentle lens bloom on the glowing parts.
+
+PALETTE: dark near-black navy background (#0B1020) with rare, intensely saturated glows only — a rainbow of term-bars (warm orange/red → gold → cyan), a translucent glowing cyan-blue partial-sum wall (#25CFFF), an amber-gold growth curve (#FFB733), and a golden "∞" and formula. Keep most of the frame dark so the glowing math pops.
+
+COMPOSITION & FORMAT: 16:9 wide landscape, centered one-point perspective, room at the very center for the glowing formula and the golden ∞. High detail, smooth rendering, soft volumetric light.
+
+AVOID: photorealistic grime, horror, dark/scary tone, humans or human faces, humanoid robots, cluttered or garbled/unreadable text, watermarks, logos.
