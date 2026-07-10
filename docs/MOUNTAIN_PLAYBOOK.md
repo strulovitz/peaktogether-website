@@ -222,31 +222,39 @@ Get pixel sizes (PowerShell + System.Drawing). So far Nir's images have been:
 The global `.gp-gallery.two` rule is **tuned for exactly this pair of shapes**. If a future pair has **different** aspect ratios, the equal-height math breaks — **update the `nth-child` flex values** so `flex-grow = width/height` of each image (see 8d), or the heights won't match.
 
 ### 8c. The markup (scientist FIRST = left on wide / top on narrow)
-Right after `<p class="subtitle">…</p>` on the hub:
+Right after `<p class="subtitle">…</p>` on the hub. **Each image is wrapped in a `<figure>`** so it can carry a `<figcaption>` welcome/anecdote below it (see §8f). Even images with no caption yet get a `<figure>` wrapper, so both hub pages stay identical in structure:
 ```html
 <div class="gp-gallery two">
-    <img src="/images/<…>-sherpa-guide.png" alt="<Scientist> — the sherpa guide for <Mountain> – <Topic>">
-    <img src="/images/<…>-real-mountain.png" alt="<Mountain> — the real mountain">
+    <figure>
+        <img src="/images/<…>-sherpa-guide.png" alt="<Scientist> — the sherpa guide for <Mountain> – <Topic>">
+        <figcaption>… first-person welcome + anecdote (see §8f) …</figcaption>  <!-- only once Nir gives the text -->
+    </figure>
+    <figure>
+        <img src="/images/<…>-real-mountain.png" alt="<Mountain> — the real mountain">
+    </figure>
 </div>
 ```
 DOM order controls layout: **child 1 = left (wide) / top (narrow)** = the **scientist**; **child 2 = right / bottom** = the **mountain**.
 
 ### 8d. The CSS (already in global `style.css`, beside `.four`/`.three`)
 ```css
-/* Two images shown in full at the SAME height; each image's width follows its own
-   aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3), so nothing is cropped. */
+/* Two figures side by side; images shown in full at the SAME height; each figure's width
+   follows its image's aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3). */
 .gp-gallery.two { display: flex; align-items: flex-start; }
-.gp-gallery.two img { width: auto; min-width: 0; }
-.gp-gallery.two img:nth-child(1) { flex: 1 1 0; }      /* square portrait → flex-grow = 1.0  */
-.gp-gallery.two img:nth-child(2) { flex: 1.333 1 0; }  /* 4:3 mountain    → flex-grow = 1.333 */
+.gp-gallery.two > figure { margin: 0; min-width: 0; }
+.gp-gallery.two > figure:nth-child(1) { flex: 1 1 0; }      /* square portrait → flex-grow = 1.0  */
+.gp-gallery.two > figure:nth-child(2) { flex: 1.333 1 0; }  /* 4:3 mountain    → flex-grow = 1.333 */
+.gp-gallery.two > figure > img { width: 100%; height: auto; }
+.gp-gallery figcaption { margin-top: 12px; font-size: 0.95rem; line-height: 1.6; color: #555; }
 ```
 and inside `@media (max-width: 768px) { … }`:
 ```css
 .gp-gallery.two { flex-direction: column; }
-.gp-gallery.two img { width: 100%; flex: none; }
+.gp-gallery.two > figure { width: 100%; flex: none; }
 ```
-**Why it works:** each image's `flex-grow` = its width/height ratio, so flex gives each a width proportional to its aspect ratio → **both render at the exact same height, side by side, nothing cropped.** On ≤768px they stack full-width (scientist on top). This is what "correct the height of the scientist" means: the square portrait no longer looks taller than the 4:3 mountain.
-- If Nir ever wants **edge-to-edge with a small crop** instead of height-matched-no-crop, switch to `aspect-ratio: 4/3; object-fit: cover;` — but **ASK first** (cropping his image is consequential).
+**Why it works:** each figure's `flex-grow` = its image's width/height ratio, so flex gives each figure a width proportional to its aspect ratio → **both images render at the exact same height, side by side, nothing cropped.** A caption just hangs below its image (columns can differ in total height; the images stay level). On ≤768px they stack full-width (scientist on top). This is what "correct the height of the scientist" means.
+- If a future pair has **different** aspect ratios, update the two `nth-child` flex-grow values to each image's width/height, or the heights won't match.
+- If Nir ever wants **edge-to-edge with a small crop** instead of height-matched-no-crop → `aspect-ratio: 4/3; object-fit: cover;` — but **ASK first** (cropping his image is consequential).
 
 ### 8e. The lightbox (click to enlarge — same as the game pages)
 The base `.gp-gallery` + `.gp-gallery img` styling and ALL `.lightbox-*` / `.zoomable` CSS already live in `style.css`. Add this **exact script** just before `</body>` on the hub (it targets `.gp-gallery img`):
@@ -281,6 +289,16 @@ The base `.gp-gallery` + `.gp-gallery img` styling and ALL `.lightbox-*` / `.zoo
 </script>
 ```
 (I can't view images myself — write a thematic `alt` from the filename/topic and tell Nir he can refine it.)
+
+### 8f. The welcome caption (below the scientist's photo only)
+Nir gives a paragraph of text he found on Google — a description of the scientist + a funny life anecdote. Rewrite it in **first person** with two bold framing phrases:
+```
+<figcaption><strong>Our Sherpa guide welcomes us:</strong> Hi! I'm …[description sentence(s) in first person]… <strong>Let me tell you a funny story!</strong> …[anecdote in first person, as if the scientist is telling it]…</figcaption>
+```
+- Keep ALL facts verbatim; just shift pronouns and tense to first person.
+- Use curly quotes `“ ”` / `’` and proper typography.
+- Only the scientist's `<figure>` gets a `<figcaption>`. The real-mountain figure stays caption-less (just `<figure><img …></figure>`).
+- After writing: verify the total character length is reasonable (under ~600 chars is comfortable).
 
 ---
 

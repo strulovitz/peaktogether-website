@@ -1505,12 +1505,20 @@ h1, h2, h3, h4, h5, h6 {
 
 .gp-gallery.four { grid-template-columns: repeat(4, 1fr); }
 .gp-gallery.three { grid-template-columns: repeat(3, 1fr); }
-/* Two images shown in full at the SAME height; each image's width follows its own
-   aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3), so nothing is cropped. */
+/* Two images shown in full at the SAME height; each figure's width follows its image's
+   aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3), so nothing is cropped.
+   Each figure may carry a <figcaption> welcome/anecdote below its image. */
 .gp-gallery.two { display: flex; align-items: flex-start; }
-.gp-gallery.two img { width: auto; min-width: 0; }
-.gp-gallery.two img:nth-child(1) { flex: 1 1 0; }
-.gp-gallery.two img:nth-child(2) { flex: 1.333 1 0; }
+.gp-gallery.two > figure { margin: 0; min-width: 0; }
+.gp-gallery.two > figure:nth-child(1) { flex: 1 1 0; }
+.gp-gallery.two > figure:nth-child(2) { flex: 1.333 1 0; }
+.gp-gallery.two > figure > img { width: 100%; height: auto; }
+.gp-gallery figcaption {
+    margin-top: 12px;
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: #555;
+}
 
 .gp-gallery img {
     width: 100%;
@@ -1669,7 +1677,7 @@ h1, h2, h3, h4, h5, h6 {
     .gp-gallery.four,
     .gp-gallery.three { grid-template-columns: repeat(2, 1fr); }
     .gp-gallery.two { flex-direction: column; }
-    .gp-gallery.two img { width: 100%; flex: none; }
+    .gp-gallery.two > figure { width: 100%; flex: none; }
     .gp-footstrip { flex-direction: column; align-items: flex-start; }
 }
 
