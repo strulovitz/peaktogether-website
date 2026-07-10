@@ -17,90 +17,30 @@
 <p>One of the most eye-opening lessons in basic calculus is dealing with infinite series – summing infinitely many terms. At first, it sounds impossible to add up infinitely many numbers and get a finite answer, but calculus (and its rigorous cousin, analysis) provides the tools to determine whether such a sum converges to a limit or diverges (grows without bound). For example, the series $1 + \tfrac{1}{2} + \tfrac{1}{3} + \tfrac{1}{4} + \cdots$, known as the harmonic series, diverges – it keeps growing slowly but inexorably to infinity[1]. This fact is surprising because the terms $\tfrac{1}{n}$ get very small, yet not small enough to prevent the infinite sum from blowing up. Such insights teach us caution and precision when handling infinity. (We’ll later see that this divergent harmonic series is intimately related to the Riemann zeta function at $s=1$ – a preview of things to come.)</p>
 
 <!-- ============================================= -->
-<!--  INTERACTIVE DEMO -- Peak Together: Harmonic Series  -->
-<!--  Descriptions by Claude Fable (verbatim).             -->
+<!--  INTERACTIVE DEMO — Peak Together: Harmonic Series  -->
 <!--  Built by DeepSeek V4 Pro in OpenCode.                -->
 <!-- ============================================= -->
 <div class="demo-callout">
-    <h3>Try It Together -- Interactive 3D Demo</h3>
-    <p><strong>Two players, one computer, one screen, one 3D math world.</strong></p>
-    <p>The design: one shared screen. The boyfriend (Pilot) flies a Descent-style 6-DOF ship with the keyboard (or Thrustmaster T16000M joystick); he may borrow the mouse for pitch/yaw by holding the right mouse button (with an invert toggle). The girlfriend (Manipulator) uses the mouse (left button) or Xbox 360 Controller on sliders to change $N$, spacing, etc.</p>
+    <h3>🎮 Play the Interactive 3D Demo — Two players, one screen</h3>
+    <p>
+        We built a <strong>3D "math flyer"</strong> that turns the harmonic series into a world you can
+        fly through together. One player pilots the camera Descent-style; the other drags Manipulate-style
+        sliders to bend the world in real time. Tab cycles through eleven faithfully-rendered scenes — from the
+        famous Oresme comparison test to the Quicksort sorting algorithm — each a consequence of one stubborn,
+        divergent series.
+    </p>
 
-    <div class="demo-page">
-        <h4>Page 1 -- Harmonic Series: Definition &amp; Divergence</h4>
-        <p>The series $H_N = \sum_{n=1}^{N} \frac{1}{n}$ is rendered as real LaTeX (via matplotlib's mathtext -- no LaTeX installation needed), and in 3D you see the terms $1/n$ as shrinking bars next to a translucent "partial-sum wall" that grows like $\ln N + \gamma$ -- divergence made visible.</p>
+    <div class="gp-gallery four">
+        <img src="/images/harmonic-series-demo-crossing-a-desert.png" alt="Harmonic Series Demo — crossing a desert (jeep problem)">
+        <img src="/images/harmonic-series-demo-stacking-blocks-overhang.png" alt="Harmonic Series Demo — stacking blocks with overhang ½ H_n">
+        <img src="/images/harmonic-series-demo-collecting-coupons.png" alt="Harmonic Series Demo — collecting coupons, E[T] = n H_n">
+        <img src="/images/harmonic-series-demo-quicksort-sorting-algorithm.png" alt="Harmonic Series Demo — quicksort and the harmonic cost of sorting">
     </div>
 
-    <div class="demo-page">
-        <h4>Page 2 -- Comparison Test (Oresme, ~1350): Blue Rectangles of Area 1/2</h4>
-        <p>The pilot flies low along the x-axis past $x = 16$, and the girlfriend pushes $k$ from 5 to 8 -- new blue rectangles keep appearing, each worth another guaranteed 1/2, while the grey bars always stay above the blue. That is the divergence proof, exactly as Wikipedia draws it. :-)</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 3 -- Integral Test: H_N Trapped Between Two Integrals</h4>
-        <p>A floating white "paper" page in 3D with cream rectangles, black axes, and the crimson hyperbola $y=1/x$ through the upper-left corners -- exactly like Wikipedia's figure. The lesson moment: girlfriend sets $N=6$ (the figure!), boyfriend hovers in front of the paper like reading a giant book -- then she slowly drags "Shift rectangles left" to 1 while he watches every rectangle duck under the crimson curve. Sum trapped between $\ln(N+1)$ and $1 + \ln N$, felt with the eyes. :-)</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 4 -- Partial Sums &amp; Growth Rate: $\ln n + \gamma$</h4>
-        <p>Girlfriend drags rows $1 \to 20$ while the boyfriend hovers in front of the giant table -- the bars crawl: twenty terms and still under $3.6$. Then she reads aloud: reaching $H_n > 10$ needs $12,367$ terms!</p>
-        <p><strong>Approximation $\to$ 1:</strong> the red $\ln n$ curve misses every black dot by the <em>same</em> gap. <strong>$\to$ 2:</strong> the amber curve closes it -- that constant gap is $\gamma$ (label appears in-world!). <strong>$\to$ 3:</strong> cyan $+ \frac{1}{2n}$ -- pilot flies close to row $20$ and sees it essentially touch the dot ($\varepsilon_{20} \approx 0.0003$).</p>
-        <p>Highlight rows $1$, $2$, $6$: the <em>only</em> exact decimals ($1$, $1.5$, $2.45$) -- "remember these three, next page explains why there are no others!"</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 5 -- Divisibility: No $H_n$ Is an Integer (except $H_1 = 1$)</h4>
-        <p>Our first <em>original</em> visualization (Wikipedia has no figure for this proof)! 🎨 Towers of blue cubes — each cube = one factor of $2$ in the numerator $M/i$.</p>
-        <p>Set $n = 7$: the red cube-less column sits at $i = 4$. Girlfriend nudges $n$ to $8$ — the red column <em>jumps</em> to $8$ and column $4$ grows a cube. Again at $16$. The boyfriend flies down the alley of towers: <em>every</em> column has at least one blue cube except the red one, always exactly one.</p>
-        <p>Read the overlay: numerators (green = even, red = odd) — one red number only. Sum odd, denominator $M$ even: $H_n = \frac{\mathrm{odd}}{\mathrm{even}}$, never an integer. <strong>Subtract slider:</strong> try $H_{12} - H_5$, $H_{20} - H_{19}$… exact fractions, never integers — the stronger theorem!</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 6 -- Interpolation (Digamma) + Ramanujan Summation</h4>
-        <p>Our most ambitious page yet! 🖼️ A giant gallery painting hung in 3D space — live-computed <em>domain coloring</em> of the digamma function $\psi(z)$ over the complex plane, with rainbow pinwheels marching along the negative real axis (the poles at $0, -1, -2, \ldots$) and the great swirl near $1.4616$ — digamma's only positive real zero.</p>
-        <p>In front: a crimson interpolation curve $H_x = \psi(x+1) + \gamma$ threading exactly through every black dot $(n, H_n)$. Girlfriend drags the blue bead — at every integer it kisses a dot; park it at $x = 0.5$ and the overlay snaps to the exact $H_{1/2} = 2 - 2\ln 2$.</p>
-        <p>Toggle "Show $\ln x$": the dashed curve runs below, and the amber gap on the right shrinks toward $\gamma$ — <em>"the Ramanujan value of the divergent harmonic series</em> $\sum_{n \geq 1}^{\mathcal{R}} \frac{1}{n} = \gamma$<em>."</em> 🤯</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 7 -- Crossing a Desert: The Jeep Problem (reach = r/2 H_n)</h4>
-        <p>A scrubbable mission movie! 🏜️ Set $n = 3$, drag "Mission progress" slowly from 0 — the green jeep drives out $1/6$, drops $2/3$ in the new depot (Wikipedia row 1!), limps home on its reserved $1/6$, refuels (row 2), and so on — all five figure snapshots appear with <em>exact</em> fractions: $2/3$, $1/2$, $1/3$, $1/6$, $1/4$ (computed with Fraction arithmetic, zero rounding).</p>
-        <p>At the climax the jeep stands at $11/12$ with tank $1/2$ — and on the way home every depot drains to exactly 0. Not a drop wasted! Crank $n$ to 6: reach $\frac{1}{2}H_6 = \frac{49}{40}$ — past one full tank-range!</p>
-        <p>Girlfriend reads the overlay: "Divergence means any desert is crossable." Boyfriend flies alongside the jeep like a chase helicopter. 🚁</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 8 -- Stacking Blocks: Overhang = (1/2) H_n (no limit!)</h4>
-        <p>True 3D wooden blocks — the Wikipedia photo, but you can fly inside it! 🧱 The top block sticks out $1/2$, block $k$ adds $1/(2k)$, total overhang = $\frac{t}{2}H_n$.</p>
-        <p>Defaults ($n=9$, $t=1$) recreate the Wikipedia photo. Boyfriend flies <em>under</em> the overhang and looks up — then hovers at the front face: every dark COM arrow sits <em>exactly</em> on the edge of the block below. One millimeter more and it falls!</p>
-        <p>Girlfriend eases $t$ down to $0.8$: all arrows retreat inward in unison — the margin $(1-t)/2$ is the <em>same</em> on every level! Back to $t=1$: collective held breath. Crank $n$ to 31: the red arrow reads $\frac{1}{2}H_{31} \approx 2.013$ — the stack clears <em>two full block lengths</em> of thin air! 🏗️</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 9 -- Counting Primes &amp; Divisors: Euler 1737, Mertens, Dirichlet</h4>
-        <p>Two exhibits side by side! 🔢 <strong>Exhibit A (left):</strong> Euler's primes — harmonic bars where composites fade to ghosts and primes glow <span style="color:#D02030;">crimson</span>. A translucent green wall grows as $\sum_{p \le x} 1/p$, hugged by the amber Mertens curve $\ln\ln x + M$ ($M \approx 0.2615$). The wall's divergence = infinitely many primes!</p>
-        <p><strong>Exhibit B (right):</strong> Dirichlet's hyperbola — a paper lattice where dots $(i,j)$ with $ij \le n$ turn deep blue under the crimson hyperbola $xy = n$. Column $i$ contains exactly $\lfloor n/i \rfloor$ dots — sweep the highlight slider to read each column! 🟠</p>
-        <p>Compare the overlay's two numbers: $D/n$ vs $\ln n + 2\gamma - 1$ — and tell each other that bounding the leftover error is <em>still an open problem</em> (Dirichlet's divisor problem). Someone in this room could solve it. 😉</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 10 -- Collecting Coupons: E[T] = n H_n</h4>
-        <p><strong>Exhibit A (left):</strong> Faithful Wikipedia chart — rows $n=1..60$, grey bars of length $\lceil n H_n \rceil$ (every 5th darker), with computed values $12, 30, 50, 72, 96, 120, 146, 172, 198, 225, 253, 281$ matching the figure exactly! Dashed fan lines $E(T)=n..5n$ in the figure's dark-red → green progression. 🎯</p>
-        <p><strong>Exhibit B (right):</strong> A wall of 60 coupon tiles + live simulation with deterministic seeded draws — scrub "Random draws t" backwards <em>and</em> forwards! Tiles light up in vibrant color when first collected. At $k=55/60$ the overlay says the next coupon costs $60/5 = 12$ draws, and the <em>last</em> one costs $60$. The tail is where collectors go broke. 💸</p>
-        <p>Race night! Each pick a seed, scrub to completion, compare your $T$ against $E[T] = 281$ — who beat the expectation? Reseed and rematch! 🎰</p>
-    </div>
-
-    <div class="demo-page">
-        <h4>Page 11 -- Quicksort: The Harmonic Price of Sorting</h4>
-        <p>The grand finale! 🔀 31 shuffled grey bars — she drags "Progress %" and the animation begins. A red bar lights up (the pivot, always the last bar of the shaded zone), a blue line marks its height, and red curved arcs flash as bars leap past each other. He flies low along the wall and watches the shaded zone split, split, split again — until, at 100%, a perfect staircase stands from 1 to 31. 🎯</p>
-        <p>The punchline: about 188 comparisons expected. Why? Two bars that end up neighbors ($k=0$) are compared almost surely: probability $2/(0+2) = 1$. Two bars far apart almost never meet: $2/(k+2)$ shrinks like a harmonic term. Sum all those harmonic crumbs over every pair and out comes $\sum 2 H_i = O(n \log n)$ — the <em>same series</em> that built our towers and crossed our desert now sets the speed limit of sorting! ⚡</p>
-    </div>
-
-    <p><strong>Press Tab</strong> to cycle between pages. More pages coming soon!</p>
-    <p class="demo-reqs">Requirements: Python 3.9+ &nbsp;|&nbsp; <code>pip install pygame PyOpenGL numpy matplotlib</code></p>
-    <a href="harmonic_series_mathematics.py" download class="demo-dl-button">Download harmonic_series_mathematics.py</a>
-    <p class="demo-note">Run with: <code>python harmonic_series_mathematics.py</code> (Windows / macOS / Linux)</p>
+    <a href="/arcade/harmonic-series-demo/" class="demo-dl-button">🎼 Enter the Harmonic Series Demo →</a>
+    <p class="demo-note">Free &amp; open-source — two players, one keyboard + one mouse. No signup, no payment, ever.</p>
 </div>
+
 
 <p>Another fundamental result learned early on is that some infinite series do converge to beautiful values. A famous example is the Basel Problem: the sum of the reciprocals of the squares of all positive integers, $1 + \tfrac{1}{2^2} + \tfrac{1}{3^2} + \tfrac{1}{4^2} + \cdots$, actually converges to a precise number. In 1734, the young Leonhard Euler stunned the mathematical world by finding its sum: $1 + \frac{1}{4} + \frac{1}{9} + \cdots = \frac{\pi^2}{6} \approx 1.644934$[1]. This was one of the early glimpses of the mysterious constant $\pi$ showing up in an infinite sum of rational terms – an indication that deep connections underlie even simple-looking series. This particular series is now recognized as $\zeta(2)$, the Riemann zeta function evaluated at $2$, although Euler solved it long before Riemann generalized the zeta function. The Basel Problem taught mathematicians that infinite processes, handled with care, can yield exact results and that new mathematical ideas (like the zeta function) might be lurking in familiar territory.</p>
 <p>In short, calculus gives us the mindset and techniques to handle continuous change and infinite processes. We gain intuition for how something can approach a value ever more closely (but perhaps never exactly reach it) and how an infinite summation can sometimes make sense and equal a finite number. These concepts of convergence, divergence, and limit processes form the bedrock for later understanding the convergence of the Riemann zeta series and the idea of extending functions beyond their naively defined domain. We’ll carry these fundamental tools as we climb.</p>
@@ -223,5 +163,37 @@
     </main>
     <div data-component="footer"></div>
     <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt) { big.setAttribute('src', src); big.setAttribute('alt', alt || ''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox() { overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src', ''); }
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () { openBox(this.getAttribute('src'), this.getAttribute('alt')); });
+            }
+            overlay.addEventListener('click', function (e) { if (e.target === overlay || e.target === closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.keyCode === 27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
 </body>
 </html>

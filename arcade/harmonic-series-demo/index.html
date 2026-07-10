@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harmonic Series Demo — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=25">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main>
+        <article class="page gp">
+
+            <!-- ① TITLE BLOCK -->
+            <span class="game-badge playable">▶ PLAYABLE</span>
+            <h1>🎼 Harmonic Series Demo</h1>
+            <p class="gp-hook">
+                A two-player, one-screen <strong>3D "math flyer"</strong> for the first base camp of
+                <strong>Everest — the Riemann Hypothesis</strong>. One of you <em>flies</em> Descent-style through
+                a living diagram of the harmonic series <span class="nowrap">$H_N = 1 + \tfrac{1}{2} + \tfrac{1}{3} + \cdots + \tfrac{1}{N}$</span>;
+                the other drags <strong>Manipulate-style sliders</strong> to bend the world in real time. Watch the
+                terms shrink toward zero while the partial-sum wall grows <em>forever</em> — the astonishing fact that
+                the harmonic series diverges.
+            </p>
+
+            <!-- Looping, muted clip (served free via jsDelivr CDN from the git repo) -->
+            <div class="pt-clip">
+                <video class="pt-clip__video" autoplay loop muted playsinline preload="metadata"
+                       poster="/images/harmonic-series-demo-clip-poster.jpg"
+                       aria-label="Gameplay footage of the Harmonic Series Demo, looping silently">
+                    <source src="https://cdn.jsdelivr.net/gh/strulovitz/peaktogether-website@master/arcade/harmonic-series-demo/harmonic-series-demo-clip.mp4" type="video/mp4" />
+                    <img src="/images/harmonic-series-demo-clip-poster.jpg" alt="Harmonic Series Demo gameplay" />
+                </video>
+            </div>
+
+            <div class="gp-cta">
+                <a href="#download" class="big-button">⬇ Get the Demo (Windows)</a>
+                <a href="/mathematics/Riemann_hypothesis/Analytical_Path_Classical_and_Modern_Analytic_Number_Theory/" class="gp-ghost-btn">← Base Camp: Analytic Number Theory</a>
+            </div>
+            <p class="gp-setup-line">Two players, one keyboard + one mouse (or add a joystick + Xbox controller). 🎮</p>
+
+            <!-- ② WHAT IT IS -->
+            <h2>A number series you can fly through</h2>
+            <p>
+                The harmonic series is the sum of the reciprocals of the whole numbers. Each new term
+                — $\tfrac{1}{2}$, $\tfrac{1}{3}$, $\tfrac{1}{4}$, … — is smaller than the last, shrinking toward zero.
+                So surely the total settles down to some finite number? <strong>It doesn't.</strong> Add enough terms and
+                the sum sails past 10, past 100, past any number you name — just agonizingly slowly (to pass 10 you need
+                12,367 terms!). This demo makes that paradox <em>physical</em>: a front row of colored bars are the
+                terms $\tfrac{1}{n}$ (they shrink), and a translucent wall behind them is the running total $H_n$
+                (it never stops climbing), traced by the amber growth law $H_N \approx \ln N + \gamma$.
+            </p>
+
+            <!-- ③ THE TWIST -->
+            <h2>Eleven scenes, one stubborn series</h2>
+            <p>
+                Press <strong>Tab</strong> to fly between eleven faithfully-rendered scenes — each a famous consequence
+                of that one divergence, rebuilt in true 3D from the classic Wikipedia figures:
+            </p>
+            <ul class="gp-list">
+                <li><strong>Definition &amp; Divergence</strong> — the shrinking terms vs. the ever-growing wall.</li>
+                <li><strong>Comparison Test (Oresme, ~1350)</strong> — infinitely many blue rectangles, each of area ½.</li>
+                <li><strong>Integral Test</strong> — $H_N$ trapped between two integrals of $1/x$.</li>
+                <li><strong>Partial Sums &amp; Growth</strong> — the table of harmonic numbers and the $\ln n + \gamma$ curve.</li>
+                <li><strong>Divisibility</strong> — why no harmonic number (except $H_1$) is ever a whole number.</li>
+                <li><strong>Interpolation (Digamma)</strong> — a domain-colored painting of $\psi(z)$ and Ramanujan's $\gamma$.</li>
+                <li><strong>Crossing a Desert</strong> — the jeep/fuel-depot problem, reach $= \tfrac{r}{2}H_n$.</li>
+                <li><strong>Stacking Blocks</strong> — an overhang of $\tfrac{1}{2}H_n$ block-lengths, with no limit.</li>
+                <li><strong>Counting Primes &amp; Divisors</strong> — Euler 1737, Mertens, and Dirichlet's lattice.</li>
+                <li><strong>Collecting Coupons</strong> — the expected wait $E[T] = n H_n$, with a live simulation.</li>
+                <li><strong>Quicksort</strong> — the harmonic price of sorting, $2n(H_n - 1)$ comparisons.</li>
+            </ul>
+
+            <!-- ④ GALLERY -->
+            <h2>📸 Gallery — real in-demo screenshots</h2>
+            <p class="gp-muted">Straight from the demo. Click any photo to view it full-size.</p>
+            <div class="gp-gallery four">
+                <img src="/images/harmonic-series-demo-crossing-a-desert.png" alt="Harmonic Series Demo — the jeep 'crossing a desert' problem with fuel depots">
+                <img src="/images/harmonic-series-demo-stacking-blocks-overhang.png" alt="Harmonic Series Demo — stacking blocks, overhanging the table edge by ½ H_n">
+                <img src="/images/harmonic-series-demo-collecting-coupons.png" alt="Harmonic Series Demo — the coupon collector's problem, E[T] = n H_n">
+                <img src="/images/harmonic-series-demo-quicksort-sorting-algorithm.png" alt="Harmonic Series Demo — quicksort and the harmonic cost of sorting">
+            </div>
+
+            <!-- ⑤ THE MOUNTAIN -->
+            <h2>🏔️ Why it lives on Everest</h2>
+            <p>
+                The harmonic series is the doorway to the <strong>Riemann zeta function</strong>
+                $\zeta(s) = \sum_{n=1}^{\infty} \tfrac{1}{n^s}$ — the harmonic series is exactly $\zeta(1)$, sitting
+                right at the edge where the sum first blows up. Understanding <em>how</em> it diverges — and Euler's
+                stunning discovery that it equals a product over the primes — is the first foothold on the climb toward
+                the Riemann Hypothesis. This demo is the playable first Stepping Stone of
+                <a href="/mathematics/Riemann_hypothesis/Analytical_Path_Classical_and_Modern_Analytic_Number_Theory/">Base Camp: Classical &amp; Modern Analytic Number Theory</a>.
+            </p>
+
+            <!-- ⑥ HOW YOU TWO PLAY -->
+            <h2>❤️ How you two play</h2>
+            <div class="gp-roles">
+                <div class="gp-role">
+                    <h3>🕹️ Player 1 — The Pilot</h3>
+                    <p>Flies the camera through the 3D world Descent-style with the <strong>keyboard</strong> (and an optional joystick) — full 6 degrees of freedom, no gimbal lock.</p>
+                </div>
+                <div class="gp-role">
+                    <h3>🎯 Player 2 — The Manipulator</h3>
+                    <p>Bends the world with the <strong>mouse</strong> (and an optional Xbox controller), dragging Manipulate-style sliders: more terms, more opacity, scrub the animations.</p>
+                </div>
+            </div>
+
+            <!-- ⑥b CONTROLS -->
+            <h2>🎮 Controls</h2>
+            <h3>🕹️ Pilot (keyboard)</h3>
+            <ul>
+                <li><code>W</code>/<code>S</code> forward / back · <code>A</code>/<code>D</code> strafe · <code>Z</code>/<code>X</code> up / down</li>
+                <li><code>Q</code>/<code>E</code> roll · <strong>arrow keys</strong> pitch / yaw · <strong>Shift</strong> boost</li>
+                <li>Hold the <strong>right mouse button</strong> to mouse-look</li>
+            </ul>
+            <h3>🖱️ Manipulator (mouse)</h3>
+            <ul>
+                <li>Drag the <strong>sliders</strong> on the right to change $N$, opacity, curves, and to scrub the animations</li>
+            </ul>
+            <h3>🎮 Shared</h3>
+            <ul>
+                <li><strong>Tab</strong> — next scene · <strong>R</strong> — reset view · <strong>I</strong> — toggle info · <strong>H</strong>/<strong>F1</strong> — help · <strong>Esc</strong> — quit</li>
+            </ul>
+
+            <!-- ⑦ TECH -->
+            <h2>⚙️ The tech</h2>
+            <p>
+                <strong>Language:</strong> pure Python. <strong>Graphics:</strong> real-time 3D via PyOpenGL + pygame
+                (a quaternion 6-DOF camera, no gimbal lock). <strong>Math &amp; labels:</strong> NumPy, with crisp LaTeX
+                rendered through matplotlib's mathtext. Free and open-source — every line is on
+                <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a>.
+            </p>
+
+            <!-- ⑧ DOWNLOAD -->
+            <div class="game-anchor" id="download"></div>
+            <h2>⬇️ Get the Demo</h2>
+            <p class="gp-muted">🔨 A one-click Windows build (no Python needed) is being packaged and will land here shortly. In the meantime, you can run it from source in three lines:</p>
+            <h3>🧑‍💻 Run from source</h3>
+            <ol class="gp-list">
+                <li>Get the code from <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">GitHub</a> (free, open-source — no account, ever).</li>
+                <li>Make sure you have <a href="https://www.python.org/" target="_blank" rel="noopener">Python</a> installed, then install the libraries: <code>pip install pygame PyOpenGL numpy matplotlib</code></li>
+                <li>Run it: <code>python harmonic_series_mathematics.py</code> (in the Analytic Number Theory base-camp folder).</li>
+            </ol>
+            <p class="gp-muted">First time running a game like this? Our <a href="/how-it-works/">How It Works</a> page walks you through everything in plain English.</p>
+
+            <!-- ⑨ FOOTER STRIP -->
+            <div class="gp-footstrip">
+                <span>▶ Playable &mdash; <em>eleven scenes of the harmonic series</em></span>
+                <span>🔓 Free &amp; open-source</span>
+                <span><a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">Contribute on GitHub →</a></span>
+            </div>
+
+            <a href="/mathematics/Riemann_hypothesis/Analytical_Path_Classical_and_Modern_Analytic_Number_Theory/" class="back-link">← Back to Base Camp: Analytic Number Theory</a>
+        </article>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt) { big.setAttribute('src', src); big.setAttribute('alt', alt || ''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox() { overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src', ''); }
+            for (var i = 0; i < imgs.length; i++) {
+                imgs[i].classList.add('zoomable');
+                imgs[i].addEventListener('click', function () { openBox(this.getAttribute('src'), this.getAttribute('alt')); });
+            }
+            overlay.addEventListener('click', function (e) { if (e.target === overlay || e.target === closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape' || e.keyCode === 27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
+</body>
+</html>
