@@ -1505,13 +1505,16 @@ h1, h2, h3, h4, h5, h6 {
 
 .gp-gallery.four { grid-template-columns: repeat(4, 1fr); }
 .gp-gallery.three { grid-template-columns: repeat(3, 1fr); }
-/* Two images shown in full at the SAME height; each figure's width follows its image's
-   aspect ratio (child 1 = square 1:1, child 2 = landscape 4:3), so nothing is cropped.
-   Each figure may carry a <figcaption> welcome/anecdote below its image. */
+/* Two figures side by side, images shown in full at the SAME height and NOTHING cropped.
+   Each figure's width is proportional to its image's aspect ratio (W/H) via flex-grow with
+   flex-basis:0, so both images come out exactly the same height. The scientist portrait is
+   square (grow 1). The mountain photo's grow = its own W/H: default is 4:3 (1.333); for a
+   photo with a different shape, add/use a `.mtn-###` modifier class (### = W/H × 100) on the
+   gallery div. This keeps ALL the logic in this one global file, one ratio per page. */
 .gp-gallery.two { display: flex; align-items: flex-start; }
-.gp-gallery.two > figure { margin: 0; min-width: 0; }
-.gp-gallery.two > figure:nth-child(1) { flex: 1 1 0; }
-.gp-gallery.two > figure:nth-child(2) { flex: 1.649 1 0; }  /* landscape mountain; flex-grow = widest image W/H (Everest 1.649) */
+.gp-gallery.two > figure { margin: 0; min-width: 0; flex: 1 1 0; }
+.gp-gallery.two > figure:nth-child(2) { flex-grow: 1.333; }          /* 4:3 mountain (960×720) — default (K2, Annapurna) */
+.gp-gallery.two.mtn-165 > figure:nth-child(2) { flex-grow: 1.649; }  /* wider mountain (Everest 1187×720) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption {
     margin-top: 12px;
@@ -1677,7 +1680,8 @@ h1, h2, h3, h4, h5, h6 {
     .gp-gallery.four,
     .gp-gallery.three { grid-template-columns: repeat(2, 1fr); }
     .gp-gallery.two { flex-direction: column; }
-    .gp-gallery.two > figure { width: 100%; flex: none; }
+    .gp-gallery.two > figure,
+    .gp-gallery.two.mtn-165 > figure:nth-child(2) { width: 100%; flex: none; }
     .gp-footstrip { flex-direction: column; align-items: flex-start; }
 }
 
