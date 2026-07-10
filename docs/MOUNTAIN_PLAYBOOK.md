@@ -223,8 +223,9 @@ $files | Select-String -SimpleMatch -Pattern 'T^*'   # fixed  → expect >=1
 - Repo: `C:\Users\nir_s\peaktogether-website` (git). Remote:
   `https://github.com/strulovitz/peaktogether-website.git`.
 - Commit message style in this repo: conventional prefixes `feat:` / `docs:` / `fix:` (no emojis).
-- **Only commit/push when Nir asks.** Don't sweep unrelated files (e.g. `quake/savegame.json`)
-  into website commits — stage specific paths.
+- **Always commit + push after each completed change (standing instruction, Nir, July 10, 2026).** Nir
+  does NOT want to be asked each time — just do it. Still stage specific paths; don't sweep unrelated files
+  (e.g. `quake/savegame.json`) into website commits.
 - Known future cleanup: the existing **Riemann** pages have some garbled equations baked in from
   old PDF extraction — could be fixed the same Option-A way someday.
 
@@ -238,5 +239,5 @@ $files | Select-String -SimpleMatch -Pattern 'T^*'   # fixed  → expect >=1
 
 ### Mountains completed
 - 🏔️ **Everest = Riemann Hypothesis** — `mathematics/Riemann_hypothesis/` (gold standard, fattened).
-- 🏔️ **Annapurna I = Navier–Stokes Existence & Smoothness** — `mathematics/Navier-Stokes_existence_and_smoothness/`
-  (skeleton: hub + 6 path pages, 13 base camps, 39 stepping stones, all sources; 7 LaTeX fixes applied).
+- 🏔️ **Annapurna I = Navier–Stokes Existence & Smoothness** — `mathematics/Navier-Stokes_existence_and_smoothness/`  (skeleton: hub + 6 path pages, 13 base camps, 39 stepping stones, all sources; 7 LaTeX fixes applied).
+- 🏔️ **K2 = Turbulence** (Physics — first Physics mountain) — `physics/K2_turbulence/` (skeleton: hub + 9 path pages, 27 base camps, all annotated sources + per-path "What to Upload Next"; 1 LaTeX fix `\sim\!20`; 3 prose fixes: WALETIME→WMLES [best-judgment], layer-and-scade→cascade, Peclét/Peclet→Péclet). Physics submenu "Coming soon" replaced with the K2 link.
