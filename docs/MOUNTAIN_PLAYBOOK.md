@@ -36,6 +36,8 @@ Completed so far:
 
 - 🏔️ **Istor-o-Nal = Economical Carbon Capture** — `chemistry/Istor-o-Nal_economical_carbon_capture/` (skeleton; 10 paths; richer doc type with all whole-mountain sections; sherpa = Jennifer Wilcox; mountain photo 960×720 → 4:3 = default, no CSS modifier needed). Built July 10, 2026. ✅ FULLY DONE: committed, pushed. Second Chemistry mountain.
 
+- 🏔️ **Kangchenjunga = Goldbach's Conjecture** — `mathematics/Kangchenjunga_goldbach_conjecture/` (skeleton; **5 paths**; richer doc type with all whole-mountain sections: Executive Snapshot, Cross-Language Synthesis, Partial Results & Analogs, Risk/Feasibility & Payoff, Common Pitfalls, 30/90/180-Day Work Plan, Canonical Notation & Glossary; sherpa = **Leonhard Euler**; mountain photo 1080×720 → 3:2, new CSS class **`.mtn-150`**). Built July 11, 2026. Third Mathematics mountain. ✅ FULLY DONE: hub + 5 path pages + hero gallery (Euler welcome caption w/ the Diderot "God exists" algebra anecdote + Kangchenjunga verbatim anecdote) + lightbox + menu + /mountains/ grid; committed + pushed. Math copy-artifact fixes reported to Nir (dropped `\` on set-braces `\{\}`, subscripts `\mathfrak{M}_{a/q}`, `\int_{...}`, `\#`, `$P_k$`). CSS bumped **v28 → v29**.
+
 **⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
@@ -217,7 +219,7 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
       if ($t.Contains('style.css?v=OLD')) { [System.IO.File]::WriteAllText($_.FullName, $t.Replace('style.css?v=OLD','style.css?v=NEW'), $enc) }
   }
   ```
-  Then verify 0 remain at the old version, and **tell Nir to re-upload ALL the HTML** (easiest: bulk-upload the whole site folder in FileZilla, overwrite). Current version as of this writing: **v=26** (bumped v25→v26 for Tirich Mir's `.mtn-178` class).
+  Then verify 0 remain at the old version, and **tell Nir to re-upload ALL the HTML** (easiest: bulk-upload the whole site folder in FileZilla, overwrite). Current version as of this writing: **v=29** (history: v25→v26 Tirich Mir `.mtn-178`; v26→v27 Gasherbrum I `.mtn-141`; v27→v28 "How It Works" rebuild `.page pre`/`code`/`.hiw-img`; v28→v29 Kangchenjunga `.mtn-150`).
 - **NEVER** add a per-page `<style>` block or inline layout hack. (I did this once on K2 to "avoid Ctrl+F5" and Nir was furious — it fragments the codebase. Do it the site's way: global `style.css` + a version bump.)
 - Adding a **new reusable class** to `style.css` (like `.gp-gallery.two`) is the correct, safe way — put it right beside its siblings (`.four`, `.three`).
 
@@ -270,6 +272,7 @@ DOM order controls layout: **child 1 = left (wide) / top (narrow)** = the **scie
 .gp-gallery.two > figure:nth-child(2) { flex-grow: 1.333; }          /* 4:3 (default — K2, Annapurna)      */
 .gp-gallery.two.mtn-165 > figure:nth-child(2) { flex-grow: 1.649; }  /* wider (Everest, 1187×720, W/H≈1.649) */
 .gp-gallery.two.mtn-178 > figure:nth-child(2) { flex-grow: 1.778; }  /* 16:9 (Tirich Mir, 1280×720, W/H≈1.778) */
+.gp-gallery.two.mtn-150 > figure:nth-child(2) { flex-grow: 1.5; }    /* 3:2 (Kangchenjunga, 1080×720, W/H=1.5) */
 .gp-gallery.two > figure > img { width: 100%; height: auto; }
 .gp-gallery figcaption { margin-top: 12px; font-size: 0.95rem; line-height: 1.6; color: #555; }
 ```
