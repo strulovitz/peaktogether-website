@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 1: Fourier-Analytic (Circle Method) — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=28">
+</head>
+<body>
+    <div data-component="header"></div>
+    <main class="page">
+        <h1>Path 1: Fourier-Analytic (Circle Method) Path</h1>
+        <p class="subtitle">Use the Hardy–Littlewood circle method to detect prime pairs.</p>
+
+        <h2>Rationale</h2>
+        <p>The circle method uses harmonic analysis (integrals of exponential sums) to estimate the number of ways an even number $N$ can be written as $p_1+p_2$. Hardy and Littlewood conjectured an asymptotic formula for this count, which is proved for sums of three or more primes but remains unproven for two primes. Partial successes include Vinogradov&rsquo;s 1937 theorem that every sufficiently large odd is a sum of 3 primes and results showing that nearly all even $N$ have at least one Goldbach decomposition. These suggest the analytic ingredients are &ldquo;almost&rdquo; there. This path might succeed by sharpening control of exponential sums of primes (the minor arcs analysis) enough to force even the exceptional even numbers to have a representation.</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Analytic number theory; Fourier series and integrals; Dirichlet characters and primes in arithmetic progressions; asymptotic analysis; the Prime Number Theorem and zero-density estimates.</p>
+
+        <h2>Dependencies</h2>
+        <p>This path benefits from results in Path 3 (complex-analytic L-functions) for input on primes distribution (e.g. Generalized Riemann Hypothesis (GRH) simplifies some estimates). It also complements Path 2 (sieve) by providing density results that sieve alone cannot.</p>
+
+        <h2>Signs of Progress</h2>
+        <p>Improved estimates for exponential sums like $S(N)=\sum_{p\le N}e^{2\pi i p \theta}$ on minor arcs; a proof of the Hardy–Littlewood Prime Tuples conjecture for the 2-tuple case (which includes Goldbach&rsquo;s even=2 primes as a special case) for large $N$; or bounds showing the error term in Goldbach&rsquo;s asymptotic formula is $o(1)$. For example, showing every even $N$ up to some astronomically large bound has a representation (with bound increasing with theoretical advances) indicates we are closing in.</p>
+
+        <h2>Base Camp 1.1: Foundation of Analytic Number Theory – Understanding Primes in Analytical Terms</h2>
+        <p><strong>Scope:</strong> Build a baseline ability to handle classical results on primes: the Prime Number Theorem (PNT), Dirichlet&rsquo;s theorem on primes in arithmetic progressions, and basic complex analysis tools like generating functions. What you must be able to do: derive the asymptotic density of primes ($\pi(x)\sim x/\ln x$), use Dirichlet characters to show, e.g., there are infinitely many primes congruent to $a \pmod{d}$, and understand the role of the Riemann zeta function $\zeta(s)$ in prime distribution. This is crucial because the circle method&rsquo;s input is often the Fourier transform of the primes (via generating functions), whose behavior is constrained by these classical results.</p>
+        <p><strong>Stepping-stones:</strong> (1) Prove the Prime Number Theorem using complex analysis (Hadamard and de la Vallée-Poussin&rsquo;s approach) or Selberg&rsquo;s elementary method. (2) Derive Dirichlet&rsquo;s theorem on arithmetic progressions and understand L-series. (3) Study how zeros of $\zeta(s)$ relate to error terms in PNT (even though RH is deeper, a basic zero-free region argument). (4) Get comfortable with big-O and $o$ notation as used in number theory (e.g. $\psi(x)=x+O(xe^{-c\sqrt{\ln x}})$).</p>
+        <p><strong>Best resources:</strong></p>
+        <ul>
+            <li>Tom M. Apostol – <em>Introduction to Analytic Number Theory</em>. Springer, 1976. – Apostol&rsquo;s text covers PNT, Dirichlet&rsquo;s theorem, and employs complex analysis gently. It&rsquo;s clear and well-loved for building the analytic toolkit needed (contour integrals, Euler products) without assuming too much.</li>
+            <li>G. H. Hardy &amp; E. M. Wright – <em>An Introduction to the Theory of Numbers</em>, 6th ed. Oxford Univ. Press, 2008. – A classical reference (originally 1938) that includes expository proofs of PNT and many exercises. Hardy &amp; Wright also discuss Goldbach&rsquo;s problem historically and provide context on early analytic attempts, linking theory to our specific goal.</li>
+            <li>Harold Davenport – <em>Multiplicative Number Theory</em>, 3rd ed. (rev. by H. Montgomery). Springer GTM, 2000. – Focuses on Dirichlet characters, L-functions, and zero-free regions (has the proof that $\zeta(s)$ has no zeros on $\Re(s)=1$). This gives a solid background for understanding the minor arc estimates and the role of GRH mentioned later.</li>
+        </ul>
+
+        <h2>Base Camp 1.2: The Hardy–Littlewood Circle Method Basics – Techniques for Waring&rsquo;s Problem and Ternary Goldbach</h2>
+        <p><strong>Scope:</strong> Master the general process of the circle method in simpler contexts. The circle method transforms an additive problem into integrals over a unit circle (in the complex plane) – splitting into major arcs (regions of $\theta$ near rationals with small denominators) and minor arcs (the rest). What you must be able to do: apply this to Waring&rsquo;s problem (expressing integers as sums of $k$th powers) or to the weak Goldbach (3 primes) case, which was solved by Vinogradov. Understand how to set up generating functions like $F(\theta)=\sum_{n\le N}r(n)e^{in\theta}$ where $r(n)$ is the number of representations of $n$ in the desired form, and how to estimate $F(\theta)$ on different arcs. Learn to use major arc expansions (e.g. deriving main terms via local approximations like $\sum_{p\le N}e^{ip\theta}\approx \frac{N}{\ln N}$ for small $\theta$) and minor arc bounds (exponential sum estimates).</p>
+        <p><strong>Stepping-stones:</strong> (1) Work through a proof of Vinogradov&rsquo;s theorem: every sufficiently large odd $N$ is $p_1+p_2+p_3$. This involves establishing $|\int_{\text{minor arcs}}e^{-iN\theta}(\sum_{p\le N}e^{ip\theta})^3 d\theta| &lt; \frac{1}{2}$, say, and a positive main term on major arcs. (2) Practice on a simpler example: show every sufficiently large integer is sum of at most 4 squares (using circle method – a la Hardy&rsquo;s work on Ramanujan&rsquo;s conjecture – though that&rsquo;s a bit different analytic tool). (3) Understand the original Hardy–Littlewood papers (at least conceptually), especially their Conjecture (HL) for two primes and why it&rsquo;s harder than the $c\ge3$ case.</p>
+        <p><strong>Best resources:</strong></p>
+        <ul>
+            <li>R. C. Vaughan – <em>The Hardy-Littlewood Method</em>, 2nd ed. Cambridge Univ. Press, 1997. – The definitive monograph on the circle method. Chapter 3 is literally &ldquo;Goldbach&rsquo;s problems&rdquo; (one chapter covers both weak and strong forms). Vaughan provides a modern, rigorous treatment of Vinogradov&rsquo;s 3-prime theorem and sketches the obstacles for the 2-prime case. It&rsquo;s advanced, but indispensable once you have the basics.</li>
+            <li>Bruce C. Berndt – <em>Ramanujan&rsquo;s Notebooks, Part III</em>. Springer, 1991 (Ch. 11: Circle Method). – Contains a user-friendly introduction to the circle method in number theory, including Hardy, Littlewood, and Ramanujan&rsquo;s use of it for sums of powers. It&rsquo;s less comprehensive than Vaughan but more accessible, guiding the reader through several examples with extensive commentary.</li>
+            <li>Henryk Iwaniec &amp; Emmanuel Kowalski – <em>Analytic Number Theory</em>. AMS Colloquium Publ. Vol. 53, 2004. – A broad text; Sections 13–15 cover the circle method (including Vinogradov&rsquo;s theorem) in a contemporary style. Iwaniec–Kowalski also develop the necessary exponential sum estimates (Weyl sums, etc.) that are crucial for handling minor arcs, making it a great one-stop reference.</li>
+        </ul>
+
+        <h2>Base Camp 1.3: Exponential Sum Estimates and Major/Minor Arc Mastery – Refining the Tools</h2>
+        <p><strong>Scope:</strong> Delve into the technical core of the circle method: bounding exponential sums of primes (and other sequences) and handling the delicate analysis on major and minor arcs. What you must be able to do: use the Weyl differencing method and Vinogradov&rsquo;s mean value theorem to bound exponential sums like $\sum_{p\le N} e^{2\pi i p^k \theta}$, use the large sieve inequality to control minor arc integrals, and derive the main term on major arcs via the singular series. For Goldbach, one key challenge is that the singular series (an infinite product from local densities) converges to a nonzero constant $\approx 1.320323631\ldots$ known as $\mathfrak{S}(N)$, so one expects roughly $2\Pi_2 \frac{N}{(\ln N)^2}$ representations for large even $N$. Understanding why this constant appears (from Chinese remainder theorem and local prime probabilities) and how to rigorously show it in the limit of the major arc integral is important. Meanwhile, minor arc estimates must become second nature – e.g. leveraging zero-free regions of $\zeta(s)$ or results like Bombieri–Vinogradov to bound exponential sums of primes (this is where a hypothetical GRH makes life easier by giving even stronger bounds).</p>
+        <p><strong>Stepping-stones:</strong> (1) Prove simple exponential sum bounds: e.g. show $\left|\sum_{p\le N}e^{2\pi i p \theta}\right| &lt; CN/\ln N$ for some constant $C$ when $\theta$ is not too close to a rational with small denominator. (2) Learn Vinogradov&rsquo;s mean value theorem (the modern proof by Wooley or Bourgain et al.), as it provides sharp bounds for complete exponential sums – though in Goldbach, the sums are incomplete (upper limit $N$), requiring additional care or completion techniques. (3) Derive the singular series for Goldbach: assuming heuristics, $\mathfrak{S}(N)=\prod_{p}(1 - \frac{1}{(p-1)^2})^{-1}(1 - \frac{1}{p})^2$ for even $N$ not divisible by small primes. Show for $c\ge3$ (three primes) this series absolutely converges and appears in the main term of the Hardy-Littlewood asymptotic formula. (4) Understand why for $c=2$ the main term is more elusive – essentially because the minor arc integrals don&rsquo;t decay fast enough with current knowledge.</p>
+        <p><strong>Best resources:</strong></p>
+        <ul>
+            <li>Hua Loo-Keng – <em>Additive Theory of Prime Numbers</em>. Translations of Math. Monographs, Vol. 13, AMS, 1965. – An older book by a student of Hua, covering Vinogradov&rsquo;s method in detail. It has a classical treatment of exponential sum estimates with many worked examples. Hua&rsquo;s inequality (a form of exponential sum bound) is covered, which is directly relevant to controlling minor arcs.</li>
+            <li>K. I. Iwasawa – &ldquo;Lectures on the Circle Method&rdquo;. (Found in Collected Papers of Kenkichi Iwasawa, or as lecture notes, 1979). – These lecture notes are a concise, high-level summary of the circle method&rsquo;s analytic parts. Iwasawa emphasizes the structure of the argument (major vs minor arcs, using Cauchy–Schwarz, etc.) and includes the Goldbach problem as a motivating example. It&rsquo;s great for clarifying the strategy without getting lost in technicalities.</li>
+            <li>T. Estermann – <em>Complex Numbers and Functions</em> (Appendix: Goldbach&rsquo;s Conjecture outline). Macmillan, 1962. – Estermann was one of the first to prove &ldquo;almost all even numbers are sum of two primes&rdquo;. In this modest monograph, he sketches how complex analysis and exponential sums are applied to Goldbach. While not a full proof, it gives insight into the estimations needed and is much easier to digest as a beginner. It serves as a stepping stone before jumping into Vaughan or Hua.</li>
+        </ul>
+
+        <h2>Base Camp 1.4: State-of-the-art and Remaining Gaps – Pushing Towards Two Primes</h2>
+        <p><strong>Scope:</strong> Survey the latest refinements in the circle method and related analytic techniques that specifically target the binary Goldbach problem. At this stage, you should consolidate knowledge and identify exactly where the current methods fall short for two primes. What you must be able to do: understand the results like Montgomery–Vaughan (1975) showing the exceptional set of evens not expressible as two primes has density zero and even an upper bound like $O(N^{1-c})$ exceptions up to $N$. Grasp Linnik&rsquo;s theorem (1951) that if you allow a few powers of 2 added, two primes suffice, and its modern improvements. Study any partial conditional results: e.g. assume GRH and derive Goldbach&rsquo;s conjecture for sufficiently large $N$ (done by HL 1923 and extended by others). Recognize the &ldquo;critical barrier&rdquo;: the minor arc integrals currently require using the Generalized Lindelöf Hypothesis or stronger to close the gap entirely. This base-camp is about appreciating how far we&rsquo;ve climbed and how far remains.</p>
+        <p><strong>Stepping-stones:</strong> (1) Read Montgomery&rsquo;s and Vaughan&rsquo;s paper on &ldquo;Exceptional sets in Goldbach&rsquo;s problem&rdquo; for their method (which cleverly uses a two-dimensional sieve on top of analytic methods). (2) Understand Chen&rsquo;s &ldquo;double sieve&rdquo; method which combined with some analytic input yields &ldquo;prime + semiprime&rdquo; – see how close it comes to &ldquo;prime + prime&rdquo;. (3) Examine any numerical verification records, e.g. Oliveira e Silva&rsquo;s computation to $4\times10^{18}$, to understand empirically how the conjecture behaves and calibrate the difficulty (the fact that even that enormous range yielded no counterexample suggests something). (4) Follow recent developments or talks – for instance, T. Tao&rsquo;s blog or preprint (2012) where he proved every odd is at most 5 primes (a breakthrough just before Helfgott solved the 3 prime case). Tao&rsquo;s combinatorial-analytic approach might illustrate the modern hybrid techniques.</p>
+        <p><strong>Best resources:</strong></p>
+        <ul>
+            <li>H. Davenport – &ldquo;On Goldbach&rsquo;s problem,&rdquo; <em>Acta Arithmetica</em> 2 (1937), 131–160. – Davenport attempted a version of the circle method and introduced ideas that influenced later proofs. Reading this (and a follow-up by Davenport &amp; Heilbronn) shows historically what was missing and sets the stage for modern approaches. It&rsquo;s technical, but the introduction and conclusion sections explain the state-of-art circa 1937, which in broad strokes remains similar today (just with bigger partial results). This gives perspective on progress.</li>
+            <li>Jörg Richstein – &ldquo;Verifying the Goldbach conjecture up to $4\cdot 10^{14}$,&rdquo; <em>Mathematics of Computation</em> 70 (2001): 1745-1749. – An example of a large-scale verification paper. Richstein pushed verification to $10^{14}$ at the time. Such papers (including Oliveira e Silva et al. 2014 for $4\cdot10^{18}$) are useful to see what computational methods exist, how they optimize the search for Goldbach pairs, and they often discuss implications (like certain heuristics confirmed by data). While not theoretical proof, this is the empirical base-camp confirming our footing.</li>
+            <li>Terence Tao – &ldquo;Every odd number greater than 1 is the sum of at most five primes.&rdquo; (preprint, 2012, arXiv:1201.6656). – This paper by Tao, published just before Helfgott&rsquo;s result, uses a combination of the circle method with combinatorial ideas (like using granular linear programming bounds on major arcs). It represents the cutting-edge approach to Goldbach-type problems. Studying it will show you the modern refinements of the circle method and how additional tricks are employed to chip away at the problem. It&rsquo;s essentially a blueprint of what a successful approach to the 2-prime problem might look like, albeit still falling slightly short.</li>
+        </ul>
+
+        <p><em>Foundational across camps: Note that Hardy &amp; Wright&rsquo;s <em>Theory of Numbers</em> and Vaughan&rsquo;s <em>Hardy-Littlewood Method</em> are foundational references that span multiple base-camps in Path 1, offering both introductory insight and deep technical details.</em></p>
+
+        <h2>Full Bibliography (Path 1)</h2>
+
+        <p><strong>BC1.1 Fundamentals:</strong></p>
+        <ul>
+            <li>Tom M. Apostol. <em>Introduction to Analytic Number Theory</em>. Springer, 1976. – A classical text covering prime number theorem, Dirichlet series, etc., building a base for analytic approaches.</li>
+            <li>G. H. Hardy and E. M. Wright. <em>An Introduction to the Theory of Numbers</em>. 6th ed., OUP, 2008. – Contains an introduction to Goldbach&rsquo;s problem and many fundamental results. A foundational reference across number theory.</li>
+            <li>Harold Davenport. <em>Multiplicative Number Theory</em>. 3rd ed., Springer GTM 74, 2000. – Focuses on Dirichlet L-functions and primes in progressions; includes zero-free region results useful in analytic proofs of Goldbach-type results.</li>
+        </ul>
+
+        <p><strong>BC1.2 Circle Method Basics:</strong></p>
+        <ul>
+            <li>R. C. Vaughan. <em>The Hardy-Littlewood Method</em>. 2nd ed., Cambridge University Press, 1997. – Definitive account of the circle method; Chapter 3 directly addresses Goldbach&rsquo;s problems (both weak and strong forms).</li>
+            <li>Bruce C. Berndt. <em>Ramanujan&rsquo;s Notebooks, Part III</em>. Springer, 1991. – Contains a chapter on the circle method with intuitive explanations, bridging to Hardy–Littlewood&rsquo;s work.</li>
+            <li>Henryk Iwaniec and Emmanuel Kowalski. <em>Analytic Number Theory</em>. AMS Colloquium Publications, Vol. 53, 2004. – Comprehensive modern text; sections 13–15 cover circle method applications including Goldbach.</li>
+        </ul>
+
+        <p><strong>BC1.3 Exponential Sum Estimates:</strong></p>
+        <ul>
+            <li>Hua Loo-Keng. <em>Additive Theory of Prime Numbers</em>. Translations of Mathematical Monographs, Vol. 13, AMS, 1965. – Classic Chinese work (in English translation) detailing Vinogradov&rsquo;s 3-prime theorem and exponential sum lemmas.</li>
+            <li>Kenkichi Iwasawa. <em>Lectures on the Circle Method</em> (1979, published in collected papers). – A succinct set of notes outlining the method&rsquo;s key steps without too much technical drag.</li>
+            <li>Theodor Estermann. <em>Complex Numbers and Functions</em>. Macmillan, 1962. – Contains an appendix or discussion on Goldbach&rsquo;s conjecture and the use of complex analytic methods, from one of the pioneers who proved &ldquo;almost all&rdquo; even are Goldbach.</li>
+        </ul>
+
+        <p><strong>BC1.4 State of the Art:</strong></p>
+        <ul>
+            <li>H. Davenport. &ldquo;On Goldbach&rsquo;s problem,&rdquo; <em>Acta Arithmetica</em> 2 (1937), 131–160. – Historical paper investigating Goldbach; shows limitations of the time and partial results achieved.</li>
+            <li>J. Richstein. &ldquo;Verifying the Goldbach conjecture up to $4 \times 10^{14}$,&rdquo; <em>Mathematics of Computation</em> 70 (2001), 1745–1749. – Documentation of large computational verification. Good for numeric context.</li>
+            <li>Terence Tao. &ldquo;Every odd number greater than 1 is the sum of at most five primes,&rdquo; <em>Mathematics of Computation</em> 83 (2014), 119–133 (preprint from 2012). – Showcases a modern approach combining circle method with combinatorial ideas to improve the weaker Goldbach conjecture result.</li>
+        </ul>
+
+        <a href="../" class="back-link">← Back to Kangchenjunga – Goldbach&rsquo;s Conjecture</a>
+    </main>
+    <div data-component="footer"></div>
+    <script src="/components.js?v=3"></script>
+</body>
+</html>
