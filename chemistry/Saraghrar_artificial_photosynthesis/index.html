@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Saraghrar: Artificial Photosynthesis — Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=30">
+    <link rel="stylesheet" href="/style.css?v=31">
 </head>
 <body>
 
@@ -15,6 +15,17 @@
         <h1>🏔️ Saraghrar: Artificial Photosynthesis</h1>
 
         <p class="subtitle">Turn sunlight, CO₂, and water directly into a storable fuel — a grand challenge spanning light harvesting, charge separation, and multi-electron catalysis. Thirteen routes climb this peak across three altitude stages: four light-capture paths, five charge-transfer strategies, and four fuel-forming catalysts. Together, we climb.</p>
+
+        <div class="gp-gallery two mtn-151">
+            <figure>
+                <img src="/images/saraghrar-artificial-photosynthesis-giacomo-ciamicin-sherpa-guide.png" alt="Giacomo Ciamician — the sherpa guide for Saraghrar – Artificial Photosynthesis">
+                <figcaption><strong>Our Sherpa guide welcomes us:</strong> Buongiorno! 👋🇮🇹 I&rsquo;m Giacomo Luigi Ciamician (1857&ndash;1922), an Italian-Armenian chemist and politician 🧑‍🔬 widely regarded as the &ldquo;father of organic photochemistry&rdquo; and a founding prophet of green chemistry. 🌱🔬 Long before the advent of modern environmentalism, I recognized the limitations of fossil fuels and advocated for transitioning human society to renewable solar energy! ☀️♻️ <strong>Let me tell you a funny story!</strong> 😄 In 1912, I placed numerous test tubes and flasks containing my liquid chemical samples on the roof of my Bologna laboratory. 🧪🏛️ I then promptly went on summer holiday to the coast 🏖️, leaving the Italian summer sun to do all the work! ☀️😎 Known affectionately as the &ldquo;father of organic photochemistry,&rdquo; I was a dedicated champion of harnessing the sun&rsquo;s power to replace coal and fossil fuels. 🔥🚫 My visionary 1912 lecture in New York, <em>The Photochemistry of the Future</em> 🗽🎤, prophesied an era where human industries would be powered by solar-driven &ldquo;forests of glass tubes&rdquo;! 🌳⚗️ Despite being nominated for the Nobel Prize <strong>nine times</strong> 🏅, I never won — but my humorous, laid-back methods and visionary prophecies laid the groundwork for today&rsquo;s renewable energy and artificial photosynthesis technologies! 💡🌍</figcaption>
+            </figure>
+            <figure>
+                <img src="/images/saraghrar-artificial-photosynthesis-real-mountain.png" alt="Saraghrar — the fourth-highest independent peak in the Hindu Kush">
+                <figcaption>Saraghrar is the fourth-highest independent peak in the Hindu Kush mountain range. ⛰️ It is located in the Chitral District of the Khyber Pakhtunkhwa province in Pakistan 🇵🇰, right near the border with Afghanistan. 🇦🇫 <strong>The First Ascent of Saraghrar Northwest</strong> 🧗‍♂️🏆: In 2021, a Georgian trio completed the first ascent of Saraghrar Northwest (7,300m) in Pakistan&rsquo;s Hindu Kush. 🇬🇪 The massive 2,300m rock wall was previously unclimbed and stymied several Spanish expeditions. 🧱😤 The Georgian team succeeded despite frostbite and extreme isolation 🥶, earning the prestigious <em>Piolet d&rsquo;Or</em> for the achievement! 🥇🏔️ The Saraghrar massif — a crown of summits 👑 — is notoriously complex, characterized by a broad plateau suspended above vertical granite faces. 🪨 Earlier, during the 1975 Spanish expedition to the mountain&rsquo;s southwestern ridge, climbers actually hauled an actual miniature Roman flag up the slopes of the massive peak! 🇪🇸🏴</figcaption>
+            </figure>
+        </div>
 
         <h2>Executive Snapshot</h2>
 
@@ -253,5 +264,33 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt){ big.setAttribute('src', src); big.setAttribute('alt', alt||''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox(){ overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src',''); }
+            for (var i=0;i<imgs.length;i++){ imgs[i].classList.add('zoomable'); imgs[i].addEventListener('click', function(){ openBox(this.getAttribute('src'), this.getAttribute('alt')); }); }
+            overlay.addEventListener('click', function(e){ if (e.target===overlay || e.target===closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function(e){ if (e.key==='Escape'||e.keyCode===27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
 </body>
 </html>
