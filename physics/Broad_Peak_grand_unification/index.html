@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Broad Peak: Grand Unification — Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=29">
+    <link rel="stylesheet" href="/style.css?v=30">
 </head>
 <body>
 
@@ -15,6 +15,17 @@
         <h1>🏔️ Broad Peak: Grand Unification of Fundamental Forces</h1>
 
         <p class="subtitle">Do the electromagnetic, weak, and strong forces all flow from a single force at ultra-high energy — and can gravity join them? Seven great routes climb this Himalayan giant: pure gauge symmetry, supersymmetry, extra dimensions (three flavors), string/M-theory, and composite models. Together, we climb.</p>
+
+        <div class="gp-gallery two mtn-156">
+            <figure>
+                <img src="/images/broad-peak-grand-unification-sheldon-glashow-sherpa-guide.png" alt="Sheldon Glashow — the sherpa guide for Broad Peak – Grand Unification">
+                <figcaption><strong>Our Sherpa guide welcomes us:</strong> Hi! I&rsquo;m Sheldon Lee Glashow, an American theoretical physicist 🧑‍🔬🇺🇸, and in 1979 I shared the Nobel Prize in Physics 🏆 for my foundational work on the Standard Model! Alongside Steven Weinberg and Abdus Salam, I unified electromagnetism and the weak nuclear force into what we now call the electroweak theory ⚡💫 — the very bedrock this entire Broad Peak expedition rests upon! 🔬✨ <strong>Let me tell you a funny story!</strong> During a lecture at Harvard by fellow physicist Sidney Coleman, I may have &hellip; dozed off a bit. 😴💤 Coleman stopped talking, pointed straight at me, and announced to the room: &ldquo;This is very interesting. It is stage three sleep. Indistinguishable from clinical death.&rdquo; 😵 As everyone erupted in laughter 😂 and I groggily woke up, he delivered the ultimate punchline: &ldquo;In all but three states, you could take out his heart.&rdquo; 💔😆 Oh, and here is a fun fact: in 1997, I accidentally helped shape the movie <em>Good Will Hunting</em>! 🎬 When Matt Damon (then a Harvard student) pitched me the premise of the lead character being a genius physicist, I told him the idea &ldquo;didn&rsquo;t ring true&rdquo; 🤔 — and suggested he make the character a math prodigy instead! 🧮🎭</figcaption>
+            </figure>
+            <figure>
+                <img src="/images/broad-peak-grand-unification-real-mountain.png" alt="Broad Peak — the 12th highest mountain in the world, in the Karakoram Range">
+                <figcaption>Broad Peak is the 12th highest mountain in the world 🌏 at 8,051 meters (26,414 feet). ⛰️ Located in the Karakoram Range on the border of Pakistan and China 🇵🇰🇨🇳, it sits roughly five miles from K2. Its summit ridge spans over 1.5 kilometers (almost 1 mile), which inspired its name. 📏 <strong>The 25-Year Redemption of Maciej Berbeka</strong> 🧗‍♂️❤️‍🩹: One of the most harrowing tales involves legendary Polish mountaineer Maciej Berbeka. ❄️ In 1988, Berbeka embarked on an alpine-style attempt of Broad Peak. Battling dense fog and freezing dusk 🌫️, he reached a rocky point that he was convinced was the main summit. He even radioed his base camp to celebrate his &ldquo;first winter ascent&rdquo;. 📻🏆 There was a catch: he was at the Rocky Summit (8,028 meters), just shy of the actual 8,051-meter main peak. 😞 His team back at base camp realized the error but chose not to tell him, fearing he would push forward and lose his life in the worsening weather. They congratulated him and let the false claim stand. 💔 Three months later, Berbeka discovered the truth, which tarnished his reputation and haunted him for <strong>25 years</strong>. ⏳ In 2013, at 58 years old, Berbeka finally returned to Broad Peak with a new generation of Polish winter climbers. 🇵🇱 On March 5, 2013, he and three teammates successfully completed the absolute first winter ascent of the true summit! 🏔️✨ Tragically, the triumph was short-lived — during the treacherous descent, the mountain claimed the lives of Berbeka and his younger teammate, Tomasz Kowalski. 🕊️😢 It is an incredible story of obsession, redemption, and ultimate sacrifice, later adapted into the 2022 Netflix film <em>Broad Peak</em>. 🎬</figcaption>
+            </figure>
+        </div>
 
         <h2>Executive Snapshot</h2>
 
@@ -90,5 +101,33 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.gp-gallery img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt){ big.setAttribute('src', src); big.setAttribute('alt', alt||''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox(){ overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src',''); }
+            for (var i=0;i<imgs.length;i++){ imgs[i].classList.add('zoomable'); imgs[i].addEventListener('click', function(){ openBox(this.getAttribute('src'), this.getAttribute('alt')); }); }
+            overlay.addEventListener('click', function(e){ if (e.target===overlay || e.target===closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function(e){ if (e.key==='Escape'||e.keyCode===27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
 </body>
 </html>
