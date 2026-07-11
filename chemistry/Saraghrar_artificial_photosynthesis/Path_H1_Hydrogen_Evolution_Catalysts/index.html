@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H1: Hydrogen Evolution Catalysts (H₂ as Fuel) — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+</head>
+<body>
+    <div data-component="header"></div>
+    <main class="page">
+        <h1>H1: Hydrogen Evolution Catalysts (H₂ as Fuel)</h1>
+        <p class="subtitle">Catalyze 2H⁺ + 2e⁻ → H₂ — the simplest solar fuel target, using earth-abundant alternatives to platinum.</p>
+
+        <h2>Idea</h2>
+        <p>Catalyze the reaction 2H⁺ + 2e⁻ → H₂ efficiently in water. This is the simplest fuel (just hydrogen gas). Catalysts can be heterogeneous (metals like platinum, or NiMo alloys) or molecular (e.g. cobaloxime complexes, nickel diphosphines, iron-sulfur clusters mimicking hydrogenase enzymes).</p>
+
+        <h2>Rationale</h2>
+        <p>Hydrogen is a clean fuel and easier to produce than multi-carbon fuels. In nature, hydrogenase enzymes achieve this with earth-abundant metals (Fe, Ni) at high turnover rates. Artificially, noble metals like Pt work great but are costly; thus a lot of research aims at cheaper bio-inspired catalysts.</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Catalytic cycles for H–H bond formation; overpotential and exchange current concepts; poisoning and stability issues (many catalysts are deactivated by O₂).</p>
+
+        <h2>Dependencies</h2>
+        <p>Requires a source of electrons/protons – i.e. integration with a light absorber (L-stage) and typically paired with a water oxidation catalyst (because protons and electrons must come from water).</p>
+
+        <h2>Signs of Progress</h2>
+        <p>High turnover number (&gt;10⁶) with non-precious catalyst in neutral water; sustaining catalysis under illumination without degradation for many hours; success of artificial hydrogenases in functioning within a full photo-device.</p>
+
+        <h2>Base Camp H1.1: Electrocatalytic Hydrogen Evolution Basics</h2>
+        <p><strong>Scope:</strong> Master the fundamentals of how H₂ is produced electrochemically (2H⁺ + 2e⁻ → H₂) and the typical kinetics on different materials. Understand concepts like exchange current density and Tafel slopes that indicate mechanism.</p>
+        <p><strong>Stepping-stones:</strong> Derive the Tafel equation for HER from mechanism assumptions. Study volcano plots for HER activity vs metal-hydrogen bond strength. Recognize that in neutral water, H⁺ is scarce, so water must be the proton source (harder kinetics).</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Trasatti, Sergio – "Work function, electronegativity, and electrochemical behaviour of metals: III. Electrolytic hydrogen evolution in acid solutions," J Electroanalytical Chem 39.1 (1972): 163–184. Why: Classical analysis linking work function of metals to their HER activity, introducing the volcano plot concept.</li>
+            <li>Conway, Brian &amp; Tilak, Balgopal – "Interfacial processes involving electrocatalytic evolution and oxidation of hydrogen," Advances in Catalysis 38 (1992): 1–147. Why: Extensive scholarly review of HER mechanisms in various pH.</li>
+            <li>Norskov, Jens et al. – "Trends in the exchange current for hydrogen evolution," J Electrochem Soc 152.3 (2005): J23–J26. Why: Modern computational perspective revisiting the volcano plot with DFT-calculated binding energies.</li>
+        </ul>
+
+        <h2>Base Camp H1.2: Molecular Hydrogenase Mimics</h2>
+        <p><strong>Scope:</strong> Explore the molecular catalysts inspired by enzymes: e.g., [FeFe] hydrogenase active site mimics, cobaloximes, nickel diphosphines. Understand their catalytic cycles and what limits them.</p>
+        <p><strong>Stepping-stones:</strong> Pick archetypes: the cobaloxime (Co(dmg)₂) catalyst and the DuBois Ni(P₂ᴿN₂)₂ catalyst. Compare their performance metrics: overpotential, turnover frequency, stability.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Artero, Vincent et al. – "Iron and cobalt complexes as molecular catalysts for the electrochemical production of hydrogen," Comptes Rendus Chimie 11.8 (2008): 845–851. Why: Nice overview of Fe and Co molecular catalysts for H₂ with key systems and their characteristics.</li>
+            <li>Du, Pingwu et al. – "Hydrogen photoproduction using a cobalt tetraazamacrocyclic catalyst," Inorganic Chemistry 47.24 (2008): 11420–11430. Why: Illustrates how molecular catalysts are applied in photochemical H₂ production.</li>
+            <li>Chen, Zhiyong et al. – "Nickel complex catalyzed electrochemical hydrogen production from water," PNAS 104.17 (2007): 6951–6956. Why: Landmark paper by DuBois group showing a nickel complex working in water near neutral pH for H₂.</li>
+        </ul>
+
+        <h2>Base Camp H1.3: Heterogeneous Catalysts &amp; Nanomaterials for HER</h2>
+        <p><strong>Scope:</strong> Look at non-molecular, solid catalysts for H₂: noble metal alternatives like Ni, MoS₂, metal phosphides (Ni₂P), carbon-based catalysts. Understand how these are evaluated and integrated on a photoelectrode.</p>
+        <p><strong>Stepping-stones:</strong> Review MoS₂'s active edge sites and how engineering those improved HER. Check nickel alloys like NiMo or NiW – why do alloys help? Consider stability under illumination conditions with O₂ around.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Voiry, Damien et al. – "The role of electronic coupling between substrate and 2D MoS₂ in electrocatalytic production of hydrogen," Nature Materials 15.9 (2016): 1003–1009. Why: Discusses MoS₂ on different substrates, giving insight into how conductivity and support interactions matter.</li>
+            <li>Popczun, Eric et al. – "Nanostructured nickel phosphide as an electrocatalyst for the hydrogen evolution reaction," J Am Chem Soc 135.25 (2013): 9267–9270. Why: Example of a cheap catalyst (Ni₂P) with good performance.</li>
+            <li>Zou, Xiaoxin &amp; Zhang, Yuyan – "Noble metal-free hydrogen evolution catalysts for water splitting," Chem Soc Rev 44.15 (2015): 5148–5180. Why: Comprehensive review of HER catalysts without noble metals.</li>
+        </ul>
+
+        <a href="../" class="back-link">← Back to Saraghrar – Artificial Photosynthesis</a>
+    </main>
+    <div data-component="footer"></div>
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

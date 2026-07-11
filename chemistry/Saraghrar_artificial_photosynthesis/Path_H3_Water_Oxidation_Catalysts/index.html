@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>H3: Water Oxidation Catalysts (Oxygen Evolution)</title>
+<link rel="stylesheet" href="../../style.css?v=30">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page">
+  <a href="../" class="back-link">&larr; Back to Saraghrar &ndash; Artificial Photosynthesis</a>
+
+  <h1>H3: Water Oxidation Catalysts (Oxygen Evolution)</h1>
+  <p>Subtitle: The 4-electron bottleneck: split water to O&lt;sub&gt;2&lt;/sub&gt;, supplying protons and electrons for any fuel path.</p>
+
+  <h2>Idea</h2>
+  <p>Catalyze the reaction 2H&lt;sub&gt;2&lt;/sub&gt;O &rarr; O&lt;sub&gt;2&lt;/sub&gt; + 4H&lt;sup&gt;+&lt;/sup&gt; + 4e&lt;sup&gt;&minus;&lt;/sup&gt;, which is the necessary oxidative half-reaction to supply electrons for either H&lt;sub&gt;2&lt;/sub&gt; or carbon fuel generation. This is often considered the hardest part, as it's a four-electron uphill reaction with O&ndash;O bond formation. Catalysts studied include molecular complexes (e.g. ruthenium &quot;blue dimer&quot;, bio-inspired Mn oxo clusters mimicking the natural PSII core), and inorganic solids (IrO&lt;sub&gt;2&lt;/sub&gt;, RuO&lt;sub&gt;2&lt;/sub&gt;, cobalt oxides, nickel&ndash;iron oxides).</p>
+
+  <h2>Rationale</h2>
+  <p>Without a fast water oxidation catalyst, holes accumulate and recombine, and the whole system stalls. Nature's solution is a Ca&ndash;Mn&lt;sub&gt;4&lt;/sub&gt;O&lt;sub&gt;5&lt;/sub&gt; cluster in Photosystem II. Cobalt phosphate (Co-Pi) was a breakthrough discovery as a self-healing water oxidation catalyst in neutral water. Robust water oxidation is often the bottleneck, so advancing this greatly boosts any full system.</p>
+
+  <h2>Prerequisite Themes</h2>
+  <p>Reaction mechanisms for O&ndash;O bond formation; ligand design for multi-electron transfer; measuring turnover frequency and durability (TON, TOF).</p>
+
+  <h2>Dependencies</h2>
+  <p>Every artificial photosynthesis path needs a water oxidation catalyst at the &quot;O&lt;sub&gt;2&lt;/sub&gt;-evolving side.&quot; Thus H3 is universally required.</p>
+
+  <h2>Signs of Progress</h2>
+  <p>Catalysts sustaining millions of turnovers without rare metals; lower overpotential (within &lt;0.3 V of the thermodynamic 1.23 V); integration onto light absorbers without losing activity.</p>
+
+  <h2>Base Camp H3.1: Oxygen Evolution Mechanism and Thermodynamics</h2>
+  <p><strong>Scope:</strong> Know the basics of the O&lt;sub&gt;2&lt;/sub&gt; evolution reaction (OER) in water: it requires 4 electrons removed and presumably 4 protons, going through intermediates like &ndash;OH, =O, O&ndash;O bond formation, and O&lt;sub&gt;2&lt;/sub&gt; release. Understand why it's thermodynamically uphill and often the bottleneck.</p>
+  <p><strong>Stepping-stones:</strong> Write out possible mechanisms: M&ndash;OH &rarr; M=O &rarr; O&ndash;O coupling between two M=O or via an OO^2- intermediate. Learn what overpotential means: often &gt;0.3 V for decent rates.</p>
+  <p><strong>Resources:</strong></p>
+  <ul>
+    <li>Gerischer, Heinz &amp; Bockris, John &ndash; <em>The mechanism of oxygen evolution on oxide electrodes</em>, J Electrochem Soc 113.11 (1966): 1174. Why: Classic piece discussing how O&lt;sub&gt;2&lt;/sub&gt; might evolve on oxide surfaces.</li>
+    <li>Xu, Yan &amp; Gregory V. &ndash; <em>Mechanistic understanding of oxygen evolution on transition metal oxides</em>, Chem Rev 114.23 (2014): 11936&ndash;11968. Why: Up-to-date review on OER mechanisms on different catalysts.</li>
+    <li>Rao, R. et al. &ndash; <em>Intermediates in the electrochemical oxidation of water to O&lt;sub&gt;2&lt;/sub&gt;</em>, Energy &amp; Environ Sci 10.11 (2017): 2626&ndash;2637. Why: Discusses detected intermediates in OER for some catalysts.</li>
+  </ul>
+
+  <h2>Base Camp H3.2: Molecular Water Oxidation Catalysts</h2>
+  <p><strong>Scope:</strong> Study the known molecular catalysts for water oxidation: Ru-based ones (the famous &quot;blue dimer&quot;, multi-Ru polyoxometalates), some Ir complexes, and first-row examples (cobalt polypyridines, nickel hangman corroles).</p>
+  <p><strong>Stepping-stones:</strong> Look at the &quot;blue dimer&quot; &ndash; see how it goes to Ru&lt;sup&gt;V&lt;/sup&gt;=O and how two of those can combine to make O&lt;sub&gt;2&lt;/sub&gt;. Check newer catalysts like Nocera's Co-phosphate. Recognize stability issues: many molecular ones degrade after some cycles.</p>
+  <p><strong>Resources:</strong></p>
+  <ul>
+    <li>Concepcion, Javier et al. &ndash; <em>Making oxygen with ruthenium complexes</em>, Accounts of Chemical Research 42.12 (2009): 1954&ndash;1965. Why: Account by Meyer's group explaining design considerations and mechanisms of several Ru catalysts including the blue dimer.</li>
+    <li>Matheu, Roc et al. &ndash; <em>Manganese catalysts for water oxidation: from ligand design to mechanism through spectroscopy and computation</em>, Chem Rev 119.4 (2019): 2455&ndash;2521. Why: Manganese is of interest because of the Mn in PSII. Review covers synthetic Mn catalysts.</li>
+    <li>Zhong, Diane &amp; Dismukes, G. Charles &ndash; <em>Photosynthetic water-oxidation catalysts: manganese oxides and cobalt oxides</em>, Dalton Transactions 45.9 (2016): 3952&ndash;3981. Why: Review focusing on heterogeneous oxide clusters and films, linking molecular and extended inorganic catalysts.</li>
+  </ul>
+
+  <h2>Base Camp H3.3: Metal Oxide and Oxyhydroxide Catalysts (Heterogeneous OER)</h2>
+  <p><strong>Scope:</strong> Delve into the transition metal oxides that are state-of-the-art for OER: IrO&lt;sub&gt;2&lt;/sub&gt; and RuO&lt;sub&gt;2&lt;/sub&gt; (benchmarks), Co oxides (Co&lt;sub&gt;3&lt;/sub&gt;O&lt;sub&gt;4&lt;/sub&gt; spinel, CoOOH), NiFe oxyhydroxide (one of the best in alkaline), perovskites. Understand how oxidation state changes, conductivity, and surface area affect performance.</p>
+  <p><strong>Stepping-stones:</strong> Examine Tafel plots and reaction orders for some of these catalysts to see if it hints at mechanism. Look at how adding Fe to Ni(OH)&lt;sub&gt;2&lt;/sub&gt; dramatically improves OER.</p>
+  <p><strong>Resources:</strong></p>
+  <ul>
+    <li>Seitz, Linsey et al. &ndash; <em>A highly active and stable iridium-based catalyst for oxygen evolution in acid</em>, Science 353.6303 (2016): 1011&ndash;1014. Why: Discusses IrO&lt;sub&gt;2&lt;/sub&gt; with specific nanostructuring for acid OER.</li>
+    <li>Trotochaud, Lena et al. &ndash; <em>Solution-cast metal oxide thin film electrocatalysts for oxygen evolution</em>, J Am Chem Soc 134.41 (2012): 17253&ndash;17261. Why: Systematic study of various first-row transition metal oxides for OER in alkaline.</li>
+    <li>Suen, Nam et al. &ndash; <em>Stabilizing NiOOH by Fe incorporation and its dual role in water splitting</em>, ChemSusChem 14.8 (2021): 1696&ndash;1702. Why: Focuses on the NiFe synergy in OER.</li>
+  </ul>
+
+  <h2>Base Camp H3.4: Catalyst Integration and Stability Under Illumination</h2>
+  <p><strong>Scope:</strong> Consider the integration of OER catalysts in an actual device. Learn about how OER catalysts can be deposited on photoanodes and what issues arise (blocking light, interfering with surface charge transfer). Also, stability: many catalysts that work in dark electrolysis might photocorrode.</p>
+  <p><strong>Stepping-stones:</strong> Investigate a case: BiVO&lt;sub&gt;4&lt;/sub&gt; photoanode with a NiOOH catalyst &ndash; how do they put NiOOH on, and how it improves the photocurrent. Consider catalyst transparency.</p>
+  <p><strong>Resources:</strong></p>
+  <ul>
+    <li>Hong, Jincheol et al. &ndash; <em>Integrating nanostructured water splitting catalysts onto semiconductor photoabsorbers</em>, Frontiers in Chemistry 7 (2019): 329. Why: Review on integration of catalysts with light absorbers.</li>
+    <li>Hu, Shu &amp; Shaner, Matthew &ndash; <em>Photoelectrode/Catalyst Integration</em>, Chapter in Solar Energy for Fuels, Springer, 2017. Why: Book chapter dealing with how to integrate catalysts with photoelectrodes.</li>
+    <li>Chen, Yan &amp; Yang, Kai &ndash; <em>Stability challenges of electrocatalytic oxygen evolution reaction</em>, Advanced Energy Materials 10.9 (2020): 1902845. Why: Touches on stability issues like catalyst dissolution, helping think about prolonging catalyst life.</li>
+  </ul>
+</main>
+
+<div id="footer"></div>
+<script src="../../components.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M1: Photoelectrochemical Cell (Wired Two-Electrode System)</title>
+  <link rel="stylesheet" href="../../../style.css?v=30">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page">
+
+<a href="../" class="back-link">&larr; Back to Saraghrar &ndash; Artificial Photosynthesis</a>
+
+<h1>M1: Photoelectrochemical Cell (Wired Two-Electrode System)</h1>
+
+<p class="subtitle">Two-electrode systems that physically separate oxidation and reduction using wires and membranes.</p>
+
+<h2>Idea</h2>
+<p>Physically separate the oxidation and reduction reactions into two compartments (anode and cathode) connected by a wire (or semiconductor junction) and sometimes an ion-conducting membrane. One side (photoanode) generates O&lt;sub&gt;2&lt;/sub&gt; from water, the other side (photocathode) generates fuel (H&lt;sub&gt;2&lt;/sub&gt; or reduced carbon). This is analogous to a photovoltaic cell driving an electrolyzer, but ideally integrated.</p>
+
+<h2>Rationale</h2>
+<p>By separating the sites, one can avoid the explosive H&lt;sub&gt;2&lt;/sub&gt;/O&lt;sub&gt;2&lt;/sub&gt; gas mixture and optimize conditions for each reaction. Also, a built-in electric field helps pull electrons in the right direction, reducing recombination. This strategy has yielded some of the highest efficiencies (e.g. multi-junction Si or III-V semiconductor devices driving water splitting with &gt;10&ndash;20% efficiency). It benefits from mature solar cell technology and water electrolysis knowledge.</p>
+
+<h2>Prerequisite Themes</h2>
+<p>Electrochemistry (half-reactions, Nernst potentials, ion conduction); semiconductor interfaces (Schottky junctions, p-n junctions); engineering of cell components (seals, membranes like proton exchange membranes).</p>
+
+<h2>Dependencies</h2>
+<p>Works best with good light-absorbers (from L2 or multiple L2 in tandem for enough voltage) and robust catalysts on each electrode (H-side and O-side from H1&ndash;H3). Requires pairing of currents &ndash; the photoanode and photocathode must produce equal electron flux.</p>
+
+<h2>Signs of Progress</h2>
+<p>Achieving unbiased water splitting (or CO&lt;sub&gt;2&lt;/sub&gt; reduction) with just sunlight and no external voltage; durable membranes that prevent product crossover; modular &ldquo;artificial leaf&rdquo; prototypes scalable (already lab prototypes on 1 m&lt;sup&gt;2&lt;/sup&gt; scale attaining &gt;10% efficiency).</p>
+
+<hr>
+
+<h2>Base Camp M1.1: Electrochemical Cell Design and Analysis</h2>
+
+<h3>Scope</h3>
+<p>Acquire the basics of electrolytic cell design: electrodes, membranes, electrolytes, and how to measure performance (IV curves, gas output, Faradaic efficiency). Specifically for water splitting, know how a two-electrode setup works with a reference electrode to measure overpotentials at each side. Be able to calculate efficiency = (chemical energy out / solar energy in) and interpret a Tafel plot for a catalyst electrode.</p>
+
+<h3>Stepping-stones</h3>
+<p>Build a mental picture of a PEC cell: identify anode vs cathode, understand terms like &ldquo;bias-free&rdquo; (no external voltage) and &ldquo;short-circuit current&rdquo;. Familiarize with gas separation issues and safety (H&lt;sub&gt;2&lt;/sub&gt;/O&lt;sub&gt;2&lt;/sub&gt; mixture).</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Heller, Adam &ndash; <em>Electrical Aspects of Photochemistry</em>, Science 223.4640 (1984): 1141&ndash;1148. <span class="why">Why: A classic article that discusses the integration of photochemistry with electrochemistry, laying out principles of photoelectrochemical cells in an accessible way.</span></li>
+  <li>Ayers, Katherine et al. &ndash; <em>Research Opportunities and Challenges in the Development of Hydrogen Production Technologies</em>, Electrochemical Society Interface 24.2 (2015): 49&ndash;55. <span class="why">Why: Gives a practical perspective on design considerations and challenges from an engineering standpoint.</span></li>
+  <li>McEvoy, James &amp; Zhang, Bruce &ndash; <em>Photoelectrochemical Solar Fuel Production: From Basic Principles to Advanced Devices</em>, Nano Energy 2.1 (2013): 1&ndash;14. <span class="why">Why: A tutorial-like review that starts from basics of PEC cells and builds up to the latest devices.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M1.2: Semiconductor&ndash;Electrocatalyst Interfaces</h2>
+
+<h3>Scope</h3>
+<p>Understand how to interface catalysts (usually metals or metal oxides) with light-absorbing electrodes. This includes how catalysts can improve charge separation and how to ensure good electrical contact. Learn about &ldquo;buried junction&rdquo; vs &ldquo;surface junction&rdquo; designs.</p>
+
+<h3>Stepping-stones</h3>
+<p>Dive into a case study: for instance, a BiVO&lt;sub&gt;4&lt;/sub&gt; photoanode with a NiFe oxyhydroxide O&lt;sub&gt;2&lt;/sub&gt; evolution catalyst on it &ndash; see how adding the catalyst not only speeds O&lt;sub&gt;2&lt;/sub&gt; generation but also affects the photovoltage. Consider the trade-off: catalysts often are opaque or block light if too thick.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Sivula, Kevin &amp; Van de Krol, Roel &ndash; <em>Semiconductor Materials for Photoelectrolysis</em>, Nature Reviews Materials 1 (2016): 15010. <span class="why">Why: Discusses strategies like core-shell nanostructures and protective catalyst layers, providing insight into various interface designs.</span></li>
+  <li>Lewis, Nathan &amp; Nocera, Daniel &ndash; <em>Powering the planet: Chemical challenges in solar energy utilization</em>, PNAS 103.43 (2006): 15729&ndash;15735. <span class="why">Why: A famous perspective highlighting the importance of coupling light absorbers with catalysts.</span></li>
+  <li>Waegele, Matthias et al. &ndash; <em>How surface potential determines the kinetics of the first hole transfer of water oxidation on TiO&lt;sub&gt;2&lt;/sub&gt;</em>, J Am Chem Soc 136.36 (2014): 12688&ndash;12695. <span class="why">Why: Shows what happens at a catalyst-semiconductor interface, underscoring need to tailor the interface.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M1.3: Tandem (Dual-Absorber) Cell Configuration</h2>
+
+<h3>Scope</h3>
+<p>Many efficient PEC designs use two light absorbers in series to provide enough voltage for water splitting &ndash; analogous to a tandem solar cell. Learn how to wire two photoelectrodes together or a photovoltage plus a dark electrode. Analyze the current-voltage matching.</p>
+
+<h3>Stepping-stones</h3>
+<p>Study the &ldquo;operating point&rdquo; where the IV curve of the photoanode and photocathode intersect. See real examples like: tandem of a GaInP&lt;sub&gt;2&lt;/sub&gt; photoanode with a silicon photocathode achieving high efficiency water splitting.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Pan, Lin et al. &ndash; <em>On the Art of Designing Photoelectrochemical Tandem Cells</em>, Energy &amp; Environmental Science 8.8 (2015): 2339&ndash;2347. <span class="why">Why: Nice discussion on tandem cell design and how the electrolyte factors in.</span></li>
+  <li>Chatman, Stephen &amp; Mallouk, Thomas &ndash; <em>Tandem photoelectrolysis cells for solar water splitting</em>, Chemistry of Materials 26.1 (2014): 139&ndash;150. <span class="why">Why: A focused review on tandem PEC cells explaining the need for dual absorbers and surveying combinations tried.</span></li>
+  <li>Green, Martin et al. &ndash; <em>The Path to 25% Silicon Solar Cell Efficiency</em>, Progress in Photovoltaics 17.3 (2009): 183&ndash;189. <span class="why">Why: Understanding single-junction limits and tandem PV drive is directly translatable to PEC design.</span></li>
+</ul>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="../../../components.js"></script>
+</body>
+</html>

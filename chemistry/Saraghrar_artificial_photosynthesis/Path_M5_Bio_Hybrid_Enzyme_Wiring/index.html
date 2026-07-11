@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>M5: Bio-Hybrid and Enzyme Wiring Approaches — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>M5: Bio-Hybrid and Enzyme Wiring Approaches</h1>
+        <p class="subtitle">Wire photosynthetic proteins or redox enzymes to artificial electrodes for semi-artificial systems.</p>
+
+        <h2>Idea</h2>
+        <p>Directly incorporate components of natural photosynthesis or metabolisms – for example, wiring a photosynthetic protein (like Photosystem II or bacterial reaction centers) to artificial electrodes, or using redox enzymes (hydrogenases, CO₂-fixing enzymes) coupled with light absorbers.</p>
+
+        <h2>Rationale</h2>
+        <p>Instead of reinventing all charge-separation chemistry, one can use the finely tuned charge separation of natural proteins. For instance, researchers have connected Photosystem II to electrodes to extract electrons, or combined Photosystem I with a catalyst to make H₂ ("semi-artificial" systems). This leverages billions of years of evolution for the hard steps, while using human engineering to supply necessary parts.</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Protein electrochemistry; enzyme immobilization techniques; lipid membranes or other matrices to support functional conformation outside cells.</p>
+
+        <h2>Dependencies</h2>
+        <p>Needs a source of light for the protein and then interfaces with catalysts or electrodes (for the H-stage). Often limited by stability (proteins can denature or quit working outside their native environment).</p>
+
+        <h2>Signs of Progress</h2>
+        <p>Successful long-lived electron transfer from a photosystem to an electrode or catalyst (hours or days of operation); engineered variants of enzymes that are more robust to oxygen or have broader spectrum absorption; hybrid devices that achieve measurable fuel production by coupling a biocomponent with an inorganic catalyst.</p>
+
+        <h2>Base Camp M5.1: Fundamentals of Photosynthetic Protein Function</h2>
+        <p><strong>Scope:</strong> If using parts of living systems, you must know how they work in native context. Understand how photosystems absorb light, generate charge separation, and transfer electrons to natural cofactors.</p>
+        <p><strong>Stepping-stones:</strong> Identify the redox cofactors inside PSII and PSI and their arrangement. Learn what stabilizes charge separation in PSI. Recognize limitations: these proteins need constant replacement of their D1 subunit (in PSII) due to damage.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Jordan, Peter et al. – "Three-dimensional structure of cyanobacterial photosystem I at 2.5 Å resolution," <em>Nature</em> 411.6840 (2001): 909–917. Why: Landmark paper that resolved PSI structure, giving insight into the complexity of the protein and the path electrons take.</li>
+            <li>Umena, Yasufumi et al. – "Crystal structure of oxygen-evolving photosystem II at a resolution of 1.9 Å," <em>Nature</em> 473.7345 (2011): 55–60. Why: The high-resolution structure of PSII, including the Mn₄CaO₅ cluster. Informs how you might stabilize or connect to PSII artificially.</li>
+            <li>Duarte, Ana et al. – "Isolation and characterization of a Photosystem II–reaction center–phycobilisome supercomplex from Synechocystis," <em>Biochimica et Biophysica Acta (BBA) - Bioenergetics</em> 1767.4 (2007): 272–279. Why: Gives an idea of methods to get these complexes out of cells and still functional.</li>
+        </ul>
+
+        <h2>Base Camp M5.2: Techniques for Wiring Proteins to Electrodes</h2>
+        <p><strong>Scope:</strong> Learn electrochemical communication with enzymes/proteins: how to attach a protein like a hydrogenase or photosystem to an electrode such that electrons can pass. This includes covalent attachment, adsorption on conductive nanomaterials, or encapsulation in polymers.</p>
+        <p><strong>Stepping-stones:</strong> Look at an example of an enzyme electrode: hydrogenase on a graphite electrode. Consider the orientation problem. Study the concept of diffusion vs wired: a diffusional mediator can carry electrons from enzyme to electrode.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Willner, Itamar et al. – "Wiring of redox enzymes to electrodes by biomolecules," <em>J Phys Chem B</em> 101.36 (1997): 6670–6682. Why: A classic review on connecting enzymes to electrodes, covering various approaches.</li>
+            <li>Armstrong, Fraser et al. – "Guiding Principles of Hydrogenase Catalysis Instigated by Protein Film Electrochemistry," <em>Accounts of Chemical Research</em> 46.10 (2013): 2055–2064. Why: Explains how to attach hydrogenase enzymes to electrodes and what insights were gained.</li>
+            <li>Aziz, Shujahadeen et al. – "Harnessing Photosystem I for biophotovoltaics," <em>J Mater Chem A</em> 2.11 (2014): 3705–3717. Why: Concrete demonstration of wiring a photosystem to an electrode, including use of a polymer to keep it active.</li>
+        </ul>
+
+        <h2>Base Camp M5.3: Metabolic Engineering for Fuel Production</h2>
+        <p><strong>Scope:</strong> Understanding how one can rewire a microbe's metabolism to output a desired fuel. Even if you use whole cells rather than isolated proteins, you often need to tweak them. Learn basics of genetic engineering in cyanobacteria/algae.</p>
+        <p><strong>Stepping-stones:</strong> Familiarize with some metabolic pathways for biofuel: the pathway from acetyl-CoA to butanol. Understand how electrons from photosynthetic electron transport can be redirected to these pathways via ferredoxin and NADPH.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Ducat, DC et al. – "Engineering cyanobacteria to generate high-value products," <em>Trends in Biotechnology</em> 29.2 (2011): 95–103. Why: A review that talks about genetic engineering of cyanobacteria for hydrogen, alcohols, etc.</li>
+            <li>Leino, Hikari et al. – "Protein engineering of algal photoenzymes for biofuel production," <em>Current Opinion in Biotechnology</em> 59 (2019): 21–28. Why: Focuses on enzymes in algae that could be improved or altered for better fuel production.</li>
+            <li>Angermayr, S. et al. – "Metabolic engineering of cyanobacteria for the synthesis of commodity products," <em>Trends in Biotechnology</em> 33.6 (2015): 352–361. Why: Overview of possible products and the metabolic pathways involved, complementing the Ducat review.</li>
+        </ul>
+
+        <a href="../" class="back-link">← Back to Saraghrar – Artificial Photosynthesis</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

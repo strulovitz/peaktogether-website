@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>H4: Photobiological Fuel Production (Living Catalysts) — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+</head>
+<body>
+    <div data-component="header"></div>
+    <main class="page">
+        <h1>H4: Photobiological Fuel Production (Living Catalysts)</h1>
+        <p class="subtitle">Engineer algae, cyanobacteria, or enzymes to produce fuels directly from sunlight and CO₂.</p>
+
+        <h2>Idea</h2>
+        <p>Instead of synthetic catalysts, use living organisms or enzymes to produce fuels from sunlight. For example, engineer algae or cyanobacteria to produce H₂, or to secrete liquid fuels (like alcohols or hydrocarbons) using CO₂ and sunlight. This is essentially natural photosynthesis redirected to human-useful products (biofuels), and overlaps with synthetic biology.</p>
+
+        <h2>Rationale</h2>
+        <p>Some microorganisms naturally produce hydrogen or other energy-rich compounds. By tweaking their metabolism, we can potentially create a self-sustained system where cells use sunlight and CO₂ to excrete fuel. The advantage is that the organisms handle the molecular complexity of light harvesting and enzymatic catalysis; the challenge is persuading them to make fuel at high rates and not just use the energy for growth.</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Microbiology (growth conditions, photobioreactors); metabolic engineering (pathway modifications); enzyme engineering for robustness (e.g., making hydrogenases O₂-tolerant).</p>
+
+        <h2>Dependencies</h2>
+        <p>This approach can be standalone (the microbe does everything), but often augmented with tech like bioelectrodes or synthetic light absorbers to enhance performance. It competes with artificial routes, but also can complement them.</p>
+
+        <h2>Signs of Progress</h2>
+        <p>Strains producing significant fuel per biomass; addressing the "oxygen sensitivity" problem; scaling photobiological systems (pilot photobioreactors for H₂ or biofuel production); achieving efficiencies better than native photosynthesis.</p>
+
+        <h2>Base Camp H4.1: Microbial Hydrogen and Biofuel Production</h2>
+        <p><strong>Scope:</strong> Learn which organisms naturally produce H₂ or other fuels. Many algae and cyanobacteria produce H₂ under anaerobic conditions. Others produce ethanol, butanol via fermentation. Identify triggers and pathways.</p>
+        <p><strong>Stepping-stones:</strong> Research specific systems: <em>Chlamydomonas</em> – how does it switch from O₂ evolution to H₂ evolution under nutrient stress? <em>Synechocystis</em> sp. PCC6803 – can it be engineered to secrete lactate or isoprene?</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Melis, Anastasios – "Green algae as a source of energy," <em>Plant Physiology</em> 127.3 (2001): 740–748. Why: Perspective covering early work on algal H₂ production and the idea of tapping into photosynthesis for fuel.</li>
+            <li>Ghirardi, Maria et al. – "Hydrogen production by photosynthetic microorganisms," <em>Chem Soc Rev</em> 38.1 (2009): 52–61. Why: Thorough review from DOE researchers focusing on algae and bacteria producing H₂.</li>
+            <li>Toya, Yoshihiro et al. – "Short Metabolic Pathways for the Photosynthetic Production of 1-Butanol from CO₂ in Cyanobacteria," <em>ACS Synthetic Biology</em> 4.4 (2015): 364–374. Why: Describes engineering cyanobacteria to produce a liquid fuel (butanol) directly from CO₂.</li>
+        </ul>
+
+        <h2>Base Camp H4.2: Synthetic Biology and Genetic Tools</h2>
+        <p><strong>Scope:</strong> Focus on the toolkit for modifying photosynthetic organisms. This includes transformation methods for algae/cyanobacteria, promoter systems, and CRISPR or other gene knockout methods to remove competing pathways.</p>
+        <p><strong>Stepping-stones:</strong> Identify model organisms: <em>Synechocystis</em> PCC6803, <em>Synechococcus elongatus</em>, <em>Chlamydomonas reinhardtii</em>. Learn what genetic parts exist and methods like creating anoxic conditions to induce hydrogenase.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Bentley, Fabien &amp; Melis, Anastasios – "Diffusion of photobiotechnology and synthetic biology," <em>Synthetic Biology</em> 3.1 (2018): ysy005. Why: Broad piece on synthetic biology in phototrophs, touching on available genetic tools.</li>
+            <li>Rubin, Benjamin et al. – "Synthetic biology guiding the design of cyanobacterial biofuel devices," <em>Current Opinion in Chemical Biology</em> 41 (2017): 123–130. Why: Focuses on how synthetic biology principles can integrate with device design.</li>
+            <li>Zhou, Jing et al. – "Development of a CRISPR-Cas9 system for genetic manipulation in <em>Synechococcus elongatus</em>," <em>Microbial Cell Factories</em> 15.1 (2016): 1–8. Why: Shows CRISPR working in a cyanobacterium, indicative of how far genetic tools have come.</li>
+        </ul>
+
+        <h2>Base Camp H4.3: Photobioreactor Design and Operation</h2>
+        <p><strong>Scope:</strong> If you have engineered microbes making fuel, how do you culture them to maximize output? Learn about photobioreactors: open ponds vs closed systems, getting light to all cells, gas exchange, contamination for open systems, and scaling.</p>
+        <p><strong>Stepping-stones:</strong> Investigate existing pilots: Algenol's ethanol from algae (plastic bags as reactors). Understand parameters: light intensity, cell density, temperature control. Consider continuous vs batch operation.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Waltz, Emily – "Algae farm claims continuous ethanol production," <em>Nature Biotechnology</em> 27.7 (2009): 591–592. Why: News piece on Algenol's ethanol-from-algae, giving an idea of how industry approaches photobioreactors for fuel.</li>
+            <li>Sierra, Eduardo et al. – "Characterization of a flat plate photobioreactor for the production of microalgae," <em>Chemical Engineering Journal</em> 138.1-3 (2008): 136–147. Why: Technical analysis providing concrete data on what designs yield good productivity.</li>
+            <li>König, Dominik et al. – "Photobioreactors in life sciences," <em>Engineering in Life Sciences</em> 19.6 (2019): 434–441. Why: Recent overview of photobioreactor technology and applications, tying biological and engineering aspects.</li>
+        </ul>
+
+        <h2>Base Camp H4.4: Hybrid Systems and Co-cultures</h2>
+        <p><strong>Scope:</strong> This advanced base-camp is about combining biology with artificial components. For example, using a semiconductor to absorb light and deliver electrons to microbes, or pairing a photosynthetic organism with a chemotrophic one in co-culture.</p>
+        <p><strong>Stepping-stones:</strong> Look at examples: the "Artificial leaf + <em>Ralstonia</em>" system where a Si solar cell made H₂ which bacteria consumed to make liquid fuel. Or "cyborg bacteria" with nanowire implants helping them produce acetic acid from CO₂.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Li, Hanyu et al. – "Biological conversion of solar energy into isopropanol by a nanowire-induced CO₂-fixing bacterium," <em>ACS Energy Letters</em> 2.3 (2017): 454–456. Why: Demonstrates integrating inorganic nanostructures with bacteria to enhance CO₂-to-fuel conversion.</li>
+            <li>Liu, Chong et al. – "Nanowire-bacteria hybrids for unassisted solar carbon dioxide fixation to value-added chemicals," <em>Nano Letters</em> 15.5 (2015): 3634–3639. Why: System where nanowires generate reducing power and bacteria incorporate CO₂ into acetate.</li>
+            <li>Kucek, Leo et al. – "Co-culture of the algae <em>Chlamydomonas</em> and the bacterium <em>Azotobacter</em> for mutually-assisted phototrophic growth," <em>Applied and Environmental Microbiology</em> 82.19 (2016): 6158–6169. Why: Shows symbiotic setups where one microbe supports another, teaching that designing a small ecosystem might overcome limitations.</li>
+        </ul>
+
+        <a href="../" class="back-link">&larr; Back to Saraghrar – Artificial Photosynthesis</a>
+    </main>
+    <div data-component="footer"></div>
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L3: Biomimetic Antenna Complexes — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+</head>
+<body>
+
+    <div data-component="header"></div>
+
+    <main class="page">
+        <h1>L3: Biomimetic Antenna Complexes (Artificial Light-Harvesting Systems)</h1>
+
+        <p class="subtitle">Supramolecular dye arrays that harvest light and funnel energy to a reaction center.</p>
+
+        <h2>Idea</h2>
+        <p>Construct supramolecular light-harvesting systems analogous to plant antenna complexes – e.g. dye arrays in porous hosts, metal-organic frameworks, or self-assembled chromophore networks that capture light and funnel energy to a reaction center.</p>
+
+        <h2>Rationale</h2>
+        <p>Natural systems use dozens of pigments to harvest light over a broad spectrum and concentrate energy into the reaction center. Artificial analogs (like dye-loaded zeolite crystals, or dendrimers and polymer films with embedded chromophores) can similarly broaden absorption and improve efficiency by energy transfer cascades. This path is attractive for maximizing solar spectrum usage and possibly reducing the amount of expensive catalyst needed (since many antenna molecules can feed one catalyst).</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Förster resonance energy transfer (FRET); supramolecular chemistry for assembling chromophores; spectral multiplexing.</p>
+
+        <h2>Dependencies</h2>
+        <p>Requires integration with a charge-separation/catalyst unit – the antenna supplies excited states to either a semiconductor (L2) or a molecular reaction center (M2). Thus it complements other paths rather than stands alone.</p>
+
+        <h2>Signs of Progress</h2>
+        <p>Successful energy-transfer systems that mimic the "funnel" effect (demonstrated by, e.g., dye-zeolite antennas transferring energy to a bound catalyst); improved spectral coverage (e.g., combining UV, visible, near-IR dyes); durability of antenna materials under continuous light.</p>
+
+        <h2>Base Camp L3.1: Natural Light-Harvesting Mechanisms</h2>
+        <p><strong>Scope:</strong> Before building artificial antennas, understand how plants and bacteria harvest light. Know the structures of antenna complexes like LH1/LH2 in purple bacteria or the chlorophyll arrangements in plant LHC-II, and how they achieve nearly 95% energy transfer efficiency to the reaction center. Be able to explain resonance energy transfer (FRET) and exciton diffusion.</p>
+        <p><strong>Stepping-stones:</strong> Calculate an exciton diffusion length given a lifetime and diffusion constant; examine the role of pigment-protein geometry in spectral tuning.</p>
+        <ul>
+            <li>Blankenship, Robert – <em>Molecular Mechanisms of Photosynthesis</em>, 2nd Ed. (Wiley, 2014). Why: An authoritative textbook on photosynthesis. Chapters on light harvesting give a clear picture of how arrays of pigments function in nature, providing inspiration and quantitative understanding for artificial systems.</li>
+            <li>van Grondelle, Rienk &amp; Novoderezhkin, Vladimir – "Energy transfer in photosynthesis: experimental insights and quantitative models," <em>Phys Chem Chem Phys</em> 8 (2006): 793–807. Why: A deep but enlightening review on how excitation energy flows in antenna systems.</li>
+            <li>Cogdell, Richard et al. – "The architecture and function of the light-harvesting apparatus of purple bacteria," <em>Quarterly Reviews of Biophysics</em> 39.3 (2006): 227–324. Why: Beautifully describes an entire natural antenna system, providing tricks nature uses (circular arrangements, carotenoids for photoprotection) that could inspire artificial design.</li>
+        </ul>
+
+        <h2>Base Camp L3.2: Supramolecular Chemistry of Dye Assemblies</h2>
+        <p><strong>Scope:</strong> Learn how to assemble multiple chromophores into a stable structure. This could be via a porous host (zeolites, MOFs), covalent linkers (porphyrin arrays, dendrimers), or self-assembly (lipid bilayers, block copolymers embedding dyes). The goal is to achieve controlled spacing and alignment to promote energy transfer.</p>
+        <p><strong>Stepping-stones:</strong> Investigate examples like dye-loaded zeolites (as in Calzaferri's work) – how are dyes inserted and oriented? Or DNA-based assemblies where dyes are attached along a scaffold. Understand the role of distance and orientation in FRET.</p>
+        <ul>
+            <li>Calzaferri, Gion et al. – "Artificial photonic antenna systems by dye-loaded zeolite L," <em>Phys Chem Chem Phys</em> 10 (2008): 1057–1071. Why: Written by the group that made dye-zeolite antennas, detailing how they built an antenna and what energy transfer results they got.</li>
+            <li>Barber, James – "Photosynthetic energy conversion: natural and artificial," <em>Chem Soc Rev</em> 38.1 (2009): 185–196. Why: A tutorial-style review drawing analogies between natural antennas and attempts to create artificial ones, covering supramolecular approaches.</li>
+            <li>Anderson, HL – "Building molecular wires from the colours of life: conjugated porphyrin oligomers," <em>Chem Commun</em> (1999): 2323–2330. Why: Gives insight into covalently linking chromophores (porphyrins) to create electronic and photonic wires.</li>
+        </ul>
+
+        <h2>Base Camp L3.3: Spectroscopy and Dynamics in Multi-Chromophore Systems</h2>
+        <p><strong>Scope:</strong> Once you have an antenna, how do you test it? This base-camp is about the techniques to study energy transfer: absorption and emission spectroscopy, time-resolved fluorescence, ultrafast pump-probe measurements. You should be able to interpret a fluorescence decay curve to determine energy transfer efficiency.</p>
+        <p><strong>Stepping-stones:</strong> Look at example data from natural antennas vs artificial ones. Learn how to use the Perrin or Förster equations to estimate transfer rates. Consider what a transient absorption spectrum might show if energy is being funneled to a reaction center mimic.</p>
+        <ul>
+            <li>Lakowicz, Joseph – <em>Principles of Fluorescence Spectroscopy</em>, 3rd Ed. (Springer, 2006). Why: The go-to reference for fluorescence and FRET. Contains sections on energy transfer theory and how to measure it.</li>
+            <li>Scholes, Gregory D. – "Long-range resonance energy transfer in molecular systems," <em>Ann Rev Phys Chem</em> 54 (2003): 57–87. Why: An informative review on the theory and observation of resonance energy transfer, including beyond the simple Förster theory.</li>
+            <li>Würthner, Frank et al. – "Perylene bisimide dye assemblies as archetype functional supramolecular materials," <em>Chem Rev</em> 116.3 (2016): 962–1052. Why: Shows how spectroscopic analysis is used to deduce structure and function of dye assemblies.</li>
+        </ul>
+
+        <a href="../" class="back-link">← Back to Saraghrar – Artificial Photosynthesis</a>
+    </main>
+
+    <div data-component="footer"></div>
+
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

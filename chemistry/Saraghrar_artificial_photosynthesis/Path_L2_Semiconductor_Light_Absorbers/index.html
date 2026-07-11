@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>L2: Semiconductor Light Absorbers (Solid-State Photocathodes/Photoanodes) — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=30">
+</head>
+<body>
+    <div data-component="header"></div>
+    <main class="page">
+        <h1>L2: Semiconductor Light Absorbers (Solid-State Photocathodes/Photoanodes)</h1>
+        <p class="subtitle">Inorganic semiconductors that convert photons to separated charge via band bending at interfaces.</p>
+
+        <h2>Idea</h2>
+        <p>Use inorganic semiconductors that absorb light to generate electron-hole pairs which drive redox reactions. Examples: TiO₂ (UV-active, as in the classic Honda–Fujishima effect), silicon (visible-active, used in multi-junction "artificial leaf" cells), CdS/CdSe and perovskites (tunable bandgaps), etc.</p>
+
+        <h2>Rationale</h2>
+        <p>Semiconductors can directly convert photons to separated charge under the influence of built-in electric fields or band bending at interfaces. They are the basis of efficient solar cells, and coupling them with catalysts yields integrated photoelectrochemical cells. Historic milestones include TiO₂ splitting water under UV in 1972, and a 1983 device with amorphous Si coated with catalysts splitting water in one piece. Modern multi-junction cells have achieved the highest solar-to-fuel efficiencies (~22%), proving the principle.</p>
+
+        <h2>Prerequisite Themes</h2>
+        <p>Semiconductor band theory; surface electrochemistry; stability under illumination (preventing photocorrosion).</p>
+
+        <h2>Dependencies</h2>
+        <p>Needs complementary catalysts (for water oxidation and fuel formation, see H1–H3) and often a means to separate product gases (if two electrodes, akin to M1 path). Can be combined with molecular dyes (sensitized semiconductors) or used in tandem (M3 Z-scheme) for higher voltage.</p>
+
+        <h2>Signs of Progress</h2>
+        <p>Discovery of stable semiconductor materials that absorb visible light and yield &gt;10% efficient water splitting without external bias; effective protective coatings to prevent corrosion; nanostructures that improve light absorption and charge separation (e.g. nanowires, quantum dots on electrodes).</p>
+
+        <h2>Base Camp L2.1: Semiconductor Physics for Photoconversion</h2>
+        <p><strong>Scope:</strong> Master the basics of semiconductor energy bands, charge carriers, and how p-n junctions or Schottky junctions separate charge. Be able to explain concepts like band gap (and how it relates to photon absorption threshold), Fermi level, depletion region, and photovoltage.</p>
+        <p><strong>Stepping-stones:</strong> Calculate the maximum theoretical photovoltage from a given semiconductor band alignment; understand minority carrier diffusion length and why nanostructures can help if that length is short; examine how surface states can act as recombination centers.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Sze, Simon &amp; Ng, Kwok – <em>Physics of Semiconductor Devices</em>, 3rd Ed. (Wiley, 2006). Why: The go-to reference on semiconductors. Focus on chapters about p-n junctions and photovoltaic effect – this gives the underpinnings of how a semiconductor can generate a voltage from light (crucial for photoelectrochemical cells).</li>
+            <li>Nelson, Jenny – <em>The Physics of Solar Cells</em> (Imperial College Press, 2003). Why: A very clear text on how solar cells work; relevant sections explain generation/recombination, band diagrams, and tandem cells. Understanding this lets you approach photoelectrodes with a solid foundation.</li>
+            <li>O'Hayre, Ryan et al. – <em>Fuel Cell Fundamentals</em>, 3rd Ed. (Wiley, 2016). Why: Includes a chapter on photoelectrochemical water splitting. It nicely bridges semiconductor physics with electrochemistry, and is approachable.</li>
+        </ul>
+
+        <h2>Base Camp L2.2: Photoelectrochemistry and Band Alignment in Solutions</h2>
+        <p><strong>Scope:</strong> Learn how semiconductor energy levels line up with redox potentials in solution. You should be able to sketch a band diagram of a photoanode or photocathode in contact with water, indicating where water oxidation or proton reduction happens relative to the band edges.</p>
+        <p><strong>Stepping-stones:</strong> Get comfortable with Nernst equations for redox couples (e.g. H⁺/H₂, O₂/H₂O) and relate those to potentials on an absolute energy scale (e.g. eV vs NHE scale). Understand the role of catalysts on electrodes – how they lower the kinetic barrier but don't change the thermodynamic band alignment.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Bard, Allen &amp; Faulkner, Larry – <em>Electrochemical Methods: Fundamentals and Applications</em>, 2nd Ed. (Wiley, 2001). Why: This bible of electrochemistry has sections on semiconductor electrodes explaining flat-band potential and photoelectrochemical behavior.</li>
+            <li>Gerischer, Heinz – "Electrochemical Photo and Solar Cells: Principles and Some Experiments," <em>J Electroanal Chem</em> 58 (1975): 263–274. Why: A classic paper by a pioneer of photoelectrochemistry, describing semiconductor electrode principles in an accessible way.</li>
+            <li>Khan, Sumit &amp; Rahman, Hasan – "Photoelectrochemical Water Splitting: A Road from Stable Materials to Efficient Solar Fuel," <em>J Mater Chem A</em> 5.46 (2017): 23007–23030. Why: A modern review with concrete examples of band alignments for various materials and strategies to improve them.</li>
+        </ul>
+
+        <h2>Base Camp L2.3: Materials for Visible-Light Photocatalysis</h2>
+        <p><strong>Scope:</strong> Survey the common semiconductor materials used for artificial photosynthesis, especially those active under visible light. Be able to discuss TiO₂ (UV-only, very stable), vs narrower bandgap oxides like Fe₂O₃, BiVO₄, WO₃, vs newer materials like C₃N₄, perovskites, and III-V semiconductors (GaP, GaAs).</p>
+        <p><strong>Stepping-stones:</strong> Create a chart of bandgaps and band positions for key materials; examine how doping and alloying (e.g. TaON or Zn-doped iron oxide) can tune properties; understand what the "Honda-Fujishima effect" was (UV on TiO₂ → H₂) as a historical anchor.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Kudo, Akihiko &amp; Miseki, Yugo – "Heterogeneous Photocatalyst Materials for Water Splitting," <em>Chem Soc Rev</em> 38.1 (2009): 253–278. Why: Highly cited review that catalogs many photocatalytic materials and their properties, including strategies to make visible-light catalysts.</li>
+            <li>Hisatomi, Takashi &amp; Domen, Kazunari – "Introductory Lecture: Sunlight-Driven Water Splitting and Carbon Dioxide Reduction by Artificial Photosynthesis," <em>Faraday Discuss</em> 198 (2017): 11–35. Why: A more recent overview by leaders in the field, written as an introductory lecture, making it quite accessible.</li>
+            <li>Grimes, Craig et al. – <em>Light, Water, Hydrogen: The Solar Generation of Hydrogen by Water Photoelectrolysis</em> (Springer, 2008). Why: Provides a deep dive into materials and engineering of photoelectrochemical hydrogen production.</li>
+        </ul>
+
+        <h2>Base Camp L2.4: Stability and Surface Engineering</h2>
+        <p><strong>Scope:</strong> Address one of the toughest issues with semiconductors in water: corrosion and surface recombination. Learn why some semiconductors (e.g. Si, GaAs) corrode quickly in electrolyte and how to protect them (e.g. with thin TiO₂ layers or self-healing catalysts).</p>
+        <p><strong>Stepping-stones:</strong> Investigate case studies like: protecting a Si photoelectrode with a TiO₂ coating and how that extends its life; using ALD (atomic layer deposition) to apply nanometer layers that are transparent and conductive. Study how co-catalysts can both catalyze reactions and shield the semiconductor.</p>
+        <p><strong>Resources:</strong></p>
+        <ul>
+            <li>Walter, M. et al. – "Solar Water Splitting Cells," <em>Chem Rev</em> 110.11 (2010): 6446–6473. Why: A broad review with a significant section on stability issues and surface modifications for photoelectrodes.</li>
+            <li>McKone, James et al. – "Earth-Abundant Hydrogen Evolution Electrocatalysts," <em>Chem Mater</em> 26.1 (2014): 407–414. Why: Touches on integrating catalysts on photoelectrodes to improve both efficiency and protect the surface.</li>
+            <li>Nozik, Arthur &amp; Memming, Rolf – "Physical Chemistry of Semiconductor–Liquid Interfaces," <em>J Phys Chem</em> 100.31 (1996): 13061–13078. Why: A classic, detailed review on the semiconductor-liquid interface, including surface state effects and stability.</li>
+        </ul>
+
+        <a href="../" class="back-link">← Back to Saraghrar – Artificial Photosynthesis</a>
+    </main>
+    <div data-component="footer"></div>
+    <script src="/components.js?v=3"></script>
+</body>
+</html>

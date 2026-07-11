@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M4: Proton-Coupled Electron Transfer Networks</title>
+  <link rel="stylesheet" href="../../../style.css?v=30">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page">
+
+<a href="../" class="back-link">← Back to Saraghrar – Artificial Photosynthesis</a>
+
+<h1>M4: Proton-Coupled Electron Transfer Networks</h1>
+
+<p class="subtitle">Engineer proton relays to keep electrons and protons in sync, avoiding charge build-up and energy waste.</p>
+
+<h2>Idea</h2>
+<p>Engineer the intermediate steps of electron transfer so that protons are moved simultaneously (either through electrolytes, membrane channels, or chemical relays) to avoid charge build-up and stabilize charge separation. In practice, this might mean incorporating buffering molecules or proton relays near catalysts, or using materials (like Nafion membranes or MOFs) that facilitate coupled proton transport.</p>
+
+<h2>Rationale</h2>
+<p>Many side-reactions and energy losses occur if electrons and protons are out of sync. Natural enzymes elegantly couple proton flows with electron transfer (hence the term PCET). Incorporating this principle can improve the efficiency of artificial systems.</p>
+
+<h2>Prerequisite Themes</h2>
+<p>Acid-base chemistry near electrodes; hydrogen-bond networks; kinetic isotope effects (as evidence of PCET).</p>
+
+<h2>Dependencies</h2>
+<p>This is more of an enabling sub-strategy than a stand-alone path – it needs to be applied in conjunction with either M1, M2, or M3 designs.</p>
+
+<h2>Signs of Progress</h2>
+<p>Reduction in overpotentials for fuel-forming reactions when proton relays are added; evidence of sustained charge separation in devices by managing pH gradients. This path is critical for making any of the others truly efficient and &ldquo;water-compatible.&rdquo;</p>
+
+<hr>
+
+<h2>Base Camp M4.1: Br&oslash;nsted Acids/Bases in Electron Transfer</h2>
+
+<h3>Scope</h3>
+<p>Study how the presence of acids or bases can change electron transfer pathways. Understand the concept of a &ldquo;proton acceptor&rdquo; near an electron transfer site.</p>
+
+<h3>Stepping-stones</h3>
+<p>Examine specific examples like [Ru(bpy)<sub>2</sub>(bpy-OH<sub>2</sub>)]<sup>2+</sup> which can undergo PCET to form [Ru<sup>III</sup>–OH] + H<sup>+</sup>. Note how its oxidation potential shifts with pH (Pourbaix diagram analysis). Or the classic tyrosine in PSII: its oxidation is coupled to proton release to a nearby histidine.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Costentin, Cyrille et al. – <em>Concerted proton–electron transfers in the electrochemical oxidation of a phenol substituted by an intramolecular base</em>, J Am Chem Soc 131.41 (2009): 14979–14989. <span class="why">Why: Shows how intramolecular base lowers the oxidation potential drastically by PCET.</span></li>
+  <li>Liu, Fan &amp; Franke, Petra – <em>PCET in Photocatalytic Water Oxidation</em>, Current Opinion in Chemical Biology 25 (2015): 34–40. <span class="why">Why: Concise review focusing on PCET in water oxidation catalysis, explaining the importance of concerted transfers.</span></li>
+  <li>Bhattacharyya, Sibapriya &amp; Waegele, Matthias – <em>The Roles of Proton-Coupled Electron Transfer in Water Oxidation</em>, Catalysts 9.10 (2019): 796. <span class="why">Why: Accessible overview of PCET roles in water oxidation, linking physical chemistry concepts to O–H and O–O bond making/breaking.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M4.2: Buffering and Proton Transport in Systems</h2>
+
+<h3>Scope</h3>
+<p>Focus on the medium: how do protons get transported away or towards catalysts in a larger system? Learn about buffers, proton carriers (like mobile imidazole), and proton exchange membranes (like Nafion).</p>
+
+<h3>Stepping-stones</h3>
+<p>Consider designing an experiment: if you have a photoanode producing protons, how do you confirm those protons reach the cathode? Understand water&rsquo;s self-ion transport (slow) vs using a membrane.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Ursua, A. et al. – <em>Hydrogen production from water electrolysis: current status and future trends</em>, Proceedings of the IEEE 100.2 (2012): 410–426. <span class="why">Why: Sections discuss proton exchange membranes and how protons are conducted, paralleling needs in artificial photosynthesis devices.</span></li>
+  <li>Geletii, Yurii et al. – <em>An All-Inorganic, Stable, and Highly Active Tetraruthenium Homogeneous Catalyst for Water Oxidation</em>, Angew Chem Int Ed 47.21 (2008): 3896–3899. <span class="why">Why: Shows how certain buffer anions act as proton relays in the mechanism of a Ru water oxidation catalyst.</span></li>
+  <li>Parsons, R. – <em>The rate of electrolytic hydrogen evolution and the heat of adsorption of hydrogen</em>, Transactions of the Faraday Society 54 (1958): 1053–1063. <span class="why">Why: Classic on proton reduction kinetics, showing that even simple hydrogen evolution is fundamentally a PCET process.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M4.3: Designing Catalysts with Internal Proton Relays</h2>
+
+<h3>Scope</h3>
+<p>Zoom in on catalyst molecules. Learn how chemists build in functionality like pendant amines in nickel catalysts for H<sub>2</sub> evolution, or how the OEC in PSII has amino acids positioned to shuttle protons.</p>
+
+<h3>Stepping-stones</h3>
+<p>Examine DuBois&rsquo; nickel diphosphine catalysts for H<sub>2</sub> evolution which have a pendant amine that swings in to deliver protons. Or Nocera&rsquo;s cobalt phosphate catalyst – its structure may facilitate proton transfer.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>DuBois, Daniel &amp; DuBois, Mary – <em>The roles of the first and second coordination spheres in the design of molecular catalysts for H<sub>2</sub> production and oxidation</em>, Chem Soc Rev 38.1 (2009): 62–72. <span class="why">Why: A blueprint for how to incorporate proton relays in catalysts, written by the pioneers.</span></li>
+  <li>McDaniel, Nicole et al. – <em>Cobalt hangman porphyrins: efficient catalysts for the electrochemical production of hydrogen from neutral water</em>, J Am Chem Soc 135.26 (2013): 9776–9779. <span class="why">Why: Concrete example where adding a proton relay (the &ldquo;hangman&rdquo; carboxylic acid) made a big difference.</span></li>
+  <li>Hammes-Schiffer, Sharon – <em>Proton-coupled electron transfer in energy conversion processes</em>, Accounts of Chemical Research 42.12 (2009): 1881–1889. <span class="why">Why: Provides perspective on how PCET considerations guide the design of catalysts.</span></li>
+</ul>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="../../../components.js"></script>
+</body>
+</html>

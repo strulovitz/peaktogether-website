@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>M3: Z-Scheme and Multi-Photon Pathways</title>
+  <link rel="stylesheet" href="../../../style.css?v=30">
+</head>
+<body>
+
+<div id="header"></div>
+
+<main class="page">
+
+<a href="../" class="back-link">&larr; Back to Saraghrar &ndash; Artificial Photosynthesis</a>
+
+<h1>M3: Z-Scheme and Multi-Photon Pathways</h1>
+
+<p class="subtitle">Use multiple sequential light-absorbing steps to reach higher-energy reactions, like nature&rsquo;s two-photon scheme.</p>
+
+<h2>Idea</h2>
+<p>Use multiple sequential light-absorbing steps to reach higher energy reactions, akin to the &ldquo;Z-scheme&rdquo; in plants where two photons (one in Photosystem II, one in Photosystem I) are used to achieve overall water splitting and NADP&plus; reduction. In artificial terms, this could be two photocatalysts coupled in series.</p>
+
+<h2>Rationale</h2>
+<p>Splitting water or reducing CO&sub2; requires a lot of energy; trying to do it in one big jump requires UV or a very efficient absorber. A two-step approach allows using lower-energy visible light in each step and combining their energy. This can also mitigate the multi-electron vs single-photon problem.</p>
+
+<h2>Prerequisite Themes</h2>
+<p>Redox mediators (shuttling electrons between two subsystems); matching the rates of two sub-reactions; light synchronization issues.</p>
+
+<h2>Dependencies</h2>
+<p>Each sub-system still needs its own L and H components. Often involves integrating paths L1/L2 with complementary second absorbers.</p>
+
+<h2>Signs of Progress</h2>
+<p>Demonstrations of tandem absorber systems outperforming single absorbers; identification of suitable intermediate redox couples (analogous to the plastoquinone/plastocyanin shuttle in plants).</p>
+
+<hr>
+
+<h2>Base Camp M3.1: Natural Z-Scheme and Photosystems I &amp; II</h2>
+
+<h3>Scope</h3>
+<p>Get a solid understanding of the natural two-photon system in oxygenic photosynthesis. Know the roles of PSII (using one photon to oxidize water and reduce plastoquinone) and PSI (using another photon to further boost electrons to reduce NADP&plus;). Learn how these two are connected via an electron transport chain.</p>
+
+<h3>Stepping-stones</h3>
+<p>Diagram the Z-scheme energy graph with the two excitation steps. Understand why two separate centers were evolutionarily necessary (one wasn&rsquo;t enough energy).</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Nelson, Nick &amp; Ben-Shem, Adam &ndash; <em>The complex architecture of oxygenic photosynthesis</em>, Nature Reviews Molecular Cell Biology 5.12 (2004): 971&ndash;982. <span class="why">Why: A clear review of the structure and function of the photosystems and how they work together.</span></li>
+  <li>Barber, James &ndash; <em>Photosystem II: the engine of life</em>, Quarterly Reviews of Biophysics 49 (2016): e14. <span class="why">Why: Focuses on PSII, containing good insights into limitations of one photosystem and why PSI is needed.</span></li>
+  <li>Dau, Holger &amp; Zaharieva, Ivelina &ndash; <em>Principles, efficiency, and blueprint character of solar-energy conversion in photosynthetic water oxidation</em>, Accounts of Chemical Research 42.12 (2009): 1861&ndash;1870. <span class="why">Why: Reflects on principles from natural water oxidation and Z-scheme that could inform artificial designs.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M3.2: Redox Mediators and Shuttles</h2>
+
+<h3>Scope</h3>
+<p>In many artificial multi-photon systems, an intermediate shuttle transfers electrons between two light absorbers. Learn about such mediators: I&sup3;&macr;/I&macr;, relay molecules like viologens, or solid-state mediators. Know the properties a mediator must have.</p>
+
+<h3>Stepping-stones</h3>
+<p>Consider a hypothetical example: one photocatalyst produces H&sub2;O&sub2; as an intermediate, which a second photocatalyst uses. Analyze pros/cons. Calculate the potential of a given redox mediator relative to the two half-reactions it connects.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Yamada, Yukikazu et al. &ndash; <em>Mediators for solar fuel production</em>, Chem Soc Rev 49.6 (2020): 2006&ndash;2030. <span class="why">Why: A focused review on mediators used in solar fuel schemes, directly informing Z-scheme design.</span></li>
+  <li>Kalyanasundaram, K. &amp; Gr&auml;tzel, M. &ndash; <em>Artificial photosynthesis: Biomimetic approaches to solar energy conversion and storage</em>, Current Opinion in Biotechnology 9.2 (1998): 128&ndash;136. <span class="why">Why: Captures early ideas of multi-component systems including use of redox mediators.</span></li>
+  <li>Oh, Sang-Eun &amp; Logan, Bruce &ndash; <em>Hydrogen and electricity production from a food processing wastewater</em>, Water Research 39.19 (2005): 4673&ndash;4682. <span class="why">Why: Illustrates a two-stage process where one stage produces an intermediate and another uses it &ndash; an analogy for multi-step schemes.</span></li>
+</ul>
+
+<hr>
+
+<h2>Base Camp M3.3: Coupling Photochemical Modules (Engineering Perspective)</h2>
+
+<h3>Scope</h3>
+<p>Delve into the engineering aspect of putting two photocatalytic modules together. How do you interface them? Do they run in the same reactor or separate? This includes concepts of &ldquo;chemical solar cell&rdquo; design and overall efficiency accounting.</p>
+
+<h3>Stepping-stones</h3>
+<p>Imagine designing a two-stage photoreactor: what containers, pumps, or separators might be needed? Consider time coordination: if step1 generates intermediate faster than step2 consumes it, it might build up.</p>
+
+<h3>Resources</h3>
+<ul>
+  <li>Nozik, Arthur &ndash; <em>Photoelectrolysis of water using two tandem cell photovoltaic devices</em>, Applied Physics Letters 30.12 (1977): 567&ndash;569. <span class="why">Why: Early conceptual paper proposing a tandem approach for water splitting.</span></li>
+  <li>Linkous, Charles et al. &ndash; <em>Photochemical production of hydrogen and hydrogen peroxide from water</em>, Solar Energy 41.4 (1988): 431&ndash;438. <span class="why">Why: An example of a two-step scheme, revealing practical challenges of intermediate management.</span></li>
+  <li>Maeda, Kazuhiko &ndash; <em>Z-Scheme Water Splitting Using Two Different Semiconductor Photocatalysts</em>, ACS Catalysis 3.7 (2013): 1486&ndash;1503. <span class="why">Why: Overview on Z-scheme water splitting with particulate photocatalysts, giving both chemistry and engineering insights.</span></li>
+</ul>
+
+</main>
+
+<div id="footer"></div>
+
+<script src="../../../components.js"></script>
+</body>
+</html>
