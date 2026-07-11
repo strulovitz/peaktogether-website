@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>How It Works — Peak Together</title>
-    <link rel="stylesheet" href="/style.css?v=27">
+    <link rel="stylesheet" href="/style.css?v=28">
 </head>
 <body>
 
@@ -12,28 +12,117 @@
 
     <main>
         <article class="page">
-            <h1>How It Works</h1>
+            <h1>⚙️ How It Works</h1>
+            <p class="subtitle">You don't need to know math. You don't need to know code. You need one person you want to amaze.</p>
 
-            <p>Peak Together is a little arcade of free games for two curious minds. Each game turns one of the hardest problems in science or math into something you can <em>play</em> — side by side, on one screen.</p>
+            <img class="hiw-img" src="/images/how-it-works-hero.png" alt="A young maker at a laptop at night, a glowing miniature mountain range and a path of golden lanterns pouring out of the screen — anyone can conjure a world from a laptop.">
 
-            <h2>1. Get the game</h2>
-            <p>Every game is open-source and free. Head to <a href="/arcade/">The Arcade</a>, pick a game, and download it. No account, no payment, ever.</p>
+            <h2>🙋 A confession, before anything else</h2>
+            <p>I built every game and every demo on this website. And here is the truth:</p>
+            <p>I understand zero of the mathematics on these pages. Zero. I cannot follow the proofs in Descent QED. I cannot do the calculus that LOOM2 sings. I can't even write "Hello World" — the simplest program that exists. I also have ADD (attention deficit disorder); some days I can barely count my own games correctly.</p>
+            <p>And yet: real-time 3D engines with custom shaders. Live orchestral audio synthesis. Nine proofs of the Basel problem, faithful to the letter. Newton's <em>Principia</em> rebuilt room by room from the 1687 figures.</p>
+            <p>How? Genius AI did both kinds of heavy lifting. It wrote the code — that's called vibe-coding, and you may have heard of it. But it also carried the science — call it vibe-math, vibe-physics, vibe-science. I brought only two things: a person I love who I wanted to share a mountain with, and stubbornness.</p>
+            <p>If I could do this, then — honestly, and I mean this literally — anybody on Earth can. Kids can. Grandparents can. You can. This page shows you how.</p>
 
-            <h2>2. Run it — no Python, no terminal</h2>
-            <p>Our games run on Windows with a single double-click. Nothing to install, nothing technical to learn:</p>
+            <h2>🗺️ Part One — How the climbing works</h2>
+            <p class="subtitle">(for players — how to enjoy what's already here)</p>
+            <p>Everything on this site is organized like a real mountain range:</p>
+
+            \[ \text{Mountain} \;\longrightarrow\; \text{Path} \;\longrightarrow\; \text{Base Camp} \;\longrightarrow\; \text{Stepping Stone} \]
+
+            <img class="hiw-img" src="/images/how-it-works-mountain-map.png" alt="A stylized mountain with several colored climbing paths winding up its slopes, glowing base-camp tents and campfires, and chains of luminous stepping stones; two tiny roped climbers at the bottom look up at the aurora-lit summit.">
+
+            <ul>
+                <li>A <strong>Mountain</strong> is one of the greatest unsolved problems of science — the Riemann Hypothesis, Navier–Stokes, quantum gravity, room-temperature superconductors. Each has a legendary scientist as its sherpa guide.</li>
+                <li>A <strong>Path</strong> is one real approach to the summit — just like real Everest has multiple climbing routes of different character. Riemann alone has nine.</li>
+                <li>A <strong>Base Camp</strong> is a subtopic along a path. A <strong>Stepping Stone</strong> is a sub-subtopic — and every stepping stone is meant to become a playable demo: a two-player, one-screen experience where one of you flies and one of you bends the world.</li>
+                <li>The <strong>Arcade</strong> is the mountain range's shared foundation: full games — loving remakes of Descent, Quake, Loom, Homeworld — that teach the bedrock every mountain stands on: proofs, mechanics, calculus, linear algebra.</li>
+            </ul>
+
+            <p>The rules of every climb, everywhere on this site:</p>
+            <ul>
+                <li>💑 <strong>Two players, one screen, two real jobs.</strong> One flies, one thinks. Neither can win alone. Talking to each other is the game. (Solo works too — you just play both roles.)</li>
+                <li>🛡️ <strong>You cannot lose.</strong> No health bars, no lives, no game-over, ever. Wrong answers get a friendly explanation, never a punishment. You're not being tested — you're being shown.</li>
+                <li>📖 <strong>Nothing is dumbed down.</strong> Real proofs, real figures, real Wikipedia-register truth — made playable, never made fake.</li>
+                <li>💯 <strong>Everything is free, forever.</strong> No signup, no ads, no catch. Download a <code>.zip</code>, extract it, double-click the <code>.exe</code>, done. (First time downloading a game? Every game page walks you through it click by click — and if you get stuck, my phone number is at the bottom of this page. Really.)</li>
+            </ul>
+
+            <h2>🔨 Part Two — How the building works</h2>
+            <p class="subtitle">(for makers — how to create what isn't here yet)</p>
+            <p>Here is the part I care about most.</p>
+            <p>Look at the map of any mountain: paths, base camps, hundreds of stepping stones. The research skeleton is already done — every path is fully mapped. What's missing is the demos: the playable, flyable, singable version of each stepping stone. One person could never build them all.</p>
+            <p>But you know what did build the largest encyclopedia in human history? Everybody. Wikipedia works because anyone can write one page. Peak Together works the same way: anyone can build one stepping stone. Think of the Wolfram Demonstrations Project — but as a game, built by the crowd, climbing real unsolved mountains together.</p>
+            <p>And here's the secret that makes it possible: the recipe is formulaic. Every single thing on this site was made the same way:</p>
+
+            \[ \text{a Wikipedia page} \;\longrightarrow\; \text{a conversation with genius AI} \;\longrightarrow\; \text{a free playable demo} \]
+
+            <p>That's it. That's the whole factory. You don't need to understand the Wikipedia page. You don't need to understand the code. The AI understands both. You are the director, not the crew.</p>
+
+            <img class="hiw-img" src="/images/how-it-works-recipe.png" alt="A whimsical magical kitchen-workshop: a glowing open encyclopedia book on the left, a friendly round robot stirring its glowing contents in a cauldron like a chef, and on the right a shining crystal snow-globe rising out with a tiny playable 3D world and spaceship inside.">
+
+            <h2>🍰 The Recipe — build your first stepping stone this weekend</h2>
             <ol>
-                <li>Download the game's Windows <code>.zip</code>.</li>
-                <li>Right-click it → <strong>Extract All…</strong></li>
-                <li>Open the extracted folder.</li>
-                <li>Double-click the game's <strong><code>.exe</code></strong> file — and you're flying. 🚀</li>
+                <li><strong>Pick your person.</strong> Not your topic — your person. The girlfriend whose birthday is coming. The cute nerd in your class you're too shy to talk to. Your dad. Your granddaughter. Everything is easier when it's a gift.</li>
+                <li><strong>Pick a Wikipedia page.</strong> Any mathematical or scientific concept that sounds beautiful to you — even if (especially if!) you don't understand a word of it. Browse a mountain's stepping stones <a href="/mountains/">here</a> for ideas, or wander Wikipedia until something glows.</li>
+                <li><strong>Grab the skeleton.</strong> The full source code of the Harmonic Series Demo is <a href="https://github.com/strulovitz/peaktogether-website/releases/tag/harmonic-series-demo-v1.0.0" target="_blank" rel="noopener">on GitHub</a> — free, no account needed. It's the official template: 6-DOF flying, sliders, scenes, everything. You won't read this code. You'll hand it to the AI.</li>
+                <li><strong>Copy-paste this starter prompt</strong> into Claude or ChatGPT — yes, literally this, right now:
+<pre>I want to build a free educational demo for the open-source project Peak
+Together (peaktogether.me). Important: I don't know how to program, and I
+don't understand the mathematics — you will do both. I am the director;
+please talk to me in plain English, one small step at a time, and write
+ALL the code yourself.
+
+The demo is two-player on one screen: Player 1 flies a 3D camera
+Descent-style with the keyboard (pygame + PyOpenGL, full 6 degrees of
+freedom), and Player 2 drags Manipulate-style sliders with the mouse that
+bend the world in real time. Rules of the project: stay faithful to the
+real figures and formulas of the source article (never dumb it down); no
+health, no lives, no game-over — wrong turns get friendly explanations;
+pure Python (pygame, PyOpenGL, NumPy, matplotlib for LaTeX labels).
+
+I'm attaching two things:
+1. The template source code from the project's Harmonic Series Demo —
+   please keep its structure, controls, and style.
+2. The Wikipedia article about [TOPIC] — please read it and propose a
+   list of 5–10 flyable 3D scenes based on its most famous figures,
+   examples, and results.
+
+Start by showing me the list of proposed scenes. Then we'll build them
+one at a time, and you'll tell me exactly what to click and paste.</pre>
+                </li>
+                <li><strong>Vibe.</strong> The AI proposes scenes; you pick your favorites. It writes code; you run it and paste back whatever errors appear (that's a real technique — it's how I built everything). You say things like "make the wall more golden" and "slower, it's too fast for my mom." No step requires understanding — only taste, patience, and love.</li>
+                <li><strong>Send it in.</strong> Two doors, both always open:
+                    <ul>
+                        <li>🧑‍💻 The GitHub way: fork <a href="https://github.com/strulovitz/peaktogether-website" target="_blank" rel="noopener">the repository</a> and open a pull request.</li>
+                        <li>💌 The human way: just email it to me. Or message me on any social network in the footer below. Or — I'm serious — call my phone. Even if you've never touched GitHub in your life, I will upload your demo myself, onto its stepping stone, with your name on it, forever.</li>
+                    </ul>
+                </li>
+                <li><strong>Give it.</strong> Watch their face when they realize you built them a world. That's the moment this whole website exists for.</li>
             </ol>
-            <p>No Python, no terminal, no installer, no admin needed. To uninstall, just delete the folder.</p>
 
-            <h2>3. Controls</h2>
-            <p>You can play with keyboard + mouse, or plug in a flight joystick and a gamepad for the full two-player experience. One person flies, the other thinks — and you have to talk to each other to win.</p>
+            <h2>🎁 Who builds these? People like you.</h2>
 
-            <h2>Playing solo?</h2>
-            <p>That works too! You can fly and think on your own — it's just more fun (and easier) with someone you love beside you. 💕</p>
+            <img class="hiw-img" src="/images/how-it-works-gift.png" alt="A shy teenage boy with glasses, blushing, hands a delighted nerdy girl with a ponytail and freckles a small glowing magical sphere holding a miniature living mathematical world of golden spiral galaxies, her face lit up with wonder, at sunset.">
+
+            <ul>
+                <li>💝 A boyfriend builds the "Fourier Series" stepping stone as a birthday gift — because she loves music, and now the math sings her name.</li>
+                <li>🥰 A shy boy from the back row builds a small demo about prime numbers for the cute nerd girl in his class. He never had to say a word. The demo said it.</li>
+                <li>👨‍👩‍👧‍👦 A family spends a rainy Sunday building one scene together — the kids pick the colors, grandpa picks the topic, the AI does the math. A Disneyland you build yourselves, with your own hands.</li>
+                <li>🧑‍🏫 A teacher builds the exact stepping stone her class is stuck on — and Monday's lesson becomes a flight.</li>
+                <li>🔬 A professor who spent thirty years on one beautiful theorem finally has a way to show his own family why.</li>
+                <li>📺 A YouTuber builds one live, on camera, in an afternoon — because the process itself is the show.</li>
+            </ul>
+            <p>Playing is joy. Building is meaning. The demo you make will outlast the weekend you made it in.</p>
+
+            <h2>🌍 Why this matters</h2>
+            <p>Every demo makes a real idea playable for every future visitor — a Wikipedia of playable science, growing one gift at a time. And the mountains at the top are real: unsolved, waiting. Nobody knows which mind, playing which stepping stone, on which date night, catches the spark that matters. That's the wisdom of the crowd — and it's the one thing that never worked by testing people, only by inviting them.</p>
+            <p>In a world where AI does more and more alone, this site is built on the one thing it cannot do: two humans wondering together.</p>
+
+            <h2>💌 The one thing we ask</h2>
+            <p>Not money — everything here is free, forever. Not signup — there is none.</p>
+            <p>Share this with one person. That's the whole ask. Send it to someone you'd like to climb with. Because on this mountain, like on the real one, nobody summits alone.</p>
+
+            <p><strong>🏔️ See you on the slopes.</strong></p>
 
             <a href="/" class="back-link">← Back to Home</a>
         </article>
@@ -42,5 +131,33 @@
     <div data-component="footer"></div>
 
     <script src="/components.js?v=3"></script>
+    <script>
+    (function () {
+        'use strict';
+        function initLightbox() {
+            var imgs = document.querySelectorAll('.page .hiw-img');
+            if (!imgs.length) return;
+            var overlay = document.createElement('div');
+            overlay.className = 'lightbox-overlay';
+            overlay.setAttribute('role', 'dialog');
+            overlay.setAttribute('aria-modal', 'true');
+            var big = document.createElement('img');
+            big.className = 'lightbox-img'; big.alt = '';
+            var closeBtn = document.createElement('button');
+            closeBtn.className = 'lightbox-close';
+            closeBtn.setAttribute('aria-label', 'Close');
+            closeBtn.innerHTML = '&times;';
+            overlay.appendChild(big); overlay.appendChild(closeBtn);
+            document.body.appendChild(overlay);
+            function openBox(src, alt){ big.setAttribute('src', src); big.setAttribute('alt', alt||''); overlay.classList.add('open'); document.body.classList.add('lightbox-locked'); }
+            function closeBox(){ overlay.classList.remove('open'); document.body.classList.remove('lightbox-locked'); big.setAttribute('src',''); }
+            for (var i=0;i<imgs.length;i++){ imgs[i].classList.add('zoomable'); imgs[i].addEventListener('click', function(){ openBox(this.getAttribute('src'), this.getAttribute('alt')); }); }
+            overlay.addEventListener('click', function(e){ if (e.target===overlay || e.target===closeBtn) closeBox(); });
+            closeBtn.addEventListener('click', closeBox);
+            document.addEventListener('keydown', function(e){ if (e.key==='Escape'||e.keyCode===27) closeBox(); });
+        }
+        if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initLightbox); } else { initLightbox(); }
+    })();
+    </script>
 </body>
 </html>

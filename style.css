@@ -1130,6 +1130,42 @@ h1, h2, h3, h4, h5, h6 {
     margin-bottom: 16px;
 }
 
+/* Inline code inside page prose (`like .this`) */
+.page code {
+    background: #f1ece2;
+    color: #8a4b1a;
+    padding: 0.12em 0.45em;
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-family: 'Consolas', 'Courier New', monospace;
+}
+
+/* Block code (starter-prompt recipe, etc.) */
+.page pre {
+    background: #faf7f0;
+    border: 1px solid #e5dccf;
+    border-radius: 12px;
+    padding: 18px 22px;
+    overflow-x: auto;
+    font-size: 0.88rem;
+    line-height: 1.65;
+    color: #3a3226;
+    margin-bottom: 20px;
+    font-family: 'Consolas', 'Courier New', monospace;
+    white-space: pre-wrap;
+}
+
+/* Full-width inline image inside a text page (storytelling images) */
+.page .hiw-img {
+    display: block;
+    width: 100%;
+    max-width: 480px;
+    height: auto;
+    margin: 32px auto 28px;
+    border-radius: 20px;
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.14);
+}
+
 .path-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
