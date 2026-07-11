@@ -120,6 +120,132 @@
 
         <p>In summary, cross-language exploration reinforces the idea of a modular approach: splitting water (or producing H₂) is often pursued separately from CO₂ reduction. It also underscores efficiency and stability targets (10%+, millions of cycles) that are globally recognized. The historical and socio-economic framing (solving storage for renewables, climate mitigation) is universally present. The term &ldquo;artificial photosynthesis&rdquo; may encompass slightly different scopes &ndash; some including any solar-to-chemical scheme (even PV-driven electrolysis, per Japanese broad usage) &ndash; but all converge on the vision of a solar-powered, direct fuel generator. This validates our multi-path breakdown, which indeed mirrors how different scientific communities approach each piece of the puzzle.</p>
 
+        <h2>Partial Results &amp; Analogs</h2>
+
+        <p>Over decades of research, numerous partial breakthroughs have been achieved, each addressing some aspect of the artificial photosynthesis problem but not the whole. Here we summarize the most significant results, along with how they map onto our path categories (L, M, H stages) and what they imply:</p>
+
+        <p><strong>Photocatalytic Water Splitting on TiO₂ (Honda-Fujishima Effect, 1972):</strong> Fujishima and Honda demonstrated that a TiO₂ anode under UV light could split water into O₂ and H₂ (with a platinum cathode to collect H₂). This was the first proof-of-concept of light-driven water splitting. Path mapping: TiO₂ is a semiconductor absorber (L2); charge separation was via the semiconductor-electrolyte interface (M1, a photoanode), and Pt catalyzed H₂ (H1). It produced H₂ but only under UV (TiO₂ band gap ~3.2 eV) and with poor efficiency. However, it established the feasibility of using inorganic materials for artificial photosynthesis.</p>
+
+        <p><strong>The &ldquo;Artificial Leaf&rdquo; Silicon Device (Ayers 1983 &amp; Nocera 2011):</strong> In 1983, William Ayers and co-workers built a multi-junction amorphous silicon device that, when immersed in water and coated with catalysts, achieved water photolysis with visible light. Later, in 2011, Daniel Nocera&rsquo;s group presented an &ldquo;artificial leaf&rdquo; using a single triple-junction amorphous silicon solar cell coated with a cobalt phosphate (Co-OEC) oxygen evolution catalyst and a nickel-molybdenum-zinc alloy for H₂ evolution. This device could generate H₂ and O₂ continuously. Path mapping: These are full integrated systems: L2 (multi-junction Si absorber), M1 (wired PV-style configuration), H1 and H3 (NiMoZn for H₂, CoPi for O₂). Partial result: It achieved spontaneous water splitting at ~2.5% efficiency in laboratory conditions &ndash; not commercial, but a big leap in simplicity. Sun Catalytix, the startup, however found it &ldquo;offered few savings&rdquo; over other hydrogen production methods, underlining that efficiency and cost needed improvement.</p>
+
+        <p><strong>Catalytic &ldquo;Oxygen Evolving Complex&rdquo; Analogues:</strong> Significant partial results have come in isolating or mimicking pieces of the natural O₂ evolution catalyst. For instance, the synthesis of a &ldquo;blue dimer&rdquo; Ru complex by Meyer and coworkers, which was one of the first homogeneous catalysts to produce O₂ from water when driven by a chemical oxidant or light. Also, various Mn₄O₄ cubanes have been made as analogues to the natural PSII cluster. They show some water oxidation activity but typically with sacrificial oxidants and far from the robustness of the enzyme.</p>
+
+        <p><strong>Homogeneous CO₂ Reduction to Fuels:</strong> In 1982, Lehn and Ziessel reported photochemical reduction of CO₂ to CO (and H₂) using a Ru(bipyridine) complex as photosensitizer and catalyst with triethanolamine as sacrificial reductant. This was a seminal partial success showing CO₂ could be activated by molecular catalysts. Later, in 2008, Bocarsly&rsquo;s group used a p-type GaP semiconductor electrode with a pyridinium catalyst to convert CO₂ to methanol at ~10% efficiency. And more recently, there have been demonstrations of CO₂ to formate or CO with decent efficiency using molecular catalysts under electrochemical bias with light providing the electrons.</p>
+
+        <p><strong>High-Efficiency Tandem Devices:</strong> A notable milestone is the achievement of solar-to-hydrogen efficiency of 22.4% in 2015. In one report, a GaInP/GaAs/Ge triple-junction cell with NiMo and NiO as catalysts reached ~19% and with concentrated light 30% has been reported elsewhere. Path mapping: This is L2 (multi-junction III-V or similar), M1 (wired cell), H1 &amp; H3 (Ni-based catalysts). Partial result: extremely high efficiency was shown, validating that artificial photosynthesis is not fundamentally limited to low efficiencies. The challenge remains cost and stability.</p>
+
+        <p><strong>Photobiological Achievements:</strong> An important partial result was the genetic knockout of uptake hydrogenases in <em>Nostoc punctiforme</em>, which enabled sustained H₂ production by the organism&rsquo;s nitrogenase under illumination. Companies and labs have shown algae producing e.g. ethanol or hydrocarbons on pilot scales (albeit at modest efficiencies ~1-2%).</p>
+
+        <p><strong>Analogous Systems in Other Fields:</strong> We can mention analogs like photoelectrochemical nitrogen fixation to ammonia or photo-driven chlorate/peroxide generation; these are not directly solar fuel but use similar chemistry (multi-electron, multi-proton). Another analog: natural photosynthesis in artificial environments, such as putting chloroplasts or whole cells on electrodes (semi-artificial).</p>
+
+        <p>Each partial result typically supports or validates a specific path. The common thread is that no single partial result yet combines all elements into a durable, efficient whole. These results significantly narrow the search though: for instance, knowing NiFe oxyhydroxide is an excellent OER catalyst in base tells us where to focus for H3, and knowing multi-junction Si or III-V can provide the needed photovoltage informs our L2/M1 strategy.</p>
+
+        <p><strong>Mapping partial results to paths:</strong></p>
+        <ul>
+            <li><strong>TiO₂–Pt UV cell (Honda/Fujishima)</strong> &ndash; Paths: L2, M1, H1 &amp; H3. Showed basic viability of inorganic approach.</li>
+            <li><strong>Dye-sensitized CO₂ reduction (Lehn)</strong> &ndash; Paths: L1, M2, H2. Showed molecular photocatalysis can do multi-e⁻ chemistry albeit with sacrifice reagents.</li>
+            <li><strong>Multi-junction Si with CoPi/NiMo (Nocera&rsquo;s leaf)</strong> &ndash; Paths: L2, M1, H1 &amp; H3. Showed a complete unbiased water splitter with non-precious catalysts.</li>
+            <li><strong>Record efficiency tandem (various)</strong> &ndash; Paths: L2, M3, H1/H3. Demonstrated efficiency potential.</li>
+            <li><strong>Bio H₂ from Nostoc</strong> &ndash; Path: H4 mainly. Showed genetically improved H₂ output.</li>
+            <li><strong>CO₂ to methanol (Bocarsly)</strong> &ndash; Paths: L2, M1, H2. Provided hint that direct CO₂ to liquid fuel might be possible.</li>
+        </ul>
+
+        <h2>Risk, Feasibility &amp; Potential Payoff Analysis</h2>
+
+        <p>For each candidate path (at the granular &ldquo;mini-path&rdquo; level we defined), we assess feasibility (technical likelihood of progress or success, rated 1&ndash;5) and payoff (the impact if it succeeds, 1&ndash;5). These ratings are grounded in current literature consensus and the difficulty or reward of each approach.</p>
+
+        <p><strong>L1 (Molecular Dye Sensitizers):</strong> Feasibility: 3/5. Small dye molecules and their use in DSSC-like systems are well-understood and low-cost. The challenge is stability. Payoff: 2/5. A purely molecular solution might never hit very high efficiencies or long lifetimes of solid-state devices. However, L1 knowledge is crucial to other paths (like co-sensitizing semiconductors).</p>
+
+        <p><strong>L2 (Semiconductor Light Absorbers):</strong> Feasibility: 5/5. Proven in parts: we have a century of semiconductor tech. Payoff: 5/5. If one finds a stable, earth-abundant semiconductor system that splits water efficiently, that&rsquo;s the holy grail core of artificial photosynthesis.</p>
+
+        <p><strong>L3 (Biomimetic Antenna Complexes):</strong> Feasibility: 2/5. Complex to build, still mostly at lab demonstration level. Payoff: 3/5. Could significantly improve light capture especially in low light, but incremental rather than game-changing unless it enables otherwise impossible configurations.</p>
+
+        <p><strong>L4 (Plasmonic/Quantum Nanostructures):</strong> Feasibility: 3/5. Nanomaterials are an exploding field but hot electron extraction is often inefficient. Payoff: 4/5. If mastered, could allow sub-band-gap utilization and break through efficiency limits.</p>
+
+        <p><strong>M1 (Photoelectrochemical Cells):</strong> Feasibility: 5/5. One of the most straightforward engineered approaches. Payoff: 4/5. Well-designed PEC can simplify the system (one unit instead of solar panel + electrolyzer), potentially lowering costs.</p>
+
+        <p><strong>M2 (Molecular Triads/Assemblies):</strong> Feasibility: 2/5. A complete molecular system that both oxidizes water and reduces protons/CO₂ in one cycle is not yet achieved. Payoff: 3/5. If it worked, advantage might be self-assembly and low-cost synthesis, but efficiency likely limited.</p>
+
+        <p><strong>M3 (Z-Scheme Multi-Photon):</strong> Feasibility: 4/5. Several Z-scheme particulate systems demonstrated. Payoff: 5/5. Arguably required for high efficiency or for CO₂ reduction to multi-carbon products. Allows utilization of lower-energy photons to drive high-energy chemistry.</p>
+
+        <p><strong>M4 (PCET and Proton Management):</strong> Feasibility: 4/5. Not a standalone path but a set of tactics already in use implicitly. Payoff: 4/5. Good PCET management can significantly lower overpotentials and increase device efficiency/stability.</p>
+
+        <p><strong>M5 (Bio-Hybrid Approaches):</strong> Feasibility: 3/5. Mixed bag &ndash; some bio-hybrid things already done but stability limited. Payoff: 5/5 (long-term). If achieved, could combine high efficiency of inorganic light capture with unrivaled selectivity of enzymes for complex chemicals, plus self-repair via reproduction.</p>
+
+        <p><strong>Path Interactions:</strong> The combinatorial possibilities mean some of the highest payoffs likely come from hybrid paths: semiconductor + biological or tandem PEC + molecular catalyst. An optimal route up the mountain might be a hybrid climbing team &ndash; utilizing the high efficiency base camps of inorganic paths combined with the smart rope-work of PCET and perhaps a biological sherpa to carry the load of making complex fuels.</p>
+
+        <h2>Common Pitfalls &amp; Dead Ends</h2>
+
+        <p>In reviewing past attempts, several recurring mistakes or oversights stand out:</p>
+
+        <p><strong>Chasing Headline Efficiency without Stability:</strong> Many teams achieved exciting efficiency in a single-day demo but the system rapidly degraded. A notorious example: perovskite-based photoelectrodes showed great initial currents but failed after minutes due to water ingress. Avoid: Always evaluate stability (TON, hours of operation) alongside efficiency. Develop protective coatings and do accelerated aging tests.</p>
+
+        <p><strong>Sacrificial Reagents Illusion:</strong> Many photochemical setups used sacrificial electron donors (like EDTA, triethanolamine) to prove a concept. It&rsquo;s a dead-end practically &ndash; you&rsquo;re consuming another chemical to make fuel, defeating the purpose. Avoid: Design systems that are complete cycles (both oxidation and reduction happening).</p>
+
+        <p><strong>Incomplete Products / Selectivity Issues:</strong> In CO₂ reduction, a pitfall is getting a mixture of products or stopping at CO when you want methanol. Avoid: Emphasize catalyst and system design for selectivity. Use membranes or separators to keep incompatible reactions apart.</p>
+
+        <p><strong>Neglecting Mass Transport and Scale Effects:</strong> Lab demos often operate with high-purity CO₂ bubbled directly or very low current densities. When scaling, CO₂ supply and bubble management become critical. Avoid: Consider reactor engineering early. Use gas diffusion electrodes for CO₂ as needed.</p>
+
+        <p><strong>Overcomplexity in Design:</strong> Over-complicating the system with too many components makes it impractical. Avoid: Strive for elegant simplicity &ndash; fewer moving parts. Each added component can be a failure point.</p>
+
+        <p><strong>Ignoring Catalytic Bias and Side Reactions:</strong> Many catalysts have certain biases &ndash; e.g., a hydrogenase will also do H₂ oxidation if O₂ appears. Avoid: Ensure proper separation of reactions. Design spatial segregation and use one-way membranes.</p>
+
+        <p><strong>Underestimating CO₂ Source Issues:</strong> Laboratory CO₂ reduction often uses a cylinder of CO₂; real air has 0.04%. Direct air capture is energy-intensive. Avoid: Consider integrated CO₂ capture solutions or locate at point sources of CO₂.</p>
+
+        <p><strong>Safety and Environmental Oversights:</strong> In excitement to generate fuel, neglect safety (H₂/O₂ mixtures can ignite; toxic elements like Cd or Pb). Avoid: Design with benign materials, encapsulate catalysts, keep H₂ and O₂ separated.</p>
+
+        <p>A &ldquo;dead end&rdquo; historically was the idea of a single giant molecule doing it all. So far this hasn&rsquo;t yielded a practical system. More traction is in modular systems where each piece does one job well and they are connected (much like nature uses multiple complexes in series).</p>
+
+        <h2>30/90/180-Day Work Plan</h2>
+
+        <p>The next 6 months will combine intensive learning of fundamentals (first 30 days) with progressively more specialized study and initial experiments (by 90 days), leading to a focused exploratory research project (by 180 days).</p>
+
+        <p><strong>First 30 Days (0&ndash;1 month): Base Fundamentals and Survey.</strong> Week 1: Photochemistry &amp; Electrochemistry Bootcamp. Study Turro&rsquo;s photochemistry textbook and Bard &amp; Faulkner&rsquo;s electrochemistry. Toy problem: calculate the excited-state redox potential of Ru(bipy)_3^2+. Week 2: Catalysis and PCET Basics. Read on OER mechanism and PCET theory. Toy problem: oxidation of phenol with vs without PCET. Week 3: Materials and Devices Survey. Study Kudo &amp; Miseki&rsquo;s review; sketch a PEC cell design. Toy problem: calculate H₂ output from photocurrent. Week 4: Biochemical and CO₂ Fixation Intro. Read on algal hydrogen production and CO₂ electroreduction. Toy problem: determine thermodynamic favorability of CO₂ reduction pathways.</p>
+
+        <p><strong>Next 60 Days (1&ndash;3 months): Specialization and Initial Experimental Probing.</strong> Choose a primary approach to focus on for hands-on exploration (e.g., PEC tandem for CO₂ to CO). Month 2: Deep-dive into tandem cell config, molecular CO₂ catalysts, and nano HER catalysts. Assemble rudimentary PEC setup in lab. Toy experiment: controlled CO₂ electrolysis on copper foil. Month 3: Integration and Advanced Topics. Combine two photoabsorbers in a tandem. Implement membrane between anode and cathode. Mini-Project by Day 90: demonstrate a small artificial photosynthesis unit producing measurable fuel.</p>
+
+        <p><strong>Following 90 to 180 Days (3&ndash;6 months): Focused Research and Prototype Development.</strong> Month 4: Optimize and Build Final Device. Pick improved materials, fabricate larger area photoelectrode, test under real sun. Month 5: Testing Integrated System and Troubleshooting. Connect artificial H₂ generator to bacterial culture or chemical reactor. Month 6: Data Analysis and Reporting. Measure overall efficiency, evaluate stability, document everything and draft publication-style report.</p>
+
+        <p><strong>Checkpoints:</strong></p>
+        <ul>
+            <li><strong>Day 30:</strong> Foundational knowledge &ndash; can explain how an artificial leaf works to a peer and solve basic calculations.</li>
+            <li><strong>Day 60:</strong> Working lab components &ndash; record of generating at least some gas from a photoelectrode.</li>
+            <li><strong>Day 90:</strong> Small integrated demonstration &ndash; wired or wireless device producing fuel at least on a lab scale.</li>
+            <li><strong>Day 120:</strong> Upgraded system built &ndash; larger area, improved materials.</li>
+            <li><strong>Day 150:</strong> Coupled system test results.</li>
+            <li><strong>Day 180:</strong> Final report with efficiency numbers, durability observations, and next steps.</li>
+        </ul>
+
+        <h2>Canonical Notation &amp; Glossary</h2>
+
+        <p>To ensure clear communication across all paths (and aligning terms in different languages), here is a glossary of key notation and terms used in artificial photosynthesis discussions:</p>
+
+        <p><strong>Photon Flux / Solar Spectrum:</strong> We use standard AM1.5G solar spectrum (~100 mW/cm²). Photon energy $E = h\nu$; often bandgaps given in eV. 1 sun = 1 kW/m².</p>
+
+        <p><strong>Photocurrent (J) and Faradaic Efficiency (FE):</strong> Photocurrent density J (mA/cm²) measures electrons per area per time. Faradaic efficiency (%) = (electrons used in desired product / total passed)×100.</p>
+
+        <p><strong>Band Edges and Redox Potentials:</strong> Conduction band (CB) and valence band (VB) edges of semiconductors will be referenced vs NHE (Normal Hydrogen Electrode) or RHE (Reversible Hydrogen Electrode). At pH 7, RHE = NHE - 0.41 V.</p>
+
+        <p><strong>Overpotential (η):</strong> The extra potential beyond thermodynamic requirement to drive a reaction at useful rate. E.g., OER has thermodynamic 1.23 V, but if catalyst needs 1.5 V, η = 0.27 V.</p>
+
+        <p><strong>Turnover Number (TON) and Turnover Frequency (TOF):</strong> TON = moles of product per mole of catalyst active site over its lifetime (durability). TOF = turnovers per site per second (activity). We strive for high TON (&gt;&gt;10^6 ideally).</p>
+
+        <p><strong>Photosensitizer (PS) and Catalyst (Cat):</strong> Common abbreviations in molecular schemes. Triad notation: D&ndash;P&ndash;A (Donor&ndash;Photosensitizer&ndash;Acceptor) where donor is water oxidation catalyst site, acceptor is proton reduction catalyst site.</p>
+
+        <p><strong>PCET (Proton-Coupled Electron Transfer):</strong> Means proton and electron move together. A concerted PCET step might be e.g., &ldquo;Fe^III&ndash;OH + H₂O → Fe^IV=O + H₃O^+ + e⁻&rdquo; to show electron and proton transfer in one reaction.</p>
+
+        <p><strong>Z-Scheme Diagram:</strong> The energy diagram reminiscent of the letter &ldquo;Z&rdquo;: one photosystem raises an electron, the hole goes to O₂ side via second photon raising another electron. The two-step excitation scheme from natural photosynthesis.</p>
+
+        <p><strong>Quantum Efficiency (QE) / IPCE:</strong> The fraction of photons that produce electrons (Incident Photon-to-Current Efficiency).</p>
+
+        <p><strong>Energy Efficiency and Solar-to-Fuel Efficiency (STF):</strong> Overall efficiency = (ΔG of fuel × fuel produced rate) / incident solar power. Expressed as percentage. 10% is great.</p>
+
+        <p><strong>Chemical Equations and Units:</strong> Standard chemical notation: H₂O, CO₂, H₂, O₂, CH₃OH (methanol), C₂H₄ (ethylene). eV for energy, nm for wavelength, mA/cm² for current density, V (vs RHE or NHE) for potentials.</p>
+
+        <p><strong>Bio-terms:</strong> Calvin Cycle (C3 cycle), RuBisCO enzyme (for CO₂ fixation in plants), hydrogenase (enzyme splitting H⁺/H₂). <em>Chlamydomonas reinhardtii</em> (model algae), <em>Synechocystis</em> (model cyanobacterium).</p>
+
+        <p>Aligning cross-language: German &ldquo;Spannung&rdquo; = voltage, Russian &ldquo;перенос заряда&rdquo; = charge transfer, Japanese &ldquo;触媒&rdquo; = catalyst (<em>shokubai</em>). We will consistently use English terms and give definitions as above.</p>
+
         <a href="/" class="back-link">← Back to Home</a>
 
     </main>

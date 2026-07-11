@@ -4,8 +4,8 @@
 > This is the exact, battle-tested process (refined on **K2 = Turbulence** and **Annapurna I = Navier–Stokes**, July 2026).
 > Follow it **the same way every time**. Author: DeepSeek V4 Pro in OpenCode. For: Nir (GitHub: strulovitz).
 >
-> 🔑 **The five things Nir cares about most (never forget):**
-> 1. **ALL the text is HOLY / VERBATIM** — every word ChatGPT wrote, not just the math. Never paraphrase, add, drop, reorder, or "improve."
+> 🔑 **The six things Nir cares about most (never forget):**
+> 1. **ALL the text is HOLY / VERBATIM** — every word ChatGPT wrote, not just the math. Never paraphrase, add, drop, reorder, or "improve." **EVERY section of the doc goes on the site. If DeepSeek is unsure where something goes, look harder — it ALWAYS has a home (hub or path page). There is never a "should I include this?" question. Everything. Always. No exceptions.**
 > 2. **The math must be beautiful, like LaTeX** (MathJax `$...$`). If a copy artifact broke an equation, fix it — **verify the correct form on the internet** — and tell Nir **at the end** (only if something was broken).
 > 3. **NEVER break the top menu.** It took many hours to get working on all browsers + phone. Additive edits only.
 > 4. **NEVER ruin the CSS.** One global `style.css`, single source of truth. No per-page style hacks.
