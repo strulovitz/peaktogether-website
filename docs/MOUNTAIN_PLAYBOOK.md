@@ -42,7 +42,7 @@ Completed so far:
 
 - 🏔️ **Saraghrar = Artificial Photosynthesis** — `chemistry/Saraghrar_artificial_photosynthesis/` (skeleton; 13 paths H1-H4/L1-L4/M1-M5; richer doc type with all whole-mountain sections; sherpa = Giacomo Ciamician; mountain photo 1090×720 → CSS class `.mtn-151`). Built July 12, 2026. Third Chemistry mountain. ✅ FULLY DONE.
 
-- 🏔️ **Mont Blanc = Alternative Biochemistries** — `biology/Mont_Blanc_alternative_biochemistries/` — 🏴 FIRST BIOLOGY MOUNTAIN. Built July 12, 2026. 10 paths; richer doc type with all whole-mountain sections (Executive Snapshot, Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary). Images pending.
+- 🏔️ **Mont Blanc = Alternative Biochemistries** — `biology/Mont_Blanc_alternative_biochemistries/` — 🏴 FIRST BIOLOGY MOUNTAIN. Built July 12, 2026. 10 paths; richer doc type with all whole-mountain sections (Executive Snapshot, Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary). ✅ FULLY DONE: hub + 10 path pages + hero gallery (Frances Arnold) + lightbox + mountain photo (1280×720, 16:9 → `.mtn-178`) + /mountains/ grid card; committed + pushed.
 
 - 🏔️ **Kilimanjaro = Cure for Cancer** — `medicine/Kilimanjaro_cure_for_cancer/` — 🏴 FIRST MEDICINE MOUNTAIN. Built July 12, 2026.
 
