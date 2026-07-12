@@ -42,9 +42,29 @@ Completed so far:
 
 - 🏔️ **Saraghrar = Artificial Photosynthesis** — `chemistry/Saraghrar_artificial_photosynthesis/` (skeleton; 13 paths H1-H4/L1-L4/M1-M5; richer doc type with all whole-mountain sections; sherpa = Giacomo Ciamician; mountain photo 1090×720 → CSS class `.mtn-151`). Built July 12, 2026. Third Chemistry mountain. ✅ FULLY DONE.
 
-- **🧬 New subject: Medicine** — added to the menu July 12, 2026. First Medicine mountain coming soon.
+- 🏔️ **Kilimanjaro = Cure for Cancer** — `medicine/Kilimanjaro_cure_for_cancer/` — 🏴 FIRST MEDICINE MOUNTAIN. Built July 12, 2026.
 
-**⏭️ NEXT mountain: Nir's next Medicine pick.** Nir will choose it (mountain name + Deep Research text) — do NOT assume which one.
+  **HUB page** (`medicine/Kilimanjaro_cure_for_cancer/index.html`): Built first as a single page containing ALL the original overview content: 7 research areas (Cancer Immunotherapy, Targeted Molecular Therapy, Genome Instability, Epigenetic Reprogramming, Tumor Heterogeneity, Cancer Virology/Microbiome, Experimental/Synthetic Biology) with 85 curated resources + 7 research prompts. ⚠️ The original Deep Research text for Kilimanjaro was HUGE — Nir later gave individual "path" Deep Research results for deeper dives (like Riemann Hypothesis style).
+
+  **Path pages built so far (3 of 7 planned):**
+
+  | Path | Page | Size | Content |
+  |------|------|------|---------|
+  | **Path 1** | `Path_1_Cancer_Immunotherapy/index.html` | 137KB, 12 h2, 22 h3 | Cancer Immunotherapy — 6 sub-paths (Checkpoint, CAR-T, Vaccines, Oncolytic, TME, Natural), 6 base camps (BC1.1–BC2.3), whole-mountain sections, glossary, 30/90/180 plan, bibliography |
+  | **Path 2** | `Path_2_Targeted_Molecular_Therapy/index.html` | 83KB, 14 h2, 59 h3 | Targeted Molecular Therapy & Oncogene Addiction — 8 sub-paths (BCR-ABL, EGFR, PARP/Synthetic Lethality, KRAS/Undruggables, Differentiation, Tissue-Agnostic, Multi-Modal/Resistance, Metabolic), 40 base camps, whole-mountain sections, glossary, 30/90/180 plan, 68-source bibliography |
+  | **Path 3** | `Path_3_Genome_Instability_Precision_Medicine/index.html` | 108KB, 19 h2, 66 h3 | Cancer Genome Instability & Precision Medicine — 9 total parts (2 original + 7 appended): Parts 1-2 (Core + BC 1A-2C), Part 3 (Heterogeneity-Adaptive), Part 4 (Neoantigen Immunotherapy), Part 5 (DNA Repair/Synthetic Lethality), Part 6 (Microenvironment), Part 7 (Precision Prevention), Part 8 (Liquid Biopsy), Part 9 (Multi-omic AI). **35 base camps total, 26 glossary terms, 60+ bib entries** |
+
+  **🔑 CRITICAL: How Path 3 was built — the "append" pattern**
+  Nir gave Path 3 in two batches: first parts 1-2 (core overview + BC1A-2C), then parts 3-9 (detailed base camps for remaining paths). DeepSeek MUST APPEND, not replace. This was done by first building the file with an `<!-- APPEND_MARKER -->` comment, then replacing that marker with the new content in 4 sequential edits (each edit ≈ 25-35KB). The back-link and closing HTML tags stay at the bottom. If Nir gives content this way again, use the same marker-based append approach.
+
+  **⏳ STILL TO BUILD (for Kilimanjaro):**
+  - **Paths 4–6** — Nir said he has these ready (4 more individual Deep Research texts, since Path 3 was one of the original 7)
+  - **Path 7** — ChatGPT "fucked" Nir on this one, not yet done
+  - **Images** — No sherpa guide or mountain photo yet for Kilimanjaro (Nir hasn't provided them; no hero gallery, no /mountains/ grid card)
+
+  **Menu status:** Kilimanjaro — Cure for Cancer is in `header.html` under Medicine dropdown. Mountains grid card on `/mountains/` still needs adding (waiting for sherpa image).
+
+**⏭️ NEXT: Kilimanjaro Path 4 (Nir has Paths 4–6 ready to give).** Once those are built, remaining work: Path 7 (TBD), images, mountains grid card. Then any new mountains Nir chooses.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
