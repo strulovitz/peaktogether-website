@@ -16,7 +16,7 @@
 ## 0. What a "mountain" is + what Nir gives me
 
 - Each famous problem is a **"mountain."** Nir assigns a **real-world mountain name** (metaphor) — I **NEVER invent it**.
-- Nir also gives the **SUBJECT** = top-level folder: **mathematics / physics / chemistry / biology**.
+- Nir also gives the **SUBJECT** = top-level folder: **mathematics / physics / chemistry / biology / medicine**.
 - Nir pastes the **Deep Research text** (from a ChatGPT web chat).
 - Nir may later give **two images**: a **scientist "sherpa guide"** portrait + the **real mountain** photo.
 
@@ -38,7 +38,13 @@ Completed so far:
 
 - 🏔️ **Kangchenjunga = Goldbach's Conjecture** — `mathematics/Kangchenjunga_goldbach_conjecture/` (skeleton; **5 paths**; richer doc type with all whole-mountain sections: Executive Snapshot, Cross-Language Synthesis, Partial Results & Analogs, Risk/Feasibility & Payoff, Common Pitfalls, 30/90/180-Day Work Plan, Canonical Notation & Glossary; sherpa = **Leonhard Euler**; mountain photo 1080×720 → 3:2, new CSS class **`.mtn-150`**). Built July 11, 2026. Third Mathematics mountain. ✅ FULLY DONE: hub + 5 path pages + hero gallery (Euler welcome caption w/ the Diderot "God exists" algebra anecdote + Kangchenjunga verbatim anecdote) + lightbox + menu + /mountains/ grid; committed + pushed. Math copy-artifact fixes reported to Nir (dropped `\` on set-braces `\{\}`, subscripts `\mathfrak{M}_{a/q}`, `\int_{...}`, `\#`, `$P_k$`). CSS bumped **v28 → v29**.
 
-**⏭️ NEXT mountain: NOT YET DECIDED.** Nir will choose it (name + subject + Deep Research text) in a future session — do NOT assume which one.
+- 🏔️ **Broad Peak = Grand Unification** — `physics/Broad_Peak_grand_unification/` (skeleton; 7 paths; richer doc type with whole-mountain sections; sherpa = Sheldon Glashow; mountain photo 1120×720 → CSS class `.mtn-156`). Built July 11, 2026. Third Physics mountain. ✅ FULLY DONE.
+
+- 🏔️ **Saraghrar = Artificial Photosynthesis** — `chemistry/Saraghrar_artificial_photosynthesis/` (skeleton; 13 paths H1-H4/L1-L4/M1-M5; richer doc type with all whole-mountain sections; sherpa = Giacomo Ciamician; mountain photo 1090×720 → CSS class `.mtn-151`). Built July 12, 2026. Third Chemistry mountain. ✅ FULLY DONE.
+
+- **🧬 New subject: Medicine** — added to the menu July 12, 2026. First Medicine mountain coming soon.
+
+**⏭️ NEXT mountain: Nir's next Medicine pick.** Nir will choose it (mountain name + Deep Research text) — do NOT assume which one.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
@@ -181,7 +187,7 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
 - The menu lives **ONCE** in `/header.html`. Every page just has `<div data-component="header"></div>`; `components.js` fetches `header.html` and injects it. So I edit **one file** and the whole site updates.
 - It's a **3-level dropdown**:
   - **Level 1** (top bar): Home · The Arcade · **The Mountains** · How It Works · About · Play/GitHub buttons
-  - **Level 2** (inside "The Mountains"): **Mathematics · Physics · Chemistry · Biology** — these are `<li class="has-submenu"><span class="submenu-toggle">Subject</span><ul class="submenu">…</ul></li>`
+  - **Level 2** (inside "The Mountains"): **Mathematics · Physics · Chemistry · Biology · Medicine** — these are `<li class="has-submenu"><span class="submenu-toggle">Subject</span><ul class="submenu">…</ul></li>`
   - **Level 3** (inside each subject): the mountain links, `<li><a href="/…/">Name</a></li>`
 - **Desktop** = pure CSS `:hover` with invisible "bridge" `::after` zones (in `style.css`). **Mobile (≤900px)** = hamburger toggles `.nav-open`; tapping a `.submenu-toggle` toggles `.submenu-open` (accordion in `components.js`). **DO NOT touch `components.js`.**
 - **Both "The Arcade" and "The Mountains" are now dropdowns** (July 2026). Arcade = "All the games" (`.submenu-heading`) + 4 Level-2 leaf game links; Mountains = "All the mountains" (`.submenu-heading`) + subject sub-dropdowns. There's also a standalone `/mountains/` and `/arcade/` overview page.
@@ -201,7 +207,7 @@ MathJax decodes entities back before typesetting, so escaping is safe and requir
   </ul>
   ```
 - A subject's **later mountains**: just add another `<li><a …></li>` next to the existing ones (like Mathematics holds both Riemann + Navier–Stokes).
-- **Subjects are permanent** — never remove/rename Physics/Chemistry/Biology; each will hold MANY mountains.
+- **Subjects are permanent** — never remove/rename Physics/Chemistry/Biology/Medicine; each will hold MANY mountains.
 - To keep the edit unique/safe: include the subject's `<span class="submenu-toggle">Subject</span>` line in the match so I only touch the right subject (Physics/Chemistry/Biology all have identical "Coming soon").
 - After editing: verify exactly the intended change (see §9). **Never** edit the CSS or JS for a menu change.
 
