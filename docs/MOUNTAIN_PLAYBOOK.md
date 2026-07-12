@@ -65,12 +65,11 @@ Completed so far:
   - **APPEND pattern (Path 3 & 4):** Write file with `<!-- APPEND_MARKER -->`, replace marker with each batch, add new marker for next batch.
   - **OCR from PDF (Path 6):** PDFs with custom font encoding (glyph indices, no ToUnicode CMap) require Tesseract OCR at 600DPI with pymupdf rendering. Handle page rotation. Isolated venv.
 
-  **⏳ REMAINING:**
-  - **Path 7** — ChatGPT "fucked" Nir on this one. TBD.
+  **❌ Path 7:** PERMANENTLY CANCELLED — Nir has only 6 paths. NEVER ask about Path 7 again.
 
   **Menu:** Kilimanjaro in header.html under Medicine. Mountains grid card added.
 
-  **⏭️ NEXT: Biology mountains.** Nir said "3 mountains in biology." Wait for Nir's picks.
+  **⏭️ NEXT: Biology mountains.** Nir said "3 mountains in biology." First up: 🏔️ Mont Blanc = Alternative Biochemistries.
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
