@@ -42,7 +42,7 @@ Completed so far:
 
 - 🏔️ **Saraghrar = Artificial Photosynthesis** — `chemistry/Saraghrar_artificial_photosynthesis/` (skeleton; 13 paths H1-H4/L1-L4/M1-M5; richer doc type with all whole-mountain sections; sherpa = Giacomo Ciamician; mountain photo 1090×720 → CSS class `.mtn-151`). Built July 12, 2026. Third Chemistry mountain. ✅ FULLY DONE.
 
-- 🏔️ **Mont Blanc = Alternative Biochemistries** — `biology/Mont_Blanc_alternative_biochemistries/` — 🏴 FIRST BIOLOGY MOUNTAIN. Built July 12, 2026. 10 paths; richer doc type with all whole-mountain sections (Executive Snapshot, Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary). ✅ FULLY DONE: hub + 10 path pages + hero gallery (Frances Arnold) + lightbox + mountain photo (1280×720, 16:9 → `.mtn-178`) + /mountains/ grid card; committed + pushed.
+- 🏔️ **Mont Blanc = Alternative Biochemistries** — `biology/Mont_Blanc_alternative_biochemistries/` — 🏴 FIRST BIOLOGY MOUNTAIN. Built July 12, 2026. 10 paths; richer doc type with all whole-mountain sections (Executive Snapshot, Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary). ✅ FULLY DONE: hub + 10 path pages + hero gallery (Frances Arnold) + lightbox + mountain photo (960×720, 4:3 → default, no CSS modifier) + /mountains/ grid card; committed + pushed. 🖼️ Photo retrimmed July 12.
 
 - 🏔️ **Kilimanjaro = Cure for Cancer** — `medicine/Kilimanjaro_cure_for_cancer/` — 🏴 FIRST MEDICINE MOUNTAIN. Built July 12, 2026.
 
@@ -71,7 +71,31 @@ Completed so far:
 
   **Menu:** Kilimanjaro in header.html under Medicine. Mountains grid card added.
 
-  **⏭️ NEXT: Biology mountains.** Nir said "3 mountains in biology." First up: 🏔️ Mont Blanc = Alternative Biochemistries.
+  **⏭️ NEXT:** To be decided by Nir. All 5 subjects have mountains now: 3 Mathematics, 3 Physics, 3 Chemistry, 3 Biology, 1 Medicine = 14 mountains total as of July 12, 2026.
+
+- 🏔️ **Matterhorn = Origin of Life** — `biology/Matterhorn_origin_of_life/` — 🏴 SECOND BIOLOGY MOUNTAIN. Built July 12, 2026. 11 paths; richer doc type with all whole-mountain sections; sherpa = J.B.S. Haldane; mountain photo 1080×720 (3:2 → `.mtn-150`). ✅ FULLY DONE: hub + 11 path pages + hero gallery + lightbox + mountains grid card.
+
+- 🏔️ **Eiger = Aging Mechanisms** — `biology/Eiger_aging_mechanisms/` — 🏴 THIRD BIOLOGY MOUNTAIN. Built July 12, 2026. 13 paths; richer doc type with all whole-mountain sections; sherpa = Carol Greider; mountain photo 1094×720 → new CSS class `.mtn-152` (flex-grow 1.519). ✅ FULLY DONE: hub + 13 path pages + hero gallery + lightbox + mountains grid card. CSS bumped v32→v33.
+
+**🧬 Biology is COMPLETE — 3 mountains total.**
+
+**🏔️ MOUNTAINS AT A GLANCE (14 total as of July 12, 2026):**
+
+| Mountain | Problem | Subject | CSS | Status |
+|----------|---------|---------|-----|--------|
+| Everest | Riemann Hypothesis | Mathematics | `.mtn-165` | ✅ Shipped |
+| Annapurna I | Navier–Stokes | Mathematics | default (4:3) | ✅ Shipped |
+| Kangchenjunga | Goldbach's Conjecture | Mathematics | `.mtn-150` | ✅ Shipped |
+| K2 | Turbulence | Physics | default (4:3) | ✅ Shipped |
+| Gasherbrum I | Quantum Gravity | Physics | `.mtn-141` | ✅ Shipped |
+| Broad Peak | Grand Unification | Physics | `.mtn-156` | ✅ Shipped |
+| Tirich Mir | Room-Temperature Superconductors | Chemistry | `.mtn-178` | ✅ Shipped |
+| Istor-o-Nal | Economical Carbon Capture | Chemistry | default (4:3) | ✅ Shipped |
+| Saraghrar | Artificial Photosynthesis | Chemistry | `.mtn-151` | ✅ Shipped |
+| Mont Blanc | Alternative Biochemistries | Biology | default (4:3) | ✅ Shipped |
+| Matterhorn | Origin of Life | Biology | `.mtn-150` | ✅ Shipped |
+| Eiger | Aging Mechanisms | Biology | `.mtn-152` | ✅ Shipped |
+| Kilimanjaro | Cure for Cancer | Medicine | `.mtn-149` | ✅ Shipped |
 
 **Default build = SKELETON:** one hub + one page per path; base camps are **sections** inside the path pages (no separate base-camp sub-pages unless Nir later gives per-path deep dives, RH-style).
 
