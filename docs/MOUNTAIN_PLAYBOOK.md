@@ -42,6 +42,8 @@ Completed so far:
 
 - 🏔️ **Saraghrar = Artificial Photosynthesis** — `chemistry/Saraghrar_artificial_photosynthesis/` (skeleton; 13 paths H1-H4/L1-L4/M1-M5; richer doc type with all whole-mountain sections; sherpa = Giacomo Ciamician; mountain photo 1090×720 → CSS class `.mtn-151`). Built July 12, 2026. Third Chemistry mountain. ✅ FULLY DONE.
 
+- 🏔️ **Mont Blanc = Alternative Biochemistries** — `biology/Mont_Blanc_alternative_biochemistries/` — 🏴 FIRST BIOLOGY MOUNTAIN. Built July 12, 2026. 10 paths; richer doc type with all whole-mountain sections (Executive Snapshot, Cross-Language, Partial Results, Risk/Feasibility, Path Interactions, Pitfalls, Work Plan, Glossary). Images pending.
+
 - 🏔️ **Kilimanjaro = Cure for Cancer** — `medicine/Kilimanjaro_cure_for_cancer/` — 🏴 FIRST MEDICINE MOUNTAIN. Built July 12, 2026.
 
   **HUB page** (`medicine/Kilimanjaro_cure_for_cancer/index.html`): Built first as a single page containing ALL the original overview content: 7 research areas (Cancer Immunotherapy, Targeted Molecular Therapy, Genome Instability, Epigenetic Reprogramming, Tumor Heterogeneity, Cancer Virology/Microbiome, Experimental/Synthetic Biology) with 85 curated resources + 7 research prompts. ⚠️ The original Deep Research text for Kilimanjaro was HUGE — Nir later gave individual "path" Deep Research results for deeper dives (like Riemann Hypothesis style).
