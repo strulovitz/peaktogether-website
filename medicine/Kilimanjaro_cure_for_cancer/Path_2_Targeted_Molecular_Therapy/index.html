@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Path 2: Targeted Molecular Therapy — Kilimanjaro — Peak Together</title>
+    <link rel="stylesheet" href="/style.css?v=31">
+</head>
+<body>
+    <div data-component="header"></div>
+    <main class="page">
+        <h1>Kilimanjaro Path 2: Targeted Molecular Therapy &amp; Oncogene Addiction</h1>
+        <p class="subtitle">Exploiting the dependence of cancers on single dominant oncogenes — from imatinib&rsquo;s CML revolution to drugging the &ldquo;undruggable&rdquo; KRAS. Together, we climb.</p>
+        <h2>Executive Snapshot</h2>
+        <p>Targeted molecular therapy exploits oncogene addiction &ndash; the dependence of some cancers on a single dominant oncogene &ndash; to achieve striking, if often temporary, clinical remissions. Over the past two decades, this strategy has led to unprecedented successes: chronic myelogenous leukemia (CML) was transformed from fatal to manageable with BCR-ABL kinase inhibitors, and a rare leukemia (APL) became curable (~90% survival) with targeted differentiation therapy (E1). New drugs now target &ldquo;undruggable&rdquo; oncogenes like KRAS (E3), and tumor-agnostic approvals (e.g. TRK-fusion inhibitors) exploit driver mutations regardless of cancer type (E2). However, most solid tumors eventually escape control via resistance mutations, pathway bypass, or clonal heterogeneity &ndash; so cures remain elusive outside a few scenarios. This report charts 8 interdependent Paths toward a theoretical cure, each with Base-Camps (key concepts, assays, models) and guided by tiered evidence (E1&ndash;E5) from the provided sources. Suppressed or overlooked leads (e.g. metabolic therapies with off-patent drugs) are flagged, alongside tissue-agnostic strategies (TRK fusions, PARP synthetic-lethality) and synergistic combinations. Recurring pitfalls &ndash; such as therapies that dazzled in mouse models only to disappoint in human trials &ndash; are highlighted to inform adaptive, evolution-aware tactics. We conclude with a 30/90/180&ndash;day plan blending study and research, a glossary of canonical terms, and a bibliography by Path.</p>
+        <h2>Inventory of Candidate Therapeutic Paths</h2>
+        <h3>Path 1 &ndash; Oncogenic Kinase Addiction (BCR-ABL &amp; Beyond)</h3>
+        <p><strong>Rationale &amp; Scope:</strong> This path targets cancers driven by a single, constitutively active kinase oncoprotein. CML is the poster child: virtually all cases have the BCR-ABL fusion tyrosine kinase, and their leukemic cells are &ldquo;addicted&rdquo; to its signals. In oncogene-addicted cells, turning off that one kinase is like &ldquo;removing the linchpin,&rdquo; causing apoptosis while sparing normal cells (E5). Gleevec (imatinib) proved this concept by inducing near-universal remissions in early-phase CML patients with minimal toxicity (E2). This path also extends to other kinases: e.g. KIT in GIST, EGFR in some lung cancers, and ALK or RET fusions in certain tumors. The challenge is ensuring complete kinase suppression (pharmacokinetics, blood-brain barrier penetration) and managing resistance.</p>
+        <p><strong>Path Prerequisites:</strong> A clearly identified driver kinase abnormality (translocation or mutation) that: (1) is present in most tumor cells, (2) is absent or non-essential in normal tissues, and (3) has a druggable ATP pocket or allosteric site. Cytogenetics or sequencing must reliably detect the lesion (e.g. BCR-ABL by PCR/FISH). Also required: a potent tyrosine kinase inhibitor (TKI) with high specificity to avoid off-target toxicity.</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> This path often works synergistically with standard therapies: e.g. using TKIs as adjuvants post-surgery (imatinib after GIST resection improved cure rates) or combining with minimal chemotherapy. Cross-path synergy: Path 7 (Resistance Management) dovetails here &ndash; next-generation TKIs can be deployed when first-line fails (e.g. ponatinib for BCR-ABL T315I mutation), or combined if tolerable.</p>
+        <p><strong>Progress Markers:</strong> Key markers include hematologic remission (normal blood counts), cytogenetic remission (no Philadelphia chromosome cells in marrow), and molecular remission (BCR-ABL mRNA undetectable by PCR). Achieving deep molecular remission correlates with long-term cure-like outcomes in CML (5-year survival &gt;95% on imatinib). In solid tumors like GIST, radiographic response (tumor shrinkage on CT/PET) and symptomatic improvement are early markers, though eventual progression is common as resistant clones emerge.</p>
+
+        <h3>Path 2 &ndash; EGFR Dependency in Lung Cancer</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Some non-small cell lung cancers (NSCLCs), especially adenocarcinomas in never-smokers, are driven by mutant EGFR. These mutants (e.g. L858R, exon19 deletions) send constant growth signals yet also confer an Achilles&rsquo; heel: the tumors become exquisitely sensitive to EGFR-blocking drugs. This is a quintessential case of oncogene addiction &ndash; the cancer cell&rsquo;s survival hinges on aberrant EGFR signaling, so EGFR TKIs cause tumor cells to undergo apoptosis whereas EGFR-normal cells are less affected. The path covers the development of three generations of EGFR inhibitors and the management of inevitable drug resistance.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Biomarker identification &ndash; reliable tests for EGFR mutations in tumor tissue or plasma to select patients. (2) Targeted agents &ndash; an EGFR kinase inhibitor that preferentially targets mutant EGFR over wild-type. (3) Tumor must be dependent on the EGFR pathway (mutation is a driver, not just a passenger).</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> EGFR-mutant lung cancers respond so well to TKIs that targeted therapy is first-line standard. Combining EGFR TKIs with other agents has been explored: e.g. EGFR TKI + anti-angiogenic (bevacizumab) modestly improved PFS, and in resistant cases EGFR TKI + MET inhibitor can overcome bypass resistance. There is caution in combining with immunotherapy: EGFR-driven tumors tend to have low mutation burden and poor response to PD-1 inhibitors.</p>
+        <p><strong>Progress Markers:</strong> Dramatic tumor shrinkage often appears in the first 6&ndash;8 weeks on EGFR TKI for responsive patients &ndash; sometimes near complete resolution of lung lesions. Overall response rate (ORR) ~70% and median PFS ~12&ndash;14 months on osimertinib (front-line) vs ~6 months on chemo. In real-time, checking circulating tumor DNA for EGFR mutations can guide if resistance is emerging (like detecting T790M to switch to osimertinib).</p>
+
+        <h3>Path 3 &ndash; Synthetic Lethality (PARP &amp; DNA Repair)</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Path 3 targets tumors by exploiting a &ldquo;genetic trap&rdquo; &ndash; a pair of pathways where the cancer can survive losing one but not both. The poster example: BRCA1/2-mutant cancers and PARP inhibitors. BRCA-deficient cells can&rsquo;t repair double-strand DNA breaks via homologous recombination (HR); they rely on PARP-mediated single-strand break repair. Inhibiting PARP causes replication forks to collapse into double-strand breaks that BRCA-deficient cells cannot fix, leading to selective tumor cell death. This path also includes other synthetic lethal strategies: ATR inhibitors for ATM-mutant cancers, or seeking RAS synthetic lethal partners.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Known tumor suppressor or DNA repair deficiency in the cancer (germline or somatic). (2) An inhibitor for the complementary pathway. (3) The synthetic lethal relationship must be well-validated preclinically. (4) A way to identify responding patients (biomarker assay).</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> Synthetic lethal drugs often work synergistically with DNA-damaging chemotherapies. This path intersects with Path 7 (combination strategies): e.g. combining PARP inhibitors with immunotherapy is under investigation. There&rsquo;s also interplay with Path 8 (metabolic vulnerabilities): many synthetic lethal interactions involve stress pathways.</p>
+        <p><strong>Progress Markers:</strong> In BRCA-mutant ovarian cancer, PARP inhibitors as maintenance therapy more than doubled PFS versus placebo. A striking early signal was durable tumor shrinkage in PARP inhibitor trials: patients with advanced BRCA-mutant cancers who had exhausted chemo options still achieved partial responses lasting &gt;1 year. Another marker is &ldquo;BRCAness&rdquo; &ndash; phenotypic measures of HR repair deficiency &ndash; to broaden eligibility beyond BRCA mutations.</p>
+
+        <h3>Path 4 &ndash; Drugging the &ldquo;Undruggable&rdquo; (KRAS &amp; Beyond)</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Path 4 aims to conquer oncogenes that historically evaded therapeutic targeting due to lack of obvious binding pockets &ndash; RAS, MYC, &beta;-catenin, etc. It involves innovative chemistry and biology: designing covalent inhibitors that latch onto mutant-specific residues (KRAS^G12C), disrupting protein-protein interactions (nutlin-3a for MDM2-p53), or leveraging targeted protein degradation (PROTACs). The KRAS^G12C story is emblematic: scientists found that the cysteine in the 12th position of KRAS^G12C can be covalently modified by small molecules to lock KRAS in its inactive GDP-bound form. After decades of Ras being considered impossible to inhibit, sotorasib showed tumor shrinkage and got approved.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Deep structural insight to identify cryptic pockets. (2) Novel chemistries such as irreversible covalent bonding to a mutant residue. (3) Cellular proof of concept that hitting the target yields an antiproliferative effect. (4) Companion diagnostics to find patients.</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> Sometimes the best way to drug an undruggable is to combine partial solutions. E.g., in RAS-driven tumors, combining a KRAS^G12C inhibitor with a MEK inhibitor or SHP2 inhibitor might produce a deeper blockade. This path also intersects Path 7: an &ldquo;undruggable&rdquo; might become druggable over time with new tech (PROTACs), and combining that with other treatments could yield cures.</p>
+        <p><strong>Progress Markers:</strong> Sotorasib&rsquo;s phase I showed ~37% response in heavily pretreated KRAS^G12C NSCLC &ndash; modest compared to EGFR inhibitors, but remarkable given KRAS had zero targeted options before. Another marker: duration of response &ndash; with KRAS inhibitors, many responses are not long (median PFS ~6 months), indicating resistance (often new RAS mutations or pathway reactivation). Regulatory approval of sotorasib validates that an undruggable target can become druggable.</p>
+
+        <h3>Path 5 &ndash; Differentiation Therapy (APL Model)</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Instead of killing cancer cells outright, Path 5 aims to reform them &ndash; inducing malignant cells to resume a normal differentiation program. The paradigm is acute promyelocytic leukemia (APL): a single aberrant transcription factor (PML-RAR&alpha; fusion) keeps promyelocytes stuck in an immature, proliferative state. ATRA + arsenic trioxide has made APL &ndash; once the most fatal acute leukemia &ndash; into a highly curable disease (&gt;90% cure). This path explores leveraging similar principles in other cancers: targeting epigenetic or transcriptional repressors to release differentiation blocks.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Defined differentiation arrest driven by a lesion that blocks a specific step of cell maturation. (2) Agents that reverse that block &ndash; often hormone analogues, vitamins, or enzyme inhibitors. (3) Biomarkers of differentiation. (4) Clinical support to manage differentiation syndrome.</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> Differentiation therapy often synergizes with cytotoxic therapy or targeted therapy. For instance, in high-risk APL, adding a bit of conventional chemo or an anti-CD33 antibody can help. Another synergy is with immunotherapy: differentiated cancer cells may express more differentiation antigens or be more prone to immune clearance. Path 5 can intersect with Path 8 (metabolic aspects) &ndash; differentiation of cells often changes their metabolic state.</p>
+        <p><strong>Progress Markers:</strong> In APL, the markers are dramatic: disappearance of promyeloblasts from blood and marrow within days of therapy, maturation of neutrophils, and molecular remission (PML-RAR&alpha; PCR negative). The early death rate from APL has plummeted to ~5-8%, and long-term relapse-free survival exceeds 90%. For solid tumors, one might look for tumor cells taking on more mature features or decreased expression of stem cell/progenitor markers.</p>
+
+        <h3>Path 6 &ndash; Tissue-Agnostic Targeting &amp; Precision Trials</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Path 6 breaks the organ-specific mold by targeting molecular alterations across all tumor types. The flagship successes are NTRK gene fusions (found in &lt;1% of many cancers): a selective TRK inhibitor yields high response rates across all ages and histologies. Other examples include RET fusions, BRAF V600E, and MSI-high responding to PD-1 immunotherapy across cancer types. This path emphasizes how precision oncology trials (like NCI-MATCH) have attempted to systematically match drugs to mutations across diseases.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Comprehensive molecular testing infrastructure to screen large numbers of patients. (2) Drugs available for those targets. (3) Regulatory and trial design innovation for tissue-agnostic approvals. (4) Biological rationale that the oncogene drives the tumor across contexts.</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> This path intersects conceptually with Path 1 and 2 but is distinguished by tissue-agnostic application. Synergy with Path 7: in tissue-agnostic trials, combining per-cohort strategies is often needed (e.g. BRAF-mutant colon cancer needing EGFR inhibitor co-treatment). Also, immunotherapy can be considered a special case of tissue-agnostic targeting (targeting MSI-high/TMB).</p>
+        <p><strong>Progress Markers:</strong> Larotrectinib&rsquo;s ORR was 75% and median duration not reached at ~1 year follow-up &ndash; this convinced regulators that &ldquo;if you find an NTRK fusion, this drug works, no matter the cancer&rdquo; (E2 evidence). Another measure: currently a handful of tissue-agnostic indications exist (NTRK fusions, MSI-high), with more expected as our ability to identify drivers improves.</p>
+
+        <h3>Path 7 &ndash; Multi-Modal Targeting &amp; Resistance Management</h3>
+        <p><strong>Rationale &amp; Scope:</strong> While single-agent targeted therapies often induce dramatic initial responses, cancers frequently adapt and progress. Path 7 addresses this by using combinatorial logic and adaptive strategies. Combination therapy: two or more agents given together to block parallel pathways or prevent emergence of resistant clones. Adaptive therapy: treatments rotated or dosed to maintain a stable tumor burden and delay resistance. A concrete example: BRAF^V600-mutant melanoma &ndash; BRAF inhibitor alone yields median ~6 months before resistance, but adding a MEK inhibitor extended PFS to ~10&ndash;15 months and became standard.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Knowledge of resistance pathways via biopsies and laboratory models. (2) Agents to target those escape routes. (3) Tolerability of combos. (4) Biomarker monitoring for early resistance detection. (5) For adaptive therapy: frequent monitoring and flexible dosing protocols.</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> This path is inherently synergistic with all other Paths &ndash; it&rsquo;s about combining them! E.g., combine Path 1&rsquo;s kinase inhibitor with Path 8&rsquo;s metabolic drug to hit the tumor from two sides. Synergies also exist with immunotherapy: RAF/MEK inhibition can increase T cell infiltration in melanoma. Path 7 leans on pharmacologic synergy &ndash; understanding how drug combinations interact at molecular and clinical levels.</p>
+        <p><strong>Progress Markers:</strong> BRAF + MEK in melanoma improved 3-year survival from ~30% to ~50% in trials (E2 evidence). In ALK+ lung cancer, sequential use of more potent ALK inhibitors pushed median survival past 5 years. For adaptive therapy trials (still in pilot phase), markers might be longer time to progression compared to historical continuous therapy. Radiologically, one might see tumors oscillating under adaptive dosing &ndash; a new pattern to measure.</p>
+
+        <h3>Path 8 &ndash; Metabolic &amp; Microenvironmental Vulnerabilities (&#x1F3F4; Suppressed Leads)</h3>
+        <p><strong>Rationale &amp; Scope:</strong> Path 8 shifts focus from classic oncogenes to cancer cells&rsquo; support systems: altered metabolism, oxidative stress management, autophagy, and microenvironment interactions. These are non&ndash;oncogene addictions &ndash; cancer cells heavily depend on certain normal cellular functions being hyperactive. For example, the cheap drug dichloroacetate (DCA) activates pyruvate dehydrogenase, pushing pyruvate into the TCA cycle &ndash; selectively killing cancer cells by oxidative stress while sparing normal cells (E4 evidence). Metformin, a safe diabetes drug, activates AMPK and lowers insulin; epidemiologic studies link it to reduced cancer incidence. Many of these leads involve off-patent compounds, meaning pharmaceutical investment has been low.</p>
+        <p><strong>Path Prerequisites:</strong> (1) Robust preclinical rationale that normal cells aren&rsquo;t equally affected. (2) Sometimes patient subset identification. (3) Repurposed drug availability or new drug development. (4) Biomarker of effect (e.g. lactate levels, FDG uptake decrease).</p>
+        <p><strong>Interdependencies &amp; Synergies:</strong> This path is a natural partner to others. Metabolic drugs can be combined with oncogene-targeted drugs to prevent metabolic compensation. Metformin has been studied combined with chemotherapy and targeted agents. Another synergy: dietary interventions (ketogenic diet to exploit glycolysis dependence) could pair with metabolic drugs. The low toxicity of these approaches means they can often be added to other regimens without huge added side-effects.</p>
+        <p><strong>Progress Markers:</strong> For DCA, a small trial in glioblastoma reported some patients had stable disease and metabolic changes in tumors. For metformin, large retrospective cohorts indicated better cancer outcomes, and the NCIC MA.32 trial testing metformin in early breast cancer is a definitive progress marker awaited. Functional imaging &ndash; a drop in tumor FDG uptake after starting a glycolysis inhibitor &ndash; suggests target engagement.</p>
+
+        <p><em>(&#x1F3F4; Suppressed Lead: indicates a path or agent historically overlooked or underfunded, often due to lack of commercial interest rather than scientific merit.)</em></p>
+
+        <h2>Base-Camps for Path 1 &ndash; Oncogenic Kinase Addiction</h2>
+
+        <h3>BC1: Understanding Oncogene Addiction in CML</h3>
+        <p><strong>Stepping Stones:</strong> Grasp how the Philadelphia chromosome t(9;22) creates the BCR-ABL tyrosine kinase, which constitutively activates growth signaling. Learn why CML cells depend on BCR-ABL for survival (e.g. it provides anti-apoptotic signals).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch17 Sidebar 17.14 (E5)</strong> &ndash; defines oncogene addiction and illustrates why disabling a single oncogenic pathway (like mutant EGFR or BCR-ABL) can kill cancer cells that harbor additional latent lethal mutations.</li>
+            <li><strong>Abeloff Sec.5 (E5)</strong> &ndash; contrasts oncogene addiction vs non&ndash;oncogene addiction, citing BCR-ABL/Imatinib as proof that cancers can become hooked on one oncoprotein for survival.</li>
+            <li><strong>Ji Luo et al., Cell 2009 (E5)</strong> &ndash; frames oncogene addiction within cell stress: oncogenes drive proliferation but at cost of proteotoxic or metabolic stress; if that oncogene&rsquo;s activity is suddenly removed, the cancer cell&rsquo;s buffering systems get overwhelmed, leading to cell death.</li>
+        </ul>
+
+        <h3>BC2: Imatinib&rsquo;s Mechanism &ndash; Rational Inhibitor Design</h3>
+        <p><strong>Stepping Stones:</strong> Study the structure of ABL kinase and how imatinib (STI-571) binds the ATP pocket in a unique inactive conformation. Understand specificity: imatinib was designed to exploit subtle ABL features, inhibiting BCR-ABL strongly while sparing most normal kinases.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Fig.17.13 and text (E5)</strong> &ndash; describes how Gleevec binds the Abl kinase domain, &ldquo;locking&rdquo; it in an inactive state; notably, only 4 of ~90 tyrosine kinases are substantially inhibited at therapeutic doses.</li>
+            <li><strong>Weinberg Fig.17.14 / Ostrem et al. 2013 (E4)</strong> &ndash; provides a model of designing small molecules to bind a mutant protein pocket and shift it to inactive GDP-bound state, analogous to imatinib&rsquo;s effect on Abl.</li>
+            <li><strong>Abeloff Ch.30 (Targeted Therapy) (E5)</strong> &ndash; discusses how TKIs can be broad or selective; imatinib&rsquo;s multi-kinase activity was initially a concern but later a boon for treating GIST and hypereosinophilic syndrome.</li>
+        </ul>
+
+        <h3>BC3: Clinical Breakthrough &ndash; CML Remission Data</h3>
+        <p><strong>Stepping Stones:</strong> Review pivotal trial outcomes: chronic-phase CML patients on imatinib experienced &gt;90% complete hematologic response and high cytogenetic remission rates, far surpassing prior interferon-based therapy. Learn to interpret survival curves and remission depth (PCR).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; notes the initial 1998 phase I/II trial where all 31 patients achieved remissions with minimal side effects, and by 2006 five-year follow-up, &lt;5% had died of CML causes.</li>
+            <li><strong>Weinberg Fig.17.30 &amp; text (E5)</strong> &ndash; visually shows a patient&rsquo;s blood smear and BCR-ABL PCR levels pre- vs post-Gleevec, illustrating both clinical and molecular response.</li>
+            <li><strong>DeVita Ch.17 (Leukemias)</strong> &ndash; provides context on imatinib vs interferon+ARA-C trial (IRIS study) results (E1), the randomized trial confirming imatinib&rsquo;s superiority.</li>
+        </ul>
+
+        <h3>BC4: Extending to KIT &amp; PDGFRA &ndash; GIST Success</h3>
+        <p><strong>Stepping Stones:</strong> Understand that imatinib&rsquo;s inhibition of KIT receptor tyrosine kinase enabled a new treatment for gastrointestinal stromal tumors (driven by KIT/PDGFRA mutations). Examine imaging or case studies of GIST tumor shrinkage on imatinib and the concept of adjuvant vs metastatic setting efficacy.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; explains that KIT mutations drive ~85% of GISTs, and imatinib induced clear regression in ~70% of advanced GIST patients (see Fig.17.34A).</li>
+            <li><strong>Weinberg Fig.17.34B &amp; text (E5)</strong> &ndash; presents CT scans of a GIST patient: dramatic initial response followed by re-emergence of resistant nodules ~9 months later, each harboring new KIT mutations (lesson on acquired resistance).</li>
+            <li><strong>Abeloff Sec. on Sarcoma (E5)</strong> &ndash; mentions GIST and TKIs, reinforcing that a single oncogene can be the Achilles&rsquo; heel across different diseases.</li>
+        </ul>
+
+        <h3>BC5: Resistance &amp; Next-Gen TKIs</h3>
+        <p><strong>Stepping Stones:</strong> Explore mechanisms by which cancer cells escape single-kinase blockade: point mutations in the kinase domain (e.g. ABL T315I), gene amplification, or activation of alternate pathways. Learn about second- and third-generation TKIs (dasatinib, nilotinib, ponatinib) and mutation-specific inhibitors.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; illustrates the T315I mutation in BCR-ABL that bumps Gleevec out, and how ponatinib was crafted to circumvent that steric clash.</li>
+            <li><strong>DeVita Ch.30 (Targeted Therapy/Lung) (E5)</strong> &ndash; outlines &ldquo;generations&rdquo; of TKIs and how later generations tackle resistance mutations (concept transferable to CML).</li>
+            <li><strong>Lord &amp; Ashworth 2017 (Science) (E5)</strong> &ndash; underscores that acquired resistance emerges in most patients on targeted monotherapy and enumerates mechanisms; calls for strategies to delay resistance.</li>
+        </ul>
+        <p><em>(Evidence tiers:) E1 &ndash; Imatinib&rsquo;s efficacy is supported by Phase III trials and long-term follow-up; E2 &ndash; extension to GIST from early trials and FDA approvals; E5 &ndash; textbook and expert reviews provide mechanistic insights.</em></p>
+
+        <h2>Base-Camps for Path 2 &ndash; EGFR Dependency in Lung Cancer</h2>
+
+        <h3>BC1: EGFR Mutation Biology &amp; Oncogene Addiction</h3>
+        <p><strong>Stepping Stones:</strong> Study how specific EGFR mutations (in the kinase domain) lead to constitutive signaling but also alter the receptor&rsquo;s shape to favor drug binding. Recognize the clinical phenotype: non-smoker, Asian ethnicity, adenocarcinoma histology &ndash; which led to the discovery of these mutations.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Sidebar &ldquo;Oncogene addiction may explain Iressa/Tarceva success&rdquo; (E5)</strong> &ndash; describes how mutant EGFRs make NSCLC cells ~100&times; more sensitive to TKIs and proposes why: the cells have acquired other changes that are lethal unless the mutant EGFR keeps them alive.</li>
+            <li><strong>Abeloff Ch.8 (Molecular Oncology) on EGFR signaling (E5)</strong> &ndash; background on how EGFR drives proliferation and survival.</li>
+            <li><strong>DeVita (Lung Cancer section) (E5)</strong> &ndash; provides context: ~15% of Western NSCLC and ~50% of Asian NSCLC harbor EGFR mutations.</li>
+        </ul>
+
+        <h3>BC2: 1st-Gen TKIs (Gefitinib/Erlotinib) &ndash; Proof of Concept</h3>
+        <p><strong>Stepping Stones:</strong> Learn about the initial trials: before mutations were known, gefitinib had mixed results in unselected patients, but astonishing durable responses in a few, which on retrospective analysis all had EGFR mutations. Know the differences: reversible ATP-competitive inhibitors, daily oral dosing, common rash side effect.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; notes that only certain tumors responded strongly to Iressa/Tarceva, leading to molecular marker stratification.</li>
+            <li><strong>DeVita Ch.30 (E5)</strong> &ndash; lists that classical sensitizing EGFR mutations yield ORRs of 60&ndash;80% and &gt;1 year PFS on TKIs, whereas wild-type EGFR cases do not.</li>
+            <li><strong>Abeloff (Clinical Lung Oncology)</strong> &ndash; discusses the BR.21 trial (erlotinib vs placebo) that showed a survival benefit in previously treated NSCLC (E2).</li>
+        </ul>
+
+        <h3>BC3: Resistance Mechanisms &ndash; T790M and Bypass</h3>
+        <p><strong>Stepping Stones:</strong> Understand the most common acquired resistance to first-gen EGFR TKIs: the T790M gatekeeper mutation (appearing in ~50% of relapsed patients) which increases ATP affinity and blocks drug binding. Also cover other mechanisms: MET amplification, HER2 amplification, small-cell lung cancer transformation, downstream KRAS mutations.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Lord &amp; Ashworth (Science) (E5)</strong> &ndash; draws parallels with PARP resistance but conceptually similar: secondary mutations (like T790M in EGFR) and bypass signaling drive resistance under drug pressure.</li>
+            <li><strong>DeVita (Lung, EGFR subsection) (E5)</strong> &ndash; explains on-target (another EGFR mutation) vs off-target (bypass pathways) resistance and therapeutic approaches for each.</li>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; mentions EGFR T790M as analogous to Abl T315I as an inevitable mutation requiring next-gen drug.</li>
+        </ul>
+
+        <h3>BC4: Next-Generation EGFR Inhibitors</h3>
+        <p><strong>Stepping Stones:</strong> Examine how afatinib (2nd-gen, covalent but less mutant-selective) and osimertinib (3rd-gen, covalent and mutant-specific including T790M) were developed to tackle resistance and improve CNS penetration. Note their clinical trial outcomes.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>DeVita Ch.30 (E5)</strong> &ndash; delineates first-, second-, third-generation EGFR TKIs and their properties (irreversible binding, wild-type sparing, CNS penetration for osimertinib).</li>
+            <li><strong>DeVita (Lung Cancer therapy) (E5)</strong> &ndash; notes that when backed by Phase III data, later-generation agents are preferred first-line (e.g. osimertinib for EGFR mutant NSCLC).</li>
+            <li><strong>FLAURA trial data (E2)</strong> &ndash; demonstrating improved PFS (18.9m vs 10.2m) and CNS efficacy with osimertinib.</li>
+        </ul>
+
+        <h3>BC5: Clinical Outcomes &amp; Trials</h3>
+        <p><strong>Stepping Stones:</strong> Review key clinical endpoints in EGFR-targeted therapy: Response rate, PFS, OS, and quality of life. Understand that despite high initial response, no OS benefit was seen in some trials due to cross-over.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>DeVita (Pancreatic excerpt referencing olaparib) (E2)</strong> &ndash; highlights an issue: significantly improved PFS did not translate to OS because of trial design (similar in EGFR trials).</li>
+            <li><strong>Weinberg/Abeloff</strong> &ndash; mention the Iressa Pan-Asia Study (IPASS) which first demonstrated in an EGFR-mutant subgroup, gefitinib beat chemo on PFS and response (E2).</li>
+            <li><strong>Abeloff (EGFR TKI side effects)</strong> &ndash; discuss manageable toxicities: acneiform rash correlating with efficacy, emphasizing patient management aspects.</li>
+        </ul>
+        <p><em>(Evidence tiers:) E1 &ndash; multiple Phase III RCTs (IPASS, EURTAC, FLAURA) support EGFR TKIs in mutants; E2 &ndash; meta-analyses and clinical guidelines endorse this; E5 &ndash; textbooks summarize these for education.</em></p>
+
+        <h2>Base-Camps for Path 3 &ndash; Synthetic Lethality &amp; DNA Repair Targeting</h2>
+
+        <h3>BC1: Mechanism of PARP and DNA Repair</h3>
+        <p><strong>Stepping Stones:</strong> Learn PARP1&rsquo;s normal role: detecting single-strand DNA breaks and recruiting repair enzymes through poly(ADP-ribose) chain formation. Understand how PARP inhibitors not only block repair but also &ldquo;trap&rdquo; PARP on DNA, converting a single-strand break into a replication-blocking lesion. Review homologous recombination (HR) repair via BRCA1/2 and why its loss is catastrophic when PARP is inhibited.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff Chapter on DNA Repair (E5)</strong> &ndash; clearly outlines two strategies for PARP inhibitors: as chemo/radiation sensitizers and as single agents exploiting synthetic lethality in cancers with specific genetic weaknesses.</li>
+            <li><strong>Lord &amp; Ashworth Science 2017 (E5)</strong> &ndash; provides a concise definition of synthetic lethality and details how PARP inhibition kills BRCA-mutant cells by causing unrepaired double-strand breaks at stalled replication forks.</li>
+            <li><strong>Lord &amp; Ashworth Fig.1D (E5)</strong> &ndash; a visual schematic of trapped PARP causing fork collapse and cell death if HR is defective.</li>
+        </ul>
+
+        <h3>BC2: Clinical Evidence &ndash; PARP Inhibitors in BRCA Cancers</h3>
+        <p><strong>Stepping Stones:</strong> Examine pivotal trials: e.g. OlympiAD (olaparib vs chemo in metastatic BRCA-mutated breast), SOLO-1 (maintenance olaparib in ovarian). Focus on outcomes: improved PFS, sometimes higher response rates.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>DeVita (Pancreatic section) (E2)</strong> &ndash; discusses POLO trial: olaparib maintenance in germline BRCA-mutated pancreatic cancer improved PFS significantly (7.4 vs 3.8 months).</li>
+            <li><strong>Lord &amp; Ashworth (E5)</strong> &ndash; mentions early trials showing durable responses in BRCA-mutant ovarian, breast, and prostate cancers, which led to the approval of olaparib.</li>
+            <li><strong>Abeloff/Weinberg (E5)</strong> &ndash; note that BRCA1 was discovered in 1994, and by 2014 we have drugs exploiting that knowledge, a success of translational research.</li>
+        </ul>
+
+        <h3>BC3: Beyond BRCA &ndash; Other Synthetic Lethal Targets</h3>
+        <p><strong>Stepping Stones:</strong> Broaden understanding to other DNA repair or vulnerability pairs: ATM/ATR, PTEN/PI3K&beta;, ARID1A/ATR inhibitors, etc. Also concept of &ldquo;BRCAness&rdquo; where tumors without BRCA mutation still behave like HR-deficient and respond to PARP inhibitors.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (E5)</strong> &ndash; notes that potent PARP inhibitors are being tested in tumors with mutations in other HR pathway genes (ATM, PALB2, etc.).</li>
+            <li><strong>Ji Luo et al. (Cell 2009) (E5)</strong> &ndash; lists metabolic enzymes and stress pathways that, when inhibited, strongly attenuate tumor growth (synthetic lethal with oncogene-driven metabolic reprogramming).</li>
+            <li><strong>Current literature (E4)</strong> &ndash; synthetic lethal CRISPR screens are identifying many such vulnerabilities, a growing frontier.</li>
+        </ul>
+
+        <h3>BC4: Resistance to Synthetic Lethal Therapy</h3>
+        <p><strong>Stepping Stones:</strong> Investigate how tumors develop resistance to PARP inhibitors: secondary mutations that restore BRCA function (BRCA reversion mutations), loss of 53BP1 that paradoxically restores some HR, upregulation of drug transporters, etc.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Lord &amp; Ashworth (E5)</strong> &ndash; details multiple mechanisms of PARPi resistance found experimentally and clinically, notably BRCA reversion (the only one fully validated clinically so far).</li>
+            <li><strong>Weinberg/Abeloff (E5)</strong> &ndash; mention that resistance emerges in targeted therapies in general.</li>
+            <li><strong>DeVita (E5)</strong> &ndash; analogous to other targeted drug resistance discussions.</li>
+        </ul>
+
+        <h3>BC5: Combination Approaches with PARP</h3>
+        <p><strong>Stepping Stones:</strong> Evaluate strategies to extend synthetic lethal therapy impact: combining PARP inhibitors with chemotherapy, immune checkpoint inhibitors, or ATR inhibitors.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (E5)</strong> &ndash; notes synergy of PARP inhibitors with DNA-damaging modalities.</li>
+            <li><strong>DeVita (E3/E4)</strong> &ndash; references MEDIOLA study: olaparib + durvalumab in BRCA ovarian, an example of PARP+immune combination.</li>
+            <li><strong>Current practice (E4)</strong> &ndash; an ongoing area is PARP+immune in HRD tumors; early signals show some activity.</li>
+        </ul>
+        <p><em>(Evidence tiers:) E1 &ndash; RCTs in ovarian cancer (SOLO-1, etc.) firmly establish PARP inhibitors; E2 &ndash; trials in pancreatic, breast showing PFS benefit; E5 &ndash; mechanistic reviews by pioneers.</em></p>
+
+        <h2>Base-Camps for Path 4 &ndash; Targeting the &ldquo;Undruggable&rdquo;</h2>
+
+        <h3>BC1: Defining &ldquo;Undruggable&rdquo; and Past Attempts</h3>
+        <p><strong>Stepping Stones:</strong> Understand why certain oncogenes were labeled undruggable: e.g. RAS is a small GTP-binding protein with a smooth surface (no deep pocket for a drug), and it signals via protein-protein interactions. Recall historical failures (e.g. farnesyltransferase inhibitors failed because KRAS evaded them via alternative prenylation).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; explains what makes a protein &ldquo;druggable&rdquo; (presence of catalytic clefts) and why transcription factors like MYC were considered undruggable. It also mentions nutlin for p53-MDM2 as a success story.</li>
+            <li><strong>Abeloff (Molecular targets) (E5)</strong> &ndash; lists proto-oncogenes like NRAS, MYC being hyperactivated in many cancers and notes one alteration is insufficient for malignancy, implying redundant pathways.</li>
+            <li><strong>Ji Luo et al. (Cell) (E5)</strong> &ndash; underscores that targeting non-classical targets (like metabolic enzymes) can significantly stunt tumors, broadening our thinking beyond kinases.</li>
+        </ul>
+
+        <h3>BC2: KRAS^G12C &ndash; Finding a Pocket</h3>
+        <p><strong>Stepping Stones:</strong> Dive into the specific breakthrough for KRAS: the discovery of a small pocket under the Switch-II region accessible in the inactive (GDP-bound) form of KRAS^G12C. A covalent inhibitor (e.g. sotorasib) binds Cys12 and locks KRAS in GDP state. This works only for the cysteine mutant (G12C) &ndash; an example of allele-specific targeting.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Fig.17.14 and text (E5)</strong> &ndash; describes the structural biology of KRAS^G12C inhibition: a small molecule makes a covalent bond with the cysteine at position 12, exploiting a cryptic pocket.</li>
+            <li><strong>Ostrem et al., Nature 2013 (E4)</strong> &ndash; initial proof of concept that an irreversible binder can discriminate mutant vs wild-type RAS.</li>
+            <li><strong>DeVita Ch.30 (E5)</strong> &ndash; acknowledges KRAS G12C inhibitors (sotorasib, adagrasib) irreversibly bind the inactive KRAS and interfere with oncogenic signaling.</li>
+        </ul>
+
+        <h3>BC3: Clinical Impact of KRAS Inhibitors</h3>
+        <p><strong>Stepping Stones:</strong> Examine trial results: In advanced KRAS^G12C mutant lung cancer, sotorasib produced responses in ~37% of patients and median PFS ~6.8 months. Discuss FDA approval (sotorasib in 2021).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>DeVita/Practice Oncology (E5)</strong> &ndash; categorizes targeted therapy outcomes: notes KRAS G12C inhibitors yield ORRs ~30&ndash;50% and PFS &lt;1 year, placing them in a &ldquo;second category&rdquo; of efficacy compared to EGFR or ALK therapies.</li>
+            <li><strong>CodeBreaK100 (NEJM 2021 for sotorasib) (E2)</strong> &ndash; data align with the above.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; mentions that KRAS is the most common oncogene in cancer (pancreatic ~90%, colorectal ~40%, lung ~30%), so this breakthrough has huge implications.</li>
+        </ul>
+
+        <h3>BC4: Beyond KRAS &ndash; Other Undruggables</h3>
+        <p><strong>Stepping Stones:</strong> Expand to MYC and others: MYC-MAX interaction inhibitors (experimental), nutlin-3 as a small molecule that binds MDM2 freeing p53 (clinical proof-of-concept in leukemia). Also PROTACs to degrade targets like androgen receptor variants.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg Ch.17 (E5)</strong> &ndash; recounts the &ldquo;exception&rdquo; in 2003 of finding Nutlin that blocks the MDM2-p53 interaction, proving some protein interactions can be drugged.</li>
+            <li><strong>Abeloff (non-oncogene addiction) (E5)</strong> &ndash; notes many cancers rely on antiapoptotic BCL-2 family proteins, leading to drugs like venetoclax which has cured some leukemias.</li>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; demonstrates how reactivating certain pathways (forcing pyruvate into mitochondria) can counteract oncogenes like MYC, essentially targeting an &ldquo;undruggable&rdquo; indirectly.</li>
+        </ul>
+
+        <h3>BC5: Resistance &amp; Future Directions</h3>
+        <p><strong>Stepping Stones:</strong> Acknowledge that even when we succeed in drugging the undruggable, resistance quickly follows. E.g., tumors on KRAS^G12C inhibitors often develop new RAS mutations or activate parallel pathways. Discuss next-gen KRAS inhibitors aiming at other mutants (G12D, G12V).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Lord &amp; Ashworth (E5)</strong> &ndash; emphasizes that selective pressure from any targeted agent will spur emergence of resistant clones.</li>
+            <li><strong>DeVita (Lung) (E5)</strong> &ndash; notes that when bypass resistance emerges, switching to standard platinum doublet chemo is recommended.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; commentary that targeting RAS opened a &ldquo;floodgate&rdquo; and now other tough targets are in sights (e.g., mutant p53 reactivators, KRAS^G12D inhibitors).</li>
+        </ul>
+
+        <h2>Base-Camps for Path 5 &ndash; Differentiation Therapy</h2>
+
+        <h3>BC1: APL and the PML-RAR&alpha; Oncogene</h3>
+        <p><strong>Stepping Stones:</strong> Understand the molecular lesion in APL: a t(15;17) translocation creates PML-RAR&alpha; fusion protein. The fusion acts as a dominant repressor by recruiting co-repressors and histone deacetylase, blocking transcription. This single block leads to accumulation of undifferentiated promyelocytes.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Leukemia chapter) (E5)</strong> &ndash; details how PML-RAR&alpha; recruits N-CoR/HDAC complex, silencing differentiation genes. It explains why pharmacologic doses of ATRA can bind the fusion, alter its conformation, and release the co-repressor.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; also notes variant RAR fusions (PLZF-RAR&alpha;) where ATRA doesn&rsquo;t work, highlighting the specificity of APL&rsquo;s responsiveness.</li>
+            <li><strong>DeVita (hem malignancies) (E5)</strong> &ndash; likely covers APL as a model of targeted therapy, reinforcing how understanding a unique fusion led to a therapy.</li>
+        </ul>
+
+        <h3>BC2: ATRA + Arsenic &ndash; Mechanisms</h3>
+        <p><strong>Stepping Stones:</strong> Learn how ATRA (vitamin A derivative) binds PML-RAR&alpha; and leads to co-repressor dissociation. Arsenic trioxide (ATO) binds directly to PML part, causing oxidative stress and proteolysis of the fusion protein. These dual actions are complementary: ATRA forces differentiation; ATO degrades the oncogene and also induces apoptosis.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Front. Oncol. 2021 Zhu et al. (E1)</strong> &ndash; introductory text calls APL a &ldquo;unique example of success of targeted treatment, with a cure rate &gt;90%&hellip; ATRA + ATO front-line since 2013 in guidelines&hellip; chemo-free treatment.&rdquo;</li>
+            <li><strong>Wang &amp; Chen, Nature Rev Cancer 2008 (E5)</strong> &ndash; described ATO binding PML leading to SUMOylation and degradation of PML-RAR&alpha;.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; mentions arsenic&rsquo;s historical use and its re-emergence as a targeted agent.</li>
+        </ul>
+
+        <h3>BC3: Clinical Outcomes in APL</h3>
+        <p><strong>Stepping Stones:</strong> Examine clinical data: the landmark Lo-Coco et al. 2013 NEJM trial that showed ATRA+ATO is superior to ATRA+chemotherapy in low-risk APL, with ~100% complete remission and ~97% 2-year survival. Also population data like Zhu et al. 2021.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Zhu et al. (Front Oncol 2021) (E1)</strong> &ndash; reports on 1,233 APL patients in China 2015&ndash;2019: ~83% received ATRA+arsenic first-line by 2019; early death rate 8.2%; 3-year overall survival 87.9%.</li>
+            <li><strong>Lo-Coco et al., NEJM 2013 (E2)</strong> &ndash; trial achieved high cure rates without traditional chemo.</li>
+            <li><strong>Abeloff/DeVita (E5)</strong> &ndash; comments that APL is now curable with differentiation therapy, one of the first molecularly targeted curative therapies for cancer.</li>
+        </ul>
+
+        <h3>BC4: Differentiation Therapy in Other Contexts</h3>
+        <p><strong>Stepping Stones:</strong> Survey attempts beyond APL: cutaneous T-cell lymphoma with HDAC inhibitors (vorinostat, romidepsin), MDS with hypomethylating agents (azacitidine), neuroblastoma with 13-cis-retinoic acid post-chemotherapy. Discuss successes and limitations.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff/DeVita (Lymphoma section) (E5)</strong> &ndash; HDAC inhibitors mechanism (increase acetylation, turn on silenced genes including those driving differentiation/apoptosis in T-cell lymphoma).</li>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; mentions hypoxia-inducible factor and how tumors adapt; context of tumor microenvironment requiring adaptation.</li>
+            <li><strong>Clinical guidelines (NCCN) (E1)</strong> &ndash; in high-risk neuroblastoma, differentiating agent isotretinoin is part of therapy.</li>
+        </ul>
+
+        <h3>BC5: Pitfalls &ndash; When Differentiation Fails</h3>
+        <p><strong>Stepping Stones:</strong> Recognize why this strategy is not universal: many solid tumors lack a single dominant differentiation block, or the cancer cell of origin is too mutated. Applying ATRA in other AML subtypes has minor effects because they don&rsquo;t have RAR&alpha; fusions; using vitamin D in prostate cancer had limited success.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff text on other AML translocations (E5)</strong> &ndash; notes leukemias with other RAR&alpha; fusions are unresponsive to ATRA at safe doses.</li>
+            <li><strong>Weinberg (E5)</strong> &ndash; discusses that many cancer cells accumulate too many genetic changes; simply reactivating one differentiation pathway might not suffice.</li>
+            <li><strong>Zhu et al. discussion</strong> &ndash; acknowledges limitations but implies if guidelines applied widely, cures can be achieved &ndash; the challenge is implementation, not scientific.</li>
+        </ul>
+        <p><em>(Evidence tiers:) E1 &ndash; ATRA+ATO in APL is guideline-backed with multiple trials; E3 &ndash; other differentiation therapies have supportive phase II data; E5 &ndash; conceptual frameworks from textbooks.</em></p>
+
+        <h2>Base-Camps for Path 6 &ndash; Tissue-Agnostic Targeting</h2>
+
+        <h3>BC1: Basket vs Umbrella Trial Design</h3>
+        <p><strong>Stepping Stones:</strong> Clarify trial design concepts. Umbrella trial: one cancer type, many targeted arms based on different biomarkers. Basket trial: one drug tested in multiple cancer types all having the same mutation. NCI-MATCH is a many-drugs basket trial because each &ldquo;basket&rdquo; is a mutation-drug match.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Clinical Trials chapter) (E5)</strong> &ndash; defines basket trials and gives BRAF inhibitors example: worked in melanoma but not colon cancer (negative in mixed basket hides tissue differences).</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; describes NCI-MATCH as the archetype of precision medicine trial with many phase II arms targeting specific mutations in any cancer.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; indicates how many patients were screened (&gt;6000 by 2017) and how many matched (~1000), illustrating the scale needed.</li>
+        </ul>
+
+        <h3>BC2: TRK Fusion Story &ndash; Tumor-Agnostic Therapy</h3>
+        <p><strong>Stepping Stones:</strong> Detail the discovery that rare fusions in NTRK1/2/3 genes drive certain cancers, and the development of TRK inhibitors (larotrectinib, entrectinib). Present the clinical data: larotrectinib achieved 75% ORR in 55 patients aged 4 months to 76 years across 17 tumor types.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Drilon et al. NEJM 2018 (E2)</strong> &ndash; key efficacy results: ORR 75%, 86% of responders still in response at median 9.4mo follow-up, no serious toxicity causing discontinuation.</li>
+            <li><strong>Drilon et al. background (E2)</strong> &ndash; notes preclinical models suggested TRK fusions lead to oncogene addiction regardless of tissue and may occur in up to 1% of solid tumors in aggregate.</li>
+            <li><strong>Abeloff/DeVita (E1)</strong> &ndash; FDA approval of larotrectinib for any NTRK fusion-positive solid tumor, an example of the new paradigm.</li>
+        </ul>
+
+        <h3>BC3: NCI-MATCH and Other Precision Initiatives</h3>
+        <p><strong>Stepping Stones:</strong> Discuss large-scale efforts: NCI-MATCH (Molecular Analysis for Therapy Choice) &ndash; opened 2015, hundreds of sites, genomic screening. Also ASCO&rsquo;s TAPUR, MSK IMPACT trial. Evaluate outcomes: early results showed some arms with low efficacy, some with moderate activity.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (E5)</strong> &ndash; describes NCI-MATCH structure and goal: by end of 2017, 6000 screened, 1000 matched to small phase II sub-trials.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; acknowledges caveat: not all histologies respond the same to a given targeted agent (BRAF example again), so a basket might need to analyze per cohort.</li>
+            <li><strong>DeVita (E5)</strong> &ndash; weighs in that while genotype-driven trials are appealing, many patients don&rsquo;t have a clear match.</li>
+        </ul>
+
+        <h3>BC4: Tissue Context Matters &ndash; BRAF Paradox</h3>
+        <p><strong>Stepping Stones:</strong> Use BRAF^V600 as a cautionary tale. In melanoma, BRAF inhibitors have ~50% ORR as single agents. In colorectal cancer, initial trials of vemurafenib saw virtually no responses because EGFR signaling ramps up to bypass BRAF blockade. Solution: BRAF + EGFR &plusmn; MEK inhibition is effective (the BEACON trial).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (E5)</strong> &ndash; explicitly points out BRAF inhibitors work in BRAF-mutant melanoma but not BRAF-mutant colon cancer, warning about tissue context.</li>
+            <li><strong>DeVita (GI oncology) (E1)</strong> &ndash; notes that for colon, now approved regimen is BRAF inhibitor + EGFR inhibitor.</li>
+            <li><strong>Drilon NEJM</strong> &ndash; for TRK, even CNS metastases responded if drug penetrated. Not much exception there.</li>
+        </ul>
+
+        <h3>BC5: Pan-Cancer Regulatory Milestones</h3>
+        <p><strong>Stepping Stones:</strong> Summarize the new paradigm&rsquo;s acceptance: FDA has given tumor-agnostic approvals for NTRK inhibitors and immunotherapy for MSI-high or TMB-high tumors. This changes drug development &ndash; now a rare mutation can be enough for approval without huge phase III.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff/DeVita (E5)</strong> &ndash; mention larotrectinib&rsquo;s approval (2018) as a first of its kind along with pembrolizumab&rsquo;s MSI-high (2017).</li>
+            <li><strong>Drilon or Hyman publications (E5)</strong> &ndash; editorials praising the tissue-agnostic approach.</li>
+            <li><strong>NCI-MATCH updates from 2020 (E4)</strong> &ndash; showing a few arms met success criteria, illustrating that some mutations responded while others did not.</li>
+        </ul>
+
+        <h2>Base-Camps for Path 7 &ndash; Multi-Modal Targeting &amp; Resistance Management</h2>
+
+        <h3>BC1: Clonal Heterogeneity &amp; Evolution 101</h3>
+        <p><strong>Stepping Stones:</strong> Review how tumors are not monolithic; even at diagnosis, subclones exist. Under therapy, sensitive clones die off, resistant ones can grow out &ndash; Darwinian selection. Use GIST on Gleevec as illustration: initially all tumor cells shrink, then tiny clones with second KIT mutations expand.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Weinberg GIST resistance figure (E5)</strong> &ndash; shows imaging evidence of three distinct resistant nodules arising in a GIST liver metastasis on imatinib, a vivid demonstration of clonal evolution.</li>
+            <li><strong>Lord &amp; Ashworth (E5)</strong> &ndash; generalizes that selective pressure from targeted therapies drives emergence of resistant clones.</li>
+            <li><strong>Abeloff/DeVita (E5)</strong> &ndash; likely discuss &ldquo;intratumor heterogeneity&rdquo; as a challenge to any targeted monotherapy.</li>
+        </ul>
+
+        <h3>BC2: Combination Therapies &ndash; Case Study Melanoma</h3>
+        <p><strong>Stepping Stones:</strong> Focus on a concrete success: BRAF + MEK inhibitors in BRAF-mutant melanoma. Explain rationale: MEK is downstream of BRAF in the MAPK pathway, combining prevents resurgence of signaling. Show data: combo improved response (~70% vs 50%) and PFS/OS.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>DeVita (Melanoma/targeted tx) (E5)</strong> &ndash; notes single-agent BRAF inhibitors had ORR ~30-40%, PFS ~5-7 mo, whereas adding MEK inhibitor improved outcomes (dabrafenib+trametinib ORR ~70%, longer PFS).</li>
+            <li><strong>DeVita (Lung, BRAF) (E5)</strong> &ndash; states the improved results with BRAF+MEK mirrored in lung cancer BRAF V600E.</li>
+            <li><strong>Weinberg/Abeloff (E5)</strong> &ndash; conceptually support that dual pathway blockade can forestall resistance.</li>
+        </ul>
+
+        <h3>BC3: Horizontal vs Vertical Inhibition</h3>
+        <p><strong>Stepping Stones:</strong> Introduce strategy types: Horizontal = targeting two separate pathways to prevent cross-talk (e.g. EGFR + MET in EGFR mutant lung). Vertical = targeting different levels of the same pathway (e.g. RAF + MEK).</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Trial design advances) (E5)</strong> &ndash; mentions platform trials like I-SPY2 trying combinations in neoadjuvant therapy.</li>
+            <li><strong>DeVita (Lung) (E5)</strong> &ndash; listing combos and outcomes by target, implicitly covers horizontal vs vertical.</li>
+            <li><strong>Ji Luo (Cell) (E5)</strong> &ndash; implies combining oncogene targeting with stress induction (vertical in a sense).</li>
+        </ul>
+
+        <h3>BC4: Adaptive Therapy &ndash; Control Theory Analogy</h3>
+        <p><strong>Stepping Stones:</strong> Dive into the concept of not aiming to eliminate all cancer cells as fast as possible, but to manage tumor like a chronic disease with feedback control. Use an analogy: maintaining a stable predator-prey balance &ndash; sensitive tumor cells are predators; drug-resistant cells are prey that flourish only when predators are gone; by keeping some sensitive cells around with moderate drug dose, they keep resistant cells in check.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Lord &amp; Ashworth (E5)</strong> &ndash; concludes that alternative strategies to delay resistant clones are needed, hinting at adaptive approaches.</li>
+            <li><strong>Weinberg (if any reference)</strong> &ndash; not explicitly found, might not be in textbook yet.</li>
+            <li><strong>Gatenby &amp; Zhang (E4)</strong> &ndash; introduced mathematical models of adaptive therapy; emerging strategy.</li>
+        </ul>
+
+        <h3>BC5: Clinical Trials and Biomarkers for Resistance</h3>
+        <p><strong>Stepping Stones:</strong> Emphasize the importance of clinical trial design that allows mid-course adjustments &ndash; e.g. Bayesian adaptive trials (I-SPY2 example). Also highlight use of repeated biopsies or plasma DNA to detect new mutations, triggering a switch in therapy.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Adaptive trial designs) (E5)</strong> &ndash; discusses I-SPY2 where randomization probabilities adapt based on biomarker profiles and response, and better-performing drugs &ldquo;graduate&rdquo; faster.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; touches on how requiring biomarker for randomization avoids missing data and allows dropping non-responding subsets.</li>
+            <li><strong>DeVita (E4)</strong> &ndash; notes that modern trials use ctDNA monitoring; when certain resistance mutations appear, patients can be switched to appropriate therapy before clinical progression.</li>
+        </ul>
+        <p><em>(Evidence tiers:) E2 &ndash; combination regimens validated in RCTs (BRAF+MEK, dual HER2, etc.); E4 &ndash; adaptive therapy evidence largely preclinical or small trials; E5 &ndash; conceptual support from experts.</em></p>
+
+        <h2>Base-Camps for Path 8 &ndash; Metabolic &amp; Microenvironmental Vulnerabilities</h2>
+
+        <h3>BC1: Warburg Effect and Glycolysis Addiction</h3>
+        <p><strong>Stepping Stones:</strong> Recap the Warburg effect: cancer cells often prefer glycolysis &rarr; lactate even with oxygen (aerobic glycolysis). Understand possible reasons: generate biosynthetic intermediates, avoid excessive ROS from mitochondria. Recognize that this creates dependency on glycolytic enzymes.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Ji Luo et al., Cell 2009 (E5)</strong> &ndash; discusses unclear reasons for Warburg but suggests it diverts resources to biosynthesis and limits ROS. It lists experiments where inhibiting metabolic enzymes stunted tumor growth.</li>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; crucially notes cancer cells have higher ROS and mitigate this by engaging glycolysis; forcing pyruvate into mitochondria (via DCA inhibiting PDK) increases ROS and triggers cancer cell apoptosis.</li>
+            <li><strong>Abeloff/DeVita (Metabolism in cancer) (E5)</strong> &ndash; a section on tumor metabolism to reinforce these points.</li>
+        </ul>
+
+        <h3>BC2: Dichloroacetate (DCA) &ndash; Off-Patent Metabolic Therapy</h3>
+        <p><strong>Stepping Stones:</strong> Focus on DCA as a case study of a suppressed lead. DCA has been used in metabolic diseases and is inexpensive. It inhibits PDK, thereby activating PDH, forcing pyruvate into the mitochondria. In 2007, researchers showed DCA caused regression of lung cancer xenografts in rats. Because no company stands to profit, large trials haven&rsquo;t happened.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; explicitly: &ldquo;dichloroacetate&hellip;stimulates mitochondrial oxidative phosphorylation and ROS production, selectively inducing apoptosis in cancer cells but not normal cells (Bonnet et al., 2007).&rdquo;</li>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; also mentions inhibiting glutathione synthesis can up ROS and radiosensitize cancer cells, another metabolic stress angle.</li>
+            <li><strong>Academic commentary (E4)</strong> &ndash; despite promising lab results, DCA hasn&rsquo;t been pharma-developed due to no patent, relying on academia/clinical enthusiasts.</li>
+        </ul>
+
+        <h3>BC3: Metformin &ndash; Insulin and mTOR Modulation</h3>
+        <p><strong>Stepping Stones:</strong> Explain metformin&rsquo;s dual anti-cancer rationale: systemic (lowers insulin and IGF-1) and cell-autonomous (activates AMPK, inhibiting mTOR). Epidemiologic data found diabetics on metformin had less cancer incidence and mortality. Now it&rsquo;s in trials for cancer prevention and therapy adjunct.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Cancer prevention chapter) (E5)</strong> &ndash; describes epidemiology: diabetics on metformin had reduced breast cancer incidence; mechanism: AMPK activation reduces insulin and directly inhibits epithelial cell growth.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; details NCIC phase III trial testing metformin in early-stage breast cancer post-treatment (E2).</li>
+            <li><strong>DeVita/Weinberg (E5)</strong> &ndash; mention metformin as an intriguing repurposed agent.</li>
+        </ul>
+
+        <h3>BC4: Targeting Oxidative Stress &amp; Autophagy</h3>
+        <p><strong>Stepping Stones:</strong> Explore other non-oncogene addictions. Cancer often upregulates chaperones like HSP90 &ndash; HSP90 inhibitors can cripple many oncogenes at once. Cancers often need autophagy &ndash; inhibitors like hydroxychloroquine are being tested. Anti-apoptotic proteins (BCL-2, MCL1) are overexpressed &ndash; drugs like venetoclax exploit this addiction.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (E5)</strong> &ndash; defines non&ndash;oncogene addiction: dependence on stress-response pathways like heat shock proteins and anti-apoptotic BCL-2 family.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; gives examples: BCL-2 overexpression shortens latency of Myc-induced lymphoma, underpinning why BCL-2 is targeted by venetoclax with good effect.</li>
+            <li><strong>Ji Luo et al. (E5)</strong> &ndash; emphasizes glutathione and oxidative stress which we have covered.</li>
+        </ul>
+
+        <h3>BC5: Clinical Trials and Integrative Approaches</h3>
+        <p><strong>Stepping Stones:</strong> Note ongoing trials: combining metformin with chemotherapy in pancreatic cancer, DCA with chemoradiation in glioblastoma, dietary interventions like fasting or ketogenic diets being studied to augment treatment. Also anti-angiogenics (bevacizumab) which extended PFS when added to chemo.</p>
+        <h4>Key Resources</h4>
+        <ul>
+            <li><strong>Abeloff (Prevention &amp; Integrative) (E5)</strong> &ndash; lists vitamin D, green tea extract (EGCG), rexinoids being studied to prevent or treat cancer; breadth of &ldquo;soft&rdquo; therapies interest.</li>
+            <li><strong>Abeloff (E5)</strong> &ndash; mentions a trial of green tea extract (EGCG) showing tolerability but awaiting efficacy readouts.</li>
+            <li><strong>DeVita (E5)</strong> &ndash; possibly mentions ongoing research in these supportive pathways.</li>
+        </ul>
+
+        <h2>Synergistic Path Interactions &amp; Recurring Pitfalls</h2>
+        <p>Many of these Paths are mutually reinforcing. Path 1 (oncogenic kinase targeting) and Path 3 (synthetic lethality) often work hand-in-hand: a tumor might be hit first with a kinase inhibitor, and if it harbors a DNA repair defect, a PARP inhibitor (Path 3) can be added to finish off cells under replication stress. Path 8&rsquo;s metabolic interventions can create hostile conditions for cancer cells, making them more susceptible to Path 2 or Path 1 agents.</p>
+        <p>Adaptive sequencing (Path 7) links with everything: consider EGFR-mutant lung cancer &ndash; start with an EGFR TKI (Path 2), on progression add a MET inhibitor if MET amplification arises (Path 7 horizontal combo), and concurrently manage insulin spikes with metformin (Path 8) to possibly slow PI3K-driven resistance.</p>
+        <p>However, recurring pitfalls temper our ambition:</p>
+        <ul>
+            <li><strong>Heterogeneity &amp; Evolution:</strong> Tumor cell diversity means any single-path therapy often spares some clones. Even combination therapy might only delay, not prevent, resistance because cancer populations co-evolve under pressure.</li>
+            <li><strong>Bench-to-Bedside Translation Gaps:</strong> Agents that work in immunodeficient mice may flop in humans. Differences in scale, metabolism, and microenvironment between mice and humans. Solution: early phase trials should incorporate biomarker endpoints (tumor biopsies for target inhibition, functional imaging).</li>
+            <li><strong>Toxicity and Tolerance:</strong> Combining paths can yield cumulative toxicity. The therapeutic index can shrink quickly. Careful dose finding, intermittent dosing, and support medications are needed.</li>
+            <li><strong>Financial and Logistical Challenges:</strong> Precision medicine demands broad genetic testing. Not all patients have access; even when they do, many find &ldquo;actionable&rdquo; doesn&rsquo;t always mean &ldquo;available.&rdquo; Targeted drugs are expensive; combinations multiply costs.</li>
+        </ul>
+        <p>In summary, a future curative strategy likely demands combining multiple Paths: hitting the oncogene hard, closing escape hatches, reactivating intrinsic death programs, normalizing tumor cells, and enlisting the immune system. The mountain of curing advanced cancer is steep, but with base-camps established along these conceptual Paths, the summit &ndash; long-term control or cure &ndash; comes into view.</p>
+
+        <h2>30/90/180-Day Plan &ndash; Study &amp; Research Roadmap</h2>
+        <p><strong>Day 0 Baseline:</strong> You are equipped with a solid science background but need specialized knowledge to master this multifaceted strategy. The goal in 6 months (&asymp;180 days) is to be ready to contribute to research design for &ldquo;Kilimanjaro-2&rdquo; targeted therapy approaches.</p>
+
+        <h3>First 30 Days &ndash; Foundation Building</h3>
+        <p><strong>Study (Weeks 1&ndash;4):</strong> Focus on core textbooks and seminal papers: Weinberg&rsquo;s <em>The Biology of Cancer</em> chapters on oncogenes, tumor suppressors, angiogenesis, and therapeutics (E5). Review DeVita sections on targeted therapy in various cancers. Deep-dive into key trial publications: Druker et al. 2001 (imatinib in CML), Drilon et al. 2018 (larotrectinib), Lo-Coco et al. 2013 (APL ATRA+ATO trial). Study Ji Luo et al. Cell 2009 and Lord &amp; Ashworth Science 2017 for conceptual understanding. <strong>Practice:</strong> Create a concept map linking pathways. Solve end-of-chapter problems in Weinberg. <strong>Engage:</strong> Attend online lectures or courses (MIT&rsquo;s 7.00x Fundamentals of Cancer Biology, Coursera&rsquo;s Precision Oncology). <strong>Outcome by Day 30:</strong> Fluent in molecular oncology language; able to explain &ldquo;oncogene addiction&rdquo;, describe how imatinib revolutionized CML, outline at least five mechanisms of drug resistance.</p>
+
+        <h3>By 90 Days &ndash; Integration &amp; Specialization</h3>
+        <p><strong>Month 2 (Days 31&ndash;60):</strong> Re-read key sources critically; go through Abeloff&rsquo;s chapters on clinical trial design and precision medicine. Begin exploring current literature on &ldquo;KRAS G12C trials&rdquo;, &ldquo;PARP inhibitor resistance&rdquo;, &ldquo;metformin cancer trial results.&rdquo; <strong>Interdisciplinary Learning:</strong> Dive into systems biology/control theory basics to understand adaptive therapy. Spend a week learning about Lotka-Volterra equations and tumor dynamics simulation. <strong>Laboratory Connection:</strong> If possible, visit a cancer biology lab or virtually shadow one. <strong>Month 3 (Days 61&ndash;90):</strong> Choose 2&ndash;3 areas for deeper specialization: KRAS inhibitors, metabolic therapy, or synthetic lethality beyond PARP. Create a hypothetical clinical trial protocol one-pager combining relevant paths. <strong>Outcome by Day 90:</strong> Integrated view; ability to apply knowledge to design experiments or trials.</p>
+
+        <h3>By 180 Days &ndash; Contribution &amp; Leadership</h3>
+        <p><strong>Months 4&ndash;6 (Days 91&ndash;180):</strong> Transition to active research mode. Design an in vitro experiment to test a &ldquo;suppressed lead&rdquo; or use cancer genomics datasets to find correlations. Attend molecular tumor board meetings. Network with researchers in the domain. Formulate your own research proposal. Synthesize everything into a presentation or review article. <strong>Outcome by Day 180:</strong> Not just a reader of cancer therapy advancements, but an active contributor &ndash; capable of designing experiments or trials, critically evaluating new data, and continuously learning.</p>
+
+        <h2>Glossary of Canonical Terms</h2>
+        <ul>
+            <li><strong>Oncogene Addiction:</strong> The phenomenon wherein a cancer cell is highly dependent on a single overactive oncogene for its growth and survival. In such cancers, silencing that key oncogene (via a drug) causes dramatic cell death. Example: CML cells are &ldquo;addicted&rdquo; to BCR-ABL signaling.</li>
+            <li><strong>Non&ndash;Oncogene Addiction:</strong> Reliance of cancer cells on certain normal cellular pathways (not themselves mutated oncogenes) that help cope with stress induced by oncogenic transformation. For instance, cancer cells often need high levels of chaperone proteins like HSP90 to stabilize all their mutant proteins.</li>
+            <li><strong>Tyrosine Kinase Inhibitor (TKI):</strong> A small-molecule drug that blocks the enzymatic activity of a tyrosine kinase. Many oncogenes are kinases (EGFR, BCR-ABL, ALK, etc.). TKIs often compete with ATP in the kinase&rsquo;s active site.</li>
+            <li><strong>Monoclonal Antibody (mAb):</strong> An antibody made to bind a specific target (often a cell surface receptor or ligand). In cancer, mAbs can block receptor signaling (e.g. cetuximab against EGFR&rsquo;s external domain) or mark cells for immune destruction.</li>
+            <li><strong>Synthetic Lethality:</strong> A relationship between two genes where mutation/loss of either alone is tolerable, but losing both is lethal to the cell. Cancer cells often have one gene lost (e.g. BRCA1/2), so targeting the partner gene (e.g. PARP) kills the cell.</li>
+            <li><strong>PARP Inhibitor:</strong> A drug that inhibits Poly(ADP-ribose) polymerase (PARP) enzymes, involved in single-strand DNA break repair. Inhibiting PARP in a BRCA mutant cell leads to accumulation of DNA damage and cell death. Olaparib was the first approved.</li>
+            <li><strong>Differentiation Therapy:</strong> Treatment strategy aimed at inducing cancer cells to differentiate (mature into non-dividing cells), rather than directly killing them. ATRA in APL forces promyeloblasts to become neutrophils.</li>
+            <li><strong>Basket Trial:</strong> A clinical trial design that enrolls patients based on a shared molecular marker rather than cancer type. All patients with that marker receive a targeted therapy in one &ldquo;basket.&rdquo; E.g., an NTRK fusion basket trial treated patients with larotrectinib regardless of cancer type.</li>
+            <li><strong>Umbrella Trial:</strong> A trial where patients with a single cancer type are assigned to different arms based on distinct biomarkers. E.g., Lung-MAP for squamous lung cancer with arms targeting FGFR, CDK4, etc.</li>
+            <li><strong>Biomarker:</strong> A measurable indicator of some biological state or condition. In oncology, often refers to molecular features of the tumor (mutations, gene expression) that predict therapy response or prognosis.</li>
+            <li><strong>Progression-Free Survival (PFS):</strong> The length of time during and after treatment that a patient lives with the disease without it getting worse. Often used in trials of targeted agents.</li>
+            <li><strong>Overall Survival (OS):</strong> The length of time from treatment (or trial enrollment) until death from any cause. The gold-standard endpoint to prove a therapy extends life.</li>
+            <li><strong>Overall Response Rate (ORR):</strong> The proportion of patients in a trial whose tumors shrink by a predefined amount (partial response) or disappear (complete response) after treatment. Used in early-phase trials.</li>
+            <li><strong>Clonal Evolution:</strong> The process by which tumor cells accumulate new mutations and subpopulations (clones) that have growth advantages under selective pressures (like treatment). Over time, a small resistant clone can become dominant.</li>
+            <li><strong>Adaptive Therapy:</strong> A treatment strategy that adjusts dosing dynamically based on tumor response, with the aim to maintain a stable tumor burden and prevent outgrowth of resistant clones. Not yet standard, but pilot studies are exploring this approach.</li>
+            <li><strong>Evidence Tiers (E1&ndash;E5):</strong> A hierarchy of evidence: E1 = highest (meta-analyses of Phase III trials, guidelines), E2 = strong single studies (large RCTs), E3 = supportive studies (Phase II trials), E4 = suggestive/preclinical evidence (lab research, animal studies), E5 = expert opinion, textbook, or review article consensus.</li>
+            <li><strong>Remission (Complete vs Partial):</strong> Complete remission (CR) is disappearance of all signs of cancer. Partial remission (PR) is a significant reduction (often &ge;30%). In CML, deep molecular remission (BCR-ABL PCR undetectable) is a deep response.</li>
+            <li><strong>Mutation (Driver vs Passenger):</strong> A driver mutation confers a growth advantage and is causally implicated in cancer progression. A passenger mutation is along for the ride, often neutral. Targeted therapy focuses on drivers.</li>
+            <li><strong>Apoptosis:</strong> Programmed cell death mechanism often triggered by effective therapies in oncogene-addicted cells. Many targeted therapies ultimately induce apoptosis in cancer cells.</li>
+        </ul>
+
+        <h2>Full Bibliography (by Path)</h2>
+
+        <h3>Path 1 &ndash; Oncogenic Kinase Addiction</h3>
+        <ul>
+            <li>Weinberg, R.A. &ndash; <em>The Biology of Cancer</em> (2nd ed.), Ch.17 &ndash; Discusses Gleevec&rsquo;s development and validation of oncogene addiction in CML (E5).</li>
+            <li>DeVita, Hellman, Rosenberg&rsquo;s <em>Cancer: Principles &amp; Practice of Oncology</em>, Ch. on CML &ndash; Summarizes imatinib&rsquo;s clinical trial results, notes 5-year survival &gt;90% on imatinib (E1).</li>
+            <li>Weinberg Sidebar 17.14 on Oncogene Addiction &ndash; Explains concept using EGFR mutant NSCLC, relevant to why targeting one kinase can be so effective (E5).</li>
+            <li>Weinberg Fig. 17.34 (GIST response to Gleevec) &ndash; Illustrates initial response and eventual clonal resistance in GIST (E5).</li>
+            <li>Druker et al., NEJM 2006 &ndash; Updated CML survival data (E2).</li>
+            <li>O&rsquo;Hare et al., Cancer Cell 2009 &ndash; Describes ponatinib overcoming T315I mutation (E3).</li>
+            <li><em>Abeloff&rsquo;s Clinical Oncology</em>, Ch.5 &ndash; Differentiates oncogene vs non-oncogene addiction (E5).</li>
+        </ul>
+
+        <h3>Path 2 &ndash; EGFR Dependency</h3>
+        <ul>
+            <li>Weinberg Ch.17 &ndash; Coverage of EGFR mutant NSCLC responses to TKIs (E5).</li>
+            <li>DeVita Lung Cancer Chapter &ndash; States EGFR/ALK TKIs improve outcomes over chemo in mutant cases, details first-line agents (E1).</li>
+            <li>DeVita Lung &ndash; Notes caution with single-agent immunotherapy in EGFR-mutant cancers (E1).</li>
+            <li><em>Abeloff&rsquo;s Clinical Oncology</em>, Molecular Oncology &ndash; Discusses EGFR as proto-oncogene, mutation prevalence (E5).</li>
+            <li>Paez et al., Science 2004 &amp; Lynch et al., NEJM 2004 &ndash; Discovery of EGFR mutations and correlation with TKI responses (E2).</li>
+            <li>Lord &amp; Ashworth, Science 2017 &ndash; General statement on acquired resistance in targeted therapy (E5).</li>
+        </ul>
+
+        <h3>Path 3 &ndash; Synthetic Lethality</h3>
+        <ul>
+            <li><em>Abeloff&rsquo;s Clinical Oncology</em>, Ch. on DNA Repair &ndash; Explains PARP&rsquo;s role, synthetic lethality concept, early PARP inhibitor trials (E5).</li>
+            <li>Lord, C.J. &amp; Ashworth, A., Science 2017 &ndash; Comprehensive review on PARP inhibitors, mechanisms of action, and resistance (E5).</li>
+            <li>DeVita Pancreatic Cancer Chapter &ndash; Discusses POLO trial: olaparib vs placebo in gBRCA pancreatic cancer (E2).</li>
+            <li>Swisher et al., NEJM 2017 (ARIEL2) &ndash; Rucaparib in ovarian cancer trial (E2).</li>
+            <li>Mirza et al., NEJM 2016 (NOVA) &ndash; Niraparib maintenance trial in ovarian (E2).</li>
+            <li><em>Abeloff</em> on other HR pathway genes &ndash; Mentions trials extending PARPi to ATM, PALB2, etc. (E5).</li>
+        </ul>
+
+        <h3>Path 4 &ndash; Targeting &ldquo;Undruggables&rdquo;</h3>
+        <ul>
+            <li>Weinberg Ch.17 (Targeting Ras) &ndash; Describes KRAS^G12C inhibitors locking Ras in GDP-bound form (E5).</li>
+            <li>Weinberg Ch.17 (Drugging PPI) &ndash; Tells Nutlin story (inhibiting MDM2-p53 interaction) (E5).</li>
+            <li>DeVita Lung &ndash; Acknowledges KRAS G12C inhibitors sotorasib/adagrasib (E1, based on FDA approvals).</li>
+            <li><em>Abeloff</em>, Oncogene section &ndash; Lists NRAS, MYC frequent mutations (E5).</li>
+            <li>Ji Luo et al., Cell 2009 &ndash; Suggests alternate ways to hit Myc-driven cancers by exploiting metabolic needs (E5).</li>
+            <li>Skoulidis et al., NEJM 2021 (CodeBreaK100) &ndash; Sotorasib in NSCLC: confirmed ORR 37%, median PFS 6.8 mo (E2).</li>
+            <li>Waters et al., Cell 2021 &ndash; KRAS G12C inhibitor resistance mechanisms identified (E3).</li>
+        </ul>
+
+        <h3>Path 5 &ndash; Differentiation Therapy</h3>
+        <ul>
+            <li><em>Abeloff&rsquo;s Clinical Oncology</em>, Leukemia chapter &ndash; Mechanistic explanation of PML-RAR&alpha; fusion and ATRA action (E5).</li>
+            <li>Zhu et al., Front. Oncol. 2021 &ndash; &ldquo;Early Death and Survival in APL in ATRA+arsenic era&rdquo;: 3-yr OS 87.9% (E1).</li>
+            <li>Lo-Coco et al., NEJM 2013 &ndash; Trial showing ATRA+ATO superior to ATRA+chemo (90+% cure, reduced toxicity) (E2).</li>
+            <li><em>Abeloff</em> on alt translocations &ndash; Noting ATRA doesn&rsquo;t work in those (E5).</li>
+            <li>DeVita AML/APL section &ndash; Recounts how APL went from most lethal to most curable (E5).</li>
+            <li>HDAC inhibitors (Vorinostat) FDA summary 2006 &ndash; Records response rates in CTCL (E3).</li>
+            <li>Reynolds et al., NEJM 2004 &ndash; Isotretinoin in neuroblastoma maintenance (E2).</li>
+        </ul>
+
+        <h3>Path 6 &ndash; Tissue-Agnostic Targeting</h3>
+        <ul>
+            <li>Drilon et al., NEJM 2018 &ndash; &ldquo;Larotrectinib in TRK fusion-positive cancers&rdquo;: 55 patients, ORR 75%, durable responses (E2).</li>
+            <li><em>Abeloff</em>, Clinical Trials Network &amp; NCI-MATCH &ndash; Describes MATCH trial design and progress (E5).</li>
+            <li><em>Abeloff</em>, Basket vs Umbrella &ndash; Defines trials and gives caveats (E5).</li>
+            <li>Marco, E. et al., Lancet Oncol 2020 &ndash; Initial NCI-MATCH results (E3).</li>
+            <li>FDA Approvals: pembrolizumab for MSI-high (2017), larotrectinib for NTRK (2018), entrectinib for NTRK (2020) (E1).</li>
+            <li>Yaeger et al., NEJM 2019 &ndash; BEACON trial: encorafenib + cetuximab in BRAF V600E colorectal (E2).</li>
+        </ul>
+
+        <h3>Path 7 &ndash; Combinations &amp; Adaptive Strategies</h3>
+        <ul>
+            <li>DeVita Melanoma &ndash; Describes BRAF inhibitor trials and BRAF+MEK combo improvements (E2).</li>
+            <li>DeVita Lung &ndash; Mentions combo approaches and sequential therapy for on-target vs bypass resistance (E1).</li>
+            <li><em>Abeloff</em>, I-SPY2 adaptive trial description &ndash; Real-world example of adaptive randomization (E5).</li>
+            <li>Weinberg GIST resistance story &ndash; Reused to illustrate clonal evolution (E5).</li>
+            <li>Gatenby et al., Nat Commun 2020 &ndash; Pilot clinical trial of adaptive therapy in prostate cancer (E3).</li>
+            <li>Lord &amp; Ashworth &ndash; Emphasizes need for strategies to suppress resistant clones (E5).</li>
+            <li>Sharma et al., Cell 2010 &ndash; &ldquo;Drug-tolerant persisters&rdquo; concept (E4).</li>
+        </ul>
+
+        <h3>Path 8 &ndash; Metabolic Vulnerabilities</h3>
+        <ul>
+            <li>Ji Luo et al., Cell 2009 &ndash; Key reference for metabolic targeting ideas and non-oncogene addictions (E5).</li>
+            <li>Bonnet et al., Cancer Cell 2007 &ndash; First DCA cancer paper: DCA triggering apoptosis in lung cancer xenografts (E4).</li>
+            <li>Michelakis et al., Sci Transl Med 2010 &ndash; Phase I DCA in glioblastoma (E3).</li>
+            <li><em>Abeloff</em>, Cancer Prevention chapter &ndash; Mentions metformin, vitamin D, EGCG in prevention (E5).</li>
+            <li>Pollak, M., Nat Rev Cancer 2012 &ndash; Review on metformin anti-cancer mechanisms (E5).</li>
+            <li><em>Abeloff</em>, Non-oncogene addiction examples &ndash; Mentions HSPs, NF-&kappa;B, BCL-2 as hyperactivated stress support systems (E5).</li>
+            <li>Venetoclax trials (NEJM 2018 in CLL) &ndash; Showed targeting BCL-2 can yield high response in CLL (E2).</li>
+            <li>Hanahan, D. &amp; Weinberg, R.A., Cell 2011 &ndash; &ldquo;Hallmarks of Cancer: Next Gen&rdquo; &ndash; includes deregulated metabolism as hallmark (E5).</li>
+        </ul>
+
+        <a href="/medicine/Kilimanjaro_cure_for_cancer/" class="back-link">&larr; Back to Kilimanjaro &ndash; Cure for Cancer</a>
+    </main>
+    <div data-component="footer"></div>
+    <script src="/components.js?v=3"></script>
+</body>
+</html>
