@@ -144,10 +144,14 @@ class _GlyphAtlas:
         self._draw = ImageDraw.Draw(self._img)
         self._font = self._try_fonts(
             ImageFont, ("segoeuib.ttf", "arialbd.ttf",
-                        "DejaVuSans-Bold.ttf", "arial.ttf"))
+                        "DejaVuSans-Bold.ttf", "arial.ttf",
+                        "Helvetica-Bold.ttf", "Helvetica.ttf",
+                        "LiberationSans-Bold.ttf", "NotoSans-Bold.ttf"))
         if self._font is None:
             raise RuntimeError("hud: no usable system TTF font found")
-        self._emoji_font = self._try_fonts(ImageFont, ("seguiemj.ttf",))
+        self._emoji_font = self._try_fonts(
+            ImageFont, ("seguiemj.ttf", "Apple Color Emoji.ttf",
+                        "NotoColorEmoji.ttf", "NotoEmoji-Regular.ttf"))
         self._x = self._y = self._row_h = 0           # shelf-packer cursor
         # ch -> (u0, v0, u1, v1, w, h, off_x, off_y, advance, is_color)
         self.glyphs = {}
