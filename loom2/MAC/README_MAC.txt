@@ -156,12 +156,21 @@ TO RUN IT AGAIN LATER
 TROUBLESHOOTING
 ═══════════════════════════════════════════════════════════════
 
+  "ModuleNotFoundError: No module named 'audioop'"
+  → This happened on Python 3.13+ (Apple removed audioop).
+    FIX: The launcher now handles this automatically. If you
+    need to fix it manually, type:
+       pip3 install audioop-lts
+    (NOTE: as of July 2026 we replaced pydub with miniaudio,
+     which doesn't need audioop or ffmpeg — this error should
+     no longer appear.)
+
   "command not found: python3"
   → Python isn't installed yet. Go back to Step 2.
 
   "no usable system TTF font found"
-  → This should NOT happen (we added Mac font support),
-    but if it does, type this and press Enter:
+  → This should NOT happen (we added Mac font support —
+    Helvetica), but if it does, type this and press Enter:
        brew install font-liberation
     (If you don't have Homebrew, install it from https://brew.sh
      first — it's one command and takes 2 minutes.)

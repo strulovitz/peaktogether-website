@@ -1,15 +1,16 @@
 """
 LOOM2 -- audio/sampler.py
 Loads the 89-sample orchestra into memory ONCE; serves numpy arrays.
-Allowed imports: numpy, json, os, config. Mp3 decoding: audioread or
-pydub+ffmpeg -- child chooses ONE, states it in a header comment.
-Contracts: BHAGAVAD GITA G2.2 (frozen). Bodies filled by Parent B, 2026-07-07.
+Allowed imports: numpy, json, os, config. Mp3 decoder: miniaudio (built-in,
+no ffmpeg). Contracts: BHAGAVAD GITA G2.2 (frozen).
+Bodies filled by Parent B, 2026-07-07.
 
-DECODER CHOICE (per the contract's either/or): pydub + ffmpeg.
-  pydub 0.25.1 + ffmpeg on PATH, verified against the real library
-  (viola_E4.mp3 -> mono, 44100 Hz native). render_offline.py renders the
-  quiz WAVs ONCE at design time on the machine that has ffmpeg, so decoder
-  determinism per-machine is exactly the guarantee SUTRAS 5.3 needs.
+DECODER CHOICE (amended 2026-07-15, DeepSeek/Nir): miniaudio.
+  Replaces pydub+ffmpeg (2026-07-07 original). pydub required ffmpeg on PATH
+  AND the stdlib 'audioop' module (removed in Python 3.13+, PEP 594), so it
+  broke on Python >= 3.13 AND on platforms without ffmpeg. miniaudio is a pure
+  C library with built-in MP3/WAV/FLAC/OGG decoders -- zero system deps, works
+  on Windows/Mac/Linux identically. The public SampleLibrary API is unchanged.
 
 Every buffer served by this class promises:
   * 1-D contiguous np.float32 mono at config.SAMPLE_RATE, peak == 0.9
@@ -24,7 +25,7 @@ Every buffer served by this class promises:
 import json
 import os
 import numpy as np
-from pydub import AudioSegment          # the chosen decoder (ffmpeg on PATH)
+import miniaudio                       # built-in MP3/WAV/FLAC/OGG decoder (no ffmpeg)
 import config
 
 # ---------- pentatonic note parsing (parachute path only) ----------
@@ -65,11 +66,13 @@ _FALLBACK_PEAK = 0.8         # gentler than the 0.9 samples: a missing file
 
 def _decode_mono(path: str) -> np.ndarray:
     """mp3 -> 1-D float64 mono at config.SAMPLE_RATE, range [-1, 1]."""
-    seg = AudioSegment.from_file(path)
-    seg = seg.set_channels(1).set_frame_rate(config.SAMPLE_RATE)
-    seg = seg.set_sample_width(2)                    # 16-bit PCM
-    raw = np.array(seg.get_array_of_samples(), dtype=np.float64)
-    return raw / 32768.0
+    decoded = miniaudio.decode_file(
+        path,
+        output_format=miniaudio.SampleFormat.FLOAT32,
+        nchannels=1,
+        sample_rate=config.SAMPLE_RATE,
+    )
+    return np.array(decoded.samples, dtype=np.float64)
 
 
 def _resample_semitones(buf: np.ndarray, semitones: int) -> np.ndarray:

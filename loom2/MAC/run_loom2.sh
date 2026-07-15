@@ -32,7 +32,7 @@ fi
 echo "🐍 Using: $($PYTHON --version)"
 
 # Check if dependencies are installed; if not, guide the user
-$PYTHON -c "import moderngl, pyglet, numpy, PIL, sounddevice" 2>/dev/null || {
+$PYTHON -c "import moderngl, pyglet, numpy, PIL, sounddevice, miniaudio" 2>/dev/null || {
     echo ""
     echo "⚠️  Some dependencies are missing. Install them with:"
     echo "   $PYTHON -m pip install -r requirements-runtime.txt"

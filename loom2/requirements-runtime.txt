@@ -3,4 +3,5 @@ pyglet==2.1.14
 numpy==2.4.6
 Pillow==12.2.0
 sounddevice==0.5.5
-pydub==0.25.1
+miniaudio
+audioop-lts; python_version >= "3.13"
