@@ -157,4 +157,46 @@ On restart, read:
 
 ---
 
-(End of file — total 8 sections)
+## 9. PRACTICAL RULES FROM THE TRENCHES (locked July 16, 2026)
+
+### 9a. ONE JOURNALIST AT A TIME
+
+DeepSeek works through journalists **ONE BY ONE** — never all at once. The loop:
+1. DeepSeek reads the tracker → finds the next unsent journalist name.
+2. DeepSeek tries to find their email from the internet (author pages, etc.).
+3. If found → DeepSeek outputs the full copy-paste block (subject + letter with name).
+4. If NOT found → DeepSeek tells Nir honestly: "Email not found. Nir, can you Google '[NAME] [OUTLET] email' and paste the results?"
+5. Nir pastes Google results → DeepSeek extracts the email → outputs the block.
+6. Nir sends from Gmail, says "done" → DeepSeek updates tracker + commits + pushes.
+7. Move to the NEXT journalist of the SAME type.
+
+### 9b. HOW DEEPSEEK SEARCHES FOR EMAILS
+
+- DeepSeek checks the journalist's author page on the publication's website (e.g. `technologyreview.com/author/niall-firth/`).
+- DeepSeek checks the publication's "Our Team" or masthead page.
+- If still no email → DeepSeek asks Nir to Google it. DeepSeek does NOT:
+  - ❌ Use Muck Rack (Nir forbids it — July 16, 2026)
+  - ❌ Use RocketReach, Hunter.io, or any paid email-finding service
+  - ❌ Invent or guess an email pattern (e.g. firstname.lastname@outlet.com)
+  - ❌ Scrape LinkedIn or Twitter/X
+
+### 9c. JOURNALIST NAMES COME FROM THE TRACKER
+
+The tracker already lists which journalists to send to (Nir named them earlier in the process). DeepSeek reads the tracker's status marker to find who's next. DeepSeek does NOT invent new names or search for additional journalists — those are Nir's picks.
+
+### 9d. MOUNTAINS ARE PAUSED DURING PRESS PHASE
+
+While we are in press outreach, mountain building is **PAUSED**. Do NOT mention mountains, do NOT ask about next mountains, do NOT read the mountain playbook — unless Nir explicitly says "let's do a mountain." The AGENTS.md CURRENT PHASE marker reflects this.
+
+### 9e. COMMIT + PUSH AFTER EVERY SEND
+
+After Nir confirms a journalist was sent, DeepSeek:
+1. Updates `press/pitch-tracker.md` (adds the row, updates the status marker comment).
+2. Commits with message: `press: [OUTLET] — [Type] — [Name] sent`
+3. Pushes to GitHub.
+
+This is NOT optional. Every send = one commit + push.
+
+---
+
+(End of file — total 9 sections)
