@@ -84,6 +84,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 48 | Rhiannon Williams | rhiannon.williams@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
 | 49 | Mary Beth Griggs | marybeth.griggs@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
 | 50 | Antonio Regalado | antonio.regalado@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
+| 51 | James Temple | james.temple@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
 
 ---
 
