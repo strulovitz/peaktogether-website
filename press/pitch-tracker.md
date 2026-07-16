@@ -56,6 +56,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 20 | John Gravois | john_gravois@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 21 | Anthony Lydgate | anthony_lydgate@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 22 | Alana Hope Levinson | alana_levinson@wired.com | WIRED | 4-Features | USA | ✅ Sent |
+| 23 | Sandra Upson | sandra_upson@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 
 ---
 
