@@ -39,6 +39,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 3 | Zeyi Yang | zeyi_yang@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 4 | Maxwell Zeff | maxwell_zeff@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 5 | Zoë Schiffer | zoe_schiffer@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 6 | Sophie Kleeman | sophie_kleeman@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
