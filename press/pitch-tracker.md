@@ -40,6 +40,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 4 | Maxwell Zeff | maxwell_zeff@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 5 | Zoë Schiffer | zoe_schiffer@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 6 | Sophie Kleeman | sophie_kleeman@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 7 | Louise Matsakis | louise_matsakis@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
