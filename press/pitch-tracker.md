@@ -61,7 +61,8 @@ nir.strulovitz@gmail.com · +972544752626
 | 25 | Todd Feathers | feathers.to@gmail.com, tips@toddfeathers.com | WIRED | 5-Education | USA | ✅ Sent |
 | 26 | Matt Burgess | Matt_Burgess@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 27 | Katie Drummond | uncannyvalley@wired.com | WIRED | 5-Education | USA | ✅ Sent |
-| 28 | Adrienne So | adrienne_so@wired.com, adrienne.m.so@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
+| 28 | Adrienne So | adrienne_so@wired.com ❌ bounced, adrienne.m.so@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
+| 29 | Mark Keierleber | mark.keierleber@protonmail.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
