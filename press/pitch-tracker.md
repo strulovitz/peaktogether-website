@@ -92,8 +92,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 56 | Amy Nordrum | amy.nordrum@technologyreview.com, amy@amynordrum.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
 | 57 | Rachel Courtland | rachel.courtland@technologyreview.com, rcourtland@nasw.org | MIT Tech Review | 4-Features | USA | ✅ Sent |
 | 58 | Alice Dragoon | alice.dragoon@technologyreview.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
+| 59 | Corinne Iozzio | corinne.iozzio@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 complete (5 sent). Type 4 notes: Melissa Heikkilä left MIT TR (Jan 2025, now FT), Michelle Kim no email found. Remaining: Type 5 only. Total sent: 58 across WIRED (39) + MIT Tech Review (19 so far). -->
+<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 complete (5 sent). Type 5: Corinne Iozzio sent. Remaining: Teresa Elsey, Stephanie Arnett, Eric Mongeon, Linda Lowenthal, Abby Ivory-Ganja, Juliet Beauchamp. Total sent: 59 across WIRED (39) + MIT Tech Review (20 so far). -->
 
 ---
 
