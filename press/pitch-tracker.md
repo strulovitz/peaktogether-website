@@ -32,9 +32,9 @@ nir.strulovitz@gmail.com · +972544752626
 
 ## 📋 Journalist Tracker
 
-| # | Name | Email(s) | Publication | Country | Status |
-|---|------|----------|-------------|---------|--------|
-|   |      |          |             |         |        |
+| # | Name | Email(s) | Publication | Type | Country | Status |
+|---|------|----------|-------------|------|---------|--------|
+| 1 | Will Knight | will_knight@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
