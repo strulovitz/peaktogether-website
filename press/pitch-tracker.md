@@ -52,6 +52,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 16 | Angela Watercutter | angela.watercutter@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 17 | Emily Mullin | emily_mullin@wired.com | WIRED | 3-Science | USA | ✅ Sent |
 | 18 | Molly Taft | molly_taft@wired.com | WIRED | 3-Science | USA | ✅ Sent |
+| 19 | Jason Kehe | jason_kehe@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 
 ---
 
