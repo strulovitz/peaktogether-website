@@ -35,6 +35,7 @@ nir.strulovitz@gmail.com · +972544752626
 | # | Name | Email(s) | Publication | Type | Country | Status |
 |---|------|----------|-------------|------|---------|--------|
 | 1 | Will Knight | will_knight@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 2 | Lauren Goode | lauren_goode@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
