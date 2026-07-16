@@ -55,6 +55,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 19 | Jason Kehe | jason_kehe@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 20 | John Gravois | john_gravois@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 21 | Anthony Lydgate | anthony_lydgate@wired.com | WIRED | 4-Features | USA | ✅ Sent |
+| 22 | Alana Hope Levinson | alana_levinson@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 
 ---
 
