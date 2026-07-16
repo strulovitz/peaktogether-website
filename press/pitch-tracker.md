@@ -88,8 +88,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 52 | Jessica Hamzelou | jessica.hamzelou@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
 | 53 | Casey Crownhart | casey.crownhart@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
 | 54 | Amanda Silverman | amanda.silverman@technologyreview.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
+| 55 | Niall Firth | niall.firth@technologyreview.com, niallfirth@hotmail.com | MIT Tech Review | 4-Features | UK | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (1). Remaining: Type 4 (Niall Firth, Amy Nordrum, Rachel Courtland, Alice Dragoon, Melissa Heikkilä, Michelle Kim) + Type 5. Total sent: 54 across WIRED (39) + MIT Tech Review (15 so far). -->
+<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (2). Remaining: Type 4 (Amy Nordrum, Rachel Courtland, Alice Dragoon, Melissa Heikkilä, Michelle Kim) + Type 5. Total sent: 55 across WIRED (39) + MIT Tech Review (16 so far). -->
 
 ---
 
