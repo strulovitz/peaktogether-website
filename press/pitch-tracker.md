@@ -38,12 +38,35 @@ nir.strulovitz@gmail.com · +972544752626
 
 ---
 
+---
+
+## 🎯 Five Arrowheads (Subject Lines by Fable, verbatim)
+
+**🥇 Technology / AI reporter:**
+    Subject: Story: I can't write a line of code. I directed AI to build a "Disneyland of mathematics" in one month — every commit public. (And I spent ten years protesting AI.)
+
+**🥈 Internet culture / digital culture writer:**
+    Subject: Story: The most wholesome strange thing on the internet — a free "Disneyland of mathematics" a non-coder built with AI as a gift for his girlfriend
+
+**🥉 Science / math writer:**
+    Subject: Story: The hardest unsolved problems in mathematics, rebuilt as '90s arcade games — a free theme park where couples play real university math
+
+**4️⃣ Features / human-interest writer:**
+    Subject: Story: He fought AI for ten years. Then he used it to build a mathematical theme park for the woman he loves — free, for everyone, forever
+
+**5️⃣ Education / edtech reporter:**
+    Subject: Story: A free, open-source "science museum" where students learn university mathematics by playing '90s-style games — no signup, no ads, built by one non-coder with AI
+
+---
+
 ## 🔧 Template for DeepSeek output
 
 For each journalist, DeepSeek will output:
 
 **Name:** [exact name from Google]
 **Email(s):** [all emails found]
+**Type:** [1-Tech / 2-Internet / 3-Science / 4-Features / 5-Education]
 ```
-[paste the VERBATIM letter above with "Dear [NAME]," at the top, nothing else changed]
+[Subject line for that type]
+[paste the VERBATIM letter for that type with "Dear [NAME]," at the top, nothing else changed]
 ```
