@@ -263,15 +263,7 @@ work with search grounding.
 - Daily reset: midnight Pacific = **10:00 AM Israel time**.
 - **Rule:** ONE test per session. Do NOT hammer the API.
 
-### 10f. BRAVE SEARCH — FALLBACK (if Gemini keeps failing)
-
-- Sign up: https://api.search.brave.com/ (Data for Search, free plan)
-- Free tier: ~2,000 queries/month
-- Set `BRAVE_API_KEY` env var
-- OpenClaw has native Brave support: `openclaw configure --section web` → Brave
-- Returns structured snippets (no AI synthesis, but main model can synthesize)
-
-### 10g. LESSONS LEARNED (DON'T REPEAT)
+### 10f. LESSONS LEARNED (DON'T REPEAT)
 
 1. ❌ OpenClaw's Gemini `web_search` tool has a KNOWN BUG. Don't waste time debugging it.
 2. ❌ Don't hammer the Gemini API with test queries — exhausts grounded search quota.
@@ -281,7 +273,7 @@ work with search grounding.
 6. ✅ `gemini_websearch.py` has built-in backoff + model fallback.
 7. ✅ Daily quota reset = 10:00 AM Israel time.
 
-### 10h. GOOGLE-SEARCH KEY FORMAT (2026)
+### 10g. GOOGLE-SEARCH KEY FORMAT (2026)
 
 Google changed their API key format in 2026. New keys from aistudio.google.com
 start with `AQ.` (not `AIza`). Both are valid. Don't tell Nir his key is
