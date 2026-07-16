@@ -199,4 +199,94 @@ This is NOT optional. Every send = one commit + push.
 
 ---
 
-(End of file — total 9 sections)
+## 10. OPENCLAW AUTOMATION (established July 16-17, 2026)
+
+We attempted to automate the entire press outreach pipeline with OpenClaw —
+an open-source personal AI agent that runs locally, connects to Telegram,
+and can call APIs. The goal: Nir says "start press: CNN" and the agent finds
+journalists, searches emails, sends verbatim letters.
+
+### 10a. OPENCLAW SETUP (completed)
+
+- **Installed:** Windows, Node.js, `npm i -g openclaw@latest`
+- **Model:** DeepSeek V4 Pro (Nir's API key from platform.deepseek.com)
+- **Telegram:** Bot created via @BotFather, connected (pairing approved)
+- **DeepSeek plugin:** `@openclaw/deepseek-provider` installed
+- **Google plugin:** Bundled (`stock:google/index.js`), enabled
+- **Config:** `~/.openclaw/openclaw.json`
+- **Press skill:** Written at `~/.openclaw/skills/press-outreach/SKILL.md`
+  Contains all 5 verbatim letters, grouping rules, workflow instructions.
+  Agent discovers skills on session restart.
+
+### 10b. GEMINI API KEY (for Google web search)
+
+- **Created:** Google AI Studio → https://aistudio.google.com/apikey
+- **Key format:** Newer format starting with `AQ.` (NOT the old `AIza` format).
+  Both formats are valid — Google changed the prefix in 2026.
+- **Set as:** Windows user env var `GEMINI_API_KEY` (permanent, survives reboot).
+  Also in `openclaw.json` under `plugins.entries.google.config.webSearch.apiKey`.
+- **Cost:** FREE tier — limited quota, resets daily at 10:00 AM Israel time.
+
+### 10c. KNOWN BUG — OpenClaw Gemini web_search FAILS
+
+OpenClaw's built-in `web_search` with `provider: "gemini"` is BROKEN.
+GitHub PR #104672 "fix(gemini): resolve search env secret refs" — STILL OPEN
+as of July 16, 2026. The Google plugin loads but credential resolution for
+the web_search provider flow fails.
+
+**Workaround:** Call Gemini API directly via `exec` tool using Fable's script.
+
+### 10d. FABLE'S GEMINI SCRIPT (the working solution)
+
+File: `C:\Users\nir_s\gemini_websearch.py`
+
+- Stdlib-only Python (no pip install)
+- Calls `generativelanguage.googleapis.com/v1beta/models/{model}:generateContent`
+- Uses `x-goog-api-key` header for auth (not URL query param)
+- `tools: [{"google_search": {}}]` for Google Search grounding
+- Handles 429 with exponential backoff (honors Google's RetryInfo)
+- Falls through multiple models on 400/404
+- Reads API key from env var first, then from openclaw.json
+- Never prints the key
+
+**Critical gotcha:** `-lite` models do NOT support `google_search`.
+Only full models (e.g. gemini-2.0-flash, gemini-3.5-flash, gemini-flash-latest)
+work with search grounding.
+
+### 10e. GEMINI QUOTA & RATE LIMITS
+
+- Free tier has separate quotas for plain generateContent vs grounded search.
+- Grounded search quota is SMALL — easy to exhaust with testing.
+- `gemini-2.5-flash` returns 404 on v1beta (may need v1alpha endpoint or
+  doesn't support grounding on this tier).
+- `gemini-2.0-flash` works but also has quota.
+- Daily reset: midnight Pacific = **10:00 AM Israel time**.
+- **Rule:** ONE test per session. Do NOT hammer the API.
+
+### 10f. BRAVE SEARCH — FALLBACK (if Gemini keeps failing)
+
+- Sign up: https://api.search.brave.com/ (Data for Search, free plan)
+- Free tier: ~2,000 queries/month
+- Set `BRAVE_API_KEY` env var
+- OpenClaw has native Brave support: `openclaw configure --section web` → Brave
+- Returns structured snippets (no AI synthesis, but main model can synthesize)
+
+### 10g. LESSONS LEARNED (DON'T REPEAT)
+
+1. ❌ OpenClaw's Gemini `web_search` tool has a KNOWN BUG. Don't waste time debugging it.
+2. ❌ Don't hammer the Gemini API with test queries — exhausts grounded search quota.
+3. ✅ Call Gemini directly via Python + exec (Fable's script pattern).
+4. ✅ Always use `x-goog-api-key` header, not `?key=` query param.
+5. ✅ Non-lite models only for `google_search` grounding.
+6. ✅ `gemini_websearch.py` has built-in backoff + model fallback.
+7. ✅ Daily quota reset = 10:00 AM Israel time.
+
+### 10h. GOOGLE-SEARCH KEY FORMAT (2026)
+
+Google changed their API key format in 2026. New keys from aistudio.google.com
+start with `AQ.` (not `AIza`). Both are valid. Don't tell Nir his key is
+"wrong format" — it's the new format.
+
+---
+
+(End of file — total 10 sections)
