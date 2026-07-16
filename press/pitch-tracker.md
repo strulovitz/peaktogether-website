@@ -70,6 +70,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 34 | Reece Rogers | reece_rogers@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 35 | Vittoria Elliott | vittoria.elliott@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 36 | Louryn Strampe | louryn_strampe@wired.com | WIRED | 5-Education | USA | ✅ Sent |
+| 37 | Rhett Allain | rhettallain@gmail.com, rhett.allain@southeastern.edu | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
