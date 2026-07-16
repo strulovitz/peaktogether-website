@@ -44,6 +44,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 8 | Paresh Dave | paresh_dave@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 9 | Caroline Haskins | caroline_haskins@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 10 | Joel Khalili | joel_khalili@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 11 | Kate Knibbs | kate_knibbs@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
