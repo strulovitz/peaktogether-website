@@ -37,6 +37,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 1 | Will Knight | will_knight@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 2 | Lauren Goode | lauren_goode@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 3 | Zeyi Yang | zeyi_yang@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 4 | Maxwell Zeff | maxwell_zeff@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
