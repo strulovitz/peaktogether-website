@@ -94,8 +94,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 58 | Alice Dragoon | alice.dragoon@technologyreview.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
 | 59 | Corinne Iozzio | corinne.iozzio@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 | 60 | Teresa Elsey | teresa.elsey@technologyreview.com (telsey@technologyreview.com ❌ bounced) | MIT Tech Review | 5-Education | USA | ✅ Sent |
+| 61 | Stephanie Arnett | sarnett@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 complete (5 sent). Type 5: Corinne Iozzio, Teresa Elsey sent. Remaining: Stephanie Arnett, Eric Mongeon, Linda Lowenthal, Abby Ivory-Ganja, Juliet Beauchamp. Total sent: 60 across WIRED (39) + MIT Tech Review (21 so far). -->
+<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 complete (5 sent). Type 5: Corinne Iozzio, Teresa Elsey, Stephanie Arnett sent. Remaining: Eric Mongeon, Linda Lowenthal, Abby Ivory-Ganja, Juliet Beauchamp. Total sent: 61 across WIRED (39) + MIT Tech Review (22 so far). -->
 
 ---
 
