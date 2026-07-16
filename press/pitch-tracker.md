@@ -65,6 +65,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 29 | Mark Keierleber | mark.keierleber@protonmail.com ❌ inbox full | WIRED | 5-Education | USA | ⏳ Pending |
 | 30 | Brian Barrett | brian.r.barrett@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 | 31 | Leah Feiger | leah_feiger@wired.com, leahfeiger@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
+| 32 | Charley Locke | charleylockeprojects@gmail.com, charley.locke@nytimes.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
