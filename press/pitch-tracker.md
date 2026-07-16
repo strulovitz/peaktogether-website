@@ -45,6 +45,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 9 | Caroline Haskins | caroline_haskins@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 10 | Joel Khalili | joel_khalili@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 11 | Kate Knibbs | kate_knibbs@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 12 | Miles Klee | miles_klee@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 
 ---
 
