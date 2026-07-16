@@ -73,6 +73,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 37 | Rhett Allain | rhettallain@gmail.com, rhett.allain@southeastern.edu | WIRED | 5-Education | USA | ✅ Sent |
 | 38 | Julia Black | mjnblack@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 | 39 | Elana Klein | elana_klein@wired.com, elana.klein@condenast.com | WIRED | 5-Education | USA | ✅ Sent |
+| 40 | Will Douglas Heaven | william.heaven@technologyreview.com, william.heaven@gmail.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
