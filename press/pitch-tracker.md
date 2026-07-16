@@ -93,7 +93,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 57 | Rachel Courtland | rachel.courtland@technologyreview.com, rcourtland@nasw.org | MIT Tech Review | 4-Features | USA | ✅ Sent |
 | 58 | Alice Dragoon | alice.dragoon@technologyreview.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (5). Remaining: Type 4 (Melissa Heikkilä, Michelle Kim) + Type 5. Total sent: 58 across WIRED (39) + MIT Tech Review (19 so far). -->
+<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (5). Remaining: Type 4 (Michelle Kim) + Type 5. Note: Melissa Heikkilä removed — left MIT TR Jan 2025, now AI Correspondent at Financial Times.. Total sent: 58 across WIRED (39) + MIT Tech Review (19 so far). -->
 
 ---
 
