@@ -47,6 +47,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 11 | Kate Knibbs | kate_knibbs@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 12 | Miles Klee | miles_klee@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 13 | Jason Parham | jason_parham@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
+| 14 | EJ Dickson | ej_dickson@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 
 ---
 
