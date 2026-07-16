@@ -98,8 +98,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 62 | Eric Mongeon | eric.mongeon@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 | 63 | Linda Lowenthal | linda.lowenthal@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 | 64 | Abby Ivory-Ganja | abby.ivory-ganja@technologyreview.com, press@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
+| 65 | Juliet Beauchamp | juliet.beauchamp@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 complete (5 sent). Type 5: Corinne Iozzio, Teresa Elsey, Stephanie Arnett, Eric Mongeon, Linda Lowenthal, Abby Ivory-Ganja sent. Remaining: Juliet Beauchamp. Total sent: 64 across WIRED (39) + MIT Tech Review (25 so far). -->
+<!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! Types 1 (5), 2 (4), 3 (5), 4 (5 sent + 2 skipped), 5 (7 sent). Grand total: 65 across WIRED (39) + MIT Tech Review (26). 🎉🎉🎉 -->
 
 ---
 
