@@ -42,6 +42,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 6 | Sophie Kleeman | sophie_kleeman@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 7 | Louise Matsakis | louise_matsakis@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 | 8 | Paresh Dave | paresh_dave@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
+| 9 | Caroline Haskins | caroline_haskins@wired.com | WIRED | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
