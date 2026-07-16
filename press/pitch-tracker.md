@@ -53,6 +53,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 17 | Emily Mullin | emily_mullin@wired.com | WIRED | 3-Science | USA | ✅ Sent |
 | 18 | Molly Taft | molly_taft@wired.com | WIRED | 3-Science | USA | ✅ Sent |
 | 19 | Jason Kehe | jason_kehe@wired.com | WIRED | 4-Features | USA | ✅ Sent |
+| 20 | John Gravois | john_gravois@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 
 ---
 
