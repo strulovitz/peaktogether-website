@@ -90,8 +90,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 54 | Amanda Silverman | amanda.silverman@technologyreview.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
 | 55 | Niall Firth | niall.firth@technologyreview.com, niallfirth@hotmail.com | MIT Tech Review | 4-Features | UK | ✅ Sent |
 | 56 | Amy Nordrum | amy.nordrum@technologyreview.com, amy@amynordrum.com | MIT Tech Review | 4-Features | USA | ✅ Sent |
+| 57 | Rachel Courtland | rachel.courtland@technologyreview.com, rcourtland@nasw.org | MIT Tech Review | 4-Features | USA | ✅ Sent |
 
-<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (3). Remaining: Type 4 (Rachel Courtland, Alice Dragoon, Melissa Heikkilä, Michelle Kim) + Type 5. Total sent: 56 across WIRED (39) + MIT Tech Review (17 so far). -->
+<!-- STATUS: MIT Tech Review — Types 1 (5), 2 (4), 3 (5), 4 (4). Remaining: Type 4 (Alice Dragoon, Melissa Heikkilä, Michelle Kim) + Type 5. Total sent: 57 across WIRED (39) + MIT Tech Review (18 so far). -->
 
 ---
 
