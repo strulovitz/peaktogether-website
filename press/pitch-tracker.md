@@ -71,7 +71,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 35 | Vittoria Elliott | vittoria.elliott@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 36 | Louryn Strampe | louryn_strampe@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 37 | Rhett Allain | rhettallain@gmail.com, rhett.allain@southeastern.edu | WIRED | 5-Education | USA | ✅ Sent |
-| 38 | Julia Black | mjnblack@gmail.com, julia_black@wired.com | WIRED | 5-Education | USA | ✅ Sent |
+| 38 | Julia Black | mjnblack@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 | 39 | Elana Klein | elana_klein@wired.com, elana.klein@condenast.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
