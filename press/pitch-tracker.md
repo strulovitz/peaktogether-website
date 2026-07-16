@@ -62,7 +62,8 @@ nir.strulovitz@gmail.com · +972544752626
 | 26 | Matt Burgess | Matt_Burgess@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 27 | Katie Drummond | uncannyvalley@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 28 | Adrienne So | adrienne.m.so@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
-| 29 | Mark Keierleber | mark.keierleber@protonmail.com | WIRED | 5-Education | USA | ✅ Sent |
+| 29 | Mark Keierleber | mark.keierleber@protonmail.com ❌ inbox full | WIRED | 5-Education | USA | ✅ Sent |
+| 30 | Brian Barrett | brian.r.barrett@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
