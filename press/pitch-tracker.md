@@ -77,6 +77,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 41 | James O'Donnell | james.odonnell@technologyreview.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 | 42 | Grace Huckins | grace.huckins@gmail.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 | 43 | Mat Honan | mat.honan@technologyreview.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
+| 44 | David Rotman | david.rotman@technologyreview.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
