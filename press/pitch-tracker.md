@@ -50,6 +50,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 14 | EJ Dickson | ej_dickson@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 15 | Manisha Krishnan | manisha_krishnan@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 16 | Angela Watercutter | angela.watercutter@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
+| 17 | Emily Mullin | emily_mullin@wired.com | WIRED | 3-Science | USA | ✅ Sent |
 
 ---
 
