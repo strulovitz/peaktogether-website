@@ -67,6 +67,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 31 | Leah Feiger | leah_feiger@wired.com, leahfeiger@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 | 32 | Charley Locke | charleylockeprojects@gmail.com, charley.locke@nytimes.com | WIRED | 5-Education | USA | ✅ Sent |
 | 33 | Sofia Barnett | Sofia.Barnett@startribune.com | WIRED | 5-Education | USA | ✅ Sent |
+| 34 | Reece Rogers | reece_rogers@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
