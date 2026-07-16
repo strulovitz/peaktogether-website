@@ -74,6 +74,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 38 | Julia Black | mjnblack@gmail.com | WIRED | 5-Education | USA | ✅ Sent |
 | 39 | Elana Klein | elana_klein@wired.com, elana.klein@condenast.com | WIRED | 5-Education | USA | ✅ Sent |
 | 40 | Will Douglas Heaven | william.heaven@technologyreview.com, william.heaven@gmail.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
+| 41 | James O'Donnell | james.odonnell@technologyreview.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 
 ---
 
