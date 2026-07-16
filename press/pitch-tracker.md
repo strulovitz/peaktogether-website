@@ -80,6 +80,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 44 | David Rotman | david.rotman@technologyreview.com | MIT Tech Review | 1-Tech/AI | USA | ✅ Sent |
 | 45 | Charlotte Jee | charlotte.jee@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
 | 46 | Caiwei Chen | caiwei.chen@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
+| 47 | Eileen Guo | eileen.guo@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
 
 ---
 
