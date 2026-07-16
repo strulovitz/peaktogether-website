@@ -69,6 +69,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 33 | Sofia Barnett | Sofia.Barnett@startribune.com | WIRED | 5-Education | USA | ✅ Sent |
 | 34 | Reece Rogers | reece_rogers@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 | 35 | Vittoria Elliott | vittoria.elliott@wired.com | WIRED | 5-Education | USA | ✅ Sent |
+| 36 | Louryn Strampe | louryn_strampe@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
