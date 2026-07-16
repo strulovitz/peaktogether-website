@@ -48,6 +48,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 12 | Miles Klee | miles_klee@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 13 | Jason Parham | jason_parham@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 | 14 | EJ Dickson | ej_dickson@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
+| 15 | Manisha Krishnan | manisha_krishnan@wired.com | WIRED | 2-Internet Culture | USA | ✅ Sent |
 
 ---
 
