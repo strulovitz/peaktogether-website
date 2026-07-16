@@ -99,8 +99,9 @@ nir.strulovitz@gmail.com · +972544752626
 | 63 | Linda Lowenthal | linda.lowenthal@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 | 64 | Abby Ivory-Ganja | abby.ivory-ganja@technologyreview.com, press@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
 | 65 | Juliet Beauchamp | juliet.beauchamp@technologyreview.com | MIT Tech Review | 5-Education | USA | ✅ Sent |
+| 66 | Michelle Kim | michelle.kim@technologyreview.com (guessed) | MIT Tech Review | 4-Features | USA | ✅ Sent |
 
-<!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! Types 1 (5), 2 (4), 3 (5), 4 (5 sent + 2 skipped), 5 (7 sent). Grand total: 65 across WIRED (39) + MIT Tech Review (26). 🎉🎉🎉 -->
+<!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! Types 1 (5), 2 (4), 3 (5), 4 (6 sent + 1 skipped/Melissa left), 5 (7 sent). Grand total: 66 across WIRED (39) + MIT Tech Review (27). 🎉 Next: CNN. -->
 
 ---
 
