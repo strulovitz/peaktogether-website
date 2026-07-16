@@ -59,6 +59,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 23 | Sandra Upson | sandra_upson@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 24 | Reyhan Harmanci | reyhan_harmanci@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 25 | Todd Feathers | feathers.to@gmail.com, tips@toddfeathers.com | WIRED | 5-Education | USA | ✅ Sent |
+| 26 | Matt Burgess | Matt_Burgess@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
