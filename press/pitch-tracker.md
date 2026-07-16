@@ -60,6 +60,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 24 | Reyhan Harmanci | reyhan_harmanci@wired.com | WIRED | 4-Features | USA | ✅ Sent |
 | 25 | Todd Feathers | feathers.to@gmail.com, tips@toddfeathers.com | WIRED | 5-Education | USA | ✅ Sent |
 | 26 | Matt Burgess | Matt_Burgess@wired.com | WIRED | 5-Education | USA | ✅ Sent |
+| 27 | Katie Drummond | uncannyvalley@wired.com | WIRED | 5-Education | USA | ✅ Sent |
 
 ---
 
