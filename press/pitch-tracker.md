@@ -82,6 +82,7 @@ nir.strulovitz@gmail.com · +972544752626
 | 46 | Caiwei Chen | caiwei.chen@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
 | 47 | Eileen Guo | eileen.guo@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
 | 48 | Rhiannon Williams | rhiannon.williams@technologyreview.com | MIT Tech Review | 2-Internet Culture | USA | ✅ Sent |
+| 49 | Mary Beth Griggs | marybeth.griggs@technologyreview.com | MIT Tech Review | 3-Science | USA | ✅ Sent |
 
 ---
 
