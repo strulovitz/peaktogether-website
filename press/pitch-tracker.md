@@ -105,8 +105,10 @@ nir.strulovitz@gmail.com · +972544752626
 
 | 69 | Clare Duffy | claresduffy@gmail.com, clare.duffy@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
 
+| 70 | Hadas Gold | hadas.gold@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
+
 <!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! (27 sent). 🆕 NOW: CNN. Type 1 in progress.
-Grand total: 69 — WIRED (39) + MIT TR (27) + CNN (3 so far). -->
+Grand total: 70 — WIRED (39) + MIT TR (27) + CNN (4 so far). -->
 
 ---
 
