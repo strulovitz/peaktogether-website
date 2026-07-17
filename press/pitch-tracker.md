@@ -154,9 +154,11 @@ nir.strulovitz@gmail.com · +972544752626
 | 117 | Vimal Patel | vimal.patel@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
 | 118 | Troy Closson | troy.closson@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
 | 119 | Eliza Shapiro | eliza.shapiro@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 120 | Siobhan Roberts | siobhan.roberts@nytimes.com | NYT | 3-Science | Canada | ✅ Sent |
+| 121 | Alessandra Schade | alessandra.schade@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
 
 <!-- STATUS: ✅ CNN COMPLETE! ✅ NYT COMPLETE! All 5 types done.
-Grand total: 119 — WIRED (39) + MIT TR (27) + CNN (20) + NYT (33 so far, 2 pending: Siobhan Roberts and Alessandra Schade). -->
+Grand total: 121 — WIRED (39) + MIT TR (27) + CNN (20) + NYT (35). -->
 
 ---
 
