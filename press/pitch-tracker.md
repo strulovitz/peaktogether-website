@@ -104,14 +104,26 @@ nir.strulovitz@gmail.com · +972544752626
 | 68 | Donie O'Sullivan | donie.osullivan@cnn.com, donie.osullivan@warnermedia.com | CNN | 1-Tech/AI | USA | ✅ Sent |
 
 | 69 | Clare Duffy | claresduffy@gmail.com, clare.duffy@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
-
 | 70 | Hadas Gold | hadas.gold@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
+| 71 | Lianne Kolirin | lianne.kolirin@gmail.com, lianne.kolirin@cnn.com | CNN | 1-Tech/AI | UK | ✅ Sent |
+| 72 | Seth Fiegerman | sfiegerman@gmail.com, sfiegerman@bloomberg.net | CNN | 1-Tech/AI | USA | ✅ Sent |
+| 73 | Scottie Andrew | scottie.andrew16@gmail.com, scottie.andrew@turner.com | CNN | 2-Internet | USA | ✅ Sent |
+| 74 | Lisa Respers France | lisa.respersfrance@cnn.com | CNN | 2-Internet | USA | ✅ Sent |
+| 75 | Kristen Rogers | kristen.rogers@cnn.com | CNN | 3-Science | USA | ✅ Sent |
+| 76 | Kara Alaimo | alaimocommunications@gmail.com | CNN | 3-Science | USA | ✅ Sent |
+| 77 | Andrew Freedman | andrew.freedman@cnn.com | CNN | 3-Science | USA | ✅ Sent |
+| 78 | Ella Nilsen | ella.nilsen@cnn.com | CNN | 3-Science | USA | ✅ Sent |
+| 79 | Stephanie Yang | stephanie.yang@cnn.com | CNN | 3-Science | USA | ✅ Sent |
+| 80 | Harmeet Kaur | harmeet.kaur@cnn.com | CNN | 4-Features | USA | ✅ Sent |
+| 81 | Kati Chitrakorn | kchitrakorn@gmail.com | CNN | 4-Features | UK | ✅ Sent |
+| 82 | Amarachi Orie | amarachi.orie@gmail.com, amarachiorie@gmail.com | CNN | 4-Features | UK | ✅ Sent |
+| 83 | Cindy Von Quednow | cindy.vonquednow@turner.com | CNN | 4-Features | USA | ✅ Sent |
+| 84 | Eric Levenson | eric.levenson@cnn.com | CNN | 5-Education | USA | ✅ Sent |
+| 85 | Andy Rose | andy.rose@cnn.com | CNN | 5-Education | USA | ✅ Sent |
+| 86 | Elizabeth Wolfe | elizabeth.wolfe@cnn.com | CNN | 5-Education | USA | ✅ Sent |
 
-| 71 | Lianne Kolirin | lianne.kolirin@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
-| 72 | Seth Fiegerman | seth.fiegerman@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
-
-<!-- STATUS: ✅ CNN Type 1 (Tech/AI) COMPLETE! 🆕 NOW: Type 2-Internet Culture.
-Grand total: 72 — WIRED (39) + MIT TR (27) + CNN (6 so far). -->
+<!-- STATUS: ✅ CNN COMPLETE! All 5 types done.
+Grand total: 86 — WIRED (39) + MIT TR (27) + CNN (20 so far). -->
 
 ---
 
