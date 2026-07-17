@@ -107,8 +107,11 @@ nir.strulovitz@gmail.com · +972544752626
 
 | 70 | Hadas Gold | hadas.gold@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
 
-<!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! (27 sent). 🆕 NOW: CNN. Type 1 in progress.
-Grand total: 70 — WIRED (39) + MIT TR (27) + CNN (4 so far). -->
+| 71 | Lianne Kolirin | lianne.kolirin@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
+| 72 | Seth Fiegerman | seth.fiegerman@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
+
+<!-- STATUS: ✅ CNN Type 1 (Tech/AI) COMPLETE! 🆕 NOW: Type 2-Internet Culture.
+Grand total: 72 — WIRED (39) + MIT TR (27) + CNN (6 so far). -->
 
 ---
 
