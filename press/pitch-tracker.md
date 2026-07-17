@@ -156,9 +156,30 @@ nir.strulovitz@gmail.com · +972544752626
 | 119 | Eliza Shapiro | eliza.shapiro@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
 | 120 | Siobhan Roberts | siobhan.roberts@nytimes.com | NYT | 3-Science | Canada | ✅ Sent |
 | 121 | Alessandra Schade | alessandra.schade@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 122 | Will Oremus | will.oremus@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 123 | Cat Zakrzewski | cat.zakrzewski@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 124 | Gerrit De Vynck | gerrit.devynck@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 125 | Nitasha Tiku | nitasha.tiku@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 126 | Drew Harwell | drew.harwell@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 127 | Geoffrey A. Fowler | geoffrey.fowler@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 128 | Tatum Hunter | tatum.hunter@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 129 | Chris Velazco | chris.velazco@washpost.com | WaPo | 1-Tech/AI | USA | ✅ Sent |
+| 130 | Taylor Lorenz | taylor.lorenz@washpost.com | WaPo | 2-Internet | USA | ✅ Sent |
+| 131 | Elizabeth Dwoskin | elizabeth.dwoskin@washpost.com | WaPo | 2-Internet | USA | ✅ Sent |
+| 132 | Joel Achenbach | joel.achenbach@washpost.com | WaPo | 3-Science | USA | ✅ Sent |
+| 133 | Sarah Kaplan | sarah.kaplan@washpost.com | WaPo | 3-Science | USA | ✅ Sent |
+| 134 | Carolyn Y. Johnson | carolyn.johnson@washpost.com | WaPo | 3-Science | USA | ✅ Sent |
+| 135 | Ben Guarino | ben.guarino@washpost.com | WaPo | 3-Science | USA | ✅ Sent |
+| 136 | Eli Saslow | eli.saslow@washpost.com | WaPo | 4-Features | USA | ✅ Sent |
+| 137 | Caitlin Gibson | caitlin.gibson@washpost.com | WaPo | 4-Features | USA | ✅ Sent |
+| 138 | Monica Hesse | monica.hesse@washpost.com | WaPo | 4-Features | USA | ✅ Sent |
+| 139 | Laura Meckler | laura.meckler@washpost.com | WaPo | 5-Education | USA | ✅ Sent |
+| 140 | Valerie Strauss | valerie.strauss@washpost.com | WaPo | 5-Education | USA | ✅ Sent |
+| 141 | Donna St. George | donna.stgeorge@washpost.com | WaPo | 5-Education | USA | ✅ Sent |
+| 142 | Hannah Natanson | hannah.natanson@washpost.com | WaPo | 5-Education | USA | ✅ Sent |
 
-<!-- STATUS: ✅ CNN COMPLETE! ✅ NYT COMPLETE! All 5 types done.
-Grand total: 121 — WIRED (39) + MIT TR (27) + CNN (20) + NYT (35). -->
+<!-- STATUS: ✅ CNN COMPLETE! ✅ NYT COMPLETE! ✅ WaPo COMPLETE!
+Grand total: 142 — WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21). -->
 
 ---
 
