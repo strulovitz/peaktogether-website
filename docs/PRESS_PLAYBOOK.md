@@ -328,17 +328,19 @@ python C:\Users\nir_s\gmail-send.py "recipient@email.com" "Subject" "Body"
 |--------|------|--------|
 | WIRED | 39 | ✅ Complete |
 | MIT Tech Review | 27 | ✅ Complete |
-| CNN | 2 (Lisa Eadicicco, Donie O'Sullivan) | 🔄 In progress |
+| CNN | 20 | ✅ Complete |
 
-Next: CNN Type 1 continues — Matt Egan is next journalist.
+**Grand total: 86 journalists across 3 outlets.**
+
+Next: Nir picks the next outlet (NYT, Guardian, etc.).
 
 ### 11e. WHAT STILL NEEDS TO BE DONE
 
-1. **OpenClaw presses on** — Use DuckDuckGo search + web_fetch to find CNN journalist emails. Send with gmail-send.py. One at a time. Update tracker after each send.
+1. **OpenClaw presses on** — Use DuckDuckGo search + web_fetch to find journalist emails at the NEXT outlet (Nir picks it). Send with gmail-send.py. One at a time. Update tracker after each send.
 
 2. **Rate limit discipline** — DuckDuckGo blocks aggressive scraping. Max 1 search per 30 seconds. Prefer `web_fetch` on profile pages over `web_search`.
 
-3. **After CNN is done** — Nir picks next outlet (NYT, Guardian, etc.). Same process.
+3. **CNN is done (July 17)** — Nir picks next outlet (NYT, Guardian, etc.). Same process.
 
 4. **Session management** — Use `/new` in OpenClaw to start fresh sessions when context fills up.
 
@@ -351,7 +353,7 @@ Send emails with: python C:\Users\nir_s\gmail-send.py "email" "subject" "body"
 After each send, update C:\Users\nir_s\peaktogether-website\press\pitch-tracker.md
 then git add + git commit + git push from C:\Users\nir_s\peaktogether-website
 Never invent emails. Never edit letters. One journalist at a time.
-Start: CNN Type 1, Clare Duffy.
+Start: WIRED + MIT TR + CNN are COMPLETE (86 sent). Ask Nir which outlet is next.
 ```
 
 ---
