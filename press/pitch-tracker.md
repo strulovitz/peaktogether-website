@@ -103,8 +103,10 @@ nir.strulovitz@gmail.com · +972544752626
 | 67 | Lisa Eadicicco | lisa.eadicicco@gmail.com, lisa.eadicicco@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
 | 68 | Donie O'Sullivan | donie.osullivan@cnn.com, donie.osullivan@warnermedia.com | CNN | 1-Tech/AI | USA | ✅ Sent |
 
+| 69 | Clare Duffy | claresduffy@gmail.com, clare.duffy@cnn.com | CNN | 1-Tech/AI | USA | ✅ Sent |
+
 <!-- STATUS: ✅ MIT TECH REVIEW COMPLETE! (27 sent). 🆕 NOW: CNN. Type 1 in progress.
-Grand total: 67 — WIRED (39) + MIT TR (27) + CNN (1 so far). -->
+Grand total: 69 — WIRED (39) + MIT TR (27) + CNN (3 so far). -->
 
 ---
 
