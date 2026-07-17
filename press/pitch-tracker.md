@@ -121,9 +121,42 @@ nir.strulovitz@gmail.com · +972544752626
 | 84 | Eric Levenson | eric.levenson@cnn.com | CNN | 5-Education | USA | ✅ Sent |
 | 85 | Andy Rose | andy.rose@cnn.com | CNN | 5-Education | USA | ✅ Sent |
 | 86 | Elizabeth Wolfe | elizabeth.wolfe@cnn.com | CNN | 5-Education | USA | ✅ Sent |
+| 87 | Cade Metz | cade.metz@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 88 | Kevin Roose | kevin.roose@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 89 | Kashmir Hill | kashmir.hill@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 90 | Ryan Mac | ryan.mac@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 91 | Mike Isaac | mike.isaac@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 92 | Eli Tan | eli.tan@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 93 | Brian X. Chen | brian.chen@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 94 | Steve Lohr | lohr@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 95 | Tripp Mickle | tripp.mickle@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 96 | Nico Grant | nico.grant@nytimes.com | NYT | 1-Tech/AI | USA | ✅ Sent |
+| 97 | Madison Malone Kircher | madison.kircher@nytimes.com | NYT | 2-Internet | USA | ✅ Sent |
+| 98 | Sapna Maheshwari | sapna@nytimes.com | NYT | 2-Internet | USA | ✅ Sent |
+| 99 | Callie Holtermann | callie.holtermann@nytimes.com | NYT | 2-Internet | USA | ✅ Sent |
+| 100 | Tiffany Hsu | tiffany.hsu@nytimes.com | NYT | 2-Internet | USA | ✅ Sent |
+| 101 | Kenneth Chang | kchang@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 102 | Katrina Miller | katrina.miller@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 103 | Carl Zimmer | carl.zimmer@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 104 | Azeen Ghorayshi | azeen.ghorayshi@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 105 | Emily Anthes | emily.anthes@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 106 | Dennis Overbye | overbye@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 107 | Apoorva Mandavilli | apoorva@nytimes.com | NYT | 3-Science | USA | ✅ Sent |
+| 108 | Penelope Green | greenpe@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 109 | Katherine Rosman | katherine.rosman@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 110 | Steven Kurutz | steven.kurutz@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 111 | Emma Goldberg | emma.goldberg@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 112 | Claire Cain Miller | ccm@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 113 | Hannah Dreier | hannah.dreier@nytimes.com | NYT | 4-Features | USA | ✅ Sent |
+| 114 | Dana Goldstein | dana.goldstein@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 115 | Sarah Mervosh | sarah.mervosh@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 116 | Matthew Haag | matthew.haag@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 117 | Vimal Patel | vimal.patel@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 118 | Troy Closson | troy.closson@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
+| 119 | Eliza Shapiro | eliza.shapiro@nytimes.com | NYT | 5-Education | USA | ✅ Sent |
 
-<!-- STATUS: ✅ CNN COMPLETE! All 5 types done.
-Grand total: 86 — WIRED (39) + MIT TR (27) + CNN (20 so far). -->
+<!-- STATUS: ✅ CNN COMPLETE! ✅ NYT COMPLETE! All 5 types done.
+Grand total: 119 — WIRED (39) + MIT TR (27) + CNN (20) + NYT (33 so far, 2 pending: Siobhan Roberts and Alessandra Schade). -->
 
 ---
 
