@@ -281,4 +281,79 @@ start with `AQ.` (not `AIza`). Both are valid. Don't tell Nir his key is
 
 ---
 
-(End of file — total 10 sections)
+## 11. CURRENT STATUS — July 17, 2026 (end of session)
+
+### 11a. WHAT'S SET UP AND WORKING
+
+| Component | Status | Details |
+|-----------|--------|---------|
+| OpenClaw agent | ✅ | Windows, Node.js, DeepSeek V4 Pro model |
+| Telegram | ✅ | Bot connected, Nir can message from phone |
+| Web search | ✅ | DuckDuckGo (free, no key, native OpenClaw support) |
+| Press skill | ✅ | `~/.openclaw/skills/press-outreach/SKILL.md` — all 5 letters |
+| Email sending | ✅ | `C:\Users\nir_s\gmail-send.py` — SMTP via Gmail App Password |
+| GitHub access | ✅ | Git credentials work, can commit + push tracker |
+| Gemini API key | ⚠️ | AQ format key created but NOT usable (zero quota, Vertex billing wall) |
+| DeepSeek API key | ✅ | Working as main model |
+
+### 11b. GMAIL SENDING SCRIPT
+
+File: `C:\Users\nir_s\gmail-send.py`
+
+Usage: `python C:\Users\nir_s\gmail-send.py "to@email.com" "Subject" "Body text"`
+
+Reads `OPENCLAW_GMAIL_APP_PASSWORD` env var (set as permanent Windows user var).
+Sends via `smtp.gmail.com:587` using `nir.strulovitz@gmail.com`.
+Strips spaces from the app password automatically (Google displays with spaces).
+
+OpenClaw calls this via `exec` tool. Must be instructed:
+```
+python C:\Users\nir_s\gmail-send.py "recipient@email.com" "Subject" "Body"
+```
+
+### 11c. WHY GEMINI/GOOGLE FAILED (lesson learned)
+
+- `AQ.` format keys are Vertex AI express mode, NOT Developer API keys
+- New Google Cloud projects only get AQ keys — no more `AIza` keys
+- AQ keys on Developer API = zero entitlement (not rate-limited — permanently zero)
+- AQ keys on Vertex AI = requires billing setup (403)
+- Google Custom Search JSON API = CLOSED to new customers (2026)
+- Google Programmable Search "entire web" = DEPRECATED (2026)
+- **Bottom line:** Google has killed ALL free web search APIs for new users in 2026
+- **Solution:** DuckDuckGo (free, works, no key, native OpenClaw plugin)
+
+### 11d. PRESS OUTREACH STATUS
+
+| Outlet | Sent | Status |
+|--------|------|--------|
+| WIRED | 39 | ✅ Complete |
+| MIT Tech Review | 27 | ✅ Complete |
+| CNN | 2 (Lisa Eadicicco, Donie O'Sullivan) | 🔄 In progress |
+
+Next: CNN Type 1 continues — Matt Egan is next journalist.
+
+### 11e. WHAT STILL NEEDS TO BE DONE
+
+1. **OpenClaw presses on** — Use DuckDuckGo search + web_fetch to find CNN journalist emails. Send with gmail-send.py. One at a time. Update tracker after each send.
+
+2. **Rate limit discipline** — DuckDuckGo blocks aggressive scraping. Max 1 search per 30 seconds. Prefer `web_fetch` on profile pages over `web_search`.
+
+3. **After CNN is done** — Nir picks next outlet (NYT, Guardian, etc.). Same process.
+
+4. **Session management** — Use `/new` in OpenClaw to start fresh sessions when context fills up.
+
+### 11f. AGENT INSTRUCTIONS (verbatim — give to OpenClaw on fresh session)
+
+```
+You have the press-outreach skill. Read it. Use DuckDuckGo for search.
+Space searches 30 seconds apart. Prefer web_fetch on profile pages.
+Send emails with: python C:\Users\nir_s\gmail-send.py "email" "subject" "body"
+After each send, update C:\Users\nir_s\peaktogether-website\press\pitch-tracker.md
+then git add + git commit + git push from C:\Users\nir_s\peaktogether-website
+Never invent emails. Never edit letters. One journalist at a time.
+Start: CNN Type 1, Clare Duffy.
+```
+
+---
+
+(End of file — total 11 sections)
