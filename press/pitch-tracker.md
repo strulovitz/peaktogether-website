@@ -179,7 +179,7 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 142 | Hannah Natanson | hannah.natanson@washpost.com | WaPo | 5-Education | USA | âœ… Sent |
 
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 162 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21). -->
+Grand total: 179 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21). -->
 
 ---
 
@@ -215,4 +215,5 @@ For each journalist, DeepSeek will output:
 [Subject line for that type]
 [paste the VERBATIM letter for that type with "Dear [NAME]," at the top, nothing else changed]
 ```
+
 
