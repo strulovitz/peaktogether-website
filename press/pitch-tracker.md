@@ -261,9 +261,26 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 214 | Sean O'Kane | sean.okane@techcrunch.com | TechCrunch | 4-Features | USA | ✅ Sent |
 | 215 | Marina Temkin | marina.temkin@techcrunch.com | TechCrunch | 4-Features | USA | ✅ Sent |
 
-<!-- TechCrunch: 15 journalists sent 2026-07-19 --><!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
+
+| 216 | Charlie Warzel | charlie.warzel@theatlantic.com | The Atlantic | 1-Tech/AI | USA | ✅ Sent |
+| 217 | Ian Bogost | ian.bogost@theatlantic.com | The Atlantic | 1-Tech/AI | USA | ✅ Sent |
+| 218 | Nicholas Thompson | nicholas.thompson@theatlantic.com | The Atlantic | 1-Tech/AI | USA | ✅ Sent |
+| 219 | Chris Suellentrop | chris.suellentrop@theatlantic.com | The Atlantic | 1-Tech/AI | USA | ✅ Sent |
+| 220 | Jenisha Watts | jenisha.watts@theatlantic.com | The Atlantic | 2-Internet | USA | ✅ Sent |
+| 221 | Sophia Nguyen | sophia.nguyen@theatlantic.com | The Atlantic | 2-Internet | USA | ✅ Sent |
+| 222 | Marina Koren | marina.koren@theatlantic.com | The Atlantic | 3-Science | USA | ✅ Sent |
+| 223 | Sarah A. Topol | sarah.topol@theatlantic.com | The Atlantic | 3-Science | USA | ✅ Sent |
+| 224 | Judith Shulevitz | judith.shulevitz@theatlantic.com | The Atlantic | 3-Science | USA | ✅ Sent |
+| 225 | Jeffrey Goldberg | jeffrey.goldberg@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+| 226 | Derek Thompson | derek.thompson@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+| 227 | Henry Grabar | henry.grabar@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+| 228 | Marc Novicoff | marc.novicoff@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+| 229 | Nancy Walecki | nancy.walecki@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+| 230 | Olga Khazan | olga.khazan@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
+
+<!-- The Atlantic: 15 journalists sent 2026-07-19 --><!-- TechCrunch: 15 journalists sent 2026-07-19 --><!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 536 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11) + TechCrunch (15). -->
+Grand total: 551 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11) + TechCrunch (15) + The Atlantic (15). -->
 
 ---
 
