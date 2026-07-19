@@ -244,9 +244,26 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 199 | David Salazar | david.salazar@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
 | 200 | Nate Berg | nate.berg@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
 
-<!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
+
+| 201 | Russell Brandom | russell.brandom@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 202 | Kirsten Korosec | kirsten.korosec@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 203 | Sarah Perez | sarah.perez@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 204 | Zack Whittaker | zack.whittaker@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 205 | Julie Bort | julie.bort@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 206 | Amanda Silberling | amanda.silberling@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 207 | Rebecca Bellan | rebecca.bellan@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 208 | Lucas Ropek | lucas.ropek@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 209 | Tim Fernholz | tim.fernholz@techcrunch.com | TechCrunch | 1-Tech/AI | USA | ✅ Sent |
+| 210 | Aisha Malik | aisha.malik@techcrunch.com | TechCrunch | 2-Internet | USA | ✅ Sent |
+| 211 | Lorenzo Franceschi-Bicchierai | lorenzo.franceschi-bicchierai@techcrunch.com | TechCrunch | 2-Internet | USA | ✅ Sent |
+| 212 | Tim De Chant | tim.dechant@techcrunch.com | TechCrunch | 3-Science | USA | ✅ Sent |
+| 213 | Dominic-Madori Davis | dominic-madori.davis@techcrunch.com | TechCrunch | 4-Features | USA | ✅ Sent |
+| 214 | Sean O'Kane | sean.okane@techcrunch.com | TechCrunch | 4-Features | USA | ✅ Sent |
+| 215 | Marina Temkin | marina.temkin@techcrunch.com | TechCrunch | 4-Features | USA | ✅ Sent |
+
+<!-- TechCrunch: 15 journalists sent 2026-07-19 --><!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 521 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11). -->
+Grand total: 536 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11) + TechCrunch (15). -->
 
 ---
 
