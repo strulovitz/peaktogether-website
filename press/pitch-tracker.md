@@ -209,9 +209,30 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 168 | Josh Dzieza | josh.dzieza@gmail.com | The Verge | 4-Features | USA | ✅ Sent |
 | 169 | Andrew Webster | andrew.webster@theverge.com | The Verge | 4-Features | USA | ✅ Sent |
 | 170 | Charles Pulliam-Moore | charles.pulliam-moore@theverge.com | The Verge | 4-Features | USA | ✅ Sent |
-<!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
+
+| 171 | Ken Fisher | ken@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 172 | Nate Anderson | nate.anderson@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 173 | Lee Hutchinson | lee.hutchinson@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 174 | Andrew Cunningham | andrew.cunningham@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 175 | Scharon Harding | scharon.harding@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 176 | Jeremy Hsu | jeremy.hsu@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 177 | Ashley Belanger | ashley.belanger@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 178 | Jon Brodkin | jon.brodkin@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 179 | Dan Goodin | dan.goodin@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 180 | Samuel Axon | samuel.axon@arstechnica.com | Ars Technica | 1-Tech/AI | USA | ✅ Sent |
+| 181 | Kyle Orland | kyle.orland@arstechnica.com | Ars Technica | 2-Internet | USA | ✅ Sent |
+| 182 | John Timmer | jtimmer@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 183 | Eric Berger | eric.berger@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 184 | Beth Mole | beth.mole@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 185 | Jennifer Ouellette | jennifer.ouellette@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 186 | Stephen Clark | stephen.clark@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 187 | Chris Lee | chris.lee@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 188 | Kiona N. Smith | kiona.smith@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+| 189 | Jacek Krywko | jacek.krywko@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
+
+<!-- Ars Technica: 19 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 491 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13). -->
+Grand total: 510 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19). -->
 
 ---
 
