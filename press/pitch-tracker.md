@@ -197,7 +197,7 @@ nir.strulovitz@gmail.com Â· +972544752626
 
 <!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 478 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15). -->
+Grand total: 491 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13). -->
 
 ---
 
