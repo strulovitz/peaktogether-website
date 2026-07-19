@@ -195,6 +195,20 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 156 | Rachel Hall | rachel.hall@observer.co.uk | Observer | 5-Education | UK | ✅ Sent |
 | 157 | Rachel Sylvester | rachel.sylvester@observer.co.uk | Observer | 5-Education | UK | ✅ Sent |
 
+
+| 158 | Hayden Field | hayden.field@voxmedia.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 159 | Nilay Patel | nilay.patel@theverge.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 160 | David Pierce | david@theverge.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 161 | Sean Hollister | sean.hollister@theverge.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 162 | Jay Peters | jay.peters@theverge.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 163 | Adi Robertson | adi.robertson@theverge.com | The Verge | 1-Tech/AI | USA | ✅ Sent |
+| 164 | Mia Sato | mia@theverge.com | The Verge | 2-Internet | USA | ✅ Sent |
+| 165 | Elizabeth Lopatto | liz@theverge.com | The Verge | 2-Internet | USA | ✅ Sent |
+| 166 | Justine Calma | justine.calma@theverge.com | The Verge | 3-Science | USA | ✅ Sent |
+| 167 | Kevin Nguyen | kevin.nguyen@theverge.com | The Verge | 4-Features | USA | ✅ Sent |
+| 168 | Josh Dzieza | josh.dzieza@gmail.com | The Verge | 4-Features | USA | ✅ Sent |
+| 169 | Andrew Webster | andrew.webster@theverge.com | The Verge | 4-Features | USA | ✅ Sent |
+| 170 | Charles Pulliam-Moore | charles.pulliam-moore@theverge.com | The Verge | 4-Features | USA | ✅ Sent |
 <!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
 Grand total: 491 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13). -->
