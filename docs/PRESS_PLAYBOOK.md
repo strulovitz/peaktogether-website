@@ -326,23 +326,23 @@ python C:\Users\nir_s\gmail-send.py "recipient@email.com" "Subject" "Body"
 
 | Outlet | Sent | Status |
 |--------|------|--------|
-| WIRED | 39 | ✅ Complete |
-| MIT Tech Review | 27 | ✅ Complete |
-| CNN | 20 | ✅ Complete |
+| WIRED | 39 | Complete |
+| MIT Tech Review | 27 | Complete |
+| CNN | 20 | Complete |
+| NYT | 35 | Complete |
+| WaPo | 21 | Complete |
+| BBC | 20 | Complete |
+| Guardian | 301 | Complete |
+| Observer | 15 | Complete |
+| The Verge | 13 | Complete |
 
-**Grand total: 86 journalists across 3 outlets.**
+**Grand total: 491 journalists across 9 outlets.**
 
-Next: Nir picks the next outlet (NYT, Guardian, etc.).
+ALL OUTLETS COMPLETE. Next: Nir picks the next outlet or decides what's next.
 
 ### 11e. WHAT STILL NEEDS TO BE DONE
 
-1. **OpenClaw presses on** — Use DuckDuckGo search + web_fetch to find journalist emails at the NEXT outlet (Nir picks it). Send with gmail-send.py. One at a time. Update tracker after each send.
-
-2. **Rate limit discipline** — DuckDuckGo blocks aggressive scraping. Max 1 search per 30 seconds. Prefer `web_fetch` on profile pages over `web_search`.
-
-3. **CNN is done (July 17)** — Nir picks next outlet (NYT, Guardian, etc.). Same process.
-
-4. **Session management** — Use `/new` in OpenClaw to start fresh sessions when context fills up.
+1. **Await Nir's decision** — All 9 outlets are complete. Nir picks what's next: more outlets, mountains, or something else.
 
 ### 11f. AGENT INSTRUCTIONS (verbatim — give to OpenClaw on fresh session)
 
