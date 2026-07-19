@@ -278,9 +278,28 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 229 | Nancy Walecki | nancy.walecki@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
 | 230 | Olga Khazan | olga.khazan@theatlantic.com | The Atlantic | 4-Features | USA | ✅ Sent |
 
-<!-- The Atlantic: 15 journalists sent 2026-07-19 --><!-- TechCrunch: 15 journalists sent 2026-07-19 --><!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
+
+| 231 | Adam Clark Estes | adam.clarkestes@vox.com | Vox | 1-Tech/AI | USA | ✅ Sent |
+| 232 | Swati Sharma | swati.sharma@vox.com | Vox | 1-Tech/AI | USA | ✅ Sent |
+| 233 | Bryan Walsh | bryan.walsh@vox.com | Vox | 1-Tech/AI | USA | ✅ Sent |
+| 234 | Nisha Chittal | nisha.chittal@vox.com | Vox | 1-Tech/AI | USA | ✅ Sent |
+| 235 | Alex Abad-Santos | alex.abad-santos@vox.com | Vox | 2-Internet | USA | ✅ Sent |
+| 236 | Kyndall Cunningham | kyndall.cunningham@vox.com | Vox | 2-Internet | USA | ✅ Sent |
+| 237 | Constance Grady | constance.grady@vox.com | Vox | 2-Internet | USA | ✅ Sent |
+| 238 | Caitlin Dewey | caitlin.dewey@vox.com | Vox | 2-Internet | USA | ✅ Sent |
+| 239 | Benji Jones | benji.jones@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 240 | Marina Bolotnikova | marina.bolotnikova@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 241 | Sara Herschander | sara.herschander@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 242 | Dylan Scott | dylan.scott@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 243 | Kenny Torrella | kenny.torrella@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 244 | Sigal Samuel | sigal.samuel@vox.com | Vox | 3-Science | USA | ✅ Sent |
+| 245 | Rachel Miller | rachel.miller@vox.com | Vox | 4-Features | USA | ✅ Sent |
+| 246 | Allie Volpe | allie.volpe@vox.com | Vox | 4-Features | USA | ✅ Sent |
+| 247 | Cameron Peters | cameron.peters@vox.com | Vox | 4-Features | USA | ✅ Sent |
+
+<!-- Vox: 17 journalists sent 2026-07-19 --><!-- The Atlantic: 15 journalists sent 2026-07-19 --><!-- TechCrunch: 15 journalists sent 2026-07-19 --><!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 551 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11) + TechCrunch (15) + The Atlantic (15). -->
+Grand total: 568 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11) + TechCrunch (15) + The Atlantic (15) + Vox (17). -->
 
 ---
 
