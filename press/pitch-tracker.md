@@ -178,8 +178,26 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 141 | Donna St. George | donna.stgeorge@washpost.com | WaPo | 5-Education | USA | âœ… Sent |
 | 142 | Hannah Natanson | hannah.natanson@washpost.com | WaPo | 5-Education | USA | âœ… Sent |
 
+
+| 143 | Patricia Clarke | patricia.clarke@observer.co.uk | Observer | 1-Tech/AI | UK | ✅ Sent |
+| 144 | Aisha Down | aisha.down@observer.co.uk | Observer | 1-Tech/AI | UK | ✅ Sent |
+| 145 | John Naughton | john.naughton@observer.co.uk | Observer | 2-Internet | UK | ✅ Sent |
+| 146 | Caitlin Macdonald | caitlin.macdonald@observer.co.uk | Observer | 2-Internet | UK | ✅ Sent |
+| 147 | Eva Wiseman | eva.wiseman@observer.co.uk | Observer | 2-Internet | UK | ✅ Sent |
+| 148 | Moya Lothian-McLean | moya.lothian-mclean@observer.co.uk | Observer | 2-Internet | UK | ✅ Sent |
+| 149 | Robin McKie | robin.mckie@observer.co.uk | Observer | 3-Science | UK | ✅ Sent |
+| 150 | Chloe Hadjimatheou | chloe.hadjimatheou@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 151 | Alex O'Connell | alex.oconnell@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 152 | Tom Gatti | tom.gatti@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 153 | James Tapper | james.tapper@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 154 | David Taylor | david.taylor@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 155 | Jude Rogers | jude.rogers@observer.co.uk | Observer | 4-Features | UK | ✅ Sent |
+| 156 | Rachel Hall | rachel.hall@observer.co.uk | Observer | 5-Education | UK | ✅ Sent |
+| 157 | Rachel Sylvester | rachel.sylvester@observer.co.uk | Observer | 5-Education | UK | ✅ Sent |
+
+<!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 179 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21). -->
+Grand total: 478 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15). -->
 
 ---
 
