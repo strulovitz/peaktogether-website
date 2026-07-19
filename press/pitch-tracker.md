@@ -337,3 +337,30 @@ For each journalist, DeepSeek will output:
 ```
 
 
+
+
+## Next Outlets (planned)
+
+| # | Outlet | Status |
+|---|--------|--------|
+| - | Business Insider | Not started |
+| - | Gizmodo | Not started |
+| - | Engadget | Not started |
+| - | Mashable | Not started |
+| - | PCMag | Not started |
+| - | ZDNet | Not started |
+| - | Bloomberg | Not started |
+| - | Forbes | Not started |
+| - | Time | Not started |
+| - | WSJ | Not started |
+| - | The New Yorker | Not started |
+| - | Politico | Not started |
+| - | Axios | Not started |
+| - | USA Today | Not started |
+| - | Scientific American | Not started |
+| - | Nature | Not started |
+| - | New Scientist | Not started |
+| - | Popular Science | Not started |
+| - | NPR | Not started |
+| - | Reuters | Not started |
+| - | AP | Not started |
