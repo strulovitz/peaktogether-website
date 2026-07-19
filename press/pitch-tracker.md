@@ -230,9 +230,23 @@ nir.strulovitz@gmail.com Â· +972544752626
 | 188 | Kiona N. Smith | kiona.smith@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
 | 189 | Jacek Krywko | jacek.krywko@arstechnica.com | Ars Technica | 3-Science | USA | ✅ Sent |
 
-<!-- Ars Technica: 19 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
+<!-- Ars Technica: 19 journalists sent 2026-07-19 -->
+
+| 190 | Harry McCracken | hmccracken@fastcompany.com | Fast Company | 1-Tech/AI | USA | ✅ Sent |
+| 191 | Rebecca Heilweil | rebecca.heilweil@fastcompany.com | Fast Company | 1-Tech/AI | USA | ✅ Sent |
+| 192 | Max Ufberg | max.ufberg@fastcompany.com | Fast Company | 1-Tech/AI | USA | ✅ Sent |
+| 193 | Brendan Vaughan | brendan.vaughan@fastcompany.com | Fast Company | 1-Tech/AI | USA | ✅ Sent |
+| 194 | Connie Lin | connie.lin@fastcompany.com | Fast Company | 2-Internet | USA | ✅ Sent |
+| 195 | Pavithra Mohan | pavithra.mohan@fastcompany.com | Fast Company | 2-Internet | USA | ✅ Sent |
+| 196 | Yasmin Gagne | yasmin.gagne@fastcompany.com | Fast Company | 2-Internet | USA | ✅ Sent |
+| 197 | Kristin Toussaint | kristin.toussaint@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
+| 198 | Shalene Gupta | shalene.gupta@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
+| 199 | David Salazar | david.salazar@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
+| 200 | Nate Berg | nate.berg@fastcompany.com | Fast Company | 4-Features | USA | ✅ Sent |
+
+<!-- Fast Company: 11 journalists sent 2026-07-19 --><!-- Guardian (301) list: press/_batch_guardian.py | BBC (20) list: memory/2026-07-19.md -->
 <!-- STATUS: âœ… CNN COMPLETE! âœ… NYT COMPLETE! âœ… WaPo COMPLETE!
-Grand total: 510 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19). -->
+Grand total: 521 â€” WIRED (39) + MIT TR (27) + CNN (20) + NYT (35) + WaPo (21) + BBC (20) + Guardian (301) + Observer (15) + The Verge (13) + Ars Technica (19) + Fast Company (11). -->
 
 ---
 
